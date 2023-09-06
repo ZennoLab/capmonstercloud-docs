@@ -1,0 +1,22 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.API": {
+    "message": "API",
+    "description": "The label for category API in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.API.link.generated-index.description": {
+    "message": "Основные методы для работы с API Capmonster Cloud",
+    "description": "The generated-index page description for category API in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Типы капч": {
+    "message": "Типы капч",
+    "description": "The label for category Типы капч in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Типы капч.link.generated-index.description": {
+    "message": "Документация по основным типам капч",
+    "description": "The generated-index page description for category Типы капч in sidebar tutorialSidebar"
+  }
+}

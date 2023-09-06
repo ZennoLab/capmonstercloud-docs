@@ -1,0 +1,9 @@
+{
+  "label": "Типы капч",
+  "position": 2,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "description": "Документация по основным типам капч"
+  }
+}
