@@ -132,7 +132,7 @@ Task ID for further use in [getTaskResult](./get-task-result) method.
 ### **Response example**
 
 <details>
-    <summary>Responce WITHOUT error</summary>
+    <summary>Response WITHOUT error</summary>
 
 ```json
     {
