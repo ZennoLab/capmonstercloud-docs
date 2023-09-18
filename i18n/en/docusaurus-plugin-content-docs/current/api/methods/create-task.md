@@ -3,23 +3,23 @@ sidebar_position: 0
 sidebar_label: createTask
 ---
 
-# createTask : создание задачи
+# createTask : creating a task
 
-## **Описание**
-Метод создает задачу на решение выбранного типа каптчи. В параметрах передаются авторизационные данные клиента, типизированные данные задачи и другие необязательные параметры.
+## **Description**
+This method creates a task for solving selected captcha type. In the parameters you need to pass the client authorization data, typed task data and other optional parameters.
 
-:::info Адрес метода
+:::info Method address
 
 ## <https://api.capmonster.cloud/createTask> 
 
-формат запроса: `JSON POST`
+Request format: `JSON POST`
 :::
 
 <!-- Адрес метода: <https://api.capmonster.cloud/createTask> 
 Формат запроса: JSON POST -->
 
 -----
-## **Параметры запроса**
+## **Request parameters**
 <!-- 
 |**Параметр**|**Тип**|**Обязательный**|**Значение**|
 | :-: | :-: | :-: | :-: |
@@ -29,22 +29,22 @@ sidebar_label: createTask
 
 ### `clientKey`
 Type: `String` <br />
-Обязательный: `Да`<br />
-Уникальный ключ вашей учетной записи, API ключ (найти можно [тут](https://capmonster.cloud/Dashboard))
+Required: `Yes`<br />
+Your unique account key, API key (You can find it [here](https://capmonster.cloud/Dashboard))
 
 ### `task`
-Type: `Объект задачи` <br />
-Обязательный: `Да`<br />
-Массив данных о задаче. Список типов задач капч [здесь](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/589856).
+Type: `Task object` <br />
+Required: `Yes`<br />
+Task data array. See list of available object descriptions [here](https://zennolab.atlassian.net/wiki/spaces/APIS/pages/557229/Captcha+Task+Types).
 
 ### `callbackUrl`
 Type: `String` <br />
-Обязательный: `Нет`<br />
-Веб адрес для отправки результата задачи капчи. Данные отправляются POST запросом.<br />Содержимое идентично ответу метода [getTaskResult](./get-task-result).<br />Содержимое ответа не проверяется и сервер должен успеть принять запрос за 2 секунды, затем соединение закрывается.
+Required: `No`<br />
+Web address for sending the captcha task result. Data is sent by POST request.<br />The content is identical to the response of the [getTaskResult](./get-task-result) method.<br />The content of the response is not checked and you should accept the request in 2 seconds then the connection will be closed.
 
 --- 
 
-### **Примеры запросов**
+### **Request exanmples**
 
 <!-- ```mdx-code-block
 import Tabs from '@theme/Tabs';
@@ -54,7 +54,7 @@ import CodeBlock from '@theme/CodeBlock';
 
 ```mdx-code-block
   <Tabs>
-    <TabItem value="apple" label="Задача решения обычной капчи с изображением">
+    <TabItem value="apple" label="Solving a normal captcha with an image">
     <CodeBlock className="language-json">{JSON.stringify({
       "clientKey":"67b6bcbb1a728ea8d563de6d169a2057",
       "task": {
@@ -63,7 +63,7 @@ import CodeBlock from '@theme/CodeBlock';
       }
     }, null, 2)}</CodeBlock>
     </TabItem>
-    <TabItem value="orange" label="Задача решения ReCaptcha2"><CodeBlock className="language-json">{JSON.stringify({
+    <TabItem value="orange" label="Solving ReCaptcha2"><CodeBlock className="language-json">{JSON.stringify({
       "clientKey":"67b6bcbb1a728ea8d563de6d169a2057",
       "task": {
         "type":"NoCaptchaTaskProxyless","websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2\_simple.php?level=high",
@@ -76,7 +76,7 @@ import CodeBlock from '@theme/CodeBlock';
 
 
   <details>
-    <summary>Задача решения обычной капчи с изображением</summary>
+    <summary>Solving normal captcha with an image</summary>
 
 ```json
     {
@@ -90,7 +90,7 @@ import CodeBlock from '@theme/CodeBlock';
   </details>
 
   <details>
-    <summary>Задача решения ReCaptcha2</summary>
+    <summary>Solving ReCaptcha2</summary>
 
 ```json
     {
@@ -104,7 +104,7 @@ import CodeBlock from '@theme/CodeBlock';
   </details>
 
 -----
-## **Структура ответа**
+## **Response structure**
 
 <!-- |**Параметр**|**Тип**|**Значение**|
 | :-: | :-: | :-: |
@@ -114,25 +114,25 @@ import CodeBlock from '@theme/CodeBlock';
 
 ### `errorId`
 Type: `Integer` <br />
-Обязательный: `Да`<br />
-Идентификатор ошибки.<br />**0** - ошибок нет, задача успешно создана, идентификатор задачи находится в параметре *taskId*<br />**1** - ошибка, информация о ней находится в свойстве *errorCode*
+Required: `Yes`<br />
+Error identificator.<br />**0** - no errors, the task has been successfully created, task ID located in *taskId* property<br />**1** - error, information about it is in the *errorCode* property
 
 ### `errorCode`
 Type: `String` <br />
-Обязательный: `Нет`<br />
-Код ошибки. См. [глоссарий ошибок](../api-errors).
+Required: `No`<br />
+Error code. Check out [error list](../api-errors).
 
 ### `taskId`
 Type: `Integer` <br />
-Обязательный: `Да`<br />
-Идентификатор задания для последующего использования в методе [getTaskResult](./get-task-result).
+Required: `Yes`<br />
+Task ID for further use in [getTaskResult](./get-task-result) method.
 
 ---
 
-### **Пример ответа**
+### **Response example**
 
 <details>
-    <summary>Ответ БЕЗ ошибки</summary>
+    <summary>Response WITHOUT error</summary>
 
 ```json
     {
@@ -143,7 +143,7 @@ Type: `Integer` <br />
   </details>
 
   <details>
-    <summary>Ответ содержащий ошибку ReCaptcha2</summary>
+    <summary>Response with ReCaptcha2 error</summary>
 
 ```json
     {
