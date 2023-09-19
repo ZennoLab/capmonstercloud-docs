@@ -54,11 +54,11 @@ ID which was obtained in [createTask](./create-task) method.
 
 ### `errorId`
 Type: `Integer` <br />
-Error identificator.<br />**0** - no errors, no *errorCode* property<br />**1** - error, information about it is in the *errorCode* property.
+Error identificator.<br />**0** - no errors, no *errorCode* property;<br />**1** - error, information about it is in the *errorCode* property.
 
 ### `errorCode`
 Type: `String` <br />
-Error code, check out [error list](../api-errors).
+Error code. Check out [error list](../api-errors).
 
 ### `status`
 Type: `String` <br />
