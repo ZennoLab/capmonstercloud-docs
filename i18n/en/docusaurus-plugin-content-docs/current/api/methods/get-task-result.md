@@ -62,7 +62,7 @@ Error code. Check out [error list](../api-errors).
 
 ### `status`
 Type: `String` <br />
-**processing** -  task is not ready yet<br />**ready** - task complete, solution object can be found in *solution* property.
+**processing** -  task is not ready yet;<br />**ready** - task complete, solution object can be found in *solution* property.
 
 ### `solution`
 Type: `Объект` <br />
