@@ -3,37 +3,37 @@ sidebar_position: 1
 sidebar_label: getTaskResult
 ---
 
-# getTaskResult : получить результат задачи
-## **Описание**
-После того как создали задание на решение, необходимо получить его ответ периодически проверяя статус решения.
+# getTaskResult : request task result
+## **Description**
+After you have created a task, you need to get its response by periodically checking the solving status.
 
-:::info Адрес метода
+:::info Method address
 
 ## <https://api.capmonster.cloud/getTaskResult/> 
 
-формат запроса: `JSON POST`
+request format: `JSON POST`
 :::
 
 <!-- Адрес метода: <https://api.capmonster.cloud/getTaskResult/>
 Формат запроса: JSON POST -->
 
 :::caution
-Лимит: 120 запросов на задачу.
+Limit: 120 requests per task.
 :::
 
 ---
 
-## **Параметры запроса:**
+## **Request parameters:**
 
 ### `clientKey`
 _Type: `String` <br />_
-Обязательный: `Да`<br />
-Уникальный ключ вашей учетной записи
+Required: `Yes`<br />
+Unique key of your account.
 
 ### `taskId`
 _Type: `Integer` <br />_
-Обязательный: `Да`<br />
-Идентификатор задания полученный в методе [createTask](./create-task)
+Required: `Yes`<br />
+ID which was obtained in [createTask](./create-task) method.
 
 
 <!-- |**Параметр**|**Тип**|**Обязательный**|**Значение**|
@@ -41,7 +41,7 @@ _Type: `Integer` <br />_
 |clientKey|String|Да|Уникальный ключ вашей учетной записи|
 |taskId|Integer|Да|Идентификатор задания полученный в методе [createTask](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/425989/createTask)| -->
 ---
-### **Пример запроса**
+### **Request example**
 
 ```json
 {
@@ -50,23 +50,23 @@ _Type: `Integer` <br />_
 }
 ```
 --- 
-## **Структура ответа**
+## **Response structure**
 
 ### `errorId`
 Type: `Integer` <br />
-Идентификатор ошибки.<br />**0** - ошибок нет, свойство *errorCode* отсутствует<br />**1** - ошибка, информация о ней находится в свойстве *errorCode*
+Error identificator.<br />**0** - no errors, no *errorCode* property<br />**1** - error, information about it is in the *errorCode* property
 
 ### `errorCode`
 Type: `String` <br />
-Код ошибки. См. [глоссарий ошибок](../api-errors).
+Error code, check out [error list](../api-errors).
 
 ### `status`
 Type: `String` <br />
-**processing** - задача в процессе выполнения<br />**ready** - задача выполнена, решение находится в свойстве *solution*
+**processing** -  task is not ready yet<br />**ready** - task complete, solution object can be found in *solution* property
 
 ### `solution`
 Type: `Объект` <br />
-Информация о решении задачи. Каждый тип задачи имеет разный формат.
+Task result data. Different for each type of task.
 
 <!-- |**Свойство**|**Тип**|**Значение**|
 | :-: | :-: | :-: |
@@ -75,9 +75,9 @@ Type: `Объект` <br />
 |status|String|**processing** - задача в процессе выполнения<br />**ready** - задача выполнена, решение находится в свойстве *solution*|
 |solution|Объект|Информация о решении задачи. Каждый тип задачи имеет разный формат.| -->
 ---
-### **Пример ответа:**
+### **Response example:**
 
-Ответ в процессе выполнения
+Response is in process
 
 ```json
 {
@@ -91,7 +91,7 @@ Type: `Объект` <br />
 <!-- |<p>{</p><p>`    `"errorCode": "null",</p><p>`    `"errorDescription": "null",</p><p>`    `"errorId": 0,</p><p>`    `"status": "processing",</p><p>}</p>|
 | :- | -->
 
-Успешный ответ
+Successful response
 
 ```json
 {
