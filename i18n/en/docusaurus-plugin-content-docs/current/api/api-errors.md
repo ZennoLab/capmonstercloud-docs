@@ -2,93 +2,93 @@
 sidebar_position: 4
 ---
 
-# Описание ошибок
+# Errors description
 
 ### `INVALID KEY`
-Код ошибки в API: `ERROR_KEY_DOES_NOT_EXIST` <br />
-API-ключ не существует в системе или имеет неверный формат. Проверьте корректность его написания.
+API error code: `ERROR_KEY_DOES_NOT_EXIST` <br />
+Account authorization key not found in the system or has incorrect format.
 
 ### `NO FUNDS`
-Код ошибки в API: `ERROR_ZERO_BALANCE` <br />
-Баланс учетной записи равен нулю. [Пополните баланс](https://capmonster.cloud/SelectPaymentType) своего кабинета, чтобы продолжить распознавание.
+API error code: `ERROR_ZERO_BALANCE` <br />
+Account has zero balance. [Add funds](https://capmonster.cloud/SelectPaymentType) to continue recognition. 
 
 ### `BIG IMAGE SIZE`
-Код ошибки в API: `ERROR_TOO_BIG_CAPTCHA_FILESIZE` <br />
-Размер капчи которую вы загружаете более 50,000 байт.
+API error code: `ERROR_TOO_BIG_CAPTCHA_FILESIZE` <br />
+The size of the captcha you are uploading is more than 500,000 bytes.
 
 ### `ZERO IMAGE SIZE`
-Код ошибки в API: `ERROR_ZERO_CAPTCHA_FILESIZE` <br />
-Размер капчи которую вы загружаете менее 100 байт.
+API error code: `ERROR_ZERO_CAPTCHA_FILESIZE` <br />
+The size of the captcha you are uploading is less than 100 bytes.
 
 ### `CAPTCHA ID IS NOT FOUND`
-Код ошибки в API: `ERROR_NO_SUCH_CAPCHA_ID`, `WRONG_CAPTCHA_ID` <br />
-Капча с таким ID не была найдена в системе. Убедитесь что вы запрашиваете состояние капчи в течение 5 минут после загрузки.
+API error code: `ERROR_NO_SUCH_CAPCHA_ID`, `WRONG_CAPTCHA_ID` <br />
+The captcha that you are requesting was not found. Make sure you are requesting a status update only within 5 minutes of uploading.
 
 ### `CAPTCHA UNSOLVABLE`
-Код ошибки в API: `ERROR_CAPTCHA_UNSOLVABLE` <br />
-Данный тип капч не поддерживается сервисом или картинка не содержит ответа, то есть является шумом. Возможно она является поврежденной или неправильно отрисованной.
+API error code: `ERROR_CAPTCHA_UNSOLVABLE` <br />
+This type of captchas is not supported by the service or the image does not contain an answer, perhaps it is too noisy. It could also mean that the image is corrupted or was incorrectly rendered. 
 
 ### `CAPTCHA IS NOT READY`
-Код ошибки в API: `CAPTCHA_NOT_READY` <br />
-Решение данной капчи еще не готово.
+API error code: `CAPTCHA_NOT_READY` <br />
+The captcha has not yet been solved.
 
 ### `REQUEST IS NOT ALLOWED FROM YOUR IP`
-Код ошибки в API: `ERROR_IP_NOT_ALLOWED` <br />
-Запрос с этого IP адреса с текущим ключом отклонен. Откройте раздел настроек в личном кабинете и [добавьте свой IP в список доверенных](https://capmonster.cloud/Account/Settings).
+API error code: `ERROR_IP_NOT_ALLOWED` <br />
+Request with current account key is not allowed from your IP. Open your account settings and [add your IP to the trusted list](https://capmonster.cloud/Account/Settings).
 
 ### `IP BANNED`
-Код ошибки в API: `ERROR_IP_BANNED` <br />
-Вы превысили лимит запросов с неправильным API-ключом, проверьте правильность ключа в панели управления и через некоторое время повторите попытку.
+API error code: `ERROR_IP_BANNED` <br />
+You have exceeded the limit of requests with the wrong api key, check the correctness of your api key in the control panel and after some time, try again.
 
 ### `INCORRECT METHOD`
-Код ошибки в API: `ERROR_NO_SUCH_METHOD` <br />
-Неправильно указан [тип капчи](https://zennolab.atlassian.net/wiki/spaces/APIS/pages/589856) (значение параметра «type»).
+API error code: `ERROR_NO_SUCH_METHOD` <br />
+Incorrect [captcha type](../captchas) (value of the «type» parameter).
 
 ### `REQUEST LIMIT EXCEEDED`
-Код ошибки в API: `ERROR_TOO_MUCH_REQUESTS` <br />
-Вы превысили лимит запросов на получение ответа по одной задаче. Попробуйте запрашивать [результат задачи](./methods/get-task-result) не чаще 1 раза в 2 секунды.
+API error code: `ERROR_TOO_MUCH_REQUESTS` <br />
+You have exceeded the limit of requests to receive an answer for one task. Try to request [the result of the task](./methods/get-task-result) no more than 1 time in 2 seconds.
 
 ### `THE DOMAIN IS NOT ALLOWED`
-Код ошибки в API: `ERROR_DOMAIN_NOT_ALLOWED` <br />
-Капчу с некоторых доменов нельзя разгадывать в CapMonster Cloud. При попытке создать задание для такого домена вернётся эта ошибка.
+API error code: `ERROR_DOMAIN_NOT_ALLOWED` <br />
+Captcha from some domains cannot be solved in CapMonster Cloud. If you try to create a task for such a domain, this error will return.
 
 ### `THE TOKEN IS EXPIRED`
-Код ошибки в API: `ERROR_TOKEN_EXPIRED` <br />
-При попытке распознать капчу её провайдер сообщил, что истёк срок действия дополнительного токена. Попробуйте отправить капчу с новым токеном.
+API error code: `ERROR_TOKEN_EXPIRED` <br />
+Captcha provider server reported that the additional token has expired. Try creating task with a new token.
 
 ### `NO FREE SERVERS`
-Код ошибки в API: `ERROR_NO_SLOT_AVAILABLE` <br />
-На данный момент нет свободных серверов для распознавания этого задания. Повторите попытку через некоторое время.
+API error code: `ERROR_NO_SLOT_AVAILABLE` <br />
+At the moment there are no available servers for recognizing this task. Try again after a while.
 
 ### `INVALID RECAPTCHA SITEKEY`
-Код ошибки в API: `ERROR_RECAPTCHA_INVALID_SITEKEY` <br />
-Неверный sitekey.
+API error code: `ERROR_RECAPTCHA_INVALID_SITEKEY` <br />
+Invalid sitekey.
 
 ### `INVALID RECAPTCHA DOMAIN`
-Код ошибки в API: `ERROR_RECAPTCHA_INVALID_DOMAIN` <br />
-Домен не соответствует sitekey.
+API error code: `ERROR_RECAPTCHA_INVALID_DOMAIN` <br />
+Invalid domain for sitekey.
 
 ### `RECAPTCHA TIMEOUT`
-Код ошибки в API: `ERROR_RECAPTCHA_TIMEOUT` <br />
-Превышен таймаут решения рекапчи, скорее всего из-за медленного прокси-сервера или сервера Google.
+API error code: `ERROR_RECAPTCHA_TIMEOUT` <br />
+The timeout of the ReCaptcha recognition has been exceeded, most likely due to a slow proxy or Google server.
 
 ### `YOUR IP IS BLOCKED`
-Код ошибки в API: `ERROR_IP_BLOCKED` <br />
-Доступ к API с этого IP запрещен из-за большого количества ошибок.
+API error code: `ERROR_IP_BLOCKED` <br />
+Your IP is not allowed to access this API due to a large number of errors.
 
 ### `FAILED TO CONNECT PROXY`
-Код ошибки в API: `ERROR_PROXY_CONNECT_REFUSED` <br />
-Не удалось подключиться к прокси-серверу, таймаут соединения. 
+API error code: `ERROR_PROXY_CONNECT_REFUSED` <br />
+Unable to connect to proxy server, connection timeout.
 
 ### `THE PROXY IP IS BANNED`
-Код ошибки в API: `ERROR_PROXY_BANNED` <br />
-IP прокси забанен на целевом сервисе капчи. 
+API error code: `ERROR_PROXY_BANNED` <br />
+The proxy IP is banned in the target captcha service. 
 
 ### `INCORRECT TASK TYPE`
-Код ошибки в API: `ERROR_TASK_NOT_SUPPORTED` <br />
-Тип задачи не поддерживается или указан неверно. Проверьте свойство «type» в объекте задачи. 
+API error code: `ERROR_TASK_NOT_SUPPORTED` <br />
+The task type is incorrect or not supported. Check the «type» property in the task object. 
 
 ### `ERROR_TASK_ABSENT`
-Код ошибки в API: `ERROR_TASK_ABSENT` <br />
-Объект task не найден или отправлен невалидный JSON в запросе [createTask](./methods/create-task).
+API error code: `ERROR_TASK_ABSENT` <br />
+task object not found or invalid JSON was sent in [createTask](./methods/create-task) request.
 
