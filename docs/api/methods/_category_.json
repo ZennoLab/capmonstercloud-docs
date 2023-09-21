@@ -3,6 +3,7 @@
   "position": 1,
   "collapsed": false,
   "link": {
+    "slug": "methods",
     "type": "generated-index",
     "description": "Основные методы для работы с API Capmonster Cloud"
   }

@@ -11,8 +11,12 @@
     "message": "Основные методы для работы с API Capmonster Cloud",
     "description": "The generated-index page description for category API in sidebar tutorialSidebar"
   },
+  "sidebar.tutorialSidebar.category.Методы": {
+    "message": "Methods",
+    "description": "Basic methods for working with Capmonster Cloud API"
+  },
   "sidebar.tutorialSidebar.category.Типы капч": {
-    "message": "Типы капч",
+    "message": "Captcha types",
     "description": "The label for category Типы капч in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.Типы капч.link.generated-index.description": {
