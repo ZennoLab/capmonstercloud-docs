@@ -3,7 +3,7 @@
 In case of blocking, you’ll see a notification in your [personal account](https://capmonster.cloud/Dashboard).
 Ban history is available in the settings.
 
-![](./images/Aspose.Words.bbd9194a-7e5f-4818-92e0-dfa2931e5a81.002.png) 
+![](./images/ban-history.png) 
 ## ![(синяя звезда)](./images/Aspose.Words.bbd9194a-7e5f-4818-92e0-dfa2931e5a81.003.png) **The main reasons for getting a ban:**
 
 - **KeyDoesntExist** (multiple requests without a key / with an invalid key)
