@@ -68,7 +68,7 @@ const config = {
         id: 'support_us',
         content:
           'Попробуйте наше <a target="_blank" rel="noopener noreferrer" href="#">расширение</a> для автоматического решения капч',
-        backgroundColor: '#1E50D2',
+        backgroundColor: '#0FB97D',
         textColor: 'white',
         isCloseable: false,
       },
@@ -84,13 +84,13 @@ const config = {
         // title: 'My Site',
         logo: {
           alt: 'My Site Logo',
-          src: 'img/logo_docs.svg',
+          src: 'img/logo_landing.svg',
         },
         items: [
           {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
-            position: 'left',
+            position: 'right',
             label: 'Документация',
           },
           // {to: '/blog', label: 'Пресс релизы', position: 'left'},
