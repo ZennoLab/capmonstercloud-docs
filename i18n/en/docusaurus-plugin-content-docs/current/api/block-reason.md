@@ -1,34 +1,36 @@
-﻿# Причины блокировки
-## ![(вопрос)](./images/Aspose.Words.bbd9194a-7e5f-4818-92e0-dfa2931e5a81.001.png) **Как узнать причину бана?**
-В случае блокировки в [личном кабинете](https://capmonster.cloud/Dashboard) появится уведомление.
-История блокировок доступна в меню.
+﻿# Reasons for blocking
+## ![(вопрос)](./images/Aspose.Words.bbd9194a-7e5f-4818-92e0-dfa2931e5a81.001.png) **How to find out the reason for the ban?**
+In case of blocking, you’ll see a notification in your [personal account](https://capmonster.cloud/Dashboard).
+Ban history is available in the settings.
 
-![](./images/Aspose.Words.bbd9194a-7e5f-4818-92e0-dfa2931e5a81.002.png) 
-## ![(синяя звезда)](./images/Aspose.Words.bbd9194a-7e5f-4818-92e0-dfa2931e5a81.003.png) **Основные причины получения блокировки**
-- **KeyDoesntExist** (множественные запросы без ключа / с неверным ключом)
-- **ZeroBalance** (много запросов с нулевым балансом)
+![](./images/ban-history.png) 
+## ![(синяя звезда)](./images/Aspose.Words.bbd9194a-7e5f-4818-92e0-dfa2931e5a81.003.png) **The main reasons for getting a ban:**
+
+- **KeyDoesntExist** (multiple requests without a key / with an invalid key)
+- **ZeroBalance** (multiple requests with zero balance)
 - **WrongTaskId**
-  - при превышении лимита в 120 запросов на задачу
-  - при множественном запросе результата для несуществующего TaskId
-- **BadProxy** (множественные запросы с забаненной прокси)
+  - when exceeding the limit of the 120 requests per task
+  - multiple requests to getTaskResult with wrong TaskId
+- **BadProxy** (multiple requests with a banned proxy)
 
-Бан выдаётся не за одно нарушение, а за повторяющиеся действия за ограниченный период времени. 
-## ![(синяя звезда)](./images/Aspose.Words.bbd9194a-7e5f-4818-92e0-dfa2931e5a81.004.png) **Когда снимут бан?**
-Продолжительность блокировки 10 минут при условии, что Вы не продолжаете нарушать вышеописанные правила.
+Users receive a ban for repeated actions for a limited period of time.
+## ![(синяя звезда)](./images/Aspose.Words.bbd9194a-7e5f-4818-92e0-dfa2931e5a81.004.png) **When will the ban be removed?**
+
+The duration of the block is 10 minutes, provided that you do not continue to break the rules described above.
 
 
 <details>
-    <summary>Меня постоянно банит, что делать?
+    <summary>I am constantly banned. What should I do?
 </summary>
-Это происходит из-за того, что ваше приложение\скрипт отправляет множественные некорректные запросы на API. 
+The reason is that your app/script sends multiple incorrect API requests. 
 
-**Я пользователь**
+**I am a user**
 
-Если Вы не являетесь разработчиком данного приложения\скрипта, которое отправляет капчи, свяжитесь с их службой поддержки и объясните, что сервис распознавания капчи блокирует вас за множественные некорректные запросы (см. расшифровку причины бана). 
+If you are not the developer of the app/script that sends captchas, contact their support and explain that the captcha recognition service blocks you for multiple incorrect requests (read the explanation of the reasons for getting a ban).
 
-**Я разработчик**
+**I am a developer**
 
-Если Вы разработчик, внесите изменения самостоятельно в соответствии с правилами и лимитами.
+If you are a developer, make changes yourself according to the rules and limits.
   </details>
 
 

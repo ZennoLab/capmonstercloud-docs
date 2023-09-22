@@ -2,14 +2,14 @@
 sidebar_position: 5
 ---
 
-# Передача имени модуля
-## Как передать имя модуля в CapMonster Cloud, используя только ApiKey поле
+# Passing module name
+## How to pass module name to CapMonster Cloud, using ApiKey field only
 
-Для того, чтобы передать в CapMonsterCloud информацию о модуле, который будет распознавать вашу капчу, используя только поле для указания ApiKey, вы можете дописать к ключу имя модуля в следующем формате: “{apikey}\_\_имя-модуля”
+In order to send to CapMonsterCloud information about the module that will recognize your captcha, using only the field to specify ApiKey, you can add the module name to the key in the following format: “{apikey}\_\_moduleName”
 
-Например, “00f87cb0f01330d33709ce3339ad0c8c\_\_solvemedia”
+For example, “00f87cb0f01330d33709ce3339ad0c8c\_\_solvemedia”
 
-Список доступных имен модулей представлен ниже:
+The list of available module names:
 
 - amazon
 - botdetect
@@ -25,8 +25,8 @@ sidebar_position: 5
 - steam
 - vk
 - yandex
-- yandexnew (двух-словная каптча)
+- yandexnew (two words)
 - yandexwave
-- universal (все остальные текстовые каптчи)
+- universal (all other text captcha types)
 
-Если у Вас не получилось отправить капчу на определенный модуль, пожалуйста, напишите нам в [службу поддержки](https://helpdesk.zennolab.com/conversation/new), мы поможем Вам в настройке!
+If you were unable to send a captcha to a specific module, please write to our [support team](https://helpdesk.zennolab.com/conversation/new), we will help you set it up!
