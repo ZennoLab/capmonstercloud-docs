@@ -1,33 +1,34 @@
 ﻿---
 sidebar_position: 7
 ---
-# Проблемы принимаемости токенов
+# Token acceptance issues
 
-## Что делать, если сайт принимает только часть токенов из CapMonster Cloud?
+## What to do if the site only accepts some of the tokens from CapMonster Cloud?
 
-## **Описание**
+## **Description**
 
-Вы получаете токен от CapMonster Cloud, отправляете его сайту, но последний его отклоняет. При чём иногда сайт может принять токен, например, в одном случае из 10 (процент успеха в Вашем случае может быть другим).
-В этом случае Вам может помочь параметр nocache
+You receive a token from CapMonster Cloud, send it to the site, but the site rejects it. Moreover, sometimes the site can accept a token, for example, in one case out of 10 (the percentage of success in your case may be different).
+
+In this case, the nocache parameter can help you.
 
 ---
 
-## **Как передать параметр?**
+## **How to pass a parameter?**
 
-### **Через API ключ**
+### **Via API key**
 
 :::caution
-Будет применено ко всем отправляемым капчам.
+Will be applied to all sent captchas.
 :::
 
-В настройках используемого софта допишите параметр nocache, через двойное подчёркивание, в самом конце API ключа:
+In the settings of the used software, add the nocache parameter, with a double underscore, at the very end of the API key:
 
 dce6bcbb1a728ea8d871de6d169a2057\_\_nocache
 
-### **При запросе к createTask**
+### **When requesting createTask**
 
 :::tip
-Обратите внимание на свойство *nocache* у объекта *task*
+Notice the *nocache* property of the *task* object
 :::
 
 ```json
@@ -44,19 +45,19 @@ dce6bcbb1a728ea8d871de6d169a2057\_\_nocache
 }
 ```
 
-### **При создании задания по API Rucaptcha (через URL параметры)**
+### **When creating a task using the RuCaptcha API (via URL parameters)**
 
-В URL надо добавить nocache=1
+Add nocache = 1 to the URL.
 
-В примере ниже параметр добавлен в самый конец.
+In the example below, the parameter is added to the very end.
 
 `http://api.capmonster.cloud/in.php?key=dce6bcbb1a728ea8d871de6d169a2057&method=userrecaptcha&googlekey=6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI\_iqRyTwd&pageurl=https://lessons.zennolab.com/captchas/recaptcha/v2\_simple.php?level=high&nocache=1`
 
 ---
 
-## **К каким типам капчи применим параметр?**
+## **What types of captcha does this parameter apply to?**
 
-- RecaptchaV2 ([с прокси](https://zennolab.atlassian.net/wiki/spaces/APIS/pages/680460291/NoCaptchaTask+Google) и [без них](https://zennolab.atlassian.net/wiki/spaces/APIS/pages/240648206/NoCaptchaTaskProxyless+Google))
-- [RecaptchaV3](https://zennolab.atlassian.net/wiki/spaces/APIS/pages/566493185/RecaptchaV3TaskProxyless+Google+3)
-- Hcaptcha ([с прокси](https://zennolab.atlassian.net/wiki/spaces/APIS/pages/1203601411/HCaptchaTask+hCaptcha) и [без них](https://zennolab.atlassian.net/wiki/spaces/APIS/pages/1203273729/HCaptchaTaskProxyless+hCaptcha))
-- Funcaptcha ([с прокси](https://zennolab.atlassian.net/wiki/spaces/APIS/pages/725319857/FunCaptchaTask+FunCaptcha) и [без них](https://zennolab.atlassian.net/wiki/spaces/APIS/pages/636813317/FunCaptchaTaskProxyless+FunCaptcha))
+- ReCaptchaV2 ([with proxy](https://zennolab.atlassian.net/wiki/spaces/APIS/pages/680460291/NoCaptchaTask+Google) and [without](https://zennolab.atlassian.net/wiki/spaces/APIS/pages/240648206/NoCaptchaTaskProxyless+Google))
+- [ReCaptchaV3](https://zennolab.atlassian.net/wiki/spaces/APIS/pages/566493185/RecaptchaV3TaskProxyless+Google+3)
+- HCaptcha ([with proxy](https://zennolab.atlassian.net/wiki/spaces/APIS/pages/1203601411/HCaptchaTask+hCaptcha) and [without](https://zennolab.atlassian.net/wiki/spaces/APIS/pages/1203273729/HCaptchaTaskProxyless+hCaptcha))
+- FunCaptcha ([with proxy](https://zennolab.atlassian.net/wiki/spaces/APIS/pages/725319857/FunCaptchaTask+FunCaptcha) and [without](https://zennolab.atlassian.net/wiki/spaces/APIS/pages/636813317/FunCaptchaTaskProxyless+FunCaptcha))
