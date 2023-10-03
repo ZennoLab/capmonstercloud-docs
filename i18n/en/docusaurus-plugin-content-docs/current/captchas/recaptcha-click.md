@@ -3,26 +3,26 @@ sidebar_position: 7
 sidebar_label: ReСaptcha Click
 ---
 
-# ComplexImageTask Recaptcha: решение каптчи Google
-Объект содержит данные о задаче на решение ReCaptcha2 от Google.
+# ComplexImageTask Recaptcha: Google captcha solving
+The object contains data about the task for solving ReCaptcha2 from Google.
 
-## **Структура объекта**
+## **Object structure**
 
-|**Параметр**|**Тип**|**Обязательный**|**Возможные значения**|**Описание**|
+|**Parameter**|**Type**|**Required**|**Possible values**|**Description**|
 | :- | :- | :- | :- | :- |
-|type|String|да|ComplexImageTask|Определяет тип объекта задачи|
-|class|String|да|recaptcha|Определяет класс объекта задачи|
-|imageUrls|Array|да (если не заполнено imagesBase64)|[ “[https://i.postimg.cc/yYjg75Kv/img1.jpg](https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg)”, “[https://i.postimg.cc/yYjg75Kv/img2.jpg](https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg)”, … ]|Список с адресами изображений. Максимум один url на запрос!|
-|imagesBase64|Array|да (если не заполнено imageUrls)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, … ]|Список с изображениями в формате base64. Максимум один элемент на запрос!|
-|metadata.Grid|String|да|4x4, 3x3, 1x1|Размер сетки с изображениями|
-|metadata.TaskDefinition|String|да (если не заполнено metadata.Task)|/m/015qff и другие|<p>Техническое значение, определяющее тип задания</p><p>**Как получить TaskDefinition**</p><p>Данные можно найти в ответах на запросы "/recaptcha/{recaptchaApi}/reload” или "/recaptcha/{recaptchaApi}/userverify", где recaptchaApi - это "enterprise" или "api2" в зависимости от типа Recaptcha. В ответе лежит json, в котором можно взять список TaskDefinition-ов для подгруженных капч.</p>|
-|metadata.Task|String|да (если не заполнено metadata.TaskDefinition)|Click on traffic lights и другие|Текст задания (на английском)|
-|userAgent|String|нет|-|User-Agent браузера, используемый при загрузке изображений, если были переданы ссылки в imageUrls. Необходимо использовать подпись современного браузера, иначе Google будет возвращать ошибку, требуя обновить браузер.|
-|websiteURL|String|нет|-|Адрес страницы на которой решается каптча|
+|type|String|yes|ComplexImageTask|Specifies the task object type.|
+|class|String|yes|recaptcha|Specifies the task object class.|
+|imageUrls|Array|yes (if imagesBase64 is not filled)|[ “[https://i.postimg.cc/yYjg75Kv/img1.jpg](https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg)”, “[https://i.postimg.cc/yYjg75Kv/img2.jpg](https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg)”, … ]|List with image URLs. One element per request!|
+|imagesBase64|Array|yes (if imageUrls is not filled)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, … ]|List with images in base64 format. One element per request!|
+|metadata.Grid|String|yes|4x4, 3x3, 1x1|Image grid size.|
+|metadata.TaskDefinition|String|yes (if metadata.Task is not filled)|/m/015qff and others|<p>Technical value that defines the task type</p><p>**How to get TaskDefinition**</p><p>The data can be found in responses to "/recaptcha/{recaptchaApi}/reload” or "/recaptcha/{recaptchaApi}/userverify" requests, where recaptchaApi is "enterprise" or "api2" depending on the Recaptcha type. The response contains json, in which one can take a list of TaskDefinitions for loaded captchas.</p>|
+|metadata.Task|String|yes (if metadata.TaskDefinition is not filled)|Click on traffic lights and others|Task text (in English).|
+|userAgent|String|no|-|The browser User-Agent to use when loading images if links were passed in imageUrls. It is required to use a modern browser signature, otherwise Google will return an error asking for a browser update.|
+|websiteURL|String|no|-|URL of the page where the captcha is solved.|
 
-## **Пример запроса**
+## **Request example**
 
-:::info Метод
+:::info Wethod
 <https://api.capmonster.cloud/createTask>
 :::
 ```json
@@ -45,24 +45,24 @@ sidebar_label: ReСaptcha Click
 
 
 
-**Пример ответа**
+**Response example**
 ```json
 {
   "errorId":0,
   "taskId":407533072
 }
 ```
-### **Получение результата**
-:::info Метод
+### **Getting a result**
+:::info Wethod
 <https://api.capmonster.cloud/getTaskResult>
 :::
-Используйте метод [getTaskResult](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/557078/getTaskResult) чтобы получить решение капчи. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 300мс до 6 с.
+Use the [getTaskResult](../api/methods/get-task-result.md) method to get the captcha solution. Depending on the system load, you will receive a response after a time ranging from 300ms to 6s.
 
-|**Свойство**|**Тип**|**Описание**|
+|**Property**|**Type**|**Description**|
 | :- | :- | :- |
-|answer|Array|Список в булевыми значениями, true - означает, что нужно произвести клик на соответствующее этой позиции изображение|
+|answer|Array|List with boolean values, "true" means that you need to click on the image corresponding to this position.|
 
-**Пример:**
+**Example:**
 ```json
 {
   "errorId":0,
@@ -73,10 +73,10 @@ sidebar_label: ReСaptcha Click
 }
 ```
 
-## **Ценообразование**: 
+## **Pricing**: 
 
-||**Наименование**|**Стоимость за 1000 картинок, $**|**Стоимость за 1000 новых динамических картинок, $**|
+||**Name**|**Cost per 1000 images, $**|**Cost per 1000 new dynamic images, $**|
 | :-: | :-: | :-: | :-: |
 |1|<p>reCAPTCHA 2 (3\*3)</p><p>![](Aspose.Words.3eba36bc-cab6-486e-9e8f-1e38b225e806.001.png)</p><p></p>|0,2|0,04 |
-|2|<p>reCAPTCHA 2 (4\*4)</p><p>![](Aspose.Words.3eba36bc-cab6-486e-9e8f-1e38b225e806.002.png)</p>|0,1|не применимо |
+|2|<p>reCAPTCHA 2 (4\*4)</p><p>![](Aspose.Words.3eba36bc-cab6-486e-9e8f-1e38b225e806.002.png)</p>|0,1|not applicable|
 
