@@ -3,22 +3,22 @@ sidebar_position: 10
 sidebar_label: Image to Text
 ---
 
-# ImageToTextTask : решение обычной капчи с текстом
-## **Структура объекта**
+# ImageToTextTask : solving a captcha with a text
+## **Object structure**
 
-|**Параметр**|**Тип**|**Обязательный**|**Возможные значения**|**Описание**|
+|**Parameter**|**Type**|**Required**|**Possible values**|**Description**|
 | :-: | :-: | :-: | :-: | :-: |
-|type|String|да|**ImageToTextTask**|Определяет тип объекта задачи|
-|body|String|да|-|Содержимое файла капчи закодированное в base64. Убедитесь что шлете его без переносов строки.|
-|CapMonsterModule|String|нет|yandex, special и другие|Имя модуля, например “yandex“. Альтернативный способ передачи имени модуля и список всех доступных модулей можно найти [здесь](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/187006977/CapMonster+Cloud+ApiKey)|
-|recognizingThreshold|Int|нет|0-100|Порог распознавания капчи с возможным значением от 0 до 100. Например, если в систему было отправлено значение 90, и задача решилась с уверенностью 80, то деньги за решение не спишутся. В этом случае пользователь получит ответ ERROR\_CAPTCHA\_UNSOLVABLE.|
-|Case|Boolean|нет|true, false|Учитывать регистр при решении или нет. |
-|numeric|Int|нет|0, 1|1 - если капча состоит только из цифр|
-|math|Boolean|нет|true, false|false — не определено<br />true — капча требует совершения математического действия (например: капча 2 + 6 = вернёт значение 8)|
+|type|String|yes|**ImageToTextTask**|Defines the type of the task.|
+|body|String|yes|-|File body encoded in base64. Make sure to send it without line breaks.|
+|CapMonsterModule|String|no|yandex, special and others|The name of recognizing module, for example, “yandex“. Alternative way to pass module name and list of all available modules you can find [here](../api/module-name.md).|
+|recognizingThreshold|Int|no|0-100|Captcha recognition threshold with a possible value from 0 to 100. For example, if recognizingThreshold was set to 90 and the task was solved with a confidence of 80, you won't be charged. In this case the user will get a response ERROR\_CAPTCHA\_UNSOLVABLE.|
+|Case|Boolean|no|true, false|true - if captcha is case sensitive.|
+|numeric|Int|no|0, 1|1 - if captcha contains numbers only.|
+|math|Boolean|no|true, false|false — undefined;<br />true — if captcha requires a mathematical operation (for example: captcha 2 + 6 = will return a value of 8).|
 
-## **Пример запроса**
+## **Request example**
 
-:::info Метод
+:::info Method
 <https://api.capmonster.cloud/createTask>
 :::
 ```json
@@ -32,7 +32,7 @@ sidebar_label: Image to Text
 ```
 
 
-**Пример ответа**
+**Response example**
 ```json
 {
   "errorId":0,
@@ -40,17 +40,17 @@ sidebar_label: Image to Text
 }
 ```
 
-## **Получение результата**
-:::info Метод
+## **Getting the result**
+:::info Method
 <https://api.capmonster.cloud/getTaskResult>
 :::
-Используйте метод [getTaskResult](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/557078/getTaskResult) чтобы получить решение капчи. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 300 мс до 6 с.
+Use the [getTaskResult](../api/methods/get-task-result.md) method to get the captcha solution. Depending on the system load, you will receive an answer within an interval from 300ms to 6s
 
-|**Свойство**|**Тип**|**Описание**|
+|**Property**|**Type**|**Description**|
 | :-: | :-: | :-: |
-|text|String|Текст решения капчи|
+|text|String|Captcha answer|
 
-**Пример:**
+**Example:**
 ```json
 {
   "errorId":0,
