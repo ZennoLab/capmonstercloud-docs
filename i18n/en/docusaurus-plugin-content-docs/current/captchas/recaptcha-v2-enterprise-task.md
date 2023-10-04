@@ -3,37 +3,37 @@ sidebar_position: 2
 sidebar_label: ReCaptchaV2
 ---
 
-# RecaptchaV2EnterpriseTask : решение каптчи Google Enterprise
-Объект содержит данные о задаче на решение ReCaptcha2 от Google версии Enterprise. Для обеспечения универсальности решения этого вида каптчи нам необходимо использовать все данные, которые Вы используете во время автоматизации заполнения формы на целевом сайте, включая прокси, user-agent браузера и cookies. Это позволит избежать любых проблем при изменении Google кода своей каптчи.
+# RecaptchaV2EnterpriseTask : solving Google ReCaptcha Enterprise
+The object contains data for Google reCAPTCHA Enterprise solving task. To provide solid universality for solving this type of task we have reproduce every piece of environment used for an automation task you plan to complete. Including, proxy access, browser's user-agent, cookies (optionally). 
 
-Каптча может решаться довольно долго по сравнению с обычной каптчей, но это компенсируется тем, что полученный g-captcha-response действует еще 60 секунд после решения каптчи.
+This type of captcha might be solved a bit longer than usual image captcha, but this issue is compensated by the fact that g-captcha-response value we send to you is valid for the next 60 seconds after we solves your ReCaptcha2.
 
-:::warning **Внимание!**
-Если прокси с авторизацией по IP, то необходимо обязательно добавить **116.203.55.208** в белый список.
+:::warning **Attention!**
+If the proxy is authorized by IP, then be sure to add 116.203.55.208 to the white list.
 :::
 
-## **Структура объекта**
+## **Object structure**
 
-|**Параметр**|**Тип**|**Обязательный**|**Значение**|
+|**Parameter**|**Type**|**Required**|**Value**|
 | :- | :- | :- | :- |
-|type|String|да|**RecaptchaV2EnterpriseTaskProxyless** или **RecaptchaV2EnterpriseTask (При использовании прокси)**|
-|websiteURL|String|да|Адрес страницы на которой решается каптча|
-|websiteKey|String|да|Ключ-идентификатор reCAPTCHA на целевой странице.<br />`<div class="g-recaptcha" data-sitekey="ВОТ\_ЭТОТ"></div>`<br/>или `<iframe title="reCAPTCHA" src="...;k=6LdIFr0ZAAAAAO3vz0O0OQrtAefzdJcWQM2TMYQH&amp;... , где 6LdIFr0ZAAAAAO3vz0O0OQrtAefzdJcWQM2TMYQH - websiteKey />`|
-|enterprisePayload|String|нет|Некоторые реализации виджета reCAPTCHA Enterprise могут содержать дополнительное поле s в структуре, которая передаётся в метод grecaptcha.enterprise.render вместе с sitekey.Например: `2JvUXHNTnZl1Jb6WEvbDyBMzrMTR7oQ78QRhBcG07rk9bpaAaE0LRq1ZeP5NYa0N` из: <pre lang="js" ><code>grecaptcha.enterprise.render("some-div-id", {<br /> sitekey: "6Lc\_aCMTAAAAABx7u2N0D1XnVbI\_v6ZdbM6rYf16"<br/> theme: "dark"<br/> s: "2JvUXHNTnZl1Jb6WEvbDyB...ugQA"<br/>});</code></pre>|
-|apiDomain|String|нет|<p>Адрес домена с которого загружать reCAPTCHA Enterprise. Например:</p><p>- [www.google.com](http://www.google.com)</p><p>- [www.recaptcha.net](http://www.recaptcha.net)</p><p>Не используйте параметр, если не знаете зачем он нужен.</p>|
-|proxyType|String|да (При использовании **RecaptchaV2EnterpriseTask**)|**http** - обычный http/https прокси<br />**https** - попробуйте эту опцию только если "http" не работает (требуется для некоторых кастомных прокси)<br />**socks4** - socks4 прокси<br/>**socks5** - socks5 прокси|
-|proxyAddress|String|да (При использовании **RecaptchaV2EnterpriseTask**)|<p>IP адрес прокси IPv4/IPv6. Не допускается:</p><p>- использование имен хостов</p><p>- использование прозрачных прокси (там где можно видеть IP клиента)</p><p>- использование прокси на локальных машинах</p>|
-|proxyPort|Integer|да (При использовании **RecaptchaV2EnterpriseTask**)|Порт прокси|
-|proxyLogin|String|нет|Логин прокси-сервера|
-|proxyPassword|String|нет|Пароль прокси-сервера|
-|userAgent|String|нет|User-Agent браузера, используемый в эмуляции. Необходимо использовать подпись современного браузера, иначе Google будет возвращать ошибку, требуя обновить браузер.|
-|cookies|String|нет|<p>Дополнительные cookies которые мы должны использовать во время взаимодействия с целевой страницей.</p><p>**Формат**: cookiename1=cookievalue1; cookiename2=cookievalue2</p>|
+|type|String|yes|**RecaptchaV2EnterpriseTaskProxyless** or **RecaptchaV2EnterpriseTask (When using proxy)**.|
+|websiteURL|String|yes|Address of a webpage with Google ReCaptcha Enterprise.|
+|websiteKey|String|yes|Recaptcha website key.<br />`<div class="g-recaptcha" data-sitekey="THIS\_ONE"></div>`<br/>or `<iframe title="reCAPTCHA" src="...;k=6LdIFr0ZAAAAAO3vz0O0OQrtAefzdJcWQM2TMYQH&amp;... , where 6LdIFr0ZAAAAAO3vz0O0OQrtAefzdJcWQM2TMYQH - websiteKey />`|
+|enterprisePayload|String|no|Some implementations of the reCAPTCHA Enterprise widget may contain additional parameters that are passed to the “grecaptcha.enterprise.render” method along with the sitekey. For example: <pre lang="js" ><code>grecaptcha.enterprise.render("some-div-id", {<br /> sitekey: "6Lc\_aCMTAAAAABx7u2N0D1XnVbI\_v6ZdbM6rYf16"<br/> theme: "dark"<br/> s: "2JvUXHNTnZl1Jb6WEvbDyB...ugQA"<br/>});</code></pre>|
+|apiDomain|String|no|<p>Domain address from which to load reCAPTCHA Enterprise. For example:</p><p>- [www.google.com](http://www.google.com)</p><p>- [www.recaptcha.net](http://www.recaptcha.net)</p><p>Don't use a parameter if you don't know why it's needed.</p>|
+|proxyType|String|yes (for **RecaptchaV2EnterpriseTask**)|**http** - usual http/https proxy;<br />**https** - try this only if "http" doesn't work (required by some custom proxy servers);<br />**socks4** - socks4 proxy;<br/>**socks5** - socks5 proxy.|
+|proxyAddress|String|yes (for **RecaptchaV2EnterpriseTask**)|<p>Proxy IP address IPv4/IPv6. Not allowed to use:</p><p>- host names instead of IPs;</p><p>- transparent proxies (where client IP is visible);</p><p>- proxies from local networks.</p>|
+|proxyPort|Integer|yes (for **RecaptchaV2EnterpriseTask**)|Proxy port.|
+|proxyLogin|String|no|Proxy login.|
+|proxyPassword|String|no|Proxy password.|
+|userAgent|String|no|Browser's User-Agent which is used in emulation. It is required that you use a signature of a modern browser, otherwise Google will ask you to "update your browser".|
+|cookies|String|no|<p>Additional cookies which we must use during interaction with target page or Google.</p><p>**Format**: cookiename1=cookievalue1; cookiename2=cookievalue2</p>|
 
-Для enterprisePayload - необходимо заменять функцию grecaptcha.enterprise.render перед её вызовом на свою и забирать значение из её параметров. Функция существует после загрузки скрипта, а рендерится капча обычно сразу или по событию страницы, если капча отрендерится с текущим полем s на клиенте, то токен с большой вероятностью принят не будет.
-Оригинальную функцию можно вызывать без поля s.
+For enterprisePayload - before calling it, you need to replace the grecaptcha.enterprise.render function with your own and take the value from its parameters. The function exists after loading the script, and the captcha is usually rendered immediately or based on a page event. If the captcha is rendered with the current field s on the client, then the token will most likely not be accepted.
+The original function can be called without the s field.
 
 <details>
-    <summary>Скрипт</summary>
+    <summary>Script</summary>
 
 ```js
 var __test_grc = undefined;
@@ -44,7 +44,7 @@ var __test_render = undefined;
 
 var __test_render_widget = undefined;
 
-var __test_render_args = undefined; // здесь будет лежать объект, с которым вызывается render.
+var __test_render_args = undefined; // here will be the object with which render is called.
 
 var __test_handler = {
   get: function(target, name, receiver) {
@@ -79,13 +79,13 @@ Object.defineProperty(window, 'grecaptcha', {
 
 
 
-## **Пример запроса**
+## **Request example**
 
-:::info Метод
+:::info Method
 <https://api.capmonster.cloud/createTask>
 :::
 
-### RecaptchaV2EnterpriseTask (С использованием прокси)
+### RecaptchaV2EnterpriseTask (with proxy)
 ```json
 {
   "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
@@ -106,7 +106,7 @@ Object.defineProperty(window, 'grecaptcha', {
 }
 ```
 
-### RecaptchaV2EnterpriseTaskProxyless (Без использования прокси)
+### RecaptchaV2EnterpriseTaskProxyless (without proxy)
 ```json
 {
   "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
@@ -121,7 +121,7 @@ Object.defineProperty(window, 'grecaptcha', {
 }
 ```
 
-**Пример ответа**
+**Response example**
 
 ```json
 {
@@ -130,18 +130,18 @@ Object.defineProperty(window, 'grecaptcha', {
 }
 ```
 
-## **Получение результата**
-:::info Метод
+## **Getting the result**
+:::info Method
 <https://api.capmonster.cloud/getTaskResult>
 :::
 
-Используйте метод [getTaskResult](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/557078/getTaskResult) чтобы получить решение ReCaptcha2. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 10 с до 80 с.
+Use the [getTaskResult](../api/methods/get-task-result.md) method to request answer for ReCaptcha2. You will get response within 10 - 80 sec period depending on service workload.
 
-|**Свойство**|**Тип**|**Описание**|
+|**Property**|**Type**|**Description**|
 | :- | :- | :- |
-|gRecaptchaResponse|String|Хеш который необходимо подставить в форму с reCAPTCHA Enterprise в `<textarea id="g-recaptcha-response" ..></textarea>` . Имеет длину от 500 до 2190 байт.|
+|gRecaptchaResponse|String|Hash which should be inserted into Recaptcha2 submit form in `<textarea id="g-recaptcha-response" ..></textarea>`. It has a length of 500 to 2190 bytes.|
 
-**Пример:**
+**Example:**
 ```json
 {
   "errorId":0,
