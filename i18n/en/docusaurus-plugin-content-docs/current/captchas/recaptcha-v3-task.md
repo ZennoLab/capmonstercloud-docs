@@ -5,23 +5,23 @@ sidebar_label: ReCaptchaV3
 
 
 # RecaptchaV3TaskProxyless
-Объект содержит данные о задаче на решение ReCaptcha3 от Google. Такая задача будет выполняться нашим сервисом с использованием наших собственных прокси-серверов.
+The object contains data for Google ReCaptcha3 solving task. This task will be executed by our service using our own proxy servers.
 
-При создании задачи, в отличии от ReCaptcha2, необходимо дополнительно передавать два параметра - pageAction и minScore.
+When creating a task, unlike ReCaptcha2, you should additionally pass two parameters - pageAction and minScore.
 
-## **Структура объекта**
+## **Object structure**
 
-|**Параметр**|**Тип**|**Обязательный**|**Значение**|
+|**Parameter**|**Type**|**Required**|**Value**|
 | :- | :- | :- | :- |
-|type|String|да|**RecaptchaV3TaskProxyless**|
-|websiteURL|String|да|Адрес страницы на которой решается каптча|
-|websiteKey|String|да|Ключ-идентификатор ReCaptcha3 на целевой странице.<br/>https://www.google.com/recaptcha/api.js?render=ВОТ\_ЭТОТ|
-|minScore|Double|нет|Может иметь значение от 0.1 до 0.9.|
-|pageAction|String|нет|<p>Значение параметра action, которое передаётся виджетом ReCaptcha в Google, и которое потом видит владелец сайта при проверке токена. Значение по-умолчанию: *verify*</p><p>Пример в html:<br/>*grecaptcha.execute('site\_key', {action:'login\_test'})*.</p>|
+|type|String|yes|**RecaptchaV3TaskProxyless**.|
+|websiteURL|String|yes|Address of a webpage with Google ReCaptcha.|
+|websiteKey|String|yes|Recaptcha website key.<br/>https://www.google.com/recaptcha/api.js?render=THIS\_ONE|
+|minScore|Double|no|Value from 0.1 to 0.9.|
+|pageAction|String|no|<p>Widget action value. Website owner defines what user is doing on the page through this parameter. Default value: *verify*</p><p>Example:<br/>*grecaptcha.execute('site\_key', {action:'login\_test'})*.</p>|
 
-## **Пример запроса**
+## **Request example**
 
-**Адрес** <https://api.capmonster.cloud/createTask>
+**Address:** <https://api.capmonster.cloud/createTask>
 
 ```json
 {
@@ -36,7 +36,7 @@ sidebar_label: ReCaptchaV3
 }
 ```
 
-**Пример ответа**
+**Response example**
 
 ```json
 {
@@ -44,14 +44,14 @@ sidebar_label: ReCaptchaV3
   "taskId":407533072
 }
 ```
-## **Получение результата**
-Используйте метод [getTaskResult](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/557078/getTaskResult) чтобы получить решение ReCaptcha3. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 10 с до 30 с.
+## **Getting the result**
+Use the [getTaskResult](../api/methods/get-task-result.md) to request answer for ReCaptcha3. You will get response within 10 - 30 sec period depending on service workload.
 
-|**Свойство**|**Тип**|**Описание**|
+|**Property**|**Type**|**Description**|
 | :- | :- | :- |
-|gRecaptchaResponse|String|Хеш который необходимо подставить в форму с ReCaptcha3 в  `<textarea id="g-recaptcha-response" ></textarea>` . Имеет длину от 500 до 2190 байт.|
+|gRecaptchaResponse|String|Hash which should be inserted into Recaptcha3 submit form in `<textarea id="g-recaptcha-response" ></textarea>`. It has a length of 500 to 2190 bytes.|
 
-**Пример:**
+**Example:**
 
 ```json
 {
