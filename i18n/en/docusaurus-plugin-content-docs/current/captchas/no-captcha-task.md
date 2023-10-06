@@ -3,34 +3,34 @@ sidebar_position: 0
 sidebar_label: NoCaptchaGoogle
 ---
 
-# NoCaptchaTask : решение каптчи Google
-Объект содержит данные о задаче на решение ReCaptcha2 от Google. Для обеспечения универсальности решения этого вида каптчи нам необходимо использовать все данные, которые Вы используете во время автоматизации заполнения формы на целевом сайте, включая прокси, user-agent браузера и cookies. Это позволит избежать любых проблем при изменении Google кода своей каптчи.
+# NoCaptchaTask : solving Google captcha
+The object contains data for Google ReCaptcha2 solving task. To ensure the universality of the solution to this type of captcha, you need to use all the data used when automating the filling of the form on the target site, including proxies, browser user-agent and cookies. This will help to avoid any problems when Google changes the code of its captcha.
 
-Каптча может решаться довольно долго по сравнению с обычной каптчей, но это компенсируется тем, что полученный g-captcha-response действует еще 60 секунд после решения каптчи.
+This type of captcha might be solved a bit longer than usual image captcha, but this issue is compensated by the fact that g-captcha-response value we send to you is valid for the next 60 seconds after we solves your ReCaptcha2.
 
-:::warning **Внимание!**
-Если прокси с авторизацией по IP, то необходимо обязательно добавить **116.203.55.208** в белый список.
+:::warning **Attention!**
+If the proxy is authorized by IP, then be sure to add **116.203.55.208** to the white list.
 :::
 
-## **Структура объекта**
+## **Object structure**
 
-|**Параметр**|**Тип**|**Обязательный**|**Значение**|
+|**Parameter**|**Type**|**Required**|**Value**|
 | :- | :- | :- | :- |
-|type|String|да|**NoCaptchaTaskProxyless** или **NoCaptchaTask (При использовании прокси)**|
-|websiteURL|String|да|Адрес страницы на которой решается каптча|
-|websiteKey|String|да|Ключ-идентификатор ReCaptcha2 на целевой странице.<br />`<div class="g-recaptcha" data-sitekey="ВОТ\_ЭТОТ"></div>`|
-|recaptchaDataSValue|String|нет|Некоторые реализации виджета ReCaptcha2 могут содержать дополнительный параметр "data-s" в div'е ReCaptcha2, который является одноразовым токеном и должен собираться каждый раз при решении ReCaptcha2.<br />`<div class="g-recaptcha" data-sitekey="some sitekey" data-s="ВОТ\_ЭТОТ"></div>`|
-|proxyType|String|да (При использовании **NoCaptchaTask**)|**http** - обычный http/https прокси<br />**https** - попробуйте эту опцию только если "http" не работает (требуется для некоторых кастомных прокси)<br />**socks4** - socks4 прокси<br />**socks5** - socks5 прокси|
-|proxyAddress|String|да (При использовании **NoCaptchaTask**)|<p>IP адрес прокси IPv4/IPv6. Не допускается:</p><p>- использование имен хостов</p><p>- использование прозрачных прокси (там где можно видеть IP клиента)</p><p>- использование прокси на локальных машинах</p>|
-|proxyPort|Integer|да (При использовании **NoCaptchaTask**)|Порт прокси|
-|proxyLogin|String|нет|Логин прокси-сервера|
-|proxyPassword|String|нет|Пароль прокси-сервера|
-|userAgent|String|нет|User-Agent браузера, используемый в эмуляции. Необходимо использовать подпись современного браузера, иначе Google будет возвращать ошибку, требуя обновить браузер.|
-|cookies|String|нет|<p>Дополнительные cookies которые мы должны использовать во время взаимодействия с целевой страницей.</p><p>**Формат**: cookiename1=cookievalue1; cookiename2=cookievalue2</p>|
+|type|String|yes|**NoCaptchaTaskProxyless** or **NoCaptchaTask (When using a proxy)**.|
+|websiteURL|String|yes|Address of a webpage with captcha.|
+|websiteKey|String|yes|Recaptcha website key.<br />`<div class="g-recaptcha" data-sitekey="THIS\_ONE"></div>`|
+|recaptchaDataSValue|String|no|Some custom implementations may contain additional "data-s" parameter in ReCaptcha2 div, which is in fact a one-time token and must be grabbed every time you want to solve a ReCaptcha2.<br />`<div class="g-recaptcha" data-sitekey="some sitekey" data-s="THIS\_ONE"></div>`|
+|proxyType|String|yes (for **NoCaptchaTask**)|**http** - regular http/https proxy;<br />**https** - try this only if "http" doesn't work (required by some custom proxy servers);<br />**socks4** - socks4 proxy;<br />**socks5** - socks5 proxy.|
+|proxyAddress|String|yes (for **NoCaptchaTask**)|<p>Proxy IP address IPv4/IPv6. Not allowed:</p><p> - using host names;</p><p> - using transparent proxies (where client IP is visible);</p><p>- using proxies from local networks.</p>|
+|proxyPort|Integer|yes (for **NoCaptchaTask**)|Proxy port.|
+|proxyLogin|String|no|Proxy login.|
+|proxyPassword|String|no|Proxy password.|
+|userAgent|String|no|Browser's User-Agent which is used in emulation. It is required that you use a signature of a modern browser, otherwise Google will ask you to "update your browser".|
+|cookies|String|no|<p>Additional cookies which we must use during interaction with target page or Google.</p><p>**Format**: cookiename1=cookievalue1; cookiename2=cookievalue2</p>|
 
-## **Пример запроса**
+## **Request example**
 
-**Адрес** <https://api.capmonster.cloud/createTask>
+**Address**: <https://api.capmonster.cloud/createTask>
 
 ### NoCaptchaTask
 ```json
@@ -63,7 +63,7 @@ sidebar_label: NoCaptchaGoogle
 ```
 
 
-**Пример ответа**
+**Response example**
 
 ```json
 {
@@ -72,14 +72,14 @@ sidebar_label: NoCaptchaGoogle
 }
 ```
 
-## **Получение результата**
-Используйте метод [getTaskResult](../api/methods/get-task-result) чтобы получить решение ReCaptcha2. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 10 с до 80 с.
+## **Getting result**
+Use the [getTaskResult](../api/methods/get-task-result) method to request answer for ReCaptcha2. You will get response within 10 - 80 secs period depending on service workload.
 
-|**Свойство**|**Тип**|**Описание**|
+|**Property**|**Type**|**Description**|
 | :- | :- | :- |
-|gRecaptchaResponse|String|Хеш который необходимо подставить в форму с ReCaptcha2 в `<textarea id="g-recaptcha-response" ..></textarea>` . Имеет длину от 500 до 2190 байт.|
+|gRecaptchaResponse|String|Hash which should be inserted into Recaptcha2 submit form in `<textarea id="g-recaptcha-response" ..></textarea>` . It has a length of 500 to 2190 bytes.
 
-**Пример:**
+**Example:**
 
 ```json
 {
