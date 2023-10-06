@@ -1,44 +1,45 @@
-﻿# Взаимодействие с расширением с помощью JS
-После инициализации расширения на текущей активной странице у нас появляется глобальный объект который задается в настройках расширения, по умолчанию CMExtension, с помощью которого мы можем манипулировать настройками расширения.
+﻿# Interacting with the extension using JS
+After the extension is initialized on the current active page, we have a global CMExtension object with which we can manipulate the extension settings.
 
-## Настройки, доступные для изменения:
+## Settings available for change:
 
-|**Ключ**|**Тип**|**Описание**|
+|**Key**|**Type**|**Description**|
 | :-: | :-: | :-: |
-|isEnabled|Boolean|Включено расширение по умолчанию или нет|
+|isEnabled|Boolean|Is the extension enabled by default or not.|
 |clientKey|String|API key|
-|captchaList|`Array<String>`|Список капч, которые включены (по умолчанию все капчи включены)|
-|captchaExtra|Object<{[String]: 1 | 0}>|Список капч, которые можно решать кликами (Token - 0, Click - 1)|
-|repeatsCount|Number|Количество повторных решений после ошибки|
-|isEnabledIgnoreList|Boolean|Включен ли черный список сайтов, указанный в поле ignoreList|
-|ignoreList|`Array<String>`|Список сайтов для игнорирования решения|
-|proxy|Object|Настройки прокси|
-|isManualResolving|Boolean|Включено ли ручное распознавание|
-|delayStartCount|Array<{[CaptchaType]: Number}>|Задержка перед решением капчи|
-|autoClick|Array<{[CaptchaType]: Boolean}>|Включена ли возможность автоматического начала решения капчи|
-|autoSolve|Array<{[CaptchaType]: Boolean}>|Включена ли возможность автоматического решения окна капчи|
-|textCaptchaSaveOnSite|Boolean|Сохранять ли выбранные элементы на сайте для текстовой капчи|
-|delayAfterLoadPage|Number|Задержка перед началом решения текстовой капчи, если она была сохранена для сайта |
-|recaptchaClickSelector|String|DOM Селектор элемента для нажатия при начале решения Recaptcha|
-|hCaptchaClickSelector|String|DOM Селектор элемента для нажатия при начале решения hCaptcha|
-|globalVariable|String|Название поля для взаимодействия с рашсирением через глобальный объект|
+|captchaList|`Array<String>`|List of captchas that are enabled (by default all capthas are enabled).|
+|captchaExtra|Object<{[String]: 1 | 0}>|List of captchas that can be solved by clicks
+(Token - 0, Click - 1).|
+|repeatsCount|Number|Number of repeated solutions after an error.|
+|isEnabledIgnoreList|Boolean|Whether the blacklist of sites specified in the IgnoreList field is enabled.|
+|ignoreList|`Array<String>`|List of sites to ignore the solving.|
+|proxy|Object|Proxy settings.|
+|isManualResolving|Boolean|Is manual recognition enabled.|
+|delayStartCount|Array<{[CaptchaType]: Number}>|Delay before solving captcha.|
+|autoClick|Array<{[CaptchaType]: Boolean}>|Is the ability to automatically start captcha solving enabled.|
+|autoSolve|Array<{[CaptchaType]: Boolean}>|Is the ability to automatically solve the captcha window enabled.|
+|textCaptchaSaveOnSite|Boolean|Whether to save the selected elements on the site for text captcha.|
+|delayAfterLoadPage|Number|Delay before starting to solve a text captcha, if it was saved for the site.|
+|recaptchaClickSelector|String|DOM Element selector to click when starting a ReCaptcha solving.|
+|hCaptchaClickSelector|String|DOM Element selector to click when starting a hCaptcha solving.|
+|globalVariable|String|Name of the field for interaction with extension via a global object.|
 
-Помните, что обработчики перехвата событий навешаны на сами свойства, а не на данные внутри.
-### **Пример:**
+Note that event handlers are attached to the properties, not to the data inside. 
+### **Example:**
 ```js
 window.CMExtension.isEnabled = false;
 ```
-Помимо настроек, есть события, на которые мы можем подписаться:
+In addition to settings, there are events that we can subscribe to:
 
-|**Событие**|**Описание**|
+|**Event**|**Description**|
 | :-: | :-: |
-|onCMExtensionReady|Расширение полностью загрузилось и готово к работе|
-|onHCaptchaClickStart|Начало решения hCaptcha|
-|onHCaptchaClickBackendError|Ошибка сервера при запросе результатов решения hCaptcha|
-|onHCaptchaClickIncorrect|Некорректное решение hCaptcha|
-|onHCaptchaClickSuccess|Успешное решение hCaptcha|
-|onHCaptchaClick|Нажатие на чекбокс hCaptcha|
-### **Пример:**
+|onCMExtensionReady|The extension is fully loaded and ready to go.|
+|onHCaptchaClickStart|Start the hCaptcha solving.|
+|onHCaptchaClickBackendError|Server error when requesting hCaptcha solving results.|
+|onHCaptchaClickIncorrect|Incorrect hCaptcha solving.|
+|onHCaptchaClickSuccess|Successful hCaptcha solving.|
+|onHCaptchaClick|Click on the hCaptcha checkbox.|
+### **Example:**
 ```js
 window.addEventListener("onCMExtensionReady", () => {
   // DO SOMETHING
