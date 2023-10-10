@@ -40,6 +40,7 @@ The supported image types are as follows:
 | :- | :- |
 |![](Aspose.Words.fa5d4495-c9e9-41f5-8cb9-c4b900b4bbcf.003.png)|![](Aspose.Words.fa5d4495-c9e9-41f5-8cb9-c4b900b4bbcf.004.png)|
 |![](Aspose.Words.fa5d4495-c9e9-41f5-8cb9-c4b900b4bbcf.005.png)|![](Aspose.Words.fa5d4495-c9e9-41f5-8cb9-c4b900b4bbcf.006.png)|
+|![](25940532.png)|
 
 ## **Request example**
 
@@ -54,7 +55,7 @@ The supported image types are as follows:
     "type":"HCaptchaTask",
     "websiteURL":"https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",
     "websiteKey":"472fc7af-86a4-4382-9a49-ca9090474471",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36)",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36)",
     "proxyType":"http",
     "proxyAddress":"8.8.8.8",
     "proxyPort":8080,
@@ -71,7 +72,7 @@ The supported image types are as follows:
     "type":"HCaptchaTaskProxyless",
     "websiteURL":"https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",
     "websiteKey":"472fc7af-86a4-4382-9a49-ca9090474471",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36)"
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36)"
   }
 }
 ```
@@ -104,7 +105,7 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to request ans
   "solution": {
     "gRecaptchaResponse": "P1_eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.hKdwYXNza2V5xQb9JvlblBqjTdKpourvlRNpOZLvJb0yJRmsXVFVjyxFWlL1wdYBXaPyFtnxwy2ukbMgwWn62-cjSc98Iw2XIPYWg5MNDKS4_7tBIhjY0PienoKy1...",
     "respKey": "E0_eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoidjQ3RjlqZGFYTllFQXlZZFYyRTlaWlBVQUdLaFpPakpRNjBXRTljVW40VnY3NnhuN2V3R0wwVWd1MW1Wai90WEdoYmt5a2NqVGlGdWpsSlpmVjcza...",
-    "userAgent": "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+    "userAgent": "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
   }
 }
 ```
