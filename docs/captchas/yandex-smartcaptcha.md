@@ -1,11 +1,11 @@
 ---
 sidebar_position: 12
-sidebar_label: YandexSmartCaptcha ComplexImage
+sidebar_label: Yandex SmartCaptcha ComplexImage
 ---
 
-# ComplexImageTask YandexSmartCaptcha решение YandexSmartCaptcha
+# ComplexImageTask: решение Yandex SmartCaptcha
 
-Объект содержит данные о задаче на решение YandexSmartCaptcha.
+Объект содержит данные о задаче на решение Yandex SmartCaptcha.
 
 **Пример изображения**
 
@@ -46,7 +46,7 @@ sidebar_label: YandexSmartCaptcha ComplexImage
 
 ## **Получение результата**
 
-Используйте метод [getTaskResult](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/557078/getTaskResult), чтобы получить решение капчи. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 300мс до 6 с.
+Используйте метод [getTaskResult](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/557078/getTaskResult), чтобы получить решение капчи. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 300 мс до 6 с.
 
 |**Свойство**|**Тип**|**Описание**|
 | :- | :- | :- | 
