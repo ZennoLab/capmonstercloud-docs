@@ -22,5 +22,13 @@
   "sidebar.tutorialSidebar.category.Типы капч.link.generated-index.description": {
     "message": "Документация по основным типам капч",
     "description": "The generated-index page description for category Типы капч in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Внешние сервисы": {
+    "message": "External services",
+    "description": "The label for category Типы капч in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Расширение": {
+    "message": "Extension",
+    "description": "The label for category Типы капч in sidebar tutorialSidebar"
   }
 }
