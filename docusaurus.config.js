@@ -64,14 +64,14 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      announcementBar: {
-        id: 'support_us',
-        content:
-          'Попробуйте наше <a target="_blank" rel="noopener noreferrer" href="#">расширение</a> для автоматического решения капч',
-        backgroundColor: '#0FB97D',
-        textColor: 'white',
-        isCloseable: false,
-      },
+      // announcementBar: {
+      //   id: 'support_us',
+      //   content:
+      //     'Попробуйте наше <a target="_blank" rel="noopener noreferrer" href="https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh">расширение</a> для автоматического решения капч',
+      //   backgroundColor: '#0FB97D',
+      //   textColor: 'white',
+      //   isCloseable: false,
+      // },
       algolia: {
         appId: 'IUKL1ONOLG',
         apiKey: 'df90fcc07870b0dfda29e86e993cda42',
@@ -99,7 +99,7 @@ const config = {
               position: 'right',
             },
           {
-            href: 'https://github.com/facebook/docusaurus',
+            href: 'https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh',
             label: 'Расширение',
             position: 'right',
           },

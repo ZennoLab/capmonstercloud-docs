@@ -190,3 +190,22 @@ code {
   border: none !important;
   font-weight: bold;
 }
+
+.navbar__toggle {
+  color: white;
+}
+
+@media (max-width: 996px) {
+  .menu__list-item-collapsible a, .menu__link--active, .menu__link--active:hover, .menu__list-item-collapsible a:hover, .navbar-sidebar__back, .menu__list-item a, .menu__list-item a:hover {
+    color: white;
+  }
+  .navbar-sidebar__close g {
+    stroke: white;
+  }
+  .menu__link--sublist-caret path {
+    fill: white;
+  }
+  .menu__link--sublist-caret:after {
+    filter: brightness(0) invert(1);
+  }
+}
