@@ -1,66 +1,66 @@
-﻿# Распознавание капч через API других сервисов
-CapMonster Cloud поддерживает API сервисов: Anti-Captcha (v1.0, v2.0), RuCaptcha, RipCaptcha, 2Captcha, BypassCaptcha, DeathByCaptcha. Таким образом, вы можете разгадывать капчу через CapMonster.Cloud, даже если в вашей программе нет интеграции с нашим сервисом.
+﻿# Captcha recognition via API of other services
+CapMonster Cloud supports API: Anti-Captcha (v1.0, v2.0), RuCaptcha, RipCaptcha, 2Captcha, BypassCaptcha, DeathByCaptcha. Thus, you can solve captcha through CapMonster.Cloud, even if your program doesn't have integration with our service.
 
-Для этого необходимо установить ![(синяя звезда)](Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.001.png) [**CapMonsterInterceptor**](https://static.zenno.services/ccl/interceptor.msi) (OC Windows)
-![(синяя звезда)](Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.002.png) Поддержка других платформ в разработке.
+You just need to install ![(синяя звезда)](Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.001.png) [**CapMonsterInterceptor**](https://static.zenno.services/ccl/interceptor.msi) (OC Windows)
+![(синяя звезда)](Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.002.png) Other platforms support are in development.
 
-В процессе установки потребуется указать API-ключ вашего аккаунта, который вы сможете найти в [личном кабинете](https://capmonster.cloud/Dashboard).
+During the installation process, you’ll need to specify the API key of your account, which you can find in your [personal area](https://capmonster.cloud/Dashboard).
 
 ![](Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.003.png)
 
 ![](Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.004.png) 
 
-По завершению на рабочем столе будет создан ярлык CapMonsterInterceptor. После запуска программа будет доступна в трее. Никаких настроек не требуется.
+When completed, a CapMonsterInterceptor shortcut will be created on the desktop. After launch, the program will be available in the tray. No settings are required.
 
 ![](Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.005.png) 
 
-Когда CapMonsterInterceptor запущен, все капчи отправленные на распознавание в сервисы *Anti-Captcha (v1.0, v2.0), RuCaptcha, RipCaptcha, 2Captcha, BypassCaptcha, DeathByCaptcha* будут перехватываться и перенаправляться в CapMonster.Cloud.
-## **Пример**
-Просто выберите один из сервисов распознавания в своей программе, где требуется ввод капчи. В нашем примере это будет *DeathByCaptcha*.
+When CapMonsterInterceptor is running, all captchas sent for recognition to *Anti-Captcha (v1.0, v2.0), RuCaptcha, RipCaptcha, 2Captcha, BypassCaptcha, DeathByCaptcha* services will be intercepted and redirected to CapMonster.Cloud.
+## **Example**
+Just select one of the recognition services in your program where you need to enter a captcha. In our example, it will be *DeathByCaptcha*.
 
-- **примечание для DeathByCaptcha:** для идентификации пользователя API DeathByCaptcha использует логин и пароль, а не API ключ. В этом случае нужно заполнить 2 поля случайными значениями.
+- **Note for DeathByCaptcha** to identify a user, the DeathByCaptcha API uses username and password, not an API key. In this case, you need to fill 2 fields with random values.
 
 ![](Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.006.png) 
 
-Введите любой API-ключ (*Например, qwerty*).
+Enter any API-key (For example, qwerty).
 
-Теперь можете запускать свою программу. Все капчи, отправленные на другой сервис (в примере DeathByCaptcha), будут перехватываться и отправляться в CapMonsterCloud. 
+Now you can run your program. All captchas sent to another service (DeathByCaptcha in our example) will be intercepted and sent to CapMonster Cloud.  
 
-Щёлкнув 2 раза по иконке CapMonsterInterceptor в трее, вы сможете увидеть статистику перехваченных капч, отправленных на распознавание.
+By double-clicking on the CapMonsterInterceptor icon in the tray, you can see the statistics of intercepted captchas sent for recognition.
 
 ![](Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.007.png) 
-## **Ответы на вопросы**
+## **Questions and answers**
 
 <details>
-    <summary>Как изменить API-ключ, указанный при установке CapMonsterInterceptor?</summary>
+    <summary>How to change the API-key specified when installing CapMonsterInterceptor?</summary>
 
-Щелкните 2 раза по иконке CapMonsterInterceptor в трее. В окне программы найдите блок «Settings», замените ключ на новый и нажмите кнопку «Save».
+Double click on the CapMonsterInterceptor tray icon. In the program window, find the «Settings» block, change the key and click «Save».
 
 ![](Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.009.png) 
 </details>
 
 <details>
-    <summary>Что делать, если возникла ошибка: Сделана попытка доступа к сокету методом, запрещённым правами доступа.</summary>
+    <summary>What to do if occured an error: An attempt was made to access a socket using a method prohibited by access rights?</summary>
 
 ![](Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.010.png) 
 
-Если при запуске возникнет ошибка, это означает, что 80 и\или 443 порт занят другим приложением.
+If an error occurs during the launch, it means, that port 80 and/or 443 is occupied by another app.
 
-Для исправления данной ошибки необходимо завершить процесс, который занимает данные порты.
+To fix this error, it is necessary to end the process, that occupies these ports.  
 
-Запускаем командную строку через меню пуск → поиск → cmd
+Run the command line via the start menu →  search → cmd
 
 ![](Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.011.png) 
 
-Вводим команду netstat -a -o | findstr :443
+Enter the command netstat -a -o | findstr :443
 
-Ключ ***-a*** указывает, что нас интересуют все активные подключения, ***-o*** — для каждого из них нужно отобразить *PID* (идентификатор процесса).
-**findstr :443** покажет нам только тот процесс, который занимает нужный нам порт.
+The ***-a*** key indicates that we are interested in all active connections, ***-o*** — for each of them we need to display the PID (process ID).
+**findstr :443** will show us only the process that occupies the port we need.
 
-В правой колонке отобразится PID процесса, как на скриншоте.
-Запомните его или запишите.
+The PID of the process will be displayed in the right column, as in the screenshot. 
+Remember it or write it down.
 
-Открываем диспетчер задач, переходим во вкладку «Подробности», находим процесс с нужным идентификатором и завершаем задачу.
+Open the task manager, go to the «Details» tab, find the process with the necessary ID and end the task.
 
 ![](Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.012.png)
 
