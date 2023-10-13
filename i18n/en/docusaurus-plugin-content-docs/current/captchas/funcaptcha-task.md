@@ -102,3 +102,137 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to request ans
   }
 }
 ```
+
+## Supported task types
+
+|**Type**|**Description**|
+| :- | :- |
+|![](Funcaptcha-task-types/matching-reflection.png)|Pick the image with the matching reflection|
+|![](Funcaptcha-task-types/different-object-silhouette.png)|Pick the shadow with a different object silhouette|
+|![](Funcaptcha-task-types/two-identical-objects.gif)|Pick one square that shows two identical objects|
+|![](Funcaptcha-task-types/dice-same-icon.gif)|Pick the dice pair with the same icon facing up|
+|![](Funcaptcha-task-types/dice-to-4.jpg)|Pick the dice pair whose top sides add up to 4|
+|![](Funcaptcha-task-types/dice-5.jpg)|Pick the dice pair whose top sides add up to 5|
+|![](Funcaptcha-task-types/dice-6.jpg)|Pick the dice pair whose top sides add up to 6|
+|![](Funcaptcha-task-types/dice-7.jpg)|Pick the dice pair whose top sides add up to 7|
+|![](Funcaptcha-task-types/dice-8.jpg)|Pick the dice pair whose top sides add up to 8|
+|![](Funcaptcha-task-types/dice-10.png)|Pick the dice pair whose top sides add up to 10|
+|![](Funcaptcha-task-types/dice-14.jpg)|Pick the dice pair whose top sides add up to 14|
+|![](Funcaptcha-task-types/darts.png)|Pick the image where the darts add up to 8/10/12/14|
+|![](Funcaptcha-task-types/animals-directions.jpg)|Pick the image where all animals are walking in the same direction as the arrow|
+|![](Funcaptcha-task-types/shadows-icons-top.jpg)|Pick the shadow that matches the icons at the top of the image|
+|![](Funcaptcha-task-types/matching-cards.png)|Pick the matching cards|
+|![](Funcaptcha-task-types/mouse-cheese.jpg)|Pick the mouse that can reach all the cheese in the maze|
+|![](Funcaptcha-task-types/animal-wrong-head.jpg)|Select the animal with the wrong head|
+|![](Funcaptcha-task-types/penguin.jpg)|Pick the penguin|
+|![](Funcaptcha-task-types/rotate-animal.png)|Use the arrows to rotate the animal to face in the direction of the hand|
+|![](Funcaptcha-task-types/image-correct.gif)|Pick the image that is the correct way up|
+|![](Funcaptcha-task-types/spiral-galaxy.gif)|Pick the spiral galaxy|
+|![](Funcaptcha-task-types/one-rope.png)|Pick the image with only one rope|
+|![](Funcaptcha-task-types/split-in-half.png)|Pick the cube with icons split in half|
+|![](Funcaptcha-task-types/puzzle-wrong-pieces.png)|Pick the puzzle with the wrong pieces|
+|![](Funcaptcha-task-types/amount-animals.png)|Pick the image where the number matches the amount of animals|
+|![](Funcaptcha-task-types/mouse-cheese-2.png)|Pick the mouse that can't reach the cheese|
+|![](Funcaptcha-task-types/total-fingers-3.png)|Select the image where the total fingers add up to 3|
+|![](Funcaptcha-task-types/wrong-shadow.png)|Pick the wrong shadow|
+|![](Funcaptcha-task-types/square-three-objects.png)|Pick one square that shows three of the same object|
+|![](Funcaptcha-task-types/move-person-cross.png)|Use the arrows to move the person to the spot indicated by the cross|
+|![](Funcaptcha-task-types/move-person-circle.jpg)|Use the arrows to move the person to the icon indicated by the colored circle|
+|![](Funcaptcha-task-types/rotate-animal-2.png)|Use the arrows to rotate the animal with the same icon to face where the hand is pointing|
+|![](Funcaptcha-task-types/number-objects.png)|Use the arrows to change the number of objects until it matches the left image|
+|![](Funcaptcha-task-types/dice-matches.png)|Change the dice until the count matches the image on the left|
+|![](Funcaptcha-task-types/move-train.png)|Use the arrows to move the train to the coordinates indicated in the left image|
+|![](Funcaptcha-task-types/number-rocks.png)|Match the number of rocks with the number on the left|
+|![](Funcaptcha-task-types/koala.jpg)|Pick the koala|
+|![](Funcaptcha-task-types/ladybug.gif)|Pick the ladybug|
+|![](Funcaptcha-task-types/pig.jpg)|Pick the pig|
+|![](Funcaptcha-task-types/zebra.jpg)|Pick the zebra|
+|![](Funcaptcha-task-types/shark.jpg)|Pick the shark|
+|![](Funcaptcha-task-types/dinosaur.jpg)|Pick the dinosaur|
+|![](Funcaptcha-task-types/duck.jpg)|Pick the duck|
+|![](Funcaptcha-task-types/chicken.jpg)|Pick the chicken|
+|![](Funcaptcha-task-types/rhino.jpg)|Pick the rhino|
+|![](Funcaptcha-task-types/dolphin.jpg)|Pick the dolphin|
+|![](Funcaptcha-task-types/grapes.jpg)|Pick the grapes|
+|![](Funcaptcha-task-types/goat.jpg)|Pick the goat|
+|![](Funcaptcha-task-types/elephant.jpg)|Pick the elephant|
+|![](Funcaptcha-task-types/seal.jpg)|Pick the seal|
+|![](Funcaptcha-task-types/bear.jpg)|Pick the bear|
+|![](Funcaptcha-task-types/mouse.jpg)|Pick the mouse|
+|![](Funcaptcha-task-types/butterfly.jpg)|Pick the butterfly|
+|![](Funcaptcha-task-types/monkey.jpg)|Pick the monkey|
+|![](Funcaptcha-task-types/bread.jpg)|Pick the bread|
+|![](Funcaptcha-task-types/lobster.jpg)|Pick the lobster|
+|![](Funcaptcha-task-types/kangaroo.jpg)|Pick the kangaroo|
+|![](Funcaptcha-task-types/deer.jpg)|Pick the deer|
+|![](Funcaptcha-task-types/apple.jpg)|Pick the apple|
+|![](Funcaptcha-task-types/ant.jpg)|Pick the ant|
+|![](Funcaptcha-task-types/snake.jpg)|Pick the snake|
+|![](Funcaptcha-task-types/icecream.jpg)|Pick the ice cream|
+|![](Funcaptcha-task-types/owl.gif)|Pick the owl|
+|![](Funcaptcha-task-types/pants.gif)|Pick the pants|
+|![](Funcaptcha-task-types/cactus.jpg)|Pick the cactus|
+|![](Funcaptcha-task-types/calculator.jpg)|Pick the calculator|
+|![](Funcaptcha-task-types/shoe.jpg)|Pick the shoe|
+|![](Funcaptcha-task-types/scissors.jpg)|Pick the scissors|
+|![](Funcaptcha-task-types/lion.gif)|Pick the lion|
+|![](Funcaptcha-task-types/crab.jpg)|Pick the crab|
+|![](Funcaptcha-task-types/donut.jpg)|Pick the donut|
+|![](Funcaptcha-task-types/dog.jpg)|Pick the dog|
+|![](Funcaptcha-task-types/bee.jpg)|Pick the bee|
+|![](Funcaptcha-task-types/banana.jpg)|Pick the banana|
+|![](Funcaptcha-task-types/parrot.gif)|Pick the parrot|
+|![](Funcaptcha-task-types/octopus.jpg)|Pick the octopus|
+|![](Funcaptcha-task-types/pencil.gif)|Pick the pencil|
+|![](Funcaptcha-task-types/lamp.gif)|Pick the lamp|
+|![](Funcaptcha-task-types/lock.gif)|Pick the lock|
+|![](Funcaptcha-task-types/turtle.gif)|Pick the turtle|
+|![](Funcaptcha-task-types/camel.gif)|Pick the camel|
+|![](Funcaptcha-task-types/horse.jpg)|Pick the horse|
+|![](Funcaptcha-task-types/pizza.jpg)|Pick the pizza|
+|![](Funcaptcha-task-types/bat.jpg)|Pick the bat|
+|![](Funcaptcha-task-types/watermelon.jpg)|Pick the watermelon|
+|![](Funcaptcha-task-types/controller.gif)|Pick the controller|
+|![](Funcaptcha-task-types/rabbit.jpg)|Pick the rabbit|
+|![](Funcaptcha-task-types/pineapple.jpg)|Pick the pineapple|
+|![](Funcaptcha-task-types/snail.jpg)|Pick the snail|
+|![](Funcaptcha-task-types/glasses.jpg)|Pick the glasses|
+|![](Funcaptcha-task-types/key.gif)|Pick the key|
+|![](Funcaptcha-task-types/hotdog.gif)|Pick the hotdog|
+|![](Funcaptcha-task-types/helmet.gif)|Pick the helmet|
+|![](Funcaptcha-task-types/sock.gif)|Pick the sock|
+|![](Funcaptcha-task-types/starfish.gif)|Pick the starfish|
+|![](Funcaptcha-task-types/frog.gif)|Pick the frog|
+|![](Funcaptcha-task-types/printer.jpg)|Pick the printer|
+|![](Funcaptcha-task-types/umbrella.gif)|Pick the umbrella|
+|![](Funcaptcha-task-types/giraffe.jpg)|Pick the giraffe|
+|![](Funcaptcha-task-types/spaceship.gif)|Pick the spaceship|
+|![](Funcaptcha-task-types/boat.gif)|Pick the boat|
+|![](Funcaptcha-task-types/wrong-shadow-2.jpg)|Pick the wrong shadow|
+|![](Funcaptcha-task-types/helicopter.gif)|Pick the helicopter|
+|![](Funcaptcha-task-types/refrigerator.jpg)|Pick the refrigerator|
+|![](Funcaptcha-task-types/couch.jpg)|Pick the couch|
+|![](Funcaptcha-task-types/money.jpg)|Pick the money|
+|![](Funcaptcha-task-types/mushroom.jpg)|Pick the mushroom|
+|![](Funcaptcha-task-types/fence.jpg)|Pick the fence|
+|![](Funcaptcha-task-types/car.jpg)|Pick the car|
+|![](Funcaptcha-task-types/wristwatch.jpg)|Pick the wristwatch|
+|![](Funcaptcha-task-types/alien.jpg)|Pick the alien|
+|![](Funcaptcha-task-types/fan.jpg)|Pick the fan|
+|![](Funcaptcha-task-types/crown.jpg)|Pick the crown|
+|![](Funcaptcha-task-types/burger.jpg)|Pick the burger|
+|![](Funcaptcha-task-types/train.jpg)|Pick the train|
+|![](Funcaptcha-task-types/trophy.jpg)|Pick the trophy|
+|![](Funcaptcha-task-types/aquarium.jpg)|Pick the aquarium|
+|![](Funcaptcha-task-types/anchor.jpg)|Pick the anchor|
+|![](Funcaptcha-task-types/toaster.jpg)|Pick the toaster|
+|![](Funcaptcha-task-types/stapler.jpg)|Pick the stapler|
+|![](Funcaptcha-task-types/bicycle.jpg)|Pick the bicycle|
+|![](Funcaptcha-task-types/guitar.jpg)|Pick the guitar|
+|![](Funcaptcha-task-types/fire.jpg)|Pick the fire|
+|![](Funcaptcha-task-types/flower.jpg)|Pick the flower|
+|![](Funcaptcha-task-types/snowman.jpg)|Pick the snowman|
+|![](Funcaptcha-task-types/ball.jpg)|Pick the ball|
+|![](Funcaptcha-task-types/ring.jpg)|Pick the ring|
+|![](Funcaptcha-task-types/camera.jpg)|Pick the camera|
+|![](Funcaptcha-task-types/rotate-image.png)|Type of captcha, where you need to rotate the image|
