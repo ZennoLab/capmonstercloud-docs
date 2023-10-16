@@ -17,7 +17,7 @@ Before you start automation with the extension, you need to add initial settings
 
 To do this, you need to download the [extension archive](extension-main.md).
 
-Unpack the extension and and in the root of the unpacked archive there will be a *defaultSettings.json* file where you can change the settings. [Here](initial-settings.md) you can find a description of the parameters.
+Unpack the extension and and in the root of the unpacked archive there will be a *defaultSettings.json* file where you can change the settings. [Here](ext-settings.md) you can find a description of the parameters.
 
 After the settings have been successfully changed, you need to archive it back into a .zip file.
 
