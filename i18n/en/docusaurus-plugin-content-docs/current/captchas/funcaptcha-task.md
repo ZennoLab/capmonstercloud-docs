@@ -116,26 +116,26 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to request ans
 |![](Funcaptcha-task-types/dice-6.jpg)|Pick the dice pair whose top sides add up to 6|
 |![](Funcaptcha-task-types/dice-7.jpg)|Pick the dice pair whose top sides add up to 7|
 |![](Funcaptcha-task-types/dice-8.jpg)|Pick the dice pair whose top sides add up to 8|
-|![](Funcaptcha-task-types/dice-10.png)|Pick the dice pair whose top sides add up to 10|
+|![](Funcaptcha-task-types/dice-10.jpg)|Pick the dice pair whose top sides add up to 10|
 |![](Funcaptcha-task-types/dice-14.jpg)|Pick the dice pair whose top sides add up to 14|
-|![](Funcaptcha-task-types/darts.png)|Pick the image where the darts add up to 8/10/12/14|
+|![](Funcaptcha-task-types/darts.jpg)|Pick the image where the darts add up to 8/10/12/14|
 |![](Funcaptcha-task-types/animals-directions.jpg)|Pick the image where all animals are walking in the same direction as the arrow|
 |![](Funcaptcha-task-types/shadows-icons-top.jpg)|Pick the shadow that matches the icons at the top of the image|
-|![](Funcaptcha-task-types/matching-cards.png)|Pick the matching cards|
+|![](Funcaptcha-task-types/matching-cards.jpg)|Pick the matching cards|
 |![](Funcaptcha-task-types/mouse-cheese.jpg)|Pick the mouse that can reach all the cheese in the maze|
 |![](Funcaptcha-task-types/animal-wrong-head.jpg)|Select the animal with the wrong head|
 |![](Funcaptcha-task-types/penguin.jpg)|Pick the penguin|
-|![](Funcaptcha-task-types/rotate-animal.png)|Use the arrows to rotate the animal to face in the direction of the hand|
+|![](Funcaptcha-task-types/rotate-animal.jpg)|Use the arrows to rotate the animal to face in the direction of the hand|
 |![](Funcaptcha-task-types/image-correct.gif)|Pick the image that is the correct way up|
 |![](Funcaptcha-task-types/spiral-galaxy.gif)|Pick the spiral galaxy|
-|![](Funcaptcha-task-types/one-rope.png)|Pick the image with only one rope|
+|![](Funcaptcha-task-types/one-rope.jpg)|Pick the image with only one rope|
 |![](Funcaptcha-task-types/split-in-half.png)|Pick the cube with icons split in half|
 |![](Funcaptcha-task-types/puzzle-wrong-pieces.png)|Pick the puzzle with the wrong pieces|
-|![](Funcaptcha-task-types/amount-animals.png)|Pick the image where the number matches the amount of animals|
-|![](Funcaptcha-task-types/mouse-cheese-2.png)|Pick the mouse that can't reach the cheese|
-|![](Funcaptcha-task-types/total-fingers-3.png)|Select the image where the total fingers add up to 3|
-|![](Funcaptcha-task-types/wrong-shadow.png)|Pick the wrong shadow|
-|![](Funcaptcha-task-types/square-three-objects.png)|Pick one square that shows three of the same object|
+|![](Funcaptcha-task-types/amount-animals.jpg)|Pick the image where the number matches the amount of animals|
+|![](Funcaptcha-task-types/mouse-cheese-2.jpg)|Pick the mouse that can't reach the cheese|
+|![](Funcaptcha-task-types/total-fingers-3.jpg)|Select the image where the total fingers add up to 3|
+|![](Funcaptcha-task-types/wrong-shadow.jpg)|Pick the wrong shadow|
+|![](Funcaptcha-task-types/square-three-objects.jpg)|Pick one square that shows three of the same object|
 |![](Funcaptcha-task-types/move-person-cross.png)|Use the arrows to move the person to the spot indicated by the cross|
 |![](Funcaptcha-task-types/move-person-circle.jpg)|Use the arrows to move the person to the icon indicated by the colored circle|
 |![](Funcaptcha-task-types/rotate-animal-2.png)|Use the arrows to rotate the animal with the same icon to face where the hand is pointing|
