@@ -7,7 +7,7 @@ sidebar_position: 5
 
 In order to send to CapMonsterCloud information about the module that will recognize your captcha, using only the field to specify ApiKey, you can add the module name to the key in the following format: “{apikey}\_\_moduleName”
 
-For example, “00f87cb0f01330d33709ce3339ad0c8c\_\_solvemedia”
+For example, “00f87cb0f01330d33709ce3339ad0c8c\_\_solvemedia” (**!important**, separate the API key and module name with a **double underscore**)
 
 The list of available module names:
 
