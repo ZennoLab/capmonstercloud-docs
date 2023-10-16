@@ -79,7 +79,7 @@ driver.findElement(By.xpath("//button[@id='my-button']")).click();
 
 To run our automatic script, which will launch the browser and perform the actions mentioned above, you need to write in the console:
 
-```js
+```
 node index.js
 ```
 
