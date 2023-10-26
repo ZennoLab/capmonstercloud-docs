@@ -20,7 +20,7 @@ sidebar_position: 6
 {
 
   "task": { 
-    //...
+    ...
     "recognizingThreshold" : 70
   },
   "clientKey":"234234234234234234234234",
@@ -42,6 +42,6 @@ sidebar_position: 6
 Пример: “00f87cb0f01330d33709ce3339ad0c8c\_\_solvemedia\_\_recognizingthreshold\_70”
 
 :::note
-Если у Вас не получилось настроить порог уверенности в ответе, пожалуйста, напишите нам в [службу поддержки](https://helpdesk.zennolab.com/conversation/new), мы поможем Вам в настройке!
+Если у вас не получилось настроить порог уверенности в ответе, пожалуйста, напишите нам в **[службу поддержки](https://helpdesk.zennolab.com/conversation/new)**, мы поможем вам в настройке!
 :::
 
