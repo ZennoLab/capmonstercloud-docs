@@ -22,8 +22,7 @@ To get started with the extension, click on its icon to the right of the address
 <details>
     <summary>Manual installation</summary>
 
-  ![(синяя звезда)](Aspose.Words.d14847ca-5ce8-4c9f-8081-1ec99b44a6b3.002.png) Download the archive with the extension:
-![](Aspose.Words.d14847ca-5ce8-4c9f-8081-1ec99b44a6b3.003.png)
+1. Download the [archive with the extension](https://zenno.link/CapMonsterCloud-chrome-extensions).
 
 1. Unpack it to any folder. 
    
