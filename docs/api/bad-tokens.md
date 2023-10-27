@@ -17,7 +17,9 @@
 ### [https://api.capmonster.cloud/reportIncorrectTokenCaptcha](https://api.capmonster.cloud/reportIncorrectTokenCaptcha)
 
 Также поддерживаются пути:
-[https://api.capmonster.cloud/reportIncorrectRecaptcha](https://api.capmonster.cloud/reportIncorrectRecaptcha), [https://api.capmonster.cloud/reportIncorrectHcaptcha](https://api.capmonster.cloud/reportIncorrectHcaptcha)
+
+[https://api.capmonster.cloud/reportIncorrectRecaptcha](https://api.capmonster.cloud/reportIncorrectRecaptcha), 
+[https://api.capmonster.cloud/reportIncorrectHcaptcha](https://api.capmonster.cloud/reportIncorrectHcaptcha) работают аналогично [reportIncorrectTokenCaptcha](https://api.capmonster.cloud/reportIncorrectTokenCaptcha)
 :::
 
 
@@ -32,7 +34,7 @@
 ### **Параметры запроса**
 
 | **Параметр** | **Тип** | **Обязательный** |                      **Значение**                      |
-| :------------------------: | :--------------: | :--------------------------------: | :------------------------------------------------------------------: |
+| :------------------------: | :--------------: | :--------------------------------: | :------------------------------------------------------------------ |
 |         clientKey         |      String      |                Да                | Уникальный ключ вашей учетной записи |
 |           taskId           |     Integer     |                Да                |              Идентификатор задания              |
 
@@ -49,10 +51,10 @@
 
 **Структура ответа:**
 
-| **Свойство** | **Тип** |                                                                                                                 **Значение**                                                                                                                 |
-| :------------------------: | :--------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| **Свойство** | **Тип** | **Значение** |                                                                                                                |
+| :------------------------: | :--------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |          errorId          |     Integer     | Идентификатор ошибки.<br />**0** - ошибок нет, свойство *errorCode* отсутствует<br />**1** - ошибка, информация о ней находится в свойстве *errorCode* |
-|         errorCode         |      String      |                                                                  Код ошибки. См.[глоссарий ошибок](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/295310).                                                                  |
+|         errorCode         |      String      |                                                                  Код ошибки. См.[глоссарий ошибок](api-errors.md).                                                                  |
 |           status           |      String      |                                           **success** - жалоба принята.<br />Если жалоба не принята, то поле отсутствует, причина в *errorCode*                                           |
 
 ### **Пример ответа**
@@ -71,7 +73,7 @@
 </details>
 
 <details>
-    <summary>Ответ содержащий ошибку
+    <summary>Ответ, содержащий ошибку
 </summary>
 
 ```json

@@ -17,7 +17,9 @@ We need reports so that we automatically analize data on the quality of token is
 ### [https://api.capmonster.cloud/reportIncorrectTokenCaptcha](https://api.capmonster.cloud/reportIncorrectTokenCaptcha)
 
 Also supported paths:
-[https://api.capmonster.cloud/reportIncorrectRecaptcha](https://api.capmonster.cloud/reportIncorrectRecaptcha), [https://api.capmonster.cloud/reportIncorrectHcaptcha](https://api.capmonster.cloud/reportIncorrectHcaptcha)
+
+[https://api.capmonster.cloud/reportIncorrectRecaptcha](https://api.capmonster.cloud/reportIncorrectRecaptcha), 
+[https://api.capmonster.cloud/reportIncorrectHcaptcha](https://api.capmonster.cloud/reportIncorrectHcaptcha) - works the same as [reportIncorrectTokenCaptcha](https://api.capmonster.cloud/reportIncorrectTokenCaptcha)
 :::
 
 
@@ -32,7 +34,7 @@ Also supported paths:
 ### **Request parameters**
 
 | **Parameter** | **Type** | **Required** |                      **Value**                      |
-| :------------------------: | :--------------: | :--------------------------------: | :------------------------------------------------------------------: |
+| :------------------------: | :--------------: | :--------------------------------: | :------------------------------------------------------------------ |
 |         clientKey         |      String      |                Yes                | Your unique account key |
 |           taskId           |     Integer     |                Yes                |              Task ID              |
 
@@ -50,7 +52,7 @@ Also supported paths:
 **Response structure:**
 
 | **Property** | **Type** |                                                                                                                 **Value**                                                                                                                 |
-| :------------------------: | :--------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| :------------------------: | :--------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |          errorId          |     Integer     | Error ID.<br />**0** - no errors, no *errorCode* property;<br />**1** - error, information about it is in the *errorCode* property. |
 |         errorCode         |      String      |                                                                  Error code. Check out [error types](./api-errors).                                                                  |
 |           status           |      String      |                                           **success** - the report is accepted.<br />If the report is not accepted, then the field is missing, the reason is in the *errorCode*                           |
