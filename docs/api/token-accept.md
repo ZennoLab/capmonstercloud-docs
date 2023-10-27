@@ -47,13 +47,13 @@ sidebar_position: 7
 
 ### **При создании задания по API Rucaptcha (через URL параметры)**
 
-В URL надо добавить nocache=1
+В URL надо добавить `nocache=1`
 
 :::tip
 В примере ниже параметр добавлен в самый конец.
 :::
 
-`http://api.capmonster.cloud/in.php?key=dce6bcbb1a728ea8d871de6d169a2057&method=userrecaptcha&googlekey=6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI\_iqRyTwd&pageurl=https://lessons.zennolab.com/captchas/recaptcha/v2\_simple.php?level=high&nocache=1`
+`http://api.capmonster.cloud/in.php?key=dce6bcbb1a728ea8d871de6d169a2057&method=userrecaptcha&googlekey=6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd&pageurl=https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high&nocache=1`
 
 ---
 
