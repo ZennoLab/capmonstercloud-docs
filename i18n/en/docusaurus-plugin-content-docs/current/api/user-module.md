@@ -65,7 +65,9 @@ First, set the module name (Latin characters only).
 
 ![](fed2d879-b494-4b60-a13a-036c693d0951.png)
 
+:::warning
 The module name must not contain the word **captcha**.
+:::
 
 #### **2.2. Types of symbols**
 
