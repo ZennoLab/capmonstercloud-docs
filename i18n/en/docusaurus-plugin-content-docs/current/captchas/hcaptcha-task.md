@@ -20,7 +20,7 @@ Proxies with IP authorization are not yet supported.
 
 |**Parameter**|**Type**|**Required**|**Value**|
 | :- | :- | :- | :- |
-|type|String|yes|**HCaptchaTaskProxyless** or **HCaptchaTask (when using a proxy)**|
+|type|String|yes|**HCaptchaTaskProxyless** or **HCaptchaTask (when using a proxy)**.|
 |websiteURL|String|yes|Address of a webpage with hCaptcha.|
 |websiteKey|String|yes|hCaptcha website key.|
 |isInvisible|Bool|no|Use true for invisible version of hCaptcha.|
