@@ -29,8 +29,8 @@ If the proxy is authorized by IP, then be sure to add 116.203.55.208 to the whit
 |userAgent|String|no|Browser's User-Agent which is used in emulation. It is required that you use a signature of a modern browser, otherwise Google will ask you to "update your browser".|
 |cookies|String|no|<p>Additional cookies which we must use during interaction with target page or Google.</p><p>**Format**: cookiename1=cookievalue1; cookiename2=cookievalue2</p>|
 
-For enterprisePayload - before calling it, you need to replace the grecaptcha.enterprise.render function with your own and take the value from its parameters. The function exists after loading the script, and the captcha is usually rendered immediately or based on a page event. If the captcha is rendered with the current field s on the client, then the token will most likely not be accepted.
-The original function can be called without the s field.
+For `enterprisePayload` - before calling it, you need to replace the `grecaptcha.enterprise.render` function with your own and take the value from its parameters. The function exists after loading the script, and the captcha is usually rendered immediately or based on a page event. If the captcha is rendered with the current field `s` on the client, then the token will most likely not be accepted.
+The original function can be called without the `s` field.
 
 <details>
     <summary>Script</summary>
@@ -69,7 +69,7 @@ Object.defineProperty(window, 'grecaptcha', {
     return __test_grc;
   },
   set: function(value) {
-    __test_grc = new Proxy(value, \_\_test\_handler);
+    __test_grc = new Proxy(value, __test_handler);
   }
 });
 ```
@@ -92,7 +92,7 @@ Object.defineProperty(window, 'grecaptcha', {
   "task": {
     "type":"RecaptchaV2EnterpriseTask",
     "websiteURL":"https://mydomain.com/page-with-recaptcha-enterprise",
-    "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI\_iqRyTwd",
+    "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
     "enterprisePayload": {
       "s": "SOME_ADDITIONAL_TOKEN"
     },
