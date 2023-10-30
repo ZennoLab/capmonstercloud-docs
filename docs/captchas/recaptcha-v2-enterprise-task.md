@@ -3,10 +3,10 @@ sidebar_position: 2
 sidebar_label: ReCaptchaV2Task
 ---
 
-# RecaptchaV2EnterpriseTask : решение каптчи Google Enterprise
-Объект содержит данные о задаче на решение ReCaptcha2 от Google версии Enterprise. Для обеспечения универсальности решения этого вида каптчи нам необходимо использовать все данные, которые Вы используете во время автоматизации заполнения формы на целевом сайте, включая прокси, user-agent браузера и cookies. Это позволит избежать любых проблем при изменении Google кода своей каптчи.
+# RecaptchaV2EnterpriseTask : решение капчи Google Enterprise
+Объект содержит данные о задаче на решение ReCaptcha2 от Google версии Enterprise. Для обеспечения универсальности решения этого вида капчи нам необходимо использовать все данные, которые вы используете во время автоматизации заполнения формы на целевом сайте, включая прокси, user-agent браузера и cookies. Это позволит избежать любых проблем при изменении Google кода своей капчи.
 
-Каптча может решаться довольно долго по сравнению с обычной каптчей, но это компенсируется тем, что полученный g-captcha-response действует еще 60 секунд после решения каптчи.
+Каптча может решаться довольно долго по сравнению с обычной капчей, но это компенсируется тем, что полученный g-captcha-response действует еще 60 секунд после решения капчи.
 
 :::warning **Внимание!**
 Если прокси с авторизацией по IP, то необходимо обязательно добавить **116.203.55.208** в белый список.
@@ -17,9 +17,9 @@ sidebar_label: ReCaptchaV2Task
 |**Параметр**|**Тип**|**Обязательный**|**Значение**|
 | :- | :- | :- | :- |
 |type|String|да|**RecaptchaV2EnterpriseTaskProxyless** или **RecaptchaV2EnterpriseTask (При использовании прокси)**|
-|websiteURL|String|да|Адрес страницы на которой решается каптча|
-|websiteKey|String|да|Ключ-идентификатор reCAPTCHA на целевой странице.<br />`<div class="g-recaptcha" data-sitekey="ВОТ\_ЭТОТ"></div>`<br/>или `<iframe title="reCAPTCHA" src="...;k=6LdIFr0ZAAAAAO3vz0O0OQrtAefzdJcWQM2TMYQH&amp;... , где 6LdIFr0ZAAAAAO3vz0O0OQrtAefzdJcWQM2TMYQH - websiteKey />`|
-|enterprisePayload|String|нет|Некоторые реализации виджета reCAPTCHA Enterprise могут содержать дополнительное поле s в структуре, которая передаётся в метод grecaptcha.enterprise.render вместе с sitekey.Например: `2JvUXHNTnZl1Jb6WEvbDyBMzrMTR7oQ78QRhBcG07rk9bpaAaE0LRq1ZeP5NYa0N` из: <pre lang="js" ><code>grecaptcha.enterprise.render("some-div-id", {<br /> sitekey: "6Lc\_aCMTAAAAABx7u2N0D1XnVbI\_v6ZdbM6rYf16"<br/> theme: "dark"<br/> s: "2JvUXHNTnZl1Jb6WEvbDyB...ugQA"<br/>});</code></pre>|
+|websiteURL|String|да|Адрес страницы, на которой решается капча|
+|websiteKey|String|да|Ключ-идентификатор reCAPTCHA на целевой странице.<br />`<div class="g-recaptcha" data-sitekey="ВОТ_ЭТОТ"></div>`<br/>или `<iframe title="reCAPTCHA" src="...;k=6LdIFr0ZAAAAAO3vz0O0OQrtAefzdJcWQM2TMYQH&amp;... , где 6LdIFr0ZAAAAAO3vz0O0OQrtAefzdJcWQM2TMYQH - websiteKey />`|
+|enterprisePayload|String|нет|Некоторые реализации виджета reCAPTCHA Enterprise могут содержать дополнительное поле s в структуре, которая передаётся в метод grecaptcha.enterprise.render вместе с sitekey.Например: `2JvUXHNTnZl1Jb6WEvbDyBMzrMTR7oQ78QRhBcG07rk9bpaAaE0LRq1ZeP5NYa0N` из: <pre lang="js" ><code>grecaptcha.enterprise.render("some-div-id", {<br /> sitekey: "6Lc_aCMTAAAAABx7u2N0D1XnVbI_v6ZdbM6rYf16"<br/> theme: "dark"<br/> s: "2JvUXHNTnZl1Jb6WEvbDyB...ugQA"<br/>});</code></pre>|
 |apiDomain|String|нет|<p>Адрес домена с которого загружать reCAPTCHA Enterprise. Например:</p><p>- [www.google.com](http://www.google.com)</p><p>- [www.recaptcha.net](http://www.recaptcha.net)</p><p>Не используйте параметр, если не знаете зачем он нужен.</p>|
 |proxyType|String|да (При использовании **RecaptchaV2EnterpriseTask**)|**http** - обычный http/https прокси<br />**https** - попробуйте эту опцию только если "http" не работает (требуется для некоторых кастомных прокси)<br />**socks4** - socks4 прокси<br/>**socks5** - socks5 прокси|
 |proxyAddress|String|да (При использовании **RecaptchaV2EnterpriseTask**)|<p>IP адрес прокси IPv4/IPv6. Не допускается:</p><p>- использование имен хостов</p><p>- использование прозрачных прокси (там где можно видеть IP клиента)</p><p>- использование прокси на локальных машинах</p>|
@@ -92,9 +92,9 @@ Object.defineProperty(window, 'grecaptcha', {
   "task": {
     "type":"RecaptchaV2EnterpriseTask",
     "websiteURL":"https://mydomain.com/page-with-recaptcha-enterprise",
-    "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI\_iqRyTwd",
+    "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
     "enterprisePayload": {
-      "s": "SOME\_ADDITIONAL\_TOKEN"
+      "s": "SOME_ADDITIONAL_TOKEN"
     },
     "proxyType":"http",
     "proxyAddress":"8.8.8.8",
@@ -147,7 +147,7 @@ Object.defineProperty(window, 'grecaptcha', {
   "errorId":0,
   "status":"ready",
   "solution": {
-    "gRecaptchaResponse":"3AHJ\_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9\_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
+    "gRecaptchaResponse":"3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
   }
 }
 ```
