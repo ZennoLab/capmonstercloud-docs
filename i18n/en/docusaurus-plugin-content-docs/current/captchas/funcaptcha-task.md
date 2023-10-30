@@ -18,8 +18,7 @@ If the proxy is authorized by IP, then be sure to add **116.203.55.208** to the 
 | :- | :- | :- | :- |
 |type|String|yes|**FunCaptchaTaskProxyless** or **FunCaptchaTask** (When using a proxy).|
 |websiteURL|String|yes|Address of a webpage with FunCaptcha.|
-|funcaptchaApiJSSubdomain|String|no|A special subdomain of funcaptcha.com, from which the JS captcha widget should be loaded.
-Most FunCaptcha installations work from shared domains, so this option is only needed in certain rare cases.|
+|funcaptchaApiJSSubdomain|String|no|A special subdomain of funcaptcha.com, from which the JS captcha widget should be loaded. It can be found in an element named `fc-token` - the value after the `surl`. It is required if you use a domain other than `client-api.arkoselabs.com`.|
 |websitePublicKey|String|yes|FunCaptcha website key. `<div id="funcaptcha" data-pkey="THAT_ONE"></div>`|
 |data|String|no|Additional parameter that may be required by FunCaptcha implementation. 
 Use this property to send "blob" value as a stringified array. See example how it may look like. {"\blob\":\"HERE_COMES_THE_blob_VALUE\"}*|
