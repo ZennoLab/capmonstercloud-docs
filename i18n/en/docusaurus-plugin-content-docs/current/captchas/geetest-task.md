@@ -5,7 +5,7 @@ sidebar_label: GeeTest
 
 # GeeTestTask: GeeTest captcha solving
 This type of task is for solving GeeTest captcha using your proxies.
-Your application should send the site address, public domain key (gt), key (challenge) and proxy.
+Your application should send the site address, public domain key (`gt`), key (`challenge`) and proxy.
 
 The result of solving the problem is three or five tokens for submitting the form.
 
@@ -16,13 +16,13 @@ Proxies with IP authorization are not yet supported.
 ## **Object structure**
 
 :::info
-- The gt, challenge and geetestApiServerSubdomain parameters are most often found inside the initGeetest JavaScript function.
-- Also you can see in the HTML code of the page. You can find it in the <sсript> block, which appears after the page is fully loaded in the browser.
+- The `gt`, `challenge` and `geetestApiServerSubdomain` parameters are most often found inside the `initGeetest` JavaScript function.
+- Also you can see in the HTML code of the page. You can find it in the `<sсript>` block, which appears after the page is fully loaded in the browser.
   V3
 
 ![](Aspose.Words.09e28b99-ec8b-4638-848b-cdd6fefc7ac8.001.png)
 
-V4 (captcha\_id = gt)
+V4 (captcha_id = gt)
 
 ![](Aspose.Words.09e28b99-ec8b-4638-848b-cdd6fefc7ac8.002.png)
 :::
@@ -31,7 +31,7 @@ V4 (captcha\_id = gt)
 |type|String|yes|**GeeTestTaskProxyless** or **GeeTestTask (When using proxy).**|
 |websiteURL|String|yes|Address of the page on which the captcha is solved.|
 |gt|String|yes|The GeeTest identifier key for the domain. Static value, rarely updated.<br />If v4 then this is the clientId parameter.|
-|challenge|String|yes, only for V3|<p>A dynamic key.<br />Each time our API is called, we need to get a new key value. If the captcha is loaded on the page, then the challenge value is no longer valid and you will get the [error](file:///C:/wiki/spaces/APIS/pages/295310) ERROR\_TOKEN\_EXPIRED.</p><p>You will be charged for tasks with ERROR\_TOKEN\_EXPIRED error.</p><p>It is necessary to examine the requests and find the one in which this value is returned and, before each creation of the recognition task, execute this request and parse the challenge from it.</p>|
+|challenge|String|yes, only for V3|<p>A dynamic key.<br />Each time our API is called, we need to get a new key value. If the captcha is loaded on the page, then the `challenge` value is no longer valid and you will get the [error](../api/api-errors.md) `ERROR_TOKEN_EXPIRED`.</p><p>You will be charged for tasks with `ERROR_TOKEN_EXPIRED` error.</p><p>It is necessary to examine the requests and find the one in which this value is returned and, before each creation of the recognition task, execute this request and parse the challenge from it.</p>|
 |geetestApiServerSubdomain|String|no|Optional parameter. <br />May be required for some sites.|
 |geetestGetLib|String|no|Optional parameter. May be required for some sites. <br />Send JSON as a string.|
 |version|Integer|no|Version number (default is 3). Possible values: 3, 4.|
