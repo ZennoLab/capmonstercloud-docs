@@ -18,8 +18,8 @@ sidebar_label: FunCaptchaTask
 | :- | :- | :- | :- |
 |type|String|да|**FunCaptchaTaskProxyless** или **FunCaptchaTask (При использовании прокси)**|
 |websiteURL|String|да|Адрес страницы на которой решается каптча|
-|funcaptchaApiJSSubdomain|String|нет|Специальный сервисный URL, с которого должен загружаться JS виджет каптчи. Его можно найти в элементе с именем fc-token - значение после surl. Оно требуется, если используется домен отличный от client-api.arkoselabs.com|
-|websitePublicKey|String|да|Ключ-идентификатор FunCaptcha на целевой странице. Его можно найти в блоке `<div id="funcaptcha" data-pkey="ВОТ\_ЗДЕСЬ"></div>` или в значении элементов с именем fc-token и verification-token, после параметра pk=|
+|funcaptchaApiJSSubdomain|String|нет|Специальный сервисный URL, с которого должен загружаться JS виджет каптчи. Его можно найти в элементе с именем `fc-token` - значение после `surl`. Оно требуется, если используется домен отличный от `client-api.arkoselabs.com`|
+|websitePublicKey|String|да|Ключ-идентификатор FunCaptcha на целевой странице. Его можно найти в блоке `<div id="funcaptcha" data-pkey="ВОТ_ЗДЕСЬ"></div>` или в значении элементов с именем fc-token и verification-token, после параметра pk=|
 |data|String|нет|Дополнительный параметр, который может требоваться для некоторых решений FunCaptcha.<br />Используйте это свойство для передачи параметра blob в виде массива, сведенного в строку. Пример:<br />*{"\blob\":\"HERE_COMES_THE_blob_VALUE\"}*|
 |proxyType|String|да (При использовании **FunCaptchaTask**) |**http** - обычный http/https прокси<br/>**https** - попробуйте эту опцию только если "http" не работает (требуется для некоторых кастомных прокси)<br />**socks4** - socks4 прокси<br />**socks5** - socks5 прокси|
 |proxyAddress|String|да (При использовании **FunCaptchaTask**)|<p>IP адрес прокси IPv4/IPv6. Не допускается:</p><p>- использование имен хостов</p><p>- использование прозрачных прокси (там где можно видеть IP клиента)</p><p>- использование прокси на локальных машинах</p>|
