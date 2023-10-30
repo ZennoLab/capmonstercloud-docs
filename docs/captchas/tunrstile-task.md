@@ -6,7 +6,7 @@ sidebar_label: TurnstileTask
 # TurnstileTask | Cloudflare Challenge
 Автоматически поддерживаются все подтипы Turnstile: manual, non-interactive и invisible. Поэтому нет необходимости указывать подтип для обычной капчи.
 :::caution Внимание
-Если вы решаете Turnstile на страницах cloudflare 5s challenge, то не забывайте указывать cloudflareTaskType и связанные с ним поля. userAgent указывать **обязательно**.
+Если вы решаете Turnstile на страницах cloudflare 5s challenge, то не забывайте указывать `cloudflareTaskType` и связанные с ним поля. userAgent указывать **обязательно**.
 :::
 ### **Структура объекта**
 
@@ -23,13 +23,13 @@ sidebar_label: TurnstileTask
 |cloudflareTaskType|String|нет|**cf_clearance** - если требуются куки;<br/>**token** - если требуется токен от Turnstile|
 |htmlPageBase64|String|да, если *cloudflareTaskType* равен* **cf_clearance**|Закодированная в base64 html страница с капчей.|
 |userAgent|String|да, если указан *cloudflareTaskType*|Поддерживаются только последние UA от Chrome.|
-|pageAction|String|да, если *cloudflareTaskType* равен* **token**|Поле action, которое можно найти в callback функции для загрузки капчи.<br/>Если используется *cloudflareTaskType*, то action, обычно “managed“ или “non-interactive“.|
-|data|String|да, если *cloudflareTaskType* равен* **token**|Значение поля *data* можно взять из параметра cData.|
-|pageData|String|да, если *cloudflareTaskType* равен* **token**|Значение поля *pageData* можно взять из параметра chlPageData.|
+|pageAction|String|да, если *cloudflareTaskType* равен* **token**|Поле `action`, которое можно найти в callback функции для загрузки капчи.<br/>Если используется *cloudflareTaskType*, то `action` обычно “managed“ или “non-interactive“.|
+|data|String|да, если *cloudflareTaskType* равен* **token**|Значение поля *data* можно взять из параметра `cData`.|
+|pageData|String|да, если *cloudflareTaskType* равен* **token**|Значение поля *pageData* можно взять из параметра `chlPageData`.|
 
 Прокси для получения токена передавать не обязательно.
 
-Эти параметры находятся в объекте, который передаётся во время создания капчи в функцию window.turnstile.render(el, paramsObj). Получить их можно, например, с помощью выполнения JavaScript перед загрузкой остальных скриптов:
+Эти параметры находятся в объекте, который передаётся во время создания капчи в функцию `window.turnstile.render(el, paramsObj)`. Получить их можно, например, с помощью выполнения JavaScript перед загрузкой остальных скриптов:
 
 ```js
 (function () {
@@ -141,11 +141,11 @@ sidebar_label: TurnstileTask
 ```
 
 ## **Получение результата**
-Используйте метод [getTaskResult](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/557078/getTaskResult), чтобы получить решение Turnstile. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 5 до 20 с.
+Используйте метод [getTaskResult](../api/methods/get-task-result.md), чтобы получить решение Turnstile. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 5 до 20 с.
 
 |**Свойство**|**Тип**|**Описание**|
 | :- | :- | :- |
-|cf\_clearance|String|Специальные куки cloudflare, которые вы можете подставить в свой браузер|
+|cf_clearance|String|Специальные куки cloudflare, которые вы можете подставить в свой браузер|
 |token|String|Используйте токен при вызове callback функции|
 ## **Когда нужно указывать cloudflareTaskType, а когда нет? Или как отличить обычный Turnstile от Cloudflare Challenge.**
 Cloudflare challenge может выглядеть по-разному. 
@@ -156,7 +156,9 @@ Cloudflare challenge может выглядеть по-разному.
 
 **Стилизованные варианты:**
 
-![](Aspose.Words.3953d396-96cb-4bd4-a13b-aa5740b71be8.002.png)![](Aspose.Words.3953d396-96cb-4bd4-a13b-aa5740b71be8.003.png) 
+![](Aspose.Words.3953d396-96cb-4bd4-a13b-aa5740b71be8.002.png) 
+
+![](Aspose.Words.3953d396-96cb-4bd4-a13b-aa5740b71be8.003.png) 
 
 Чтобы окончательно убедиться в наличии Cloudflare, можно открыть инструменты разработчика, посмотреть трафик, изучить код страницы и увидеть характерные признаки:
 
@@ -164,10 +166,10 @@ Cloudflare challenge может выглядеть по-разному.
 
 ![](Aspose.Words.3953d396-96cb-4bd4-a13b-aa5740b71be8.004.png)
 
-- Форма с id **challenge-form** имеет атрибут **action**(не путать с action из параметров для капчи turnstile), содержащий параметр \_\_cf\_chl\_f\_tk=:
+- Форма с id **challenge-form** имеет атрибут **action** (не путать с action из параметров для капчи turnstile), содержащий параметр `__cf_chl_f_tk=`:
 
 ![](Aspose.Words.3953d396-96cb-4bd4-a13b-aa5740b71be8.005.png)
 
-- На странице находится два похожих тега <script />, которые создают новое значение в объекте window:
+- На странице находится два похожих тега `<script>`, которые создают новое значение в объекте `window`:
 
 ![](Aspose.Words.3953d396-96cb-4bd4-a13b-aa5740b71be8.006.png) 
