@@ -92,3 +92,6 @@ IP прокси забанен на целевом сервисе капчи.
 Код ошибки в API: `ERROR_TASK_ABSENT` <br />
 Объект task не найден или отправлен невалидный JSON в запросе [createTask](./methods/create-task).
 
+### `USERAGENT IS EXPIRED`
+Код ошибки в API: `ERROR_WRONG_USERAGENT`<br />
+В запросе указан невалидный User Agent, ознакомиться с текущим User Agent вы можете в [статье](../captchas/hcaptcha-task.md).
