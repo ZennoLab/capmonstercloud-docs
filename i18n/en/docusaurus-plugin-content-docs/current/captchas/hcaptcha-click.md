@@ -18,7 +18,7 @@ The object contains data about the task for solving hCaptcha.
 |class|String|yes|hcaptcha|Specifies the task object class.|
 |imageUrls|Array|yes (if imagesBase64 is not filled)|[ “<https://i.postimg.cc/kg71cbRt/image-1.jpg>”, “<https://i.postimg.cc/6381Zx2j/image.jpg>”, … ]|List with image URLs. Max 18 elements per request.|
 |imagesBase64|Array|yes (if imageUrls is not filled)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, … ]|List with images in base64 format. Max 18 elements per request.|
-|metadata.Task|String|yes|Please click each image containing a mountain and others|Task text (in English).|
+|metadata.Task|String|yes|`Please click each image containing a mountain` and others|Task text (<u>in English</u>).|
 |userAgent|String|no|-|The browser User-Agent to use when loading images if links were passed in imageUrls. It is required to use a modern browser signature, otherwise Google will return an error asking for a browser update.|
 |websiteURL|String|no|-|URL of the page where the captcha is solved.|
 
@@ -94,7 +94,7 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the cap
 |class|String|yes|hcaptcha|Specifies the task object class.|
 |imageUrls|Array|yes (if imagesBase64 is not filled)|[ “<https://i.postimg.cc/vTn3YHr9/panda.jpg>” ]|List with image URLs. Max 18 elements per request.|
 |imagesBase64|Array|yes (if imageUrls is not filled)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…” ]|List with images in base64 format. Max 18 elements per request.|
-|metadata.Task|String|yes|Please click on the panda и другие|Task text (in English).|
+|metadata.Task|String|yes|`Please click on the panda` and others|Task text (<u>in English</u>).|
 |userAgent|String|no|-|The browser User-Agent to use when loading images if links were passed in imageUrls. It is required to use a modern browser signature, otherwise Google will return an error asking for a browser update.|
 |websiteURL|String|no|-|URL of the page where the captcha is solved|
 
@@ -167,7 +167,7 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the cap
 |class|String|yes|hcaptcha|Specifies the task object class.|
 |imageUrls|Array|yes (if imagesBase64 is not filled)|[ “<https://i.postimg.cc/4dmSy2YT/goat.jpg>” ]|List with image URLs. Max 18 elements per request.|
 |imagesBase64|Array|yes (if imageUrls is not filled)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…” ]|List with images in base64 format. Max 18 elements per request.|
-|metadata.Task|String|yes|What animal is shown in the image below? and others|Task text (in English).|
+|metadata.Task|String|yes|`What animal is shown in the image below?` and others|Task text (<u>in English</u>).|
 |metadata.Classes|Array|yes|[ "shark", "chicken", "goat", "hedgehog" ] and others|List with string values located on the right half of the captcha (in the same order as in the image).|
 |userAgent|String|no|-|The browser User-Agent to use when loading images if links were passed in imageUrls. It is required to use a modern browser signature, otherwise Google will return an error asking for a browser update.|
 |websiteURL|String|no|-|URL of the page where the captcha is solved.|
