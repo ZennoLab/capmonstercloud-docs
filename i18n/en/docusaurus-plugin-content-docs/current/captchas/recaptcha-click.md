@@ -12,11 +12,11 @@ The object contains data about the task for solving ReCaptcha2 from Google.
 | :- | :- | :- | :- | :- |
 |type|String|yes|ComplexImageTask|Specifies the task object type.|
 |class|String|yes|recaptcha|Specifies the task object class.|
-|imageUrls|Array|yes (if imagesBase64 is not filled)|[ “[https://i.postimg.cc/yYjg75Kv/img1.jpg](https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg)”, “[https://i.postimg.cc/yYjg75Kv/img2.jpg](https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg)”, … ]|List with image URLs. One element per request!|
-|imagesBase64|Array|yes (if imageUrls is not filled)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, … ]|List with images in base64 format. One element per request!|
+|imageUrls|Array|yes (if imagesBase64 is not filled)|[ “[https://i.postimg.cc/yYjg75Kv/img1.jpg](https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg)”, “[https://i.postimg.cc/yYjg75Kv/img2.jpg](https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg)”, … ]|List with image URLs. <u>One URL per request!</u>|
+|imagesBase64|Array|yes (if imageUrls is not filled)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, … ]|List with images in base64 format. <u>One element per request!</u>|
 |metadata.Grid|String|yes|4x4, 3x3, 1x1|Image grid size.|
-|metadata.TaskDefinition|String|yes (if metadata.Task is not filled)|/m/015qff and others|<p>Technical value that defines the task type</p><p>**How to get TaskDefinition**</p><p>The data can be found in responses to "/recaptcha/{recaptchaApi}/reload” or "/recaptcha/{recaptchaApi}/userverify" requests, where recaptchaApi is "enterprise" or "api2" depending on the Recaptcha type. The response contains json, in which one can take a list of TaskDefinitions for loaded captchas.</p>|
-|metadata.Task|String|yes (if metadata.TaskDefinition is not filled)|Click on traffic lights and others|Task text (in English).|
+|metadata.TaskDefinition|String|yes (if metadata.Task is not filled)|`/m/015qff` and others|<p>Technical value that defines the task type</p><p>**How to get TaskDefinition**</p><p>The data can be found in responses to "/recaptcha/{recaptchaApi}/reload” or "/recaptcha/{recaptchaApi}/userverify" requests, where recaptchaApi is "enterprise" or "api2" depending on the Recaptcha type. The response contains json, in which one can take a list of TaskDefinitions for loaded captchas.</p>|
+|metadata.Task|String|yes (if metadata.TaskDefinition is not filled)|`Click on traffic lights` and others|Task text (<u>in English</u>).|
 |userAgent|String|no|-|The browser User-Agent to use when loading images if links were passed in imageUrls. It is required to use a modern browser signature, otherwise Google will return an error asking for a browser update.|
 |websiteURL|String|no|-|URL of the page where the captcha is solved.|
 

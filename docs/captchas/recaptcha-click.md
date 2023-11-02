@@ -12,11 +12,11 @@ sidebar_label: ReСaptcha ComplexImage
 | :- | :- | :- | :- | :- |
 |type|String|да|ComplexImageTask|Определяет тип объекта задачи|
 |class|String|да|recaptcha|Определяет класс объекта задачи|
-|imageUrls|Array|да (если не заполнено imagesBase64)|[ “[https://i.postimg.cc/yYjg75Kv/img1.jpg](https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg)”, “[https://i.postimg.cc/yYjg75Kv/img2.jpg](https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg)”, … ]|Список с адресами изображений. Максимум один url на запрос!|
-|imagesBase64|Array|да (если не заполнено imageUrls)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, … ]|Список с изображениями в формате base64. Максимум один элемент на запрос!|
+|imageUrls|Array|да (если не заполнено imagesBase64)|[ “[https://i.postimg.cc/yYjg75Kv/img1.jpg](https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg)”, “[https://i.postimg.cc/yYjg75Kv/img2.jpg](https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg)”, … ]|Список с адресами изображений. <u>Максимум один url на запрос!</u>|
+|imagesBase64|Array|да (если не заполнено imageUrls)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, … ]|Список с изображениями в формате base64. <u>Максимум один элемент на запрос!</u>|
 |metadata.Grid|String|да|4x4, 3x3, 1x1|Размер сетки с изображениями|
-|metadata.TaskDefinition|String|да (если не заполнено metadata.Task)|/m/015qff и другие|<p>Техническое значение, определяющее тип задания</p><p>**Как получить TaskDefinition**</p><p>Данные можно найти в ответах на запросы "/recaptcha/{recaptchaApi}/reload” или "/recaptcha/{recaptchaApi}/userverify", где recaptchaApi - это "enterprise" или "api2" в зависимости от типа Recaptcha. В ответе лежит json, в котором можно взять список TaskDefinition-ов для подгруженных капч.</p>|
-|metadata.Task|String|да (если не заполнено metadata.TaskDefinition)|Click on traffic lights и другие|Текст задания (на английском)|
+|metadata.TaskDefinition|String|да (если не заполнено metadata.Task)|`/m/015qff` и другие|<p>Техническое значение, определяющее тип задания</p><p>**Как получить TaskDefinition**</p><p>Данные можно найти в ответах на запросы "/recaptcha/{recaptchaApi}/reload” или "/recaptcha/{recaptchaApi}/userverify", где recaptchaApi - это "enterprise" или "api2" в зависимости от типа Recaptcha. В ответе лежит json, в котором можно взять список TaskDefinition-ов для подгруженных капч.</p>|
+|metadata.Task|String|да (если не заполнено metadata.TaskDefinition)|`Click on traffic lights` и другие|Текст задания (<u>на английском</u>)|
 |userAgent|String|нет|-|User-Agent браузера, используемый при загрузке изображений, если были переданы ссылки в imageUrls. Необходимо использовать подпись современного браузера, иначе Google будет возвращать ошибку, требуя обновить браузер.|
 |websiteURL|String|нет|-|Адрес страницы на которой решается каптча|
 
