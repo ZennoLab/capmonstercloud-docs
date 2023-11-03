@@ -99,8 +99,8 @@ import CodeBlock from '@theme/CodeBlock';
       "task": 
       {
         "type":"NoCaptchaTaskProxyless",
-        "websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2\\_simple.php?level=high",
-        "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI\\_iqRyTwd"
+        "websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
+        "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"
       }
     }
 ```
