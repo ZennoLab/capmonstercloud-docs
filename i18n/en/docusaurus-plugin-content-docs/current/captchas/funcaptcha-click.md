@@ -14,7 +14,7 @@ The object contains data about the FunCaptcha solving.
 |class|String|yes|funcaptcha|Specifies the class of task object.|
 |imageUrls|Array|yes (if imagesBase64 is not filled)|[ “<https://i.postimg.cc/s2ZDrHXy/fc1.jpg>”, … ]|List with image addresses. Maximum one url per request!|
 |imagesBase64|Array|yes (if imageUrls is not filled)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, … ]|List with images in base64 format. Maximum one element per request!|
-|metadata.Task|String|yes|Pick the image that is the correct way up and others|Task text (in English).|
+|metadata.Task|String|yes|`Pick the image that is the correct way up` and others|Task text (<u>in English</u>).|
 |userAgent|String|no|-|The browser User Agent used when uploading images if links were passed to imageUrls. You should use a modern browser signature or Google will return an error asking you to update your browser.|
 |websiteURL|String|no|-|URL of the page where the captcha is solved.|
 
@@ -50,7 +50,7 @@ The object contains data about the FunCaptcha solving.
 :::info Method
 <https://api.capmonster.cloud/getTaskResult>
 :::
-Use the [getTaskResult](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/557078/getTaskResult) method to get the captcha solution. Depending on the system load, you will receive a response after a time ranging from 300ms to 6s.
+Use the [getTaskResult](../api/methods/get-task-result.md) method to get the captcha solution. Depending on the system load, you will receive a response after a time ranging from 300ms to 6s.
 
 |**Property**|**Type**|**Description**|
 | :- | :- | :- |

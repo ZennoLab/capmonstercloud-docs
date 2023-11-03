@@ -90,5 +90,8 @@ The task type is incorrect or not supported. Check the «type» property in the 
 
 ### `ERROR_TASK_ABSENT`
 API error code: `ERROR_TASK_ABSENT` <br />
-task object not found or invalid JSON was sent in [createTask](./methods/create-task) request.
+Task object not found or invalid JSON was sent in [createTask](./methods/create-task) request.
 
+### `USERAGENT IS EXPIRED`
+API error code: `ERROR_WRONG_USERAGENT`<br />
+The request specified an invalid User Agent, you can find out the current User Agent in the [article](../captchas/hcaptcha-task.md).
