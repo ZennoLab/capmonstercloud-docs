@@ -22,6 +22,7 @@ The duration of the block is 10 minutes, provided that you do not continue to br
 <details>
     <summary>I am constantly banned. What should I do?
 </summary>
+
 The reason is that your app/script sends multiple incorrect API requests. 
 
 **I am a user**
