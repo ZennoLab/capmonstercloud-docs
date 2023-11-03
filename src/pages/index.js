@@ -4,6 +4,7 @@ import Layout from '@theme/Layout';
 import Libraries from '@site/src/components/Libraries';
 import Links from '@site/src/components/Links'
 import MainHero from '../components/MainHero';
+import Prices from '../components/Prices';
 
 export default function Home() {
   const {siteConfig} = useDocusaurusContext();
@@ -12,11 +13,11 @@ export default function Home() {
     <Layout
       title={`Hello from ${siteConfig.title}`}
       description="Description will go into a meta tag in <head />">
-      
       <main>
         <MainHero />
         <Libraries />
         <Links />
+        <Prices />
       </main>
     </Layout>
   );

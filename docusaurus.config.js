@@ -150,6 +150,7 @@ const config = {
       //   ],
       //   copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
       // },
+      scripts: ['./livechat.js'],
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
