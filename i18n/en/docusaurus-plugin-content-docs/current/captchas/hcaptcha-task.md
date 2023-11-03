@@ -32,6 +32,7 @@ Proxies with IP authorization are not yet supported.
 |proxyPassword|String|no|Proxy server password.|
 |userAgent|String|no|<p>The browser User-Agent used in the emulation. You must use a modern browser signature or Google will return an error asking you to update your browser.</p><p>**Pass only the actual UA from Windows OS. Now this is version 117: “Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36”**</p>|
 |cookies|String|no|<p>Additional cookies which we must use during interaction with target page.</p><p>**Format**: cookiename1=cookievalue1; cookiename2=cookievalue2</p>|
+|fallbackToActualUA|Bool|no|<p>**true** - when specifying this parameter, we ignore the irrelevant User Agent that users send in the request, and return our own (relevant) one with getTaskResult. This will improve the acceptance of tokens.</p><p>**false** - we insert the User Agent that is specified in the request. If the User Agent is invalid, you will receive an error ERROR_WRONG_USERAGENT (USERAGENT IS EXPIRED in the log).</p>|
 
 **Supported Types**<br/>
 The supported image types are as follows:
@@ -50,30 +51,34 @@ The supported image types are as follows:
 ### HCaptchaTask (with a proxy)
 ```json
 {
-  "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
-  "task": {
-    "type":"HCaptchaTask",
-    "websiteURL":"https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",
-    "websiteKey":"472fc7af-86a4-4382-9a49-ca9090474471",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36)",
-    "proxyType":"http",
-    "proxyAddress":"8.8.8.8",
-    "proxyPort":8080,
-    "proxyLogin":"proxyLoginHere",
-    "proxyPassword":"proxyPasswordHere"
-  }
+    "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
+    "task":
+    {
+        "type":"HCaptchaTask",
+        "websiteURL":"https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",
+        "websiteKey":"472fc7af-86a4-4382-9a49-ca9090474471",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
+        "fallbackToActualUA":true,
+        "proxyType":"http",
+        "proxyAddress":"8.8.8.8",
+        "proxyPort":8080,
+        "proxyLogin":"proxyLoginHere",
+        "proxyPassword":"proxyPasswordHere"
+    }
 }
 ```
 ### HCaptchaTaskProxyless (without a proxy)
 ```json
 {
-  "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
-  "task": {
-    "type":"HCaptchaTaskProxyless",
-    "websiteURL":"https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",
-    "websiteKey":"472fc7af-86a4-4382-9a49-ca9090474471",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36)"
-  }
+    "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
+    "task":
+    {
+        "type":"HCaptchaTaskProxyless",
+        "websiteURL":"https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",
+        "websiteKey":"472fc7af-86a4-4382-9a49-ca9090474471",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
+        "fallbackToActualUA":true
+    }
 }
 ```
 
