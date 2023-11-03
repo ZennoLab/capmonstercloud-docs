@@ -22,8 +22,8 @@ We've added the ability to recognize text captchas in our browser extension.
 ![](Aspose.Words.f6d390ba-8e92-4611-b5a2-167a5168d8f1.004.png) 
 ### **Recognition automation using software**
 To automate the process of recognizing text captchas in the browser, you should:
-1. Assign the cm-image-to-text-source="id" attribute to the element with the image;
-1. Assign the  cm-image-to-text-input-result="id" attribute to the element with the input.
+1. Assign the `cm-image-to-text-source="id"` attribute to the element with the image;
+1. Assign the `cm-image-to-text-input-result="id"` attribute to the element with the input.
 
 Where "id" is the captcha identifier (arbitrary value).
 :::info 
