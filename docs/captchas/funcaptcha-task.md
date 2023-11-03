@@ -18,8 +18,8 @@ sidebar_label: FunCaptchaTask
 | :- | :- | :- | :- |
 |type|String|да|**FunCaptchaTaskProxyless** или **FunCaptchaTask (При использовании прокси)**|
 |websiteURL|String|да|Адрес страницы на которой решается каптча|
-|funcaptchaApiJSSubdomain|String|нет|Специальный сервисный URL, с которого должен загружаться JS виджет каптчи. Его можно найти в элементе с именем fc-token - значение после surl. Оно требуется, если используется домен отличный от client-api.arkoselabs.com|
-|websitePublicKey|String|да|Ключ-идентификатор FunCaptcha на целевой странице. Его можно найти в блоке `<div id="funcaptcha" data-pkey="ВОТ\_ЗДЕСЬ"></div>` или в значении элементов с именем fc-token и verification-token, после параметра pk=|
+|funcaptchaApiJSSubdomain|String|нет|Специальный сервисный URL, с которого должен загружаться JS виджет каптчи. Его можно найти в элементе с именем `fc-token` - значение после `surl`. Оно требуется, если используется домен отличный от `client-api.arkoselabs.com`|
+|websitePublicKey|String|да|Ключ-идентификатор FunCaptcha на целевой странице. Его можно найти в блоке `<div id="funcaptcha" data-pkey="ВОТ_ЗДЕСЬ"></div>` или в значении элементов с именем fc-token и verification-token, после параметра pk=|
 |data|String|нет|Дополнительный параметр, который может требоваться для некоторых решений FunCaptcha.<br />Используйте это свойство для передачи параметра blob в виде массива, сведенного в строку. Пример:<br />*{"\blob\":\"HERE_COMES_THE_blob_VALUE\"}*|
 |proxyType|String|да (При использовании **FunCaptchaTask**) |**http** - обычный http/https прокси<br/>**https** - попробуйте эту опцию только если "http" не работает (требуется для некоторых кастомных прокси)<br />**socks4** - socks4 прокси<br />**socks5** - socks5 прокси|
 |proxyAddress|String|да (При использовании **FunCaptchaTask**)|<p>IP адрес прокси IPv4/IPv6. Не допускается:</p><p>- использование имен хостов</p><p>- использование прозрачных прокси (там где можно видеть IP клиента)</p><p>- использование прокси на локальных машинах</p>|
@@ -114,26 +114,26 @@ sidebar_label: FunCaptchaTask
 |![](Funcaptcha-task-types/dice-6.jpg)|Выберите пару кубиков, сумма верхних сторон которых равна 6|
 |![](Funcaptcha-task-types/dice-7.jpg)|Выберите пару кубиков, сумма верхних сторон которых равна 7|
 |![](Funcaptcha-task-types/dice-8.jpg)|Выберите пару кубиков, сумма верхних сторон которых равна 8|
-|![](Funcaptcha-task-types/dice-10.png)|Выберите пару кубиков, сумма верхних сторон которых равна 10|
+|![](Funcaptcha-task-types/dice-10.jpg)|Выберите пару кубиков, сумма верхних сторон которых равна 10|
 |![](Funcaptcha-task-types/dice-14.jpg)|Выберите пару кубиков, сумма верхних сторон которых равна 14|
-|![](Funcaptcha-task-types/darts.png)|Выберите изображение, где сумма дартс равна 8/10/12/14|
+|![](Funcaptcha-task-types/darts.jpg)|Выберите изображение, где сумма дартс равна 8/10/12/14|
 |![](Funcaptcha-task-types/animals-directions.jpg)|Выберите изображение, на котором все животные идут по направлению стрелки|
 |![](Funcaptcha-task-types/shadows-icons-top.jpg)|Выберите тень, соответствующую значкам в верхней части изображения|
-|![](Funcaptcha-task-types/matching-cards.png)|Выберите совпадающие карты|
+|![](Funcaptcha-task-types/matching-cards.jpg)|Выберите совпадающие карты|
 |![](Funcaptcha-task-types/mouse-cheese.jpg)|Выберите мышь, которая может добраться до всех кусочков сыра в лабиринте|
 |![](Funcaptcha-task-types/animal-wrong-head.jpg)|Выберите животное с неправильной головой|
 |![](Funcaptcha-task-types/penguin.jpg)|Выберите пингвина|
-|![](Funcaptcha-task-types/rotate-animal.png)|Используйте стрелки, чтобы повернуть животное лицом в направлении руки|
+|![](Funcaptcha-task-types/rotate-animal.jpg)|Используйте стрелки, чтобы повернуть животное лицом в направлении руки|
 |![](Funcaptcha-task-types/image-correct.gif)|Выберите изображение, которое расположено правильно|
 |![](Funcaptcha-task-types/spiral-galaxy.gif)|Выберите спиральную галактику|
-|![](Funcaptcha-task-types/one-rope.png)|Выберите изображение только с одной веревкой|
+|![](Funcaptcha-task-types/one-rope.jpg)|Выберите изображение только с одной веревкой|
 |![](Funcaptcha-task-types/split-in-half.png)|Выберите куб со значками, разделенными пополам|
 |![](Funcaptcha-task-types/puzzle-wrong-pieces.png)|Выберите пазл с неправильными частями|
-|![](Funcaptcha-task-types/amount-animals.png)|Выберите изображение, где цифра соответствует количеству животных|
-|![](Funcaptcha-task-types/mouse-cheese-2.png)|Выберите мышь, которая не сможет добраться до сыра|
-|![](Funcaptcha-task-types/total-fingers-3.png)|Выберите изображение, на котором общее количество пальцев равно 3|
-|![](Funcaptcha-task-types/wrong-shadow.png)|Выберите неправильную тень|
-|![](Funcaptcha-task-types/square-three-objects.png)|Выберите один квадрат, на котором изображены три одинаковых объекта|
+|![](Funcaptcha-task-types/amount-animals.jpg)|Выберите изображение, где цифра соответствует количеству животных|
+|![](Funcaptcha-task-types/mouse-cheese-2.jpg)|Выберите мышь, которая не сможет добраться до сыра|
+|![](Funcaptcha-task-types/total-fingers-3.jpg)|Выберите изображение, на котором общее количество пальцев равно 3|
+|![](Funcaptcha-task-types/wrong-shadow.jpg)|Выберите неправильную тень|
+|![](Funcaptcha-task-types/square-three-objects.jpg)|Выберите один квадрат, на котором изображены три одинаковых объекта|
 |![](Funcaptcha-task-types/move-person-cross.png)|Используйте стрелки, чтобы переместить человека в место, указанное крестиком|
 |![](Funcaptcha-task-types/move-person-circle.jpg)|Используйте стрелки, чтобы переместить человека к значку, обозначенному цветным кружком|
 |![](Funcaptcha-task-types/rotate-animal-2.png)|Используйте стрелки, чтобы повернуть животное с таким же значком по направлению руки|
