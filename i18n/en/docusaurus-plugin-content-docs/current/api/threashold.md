@@ -2,17 +2,17 @@
 sidebar_position: 6
 ---
 
-# Установка порога списания денег
+# Setting a write-off threshold
 
-## Как задать в CapMonster.Cloud порог уверенности системы в ответе, ниже которого деньги не списываются
+## How to set confidence threshold in response below which money won't be charged
 
-Капчи на нашем сервисе распознаются с разной вероятностью в зависимости от сложности. Клиенты платят только за правильно распознанные капчи.
+In *CapMonster.Cloud* captchas acceptance depends on its complexity. Clients pay only for correctly solved captchas.
 
-Для того, чтобы *CapMonster.cloud* возвращал гарантированно правильный результат, вы можете передавать вместе с запросом на распознавание капчи также параметр **recognizingThreshold** со значением от 0 до 100.
+In order to have a guaranteed correct result, you can also pass the parameter  **recognizingThreshold** with a value from 0 to 100 along with the captcha recognition request.
 
 ---
 
-### Пример
+### Example
 
 `POST <https://api.capmonster.cloud/createTask>`
 
@@ -20,7 +20,7 @@ sidebar_position: 6
 {
 
   "task": { 
-    //...
+    ...
     "recognizingThreshold" : 70
   },
   "clientKey":"234234234234234234234234",
@@ -29,19 +29,19 @@ sidebar_position: 6
 }
 ```
 ---
-В данном случае, если параметр равен 70, то будут возвращаться только ответы, в которых наша система уверена более чем на 70%, на остальные задачи будет возвращена ошибка: “**ERROR_CAPTCHA_UNSOLVABLE**”
+In this case, if the parameter is equal to 70, then only answers in which our system is more than 70% sure will be returned, otherwise will be returned error: “**ERROR_CAPTCHA_UNSOLVABLE**”
 
-Другой способ передачи порога - использовать только поле для указания ApiKey. Вы можете дописать информацию о пороге в следующем формате: “{apikey}\_\_recognizingthreshold\_{value}”
+Another way to pass a threshold is to use only the field to specify the ApiKey. You can add threshold information in the following format: “{apikey}\_\_recognizingthreshold\_{value}”
 
-Например, “00f87cb0f01330d33709ce3339ad0c8c\_\_recognizingthreshold\_70”
+For example, “00f87cb0f01330d33709ce3339ad0c8c\_\_recognizingthreshold\_70”
 
-Также вы можете указать вместе с ключем имя модуля в следующем формате: “{apikey}\_\_имя-модуля”.
+You can also enter the name of the module with the key in the following format: “{apikey}\_\_module-name”.
 
-Ключ, порог уверенности и имя модуля указываются с разделителем “\_\_”
+The key, the confidence threshold and the name of the module are indicated with the underscore “\_\_”
 
-Пример: “00f87cb0f01330d33709ce3339ad0c8c\_\_solvemedia\_\_recognizingthreshold\_70”
+Example: “00f87cb0f01330d33709ce3339ad0c8c\_\_solvemedia\_\_recognizingthreshold\_70”
 
 :::note
-Если у Вас не получилось настроить порог уверенности в ответе, пожалуйста, напишите нам в [службу поддержки](https://helpdesk.zennolab.com/conversation/new), мы поможем Вам в настройке!
+If you are unable to set the response confidence threshold, please write to our **[support team](https://helpdesk.zennolab.com/conversation/new)**, we will help you set it up!
 :::
 

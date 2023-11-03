@@ -4,32 +4,33 @@ sidebar_label: Turnstile
 ---
 
 # TurnstileTask | Cloudflare Challenge
-Автоматически поддерживаются все подтипы Turnstile: manual, non-interactive и invisible. Поэтому нет необходимости указывать подтип для обычной капчи.
-:::caution Внимание
-Если вы решаете Turnstile на страницах cloudflare 5s challenge, то не забывайте указывать cloudflareTaskType и связанные с ним поля. userAgent указывать **обязательно**.
+All Turnstile subtypes are automatically supported: manual, non-interactive и invisible. Therefore, there is no need to specify a subtype for a normal captcha. 
+
+:::caution Attention
+If you solve Turnstile on the cloudflare 5s challenge pages, don’t forget to specify `cloudflareTaskType` and related fields. userAgent is **required**.
 :::
-### **Структура объекта**
+### **Object structure**
 
-|**Параметр**|**Тип**|**Обязательный**|**Значение**|
+|**Parameter**|**Type**|**Required**|**Value**|
 | :- | :- | :- | :- |
-|type|String|да|**TurnstileTaskProxyless** или **TurnstileTask (При использовании прокси)**|
-|websiteURL|String|да|Адрес страницы, на которой решается капча|
-|websiteKey|String|да|Ключ Turnstile|
-|proxyType|String|да (При использовании **TurnstileTask**)|**http** - обычный http/https прокси<br/>**https** - попробуйте эту опцию, только если "http" не работает (требуется для некоторых кастомных прокси)<br/>**socks4** - socks4 прокси<br/>**socks5** - socks5 прокси|
-|proxyAddress|String|да (При использовании **TurnstileTask**)|<p>IP адрес прокси IPv4/IPv6. Не допускается:</p><p>- использование имен хостов</p><p>- использование прозрачных прокси (там, где можно видеть IP клиента)</p><p>- использование прокси на локальных машинах</p>|
-|proxyPort|Integer|да (При использовании **TurnstileTask**)|Порт прокси|
-|proxyLogin|String|нет|Логин прокси-сервера|
-|proxyPassword|String|нет|Пароль прокси-сервера|
-|cloudflareTaskType|String|нет|**cf_clearance** - если требуются куки;<br/>**token** - если требуется токен от Turnstile|
-|htmlPageBase64|String|да, если *cloudflareTaskType* равен* **cf_clearance**|Закодированная в base64 html страница с капчей.|
-|userAgent|String|да, если указан *cloudflareTaskType*|Поддерживаются только последние UA от Chrome.|
-|pageAction|String|да, если *cloudflareTaskType* равен* **token**|Поле action, которое можно найти в callback функции для загрузки капчи.<br/>Если используется *cloudflareTaskType*, то action, обычно “managed“ или “non-interactive“.|
-|data|String|да, если *cloudflareTaskType* равен* **token**|Значение поля *data* можно взять из параметра cData.|
-|pageData|String|да, если *cloudflareTaskType* равен* **token**|Значение поля *pageData* можно взять из параметра chlPageData.|
+|type|String|yes|**TurnstileTaskProxyless** or **TurnstileTask (When using a proxy)**.|
+|websiteURL|String|yes|The page address, where the captcha is solved.|
+|websiteKey|String|yes|Turnstile key.|
+|proxyType|String|yes (for **TurnstileTask**)|**http** - regular http/https proxy;<br/>**https** - try this option only if "http" doesn’t work (required for some custom proxies);<br/>**socks4** - socks4 proxy;<br/>**socks5** - socks5 proxy.|
+|proxyAddress|String|yes (for **TurnstileTask**)|<p>The IP address of the IPv4/IPv6 proxy. Not allowed:</p><p>- using hostnames;</p><p>- using transparent proxies (where you can see the client's IP);</p><p>- using proxies on local machines.</p>|
+|proxyPort|Integer|yes (for **TurnstileTask**)|Proxy port.|
+|proxyLogin|String|no|Proxy login.|
+|proxyPassword|String|no|Proxy password.|
+|cloudflareTaskType|String|no|**cf_clearance** - if cookies are required;<br/>**token** - if required token from Turnstile.|
+|htmlPageBase64|String|yes, if *cloudflareTaskType* is equal to* **cf_clearance**|Base64 encoded html page with captcha.|
+|userAgent|String|yes, if *cloudflareTaskType* is specified.|Only the latest UAs from Chrome are supported.|
+|pageAction|String|yes, if *cloudflareTaskType* is equal to* **token**|The `action` field, that can be found in the callback function to load the captcha.<br/>If *cloudflareTaskType* is used, then `action` is usually “managed“ or “non-interactive“.|
+|data|String|yes, if *cloudflareTaskType* is equal to* **token**|The value of the *data* field can be taken from the `cData` parameter.|
+|pageData|String|yes, if *cloudflareTaskType* is equal to* **token**|The value of the *pageData* field can be taken from the `chlPageData` parameter.|
 
-Прокси для получения токена передавать не обязательно.
+Proxy for token method is not required.
 
-Эти параметры находятся в объекте, который передаётся во время создания капчи в функцию window.turnstile.render(el, paramsObj). Получить их можно, например, с помощью выполнения JavaScript перед загрузкой остальных скриптов:
+These parameters are in the object that is passed during captcha creation in `window.turnstile.render(el, paramsObj)` function.  You can get them, for example, by executing JavaScript before loading other scripts:
 
 ```js
 (function () {
@@ -54,14 +55,14 @@ sidebar_label: Turnstile
 ```
 
 
+## **Normal Turnstile**
+### **Request example**
 
-## **Обычный Turnstile:**
-### **Пример запроса**
-:::info Метод
+:::info Method
 <https://api.capmonster.cloud/createTask>
 :::
 
-### TurnstileTask (С использованием прокси)
+### TurnstileTask (with a proxy)
 ```json
 {
   "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
@@ -77,7 +78,7 @@ sidebar_label: Turnstile
   }
 }
 ```
-### TurnstileTaskProxyless (Без использования прокси)
+### TurnstileTaskProxyless (without a proxy)
 ```json
 {
     "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
@@ -90,7 +91,7 @@ sidebar_label: Turnstile
 }
 ```
 
-**Пример ответа**
+**Response example**
 
 ```json
 {
@@ -100,12 +101,12 @@ sidebar_label: Turnstile
 ```
 
 ## **Cloudflare challenge**
-### **Пример запроса**
-:::info Метод
+### **Request example**
+:::info Method
 <https://api.capmonster.cloud/createTask>
 :::
 
-### TurnstileTask (С использованием прокси)
+### TurnstileTask (with a proxy)
 ```json 
   {
   "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
@@ -125,7 +126,7 @@ sidebar_label: Turnstile
 }
 ```
 
-### TurnstileTaskProxyless (Без использования прокси)
+### TurnstileTaskProxyless (without a proxy)
 ```json 
   {
   "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
@@ -140,34 +141,34 @@ sidebar_label: Turnstile
 }
 ```
 
-## **Получение результата**
-Используйте метод [getTaskResult](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/557078/getTaskResult), чтобы получить решение Turnstile. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 5 до 20 с.
+## **Getting a result**
+Use the [getTaskResult](../api/methods/get-task-result.md) method to get the Turnstile solution. Depending on the system load, you will receive a response after a time ranging from 5 to 20 seconds.
 
-|**Свойство**|**Тип**|**Описание**|
+|**Property**|**Type**|**Description**|
 | :- | :- | :- |
-|cf\_clearance|String|Специальные куки cloudflare, которые вы можете подставить в свой браузер|
-|token|String|Используйте токен при вызове callback функции|
-## **Когда нужно указывать cloudflareTaskType, а когда нет? Или как отличить обычный Turnstile от Cloudflare Challenge.**
-Cloudflare challenge может выглядеть по-разному. 
+|cf_clearance|String|Special cloudflare cookies, that you can set.|
+|token|String|Pass this token to the callback function.|
+## **When specify cloudflareTaskType and when not? Or how to distinguish a normal Turnstile from a Cloudflare Challenge.**
+Cloudflare Challenge may look different. 
 
-**Обычный вариант:**
+**Simple variant:**
 
 ![](Aspose.Words.3953d396-96cb-4bd4-a13b-aa5740b71be8.001.png) 
 
-**Стилизованные варианты:**
+**Stylized variants:**
 
 ![](Aspose.Words.3953d396-96cb-4bd4-a13b-aa5740b71be8.002.png)![](Aspose.Words.3953d396-96cb-4bd4-a13b-aa5740b71be8.003.png) 
 
-Чтобы окончательно убедиться в наличии Cloudflare, можно открыть инструменты разработчика, посмотреть трафик, изучить код страницы и увидеть характерные признаки:
+To finally verify the presence of Cloudflare, you can open the developer tools, see the traffic, examine the page code and see the characteristic features:
 
-- Первый запрос к сайту возвращает код 403:
+- The first request to the site returns a 403 code:
 
 ![](Aspose.Words.3953d396-96cb-4bd4-a13b-aa5740b71be8.004.png)
 
-- Форма с id **challenge-form** имеет атрибут **action**(не путать с action из параметров для капчи turnstile), содержащий параметр \_\_cf\_chl\_f\_tk=:
+- The form with the id **challenge-form** has an **action** attribute, containing the  `__cf_chl_f_tk=` parameter:
 
 ![](Aspose.Words.3953d396-96cb-4bd4-a13b-aa5740b71be8.005.png)
 
-- На странице находится два похожих тега <script />, которые создают новое значение в объекте window:
+- There are two similar `<script>`, tags on the page that create a new value in the window object:
 
 ![](Aspose.Words.3953d396-96cb-4bd4-a13b-aa5740b71be8.006.png) 

@@ -1,9 +1,10 @@
 {
-  "label": "Методы",
+  "label": "Methods",
   "position": 1,
   "collapsed": false,
   "link": {
     "type": "generated-index",
-    "description": "Основные методы для работы с API Capmonster Cloud"
+    "slug": "methods",
+    "description": "Basic methods for working with Capmonster Cloud API"
   }
 }

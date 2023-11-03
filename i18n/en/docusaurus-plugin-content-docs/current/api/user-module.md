@@ -1,99 +1,102 @@
-﻿# Создание пользовательского модуля
+﻿# Creating a user module
 
 
-## **Описание**
+## **Description**
 
-Данная функция позволяет создавать пользовательские модули, которые будут обучены под один конкретный вид капчи.
+This function helps to create user modules that will be trained to solve a certain type of captcha. 
 
-Чтобы перейти на [страницу обучения модуля](https://capmonster.cloud/UserModules), кликните по email'у в верхней правой части сайта и выберите соответствующий пункт из меню.
+To go to the [module training page](https://capmonster.cloud/UserModules), click the email in the upper-right area of the website and select the relevant option in the menu.
 
-![](Aspose.Words.aac7548a-0b79-486d-96ce-e145c7faf5a6.002.png)
+![](834ccbf9-f439-4b1b-8cab-42ed3dbc055c.png)
+
 
 ---
 
-## **Как это работает**
+## **How it works**
 
-Если коротко, то:
+Briefly:
 
-1. Собираете капчи и упаковываете в архив
-2. Отправляете нам с указанием имени модуля
-3. Вносите депозит $10 на баланс (деньги остаются на балансе)
-4. Мы создаём модуль
-5. Вы отправляете со своего софта запросы с указанием имени созданного модуля.
+1. Collect captchas and archive them
+2. Send them to us, specifying the module name
+3. Deposit $10 to the balance (it will remain on your balance)
+4. We create the module
+5. You send requests from your soft, specifying the name of the created module.
 
-Теперь давайте рассмотрим каждый шаг более подробно.
+Now let's go into the details of each step.
 
 ---
 
-### **1. Сбор капчи**
+### **1. Collecting captchas**
 
-#### **Сколько капч нужно?**
+#### **How many captchas do you need?**
 
-Чтобы узнать ответ на этот вопрос необходимо в форме, на странице [Обучения модулей](https://capmonster.cloud/UserModules), отметить типы символов, которые встречаются на Вашей капче. После этого, над кнопкой выбора архива для загрузки, появится подсказка сколько нужно загрузить капч:
+To answer this question, mark the types of symbols that your captcha contains, in the form on the [Module training page](https://capmonster.cloud/UserModules). After that, a hint telling you how many captchas to upload will appear above the button for selecting the archive for uploading:
 
-![](Aspose.Words.aac7548a-0b79-486d-96ce-e145c7faf5a6.003.png)
+![](module-name.png)
 
-#### **Поддерживаемые форматы изображений**
+#### **Supported image formats**
 
 - jpg
 - jpeg
 - png
 
-#### **Как собирать?**
+#### **How to collect captchas?**
 
-Рассмотрим на примере программы [ZennoPoster](file:///C:/wiki/spaces/RU/pages/509149204/ZennoPoster).
+Let's look at the example with [ZennoPoster](https://zennolab.atlassian.net/wiki/spaces/EN/pages/924581921/ZennoPoster).
 
-Представим, что Вы регистрируете аккаунты на сайте и на нём есть капча, модуль для которой Вы хотите создать. Тут есть несколько возможных вариантов:
+Imagine you are registering accounts on the website and it has a captcha a module for which you want to create. There are several options:
 
-- Вполне вероятно у Вас уже есть работающий проект для этого сайта, а это означает, что Вы уже решаете эту капчу. В экшене [Распознать капчу](file:///C:/wiki/spaces/RU/pages/534053026), на вкладке *Дополнительно* есть опция [Сохранение](https://zennolab.atlassian.net/wiki/spaces/RU/pages/534053026#%D0%A1%D0%BE%D1%85%D1%80%D0%B0%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5), которая как раз и создана для таких случаев.
-- Либо же можно сделать проще: перейти на страницу где появляется капча, у неё всегда есть кнопка “Обновить картинку”. Отправляете капчу на сервис распознавания или [распознаёте вручную](file:///C:/wiki/spaces/RU/pages/534053215) (перед этим настроив в экшене [Сохранение капч](https://zennolab.atlassian.net/wiki/spaces/RU/pages/534053026#%D0%A1%D0%BE%D1%85%D1%80%D0%B0%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5)), обновляете капчу и снова отправляете распознаваться. И так пока не насобираете необходимое количество.
+- Most probably, you already have a running project for this website, which means you are already solving this captcha. In the action [Recognize captcha](https://zennolab.atlassian.net/wiki/spaces/EN/pages/924582077/Recognize+captcha), in the *More* tab you can find the [Saving](https://zennolab.atlassian.net/wiki/spaces/EN/pages/924582077/Recognize+captcha#Saving) option, that is created for such cases.
+- You can go an easier way: go to the captcha page. It always has the Refresh button. Send the captcha to the solver or [solve manually](https://zennolab.atlassian.net/wiki/spaces/EN/pages/924484621/Entering+captchas+manually) (previously set in the [Saving](https://zennolab.atlassian.net/wiki/spaces/EN/pages/924582077/Recognize+captcha#Saving) action), refresh the captcha, and send it for solving again. Repeat these steps until you collect enough captchas.
 
 :::warning
-Не стоит запускать сбор капч в десятки и сотни потоков! Не каждому сайту понравится такое.
+Do not run captcha collection in tens and hundreds of threads! Few websites would like that.
 :::
 
 ---
 
-### **2. Отправка архива капч**
+### **2. Sending the captcha archive**
 
-![](Aspose.Words.aac7548a-0b79-486d-96ce-e145c7faf5a6.004.png)
+![](a2ba29bd-c910-44cf-9979-ceb143633efd.png)
 
-#### **2.1. Название**
+#### **2.1. Name**
 
-Сперва необходимо задать имя модуля (использовать можно только латинские символы)
+First, set the module name (Latin characters only).
 
-![](Aspose.Words.aac7548a-0b79-486d-96ce-e145c7faf5a6.005.png)
+![](fed2d879-b494-4b60-a13a-036c693d0951.png)
 
-В названии модуля нельзя использовать слово **captcha**
-
-#### **2.2. Типы символов**
-
-Отмечаем типы символов, которые встречаются на Вашей капче.
-
-От отмеченных тут пунктов зависит итоговое количество капч, которые надо будет загрузить для обучения.
-
-Можно выбрать один или несколько вариантов из предложенных.
-
-![](Aspose.Words.aac7548a-0b79-486d-96ce-e145c7faf5a6.006.png)
-
-:::info
-В этом списке обязательно должен быть отмечен один из пунктов (или несколько): "Cодержит кириллицу", "Содержит латиницу", "Содержит цифры"
+:::warning
+The module name must not contain the word **captcha**.
 :::
 
-#### **2.3. Расположение разметки**
+#### **2.2. Types of symbols**
 
-Здесь надо указать где находятся ответы на капчи.
+Mark the types of symbols that your captcha contains.
 
-![](Aspose.Words.aac7548a-0b79-486d-96ce-e145c7faf5a6.007.png)
+What you mark here affects the number of captchas you will need to upload to train the module.
 
-Всё довольно просто:
+You can choose one or several options from the suggested.
 
-- **Нет -** выбираете этот пункт, если у Вас нет ответов на капчи (в этом случае обучение модуля может занять больше времени)
-- **В именах файлов** - когда имя каждой картинки-капчи и есть ответ на неё (не всегда ответ на капчу можно сохранить в качестве имени файла: в операционных системах есть ограничение на используемые символы в названиях.)
-- **В файле внутри архива -** если ответы сохранены в отдельном файле, то это должен быть простой текстовый файл, с расширением .txt
-  - Имя файла - answers.txt
-  - Должен быть расположен внутри архива вместе с капчами
-  - Формат - имяФайлаКапчи:ответНаКапчу, каждая капча с новой строки. Пример:
+![](3b39f9e1-d981-41af-842a-a51f4a51a4e0.png)
+
+:::info
+You should mark at least one of the following options: "Contains Cyrillic characters", "Contains Latin characters", "Contains numbers"
+:::
+
+#### **2.3. Markup location**
+
+Specify where captcha answers are located.
+
+![](markup-location.png)
+
+It's quite simple: 
+
+- **None** - select it if you don't have answers to captchas (in this case, module training may take longer).
+- **Located in file names** - select it if the name of every captcha image is the answer to it (sometimes a captcha answers cannot be saved in the file name: operating systems do not allow some symbols in file names).
+- **Located in a separate file in the archieve** - select it if answers are saved in a file (it should be a simple text file—.txt).
+  - File name- answers.txt
+  - Should be located inside the archive with captchas
+  - Format - CaptchaFileName:CaptchaAnswer, each captcha on a new line. Example:
 
 ```
 captcha1.png:d9li1
@@ -103,142 +106,142 @@ captcha2.png:2zhnw
 captcha3.png:99loe
 ```
 
-#### **2.4. Отправка архива**
+#### **2.4. Sending the archive**
 
-После того как указали имя модуля, выбрали типы символов и расположение ответов, осталось только загрузить zip-архив с капчами и отправить нам.
+When you specified the module name, selected symbol types, and location of answers, you need to upload the zip archive with the captchas and send us.
 
-![](Aspose.Words.aac7548a-0b79-486d-96ce-e145c7faf5a6.008.png)
+![](archieve.png)
 
-#### **2.5. Оплата**
+#### **2.5. Payment**
 
-- Если всё было сделано правильно, то в таблице отобразится Ваша заявка со статусом **Validated**.
-- После этого необходимо внести депозит $10 на баланс в расчёте на 1 модуль.
+- If you did all that correctly, your request will appear in the table with the **Validated** status.
+- After that, you need to deposit $10 per module.
 
 :::note
-Деньги за обучение не списываются, они остаются на балансе. Вы можете их потратить на распознавание любых капч в любое время.
+The funds allocated to training are not debited but stay on the balance. You can spend them on solving any captchas, anytime.
 :::
 
-- После успешного пополнения статус **первого** загруженного модуля изменится на **Paid**.
+- After successful deposit, the status of the **first** uploaded module will change to **Paid**.
 
 ---
 
-### **3. Статусы**
+### **3. Statuses**
 
 #### **Validated**
 
-![](Aspose.Words.aac7548a-0b79-486d-96ce-e145c7faf5a6.009.png)
+![](validated.png)
 
-Данный статус назначается после того, как Вы отправите форму (если всё было сделано правильно).
+You get this status after you send the form (given that you have done everything correctly). 
 
 :::note
-Для модулей с этим статусом доступна возможность удаления - если Вы загрузили модуль, но потом поняли, что отправили не тот архив или задали некрасивое имя для модуля, Вы можете его удалить, исправить все ошибки и отправить повторно.
+Modules with this status can be deleted. If you uploaded the module but realized that you sent a wrong archive or gave a bad name for the module, you can delete it, make changes, and send it again.
 :::
 
 #### **Paid**
 
-![](Aspose.Words.aac7548a-0b79-486d-96ce-e145c7faf5a6.010.png)
+![](paid.png)
 
-Оплата за модуль принята.
+Your payment for the module was accepted.
 
 #### **ValidatedInDepth**
 
-![](Aspose.Words.aac7548a-0b79-486d-96ce-e145c7faf5a6.011.png)
+![](ValidatedInDepth.png)
 
-Подготовительные работы.
+Preparatory works.
 
 #### **Annotated**
 
-![](Aspose.Words.aac7548a-0b79-486d-96ce-e145c7faf5a6.012.png)
+![](Annotated.png)
 
-Разметка капч произведена. Идёт процесс обучения.
+Captcha marking completed. Training is in progress.
 
 #### **Trained**
 
-![](Aspose.Words.aac7548a-0b79-486d-96ce-e145c7faf5a6.013.png)
+![](trained.png)
 
-Модуль готов! Теперь на него можно отправлять капчи.
+The module is ready! You can now submit captchas to it.
 
-### **4. Отправка капч на конкретный модуль**
+### **4. Sending captchas to a certain module**
 
-Существует несколько способов указать модуль для распознавания:
+There are several ways to specify a module that will solve the captchas:
 
-- [Добавить аргумент CapMonsterModule с именем необходимого модуля при отправке запроса на /createTask](https://zennolab.atlassian.net/wiki/spaces/APIS/pages/589863/ImageToTextTask) (если Вы взаимодействуете напрямую с нашим API)
-- [Добавить имя модуля в поле ApiKey](https://zennolab.atlassian.net/wiki/spaces/APIS/pages/187006977/CapMonster+Cloud+ApiKey) (очень удобно при использовании чужих программ, когда нет возможности изменить отправляемые запросы)
+- [Add the argument CapMonsterModule with the module name when sending a /createTask request ](../captchas/image-to-text.md) (if you interact directly with our API)
+- [Specify a module name in ApiKey](module-name.md) (very handy when you use third-party programs and cannot modify the requests)
 
 ---
 
 ## **FAQ**
 
 <details>
-    <summary>Как долго длится обучение модуля?</summary>
+    <summary>How long does the module training take?</summary>
 
-Обучение одного обычно происходит в течение суток.
+It usually takes one day.
 
-**Обратите внимание:** обучение производится в рабочие дни с понедельника по пятницу. Если Вы отправили заявку в пятницу, то он будет готов в начале следующей недели.
-
-</details>
-
-<details>
-    <summary>Я хочу обучить сразу несколько модулей, как мне правильно это сделать?</summary>
-
-Алгоритм простой: загружаете первый архив с капчами, оплачиваете его. Затем загружаете второй архив, оплачиваете. И так поступаете со всеми архивами.
-
-Время готовности модулей оценивайте в расчёте, приблизительно, сутки на один модуль.
+**Note:** Training goes on business days from Monday to Friday. If you sent a request on Friday, training will be completed at the beginning of the next week.
 
 </details>
 
 <details>
-    <summary>Напротив моего модуля в колонке “Комментарий” появилась надпись “Ошибка” : Что мне делать?</summary>
+    <summary>I want to train several modules at once, how can I do it correctly?</summary>
 
-![](Aspose.Words.aac7548a-0b79-486d-96ce-e145c7faf5a6.014.png)
+The algorithm is simple: you just upload the captcha archive and pay for it. Then, you upload the second archive and pay for it. You do that for all archives.
 
-Не паникуйте ![(wink)](Aspose.Words.aac7548a-0b79-486d-96ce-e145c7faf5a6.015.png) Подождите немного.
-
-Если спустя сутки ничего не изменилось, [напишите в поддержку](https://helpdesk.zennolab.com/ru) и мы Вам обязательно поможем.
+Training takes one day per module.
 
 </details>
 
 <details>
-    <summary>Я загрузил не тот архив, могу ли я его переотправить?</summary>
+    <summary>I see the "Error" sign in the "Comment" column next to my module. What should I do?</summary>
 
-Если Вы ещё не оплатили модуль и у него статус **Validated**, то Вы можете самостоятельно его удалить. Подробности Вы можете найти в описании статуса **Validated**.
+![](Error.png)
 
-</details>
+Don't panic![(wink)](Aspose.Words.aac7548a-0b79-486d-96ce-e145c7faf5a6.015.png) Just wait a bit. 
 
-<details>
-    <summary>Что за колонка “Управление” в таблице? У меня там ничего нет.</summary>
-
-В данной колонке появляется кнопка “Удалить”, но только для модулей со статусом **Validated**.
-
-Для модулей с другими статусами данная колонка остаётся пустой.
+If nothing changed in a day, [contact support](https://helpdesk.zennolab.com/en) and we will definitely help you.
 
 </details>
 
 <details>
-    <summary>Почему к имени моего модуля были добавлены какие-то символы?</summary>
+    <summary>I uploaded a wrong archive, can I resend it?</summary>
 
-Это сделано для того, чтобы имя модуля было уникальным: несколько пользователей системы могут выбрать одно и тоже имя для своего модуля и чтоб избежать путаницы система автоматически генерирует и добавляет случайные символы к имени модуля. Таким образом каждый пользователь точно будет слать капчи на свой модуль.
-
-</details>
-
-<details>
-    <summary>Могу ли я получить обученный модуль для программы CapMonster2?</summary>
-
-Нет. Обученный модуль доступен только в рамках сервиса CapMonster Cloud.
+If you didn't pay for the module and it has the **Validated** status, you can delete it. You can find more information in the description of the **Validated** status.
 
 </details>
 
 <details>
-    <summary>Меня не устраивает качество обучения. Что делать?</summary>
+    <summary>What is the “Manage” column in the table? I have nothing there</summary>
 
-[Пишите в поддержку](https://helpdesk.zennolab.com/ru).
+You will see the "Delete" button in this column. But it's only available for the modules with the **Validated** status. 
+
+For modules with other statuses, this column remains empty.
 
 </details>
 
 <details>
-    <summary>У меня есть вопрос, который здесь не освещён. Куда мне обращаться?</summary>
+    <summary>Why were some symbols added to my module name?</summary>
 
-[Пишите в поддержку](https://helpdesk.zennolab.com/ru).
+This is done to make the module name unique. Some systems users may choose the same name for their module. To avoid confusion, the system automatically generates and adds random symbols to module names. This way, every user will send captchas to their module—no confusion.
+
+</details>
+
+<details>
+    <summary>Can I get a trained module for the CapMonster2 program?</summary>
+
+No. The trained module is only available in CapMonster.Cloud.
+
+</details>
+
+<details>
+    <summary>I am not satisfied with the quality of training. What to do?</summary>
+
+[Contact our support service](https://helpdesk.zennolab.com/).
+
+</details>
+
+<details>
+    <summary>I have a question that is not covered here. Where should I contact?</summary>
+
+[Contact our support service](https://helpdesk.zennolab.com/).
 
 </details>
 

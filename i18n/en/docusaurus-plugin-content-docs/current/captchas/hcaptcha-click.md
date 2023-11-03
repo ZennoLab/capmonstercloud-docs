@@ -3,28 +3,28 @@ sidebar_position: 8
 sidebar_label: HCaptcha Click
 ---
 
-# **ComplexImageTask HCaptcha: решение каптчи hCaptcha**
-Объект содержит данные о задаче на решение hCaptcha.
+# **ComplexImageTask HCaptcha: hCaptcha solving**
+The object contains data about the task for solving hCaptcha. 
 
-## **Пример изображения (первый тип)**
+## **Image example (first type)**
 
 ![](Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.001.png) 
 
-### **Структура объекта первый тип**
+### **Object structure**
 
-|**Параметр**|**Тип**|**Обязательный**|**Возможные значения**|**Описание**|
+|**Parameter**|**Type**|**Required**|**Possible values**|**Description**|
 | :- | :- | :- | :- | :- |
-|type|String|да|ComplexImageTask|Определяет тип объекта задачи|
-|class|String|да|hcaptcha|Определяет класс объекта задачи|
-|imageUrls|Array|да (если не заполнено imagesBase64)|[ “<https://i.postimg.cc/kg71cbRt/image-1.jpg>”, “<https://i.postimg.cc/6381Zx2j/image.jpg>”, … ]|Список с адресами изображений. Максимум 18 элементов.|
-|imagesBase64|Array|да (если не заполнено imageUrls)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, … ]|Список с изображениями в формате base64. Максимум 18 элементов.|
-|metadata.Task|String|да|Please click each image containing a mountain и другие|Текст задания (на английском)|
-|userAgent|String|нет|-|User-Agent браузера, используемый при загрузке изображений, если были переданы ссылки в imageUrls. Необходимо использовать подпись современного браузера, иначе Google будет возвращать ошибку, требуя обновить браузер.|
-|websiteURL|String|нет|-|Адрес страницы на которой решается каптча|
+|type|String|yes|ComplexImageTask|Specifies the task object type.|
+|class|String|yes|hcaptcha|Specifies the task object class.|
+|imageUrls|Array|yes (if imagesBase64 is not filled)|[ “<https://i.postimg.cc/kg71cbRt/image-1.jpg>”, “<https://i.postimg.cc/6381Zx2j/image.jpg>”, … ]|List with image URLs. Max 18 elements per request.|
+|imagesBase64|Array|yes (if imageUrls is not filled)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, … ]|List with images in base64 format. Max 18 elements per request.|
+|metadata.Task|String|yes|`Please click each image containing a mountain` and others|Task text (<u>in English</u>).|
+|userAgent|String|no|-|The browser User-Agent to use when loading images if links were passed in imageUrls. It is required to use a modern browser signature, otherwise Google will return an error asking for a browser update.|
+|websiteURL|String|no|-|URL of the page where the captcha is solved.|
 
-### **Пример запроса**
+### **Request example**
 
-:::info Метод
+:::info Method
 <https://api.capmonster.cloud/createTask>
 :::
 ```json
@@ -43,7 +43,7 @@ sidebar_label: HCaptcha Click
 }
 ```
 
-**Пример ответа**
+**Response example**
 
 ```json
 {
@@ -52,18 +52,18 @@ sidebar_label: HCaptcha Click
 }
 ```
 
-### **Получение результата**
-:::info Метод
+### **Getting a result**
+:::info Wethod
 <https://api.capmonster.cloud/getTaskResult>
 :::
-Используйте метод [getTaskResult](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/557078/getTaskResult) чтобы получить решение капчи. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 300мс до 6 с.
+Use the [getTaskResult](../api/methods/get-task-result.md) method to get the captcha solution. Depending on the system load, you will receive a response after a time ranging from 300ms to 6s.
 
-|**Свойство**|**Тип**|**Описание**|
+|**Property**|**Type**|**Description**|
 | :- | :- | :- |
-|answer|Array|Список в булевыми значениями, true - означает, что нужно произвести клик на соответствующее этой позиции изображение|
-|metadata||Объект, который определяет тип возвращаемого ответа|
+|answer|Array|List with boolean values, "true" means that you need to click on the image corresponding to this position.|
+|metadata||An object that specifies the type of response to return.|
 
-**Пример:**
+**Example:**
 
 ```json
 {
@@ -76,31 +76,31 @@ sidebar_label: HCaptcha Click
 }
 ```
 
-### **Ценообразование**
+### **Pricing**
 
-|**Наименование** |**Стоимость за 1000 картинок, $**|
+|**Name** |**Cost per 1000 images, $**|
 | :-: | :-: |
 |hCaptcha|0,02|
 
-## **Примеры изображений (второй тип)**
+## **Image example (second type)**
 |![](Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.002.png)|![](Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.003.png)|![](Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.004.png)|
 | :-: | :-: | :-: |
 
-### **Структура объекта**
+### **Object structure**
 
-|**Параметр**|**Тип**|**Обязательный**|**Возможные значения**|**Описание**|
+|**Parameter**|**Type**|**Required**|**Possible values**|**Description**|
 | :- | :- | :- | :- | :- |
-|type|String|да|ComplexImageTask|Определяет тип объекта задачи|
-|class|String|да|hcaptcha|Определяет класс объекта задачи|
-|imageUrls|Array|да (если не заполнено imagesBase64)|[ “<https://i.postimg.cc/vTn3YHr9/panda.jpg>” ]|Список с адресами изображений. Максимум 18 элементов.|
-|imagesBase64|Array|да (если не заполнено imageUrls)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…” ]|Список с изображениями в формате base64. Максимум 18 элементов.|
-|metadata.Task|String|да|Please click on the panda и другие|Текст задания (на английском)|
-|userAgent|String|нет|-|User-Agent браузера, используемый при загрузке изображений, если были переданы ссылки в imageUrls. Необходимо использовать подпись современного браузера, иначе Google будет возвращать ошибку, требуя обновить браузер.|
-|websiteURL|String|нет|-|Адрес страницы на которой решается каптча|
+|type|String|yes|ComplexImageTask|Specifies the task object type.|
+|class|String|yes|hcaptcha|Specifies the task object class.|
+|imageUrls|Array|yes (if imagesBase64 is not filled)|[ “<https://i.postimg.cc/vTn3YHr9/panda.jpg>” ]|List with image URLs. Max 18 elements per request.|
+|imagesBase64|Array|yes (if imageUrls is not filled)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…” ]|List with images in base64 format. Max 18 elements per request.|
+|metadata.Task|String|yes|`Please click on the panda` and others|Task text (<u>in English</u>).|
+|userAgent|String|no|-|The browser User-Agent to use when loading images if links were passed in imageUrls. It is required to use a modern browser signature, otherwise Google will return an error asking for a browser update.|
+|websiteURL|String|no|-|URL of the page where the captcha is solved|
 
-### **Пример запроса**
+### **Request example**
 
-:::info Метод
+:::info Method
 <https://api.capmonster.cloud/createTask>
 :::
 ```json
@@ -118,7 +118,7 @@ sidebar_label: HCaptcha Click
 }
 ```
 
-**Пример ответа**
+**Response example**
 ```json
 {
   "errorId":0,
@@ -126,18 +126,18 @@ sidebar_label: HCaptcha Click
 }
 ```
 
-### **Получение результата**
-:::info Метод
+### **Getting a result**
+:::info Method
 <https://api.capmonster.cloud/getTaskResult>
 :::
-Используйте метод [getTaskResult](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/557078/getTaskResult) чтобы получить решение капчи. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 300мс до 6 с.
+Use the [getTaskResult](../api/methods/get-task-result.md) method to get the captcha solution. Depending on the system load, you will receive a response after a time ranging from 300ms to 6s.
 
-|**Свойство**|**Тип**|**Описание**|
+|**Property**|**Type**|**Description**|
 | :- | :- | :- |
-|answer|Array|Список с координатами, по которым нужно произвести клик на соответствующем изображении|
-|metadata|Object|Объект, который определяет тип возвращаемого ответа|
+|answer|Array|List with boolean values, "true" means that you need to click on the image corresponding to this position.|
+|metadata|Object|An object that specifies the type of response to return.|
 
-**Пример:**
+**Example:**
 ```json
 {
   "errorId":0,
@@ -149,32 +149,32 @@ sidebar_label: HCaptcha Click
 }
 ```
 
-### **Ценообразование:**
+### **Pricing:**
 
-|**Наименование** |**Стоимость за 1000 картинок, $**|
+|**Name** |**Cost per 1000 images, $**|
 | :-: | :-: |
 |hCaptcha|0,02|
 
-## **Пример изображения (третий тип)**
+## **Image example (third type)**
 
 ![](Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.005.png) 
 
-### **Структура объекта**
+### **Object structure**
 
-|**Параметр**|**Тип**|**Обязательный**|**Возможные значения**|**Описание**|
+|**Parameter**|**Type**|**Required**|**Possible values**|**Description**|
 | :- | :- | :- | :- | :- |
-|type|String|да|ComplexImageTask|Определяет тип объекта задачи|
-|class|String|да|hcaptcha|Определяет класс объекта задачи|
-|imageUrls|Array|да (если не заполнено imagesBase64)|[ “<https://i.postimg.cc/4dmSy2YT/goat.jpg>” ]|Список с адресами изображений. Максимум 18 элементов.|
-|imagesBase64|Array|да (если не заполнено imageUrls)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…” ]|Список с изображениями в формате base64. Максимум 18 элементов.|
-|metadata.Task|String|да|What animal is shown in the image below? и другие|Текст задания (на английском)|
-|metadata.Classes|Array|да|[ "shark", "chicken", "goat", "hedgehog" ] и другие|Список со строковыми значениями, находящимися на правой половине каптчи (в том же порядке, как на изображении)|
-|userAgent|String|нет|-|User-Agent браузера, используемый при загрузке изображений, если были переданы ссылки в imageUrls. Необходимо использовать подпись современного браузера, иначе Google будет возвращать ошибку, требуя обновить браузер.|
-|websiteURL|String|нет|-|Адрес страницы на которой решается каптча|
+|type|String|yes|ComplexImageTask|Specifies the task object type.|
+|class|String|yes|hcaptcha|Specifies the task object class.|
+|imageUrls|Array|yes (if imagesBase64 is not filled)|[ “<https://i.postimg.cc/4dmSy2YT/goat.jpg>” ]|List with image URLs. Max 18 elements per request.|
+|imagesBase64|Array|yes (if imageUrls is not filled)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…” ]|List with images in base64 format. Max 18 elements per request.|
+|metadata.Task|String|yes|`What animal is shown in the image below?` and others|Task text (<u>in English</u>).|
+|metadata.Classes|Array|yes|[ "shark", "chicken", "goat", "hedgehog" ] and others|List with string values located on the right half of the captcha (in the same order as in the image).|
+|userAgent|String|no|-|The browser User-Agent to use when loading images if links were passed in imageUrls. It is required to use a modern browser signature, otherwise Google will return an error asking for a browser update.|
+|websiteURL|String|no|-|URL of the page where the captcha is solved.|
 
-### **Пример запроса**
+### **Request example**
 
-:::info Метод
+:::info Method
 <https://api.capmonster.cloud/createTask>
 :::
 
@@ -194,7 +194,7 @@ sidebar_label: HCaptcha Click
 }
 ```
 
-**Пример ответа**
+**Response example**
 ```json
 {
   "errorId":0,
@@ -202,18 +202,18 @@ sidebar_label: HCaptcha Click
 }
 ```
 
-### **Получение результата**
-:::info Метод
+### **Getting a result**
+:::info Method
 <https://api.capmonster.cloud/getTaskResult>
 :::
-Используйте метод [getTaskResult](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/557078/getTaskResult) чтобы получить решение капчи. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 300мс до 6 с.
+Use the [getTaskResult](../api/methods/get-task-result.md) method to get the captcha solution. Depending on the system load, you will receive a response after a time ranging from 300ms to 6s.
 
-|**Свойство**|**Тип**|**Описание**|
+|**Property**|**Type**|**Description**|
 | :- | :- | :- |
-|answer|Array|Список в булевыми значениями, true - означает, что нужно произвести клик на соответствующее этой позиции изображение|
-|metadata|Object|Объект, который определяет тип возвращаемого ответа|
+|answer|Array|List with boolean values, "true" means that you need to click on the image corresponding to this position.|
+|metadata|Object|An object that specifies the type of response to return.|
 
-**Пример:**
+**Example:**
 
 ```json
 {
@@ -226,9 +226,9 @@ sidebar_label: HCaptcha Click
 }
 ```
 
-### **Ценообразование:**
+### **Pricing:**
 
-|**Наименование** |**Стоимость за 1000 картинок, $**|
+|**Name** |**Cost per 1000 images, $**|
 | :-: | :-: |
 |hCaptcha|0,02|
 

@@ -3,32 +3,32 @@ sidebar_position: 3
 sidebar_label: getBalance
 ---
 
-# getBalance : получение баланса
+# getBalance : retrieve account balance
 
-:::info Адрес метода
+:::info Method address
 
 ## <https://api.capmonster.cloud/getBalance>
 
-формат запроса: `JSON POST`
+request format: `JSON POST`
 :::
 
 <!-- Адрес метода: <https://api.capmonster.cloud/getBalance>
 
 формат запроса: JSON POST -->
 
-## **Параметры запроса**
+## **Request parameters**
 
 ### `clientKey`
 Type: `String` <br />
-Обязательный: `Да`<br />
-Уникальный ключ вашей учетной записи
+Required: `Yes`<br />
+Unique key of your account
 
 <!-- 
 |**Параметр**|**Тип**|**Обязательный**|**Значение**|
 | :-: | :-: | :-: | :-: |
 |clientKey|String|Да|Уникальный ключ вашей учетной записи| -->
 
-### **Пример тела запроса**
+### **Body Example**
 
 ```json
 {
@@ -36,19 +36,19 @@ Type: `String` <br />
 }
 ```
 
-## **Структура ответа**
+## **Response structure**
 
 ### `errorId`
 Type: `Integer` <br />
-Идентификатор ошибки.<br />**0** - ошибок нет, свойство *errorCode* отсутствует<br />**1** - ошибка, информация о ней находится в свойстве *errorCode*
+Error identificator.<br />**0** - no error, no *errorCode* property<br />**1** - error, information about it is in the *errorCode* property
 
 ### `errorCode`
 Type: `String` <br />
-Код ошибки. См. [глоссарий ошибок](../api-errors).
+Error code. Check out [error list](../api-errors).
 
 ### `balance`
 Type: `Decimal` <br />
-Количество доступных денег
+Amount of money available
 
 <!-- |**Свойство**|**Тип**|**Значение**|
 | :-: | :-: | :-: |
@@ -56,7 +56,7 @@ Type: `Decimal` <br />
 |errorCode|String|Код ошибки. См. [глоссарий ошибок](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/295310).|
 |balance|Decimal|Количество доступных денег| -->
 
-### **Пример**
+### **Example**
 
 ```json
 {

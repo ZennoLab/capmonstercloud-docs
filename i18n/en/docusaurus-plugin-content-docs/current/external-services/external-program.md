@@ -1,6 +1,6 @@
-﻿# Как подключить CapMonster.cloud к нужной программе?
-CapMonster.cloud работает абсолютно с любыми программами для распознавания каптч. Чтобы подключить CapMonster.cloud к Вашему софту, воспользуйтесь инструкцией ниже.
-## **Подключение к программам с поддержкой CapMonster.Cloud** 
+﻿# How to connect CapMonster.cloud to a program?
+CapMonster.cloud is compatible with all captcha solvers. To connect CapMonster.clod to your program, follow the guide below.
+## **Connecting to programs supporting CapMonster.Cloud** 
 <details>
     <summary>ZennoPoster</summary>
 
@@ -10,7 +10,7 @@ CapMonster.cloud работает абсолютно с любыми прогр�
 <details>
     <summary>KeyCollector</summary>
 
-Выберите “Использовать CapMonster.cloud“ и укажите Ваш персональный API-ключ.
+Select “Use CapMonster.cloud” and enter your personal API key.
 
 ![](Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.003.png)
 </details>
@@ -18,11 +18,11 @@ CapMonster.cloud работает абсолютно с любыми прогр�
 <details>
     <summary>A-Parser</summary>
 
-Для разгадывания reCAPTCHA выберите “Util::ReCaptca2“ и укажите ключ для соответствующего поля Provider.
+To solve a reCAPTCHA, select Util::ReCaptcha2 and specify the key for the Provider field.
 
 ![](Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.004.png) 
 
-Для решения обычных капч нужно выбрать “Util::Antigate“ и указать “api.capmonster.cloud“ в качестве значения для “Antigate domain“. А в поле “key” - Ваш личный API-ключ.
+To solve standard captchas, select “Util::Antigate“ and specify “api.capmonster.cloud“ as the value for “Antigate domain“. In the "key" field, specify your personal API key.
 
 ![](Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.005.png)
 </details>
@@ -33,10 +33,10 @@ CapMonster.cloud работает абсолютно с любыми прогр�
 ![](Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.006.png)
 </details>
 
-## **Подключение к программам, в которых можно указать домен**
-Скопируйте домен [api.capmonster.cloud](https://api.capmonster.cloud) и ключ для CapMonster.cloud:
+## **Connecting to programs where you can specify a domain**
+Copy the domain [api.capmonster.cloud](https://api.capmonster.cloud) and key for CapMonster.cloud.
 
-Этот способ подходит для:
+This method works for:
 
 <details>
     <summary>ZennoDroid</summary>
@@ -44,17 +44,18 @@ CapMonster.cloud работает абсолютно с любыми прогр�
 ![](Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.007.png)
 </details>
 
-## **Подключение к другим программам в 3 шага**
-1. Выберите в своём софте один из сервисов распознавания капчи, которые мы поддерживаем
-   Anti-Captcha (v1.0, v2.0), RuCaptcha, RipCaptcha, 2Captcha, BypassCaptcha, DeathByCaptcha
-1. Далее укажите Ваш личный API ключ от сервиса CapMonsterCloud в соответствующем поле софта с которого будете слать капчи.
-   1. **примечание для DeathByCaptcha:** для идентификации пользователя API DeathByCaptcha использует логин и пароль, а не API ключ. В этом случае укажите API ключ от сервиса CapMonsterCloud в графу пароль. А в поле логин можете ввести любое значение.
-1. Последний шаг - сопоставить наш IP адрес с другим сервисом, чтобы CapMonster.Cloud смог перехватывать капчи от сервисов, указанных выше. Для этого выберите свою OC, щелкните по спойлеру и следуйте инструкции.
+## **Connecting to other programs in 3 steps**
+1. In your program, select one of the captcha solvers that we support:
+   `Anti-Captcha (v1.0, v2.0), RuCaptcha, RipCaptcha, 2Captcha, BypassCaptcha, DeathByCaptcha`.
+1. Then specify your personal API key for CapMonsterCloud in the relevant field in your program from which you will send captchas.
+   1. **note for DeathByCaptcha:** to identify a user, DeathByCaptcha API employs a username and password, not an API key. In this case, specify the API key for CapMonsterCloud in the password field. Enter any value in the username field.
+1. Last step: match our IP with another service so CapMonster.Cloud can get captchas from the aforementioned services. For that, select your operating system, hit the spoiler, and follow the instruction.
 
 <details>
-    <summary>У меня Windows</summary>
+    <summary>I have Windows</summary>
 
-Перейдите в папку: C:\Windows\System32\drivers\etc\ и найдите там файл **hosts**. Откройте его с помощью блокнота и добавьте в самый конец строки:
+Go here: C:\Windows\System32\drivers\etc\ and find the file **hosts**. Open it with Notepad and add the following lines to the document end:
+
 ```
 # capmonster.cloud begin
 
@@ -100,43 +101,43 @@ CapMonster.cloud работает абсолютно с любыми прогр�
 
 # capmonster.cloud end
 ```
-Сохраните.
+Save.
 :::info
-В некоторых случаях могут потребоваться права администратора для сохранения файла. Тогда необходимо будет выполнить следующие простые шаги:
+In some cases, you may need admin rights to save the file. In this case, you will have to follow this simple instructions:
 
-1. Начните вводить «Блокнот» в поле поиска на панели задач. Когда нужный результат будет найден, нажмите по нему правой кнопкой мыши и выберите пункт «Запуск от имени администратора».
+1. Start typing "Notepad" in the search bar of your taskbar. Once the result is found, RMB-click on it and click "Run as administrator."
 
   ![](Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.008.png)
 
-1. В меню блокнота выберите Файл — Открыть и укажите путь к файлу hosts в папке *C:\Windows\System32\drivers\etc.* Если в этой папке присутствует несколько файлов с таким именем, открывайте тот, который не имеет никакого расширения.
-1. Внесите необходимые изменения в файл hosts и после чего сохраните файл через меню.
+1. In the Notepad upper menu, click File — Open and specify the path to "hosts": *C:\Windows\System32\drivers\etc.* If there are several files with this name in the folder, open the file that has no extension.
+1. Make changes to "hosts" and then save the file in the menu.
 :::
 
-Попробуйте зайти на любой из этих доменов. Если все сделано правильно - откроется белая страница. Если у Вас не получилось, напишите нам в [службу поддержки](https://helpdesk.zennolab.com/conversation/new), мы поможем Вам в настройке!
+Try visiting any of these domains. If everything is correct, a white page will open. If you couldn't do it, contact [support](https://helpdesk.zennolab.com/conversation/new), we will help you with all configurations!
 </details>
 
 <details>
-    <summary>У меня MacOS</summary>
+    <summary>I have MacOS</summary>
 
-Откройте терминал Терминал используя поиск Spotlight или через Launchpad
+Open Terminal via Spotlight or Launchpad.
 
 ![](Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.009.png) 
 
-В окне приложения введите команду открытия текстового редактора Nano: `sudo nano /etc/hosts`
+In the application window, enter the command for opening Nano text editor: `sudo nano /etc/hosts`
 
-После ввода команды нажмите клавишу «Ввод», введите свой пароль администратора и снова нажмите «Ввод». 
-
-:::info
-Процесс ввода пароля администратора визуально никак не отображается — это нормально. Просто введите пароль на клавиатуре, нажмите «Ввод» и всё сработает.
-:::
-
-Теперь вы находитесь в текстовом редакторе Nano.
+After you enter the command, click Enter, type your admin password, and hit Enter again.  
 
 :::info
-Мышь и трекпад здесь не работают, можно использовать только клавиатуру Mac.
+The process of entering the admin password is not shown. Just enter the password, click Enter, and you will get into the system. 
 :::
 
-Добавьте в самый конец документа строки:
+Now you are in Nano text editor.
+
+:::info
+Neither mouse nor trackpad work here. You can only use the keyboard.
+:::
+
+Add the following lines to the end of the document:
 
 ```
 # capmonster.cloud begin
@@ -184,21 +185,21 @@ CapMonster.cloud работает абсолютно с любыми прогр�
 # capmonster.cloud end
 ```
 
-После внесения изменений нажмите сочетание клавиш Control+O, чтобы применить их. После этого нажмите Control+X и «Ввод» для выхода из редактора. 
+After changes are made, click Ctrl+O to apply them. After that, click Ctrl+X and Enter to leave the editor.
 
-Чтобы увидеть изменения, осталось очистить кеш ДНС. Для этого введите команду: `sudo killall -HUP mDNSResponder`. Это очистит кеш DNS на Mac и операционная система увидит внесённые изменения в файле Hosts.
+To see the changes, clear the DNS cache. For that, enter the command: `sudo killall -HUP mDNSResponder`. It will clear the DNS cache on your Mac, and the operating system will see the changes in Hosts.
 
-Попробуйте зайти на любой из этих доменов. Если все сделано правильно - откроется белая страница. Если у Вас не получилось, напишите нам в [службу поддержки](https://helpdesk.zennolab.com/conversation/new), мы поможем Вам в настройке!
+Try visiting any of these domains. If everything is correct, a white page will open. If you couldn't do it, contact [support](https://helpdesk.zennolab.com/conversation/new), we will help you with all configurations.
 </details>
 
 <details>
-    <summary>У меня Linux</summary>
+    <summary>I have Linux</summary>
 
-Откройте терминал и введите команду открытия текстового редактора Nano: `sudo nano /etc/hosts`
+In the application window, enter the command for opening Nano text editor: `sudo nano /etc/hosts`
 
-После ввода команды нажмите клавишу «Ввод». Теперь вы находитесь в текстовом редакторе Nano. 
+After you enter the command, click Enter. Now you are in Nano text editor.  
 
-Добавьте в самый конец документа строки:
+Add the following lines to the end of the document:
 ```
 # capmonster.cloud begin
 
@@ -245,14 +246,14 @@ CapMonster.cloud работает абсолютно с любыми прогр�
 # capmonster.cloud end
 ```
 
-После внесения изменений нажмите сочетание клавиш Control+X, а затем «Y» чтобы применить их. 
+After changes are made, click Ctrl+X and then Y to apply them.  
 
-Теперь попробуйте зайти на любой из этих доменов. Если все сделано правильно - откроется белая страница. Если у Вас не получилось, напишите нам в [службу поддержки](https://helpdesk.zennolab.com/conversation/new), мы поможем Вам в настройке!
+Try visiting any of these domains. If everything is correct, a white page will open. If you couldn't do it, contact [support](https://helpdesk.zennolab.com/conversation/new), we will help you with all configurations.
 </details>
 
-Этот способ подходит для многих приложений, включая (не полный список):
+This method works for many apps, including the following:
 
-- БроБот
+- BroBot
 - Жукладочник
 - Определяйка
 - PHP скрипты
@@ -263,7 +264,7 @@ CapMonster.cloud работает абсолютно с любыми прогр�
 - Advego Plagiatus
 - All-in-One Checker
 - AllSubmitter
-- Botsapp для ВК
+- Botsapp for VK
 - BotZilla
 - BrowserAutomationStudio
 - CheckCheck
@@ -308,8 +309,12 @@ CapMonster.cloud работает абсолютно с любыми прогр�
 - X Parser Light
 - XSEOchecker
 - XseoN
-- И других…
+- And others...
 
-Если у Вас не получилось подключить CapMonster.Cloud к вашему приложению, пожалуйста, напишите нам в [службу поддержки](https://helpdesk.zennolab.com/conversation/new), мы поможем Вам в настройке!
+:::info !
+
+If you couldn't connect CapMonster.Cloud to your app, contact [support](https://helpdesk.zennolab.com/conversation/new), we will help you with all configurations.
+
+:::
 
 [ref1]: Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.001.png

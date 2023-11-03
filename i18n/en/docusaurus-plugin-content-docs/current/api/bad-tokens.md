@@ -1,23 +1,25 @@
-﻿# Как жаловаться на плохие токены
+﻿# How to report bad tokens
 
-## **Зачем жаловаться?**
+## **Why to report?**
 
-Жалобы нужны, чтобы мы автоматически анализировали данные о качестве токенов выдаваемых нашим API. Жалобы автоматически обрабатываются, и командой принимаются действия по улучшению качества токенов, будь то доработка системы под новые задания, улучшение сеток и тд.
+We need reports so that we automatically analize data on the quality of token issued by our API. Reports are processed automatically, and the team takes actions to improve the quality of the tokens, whether it is updating the system for new tasks, improving grids, etc.
 
 ---
 
-### **Адреса методов**
+### **Method addresses:**
 
 
-:::tip Для жалоб на капчи-картинки
+:::tip For captcha images reports
 ### [https://api.capmonster.cloud/reportIncorrectImageCaptcha](https://api.capmonster.cloud/reportIncorrectImageCaptcha)
 :::
 
-:::tip Для жалоб на токен-капчи: recaptcha(2,3, enterprise), hcaptcha, geetest, funcaptcha, turnstile.
+:::tip For token-captcha reports: recaptcha(2,3, enterprise), hcaptcha, geetest, funcaptcha, turnstile.
 ### [https://api.capmonster.cloud/reportIncorrectTokenCaptcha](https://api.capmonster.cloud/reportIncorrectTokenCaptcha)
 
-Также поддерживаются пути:
-[https://api.capmonster.cloud/reportIncorrectRecaptcha](https://api.capmonster.cloud/reportIncorrectRecaptcha), [https://api.capmonster.cloud/reportIncorrectHcaptcha](https://api.capmonster.cloud/reportIncorrectHcaptcha)
+Also supported paths:
+
+[https://api.capmonster.cloud/reportIncorrectRecaptcha](https://api.capmonster.cloud/reportIncorrectRecaptcha), 
+[https://api.capmonster.cloud/reportIncorrectHcaptcha](https://api.capmonster.cloud/reportIncorrectHcaptcha) - works the same as [reportIncorrectTokenCaptcha](https://api.capmonster.cloud/reportIncorrectTokenCaptcha)
 :::
 
 
@@ -27,16 +29,16 @@
 Также поддерживаются пути:
 [https://api.capmonster.cloud/reportIncorrectRecaptcha](https://api.capmonster.cloud/reportIncorrectRecaptcha), [https://api.capmonster.cloud/reportIncorrectHcaptcha](https://api.capmonster.cloud/reportIncorrectHcaptcha) - работают аналогично [reportIncorrectTokenCaptcha](https://api.capmonster.cloud/reportIncorrectTokenCaptcha) -->
 
-`Формат запроса: JSON POST`
+`Request format: JSON POST`
 
-### **Параметры запроса**
+### **Request parameters**
 
-| **Параметр** | **Тип** | **Обязательный** |                      **Значение**                      |
-| :------------------------: | :--------------: | :--------------------------------: | :------------------------------------------------------------------: |
-|         clientKey         |      String      |                Да                | Уникальный ключ вашей учетной записи |
-|           taskId           |     Integer     |                Да                |              Идентификатор задания              |
+| **Parameter** | **Type** | **Required** |                      **Value**                      |
+| :------------------------: | :--------------: | :--------------------------------: | :------------------------------------------------------------------ |
+|         clientKey         |      String      |                Yes                | Your unique account key |
+|           taskId           |     Integer     |                Yes                |              Task ID              |
 
-**Пример запроса:**
+**Request example:**
 
 ```json
 {
@@ -47,18 +49,18 @@
 }
 ```
 
-**Структура ответа:**
+**Response structure:**
 
-| **Свойство** | **Тип** |                                                                                                                 **Значение**                                                                                                                 |
-| :------------------------: | :--------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|          errorId          |     Integer     | Идентификатор ошибки.<br />**0** - ошибок нет, свойство *errorCode* отсутствует<br />**1** - ошибка, информация о ней находится в свойстве *errorCode* |
-|         errorCode         |      String      |                                                                  Код ошибки. См.[глоссарий ошибок](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/295310).                                                                  |
-|           status           |      String      |                                           **success** - жалоба принята.<br />Если жалоба не принята, то поле отсутствует, причина в *errorCode*                                           |
+| **Property** | **Type** |                                                                                                                 **Value**                                                                                                                 |
+| :------------------------: | :--------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|          errorId          |     Integer     | Error ID.<br />**0** - no errors, no *errorCode* property;<br />**1** - error, information about it is in the *errorCode* property. |
+|         errorCode         |      String      |                                                                  Error code. Check out [error types](./api-errors).                                                                  |
+|           status           |      String      |                                           **success** - the report is accepted.<br />If the report is not accepted, then the field is missing, the reason is in the *errorCode*                           |
 
-### **Пример ответа**
+### **Response example**
 
 <details>
-    <summary>Ответ БЕЗ ошибки
+    <summary>Response WITHOUT error
 </summary>
 
 ```json
@@ -71,7 +73,7 @@
 </details>
 
 <details>
-    <summary>Ответ содержащий ошибку
+    <summary>Response WITH an error
 </summary>
 
 ```json

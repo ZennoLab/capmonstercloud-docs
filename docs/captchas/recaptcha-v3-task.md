@@ -14,10 +14,10 @@ sidebar_label: ReCaptchaV3Task
 |**Параметр**|**Тип**|**Обязательный**|**Значение**|
 | :- | :- | :- | :- |
 |type|String|да|**RecaptchaV3TaskProxyless**|
-|websiteURL|String|да|Адрес страницы на которой решается каптча|
-|websiteKey|String|да|Ключ-идентификатор ReCaptcha3 на целевой странице.<br/>https://www.google.com/recaptcha/api.js?render=ВОТ\_ЭТОТ|
+|websiteURL|String|да|Адрес страницы, на которой решается каптча|
+|websiteKey|String|да|Ключ-идентификатор ReCaptcha3 на целевой странице.<br/>https://www.google.com/recaptcha/api.js?render=ВОТ_ЭТОТ|
 |minScore|Double|нет|Может иметь значение от 0.1 до 0.9.|
-|pageAction|String|нет|<p>Значение параметра action, которое передаётся виджетом ReCaptcha в Google, и которое потом видит владелец сайта при проверке токена. Значение по-умолчанию: *verify*</p><p>Пример в html:<br/>*grecaptcha.execute('site\_key', {action:'login\_test'})*.</p>|
+|pageAction|String|нет|<p>Значение параметра action, которое передаётся виджетом ReCaptcha в Google, и которое потом видит владелец сайта при проверке токена. Значение по-умолчанию: *verify*</p><p>Пример в html:<br/>*grecaptcha.execute('site_key', {action:'login_test'})*.</p>|
 
 ## **Пример запроса**
 
@@ -58,7 +58,7 @@ sidebar_label: ReCaptchaV3Task
   "errorId":0,
   "status":"ready",
   "solution": {
-    "gRecaptchaResponse":"3AHJ\\_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9\\_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
+    "gRecaptchaResponse":"3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
   }
 }
 ```

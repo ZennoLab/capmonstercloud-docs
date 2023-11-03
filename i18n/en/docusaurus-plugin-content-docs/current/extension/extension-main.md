@@ -2,113 +2,115 @@
 sidebar_position: 0
 ---
 
-# Расширение для браузера
+# Browser extension
+## **Description**
+With this extension, you can recognize captchas automatically directly in the browser.
 
-## **Описание**
-С помощью данного расширения можно распознавать капчи в автоматическом режиме прямо в браузере.
-
-Расширение предназначено для работы в браузере Google Chrome.
+The extension works in the Google Chrome browser.
 
 -----
-## **Автоматическая установка**
-**Важно!** В режиме инкогнито и гостевом режиме устанавливать расширения нельзя.
+## **Automatic installation**
+**Important!** You cannot install extensions in incognito mode and guest mode.
 
-1. Откройте [Интернет-магазин Chrome](https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=ru).
-1. Нажмите **Установить**.
+1. Open the [Chrome Web Store](https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=en).
+2. Click **Install**.
 
-Чтобы начать работу с расширением, нажмите на его значок справа от адресной строки. Переходите к [настройкам](https://zennolab.atlassian.net/wiki/spaces/APIS/pages/2116517889#%D0%9D%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B8).
+To get started with the extension, click on its icon to the right of the address bar. Go to the [settings](extension-main.md#settings).
 
-*Если по какой-то причине не удалось установить расширение из библиотеки Google Chrome, воспользуйтесь инструкцией по ручной установке.*
+*If for some reason it was not possible to install the extension from the Chrome Web Store, use the instructions for manual installation.*
 
 <details>
-    <summary>Ручная установка расширения</summary>
+    <summary>Manual installation</summary>
 
-  ![(синяя звезда)](Aspose.Words.d14847ca-5ce8-4c9f-8081-1ec99b44a6b3.002.png) Скачайте архив с раcширением:
-![](Aspose.Words.d14847ca-5ce8-4c9f-8081-1ec99b44a6b3.003.png)
+1. Download the [archive with the extension](https://zenno.link/CapMonsterCloud-chrome-extensions).
 
-1. Распакуйте скачанный архив в папку с любым именем. 
+1. Unpack it to any folder. 
    
-   **ВНИМАНИЕ**: данную папку впоследствии удалять нельзя иначе расширение в браузере перестанет работать.
-1. В браузере Google Chrome перейдите на страницу “Управление расширениями”, одним из трёх способов: 
-   1. Введите в адресную строку браузера chrome://extensionsи нажмите клавишу Enter.
-   1. Через меню: нажмите в правом верхнем углу (возле изображения профиля) три вертикальные точки, затем “Дополнительные инструменты”, потом “Расширения”.
+   **WARNING**: the folder shouldn’t be deleted, otherwise the extension stop working.
+1. In the Google Chrome browser open the “Extension” page. There are several ways to do this: 
+   1. Type chrome://extensions in the address bar of a browser and press Enter.
+   2. From the menu: click the three vertical dots in the upper right corner (near the profile picture), then "More Tools", then "Extensions".
 
-  ![](Aspose.Words.d14847ca-5ce8-4c9f-8081-1ec99b44a6b3.004.png)
+  ![](359d5afb-d644-45c2-a882-e7fc3da759eb.png)
 
-1. Либо перейдите в настройки Google Chrome и справа в меню выберите пункт “Расширения” (в самом низу)
+   3. Or go to the Google Chrome settings and select "Extensions" (at the very bottom) in the right menu.
 
-  ![](Aspose.Words.d14847ca-5ce8-4c9f-8081-1ec99b44a6b3.005.png)
+  ![](61a9b824-b0d2-4808-8bb8-feac4b25d0b7.png)
 
-1. Включите “Режим разработчика”
-1. Снизу появится новое меню в котором нужно выбрать кнопку “Загрузить распакованное расширение”. 
+1. Enable “Developer Mode”.
+1. Then click on “Load unpacked”.
 
-  ![](Aspose.Words.d14847ca-5ce8-4c9f-8081-1ec99b44a6b3.006.png)
+  ![](load-unpacked.png)
 
-1. Появится стандартный для Вашей ОС диалог поиска файлов/директорий, отыщите и выберете папку, в которую распаковали архив.
-1. После этого расширение должно появиться в списке установленных
+1. Find and choose the folder where you unpacked the extension.
+1. After that the extension should appear in the list of the installed extensions.
 
-![](Aspose.Words.d14847ca-5ce8-4c9f-8081-1ec99b44a6b3.007.png)
+![](919a2eab-1651-4b48-8980-b69346d700fd.png)
 
   </details>
 
 <details>
-    <summary>Ручное обновление расширения</summary>
+    <summary>Manual update of the extension</summary>
 
-Если вы устанавливаете расширение поверх предыдущей версии, то при обновлении исходных файлов расширения Вам так же нужно нажать кнопку обновить на странице “Управление расширениями” (как открыть эту страницу описано, выше в секции “Ручная установка”)
+If you are installing the extension over the previous version, then when you update the original extension files, you also need to click the update button on the "Extensions" page (how to open this page is described above in the "Manual installation" section).
 
-![](Aspose.Words.d14847ca-5ce8-4c9f-8081-1ec99b44a6b3.008.png)
+![](manual-update.png)
 </details>
 
 -----
-## **Настройки**
+## **Settings**
 <details>
-    <summary>Как закрепить расширение</summary>
+    <summary>How to pin the extension</summary>
 
-По умолчанию вновь установленное расширение скрыто. Чтоб оно постоянно отображалось его нужно закрепить, кликнув на соответствующий значок.
+By default the installed extension is hidden. To pin it you have to click on the “Pin” button:
 
-![](Aspose.Words.d14847ca-5ce8-4c9f-8081-1ec99b44a6b3.009.png)
+![](pin1.png)
 </details>
 
-После активации Вы увидите перед собой такое окно:
+After launching the extension you’ll see this window:
 
-![](Aspose.Words.d14847ca-5ce8-4c9f-8081-1ec99b44a6b3.010.png) 
-### <a name="id-расширениедлябраузера-apiключ"></a>**API ключ**
-Введите API ключ в соответствующее поле(1), нажмите кнопку сохранить(2). Если Вы ввели правильный ключ, то чуть ниже отобразится Ваш баланс(3)
+![](pin2.png)
+### <a name="id-browserextension-apikey"></a>**API key**
+Enter API key in the corresponding field(1), press save button(2). If you entered the correct key, your balance will be displayed below(3).
 
-![](Aspose.Words.d14847ca-5ce8-4c9f-8081-1ec99b44a6b3.011.png) 
-### <a name="id-расширениедлябраузера-автоматическоерешениекапч"></a>**Автоматическое решение капч**
-Здесь Вы можете выбрать те типы капч, которые расширение будет распознавать автоматически
+![](api-key.png)
+### <a name="id-browserextension-automaticcaptchasolving"></a>**Automated captcha solving**
+Here you can select the types of captchas that the extension will recognize automatically.
 
-![](Aspose.Words.d14847ca-5ce8-4c9f-8081-1ec99b44a6b3.012.png) 
+![](automated-captcha-solving.png)
 
-Может потребоваться перезагрузка страницы с капчей, для вступления изменений в силу!
-### <a name="id-расширениедлябраузера-повторнорешатькапчивслучаеошибки"></a>**Повторно решать капчи в случае ошибки**
-Если с первой попытки не удалось решить капчу, то расширение будет отправлять повторные задание, пока капча не будет решена, либо пока не будет достигнут лимит, указанный в данной настройке.
-### <a name="id-расширениедлябраузера-прокси"></a>**Прокси**
-![](Aspose.Words.d14847ca-5ce8-4c9f-8081-1ec99b44a6b3.013.png) 
+:::info !
 
-Здесь можно указать прокси, который будет отправлен вместе с задачей на распознавание.
+You may need to reload the page with captcha for the changes to take effect!
 
-“Логин” и “Пароль” указывать не обязательно.
-### <a name="id-расширениедлябраузера-управлениечёрнымсписком"></a>**Управление чёрным списком**
-С помощью чёрного списка можно настроить сайты, на которых расширение будет игнорировать капчу.
+:::
+### <a name="id-browserextension-repeatcaptchasolvingincaseofanerror"></a>**Repeat captcha solving in case of an error**
+If the first attempt to solve the captcha is failed, the extension will send repeated tasks until the captcha is not solved, or until the limit specified in this setting will not be reached.
+### <a name="id-browserextension-proxy"></a>**Proxy**
+![](proxy.png) 
 
-После включения данной опции появится поле для ввода сайтов:
+Here you can specify the proxy that will be sent along with the recognition task.
 
-![](Aspose.Words.d14847ca-5ce8-4c9f-8081-1ec99b44a6b3.014.png) 
+The "Login" and "Password" are optional.
+### <a name="id-browserextension-blacklistcontrol"></a>**Blacklist control**
+Using the blacklist you can configure the extension to ignore captchas on specific websites.
 
-Домены нужно указывать вместе с протоколом (https:// или http://)
-Можно использовать маски поиска:
+After enabling this option, a field for entering sites will appear:
 
-- ? - любой один символ кроме точки
-- \* - любое количество любых символов
+![](blacklist-control.png)
 
-Примеры:
+Domains must be specified along with the protocol (https:// or http://).
+You can use masks:
 
-|**Фильтр**|**Пояснение**|
+- ? - any one character except period
+- \* - any number of any characters
+
+Examples:
+
+|**Filter**|**Description**|
 | :-: | :-: |
-|https://zennolab.com|Запрет работы расширения на сайте https://zennolab.com|
-|https://\*.zennolab.com|Запрет работы расширения на всех поддоменах https://zennolab.com|
-|https://www.google.\*|Запрет работы расширения на google во всех зонах (ru, com, com.ua и т.д.)|
+|`https://zennolab.com`|Prohibition of the extension on the site `https://zennolab.com`|
+|`https://*.zennolab.com`|Prohibition of the extension on all subdomains `https://zennolab.com`|
+|`https://www.google.*`|Prohibiting the extension from working on Google in all zones (ru, com, com.ua, etc.)|
 
 [ref1]: Aspose.Words.d14847ca-5ce8-4c9f-8081-1ec99b44a6b3.001.png

@@ -3,23 +3,23 @@ sidebar_position: 9
 sidebar_label: FunCaptcha Click
 ---
 
-# ComplexImageTask Funcaptcha: решение капчи Funcaptcha
-Объект содержит данные о задаче на решение Funcaptcha.
+# ComplexImageTask Funcaptcha: Funcaptcha solving
+The object contains data about the FunCaptcha solving.
 
-## **Структура объекта**
+## **Object structure**
 
-|**Параметр**|**Тип**|**Обязательный**|**Возможные значения**|**Описание**|
+|**Parameter**|**Type**|**Required**|**Possible values**|**Description**|
 | :- | :- | :- | :- | :- |
-|type|String|да|ComplexImageTask|Определяет тип объекта задачи|
-|class|String|да|funcaptcha|Определяет класс объекта задачи|
-|imageUrls|Array|да (если не заполнено imagesBase64)|[ “<https://i.postimg.cc/s2ZDrHXy/fc1.jpg>”, … ]|Список с адресами изображений. Максимум один url на запрос!|
-|imagesBase64|Array|да (если не заполнено imageUrls)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, … ]|Список с изображениями в формате base64. Максимум один элемент на запрос!|
-|metadata.Task|String|да|Pick the image that is the correct way up и другие|Текст задания (на английском)|
-|userAgent|String|нет|-|User-Agent браузера, используемый при загрузке изображений, если были переданы ссылки в imageUrls. Необходимо использовать подпись современного браузера, иначе Google будет возвращать ошибку, требуя обновить браузер.|
-|websiteURL|String|нет|-|Адрес страницы на которой решается каптча|
+|type|String|yes|ComplexImageTask|Specifies the type of task object.|
+|class|String|yes|funcaptcha|Specifies the class of task object.|
+|imageUrls|Array|yes (if imagesBase64 is not filled)|[ “<https://i.postimg.cc/s2ZDrHXy/fc1.jpg>”, … ]|List with image addresses. Maximum one url per request!|
+|imagesBase64|Array|yes (if imageUrls is not filled)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, … ]|List with images in base64 format. Maximum one element per request!|
+|metadata.Task|String|yes|`Pick the image that is the correct way up` and others|Task text (<u>in English</u>).|
+|userAgent|String|no|-|The browser User Agent used when uploading images if links were passed to imageUrls. You should use a modern browser signature or Google will return an error asking you to update your browser.|
+|websiteURL|String|no|-|URL of the page where the captcha is solved.|
 
-## **Пример запроса**
-:::info Метод
+## **Request example**
+:::info Method
 <https://api.capmonster.cloud/createTask>
 :::
 
@@ -38,7 +38,7 @@ sidebar_label: FunCaptcha Click
 }
 ```
 
-**Пример ответа**
+**Response example**
 ```json
 {
   "errorId":0,
@@ -46,17 +46,17 @@ sidebar_label: FunCaptcha Click
 }
 ```
 
-## **Получение результата**
-:::info Метод
+## **Getting the results**
+:::info Method
 <https://api.capmonster.cloud/getTaskResult>
 :::
-Используйте метод [getTaskResult](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/557078/getTaskResult) чтобы получить решение капчи. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 300мс до 6 с.
+Use the [getTaskResult](../api/methods/get-task-result.md) method to get the captcha solution. Depending on the system load, you will receive a response after a time ranging from 300ms to 6s.
 
-|**Свойство**|**Тип**|**Описание**|
+|**Property**|**Type**|**Description**|
 | :- | :- | :- |
-|answer|Array|Список в булевыми значениями, true - означает, что нужно произвести клик на соответствующее этой позиции изображение|
+|answer|Array|List in boolean values, true - means that you need to click on the image corresponding to this position.|
 
-**Пример:**
+**Example:**
 ```json
 {
   "errorId":0,
@@ -67,9 +67,9 @@ sidebar_label: FunCaptcha Click
 }
 ```
 
-## **Ценообразование**
+## **Pricing**
 
-|**Наименование**|**Стоимость за 1000 картинок, $**|
+|**Cost**|**Cost per 1000 images, $**|
 | :-: | :-: |
-|funcaptcha|0,15|
+|Funcaptcha|0,15|
 
