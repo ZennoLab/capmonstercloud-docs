@@ -56,7 +56,7 @@
 
 ### **2. Отправка архива капч**
 
-![](Aspose.Words.aac7548a-0b79-486d-96ce-e145c7faf5a6.004.png)
+![](captcha-archieve.png)
 
 #### **2.1. Название**
 
@@ -126,7 +126,7 @@ captcha3.png:99loe
 
 #### **Validated**
 
-![](Aspose.Words.aac7548a-0b79-486d-96ce-e145c7faf5a6.009.png)
+![](validated.png)
 
 Данный статус назначается после того, как Вы отправите форму (если всё было сделано правильно).
 
@@ -136,25 +136,25 @@ captcha3.png:99loe
 
 #### **Paid**
 
-![](Aspose.Words.aac7548a-0b79-486d-96ce-e145c7faf5a6.010.png)
+![](paid.png)
 
 Оплата за модуль принята.
 
 #### **ValidatedInDepth**
 
-![](Aspose.Words.aac7548a-0b79-486d-96ce-e145c7faf5a6.011.png)
+![](ValidatedInDepth.png)
 
 Подготовительные работы.
 
 #### **Annotated**
 
-![](Aspose.Words.aac7548a-0b79-486d-96ce-e145c7faf5a6.012.png)
+![](Annotated.png)
 
 Разметка капч произведена. Идёт процесс обучения.
 
 #### **Trained**
 
-![](Aspose.Words.aac7548a-0b79-486d-96ce-e145c7faf5a6.013.png)
+![](Trained.png)
 
 Модуль готов! Теперь на него можно отправлять капчи.
 
@@ -190,7 +190,7 @@ captcha3.png:99loe
 <details>
     <summary>Напротив моего модуля в колонке “Комментарий” появилась надпись “Ошибка” : Что мне делать?</summary>
 
-![](Aspose.Words.aac7548a-0b79-486d-96ce-e145c7faf5a6.014.png)
+![](user-module.png)
 
 Не паникуйте ![(wink)](Aspose.Words.aac7548a-0b79-486d-96ce-e145c7faf5a6.015.png) Подождите немного.
 
