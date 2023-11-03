@@ -44,7 +44,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/ZennoLab/capmonstercloud-docs/tree/dev/',
         },
         blog: false,
         // blog: {
@@ -150,7 +150,6 @@ const config = {
       //   ],
       //   copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
       // },
-      scripts: ['./livechat.js'],
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
