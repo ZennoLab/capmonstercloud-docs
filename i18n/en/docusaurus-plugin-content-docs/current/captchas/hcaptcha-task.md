@@ -20,11 +20,11 @@ Proxies with IP authorization are not yet supported.
 
 |**Parameter**|**Type**|**Required**|**Value**|
 | :- | :- | :- | :- |
-|type|String|yes|**HCaptchaTaskProxyless** or **HCaptchaTask (when using a proxy)**|
+|type|String|yes|**HCaptchaTaskProxyless** or **HCaptchaTask (when using a proxy)**.|
 |websiteURL|String|yes|Address of a webpage with hCaptcha.|
 |websiteKey|String|yes|hCaptcha website key.|
 |isInvisible|Bool|no|Use true for invisible version of hCaptcha.|
-|data|String|no|<p>Custom data that is used in some implementations of hCaptcha, mostly with isInvisible=true.</p><p>Important: you MUST provide userAgent if you submit captcha with data parameter. The value should match the User-Agent you use when interacting with the target website.</p><p>**Pass only the actual UA from Windows OS. Now this is version 117: “Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36”**</p>|
+|data|String|no|<p>Custom data that is used in some implementations of hCaptcha, mostly with `isInvisible=true`.</p><p>Important: you MUST provide `userAgent` if you submit captcha with data parameter. The value should match the `User-Agent` you use when interacting with the target website.</p><p>**Pass only the actual UA from Windows OS. Now this is version 117: “Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36”**</p>|
 |proxyType|String|yes (for **HCaptchaTask**)|**http** - regular http/https proxy;<br />**https** - try this option only if "http" does not work (required for some custom proxies);<br />**socks4** - socks4 proxy;<br />**socks5** - socks5 proxy.|
 |proxyAddress|String|yes (for **HCaptchaTask**)|<p>IP proxy address IPv4/IPv6. Not allowed:</p><p>- using hostnames;</p><p>- using transparent proxies (where you can see the client’s IP);</p><p>- using proxies on local machines.</p>|
 |proxyPort|Integer|yes (for **HCaptchaTask**)|Proxy port.|
