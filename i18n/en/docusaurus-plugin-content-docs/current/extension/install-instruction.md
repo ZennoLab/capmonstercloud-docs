@@ -4,7 +4,13 @@ sidebar_label: Installation instructions
 ---
 
 # Instructions for installing the CapMonster Cloud extension in the ProjectMaker browser
+
+:::info
+
 The extension only works with the Chromium browser!
+
+:::
+
 ## **Method #1: Installation using a CRX file.**
 1. Download [CRX file CapMonster Cloud](https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=en);
 
