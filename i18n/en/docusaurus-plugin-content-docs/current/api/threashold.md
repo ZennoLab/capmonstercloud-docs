@@ -20,7 +20,7 @@ In order to have a guaranteed correct result, you can also pass the parameter  *
 {
 
   "task": { 
-    //...
+    ...
     "recognizingThreshold" : 70
   },
   "clientKey":"234234234234234234234234",
@@ -42,6 +42,6 @@ The key, the confidence threshold and the name of the module are indicated with 
 Example: “00f87cb0f01330d33709ce3339ad0c8c\_\_solvemedia\_\_recognizingthreshold\_70”
 
 :::note
-If you are unable to set the response confidence threshold, please write to our [support team](https://helpdesk.zennolab.com/conversation/new), we will help you set it up!
+If you are unable to set the response confidence threshold, please write to our **[support team](https://helpdesk.zennolab.com/conversation/new)**, we will help you set it up!
 :::
 

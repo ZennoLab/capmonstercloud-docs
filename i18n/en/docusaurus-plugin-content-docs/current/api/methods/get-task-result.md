@@ -26,12 +26,12 @@ Limit: 120 requests per task.
 ## **Request parameters:**
 
 ### `clientKey`
-_Type: `String` <br />_
+Type: `String` <br />
 Required: `Yes`<br />
 Unique key of your account.
 
 ### `taskId`
-_Type: `Integer` <br />_
+Type: `Integer` <br />
 Required: `Yes`<br />
 ID which was obtained in [createTask](./create-task) method.
 

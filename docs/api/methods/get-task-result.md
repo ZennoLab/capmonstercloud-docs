@@ -26,12 +26,12 @@ sidebar_label: getTaskResult
 ## **Параметры запроса:**
 
 ### `clientKey`
-_Type: `String` <br />_
+Type: `String` <br />
 Обязательный: `Да`<br />
 Уникальный ключ вашей учетной записи
 
 ### `taskId`
-_Type: `Integer` <br />_
+Type: `Integer` <br />
 Обязательный: `Да`<br />
 Идентификатор задания полученный в методе [createTask](./create-task)
 

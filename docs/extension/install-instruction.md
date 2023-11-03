@@ -4,7 +4,13 @@ sidebar_label: Инструкция по установке
 ---
 
 # Инструкция по установке расширения CapMonster Cloud в браузер ProjectMaker
+
+:::info
+
 Расширение работает только с типом браузера Chromium!
+
+:::
+
 ## **Способ №1: Установка с помощью CRX-файла.**
 1. Скачать [CRX-файл CapMonster Cloud](https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=ru);
 

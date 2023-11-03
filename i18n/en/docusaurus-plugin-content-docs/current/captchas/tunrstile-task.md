@@ -7,7 +7,7 @@ sidebar_label: Turnstile
 All Turnstile subtypes are automatically supported: manual, non-interactive и invisible. Therefore, there is no need to specify a subtype for a normal captcha. 
 
 :::caution Attention
-If you solve Turnstile on the cloudflare 5s challenge pages, don’t forget to specify cloudflareTaskType and related fields. userAgent is **required**.
+If you solve Turnstile on the cloudflare 5s challenge pages, don’t forget to specify `cloudflareTaskType` and related fields. userAgent is **required**.
 :::
 ### **Object structure**
 
@@ -24,13 +24,13 @@ If you solve Turnstile on the cloudflare 5s challenge pages, don’t forget to s
 |cloudflareTaskType|String|no|**cf_clearance** - if cookies are required;<br/>**token** - if required token from Turnstile.|
 |htmlPageBase64|String|yes, if *cloudflareTaskType* is equal to* **cf_clearance**|Base64 encoded html page with captcha.|
 |userAgent|String|yes, if *cloudflareTaskType* is specified.|Only the latest UAs from Chrome are supported.|
-|pageAction|String|yes, if *cloudflareTaskType* is equal to* **token**|The actionfield, that can be found in the callback function to load the captcha.<br/>If *cloudflareTaskType* is used, then action, is usually “managed“ or “non-interactive“.|
-|data|String|yes, if *cloudflareTaskType* is equal to* **token**|The value of the *data* field can be taken from the cData parameter.|
-|pageData|String|yes, if *cloudflareTaskType* is equal to* **token**|The value of the *pageData* field can be taken from the chlPageData parameter.|
+|pageAction|String|yes, if *cloudflareTaskType* is equal to* **token**|The `action` field, that can be found in the callback function to load the captcha.<br/>If *cloudflareTaskType* is used, then `action` is usually “managed“ or “non-interactive“.|
+|data|String|yes, if *cloudflareTaskType* is equal to* **token**|The value of the *data* field can be taken from the `cData` parameter.|
+|pageData|String|yes, if *cloudflareTaskType* is equal to* **token**|The value of the *pageData* field can be taken from the `chlPageData` parameter.|
 
 Proxy for token method is not required.
 
-These parameters are in the object that is passed during captcha creation in window.turnstile.render(el, paramsObj) function.  You can get them, for example, by executing JavaScript before loading other scripts:
+These parameters are in the object that is passed during captcha creation in `window.turnstile.render(el, paramsObj)` function.  You can get them, for example, by executing JavaScript before loading other scripts:
 
 ```js
 (function () {
@@ -146,7 +146,7 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the Tur
 
 |**Property**|**Type**|**Description**|
 | :- | :- | :- |
-|cf\_clearance|String|Special cloudflare cookies, that you can set.|
+|cf_clearance|String|Special cloudflare cookies, that you can set.|
 |token|String|Pass this token to the callback function.|
 ## **When specify cloudflareTaskType and when not? Or how to distinguish a normal Turnstile from a Cloudflare Challenge.**
 Cloudflare Challenge may look different. 
@@ -165,10 +165,10 @@ To finally verify the presence of Cloudflare, you can open the developer tools, 
 
 ![](Aspose.Words.3953d396-96cb-4bd4-a13b-aa5740b71be8.004.png)
 
-- The form with the id **challenge-form** has an **action** attribute, containing the  \_\_cf\_chl\_f\_tk= parameter:
+- The form with the id **challenge-form** has an **action** attribute, containing the  `__cf_chl_f_tk=` parameter:
 
 ![](Aspose.Words.3953d396-96cb-4bd4-a13b-aa5740b71be8.005.png)
 
-- There are two similar <script />, tags on the page that create a new value in the window object:
+- There are two similar <script>, tags on the page that create a new value in the window object:
 
 ![](Aspose.Words.3953d396-96cb-4bd4-a13b-aa5740b71be8.006.png) 

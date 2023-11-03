@@ -12,6 +12,7 @@ For example, “00f87cb0f01330d33709ce3339ad0c8c\_\_solvemedia” (**!important*
 The list of available module names:
 
 - amazon
+- whatsapp
 - botdetect
 - facebook
 - gmx
