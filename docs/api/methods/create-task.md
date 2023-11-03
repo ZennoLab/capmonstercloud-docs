@@ -81,9 +81,10 @@ import CodeBlock from '@theme/CodeBlock';
 ```json
     {
       "clientKey":"67b6bcbb1a728ea8d563de6d169a2057",
-      "task": {
+      "task": 
+      {
         "type":"ImageToTextTask",
-        "body":"BASE64\_BODY\_HERE!"
+        "body":"BASE64_BODY_HERE!"
       }
     }
 ```
@@ -95,8 +96,10 @@ import CodeBlock from '@theme/CodeBlock';
 ```json
     {
       "clientKey":"67b6bcbb1a728ea8d563de6d169a2057",
-      "task": {
-        "type":"NoCaptchaTaskProxyless","websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2\\_simple.php?level=high",
+      "task": 
+      {
+        "type":"NoCaptchaTaskProxyless",
+        "websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2\\_simple.php?level=high",
         "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI\\_iqRyTwd"
       }
     }
@@ -143,12 +146,12 @@ Type: `Integer` <br />
   </details>
 
   <details>
-    <summary>Ответ содержащий ошибку ReCaptcha2</summary>
+    <summary>Ответ, содержащий ошибку</summary>
 
 ```json
     {
         "errorId": 1,
-        "errorCode": "ERROR\_KEY\_DOES\_NOT\_EXIST",
+        "errorCode": "ERROR_KEY_DOES_NOT_EXIST",
         "errorDescription": "Account authorization key not found in the system or has incorrect format",
         "taskId": 0
     }
