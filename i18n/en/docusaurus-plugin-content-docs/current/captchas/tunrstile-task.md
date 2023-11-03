@@ -169,6 +169,6 @@ To finally verify the presence of Cloudflare, you can open the developer tools, 
 
 ![](Aspose.Words.3953d396-96cb-4bd4-a13b-aa5740b71be8.005.png)
 
-- There are two similar <script>, tags on the page that create a new value in the window object:
+- There are two similar `<script>`, tags on the page that create a new value in the window object:
 
 ![](Aspose.Words.3953d396-96cb-4bd4-a13b-aa5740b71be8.006.png) 
