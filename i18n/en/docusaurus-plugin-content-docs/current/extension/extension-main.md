@@ -80,7 +80,11 @@ Here you can select the types of captchas that the extension will recognize auto
 
 ![](automated-captcha-solving.png)
 
+:::info !
+
 You may need to reload the page with captcha for the changes to take effect!
+
+:::
 ### <a name="id-browserextension-repeatcaptchasolvingincaseofanerror"></a>**Repeat captcha solving in case of an error**
 If the first attempt to solve the captcha is failed, the extension will send repeated tasks until the captcha is not solved, or until the limit specified in this setting will not be reached.
 ### <a name="id-browserextension-proxy"></a>**Proxy**
@@ -106,8 +110,8 @@ Examples:
 
 |**Filter**|**Description**|
 | :-: | :-: |
-|https://zennolab.com|Prohibition of the extension on the site|
-|https://\*.zennolab.com|Prohibition of the extension on all subdomains https://zennolab.com|
-|https://www.google.\*|Prohibiting the extension from working on Google in all zones (ru, com, com.ua, etc.)|
+|`https://zennolab.com`|Prohibition of the extension on the site `https://zennolab.com`|
+|`https://*.zennolab.com`|Prohibition of the extension on all subdomains `https://zennolab.com`|
+|`https://www.google.*`|Prohibiting the extension from working on Google in all zones (ru, com, com.ua, etc.)|
 
 [ref1]: Aspose.Words.d14847ca-5ce8-4c9f-8081-1ec99b44a6b3.001.png
