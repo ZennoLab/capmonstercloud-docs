@@ -46,7 +46,7 @@ This method works for:
 
 ## **Connecting to other programs in 3 steps**
 1. In your program, select one of the captcha solvers that we support:
-   Anti-Captcha (v1.0, v2.0), RuCaptcha, RipCaptcha, 2Captcha, BypassCaptcha, DeathByCaptcha.
+   `Anti-Captcha (v1.0, v2.0), RuCaptcha, RipCaptcha, 2Captcha, BypassCaptcha, DeathByCaptcha`.
 1. Then specify your personal API key for CapMonsterCloud in the relevant field in your program from which you will send captchas.
    1. **note for DeathByCaptcha:** to identify a user, DeathByCaptcha API employs a username and password, not an API key. In this case, specify the API key for CapMonsterCloud in the password field. Enter any value in the username field.
 1. Last step: match our IP with another service so CapMonster.Cloud can get captchas from the aforementioned services. For that, select your operating system, hit the spoiler, and follow the instruction.
@@ -311,6 +311,10 @@ This method works for many apps, including the following:
 - XseoN
 - And others...
 
+:::info !
+
 If you couldn't connect CapMonster.Cloud to your app, contact [support](https://helpdesk.zennolab.com/conversation/new), we will help you with all configurations.
+
+:::
 
 [ref1]: Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.001.png
