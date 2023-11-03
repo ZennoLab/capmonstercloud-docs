@@ -18,8 +18,8 @@ If the proxy is authorized by IP, then be sure to add **116.203.55.208** to the 
 | :- | :- | :- | :- |
 |type|String|yes|**NoCaptchaTaskProxyless** or **NoCaptchaTask (When using a proxy)**.|
 |websiteURL|String|yes|Address of a webpage with captcha.|
-|websiteKey|String|yes|Recaptcha website key.<br />`<div class="g-recaptcha" data-sitekey="THIS\_ONE"></div>`|
-|recaptchaDataSValue|String|no|Some custom implementations may contain additional "data-s" parameter in ReCaptcha2 div, which is in fact a one-time token and must be grabbed every time you want to solve a ReCaptcha2.<br />`<div class="g-recaptcha" data-sitekey="some sitekey" data-s="THIS\_ONE"></div>`|
+|websiteKey|String|yes|Recaptcha website key.<br />`<div class="g-recaptcha" data-sitekey="THIS_ONE"></div>`|
+|recaptchaDataSValue|String|no|Some custom implementations may contain additional "data-s" parameter in ReCaptcha2 div, which is in fact a one-time token and must be grabbed every time you want to solve a ReCaptcha2.<br />`<div class="g-recaptcha" data-sitekey="some sitekey" data-s="THIS_ONE"></div>`|
 |proxyType|String|yes (for **NoCaptchaTask**)|**http** - regular http/https proxy;<br />**https** - try this only if "http" doesn't work (required by some custom proxy servers);<br />**socks4** - socks4 proxy;<br />**socks5** - socks5 proxy.|
 |proxyAddress|String|yes (for **NoCaptchaTask**)|<p>Proxy IP address IPv4/IPv6. Not allowed:</p><p> - using host names;</p><p> - using transparent proxies (where client IP is visible);</p><p>- using proxies from local networks.</p>|
 |proxyPort|Integer|yes (for **NoCaptchaTask**)|Proxy port.|
@@ -38,8 +38,8 @@ If the proxy is authorized by IP, then be sure to add **116.203.55.208** to the 
   "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
   "task": {
     "type":"NoCaptchaTask",
-    "websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2\_simple.php?level=high",
-    "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI\_iqRyTwd",
+    "websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
+    "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
     "proxyType":"http",
     "proxyAddress":"8.8.8.8",
     "proxyPort":8080,
@@ -56,8 +56,8 @@ If the proxy is authorized by IP, then be sure to add **116.203.55.208** to the 
   "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
   "task": {
     "type":"NoCaptchaTaskProxyless",
-    "websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2\_simple.php?level=high",
-    "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI\_iqRyTwd"
+    "websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
+    "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"
   }
 }
 ```
@@ -86,7 +86,7 @@ Use the [getTaskResult](../api/methods/get-task-result) method to request answer
   "errorId":0,
   "status":"ready",
   "solution": {
-    "gRecaptchaResponse":"3AHJ\_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9\_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
+    "gRecaptchaResponse":"3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
   }
 }
 ```

@@ -18,8 +18,8 @@ If the proxy is authorized by IP, then be sure to add 116.203.55.208 to the whit
 | :- | :- | :- | :- |
 |type|String|yes|**RecaptchaV2EnterpriseTaskProxyless** or **RecaptchaV2EnterpriseTask (When using proxy)**.|
 |websiteURL|String|yes|Address of a webpage with Google ReCaptcha Enterprise.|
-|websiteKey|String|yes|Recaptcha website key.<br />`<div class="g-recaptcha" data-sitekey="THIS\_ONE"></div>`<br/>or `<iframe title="reCAPTCHA" src="...;k=6LdIFr0ZAAAAAO3vz0O0OQrtAefzdJcWQM2TMYQH&amp;... , where 6LdIFr0ZAAAAAO3vz0O0OQrtAefzdJcWQM2TMYQH - websiteKey />`|
-|enterprisePayload|String|no|Some implementations of the reCAPTCHA Enterprise widget may contain additional parameters that are passed to the “grecaptcha.enterprise.render” method along with the sitekey. For example: <pre lang="js" ><code>grecaptcha.enterprise.render("some-div-id", {<br /> sitekey: "6Lc\_aCMTAAAAABx7u2N0D1XnVbI\_v6ZdbM6rYf16"<br/> theme: "dark"<br/> s: "2JvUXHNTnZl1Jb6WEvbDyB...ugQA"<br/>});</code></pre>|
+|websiteKey|String|yes|Recaptcha website key.<br />`<div class="g-recaptcha" data-sitekey="THIS_ONE"></div>`<br/>or `<iframe title="reCAPTCHA" src="...;k=6LdIFr0ZAAAAAO3vz0O0OQrtAefzdJcWQM2TMYQH&amp;... , where 6LdIFr0ZAAAAAO3vz0O0OQrtAefzdJcWQM2TMYQH - websiteKey />`|
+|enterprisePayload|String|no|Some implementations of the reCAPTCHA Enterprise widget may contain additional parameters that are passed to the “grecaptcha.enterprise.render” method along with the sitekey. For example: <pre lang="js" ><code>grecaptcha.enterprise.render("some-div-id", {<br /> sitekey: "6Lc_aCMTAAAAABx7u2N0D1XnVbI_v6ZdbM6rYf16"<br/> theme: "dark"<br/> s: "2JvUXHNTnZl1Jb6WEvbDyB...ugQA"<br/>});</code></pre>|
 |apiDomain|String|no|<p>Domain address from which to load reCAPTCHA Enterprise. For example:</p><p>- [www.google.com](http://www.google.com)</p><p>- [www.recaptcha.net](http://www.recaptcha.net)</p><p>Don't use a parameter if you don't know why it's needed.</p>|
 |proxyType|String|yes (for **RecaptchaV2EnterpriseTask**)|**http** - usual http/https proxy;<br />**https** - try this only if "http" doesn't work (required by some custom proxy servers);<br />**socks4** - socks4 proxy;<br/>**socks5** - socks5 proxy.|
 |proxyAddress|String|yes (for **RecaptchaV2EnterpriseTask**)|<p>Proxy IP address IPv4/IPv6. Not allowed to use:</p><p>- host names instead of IPs;</p><p>- transparent proxies (where client IP is visible);</p><p>- proxies from local networks.</p>|
@@ -29,8 +29,8 @@ If the proxy is authorized by IP, then be sure to add 116.203.55.208 to the whit
 |userAgent|String|no|Browser's User-Agent which is used in emulation. It is required that you use a signature of a modern browser, otherwise Google will ask you to "update your browser".|
 |cookies|String|no|<p>Additional cookies which we must use during interaction with target page or Google.</p><p>**Format**: cookiename1=cookievalue1; cookiename2=cookievalue2</p>|
 
-For enterprisePayload - before calling it, you need to replace the grecaptcha.enterprise.render function with your own and take the value from its parameters. The function exists after loading the script, and the captcha is usually rendered immediately or based on a page event. If the captcha is rendered with the current field s on the client, then the token will most likely not be accepted.
-The original function can be called without the s field.
+For `enterprisePayload` - before calling it, you need to replace the `grecaptcha.enterprise.render` function with your own and take the value from its parameters. The function exists after loading the script, and the captcha is usually rendered immediately or based on a page event. If the captcha is rendered with the current field `s` on the client, then the token will most likely not be accepted.
+The original function can be called without the `s` field.
 
 <details>
     <summary>Script</summary>
@@ -69,7 +69,7 @@ Object.defineProperty(window, 'grecaptcha', {
     return __test_grc;
   },
   set: function(value) {
-    __test_grc = new Proxy(value, \_\_test\_handler);
+    __test_grc = new Proxy(value, __test_handler);
   }
 });
 ```
@@ -92,9 +92,9 @@ Object.defineProperty(window, 'grecaptcha', {
   "task": {
     "type":"RecaptchaV2EnterpriseTask",
     "websiteURL":"https://mydomain.com/page-with-recaptcha-enterprise",
-    "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI\_iqRyTwd",
+    "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
     "enterprisePayload": {
-      "s": "SOME\_ADDITIONAL\_TOKEN"
+      "s": "SOME_ADDITIONAL_TOKEN"
     },
     "proxyType":"http",
     "proxyAddress":"8.8.8.8",
@@ -147,7 +147,7 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to request ans
   "errorId":0,
   "status":"ready",
   "solution": {
-    "gRecaptchaResponse":"3AHJ\_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9\_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
+    "gRecaptchaResponse":"3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
   }
 }
 ```

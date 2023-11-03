@@ -17,9 +17,9 @@ sidebar_label: NoCaptchaTask
 |**Параметр**|**Тип**|**Обязательный**|**Значение**|
 | :- | :- | :- | :- |
 |type|String|да|**NoCaptchaTaskProxyless** или **NoCaptchaTask (При использовании прокси)**|
-|websiteURL|String|да|Адрес страницы на которой решается каптча|
-|websiteKey|String|да|Ключ-идентификатор ReCaptcha2 на целевой странице.<br />`<div class="g-recaptcha" data-sitekey="ВОТ\_ЭТОТ"></div>`|
-|recaptchaDataSValue|String|нет|Некоторые реализации виджета ReCaptcha2 могут содержать дополнительный параметр "data-s" в div'е ReCaptcha2, который является одноразовым токеном и должен собираться каждый раз при решении ReCaptcha2.<br />`<div class="g-recaptcha" data-sitekey="some sitekey" data-s="ВОТ\_ЭТОТ"></div>`|
+|websiteURL|String|да|Адрес страницы, на которой решается каптча|
+|websiteKey|String|да|Ключ-идентификатор ReCaptcha2 на целевой странице.<br />`<div class="g-recaptcha" data-sitekey="ВОТ_ЭТОТ"></div>`|
+|recaptchaDataSValue|String|нет|Некоторые реализации виджета ReCaptcha2 могут содержать дополнительный параметр "data-s" в div'е ReCaptcha2, который является одноразовым токеном и должен собираться каждый раз при решении ReCaptcha2.<br />`<div class="g-recaptcha" data-sitekey="some sitekey" data-s="ВОТ_ЭТОТ"></div>`|
 |proxyType|String|да (При использовании **NoCaptchaTask**)|**http** - обычный http/https прокси<br />**https** - попробуйте эту опцию только если "http" не работает (требуется для некоторых кастомных прокси)<br />**socks4** - socks4 прокси<br />**socks5** - socks5 прокси|
 |proxyAddress|String|да (При использовании **NoCaptchaTask**)|<p>IP адрес прокси IPv4/IPv6. Не допускается:</p><p>- использование имен хостов</p><p>- использование прозрачных прокси (там где можно видеть IP клиента)</p><p>- использование прокси на локальных машинах</p>|
 |proxyPort|Integer|да (При использовании **NoCaptchaTask**)|Порт прокси|
@@ -38,8 +38,8 @@ sidebar_label: NoCaptchaTask
   "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
   "task": {
     "type":"NoCaptchaTask",
-    "websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2\_simple.php?level=high",
-    "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI\_iqRyTwd",
+    "websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
+    "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
     "proxyType":"http",
     "proxyAddress":"8.8.8.8",
     "proxyPort":8080,
@@ -56,8 +56,8 @@ sidebar_label: NoCaptchaTask
   "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
   "task": {
     "type":"NoCaptchaTaskProxyless",
-    "websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2\_simple.php?level=high",
-    "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI\_iqRyTwd"
+    "websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
+    "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"
   }
 }
 ```
@@ -86,7 +86,7 @@ sidebar_label: NoCaptchaTask
   "errorId":0,
   "status":"ready",
   "solution": {
-    "gRecaptchaResponse":"3AHJ\_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9\_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
+    "gRecaptchaResponse":"3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
   }
 }
 ```

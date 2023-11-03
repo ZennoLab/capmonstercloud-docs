@@ -15,9 +15,9 @@ When creating a task, unlike ReCaptcha2, you should additionally pass two parame
 | :- | :- | :- | :- |
 |type|String|yes|**RecaptchaV3TaskProxyless**.|
 |websiteURL|String|yes|Address of a webpage with Google ReCaptcha.|
-|websiteKey|String|yes|Recaptcha website key.<br/>https://www.google.com/recaptcha/api.js?render=THIS\_ONE|
+|websiteKey|String|yes|Recaptcha website key.<br/>https://www.google.com/recaptcha/api.js?render=THIS_ONE|
 |minScore|Double|no|Value from 0.1 to 0.9.|
-|pageAction|String|no|<p>Widget action value. Website owner defines what user is doing on the page through this parameter. Default value: *verify*</p><p>Example:<br/>*grecaptcha.execute('site\_key', {action:'login\_test'})*.</p>|
+|pageAction|String|no|<p>Widget action value. Website owner defines what user is doing on the page through this parameter. Default value: *verify*</p><p>Example:<br/>*grecaptcha.execute('site_key', {action:'login_test'})*.</p>|
 
 ## **Request example**
 
@@ -58,7 +58,7 @@ Use the [getTaskResult](../api/methods/get-task-result.md) to request answer for
   "errorId":0,
   "status":"ready",
   "solution": {
-    "gRecaptchaResponse":"3AHJ\\_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9\\_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
+    "gRecaptchaResponse":"3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
   }
 }
 ```
