@@ -23,7 +23,7 @@ sidebar_position: 0
 <details>
     <summary>Ручная установка расширения</summary>
 
-1. Скачайте [архив с раcширением](https://zenno.link/CapMonsterCloud-chrome-extensions).
+1. Скачайте [архив с раcширением](https://zenno.link/CapMonsterCloud-chrome-extension).
 
 1. Распакуйте скачанный архив в папку с любым именем. 
    
