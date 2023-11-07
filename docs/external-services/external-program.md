@@ -4,7 +4,7 @@ CapMonster.cloud работает абсолютно с любыми прогр�
 <details>
     <summary>ZennoPoster</summary>
 
-![](Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.002.png)
+![](zennoposter.png)
 </details>
 
 <details>
@@ -20,11 +20,11 @@ CapMonster.cloud работает абсолютно с любыми прогр�
 
 Для разгадывания reCAPTCHA выберите “Util::ReCaptca2“ и укажите ключ для соответствующего поля Provider.
 
-![](Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.004.png) 
+![](aparser.png) 
 
 Для решения обычных капч нужно выбрать “Util::Antigate“ и указать “api.capmonster.cloud“ в качестве значения для “Antigate domain“. А в поле “key” - Ваш личный API-ключ.
 
-![](Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.005.png)
+![](aparser2.png)
 </details>
 
 <details>
