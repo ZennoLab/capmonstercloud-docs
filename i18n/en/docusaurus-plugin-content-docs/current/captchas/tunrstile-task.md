@@ -171,6 +171,6 @@ To finally verify the presence of Cloudflare, you can open the developer tools, 
 
 ![](1e4dc39f-0a4a-4c29-a48d-abc7a2ec6380.png)
 
-- There are two similar `<script>`, tags on the page that create a new value in the window object:
+- There are two similar `<script>`, tags on the page that create a new value in the `window` object:
 
 ![](gif.gif) 
