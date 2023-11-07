@@ -4,7 +4,7 @@ CapMonster.cloud is compatible with all captcha solvers. To connect CapMonster.c
 <details>
     <summary>ZennoPoster</summary>
 
-![](Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.002.png)
+![](zennoposter.png)
 </details>
 
 <details>
@@ -20,11 +20,11 @@ Select “Use CapMonster.cloud” and enter your personal API key.
 
 To solve a reCAPTCHA, select Util::ReCaptcha2 and specify the key for the Provider field.
 
-![](Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.004.png) 
+![](aparser.png) 
 
 To solve standard captchas, select “Util::Antigate“ and specify “api.capmonster.cloud“ as the value for “Antigate domain“. In the "key" field, specify your personal API key.
 
-![](Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.005.png)
+![](aparser2.png)
 </details>
 
 <details>
