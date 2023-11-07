@@ -152,24 +152,24 @@ Cloudflare challenge может выглядеть по-разному.
 
 **Обычный вариант:**
 
-![](Aspose.Words.3953d396-96cb-4bd4-a13b-aa5740b71be8.001.png) 
+![](turnstile-simple.png) 
 
 **Стилизованные варианты:**
 
-![](Aspose.Words.3953d396-96cb-4bd4-a13b-aa5740b71be8.002.png) 
+![](turnstile-stylized.png)
 
-![](Aspose.Words.3953d396-96cb-4bd4-a13b-aa5740b71be8.003.png) 
+![](turnstile-stylized-2.png) 
 
 Чтобы окончательно убедиться в наличии Cloudflare, можно открыть инструменты разработчика, посмотреть трафик, изучить код страницы и увидеть характерные признаки:
 
 - Первый запрос к сайту возвращает код 403:
 
-![](Aspose.Words.3953d396-96cb-4bd4-a13b-aa5740b71be8.004.png)
+![](b61dae70-f056-4257-ab72-05beacb27a0d.png)
 
 - Форма с id **challenge-form** имеет атрибут **action** (не путать с action из параметров для капчи turnstile), содержащий параметр `__cf_chl_f_tk=`:
 
-![](Aspose.Words.3953d396-96cb-4bd4-a13b-aa5740b71be8.005.png)
+![](1e4dc39f-0a4a-4c29-a48d-abc7a2ec6380.png)
 
 - На странице находится два похожих тега `<script>`, которые создают новое значение в объекте `window`:
 
-![](Aspose.Words.3953d396-96cb-4bd4-a13b-aa5740b71be8.006.png) 
+![](gif.gif) 

@@ -153,22 +153,24 @@ Cloudflare Challenge may look different.
 
 **Simple variant:**
 
-![](Aspose.Words.3953d396-96cb-4bd4-a13b-aa5740b71be8.001.png) 
+![](turnstile-simple.png) 
 
 **Stylized variants:**
 
-![](Aspose.Words.3953d396-96cb-4bd4-a13b-aa5740b71be8.002.png)![](Aspose.Words.3953d396-96cb-4bd4-a13b-aa5740b71be8.003.png) 
+![](turnstile-stylized.png)
+
+![](turnstile-stylized-2.png) 
 
 To finally verify the presence of Cloudflare, you can open the developer tools, see the traffic, examine the page code and see the characteristic features:
 
 - The first request to the site returns a 403 code:
 
-![](Aspose.Words.3953d396-96cb-4bd4-a13b-aa5740b71be8.004.png)
+![](b61dae70-f056-4257-ab72-05beacb27a0d.png)
 
 - The form with the id **challenge-form** has an **action** attribute, containing the  `__cf_chl_f_tk=` parameter:
 
-![](Aspose.Words.3953d396-96cb-4bd4-a13b-aa5740b71be8.005.png)
+![](1e4dc39f-0a4a-4c29-a48d-abc7a2ec6380.png)
 
-- There are two similar `<script>`, tags on the page that create a new value in the window object:
+- There are two similar `<script>`, tags on the page that create a new value in the `window` object:
 
-![](Aspose.Words.3953d396-96cb-4bd4-a13b-aa5740b71be8.006.png) 
+![](gif.gif) 
