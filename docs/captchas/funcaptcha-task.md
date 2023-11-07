@@ -141,6 +141,7 @@ sidebar_label: FunCaptchaTask
 |![](Funcaptcha-task-types/dice-matches.png)|Меняйте кубики, пока количество не совпадет с числом на изображении слева|
 |![](Funcaptcha-task-types/move-train.png)|Используйте стрелки, чтобы переместить транспорт к координатам, указанным на левом изображении|
 |![](Funcaptcha-task-types/number-rocks.png)|Выберите изображение, на котором количество камней совпадает с числом слева|
+|![](Funcaptcha-task-types/move-person-indicated-seat.png)|C помощью стрелок переместите человека на указанное место|
 |![](Funcaptcha-task-types/koala.jpg)|Выберите коалу|
 |![](Funcaptcha-task-types/ladybug.gif)|Выберите божью коровку|
 |![](Funcaptcha-task-types/pig.jpg)|Выберите свинью|
