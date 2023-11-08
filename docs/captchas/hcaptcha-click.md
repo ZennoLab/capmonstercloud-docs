@@ -16,7 +16,7 @@ sidebar_label: HCaptcha ComplexImage
 | :- | :- | :- | :- | :- |
 |type|String|да|ComplexImageTask|Определяет тип объекта задачи|
 |class|String|да|hcaptcha|Определяет класс объекта задачи|
-|imageUrls|Array|да (если не заполнено imagesBase64)|[ “https://i.postimg.cc/kg71cbRt/image-1.jpg”, “https://i.postimg.cc/6381Zx2j/image.jpg”, … ]|Список с адресами изображений. Максимум 18 элементов.|
+|imageUrls|Array|да (если не заполнено imagesBase64)|[ “[https://i.postimg.cc/kg71cbRt/image-1.jpg](https://i.postimg.cc/kg71cbRt/image-1.jpg)”, “[https://i.postimg.cc/6381Zx2j/image.jpg](https://i.postimg.cc/6381Zx2j/image.jpg)”, … ]|Список с адресами изображений. Максимум 18 элементов.|
 |imagesBase64|Array|да (если не заполнено imageUrls)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, … ]|Список с изображениями в формате base64. Максимум 18 элементов.|
 |metadata.Task|String|да|`Please click each image containing a mountain` и другие|Текст задания (<u>на английском</u>)|
 |userAgent|String|нет|-|User-Agent браузера, используемый при загрузке изображений, если были переданы ссылки в imageUrls. Необходимо использовать подпись современного браузера, иначе Google будет возвращать ошибку, требуя обновить браузер.|
@@ -92,7 +92,7 @@ sidebar_label: HCaptcha ComplexImage
 | :- | :- | :- | :- | :- |
 |type|String|да|ComplexImageTask|Определяет тип объекта задачи|
 |class|String|да|hcaptcha|Определяет класс объекта задачи|
-|imageUrls|Array|да (если не заполнено imagesBase64)|[ “https://i.postimg.cc/vTn3YHr9/panda.jpg” ]|Список с адресами изображений. Максимум 18 элементов.|
+|imageUrls|Array|да (если не заполнено imagesBase64)|[ “[https://i.postimg.cc/vTn3YHr9/panda.jpg](https://i.postimg.cc/vTn3YHr9/panda.jpg)” ]|Список с адресами изображений. Максимум 18 элементов.|
 |imagesBase64|Array|да (если не заполнено imageUrls)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…” ]|Список с изображениями в формате base64. Максимум 18 элементов.|
 |metadata.Task|String|да|`Please click on the panda` и другие|Текст задания (<u>на английском</u>)|
 |userAgent|String|нет|-|User-Agent браузера, используемый при загрузке изображений, если были переданы ссылки в imageUrls. Необходимо использовать подпись современного браузера, иначе Google будет возвращать ошибку, требуя обновить браузер.|
@@ -165,7 +165,7 @@ sidebar_label: HCaptcha ComplexImage
 | :- | :- | :- | :- | :- |
 |type|String|да|ComplexImageTask|Определяет тип объекта задачи|
 |class|String|да|hcaptcha|Определяет класс объекта задачи|
-|imageUrls|Array|да (если не заполнено imagesBase64)|[ “https://i.postimg.cc/4dmSy2YT/goat.jpg” ]|Список с адресами изображений. Максимум 18 элементов.|
+|imageUrls|Array|да (если не заполнено imagesBase64)|[ “[https://i.postimg.cc/4dmSy2YT/goat.jpg](https://i.postimg.cc/4dmSy2YT/goat.jpg)” ]|Список с адресами изображений. Максимум 18 элементов.|
 |imagesBase64|Array|да (если не заполнено imageUrls)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…” ]|Список с изображениями в формате base64. Максимум 18 элементов.|
 |metadata.Task|String|да|`What animal is shown in the image below?` и другие|Текст задания (<u>на английском</u>)|
 |metadata.Classes|Array|да|[ "shark", "chicken", "goat", "hedgehog" ] и другие|Список со строковыми значениями, находящимися на правой половине каптчи (в том же порядке, как на изображении)|
