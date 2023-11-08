@@ -156,9 +156,19 @@ Cloudflare challenge может выглядеть по-разному.
 
 **Стилизованные варианты:**
 
+<figure>
+
 ![](turnstile-stylized.png)
+<figcaption>Челлендж органично встроен в сам сайт</figcaption>
+
+</figure>
+
+<figure>
 
 ![](turnstile-stylized-2.png) 
+<figcaption>Выглядит как обычная капча turnstile, но на самом деле это challenge</figcaption>
+
+</figure>
 
 Чтобы окончательно убедиться в наличии Cloudflare, можно открыть инструменты разработчика, посмотреть трафик, изучить код страницы и увидеть характерные признаки:
 
