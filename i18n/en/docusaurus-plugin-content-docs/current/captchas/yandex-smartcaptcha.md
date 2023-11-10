@@ -159,8 +159,8 @@ instance.ActiveTab.FullEmulationMouseMoveToHtmlElement(submitBtn);
 instance.ActiveTab.FullEmulationMouseClick("left", "click");
 ```
 
-Final test project (don't forget to enter your API key from CapMonster.Cloud)<br/>
-![](ya-image-task-example.png)
+[Final test project](https://drive.google.com/drive/folders/1QNNcBXBGjGZMc6AQ7bdYtr4YEQEumxT4) (don't forget to enter your API key from CapMonster.Cloud).<br/>
+
 
 ## **Using other programs**
 
