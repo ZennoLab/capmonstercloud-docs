@@ -1,6 +1,7 @@
 ---
 sidebar_position: 13
 sidebar_label: Yandex SmartCaptcha Task
+draft: true
 ---
 
 # Yandex SmartCaptcha
