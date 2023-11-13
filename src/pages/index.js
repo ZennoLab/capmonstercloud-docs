@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import Libraries from '@site/src/components/Libraries';
@@ -8,7 +8,13 @@ import Prices from '../components/Prices';
 
 export default function Home() {
   const {siteConfig} = useDocusaurusContext();
-
+  const hideThemeToggle = () => {
+    const toggle = document.querySelector('button.clean-btn:not(.navbar__toggle)');
+    toggle.parentElement.style.display = 'none';
+  }
+  useEffect(() => {
+    hideThemeToggle();
+  })
   return (
     <Layout
       title={`Hello from ${siteConfig.title}`}
