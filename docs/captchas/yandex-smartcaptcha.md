@@ -1,6 +1,7 @@
 ---
 sidebar_position: 12
 sidebar_label: Yandex SmartCaptcha ComplexImage
+draft: true
 ---
 
 # ComplexImageTask: решение Yandex SmartCaptcha
@@ -159,8 +160,7 @@ instance.ActiveTab.FullEmulationMouseMoveToHtmlElement(submitBtn);
 instance.ActiveTab.FullEmulationMouseClick("left", "click");
 ```
 
-Итоговый тестовый проект(не забудьте прописать свой API ключ от CapMonster Cloud)<br/>
-![](ya-image-task-example.png)
+[Итоговый тестовый проект](https://drive.google.com/drive/folders/1QNNcBXBGjGZMc6AQ7bdYtr4YEQEumxT4) (не забудьте прописать свой API ключ от CapMonster Cloud).<br/>
 
 ## **Работа с другими программами**
 

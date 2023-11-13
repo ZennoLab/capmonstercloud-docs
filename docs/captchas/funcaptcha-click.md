@@ -12,7 +12,7 @@ sidebar_label: FunCaptcha ComplexImage
 | :- | :- | :- | :- | :- |
 |type|String|да|ComplexImageTask|Определяет тип объекта задачи|
 |class|String|да|funcaptcha|Определяет класс объекта задачи|
-|imageUrls|Array|да (если не заполнено imagesBase64)|[ “<https://i.postimg.cc/s2ZDrHXy/fc1.jpg>”, … ]|Список с адресами изображений. Максимум один url на запрос!|
+|imageUrls|Array|да (если не заполнено imagesBase64)|[ “[https://i.postimg.cc/s2ZDrHXy/fc1.jpg](https://i.postimg.cc/s2ZDrHXy/fc1.jpg)”, … ]|Список с адресами изображений. Максимум один url на запрос!|
 |imagesBase64|Array|да (если не заполнено imageUrls)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, … ]|Список с изображениями в формате base64. Максимум один элемент на запрос!|
 |metadata.Task|String|да|`Pick the image that is the correct way up` и другие|Текст задания (<u>на английском</u>)|
 |userAgent|String|нет|-|User-Agent браузера, используемый при загрузке изображений, если были переданы ссылки в imageUrls. Необходимо использовать подпись современного браузера, иначе Google будет возвращать ошибку, требуя обновить браузер.|

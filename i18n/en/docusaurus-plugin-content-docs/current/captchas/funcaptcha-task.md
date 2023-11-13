@@ -142,6 +142,7 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to request ans
 |![](Funcaptcha-task-types/dice-matches.png)|Change the dice until the count matches the image on the left|
 |![](Funcaptcha-task-types/move-train.png)|Use the arrows to move the train to the coordinates indicated in the left image|
 |![](Funcaptcha-task-types/number-rocks.png)|Match the number of rocks with the number on the left|
+|![](Funcaptcha-task-types/move-person-indicated-seat.png)|Using the arrows move the person to the indicated seat|
 |![](Funcaptcha-task-types/koala.jpg)|Pick the koala|
 |![](Funcaptcha-task-types/ladybug.gif)|Pick the ladybug|
 |![](Funcaptcha-task-types/pig.jpg)|Pick the pig|
