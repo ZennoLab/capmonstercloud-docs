@@ -25,7 +25,7 @@ After the settings have been successfully changed, you need to archive it back i
 
 Now configure Selenium WebDriver to use the created browser profile.
 
-To do this, create an index.js file with the following content:
+To do this, create an `index.js` file with the following content:
 
 ```js
 const { Builder, By, Key, until } = require('selenium-webdriver');
