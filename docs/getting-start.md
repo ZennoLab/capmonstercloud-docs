@@ -5,6 +5,54 @@ sidebar_position: 0
 ---
 
 # Начало работы
+
+В данном разделе вы можете изучить способы отправки капч в CapMonster Cloud и методы распознавания.
+
+## Способы отправки
+
+Мы поддерживаем API сервисов ручного распознавания:
+
+- AntiCaptcha v1, v2
+- RuCaptcha/2Captcha
+- RipCaptcha
+- BypassCaptcha
+- DeathByCaptcha
+
+:::info Адрес метода
+
+## <https://api.capmonster.cloud> 
+
+Формат запроса: `JSON POST`.
+Формат ответа всегда в формате `JSON`.
+:::
+
+
+**Чтобы решить капчу, вам нужно**:
+
+1. Создать задачу капчи методом [createTask](api/methods/create-task.md).
+2. Подождать некоторое время. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 300мс до 6с.
+3. Запросить решение капчи методом [getTaskResult](api/methods/get-task-result.md). Если капча еще не была решена, перейти к п.2.
+
+Дополнительный метод:
+
+- [Получить](api/methods/get-balance.md) актуальный баланс аккаунта.
+
+### Примеры кода
+
+Для вашего удобства мы создали готовые библиотеки для быстрой интеграции API CapMonster.Cloud в свой код. Распознавайте reCAPTCHA, hCaptcha и другие виды капч по самым низким ценам на рынке!
+
+|**Язык**|**Ссылка на репозиторий**|
+| :- | :- | 
+|С#|- [Nuget](https://www.nuget.org/packages/Zennolab.CapMonsterCloud.Client)<br /> - [Github](https://github.com/ZennoLab/capmonstercloud-client-dotnet) |
+|Python|- [PyPl](https://pypi.org/project/capmonstercloudclient/)<br /> - [Github](https://github.com/ZennoLab/capmonstercloud-client-python)|
+|JS|- [Npm](https://www.npmjs.com/package/@zennolab_com/capmonstercloud-client)<br /> - [Github](https://github.com/ZennoLab/capmonstercloud-client-js)|
+|GO|- [Pkg.go.dev](https://pkg.go.dev/github.com/ZennoLab/capmonstercloud-client-go)<br /> - [Github](https://github.com/ZennoLab/capmonstercloud-client-go)|
+|PHP|- [Packagist](https://packagist.org/packages/zennolab/capmonstercloud.client)<br /> - [Github](https://github.com/ZennoLab/capmonstercloud-client-php)|
+
+
+
+## Методы распознавания
+
 В сервисе CapMonster Cloud есть 2 метода распознавания капч:
 
 1. Через token.
