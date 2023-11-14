@@ -1,6 +1,6 @@
 ﻿---
 sidebar_position: 0
-sidebar_label: NoCaptchaGoogle
+sidebar_label: RecaptchaV2
 ---
 
 # NoCaptchaTask : solving Google captcha

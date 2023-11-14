@@ -1,0 +1,10 @@
+.barBlock {
+  background: #0FB97D;
+  padding:5px;
+  text-align: center;
+}
+
+.barBlock a{
+  color: white;
+  text-decoration: underline;
+}

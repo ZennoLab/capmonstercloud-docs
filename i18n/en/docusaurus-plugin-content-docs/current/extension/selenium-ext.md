@@ -1,3 +1,8 @@
+---
+sidebar_position: 4
+---
+
+
 # Integrating the extension into Selenium using Node.js
 
 In this tutorial, we will show you how to integrate the browser extension using the Selenium WebDriver library and perform automated tasks on a specific website.
@@ -25,7 +30,7 @@ After the settings have been successfully changed, you need to archive it back i
 
 Now configure Selenium WebDriver to use the created browser profile.
 
-To do this, create an index.js file with the following content:
+To do this, create an `index.js` file with the following content:
 
 ```js
 const { Builder, By, Key, until } = require('selenium-webdriver');
