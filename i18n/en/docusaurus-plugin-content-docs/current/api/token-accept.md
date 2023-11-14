@@ -48,7 +48,7 @@ Notice the *nocache* property of the *task* object
 
 ### **When creating a task using the RuCaptcha API (via URL parameters)**
 
-Add `nocache = 1` to the URL.
+Add `nocache=1` to the URL.
 
 :::tip
 In the example below, the parameter is added to the very end.
