@@ -1,4 +1,9 @@
-﻿# Extension settings
+﻿---
+sidebar_position: 3
+---
+
+
+# Extension settings
 
 ## Settings available for change:
 
