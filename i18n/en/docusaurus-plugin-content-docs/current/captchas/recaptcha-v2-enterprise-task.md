@@ -1,6 +1,6 @@
 ﻿---
 sidebar_position: 2
-sidebar_label: ReCaptchaV2
+sidebar_label: ReCaptchaV2EnterpriseTask
 ---
 
 # RecaptchaV2EnterpriseTask : solving Google ReCaptcha Enterprise
