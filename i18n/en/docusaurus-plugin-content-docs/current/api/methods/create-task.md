@@ -35,7 +35,7 @@ Your unique account key, API key (You can find it [here](https://capmonster.clou
 ### `task`
 Type: `Task object` <br />
 Required: `Yes`<br />
-Task data array. See list of available object descriptions [here](https://zennolab.atlassian.net/wiki/spaces/APIS/pages/557229/Captcha+Task+Types).
+Task data array. See list of available object descriptions [here](../../captchas).
 
 ### `callbackUrl`
 Type: `String` <br />
