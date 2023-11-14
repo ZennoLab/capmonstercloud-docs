@@ -4,7 +4,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 export default function AnnounceBar() {
   const { i18n } = useDocusaurusContext();
-  const titleRu = 'Сслыка на старую версию документации';
+  const titleRu = 'Ссылка на старую версию документации';
   const titleEn = 'Link to old version of documentation'
   const title = i18n.currentLocale === 'ru' ? titleRu : titleEn;
 
