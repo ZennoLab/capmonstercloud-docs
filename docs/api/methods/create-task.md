@@ -35,7 +35,7 @@ Type: `String` <br />
 ### `task`
 Type: `Объект задачи` <br />
 Обязательный: `Да`<br />
-Массив данных о задаче. Список типов задач капч [здесь](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/589856).
+Массив данных о задаче. Список типов задач капч [здесь](../../captchas).
 
 ### `callbackUrl`
 Type: `String` <br />
