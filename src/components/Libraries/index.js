@@ -7,37 +7,37 @@ const LibrariesList = [
   {
     title: 'C#',
     Svg: require('@site/static/img/C#.svg').default,
-    githubLink: 'github.com',
+    githubLink: 'https://zenno.link/cmcloud-github',
     customLinkName: 'Nuget',
-    customLinkUrl: 'nuget.com'
+    customLinkUrl: 'https://zenno.link/cmcloud-nuget'
   },
   {
     title: 'Python',
     Svg: require('@site/static/img/Python.svg').default,
-    githubLink: 'github.com',
+    githubLink: 'https://zenno.link/cmcloud-github-py',
     customLinkName: 'PyPl',
-    customLinkUrl: 'nuget.com'
+    customLinkUrl: 'https://zenno.link/cmcloud-pypi-py'
   },
   {
     title: 'JavaScript',
     Svg: require('@site/static/img/Js.svg').default,
-    githubLink: 'github.com',
+    githubLink: 'https://zenno.link/cmcloud-github-js',
     customLinkName: 'Npm',
-    customLinkUrl: 'nuget.com'
+    customLinkUrl: 'https://zenno.link/cmcloud-npm-js'
   },
   {
     title: 'Go',
     Svg: require('@site/static/img/Go.svg').default,
-    githubLink: 'github.com',
+    githubLink: 'https://zenno.link/cmcloud-github-go',
     customLinkName: 'Pkg.go.dev',
-    customLinkUrl: 'nuget.com'
+    customLinkUrl: 'https://zenno.link/cmcloud-pkggodev-go'
   },
   {
     title: 'PHP',
     Svg: require('@site/static/img/Php.svg').default,
-    githubLink: 'github.com',
+    githubLink: 'https://github.com/ZennoLab/capmonstercloud-client-php',
     customLinkName: 'Packagist',
-    customLinkUrl: 'nuget.com'
+    customLinkUrl: 'https://packagist.org/packages/zennolab/capmonstercloud.client'
   },
 ];
 

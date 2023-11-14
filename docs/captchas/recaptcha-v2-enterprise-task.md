@@ -1,6 +1,6 @@
 ﻿---
 sidebar_position: 2
-sidebar_label: ReCaptchaV2Task
+sidebar_label: ReCaptchaV2EnterpriseTask
 ---
 
 # RecaptchaV2EnterpriseTask : решение капчи Google Enterprise
