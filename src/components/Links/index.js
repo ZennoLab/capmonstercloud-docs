@@ -38,7 +38,7 @@ export default function Links() {
       Svg: require('@site/static/img/CapCloud_icon.svg').default,
       desciption: isRULocale ? 'Облачный сервис для автоматического распознавания reCAPTCHA, hCaptcha и других видов капч' : 'Cloud service for automatic recognition of reCAPTCHA, hCaptcha and other types of captchas',
       image: '/img/Cap_img.png',
-      linkUrl: 'github.com'
+      linkUrl: 'https://capmonster.cloud/Dashboard'
     },
     {
       title: isRULocale ? 'Расширение для браузера' : 'Browser extension',
@@ -52,7 +52,7 @@ export default function Links() {
       Svg: require('@site/static/img/Sup_icon.svg').default,
       desciption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore',
       image: '/img/Sup_img.png',
-      linkUrl: 'github.com'
+      linkUrl: 'https://helpdesk.zennolab.com/conversation/new'
     },
   ];
 
