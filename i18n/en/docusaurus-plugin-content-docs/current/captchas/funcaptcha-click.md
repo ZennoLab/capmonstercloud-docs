@@ -1,9 +1,9 @@
 ﻿---
 sidebar_position: 9
-sidebar_label: FunCaptcha Click
+sidebar_label: ComplexImageTask Funcaptcha
 ---
 
-# ComplexImageTask Funcaptcha: Funcaptcha solving
+# ComplexImageTask Funcaptcha
 The object contains data about the FunCaptcha solving.
 
 ## **Object structure**

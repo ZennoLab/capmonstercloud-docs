@@ -1,10 +1,10 @@
 ---
 sidebar_position: 12
-sidebar_label: Yandex SmartCaptcha ComplexImage
+sidebar_label: ComplexImageTask YSC
 draft: true
 ---
 
-# ComplexImageTask: решение Yandex SmartCaptcha
+# ComplexImageTask YSC
 
 Объект содержит данные о задаче на решение Yandex SmartCaptcha.
 

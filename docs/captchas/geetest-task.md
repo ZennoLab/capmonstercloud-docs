@@ -3,7 +3,7 @@ sidebar_position: 5
 sidebar_label: GeeTestTask
 ---
 
-# GeeTestTask: решение каптчи GeeTest
+# GeeTestTask
 Этот тип задач используется для решения каптчи GeeTest с использованием Ваших прокси.
 Ваше приложение должно прислать адрес сайта, публичный ключ домена (`gt`), ключ (`challenge`) и прокси.
 

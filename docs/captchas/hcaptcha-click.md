@@ -1,9 +1,9 @@
 ﻿---
 sidebar_position: 8
-sidebar_label: HCaptcha ComplexImage
+sidebar_label: ComplexImageTask HCaptcha
 ---
 
-# **ComplexImageTask HCaptcha: решение каптчи hCaptcha**
+# **ComplexImageTask HCaptcha**
 Объект содержит данные о задаче на решение hCaptcha.
 
 ## **Пример изображения (первый тип)**
