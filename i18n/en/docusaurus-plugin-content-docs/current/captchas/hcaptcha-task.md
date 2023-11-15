@@ -1,9 +1,9 @@
 ﻿---
 sidebar_position: 4
-sidebar_label: HCaptcha
+sidebar_label: HCaptchaTask
 ---
 
-# HCaptchaTask : hCaptcha solving
+# HCaptchaTask
 The object contains data for hCaptcha solving task. To provide solid universality for solving this type of task we have reproduce every piece of environment used for an automation task you plan to complete. This includes: proxy access, browser's user-agent, cookies (optionally). This approach will eliminate all possible obstacles which might implement in the future.
 
 This type of captcha might be solved a bit longer than usual image captcha, but this issue is compensated by the fact that g-captcha-response value we send to you is valid for the next 60 seconds after we solves your hCaptcha.

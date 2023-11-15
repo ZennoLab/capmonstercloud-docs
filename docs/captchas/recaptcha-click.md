@@ -1,9 +1,9 @@
 ﻿---
 sidebar_position: 7
-sidebar_label: ReСaptcha ComplexImage
+sidebar_label: ComplexImageTask Recaptcha
 ---
 
-# ComplexImageTask Recaptcha: решение каптчи Google
+# ComplexImageTask Recaptcha
 Объект содержит данные о задаче на решение ReCaptcha2 от Google.
 
 ## **Структура объекта**

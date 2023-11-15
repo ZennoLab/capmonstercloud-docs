@@ -1,9 +1,9 @@
 ﻿---
 sidebar_position: 9
-sidebar_label: FunCaptcha ComplexImage
+sidebar_label: ComplexImageTask Funcaptcha
 ---
 
-# ComplexImageTask Funcaptcha: решение капчи Funcaptcha
+# ComplexImageTask Funcaptcha
 Объект содержит данные о задаче на решение Funcaptcha.
 
 ## **Структура объекта**

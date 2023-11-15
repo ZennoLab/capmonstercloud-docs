@@ -3,7 +3,7 @@ sidebar_position: 3
 sidebar_label: FunCaptchaTask
 ---
 
-# FunCaptchaTask : решение каптчи FunCaptcha
+# FunCaptchaTask
 Этот тип задач решает FunCaptcha. Ваше приложение присылает адрес страницы, публичный ключ FunCaptcha и опционально прокси.
 
 Результатом решения задачи является токен для сабмита формы.

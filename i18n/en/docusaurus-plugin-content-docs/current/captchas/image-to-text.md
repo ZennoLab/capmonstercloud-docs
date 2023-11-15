@@ -1,9 +1,9 @@
 ﻿---
 sidebar_position: 10
-sidebar_label: Image to Text
+sidebar_label: ImageToTextTask
 ---
 
-# ImageToTextTask : solving a captcha with a text
+# ImageToTextTask
 ## **Object structure**
 
 |**Parameter**|**Type**|**Required**|**Possible values**|**Description**|

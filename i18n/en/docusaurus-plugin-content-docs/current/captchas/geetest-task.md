@@ -1,9 +1,9 @@
 ﻿---
 sidebar_position: 5
-sidebar_label: GeeTest
+sidebar_label: GeeTestTask
 ---
 
-# GeeTestTask: GeeTest captcha solving
+# GeeTestTask
 This type of task is for solving GeeTest captcha using your proxies.
 Your application should send the site address, public domain key (`gt`), key (`challenge`) and proxy.
 

@@ -1,6 +1,6 @@
 ﻿---
 sidebar_position: 6
-sidebar_label: Turnstile
+sidebar_label: TurnstileTask
 ---
 
 # TurnstileTask | Cloudflare Challenge
