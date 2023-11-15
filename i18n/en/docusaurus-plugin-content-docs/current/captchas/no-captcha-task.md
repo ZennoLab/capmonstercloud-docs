@@ -1,9 +1,9 @@
 ﻿---
 sidebar_position: 0
-sidebar_label: RecaptchaV2
+sidebar_label: RecaptchaV2Task
 ---
 
-# NoCaptchaTask : solving Google captcha
+# RecaptchaV2Task
 The object contains data for Google ReCaptcha2 solving task. To ensure the universality of the solution to this type of captcha, you need to use all the data used when automating the filling of the form on the target site, including proxies, browser user-agent and cookies. This will help to avoid any problems when Google changes the code of its captcha.
 
 This type of captcha might be solved a bit longer than usual image captcha, but this issue is compensated by the fact that g-captcha-response value we send to you is valid for the next 60 seconds after we solves your ReCaptcha2.
@@ -16,13 +16,13 @@ If the proxy is authorized by IP, then be sure to add **116.203.55.208** to the 
 
 |**Parameter**|**Type**|**Required**|**Value**|
 | :- | :- | :- | :- |
-|type|String|yes|**NoCaptchaTaskProxyless** or **NoCaptchaTask (When using a proxy)**.|
+|type|String|yes|**RecaptchaV2TaskProxyless** or **RecaptchaV2Task (When using a proxy)**.|
 |websiteURL|String|yes|Address of a webpage with captcha.|
 |websiteKey|String|yes|Recaptcha website key.<br />`<div class="g-recaptcha" data-sitekey="THIS_ONE"></div>`|
 |recaptchaDataSValue|String|no|Some custom implementations may contain additional "data-s" parameter in ReCaptcha2 div, which is in fact a one-time token and must be grabbed every time you want to solve a ReCaptcha2.<br />`<div class="g-recaptcha" data-sitekey="some sitekey" data-s="THIS_ONE"></div>`|
-|proxyType|String|yes (for **NoCaptchaTask**)|**http** - regular http/https proxy;<br />**https** - try this only if "http" doesn't work (required by some custom proxy servers);<br />**socks4** - socks4 proxy;<br />**socks5** - socks5 proxy.|
-|proxyAddress|String|yes (for **NoCaptchaTask**)|<p>Proxy IP address IPv4/IPv6. Not allowed:</p><p> - using host names;</p><p> - using transparent proxies (where client IP is visible);</p><p>- using proxies from local networks.</p>|
-|proxyPort|Integer|yes (for **NoCaptchaTask**)|Proxy port.|
+|proxyType|String|yes (for **RecaptchaV2Task**)|**http** - regular http/https proxy;<br />**https** - try this only if "http" doesn't work (required by some custom proxy servers);<br />**socks4** - socks4 proxy;<br />**socks5** - socks5 proxy.|
+|proxyAddress|String|yes (for **RecaptchaV2Task**)|<p>Proxy IP address IPv4/IPv6. Not allowed:</p><p> - using host names;</p><p> - using transparent proxies (where client IP is visible);</p><p>- using proxies from local networks.</p>|
+|proxyPort|Integer|yes (for **RecaptchaV2Task**)|Proxy port.|
 |proxyLogin|String|no|Proxy login.|
 |proxyPassword|String|no|Proxy password.|
 |userAgent|String|no|Browser's User-Agent which is used in emulation. It is required that you use a signature of a modern browser, otherwise Google will ask you to "update your browser".|
@@ -32,12 +32,12 @@ If the proxy is authorized by IP, then be sure to add **116.203.55.208** to the 
 
 **Address**: <https://api.capmonster.cloud/createTask>
 
-### NoCaptchaTask
+### RecaptchaV2Task
 ```json
 {
   "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
   "task": {
-    "type":"NoCaptchaTask",
+    "type":"RecaptchaV2Task",
     "websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
     "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
     "proxyType":"http",
@@ -50,12 +50,12 @@ If the proxy is authorized by IP, then be sure to add **116.203.55.208** to the 
 }
 ```
 
-### NoCaptchaTaskProxyless
+### RecaptchaV2TaskProxyless
 ```json
 {
   "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
   "task": {
-    "type":"NoCaptchaTaskProxyless",
+    "type":"RecaptchaV2TaskProxyless",
     "websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
     "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"
   }

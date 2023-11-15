@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-sidebar_label: ReCaptchaV3Task
+sidebar_label: ReCaptchaV3TaskProxyless
 ---
 
 

@@ -1,9 +1,9 @@
 ﻿---
 sidebar_position: 10
-sidebar_label: Image to Text
+sidebar_label: ImageToTextTask
 ---
 
-# ImageToTextTask : решение обычной капчи с текстом
+# ImageToTextTask
 ## **Структура объекта**
 
 |**Параметр**|**Тип**|**Обязательный**|**Возможные значения**|**Описание**|

@@ -1,9 +1,9 @@
 ﻿---
 sidebar_position: 3
-sidebar_label: FunCaptcha
+sidebar_label: FunCaptchaTask
 ---
 
-# FunCaptchaTask : solving FunCaptcha
+# FunCaptchaTask
 This type solving task FunCaptcha. Your app submits website address, public key and proxy.
 
 The result of solving task is a token for the submit form.

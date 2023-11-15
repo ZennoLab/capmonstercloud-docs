@@ -3,7 +3,7 @@ sidebar_position: 2
 sidebar_label: ReCaptchaV2EnterpriseTask
 ---
 
-# RecaptchaV2EnterpriseTask : solving Google ReCaptcha Enterprise
+# RecaptchaV2EnterpriseTask
 The object contains data for Google reCAPTCHA Enterprise solving task. To provide solid universality for solving this type of task we have reproduce every piece of environment used for an automation task you plan to complete. Including, proxy access, browser's user-agent, cookies (optionally). 
 
 This type of captcha might be solved a bit longer than usual image captcha, but this issue is compensated by the fact that g-captcha-response value we send to you is valid for the next 60 seconds after we solves your ReCaptcha2.

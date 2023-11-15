@@ -1,10 +1,10 @@
 ---
 sidebar_position: 13
-sidebar_label: Yandex SmartCaptcha Task
+sidebar_label: YandexSmartCaptchaTask
 draft: true
 ---
 
-# Yandex SmartCaptcha
+# YandexSmartCaptchaTask
 
 :::info
 Please note that this captcha is divided into two types: 

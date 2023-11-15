@@ -1,9 +1,9 @@
 ﻿---
 sidebar_position: 0
-sidebar_label: RecaptchaV2
+sidebar_label: RecaptchaV2Task
 ---
 
-# NoCaptchaTask : решение каптчи Google
+# RecaptchaV2Task
 Объект содержит данные о задаче на решение ReCaptcha2 от Google. Для обеспечения универсальности решения этого вида каптчи нам необходимо использовать все данные, которые Вы используете во время автоматизации заполнения формы на целевом сайте, включая прокси, user-agent браузера и cookies. Это позволит избежать любых проблем при изменении Google кода своей каптчи.
 
 Каптча может решаться довольно долго по сравнению с обычной каптчей, но это компенсируется тем, что полученный g-captcha-response действует еще 60 секунд после решения каптчи.
@@ -16,13 +16,13 @@ sidebar_label: RecaptchaV2
 
 |**Параметр**|**Тип**|**Обязательный**|**Значение**|
 | :- | :- | :- | :- |
-|type|String|да|**NoCaptchaTaskProxyless** или **NoCaptchaTask (При использовании прокси)**|
+|type|String|да|**RecaptchaV2TaskProxyless** или **RecaptchaV2Task (При использовании прокси)**|
 |websiteURL|String|да|Адрес страницы, на которой решается каптча|
 |websiteKey|String|да|Ключ-идентификатор ReCaptcha2 на целевой странице.<br />`<div class="g-recaptcha" data-sitekey="ВОТ_ЭТОТ"></div>`|
 |recaptchaDataSValue|String|нет|Некоторые реализации виджета ReCaptcha2 могут содержать дополнительный параметр "data-s" в div'е ReCaptcha2, который является одноразовым токеном и должен собираться каждый раз при решении ReCaptcha2.<br />`<div class="g-recaptcha" data-sitekey="some sitekey" data-s="ВОТ_ЭТОТ"></div>`|
-|proxyType|String|да (При использовании **NoCaptchaTask**)|**http** - обычный http/https прокси<br />**https** - попробуйте эту опцию только если "http" не работает (требуется для некоторых кастомных прокси)<br />**socks4** - socks4 прокси<br />**socks5** - socks5 прокси|
-|proxyAddress|String|да (При использовании **NoCaptchaTask**)|<p>IP адрес прокси IPv4/IPv6. Не допускается:</p><p>- использование имен хостов</p><p>- использование прозрачных прокси (там где можно видеть IP клиента)</p><p>- использование прокси на локальных машинах</p>|
-|proxyPort|Integer|да (При использовании **NoCaptchaTask**)|Порт прокси|
+|proxyType|String|да (При использовании **RecaptchaV2Task**)|**http** - обычный http/https прокси<br />**https** - попробуйте эту опцию только если "http" не работает (требуется для некоторых кастомных прокси)<br />**socks4** - socks4 прокси<br />**socks5** - socks5 прокси|
+|proxyAddress|String|да (При использовании **RecaptchaV2Task**)|<p>IP адрес прокси IPv4/IPv6. Не допускается:</p><p>- использование имен хостов</p><p>- использование прозрачных прокси (там где можно видеть IP клиента)</p><p>- использование прокси на локальных машинах</p>|
+|proxyPort|Integer|да (При использовании **RecaptchaV2Task**)|Порт прокси|
 |proxyLogin|String|нет|Логин прокси-сервера|
 |proxyPassword|String|нет|Пароль прокси-сервера|
 |userAgent|String|нет|User-Agent браузера, используемый в эмуляции. Необходимо использовать подпись современного браузера, иначе Google будет возвращать ошибку, требуя обновить браузер.|
@@ -32,12 +32,12 @@ sidebar_label: RecaptchaV2
 
 **Адрес** <https://api.capmonster.cloud/createTask>
 
-### NoCaptchaTask
+### RecaptchaV2Task
 ```json
 {
   "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
   "task": {
-    "type":"NoCaptchaTask",
+    "type":"RecaptchaV2Task",
     "websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
     "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
     "proxyType":"http",
@@ -50,12 +50,12 @@ sidebar_label: RecaptchaV2
 }
 ```
 
-### NoCaptchaTaskProxyless
+### RecaptchaV2TaskProxyless
 ```json
 {
   "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
   "task": {
-    "type":"NoCaptchaTaskProxyless",
+    "type":"RecaptchaV2TaskProxyless",
     "websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
     "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"
   }
