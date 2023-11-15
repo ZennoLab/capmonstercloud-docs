@@ -42,7 +42,7 @@ You have exceeded the limit of requests with the wrong api key, check the correc
 
 ### `INCORRECT METHOD`
 API error code: `ERROR_NO_SUCH_METHOD` <br />
-Incorrect [captcha type](/en/docs/captchas) (value of the «type» parameter).
+Incorrect [captcha type](/docs/captchas) (value of the «type» parameter).
 
 ### `REQUEST LIMIT EXCEEDED`
 API error code: `ERROR_TOO_MUCH_REQUESTS` <br />
