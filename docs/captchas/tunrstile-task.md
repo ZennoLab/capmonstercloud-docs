@@ -183,3 +183,122 @@ Cloudflare challenge может выглядеть по-разному.
 - На странице находится два похожих тега `<script>`, которые создают новое значение в объекте `window`:
 
 ![](gif.gif) 
+
+<details>
+        <summary>Пример реализации решения с помощью Selenium на Node.js</summary>
+
+```js
+
+const { Builder } = require('selenium-webdriver');
+const chrome = require('selenium-webdriver/chrome');
+
+(async function example() {
+  const options = new chrome.Options();
+  options.addArguments('--auto-open-devtools-for-tabs')
+
+  const driver = new Builder()
+    .forBrowser('chrome')
+    .setChromeOptions(options)
+    .build();
+
+  try {
+    driver.executeScript(`
+    window.turnstile = new Proxy(window.turnstile, {
+      get(target, prop) {
+        if (prop === 'render') {
+          return function(a, b) {
+            let p = {
+              type: "TurnstileTaskProxyless",
+              websiteKey: b.sitekey,
+              websiteURL: window.location.href,
+              data: b.cData,
+              pagedata: b.chlPageData,
+              action: b.action,
+              userAgent: navigator.userAgent
+          }
+          
+          console.log(JSON.stringify(p))
+          window.params = p;
+          window.turnstileCallback = b.callback;
+            return target.render.apply(this, arguments);
+          }
+        }
+        return target[prop];
+      }
+    });
+    `)
+
+    driver.get('SITE WITH CAPTCHA');
+    
+
+    const params = await driver.executeScript(`
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve(window.params)
+        }, 2000)
+      })
+    `);
+
+    if (params) {
+      const data = {
+        clientKey: 'API KEY',
+        task: {
+          type: 'TurnstileTaskProxyless',
+          websiteURL: params.websiteURL,
+          websiteKey: params.websiteKey,
+          data: params.data,
+          action: params.action
+        }
+      }
+
+      const createResult = await fetch('https://api.capmonster.cloud/createTask', {
+        method: 'post',
+        body: JSON.stringify(data)
+      });
+
+      const createTaskResult = await createResult.json()
+
+      if (createTaskResult.taskId) {
+        const asyncDelay = (timeout) =>
+          new Promise(resolve => {
+              setTimeout(() => {
+                  resolve();
+              }, timeout);
+          });
+        
+        const getTaskResult = async (taskId) => {
+          const taskResult = await fetch('https://api.capmonster.cloud/getTaskResult', {
+            method: 'post',
+            body: JSON.stringify({
+              "clientKey":"API KEY",
+              "taskId": createTaskResult.taskId
+            })
+          });
+          const taskResponse = await taskResult.json();
+          if (taskResponse.status === 'processing') {
+            await asyncDelay(5000);
+            return await getTaskResult(taskId)
+          }
+          return taskResponse;
+        }
+       
+        const taskRes = await getTaskResult(createTaskResult.taskId)
+
+        if (taskRes.solution) {
+          await driver.executeScript(`
+            window.turnstileCallback(${taskRes.solution.token});
+          `);
+        }
+      }
+      
+    }
+
+    //DO SOMETHING
+  } finally {
+    await driver.quit();
+  }
+})();
+
+```
+
+</details>
