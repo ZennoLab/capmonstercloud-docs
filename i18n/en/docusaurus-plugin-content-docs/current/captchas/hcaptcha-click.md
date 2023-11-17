@@ -3,7 +3,7 @@ sidebar_position: 8
 sidebar_label: ComplexImageTask HCaptcha
 ---
 
-# **ComplexImageTask HCaptcha**
+# ComplexImageTask HCaptcha
 The object contains data about the task for solving hCaptcha. 
 
 ## **Image example (first type)**
