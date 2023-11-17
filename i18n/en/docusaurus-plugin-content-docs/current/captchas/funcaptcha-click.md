@@ -12,8 +12,8 @@ The object contains data about the FunCaptcha solving.
 | :- | :- | :- | :- | :- |
 |type|String|yes|ComplexImageTask|Specifies the type of task object.|
 |class|String|yes|funcaptcha|Specifies the class of task object.|
-|imageUrls|Array|yes (if imagesBase64 is not filled)|[ “[https://i.postimg.cc/s2ZDrHXy/fc1.jpg](https://i.postimg.cc/s2ZDrHXy/fc1.jpg)”, … ]|List with image addresses. Maximum one url per request!|
-|imagesBase64|Array|yes (if imageUrls is not filled)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, … ]|List with images in base64 format. Maximum one element per request!|
+|imageUrls|Array|yes (if imagesBase64 is not filled)|[ “[https://i.postimg.cc/s2ZDrHXy/fc1.jpg](https://i.postimg.cc/s2ZDrHXy/fc1.jpg)”, … ]|[Single image](https://i.postimg.cc/s2ZDrHXy/fc1.jpg) (in an array).|
+|imagesBase64|Array|yes (if imageUrls is not filled)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, … ]|[Single image](https://i.postimg.cc/s2ZDrHXy/fc1.jpg) in base64 format (in an array).|
 |metadata.Task|String|yes|`Pick the image that is the correct way up` and others|Task text (<u>in English</u>).|
 |userAgent|String|no|-|The browser User Agent used when uploading images if links were passed to imageUrls. You should use a modern browser signature or Google will return an error asking you to update your browser.|
 |websiteURL|String|no|-|URL of the page where the captcha is solved.|
