@@ -22,7 +22,7 @@ The object contains data about the task for solving ReCaptcha2 from Google.
 
 ## **Request example**
 
-:::info Wethod
+:::info Method
 <https://api.capmonster.cloud/createTask>
 :::
 ```json
@@ -53,7 +53,7 @@ The object contains data about the task for solving ReCaptcha2 from Google.
 }
 ```
 ### **Getting a result**
-:::info Wethod
+:::info Method
 <https://api.capmonster.cloud/getTaskResult>
 :::
 Use the [getTaskResult](../api/methods/get-task-result.md) method to get the captcha solution. Depending on the system load, you will receive a response after a time ranging from 300ms to 6s.
