@@ -20,8 +20,7 @@ If the proxy is authorized by IP, then be sure to add **116.203.55.208** to the 
 |websiteURL|String|yes|Address of a webpage with FunCaptcha.|
 |funcaptchaApiJSSubdomain|String|no|A special subdomain of funcaptcha.com, from which the JS captcha widget should be loaded. It can be found in an element named `fc-token` - the value after the `surl`. It is required if you use a domain other than `client-api.arkoselabs.com`.|
 |websitePublicKey|String|yes|FunCaptcha website key. `<div id="funcaptcha" data-pkey="THAT_ONE"></div>`|
-|data|String|no|Additional parameter that may be required by FunCaptcha implementation. 
-Use this property to send "blob" value as a stringified array. See example how it may look like. {"\blob\":\"HERE_COMES_THE_blob_VALUE\"}*|
+|data|String|no|Additional parameter that may be required by FunCaptcha implementation.<br/> Use this property to send "blob" value as a stringified array. See example how it may look like: {"\blob\":\"HERE_COMES_THE_blob_VALUE\"}*|
 |proxyType|String|yes (if using **FunCaptchaTask**)| Type of the proxy<br/> **http** - usual http/https proxy;<br/>**https** - try this only if "http" doesn't work (required by some custom proxy servers);<br />**socks4** - socks4 proxy;<br />**socks5** - socks5 proxy.|
 |proxyAddress|String|yes (If using **FunCaptchaTask**)|<p>Proxy IP address IPv4/IPv6. Not allowed to use:</p><p>- host names instead of IPs</p><p>- transparent proxies (where client IP is visible)</p><p>- proxies from local networks (192.., 10.., 127...).</p>|
 |proxyPort|Integer|yes (If using **FunCaptchaTask**)|Proxy port.|
