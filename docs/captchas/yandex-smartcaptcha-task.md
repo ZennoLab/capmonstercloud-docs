@@ -75,7 +75,7 @@ draft: true
 **Создание запроса:**
 
 :::info Метод
-<https://api.capmonster.cloud/createTask>
+`<https://api.capmonster.cloud/createTask>`
 :::
 
 ```json
@@ -134,7 +134,7 @@ draft: true
 **Создание запроса:**
 
 :::info Метод
-<https://api.capmonster.cloud/createTask>
+`<https://api.capmonster.cloud/createTask>`
 :::
 
 ```json
@@ -216,7 +216,7 @@ draft: true
 
 После выполения кубика в переменной проекта “html“ будет находиться содержимое страницы. Нам нужно закодировать его в base64. Сделать это можно с помощью короткого C# сниппета:
 
-```C#
+```csharp
 var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(project.Variables["html"].Value);
 return System.Convert.ToBase64String(plainTextBytes);
 ```
@@ -228,7 +228,7 @@ return System.Convert.ToBase64String(plainTextBytes);
 
 Теперь закодированная страница находится в переменной “encodedHtml“. 
 
-Текущий websiteUrl можно взять с помощью встроенного макроса {-Page.Url-}.
+Текущий websiteUrl можно взять с помощью встроенного макроса `{-Page.Url-}`.
 
 **Шаг 2. Создание запроса на решение капчи**
 

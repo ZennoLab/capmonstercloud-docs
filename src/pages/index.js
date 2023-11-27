@@ -6,6 +6,7 @@ import Links from '@site/src/components/Links'
 import MainHero from '../components/MainHero';
 import Prices from '../components/Prices';
 import AnnounceBar from '../components/AnnounceBar';
+import Head from '@docusaurus/Head';
 
 export default function Home() {
   const {siteConfig} = useDocusaurusContext();
@@ -21,6 +22,10 @@ export default function Home() {
       title={`Hello from ${siteConfig.title}`}
       description="Description will go into a meta tag in <head />">
       <main>
+        <Head>
+        <meta name="google-site-verification" content="LTaYcyNwaZKXhoWI-eqaxSJ1IX6zF3NJrjACTp41Tyg" />
+
+        </Head>
         <AnnounceBar />
         <MainHero />
         <Libraries />

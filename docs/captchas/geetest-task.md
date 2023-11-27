@@ -46,7 +46,7 @@ V4 (captcha_id = gt)
 ### **Пример запроса**
 
 :::info Метод
-<https://api.capmonster.cloud/createTask>
+`<https://api.capmonster.cloud/createTask>`
 :::
 
 ### GeeTestTask (С использованием прокси)
@@ -94,11 +94,12 @@ V4 (captcha_id = gt)
 
 ### **Получение результата**
 :::info Метод
-<https://api.capmonster.cloud/getTaskResult>
+`<https://api.capmonster.cloud/getTaskResult>`
 :::
 Используйте метод [getTaskResult](../api/methods/get-task-result.md) чтобы получить решение GeeTest. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 10 с до 30 с.
 
-<table><tr><th><b>Свойство</b></th><th><b>Тип</b></th><th><b>Описание</b></th></tr>
+<table>
+<tr><th><b>Свойство</b></th><th><b>Тип</b></th><th><b>Описание</b></th></tr>
 <tr><td>challenge</td><td>Строка</td><td rowspan="3">Все три параметра необходимы при отправке формы на целевом сайте.</td></tr>
 <tr><td>validate</td><td>Строка</td></tr>
 <tr><td>seccode</td><td>Строка</td></tr>
@@ -121,7 +122,7 @@ V4 (captcha_id = gt)
 ## **GeeTest V4**
 ### **Пример запроса**
 :::info Метод
-<https://api.capmonster.cloud/createTask>
+`<https://api.capmonster.cloud/createTask>`
 :::
 
 ### GeeTestTask (С использованием прокси)
@@ -173,11 +174,12 @@ V4 (captcha_id = gt)
 
 ### **Получение результата**
 :::info Метод
-<https://api.capmonster.cloud/getTaskResult>
+`<https://api.capmonster.cloud/getTaskResult>`
 :::
 Используйте метод [getTaskResult](../api/methods/get-task-result.md) чтобы получить решение GeeTest. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 10 с до 30 с.
 
-<table><tr><th><b>Свойство</b></th><th><b>Тип</b></th><th><b>Описание</b></th></tr>
+<table>
+<tr><th><b>Свойство</b></th><th><b>Тип</b></th><th><b>Описание</b></th></tr>
 <tr><td>captcha_id</td><td>Строка</td><td rowspan="5">Все пять параметров необходимы при отправке формы на целевом сайте.<br />input[name=captcha_id]<br />input[name=lot_number]<br />input[name=pass_token]<br />input[name=gen_time]<br />input[name=captcha_output]</td></tr>
 <tr><td>lot_number</td><td>Строка</td></tr>
 <tr><td>pass_token</td><td>Строка</td></tr>

@@ -10,7 +10,7 @@ This method creates a task for solving selected captcha type. In the parameters 
 
 :::info Method address
 
-## <https://api.capmonster.cloud/createTask> 
+## `<https://api.capmonster.cloud/createTask>`
 
 Request format: `JSON POST`
 :::

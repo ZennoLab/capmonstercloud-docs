@@ -60,8 +60,9 @@ Also supported paths:
 ### **Response example**
 
 <details>
-    <summary>Response WITHOUT error
-</summary>
+  <summary>
+    Response WITHOUT error
+  </summary>
 
 ```json
 {
@@ -73,8 +74,9 @@ Also supported paths:
 </details>
 
 <details>
-    <summary>Response WITH an error
-</summary>
+  <summary>
+    Response WITH an error
+  </summary>
 
 ```json
 {

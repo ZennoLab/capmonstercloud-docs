@@ -31,7 +31,7 @@ The extension only works with the Chromium browser!
 6. In the extension window that opens, enter the API key from your CapMonster Cloud personal account.
 ## **Method #2: Installation via the Chrome Web Store.**
 1. Open ProjectMaker;
-2. Go to the extension page <https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=en>;
+2. Go to the extension page `<https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=en>`;
 3. Click the “Install” button and install the extension;
 4. Add “Activate extension” action;
 

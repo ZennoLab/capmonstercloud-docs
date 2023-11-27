@@ -23,7 +23,7 @@ draft: true
 ## **Пример запроса**
 
 :::info Метод
-<https://api.capmonster.cloud/createTask>
+`<https://api.capmonster.cloud/createTask>`
 :::
 
 ```json
@@ -109,7 +109,7 @@ draft: true
 
 Для подготовки задания к отправке и получении картинки в base64 можно воспользоваться следующим C# сниппетом: <br/>
 
-```C#
+```csharp
 // Найдём элемент с заданием(выделен нижней красной рамкой на скриншоте выше)
 HtmlElement taskContainer = instance.ActiveTab.FindElementByXPath("//div[@class=\"AdvancedCaptcha-SilhouetteTask\"]", 0);
 // Установим ему соответствующий стиль
@@ -131,7 +131,7 @@ return image.DrawPartToBitmap(0, 0, 300, 220, false);
 
 После получения результата распознавания можно воспользоваться следующим C# сниппетом для прокликивания координат: 
 
-```C#
+```csharp
 // Получаем значение переменной, в которой хранится результат
 // от /getTaskResult
 string jsonStr = project.Variables["cmcloudTaskResult"].Value;
@@ -168,7 +168,7 @@ instance.ActiveTab.FullEmulationMouseClick("left", "click");
 
 Например, таким образом можно получить картинку с заданием в playwright:
 
-```C#
+```csharp
 // Установить нужный стиль элементу
 const taskTextContainer = await page.locator('//div[@class="AdvancedCaptcha-SilhouetteTask"]');
 await taskTextContainer.evaluate((element) => {
@@ -182,7 +182,7 @@ const imageWithExtraStuff = await screenshotContainer.screenshot({ scale: "css",
 
 После картинку нужно обрезать. Для этого воспользуемся библиотекой [sharp](https://www.npmjs.com/package/sharp):
 
-```C#
+```csharp
 const sharpImageFull = sharp(imageWithExtraStuff);
 const sharpImageCropped = sharpImageFull
   .trim({ background: "#FFFFFF", threshold: 0 })

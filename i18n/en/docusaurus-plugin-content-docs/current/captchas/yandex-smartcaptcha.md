@@ -23,7 +23,7 @@ The object contains data about the Yandex SmartCaptcha task solving.
 ## **Request example**
 
 :::info Method
-<https://api.capmonster.cloud/createTask>
+`<https://api.capmonster.cloud/createTask>`
 :::
 
 ```json
@@ -109,7 +109,7 @@ We need to prepare a task, take a screenshot of the element and send it to CapMo
 
 To prepare a task for sending and receiving an image in base64, you can use the following C# snippet:  <br/>
 
-```C#
+```csharp
 // Let's find the element with the task (highlighted by the lower red frame in the screenshot above)
 HtmlElement taskContainer = instance.ActiveTab.FindElementByXPath("//div[@class=\"AdvancedCaptcha-SilhouetteTask\"]", 0);
 // Set the appropriate style for it
@@ -131,7 +131,7 @@ If you save the result of executing the action into the *imageBase64* variable, 
 
 After receiving the result, you can use the following C# snippet to click on the coordinates:  
 
-```C#
+```csharp
 // Getting the value of the variable where the result is placed
 // from /getTaskResult
 string jsonStr = project.Variables["cmcloudTaskResult"].Value;
@@ -169,7 +169,7 @@ Most automation frameworks (Selenium/Puppeteer/Playwright, etc.) provide options
 
 For example, this way you can get an image with a task in playwright:
 
-```C#
+```csharp
 // Set the necessary style to the element
 const taskTextContainer = await page.locator('//div[@class="AdvancedCaptcha-SilhouetteTask"]');
 await taskTextContainer.evaluate((element) => {
@@ -183,7 +183,7 @@ const imageWithExtraStuff = await screenshotContainer.screenshot({ scale: "css",
 
 Afterwards you need to crop the picture. To do this, you can use the [sharp library](https://www.npmjs.com/package/sharp):
 
-```C#
+```csharp
 const sharpImageFull = sharp(imageWithExtraStuff);
 const sharpImageCropped = sharpImageFull
   .trim({ background: "#FFFFFF", threshold: 0 })

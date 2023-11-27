@@ -18,7 +18,7 @@ We support API of manual recognition services:
 
 :::info Method address
 
-## <https://api.capmonster.cloud> 
+## `<https://api.capmonster.cloud>`
 
 Request format: `JSON POST`.
 Response is always in the `JSON` format.

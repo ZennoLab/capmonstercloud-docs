@@ -14,7 +14,7 @@ If the proxy is authorized by IP, then be sure to add 116.203.55.208 to the whit
 
 ## **Object structure**
 
-|**Parameter**|**Type**|**Required**|**Value**|
+<!-- |**Parameter**|**Type**|**Required**|**Value**|
 | :- | :- | :- | :- |
 |type|String|yes|**RecaptchaV2EnterpriseTaskProxyless** or **RecaptchaV2EnterpriseTask (When using proxy)**.|
 |websiteURL|String|yes|Address of a webpage with Google ReCaptcha Enterprise.|
@@ -27,7 +27,7 @@ If the proxy is authorized by IP, then be sure to add 116.203.55.208 to the whit
 |proxyLogin|String|no|Proxy login.|
 |proxyPassword|String|no|Proxy password.|
 |userAgent|String|no|Browser's User-Agent which is used in emulation. It is required that you use a signature of a modern browser, otherwise Google will ask you to "update your browser".|
-|cookies|String|no|<p>Additional cookies which we must use during interaction with target page or Google.</p><p>**Format**: cookiename1=cookievalue1; cookiename2=cookievalue2</p>|
+|cookies|String|no|<p>Additional cookies which we must use during interaction with target page or Google.</p><p>**Format**: cookiename1=cookievalue1; cookiename2=cookievalue2</p>| -->
 
 For `enterprisePayload` - before calling it, you need to replace the `grecaptcha.enterprise.render` function with your own and take the value from its parameters. The function exists after loading the script, and the captcha is usually rendered immediately or based on a page event. If the captcha is rendered with the current field `s` on the client, then the token will most likely not be accepted.
 The original function can be called without the `s` field.
@@ -82,7 +82,7 @@ Object.defineProperty(window, 'grecaptcha', {
 ## **Request example**
 
 :::info Method
-<https://api.capmonster.cloud/createTask>
+`<https://api.capmonster.cloud/createTask>`
 :::
 
 ### RecaptchaV2EnterpriseTask (with proxy)
@@ -132,7 +132,7 @@ Object.defineProperty(window, 'grecaptcha', {
 
 ## **Getting the result**
 :::info Method
-<https://api.capmonster.cloud/getTaskResult>
+`<https://api.capmonster.cloud/getTaskResult>`
 :::
 
 Use the [getTaskResult](../api/methods/get-task-result.md) method to request answer for ReCaptcha2. You will get response within 10 - 80 sec period depending on service workload.

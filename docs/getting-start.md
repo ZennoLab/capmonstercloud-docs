@@ -20,7 +20,7 @@ sidebar_position: 0
 
 :::info Адрес метода
 
-## <https://api.capmonster.cloud> 
+## `<https://api.capmonster.cloud>`
 
 Формат запроса: `JSON POST`.
 Формат ответа всегда в формате `JSON`.

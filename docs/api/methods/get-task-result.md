@@ -9,7 +9,7 @@ sidebar_label: getTaskResult
 
 :::info Адрес метода
 
-## <https://api.capmonster.cloud/getTaskResult/> 
+## `<https://api.capmonster.cloud/getTaskResult/>`
 
 формат запроса: `JSON POST`
 :::
