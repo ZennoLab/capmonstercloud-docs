@@ -43,8 +43,14 @@ const config = {
           showLastUpdateTime: true,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/ZennoLab/capmonstercloud-docs/tree/dev',
+          editUrl: (params) => {
+            const  {
+              versionDocsDirPath, 
+              docPath,
+              locale 
+            } = params;
+            return locale === 'ru' ? `https://github.com/ZennoLab/capmonstercloud-docs/tree/dev/${versionDocsDirPath}/${docPath}` : `https://github.com/ZennoLab/capmonstercloud-docs/tree/dev/i18n/en/docusaurus-plugin-content-docs/current/${docPath}`
+          }
         },
         blog: false,
         // blog: {
