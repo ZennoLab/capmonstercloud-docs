@@ -10,7 +10,7 @@ sidebar_label: createTask
 
 :::info Адрес метода
 
-## <https://api.capmonster.cloud/createTask> 
+## `<https://api.capmonster.cloud/createTask>`
 
 формат запроса: `JSON POST`
 :::
@@ -76,7 +76,9 @@ import CodeBlock from '@theme/CodeBlock';
 
 
   <details>
-    <summary>Задача решения обычной капчи с изображением</summary>
+    <summary>
+      Задача решения обычной капчи с изображением
+    </summary>
 
 ```json
     {
@@ -91,7 +93,9 @@ import CodeBlock from '@theme/CodeBlock';
   </details>
 
   <details>
-    <summary>Задача решения ReCaptcha2</summary>
+    <summary>
+      Задача решения ReCaptcha2
+    </summary>
 
 ```json
     {

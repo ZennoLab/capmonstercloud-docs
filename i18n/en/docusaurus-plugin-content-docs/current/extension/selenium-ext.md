@@ -13,7 +13,7 @@ In this tutorial, we will show you how to integrate the browser extension using 
 
 2. Install the required packages using npm:
 
-```shell
+```bash
 npm install selenium-webdriver
 ```
 ## Step 2: Changing extension parameters
@@ -84,7 +84,7 @@ driver.findElement(By.xpath("//button[@id='my-button']")).click();
 
 To run our automatic script, which will launch the browser and perform the actions mentioned above, you need to write in the console:
 
-```
+```bash
 node index.js
 ```
 

@@ -19,7 +19,7 @@ sidebar_label: ReCaptchaV2EnterpriseTask
 |type|String|да|**RecaptchaV2EnterpriseTaskProxyless** или **RecaptchaV2EnterpriseTask (При использовании прокси)**|
 |websiteURL|String|да|Адрес страницы, на которой решается капча|
 |websiteKey|String|да|Ключ-идентификатор reCAPTCHA на целевой странице.<br />`<div class="g-recaptcha" data-sitekey="ВОТ_ЭТОТ"></div>`<br/>или `<iframe title="reCAPTCHA" src="...;k=6LdIFr0ZAAAAAO3vz0O0OQrtAefzdJcWQM2TMYQH&amp;...` , где `6LdIFr0ZAAAAAO3vz0O0OQrtAefzdJcWQM2TMYQH` - `websiteKey`|
-|enterprisePayload|String|нет|Некоторые реализации виджета reCAPTCHA Enterprise могут содержать дополнительное поле s в структуре, которая передаётся в метод grecaptcha.enterprise.render вместе с sitekey.Например: `2JvUXHNTnZl1Jb6WEvbDyBMzrMTR7oQ78QRhBcG07rk9bpaAaE0LRq1ZeP5NYa0N` из: <pre lang="js" ><code>grecaptcha.enterprise.render("some-div-id", {<br /> sitekey: "6Lc_aCMTAAAAABx7u2N0D1XnVbI_v6ZdbM6rYf16"<br/> theme: "dark"<br/> s: "2JvUXHNTnZl1Jb6WEvbDyB...ugQA"<br/>});</code></pre>|
+|enterprisePayload|String|нет|Некоторые реализации виджета reCAPTCHA Enterprise могут содержать дополнительное поле s в структуре, которая передаётся в метод grecaptcha.enterprise.render вместе с sitekey.Например: `2JvUXHNTnZl1Jb6WEvbDyBMzrMTR7oQ78QRhBcG07rk9bpaAaE0LRq1ZeP5NYa0N` из: `<pre lang="js" ><code>grecaptcha.enterprise.render("some-div-id", {<br /> sitekey: "6Lc_aCMTAAAAABx7u2N0D1XnVbI_v6ZdbM6rYf16"<br/> theme: "dark"<br/> s: "2JvUXHNTnZl1Jb6WEvbDyB...ugQA"<br/>});</code></pre>`|
 |apiDomain|String|нет|<p>Адрес домена с которого загружать reCAPTCHA Enterprise. Например:</p><p>- [www.google.com](http://www.google.com)</p><p>- [www.recaptcha.net](http://www.recaptcha.net)</p><p>Не используйте параметр, если не знаете зачем он нужен.</p>|
 |proxyType|String|да (При использовании **RecaptchaV2EnterpriseTask**)|**http** - обычный http/https прокси<br />**https** - попробуйте эту опцию только если "http" не работает (требуется для некоторых кастомных прокси)<br />**socks4** - socks4 прокси<br/>**socks5** - socks5 прокси|
 |proxyAddress|String|да (При использовании **RecaptchaV2EnterpriseTask**)|<p>IP адрес прокси IPv4/IPv6. Не допускается:</p><p>- использование имен хостов</p><p>- использование прозрачных прокси (там где можно видеть IP клиента)</p><p>- использование прокси на локальных машинах</p>|
@@ -82,7 +82,7 @@ Object.defineProperty(window, 'grecaptcha', {
 ## **Пример запроса**
 
 :::info Метод
-<https://api.capmonster.cloud/createTask>
+`<https://api.capmonster.cloud/createTask>`
 :::
 
 ### RecaptchaV2EnterpriseTask (С использованием прокси)
@@ -132,7 +132,7 @@ Object.defineProperty(window, 'grecaptcha', {
 
 ## **Получение результата**
 :::info Метод
-<https://api.capmonster.cloud/getTaskResult>
+`<https://api.capmonster.cloud/getTaskResult>`
 :::
 
 Используйте метод [getTaskResult](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/557078/getTaskResult) чтобы получить решение ReCaptcha2. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 10 с до 80 с.

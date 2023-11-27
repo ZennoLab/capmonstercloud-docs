@@ -30,7 +30,7 @@ sidebar_label: RecaptchaV2Task
 
 ## **Пример запроса**
 
-**Адрес** <https://api.capmonster.cloud/createTask>
+**Адрес** `<https://api.capmonster.cloud/createTask>`
 
 ### RecaptchaV2Task
 ```json

@@ -30,7 +30,7 @@ If the proxy is authorized by IP, then be sure to add **116.203.55.208** to the 
 
 ## **Request example**
 
-**Address**: <https://api.capmonster.cloud/createTask>
+**Address**: `<https://api.capmonster.cloud/createTask>`
 
 ### RecaptchaV2Task
 ```json
