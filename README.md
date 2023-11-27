@@ -1,8 +1,11 @@
 <p align="center"><img src="https://github.com/ZennoLab/capmonstercloud-docs/blob/master/static/img/logo_docs.svg"></p>
 
+
 # Documentation for Capmonster Cloud
 
 This website is built using [Docusaurus 3](https://docusaurus.io/), a modern static website generator.
+
+--- 
 
 ### Installation
 
@@ -13,7 +16,7 @@ or
 ```bash
 npm install
 ```
-
+---
 ### Local Development
 
 ```bash
@@ -28,7 +31,7 @@ If you want to start Russian, try
 ```bash
 yarn start -- --locale ru
 ```
-
+---
 ### Build
 
 ```bash
@@ -37,12 +40,12 @@ yarn build
 
 This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
-After build you can view full generated site with ru and en version, just run
+After build you can view full generated site with `ru` and `en` version, just run
 
 ```bash
 yarn serve
 ```
-
+---
 
 ### Structure
 
