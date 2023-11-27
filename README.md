@@ -5,9 +5,7 @@
 
 This website is built using [Docusaurus 3](https://docusaurus.io/), a modern static website generator.
 
---- 
-
-### Installation
+## Installation
 
 ```bash
 yarn
@@ -16,8 +14,8 @@ or
 ```bash
 npm install
 ```
----
-### Local Development
+
+## Local Development
 
 ```bash
 yarn start
@@ -31,8 +29,8 @@ If you want to start Russian, try
 ```bash
 yarn start -- --locale ru
 ```
----
-### Build
+
+## Build
 
 ```bash
 yarn build
@@ -45,9 +43,8 @@ After build you can view full generated site with `ru` and `en` version, just ru
 ```bash
 yarn serve
 ```
----
 
-### Structure
+## Structure
 
 Russian documentation located at `/docs`
 
