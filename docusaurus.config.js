@@ -66,10 +66,6 @@ const config = {
         googleTagManager: {
           containerId: 'GTM-PZCSDCS',
         },
-        gtag: {
-          trackingID: 'GTM-PZCSDCS',
-          anonymizeIP: true,
-        },
       }),
     ],
   ],
