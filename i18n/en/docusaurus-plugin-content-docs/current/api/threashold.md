@@ -31,11 +31,11 @@ In order to have a guaranteed correct result, you can also pass the parameter  *
 ---
 In this case, if the parameter is equal to 70, then only answers in which our system is more than 70% sure will be returned, otherwise will be returned error: “**ERROR_CAPTCHA_UNSOLVABLE**”
 
-Another way to pass a threshold is to use only the field to specify the ApiKey. You can add threshold information in the following format: “{apikey}\_\_recognizingthreshold\_{value}”
+Another way to pass a threshold is to use only the field to specify the ApiKey. You can add threshold information in the following format: `{apikey}__recognizingthreshold_{value}`
 
 For example, “00f87cb0f01330d33709ce3339ad0c8c\_\_recognizingthreshold\_70”
 
-You can also enter the name of the module with the key in the following format: “{apikey}\_\_module-name”.
+You can also enter the name of the module with the key in the following format: `{apikey}__module-name`.
 
 The key, the confidence threshold and the name of the module are indicated with the underscore “\_\_”
 

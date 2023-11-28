@@ -19,7 +19,7 @@ sidebar_label: ImageToTextTask
 ## **Request example**
 
 :::info Method
-<https://api.capmonster.cloud/createTask>
+`<https://api.capmonster.cloud/createTask>`
 :::
 ```json
 {
@@ -42,7 +42,7 @@ sidebar_label: ImageToTextTask
 
 ## **Getting the result**
 :::info Method
-<https://api.capmonster.cloud/getTaskResult>
+`<https://api.capmonster.cloud/getTaskResult>`
 :::
 Use the [getTaskResult](../api/methods/get-task-result.md) method to get the captcha solution. Depending on the system load, you will receive an answer within an interval from 300ms to 6s
 

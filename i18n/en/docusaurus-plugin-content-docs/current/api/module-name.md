@@ -5,7 +5,7 @@ sidebar_position: 5
 # Passing module name
 ## How to pass module name to CapMonster Cloud, using ApiKey field only
 
-In order to send to CapMonsterCloud information about the module that will recognize your captcha, using only the field to specify ApiKey, you can add the module name to the key in the following format: “{apikey}__moduleName”
+In order to send to CapMonsterCloud information about the module that will recognize your captcha, using only the field to specify ApiKey, you can add the module name to the key in the following format: `{apikey}__moduleName`
 
 For example, “00f87cb0f01330d33709ce3339ad0c8c__solvemedia” (**!important**, separate the API key and module name with a **double underscore**)
 

@@ -7,7 +7,7 @@ sidebar_label: getBalance
 
 :::info Method address
 
-## <https://api.capmonster.cloud/getBalance>
+## `<https://api.capmonster.cloud/getBalance>`
 
 request format: `JSON POST`
 :::

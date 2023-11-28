@@ -1,8 +1,8 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const lightCodeTheme = require('prism-react-renderer').themes.github;
+const darkCodeTheme = require('prism-react-renderer').themes.dracula;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -43,8 +43,14 @@ const config = {
           showLastUpdateTime: true,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/ZennoLab/capmonstercloud-docs/tree/dev',
+          editUrl: (params) => {
+            const  {
+              versionDocsDirPath, 
+              docPath,
+              locale 
+            } = params;
+            return locale === 'ru' ? `https://github.com/ZennoLab/capmonstercloud-docs/tree/dev/${versionDocsDirPath}/${docPath}` : `https://github.com/ZennoLab/capmonstercloud-docs/tree/dev/i18n/en/docusaurus-plugin-content-docs/current/${docPath}`
+          }
         },
         blog: false,
         // blog: {
@@ -57,9 +63,8 @@ const config = {
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
-        gtag: {
-          trackingID: 'GTM-PZCSDCS',
-          anonymizeIP: true,
+        googleTagManager: {
+          containerId: 'GTM-PZCSDCS',
         },
       }),
     ],
@@ -77,9 +82,9 @@ const config = {
       //   isCloseable: false,
       // },
       algolia: {
-        appId: 'IUKL1ONOLG',
-        apiKey: 'df90fcc07870b0dfda29e86e993cda42',
-        indexName: 'capmonster-cloud-netlify',
+        appId: 'MILBEXBQOC',
+        apiKey: 'a2dea160d731dd434ddd0777c4f0b77e',
+        indexName: 'capmonster',
         contextualSearch: true,
       },
       // Replace with your project's social card
@@ -112,12 +117,13 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+        additionalLanguages: [
+          'json',
+          'java',
+          'bash',
+          'csharp'
+        ],
       },
-      plugins: [
-        ['docusaurus-plugin-yandex-metrica', {
-          counterID: '53113561',
-        }],
-      ],
     }),
 };
 

@@ -46,7 +46,7 @@ V4 (captcha_id = gt)
 ### **Request example**
 
 :::info Method
-<https://api.capmonster.cloud/createTask>
+`<https://api.capmonster.cloud/createTask>`
 :::
 
 ### GeeTestTask (With proxy)
@@ -94,11 +94,13 @@ V4 (captcha_id = gt)
 
 ### **Getting the result**
 :::info Method
-<https://api.capmonster.cloud/getTaskResult>
+`<https://api.capmonster.cloud/getTaskResult>`
 :::
 Use the [getTaskResult](../api/methods/get-task-result.md) method to get the result of GeeTest recognition. Depending on the system load, you will receive a response after a time in the range from 10 s to 30 s.
 
-<table><tr><th><b>Property</b></th><th><b>Type</b></th><th><b>Description</b></th></tr>
+<table><tr>
+<th><b>Property</b></th><th><b>Type</b></th><th><b>Description</b></th>
+</tr>
 <tr><td>challenge</td><td>String</td><td rowspan="3">All three parameters are required when submitting the form on the target site.</td></tr>
 <tr><td>validate</td><td>String</td></tr>
 <tr><td>seccode</td><td>String</td></tr>
@@ -121,7 +123,7 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the res
 ## **GeeTest V4**
 ### **Request example**
 :::info Method
-<https://api.capmonster.cloud/createTask>
+`<https://api.capmonster.cloud/createTask>`
 :::
 
 ### GeeTestTask (With proxy)
@@ -173,12 +175,17 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the res
 
 ### **Getting the result**
 :::info Method
-<https://api.capmonster.cloud/getTaskResult>
+`<https://api.capmonster.cloud/getTaskResult>`
 :::
 Use the [getTaskResult](../api/methods/get-task-result.md) to get the result of GeeTest recognition. Depending on the system load, you will receive a response after a time in the range from 10 s to 30 s.
 
-<table><tr><th><b>Property</b></th><th><b>Type</b></th><th><b>Description</b></th></tr>
-<tr><td>captcha_id</td><td>String</td><td rowspan="5">All five parameters are required when submitting the form on the target site.<br />input[name=captcha_id]<br />input[name=lot_number]<br />input[name=pass_token]<br />input[name=gen_time]<br />input[name=captcha_output]</td></tr>
+<table>
+<tr>
+<th><b>Property</b></th><th><b>Type</b></th><th><b>Description</b></th>
+</tr>
+<tr>
+<td>captcha_id</td><td>String</td><td rowspan="5">All five parameters are required when submitting the form on the target site.<br />input[name=captcha_id]<br />input[name=lot_number]<br />input[name=pass_token]<br />input[name=gen_time]<br />input[name=captcha_output]</td>
+</tr>
 <tr><td>lot_number</td><td>String</td></tr>
 <tr><td>pass_token</td><td>String</td></tr>
 <tr><td>gen_time</td><td>String</td></tr>

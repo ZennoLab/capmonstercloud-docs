@@ -31,7 +31,7 @@ sidebar_label: Инструкция по установке
 1. Ввести API-key из личного кабинета CapMonster Cloud в открывшемся окне расширения.
 ## **Способ №2: Установка через интернет-магазин Google Chrome.**
 1. Открыть ProjectMaker;
-1. Перейти на страницу расширения <https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=ru> ;
+1. Перейти на страницу расширения `<https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=ru>` ;
 1. Установить расширение, нажав кнопку «Установить»;
 1. Добавить экшен «Активировать расширение»;
 

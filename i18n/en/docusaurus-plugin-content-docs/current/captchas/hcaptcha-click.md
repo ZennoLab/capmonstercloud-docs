@@ -25,7 +25,7 @@ The object contains data about the task for solving hCaptcha.
 ### **Request example**
 
 :::info Method
-<https://api.capmonster.cloud/createTask>
+`<https://api.capmonster.cloud/createTask>`
 :::
 ```json
 {
@@ -53,8 +53,8 @@ The object contains data about the task for solving hCaptcha.
 ```
 
 ### **Getting a result**
-:::info Wethod
-<https://api.capmonster.cloud/getTaskResult>
+:::info Method
+`<https://api.capmonster.cloud/getTaskResult>`
 :::
 Use the [getTaskResult](../api/methods/get-task-result.md) method to get the captcha solution. Depending on the system load, you will receive a response after a time ranging from 300ms to 6s.
 
@@ -101,7 +101,7 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the cap
 ### **Request example**
 
 :::info Method
-<https://api.capmonster.cloud/createTask>
+`<https://api.capmonster.cloud/createTask>`
 :::
 ```json
 {
@@ -128,7 +128,7 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the cap
 
 ### **Getting a result**
 :::info Method
-<https://api.capmonster.cloud/getTaskResult>
+`<https://api.capmonster.cloud/getTaskResult>`
 :::
 Use the [getTaskResult](../api/methods/get-task-result.md) method to get the captcha solution. Depending on the system load, you will receive a response after a time ranging from 300ms to 6s.
 
@@ -175,7 +175,7 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the cap
 ### **Request example**
 
 :::info Method
-<https://api.capmonster.cloud/createTask>
+`<https://api.capmonster.cloud/createTask>`
 :::
 
 ```json
@@ -204,7 +204,7 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the cap
 
 ### **Getting a result**
 :::info Method
-<https://api.capmonster.cloud/getTaskResult>
+`<https://api.capmonster.cloud/getTaskResult>`
 :::
 Use the [getTaskResult](../api/methods/get-task-result.md) method to get the captcha solution. Depending on the system load, you will receive a response after a time ranging from 300ms to 6s.
 

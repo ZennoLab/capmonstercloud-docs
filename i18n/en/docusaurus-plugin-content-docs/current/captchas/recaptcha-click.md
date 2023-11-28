@@ -15,15 +15,15 @@ The object contains data about the task for solving ReCaptcha2 from Google.
 |imageUrls|Array|yes (if imagesBase64 is not filled)|[ “[https://i.postimg.cc/yYjg75Kv/img1.jpg](https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg)”]|Single image 4x4, [3x3](https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg) or a new 1x1 captcha part (in an array).|
 |imagesBase64|Array|yes (if imageUrls is not filled)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”]|Single image 4x4, [3x3](https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg) or a new 1x1 captcha part in base64 format (in an array).|
 |metadata.Grid|String|yes|4x4, 3x3, 1x1|Image grid size.|
-|metadata.TaskDefinition|String|yes (if metadata.Task is not filled)|`/m/015qff` and others|<p>Technical value that defines the task type</p><p>**How to get TaskDefinition**</p><p>The data can be found in responses to "/recaptcha/{recaptchaApi}/reload” or "/recaptcha/{recaptchaApi}/userverify" requests, where recaptchaApi is "enterprise" or "api2" depending on the Recaptcha type. The response contains json, in which one can take a list of TaskDefinitions for loaded captchas.</p>|
+|metadata.TaskDefinition|String|yes (if metadata.Task is not filled)|`/m/015qff` and others|<p>Technical value that defines the task type</p><p>**How to get TaskDefinition**</p><p>The data can be found in responses to `/recaptcha/{recaptchaApi}/reload` or `/recaptcha/{recaptchaApi}/userverify` requests, where recaptchaApi is "enterprise" or "api2" depending on the Recaptcha type. The response contains json, in which one can take a list of TaskDefinitions for loaded captchas.</p>|
 |metadata.Task|String|yes (if metadata.TaskDefinition is not filled)|`Click on traffic lights` and others|Task text (<u>in English</u>).|
 |userAgent|String|no|-|The browser User-Agent to use when loading images if links were passed in imageUrls. It is required to use a modern browser signature, otherwise Google will return an error asking for a browser update.|
 |websiteURL|String|no|-|URL of the page where the captcha is solved.|
 
 ## **Request example**
 
-:::info Wethod
-<https://api.capmonster.cloud/createTask>
+:::info Method
+`<https://api.capmonster.cloud/createTask>`
 :::
 ```json
 {
@@ -53,8 +53,8 @@ The object contains data about the task for solving ReCaptcha2 from Google.
 }
 ```
 ### **Getting a result**
-:::info Wethod
-<https://api.capmonster.cloud/getTaskResult>
+:::info Method
+`<https://api.capmonster.cloud/getTaskResult>`
 :::
 Use the [getTaskResult](../api/methods/get-task-result.md) method to get the captcha solution. Depending on the system load, you will receive a response after a time ranging from 300ms to 6s.
 
