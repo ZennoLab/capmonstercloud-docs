@@ -1,7 +1,7 @@
 <p align="center"><img src="https://github.com/ZennoLab/capmonstercloud-docs/blob/master/static/img/logo_docs.svg"></p>
 
 
-# Documentation for Capmonster Cloud
+# Documentation for CapMonster Cloud
 
 This website is built using [Docusaurus 3](https://docusaurus.io/), a modern static website generator.
 
@@ -21,10 +21,10 @@ npm install
 yarn start
 ```
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
-By default it is English version
+This command starts a local development server and opens up a browser window. Most changes are reflected in real time, no need to restart the server.
+By default this is the English version.
 
-If you want to start Russian, try
+If you want to start the Russian version, run
 
 ```bash
 yarn start -- --locale ru
@@ -38,7 +38,7 @@ yarn build
 
 This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
-After build you can view full generated site with `ru` and `en` version, just run
+After build you can view fully generated site with `ru` and `en` versions, just run
 
 ```bash
 yarn serve
@@ -46,12 +46,12 @@ yarn serve
 
 ## Structure
 
-Russian documentation located at `/docs`
+Russian documentation is located in `/docs`.
 
-Every folder it's category for article.
+Each folder is a category for an article.
 
-English documentation located at `/i18n/en/docusaurus-plugin-content-docs/current/`
+English documentation is located in `/i18n/en/docusaurus-plugin-content-docs/current/`.
 
-If you want same article for ru and en version, you need create file at `/docs` and `/i18n/en/docusaurus-plugin-content-docs/current/` with same filename and folder.
+If you need the same article for ru and en version, you should create a file in `/docs` and `/i18n/en/docusaurus-plugin-content-docs/current/` directories with same filename and folder.
 
-For more information about syntax and structure you can visit [https://docusaurus.io/](https://docusaurus.io/)
+For more information about syntax and structure, you can visit [https://docusaurus.io/](https://docusaurus.io/).
