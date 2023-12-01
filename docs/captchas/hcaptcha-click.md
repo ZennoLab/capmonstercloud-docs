@@ -6,23 +6,27 @@ sidebar_label: ComplexImageTask HCaptcha
 # ComplexImageTask HCaptcha
 Объект содержит данные о задаче на решение hCaptcha.
 
-## **Пример изображения (первый тип)**
-
-![](Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.001.png) 
-
-### **Структура объекта первый тип**
-
+## **Общая структура объекта**
+:::info Метод
+<https://api.capmonster.cloud/createTask>
+:::
 |**Параметр**|**Тип**|**Обязательный**|**Возможные значения**|**Описание**|
 | :- | :- | :- | :- | :- |
 |type|String|да|ComplexImageTask|Определяет тип объекта задачи|
 |class|String|да|hcaptcha|Определяет класс объекта задачи|
-|imageUrls|Array|да (если не заполнено imagesBase64)|[ “[https://i.postimg.cc/kg71cbRt/image-1.jpg](https://i.postimg.cc/kg71cbRt/image-1.jpg)”, “[https://i.postimg.cc/6381Zx2j/image.jpg](https://i.postimg.cc/6381Zx2j/image.jpg)”, … ]|Список с адресами изображений. Максимум 18 элементов.|
-|imagesBase64|Array|да (если не заполнено imageUrls)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, … ]|Список с изображениями в формате base64. Максимум 18 элементов.|
-|exampleImageUrls|Array|да (если не заполнено exampleImagesBase64)|[ “[https://i.postimg.cc/kg71cbRt/image-1.jpg](https://i.postimg.cc/kg71cbRt/image-1.jpg)”]|Список с адресами изображений. Максимум 1 элемент.|
-|exampleImagesBase64|Array|да (если не заполнено exampleImageUrls)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”]|Список с изображениями в формате base64. Максимум 1 элемент.|
+|imageUrls|Array|да (если не заполнено imagesBase64)|[ “[https://i.postimg.cc/kg71cbRt/image-1.jpg](https://i.postimg.cc/kg71cbRt/image-1.jpg)”,… ]|Список с адресами изображений. Максимум 18 элементов.|
+|imagesBase64|Array|да (если не заполнено imageUrls)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”,… ]|Список с изображениями в формате base64. Максимум 18 элементов.|
 |metadata.Task|String|да|`Please click each image containing a mountain` и другие|Текст задания (<u>на английском</u>)|
 |userAgent|String|нет|-|User-Agent браузера, используемый при загрузке изображений, если были переданы ссылки в imageUrls. Необходимо использовать подпись современного браузера, иначе Google будет возвращать ошибку, требуя обновить браузер.|
 |websiteURL|String|нет|-|Адрес страницы на которой решается каптча|
+
+## **Пример изображения (первый тип)**
+
+![](Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.001.png) 
+
+:::info Правильно выберите тип задания
+Данный тип заданий не содержит референсного изображения, такого как в [четвертом типе](#пример-изображения-четвертый-тип)
+:::
 
 ### **Пример запроса**
 
@@ -88,20 +92,6 @@ sidebar_label: ComplexImageTask HCaptcha
 |![](Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.002.png)|![](Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.003.png)|![](Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.004.png)|
 | :-: | :-: | :-: |
 
-### **Структура объекта**
-
-|**Параметр**|**Тип**|**Обязательный**|**Возможные значения**|**Описание**|
-| :- | :- | :- | :- | :- |
-|type|String|да|ComplexImageTask|Определяет тип объекта задачи|
-|class|String|да|hcaptcha|Определяет класс объекта задачи|
-|imageUrls|Array|да (если не заполнено imagesBase64)|[ “[https://i.postimg.cc/vTn3YHr9/panda.jpg](https://i.postimg.cc/vTn3YHr9/panda.jpg)” ]|Список с адресами изображений. Максимум 18 элементов.|
-|imagesBase64|Array|да (если не заполнено imageUrls)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…” ]|Список с изображениями в формате base64. Максимум 18 элементов.|
-|exampleImageUrls|Array|да (если не заполнено exampleImagesBase64)|[ “[https://i.postimg.cc/vTn3YHr9/panda.jpg](https://i.postimg.cc/vTn3YHr9/panda.jpg)”]|Список с адресами изображений. Максимум 1 элемент.|
-|exampleImagesBase64|Array|да (если не заполнено exampleImageUrls)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”]|Список с изображениями в формате base64. Максимум 1 элемент.|
-|metadata.Task|String|да|`Please click on the panda` и другие|Текст задания (<u>на английском</u>)|
-|userAgent|String|нет|-|User-Agent браузера, используемый при загрузке изображений, если были переданы ссылки в imageUrls. Необходимо использовать подпись современного браузера, иначе Google будет возвращать ошибку, требуя обновить браузер.|
-|websiteURL|String|нет|-|Адрес страницы на которой решается каптча|
-
 ### **Пример запроса**
 
 :::info Метод
@@ -164,19 +154,11 @@ sidebar_label: ComplexImageTask HCaptcha
 ![](Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.005.png) 
 
 ### **Структура объекта**
+#### **Дополнительные параметры**
 
 |**Параметр**|**Тип**|**Обязательный**|**Возможные значения**|**Описание**|
 | :- | :- | :- | :- | :- |
-|type|String|да|ComplexImageTask|Определяет тип объекта задачи|
-|class|String|да|hcaptcha|Определяет класс объекта задачи|
-|imageUrls|Array|да (если не заполнено imagesBase64)|[ “[https://i.postimg.cc/4dmSy2YT/goat.jpg](https://i.postimg.cc/4dmSy2YT/goat.jpg)” ]|Список с адресами изображений. Максимум 18 элементов.|
-|imagesBase64|Array|да (если не заполнено imageUrls)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…” ]|Список с изображениями в формате base64. Максимум 18 элементов.|
-|exampleImageUrls|Array|да (если не заполнено exampleImagesBase64)|[ “[https://i.postimg.cc/4dmSy2YT/goat.jpg](https://i.postimg.cc/4dmSy2YT/goat.jpg)”]|Список с адресами изображений. Максимум 1 элемент.|
-|exampleImagesBase64|Array|да (если не заполнено exampleImageUrls)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”]|Список с изображениями в формате base64. Максимум 1 элемент.|
-|metadata.Task|String|да|`What animal is shown in the image below?` и другие|Текст задания (<u>на английском</u>)|
 |metadata.Classes|Array|да|[ "shark", "chicken", "goat", "hedgehog" ] и другие|Список со строковыми значениями, находящимися на правой половине каптчи (в том же порядке, как на изображении)|
-|userAgent|String|нет|-|User-Agent браузера, используемый при загрузке изображений, если были переданы ссылки в imageUrls. Необходимо использовать подпись современного браузера, иначе Google будет возвращать ошибку, требуя обновить браузер.|
-|websiteURL|String|нет|-|Адрес страницы на которой решается каптча|
 
 ### **Пример запроса**
 
@@ -227,6 +209,88 @@ sidebar_label: ComplexImageTask HCaptcha
   "status":"ready",
   "solution": { 
     "answer": [ false, false, true, false ],
+    "metadata": { "AnswerType": "Grid" }
+  }
+}
+```
+
+### **Ценообразование:**
+
+|**Наименование** |**Стоимость за 1000 картинок, $**|
+| :-: | :-: |
+|hCaptcha|0,02|
+
+## **Пример изображения (четвертый тип)**
+
+![](hcaptcha-task-types/4type.png)
+
+### **Структура объекта**
+#### **Дополнительные параметры**
+
+|**Параметр**|**Тип**|**Обязательный**|**Возможные значения**|**Описание**|
+| :- | :- | :- | :- | :- |
+|imageUrls|-|-|-|Список с адресами изображений. Должен содержать 9 изображений.|
+|imagesBase64|-|-|-|Список с изображениями в формате base64. Должен содержать 9 изображений.|
+|exampleImageUrls|Array|да (если не заполнено exampleImagesBase64)|[ “[https://i.postimg.cc/GmBgwnDm/4type-example-image.png](https://i.postimg.cc/GmBgwnDm/4type-example-image.png)”]|Список с адресами изображений. Должен содержать 1 элемент.|
+|exampleImagesBase64|Array|да (если не заполнено exampleImageUrls)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”]|Список с изображениями в формате base64. Должен содержать 1 элемент.|
+
+### **Пример запроса**
+
+:::info Метод
+<https://api.capmonster.cloud/createTask>
+:::
+
+```json
+{
+  "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
+  "task": {
+    "type": "ComplexImageTask",
+    "class": "hcaptcha",
+    "imageUrls": [
+      "https://i.postimg.cc/13LCy70c/4type-image-00.png",
+      "https://i.postimg.cc/1zwWX0Jx/4type-image-01.png",
+      "https://i.postimg.cc/MTw9QcFn/4type-image-02.png",
+      "https://i.postimg.cc/kGXwT099/4type-image-03.png",
+      "https://i.postimg.cc/3NS1VtJG/4type-image-04.png",
+      "https://i.postimg.cc/m2k8CW8y/4type-image-05.png",
+      "https://i.postimg.cc/rm9QC8BQ/4type-image-06.png",
+      "https://i.postimg.cc/tR2Bs4tg/4type-image-07.png",
+      "https://i.postimg.cc/m2nVSpnf/4type-image-08.png" ],
+    "exampleImageUrls": [ "https://i.postimg.cc/GmBgwnDm/4type-example-image.png" ],
+    "metadata": {
+      "Task": "Please select all images that appear warmer in comparison to other images"
+    }
+  }
+}
+```
+
+**Пример ответа**
+```json
+{
+  "errorId":0,
+  "taskId":407533072
+}
+```
+
+### **Получение результата**
+:::info Метод
+<https://api.capmonster.cloud/getTaskResult>
+:::
+Используйте метод [getTaskResult](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/557078/getTaskResult) чтобы получить решение капчи. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 300мс до 6 с.
+
+|**Свойство**|**Тип**|**Описание**|
+| :- | :- | :- |
+|answer|Array|Список в булевыми значениями, true - означает, что нужно произвести клик на соответствующее этой позиции изображение|
+|metadata|Object|Объект, который определяет тип возвращаемого ответа|
+
+**Пример:**
+
+```json
+{
+  "errorId":0,
+  "status":"ready",
+  "solution": { 
+    "answer": [ false, true, true, false, false, false, true, false, false ],
     "metadata": { "AnswerType": "Grid" }
   }
 }
