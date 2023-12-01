@@ -9,7 +9,7 @@ sidebar_label: ComplexImageTask HCaptcha
 ## **Запрос на создание задачи**
 ### **Структура отправляемого объекта**
 :::info Метод
-<https://api.capmonster.cloud/createTask>
+`<https://api.capmonster.cloud/createTask>`
 :::
 |**Параметр**|**Тип**|**Обязательный**|**Возможные значения**|**Описание**|
 | :- | :- | :- | :- | :- |
@@ -26,7 +26,7 @@ sidebar_label: ComplexImageTask HCaptcha
 
 ## **Запрос на получение ответа**
 :::info Метод
-<https://api.capmonster.cloud/getTaskResult>
+`<https://api.capmonster.cloud/getTaskResult>`
 :::
 Используйте метод [getTaskResult](../api/methods/get-task-result.md) чтобы получить решение капчи. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 300мс до 6 с.
 
@@ -36,13 +36,12 @@ sidebar_label: ComplexImageTask HCaptcha
 |answer|Array of objects|Список ответов на каждое из переданных изображений.|
 |metadata.AnswerType|string|Тип возвращаемого ответа.|
 
-### **Типы ответов**
-|**Тип ответа**|**Формат ответа**|**Пример ответа**|**Описание**|
-| :- | :- | :- | :- |
-|Grid|Array of boolean|`[true, false, true]`|Список в булевыми значениями, true - означает, что нужно произвести клик на соответствующее этой позиции изображение|
-|Coordinate|Array of objects|`[{ "X":371, "Y":505.0000112 }]`|Список с координатами, по которым нужно произвести клик на соответствующем изображении|
+### **Тип ответа Grid**
+|**Формат ответа**|**Пример ответа**|**Описание**|
+| :- | :- | :- |
+|Array of boolean|`[true, false, true]`|Список с булевыми значениями, true - означает, что нужно произвести клик на соответствующее этой позиции изображение|
 
-### **Пример ответа**
+**Пример ответа:**
 ```json
 {
   "errorId":0,
@@ -50,6 +49,23 @@ sidebar_label: ComplexImageTask HCaptcha
   "solution": {
     "answer": [ false, true ],
     "metadata": { "AnswerType": "Grid" }
+  }
+}
+```
+
+### **Тип ответа Coordinate**
+|**Формат ответа**|**Пример ответа**|**Описание**|
+| :- | :- | :- |
+|Array of objects|`[{ "X":371, "Y":505.0000112 }, { "X":5, "Y":101.2 }]`|Список с координатами, по которым нужно произвести клик на соответствующем изображении|
+
+**Пример ответа:**
+```json
+{
+  "errorId":0,
+  "status":"ready",
+  "solution": { 
+    "answer": [ { "X":371, "Y":505.0000112 }, { "X":5, "Y":101.2 } ],
+    "metadata": { "AnswerType": "Coordinate" }
   }
 }
 ```
@@ -96,7 +112,7 @@ sidebar_label: ComplexImageTask HCaptcha
 :::info Метод
 `<https://api.capmonster.cloud/getTaskResult>`
 :::
-Тип получаемого ответа - [**Grid**](#типы-ответов).
+Тип получаемого ответа - [**Grid**](#тип-ответа-grid).
 
 **Пример:**
 
@@ -153,7 +169,7 @@ sidebar_label: ComplexImageTask HCaptcha
 :::info Метод
 `<https://api.capmonster.cloud/getTaskResult>`
 :::
-Тип получаемого ответа - [**Coordinate**](#типы-ответов).
+Тип получаемого ответа - [**Coordinate**](#тип-ответа-coordinate).
 
 **Пример:**
 ```json
@@ -167,7 +183,7 @@ sidebar_label: ComplexImageTask HCaptcha
 }
 ```
 
-### **Ценообразование:**
+### **Ценообразование**
 
 |**Наименование** |**Стоимость за 1000 картинок, $**|
 | :-: | :-: |
@@ -213,7 +229,7 @@ sidebar_label: ComplexImageTask HCaptcha
 :::info Метод
 `<https://api.capmonster.cloud/getTaskResult>`
 :::
-Тип получаемого ответа - [**Grid**](#типы-ответов).
+Тип получаемого ответа - [**Grid**](#тип-ответа-grid).
 
 **Пример:**
 
@@ -228,7 +244,7 @@ sidebar_label: ComplexImageTask HCaptcha
 }
 ```
 
-### **Ценообразование:**
+### **Ценообразование**
 
 |**Наименование** |**Стоимость за 1000 картинок, $**|
 | :-: | :-: |
@@ -245,7 +261,7 @@ sidebar_label: ComplexImageTask HCaptcha
 ### **Пример запроса**
 
 :::info Метод
-<https://api.capmonster.cloud/createTask>
+`<https://api.capmonster.cloud/createTask>`
 :::
 
 ```json
@@ -282,9 +298,9 @@ sidebar_label: ComplexImageTask HCaptcha
 
 ### **Получение результата**
 :::info Метод
-<https://api.capmonster.cloud/getTaskResult>
+`<https://api.capmonster.cloud/getTaskResult>`
 :::
-Тип получаемого ответа - [**Grid**](#типы-ответов).
+Тип получаемого ответа - [**Grid**](#тип-ответа-grid).
 
 **Пример:**
 
@@ -299,7 +315,7 @@ sidebar_label: ComplexImageTask HCaptcha
 }
 ```
 
-### **Ценообразование:**
+### **Ценообразование**
 
 |**Наименование** |**Стоимость за 1000 картинок, $**|
 | :-: | :-: |
