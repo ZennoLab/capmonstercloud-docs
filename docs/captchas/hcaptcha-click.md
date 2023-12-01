@@ -6,7 +6,8 @@ sidebar_label: ComplexImageTask HCaptcha
 # ComplexImageTask HCaptcha
 Объект содержит данные о задаче на решение hCaptcha.
 
-## **Общая структура объекта**
+## **Запрос на создание задачи**
+### **Структура отправляемого объекта**
 :::info Метод
 <https://api.capmonster.cloud/createTask>
 :::
@@ -16,9 +17,42 @@ sidebar_label: ComplexImageTask HCaptcha
 |class|String|да|hcaptcha|Определяет класс объекта задачи|
 |imageUrls|Array|да (если не заполнено imagesBase64)|[ “[https://i.postimg.cc/kg71cbRt/image-1.jpg](https://i.postimg.cc/kg71cbRt/image-1.jpg)”,… ]|Список с адресами изображений. Максимум 18 элементов.|
 |imagesBase64|Array|да (если не заполнено imageUrls)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”,… ]|Список с изображениями в формате base64. Максимум 18 элементов.|
-|metadata.Task|String|да|`Please click each image containing a mountain` и другие|Текст задания (<u>на английском</u>)|
+|metadata.Task|String|да|`Please click on the panda` и другие|Текст задания (<u>на английском</u>)|
+|exampleImageUrls|Array|не всегда|[ “[https://i.postimg.cc/GmBgwnDm/4type-example-image.png](https://i.postimg.cc/GmBgwnDm/4type-example-image.png)”]|Список с адресами изображений. Должен содержать 1 элемент.|
+|exampleImagesBase64|Array|не всегда|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”]|Список с изображениями в формате base64. Должен содержать 1 элемент.|
+|metadata.Classes|Array|не всегда|[ "shark", "chicken", "goat", "hedgehog" ] и другие|Список со строковыми значениями, находящимися на правой половине каптчи (в том же порядке, как на изображении)|
 |userAgent|String|нет|-|User-Agent браузера, используемый при загрузке изображений, если были переданы ссылки в imageUrls. Необходимо использовать подпись современного браузера, иначе Google будет возвращать ошибку, требуя обновить браузер.|
 |websiteURL|String|нет|-|Адрес страницы на которой решается каптча|
+
+## **Запрос на получение ответа**
+:::info Метод
+<https://api.capmonster.cloud/getTaskResult>
+:::
+Используйте метод [getTaskResult](../api/methods/get-task-result.md) чтобы получить решение капчи. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 300мс до 6 с.
+
+### **Структура объекта solution**
+|**Свойство**|**Тип**|**Описание**|
+| :- | :- | :- |
+|answer|Array of objects|Список ответов на каждое из переданных изображений.|
+|metadata.AnswerType|string|Тип возвращаемого ответа.|
+
+### **Типы ответов**
+|**Тип ответа**|**Формат ответа**|**Пример ответа**|**Описание**|
+| :- | :- | :- | :- |
+|Grid|Array of boolean|`[true, false, true]`|Список в булевыми значениями, true - означает, что нужно произвести клик на соответствующее этой позиции изображение|
+|Coordinate|Array of objects|`[{ "X":371, "Y":505.0000112 }]`|Список с координатами, по которым нужно произвести клик на соответствующем изображении|
+
+### **Пример ответа**
+```json
+{
+  "errorId":0,
+  "status":"ready",
+  "solution": {
+    "answer": [ false, true ],
+    "metadata": { "AnswerType": "Grid" }
+  }
+}
+```
 
 ## **Пример изображения (первый тип)**
 
@@ -62,12 +96,7 @@ sidebar_label: ComplexImageTask HCaptcha
 :::info Метод
 `<https://api.capmonster.cloud/getTaskResult>`
 :::
-Используйте метод [getTaskResult](../api/methods/get-task-result.md), чтобы получить решение капчи. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 300мс до 6 с.
-
-|**Свойство**|**Тип**|**Описание**|
-| :- | :- | :- |
-|answer|Array|Список в булевыми значениями, true - означает, что нужно произвести клик на соответствующее этой позиции изображение|
-|metadata||Объект, который определяет тип возвращаемого ответа|
+Тип получаемого ответа - [**Grid**](#типы-ответов).
 
 **Пример:**
 
@@ -124,12 +153,7 @@ sidebar_label: ComplexImageTask HCaptcha
 :::info Метод
 `<https://api.capmonster.cloud/getTaskResult>`
 :::
-Используйте метод [getTaskResult](../api/methods/get-task-result.md) чтобы получить решение капчи. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 300мс до 6 с.
-
-|**Свойство**|**Тип**|**Описание**|
-| :- | :- | :- |
-|answer|Array|Список с координатами, по которым нужно произвести клик на соответствующем изображении|
-|metadata|Object|Объект, который определяет тип возвращаемого ответа|
+Тип получаемого ответа - [**Coordinate**](#типы-ответов).
 
 **Пример:**
 ```json
@@ -153,12 +177,7 @@ sidebar_label: ComplexImageTask HCaptcha
 
 ![](Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.005.png) 
 
-### **Структура объекта**
-#### **Дополнительные параметры**
-
-|**Параметр**|**Тип**|**Обязательный**|**Возможные значения**|**Описание**|
-| :- | :- | :- | :- | :- |
-|metadata.Classes|Array|да|[ "shark", "chicken", "goat", "hedgehog" ] и другие|Список со строковыми значениями, находящимися на правой половине каптчи (в том же порядке, как на изображении)|
+Этот тип капч должен содержать поле **metadata.Classes**.
 
 ### **Пример запроса**
 
@@ -194,12 +213,7 @@ sidebar_label: ComplexImageTask HCaptcha
 :::info Метод
 `<https://api.capmonster.cloud/getTaskResult>`
 :::
-Используйте метод [getTaskResult](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/557078/getTaskResult) чтобы получить решение капчи. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 300мс до 6 с.
-
-|**Свойство**|**Тип**|**Описание**|
-| :- | :- | :- |
-|answer|Array|Список в булевыми значениями, true - означает, что нужно произвести клик на соответствующее этой позиции изображение|
-|metadata|Object|Объект, который определяет тип возвращаемого ответа|
+Тип получаемого ответа - [**Grid**](#типы-ответов).
 
 **Пример:**
 
@@ -224,15 +238,9 @@ sidebar_label: ComplexImageTask HCaptcha
 
 ![](hcaptcha-task-types/4type.png)
 
-### **Структура объекта**
-#### **Дополнительные параметры**
+Для данного запроса обязательное поле **exampleImageUrls** или **exampleImagesBase64**. Оно должно содержать одну картинку.
 
-|**Параметр**|**Тип**|**Обязательный**|**Возможные значения**|**Описание**|
-| :- | :- | :- | :- | :- |
-|imageUrls|-|-|-|Список с адресами изображений. Должен содержать 9 изображений.|
-|imagesBase64|-|-|-|Список с изображениями в формате base64. Должен содержать 9 изображений.|
-|exampleImageUrls|Array|да (если не заполнено exampleImagesBase64)|[ “[https://i.postimg.cc/GmBgwnDm/4type-example-image.png](https://i.postimg.cc/GmBgwnDm/4type-example-image.png)”]|Список с адресами изображений. Должен содержать 1 элемент.|
-|exampleImagesBase64|Array|да (если не заполнено exampleImageUrls)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”]|Список с изображениями в формате base64. Должен содержать 1 элемент.|
+Поле **imageUrls** или **imagesBase64** должно содержать 9 картинок.
 
 ### **Пример запроса**
 
@@ -276,12 +284,7 @@ sidebar_label: ComplexImageTask HCaptcha
 :::info Метод
 <https://api.capmonster.cloud/getTaskResult>
 :::
-Используйте метод [getTaskResult](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/557078/getTaskResult) чтобы получить решение капчи. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 300мс до 6 с.
-
-|**Свойство**|**Тип**|**Описание**|
-| :- | :- | :- |
-|answer|Array|Список в булевыми значениями, true - означает, что нужно произвести клик на соответствующее этой позиции изображение|
-|metadata|Object|Объект, который определяет тип возвращаемого ответа|
+Тип получаемого ответа - [**Grid**](#типы-ответов).
 
 **Пример:**
 
