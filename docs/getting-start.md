@@ -8,16 +8,6 @@ sidebar_position: 0
 
 В данном разделе вы можете изучить способы отправки капч в CapMonster Cloud и методы распознавания.
 
-## Способы отправки
-
-Мы поддерживаем API сервисов ручного распознавания:
-
-- AntiCaptcha v1, v2
-- RuCaptcha/2Captcha
-- RipCaptcha
-- BypassCaptcha
-- DeathByCaptcha
-
 :::info Адрес метода
 
 ## `<https://api.capmonster.cloud>`
