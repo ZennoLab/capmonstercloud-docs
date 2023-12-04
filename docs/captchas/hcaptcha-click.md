@@ -271,16 +271,17 @@ sidebar_label: ComplexImageTask HCaptcha
     "type": "ComplexImageTask",
     "class": "hcaptcha",
     "imageUrls": [
-      "https://i.postimg.cc/13LCy70c/4type-image-00.png",
-      "https://i.postimg.cc/1zwWX0Jx/4type-image-01.png",
-      "https://i.postimg.cc/MTw9QcFn/4type-image-02.png",
-      "https://i.postimg.cc/kGXwT099/4type-image-03.png",
-      "https://i.postimg.cc/3NS1VtJG/4type-image-04.png",
-      "https://i.postimg.cc/m2k8CW8y/4type-image-05.png",
-      "https://i.postimg.cc/rm9QC8BQ/4type-image-06.png",
-      "https://i.postimg.cc/tR2Bs4tg/4type-image-07.png",
-      "https://i.postimg.cc/m2nVSpnf/4type-image-08.png" ],
-    "exampleImageUrls": [ "https://i.postimg.cc/GmBgwnDm/4type-example-image.png" ],
+      "https://i.postimg.cc/bwVVWbkG/4type-00.jpg",
+      "https://i.postimg.cc/nzBdXP57/4type-01.jpg",
+      "https://i.postimg.cc/zf9tXrd8/4type-02.jpg",
+      "https://i.postimg.cc/2yY0hxRt/4type-03.jpg",
+      "https://i.postimg.cc/rFQfRWhh/4type-04.jpg",
+      "https://i.postimg.cc/Jz0PNnvR/4type-05.jpg",
+      "https://i.postimg.cc/h48ygNVR/4type-06.jpg",
+      "https://i.postimg.cc/yY1yXdtk/4type-07.jpg",
+      "https://i.postimg.cc/Prt6qKMp/4type-08.jpg"
+     ],
+    "exampleImageUrls": [ "https://i.postimg.cc/MpLtdwJV/4type-example.jpg" ],
     "metadata": {
       "Task": "Please select all images that appear warmer in comparison to other images"
     }
@@ -309,7 +310,7 @@ sidebar_label: ComplexImageTask HCaptcha
   "errorId":0,
   "status":"ready",
   "solution": { 
-    "answer": [ false, true, true, false, false, false, true, false, false ],
+    "answer": [ true, false, false, false, false, true, false, false, true ],
     "metadata": { "AnswerType": "Grid" }
   }
 }
