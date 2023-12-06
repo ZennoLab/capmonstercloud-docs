@@ -6,16 +6,6 @@ sidebar_position: 0
 
 In this section you can learn how to send captchas to CapMonster Cloud and methods for recognizing them.
 
-## How to send captchas
-
-We support API of manual recognition services:
-
-- AntiCaptcha v1, v2
-- RuCaptcha/2Captcha
-- RipCaptcha
-- BypassCaptcha
-- DeathByCaptcha
-
 :::info Method address
 
 ## `<https://api.capmonster.cloud>`

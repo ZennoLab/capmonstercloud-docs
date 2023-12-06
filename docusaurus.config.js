@@ -97,6 +97,11 @@ const config = {
         },
         items: [
           {
+            href: 'https://capmonster.cloud',
+            label: 'Capmonster.cloud',
+            position: 'right',
+          },
+          {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'right',
