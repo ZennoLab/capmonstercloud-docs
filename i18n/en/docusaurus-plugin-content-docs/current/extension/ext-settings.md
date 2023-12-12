@@ -12,8 +12,7 @@ sidebar_position: 3
 |`isEnabled`|`Boolean`|Is the extension enabled by default or not|
 |`clientKey`|`String`|API key|
 |`captchaList`|`Array<String>`|List of captchas that are enabled (by default all capthas are enabled)|
-|`captchaExtra`|`Object<{[String]: 1 / 0}>`|List of captchas that can be solved by clicks
-(Token - 0, Click - 1)|
+|`captchaExtra`|`Object<{[String]: 1 / 0}>`|List of captchas that can be solved by clicks (Token - 0, Click - 1)|
 |`repeatsCount`|`Number`|Number of repeated solutions after an error|
 |`isEnabledIgnoreList`|`Boolean`|Whether the blacklist of sites specified in the IgnoreList field is enabled|
 |`ignoreList`|`Array<String>`|List of sites to ignore the solving|
