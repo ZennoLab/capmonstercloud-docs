@@ -18,8 +18,8 @@ sidebar_label: ComplexImageTask HCaptcha
 |imageUrls|Array|да (если не заполнено imagesBase64)|[ “[https://i.postimg.cc/kg71cbRt/image-1.jpg](https://i.postimg.cc/kg71cbRt/image-1.jpg)”,… ]|Список с адресами изображений. Максимум 18 элементов.|
 |imagesBase64|Array|да (если не заполнено imageUrls)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”,… ]|Список с изображениями в формате base64. Максимум 18 элементов.|
 |metadata.Task|String|да|`Please click on the panda` и другие|Текст задания (<u>на английском</u>)|
-|exampleImageUrls|Array|не всегда|[ “[https://i.postimg.cc/GmBgwnDm/4type-example-image.png](https://i.postimg.cc/GmBgwnDm/4type-example-image.png)”]|Список с адресами изображений. Должен содержать 1 элемент.|
-|exampleImagesBase64|Array|не всегда|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”]|Список с изображениями в формате base64. Должен содержать 1 элемент.|
+|exampleImageUrls|Array|не всегда|[ “[https://i.postimg.cc/GmBgwnDm/4type-example-image.png](https://i.postimg.cc/GmBgwnDm/4type-example-image.png)”]|Список с адресами изображений. Должен содержать 1 или несколько элементов в зависимости от типа задания.|
+|exampleImagesBase64|Array|не всегда|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”]|Список с изображениями в формате base64. Должен содержать 1 или несколько элементов в зависимости от типа задания.|
 |metadata.Classes|Array|не всегда|[ "shark", "chicken", "goat", "hedgehog" ] и другие|Список со строковыми значениями, находящимися на правой половине каптчи (в том же порядке, как на изображении)|
 |userAgent|String|нет|-|User-Agent браузера, используемый при загрузке изображений, если были переданы ссылки в imageUrls. Необходимо использовать подпись современного браузера, иначе Google будет возвращать ошибку, требуя обновить браузер.|
 |websiteURL|String|нет|-|Адрес страницы на которой решается каптча|
@@ -137,6 +137,13 @@ sidebar_label: ComplexImageTask HCaptcha
 |![](Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.002.png)|![](Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.003.png)|![](Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.004.png)|
 | :-: | :-: | :-: |
 
+:::info Передавайте референсные изображения для лучшего решения
+Изображения которые находятся в шапке задания если они есть, необходимо передавать в параметре `exampleImagesBase64` или `exampleImageUrls`
+
+![](reference-example.png)
+
+:::
+
 ### **Пример запроса**
 
 :::info Метод
@@ -148,6 +155,7 @@ sidebar_label: ComplexImageTask HCaptcha
   "task": {
     "type": "ComplexImageTask",
     "class": "hcaptcha",
+    "exampleImagesBase64":[“/9j/4AAQSkZJRgABAQEAAAAAAAD…”, “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, “/9j/4AAQSkZJRgABAQEAAAAAAAD…”],
     "imagesBase64": [ “/9j/4AAQSkZJRgABAQEAAAAAAAD…” ],
     "metadata": {
       "Task": "Please click on the panda"
