@@ -126,7 +126,8 @@ const config = {
           'json',
           'java',
           'bash',
-          'csharp'
+          'csharp',
+          'http'
         ],
       },
     }),

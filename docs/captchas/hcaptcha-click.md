@@ -9,7 +9,9 @@ sidebar_label: ComplexImageTask HCaptcha
 ## **Запрос на создание задачи**
 ### **Структура отправляемого объекта**
 :::info Метод
-`<https://api.capmonster.cloud/createTask>`
+```http
+https://api.capmonster.cloud/createTask
+```
 :::
 |**Параметр**|**Тип**|**Обязательный**|**Возможные значения**|**Описание**|
 | :- | :- | :- | :- | :- |
@@ -26,7 +28,9 @@ sidebar_label: ComplexImageTask HCaptcha
 
 ## **Запрос на получение ответа**
 :::info Метод
-`<https://api.capmonster.cloud/getTaskResult>`
+```http
+https://api.capmonster.cloud/getTaskResult
+```
 :::
 Используйте метод [getTaskResult](../api/methods/get-task-result.md) чтобы получить решение капчи. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 300мс до 6 с.
 
@@ -81,7 +85,9 @@ sidebar_label: ComplexImageTask HCaptcha
 ### **Пример запроса**
 
 :::info Метод
-`<https://api.capmonster.cloud/createTask>`
+```http
+https://api.capmonster.cloud/createTask
+```
 :::
 ```json
 {
@@ -110,7 +116,9 @@ sidebar_label: ComplexImageTask HCaptcha
 
 ### **Получение результата**
 :::info Метод
-`<https://api.capmonster.cloud/getTaskResult>`
+```http
+https://api.capmonster.cloud/getTaskResult
+```
 :::
 Тип получаемого ответа - [**Grid**](#тип-ответа-grid).
 
@@ -147,7 +155,9 @@ sidebar_label: ComplexImageTask HCaptcha
 ### **Пример запроса**
 
 :::info Метод
-`<https://api.capmonster.cloud/createTask>`
+```http
+https://api.capmonster.cloud/createTask
+```
 :::
 ```json
 {
@@ -175,7 +185,9 @@ sidebar_label: ComplexImageTask HCaptcha
 
 ### **Получение результата**
 :::info Метод
-`<https://api.capmonster.cloud/getTaskResult>`
+```http
+https://api.capmonster.cloud/getTaskResult
+```
 :::
 Тип получаемого ответа - [**Coordinate**](#тип-ответа-coordinate).
 
@@ -206,7 +218,9 @@ sidebar_label: ComplexImageTask HCaptcha
 ### **Пример запроса**
 
 :::info Метод
-`<https://api.capmonster.cloud/createTask>`
+```http
+https://api.capmonster.cloud/createTask
+```
 :::
 
 ```json
@@ -235,7 +249,9 @@ sidebar_label: ComplexImageTask HCaptcha
 
 ### **Получение результата**
 :::info Метод
-`<https://api.capmonster.cloud/getTaskResult>`
+```http
+https://api.capmonster.cloud/getTaskResult
+```
 :::
 Тип получаемого ответа - [**Grid**](#тип-ответа-grid).
 
@@ -269,7 +285,9 @@ sidebar_label: ComplexImageTask HCaptcha
 ### **Пример запроса**
 
 :::info Метод
-`<https://api.capmonster.cloud/createTask>`
+```http
+https://api.capmonster.cloud/createTask
+```
 :::
 
 ```json
@@ -307,7 +325,9 @@ sidebar_label: ComplexImageTask HCaptcha
 
 ### **Получение результата**
 :::info Метод
-`<https://api.capmonster.cloud/getTaskResult>`
+```http
+https://api.capmonster.cloud/getTaskResult
+```
 :::
 Тип получаемого ответа - [**Grid**](#тип-ответа-grid).
 
