@@ -148,7 +148,7 @@ https://api.capmonster.cloud/getTaskResult
 :::info Передавайте референсные изображения для лучшего решения
 Изображения которые находятся в шапке задания если они есть, необходимо передавать в параметре `exampleImagesBase64` или `exampleImageUrls`
 
-![](reference-example.png)
+![small-size](reference-example.png)
 
 :::
 
