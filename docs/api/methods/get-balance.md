@@ -6,9 +6,9 @@ sidebar_label: getBalance
 # getBalance : получение баланса
 
 :::info Адрес метода
-
-## `<https://api.capmonster.cloud/getBalance>`
-
+```http
+https://api.capmonster.cloud/getBalance
+```
 формат запроса: `JSON POST`
 :::
 

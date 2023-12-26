@@ -9,9 +9,9 @@ sidebar_position: 0
 В данном разделе вы можете изучить способы отправки капч в CapMonster Cloud и методы распознавания.
 
 :::info Адрес метода
-
-## `<https://api.capmonster.cloud>`
-
+```http
+https://api.capmonster.cloud
+```
 Формат запроса: `JSON POST`.
 Формат ответа всегда в формате `JSON`.
 :::

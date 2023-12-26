@@ -14,8 +14,10 @@ sidebar_position: 6
 
 ### Пример
 
-`POST <https://api.capmonster.cloud/createTask>`
-
+POST 
+```http
+https://api.capmonster.cloud/createTask
+```
 ```json
 {
 

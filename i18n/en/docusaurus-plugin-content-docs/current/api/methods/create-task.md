@@ -9,8 +9,9 @@ sidebar_label: createTask
 This method creates a task for solving selected captcha type. In the parameters you need to pass the client authorization data, typed task data and other optional parameters.
 
 :::info Method address
-
-## `<https://api.capmonster.cloud/createTask>`
+```http
+https://api.capmonster.cloud/createTask
+```
 
 Request format: `JSON POST`
 :::

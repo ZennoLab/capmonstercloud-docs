@@ -32,7 +32,9 @@ If the proxy is authorized by IP, then be sure to add **116.203.55.208** to the 
 ## **Request example**
 
 :::info Method
-`<https://api.capmonster.cloud/createTask>`
+```http
+https://api.capmonster.cloud/createTask
+```
 :::
 
 ### FunCaptchaTask (With proxy)
@@ -81,7 +83,9 @@ If the proxy is authorized by IP, then be sure to add **116.203.55.208** to the 
 ## **Getting result**
 
 :::info Method
-`<https://api.capmonster.cloud/getTaskResult>`
+```http
+https://api.capmonster.cloud/getTaskResult
+```
 :::
 
 Use the [getTaskResult](../api/methods/get-task-result.md) method to request answer for FunCaptcha. You will get response within 10 - 30 secs period depending on service workload.

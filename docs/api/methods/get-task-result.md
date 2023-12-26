@@ -8,9 +8,9 @@ sidebar_label: getTaskResult
 После того как создали задание на решение, необходимо получить его ответ периодически проверяя статус решения.
 
 :::info Адрес метода
-
-## `<https://api.capmonster.cloud/getTaskResult/>`
-
+```http
+https://api.capmonster.cloud/getTaskResult/
+```
 формат запроса: `JSON POST`
 :::
 
