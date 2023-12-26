@@ -14,7 +14,10 @@ In order to have a guaranteed correct result, you can also pass the parameter  *
 
 ### Example
 
-`POST <https://api.capmonster.cloud/createTask>`
+POST
+```http
+https://api.capmonster.cloud/createTask
+ ```
 
 ```json
 {

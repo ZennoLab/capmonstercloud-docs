@@ -23,7 +23,9 @@ draft: true
 ## **Пример запроса**
 
 :::info Метод
-`<https://api.capmonster.cloud/createTask>`
+```http
+https://api.capmonster.cloud/createTask
+```
 :::
 
 ```json

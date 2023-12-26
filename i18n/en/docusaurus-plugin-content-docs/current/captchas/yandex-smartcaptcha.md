@@ -23,7 +23,9 @@ The object contains data about the Yandex SmartCaptcha task solving.
 ## **Request example**
 
 :::info Method
-`<https://api.capmonster.cloud/createTask>`
+```http
+https://api.capmonster.cloud/createTask
+```
 :::
 
 ```json

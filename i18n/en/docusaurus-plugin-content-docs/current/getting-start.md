@@ -7,9 +7,9 @@ sidebar_position: 0
 In this section you can learn how to send captchas to CapMonster Cloud and methods for recognizing them.
 
 :::info Method address
-
-## `<https://api.capmonster.cloud>`
-
+```http
+https://api.capmonster.cloud
+```
 Request format: `JSON POST`.
 Response is always in the `JSON` format.
 :::

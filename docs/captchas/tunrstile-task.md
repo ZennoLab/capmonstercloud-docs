@@ -58,7 +58,9 @@ sidebar_label: TurnstileTask
 ## **Обычный Turnstile:**
 ### **Пример запроса**
 :::info Метод
-`<https://api.capmonster.cloud/createTask>`
+```http
+https://api.capmonster.cloud/createTask
+```
 :::
 
 ### TurnstileTask (С использованием прокси)
@@ -102,7 +104,9 @@ sidebar_label: TurnstileTask
 ## **Cloudflare challenge**
 ### **Пример запроса**
 :::info Метод
-`<https://api.capmonster.cloud/createTask>`
+```http
+https://api.capmonster.cloud/createTask
+```
 :::
 
 ### TurnstileTask (С использованием прокси)

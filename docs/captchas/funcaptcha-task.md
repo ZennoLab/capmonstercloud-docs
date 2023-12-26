@@ -32,7 +32,9 @@ sidebar_label: FunCaptchaTask
 ## **Пример запроса**
 
 :::info Метод
-`<https://api.capmonster.cloud/createTask>`
+```http
+https://api.capmonster.cloud/createTask
+```
 :::
 
 ### FunCaptchaTask (С использованием прокси)
@@ -81,7 +83,9 @@ sidebar_label: FunCaptchaTask
 ## **Получение результата**
 
 :::info Метод
-`<https://api.capmonster.cloud/getTaskResult>`
+```http
+https://api.capmonster.cloud/getTaskResult
+```
 :::
 
 Используйте метод [getTaskResult](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/557078/getTaskResult) чтобы получить решение FunCaptcha. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 10 с до 30 с.

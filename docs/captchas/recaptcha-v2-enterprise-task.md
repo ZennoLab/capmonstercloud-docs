@@ -82,7 +82,9 @@ Object.defineProperty(window, 'grecaptcha', {
 ## **Пример запроса**
 
 :::info Метод
-`<https://api.capmonster.cloud/createTask>`
+```http
+https://api.capmonster.cloud/createTask
+```
 :::
 
 ### RecaptchaV2EnterpriseTask (С использованием прокси)

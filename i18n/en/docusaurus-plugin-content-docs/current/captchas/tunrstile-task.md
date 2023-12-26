@@ -59,7 +59,9 @@ These parameters are in the object that is passed during captcha creation in `wi
 ### **Request example**
 
 :::info Method
-`<https://api.capmonster.cloud/createTask>`
+```http
+https://api.capmonster.cloud/createTask
+```
 :::
 
 ### TurnstileTask (with a proxy)
@@ -103,7 +105,9 @@ These parameters are in the object that is passed during captcha creation in `wi
 ## **Cloudflare challenge**
 ### **Request example**
 :::info Method
-`<https://api.capmonster.cloud/createTask>`
+```http
+https://api.capmonster.cloud/createTask
+```
 :::
 
 ### TurnstileTask (with a proxy)

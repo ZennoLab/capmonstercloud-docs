@@ -82,7 +82,9 @@ Object.defineProperty(window, 'grecaptcha', {
 ## **Request example**
 
 :::info Method
-`<https://api.capmonster.cloud/createTask>`
+```http
+https://api.capmonster.cloud/createTask
+```
 :::
 
 ### RecaptchaV2EnterpriseTask (with proxy)
@@ -132,7 +134,9 @@ Object.defineProperty(window, 'grecaptcha', {
 
 ## **Getting the result**
 :::info Method
-`<https://api.capmonster.cloud/getTaskResult>`
+```http
+https://api.capmonster.cloud/getTaskResult
+```
 :::
 
 Use the [getTaskResult](../api/methods/get-task-result.md) method to request answer for ReCaptcha2. You will get response within 10 - 80 sec period depending on service workload.

@@ -21,7 +21,10 @@ When creating a task, unlike ReCaptcha2, you should additionally pass two parame
 
 ## **Request example**
 
-**Address:** `<https://api.capmonster.cloud/createTask>`
+**Address:** 
+```http
+https://api.capmonster.cloud/createTask
+```
 
 ```json
 {
