@@ -46,7 +46,9 @@ V4 (captcha_id = gt)
 ### **Request example**
 
 :::info Method
-`<https://api.capmonster.cloud/createTask>`
+```http
+https://api.capmonster.cloud/createTask
+```
 :::
 
 ### GeeTestTask (With proxy)
@@ -94,7 +96,9 @@ V4 (captcha_id = gt)
 
 ### **Getting the result**
 :::info Method
-`<https://api.capmonster.cloud/getTaskResult>`
+```http
+https://api.capmonster.cloud/getTaskResult
+```
 :::
 Use the [getTaskResult](../api/methods/get-task-result.md) method to get the result of GeeTest recognition. Depending on the system load, you will receive a response after a time in the range from 10 s to 30 s.
 
@@ -123,7 +127,9 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the res
 ## **GeeTest V4**
 ### **Request example**
 :::info Method
-`<https://api.capmonster.cloud/createTask>`
+```http
+https://api.capmonster.cloud/createTask
+```
 :::
 
 ### GeeTestTask (With proxy)
@@ -175,7 +181,9 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the res
 
 ### **Getting the result**
 :::info Method
-`<https://api.capmonster.cloud/getTaskResult>`
+```http
+https://api.capmonster.cloud/getTaskResult
+```
 :::
 Use the [getTaskResult](../api/methods/get-task-result.md) to get the result of GeeTest recognition. Depending on the system load, you will receive a response after a time in the range from 10 s to 30 s.
 

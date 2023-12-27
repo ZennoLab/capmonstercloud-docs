@@ -46,7 +46,9 @@ V4 (captcha_id = gt)
 ### **Пример запроса**
 
 :::info Метод
-`<https://api.capmonster.cloud/createTask>`
+```http
+https://api.capmonster.cloud/createTask
+```
 :::
 
 ### GeeTestTask (С использованием прокси)
@@ -94,7 +96,9 @@ V4 (captcha_id = gt)
 
 ### **Получение результата**
 :::info Метод
-`<https://api.capmonster.cloud/getTaskResult>`
+```http
+https://api.capmonster.cloud/getTaskResult
+```
 :::
 Используйте метод [getTaskResult](../api/methods/get-task-result.md) чтобы получить решение GeeTest. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 10 с до 30 с.
 
@@ -122,7 +126,9 @@ V4 (captcha_id = gt)
 ## **GeeTest V4**
 ### **Пример запроса**
 :::info Метод
-`<https://api.capmonster.cloud/createTask>`
+```http
+https://api.capmonster.cloud/createTask
+```
 :::
 
 ### GeeTestTask (С использованием прокси)
@@ -174,7 +180,9 @@ V4 (captcha_id = gt)
 
 ### **Получение результата**
 :::info Метод
-`<https://api.capmonster.cloud/getTaskResult>`
+```http
+https://api.capmonster.cloud/getTaskResult
+```
 :::
 Используйте метод [getTaskResult](../api/methods/get-task-result.md) чтобы получить решение GeeTest. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 10 с до 30 с.
 

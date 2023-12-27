@@ -75,7 +75,9 @@ Response:
 **Create a request:**
 
 :::info Method
-`<https://api.capmonster.cloud/createTask>`
+```http
+https://api.capmonster.cloud/createTask
+```
 :::
 
 ```json
@@ -134,7 +136,9 @@ Response:
 **Create a request:**
 
 :::info Method
-`<https://api.capmonster.cloud/createTask>`
+```http
+https://api.capmonster.cloud/createTask
+```
 :::
 
 ```json

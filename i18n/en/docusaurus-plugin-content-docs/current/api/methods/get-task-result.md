@@ -8,9 +8,9 @@ sidebar_label: getTaskResult
 After you have created a task, you need to get its response by periodically checking the solving status.
 
 :::info Method address
-
-## `<https://api.capmonster.cloud/getTaskResult/>`
-
+```http
+https://api.capmonster.cloud/getTaskResult/
+```
 request format: `JSON POST`
 :::
 

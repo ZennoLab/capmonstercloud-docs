@@ -6,8 +6,9 @@ sidebar_label: getBalance
 # getBalance : retrieve account balance
 
 :::info Method address
-
-## `<https://api.capmonster.cloud/getBalance>`
+```http
+https://api.capmonster.cloud/getBalance
+```
 
 request format: `JSON POST`
 :::

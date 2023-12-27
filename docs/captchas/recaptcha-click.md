@@ -23,7 +23,9 @@ sidebar_label: ComplexImageTask Recaptcha
 ## **Пример запроса**
 
 :::info Метод
-`<https://api.capmonster.cloud/createTask>`
+```http
+https://api.capmonster.cloud/createTask
+```
 :::
 ```json
 {
@@ -54,7 +56,9 @@ sidebar_label: ComplexImageTask Recaptcha
 ```
 ### **Получение результата**
 :::info Метод
-`<https://api.capmonster.cloud/getTaskResult>`
+```http
+https://api.capmonster.cloud/getTaskResult
+```
 :::
 Используйте метод [getTaskResult](../api/methods/get-task-result.md) чтобы получить решение капчи. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 300мс до 6 с.
 

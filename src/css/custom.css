@@ -209,3 +209,5 @@ code {
     filter: brightness(0) invert(1);
   }
 }
+
+img[alt=small-size] { width: 200px; }

@@ -10,11 +10,15 @@ We need reports so that we automatically analize data on the quality of token is
 
 
 :::tip For captcha images reports
-### [https://api.capmonster.cloud/reportIncorrectImageCaptcha](https://api.capmonster.cloud/reportIncorrectImageCaptcha)
+```http
+https://api.capmonster.cloud/reportIncorrectImageCaptcha
+```
 :::
 
 :::tip For token-captcha reports: recaptcha(2,3, enterprise), hcaptcha, geetest, funcaptcha, turnstile.
-### [https://api.capmonster.cloud/reportIncorrectTokenCaptcha](https://api.capmonster.cloud/reportIncorrectTokenCaptcha)
+```http
+https://api.capmonster.cloud/reportIncorrectTokenCaptcha
+```
 
 Also supported paths:
 

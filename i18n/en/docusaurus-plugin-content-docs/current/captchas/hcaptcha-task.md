@@ -46,7 +46,9 @@ The supported image types are as follows:
 ## **Request example**
 
 :::info Method
-`<https://api.capmonster.cloud/createTask>`
+```http
+https://api.capmonster.cloud/createTask
+```
 :::
 ### HCaptchaTask (with a proxy)
 ```json
@@ -91,7 +93,9 @@ The supported image types are as follows:
 ```
 ## **Getting result**
 :::info Method
-`<https://api.capmonster.cloud/getTaskResult>`
+```http
+https://api.capmonster.cloud/getTaskResult
+```
 :::
 Use the [getTaskResult](../api/methods/get-task-result.md) method to request answer for hCaptcha. You will get response within 10 - 80 secs period depending on service workload.
 

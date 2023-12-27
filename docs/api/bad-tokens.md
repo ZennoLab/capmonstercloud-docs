@@ -10,16 +10,20 @@
 
 
 :::tip Для жалоб на капчи-картинки
-### [https://api.capmonster.cloud/reportIncorrectImageCaptcha](https://api.capmonster.cloud/reportIncorrectImageCaptcha)
+```http
+https://api.capmonster.cloud/reportIncorrectImageCaptcha
+```
 :::
 
 :::tip Для жалоб на токен-капчи: recaptcha(2,3, enterprise), hcaptcha, geetest, funcaptcha, turnstile.
-### [https://api.capmonster.cloud/reportIncorrectTokenCaptcha](https://api.capmonster.cloud/reportIncorrectTokenCaptcha)
+```http
+https://api.capmonster.cloud/reportIncorrectTokenCaptcha
+```
 
 Также поддерживаются пути:
 
-[https://api.capmonster.cloud/reportIncorrectRecaptcha](https://api.capmonster.cloud/reportIncorrectRecaptcha), 
-[https://api.capmonster.cloud/reportIncorrectHcaptcha](https://api.capmonster.cloud/reportIncorrectHcaptcha) работают аналогично [reportIncorrectTokenCaptcha](https://api.capmonster.cloud/reportIncorrectTokenCaptcha)
+https://api.capmonster.cloud/reportIncorrectRecaptcha , 
+https://api.capmonster.cloud/reportIncorrectHcaptcha работают аналогично https://api.capmonster.cloud/reportIncorrectTokenCaptcha
 :::
 
 

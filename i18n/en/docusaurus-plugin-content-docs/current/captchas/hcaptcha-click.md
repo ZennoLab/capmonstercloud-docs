@@ -9,7 +9,9 @@ The object contains data about the task for solving hCaptcha.
 ## **Request to create a task**
 ### **Structure of the sent object**
 :::info Method
-`<https://api.capmonster.cloud/createTask>`
+```http
+https://api.capmonster.cloud/createTask
+```
 :::
 |**Parameter**|**Type**|**Required**|**Possible values**|**Description**|
 | :- | :- | :- | :- | :- |
@@ -26,7 +28,9 @@ The object contains data about the task for solving hCaptcha.
 
 ## **Request for a response**
 :::info Method
-`<https://api.capmonster.cloud/getTaskResult>`
+```http
+https://api.capmonster.cloud/getTaskResult
+```
 :::
 Use the [getTaskResult](../api/methods/get-task-result.md) method to get the captcha solution. Depending on the system load, you will receive a response after a time ranging from 300ms to 6s.
 
@@ -81,7 +85,9 @@ This task type does not contain a reference image, such as [fourth type](#image-
 ### **Request example**
 
 :::info Method
-`<https://api.capmonster.cloud/createTask>`
+```http
+https://api.capmonster.cloud/createTask
+```
 :::
 ```json
 {
@@ -110,7 +116,9 @@ This task type does not contain a reference image, such as [fourth type](#image-
 
 ### **Getting a result**
 :::info Method
-`<https://api.capmonster.cloud/getTaskResult>`
+```http
+https://api.capmonster.cloud/getTaskResult
+```
 :::
 Type of received response - [**Grid**](#grid-response-type).
 
@@ -137,10 +145,19 @@ Type of received response - [**Grid**](#grid-response-type).
 |![](Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.002.png)|![](Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.003.png)|![](Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.004.png)|
 | :-: | :-: | :-: |
 
+:::info Share reference images for better results
+Images that are in the task header, if any, should be passed in the `exampleImagesBase64` or `exampleImageUrls` parameter
+
+![small-size](reference-example.png)
+
+:::
+
 ### **Request example**
 
 :::info Method
-`<https://api.capmonster.cloud/createTask>`
+```http
+https://api.capmonster.cloud/createTask
+```
 :::
 ```json
 {
@@ -148,6 +165,7 @@ Type of received response - [**Grid**](#grid-response-type).
   "task": {
     "type": "ComplexImageTask",
     "class": "hcaptcha",
+    "exampleImagesBase64":[“/9j/4AAQSkZJRgABAQEAAAAAAAD…”, “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, “/9j/4AAQSkZJRgABAQEAAAAAAAD…”],
     "imagesBase64": [ “/9j/4AAQSkZJRgABAQEAAAAAAAD…” ],
     "metadata": {
       "Task": "Please click on the panda"
@@ -167,7 +185,9 @@ Type of received response - [**Grid**](#grid-response-type).
 
 ### **Getting a result**
 :::info Method
-`<https://api.capmonster.cloud/getTaskResult>`
+```http
+https://api.capmonster.cloud/getTaskResult
+```
 :::
 Type of received response - [**Coordinate**](#coordinate-response-type).
 
@@ -198,7 +218,9 @@ This type of captcha should contain the **metadata.Classes** field.
 ### **Request example**
 
 :::info Method
-`<https://api.capmonster.cloud/createTask>`
+```http
+https://api.capmonster.cloud/createTask
+```
 :::
 
 ```json
@@ -227,7 +249,9 @@ This type of captcha should contain the **metadata.Classes** field.
 
 ### **Getting a result**
 :::info Method
-`<https://api.capmonster.cloud/getTaskResult>`
+```http
+https://api.capmonster.cloud/getTaskResult
+```
 :::
 Type of received response - [**Grid**](#grid-response-type).
 
@@ -261,7 +285,9 @@ The **imageUrls** or **imagesBase64** field should contain 9 images.
 ### **Request example**
 
 :::info Method
-`<https://api.capmonster.cloud/createTask>`
+```http
+https://api.capmonster.cloud/createTask
+```
 :::
 
 ```json
@@ -299,7 +325,9 @@ The **imageUrls** or **imagesBase64** field should contain 9 images.
 
 ### **Getting a result**
 :::info Method
-`<https://api.capmonster.cloud/getTaskResult>`
+```http
+https://api.capmonster.cloud/getTaskResult
+```
 :::
 Type of received response - [**Grid**](#grid-response-type).
 
