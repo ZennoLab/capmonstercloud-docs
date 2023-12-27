@@ -15,7 +15,7 @@ https://api.capmonster.cloud/reportIncorrectImageCaptcha
 ```
 :::
 
-:::tip For token-captcha reports: recaptcha(2,3, enterprise), hcaptcha, geetest, funcaptcha, turnstile.
+:::tip For token-captcha reports: recaptcha(2,3, enterprise), hcaptcha, geetest, turnstile.
 ```http
 https://api.capmonster.cloud/reportIncorrectTokenCaptcha
 ```

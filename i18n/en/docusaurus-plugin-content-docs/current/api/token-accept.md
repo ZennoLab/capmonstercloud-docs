@@ -63,4 +63,3 @@ In the example below, the parameter is added to the very end.
 - [ReCaptchaV2](../captchas/no-captcha-task.md)
 - [ReCaptchaV3](../captchas/recaptcha-v3-task.md)
 - [HCaptcha](../captchas/hcaptcha-task.md)
-- [FunCaptcha](../captchas/funcaptcha-task.md)

@@ -14,8 +14,8 @@ export default function Home() {
   const titleEn = 'CapMonster Cloud Docs | How to Bypass Any Type of Captcha '
   const title = i18n.currentLocale === 'ru' ? titleRu : titleEn;
 
-  const descriptionRu = 'Как обходить  reCAPTCHA, hCaptcha, FunCaptcha и другие типы капчи при помощи CapMonster Cloud.';
-  const descriptionEn = 'How to  bypass  reCAPTCHA, hCaptcha, FunCaptcha and other types of captcha by CapMonster Cloud.'
+  const descriptionRu = 'Как обходить  reCAPTCHA, hCaptcha и другие типы капчи при помощи CapMonster Cloud.';
+  const descriptionEn = 'How to  bypass  reCAPTCHA, hCaptcha and other types of captcha by CapMonster Cloud.'
   const description = i18n.currentLocale === 'ru' ? descriptionRu : descriptionEn;
 
 

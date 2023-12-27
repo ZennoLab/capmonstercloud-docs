@@ -15,7 +15,7 @@ https://api.capmonster.cloud/reportIncorrectImageCaptcha
 ```
 :::
 
-:::tip Для жалоб на токен-капчи: recaptcha(2,3, enterprise), hcaptcha, geetest, funcaptcha, turnstile.
+:::tip Для жалоб на токен-капчи: recaptcha(2,3, enterprise), hcaptcha, geetest, turnstile.
 ```http
 https://api.capmonster.cloud/reportIncorrectTokenCaptcha
 ```
