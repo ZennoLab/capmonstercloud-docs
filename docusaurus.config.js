@@ -82,9 +82,9 @@ const config = {
       //   isCloseable: false,
       // },
       algolia: {
-        appId: 'MILBEXBQOC',
-        apiKey: 'a2dea160d731dd434ddd0777c4f0b77e',
-        indexName: 'capmonster',
+        appId: 'IUKL1ONOLG',
+        apiKey: 'df90fcc07870b0dfda29e86e993cda42',
+        indexName: 'capmonster-cloud-netlify',
         contextualSearch: true,
       },
       // Replace with your project's social card
