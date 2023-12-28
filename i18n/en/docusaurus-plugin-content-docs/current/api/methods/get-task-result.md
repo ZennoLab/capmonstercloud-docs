@@ -9,7 +9,7 @@ After you have created a task, you need to get its response by periodically chec
 
 :::info Method address
 ```http
-https://api.capmonster.cloud/getTaskResult/
+https://api.capmonster.cloud/getTaskResult
 ```
 request format: `JSON POST`
 :::

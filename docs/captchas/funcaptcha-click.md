@@ -1,6 +1,7 @@
 ﻿---
 sidebar_position: 9
 sidebar_label: ComplexImageTask Funcaptcha
+draft: true
 ---
 
 # ComplexImageTask Funcaptcha
