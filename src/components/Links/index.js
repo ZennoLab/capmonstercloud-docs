@@ -50,7 +50,7 @@ export default function Links() {
     {
       title: isRULocale ? 'Техподдержка' : 'Support',
       Svg: require('@site/static/img/Sup_icon.svg').default,
-      desciption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore',
+      desciption: isRULocale ? 'Техническая поддержка, на которую можно положиться' : 'Technical support you can rely on',
       image: '/img/Sup_img.png',
       linkUrl: 'https://helpdesk.zennolab.com/conversation/new'
     },
