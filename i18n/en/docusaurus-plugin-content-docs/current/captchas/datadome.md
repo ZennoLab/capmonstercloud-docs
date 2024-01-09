@@ -5,7 +5,9 @@ sidebar_label: DataDome
 
 # DataDome
 
+:::warning **Attention!**
 This task will be performed using our proxy servers. Use the received cookies in your project to automatically pass the captcha.
+:::
 
 ## **Object structure**
 
