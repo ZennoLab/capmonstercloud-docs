@@ -17,7 +17,7 @@ sidebar_label: HCaptchaTask
 |websiteURL|String|да|Адрес страницы на которой решается капча.|
 |websiteKey|String|да|Ключ-идентификатор hCaptcha на целевой странице.|
 |isInvisible|Bool|нет|true, если hCaptcha невидимая.|
-|data|String|нет|<p>Дополнительный параметр, используемый в основном с `isInvisible=true`.|
+|data|String|нет|<p>Дополнительный параметр, используемый в основном с `isInvisible=true`.</p>|
 |proxyType|String|да (При использовании **HCaptchaTask**)|**http** - обычный http/https прокси<br />**https** - попробуйте эту опцию только если "http" не работает (требуется для некоторых кастомных прокси)<br />**socks4** - socks4 прокси<br />**socks5** - socks5 прокси|
 |proxyAddress|String|да (При использовании **HCaptchaTask**)|<p>IP адрес прокси IPv4/IPv6. Не допускается:</p><p>- использование имен хостов</p><p>- использование прозрачных прокси (там где можно видеть IP клиента)</p><p>- использование прокси на локальных машинах</p>|
 |proxyPort|Integer|да (При использовании **HCaptchaTask**)|Порт прокси|
