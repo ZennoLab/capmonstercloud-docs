@@ -6,7 +6,9 @@ sidebar_label: HCaptchaTask
 # HCaptchaTask
 The object contains data for hCaptcha solving task. To provide solid universality for solving this type of task we have reproduce every piece of environment used for an automation task you plan to complete. This includes: proxy access, browser's user-agent, cookies (optionally). This approach will eliminate all possible obstacles which might implement in the future.
 
-This type of captcha might be solved a bit longer than usual image captcha, but this issue is compensated by the fact that g-captcha-response value we send to you is valid for the next 60 seconds after we solves your hCaptcha.
+This type of captcha might be solved a bit longer than usual image captcha, but this issue is compensated by the fact that g-captcha-response value we send to you is valid for the next 60 seconds after we solves your Captcha.
+
+**Important!** If you are experiencing issues with accepting hcaptcha token, please contact CapMonster Cloud support with the provided url and sitekey. We will try to solve this issue as soon as possible.
 
 ## **Object structure**
 
@@ -16,13 +18,13 @@ This type of captcha might be solved a bit longer than usual image captcha, but 
 |websiteURL|String|yes|Address of a webpage with hCaptcha.|
 |websiteKey|String|yes|hCaptcha website key.|
 |isInvisible|Bool|no|Use true for invisible version of hCaptcha.|
-|data|String|no|<p>Custom data that is used in some implementations of hCaptcha, mostly with `isInvisible=true`.</p><p>Important: you MUST provide `userAgent` if you submit captcha with data parameter. The value should match the `User-Agent` you use when interacting with the target website.</p><p>**Pass only the actual UA from Windows OS. Now this is version 120: “Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36”**</p>|
+|data|String|no|<p>Custom data that is used in some implementations of hCaptcha, mostly with `isInvisible=true`.</p>|
 |proxyType|String|yes (for **HCaptchaTask**)|**http** - regular http/https proxy;<br />**https** - try this option only if "http" does not work (required for some custom proxies);<br />**socks4** - socks4 proxy;<br />**socks5** - socks5 proxy.|
 |proxyAddress|String|yes (for **HCaptchaTask**)|<p>IP proxy address IPv4/IPv6. Not allowed:</p><p>- using hostnames;</p><p>- using transparent proxies (where you can see the client’s IP);</p><p>- using proxies on local machines.</p>|
 |proxyPort|Integer|yes (for **HCaptchaTask**)|Proxy port.|
 |proxyLogin|String|no|Proxy server login.|
 |proxyPassword|String|no|Proxy server password.|
-|userAgent|String|no|<p>The browser User-Agent used in the emulation. You must use a modern browser signature or Google will return an error asking you to update your browser.</p><p>**Pass only the actual UA from Windows OS. Now this is version 120: “Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36”**</p>|
+|userAgent|String|no|**Pass only the actual UA from Windows OS. Now this is version 120: “Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36”**|
 |cookies|String|no|<p>Additional cookies which we must use during interaction with target page.</p><p>**Format**: cookiename1=cookievalue1; cookiename2=cookievalue2</p>|
 |fallbackToActualUA|Bool|no|<p>**true** - when specifying this parameter, we ignore the irrelevant User Agent that users send in the request, and return our own (relevant) one with getTaskResult. This will improve the acceptance of tokens.</p><p>**false** - we insert the User Agent that is specified in the request. If the User Agent is invalid, you will receive an error ERROR_WRONG_USERAGENT (USERAGENT IS EXPIRED in the log).</p>|
 
