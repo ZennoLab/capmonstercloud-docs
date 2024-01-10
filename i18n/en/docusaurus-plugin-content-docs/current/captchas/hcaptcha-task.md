@@ -8,14 +8,6 @@ The object contains data for hCaptcha solving task. To provide solid universalit
 
 This type of captcha might be solved a bit longer than usual image captcha, but this issue is compensated by the fact that g-captcha-response value we send to you is valid for the next 60 seconds after we solves your hCaptcha.
 
-:::warning **Attention!**
-hCaptcha seems to have limit of solved tasks from one IP, about 3 items per 12 hours. Take this into account when you build solving process through your proxy.
-:::
-
-:::warning **Attention!**
-Proxies with IP authorization are not yet supported.
-:::
-
 ## **Object structure**
 
 |**Parameter**|**Type**|**Required**|**Value**|
