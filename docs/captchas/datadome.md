@@ -31,12 +31,12 @@ https://api.capmonster.cloud/createTask
     "clientKey": "dce6bcbb1a728ea8d871de6d169a2057",
     "task": {
         "type": "CustomTask",
-		"class": "DataDome",
+        "class": "DataDome",
         "websiteURL": "site.com",
         "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         "metadata": {
-		  "captchaUrl": "https://geo.captcha-delivery.com/captcha/?initialCid=12434324"
-		 }
+            "captchaUrl": "https://geo.captcha-delivery.com/captcha/?initialCid=12434324"
+        }
     }
 }
 ```
