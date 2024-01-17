@@ -69,7 +69,7 @@ By default the installed extension is hidden. To pin it you have to click on the
 
 After launching the extension you’ll see this window:
 
-![](pin2.png)
+![](ext.screen.en.png)
 ### <a name="id-browserextension-apikey"></a>**API key**
 Enter API key in the corresponding field(1), press save button(2). If you entered the correct key, your balance will be displayed below(3).
 
@@ -77,7 +77,7 @@ Enter API key in the corresponding field(1), press save button(2). If you entere
 ### <a name="id-browserextension-automaticcaptchasolving"></a>**Automated captcha solving**
 Here you can select the types of captchas that the extension will recognize automatically.
 
-![](automated-captcha-solving.png)
+![](extension.example.png)
 
 :::info !
 
