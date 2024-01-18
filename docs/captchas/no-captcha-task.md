@@ -27,6 +27,7 @@ sidebar_label: RecaptchaV2Task
 |proxyPassword|String|нет|Пароль прокси-сервера|
 |userAgent|String|нет|User-Agent браузера, используемый в эмуляции. Необходимо использовать подпись современного браузера, иначе Google будет возвращать ошибку, требуя обновить браузер.|
 |cookies|String|нет|<p>Дополнительные cookies которые мы должны использовать во время взаимодействия с целевой страницей.</p><p>**Формат**: cookiename1=cookievalue1; cookiename2=cookievalue2</p>|
+|isInvisible|bool|нет|true, если капча невидимая|
 
 ## **Пример запроса**
 
