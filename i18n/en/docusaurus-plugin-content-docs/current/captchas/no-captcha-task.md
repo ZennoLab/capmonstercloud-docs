@@ -27,6 +27,7 @@ If the proxy is authorized by IP, then be sure to add **116.203.55.208** to the 
 |proxyPassword|String|no|Proxy password.|
 |userAgent|String|no|Browser's User-Agent which is used in emulation. It is required that you use a signature of a modern browser, otherwise Google will ask you to "update your browser".|
 |cookies|String|no|<p>Additional cookies which we must use during interaction with target page or Google.</p><p>**Format**: cookiename1=cookievalue1; cookiename2=cookievalue2</p>|
+|isInvisible|bool|no|use true for invisible version of captcha|
 
 ## **Request example**
 
