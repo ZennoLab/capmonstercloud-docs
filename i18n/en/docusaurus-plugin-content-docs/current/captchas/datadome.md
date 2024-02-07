@@ -17,7 +17,7 @@ This task will be performed using our proxy servers. Use the received cookies in
 |class|String|yes|**DataDome**|
 |websiteURL|String|yes|Address of the main page where the captcha is solved|
 |metadata|Object|yes|The object that contains additional data about the captcha - captchaUrl: `"captchaUrl": "..."` <br /> You can take the link from the page with the captcha. Often it looks like `https://geo.captcha-delivery.com/captcha/?initialCid=...`|
-|userAgent|String|no|Browser User-Agent.<br /> **Pass only the actual UA from Windows OS. Now this is version 120**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36`|
+|userAgent|String|no|Browser User-Agent.<br /> **Pass only the actual UA from Windows OS. Now this is version 121**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36`|
 
 ## **Request example**
 
