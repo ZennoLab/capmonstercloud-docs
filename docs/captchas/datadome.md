@@ -17,7 +17,7 @@ sidebar_label: DataDome
 |class|String|да|**DataDome**|
 |websiteURL|String|да|Адрес основной страницы, на которой решается капча|
 |metadata|Object|да|Объект, который содержит дополнительные данные о капче - captchaUrl: `"captchaUrl": "..."` <br /> Ссылку можно взять со страницы с капчей. Зачастую имеет вид `https://geo.captcha-delivery.com/captcha/?initialCid=...`|
-|userAgent|String|нет|User-Agent браузера.<br /> **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является 120 версия**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36`|
+|userAgent|String|нет|User-Agent браузера.<br /> **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является 121 версия**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36`|
 
 ## **Пример запроса**
 
