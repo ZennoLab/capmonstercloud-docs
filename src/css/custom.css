@@ -6,10 +6,10 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #1E50D2;
-  --ifm-color-primary-dark: #1648c7;
-  --ifm-color-primary-darker: #0f3fb7;
-  --ifm-color-primary-darkest: #052e96;
+  --ifm-color-primary: #A54BFF;
+  --ifm-color-primary-dark: #A54BFF;
+  --ifm-color-primary-darker: #A54BFF;
+  --ifm-color-primary-darkest: #A54BFF;
   --ifm-color-primary-light: #4682E6;
   --ifm-color-primary-lighter: #5e90e8;
   --ifm-color-primary-lightest: #80aaf4;
@@ -60,12 +60,12 @@
 /* .DocSearch-Button .DocSearch-Search-Icon {
   color: white !important;
 } */
-.toggleButton_node_modules-\@docusaurus-theme-classic-lib-theme-ColorModeToggle-styles-module svg {
+/* .toggleButton_node_modules-\@docusaurus-theme-classic-lib-theme-ColorModeToggle-styles-module svg {
   color: white;
-}
-.toggleButton_node_modules-\@docusaurus-theme-classic-lib-theme-ColorModeToggle-styles-module:hover {
+} */
+/* .toggleButton_node_modules-\@docusaurus-theme-classic-lib-theme-ColorModeToggle-styles-module:hover {
   background: #87AAFF !important;
-}
+} */
 
 .menu__link {
   /* padding-left: 30px; */
@@ -85,24 +85,24 @@
 .theme-doc-sidebar-item-link-level-1:nth-child(1n) .menu__link::before {
   content: '';
   background: url('/img/18x18_start.svg');
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   margin-right: 12px;
 }
 
 .theme-doc-sidebar-item-category-level-1:nth-child(2) > .menu__list-item-collapsible .menu__link::before {
   content: '';
   background: url('/img/18x18_api.svg');
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   margin-right: 12px;
 }
 
 .theme-doc-sidebar-item-category-level-1:nth-child(3) > .menu__list-item-collapsible .menu__link::before {
   content: '';
   background: url('/img/18x18_captcha.svg');
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   margin-right: 12px;
 }
 
@@ -117,8 +117,8 @@
 .theme-doc-sidebar-item-category-level-1:nth-child(5) > .menu__list-item-collapsible .menu__link::before {
   content: '';
   background: url('/img/18x18_extension.svg');
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   margin-right: 12px;
 }
 
@@ -167,8 +167,8 @@
 }
 
 code {
-  color: #2864F0;
-  border-color: #CDDCFF;
+  color: #A54BFF;
+  border-color: #E6C8FF;
 }
 
 [data-theme='dark'] code {
@@ -180,7 +180,7 @@ code {
 
 
 .details_node_modules-\@docusaurus-theme-classic-lib-theme-Details-styles-module {
-  background: #EBF2FF;
+  background: #F5EBFF;
   border: none !important;
   font-weight: bold;
 }
