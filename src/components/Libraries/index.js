@@ -25,20 +25,6 @@ const LibrariesList = [
     customLinkName: 'Npm',
     customLinkUrl: 'https://zenno.link/cmcloud-npm-js'
   },
-  {
-    title: 'Go',
-    Svg: require('@site/static/img/Go.svg').default,
-    githubLink: 'https://zenno.link/cmcloud-github-go',
-    customLinkName: 'Pkg.go.dev',
-    customLinkUrl: 'https://zenno.link/cmcloud-pkggodev-go'
-  },
-  {
-    title: 'PHP',
-    Svg: require('@site/static/img/Php.svg').default,
-    githubLink: 'https://github.com/ZennoLab/capmonstercloud-client-php',
-    customLinkName: 'Packagist',
-    customLinkUrl: 'https://packagist.org/packages/zennolab/capmonstercloud.client'
-  },
 ];
 
 

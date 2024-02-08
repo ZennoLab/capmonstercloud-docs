@@ -2,24 +2,17 @@ import React from 'react';
 import styles from './styles.module.css';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
-function Link({title, Svg, image, desciption, linkUrl }) {
+function Link({title, image, desciption, bottomBlock }) {
   return (
     <div className={styles.linkBlock}>
       <div className={styles.imgWrap}>
         <img src={image} className={styles.linkImg} />
       </div>
-      
-
-      <div  className={styles.titleBlock}>
-        <Svg className={styles.libSvg} role="img" />
-        <a href={linkUrl} className={styles.titleWrap}>
-          <h3 className={styles.linkTitle}>{title}</h3>
-          <img src="/img/LinkArrow.svg" className={styles.linkArr}/>
-        </a>
-      </div>
+      <h3 className={styles.linkTitle}>{title}</h3>
       <div className={styles.desciption}>
         {desciption}
       </div>
+      <div className={styles.bottomBlock}>{bottomBlock && bottomBlock}</div>
     </div>
   );
 }
@@ -30,7 +23,6 @@ export default function Links() {
   const titleRu = 'Полезные ссылки';
   const titleEn = 'Useful links';
   const title = isRULocale ? titleRu : titleEn;
-  
 
   const LinksList = [
     {
@@ -62,14 +54,24 @@ export default function Links() {
         <div className={styles.mainTitle}>{title}</div>
 
         <div className={styles.libsBlock}>
-          {LinksList.map(link => (
-            <Link title={link.title}
-              Svg={link.Svg}
-              image={link.image}
-              desciption={link.desciption}
-              linkUrl={link.linkUrl}
-            />
-          ))}
+          <Link
+            title="CapBroGPT"
+            image="/img/84x84_dashboard.svg"
+            desciption="Облачный AI сервис для автоматического распознавания капч"
+            bottomBlock={<div className={styles.btn}>Перейти</div>}
+          />
+          <Link
+            title="Расширение"
+            image="/img/84x84_extention.svg"
+            desciption="Облачный AI сервис для автоматического распознавания капч"
+            bottomBlock={<div className={styles.btns}><div className={styles.btn}><img src="img/24x24_chrome.svg"/><span>Скачать</span></div><div className={styles.btn}><img src="img/24x24_firefox.svg"/><span>Скачать</span></div></div>}
+          />
+          <Link
+            title="Техподдержка"
+            image="/img/84x84_chat.svg"
+            desciption="Решение Ваших вопросов"
+            bottomBlock={<div className={styles.btn}>Обратиться</div>}
+          />
         </div>
       </div>
     </section>

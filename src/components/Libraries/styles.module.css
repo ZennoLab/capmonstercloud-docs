@@ -1,7 +1,7 @@
 .libraries {
-  background: #F4F6FA;
+  background: #ffffff;
   padding-top: 120px;
-  padding-bottom: 120px;;
+  padding-bottom: 120px;
 }
 
 .libsBlock {
@@ -29,36 +29,38 @@
   flex-shrink: 0;
 }
 .libBlock {
-  padding: 21px;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.15);
+  padding: 24px;
   border-radius: 10px;
-  background: white;
+  background: #F5F0FF;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .titleBlock {
   display: flex;
   gap: 12px;
   align-items: center;
-  margin-bottom: 36px;
 }
 .libTitle {
-  font-size: 24px;
-  color: #1E283C;
+  font-size: 18px;
+  color: #191E32;
   /* line-height: 28px; */
-  font-weight: 500;
+  font-weight: 700;
   margin: 0;
 }
 .libBtn {
   display: inline-block;
   text-decoration: none;
-  border-radius: 8px;
-  border: 1px solid #14BE82;
+  border-radius: 100px;
+  border: 1px solid #A54BFF;
   background: transparent;
-  width: 110px;
-  height: 60px;
-  line-height: 60px;
+  height: 32px;
+  line-height: 32px;
   font-weight: 500;
-  font-size: 18px;
-  color: #14BE82;
+  font-size: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
+  color: #A54BFF;
   text-align: center;
   transition: all 0.3s;
 }
@@ -69,7 +71,7 @@
 }
 .libBtn:hover {
   text-decoration: none;
-  background-color: #14BE82;
+  background-color: #A54BFF;
   color: white
 }
 .libBtns {
@@ -79,23 +81,24 @@
 }
 
 .mainTitle {
-  color: #1E283C;
-  font-weight: 600;
-  font-size: 44px;
-  line-height: 51px;
+  font-size: 50px;
+  color: #191E32;
+  /* line-height: 28px; */
+  font-weight: 700;
+  margin: 0;
+  margin-bottom: 32px;
   text-align: center;
-  margin-bottom: 30px;
 }
 
 .subTitle {
-  color: #788296;
+  color: #4B505A;
   font-weight: 400;
-  font-size: 22px;
-  line-height: 34px;
+  font-size: 16px;
+  line-height: 26px;
   text-align: center;
   padding-left: 50px;
   padding-right: 50px;
-  margin-bottom: 50px;
+  margin-bottom: 60px;
 }
 
 @media (max-width: 768px) {

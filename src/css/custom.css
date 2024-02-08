@@ -15,9 +15,9 @@
   --ifm-color-primary-lightest: #80aaf4;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-  --ifm-navbar-background-color: #1E50D2;
-  --ifm-navbar-link-color: #ffffff;
-  --ifm-navbar-link-hover-color: #d9e7ff;
+  /* --ifm-navbar-background-color: #1E50D2; */
+  /* --ifm-navbar-link-color: #ffffff; */
+  /* --ifm-navbar-link-hover-color: #d9e7ff; */
   --docsearch-searchbox-background: #3264EB;
   --ifm-h1-font-size: 2.25rem;
   --ifm-color-danger-contrast-foreground: #F04650;
@@ -123,7 +123,7 @@
 }
 
 .navbar__link:hover, .navbar__link--active {
-  color: white !important;
+  color: #A54BFF !important;
   /* font-weight: bold; */
 }
 

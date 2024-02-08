@@ -16,7 +16,51 @@ export default function Prices() {
         <div className={styles.mainTitle}>{title}</div>
 
         <div className={styles.prices}>
-          <iframe src={priceLink} />
+          <div className={styles.priceBlock}>
+            <div className={styles.blockTitle}>
+              <img src="/img/funcaptcha-icon.svg" />
+              <div className={styles.priceTitle}>FunCaptcha</div>
+            </div>
+            <div className={styles.priceTypes}>
+              <div className={styles.priceType}>
+                <div className={styles.priceTypeTitle}>
+                  <span>Цена за 1000 капч</span>
+                  <img src="/img/image-icon.svg" />
+                </div>
+                <div className={styles.itemPrice}>
+                  $0.15
+                </div>
+              </div>
+              <div className={styles.priceType}>
+                <div className={styles.priceTypeTitle}>
+                  <span>Цена за 1000 капч</span>
+                  <img src="/img/token-icon.svg" />
+                </div>
+                <div className={styles.itemPrice}>
+                  $2
+                </div>
+              </div>
+            </div>
+            <div className={styles.paramsBlock}>
+              <div className={styles.param}>
+                <div className={styles.paramTitle}>
+                  <img src="/img/20x20_speed.svg" />
+                  <span>Скорость распознавания</span>
+                </div>
+                <div className={styles.speedParam}>13 сек</div>
+              </div>
+              <div className={styles.param}>
+                <div className={styles.paramTitle}>
+                  <img src="/img/20x20_success.svg" />
+                  <span>Успешность распознавания</span>
+                </div>
+                <div className={styles.successParam}>95%</div>
+              </div>
+            </div>
+            <div className={styles.btn}>
+              Попробовать прямо сейчас
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -97,26 +97,35 @@ const config = {
         },
         items: [
           {
-            href: 'https://capmonster.cloud',
-            label: 'Capmonster.cloud',
-            position: 'right',
-          },
-          {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
-            position: 'right',
+            position: 'left',
             label: 'Документация',
           },
+          {
+            href: 'https://capmonster.cloud',
+            label: 'CapBroGPT',
+            position: 'left',
+          },
+
+          {
+            href: 'https://capmonster.cloud',
+            label: 'Панель управления',
+            position: 'left',
+          },
+
+          {
+            href: 'https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh',
+            label: 'Расширение',
+            position: 'left',
+          },
+          
           // {to: '/blog', label: 'Пресс релизы', position: 'left'},
             {
               type: 'localeDropdown',
               position: 'right',
             },
-          {
-            href: 'https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh',
-            label: 'Расширение',
-            position: 'right',
-          },
+          
         ],
       },
       prism: {
