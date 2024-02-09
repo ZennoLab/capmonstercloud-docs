@@ -9,7 +9,7 @@ include:
     BRANCH: $CI_COMMIT_BRANCH
   before_script:
     - CI_PUSH_REPO=`echo "$CI_REPOSITORY_URL $GIT_PUSH_ACCESS_TOKEN" | sed 's/^.*\(@.*\)\s\(.*\)/https:\/\/oauth2:\2\1/g'`
-    - git remote add origin $CI_PUSH_REPO
+    - git remote set-url origin $CI_PUSH_REPO
     - git config user.name "ci-bot"
     - git config user.email "ci-bot@noreply.$CI_SERVER_HOST"
     - cd $CHART_PATH
@@ -34,4 +34,26 @@ build:
     refs:
       - master
       - dev
+
+update_manifest:
+  stage: deploy
+  extends: .update
+  tags: [ deploy_to_new_k8s ]
+  variables:
+    BRANCH: $CI_COMMIT_BRANCH
+    IMAGE_REGISTRY: $CI_REGISTRY_IMAGE
+    IMAGE_TAG: $TAG.$CI_PIPELINE_IID
+    IMAGE_YAML_FILE: $CI_COMMIT_REF_NAME.image.yaml
+    # https://github.com/mikefarah/yq/tree/3.1.1
+    IMAGE_REGISTRY_YQ_CMD: "webapi.image.repository"
+    IMAGE_TAG_YQ_CMD: "webapi.image.tag"
+  script:
+    - yq w -i $IMAGE_YAML_FILE "$IMAGE_REGISTRY_YQ_CMD" $IMAGE_REGISTRY
+    - yq w -i $IMAGE_YAML_FILE "$IMAGE_TAG_YQ_CMD" $IMAGE_TAG
+    # CANNOT use "-o ci.skip" because accessing repo via "https://" rather then "git@" protocol
+    - git commit -am "update image tag $IMAGE_REGISTRY:$IMAGE_TAG in $IMAGE_YAML_FILE [ci skip]"
+      && git push -u origin HEAD:$CI_COMMIT_BRANCH
+  rules:
+  - !reference [.argocd_service_envs_rules, rules]
+
 
