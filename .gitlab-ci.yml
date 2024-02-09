@@ -9,8 +9,7 @@ include:
     BRANCH: $CI_COMMIT_BRANCH
   before_script:
     - CI_PUSH_REPO=`echo "$CI_REPOSITORY_URL $GIT_PUSH_ACCESS_TOKEN" | sed 's/^.*\(@.*\)\s\(.*\)/https:\/\/oauth2:\2\1/g'`
-    - git remote set-url origin $CI_PUSH_REPO
-    - git checkout origin/$CI_COMMIT_BRANCH
+    - git remote add origin $CI_PUSH_REPO
     - git config user.name "ci-bot"
     - git config user.email "ci-bot@noreply.$CI_SERVER_HOST"
     - cd $CHART_PATH
