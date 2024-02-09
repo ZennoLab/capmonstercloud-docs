@@ -165,7 +165,6 @@ The module is ready! You can now submit captchas to it.
 
 There are several ways to specify a module that will solve the captchas:
 
-- [Add the argument CapMonsterModule with the module name when sending a /createTask request ](../captchas/image-to-text.md) (if you interact directly with our API)
 - [Specify a module name in ApiKey](module-name.md) (very handy when you use third-party programs and cannot modify the requests)
 
 ---

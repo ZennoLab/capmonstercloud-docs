@@ -56,9 +56,3 @@ sidebar_position: 7
 `http://api.capmonster.cloud/in.php?key=dce6bcbb1a728ea8d871de6d169a2057&method=userrecaptcha&googlekey=6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd&pageurl=https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high&nocache=1`
 
 ---
-
-## **К каким типам капчи применим параметр?**
-
-- [ReCaptchaV2](../captchas/no-captcha-task.md)
-- [ReCaptchaV3](../captchas/recaptcha-v3-task.md)
-- [HCaptcha](../captchas/hcaptcha-task.md)
