@@ -5,7 +5,7 @@ webapi:
     Serilog__WriteTo__0__Args__formatter: "Serilog.Formatting.Compact.RenderedCompactJsonFormatter, Serilog.Formatting.Compact"
 
   service:
-    name: "dedicated-product-dashboard-ui"
+    name: "dedicated-product-docs"
   
   imagePullSecrets:
     - name: gitlab-zenno-registry-capmonstercloud
