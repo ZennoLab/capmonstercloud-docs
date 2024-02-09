@@ -1,0 +1,50 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cmc-dedicatedproduct-docs-dev
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://gitlab.zenno.io/CapMonsterCloud/dedicatedproduct/docs.git
+    targetRevision: dev
+    path: .helm
+    helm:
+      valueFiles:
+        - dev.values.yaml
+        - dev.image.yaml
+
+  destination:
+    server: https://kubernetes.default.svc.cluster.local
+    namespace: cmc-dev
+
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cmc-dedicatedproduct-docs-prod
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://gitlab.zenno.io/CapMonsterCloud/dedicatedproduct/docs.git
+    targetRevision: master
+    path: .helm
+    helm:
+      valueFiles:
+        - main.values.yaml
+        - main.image.yaml
+
+  destination:
+    server: https://kubernetes.default.svc.cluster.local
+    namespace: cmc-prod
+
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true

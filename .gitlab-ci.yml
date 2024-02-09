@@ -1,0 +1,26 @@
+---
+include:
+  - project: 'common/helm-charts'
+    ref: master
+    file: '/.gitlab-ci/argocd.yml'
+
+stages:  # List of stages for jobs, and their order of execution
+  - linters
+  - build
+  - deploy
+
+build:
+  stage: build
+  variables:
+    CONTAINER_IMAGE: $CI_REGISTRY_IMAGE:$TAG.$CI_PIPELINE_IID
+  tags:
+    - shell
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t ${CONTAINER_IMAGE} -f Dockerfile .
+    - docker push ${CONTAINER_IMAGE}
+  only:
+    refs:
+      - master
+      - dev
+
