@@ -1,4 +1,4 @@
 webapi:
   image:
     repository: gitlab.zenno.io:5050/capmonstercloud/dedicatedproduct/docs
-    tag: dev.13
+    tag: dev.15
