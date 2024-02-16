@@ -2,7 +2,7 @@
 sidebar_position: 0
 ---
 
-# Browser extension
+# Chrome browser extension
 ## **Description**
 With this extension, you can recognize captchas automatically directly in the browser.
 
