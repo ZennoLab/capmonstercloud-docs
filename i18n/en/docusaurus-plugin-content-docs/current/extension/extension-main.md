@@ -22,7 +22,7 @@ To get started with the extension, click on its icon to the right of the address
 <details>
     <summary>Manual installation</summary>
 
-1. Download the [archive with the extension](https://zenno.link/CapMonsterCloud-chrome-extension).
+1. Download the [archive with the extension](https://drive.google.com/drive/folders/1ErdzNr6yF8g9fWpNSenaQ-93mANG6wLC?usp=drive_link).
 
 1. Unpack it to any folder. 
    
