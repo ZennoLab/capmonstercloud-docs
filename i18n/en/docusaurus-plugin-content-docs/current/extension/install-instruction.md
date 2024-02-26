@@ -1,6 +1,6 @@
 ﻿---
 sidebar_position: 3
-sidebar_label: Installation instructions
+sidebar_label: Instructions for installing the extension in the ProjectMaker browser
 ---
 
 # Instructions for installing the CapMonster Cloud extension in the ProjectMaker browser

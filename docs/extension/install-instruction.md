@@ -1,6 +1,6 @@
 ﻿---
 sidebar_position: 3
-sidebar_label: Инструкция по установке
+sidebar_label: Инструкция по установке расширения в браузер ProjectMaker
 ---
 
 # Инструкция по установке расширения CapMonster Cloud в браузер ProjectMaker
