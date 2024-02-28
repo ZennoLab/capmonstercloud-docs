@@ -16,7 +16,7 @@ This task will be performed using our proxy servers. Use the received cookies in
 |type|String|yes|**CustomTask**|
 |class|String|yes|**DataDome**|
 |websiteURL|String|yes|Address of the main page where the captcha is solved|
-|metadata|Object|yes|The object that contains additional data about the captcha - captchaUrl: `"captchaUrl": "..."` <br /> You can take the link from the page with the captcha. Often it looks like `https://geo.captcha-delivery.com/captcha/?initialCid=...`|
+|metadata|Object|yes|Object that contains additional captcha data: <br /> `"htmlPageBase64": "..."` - base64 encoded html page with captcha. <br /> `"datadomeCookie:` - Your cookies from datadome. You can get it on the page using "document.cookie" or in the request header Set-Cookie: "datadome=..." (see example request /createTask)|
 |userAgent|String|no|Browser User-Agent.<br /> **Pass only the actual UA from Windows OS. Now this is version 121**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36`|
 
 ## **Request example**
@@ -35,7 +35,8 @@ https://api.capmonster.cloud/createTask
         "websiteURL": "site.com",
         "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         "metadata": {
-            "captchaUrl": "https://geo.captcha-delivery.com/captcha/?initialCid=12434324"
+            "htmlPageBase64": "PGh0bWw+PGhlYWQ+PHRpdGxlPmJs...N0E5QTA1",
+            "datadomeCookie": "datadome=6BvxqELMoorFNoo7GT1...JyfP_mhz"
         }
     }
 }
