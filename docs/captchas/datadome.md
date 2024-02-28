@@ -16,7 +16,7 @@ sidebar_label: DataDome
 |type|String|да|**CustomTask**|
 |class|String|да|**DataDome**|
 |websiteURL|String|да|Адрес основной страницы, на которой решается капча|
-|metadata|Object|да|Объект, который содержит дополнительные данные о капче - captchaUrl: `"captchaUrl": "..."` <br /> Ссылку можно взять со страницы с капчей. Зачастую имеет вид `https://geo.captcha-delivery.com/captcha/?initialCid=...`|
+|metadata|Object|да|Объект, который содержит дополнительные данные о капче: `"htmlPageBase64": "..."` - закодированная в base64 html страница с капчей. <br /> `"datadomeCookie":` - Ваши куки от datadome. Можно получить на странице с помощью "document.cookie" или в заголовке запроса Set-Cookie: "datadome=..." (см. пример запроса /createTask)|
 |userAgent|String|нет|User-Agent браузера.<br /> **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является 121 версия**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36`|
 
 ## **Пример запроса**
@@ -35,7 +35,8 @@ https://api.capmonster.cloud/createTask
         "websiteURL": "site.com",
         "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         "metadata": {
-            "captchaUrl": "https://geo.captcha-delivery.com/captcha/?initialCid=12434324"
+            "htmlPageBase64": "PGh0bWw+PGhlYWQ+PHRpdGxlPmJs...N0E5QTA1",
+			"datadomeCookie": "datadome=6BvxqELMoorFNoo7GT1...JyfP_mhz"
         }
     }
 }
