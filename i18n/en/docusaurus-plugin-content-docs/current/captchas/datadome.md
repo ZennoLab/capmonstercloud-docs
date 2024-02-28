@@ -16,7 +16,7 @@ This task will be performed using our proxy servers. Use the received cookies in
 |type|String|yes|**CustomTask**|
 |class|String|yes|**DataDome**|
 |websiteURL|String|yes|Address of the main page where the captcha is solved|
-|metadata|Object|yes|Object that contains additional captcha data: `"htmlPageBase64": "..."` - base64 encoded html page with captcha. <br /> `"datadomeCookie:` - Your cookies from datadome. You can get it on the page using "document.cookie" or in the request header Set-Cookie: "datadome=..." (see example request /createTask)|
+|metadata|Object|yes|Object that contains additional captcha data: <br /> `"htmlPageBase64": "..."` - base64 encoded html page with captcha. <br /> `"datadomeCookie:` - Your cookies from datadome. You can get it on the page using "document.cookie" or in the request header Set-Cookie: "datadome=..." (see example request /createTask)|
 |userAgent|String|no|Browser User-Agent.<br /> **Pass only the actual UA from Windows OS. Now this is version 121**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36`|
 
 ## **Request example**
