@@ -36,7 +36,7 @@ https://api.capmonster.cloud/createTask
         "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         "metadata": {
             "htmlPageBase64": "PGh0bWw+PGhlYWQ+PHRpdGxlPmJs...N0E5QTA1",
-			"datadomeCookie": "datadome=6BvxqELMoorFNoo7GT1...JyfP_mhz"
+            "datadomeCookie": "datadome=6BvxqELMoorFNoo7GT1...JyfP_mhz"
         }
     }
 }
