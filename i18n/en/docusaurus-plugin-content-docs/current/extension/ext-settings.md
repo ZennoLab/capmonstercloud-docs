@@ -82,22 +82,3 @@ Note that event handlers are attached to the properties, not to the data inside.
 ```js
 window.CMExtension.isEnabled = false;
 ```
-
-In addition to the settings, there are events that we can subscribe to:
-
-|**Event**|**Description**|
-| :-: | :-: |
-|`onCMExtensionReady`|The extension is fully loaded and ready to go|
-|`onHCaptchaClickStart`|Start the hCaptcha solving|
-|`onHCaptchaClickBackendError`|Server error when requesting hCaptcha solving results|
-|`onHCaptchaClickIncorrect`|Incorrect hCaptcha solving|
-|`onHCaptchaClickSuccess`|Successful hCaptcha solving|
-|`onHCaptchaClick`|Click on the hCaptcha checkbox|
-
-### **Example:**
-
-```js
-window.addEventListener("onCMExtensionReady", () => {
-  // DO SOMETHING
-})
-```
