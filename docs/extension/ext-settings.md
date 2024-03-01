@@ -80,19 +80,3 @@ sidebar_position: 4
 ```js
 window.CMExtension.isEnabled = false;
 ```
-Помимо настроек, есть события, на которые мы можем подписаться:
-
-|**Событие**|**Описание**|
-| :-: | :-: |
-|`onCMExtensionReady`|Расширение полностью загрузилось и готово к работе|
-|`onHCaptchaClickStart`|Начало решения hCaptcha|
-|`onHCaptchaClickBackendError`|Ошибка сервера при запросе результатов решения hCaptcha|
-|`onHCaptchaClickIncorrect`|Некорректное решение hCaptcha|
-|`onHCaptchaClickSuccess`|Успешное решение hCaptcha|
-|`onHCaptchaClick`|Нажатие на чекбокс hCaptcha|
-### **Пример:**
-```js
-window.addEventListener("onCMExtensionReady", () => {
-  // DO SOMETHING
-})
-```
