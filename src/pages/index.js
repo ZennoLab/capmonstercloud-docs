@@ -5,7 +5,6 @@ import Libraries from '@site/src/components/Libraries';
 import Links from '@site/src/components/Links'
 import MainHero from '../components/MainHero';
 import Prices from '../components/Prices';
-import AnnounceBar from '../components/AnnounceBar';
 import Head from '@docusaurus/Head';
 
 export default function Home() {
@@ -36,7 +35,6 @@ export default function Home() {
           <title>{title}</title>
           <meta name="description" content={description}></meta>
         </Head>
-        <AnnounceBar />
         <MainHero />
         <Libraries />
         <Links />

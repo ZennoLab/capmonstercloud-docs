@@ -97,9 +97,8 @@ const config = {
         },
         items: [
           {
-            href: 'https://capmonster.cloud',
-            label: 'Capmonster.cloud',
-            position: 'right',
+            type: 'search',
+            position: 'left',
           },
           {
             type: 'docSidebar',
@@ -116,6 +115,11 @@ const config = {
             href: 'https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh',
             label: 'Расширение',
             position: 'right',
+          },
+          {
+            type: 'html',
+            position: 'right',
+            value: '<a href="/" class="lk-link">Личный кабинет</a>',
           },
         ],
       },
