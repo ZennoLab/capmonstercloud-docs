@@ -16,7 +16,7 @@ This task will be performed using our proxy servers. Use the received cookies in
 |type|String|yes|**CustomTask**|
 |class|String|yes|**DataDome**|
 |websiteURL|String|yes|Address of the main page where the captcha is solved|
-|metadata|Object|yes|Object that contains additional captcha data: <br /> `"htmlPageBase64": "..."` - base64 encoded html page with captcha. <br /> `"datadomeCookie:` - Your cookies from datadome. You can get it on the page using "document.cookie" or in the request header Set-Cookie: "datadome=..." (see example request /createTask)|
+|metadata|Object|yes|One of the values of your choice: `"htmlPageBase64": "..."` or `"captchaUrl"`. <br /> --- <br />Object that contains additional data about the captcha: `"htmlPageBase64": "..."` - a base64 encoded html page that comes with a 403 code and a Set-Cookie: datadome="..." header in response to a get request to the target site.<br/> `"captchaUrl"` - link to the captcha. Usually it looks like this: `"https://geo.captcha-delivery.com/captcha/?initialCid=..."`. <br/>--- <br /> `"datadomeCookie"` - your cookies from datadome. You can get it on the page using "document.cookie" or in the Set-Cookie request header: "datadome=..." (see example request /createTask)|
 |userAgent|String|no|Browser User-Agent.<br /> **Pass only the actual UA from Windows OS. Now this is version 121**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36`|
 
 ## **Request example**
