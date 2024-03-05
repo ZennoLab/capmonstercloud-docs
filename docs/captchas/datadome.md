@@ -69,7 +69,6 @@ https://api.capmonster.cloud/createTask
                 }
             }
         }
-    },
-    "status": "ready"
+    }
 }
 ```
