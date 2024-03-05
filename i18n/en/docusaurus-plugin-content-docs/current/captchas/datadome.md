@@ -69,7 +69,6 @@ Use the [getTaskResult](../api/methods/get-task-result) method to get the DataDo
                 }
             }
         }
-    },
-    "status": "ready"
+    }
 }
 ```
