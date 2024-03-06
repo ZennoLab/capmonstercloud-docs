@@ -19,7 +19,7 @@ sidebar_label: DataDome
 |metadata.htmlPageBase64|String|да (если не заполнено metadata.captchaUrl)|Объект, который содержит дополнительные данные о капче: `"htmlPageBase64": "..."` - закодированная в base64 html-страница, которая приходит с кодом 403 и заголовком Set-Cookie: datadome="..." в ответ на get-запрос к целевому сайту.|
 |metadata.captchaUrl|String|да (если не заполнено metadata.htmlPageBase64)|`"captchaUrl"` - ссылка на капчу. Обычно имеет следующий вид: `"https://geo.captcha-delivery.com/captcha/?initialCid=..."`.|
 |metadata.datadomeCookie|String|да|Ваши куки от datadome. Можно получить на странице с помощью "document.cookie" или в заголовке запроса Set-Cookie: "datadome=..." (см. пример запроса /createTask)|
-|userAgent|String|нет|User-Agent браузера.<br /> **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является 121 версия**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36`|
+|userAgent|String|нет|User-Agent браузера.<br /> **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является 122 версия**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36`|
 
 ## **Пример запроса**
 
@@ -35,7 +35,7 @@ https://api.capmonster.cloud/createTask
         "type": "CustomTask",
         "class": "DataDome",
         "websiteURL": "site.com",
-        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
         "metadata": {
             "htmlPageBase64": "PGh0bWw+PGhlYWQ+PHRpdGxlPmJs...N0E5QTA1",
             "datadomeCookie": "datadome=6BvxqELMoorFNoo7GT1...JyfP_mhz"
