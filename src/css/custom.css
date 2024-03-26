@@ -282,7 +282,7 @@ img[alt=small-size] { width: 200px; }
   box-shadow: none;
 }
 
-.admonitionHeading_node_modules-\@docusaurus-theme-classic-lib-theme-Admonition-Layout-styles-module {
+div[class^='admonitionHeading'] {
   margin-bottom: 1rem !important;
 }
 
@@ -294,12 +294,12 @@ img[alt=small-size] { width: 200px; }
   padding-right: 5px;
 }
 
-.alert .codeBlockContainer_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Container-styles-module pre {
+.alert pre {
   background: #FAFCFF !important;
 }
 
-.codeBlockContainer_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Container-styles-module.theme-code-block {
-  box-shadow: none;
+div[class*='codeBlockContainer'] {
+  box-shadow: none !important
 }
 
 .alert--warning p code{
@@ -310,7 +310,7 @@ img[alt=small-size] { width: 200px; }
   padding-right: 5px;
 }
 
-.admonitionIcon_node_modules-\@docusaurus-theme-classic-lib-theme-Admonition-Layout-styles-module {
+span[class^='admonitionIcon'] {
   display: none !important;
 }
 
