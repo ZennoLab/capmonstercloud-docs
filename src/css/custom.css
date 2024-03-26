@@ -36,6 +36,7 @@
   --ifm-table-stripe-background:#F8F9FC;
   --ifm-table-head-background: transparent;
   --ifm-table-background: transparent;
+  --docusaurus-details-decoration-color: #7D6EFF;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -164,10 +165,6 @@
   border: 1px solid var(--ifm-alert-foreground-color);
 }
 
-.codeBlockContainer_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Container-styles-module pre{
-  background: #F5F5FF !important;
-}
-
 code {
   color: #8264FF;
   border-color: #D2D2FF;
@@ -181,13 +178,33 @@ code {
 
 
 
-.details_node_modules-\@docusaurus-theme-classic-lib-theme-Details-styles-module {
-  background: transparent;
+details {
+  background: transparent !important;
   border: 1px solid #D2D2FF !important;
   border-radius: 8px !important;
   font-weight: bold;
+  --ifm-link-color: red;
 }
 
+
+details div[class^='collapsibleContent'] {
+  border-top: 1px solid #7D6EFF;
+  color: #7D6EFF;
+}
+
+details div[class^='collapsibleContent'] a {
+  color: #7D6EFF;
+  text-decoration-color: #7D6EFF;
+}
+
+
+summary:before {
+  border-color: transparent transparent transparent var(--ifm-color-primary) !important;
+}
+
+pre {
+  background: #F5F5FF !important;
+}
 [data-theme='dark'] .details_node_modules-\@docusaurus-theme-classic-lib-theme-Details-styles-module {
   background: #323440;
   border: none !important;
@@ -312,4 +329,12 @@ table thead tr {
 
 table thead {
   background: #F0F2F5;
+}
+
+[data-theme='dark'] table thead {
+  background: #1B1B1D;
+}
+
+[data-theme='dark'] .alert p {
+  color: white;
 }
