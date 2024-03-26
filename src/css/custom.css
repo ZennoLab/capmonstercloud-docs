@@ -351,3 +351,7 @@ table thead {
 [data-theme='dark'] .alert p {
   color: white;
 }
+
+a[class*='cardContainer'] {
+  box-shadow: none;
+}
