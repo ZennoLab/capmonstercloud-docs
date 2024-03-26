@@ -14,5 +14,9 @@
   "item.label.Расширение": {
     "message": "Extension",
     "description": "Navbar item with label Расширение"
+  },
+  "item.label.Личный кабинет": {
+    "message": "Dashboard",
+    "description": "Navbar item with label Личный кабинет"
   }
 }
