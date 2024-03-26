@@ -22,13 +22,20 @@
   --ifm-h1-font-size: 2.25rem;
   --ifm-color-danger-contrast-foreground: #F04650;
   --ifm-color-danger-contrast-background: #FFF0F0;
-  --ifm-color-info-contrast-foreground: #1482EB;
+  --ifm-color-info-contrast-foreground: #37A0FF;
   --ifm-color-info-contrast-background: #EBF5FF;
   --ifm-color-warning-contrast-foreground: #E6780F;
   --ifm-color-warning-contrast-background: #FFF5EB;
-  --ifm-color-success-contrast-foreground: #00A55F;
+  --ifm-color-success-contrast-foreground: #14C87D;
   --ifm-color-success-contrast-background: #EBF5F0;
   --ifm-code-background: #EBF2FF;
+  --ifm-alert-border-color: #37A0FF;
+  --ifm-color-info-dark: #37A0FF;
+  --ifm-color-warning-dark: #FA9637;
+  --ifm-color-success-dark: #14C87D;
+  --ifm-table-stripe-background:#F8F9FC;
+  --ifm-table-head-background: transparent;
+  --ifm-table-background: transparent;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -74,7 +81,7 @@
 }
 .menu__link--active {
   font-weight: bold;
-  color: #1E232D;
+  /* color: red; */
 }
 
 [data-theme='dark'] .menu__link--active {
@@ -137,7 +144,7 @@
   --ifm-h3-font-size: 1.25rem;
 }
 
-.alert {
+.alert p {
   color: #1E232D;
 }
 
@@ -158,7 +165,7 @@
 }
 
 .codeBlockContainer_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Container-styles-module pre{
-  background: #EEEEFF;
+  background: #F5F5FF !important;
 }
 
 code {
@@ -175,8 +182,9 @@ code {
 
 
 .details_node_modules-\@docusaurus-theme-classic-lib-theme-Details-styles-module {
-  background: #EBF2FF;
-  border: none !important;
+  background: transparent;
+  border: 1px solid #D2D2FF !important;
+  border-radius: 8px !important;
   font-weight: bold;
 }
 
@@ -186,11 +194,11 @@ code {
   font-weight: bold;
 }
 
-.navbar__toggle {
+/* .navbar__toggle {
   color: white;
-}
+} */
 
-@media (max-width: 996px) {
+/* @media (max-width: 996px) {
   .menu__list-item-collapsible a, .menu__link--active, .menu__link--active:hover, .menu__list-item-collapsible a:hover, .navbar-sidebar__back, .menu__list-item a, .menu__list-item a:hover {
     color: white;
   }
@@ -203,7 +211,7 @@ code {
   .menu__link--sublist-caret:after {
     filter: brightness(0) invert(1);
   }
-}
+} */
 
 img[alt=small-size] { width: 200px; }
 
@@ -219,6 +227,21 @@ img[alt=small-size] { width: 200px; }
   font-weight: 500;
   border-radius: 8px;
   transition: all 0.3s;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+@media (max-width: 996px) {
+  .navbar__item.lk-link {
+    display: none;
+  }
+}
+
+
+.lk-link svg {
+  display: none;
 }
 
 .lk-link:hover, .lk-link:focus, .lk-link:active {
@@ -232,4 +255,61 @@ img[alt=small-size] { width: 200px; }
 
 .lk-link:active {
   background: #7864FF;
+}
+
+.alert--info, .alert--warning, .alert--success  {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.admonitionHeading_node_modules-\@docusaurus-theme-classic-lib-theme-Admonition-Layout-styles-module {
+  margin-bottom: 1rem !important;
+}
+
+.alert--info p code, .alert--info ul code{
+  color: #0073E1;
+  background: #BEE1FF;
+  border: none;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.alert .codeBlockContainer_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Container-styles-module pre {
+  background: #FAFCFF !important;
+}
+
+.codeBlockContainer_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Container-styles-module.theme-code-block {
+  box-shadow: none;
+}
+
+.alert--warning p code{
+  color: #D7781E;
+  background: #FFE1C3;
+  border: none;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.admonitionIcon_node_modules-\@docusaurus-theme-classic-lib-theme-Admonition-Layout-styles-module {
+  display: none !important;
+}
+
+.alert--success p code{
+  color: #009650;
+  background: #B9EBD2;
+  border: none;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+table thead tr {
+  border-width: 1px;
+}
+
+.details_node_modules-\@docusaurus-theme-common-lib-components-Details-styles-module > summary {
+  color: #14193C;
+}
+
+table thead {
+  background: #F0F2F5;
 }

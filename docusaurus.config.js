@@ -117,9 +117,10 @@ const config = {
             position: 'right',
           },
           {
-            type: 'html',
+            href: 'https://capmonster.cloud/Dashboard',
+            label: 'Личный кабинет',
             position: 'right',
-            value: '<a href="/" class="lk-link">Личный кабинет</a>',
+            className: 'lk-link',
           },
         ],
       },
