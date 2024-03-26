@@ -197,6 +197,9 @@ details div[class^='collapsibleContent'] a {
   text-decoration-color: #7D6EFF;
 }
 
+summary {
+  color: #14193C;
+}
 
 summary:before {
   border-color: transparent transparent transparent var(--ifm-color-primary) !important;
@@ -321,10 +324,6 @@ img[alt=small-size] { width: 200px; }
 
 table thead tr {
   border-width: 1px;
-}
-
-.details_node_modules-\@docusaurus-theme-common-lib-components-Details-styles-module > summary {
-  color: #14193C;
 }
 
 table thead {
