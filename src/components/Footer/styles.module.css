@@ -1,0 +1,8 @@
+.footerWrap {
+  background: #F4F6FA
+}
+
+.footerWrap iframe {
+  width: 100%;
+  height: 400px;
+}
