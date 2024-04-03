@@ -43,10 +43,10 @@
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #78AAFF;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
+  --ifm-color-primary: #B4A0FF;
+  --ifm-color-primary-dark: #B4A0FF;
+  --ifm-color-primary-darker: #B4A0FF;
+  --ifm-color-primary-darkest: #B4A0FF;
   --ifm-color-primary-light: #29d5b0;
   --ifm-color-primary-lighter: #32d8b4;
   --ifm-color-primary-lightest: #4fddbf;
@@ -88,7 +88,7 @@
 }
 
 [data-theme='dark'] .menu__link--active {
-  color: #78AAFF;
+  color: #B4A0FF;
 }
 
 
@@ -173,19 +173,28 @@ code {
 }
 
 [data-theme='dark'] code {
-  color: #78AAFF;
-  border-color: #373764;
-  background: #373764;
+  color: #B4A0FF;
+  border-color: #3C3764;
+  background: #3C3764;
 }
 
 
+[data-theme='dark'] details {
+  background: transparent !important;
+  border: 1px solid #D2D2FF !important;
+  border-radius: 8px !important;
+  font-weight: bold;
+}
 
 details {
   background: transparent !important;
   border: 1px solid #D2D2FF !important;
   border-radius: 8px !important;
   font-weight: bold;
-  --ifm-link-color: red;
+}
+
+[data-theme='dark'] summary {
+  color: #D2D2FF;
 }
 
 
@@ -354,4 +363,10 @@ table thead {
 
 a[class*='cardContainer'] {
   box-shadow: none;
+}
+
+@media (max-width: 436px) {
+  .navbar__logo img {
+    max-width: 180px;
+  }
 }
