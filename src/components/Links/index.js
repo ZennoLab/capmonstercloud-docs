@@ -37,21 +37,21 @@ export default function Links() {
       title: 'CapMonster Cloud',
       Svg: require('@site/static/img/CapCloud_icon.svg').default,
       desciption: isRULocale ? 'Облачный сервис для автоматического распознавания reCAPTCHA, hCaptcha и других видов капч' : 'Cloud service for automatic recognition of reCAPTCHA, hCaptcha and other types of captchas',
-      image: '/img/Cap_img.png',
+      image: isRULocale ? '/img/ru_dashboard.png' : '/img/en_dashboard.png',
       linkUrl: 'https://capmonster.cloud/Dashboard'
     },
     {
       title: isRULocale ? 'Расширение для браузера' : 'Browser extension',
       Svg: require('@site/static/img/Ext_icon.svg').default,
       desciption: isRULocale ? 'Автоматическое распознавание капч в браузере Chrome в фоновом режиме' : 'Automatic captcha recognition in the Chrome browser in the background',
-      image: '/img/Ext_img.png',
+      image: isRULocale ? '/img/ru_extension.png' : '/img/en_extension.png',
       linkUrl: 'https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh'
     },
     {
       title: isRULocale ? 'Техподдержка' : 'Support',
       Svg: require('@site/static/img/Sup_icon.svg').default,
       desciption: isRULocale ? 'Техническая поддержка, на которую можно положиться' : 'Technical support you can rely on',
-      image: '/img/Sup_img.png',
+      image: isRULocale ? '/img/ru_support.png' : '/img/en_support.png',
       linkUrl: 'https://helpdesk.zennolab.com/conversation/new'
     },
   ];

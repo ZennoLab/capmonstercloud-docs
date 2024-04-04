@@ -5,8 +5,8 @@ import Libraries from '@site/src/components/Libraries';
 import Links from '@site/src/components/Links'
 import MainHero from '../components/MainHero';
 import Prices from '../components/Prices';
-import AnnounceBar from '../components/AnnounceBar';
 import Head from '@docusaurus/Head';
+import Footer from '../components/Footer';
 
 export default function Home() {
   const {siteConfig, i18n} = useDocusaurusContext();
@@ -36,11 +36,11 @@ export default function Home() {
           <title>{title}</title>
           <meta name="description" content={description}></meta>
         </Head>
-        <AnnounceBar />
         <MainHero />
         <Libraries />
         <Links />
         <Prices />
+        <Footer />
       </main>
     </Layout>
   );

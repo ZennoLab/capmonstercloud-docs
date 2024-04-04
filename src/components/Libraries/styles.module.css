@@ -51,14 +51,14 @@
   display: inline-block;
   text-decoration: none;
   border-radius: 8px;
-  border: 1px solid #14BE82;
+  border: 1px solid #7D6EFF;
   background: transparent;
   width: 110px;
   height: 60px;
   line-height: 60px;
   font-weight: 500;
   font-size: 18px;
-  color: #14BE82;
+  color: #7D6EFF;
   text-align: center;
   transition: all 0.3s;
 }
@@ -69,29 +69,30 @@
 }
 .libBtn:hover {
   text-decoration: none;
-  background-color: #14BE82;
+  background-color: #7D6EFF;
   color: white
 }
 .libBtns {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 12px;
 }
 
 .mainTitle {
-  color: #1E283C;
-  font-weight: 600;
-  font-size: 44px;
-  line-height: 51px;
+  color: #14193C;
+  font-weight: 700;
+  font-size: 60px;
+  line-height: 72px;
   text-align: center;
   margin-bottom: 30px;
 }
 
 .subTitle {
-  color: #788296;
+  color: #14193C;
   font-weight: 400;
-  font-size: 22px;
-  line-height: 34px;
+  font-size: 20px;
+  line-height: 32px;
   text-align: center;
   padding-left: 50px;
   padding-right: 50px;
