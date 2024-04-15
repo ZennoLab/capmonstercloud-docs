@@ -1,32 +1,36 @@
-﻿---
+---
 sidebar_position: 6
 sidebar_label: TurnstileTask
 ---
 
 # TurnstileTask | Cloudflare Challenge
 Автоматически поддерживаются все подтипы Turnstile: manual, non-interactive и invisible. Поэтому нет необходимости указывать подтип для обычной капчи.
-:::caution Внимание
-Если вы решаете Turnstile на страницах cloudflare 5s challenge, то не забывайте указывать `cloudflareTaskType` и связанные с ним поля. userAgent указывать **обязательно**.
+:::caution Внимание!
+Ознакомьтесь со всеми тремя вариантами распознавания капчи и выберете наиболее предпочтительный для вас. 
 :::
-### **Структура объекта**
-
+## Вариант 1 (Turnstile)
+Вам требуется решить **обычную** turstile капчу, как [здесь](http://tsmanaged.zlsupport.com). Обратите внимание, что капча на страницах CloudFlare может выглядеть идентично. Посмотрите в конце статьи как отличить обычный Turnstile от Cloudflare Challenge. 
+#### Структура объекта
 |**Параметр**|**Тип**|**Обязательный**|**Значение**|
 | :- | :- | :- | :- |
-|type|String|да|**TurnstileTaskProxyless** или **TurnstileTask (При использовании прокси)**|
+|type|String|да|**TurnstileTaskProxyless**|
 |websiteURL|String|да|Адрес страницы, на которой решается капча|
 |websiteKey|String|да|Ключ Turnstile|
-|proxyType|String|да (При использовании **TurnstileTask**)|**http** - обычный http/https прокси<br/>**https** - попробуйте эту опцию, только если "http" не работает (требуется для некоторых кастомных прокси)<br/>**socks4** - socks4 прокси<br/>**socks5** - socks5 прокси|
-|proxyAddress|String|да (При использовании **TurnstileTask**)|<p>IP адрес прокси IPv4/IPv6. Не допускается:</p><p>- использование имен хостов</p><p>- использование прозрачных прокси (там, где можно видеть IP клиента)</p><p>- использование прокси на локальных машинах</p>|
-|proxyPort|Integer|да (При использовании **TurnstileTask**)|Порт прокси|
-|proxyLogin|String|нет|Логин прокси-сервера|
-|proxyPassword|String|нет|Пароль прокси-сервера|
-|cloudflareTaskType|String|нет|**cf_clearance** - если требуются куки;<br/>**token** - если требуется токен от Turnstile|
-|htmlPageBase64|String|да, если *cloudflareTaskType* равен* **cf_clearance**|Закодированная в base64 html страница с капчей.|
-|userAgent|String|да, если указан *cloudflareTaskType*|Поддерживаются только последние UA от Chrome.|
-|pageAction|String|да, если *cloudflareTaskType* равен* **token**|Поле `action`, которое можно найти в callback функции для загрузки капчи.<br/>Если используется *cloudflareTaskType*, то `action` обычно “managed“ или “non-interactive“.|
-|data|String|да, если *cloudflareTaskType* равен* **token**|Значение поля *data* можно взять из параметра `cData`.|
-|pageData|String|да, если *cloudflareTaskType* равен* **token**|Значение поля *pageData* можно взять из параметра `chlPageData`.|
+|pageAction|String|нет|Поле `action`, которое можно найти в callback функции для загрузки капчи
 
+## Вариант 2 (CloudFlare)
+Вы работаете через браузер, и Вам требуется получить токен для прохождения CloudFlare
+#### Структура объекта
+|**Параметр**|**Тип**|**Обязательный**|**Значение**|
+| :- | :- | :- | :- |
+|type|String|да|**TurnstileTaskProxyless**|
+|websiteURL|String|да|Адрес страницы, на которой решается капча|
+|websiteKey|String|да|Ключ Turnstile|
+|cloudflareTaskType|String|да|**token**|
+|userAgent|String|да|Поддерживаются только последние UA от Chrome.|
+|pageAction|String|да|Поле `action`, которое можно найти в callback функции для загрузки капчи. Если используется *cloudflareTaskType*, то `action` обычно “managed“ или “non-interactive“.|
+|data|String|да|Значение поля *data* можно взять из параметра `cData`.|
+|pageData|String|да|Значение поля *pageData* можно взять из параметра `chlPageData`.|
 Прокси для получения токена передавать не обязательно.
 
 Эти параметры находятся в объекте, который передаётся во время создания капчи в функцию `window.turnstile.render(el, paramsObj)`. Получить их можно, например, с помощью выполнения JavaScript перед загрузкой остальных скриптов:
@@ -53,45 +57,41 @@ sidebar_label: TurnstileTask
 })();
 ```
 
+## Вариант 3 (CloudFlare)
+Вы работаете с помощью запросов, и Вам требуются куки `cf_clearance`. Обязательно нужны ваши прокси
+#### Структура объекта
+|**Параметр**|**Тип**|**Обязательный**|**Значение**|
+| :- | :- | :- | :- |
+|type|String|да|**TurnstileTask**|
+|websiteURL|String|да|Адрес страницы, на которой решается капча|
+|websiteKey|String|да|Ключ Turnstile(можно передать любую строку)|
+|cloudflareTaskType|String|нет|**cf_clearance**|
+|htmlPageBase64|String|да|Закодированная в base64 html страница **"Just a moment"** которая выдаётся с кодом 403 при обращению к сайту с данной защитой.|
+|userAgent|String|да|Поддерживаются только последние UA от Chrome.|
+|proxyType|String|да|**http** - обычный http/https прокси<br/>**https** - попробуйте эту опцию, только если "http" не работает (требуется для некоторых кастомных прокси)<br/>**socks4** - socks4 прокси<br/>**socks5** - socks5 прокси|
+|proxyAddress|String|да|<p>IP адрес прокси IPv4/IPv6. Не допускается:</p><p>- использование имен хостов</p><p>- использование прозрачных прокси (там, где можно видеть IP клиента)</p><p>- использование прокси на локальных машинах</p>|
+|proxyPort|Integer|да|Порт прокси|
+|proxyLogin|String|да|Логин прокси-сервера|
+|proxyPassword|String|да|Пароль прокси-сервера|
 
-
-## **Обычный Turnstile:**
-### **Пример запроса**
+## Примеры запросов
+### **Вариант 1. Обычный Turnstile:**
 :::info Метод
 ```http
 https://api.capmonster.cloud/createTask
 ```
 :::
-
-### TurnstileTask (С использованием прокси)
-```json
-{
-  "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
-  "task": {
-    "type":"TurnstileTask",
-    "websiteURL":"http://tsmanaged.zlsupport.com",
-    "websiteKey":"0x4AAAAAAABUYP0XeMJF0xoy",
-    "proxyType":"http",
-    "proxyAddress":"8.8.8.8",
-    "proxyPort":8080,
-    "proxyLogin":"proxyLoginHere",
-    "proxyPassword":"proxyPasswordHere"
-  }
-}
-```
-### TurnstileTaskProxyless (Без использования прокси)
 ```json
 {
     "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
     "task":
-    {
-        "type":"TurnstileTaskProxyless",
-        "websiteURL":"http://tsmanaged.zlsupport.com",
-        "websiteKey":"0x4AAAAAAABUYP0XeMJF0xoy"
-    }
+    {
+        "type":"TurnstileTaskProxyless",
+        "websiteURL":"http://tsmanaged.zlsupport.com",
+        "websiteKey":"0x4AAAAAAABUYP0XeMJF0xoy"
+    }
 }
 ```
-
 **Пример ответа**
 
 ```json
@@ -100,46 +100,49 @@ https://api.capmonster.cloud/createTask
   "taskId":407533072
 }
 ```
-
-## **Cloudflare challenge**
-### **Пример запроса**
+### **Вариант 2. CloudFlare(token)**
 :::info Метод
 ```http
 https://api.capmonster.cloud/createTask
 ```
 :::
+```json
+{
+	"clientKey": "dce6bcbb1a728ea8d871de6d169a2057",
+	"task": {
+		"type": "TurnstileTask",
+		"websiteURL": "https://site.com",
+		"websiteKey": "0x4AAAAAAADnPIDROrmt1Wwj",
+		"cloudflareTaskType": "token",
+		"userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36",
+		"pageAction": "managed",
+		"pageData": "HUHDWUHuhuwfiweh32..uh2uhuhyugYUG=",
+		"data": "874291f4retD1366"
+	}
+}
+```
 
-### TurnstileTask (С использованием прокси)
+### Вариант 3. CloudFlare(cookie)
+:::info Метод
+```http
+https://api.capmonster.cloud/createTask
+```
+:::
 ```json 
   {
   "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
   "task": {
     "type":"TurnstileTask",
     "websiteURL":"https://nowsecure.nl",
-    "websiteKey":"0x4AAAAAAADnPIDROrmt1Wwj",
+    "websiteKey":"xxxxxxxxxx",
+    "cloudflareTaskType": "cf_clearance",
+    "htmlPageBase64": "PCFET0NUWVBFIGh0...vYm9keT48L2h0bWw+",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
     "proxyType":"http",
     "proxyAddress":"8.8.8.8",
     "proxyPort":8080,
     "proxyLogin":"proxyLoginHere",
-    "proxyPassword":"proxyPasswordHere",
-    "cloudflareTaskType": "cf_clearance",
-    "htmlPageBase64": "PCFET0NUWVBFIGh0...vYm9keT48L2h0bWw+",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
-  }
-}
-```
-
-### TurnstileTaskProxyless (Без использования прокси)
-```json 
-  {
-  "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
-  "task": {
-    "type":"TurnstileTask",
-    "websiteURL":"https://nowsecure.nl",
-    "websiteKey":"0x4AAAAAAADnPIDROrmt1Wwj",
-    "cloudflareTaskType": "cf_clearance",
-    "htmlPageBase64": "PCFET0NUWVBFIGh0...vYm9keT48L2h0bWw+",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+    "proxyPassword":"proxyPasswordHere"
   }
 }
 ```
@@ -151,7 +154,7 @@ https://api.capmonster.cloud/createTask
 | :- | :- | :- |
 |cf_clearance|String|Специальные куки cloudflare, которые вы можете подставить в свой браузер|
 |token|String|Используйте токен при вызове callback функции|
-## **Когда нужно указывать cloudflareTaskType, а когда нет? Или как отличить обычный Turnstile от Cloudflare Challenge.**
+## **Как отличить обычный Turnstile от Cloudflare Challenge.**
 Cloudflare challenge может выглядеть по-разному. 
 
 **Обычный вариант:**
