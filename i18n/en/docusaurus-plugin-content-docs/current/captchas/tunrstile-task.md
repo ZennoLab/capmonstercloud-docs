@@ -4,33 +4,37 @@ sidebar_label: TurnstileTask
 ---
 
 # TurnstileTask | Cloudflare Challenge
-All Turnstile subtypes are automatically supported: manual, non-interactive и invisible. Therefore, there is no need to specify a subtype for a normal captcha. 
+All Turnstile subtypes are automatically supported: manual, non-interactive, and invisible. Therefore, there is no need to specify a subtype for a regular captcha. 
 
-:::caution Attention
-If you solve Turnstile on the cloudflare 5s challenge pages, don’t forget to specify `cloudflareTaskType` and related fields. userAgent is **required**.
+:::caution Attention!
+Check out all three options of captcha recognition and choose the most convenient one for you.
 :::
-### **Object structure**
-
+## Option 1 (Turnstile)
+You are required to solve a regular turnstile captcha, as here. Note that the CAPTCHA on CloudFlare pages may look identical. Learn more about how to distinguish between a regular Turnstile and a Cloudflare Challenge at the end of the article.
+#### **Object structure**
 |**Parameter**|**Type**|**Required**|**Value**|
 | :- | :- | :- | :- |
-|type|String|yes|**TurnstileTaskProxyless** or **TurnstileTask (When using a proxy)**.|
-|websiteURL|String|yes|The page address, where the captcha is solved.|
-|websiteKey|String|yes|Turnstile key.|
-|proxyType|String|yes (for **TurnstileTask**)|**http** - regular http/https proxy;<br/>**https** - try this option only if "http" doesn’t work (required for some custom proxies);<br/>**socks4** - socks4 proxy;<br/>**socks5** - socks5 proxy.|
-|proxyAddress|String|yes (for **TurnstileTask**)|<p>The IP address of the IPv4/IPv6 proxy. Not allowed:</p><p>- using hostnames;</p><p>- using transparent proxies (where you can see the client's IP);</p><p>- using proxies on local machines.</p>|
-|proxyPort|Integer|yes (for **TurnstileTask**)|Proxy port.|
-|proxyLogin|String|no|Proxy login.|
-|proxyPassword|String|no|Proxy password.|
-|cloudflareTaskType|String|no|**cf_clearance** - if cookies are required;<br/>**token** - if required token from Turnstile.|
-|htmlPageBase64|String|yes, if *cloudflareTaskType* is equal to* **cf_clearance**|Base64 encoded html page with captcha.|
-|userAgent|String|yes, if *cloudflareTaskType* is specified.|Only the latest UAs from Chrome are supported.|
-|pageAction|String|yes, if *cloudflareTaskType* is equal to* **token**|The `action` field, that can be found in the callback function to load the captcha.<br/>If *cloudflareTaskType* is used, then `action` is usually “managed“ or “non-interactive“.|
-|data|String|yes, if *cloudflareTaskType* is equal to* **token**|The value of the *data* field can be taken from the `cData` parameter.|
-|pageData|String|yes, if *cloudflareTaskType* is equal to* **token**|The value of the *pageData* field can be taken from the `chlPageData` parameter.|
+|type|String|yes|**TurnstileTaskProxyless**|
+|websiteURL|String|yes|The page address, where the captcha is solved|
+|websiteKey|String|yes|Turnstile key|
+|pageAction|String|no|The `action` field that can be found in the callback function to load the captcha|
 
-Proxy for token method is not required.
+## Option 2 (CloudFlare)
+You are working through a browser and you need to get a token to pass CloudFlare.
+#### **Object structure**
+|**Parameter**|**Type**|**Required**|**Value**|
+| :- | :- | :- | :- |
+|type|String|yes|**TurnstileTaskProxyless**|
+|websiteURL|String|yes|Address of the page where the captcha is solved|
+|websiteKey|String|yes|Turnstile key|
+|cloudflareTaskType|String|yes|**token**|
+|userAgent|String|yes|Only the latest UAs from Chrome are supported.|
+|pageAction|String|yes|The `action` field can be found in the callback function to load the captcha. If cloudflareTaskType is used, the `action` is usually "managed" or "non-interactive".|
+|data|String|yes|The value of the data field can be taken from the `cData` parameter.|
+|pageData|String|yes|The value of the pageData field can be taken from the `chlPageData` parameter.|
+It is not necessary to pass a proxy to get the token.
 
-These parameters are in the object that is passed during captcha creation in `window.turnstile.render(el, paramsObj)` function.  You can get them, for example, by executing JavaScript before loading other scripts:
+These parameters are in the object that is passed during captcha creation to the function `window.turnstile.render(el, paramsObj)`. You can get them, for example, by executing JavaScript before loading other scripts:
 
 ```js
 (function () {
@@ -54,24 +58,86 @@ These parameters are in the object that is passed during captcha creation in `wi
 })();
 ```
 
+## Option 3 (CloudFlare)
+You are working using queries, and you need cf_clearance cookies. It is required that you need your proxies.
+#### **Object structure**
+|**Parameter**|**Type**|**Required**|**Value**|
+| :- | :- | :- | :- |
+|type|String|yes|**TurnstileTask**|
+|websiteURL|String|yes|Address of the page on which the captcha is solved|
+|websiteKey|String|yes|Turnstile key (you can pass any string)|
+|cloudflareTaskType|String|no|**cf_clearance**|
+|htmlPageBase64|String|yes|Base64 encoded html page **"Just a moment"** which is given with code 403 when accessing a site with this protection.|
+|userAgent|String|yes|Only the latest UAs from Chrome are supported.|
+|proxyType|String|yes|**http** - normal http/https proxy<br/>**https** - try this option only if "http" doesn't work (required for some custom proxies)<br/>**socks4** - socks4 proxy<br/>**socks5** - socks5 proxy|
+|proxyAddress|String|yes|IP address of the IPv4/IPv6 proxy. Not allowed:<br/>- use of hostnames<br/>- use of transparent proxies (where you can see client IP)<br/>- use of proxies on local machines|
+|proxyPort|Integer|yes|Proxy Port|
+|proxyLogin|String|yes|Proxy server login|
+|proxyPassword|String|yes|Proxy server password|
 
-## **Normal Turnstile**
-### **Request example**
-
-:::info Method
+## Examples of requests
+### **Option 1: Normal Turnstile**
+:::info METHOD
 ```http
 https://api.capmonster.cloud/createTask
 ```
 :::
-
-### TurnstileTask (with a proxy)
 ```json
 {
+    "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
+    "task":
+    {
+        "type":"TurnstileTaskProxyless",
+        "websiteURL":"http://tsmanaged.zlsupport.com",
+        "websiteKey":"0x4AAAAAAABUYP0XeMJF0xoy"
+    }
+}
+```
+**Example response**
+```json
+{
+  "errorId":0,
+  "taskId":407533072
+}
+```
+
+### **Option 2. CloudFlare (token)**
+:::info METHOD
+```http
+https://api.capmonster.cloud/createTask
+```
+:::
+```json
+{
+	"clientKey": "dce6bcbb1a728ea8d871de6d169a2057",
+	"task": {
+		"type": "TurnstileTask",
+		"websiteURL": "https://site.com",
+		"websiteKey": "0x4AAAAAAADnPIDROrmt1Wwj",
+		"cloudflareTaskType": "token",
+		"userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36",
+		"pageAction": "managed",
+		"pageData": "HUHDWUHuhuwfiweh32..uh2uhuhyugYUG=",
+		"data": "874291f4retD1366"
+	}
+}
+```
+### Option 3. CloudFlare(cookie)
+:::info METHOD
+```http
+https://api.capmonster.cloud/createTask
+```
+:::
+```json 
+  {
   "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
   "task": {
     "type":"TurnstileTask",
-    "websiteURL":"http://tsmanaged.zlsupport.com",
-    "websiteKey":"0x4AAAAAAABUYP0XeMJF0xoy",
+    "websiteURL":"https://nowsecure.nl",
+    "websiteKey":"xxxxxxxxxx",
+    "cloudflareTaskType": "cf_clearance",
+    "htmlPageBase64": "PCFET0NUWVBFIGh0...vYm9keT48L2h0bWw+",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
     "proxyType":"http",
     "proxyAddress":"8.8.8.8",
     "proxyPort":8080,
@@ -80,82 +146,18 @@ https://api.capmonster.cloud/createTask
   }
 }
 ```
-### TurnstileTaskProxyless (without a proxy)
-```json
-{
-    "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
-    "task":
-    {
-        "type":"TurnstileTaskProxyless",
-        "websiteURL":"http://tsmanaged.zlsupport.com",
-        "websiteKey":"0x4AAAAAAABUYP0XeMJF0xoy"
-    }
-}
-```
 
-**Response example**
-
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
-
-## **Cloudflare challenge**
-### **Request example**
-:::info Method
-```http
-https://api.capmonster.cloud/createTask
-```
-:::
-
-### TurnstileTask (with a proxy)
-```json 
-  {
-  "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
-  "task": {
-    "type":"TurnstileTask",
-    "websiteURL":"https://nowsecure.nl",
-    "websiteKey":"0x4AAAAAAADnPIDROrmt1Wwj",
-    "proxyType":"http",
-    "proxyAddress":"8.8.8.8",
-    "proxyPort":8080,
-    "proxyLogin":"proxyLoginHere",
-    "proxyPassword":"proxyPasswordHere",
-    "cloudflareTaskType": "cf_clearance",
-    "htmlPageBase64": "PCFET0NUWVBFIGh0...vYm9keT48L2h0bWw+",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
-  }
-}
-```
-
-### TurnstileTaskProxyless (without a proxy)
-```json 
-  {
-  "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
-  "task": {
-    "type":"TurnstileTask",
-    "websiteURL":"https://nowsecure.nl",
-    "websiteKey":"0x4AAAAAAADnPIDROrmt1Wwj",
-    "cloudflareTaskType": "cf_clearance",
-    "htmlPageBase64": "PCFET0NUWVBFIGh0...vYm9keT48L2h0bWw+",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
-  }
-}
-```
-
-## **Getting a result**
-Use the [getTaskResult](../api/methods/get-task-result.md) method to get the Turnstile solution. Depending on the system load, you will receive a response after a time ranging from 5 to 20 seconds.
+## **GetTaskResult**
+Use the [getTaskResult](../api/methods/get-task-result.md) method to get the Turnstile solution. Depending on the system load, you will get a response after a time in the range of 5 to 20s.
 
 |**Property**|**Type**|**Description**|
 | :- | :- | :- |
-|cf_clearance|String|Special cloudflare cookies, that you can set.|
-|token|String|Pass this token to the callback function.|
-## **When specify cloudflareTaskType and when not? Or how to distinguish a normal Turnstile from a Cloudflare Challenge.**
-Cloudflare Challenge may look different. 
+|cf_clearance|String|A special Cloudflare cookie that you can substitute into your browser|
+|token|String|Use a token when calling a callback function|
+## **How to distinguish between a regular Turnstile and a Cloudflare Challenge**
+A Cloudflare challenge can look different.
 
-**Simple variant:**
+**Normal variant:**
 
 ![](turnstile-simple.png) 
 
@@ -164,33 +166,34 @@ Cloudflare Challenge may look different.
 <figure>
 
 ![](turnstile-stylized.png)
-<figcaption>Челлендж органично встроен в сам сайт</figcaption>
+<figcaption>The challenge is seamlessly integrated into the site itself.</figcaption>
 
 </figure>
 
 <figure>
 
 ![](turnstile-stylized-2.png) 
-<figcaption>Выглядит как обычная капча turnstile, но на самом деле это challenge</figcaption>
+
+<figcaption>It looks like a regular turnstile CAPTCHA, but it's actually a challenge.</figcaption>
 
 </figure>
 
-To finally verify the presence of Cloudflare, you can open the developer tools, see the traffic, examine the page code and see the characteristic features:
+To be finally convinced of the presence of Cloudflare, you can open the developer tools, look at the traffic, examine the page code, and see the characteristic signs:
 
 - The first request to the site returns a 403 code:
 
 ![](b61dae70-f056-4257-ab72-05beacb27a0d.png)
 
-- The form with the id **challenge-form** has an **action** attribute, containing the  `__cf_chl_f_tk=` parameter:
+- The form with the id **challenge-form** has an **action** attribute (not to be confused with the action from the parameters for turnstile captcha) containing the `__cf_chl_f_tk=` parameter:
 
 ![](1e4dc39f-0a4a-4c29-a48d-abc7a2ec6380.png)
 
-- There are two similar `<script>`, tags on the page that create a new value in the `window` object:
+- The page contains two similar `<script>` tags that create a new value in the `window` object:
 
 ![](gif.gif) 
 
 <details>
-        <summary>Example of implementing the solution using Selenium on Node.js</summary>
+        <summary>Example of solution implementation using Selenium on Node.js</summary>
 
 ```js
 
@@ -303,7 +306,5 @@ const chrome = require('selenium-webdriver/chrome');
     await driver.quit();
   }
 })();
-
 ```
-
 </details>
