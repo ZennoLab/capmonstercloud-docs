@@ -5,9 +5,11 @@ sidebar_label: TurnstileTask
 
 # TurnstileTask | Cloudflare Challenge
 Автоматически поддерживаются все подтипы Turnstile: manual, non-interactive и invisible. Поэтому нет необходимости указывать подтип для обычной капчи.
+
 :::caution Внимание!
 Ознакомьтесь со всеми тремя вариантами распознавания капчи и выберете наиболее предпочтительный для вас. 
 :::
+
 ## Вариант 1 (Turnstile)
 Вам требуется решить **обычную** turstile капчу, как [здесь](http://tsmanaged.zlsupport.com). Обратите внимание, что капча на страницах CloudFlare может выглядеть идентично. Посмотрите в конце статьи как отличить обычный Turnstile от Cloudflare Challenge. 
 #### Структура объекта
@@ -100,6 +102,7 @@ https://api.capmonster.cloud/createTask
   "taskId":407533072
 }
 ```
+
 ### **Вариант 2. CloudFlare(token)**
 :::info Метод
 ```http
