@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './styles.module.css';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { Tooltip } from 'react-tooltip'
@@ -20,6 +20,10 @@ export default function Prices() {
   const onLoad = () => {
     setHeight(ref.current?.contentWindow ? ref.current?.contentWindow?.document.body.scrollHeight + "px" : 0);
   };
+
+  useEffect(() => {
+    onLoad();
+  }, []);
 
   return (
     <section className={styles.pricesWrap}>
