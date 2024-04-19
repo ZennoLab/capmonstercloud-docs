@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from './styles.module.css';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { Tooltip } from 'react-tooltip'
@@ -15,16 +15,6 @@ export default function Prices() {
 
   const priceSubTooltipText = isRULocale ? 'За исключением заданий Cloudflare Bot Challenge, Cloudflare Turnstile' : 'Excluding Cloudflare Bot Challenge, Cloudflare Turnstile';
 
-  const ref = React.useRef();
-  const [height, setHeight] = React.useState("0px");
-  const onLoad = () => {
-    setHeight(ref.current?.contentWindow ? ref.current?.contentWindow?.document.body.scrollHeight + "px" : 0);
-  };
-
-  useEffect(() => {
-    onLoad();
-  }, []);
-
   return (
     <section className={styles.pricesWrap}>
       <div className="container">
@@ -34,7 +24,7 @@ export default function Prices() {
           {priceSubTooltipText}
         </Tooltip>
         <div className={styles.prices}>
-          <iframe ref={ref} src={priceLink} onLoad={onLoad} height={height} />
+          <iframe src={priceLink} />
         </div>
       </div>
     </section>
