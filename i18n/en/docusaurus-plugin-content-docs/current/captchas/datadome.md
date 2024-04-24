@@ -19,7 +19,7 @@ This task will be performed using our proxy servers. Use the received cookies in
 |metadata.htmlPageBase64|String|yes (if metadata.captchaUrl is not filled)|Object that contains additional data about the captcha: `"htmlPageBase64": "..."` - a base64 encoded html page that comes with a 403 code and a Set-Cookie: datadome="..." header in response to a get request to the target site.|
 |metadata.captchaUrl|String|yes (if metadata.htmlPageBase64 is not filled)|`"captchaUrl"` - link to the captcha. Usually it looks like this: `"https://geo.captcha-delivery.com/captcha/?initialCid=..."`.|
 |metadata.datadomeCookie|String|yes|Your cookies from datadome. You can get it on the page using "document.cookie" or in the Set-Cookie request header: "datadome=..." (see example request /createTask)|
-|userAgent|String|no|Browser User-Agent.<br /> **Pass only the actual UA from Windows OS. Now this is version 123**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36`|
+|userAgent|String|no|Browser User-Agent.<br /> **Pass only the actual UA from Windows OS. Now this is version 124**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36`|
 
 ## **Request example**
 
@@ -35,7 +35,7 @@ https://api.capmonster.cloud/createTask
         "type": "CustomTask",
         "class": "DataDome",
         "websiteURL": "site.com",
-        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
         "metadata": {
             "htmlPageBase64": "PGh0bWw+PGhlYWQ+PHRpdGxlPmJs...N0E5QTA1",
             "datadomeCookie": "datadome=6BvxqELMoorFNoo7GT1...JyfP_mhz"
