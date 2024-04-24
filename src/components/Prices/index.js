@@ -9,7 +9,7 @@ export default function Prices() {
   const titleRu = 'Цена';
   const titleEn = 'Price';
   const title = isRULocale ? titleRu : titleEn;
-  const priceLink = isRULocale ? 'https://cmadmin.dev.k8s.zenno.services/prices?culture=ru-RU' : 'https://cmadmin.dev.k8s.zenno.services/prices?culture=en-US';
+  const priceLink = isRULocale ? 'https://capmonster.cloud/prices?culture=ru-RU' : 'https://capmonster.cloud/prices?culture=en-US';
 
   const subTitle = isRULocale ? 'Прокси включены в цену*: экономьте с CapMonster Cloud' : 'Proxy price inclusions*: save with CapMonster Cloud';
 
