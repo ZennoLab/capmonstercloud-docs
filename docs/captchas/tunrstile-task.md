@@ -29,7 +29,7 @@ sidebar_label: TurnstileTask
 |websiteURL|String|да|Адрес страницы, на которой решается капча|
 |websiteKey|String|да|Ключ Turnstile|
 |cloudflareTaskType|String|да|**token**|
-|userAgent|String|да|Поддерживаются только последние UA от Chrome.|
+|userAgent|String|да|User-Agent браузера.<br /> **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является 124 версия**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36`|
 |pageAction|String|да|Поле `action`, которое можно найти в callback функции для загрузки капчи. Если используется *cloudflareTaskType*, то `action` обычно “managed“ или “non-interactive“.|
 |data|String|да|Значение поля *data* можно взять из параметра `cData`.|
 |pageData|String|да|Значение поля *pageData* можно взять из параметра `chlPageData`.|
@@ -69,7 +69,7 @@ sidebar_label: TurnstileTask
 |websiteKey|String|да|Ключ Turnstile(можно передать любую строку)|
 |cloudflareTaskType|String|нет|**cf_clearance**|
 |htmlPageBase64|String|да|Закодированная в base64 html страница **"Just a moment"** которая выдаётся с кодом 403 при обращению к сайту с данной защитой.|
-|userAgent|String|да|Поддерживаются только последние UA от Chrome.|
+|userAgent|String|да|User-Agent браузера.<br /> **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является 124 версия**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36`|
 |proxyType|String|да|**http** - обычный http/https прокси<br/>**https** - попробуйте эту опцию, только если "http" не работает (требуется для некоторых кастомных прокси)<br/>**socks4** - socks4 прокси<br/>**socks5** - socks5 прокси|
 |proxyAddress|String|да|<p>IP адрес прокси IPv4/IPv6. Не допускается:</p><p>- использование имен хостов</p><p>- использование прозрачных прокси (там, где можно видеть IP клиента)</p><p>- использование прокси на локальных машинах</p>|
 |proxyPort|Integer|да|Порт прокси|
@@ -117,7 +117,7 @@ https://api.capmonster.cloud/createTask
 		"websiteURL": "https://site.com",
 		"websiteKey": "0x4AAAAAAADnPIDROrmt1Wwj",
 		"cloudflareTaskType": "token",
-		"userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36",
+		"userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
 		"pageAction": "managed",
 		"pageData": "HUHDWUHuhuwfiweh32..uh2uhuhyugYUG=",
 		"data": "874291f4retD1366"
@@ -140,7 +140,7 @@ https://api.capmonster.cloud/createTask
     "websiteKey":"xxxxxxxxxx",
     "cloudflareTaskType": "cf_clearance",
     "htmlPageBase64": "PCFET0NUWVBFIGh0...vYm9keT48L2h0bWw+",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
     "proxyType":"http",
     "proxyAddress":"8.8.8.8",
     "proxyPort":8080,
