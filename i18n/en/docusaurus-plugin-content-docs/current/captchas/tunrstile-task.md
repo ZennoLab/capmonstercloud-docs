@@ -28,7 +28,7 @@ You are working through a browser and you need to get a token to pass CloudFlare
 |websiteURL|String|yes|Address of the page where the captcha is solved|
 |websiteKey|String|yes|Turnstile key|
 |cloudflareTaskType|String|yes|**token**|
-|userAgent|String|yes|Only the latest UAs from Chrome are supported.|
+|userAgent|String|yes|Browser User-Agent.<br /> **Pass only the actual UA from Windows OS. Now this is version 124**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36`|
 |pageAction|String|yes|The `action` field can be found in the callback function to load the captcha. If cloudflareTaskType is used, the `action` is usually "managed" or "non-interactive".|
 |data|String|yes|The value of the data field can be taken from the `cData` parameter.|
 |pageData|String|yes|The value of the pageData field can be taken from the `chlPageData` parameter.|
@@ -68,7 +68,7 @@ You are working using queries, and you need cf_clearance cookies. It is required
 |websiteKey|String|yes|Turnstile key (you can pass any string)|
 |cloudflareTaskType|String|no|**cf_clearance**|
 |htmlPageBase64|String|yes|Base64 encoded html page **"Just a moment"** which is given with code 403 when accessing a site with this protection.|
-|userAgent|String|yes|Only the latest UAs from Chrome are supported.|
+|userAgent|String|yes|Browser User-Agent.<br /> **Pass only the actual UA from Windows OS. Now this is version 124**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36`|
 |proxyType|String|yes|**http** - normal http/https proxy<br/>**https** - try this option only if "http" doesn't work (required for some custom proxies)<br/>**socks4** - socks4 proxy<br/>**socks5** - socks5 proxy|
 |proxyAddress|String|yes|IP address of the IPv4/IPv6 proxy. Not allowed:<br/>- use of hostnames<br/>- use of transparent proxies (where you can see client IP)<br/>- use of proxies on local machines|
 |proxyPort|Integer|yes|Proxy Port|
@@ -137,7 +137,7 @@ https://api.capmonster.cloud/createTask
     "websiteKey":"xxxxxxxxxx",
     "cloudflareTaskType": "cf_clearance",
     "htmlPageBase64": "PCFET0NUWVBFIGh0...vYm9keT48L2h0bWw+",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
     "proxyType":"http",
     "proxyAddress":"8.8.8.8",
     "proxyPort":8080,
