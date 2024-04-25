@@ -14,7 +14,6 @@ export default function Prices() {
   const subTitle = isRULocale ? 'Прокси включены в цену*: экономьте с CapMonster Cloud' : 'Proxy price inclusions*: save with CapMonster Cloud';
 
   const priceSubTooltipText = isRULocale ? 'За исключением заданий Cloudflare Bot Challenge, Cloudflare Turnstile' : 'Excluding Cloudflare Bot Challenge, Cloudflare Turnstile';
-  
 
   return (
     <section className={styles.pricesWrap}>
