@@ -43,6 +43,20 @@ Type: `String` <br />
 Required: `No`<br />
 Web address for sending the captcha task result. Data is sent by POST request.<br />The content is identical to the response of the [getTaskResult](./get-task-result) method.<br />The content of the response is not checked and you should accept the request in 2 seconds then the connection will be closed.
 
+Example of using the `callbackUrl` function:
+
+```json
+{
+  "clientKey": "67b6bcbb1a728ea8d563de6d169a2057",
+  "task": {
+    "type": "NoCaptchaTaskProxyless",
+    "websiteURL": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
+    "websiteKey": "6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"
+  },
+  "callbackUrl": "https://yourwebsite.com/callback"
+}
+```
+
 --- 
 
 ### **Request examples**
