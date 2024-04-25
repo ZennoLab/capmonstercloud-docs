@@ -112,7 +112,7 @@ const config = {
               position: 'right',
             },
           {
-            href: 'https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh',
+            href: 'https://capmonster.cloud/#new-extension-block',
             label: 'Расширение',
             position: 'right',
           },

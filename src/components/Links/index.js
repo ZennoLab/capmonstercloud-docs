@@ -45,7 +45,7 @@ export default function Links() {
       Svg: require('@site/static/img/Ext_icon.svg').default,
       desciption: isRULocale ? 'Автоматическое распознавание капч в браузере Chrome в фоновом режиме' : 'Automatic captcha recognition in the Chrome browser in the background',
       image: isRULocale ? '/img/ru_extension.png' : '/img/en_extension.png',
-      linkUrl: 'https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh'
+      linkUrl: 'https://capmonster.cloud/#new-extension-block'
     },
     {
       title: isRULocale ? 'Техподдержка' : 'Support',
