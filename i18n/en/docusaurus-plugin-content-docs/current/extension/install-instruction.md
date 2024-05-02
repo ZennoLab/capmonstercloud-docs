@@ -49,7 +49,7 @@ To make the use of CapMonster Cloud extension in the ProjectMaker easier, we’v
 
 ***Minimum version of ZennoPoster 7.6.1***
 
-![](Aspose.Words.d33c25f1-0d68-4361-bcfb-da50f3892df4.002.png)
+[![Extension_Example](Aspose.Words.d33c25f1-0d68-4361-bcfb-da50f3892df4.002.png)](https://drive.google.com/file/d/1k9suZUafyr-UR14Fm4BFrGDr3cGmodwq/view?usp=drive_link)
 :::caution
 When installing the CapMonster Cloud extension via a CRX file, you need to keep the extension version up to date. In case of a version update, you need to re-download the current CRX file and reinstall it.
 :::
