@@ -3,13 +3,11 @@ sidebar_position: 7
 ---
 # Token acceptance issues
 
-## What to do if the site only accepts some of the tokens from CapMonster Cloud?
+## What to do if a site is only accepting a portion of tokens from CapMonster Cloud?
 
 ## **Description**
 
-You receive a token from CapMonster Cloud, send it to the site, but the site rejects it. Moreover, sometimes the site can accept a token, for example, in one case out of 10 (the percentage of success in your case may be different).
-
-In this case, the `nocache` parameter can help you.
+You receive a token from CapMonster Cloud and send it to a site, but the site rejects it. And sometimes the site can accept the token, for example, in one case out of 10 (the success rate in your case may be different). Blocking or rejection of tokens can happen because of frequent requests from one IP address, or because of poor captcha quality (noise on the image), also some sites may use dynamic captcha updates or add additional checks without notification. In this case, the `nocache` parameter can help you.
 
 ---
 
