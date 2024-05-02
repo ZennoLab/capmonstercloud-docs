@@ -8,7 +8,7 @@ sidebar_position: 6
 
 In *CapMonster.Cloud* captchas acceptance depends on its complexity. Clients pay only for correctly solved captchas.
 
-In order to have a guaranteed correct result, you can also pass the parameter  **recognizingThreshold** with a value from 0 to 100 along with the captcha recognition request.
+In order for CapMonster.cloud to return a guaranteed correct result, you can pass along with the captcha recognition request also a **recognizingthreshold** parameter with a value between 0 and 100. This parameter allows you to set the threshold of the system's confidence in the correct answer for the captcha and determines the minimum value below which money will not be deducted from the balance. 
 
 ---
 
