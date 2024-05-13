@@ -20,6 +20,24 @@ The object contains data about the task for solving ReCaptcha2 from Google.
 |userAgent|String|no|-|The browser User-Agent to use when loading images if links were passed in imageUrls. It is required to use a modern browser signature, otherwise Google will return an error asking for a browser update.|
 |websiteURL|String|no|-|URL of the page where the captcha is solved.|
 
+### **Description of parameters**
+
+**imageUrls**: links to images.
+
+**imagesBase64**: images in Base64 format.
+
+**metadata.Grid**: additional metadata related to image grid sizes.
+
+**metadata.TaskDefinition**: task description identifier/type, e.g.: `/m/015qff` means "Click on traffic lights".
+
+![](taskdefinition.png)
+
+**metadata.Task**: additional metadata related to the task.
+
+**userAgent**: information about the user agent. Current userAgent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0.0 Safari/537.36
+
+**websiteURL**: address of the web page with the captcha.
+
 ## **Request example**
 
 :::info Method
@@ -39,7 +57,7 @@ https://api.capmonster.cloud/createTask
       "Grid": "3x3",
       "TaskDefinition": "/m/015qff"
     },
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36.",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36.",
     "websiteUrl": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle"
   }
 }
