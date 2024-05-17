@@ -5,6 +5,8 @@ sidebar_position: 4
 
 # Receiving events from the extension
 
+Receiving events from the extension helps your code to be aware of events that are happening (such as successfully solving a captcha with a token or clicks) and react accordingly.
+
 When solving various types of captchas, the extension sends events to the currently active page in the global window object.
 
 If necessary, it is possible to subscribe to these events via `window.addEventListener`
