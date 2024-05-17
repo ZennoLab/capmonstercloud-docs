@@ -102,3 +102,4 @@ Examples:
 |`https://*.zennolab.com`|Prohibition of the extension on all subdomains `https://zennolab.com`|
 |`https://www.google.*`|Prohibiting the extension from working on Google in all zones (ru, com, com.ua, etc.)|
 
+When errors occur in solving captchas, see the [error glossary](/api/api-errors.md).
