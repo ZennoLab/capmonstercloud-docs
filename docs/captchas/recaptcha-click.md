@@ -82,5 +82,5 @@ https://api.capmonster.cloud/getTaskResult
 ||**Наименование**|**Стоимость за 1000 картинок, $**|**Стоимость за 1000 новых динамических картинок, $**|
 | :-: | :-: | :-: | :-: |
 |1|<p>reCAPTCHA 2 (3\*3)</p><p>![](Aspose.Words.3eba36bc-cab6-486e-9e8f-1e38b225e806.001.png)</p><p></p>|0,2|0,04 |
-|2|<p>reCAPTCHA 2 (4\*4)</p><p>![](Aspose.Words.3eba36bc-cab6-486e-9e8f-1e38b225e806.002.png)</p>|0,1|не применимо |
+|2|<p>reCAPTCHA 2 (4\*4)</p><p>![](Aspose.Words.3eba36bc-cab6-486e-9e8f-1e38b225e806.002.png)</p>|0,1|неприменимо |
 

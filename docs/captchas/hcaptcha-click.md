@@ -22,9 +22,9 @@ https://api.capmonster.cloud/createTask
 |metadata.Task|String|да|`Please click on the panda` и другие|Текст задания (<u>на английском</u>)|
 |exampleImageUrls|Array|не всегда|[ “[https://i.postimg.cc/GmBgwnDm/4type-example-image.png](https://i.postimg.cc/GmBgwnDm/4type-example-image.png)”]|Список с адресами изображений. Должен содержать 1 или несколько элементов в зависимости от типа задания.|
 |exampleImagesBase64|Array|не всегда|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”]|Список с изображениями в формате base64. Должен содержать 1 или несколько элементов в зависимости от типа задания.|
-|metadata.Classes|Array|не всегда|[ "shark", "chicken", "goat", "hedgehog" ] и другие|Список со строковыми значениями, находящимися на правой половине каптчи (в том же порядке, как на изображении)|
+|metadata.Classes|Array|не всегда|[ "shark", "chicken", "goat", "hedgehog" ] и другие|Список со строковыми значениями, находящимися на правой половине капчи (в том же порядке, как на изображении)|
 |userAgent|String|нет|-|User-Agent браузера, используемый при загрузке изображений, если были переданы ссылки в imageUrls. Необходимо использовать подпись современного браузера, иначе Google будет возвращать ошибку, требуя обновить браузер.|
-|websiteURL|String|нет|-|Адрес страницы на которой решается каптча|
+|websiteURL|String|нет|-|Адрес страницы, на которой решается капча|
 
 ## **Запрос на получение ответа**
 :::info Метод
@@ -32,7 +32,7 @@ https://api.capmonster.cloud/createTask
 https://api.capmonster.cloud/getTaskResult
 ```
 :::
-Используйте метод [getTaskResult](../api/methods/get-task-result.md) чтобы получить решение капчи. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 300мс до 6 с.
+Используйте метод [getTaskResult](../api/methods/get-task-result.md), чтобы получить решение капчи. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 300мс до 6 с.
 
 ### **Структура объекта solution**
 |**Свойство**|**Тип**|**Описание**|
@@ -146,7 +146,7 @@ https://api.capmonster.cloud/getTaskResult
 | :-: | :-: | :-: |
 
 :::info Передавайте референсные изображения для лучшего решения
-Изображения которые находятся в шапке задания если они есть, необходимо передавать в параметре `exampleImagesBase64` или `exampleImageUrls`
+Изображения, которые находятся в шапке задания, если они есть, необходимо передавать в параметре `exampleImagesBase64` или `exampleImageUrls`
 
 ![small-size](reference-example.png)
 
