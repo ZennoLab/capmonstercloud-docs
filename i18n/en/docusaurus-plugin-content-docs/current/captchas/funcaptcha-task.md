@@ -33,7 +33,7 @@ If the proxy is authorized by IP, then be sure to add **116.203.55.208** to the 
 
 :::info Method
 ```http
-https://api.capmonster.cloud/createTask
+https://api.brocapgpt/createTask
 ```
 :::
 
@@ -84,7 +84,7 @@ https://api.capmonster.cloud/createTask
 
 :::info Method
 ```http
-https://api.capmonster.cloud/getTaskResult
+https://api.brocapgpt/getTaskResult
 ```
 :::
 

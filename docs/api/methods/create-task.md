@@ -10,27 +10,18 @@ sidebar_label: createTask
 
 :::info Адрес метода
 ```http
-https://api.capmonster.cloud/createTask
+https://api.brocapgpt/createTask
 ```
 формат запроса: `JSON POST`
 :::
 
-<!-- Адрес метода: <https://api.capmonster.cloud/createTask> 
-Формат запроса: JSON POST -->
-
 -----
 ## **Параметры запроса**
-<!-- 
-|**Параметр**|**Тип**|**Обязательный**|**Значение**|
-| :-: | :-: | :-: | :-: |
-|clientKey|String|Да|Уникальный ключ вашей учетной записи, API ключ (найти можно [тут](https://capmonster.cloud/Dashboard))|
-|task|Объект задачи|Да|Массив данных о задаче. Список типов задач капч [здесь](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/589856).|
-|callbackUrl|String|Нет|Веб адрес для отправки результата задачи капчи. Данные отправляются POST запросом.<br />Содержимое идентично ответу метода [getTaskResult](file:///C:/wiki/spaces/APIS/pages/557078).<br />Содержимое ответа не проверяется и сервер должен успеть принять запрос за 2 секунды, затем соединение закрывается.| -->
 
 ### `clientKey`
 Type: `String` <br />
-Обязательный: `Да`<br />
-Уникальный ключ вашей учетной записи, API ключ (найти можно [тут](https://capmonster.cloud/Dashboard))
+Обязательный: `Да` <br />
+Уникальный ключ вашей учетной записи, API ключ (найти можно [тут](https://brocapgpt.com/dashboard)
 
 ### `task`
 Type: `Объект задачи` <br />
@@ -45,79 +36,51 @@ Type: `String` <br />
 --- 
 
 ### **Примеры запросов**
-
-<!-- ```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import CodeBlock from '@theme/CodeBlock';
-```
-
-```mdx-code-block
-  <Tabs>
-    <TabItem value="apple" label="Задача решения обычной капчи с изображением">
-    <CodeBlock className="language-json">{JSON.stringify({
-      "clientKey":"67b6bcbb1a728ea8d563de6d169a2057",
-      "task": {
-        "type":"ImageToTextTask",
-        "body":"BASE64\_BODY\_HERE!"
-      }
-    }, null, 2)}</CodeBlock>
-    </TabItem>
-    <TabItem value="orange" label="Задача решения ReCaptcha2"><CodeBlock className="language-json">{JSON.stringify({
-      "clientKey":"67b6bcbb1a728ea8d563de6d169a2057",
-      "task": {
-        "type":"NoCaptchaTaskProxyless","websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2\_simple.php?level=high",
-        "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI\_iqRyTwd"
-      }
-    }
-, null, 2)}</CodeBlock></TabItem>
-  </Tabs>
-``` -->
-
-
   <details>
     <summary>
-      Задача решения обычной капчи с изображением
+      Задача решения FunCaptchaTask
     </summary>
 
 ```json
     {
-      "clientKey":"67b6bcbb1a728ea8d563de6d169a2057",
-      "task": 
-      {
-        "type":"ImageToTextTask",
-        "body":"BASE64_BODY_HERE!"
-      }
-    }
+		"clientKey":"67b6bcbb1a728ea8d563de6d169a2057",
+		"task": 
+		{
+			"type":"FunCaptchaTaskProxyless",
+			"websiteURL":"http://mywebsite.com/",
+			"funcaptchaApiJSSubdomain":"mywebsite-api.funcaptcha.com",
+			"data": "{\"blob\":\"dyXvXANMbHj1iDyz.Qj97JtSqR2n%2BuoY1V%2FbdgbrG7p%2FmKiqdU9AwJ6MifEt0np4vfYn6TTJDJEfZDlcz9Q1XMn9przeOV%2FCr2%2FIpi%2FC1s%3D\"}",
+			"websitePublicKey":"69A21A01-CC7B-B9C6-0F9A-E7FA06677FFC"
+		}
+	}
 ```
   </details>
 
   <details>
     <summary>
-      Задача решения ReCaptcha2
+      Задача решения ComplexImageTask
     </summary>
 
 ```json
     {
-      "clientKey":"67b6bcbb1a728ea8d563de6d169a2057",
-      "task": 
-      {
-        "type":"NoCaptchaTaskProxyless",
-        "websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
-        "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"
-      }
-    }
+		"clientKey":"67b6bcbb1a728ea8d563de6d169a2057",
+		"task": 
+		{
+			"type": "ComplexImageTask",
+			"class": "funcaptcha",
+			"imageUrls":[ "https://i.postimg.cc/s2ZDrHXy/fc1.jpg" ],
+			"metadata": 
+			{
+			  "Task": "Pick the image that is the correct way up"
+			},
+			"userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+		}
+	}
 ```
   </details>
 
 -----
 ## **Структура ответа**
-
-<!-- |**Параметр**|**Тип**|**Значение**|
-| :-: | :-: | :-: |
-|errorId|Integer|Идентификатор ошибки.<br />**0** - ошибок нет, задача успешно создана, идентификатор задачи находится в параметре *taskId*<br />**1** - ошибка, информация о ней находится в свойстве *errorCode*|
-|errorCode|String|Код ошибки. См. [глоссарий ошибок](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/295310).|
-|taskId|Integer|Идентификатор задания для последующего использования в методе [getTaskResult](https://zennolab.atlassian.net/wiki/spaces/APIS/pages/557078/getTaskResult).| -->
 
 ### `errorId`
 Type: `Integer` <br />

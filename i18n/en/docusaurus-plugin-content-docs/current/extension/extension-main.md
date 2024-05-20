@@ -45,7 +45,7 @@ To get started with the extension, click on its icon to the right of the address
 1. Find and choose the folder where you unpacked the extension.
 1. After that the extension should appear in the list of the installed extensions.
 
-![](919a2eab-1651-4b48-8980-b69346d700fd.png)
+![](extension1.png)
 
   </details>
 
@@ -54,7 +54,7 @@ To get started with the extension, click on its icon to the right of the address
 
 If you are installing the extension over the previous version, then when you update the original extension files, you also need to click the update button on the "Extensions" page (how to open this page is described above in the "Manual installation" section).
 
-![](manual-update.png)
+![](extension2.png)
 </details>
 
 -----
@@ -64,34 +64,28 @@ If you are installing the extension over the previous version, then when you upd
 
 By default the installed extension is hidden. To pin it you have to click on the “Pin” button:
 
-![](pin1.png)
+![](extension3.png)
 </details>
 
 After launching the extension you’ll see this window:
+![](extension4.png)
 
-![](ext.screen.en.png)
 ### <a name="id-browserextension-apikey"></a>**API key**
 Enter API key in the corresponding field(1), press save button(2). If you entered the correct key, your balance will be displayed below(3).
+![](extension5.png)
 
-![](api-key.png)
 ### <a name="id-browserextension-automaticcaptchasolving"></a>**Automated captcha solving**
 Here you can select the types of captchas that the extension will recognize automatically.
 
-![](extension.example.png)
-
-:::info !
-
-You may need to reload the page with captcha for the changes to take effect!
-
-:::
 ### <a name="id-browserextension-repeatcaptchasolvingincaseofanerror"></a>**Repeat captcha solving in case of an error**
 If the first attempt to solve the captcha is failed, the extension will send repeated tasks until the captcha is not solved, or until the limit specified in this setting will not be reached.
+![](extension7.png) 
+
 ### <a name="id-browserextension-proxy"></a>**Proxy**
-![](proxy.png) 
-
+![](extension8.png)  
 Here you can specify the proxy that will be sent along with the recognition task.
-
 The "Login" and "Password" are optional.
+
 ### <a name="id-browserextension-blacklistcontrol"></a>**Blacklist control**
 Using the blacklist you can configure the extension to ignore captchas on specific websites.
 
