@@ -32,9 +32,8 @@ V4 (captcha_id = gt)
 |websiteURL|String|yes|Address of the page on which the captcha is solved.|
 |gt|String|yes|The GeeTest identifier key for the domain. Static value, rarely updated.<br />If v4 then this is the clientId parameter.|
 |challenge|String|yes, only for V3|<p>A dynamic key.<br />Each time our API is called, we need to get a new key value. If the captcha is loaded on the page, then the `challenge` value is no longer valid and you will get the [error](../api/api-errors.md) `ERROR_TOKEN_EXPIRED`.</p><p>You will be charged for tasks with `ERROR_TOKEN_EXPIRED` error.</p><p>It is necessary to examine the requests and find the one in which this value is returned and, before each creation of the recognition task, execute this request and parse the challenge from it.</p>|
-|geetestApiServerSubdomain|String|no|Geetest API subdomen server (must be different from
-api.geetest.com). <br />Optional parameter. May be required for some sites.|
-|geetestGetLib|String|no| Path to the captcha script to display it on the page. <br /> Optional parameter. May be required for some sites. <br />Send JSON as a string.|
+|geetestApiServerSubdomain|String|no|Geetest API subdomain server (must be different from api.geetest.com). <br />Optional parameter. May be required for some sites.|
+|geetestGetLib|String|no|Path to the captcha script to display it on the page. <br /> Optional parameter. May be required for some sites. <br />Send JSON as a string.|
 |version|Integer|no|Version number (default is 3). Possible values: 3, 4.|
 |initParameters|Object|no|Additional parameters for version 4, used together with “riskType” (captcha type/characteristics of its verification).|
 |proxyType|String|yes (When using **GeeTestTask**)|**http** - regular http/https proxy;<br />**https** - try this option only if "http" doesn't work (required for some custom proxies);<br />**socks4** - socks4 proxy;<br />**socks5** - socks5 proxy.|
