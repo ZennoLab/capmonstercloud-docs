@@ -1,5 +1,16 @@
 ﻿# How to report bad tokens
 
+File a complaint about incorrect tokens provided by CapMonster Cloud when they do not result in successful verification on the site or are frequently rejected.
+
+Examples of situations when you should file a complaint:
+
+- A user has received a solution token, but the site still does not pass it as a correct captcha solution.
+
+- Some sites are successfully accepting tokens, while others are rejecting them.
+
+- Rejection on sites that have previously successfully accepted similar tokens.
+
+
 ## **Why to report?**
 
 We need reports so that we automatically analize data on the quality of token issued by our API. Reports are processed automatically, and the team takes actions to improve the quality of the tokens, whether it is updating the system for new tasks, improving grids, etc.
