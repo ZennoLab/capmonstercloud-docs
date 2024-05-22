@@ -6,6 +6,10 @@ sidebar_label: ReCaptchaV2EnterpriseTask
 # RecaptchaV2EnterpriseTask
 The object contains data for Google reCAPTCHA Enterprise solving task. To provide solid universality for solving this type of task we have reproduce every piece of environment used for an automation task you plan to complete. Including, proxy access, browser's user-agent, cookies (optionally). 
 
+This type of captcha has no visual differences from ReCaptcha v.2, you can see the difference using the captcha code, for example in developer tools under the Network tab in Queries:
+
+*Request URL (anchor): https://www.google.com/recaptcha/enterprise/anchor?ar=1&k=6Lf26sUnAAAAAIKLuWNYgRsFUfmI-3Lex3xT5N-s&co=aHR0cHM6Ly8yY2FwdGNoYS5jb206NDQz&hl=en&v=1kRDYC3bfA-o6-tsWzIBvp7k&size=normal&cb=43r1q2d3mx66*
+
 This type of captcha might be solved a bit longer than usual image captcha, but this issue is compensated by the fact that g-captcha-response value we send to you is valid for the next 60 seconds after we solves your ReCaptcha2.
 
 :::warning **Attention!**
@@ -31,6 +35,8 @@ If the proxy is authorized by IP, then be sure to add 116.203.55.208 to the whit
 
 For `enterprisePayload` - before calling it, you need to replace the `grecaptcha.enterprise.render` function with your own and take the value from its parameters. The function exists after loading the script, and the captcha is usually rendered immediately or based on a page event. If the captcha is rendered with the current field `s` on the client, then the token will most likely not be accepted.
 The original function can be called without the `s` field.
+
+`apiDomain` is the domain that hosts the API interface for interacting with reCAPTCHA, it is used to verify that the user passes the captcha.
 
 <details>
     <summary>Script</summary>
@@ -103,7 +109,7 @@ https://api.capmonster.cloud/createTask
     "proxyPort":8080,
     "proxyLogin":"proxyLoginHere",
     "proxyPassword":"proxyPasswordHere",
-    "userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.132 Safari/537.36"
+    "userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
   }
 }
 ```
