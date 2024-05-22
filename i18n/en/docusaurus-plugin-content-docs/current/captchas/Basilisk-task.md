@@ -13,7 +13,7 @@ This task will be performed using our proxy servers.
 |class|String|yes|**Basilisk**|
 |websiteURL|String|yes|The address of the main page where the captcha is solved.|
 |websiteKey|String|yes|Can be found in the html code in the attribute **data-sitekey** of the captcha container or in the payload of a POST request to the `https://basiliskcaptcha.com/challenge/check-site` in the field **site_key**|
-|userAgent|String|no|User-Agent browser. **Pass only the current UA from the Windows operating system. This is currently version 123**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36`|
+|userAgent|String|no|User-Agent browser. **Pass only the current UA from the Windows operating system. This is currently version 124**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36`|
 ## **Example request**
 **Address:** 
 ```http
