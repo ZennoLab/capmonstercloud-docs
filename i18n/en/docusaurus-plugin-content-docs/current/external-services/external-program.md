@@ -318,3 +318,15 @@ If you couldn't connect CapMonster.Cloud to your app, contact [support](https://
 :::
 
 [ref1]: Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.001.png
+
+## **Frequent connection errors. How to avoid them?**
+
+**Network problems**: If you are having trouble connecting to CapMonster.Cloud, check your internet connection. An unstable network or routing issues can cause malfunctions with the service.
+
+**Program configuration error**: Incorrect program configuration may cause errors when using CapMonster.Cloud. Check the settings of your software and make sure that all parameters are correctly configured to work with the service.
+
+**Exceeded limits**: You may have exceeded the limits for using the CapMonster.Cloud service. Check your account for active limits and make sure they are not exhausted.
+
+**Authentication issues**: Make sure your API key is properly copied and pasted into your software settings.
+
+**Errors in proxy settings**: If you use a proxy server to connect to the Internet, make sure that the proxy settings are specified correctly in your software and do not block access to CapMonster.Cloud.
