@@ -27,7 +27,7 @@ sidebar_label: RecaptchaV2Task
 |proxyPassword|String|нет|Пароль прокси-сервера|
 |userAgent|String|нет|User-Agent браузера, используемый в эмуляции. Необходимо использовать подпись современного браузера, иначе Google будет возвращать ошибку, требуя обновить браузер.|
 |cookies|String|нет|<p>Дополнительные cookies, которые мы должны использовать во время взаимодействия с целевой страницей.</p><p>**Формат**: cookiename1=cookievalue1; cookiename2=cookievalue2</p>|
-|isInvisible|bool|нет|true, если капча невидимая|
+|isInvisible|bool|нет|true, если капча невидимая, т.е. имеет скрытое поле для подтверждения, чекбокс отсутствует. При подозрении на бота вызывается дополнительная проверка. |
 
 ## **Пример запроса**
 
@@ -49,7 +49,7 @@ https://api.capmonster.cloud/createTask
     "proxyPort":8080,
     "proxyLogin":"proxyLoginHere",
     "proxyPassword":"proxyPasswordHere",
-    "userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.132 Safari/537.36"
+    "userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
   }
 }
 ```

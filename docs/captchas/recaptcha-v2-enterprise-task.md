@@ -6,7 +6,11 @@ sidebar_label: ReCaptchaV2EnterpriseTask
 # RecaptchaV2EnterpriseTask
 Объект содержит данные о задаче на решение ReCaptcha2 от Google версии Enterprise. Для обеспечения универсальности решения этого вида капчи нам необходимо использовать все данные, которые вы используете во время автоматизации заполнения формы на целевом сайте, включая прокси, user-agent браузера и cookies. Это позволит избежать любых проблем при изменении Google кода своей капчи.
 
-Каптча может решаться довольно долго по сравнению с обычной капчей, но это компенсируется тем, что полученный g-captcha-response действует еще 60 секунд после решения капчи.
+Этот тип капчи не имеет визуальных отличий от ReCaptcha v.2, увидеть разницу можно с помощью кода капчи, например, в инструментах разработчика во вкладке “Сеть” в запросах: 
+
+*URL Запроса (anchor): https://www.google.com/recaptcha/enterprise/anchor?ar=1&k=6Lf26sUnAAAAAIKLuWNYgRsFUfmI-3Lex3xT5N-s&co=aHR0cHM6Ly8yY2FwdGNoYS5jb206NDQz&hl=en&v=1kRDYC3bfA-o6-tsWzIBvp7k&size=normal&cb=43r1q2d3mx66*
+
+Капча может решаться довольно долго по сравнению с обычной капчей, но это компенсируется тем, что полученный g-captcha-response действует еще 60 секунд после решения капчи.
 
 :::warning **Внимание!**
 Если прокси с авторизацией по IP, то необходимо обязательно добавить **116.203.55.208** в белый список.
@@ -31,6 +35,8 @@ sidebar_label: ReCaptchaV2EnterpriseTask
 
 Для `enterprisePayload` - необходимо заменять функцию `grecaptcha.enterprise.render` перед её вызовом на свою и забирать значение из её параметров. Функция существует после загрузки скрипта, а рендерится капча обычно сразу или по событию страницы, если капча отрендерится с текущим полем `s` на клиенте, то токен с большой вероятностью принят не будет.
 Оригинальную функцию можно вызывать без поля `s`.
+
+`apiDomain` – это домен, на котором размещается API-интерфейс для взаимодействия с reCAPTCHA, используется для верификации прохождения капчи пользователем. 
 
 <details>
     <summary>Скрипт</summary>
@@ -103,7 +109,7 @@ https://api.capmonster.cloud/createTask
     "proxyPort":8080,
     "proxyLogin":"proxyLoginHere",
     "proxyPassword":"proxyPasswordHere",
-    "userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.132 Safari/537.36"
+    "userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
   }
 }
 ```

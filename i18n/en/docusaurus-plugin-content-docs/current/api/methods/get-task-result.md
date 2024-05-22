@@ -18,7 +18,7 @@ request format: `JSON POST`
 Формат запроса: JSON POST -->
 
 :::caution
-Limit: 120 requests per task.
+Limit: 120 requests per task. If the limit is exceeded, the user's account may be temporarily locked. 
 :::
 
 ---

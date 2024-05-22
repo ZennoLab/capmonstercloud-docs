@@ -114,3 +114,5 @@ Examples:
 |`https://www.google.*`|Prohibiting the extension from working on Google in all zones (ru, com, com.ua, etc.)|
 
 [ref1]: Aspose.Words.d14847ca-5ce8-4c9f-8081-1ec99b44a6b3.001.png
+
+When errors occur in solving captchas, see the [error glossary](/api/api-errors.md).

@@ -88,4 +88,6 @@ To run our automatic script, which will launch the browser and perform the actio
 node index.js
 ```
 
+To update the extension without data loss, you need to copy all settings and data from the old version, download the new version of the extension, unzip it and replace the old version with the new one.
+
 We hope this guide was helpful to you. If you have any questions, please refer to the official Selenium documentation and your browser documentation.

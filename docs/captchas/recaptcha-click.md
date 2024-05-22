@@ -20,6 +20,24 @@ sidebar_label: ComplexImageTask Recaptcha
 |userAgent|String|нет|-|User-Agent браузера, используемый при загрузке изображений, если были переданы ссылки в imageUrls. Необходимо использовать подпись современного браузера, иначе Google будет возвращать ошибку, требуя обновить браузер.|
 |websiteURL|String|нет|-|Адрес страницы, на которой решается капча.|
 
+### **Описание параметров**
+
+**imageUrls**: ссылки на изображения.
+
+**imagesBase64**: изображения в формате Base64.
+
+**metadata.Grid**: дополнительные метаданные, связанные с размерами сетки изображений.
+
+**metadata.TaskDefinition**: идентификатор/тип описания задания, например: `/m/015qff` означает “Click on traffic lights”. 
+
+![](taskdefinition.png)
+
+**metadata.Task**: дополнительные метаданные, связанные с задачей.
+
+**userAgent**: информация о пользовательском агенте. Актуальный userAgent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
+
+**websiteURL**: адрес веб-страницы с капчей. 
+
 ## **Пример запроса**
 
 :::info Метод
@@ -39,7 +57,7 @@ https://api.capmonster.cloud/createTask
       "Grid": "3x3",
       "TaskDefinition": "/m/015qff"
     },
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36.",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36.",
     "websiteUrl": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle"
   }
 }

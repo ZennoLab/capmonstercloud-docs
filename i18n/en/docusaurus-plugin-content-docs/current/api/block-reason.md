@@ -32,7 +32,16 @@ If you are not the developer of the app/script that sends captchas, contact thei
 
 **I am a developer**
 
-If you are a developer, make changes yourself according to the rules and limits.
+If you are a developer, make changes yourself according to the rules and limits:
+
+- Make sure your app or script is sending correct requests to the API. Make sure all parameters are correct, including keys, task IDs, and other required data.
+
+- Observe the limits on the number of requests per task and other restrictions set by the captcha recognition service. If your app sends too many requests, it can lead to blocking.
+
+- Make sure you use reliable proxy servers to avoid blocking due to the use of banned proxies.
+
+To see examples of valid queries, see [Captcha Types](https://docs.capmonster.cloud/docs/captchas). 
+
   </details>
 
 

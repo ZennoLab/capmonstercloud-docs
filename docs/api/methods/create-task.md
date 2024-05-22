@@ -42,6 +42,20 @@ Type: `String` <br />
 Обязательный: `Нет`<br />
 Веб адрес для отправки результата задачи капчи. Данные отправляются POST запросом.<br />Содержимое идентично ответу метода [getTaskResult](./get-task-result).<br />Содержимое ответа не проверяется и сервер должен успеть принять запрос за 2 секунды, затем соединение закрывается.
 
+Пример использования функции `callbackUrl`:
+
+```json
+{
+  "clientKey": "67b6bcbb1a728ea8d563de6d169a2057",
+  "task": {
+    "type": "NoCaptchaTaskProxyless",
+    "websiteURL": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
+    "websiteKey": "6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"
+  },
+  "callbackUrl": "https://yourwebsite.com/callback"
+}
+```
+
 --- 
 
 ### **Примеры запросов**

@@ -59,6 +59,17 @@ sidebar_label: TurnstileTask
 })();
 ```
 
+При вызове `window.turnstile.render(el, paramsObj)` загружается капча на странице, и при успешном решении вызывается функция `callback`, которая передает информацию о решении.
+
+`window.turnstile.render(el, paramsObj):`
+
+`el`: DOM-элемент для вставки в него капчи.
+
+`paramsObj`: Объект параметров, содержащий информацию о капче и инструкции для ее решения. Этот объект обычно содержит такие поля, как
+*sitekey*, *action*, *cData*, *chlPageData*, *callback*. 
+
+`callback` – функция обратного вызова после успешного прохождения капчи.
+
 ## Вариант 3 (CloudFlare)
 Вы работаете с помощью запросов, и Вам требуются куки `cf_clearance`. Обязательно нужны ваши прокси
 #### Структура объекта
@@ -68,7 +79,7 @@ sidebar_label: TurnstileTask
 |websiteURL|String|да|Адрес страницы, на которой решается капча|
 |websiteKey|String|да|Ключ Turnstile(можно передать любую строку)|
 |cloudflareTaskType|String|нет|**cf_clearance**|
-|htmlPageBase64|String|да|Закодированная в base64 html страница **"Just a moment"** которая выдаётся с кодом 403 при обращению к сайту с данной защитой.|
+|htmlPageBase64|String|да|Закодированная в base64 html страница **"Just a moment"**, которая выдаётся с кодом 403 при обращении к сайту с данной защитой.<br/> Пример получения строки htmlPageBase64: *<br/>var htmlContent = document.documentElement.outerHTML;<br/>var htmlBase64 = btoa(unescape(encodeURIComponent(htmlContent)));<br/>console.log(htmlBase64);*|
 |userAgent|String|да|User-Agent браузера.<br /> **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является 124 версия**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36`|
 |proxyType|String|да|**http** - обычный http/https прокси<br/>**https** - попробуйте эту опцию, только если "http" не работает (требуется для некоторых кастомных прокси)<br/>**socks4** - socks4 прокси<br/>**socks5** - socks5 прокси|
 |proxyAddress|String|да|<p>IP адрес прокси IPv4/IPv6. Не допускается:</p><p>- использование имен хостов</p><p>- использование прозрачных прокси (там, где можно видеть IP клиента)</p><p>- использование прокси на локальных машинах</p>|

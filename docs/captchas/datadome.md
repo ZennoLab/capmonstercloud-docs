@@ -5,6 +5,10 @@ sidebar_label: DataDome
 
 # DataDome
 
+Данный тип капчи в основном требует от пользователя решить головоломку, перемещая ползунок для подтверждения. 
+
+![](datadome.png)
+
 :::warning **Внимание!**
 Данная задача будет выполняться с использованием наших прокси-серверов. Используйте полученные куки в своём проекте, чтобы автоматически пройти капчу.
 :::
@@ -21,7 +25,7 @@ sidebar_label: DataDome
 |metadata.datadomeCookie|String|да|Ваши куки от datadome. Можно получить на странице с помощью "document.cookie" или в заголовке запроса Set-Cookie: "datadome=..." (см. пример запроса /createTask)|
 |userAgent|String|нет|User-Agent браузера.<br /> **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является 124 версия**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36`|
 
-## **Пример запроса**
+## **Пример запроса на реальном сайте**
 
 **Адрес:** 
 ```http
@@ -34,14 +38,15 @@ https://api.capmonster.cloud/createTask
     "task": {
         "type": "CustomTask",
         "class": "DataDome",
-        "websiteURL": "site.com",
+        "websiteURL": "https://www.leboncoin.fr/",
         "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
         "metadata": {
-            "htmlPageBase64": "PGh0bWw+PGhlYWQ+PHRpdGxlPmJs...N0E5QTA1",
-            "datadomeCookie": "datadome=6BvxqELMoorFNoo7GT1...JyfP_mhz"
+            "htmlPageBase64": "PGh0bWw+PGhlYWQ+PHRpdGxlPmJs...PC9odG1sPg==",
+            "datadomeCookie": "datadome=VYUWrgJ9ap4zmXq8Mgbp...64emvUPeON45z"
         }
     }
 }
+
 ```
 
 **Пример ответа**
