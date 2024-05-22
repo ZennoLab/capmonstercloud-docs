@@ -16,10 +16,10 @@ ReCaptcha3, в отличие от ReCaptcha2, не требует от посе
 |**Параметр**|**Тип**|**Обязательный**|**Значение**|
 | :- | :- | :- | :- |
 |type|String|да|**RecaptchaV3TaskProxyless**|
-|websiteURL|String|да|Адрес страницы, на которой решается каптча|
+|websiteURL|String|да|Адрес страницы, на которой решается капча|
 |websiteKey|String|да|Ключ-идентификатор ReCaptcha3 на целевой странице.<br/>https://www.google.com/recaptcha/api.js?render=ВОТ_ЭТОТ|
 |minScore|Double|нет|Может иметь значение от 0.1 до 0.9.|
-|pageAction|String|нет|<p>Значение параметра action, которое передаётся виджетом ReCaptcha в Google, и которое потом видит владелец сайта при проверке токена. Значение по-умолчанию: *verify*</p><p>Пример в html:<br/>*`grecaptcha.execute('site_key', {action:'login_test'})`*.</p>|
+|pageAction|String|нет|<p>Значение параметра action, которое передаётся виджетом ReCaptcha в Google, и которое потом видит владелец сайта при проверке токена. Значение по умолчанию: *verify*</p><p>Пример в html:<br/>*`grecaptcha.execute('site_key', {action:'login_test'})`*.</p>|
 
 ## **Пример запроса**
 
@@ -50,11 +50,11 @@ https://api.capmonster.cloud/createTask
 }
 ```
 ## **Получение результата**
-Используйте метод [getTaskResult](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/557078/getTaskResult) чтобы получить решение ReCaptcha3. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 10 с до 30 с.
+Используйте метод [getTaskResult](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/557078/getTaskResult), чтобы получить решение ReCaptcha3. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 10 с до 30 с.
 
 |**Свойство**|**Тип**|**Описание**|
 | :- | :- | :- |
-|gRecaptchaResponse|String|Хеш который необходимо подставить в форму с ReCaptcha3 в  `<textarea id="g-recaptcha-response" ></textarea>` . Имеет длину от 500 до 2190 байт.|
+|gRecaptchaResponse|String|Хеш, который необходимо подставить в форму с ReCaptcha3 в  `<textarea id="g-recaptcha-response" ></textarea>` . Имеет длину от 500 до 2190 байт.|
 
 **Пример:**
 

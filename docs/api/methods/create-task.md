@@ -116,7 +116,7 @@ import CodeBlock from '@theme/CodeBlock';
       "clientKey":"67b6bcbb1a728ea8d563de6d169a2057",
       "task": 
       {
-        "type":"NoCaptchaTaskProxyless",
+        "type":"RecaptchaV2Task",
         "websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
         "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"
       }

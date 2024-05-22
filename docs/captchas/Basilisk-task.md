@@ -13,7 +13,7 @@ sidebar_label: BasiliskTask
 |class|String|да|**Basilisk**|
 |websiteURL|String|да|Адрес основной страницы, на которой решается капча.|
 |websiteKey|String|да|Можно найти в html коде в атрибуте **data-sitekey** контейнера с капчей или в payload POST-запроса на `https://basiliskcaptcha.com/challenge/check-site` в поле **site_key**|
-|userAgent|String|нет|User-Agent браузера. **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является 123 версия**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36`|
+|userAgent|String|нет|User-Agent браузера. **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является 124 версия**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36`|
 ## **Пример запроса**
 **Адрес:** 
 ```http
