@@ -7,8 +7,8 @@ export default function MainHero() {
   const titleRu = 'Документация CapMonster Cloud';
   const titleEn = 'CapMonster Cloud Documentation'
   const title = i18n.currentLocale === 'ru' ? titleRu : titleEn;
-  const descriptionRu = 'Обширный набор инструкций и рекомендаций, которые помогут Вам успешно использовать продукт и получить максимальную выгоду от его возможностей.';
-  const desciptionEn = 'An extensive set of instructions and recommendations, that will help you successfully use the product and get the maximum benefit from its capabilities.';
+  const descriptionRu = 'Обширный набор инструкций и рекомендаций, который поможет вам успешно использовать наш продукт для автоматического распознавания капчи и получить максимальную выгоду от его возможностей.';
+  const desciptionEn = 'A comprehensive set of instructions and recommendations to help you successfully use our automatic captcha recognition tool and get the most out of its features.';
   const desciption = i18n.currentLocale === 'ru' ? descriptionRu : desciptionEn;
   const goEn = 'View';
   const goRu = 'Перейти';
