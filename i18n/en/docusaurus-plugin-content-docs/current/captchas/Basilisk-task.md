@@ -21,33 +21,21 @@ https://api.capmonster.cloud/createTask
 ```
 ```json
 {
-
    "clientKey": "API_KEY",
-
    "task": {
-
        "type": "CustomTask",
-
        "class": "Basilisk",
-
        "websiteURL": "https://domain.io/account/register",
-
        "websiteKey": "b7890hre5cf2544b2759c19fb2600897",
-
        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
-
    }
-
 }
 ```
 **Example response**
 ```json
 {
-
    "errorId":0,
-
    "taskId":407533072
-
 }
 ```
 ## **Getting the result**
@@ -55,27 +43,16 @@ Use the method [getTaskResult](../api/methods/get-task-result), to get the Basil
 **Example response:**
 ```json
 {
-
    "errorId":0,
-
    "status":"ready",
-
    "solution": {
-
       "data": {
-
            "captcha_response": "5620301f30daf284b829fba66fa9b3d0"
-
        },
-
        "headers": {
-
            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
-
        }
-
    }
-
 }
 
 ```
