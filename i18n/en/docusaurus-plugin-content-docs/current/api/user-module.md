@@ -3,7 +3,7 @@
 
 ## **Description**
 
-This function helps to create user modules that will be trained to solve a certain type of captcha. 
+This feature allows you to create custom modules that will be trained for one specific type of captcha. This will help to recognize non-standard captchas faster and more efficiently and reduce the probability of errors.  
 
 To go to the [module training page](https://capmonster.cloud/UserModules), click the email in the upper-right area of the website and select the relevant option in the menu.
 
