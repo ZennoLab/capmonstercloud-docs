@@ -1,6 +1,6 @@
 ---
 sidebar_position: 17
-sidebar_label: Basilisk
+sidebar_label: BasiliskTask
 ---
 # Basilisk - FaucetPay Captcha
 :::warning **Warning!**
