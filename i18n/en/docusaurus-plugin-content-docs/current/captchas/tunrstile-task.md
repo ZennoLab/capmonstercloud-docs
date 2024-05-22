@@ -58,6 +58,17 @@ These parameters are in the object that is passed during captcha creation to the
 })();
 ```
 
+When calling `window.turnstile.render(el, paramsObj)` the captcha on the page is loaded, and if successful, a `callback` function is called to pass information about the solution.
+
+`window.turnstile.render(el, paramsObj):`
+
+`el`: The DOM element to insert the captcha into.
+
+`paramsObj`: A params object containing information about the captcha and instructions for solving it. This object usually contains fields such as
+*sitekey*, *action*, *cData*, *chlPageData*, *callback*. 
+
+`callback` – is a callback function after the captcha is successfully passed.
+
 ## Option 3 (CloudFlare)
 You are working using queries, and you need cf_clearance cookies. It is required that you need your proxies.
 #### **Object structure**
@@ -67,7 +78,7 @@ You are working using queries, and you need cf_clearance cookies. It is required
 |websiteURL|String|yes|Address of the page on which the captcha is solved|
 |websiteKey|String|yes|Turnstile key (you can pass any string)|
 |cloudflareTaskType|String|no|**cf_clearance**|
-|htmlPageBase64|String|yes|Base64 encoded html page **"Just a moment"** which is given with code 403 when accessing a site with this protection.|
+|htmlPageBase64|String|yes|Base64 encoded html page **"Just a moment"** which is given with code 403 when accessing a site with this protection.<br/> Example of obtaining a string htmlPageBase64: *<br/>var htmlContent = document.documentElement.outerHTML;<br/>var htmlBase64 = btoa(unescape(encodeURIComponent(htmlContent)));<br/>console.log(htmlBase64);*|
 |userAgent|String|yes|Browser User-Agent.<br /> **Pass only the actual UA from Windows OS. Now this is version 124**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36`|
 |proxyType|String|yes|**http** - normal http/https proxy<br/>**https** - try this option only if "http" doesn't work (required for some custom proxies)<br/>**socks4** - socks4 proxy<br/>**socks5** - socks5 proxy|
 |proxyAddress|String|yes|IP address of the IPv4/IPv6 proxy. Not allowed:<br/>- use of hostnames<br/>- use of transparent proxies (where you can see client IP)<br/>- use of proxies on local machines|

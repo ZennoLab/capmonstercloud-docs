@@ -7,7 +7,9 @@ sidebar_label: RecaptchaV3TaskProxyless
 # RecaptchaV3TaskProxyless
 The object contains data for Google ReCaptcha3 solving task. This task will be executed by our service using our own proxy servers.
 
-When creating a task, unlike ReCaptcha2, you should additionally pass two parameters - pageAction and minScore.
+ReCaptcha3, unlike ReCaptcha2, does not require any action from the site visitor, it works invisibly in the background of the page, collecting and analyzing data about the user to determine whether he is a human or a bot. Based on this analytics, the site receives a trust rating (from 0.1 to 0.9).
+
+When creating a task, you should additionally pass two parameters - pageAction and minScore.
 
 ## **Object structure**
 

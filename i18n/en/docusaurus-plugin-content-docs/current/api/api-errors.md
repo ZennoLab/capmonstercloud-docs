@@ -4,6 +4,12 @@ sidebar_position: 4
 
 # Errors description
 
+:::info Recommendations on how to prevent errors:
+- Ensure that the type of captcha you need to solve is supported by the CapMonster Cloud service.
+- Check for updated documentation to stay up-to-date with the latest API changes and avoid using outdated methods or parameters.
+- Use quality proxies.
+:::
+
 ### `INVALID KEY`
 API error code: `ERROR_KEY_DOES_NOT_EXIST` <br />
 Account authorization key not found in the system or has incorrect format.

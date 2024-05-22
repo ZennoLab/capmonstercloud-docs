@@ -115,3 +115,5 @@ sidebar_position: 0
 |`https://www.google.*`|Запрет работы расширения на google во всех зонах (ru, com, com.ua и т.д.)|
 
 [ref1]: Aspose.Words.d14847ca-5ce8-4c9f-8081-1ec99b44a6b3.001.png
+
+При возникновении ошибок в разгадывании капч см. [глоссарий ошибок](/api/api-errors.md).

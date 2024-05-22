@@ -32,10 +32,10 @@ V4 (captcha_id = gt)
 |websiteURL|String|yes|Address of the page on which the captcha is solved.|
 |gt|String|yes|The GeeTest identifier key for the domain. Static value, rarely updated.<br />If v4 then this is the clientId parameter.|
 |challenge|String|yes, only for V3|<p>A dynamic key.<br />Each time our API is called, we need to get a new key value. If the captcha is loaded on the page, then the `challenge` value is no longer valid and you will get the [error](../api/api-errors.md) `ERROR_TOKEN_EXPIRED`.</p><p>You will be charged for tasks with `ERROR_TOKEN_EXPIRED` error.</p><p>It is necessary to examine the requests and find the one in which this value is returned and, before each creation of the recognition task, execute this request and parse the challenge from it.</p>|
-|geetestApiServerSubdomain|String|no|Optional parameter. <br />May be required for some sites.|
-|geetestGetLib|String|no|Optional parameter. May be required for some sites. <br />Send JSON as a string.|
+|geetestApiServerSubdomain|String|no|Geetest API subdomain server (must be different from api.geetest.com). <br />Optional parameter. May be required for some sites.|
+|geetestGetLib|String|no|Path to the captcha script to display it on the page. <br /> Optional parameter. May be required for some sites. <br />Send JSON as a string.|
 |version|Integer|no|Version number (default is 3). Possible values: 3, 4.|
-|initParameters|Object|no|Additional parameters for version 4.|
+|initParameters|Object|no|Additional parameters for version 4, used together with “riskType” (captcha type/characteristics of its verification).|
 |proxyType|String|yes (When using **GeeTestTask**)|**http** - regular http/https proxy;<br />**https** - try this option only if "http" doesn't work (required for some custom proxies);<br />**socks4** - socks4 proxy;<br />**socks5** - socks5 proxy.|
 |proxyAddress|String|yes (When using **GeeTestTask**)|<p>IPv4/IPv6 proxy IP address. Not allowed:</p><p>- using of hostnames;</p><p>- using transparent proxies (where you can see the client's IP);</p><p>- using proxies on local machines.</p>|
 |proxyPort|Integer|yes (When using **GeeTestTask**)|Proxy port.|
@@ -43,6 +43,25 @@ V4 (captcha_id = gt)
 |proxyPassword|String|no|Proxy-server password.|
 |userAgent|String|no|Browser User-Agent used to recognize captcha.|
 ## **GeeTest V3**
+
+### **Possible captcha variants**
+
+Intelligent mode:
+
+![](intelligent.png)
+
+Slide CAPTCHA:
+
+![](slide.png)
+
+Icon CAPTCHA:
+
+![](icon.png)
+
+Space CAPTCHA:
+
+![](space.png)
+
 ### **Request example**
 
 :::info Method
@@ -51,35 +70,38 @@ https://api.capmonster.cloud/createTask
 ```
 :::
 
-### GeeTestTask (With proxy)
+### GeeTestTask (using proxy) on a test site
 
 ```json 
 {
   "clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
   "task": {
     "type":"GeeTestTask",
-    "websiteURL":"https://example.com/geetest.php",
-    "gt":"81dc9bdb52d04dc20036dbd8313ed055",
-    "challenge":"d93591bdf7860e1e4ee2fca799911215",
+    "websiteURL":"https://www.geetest.com/en/demo",
+    "gt":"022397c99c9f646f6477822485f30404",
+    "challenge":"7f044f48bc951ecfbfc03842b5e1fe59",
     "proxyType":"http",
     "proxyAddress":"8.8.8.8",
     "proxyPort":8080,
     "proxyLogin":"proxyLoginHere",
     "proxyPassword":"proxyPasswordHere",
     "userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36"
+
   }
 }
 ```
-### GeeTestTaskProxyless (Without proxy)
+### GeeTestTaskProxyless (without proxy) on a test site
+
 ```json
 {
     "clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
     "task":
     {
         "type":"GeeTestTaskProxyless",
-        "websiteURL":"https://example.com/geetest.php",
-        "gt":"81dc9bdb52d04dc20036dbd8313ed055",
-        "challenge":"d93591bdf7860e1e4ee2fca799911215"
+        "websiteURL":"https://www.geetest.com/en/demo",
+        "gt":"022397c99c9f646f6477822485f30404",
+        "challenge":"7f044f48bc951ecfbfc03842b5e1fe59"
+
     }
 }
 ```
@@ -125,6 +147,11 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the res
 ```
 
 ## **GeeTest V4**
+
+### **Possible captcha variant**
+
+![](geetest4.png)
+
 ### **Request example**
 :::info Method
 ```http
@@ -132,14 +159,14 @@ https://api.capmonster.cloud/createTask
 ```
 :::
 
-### GeeTestTask (With proxy)
+### GeeTestTask (using proxy) on a test site
 ```json
 {
   "clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
   "task": {
-    "type":"GeeTestTaskProxyless",
-    "websiteURL":"https://example.com/geetest.php",
-    "gt":"81dc9bdb52d04dc20036dbd8313ed055",
+    "type":"GeeTestTask",
+    "websiteURL":"https://gt4.geetest.com/",
+    "gt":"54088bb07d2df3c46b79f80300b0abbe",
     "version": 4,
     "initParameters": {
       "riskType": "slide"
@@ -150,21 +177,23 @@ https://api.capmonster.cloud/createTask
     "proxyLogin":"proxyLoginHere",
     "proxyPassword":"proxyPasswordHere",
     "userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36"
+
   }
 }
 ```
-### GeeTestTaskProxyless (Without proxy)
+### GeeTestTaskProxyless (without proxy) on a test site
 ```json
 {
     "clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
     "task":
     {
         "type":"GeeTestTaskProxyless",
-        "websiteURL":"https://example.com/geetest.php",
-        "gt":"81dc9bdb52d04dc20036dbd8313ed055",
+        "websiteURL":"https://gt4.geetest.com/",
+        "gt":"54088bb07d2df3c46b79f80300b0abbe",
         "version": 4,
         "initParameters": {
           "riskType": "slide"
+
         }
     }
 }

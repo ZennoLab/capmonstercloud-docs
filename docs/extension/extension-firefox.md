@@ -103,3 +103,4 @@ sidebar_label: Расширение для браузера Firefox
 |`https://*.zennolab.com`|Запрет работы расширения на всех поддоменах `https://zennolab.com`|
 |`https://www.google.*`|Запрет работы расширения на google во всех зонах (ru, com, com.ua и т.д.)|
 
+При возникновении ошибок в разгадывании капч см. [глоссарий ошибок](/api/api-errors.md).
