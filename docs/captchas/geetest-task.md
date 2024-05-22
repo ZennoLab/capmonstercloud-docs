@@ -32,10 +32,10 @@ V4 (captcha_id = gt)
 |websiteURL|String|да|Адрес страницы, на которой решается капча|
 |gt|String|да|Ключ-идентификатор GeeTest для домена. Статическое значение, редко обновляется.<br />Если v4 то это параметр clientId|
 |challenge|String|да, только для V3|<p>Меняющийся ключ.<br />При каждом обращении к нашему API нужно получать новое значение ключа. Если каптча загружена на странице, то значение `challenge` уже недействительно и вы получите в ответ [ошибку](../api/api-errors.md) `ERROR_TOKEN_EXPIRED`.</p><p>За задачи с ошибкой `ERROR_TOKEN_EXPIRED` плата взимается как за успешно решённые задачи.</p><p>Нужно изучить запросы и найти тот, в котором возвращается это значение и перед каждым созданием задачи на распознавания выполнять этот запрос и парсить `challenge` из него.</p>|
-|geetestApiServerSubdomain|String|нет|Необязательный параметр. <br />Может потребоваться для некоторых сайтов.|
-|geetestGetLib|String|нет|Необязательный параметр. Может потребоваться для некоторых сайтов. <br />Отправляйте JSON в виде строки.|
+|geetestApiServerSubdomain|String|нет| Поддомен сервера Geetest API (должен отличаться от api.geetest.com). <br />Необязательный параметр. Может потребоваться для некоторых сайтов.|
+|geetestGetLib|String|нет|Путь к скрипту капчи для ее отображения на странице. <br /> Необязательный параметр. Может потребоваться для некоторых сайтов. <br />Отправляйте JSON в виде строки.|
 |version|Integer|нет|Номер версии (по умолчанию равен 3). Возможные значения: 3, 4.|
-|initParameters|Object|нет|Дополнительные параметры для 4 версии.|
+|initParameters|Object|нет|Дополнительные параметры для 4 версии, используются вместе с “riskType” (тип капчи/характеристики ее проверки).|
 |proxyType|String|да (При использовании **GeeTestTask**)|**http** - обычный http/https прокси<br />**https** - попробуйте эту опцию только если "http" не работает (требуется для некоторых кастомных прокси)<br />**socks4** - socks4 прокси<br />**socks5** - socks5 прокси|
 |proxyAddress|String|да (При использовании **GeeTestTask**)|<p>IP адрес прокси IPv4/IPv6. Не допускается:</p><p>- использование имен хостов</p><p>- использование прозрачных прокси (там где можно видеть IP клиента)</p><p>- использование прокси на локальных машинах</p>|
 |proxyPort|Integer|да (При использовании **GeeTestTask**)|Порт прокси|
@@ -43,6 +43,25 @@ V4 (captcha_id = gt)
 |proxyPassword|String|нет|Пароль прокси-сервера|
 |userAgent|String|нет|User-Agent браузера, используемый для решения каптчи.|
 ## **GeeTest V3**
+
+### **Примеры заданий**
+
+Intelligent mode:
+
+![](intelligent.png)
+
+Slide CAPTCHA:
+
+![](slide.png)
+
+Icon CAPTCHA:
+
+![](icon.png)
+
+Space CAPTCHA:
+
+![](space.png)
+
 ### **Пример запроса**
 
 :::info Метод
@@ -51,16 +70,16 @@ https://api.capmonster.cloud/createTask
 ```
 :::
 
-### GeeTestTask (С использованием прокси)
+### GeeTestTask (с использованием прокси) на тестовом сайте 
 
 ```json 
 {
   "clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
   "task": {
     "type":"GeeTestTask",
-    "websiteURL":"https://example.com/geetest.php",
-    "gt":"81dc9bdb52d04dc20036dbd8313ed055",
-    "challenge":"d93591bdf7860e1e4ee2fca799911215",
+    "websiteURL":"https://www.geetest.com/en/demo",
+    "gt":"022397c99c9f646f6477822485f30404",
+    "challenge":"7f044f48bc951ecfbfc03842b5e1fe59",
     "proxyType":"http",
     "proxyAddress":"8.8.8.8",
     "proxyPort":8080,
@@ -70,16 +89,16 @@ https://api.capmonster.cloud/createTask
   }
 }
 ```
-### GeeTestTaskProxyless (Без использования прокси)
+### GeeTestTaskProxyless (без использования прокси) на тестовом сайте 
 ```json
 {
     "clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
     "task":
     {
         "type":"GeeTestTaskProxyless",
-        "websiteURL":"https://example.com/geetest.php",
-        "gt":"81dc9bdb52d04dc20036dbd8313ed055",
-        "challenge":"d93591bdf7860e1e4ee2fca799911215"
+        "websiteURL":"https://www.geetest.com/en/demo",
+        "gt":"022397c99c9f646f6477822485f30404",
+        "challenge":"7f044f48bc951ecfbfc03842b5e1fe59"
     }
 }
 ```
@@ -124,6 +143,11 @@ https://api.capmonster.cloud/getTaskResult
 ```
 
 ## **GeeTest V4**
+
+### **Пример задания**
+
+![](geetest4.png)
+
 ### **Пример запроса**
 :::info Метод
 ```http
@@ -131,14 +155,14 @@ https://api.capmonster.cloud/createTask
 ```
 :::
 
-### GeeTestTask (С использованием прокси)
+### GeeTestTask (с использованием прокси) на тестовом сайте 
 ```json
 {
   "clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
   "task": {
-    "type":"GeeTestTaskProxyless",
-    "websiteURL":"https://example.com/geetest.php",
-    "gt":"81dc9bdb52d04dc20036dbd8313ed055",
+    "type":"GeeTestTask",
+    "websiteURL":"https://gt4.geetest.com/",
+    "gt":"54088bb07d2df3c46b79f80300b0abbe",
     "version": 4,
     "initParameters": {
       "riskType": "slide"
@@ -152,15 +176,15 @@ https://api.capmonster.cloud/createTask
   }
 }
 ```
-### GeeTestTaskProxyless (Без использования прокси)
+### GeeTestTaskProxyless (без использования прокси) на тестовом сайте 
 ```json
 {
     "clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
     "task":
     {
         "type":"GeeTestTaskProxyless",
-        "websiteURL":"https://example.com/geetest.php",
-        "gt":"81dc9bdb52d04dc20036dbd8313ed055",
+        "websiteURL":"https://gt4.geetest.com/",
+        "gt":"54088bb07d2df3c46b79f80300b0abbe",
         "version": 4,
         "initParameters": {
           "riskType": "slide"
