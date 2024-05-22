@@ -54,5 +54,4 @@ Use the method [getTaskResult](../api/methods/get-task-result), to get the Basil
        }
    }
 }
-
 ```
