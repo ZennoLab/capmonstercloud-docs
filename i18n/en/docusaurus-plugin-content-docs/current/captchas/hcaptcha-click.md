@@ -4,6 +4,9 @@ sidebar_label: ComplexImageTask HCaptcha
 ---
 
 # ComplexImageTask HCaptcha
+
+In ComplexImageTask, you need to perform certain actions such as overlaying objects on the image, rotating/modifying objects in the image to match certain criteria, searching/recognizing objects, and the like. 
+
 The object contains data about the task for solving hCaptcha. 
 
 ## **Request to create a task**
@@ -99,7 +102,7 @@ https://api.capmonster.cloud/createTask
     "metadata": {
       "Task": "Please click each image containing a mountain"
     },
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36.",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36.",
     "websiteUrl": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle"
   }
 }
@@ -170,7 +173,7 @@ https://api.capmonster.cloud/createTask
     "metadata": {
       "Task": "Please click on the panda"
     },
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36."
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36."
   }
 }
 ```
@@ -234,7 +237,7 @@ https://api.capmonster.cloud/createTask
       "Task": "What animal is shown in the image below?",
       "Classes": [ "shark", "chicken", "goat", "hedgehog" ]
     },
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36."
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36."
   }
 }
 ```
