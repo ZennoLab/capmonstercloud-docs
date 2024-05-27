@@ -24,7 +24,7 @@ This type of captcha might be solved a bit longer than usual image captcha, but 
 |proxyPort|Integer|yes (for **HCaptchaTask**)|Proxy port.|
 |proxyLogin|String|no|Proxy server login.|
 |proxyPassword|String|no|Proxy server password.|
-|userAgent|String|no|**Pass only the actual UA from Windows OS. Now this is version 124: “Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36”**|
+|userAgent|String|no|**Pass only the actual UA from Windows OS. Now this is version 125: “Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36”**|
 |cookies|String|no|<p>Additional cookies which we must use during interaction with target page.</p><p>**Format**: cookiename1=cookievalue1; cookiename2=cookievalue2</p>|
 |fallbackToActualUA|Bool|no|<p>**true** - when specifying this parameter, we ignore the irrelevant User Agent that users send in the request, and return our own (relevant) one with getTaskResult. This will improve the acceptance of tokens.</p><p>**false** - we insert the User Agent that is specified in the request. If the User Agent is invalid, you will receive an error ERROR_WRONG_USERAGENT (USERAGENT IS EXPIRED in the log).</p>|
 
@@ -53,7 +53,7 @@ https://api.capmonster.cloud/createTask
         "type":"HCaptchaTask",
         "websiteURL":"https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",
         "websiteKey":"472fc7af-86a4-4382-9a49-ca9090474471",
-        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
         "fallbackToActualUA":true,
         "proxyType":"http",
         "proxyAddress":"8.8.8.8",
@@ -72,7 +72,7 @@ https://api.capmonster.cloud/createTask
         "type":"HCaptchaTaskProxyless",
         "websiteURL":"https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",
         "websiteKey":"472fc7af-86a4-4382-9a49-ca9090474471",
-        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
         "fallbackToActualUA":true
     }
 }
@@ -108,7 +108,7 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to request ans
   "solution": {
     "gRecaptchaResponse": "P1_eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.hKdwYXNza2V5xQb9JvlblBqjTdKpourvlRNpOZLvJb0yJRmsXVFVjyxFWlL1wdYBXaPyFtnxwy2ukbMgwWn62-cjSc98Iw2XIPYWg5MNDKS4_7tBIhjY0PienoKy1...",
     "respKey": "E0_eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoidjQ3RjlqZGFYTllFQXlZZFYyRTlaWlBVQUdLaFpPakpRNjBXRTljVW40VnY3NnhuN2V3R0wwVWd1MW1Wai90WEdoYmt5a2NqVGlGdWpsSlpmVjcza...",
-    "userAgent": "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+    "userAgent": "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
   }
 }
 ```

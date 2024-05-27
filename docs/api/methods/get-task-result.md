@@ -33,7 +33,7 @@ Type: `String` <br />
 ### `taskId`
 Type: `Integer` <br />
 Обязательный: `Да`<br />
-Идентификатор задания полученный в методе [createTask](./create-task)
+Идентификатор задания полученный в методе [createTask](./create-task.md)
 
 
 <!-- |**Параметр**|**Тип**|**Обязательный**|**Значение**|
@@ -58,7 +58,7 @@ Type: `Integer` <br />
 
 ### `errorCode`
 Type: `String` <br />
-Код ошибки. См. [глоссарий ошибок](../api-errors).
+Код ошибки. См. [глоссарий ошибок](../api-errors.md).
 
 ### `status`
 Type: `String` <br />

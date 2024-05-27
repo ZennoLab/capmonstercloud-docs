@@ -23,7 +23,7 @@ sidebar_label: DataDome
 |metadata.htmlPageBase64|String|да (если не заполнено metadata.captchaUrl)|Объект, который содержит дополнительные данные о капче: `"htmlPageBase64": "..."` - закодированная в base64 html-страница, которая приходит с кодом 403 и заголовком Set-Cookie: datadome="..." в ответ на get-запрос к целевому сайту.|
 |metadata.captchaUrl|String|да (если не заполнено metadata.htmlPageBase64)|`"captchaUrl"` - ссылка на капчу. Обычно имеет следующий вид: `"https://geo.captcha-delivery.com/captcha/?initialCid=..."`.|
 |metadata.datadomeCookie|String|да|Ваши куки от datadome. Можно получить на странице с помощью "document.cookie" или в заголовке запроса Set-Cookie: "datadome=..." (см. пример запроса /createTask)|
-|userAgent|String|нет|User-Agent браузера.<br /> **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является 124 версия**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36`|
+|userAgent|String|нет|User-Agent браузера.<br /> **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является 125 версия**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36`|
 
 ## **Пример запроса на реальном сайте**
 
@@ -39,7 +39,7 @@ https://api.capmonster.cloud/createTask
         "type": "CustomTask",
         "class": "DataDome",
         "websiteURL": "https://www.leboncoin.fr/",
-        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
         "metadata": {
             "htmlPageBase64": "PGh0bWw+PGhlYWQ+PHRpdGxlPmJs...PC9odG1sPg==",
             "datadomeCookie": "datadome=VYUWrgJ9ap4zmXq8Mgbp...64emvUPeON45z"
@@ -59,7 +59,7 @@ https://api.capmonster.cloud/createTask
 ```
 
 ## **Получение результата**
-Используйте метод [getTaskResult](../api/methods/get-task-result), чтобы получить решение DataDome.
+Используйте метод [getTaskResult](../api/methods/get-task-result.md), чтобы получить решение DataDome.
 
 **Пример ответа:**
 
