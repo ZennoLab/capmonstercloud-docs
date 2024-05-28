@@ -14,7 +14,7 @@ sidebar_label: TenDI
 |class|String|да|**TenDI**|
 |websiteURL|String|да|Адрес основной страницы, на которой решается капча.|
 |websiteKey|String|да|captchaAppId. Например `"websiteKey": "189123456"` - уникальный параметр для вашего сайта. Можно взять с html страницы с капчей или из трафика (см. описание ниже).|
-|userAgent|String|нет|User-Agent браузера. **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является 123 версия**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36`|
+|userAgent|String|нет|User-Agent браузера. **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является 125 версия**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36`|
 ### Как получить websiteKey(captchaAppId)
 Включите инструменты разработчика, перейдите на вкладку Network, активируйте капчу и посмотрите запросы. В некотрых из них будет нужное вам значение параметра. В данном случае `websiteKey=aid`
 ![](tendi-devtools.png) 
@@ -31,7 +31,7 @@ https://api.capmonster.cloud/createTask
         "class": "TenDI",
         "websiteURL": "https://domain.com",
         "websiteKey": "189123456",
-        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
     }
 }
 ```
@@ -43,7 +43,7 @@ https://api.capmonster.cloud/createTask
 }
 ```
 ## **Получение результата**
-Используйте метод [getTaskResult](../api/methods/get-task-result), чтобы получить решение TenDI.
+Используйте метод [getTaskResult](../api/methods/get-task-result.md), чтобы получить решение TenDI.
 **Пример ответа:**
 ```json
 {
@@ -55,7 +55,7 @@ https://api.capmonster.cloud/createTask
             "ticket": "tr03lHUhdnuW3neJZu.....7LrIbs*"
         },
         "headers": {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
         }
     }
 }

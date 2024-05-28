@@ -50,7 +50,7 @@ https://api.capmonster.cloud/createTask
 }
 ```
 ## **Получение результата**
-Используйте метод [getTaskResult](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/557078/getTaskResult), чтобы получить решение ReCaptcha3. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 10 с до 30 с.
+Используйте метод [getTaskResult](../api/methods/get-task-result.md), чтобы получить решение ReCaptcha3. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 10 с до 30 с.
 
 |**Свойство**|**Тип**|**Описание**|
 | :- | :- | :- |

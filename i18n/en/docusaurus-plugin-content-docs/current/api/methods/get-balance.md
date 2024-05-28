@@ -45,7 +45,7 @@ Error identificator.<br />**0** - no error, no *errorCode* property<br />**1** -
 
 ### `errorCode`
 Type: `String` <br />
-Error code. Check out [error list](../api-errors).
+Error code. Check out [error list](../api-errors.md).
 
 ### `balance`
 Type: `Decimal` <br />

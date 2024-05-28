@@ -44,7 +44,7 @@ Type: `Integer` <br />
 
 ### `errorCode`
 Type: `String` <br />
-Код ошибки. См. [глоссарий ошибок](../api-errors).
+Код ошибки. См. [глоссарий ошибок](../api-errors.md).
 
 ### `balance`
 Type: `Decimal` <br />

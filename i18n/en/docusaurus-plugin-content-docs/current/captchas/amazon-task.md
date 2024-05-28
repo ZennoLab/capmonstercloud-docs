@@ -57,7 +57,7 @@ https://api.capmonster.cloud/createTask
 https://api.capmonster.cloud/getTaskResult
 ```
 :::
-Use the [getTaskResult](../api/methods/get-task-result) method to get the AmazonTask solution.
+Use the [getTaskResult](../api/methods/get-task-result.md) method to get the AmazonTask solution.
 
 **Answer example:**
 ```json
@@ -68,7 +68,7 @@ Use the [getTaskResult](../api/methods/get-task-result) method to get the Amazon
         "cookies": {
             "aws-waf-token": "10115f5b-ebd8-45c7-851e-cfd4f6a82e3e:EAoAua1QezAhAAAA:dp7sp2rXIRcnJcmpWOC1vIu+yq/A3EbR6b6K7c67P49usNF1f1bt/Af5pNcZ7TKZlW+jIZ7QfNs8zjjqiu8C9XQq50Pmv2DxUlyFtfPZkGwk0d27Ocznk18/IOOa49Rydx+/XkGA7xoGLNaUelzNX34PlyXjoOtL0rzYBxMAQy0D1tn+Q5u97kJBjs5Mytqu9tXPIPCTSn4dfXv5llSkv9pxBEnnhwz6HEdmdJMdfur+YRW1MgCX7i3L2Y0/CNL8kd8CEhTMzwyoXekrzBM="
         },
-        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
     }
 }
 ```
