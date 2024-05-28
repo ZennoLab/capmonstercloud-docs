@@ -41,7 +41,7 @@ Task data array. See list of available object descriptions [here](../../captchas
 ### `callbackUrl`
 Type: `String` <br />
 Required: `No`<br />
-Web address for sending the captcha task result. Data is sent by POST request.<br />The content is identical to the response of the [getTaskResult](./get-task-result) method.<br />The content of the response is not checked and you should accept the request in 2 seconds then the connection will be closed.
+Web address for sending the captcha task result. Data is sent by POST request.<br />The content is identical to the response of the [getTaskResult](./get-task-result.md) method.<br />The content of the response is not checked and you should accept the request in 2 seconds then the connection will be closed.
 
 Example of using the `callbackUrl` function:
 
@@ -138,12 +138,12 @@ Error identificator.<br />**0** - no errors, the task has been successfully crea
 ### `errorCode`
 Type: `String` <br />
 Required: `No`<br />
-Error code. Check out [error list](../api-errors).
+Error code. Check out [error list](../api-errors.md).
 
 ### `taskId`
 Type: `Integer` <br />
 Required: `Yes`<br />
-Task ID for further use in [getTaskResult](./get-task-result) method.
+Task ID for further use in [getTaskResult](./get-task-result.md) method.
 
 ---
 

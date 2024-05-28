@@ -49,7 +49,7 @@ https://api.capmonster.cloud/createTask
     "proxyPort":8080,
     "proxyLogin":"proxyLoginHere",
     "proxyPassword":"proxyPasswordHere",
-    "userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+    "userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
   }
 }
 ```
@@ -77,7 +77,7 @@ https://api.capmonster.cloud/createTask
 ```
 
 ## **Получение результата**
-Используйте метод [getTaskResult](../api/methods/get-task-result) чтобы получить решение ReCaptcha2. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 10 с до 80 с.
+Используйте метод [getTaskResult](../api/methods/get-task-result.md) чтобы получить решение ReCaptcha2. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 10 с до 80 с.
 
 |**Свойство**|**Тип**|**Описание**|
 | :- | :- | :- |

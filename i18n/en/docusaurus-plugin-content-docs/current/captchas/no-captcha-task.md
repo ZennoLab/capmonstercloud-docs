@@ -49,7 +49,7 @@ https://api.capmonster.cloud/createTask
     "proxyPort":8080,
     "proxyLogin":"proxyLoginHere",
     "proxyPassword":"proxyPasswordHere",
-    "userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+    "userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
   }
 }
 ```
@@ -77,7 +77,7 @@ https://api.capmonster.cloud/createTask
 ```
 
 ## **Getting result**
-Use the [getTaskResult](../api/methods/get-task-result) method to request answer for ReCaptcha2. You will get response within 10 - 80 secs period depending on service workload.
+Use the [getTaskResult](../api/methods/get-task-result.md) method to request answer for ReCaptcha2. You will get response within 10 - 80 secs period depending on service workload.
 
 |**Property**|**Type**|**Description**|
 | :- | :- | :- |
