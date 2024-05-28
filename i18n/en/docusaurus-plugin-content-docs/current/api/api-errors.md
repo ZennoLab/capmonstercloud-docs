@@ -52,7 +52,7 @@ Incorrect [captcha type](/docs/captchas) (value of the «type» parameter).
 
 ### `REQUEST LIMIT EXCEEDED`
 API error code: `ERROR_TOO_MUCH_REQUESTS` <br />
-You have exceeded the limit of requests to receive an answer for one task. Try to request [the result of the task](./methods/get-task-result) no more than 1 time in 2 seconds.
+You have exceeded the limit of requests to receive an answer for one task. Try to request [the result of the task](./methods/get-task-result.md) no more than 1 time in 2 seconds.
 
 ### `THE DOMAIN IS NOT ALLOWED`
 API error code: `ERROR_DOMAIN_NOT_ALLOWED` <br />
@@ -96,7 +96,7 @@ The task type is incorrect or not supported. Check the «type» property in the 
 
 ### `ERROR_TASK_ABSENT`
 API error code: `ERROR_TASK_ABSENT` <br />
-Task object not found or invalid JSON was sent in [createTask](./methods/create-task) request.
+Task object not found or invalid JSON was sent in [createTask](./methods/create-task.md) request.
 
 ### `USERAGENT IS EXPIRED`
 API error code: `ERROR_WRONG_USERAGENT`<br />

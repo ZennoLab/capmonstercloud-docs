@@ -33,7 +33,7 @@ Unique key of your account.
 ### `taskId`
 Type: `Integer` <br />
 Required: `Yes`<br />
-ID which was obtained in [createTask](./create-task) method.
+ID which was obtained in [createTask](./create-task.md) method.
 
 
 <!-- |**Параметр**|**Тип**|**Обязательный**|**Значение**|
@@ -58,7 +58,7 @@ Error identificator.<br />**0** - no errors, no *errorCode* property;<br />**1**
 
 ### `errorCode`
 Type: `String` <br />
-Error code. Check out [error list](../api-errors).
+Error code. Check out [error list](../api-errors.md).
 
 ### `status`
 Type: `String` <br />

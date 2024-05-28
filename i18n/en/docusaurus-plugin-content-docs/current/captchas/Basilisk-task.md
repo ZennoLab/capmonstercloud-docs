@@ -39,7 +39,7 @@ https://api.capmonster.cloud/createTask
 }
 ```
 ## **Getting the result**
-Use the method [getTaskResult](../api/methods/get-task-result), to get the Basilisk solution.
+Use the method [getTaskResult](../api/methods/get-task-result.md), to get the Basilisk solution.
 **Example response:**
 ```json
 {

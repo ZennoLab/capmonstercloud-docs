@@ -69,7 +69,7 @@ Also supported paths:
 | **Property** | **Type** |                                                                                                                 **Value**                                                                                                                 |
 | :------------------------: | :--------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |          errorId          |     Integer     | Error ID.<br />**0** - no errors, no *errorCode* property;<br />**1** - error, information about it is in the *errorCode* property. |
-|         errorCode         |      String      |                                                                  Error code. Check out [error types](./api-errors).                                                                  |
+|         errorCode         |      String      |                                                                  Error code. Check out [error types](./api-errors.md).                                                                  |
 |           status           |      String      |                                           **success** - the report is accepted.<br />If the report is not accepted, then the field is missing, the reason is in the *errorCode*                           |
 
 ### **Response example**
