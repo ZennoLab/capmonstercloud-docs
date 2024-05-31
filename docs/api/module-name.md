@@ -13,25 +13,79 @@ sidebar_position: 5
 Например, “00f87cb0f01330d33709ce3339ad0c8c__solvemedia” (**!важно**, API ключ и имя модуля разделить **двумя нижними подчеркиваниями**)
 
 Список доступных имен модулей представлен ниже:
-
-- amazon
-- whatsapp
-- botdetect
-- facebook
-- gmx
-- google
-- hotmail
-- mailru
-- ok
-- oknew
-- ramblerrus
-- solvemedia
-- steam
-- vk
-- yandex
-- yandexnew (двух-словная каптча)
-- yandexwave
-- universal (все остальные текстовые каптчи)
+<table>
+    <tbody>
+        <tr>
+            <td align="center">amazon</td>
+            <td align="center">![](images\amazon.png)</td>
+        </tr>
+        <tr>
+            <td align="center">whatsapp</td>
+            <td align="center"></td>
+        </tr>
+        <tr>
+            <td align="center">botdetect</td>
+            <td align="center">![](images\botdetect.png)</td>
+        </tr>
+        <tr>
+            <td align="center">facebook</td>
+            <td align="center"></td>
+        </tr>
+        <tr>
+            <td align="center">gmx</td>
+            <td align="center"></td>
+        </tr>
+        <tr>
+            <td align="center">google</td>
+            <td align="center">![](images\google.png)</td>
+        </tr>
+        <tr>
+            <td align="center">hotmail</td>
+            <td align="center">![](images\hotmail.png)</td>
+        </tr>
+        <tr>
+            <td align="center">mailru</td>
+            <td align="center">![](images\mailru.png)</td>
+        </tr>
+        <tr>
+            <td align="center">ok</td>
+            <td rowspan="2" align="center"></td>
+        </tr>
+        <tr>
+            <td align="center">oknew</td>
+        </tr>
+        <tr>
+            <td align="center">ramblerrus</td>
+            <td align="center">![](images\rambler.png)</td>
+        </tr>
+        <tr>
+            <td align="center">solvemedia</td>
+            <td align="center"></td>
+        </tr>
+        <tr>
+            <td align="center">steam</td>
+            <td align="center"></td>
+        </tr>
+        <tr>
+            <td align="center">vk</td>
+            <td align="center">![](images\vk.png)</td>
+        </tr>
+        <tr>
+            <td align="center">yandex</td>
+            <td rowspan="3" align="center">![](images\yandex.png)</td>
+        </tr>
+        <tr>
+            <td align="center">yandexnew (двух-словная капча)</td>
+        </tr>
+        <tr>
+            <td align="center">yandexwave</td>
+        </tr>
+        <tr>
+            <td align="center">universal (все остальные текстовые капчи)</td>
+            <td align="center"></td>
+        </tr>
+    </tbody>
+</table>
 
 :::info Info
 Если у вас не получилось отправить капчу на определенный модуль, пожалуйста, напишите нам в [службу поддержки](https://helpdesk.zennolab.com/conversation/new), мы поможем вам в настройке!
