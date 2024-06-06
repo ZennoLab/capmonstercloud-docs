@@ -75,14 +75,14 @@ The list of available module names:
             <td align="center">![](images\yandex.png)</td>
         </tr>
         <tr>
-            <td align="center">yandexnew (двух-словная капча)</td>
+            <td align="center">yandexnew (two words)</td>
 			<td rowspan="2" align="center">![](images\yandexwave.png)</td>
         </tr>
         <tr>
             <td align="center">yandexwave</td>
         </tr>
         <tr>
-            <td align="center">universal (все остальные текстовые капчи)</td>
+            <td align="center">universal (all other text captcha types)</td>
             <td align="center">![](images\universal.png)</td>
         </tr>
     </tbody>
