@@ -21,7 +21,7 @@ sidebar_position: 5
         </tr>
         <tr>
             <td align="center">whatsapp</td>
-            <td align="center"></td>
+            <td align="center">![](images\whatsapp.png)</td>
         </tr>
         <tr>
             <td align="center">botdetect</td>
@@ -29,11 +29,11 @@ sidebar_position: 5
         </tr>
         <tr>
             <td align="center">facebook</td>
-            <td align="center"></td>
+            <td align="center">![](images\facebook.png)</td>
         </tr>
         <tr>
             <td align="center">gmx</td>
-            <td align="center"></td>
+            <td align="center">![](images\gmx.png)</td>
         </tr>
         <tr>
             <td align="center">google</td>
@@ -49,7 +49,7 @@ sidebar_position: 5
         </tr>
         <tr>
             <td align="center">ok</td>
-            <td rowspan="2" align="center"></td>
+            <td rowspan="2" align="center">![](images\ok.png)</td>
         </tr>
         <tr>
             <td align="center">oknew</td>
@@ -60,11 +60,11 @@ sidebar_position: 5
         </tr>
         <tr>
             <td align="center">solvemedia</td>
-            <td align="center"></td>
+            <td align="center">![](images\solvemedia.png)</td>
         </tr>
         <tr>
             <td align="center">steam</td>
-            <td align="center"></td>
+            <td align="center">![](images\steam.png)</td>
         </tr>
         <tr>
             <td align="center">vk</td>
@@ -72,17 +72,18 @@ sidebar_position: 5
         </tr>
         <tr>
             <td align="center">yandex</td>
-            <td rowspan="3" align="center">![](images\yandex.png)</td>
+            <td align="center">![](images\yandex.png)</td>
         </tr>
         <tr>
             <td align="center">yandexnew (двух-словная капча)</td>
+			<td rowspan="2" align="center">![](images\yandexwave.png)</td>
         </tr>
         <tr>
             <td align="center">yandexwave</td>
         </tr>
         <tr>
             <td align="center">universal (все остальные текстовые капчи)</td>
-            <td align="center"></td>
+            <td align="center">![](images\universal.png)</td>
         </tr>
     </tbody>
 </table>
