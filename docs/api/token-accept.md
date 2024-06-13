@@ -60,4 +60,4 @@ sidebar_position: 7
 
 - [ReCaptchaV2](../captchas/no-captcha-task.md)
 - [ReCaptchaV3](../captchas/recaptcha-v3-task.md)
-- [HCaptcha](../captchas/hcaptcha-task.md)
+- [HCaptcha](../captchas/hcaptcha-task.mdx)

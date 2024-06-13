@@ -3,6 +3,8 @@ sidebar_position: 6
 sidebar_label: TurnstileTask
 ---
 
+import UserAgent from '@site/src/components/UserAgent';
+
 # TurnstileTask | Cloudflare Challenge
 All Turnstile subtypes are automatically supported: manual, non-interactive, and invisible. Therefore, there is no need to specify a subtype for a regular captcha. 
 
@@ -28,7 +30,7 @@ You are working through a browser and you need to get a token to pass CloudFlare
 |websiteURL|String|yes|Address of the page where the captcha is solved|
 |websiteKey|String|yes|Turnstile key|
 |cloudflareTaskType|String|yes|**token**|
-|userAgent|String|yes|Browser User-Agent.<br /> **Pass only the actual UA from Windows OS. Now this is version 125**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36`|
+|userAgent|String|yes|Browser User-Agent.<br /> **Pass only the actual UA from Windows OS. Now this is**: <UserAgent />|
 |pageAction|String|yes|The `action` field can be found in the callback function to load the captcha. If cloudflareTaskType is used, the `action` is usually "managed" or "non-interactive".|
 |data|String|yes|The value of the data field can be taken from the `cData` parameter.|
 |pageData|String|yes|The value of the pageData field can be taken from the `chlPageData` parameter.|

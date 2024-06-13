@@ -3,6 +3,8 @@ sidebar_position: 4
 sidebar_label: HCaptchaTask
 ---
 
+import UserAgent from '@site/src/components/UserAgent';
+
 # HCaptchaTask
 The object contains data for hCaptcha solving task. To provide solid universality for solving this type of task we have reproduce every piece of environment used for an automation task you plan to complete. This includes: proxy access, browser's user-agent, cookies (optionally). This approach will eliminate all possible obstacles which might implement in the future.
 
@@ -24,7 +26,7 @@ This type of captcha might be solved a bit longer than usual image captcha, but 
 |proxyPort|Integer|yes (for **HCaptchaTask**)|Proxy port.|
 |proxyLogin|String|no|Proxy server login.|
 |proxyPassword|String|no|Proxy server password.|
-|userAgent|String|no|**Pass only the actual UA from Windows OS. Now this is version 125: “Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36”**|
+|userAgent|String|no|**Pass only the actual UA from Windows OS. Now this is:** <UserAgent />|
 |cookies|String|no|<p>Additional cookies which we must use during interaction with target page.</p><p>**Format**: cookiename1=cookievalue1; cookiename2=cookievalue2</p>|
 |fallbackToActualUA|Bool|no|<p>**true** - when specifying this parameter, we ignore the irrelevant User Agent that users send in the request, and return our own (relevant) one with getTaskResult. This will improve the acceptance of tokens.</p><p>**false** - we insert the User Agent that is specified in the request. If the User Agent is invalid, you will receive an error ERROR_WRONG_USERAGENT (USERAGENT IS EXPIRED in the log).</p>|
 

@@ -3,6 +3,8 @@ sidebar_position: 4
 sidebar_label: HCaptchaTask
 ---
 
+import UserAgent from '@site/src/components/UserAgent';
+
 # HCaptchaTask
 Объект содержит данные о задаче на решение hCaptcha. Для обеспечения универсальности решения этого вида капчи нам необходимо использовать все данные, которые вы используете во время автоматизации заполнения формы на целевом сайте, включая прокси, user-agent браузера и cookies. Это позволит избежать любых проблем при изменении кода hCaptcha.
 
@@ -24,7 +26,7 @@ sidebar_label: HCaptchaTask
 |proxyPort|Integer|да (При использовании **HCaptchaTask**)|Порт прокси|
 |proxyLogin|String|нет|Логин прокси-сервера|
 |proxyPassword|String|нет|Пароль прокси-сервера|
-|userAgent|String|нет|**Передавайте только актуальный UA от ОС Windows. Сейчас таковым является 125 версия: “Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36”**|
+|userAgent|String|нет|**Передавайте только актуальный UA от ОС Windows. Сейчас таковым является:** <UserAgent />|
 |cookies|String|нет|<p>Дополнительные cookies которые мы должны использовать во время взаимодействия с целевой страницей.</p><p>**Формат**: cookiename1=cookievalue1; cookiename2=cookievalue2</p>|
 |fallbackToActualUA|Bool|нет|<p>**true** - при указании данного параметра мы игнорируем неактуальный User Agent, который отправляют в запросе пользователи, и возвращаем с getTaskResult свой (актуальный). Это позволит улучшить принимаемость токенов.</p><p>**false** - мы подставляем User Agent, который указан в запросе. Если User Agent неактуален, то получите ошибку ERROR_WRONG_USERAGENT (USERAGENT IS EXPIRED в логе).</p>|
 
