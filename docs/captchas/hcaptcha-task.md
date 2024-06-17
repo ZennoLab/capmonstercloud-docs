@@ -24,7 +24,7 @@ sidebar_label: HCaptchaTask
 |proxyPort|Integer|да (При использовании **HCaptchaTask**)|Порт прокси|
 |proxyLogin|String|нет|Логин прокси-сервера|
 |proxyPassword|String|нет|Пароль прокси-сервера|
-|userAgent|String|нет|**Передавайте только актуальный UA от ОС Windows. Сейчас таковым является 125 версия: “Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36”**|
+|userAgent|String|нет|**Передавайте только актуальный UA от ОС Windows. Сейчас таковым является 126 версия: “Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36”**|
 |cookies|String|нет|<p>Дополнительные cookies которые мы должны использовать во время взаимодействия с целевой страницей.</p><p>**Формат**: cookiename1=cookievalue1; cookiename2=cookievalue2</p>|
 |fallbackToActualUA|Bool|нет|<p>**true** - при указании данного параметра мы игнорируем неактуальный User Agent, который отправляют в запросе пользователи, и возвращаем с getTaskResult свой (актуальный). Это позволит улучшить принимаемость токенов.</p><p>**false** - мы подставляем User Agent, который указан в запросе. Если User Agent неактуален, то получите ошибку ERROR_WRONG_USERAGENT (USERAGENT IS EXPIRED в логе).</p>|
 
@@ -53,7 +53,7 @@ https://api.capmonster.cloud/createTask
         "type":"HCaptchaTask",
         "websiteURL":"https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",
         "websiteKey":"472fc7af-86a4-4382-9a49-ca9090474471",
-        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
         "fallbackToActualUA":true,
         "proxyType":"http",
         "proxyAddress":"8.8.8.8",
@@ -72,7 +72,7 @@ https://api.capmonster.cloud/createTask
         "type":"HCaptchaTaskProxyless",
         "websiteURL":"https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",
         "websiteKey":"472fc7af-86a4-4382-9a49-ca9090474471",
-        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
         "fallbackToActualUA":true
     }
 }
@@ -108,7 +108,7 @@ https://api.capmonster.cloud/getTaskResult
   "solution": {
     "gRecaptchaResponse": "P1_eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.hKdwYXNza2V5xQb9JvlblBqjTdKpourvlRNpOZLvJb0yJRmsXVFVjyxFWlL1wdYBXaPyFtnxwy2ukbMgwWn62-cjSc98Iw2XIPYWg5MNDKS4_7tBIhjY0PienoKy1...",
     "respKey": "E0_eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoidjQ3RjlqZGFYTllFQXlZZFYyRTlaWlBVQUdLaFpPakpRNjBXRTljVW40VnY3NnhuN2V3R0wwVWd1MW1Wai90WEdoYmt5a2NqVGlGdWpsSlpmVjcza...",
-    "userAgent": "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
+    "userAgent": "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
   }
 }
 ```
