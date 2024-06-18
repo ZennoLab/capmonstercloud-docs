@@ -85,7 +85,7 @@ https://api.capmonster.cloud/createTask
     "proxyPort":8080,
     "proxyLogin":"proxyLoginHere",
     "proxyPassword":"proxyPasswordHere",
-    "userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
+    "userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
 
   }
 }
@@ -176,7 +176,7 @@ https://api.capmonster.cloud/createTask
     "proxyPort":8080,
     "proxyLogin":"proxyLoginHere",
     "proxyPassword":"proxyPasswordHere",
-    "userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
+    "userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
 
   }
 }
