@@ -34,7 +34,7 @@ sidebar_label: ComplexImageTask Recaptcha
 
 **metadata.Task**: дополнительные метаданные, связанные с задачей.
 
-**userAgent**: информация о пользовательском агенте. Актуальный userAgent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36
+**userAgent**: информация о пользовательском агенте. Актуальный userAgent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
 
 **websiteURL**: адрес веб-страницы с капчей. 
 
@@ -57,7 +57,7 @@ https://api.capmonster.cloud/createTask
       "Grid": "3x3",
       "TaskDefinition": "/m/015qff"
     },
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36.",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36.",
     "websiteUrl": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle"
   }
 }

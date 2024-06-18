@@ -28,7 +28,7 @@ You are working through a browser and you need to get a token to pass CloudFlare
 |websiteURL|String|yes|Address of the page where the captcha is solved|
 |websiteKey|String|yes|Turnstile key|
 |cloudflareTaskType|String|yes|**token**|
-|userAgent|String|yes|Browser User-Agent.<br /> **Pass only the actual UA from Windows OS. Now this is version 125**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36`|
+|userAgent|String|yes|Browser User-Agent.<br /> **Pass only the actual UA from Windows OS. Now this is version 126**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36`|
 |pageAction|String|yes|The `action` field can be found in the callback function to load the captcha. If cloudflareTaskType is used, the `action` is usually "managed" or "non-interactive".|
 |data|String|yes|The value of the data field can be taken from the `cData` parameter.|
 |pageData|String|yes|The value of the pageData field can be taken from the `chlPageData` parameter.|
@@ -79,7 +79,7 @@ You are working using queries, and you need cf_clearance cookies. It is required
 |websiteKey|String|yes|Turnstile key (you can pass any string)|
 |cloudflareTaskType|String|no|**cf_clearance**|
 |htmlPageBase64|String|yes|Base64 encoded html page **"Just a moment"** which is given with code 403 when accessing a site with this protection.<br/> Example of obtaining a string htmlPageBase64: *<br/>var htmlContent = document.documentElement.outerHTML;<br/>var htmlBase64 = btoa(unescape(encodeURIComponent(htmlContent)));<br/>console.log(htmlBase64);*|
-|userAgent|String|yes|Browser User-Agent.<br /> **Pass only the actual UA from Windows OS. Now this is version 125**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36`|
+|userAgent|String|yes|Browser User-Agent.<br /> **Pass only the actual UA from Windows OS. Now this is version 126**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36`|
 |proxyType|String|yes|**http** - normal http/https proxy<br/>**https** - try this option only if "http" doesn't work (required for some custom proxies)<br/>**socks4** - socks4 proxy<br/>**socks5** - socks5 proxy|
 |proxyAddress|String|yes|IP address of the IPv4/IPv6 proxy. Not allowed:<br/>- use of hostnames<br/>- use of transparent proxies (where you can see client IP)<br/>- use of proxies on local machines|
 |proxyPort|Integer|yes|Proxy Port|
@@ -126,7 +126,7 @@ https://api.capmonster.cloud/createTask
 		"websiteURL": "https://site.com",
 		"websiteKey": "0x4AAAAAAADnPIDROrmt1Wwj",
 		"cloudflareTaskType": "token",
-		"userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
+		"userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
 		"pageAction": "managed",
 		"pageData": "HUHDWUHuhuwfiweh32..uh2uhuhyugYUG=",
 		"data": "874291f4retD1366"
@@ -148,7 +148,7 @@ https://api.capmonster.cloud/createTask
     "websiteKey":"xxxxxxxxxx",
     "cloudflareTaskType": "cf_clearance",
     "htmlPageBase64": "PCFET0NUWVBFIGh0...vYm9keT48L2h0bWw+",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
     "proxyType":"http",
     "proxyAddress":"8.8.8.8",
     "proxyPort":8080,
