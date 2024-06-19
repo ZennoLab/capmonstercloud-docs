@@ -104,3 +104,5 @@ sidebar_label: Расширение для браузера Firefox
 |`https://www.google.*`|Запрет работы расширения на google во всех зонах (ru, com, com.ua и т.д.)|
 
 При возникновении ошибок в разгадывании капч см. [глоссарий ошибок](/api/api-errors.md).
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/rclbsSyt57k?si=x_K3iesceibFne6W" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>

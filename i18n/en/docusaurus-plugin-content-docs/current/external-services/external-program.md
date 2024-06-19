@@ -5,6 +5,8 @@ CapMonster.cloud is compatible with all captcha solvers. To connect CapMonster.c
     <summary>ZennoPoster</summary>
 
 ![](zennoposter.png)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/o7rZS88gdjs?si=_lWloPJ_F2hz4edY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </details>
 
 <details>
