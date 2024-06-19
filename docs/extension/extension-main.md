@@ -117,3 +117,5 @@ sidebar_position: 0
 [ref1]: Aspose.Words.d14847ca-5ce8-4c9f-8081-1ec99b44a6b3.001.png
 
 При возникновении ошибок в разгадывании капч см. [глоссарий ошибок](/api/api-errors.md).
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/9dr9qPsCmfM?si=H_vSZmiTEGFx04z7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
