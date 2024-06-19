@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import ErrorBoundary from '@docusaurus/ErrorBoundary';
 import {
@@ -24,6 +24,42 @@ export default function Layout(props) {
     description,
   } = props;
   useKeyboardNavigation();
+
+  const getUserAgent = async () => {
+    const url = 'https://data-docs.capmonster.cloud/';
+
+    try {
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        throw error;
+    }
+  }
+
+  const updateUserAgent = async () => {
+    const userAgent = await getUserAgent();
+    const bodyText = document.body.innerHTML;
+    const regex = new RegExp(`(userAgentPlaceholder)`, 'gi');
+    const newBodyText = bodyText.replace(regex, userAgent?.UserAgent);
+    document.body.innerHTML = newBodyText;
+  }
+
+  useEffect(() => {
+    updateUserAgent()
+  }, [])
+
   return (
     <LayoutProvider>
       <script defer dangerouslySetInnerHTML={{__html:`(function(d,a){function c(){var b=d.createElement("script");b.async=!0;b.type="text/javascript";b.src=a._settings.messengerUrl;b.crossOrigin="anonymous";var c=d.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}window.kayako=a;a.readyQueue=[];a.newEmbedCode=!0;a.ready=function(b){a.readyQueue.push(b)};a._settings={apiUrl:"https://zennolab.kayako.com/api/v1",messengerUrl:"https://zennolab.kayakocdn.com/messenger",realtimeUrl:"wss://kre.kayako.net/socket"};window.attachEvent?window.attachEvent("onload",c):window.addEventListener("load",c,!1)})(document,window.kayako||{});`}}></script>

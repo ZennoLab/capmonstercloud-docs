@@ -87,7 +87,7 @@ https://api.capmonster.cloud/createTask
       "type":"YandexSmartCaptchaTaskProxyless",
       "websiteURL":"https://ya.ru/showcaptcha?cc=1&mt=C934C537A3644...",
       "websiteKey":"yandex",
-      "userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
+      "userAgent":"userAgentPlaceholder",
       "htmlPageBase64":"PGhlYWQ+PG1ldGEgaHR0cC1lcXVpdj0iWC1VQS1Db...0L2phdmFzY3JpcHQiPjwvc2NyaXB0PjwvYm9keT4="
    }
 }
