@@ -39,7 +39,7 @@ https://api.capmonster.cloud/createTask
 ### `callbackUrl`
 类型：`字符串` <br />
 必填：`否`<br />
-用于接收验证码任务结果的网址。数据通过POST请求发送。<br />内容与 [getTaskResult](./get-task-result.md) 方法的响应相同。<br />响应内容不进行检查，服务器必须在2秒内接受请求，然后关闭连接。
+用于接收验证码任务结果的网址。数据通过POST请求发送。<br />内容与 [getTaskResult](./get-task-result) 方法的响应相同。<br />响应内容不进行检查，服务器必须在2秒内接受请求，然后关闭连接。
 
 以下是使用 `callbackUrl` 函数的示例：
 ``` json
@@ -132,11 +132,11 @@ import CodeBlock from '@theme/CodeBlock';
 ### `errorCode`
 类型：`字符串` <br />
 必填：`否`<br />
-错误代码。查看[错误列表](../api-errors.md)。
+错误代码。查看[错误列表](../api-errors)。
 ### `taskId`
 类型：`整数` <br />
 必填：`是`<br />
-T任务ID，用于后续在 [getTaskResult](./get-task-result.md) 方法中使用。
+T任务ID，用于后续在 [getTaskResult](./get-task-result) 方法中使用。
 
 -----
 ### **响应示例**
