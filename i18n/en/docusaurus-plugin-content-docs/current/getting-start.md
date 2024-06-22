@@ -3,8 +3,6 @@ sidebar_position: 0
 sidebar_label: Getting Started
 ---
 
-import UserAgent from '@site/src/components/UserAgent';
-
 
 # Getting Started
 
@@ -41,8 +39,6 @@ For your convenience, we’ve created ready-made libraries for fast integration 
 |GO|- [Pkg.go.dev](https://pkg.go.dev/github.com/ZennoLab/capmonstercloud-client-go)<br /> - [Github](https://github.com/ZennoLab/capmonstercloud-client-go)|
 |PHP|- [Packagist](https://packagist.org/packages/zennolab/capmonstercloud.client)<br /> - [Github](https://github.com/ZennoLab/capmonstercloud-client-php)|
 
-
-userAgentPlaceholder
 
 ## Recognition methods
 

@@ -100,4 +100,4 @@ Task object not found or invalid JSON was sent in [createTask](./methods/create-
 
 ### `USERAGENT IS EXPIRED`
 API error code: `ERROR_WRONG_USERAGENT`<br />
-The request specified an invalid User Agent, you can find out the current User Agent in the [article](../captchas/hcaptcha-task.mdx).
+The request specified an invalid User Agent, you can find out the current User Agent in the [article](../captchas/hcaptcha-task.md).

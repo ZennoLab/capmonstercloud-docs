@@ -81,7 +81,7 @@ You are working using queries, and you need cf_clearance cookies. It is required
 |websiteKey|String|yes|Turnstile key (you can pass any string)|
 |cloudflareTaskType|String|no|**cf_clearance**|
 |htmlPageBase64|String|yes|Base64 encoded html page **"Just a moment"** which is given with code 403 when accessing a site with this protection.<br/> Example of obtaining a string htmlPageBase64: *<br/>var htmlContent = document.documentElement.outerHTML;<br/>var htmlBase64 = btoa(unescape(encodeURIComponent(htmlContent)));<br/>console.log(htmlBase64);*|
-|userAgent|String|yes|Browser User-Agent.<br /> **Pass only the actual UA from Windows OS. Now this is version 125**: `userAgentPlaceholder`|
+|userAgent|String|yes|Browser User-Agent.<br /> **Pass only the actual UA from Windows OS. Now this is version**: `userAgentPlaceholder`|
 |proxyType|String|yes|**http** - normal http/https proxy<br/>**https** - try this option only if "http" doesn't work (required for some custom proxies)<br/>**socks4** - socks4 proxy<br/>**socks5** - socks5 proxy|
 |proxyAddress|String|yes|IP address of the IPv4/IPv6 proxy. Not allowed:<br/>- use of hostnames<br/>- use of transparent proxies (where you can see client IP)<br/>- use of proxies on local machines|
 |proxyPort|Integer|yes|Proxy Port|

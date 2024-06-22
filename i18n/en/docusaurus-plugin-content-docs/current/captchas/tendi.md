@@ -14,7 +14,7 @@ This task will be performed using our proxy servers.
 |class|String|yes|**TenDI**|
 |websiteURL|String|yes|Address of the main page where the captcha is solved.|
 |websiteKey|String|yes|captchaAppId. For example `"websiteKey": "189123456"` - is a unique parameter for your site. You can take it from an html page with a captcha or from traffic (see description below).|
-|userAgent|String|no|Browser User-Agent. **Pass only the actual UA from Windows OS. Now this is version 125**: `userAgentPlaceholder`|
+|userAgent|String|no|Browser User-Agent. **Pass only the actual UA from Windows OS. Now this is version**: `userAgentPlaceholder`|
 ### How to get websiteKey(captchaAppId)
 Turn on the developer tools, go to the Network tab, activate the captcha and look at the requests. Some of them will contain the parameter value you need. In this case `websiteKey=aid`
 ![](tendi-devtools.png) 
