@@ -80,7 +80,7 @@ sidebar_label: TurnstileTask
 |websiteKey|String|да|Ключ Turnstile(можно передать любую строку)|
 |cloudflareTaskType|String|нет|**cf_clearance**|
 |htmlPageBase64|String|да|Закодированная в base64 html страница **"Just a moment"**, которая выдаётся с кодом 403 при обращении к сайту с данной защитой.<br/> Пример получения строки htmlPageBase64: *<br/>var htmlContent = document.documentElement.outerHTML;<br/>var htmlBase64 = btoa(unescape(encodeURIComponent(htmlContent)));<br/>console.log(htmlBase64);*|
-|userAgent|String|да|User-Agent браузера.<br /> **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является 125 версия**: `userAgentPlaceholder`|
+|userAgent|String|да|User-Agent браузера.<br /> **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является версия**: `userAgentPlaceholder`|
 |proxyType|String|да|**http** - обычный http/https прокси<br/>**https** - попробуйте эту опцию, только если "http" не работает (требуется для некоторых кастомных прокси)<br/>**socks4** - socks4 прокси<br/>**socks5** - socks5 прокси|
 |proxyAddress|String|да|<p>IP адрес прокси IPv4/IPv6. Не допускается:</p><p>- использование имен хостов</p><p>- использование прозрачных прокси (там, где можно видеть IP клиента)</p><p>- использование прокси на локальных машинах</p>|
 |proxyPort|Integer|да|Порт прокси|

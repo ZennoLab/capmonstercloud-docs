@@ -14,7 +14,7 @@ sidebar_label: TenDI
 |class|String|да|**TenDI**|
 |websiteURL|String|да|Адрес основной страницы, на которой решается капча.|
 |websiteKey|String|да|captchaAppId. Например `"websiteKey": "189123456"` - уникальный параметр для вашего сайта. Можно взять с html страницы с капчей или из трафика (см. описание ниже).|
-|userAgent|String|нет|User-Agent браузера. **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является 125 версия**: `userAgentPlaceholder`|
+|userAgent|String|нет|User-Agent браузера. **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является версия**: `userAgentPlaceholder`|
 ### Как получить websiteKey(captchaAppId)
 Включите инструменты разработчика, перейдите на вкладку Network, активируйте капчу и посмотрите запросы. В некотрых из них будет нужное вам значение параметра. В данном случае `websiteKey=aid`
 ![](tendi-devtools.png) 
