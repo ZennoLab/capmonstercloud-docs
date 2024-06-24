@@ -34,7 +34,7 @@ The object contains data about the task for solving ReCaptcha2 from Google.
 
 **metadata.Task**: additional metadata related to the task.
 
-**userAgent**: information about the user agent. Current userAgent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+**userAgent**: information about the user agent. Current userAgent: userAgentPlaceholder
 
 **websiteURL**: address of the web page with the captcha.
 
@@ -57,7 +57,7 @@ https://api.capmonster.cloud/createTask
       "Grid": "3x3",
       "TaskDefinition": "/m/015qff"
     },
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+    "userAgent": "userAgentPlaceholder",
     "websiteUrl": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle"
   }
 }
