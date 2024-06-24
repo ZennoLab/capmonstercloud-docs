@@ -3,8 +3,6 @@ sidebar_position: 4
 sidebar_label: HCaptchaTask
 ---
 
-import UserAgent from '@site/src/components/UserAgent';
-
 # HCaptchaTask
 Объект содержит данные о задаче на решение hCaptcha. Для обеспечения универсальности решения этого вида капчи нам необходимо использовать все данные, которые вы используете во время автоматизации заполнения формы на целевом сайте, включая прокси, user-agent браузера и cookies. Это позволит избежать любых проблем при изменении кода hCaptcha.
 

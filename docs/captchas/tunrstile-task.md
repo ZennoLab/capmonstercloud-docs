@@ -3,8 +3,6 @@ sidebar_position: 6
 sidebar_label: TurnstileTask
 ---
 
-import UserAgent from '@site/src/components/UserAgent';
-
 # TurnstileTask | Cloudflare Challenge
 Автоматически поддерживаются все подтипы Turnstile: manual, non-interactive и invisible. Поэтому нет необходимости указывать подтип для обычной капчи.
 

@@ -3,8 +3,6 @@ sidebar_position: 6
 sidebar_label: TurnstileTask
 ---
 
-import UserAgent from '@site/src/components/UserAgent';
-
 # TurnstileTask | Cloudflare Challenge
 All Turnstile subtypes are automatically supported: manual, non-interactive, and invisible. Therefore, there is no need to specify a subtype for a regular captcha. 
 

@@ -3,8 +3,6 @@ sidebar_position: 4
 sidebar_label: HCaptchaTask
 ---
 
-import UserAgent from '@site/src/components/UserAgent';
-
 # HCaptchaTask
 The object contains data for hCaptcha solving task. To provide solid universality for solving this type of task we have reproduce every piece of environment used for an automation task you plan to complete. This includes: proxy access, browser's user-agent, cookies (optionally). This approach will eliminate all possible obstacles which might implement in the future.
 

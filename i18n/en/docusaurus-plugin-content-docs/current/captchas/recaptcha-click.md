@@ -3,8 +3,6 @@ sidebar_position: 7
 sidebar_label: ComplexImageTask Recaptcha
 ---
 
-import UserAgent from '@site/src/components/UserAgent';
-
 # ComplexImageTask Recaptcha
 The object contains data about the task for solving ReCaptcha2 from Google.
 

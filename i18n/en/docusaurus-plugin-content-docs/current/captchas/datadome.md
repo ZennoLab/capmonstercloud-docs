@@ -3,9 +3,6 @@ sidebar_position: 14
 sidebar_label: DataDome
 ---
 
-import UserAgent from '@site/src/components/UserAgent';
-
-
 # DataDome
 
 This type of captcha basically requires the user to solve a puzzle by moving a slider to confirm. 

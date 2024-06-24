@@ -3,9 +3,6 @@ sidebar_position: 17
 sidebar_label: BasiliskTask
 ---
 
-import UserAgent from '@site/src/components/UserAgent';
-
-
 # Basilisk - FaucetPay Captcha
 :::warning **Warning!**
 This task will be performed using our proxy servers.

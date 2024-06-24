@@ -3,8 +3,6 @@ sidebar_position: 14
 sidebar_label: DataDome
 ---
 
-import UserAgent from '@site/src/components/UserAgent';
-
 # DataDome
 
 Данный тип капчи в основном требует от пользователя решить головоломку, перемещая ползунок для подтверждения. 
