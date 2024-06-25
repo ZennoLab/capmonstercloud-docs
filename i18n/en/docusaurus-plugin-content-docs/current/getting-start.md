@@ -1,6 +1,8 @@
 ﻿---
 sidebar_position: 0
+sidebar_label: Getting Started
 ---
+
 
 # Getting Started
 
@@ -36,7 +38,6 @@ For your convenience, we’ve created ready-made libraries for fast integration 
 |JS|- [Npm](https://www.npmjs.com/package/@zennolab_com/capmonstercloud-client)<br /> - [Github](https://github.com/ZennoLab/capmonstercloud-client-js)|
 |GO|- [Pkg.go.dev](https://pkg.go.dev/github.com/ZennoLab/capmonstercloud-client-go)<br /> - [Github](https://github.com/ZennoLab/capmonstercloud-client-go)|
 |PHP|- [Packagist](https://packagist.org/packages/zennolab/capmonstercloud.client)<br /> - [Github](https://github.com/ZennoLab/capmonstercloud-client-php)|
-
 
 
 ## Recognition methods
