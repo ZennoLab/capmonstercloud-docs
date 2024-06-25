@@ -7,23 +7,23 @@ const LibrariesList = [
   {
     title: 'C#',
     Svg: require('@site/static/img/C#.svg').default,
-    githubLink: 'https://zenno.link/cmcloud-github',
+    githubLink: 'https://zenno.link/brocap-github',
     customLinkName: 'Nuget',
-    customLinkUrl: 'https://zenno.link/cmcloud-nuget'
+    customLinkUrl: 'https://zenno.link/brocap-nuget'
   },
   {
     title: 'Python',
     Svg: require('@site/static/img/Python.svg').default,
-    githubLink: 'https://zenno.link/cmcloud-github-py',
+    githubLink: 'https://zenno.link/brocap-github-py',
     customLinkName: 'PyPl',
-    customLinkUrl: 'https://zenno.link/cmcloud-pypi-py'
+    customLinkUrl: 'https://zenno.link/brocap-pypi-py'
   },
   {
     title: 'JavaScript',
     Svg: require('@site/static/img/Js.svg').default,
-    githubLink: 'https://zenno.link/cmcloud-github-js',
+    githubLink: 'https://zenno.link/brocap-github-js',
     customLinkName: 'Npm',
-    customLinkUrl: 'https://zenno.link/cmcloud-npm-js'
+    customLinkUrl: 'https://zenno.link/brocap-npm-js'
   },
 ];
 

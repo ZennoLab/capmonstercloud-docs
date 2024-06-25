@@ -121,6 +121,7 @@
 }
 
 .btn {
+  display: block;
   height: 50px;
   line-height: 50px;
   border-radius: 100px;
@@ -129,4 +130,8 @@
   font-weight: 600;
   font-size: 18px;
   text-align: center;
+}
+.btn:hover, .btn:focus, .btn:active {
+  color: white;
+  text-decoration: none;
 }

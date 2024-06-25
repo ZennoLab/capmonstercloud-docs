@@ -10,6 +10,12 @@ export default function Prices() {
   const title = isRULocale ? titleRu : titleEn;
   const priceLink = isRULocale ? 'https://capmonster.cloud/prices?culture=ru-RU' : 'https://capmonster.cloud/prices?culture=en-US'
 
+  const priceForCount = isRULocale ? 'Цена за 1000 капч' : 'Price per 1000 captchas';
+  const speedRecognition = isRULocale ? 'Скорость распознавания' : 'Recognition speed';
+  const successRecognition = isRULocale ? 'Успешность распознавания' : 'Recognition success rate';
+
+  const btnText = isRULocale ? 'Попробовать прямо сейчас' : 'Try now';
+
   return (
     <section className={styles.pricesWrap}>
       <div className="container">
@@ -24,7 +30,7 @@ export default function Prices() {
             <div className={styles.priceTypes}>
               <div className={styles.priceType}>
                 <div className={styles.priceTypeTitle}>
-                  <span>Цена за 1000 капч</span>
+                  <span>{priceForCount}</span>
                   <img src="/img/image-icon.svg" />
                 </div>
                 <div className={styles.itemPrice}>
@@ -33,7 +39,7 @@ export default function Prices() {
               </div>
               <div className={styles.priceType}>
                 <div className={styles.priceTypeTitle}>
-                  <span>Цена за 1000 капч</span>
+                  <span>{priceForCount}</span>
                   <img src="/img/token-icon.svg" />
                 </div>
                 <div className={styles.itemPrice}>
@@ -45,21 +51,21 @@ export default function Prices() {
               <div className={styles.param}>
                 <div className={styles.paramTitle}>
                   <img src="/img/20x20_speed.svg" />
-                  <span>Скорость распознавания</span>
+                  <span>{speedRecognition}</span>
                 </div>
                 <div className={styles.speedParam}>13 сек</div>
               </div>
               <div className={styles.param}>
                 <div className={styles.paramTitle}>
                   <img src="/img/20x20_success.svg" />
-                  <span>Успешность распознавания</span>
+                  <span>{successRecognition}</span>
                 </div>
                 <div className={styles.successParam}>95%</div>
               </div>
             </div>
-            <div className={styles.btn}>
-              Попробовать прямо сейчас
-            </div>
+            <a href="https://brocapgpt.com" className={styles.btn}>
+              {btnText}
+            </a>
           </div>
         </div>
       </div>
