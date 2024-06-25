@@ -103,13 +103,13 @@ const config = {
             label: 'Документация',
           },
           {
-            href: 'https://capmonster.cloud',
-            label: 'CapBroGPT',
+            href: 'https://brocapgpt.com',
+            label: 'BroCapGPT',
             position: 'left',
           },
 
           {
-            href: 'https://capmonster.cloud',
+            href: 'https://brocapgpt.com/sign-in',
             label: 'Панель управления',
             position: 'left',
           },

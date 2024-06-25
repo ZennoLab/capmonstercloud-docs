@@ -14,5 +14,13 @@
   "item.label.Расширение": {
     "message": "Extension",
     "description": "Navbar item with label Расширение"
+  },
+  "item.label.BroCapGPT": {
+    "message": "BroCapGPT",
+    "description": "Navbar item with label CapBroGPT"
+  },
+  "item.label.Панель управления": {
+    "message": "Dashboard",
+    "description": "Navbar item with label Панель управления"
   }
 }

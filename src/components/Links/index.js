@@ -5,12 +5,16 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 function Link({title, image, desciption, bottomBlock }) {
   return (
     <div className={styles.linkBlock}>
-      <div className={styles.imgWrap}>
-        <img src={image} className={styles.linkImg} />
-      </div>
-      <h3 className={styles.linkTitle}>{title}</h3>
-      <div className={styles.desciption}>
-        {desciption}
+      <div className={styles.blockLinkFlex}>
+        <div className={styles.imgWrap}>
+          <img src={image} className={styles.linkImg} />
+        </div>
+        <div>
+          <h3 className={styles.linkTitle}>{title}</h3>
+          <div className={styles.desciption}>
+            {desciption}
+          </div>
+        </div>
       </div>
       <div className={styles.bottomBlock}>{bottomBlock && bottomBlock}</div>
     </div>
@@ -55,23 +59,23 @@ export default function Links() {
 
         <div className={styles.libsBlock}>
           <Link
-            title="CapBroGPT"
+            title="BroCapGPT"
             image="/img/84x84_dashboard.svg"
-            desciption="Облачный AI сервис для автоматического распознавания капч"
-            bottomBlock={<div className={styles.btn}>Перейти</div>}
+            desciption={isRULocale ? 'Облачный AI сервис для автоматического распознавания капч' : 'Cloud AI service for automatic captcha recognition'}
+            bottomBlock={<a href="https://brocapgpt.com" className={styles.btn}>{isRULocale ? 'Перейти' : 'Try now'}</a>}
           />
           <Link
-            title="Расширение"
+            title={isRULocale ? 'Расширение для браузера' : 'Browser extension'}
             image="/img/84x84_extention.svg"
-            desciption="Облачный AI сервис для автоматического распознавания капч"
-            bottomBlock={<div className={styles.btns}><div className={styles.btn}><img src="img/24x24_chrome.svg"/><span>Скачать</span></div><div className={styles.btn}><img src="img/24x24_firefox.svg"/><span>Скачать</span></div></div>}
+            desciption={isRULocale ? 'Автоматическое решение капч в фоновом режиме браузера Chrome или Firefox' : 'Automatic captcha solving in the background of Chrome or Firefox browser'}
+            bottomBlock={<div className={styles.btns}><div className={styles.btn}><img src="img/24x24_chrome.svg"/><span>{isRULocale ? 'Установить' : 'Install'}</span></div><div className={styles.btn}><img src="img/24x24_firefox.svg"/><span>{isRULocale ? 'Установить' : 'Install'}</span></div></div>}
           />
-          <Link
+          {/* <Link
             title="Техподдержка"
             image="/img/84x84_chat.svg"
             desciption="Решение Ваших вопросов"
             bottomBlock={<div className={styles.btn}>Обратиться</div>}
-          />
+          /> */}
         </div>
       </div>
     </section>
