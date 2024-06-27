@@ -58,6 +58,10 @@ The list of available module names:
             <td align="center">ramblerrus</td>
             <td align="center">![](images\rambler.png)</td>
         </tr>
+		<tr>
+            <td align="center">ramblerrusnew</td>
+            <td align="center">![](images\ramblerrusnew.png)</td>
+        </tr>
         <tr>
             <td align="center">solvemedia</td>
             <td align="center">![](images\solvemedia.png)</td>
