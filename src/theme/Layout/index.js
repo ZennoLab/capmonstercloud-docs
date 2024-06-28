@@ -50,15 +50,26 @@ export default function Layout(props) {
 
   const updateUserAgent = async () => {
     const userAgent = await getUserAgent();
-    const bodyText = document.body.innerHTML;
-    const regex = new RegExp(`(userAgentPlaceholder)`, 'gi');
-    const newBodyText = bodyText.replace(regex, userAgent?.UserAgent);
-    document.body.innerHTML = newBodyText;
-  }
+    const elements = document.querySelectorAll('*:not(script):not(style)'); // исключаем скрипты и стили
+
+    elements.forEach(element => {
+      if (element.childNodes.length) {
+        element.childNodes.forEach(node => {
+          if (node.nodeType === 3) { // Текстовый узел
+            const regex = new RegExp(`(userAgentPlaceholder)`, 'gi');
+            const newText = node.nodeValue.replace(regex, userAgent?.UserAgent);
+            if (newText !== node.nodeValue) {
+              node.nodeValue = newText;
+            }
+          }
+        });
+      }
+    });
+  };
 
   useEffect(() => {
     updateUserAgent()
-  }, [])
+  })
 
   return (
     <LayoutProvider>
