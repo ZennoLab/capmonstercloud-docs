@@ -33,7 +33,7 @@ sidebar_label: FunCaptchaTask
 
 :::info Метод
 ```http
-https://api.capmonster.cloud/createTask
+https://api.brocapgpt/createTask
 ```
 :::
 
@@ -84,11 +84,11 @@ https://api.capmonster.cloud/createTask
 
 :::info Метод
 ```http
-https://api.capmonster.cloud/getTaskResult
+https://api.brocapgpt/getTaskResult
 ```
 :::
 
-Используйте метод [getTaskResult](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/557078/getTaskResult) чтобы получить решение FunCaptcha. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 10 с до 30 с.
+Используйте метод [getTaskResult](../api/methods/get-task-result.md) чтобы получить решение FunCaptcha. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 10 с до 30 с.
 
 |**Свойство**|**Тип**|**Описание**|
 | :- | :- | :- |

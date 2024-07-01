@@ -4,11 +4,11 @@ sidebar_position: 0
 
 # Getting Start
 
-In this section you can learn how to send captchas to CapMonster Cloud and methods for recognizing them.
+In this section you can learn how to send captchas to BroCapGPT and methods for recognizing them.
 
 :::info Method address
 ```http
-https://api.capmonster.cloud
+https://api.brocapgpt
 ```
 Request format: `JSON POST`.
 Response is always in the `JSON` format.
@@ -27,7 +27,7 @@ Additional method:
 
 ### Code examples
 
-For your convenience, we’ve created ready-made libraries for fast integration the CapMonster.Cloud API into your code. Recognize reCAPTCHA, hCaptcha and other types of captcha at the lowest prices on the market!
+For your convenience, we’ve created ready-made libraries for fast integration the BroCapGPT API into your code. Recognize FunCaptcha at the lowest prices on the market!
 
 |**Language**|**Link to the repository**|
 | :- | :- | 
@@ -41,7 +41,7 @@ For your convenience, we’ve created ready-made libraries for fast integration 
 
 ## Recognition methods
 
-There are 2 captcha recognition methods in CapMonster Cloud service:
+There are 2 captcha recognition methods in BroCapGPT service:
 
 1. Token method.
 1. Click method.
@@ -54,4 +54,4 @@ Another important advantage of this recognition method is that you don’t need 
 
 This problem is often complicated by the fact that websites can use non-standard ways of implementing parameter setting and implementing the *submit* function. For example, if multiple parameters are used in requests or if these parameters are encrypted. The click method of recognition in most cases allows you to bypass such difficulties without additional complex research and experiments.
 
-There is a great opportunity to apply the click method in ZennoPoster. To do this, just install our **CapMonster Cloud extension** in a project with the Chromium engine, enter the API key and use the extension when working with the project in the same way as in the Chrome browser.
+There is a great opportunity to apply the click method in ZennoPoster. To do this, just install our **BroCapGPT extension** in a project with the Chromium engine, enter the API key and use the extension when working with the project in the same way as in the Chrome browser.

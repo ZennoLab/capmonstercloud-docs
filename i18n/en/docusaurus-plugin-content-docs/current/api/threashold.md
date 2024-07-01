@@ -6,7 +6,7 @@ sidebar_position: 6
 
 ## How to set confidence threshold in response below which money won't be charged
 
-In *CapMonster.Cloud* captchas acceptance depends on its complexity. Clients pay only for correctly solved captchas.
+In *BroCapGPT* captchas acceptance depends on its complexity. Clients pay only for correctly solved captchas.
 
 In order to have a guaranteed correct result, you can also pass the parameter  **recognizingThreshold** with a value from 0 to 100 along with the captcha recognition request.
 
@@ -16,7 +16,7 @@ In order to have a guaranteed correct result, you can also pass the parameter  *
 
 POST
 ```http
-https://api.capmonster.cloud/createTask
+https://api.brocapgpt/createTask
  ```
 
 ```json

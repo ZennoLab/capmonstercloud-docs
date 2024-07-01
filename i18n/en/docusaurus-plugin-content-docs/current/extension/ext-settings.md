@@ -41,46 +41,54 @@ The settings file looks like this:
 
 ```json title="defaultSettings.json"
 {
-  "isEnabled": true,
-  "clientKey": "",
-  "captchaList": [
-    "ReCaptcha2",
-    "ReCaptcha3",
-    "ReCaptchaEnterprise",
-    "FunCaptcha",
-    "HCaptcha",
-    "GeeTest",
-    "ImageToText",
-    "Turnstile"
-  ],
-  "captchaExtra": {
-    "ReCaptcha2": 1,
-    "HCaptcha": 1,
-    "FunCaptcha": 1
-  },
-  "repeatsCount": 0,
-  "isEnabledIgnoreList": false,
-  "ignoreList": [],
-  "proxy": {
-    "isEnabled": false,
-    "type": "http",
-    "address": "",
-    "port": 3128,
-    "login": "",
-    "password": ""
-  },
-  "manualResolving": false
+    "isEnabled": true,
+    "clientKey": "",
+    "captchaList": ["FunCaptcha"],
+    "captchaExtra": {
+        "FunCaptcha": 1
+    },
+    "repeatsCount": 0,
+    "isEnabledIgnoreList": false,
+    "ignoreList": [],
+    "proxy": {
+        "isEnabled": false,
+        "type": "http",
+        "address": "",
+        "port": 3128,
+        "login": "",
+        "password": ""
+    },
+    "isManualResolving": false,
+    "delayAfterLoadPage": 2,
+    "recaptchaClickSelector": ".recaptcha-checkbox-checkmark",
+    "hCaptchaClickSelector": "div#checkbox",
+    "globalVariable": "BroCapExtension",
+    "delayStartCount": {
+        "FunCaptcha": 0
+    },
+    "autoClick": {
+        "FunCaptcha": true
+    },
+    "autoSolve": {
+        "FunCaptcha": true
+    },
+    "delayBetweenClickEnabled": {
+        "FunCaptcha": false
+    },
+    "delayBetweenClickValue": {
+        "FunCaptcha": 0
+    }
 }
 ```
 ## Changing the settings using JS
 
-After initializing the extension on the current active page, we have a global object that is set in the extension settings, by default CMExtension, with which we can manipulate the extension settings.
+After initializing the extension on the current active page, we have a global object that is set in the extension settings, by default BroCapExtension, with which we can manipulate the extension settings.
 
 Note that event handlers are attached to the properties, not to the data inside.
 
 ### **Example:**
 ```js
-window.CMExtension.isEnabled = false;
+window.BroCapExtension.isEnabled = false;
 ```
 
 In addition to the settings, there are events that we can subscribe to:

@@ -7,7 +7,7 @@ sidebar_label: getBalance
 
 :::info Method address
 ```http
-https://api.capmonster.cloud/getBalance
+https://api.brocapgpt/getBalance
 ```
 
 request format: `JSON POST`
@@ -23,11 +23,6 @@ request format: `JSON POST`
 Type: `String` <br />
 Required: `Yes`<br />
 Unique key of your account
-
-<!-- 
-|**Параметр**|**Тип**|**Обязательный**|**Значение**|
-| :-: | :-: | :-: | :-: |
-|clientKey|String|Да|Уникальный ключ вашей учетной записи| -->
 
 ### **Body Example**
 
@@ -50,12 +45,6 @@ Error code. Check out [error list](../api-errors).
 ### `balance`
 Type: `Decimal` <br />
 Amount of money available
-
-<!-- |**Свойство**|**Тип**|**Значение**|
-| :-: | :-: | :-: |
-|errorId|Integer|Идентификатор ошибки.<br />**0** - ошибок нет, свойство *errorCode* отсутствует<br />**1** - ошибка, информация о ней находится в свойстве *errorCode*|
-|errorCode|String|Код ошибки. См. [глоссарий ошибок](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/295310).|
-|balance|Decimal|Количество доступных денег| -->
 
 ### **Example**
 
