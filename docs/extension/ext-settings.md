@@ -40,45 +40,53 @@ sidebar_position: 3
 
 ```json title="defaultSettings.json"
 {
-  "isEnabled": true,
-  "clientKey": "",
-  "captchaList": [
-    "ReCaptcha2",
-    "ReCaptcha3",
-    "ReCaptchaEnterprise",
-    "FunCaptcha",
-    "HCaptcha",
-    "GeeTest",
-    "ImageToText",
-    "Turnstile"
-  ],
-  "captchaExtra": {
-    "ReCaptcha2": 1,
-    "HCaptcha": 1,
-    "FunCaptcha": 1
-  },
-  "repeatsCount": 0,
-  "isEnabledIgnoreList": false,
-  "ignoreList": [],
-  "proxy": {
-    "isEnabled": false,
-    "type": "http",
-    "address": "",
-    "port": 3128,
-    "login": "",
-    "password": ""
-  },
-  "manualResolving": false
+    "isEnabled": true,
+    "clientKey": "",
+    "captchaList": ["FunCaptcha"],
+    "captchaExtra": {
+        "FunCaptcha": 1
+    },
+    "repeatsCount": 0,
+    "isEnabledIgnoreList": false,
+    "ignoreList": [],
+    "proxy": {
+        "isEnabled": false,
+        "type": "http",
+        "address": "",
+        "port": 3128,
+        "login": "",
+        "password": ""
+    },
+    "isManualResolving": false,
+    "delayAfterLoadPage": 2,
+    "recaptchaClickSelector": ".recaptcha-checkbox-checkmark",
+    "hCaptchaClickSelector": "div#checkbox",
+    "globalVariable": "BroCapExtension",
+    "delayStartCount": {
+        "FunCaptcha": 0
+    },
+    "autoClick": {
+        "FunCaptcha": true
+    },
+    "autoSolve": {
+        "FunCaptcha": true
+    },
+    "delayBetweenClickEnabled": {
+        "FunCaptcha": false
+    },
+    "delayBetweenClickValue": {
+        "FunCaptcha": 0
+    }
 }
 ```
 ## Измeнение настроек с помощью JS
 
-После инициализации расширения на текущей активной странице у нас появляется глобальный объект который задается в настройках расширения, по умолчанию CMExtension, с помощью которого мы можем манипулировать настройками расширения.
+После инициализации расширения на текущей активной странице у нас появляется глобальный объект который задается в настройках расширения, по умолчанию BroCapExtension, с помощью которого мы можем манипулировать настройками расширения.
 
 Помните, что обработчики перехвата событий навешаны на сами свойства, а не на данные внутри.
 ### **Пример:**
 ```js
-window.CMExtension.isEnabled = false;
+window.BroCapExtension.isEnabled = false;
 ```
 Помимо настроек, есть события, на которые мы можем подписаться:
 

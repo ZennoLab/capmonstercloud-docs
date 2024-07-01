@@ -3,7 +3,7 @@ sidebar_position: 2
 sidebar_label: Инструкция по установке
 ---
 
-# Инструкция по установке расширения CapMonster Cloud в браузер ProjectMaker
+# Инструкция по установке расширения BroCapGPT в браузер ProjectMaker
 
 :::info
 
@@ -12,7 +12,7 @@ sidebar_label: Инструкция по установке
 :::
 
 ## **Способ №1: Установка с помощью CRX-файла.**
-1. Скачать [CRX-файл CapMonster Cloud](https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=ru);
+1. Скачать [CRX-файл BroCapGPT](https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=ru);
 
 :::info
 Инструкцию по установке CRX-файла можно посмотреть [тут](https://zennolab.atlassian.net/wiki/spaces/RU/pages/2081423361#%D0%9A%D0%B0%D0%BA-%D1%81%D0%BA%D0%B0%D1%87%D0%B0%D1%82%D1%8C-crx-%D1%84%D0%B0%D0%B9%D0%BB-%D1%80%D0%B0%D1%81%D1%88%D0%B8%D1%80%D0%B5%D0%BD%D0%B8%D1%8F).

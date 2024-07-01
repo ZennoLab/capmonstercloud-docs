@@ -21,7 +21,7 @@ The object contains data about the FunCaptcha solving.
 ## **Request example**
 :::info Method
 ```http
-https://api.capmonster.cloud/createTask
+https://api.brocapgpt/createTask
 ```
 :::
 
@@ -51,7 +51,7 @@ https://api.capmonster.cloud/createTask
 ## **Getting the results**
 :::info Method
 ```http
-https://api.capmonster.cloud/getTaskResult
+https://api.brocapgpt/getTaskResult
 ```
 :::
 Use the [getTaskResult](../api/methods/get-task-result.md) method to get the captcha solution. Depending on the system load, you will receive a response after a time ranging from 300ms to 6s.

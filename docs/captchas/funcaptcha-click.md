@@ -21,7 +21,7 @@ sidebar_label: ComplexImageTask Funcaptcha
 ## **Пример запроса**
 :::info Метод
 ```http
-https://api.capmonster.cloud/createTask
+https://api.brocapgpt/createTask
 ```
 :::
 
@@ -51,7 +51,7 @@ https://api.capmonster.cloud/createTask
 ## **Получение результата**
 :::info Метод
 ```http
-https://api.capmonster.cloud/getTaskResult
+https://api.brocapgpt/getTaskResult
 ```
 :::
 Используйте метод [getTaskResult](../api/methods/get-task-result.md) чтобы получить решение капчи. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 300мс до 6 с.
