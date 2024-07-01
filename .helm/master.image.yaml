@@ -1,4 +1,0 @@
-webapi:
-  image:
-    repository: <imagePlaceholder>
-    tag: <tagPlaceholder>
