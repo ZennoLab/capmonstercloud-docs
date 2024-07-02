@@ -1,0 +1,10 @@
+{
+  "label": "Внешние сервисы",
+  "position": 4,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "slug": "external",
+    "description": "Основные методы для работы с API Capmonster Cloud"
+  }
+}

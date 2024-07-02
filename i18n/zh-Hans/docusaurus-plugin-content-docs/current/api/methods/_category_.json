@@ -1,0 +1,10 @@
+{
+  "label": "Methods",
+  "position": 1,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "slug": "methods",
+    "description": "Basic methods for working with Capmonster Cloud API"
+  }
+}
