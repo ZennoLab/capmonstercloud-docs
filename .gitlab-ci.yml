@@ -8,7 +8,7 @@ deploy:
     - npm install -f
     - npm run build
     - npm i wrangler -g
-    - npx wrangler pages deploy --branch=main
+    - npx wrangler pages deploy --branch=CI_COMMIT_BRANCH
   only:
     refs:
       - main
