@@ -1,4 +1,9 @@
-﻿# How to connect CapMonster.cloud to a program?
+﻿---
+sidebar_position: 1
+draft: true
+---
+
+# How to connect CapMonster.cloud to a program?
 CapMonster.cloud is compatible with all captcha solvers. To connect CapMonster.clod to your program, follow the guide below.
 ## **Connecting to programs supporting CapMonster.Cloud** 
 <details>

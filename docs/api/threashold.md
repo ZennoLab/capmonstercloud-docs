@@ -1,5 +1,6 @@
 ﻿---
 sidebar_position: 6
+draft: true
 ---
 
 # Установка порога списания денег

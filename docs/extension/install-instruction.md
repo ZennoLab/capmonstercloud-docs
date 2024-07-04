@@ -1,6 +1,7 @@
 ﻿---
 sidebar_position: 2
 sidebar_label: Инструкция по установке
+draft: true
 ---
 
 # Инструкция по установке расширения BroCapGPT в браузер ProjectMaker

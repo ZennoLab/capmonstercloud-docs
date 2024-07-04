@@ -1,4 +1,9 @@
-﻿# How to report bad tokens
+﻿---
+sidebar_position: 5
+draft: true
+---
+
+# How to report bad tokens
 
 ## **Why to report?**
 

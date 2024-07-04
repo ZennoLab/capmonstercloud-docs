@@ -7,7 +7,7 @@ sidebar_label: getBalance
 
 :::info Адрес метода
 ```http
-https://api.brocapgpt/getBalance
+https://api.brocapgpt.com/getBalance
 ```
 формат запроса: `JSON POST`
 :::

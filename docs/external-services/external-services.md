@@ -1,4 +1,9 @@
-﻿# Распознавание капч через API других сервисов
+﻿---
+sidebar_position: 2
+draft: true
+---
+
+# Распознавание капч через API других сервисов
 CapMonster Cloud поддерживает API сервисов: Anti-Captcha (v1.0, v2.0), RuCaptcha, RipCaptcha, 2Captcha, BypassCaptcha, DeathByCaptcha. Таким образом, вы можете разгадывать капчу через CapMonster.Cloud, даже если в вашей программе нет интеграции с нашим сервисом.
 
 Для этого необходимо установить ![(синяя звезда)](Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.001.png) [**CapMonsterInterceptor**](https://static.zenno.services/ccl/interceptor.msi) (OC Windows)

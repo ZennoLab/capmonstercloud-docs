@@ -4,8 +4,8 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 export default function MainHero() {
   const { i18n } = useDocusaurusContext();
-  const titleRu = 'Документация CapMonster Cloud';
-  const titleEn = 'CapMonster Cloud Documentation'
+  const titleRu = 'Документация BroCapGPT';
+  const titleEn = 'BroCapGPT Documentation'
   const title = i18n.currentLocale === 'ru' ? titleRu : titleEn;
   const descriptionRu = 'Обширный набор инструкций и рекомендаций, которые помогут Вам успешно использовать продукт и получить максимальную выгоду от его возможностей.';
   const desciptionEn = 'An extensive set of instructions and recommendations, that will help you successfully use the product and get the maximum benefit from its capabilities.';

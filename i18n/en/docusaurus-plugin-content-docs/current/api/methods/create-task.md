@@ -10,7 +10,7 @@ This method creates a task for solving selected captcha type. In the parameters 
 
 :::info Method address
 ```http
-https://api.brocapgpt/createTask
+https://api.brocapgpt.com/createTask
 ```
 
 Request format: `JSON POST`
@@ -70,7 +70,7 @@ Web address for sending the captcha task result. Data is sent by POST request.<b
 			{
 			  "Task": "Pick the image that is the correct way up"
 			},
-			"userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+			"userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
 		}
 	}
 ```

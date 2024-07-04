@@ -10,7 +10,7 @@ sidebar_position: 0
 
 :::info Адрес метода
 ```http
-https://api.brocapgpt
+https://api.brocapgpt.com
 ```
 Формат запроса: `JSON POST`.
 Формат ответа всегда в формате `JSON`.
@@ -36,10 +36,6 @@ https://api.brocapgpt
 |С#|- [Nuget](https://www.nuget.org/packages/Zennolab.CapMonsterCloud.Client)<br /> - [Github](https://github.com/ZennoLab/capmonstercloud-client-dotnet) |
 |Python|- [PyPl](https://pypi.org/project/capmonstercloudclient/)<br /> - [Github](https://github.com/ZennoLab/capmonstercloud-client-python)|
 |JS|- [Npm](https://www.npmjs.com/package/@zennolab_com/capmonstercloud-client)<br /> - [Github](https://github.com/ZennoLab/capmonstercloud-client-js)|
-|GO|- [Pkg.go.dev](https://pkg.go.dev/github.com/ZennoLab/capmonstercloud-client-go)<br /> - [Github](https://github.com/ZennoLab/capmonstercloud-client-go)|
-|PHP|- [Packagist](https://packagist.org/packages/zennolab/capmonstercloud.client)<br /> - [Github](https://github.com/ZennoLab/capmonstercloud-client-php)|
-
-
 
 ## Методы распознавания
 
@@ -55,5 +51,3 @@ https://api.brocapgpt
 Еще одно немаловажное достоинство данного метода распознавания заключается в том, что не требуется самостоятельно искать параметры для отправки на сервис и выполнять *autosubmit*. Не секрет, что на этом шаге можно столкнуться с достаточно серьезной и трудоемкой задачей (особенно для новичков в программировании) поиска параметра и функций в скриптах и данных в запросах, html-верстке сайтов и структуре скриптов, через которые обычно реализован *submit*.
 
 Эта проблема часто усугубляется еще и тем, что на сайтах могут применяться разные нестандартные способы реализации задания параметров и реализации функции *submit.* Например, если применяется много сторонних параметров в запросах или шифрование этих параметров. Кликовый метод решения в большинстве случаев позволяет обойти подобные трудности без дополнительных сложных исследований и экспериментов.
-
-Есть отличная возможность применять метод кликов в ZennoPoster. Для этого достаточно установить наше расширение **BroCapGPT** в проект с движком Chromium, ввести API-ключ и использовать расширение при работе с проектом аналогично тому, как это обычно происходит в системном браузере Chrome.
