@@ -8,7 +8,7 @@ In this section you can learn how to send captchas to BroCapGPT and methods for 
 
 :::info Method address
 ```http
-https://api.brocapgpt
+https://api.brocapgpt.com
 ```
 Request format: `JSON POST`.
 Response is always in the `JSON` format.
@@ -34,10 +34,6 @@ For your convenience, we’ve created ready-made libraries for fast integration 
 |С#|- [Nuget](https://www.nuget.org/packages/Zennolab.CapMonsterCloud.Client)<br /> - [Github](https://github.com/ZennoLab/capmonstercloud-client-dotnet) |
 |Python|- [PyPl](https://pypi.org/project/capmonstercloudclient/)<br /> - [Github](https://github.com/ZennoLab/capmonstercloud-client-python)|
 |JS|- [Npm](https://www.npmjs.com/package/@zennolab_com/capmonstercloud-client)<br /> - [Github](https://github.com/ZennoLab/capmonstercloud-client-js)|
-|GO|- [Pkg.go.dev](https://pkg.go.dev/github.com/ZennoLab/capmonstercloud-client-go)<br /> - [Github](https://github.com/ZennoLab/capmonstercloud-client-go)|
-|PHP|- [Packagist](https://packagist.org/packages/zennolab/capmonstercloud.client)<br /> - [Github](https://github.com/ZennoLab/capmonstercloud-client-php)|
-
-
 
 ## Recognition methods
 
@@ -53,5 +49,3 @@ The second method (**click**) also allows you to recognize complex captchas the 
 Another important advantage of this recognition method is that you don’t need to search for parameters to send to the service and execute autosubmit. It’s no secret that at this step you can face a rather serious and time-consuming task (especially for beginners in programming) of searching for parameters and functions in scripts and data in requests, html layout of sites and the structure of scripts through which *submit* is usually implemented.
 
 This problem is often complicated by the fact that websites can use non-standard ways of implementing parameter setting and implementing the *submit* function. For example, if multiple parameters are used in requests or if these parameters are encrypted. The click method of recognition in most cases allows you to bypass such difficulties without additional complex research and experiments.
-
-There is a great opportunity to apply the click method in ZennoPoster. To do this, just install our **BroCapGPT extension** in a project with the Chromium engine, enter the API key and use the extension when working with the project in the same way as in the Chrome browser.

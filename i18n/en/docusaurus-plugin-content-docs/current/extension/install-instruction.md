@@ -1,6 +1,7 @@
 ﻿---
 sidebar_position: 2
 sidebar_label: Installation instructions
+draft: true
 ---
 
 # Instructions for installing the BroCapGPT extension in the ProjectMaker browser

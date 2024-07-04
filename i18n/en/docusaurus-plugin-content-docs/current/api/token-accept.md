@@ -1,5 +1,6 @@
 ﻿---
 sidebar_position: 7
+draft: true
 ---
 # Token acceptance issues
 

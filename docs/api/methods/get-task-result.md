@@ -9,7 +9,7 @@ sidebar_label: getTaskResult
 
 :::info Адрес метода
 ```http
-https://api.brocapgpt/getTaskResult
+https://api.brocapgpt.com/getTaskResult
 ```
 формат запроса: `JSON POST`
 :::
