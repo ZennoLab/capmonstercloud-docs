@@ -7,15 +7,11 @@ sidebar_label: getBalance
 
 :::info Method address
 ```http
-https://api.brocapgpt/getBalance
+https://api.brocapgpt.com/getBalance
 ```
 
 request format: `JSON POST`
 :::
-
-<!-- Адрес метода: <https://api.capmonster.cloud/getBalance>
-
-формат запроса: JSON POST -->
 
 ## **Request parameters**
 

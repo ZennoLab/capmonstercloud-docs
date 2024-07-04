@@ -9,7 +9,7 @@ After you have created a task, you need to get its response by periodically chec
 
 :::info Method address
 ```http
-https://api.brocapgpt/getTaskResult
+https://api.brocapgpt.com/getTaskResult
 ```
 request format: `JSON POST`
 :::

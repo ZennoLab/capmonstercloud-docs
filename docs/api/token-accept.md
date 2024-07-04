@@ -1,5 +1,6 @@
 ﻿---
 sidebar_position: 7
+draft: true
 ---
 # Проблемы принимаемости токенов
 
