@@ -1,6 +1,6 @@
 ﻿---
 sidebar_position: 3
-sidebar_label: 获取账户余额
+sidebar_label: getBalance
 ---
 # getBalance：获取账户余额
 :::info 方法地址

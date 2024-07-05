@@ -22,7 +22,6 @@ sidebar_position: 2
 ![](Aspose.Words.f6d390ba-8e92-4611-b5a2-167a5168d8f1.004.png)
 ### **使用软件自动化识别**
 要在浏览器中自动化识别文本验证码的过程（例如使用 *开发者工具* 或 *Selenium*），您需要：
-
 1. 将 `cm-image-to-text-source="id"` 属性分配给包含图像的元素：
 
 ![](exapmle1.png)

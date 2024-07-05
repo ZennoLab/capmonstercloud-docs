@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 12
 sidebar_label: ComplexImageTask YSC
 draft: true
@@ -6,23 +6,23 @@ draft: true
 
 # ComplexImageTask YSC
 
-The object contains data about the Yandex SmartCaptcha task solving.
+该对象包含有关解决 Yandex SmartCaptcha 任务的数据。
 
-**Image example**
+**图片示例**
 
 ![](example-image.png)
 
-## **Object structure**
+## **对象结构**
 
-|**Parameter**|**Type**|**Required**|**Possible values**|**Description**|
-| :- | :- | :- | :- |:- |
-|type|String|yes|ComplexImageTask|Defines the task object type.|
-|class|String|yes|yandexsmartcaptcha|Defines the task object class.|
-|imagesBase64|Array|yes|[ “iVBORw0KGgoAAAANSUhEUgAAASwLbb” ]|List with one image in base64 format.|
+|**参数**|**类型**|**必填**|**可能的值**|**描述**|
+| :- | :- | :- | :- | :- |
+|type|String|是|ComplexImageTask|定义任务对象类型。|
+|class|String|是|yandexsmartcaptcha|定义任务对象类。|
+|imagesBase64|Array|是|[ “iVBORw0KGgoAAAANSUhEUgAAASwLbb” ]|包含一个以 base64 格式的图像的列表。|
 
-## **Request example**
+## **请求示例**
 
-:::info Method
+:::info 方法
 ```http
 https://api.capmonster.cloud/createTask
 ```
@@ -39,7 +39,7 @@ https://api.capmonster.cloud/createTask
 }
 ```
 
-**Response example**
+**响应示例**
 ```json
 {
     "errorId":0,
@@ -47,16 +47,16 @@ https://api.capmonster.cloud/createTask
 }
 ```
 
-## **Getting the result**
+## **获取结果**
 
-Use the [getTaskResult](../api/methods/get-task-result.md) method to get the captcha solution. Depending on the system load, you will receive a response after a time ranging from 300ms to 6s.
+使用 [getTaskResult](../api/methods/get-task-result.md) 方法获取验证码的解决方案。根据系统负载，您将在从300毫秒到6秒不等的时间范围内收到响应。
 
-|**Property**|**Type**|**Description**|
-| :- | :- | :- | 
-|answer|Array|List of coordinates.|
-|metadata|Null|Doesn't provide useful information.|
+|**属性**|**类型**|**描述**|
+| :- | :- | :- |
+|answer|Array|坐标列表。|
+|metadata|Null|不提供有用信息。|
 
-**Example**
+**示例**
 
 ```json
 {
@@ -93,101 +93,101 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the cap
 }
 ```
 
-## **Pricing**
+## **定价**
 
-|**Name**|**Cost per 1000 images, $**|
-| :- | :- | 
-|**Yandex SmartCaptcha** (click)|0.2|
+|**名称**|**每1000张图片成本, $**|
+| :- | :- |
+|**Yandex SmartCaptcha** (点击)|0.2|
 
-## **Image format**
-The captcha with the task is sent in one picture. The size on Yandex services is 300x220, on external sites 320x220.. <br/>
-The distance from the image to the container with the task text should be 4px (margin-top). The original is 13px.
+## **图片格式**
+该任务的验证码以一张图片的形式发送。在Yandex服务中，尺寸为300x220，在外部网站上为320x220。<br/>
+从图像到包含任务文本的容器的距离应为4像素（上边距）。原始距离为13像素。
 
 ![](image-format.png)
 
-## **Using ZennoPoster**
+## **使用 ZennoPoster**
 
-We need to prepare a task, take a screenshot of the element and send it to CapMonster Cloud for recognition. <br/>
+我们需要准备一个任务，截取元素的屏幕截图，并发送到CapMonster Cloud进行识别。<br/>
 
-To prepare a task for sending and receiving an image in base64, you can use the following C# snippet:  <br/>
+为了准备发送和接收以base64格式的图片的任务，您可以使用以下C#代码片段：<br/>
 
 ```csharp
-// Let's find the element with the task (highlighted by the lower red frame in the screenshot above)
+// 找到具有任务的元素（在上面截图中用下边框突出显示）
 HtmlElement taskContainer = instance.ActiveTab.FindElementByXPath("//div[@class=\"AdvancedCaptcha-SilhouetteTask\"]", 0);
-// Set the appropriate style for it
+ // 设置适当的样式
 taskContainer.SetAttribute("style", "margin-top: 4px;");
 
-// Find the container with the main image
+// 找到包含主要图片的容器 
 HtmlElement image = instance.ActiveTab.FindElementByXPath("//div[@class=\"AdvancedCaptcha AdvancedCaptcha_silhouette\"]", 0);
-// Get base64 of the required size
-return image.DrawPartToBitmap(0, 0, 300, 220, false);
+ // 获取所需大小的base64格式图片
+ return image.DrawPartToBitmap(0, 0, 300, 220, false)；
 ```
 
-If you save the result of executing the action into the *imageBase64* variable, then sending a POST request to  */createTask* will look like this:
+如果将执行操作的结果保存到*imageBase64*变量中，那么发送POST请求到*/createTask*将如下所示：
 
 <details>
-    <summary>"POST-request" action setting to send captchas to CapMonster Cloud</summary>
+    <summary>"POST请求" 设置以将验证码发送到CapMonster Cloud</summary>
 
 ![](post-request-ex.png)
 </details>
 
-After receiving the result, you can use the following C# snippet to click on the coordinates:  
+收到结果后，您可以使用以下C#代码片段单击坐标：
 
 ```csharp
-// Getting the value of the variable where the result is placed
-// from /getTaskResult
+// 获取放置结果的变量值
+ // 从/getTaskResult返回
 string jsonStr = project.Variables["cmcloudTaskResult"].Value;
-// Upload JSON
-project.Json.FromString(jsonStr);
+ // 上传JSON
+ project.Json.FromString(jsonStr);
 
-// Find the container with the task and get its coordinates
-HtmlElement imageContainer = instance.ActiveTab.FindElementByXPath("//div[@class=\"AdvancedCaptcha AdvancedCaptcha_silhouette\"]", 0);
-int imageContainerX = int.Parse(imageContainer.GetAttribute("left"));
-int imageContainerY = int.Parse(imageContainer.GetAttribute("top"));
+// 找到包含任务的容器并获取其坐标
+ HtmlElement imageContainer = instance.ActiveTab.FindElementByXPath("//div[@class=\"AdvancedCaptcha AdvancedCaptcha_silhouette\"]", 0);
+ int imageContainerX = int.Parse(imageContainer.GetAttribute("left"));
+ int imageContainerY = int.Parse(imageContainer.GetAttribute("top"));
 
 for (int i = 0; i < project.Json.solution.answer.Count; ++i) {
 	int X = Convert.ToInt32(project.Json.solution.answer[i].X);
 	int Y = Convert.ToInt32(project.Json.solution.answer[i].Y);
 	
-	// You need to add the coordinates from the service to the element coordinates,
-	// because we sent not the whole page for recognition, 
-	// but a specific container with a captcha
+	// 需要将来自服务的坐标添加到元素坐标中，
+	// 因为我们发送的不是整个页面进行识别，
+	// 而是特定的包含验证码的容器
 	instance.ActiveTab.FullEmulationMouseMove(imageContainerX + X, imageContainerY + Y);
 	instance.ActiveTab.FullEmulationMouseClick("left", "click");
 }
 
-// Submit captcha
+// 提交验证码
 HtmlElement submitBtn = instance.ActiveTab.GetDocumentByAddress("0").FindElementByTag("form", 0).FindChildByAttribute("span", "class", "CaptchaButton-SubmitContent", "regexp", 0);
 instance.ActiveTab.FullEmulationMouseMoveToHtmlElement(submitBtn);
 instance.ActiveTab.FullEmulationMouseClick("left", "click");
 ```
 
-[Final test project](https://drive.google.com/drive/folders/1QNNcBXBGjGZMc6AQ7bdYtr4YEQEumxT4) (don't forget to enter your API key from CapMonster.Cloud).<br/>
+[最终测试项目](https://drive.google.com/drive/folders/1QNNcBXBGjGZMc6AQ7bdYtr4YEQEumxT4)（不要忘记输入您的CapMonster.Cloud的API密钥）。<br/>
 
 
-## **Using other programs**
+## **使用其他程序**
 
-Most automation frameworks (Selenium/Puppeteer/Playwright, etc.) provide options for creating a screenshot.<br/>
+大多数自动化框架（如Selenium/Puppeteer/Playwright等）提供了创建截图的选项。<br/>
 
-For example, this way you can get an image with a task in playwright:
+例如，使用Playwright这样可以获取带有任务的图片：
 
 ```csharp
-// Set the necessary style to the element
+// 为元素设置必要的样式
 const taskTextContainer = await page.locator('//div[@class="AdvancedCaptcha-SilhouetteTask"]');
 await taskTextContainer.evaluate((element) => {
   element.style.marginTop = "4px";
 }, {}, { timeout: 5000 });
 
-// Get the image 
+// 获取图片
 const taskContainer = await page.locator('//div[@class="AdvancedCaptcha AdvancedCaptcha_silhouette"]');
 const imageWithExtraStuff = await screenshotContainer.screenshot({ scale: "css", timeout: 5000});
 ```
 
-Afterwards you need to crop the picture. To do this, you can use the [sharp library](https://www.npmjs.com/package/sharp):
+之后，您需要裁剪图片。您可以使用[sharp库](https://www.npmjs.com/package/sharp)来完成此操作：
 
 ```csharp
 const sharpImageFull = sharp(imageWithExtraStuff);
 const sharpImageCropped = sharpImageFull
   .trim({ background: "#FFFFFF", threshold: 0 })
   .extract({ top: 0, left: 0, height: 220, width: 300 });
-  ```
+```

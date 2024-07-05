@@ -24,10 +24,10 @@ To get started with the extension, click on its icon to the right of the address
 
 1. Download the [archive with the extension](https://drive.google.com/drive/folders/1ErdzNr6yF8g9fWpNSenaQ-93mANG6wLC?usp=drive_link).
 
-1. Unpack it to any folder. 
+2. Unpack it to any folder. 
    
    **WARNING**: the folder shouldn’t be deleted, otherwise the extension stop working.
-1. In the Google Chrome browser open the “Extension” page. There are several ways to do this: 
+3. In the Google Chrome browser open the “Extension” page. There are several ways to do this: 
    1. Type chrome://extensions in the address bar of a browser and press Enter.
    2. From the menu: click the three vertical dots in the upper right corner (near the profile picture), then "More Tools", then "Extensions".
 
@@ -37,13 +37,13 @@ To get started with the extension, click on its icon to the right of the address
 
   ![](61a9b824-b0d2-4808-8bb8-feac4b25d0b7.png)
 
-1. Enable “Developer Mode”.
-1. Then click on “Load unpacked”.
+4. Enable “Developer Mode”.
+5. Then click on “Load unpacked”.
 
   ![](load-unpacked.png)
 
-1. Find and choose the folder where you unpacked the extension.
-1. After that the extension should appear in the list of the installed extensions.
+6. Find and choose the folder where you unpacked the extension.
+7. After that the extension should appear in the list of the installed extensions.
 
 ![](919a2eab-1651-4b48-8980-b69346d700fd.png)
 

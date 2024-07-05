@@ -154,7 +154,7 @@ captcha3.png:99loe
 
 不要惊慌！![(wink)](Aspose.Words.aac7548a-0b79-486d-96ce-e145c7faf5a6.015.png)请稍等一会。
 
-如果一天内没有变化，[联系支持团队](https://helpdesk.zennolab.com/en)，我们一定会帮助您。
+如果一天内没有变化，[联系支持团队](https://helpdesk.zennolab.com)，我们一定会帮助您。
 
 </details>
 

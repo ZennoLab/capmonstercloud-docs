@@ -2,7 +2,9 @@
 sidebar_position: 1
 sidebar_label: Firefox 浏览器扩展
 ---
+
 # Firefox 浏览器扩展
+
 ## **描述**
 通过此扩展，您可以直接在浏览器中自动识别验证码。
 
@@ -11,32 +13,36 @@ sidebar_label: Firefox 浏览器扩展
 -----
 ## **自动安装**
 1. 打开 [Firefox 插件商店](https://addons.mozilla.org/en-US/firefox/addon/capmonster-cloud/)。
-1. 点击 **Add to Firefox**。
-1. 在模态窗口中点击 "Add" 按钮确认添加扩展。
+2. 点击 **Add to Firefox**。
+3. 在模态窗口中点击 "Add" 按钮确认添加扩展。
    ![](modal.png)
 
-要开始使用扩展，请点击地址栏右侧的扩展图标。前往 [设置页面](extension-firefox.md#settings)。
+要开始使用扩展，请点击地址栏右侧的扩展图标。前往 [设置页面](extension-firefox.md#设置)。
 
 *如果因某些原因无法从 Firefox 插件商店安装扩展，请使用手动安装的说明。*
 
 <details>
-<summary>手动安装</summary>
+    <summary>手动安装</summary>
 
 1. 下载带有扩展的[存档文件](https://drive.google.com/drive/folders/1dF4N_cLjuyIHhGqEfap7Wq5NJMdm12ll?usp=drive_link)。
+
 1. 打开 Firefox 浏览器并进入扩展管理：
    ![](extension-menu.png)
+   
 1. 点击齿轮按钮，在打开的下拉列表中选择 "从文件安装附加组件..."
    ![](extension-installation.png)
+   
 1. 选择已下载的带有扩展的存档文件。
+
 1. 下载完扩展后，转到 "管理您的扩展程序" 并点击安装的扩展。
    ![](extension1.png)
+   
 1. 进入 "权限" 选项卡，确保所有权限已被授予。
    ![](extension2.png)
-
 </details>
 
 <details>
-<summary>扩展程序的手动更新</summary>
+    <summary>扩展程序的手动更新</summary>
 
 如果您正在安装扩展的更新版本，那么在更新原始扩展文件后，您还需要在 "扩展" 页面上点击更新按钮（如何打开此页面在上面的 "手动安装" 部分已经描述）。
 </details>
@@ -44,7 +50,7 @@ sidebar_label: Firefox 浏览器扩展
 -----
 ## **设置**
 <details>
-<summary>如何固定扩展</summary>
+    <summary>如何固定扩展</summary>
 
 默认情况下，新安装的扩展会自动固定在浏览器面板上。
 ![](extension-panel.png)
@@ -62,7 +68,7 @@ sidebar_label: Firefox 浏览器扩展
 
 ![](extension.example.png)
 
-:::info 信息!
+:::info !
 
 您可能需要重新加载带有验证码的页面以使更改生效！
 
@@ -82,7 +88,7 @@ sidebar_label: Firefox 浏览器扩展
 
 ![](blacklist-control.png)
 
-域名必须与协议（https://或http://）一起指定。
+域名必须与协议（https:// 或 http://） 一起指定。
 您可以使用通配符：
 
 - ? - 代表除句点以外的任何字符

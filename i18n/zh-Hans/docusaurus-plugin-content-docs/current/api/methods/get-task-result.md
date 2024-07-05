@@ -1,6 +1,6 @@
 ﻿---
 sidebar_position: 1
-sidebar_label: 请求任务结果
+sidebar_label: getTaskResult
 ---
 # getTaskResult：请求任务结果
 ## **描述**

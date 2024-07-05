@@ -4,43 +4,43 @@ sidebar_label: ComplexImageTask Recaptcha
 ---
 
 # ComplexImageTask Recaptcha
-The object contains data about the task for solving ReCaptcha2 from Google.
+该对象包含解决谷歌 ReCaptcha2 任务的数据。
 
-## **Object structure**
+## **对象结构**
 
-|**Parameter**|**Type**|**Required**|**Possible values**|**Description**|
+|**参数**|**类型**|**必需**|**可能的值**|**描述**|
 | :- | :- | :- | :- | :- |
-|type|String|yes|ComplexImageTask|Specifies the task object type.|
-|class|String|yes|recaptcha|Specifies the task object class.|
-|imageUrls|Array|yes (if imagesBase64 is not filled)|[ “[https://i.postimg.cc/yYjg75Kv/img1.jpg](https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg)”]|Single image 4x4, [3x3](https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg) or a new 1x1 captcha part (in an array).|
-|imagesBase64|Array|yes (if imageUrls is not filled)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”]|Single image 4x4, [3x3](https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg) or a new 1x1 captcha part in base64 format (in an array).|
-|metadata.Grid|String|yes|4x4, 3x3, 1x1|Image grid size.|
-|metadata.TaskDefinition|String|yes (if metadata.Task is not filled)|`/m/015qff` and others|<p>Technical value that defines the task type</p><p>**How to get TaskDefinition**</p><p>The data can be found in responses to `/recaptcha/{recaptchaApi}/reload` or `/recaptcha/{recaptchaApi}/userverify` requests, where recaptchaApi is "enterprise" or "api2" depending on the Recaptcha type. The response contains json, in which one can take a list of TaskDefinitions for loaded captchas.</p>|
-|metadata.Task|String|yes (if metadata.TaskDefinition is not filled)|`Click on traffic lights` and others|Task text (<u>in English</u>).|
-|userAgent|String|no|-|The browser User-Agent to use when loading images if links were passed in imageUrls. It is required to use a modern browser signature, otherwise Google will return an error asking for a browser update.|
-|websiteURL|String|no|-|URL of the page where the captcha is solved.|
+|type|String|是|ComplexImageTask|指定任务对象类型|
+|class|String|是|recaptcha|指定任务对象类。|
+|imageUrls|Array|是（如果 imagesBase64 未填写）|[“[https://i.postimg.cc/yYjg75Kv/img1.jpg](https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg)”]| 单张 4x4 图片，[3x3](https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg)或新的 1x1 验证码部分（数组中）。|
+|imagesBase64|Array|是（如果 imageUrls 未填写）|[“/9j/4AAQSkZJRgABAQEAAAAAAAD…”]|单张 4x4 图片，[3x3](https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg)或新的 1x1 验证码部分的 base64 格式（数组中）。|
+|metadata.Grid|String|是|4x4，3x3，1x1|图片网格大小。|
+|metadata.TaskDefinition|String|是（如果 metadata.Task 未填写）|`/m/015qff` 等等|<p>定义任务类型的技术值</p><p>**如何获取 TaskDefinition**</p><p>数据可以在对`/recaptcha/{recaptchaApi}/reload` 或 `/recaptcha/{recaptchaApi}/userverify` 请求的响应中找到，其中 recaptchaApi 是 "enterprise" 或 "api2"，具体取决于 ReCaptcha 的类型。响应包含 json，可以在其中找到已加载验证码的 TaskDefinitions 列表。</p> |
+|metadata.Task|String|是（如果 metadata.TaskDefinition 未填写）|`点击红绿灯`等等|任务文本（<u>英文</u>）。|
+|userAgent|String|否|-|加载图像时使用的浏览器用户代理（如果在 imageUrls 中传递了链接）。需要使用现代浏览器签名，否则谷歌会返回错误并要求更新浏览器。|
+|websiteURL|String|否|-|解决验证码的页面 URL。|
 
-### **Description of parameters**
+### **参数描述**
 
-**imageUrls**: links to images.
+**imageUrls**：图像链接。
 
-**imagesBase64**: images in Base64 format.
+**imagesBase64**：Base64 格式的图像。
 
-**metadata.Grid**: additional metadata related to image grid sizes.
+**metadata.Grid**：与图像网格大小相关的附加元数据。
 
-**metadata.TaskDefinition**: task description identifier/type, e.g.: `/m/015qff` means "Click on traffic lights".
+**metadata.TaskDefinition**：任务描述标识符/类型，例如：`/m/015qff` 表示“点击红绿灯”。
 
 ![](taskdefinition.png)
 
-**metadata.Task**: additional metadata related to the task.
+**metadata.Task**：与任务相关的附加元数据。
 
-**userAgent**: information about the user agent. Current userAgent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+**userAgent**：用户代理信息。当前 userAgent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
 
-**websiteURL**: address of the web page with the captcha.
+**websiteURL**：包含验证码的网页地址。
 
-## **Request example**
+## **请求示例**
 
-:::info Method
+:::info 方法
 ```http
 https://api.capmonster.cloud/createTask
 ```
@@ -53,11 +53,11 @@ https://api.capmonster.cloud/createTask
     "class": "recaptcha",
     "imageUrls":[ "https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg" ],
     "metadata": {
-      "Task": "Click on traffic lights",
+      "Task": "点击红绿灯",
       "Grid": "3x3",
       "TaskDefinition": "/m/015qff"
     },
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
     "websiteUrl": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle"
   }
 }
@@ -65,26 +65,26 @@ https://api.capmonster.cloud/createTask
 
 
 
-**Response example**
+**响应示例**
 ```json
 {
   "errorId":0,
   "taskId":407533072
 }
 ```
-### **Getting a result**
-:::info Method
+### **获取结果**
+:::info 方法
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
 :::
-Use the [getTaskResult](../api/methods/get-task-result.md) method to get the captcha solution. Depending on the system load, you will receive a response after a time ranging from 300ms to 6s.
+使用[getTaskResult](../api/methods/get-task-result.md)方法获取验证码解决方案。根据系统负载情况，您将在300毫秒到6秒的时间内收到响应。
 
-|**Property**|**Type**|**Description**|
+|**属性**|**类型**|**描述**|
 | :- | :- | :- |
-|answer|Array|List with boolean values, "true" means that you need to click on the image corresponding to this position.|
+|answer|Array|包含布尔值的列表，"true" 表示需要点击对应位置的图像。|
 
-**Example:**
+**示例：**
 ```json
 {
   "errorId":0,
@@ -95,10 +95,10 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the cap
 }
 ```
 
-## **Pricing**: 
+## **定价**：
 
-||**Name**|**Cost per 1000 images, $**|**Cost per 1000 new dynamic images, $**|
+||**名称**|**每1000张图片的成本, $**|**每1000张新动态图片的费用, $**|
 | :-: | :-: | :-: | :-: |
-|1|<p>reCAPTCHA 2 (3\*3)</p><p>![](Aspose.Words.3eba36bc-cab6-486e-9e8f-1e38b225e806.001.png)</p><p></p>|0,2|0,04 |
-|2|<p>reCAPTCHA 2 (4\*4)</p><p>![](Aspose.Words.3eba36bc-cab6-486e-9e8f-1e38b225e806.002.png)</p>|0,1|not applicable|
+|1|<p>reCAPTCHA 2 (3\*3)</p><p>![](Aspose.Words.3eba36bc-cab6-486e-9e8f-1e38b225e806.001.png)</p><p></p>|0.2|0.04|
+|2|<p>reCAPTCHA 2 (4\*4)</p><p>![](Aspose.Words.3eba36bc-cab6-486e-9e8f-1e38b225e806.002.png)</p>|0.1|不适用|
 

@@ -1,6 +1,7 @@
 ﻿---
 sidebar_position: 0
 ---
+
 # Chrome 浏览器扩展
 ## **描述**
 通过此扩展，您可以直接在浏览器中自动识别验证码。
@@ -14,34 +15,35 @@ sidebar_position: 0
 1. 打开 [Chrome 网上应用店](https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=en)。
 1. 点击 **安装**。
 
-要开始使用扩展，请点击地址栏右侧的扩展图标。前往 [设置页面](extension-main.md#settings)。
+要开始使用扩展，请点击地址栏右侧的扩展图标。前往 [设置页面](extension-main.md#设置)。
 
 *如果由于某些原因无法从 Chrome 网上应用店安装扩展，请使用手动安装的说明。*
 
 <details>
-<summary>手动安装</summary>
+    <summary>手动安装</summary>
 
 1. 下载带有扩展的[存档文件](https://drive.google.com/drive/folders/1ErdzNr6yF8g9fWpNSenaQ-93mANG6wLC?usp=drive_link)。
-1. 将其解压缩到任意文件夹。
+
+2. 将其解压缩到任意文件夹。
 
    **警告**: 请勿删除该文件夹，否则扩展将停止工作。
-1. 在 Google Chrome 浏览器中打开“扩展程序”页面。有几种方法可以做到这一点：
+3. 在 Google Chrome 浏览器中打开“扩展程序”页面。有几种方法可以做到这一点：
    1. 在浏览器的地址栏中键入 chrome://extensions 并按 Enter。
-   1. 从菜单中：点击右上角的三个竖点（靠近个人资料图片），然后选择“更多工具”，然后选择“扩展程序”。
+   2. 从菜单中：点击右上角的三个竖点（靠近个人资料图片），然后选择“更多工具”，然后选择“扩展程序”。
 
 ![](359d5afb-d644-45c2-a882-e7fc3da759eb.png)
 
-3. 或者转到 Google Chrome 设置，并在右侧菜单中选择“扩展程序”（位于最底部）。
+   3. 或者转到 Google Chrome 设置，并在右侧菜单中选择“扩展程序”（位于最底部）。
 
 ![](61a9b824-b0d2-4808-8bb8-feac4b25d0b7.png)
 
-1. 启用“开发者模式”。
-1. 然后点击“加载已解压的扩展程序”。
+4. 启用“开发者模式”。
+5. 然后点击“加载已解压的扩展程序”。
 
 ![](load-unpacked.png)
 
-1. 找到并选择您解压缩扩展的文件夹。
-1. 完成后，扩展应出现在已安装扩展的列表中。
+6. 找到并选择您解压缩扩展的文件夹。
+7. 完成后，扩展应出现在已安装扩展的列表中。
 
 ![](919a2eab-1651-4b48-8980-b69346d700fd.png)
 
@@ -77,7 +79,7 @@ sidebar_position: 0
 
 ![](extension.example.png)
 
-:::info 信息！
+:::info！
 
 您可能需要重新加载带有验证码的页面以使更改生效！
 
@@ -97,7 +99,7 @@ sidebar_position: 0
 
 ![](blacklist-control.png)
 
-域名必须与协议（https://或http://）一起指定。
+域名必须与协议（https:// 或 http://） 一起指定。
 您可以使用通配符：
 
 - ? - 代表除句点以外的任何字符

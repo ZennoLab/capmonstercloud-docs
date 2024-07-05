@@ -1,33 +1,33 @@
----
+﻿---
 sidebar_position: 14
 sidebar_label: DataDome
 ---
 
 # DataDome
 
-This type of captcha basically requires the user to solve a puzzle by moving a slider to confirm. 
+这种验证码基本上要求用户通过移动滑块来解决拼图以进行确认。
 
 ![](datadome.png)
 
-:::warning **Attention!**
-This task will be performed using our proxy servers. Use the received cookies in your project to automatically pass the captcha.
+:::warning **注意！**
+此任务将使用我们的代理服务器执行。请在您的项目中使用收到的 Cookie 自动通过验证码。
 :::
 
-## **Object structure**
+## **对象结构**
 
-|**Parameter**|**Type**|**Required**|**Value**|
+|**参数**|**类型**|**必需**|**值**|
 | :-: | :-: | :-: | :- | 
-|type|String|yes|**CustomTask**|
-|class|String|yes|**DataDome**|
-|websiteURL|String|yes|Address of the main page where the captcha is solved.|
-|metadata.htmlPageBase64|String|yes (if metadata.captchaUrl is not filled)|Object that contains additional data about the captcha: `"htmlPageBase64": "..."` - a base64 encoded html page that comes with a 403 code and a Set-Cookie: datadome="..." header in response to a get request to the target site.|
-|metadata.captchaUrl|String|yes (if metadata.htmlPageBase64 is not filled)|`"captchaUrl"` - link to the captcha. Usually it looks like this: `"https://geo.captcha-delivery.com/captcha/?initialCid=..."`.|
-|metadata.datadomeCookie|String|yes|Your cookies from datadome. You can get it on the page using "document.cookie" or in the Set-Cookie request header: "datadome=..." (see example request /createTask)|
-|userAgent|String|no|Browser User-Agent.<br /> **Pass only the actual UA from Windows OS. Now this is version 126**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36`|
+|type|String|是|**CustomTask**|
+|class|String|是|**DataDome**|
+|websiteURL|String|是|解决验证码的主页面地址。|
+|metadata.htmlPageBase64|String|是（如果 metadata.captchaUrl 未填写）|包含验证码附加数据的对象：`"htmlPageBase64": "..."` - 一个 base64 编码的 HTML 页面，在对目标站点的 GET 请求响应中带有 403 状态码和 Set-Cookie: datadome="..." 头。|
+|metadata.captchaUrl|String|是（如果 metadata.htmlPageBase64 未填写）|`"captchaUrl"` - 验证码链接。通常看起来像这样：`"https://geo.captcha-delivery.com/captcha/?initialCid=..."`。|
+|metadata.datadomeCookie|String|是|您的 datadome Cookie。您可以在页面上使用 "document.cookie" 获取，或在 Set-Cookie 请求头中获取："datadome=..."（参见示例请求 /createTask）|
+|userAgent|String|否|浏览器的 User-Agent。<br /> **仅传递来自 Windows 操作系统的实际 UA。现在是**： `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36`|
 
-## **Request example on a real website**
+## **真实网站上的请求示例**
 
-**Address:** 
+**地址：**
 ```http
 https://api.capmonster.cloud/createTask
 ```
@@ -39,7 +39,7 @@ https://api.capmonster.cloud/createTask
         "type": "CustomTask",
         "class": "DataDome",
         "websiteURL": "https://www.leboncoin.fr/",
-        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
         "metadata": {
             "htmlPageBase64": "PGh0bWw+PGhlYWQ+PHRpdGxlPmJs...PC9odG1sPg==",
             "datadomeCookie": "datadome=VYUWrgJ9ap4zmXq8Mgbp...64emvUPeON45z"
@@ -48,7 +48,7 @@ https://api.capmonster.cloud/createTask
 }
 ```
 
-**Response example**
+**响应示例**
 
 ```json
 {
@@ -57,10 +57,10 @@ https://api.capmonster.cloud/createTask
 }
 ```
 
-## **Getting result**
-Use the [getTaskResult](../api/methods/get-task-result.md) method to get the DataDome solution.
+## **获取结果**
+使用 [getTaskResult](../api/methods/get-task-result.md) 方法获取 DataDome 的解决方案。
 
-**Response example:**
+**响应示例：**
 
 ```json
 {

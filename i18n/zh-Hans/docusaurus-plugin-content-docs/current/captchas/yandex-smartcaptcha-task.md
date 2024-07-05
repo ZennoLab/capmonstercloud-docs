@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 13
 sidebar_label: YandexSmartCaptchaTask
 draft: true
@@ -7,74 +7,74 @@ draft: true
 # YandexSmartCaptchaTask
 
 :::info
-Please note that this captcha is divided into two types: 
+请注意，此验证码分为两种类型：
 
-1. Yandex services
+1. Yandex 服务
 
-2. External websites
+2. 外部网站
 
-Methods for solving these types are **different**.
+解决这些类型的方法是**不同的**。
 :::
 
-## SmartCaptcha on Yandex services
+## Yandex 服务上的智能验证码
 
-This type of captcha opens on a separate page (for example, https://ya.ru/showcaptcha?…).
+这种类型的验证码会在单独的页面上打开（例如，https://ya.ru/showcaptcha?…）。
 
 <details>
-    <summary>Example</summary>
+    <summary>示例</summary>
 
 ![](appearance.png)
 </details>
 
-To create a request for solving this type of captcha, you’ll need the following data:
+要创建解决此类验证码的请求，您需要以下数据：
 
-|**Parameter**|**Type**|**Required**|**Meaning**|
+|**参数**|**类型**|**必需**|**含义**|
 | :- | :- | :- | :- | 
-|type|String|yes|**YandexSmartCaptchaTaskProxyless**|
-|websiteURL|String|yes|The address of the page, where the captcha is solved. For example, https://ya.ru/showcaptcha?…|
-|websiteKey|String|yes|**yandex**|
-|htmlPageBase64|String|yes|Base64 emcoded html page with captcha.|
-|userAgent|String|yes|UA from Chromium browser.|
+|type|String|是|**YandexSmartCaptchaTaskProxyless**|
+|websiteURL|String|是|解决验证码的页面地址。例如，https://ya.ru/showcaptcha?…|
+|websiteKey|String|是|**yandex**|
+|htmlPageBase64|String|是|包含验证码的 HTML 页面的 Base64 编码。|
+|userAgent|String|是|来自 Chromium 浏览器的用户代理。|
 
-In response, you will receive the following object:
+作为响应，您将收到以下对象：
 
-|**Parameter**|**Type**|**Description**|
+|**参数**|**类型**|**描述**|
 | :- | :- | :- | 
-|cookies|Object|This property contains an object with cookies that you need to set in your browser or in request headers. At the moment, these are only “spravka” cookies.|
-|redirectedUrl|String|The URL you will need to go to with the set cookies. Use it. It usually contains the page you initially requested.|
-|referrer|String|Referrer, that **MUST** be used when going to redirected URL.|
+|cookies|Object|此属性包含一个对象，其中包含您需要在浏览器或请求头中设置的 cookie。目前仅包括 “spravka” cookies。|
+|redirectedUrl|String|您需要使用设置的 cookie 前往的 URL。使用它。通常包含您最初请求的页面。|
+|referrer|String|在访问重定向 URL 时**必须**使用的引荐页。
 
-## SmartCaptcha on external websites
+## 外部网站上的智能验证码
 
-It looks like many other types of captchas. Simple vidget with checkbox:
+它看起来像许多其他类型的验证码。简单的带复选框的小部件：
 
 <details>
-    <summary>Example</summary>
+    <summary>示例</summary>
 
 ![](appearance-ext-web.png)
 </details>
 
-This type of captcha is perfectly solved via token. The request to solve such a captcha looks quite ordinary:
+这种类型的验证码可以通过令牌完美解决。解决此类验证码的请求看起来非常普通：
 
-|**Parameter**|**Type**|**Required**|**Meaning**|
+|**参数**|**类型**|**必需**|**含义**|
 | :- | :- | :- | :- |
-|type|String|yes|YandexSmartCaptchaTaskProxyless|
-|websiteURL|String|yes|The address of the page where the captcha is solved.|
-|websiteKey|String|yes|Sitekey with which the captcha is rendered. In most cases, it is taken from the page code.|
+|type|String|是|YandexSmartCaptchaTaskProxyless|
+|websiteURL|String|是|解决验证码的页面地址。|
+|websiteKey|String|是|网站密钥，用于渲染验证码。在大多数情况下，从页面代码中获取。|
 
-Response:
+响应：
 
-|**Property**|**Type**|**Description**|
+|**属性**|**类型**|**描述**|
 | :- | :- | :- |
-|token|String|Insert the value of the token into the smart-token field on the captcha page.|
+|token|String|将令牌的值插入到验证码页面上的智能令牌字段中。|
 
-## Request examples
+## 请求示例
 
-### Yandex services
+### Yandex 服务
 
-**Create a request:**
+**创建请求：**
 
-:::info Method
+:::info 方法
 ```http
 https://api.capmonster.cloud/createTask
 ```
@@ -93,7 +93,7 @@ https://api.capmonster.cloud/createTask
 }
 ```
 
-Response:
+响应：
 
 ```json
 {
@@ -102,9 +102,9 @@ Response:
 }
 ```
 
-**Result**
+**结果**
 
-Use the [getTaskResult](../api/methods/get-task-result.md) method to get the solution.
+使用[getTaskResult](../api/methods/get-task-result.md)方法获取解决方案。
 
 ```json
 {
@@ -113,7 +113,7 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the sol
 }
 ```
 
-Response:
+响应：
 
 ```json
 {
@@ -131,11 +131,11 @@ Response:
 }
 ```
 
-### External websites
+### 外部网站
 
-**Create a request:**
+**创建请求：**
 
-:::info Method
+:::info 方法
 ```http
 https://api.capmonster.cloud/createTask
 ```
@@ -152,7 +152,7 @@ https://api.capmonster.cloud/createTask
 }
 ```
 
-Response:
+响应：
 
 ```json
 {
@@ -161,9 +161,9 @@ Response:
 }
 ```
 
-**Result**
+**结果**
 
-Use the [getTaskResult](../api/methods/get-task-result.md) method to get the solution.
+使用[getTaskResult](../api/methods/get-task-result.md)方法获取解决方案。
 
 ```json
 {
@@ -172,7 +172,7 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the sol
 }
 ```
 
-Response:
+响应：
 
 ```json
 {

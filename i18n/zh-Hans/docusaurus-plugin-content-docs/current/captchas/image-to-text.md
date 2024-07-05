@@ -5,23 +5,23 @@ sidebar_label: ImageToTextTask
 
 # ImageToTextTask
 
-This is a regular captcha, which is an image with text to be entered into the corresponding line. 
+这是常规验证码，即包含文本的图片，需要输入相应的文本。
 
 ![](text-captcha-2.png)
 
-## **Object structure**
+## **对象结构**
 
-|**Parameter**|**Type**|**Required**|**Possible values**|**Description**|
+|**参数**|**类型**|**必填**|**可能的值**|**描述**|
 | :-: | :-: | :-: | :-: | :-: |
-|type|String|yes|**ImageToTextTask**|Defines the type of the task.|
-|body|String|yes|-|File body encoded in base64*. Make sure to send it without line breaks.|
-|CapMonsterModule|String|no|yandex, special and others|The name of recognizing module, for example, “yandex“. Alternative way to pass module name and list of all available modules you can find [here](../api/module-name.md).|
-|recognizingThreshold|Int|no|0-100|Captcha recognition threshold with a possible value from 0 to 100. For example, if recognizingThreshold was set to 90 and the task was solved with a confidence of 80, you won't be charged. In this case the user will get a response ERROR_CAPTCHA_UNSOLVABLE.|
-|Case|Boolean|no|true, false|true - if captcha is case sensitive.|
-|numeric|Int|no|0, 1|1 - if captcha contains numbers only.|
-|math|Boolean|no|true, false|false — undefined;<br />true — if captcha requires a mathematical operation (for example: captcha 2 + 6 = will return a value of 8).|
+|type|String|是|**ImageToTextTask**|定义任务类型。|
+|body|String|是|-|以base64编码的文件主体。确保发送时没有换行符。|
+|CapMonsterModule|String|否|yandex, special 等|识别模块的名称，例如“yandex”。可以通过[这里](../api/module-name.md)找到模块名称及所有可用模块的列表。|
+|recognizingThreshold|Int|否|0-100|验证码识别阈值，可取值范围为0到100。例如，如果将 recognizingThreshold 设置为90，并且任务以80的置信度解决，则不会收费。在这种情况下，用户会收到 ERROR\_CAPTCHA\_UNSOLVABLE 的响应。|
+|Case|Boolean|否|true, false|true - 如果验证码区分大小写。|
+|numeric|Int|否|0, 1|1 - 如果验证码仅包含数字。|
+|math|Boolean|否|true, false|false — 未定义；<br />true — 如果验证码需要数学操作（例如：验证码 2 + 6 = 将返回值 8）。|
 
-*Base64 is a data encoding method that allows you to represent binary data as text. Here is an example of obtaining a captcha image in base64 format using the console in the *Developer Tools*:
+Base64 是一种数据编码方法，允许将二进制数据表示为文本。以下是使用*开发者工具*中的控制台获取验证码图像的 base64 格式的示例：
 
 ```
 const captchaUrl = 'https://example.com/captcha.jpg';
@@ -35,12 +35,12 @@ function loadAndEncodeCaptchaToBase64(url) {
 
             reader.onloadend = function() {
                 const base64Data = reader.result;                
-                console.log('Base64 Encoded Captcha:', base64Data);
+                console.log('Base64 编码的验证码:, base64Data);
 
                           };
         })
         .catch(error => {
-            console.error('Error occurred while loading or encoding the captcha:', error);
+            console.error('加载或编码验证码时出错:', error);
         });
 }
 
@@ -49,9 +49,9 @@ loadAndEncodeCaptchaToBase64(captchaUrl);
 ```
 
 
-## **Request example**
+## **请求示例**
 
-:::info Method
+:::info 方法
 ```http
 https://api.capmonster.cloud/createTask
 ```
@@ -67,7 +67,7 @@ https://api.capmonster.cloud/createTask
 ```
 
 
-**Response example**
+**响应示例**
 ```json
 {
   "errorId":0,
@@ -75,20 +75,21 @@ https://api.capmonster.cloud/createTask
 }
 ```
 
-## **Getting the result**
-:::info Method
-```http
+## **获取结果**
+:::info 方法
+~~~ http
 https://api.capmonster.cloud/getTaskResult
-```
+~~~
+
 :::
-Use the [getTaskResult](../api/methods/get-task-result.md) method to get the captcha solution. Depending on the system load, you will receive an answer within an interval from 300ms to 6s
+使用[getTaskResult](../api/methods/get-task-result.md)方法获取验证码的解决方案。根据系统负载，您将在300毫秒到6秒的时间范围内收到答案。
 
-|**Property**|**Type**|**Description**|
+|**属性**|**类型**|**描述**|
 | :-: | :-: | :-: |
-|text|String|Captcha answer|
+|text|String|验证码答案|
 
-**Example:**
-```json
+**示例：**
+```http
 {
   "errorId":0,
   "status":"ready",

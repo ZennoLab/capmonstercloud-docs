@@ -1,30 +1,30 @@
----
+﻿---
 sidebar_position: 16
 sidebar_label: AmazonTask
 ---
 
-# AmazonTask | AWS WAF Captcha and Challenge
-Solving CAPTCHA and challenge in AWS WAF
-:::warning **Warning!**
-This task will be performed using our proxy servers. 
+# AmazonTask | AWS WAF 验证码与挑战
+解决 AWS WAF 中的验证码和挑战
+:::warning **警告！**
+此任务将使用我们的代理服务器执行。
 :::
-## **Object structure**
-|**Parameter**|**Type**|**Mandatory**|**Value**|
-| :-: | :-: | :-: | :- | 
-|type|String|yes|**AmazonTaskProxyless**|
-|websiteURL|String|yes|The address of the main page where captcha is solved.|
-|challengeScript|String|yes|Link to challenge.js (see description below the table)|
-|captchaScript|String|yes|Link to captcha.js (see description below the table)|
-|websiteKey|String|yes|A string that can be retrieved from an html page with a captcha or with javascript by executing the `window.gokuProps.key`|
-|context|String|yes|A string that can be retrieved from an html page with a captcha or with javascript by executing the `window.gokuProps.context`|
-|iv|String|yes|A string that can be retrieved from an html page with a captcha or with javascript by executing the `window.gokuProps.iv`|
-|cookieSolution|Boolean|no|By default **false**. If you need to use cookies "aws-waf-token", specify the value **true**. Otherwise, what you will get in return is "captcha_voucher" and "existing_token".|
-### How to get websiteKey, context, iv and challengeScript parameters
-When you go to a website, you get a 405 response and an html page with a captcha. It is from this page that you can get all the parameters:
-![](aws1.png) 
-![](aws2.png) 
-## **Request example**
-:::info Method
+## **对象结构**
+|**参数**|**类型**|**必填**|**值**|
+| :-: | :-: | :-: | :- |
+|type|String|是|**AmazonTaskProxyless**|
+|websiteURL|String|是|T解决验证码的主页地址。|
+|challengeScript|String|是|challenge.js 的链接（请参阅表格下方的描述）。|
+|captchaScript|String|是|captcha.js 的链接（请参阅表格下方的描述）。|
+|websiteKey|String|是|可以从带有验证码的 HTML 页面或通过执行 `window.gokuProps.key`的 JavaScript 脚本中检索到的字符串。|
+|context|String|是|可以从带有验证码的 HTML 页面或通过执行 `window.gokuProps.context`的 JavaScript 脚本中检索到的字符串。|
+|iv|String|是|可以从带有验证码的 HTML 页面或通过执行 `window.gokuProps.iv`的 JavaScript 脚本中检索到的字符串。|
+|cookieSolution|Boolean|否|默认为 **false**。如果需要使用名为 "aws-waf-token" 的 cookie，请指定值为 **true**。否则，您将得到 "captcha_voucher" 和 "existing_token"。
+### 如何获取 websiteKey、context、iv 和 challengeScript 参数
+当您访问一个网站时，您可能会收到一个 405 响应和一个带有验证码的 HTML 页面。您可以从这个页面获取所有参数： 
+![](aws1.png)
+![](aws2.png)
+## **请求示例**
+:::info 方法
 ```http
 https://api.capmonster.cloud/createTask
 ```
@@ -44,22 +44,22 @@ https://api.capmonster.cloud/createTask
     }
 }
 ```
-**Answer example**
+**响应示例**
 ```json
 {
     "errorId":0,
     "taskId":407533072
 }
 ```
-## **Obtaining the result**
-:::info Method
+## **获取结果**
+:::info 方法
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
 :::
-Use the [getTaskResult](../api/methods/get-task-result.md) method to get the AmazonTask solution.
+使用[getTaskResult](../api/methods/get-task-result.md)方法获取 AmazonTask 的解决方案。
 
-**Answer example:**
+**响应示例：**
 ```json
 {
     "errorId":0,

@@ -4,37 +4,37 @@ sidebar_label: TurnstileTask
 ---
 
 # TurnstileTask | Cloudflare Challenge
-All Turnstile subtypes are automatically supported: manual, non-interactive, and invisible. Therefore, there is no need to specify a subtype for a regular captcha. 
+所有 Turnstile 子类型都会自动支持：手动、非交互式和隐形。因此，对于常规验证码，无需指定子类型。
 
-:::caution Attention!
-Check out all three options of captcha recognition and choose the most convenient one for you.
+:::caution 注意！
+请查看所有三个验证码识别选项，并选择最适合您的选项。
 :::
-## Option 1 (Turnstile)
-You are required to solve a regular turnstile captcha, as here. Note that the CAPTCHA on CloudFlare pages may look identical. Learn more about how to distinguish between a regular Turnstile and a Cloudflare Challenge at the end of the article.
-#### **Object structure**
-|**Parameter**|**Type**|**Required**|**Value**|
+## 选项 1（Turnstile）
+您需要解决一个常规的 Turnstile 验证码，就像这里一样。请注意，CloudFlare 页面上的验证码可能看起来相同。了解如何区分常规 Turnstile 和 Cloudflare Challenge 的更多信息，请参阅本文末尾。
+#### **对象结构**
+|**参数**|**类型**|**必需**|**值**|
 | :- | :- | :- | :- |
-|type|String|yes|**TurnstileTaskProxyless**|
-|websiteURL|String|yes|The page address, where the captcha is solved|
-|websiteKey|String|yes|Turnstile key|
-|pageAction|String|no|The `action` field that can be found in the callback function to load the captcha|
+|type|String|是|**TurnstileTaskProxyless**|
+|websiteURL|String|是|解决验证码的页面地址|
+|websiteKey|String|是|Turnstile 密钥|
+|pageAction|String|否|可以在加载验证码的回调函数中找到的 `action` 字段|
 
-## Option 2 (CloudFlare)
-You are working through a browser and you need to get a token to pass CloudFlare.
-#### **Object structure**
-|**Parameter**|**Type**|**Required**|**Value**|
+## 选项 2（CloudFlare）
+您正在通过浏览器工作，需要获取一个令牌来通过 CloudFlare。
+#### **对象结构**
+|**参数**|**类型**|**必需**|**值**|
 | :- | :- | :- | :- |
-|type|String|yes|**TurnstileTaskProxyless**|
-|websiteURL|String|yes|Address of the page where the captcha is solved|
-|websiteKey|String|yes|Turnstile key|
-|cloudflareTaskType|String|yes|**token**|
-|userAgent|String|yes|Browser User-Agent.<br /> **Pass only the actual UA from Windows OS. Now this is version 126**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36`|
-|pageAction|String|yes|The `action` field can be found in the callback function to load the captcha. If cloudflareTaskType is used, the `action` is usually "managed" or "non-interactive".|
-|data|String|yes|The value of the data field can be taken from the `cData` parameter.|
-|pageData|String|yes|The value of the pageData field can be taken from the `chlPageData` parameter.|
-It is not necessary to pass a proxy to get the token.
+|type|String|是|**TurnstileTaskProxyless**|
+|websiteURL|String|是|解决验证码的页面地址|
+|websiteKey|String|是|Turnstile 密钥|
+|cloudflareTaskType|String|是|**token**|
+|userAgent|String|是|浏览器 User-Agent。<br /> **仅传递来自 Windows 操作系统的实际 UA。现在是**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36`|
+|pageAction|String|是|在加载验证码的回调函数中可以找到的 `action` 字段。如果使用 cloudflareTaskType，则 `action` 通常为 "managed" 或 "non-interactive"。|
+|data|String|是|data 字段的值可以从 `cData` 参数中获取。|
+|pageData|String|是|pageData 字段的值可以从 `chlPageData` 参数中获取。|
+获取令牌时不需要传递代理。
 
-These parameters are in the object that is passed during captcha creation to the function `window.turnstile.render(el, paramsObj)`. You can get them, for example, by executing JavaScript before loading other scripts:
+这些参数位于在创建验证码时传递给函数 `window.turnstile.render(el, paramsObj)` 的对象中。您可以通过在加载其他脚本之前执行 JavaScript 来获取它们，例如：
 
 ```js
 (function () {
@@ -58,37 +58,37 @@ These parameters are in the object that is passed during captcha creation to the
 })();
 ```
 
-When calling `window.turnstile.render(el, paramsObj)` the captcha on the page is loaded, and if successful, a `callback` function is called to pass information about the solution.
+调用 `window.turnstile.render(el, paramsObj)` 时，页面上的验证码将被加载，如果成功，将调用一个 `callback` 函数来传递有关解决方案的信息。
 
 `window.turnstile.render(el, paramsObj):`
 
-`el`: The DOM element to insert the captcha into.
+`el`：要插入验证码的 DOM 元素。
 
-`paramsObj`: A params object containing information about the captcha and instructions for solving it. This object usually contains fields such as
-*sitekey*, *action*, *cData*, *chlPageData*, *callback*. 
+`paramsObj`：包含有关验证码和解决方案指令的参数对象。此对象通常包含诸如 
+*sitekey*、*action*、*cData*、*chlPageData*、*callback* 等字段。
 
-`callback` – is a callback function after the captcha is successfully passed.
+`callback` – 是一个在成功通过验证码后调用的回调函数。
 
-## Option 3 (CloudFlare)
-You are working using queries, and you need cf_clearance cookies. It is required that you need your proxies.
-#### **Object structure**
-|**Parameter**|**Type**|**Required**|**Value**|
+## 选项 3（CloudFlare）
+您正在通过查询工作，并且需要 cf\_clearance cookies。您需要使用代理。
+#### **对象结构**
+|**参数**|**类型**|**必填**|**值**|
 | :- | :- | :- | :- |
-|type|String|yes|**TurnstileTask**|
-|websiteURL|String|yes|Address of the page on which the captcha is solved|
-|websiteKey|String|yes|Turnstile key (you can pass any string)|
-|cloudflareTaskType|String|no|**cf_clearance**|
-|htmlPageBase64|String|yes|Base64 encoded html page **"Just a moment"** which is given with code 403 when accessing a site with this protection.<br/> Example of obtaining a string htmlPageBase64: *<br/>var htmlContent = document.documentElement.outerHTML;<br/>var htmlBase64 = btoa(unescape(encodeURIComponent(htmlContent)));<br/>console.log(htmlBase64);*|
-|userAgent|String|yes|Browser User-Agent.<br /> **Pass only the actual UA from Windows OS. Now this is version 126**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36`|
-|proxyType|String|yes|**http** - normal http/https proxy<br/>**https** - try this option only if "http" doesn't work (required for some custom proxies)<br/>**socks4** - socks4 proxy<br/>**socks5** - socks5 proxy|
-|proxyAddress|String|yes|IP address of the IPv4/IPv6 proxy. Not allowed:<br/>- use of hostnames<br/>- use of transparent proxies (where you can see client IP)<br/>- use of proxies on local machines|
-|proxyPort|Integer|yes|Proxy Port|
-|proxyLogin|String|yes|Proxy server login|
-|proxyPassword|String|yes|Proxy server password|
+|type|String|是|**TurnstileTask**|
+|websiteURL|String|是|解决验证码的页面地址|
+|websiteKey|String|是|Turnstile 密钥（可以传递任意字符串）|
+|cloudflareTaskType|String|否|**cf\_clearance**|
+|htmlPageBase64|String|是|Base64 编码的 html 页面**"Just a moment"**，在访问受此保护的站点时返回代码 403。<br/> 获取 htmlPageBase64 的示例：*<br/>var htmlContent = document.documentElement.outerHTML;<br/>var htmlBase64 = btoa(unescape(encodeURIComponent(htmlContent)));<br/>console.log(htmlBase64);*|
+|userAgent|String|是|浏览器 User-Agent。<br /> **仅传递来自 Windows 操作系统的实际 UA。当前版本为 126**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36`|
+|proxyType|String|是|**http** - 普通的 http/https 代理<br/>**https** - 如果 "http" 不起作用，请尝试此选项（适用于某些自定义代理）<br/>**socks4** - socks4 代理<br/>**socks5** - socks5 代理|
+|proxyAddress|String|是|IPv4/IPv6 代理的 IP 地址。不允许：<br/>- 使用主机名<br/>- 使用透明代理（可以看到客户端 IP）<br/>- 在本地机器上使用代理|
+|proxyPort|Integer|是|代理端口|
+|proxyLogin|String|是|代理服务器登录|
+|proxyPassword|String|是|代理服务器密码|
 
-## Examples of requests
-### **Option 1: Normal Turnstile**
-:::info METHOD
+## 请求示例
+### **选项 1: 普通 Turnstile**
+:::info 方法
 ```http
 https://api.capmonster.cloud/createTask
 ```
@@ -104,7 +104,7 @@ https://api.capmonster.cloud/createTask
     }
 }
 ```
-**Example response**
+**示例响应**
 ```json
 {
   "errorId":0,
@@ -112,8 +112,8 @@ https://api.capmonster.cloud/createTask
 }
 ```
 
-### **Option 2. CloudFlare (token)**
-:::info METHOD
+### **选项 2.CloudFlare（token）**
+:::info 方法
 ```http
 https://api.capmonster.cloud/createTask
 ```
@@ -126,21 +126,21 @@ https://api.capmonster.cloud/createTask
 		"websiteURL": "https://site.com",
 		"websiteKey": "0x4AAAAAAADnPIDROrmt1Wwj",
 		"cloudflareTaskType": "token",
-		"userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+		"userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
 		"pageAction": "managed",
 		"pageData": "HUHDWUHuhuwfiweh32..uh2uhuhyugYUG=",
 		"data": "874291f4retD1366"
 	}
 }
 ```
-### Option 3. CloudFlare(cookie)
-:::info METHOD
+### 选项 3.CloudFlare（cookie）
+:::info 方法
 ```http
 https://api.capmonster.cloud/createTask
 ```
 :::
 ```json 
-  {
+{
   "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
   "task": {
     "type":"TurnstileTask",
@@ -148,7 +148,7 @@ https://api.capmonster.cloud/createTask
     "websiteKey":"xxxxxxxxxx",
     "cloudflareTaskType": "cf_clearance",
     "htmlPageBase64": "PCFET0NUWVBFIGh0...vYm9keT48L2h0bWw+",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
     "proxyType":"http",
     "proxyAddress":"8.8.8.8",
     "proxyPort":8080,
@@ -158,53 +158,53 @@ https://api.capmonster.cloud/createTask
 }
 ```
 
-## **GetTaskResult**
-Use the [getTaskResult](../api/methods/get-task-result.md) method to get the Turnstile solution. Depending on the system load, you will get a response after a time in the range of 5 to 20s.
+## **获取任务结果**
+使用 [getTaskResult](../api/methods/get-task-result.md) 方法获取 Turnstile 解决方案。根据系统负载情况，您将在 5 到 20 秒内收到响应。
 
-|**Property**|**Type**|**Description**|
+|**属性**|**类型**|**描述**|
 | :- | :- | :- |
-|cf_clearance|String|A special Cloudflare cookie that you can substitute into your browser|
-|token|String|Use a token when calling a callback function|
-## **How to distinguish between a regular Turnstile and a Cloudflare Challenge**
-A Cloudflare challenge can look different.
+|cf_clearance|String|特殊的 Cloudflare cookie，可以用于浏览器中|
+|token|String|在调用回调函数时使用的 token|
+## **如何区分普通 Turnstile 和 Cloudflare Challenge**
+Cloudflare 挑战的外观可能不同。
 
-**Normal variant:**
+**普通变体：**
 
-![](turnstile-simple.png) 
+![](turnstile-simple.png)
 
-**Stylized variants:**
+**风格化变体：**
 
 <figure>
 
 ![](turnstile-stylized.png)
-<figcaption>The challenge is seamlessly integrated into the site itself.</figcaption>
+<figcaption>挑战无缝集成到网站本身。</figcaption>
 
 </figure>
 
 <figure>
 
-![](turnstile-stylized-2.png) 
+![](turnstile-stylized-2.png)
 
-<figcaption>It looks like a regular turnstile CAPTCHA, but it's actually a challenge.</figcaption>
+<figcaption>外观类似于普通 turnstile CAPTCHA，但实际上是一个挑战。</figcaption>
 
 </figure>
 
-To be finally convinced of the presence of Cloudflare, you can open the developer tools, look at the traffic, examine the page code, and see the characteristic signs:
+要最终确认Cloudflare的存在，您可以打开开发者工具，查看网络流量，检查页面代码，并查看以下特征标志：
 
-- The first request to the site returns a 403 code:
+- 第一个对站点的请求返回403状态码：
 
 ![](b61dae70-f056-4257-ab72-05beacb27a0d.png)
 
-- The form with the id **challenge-form** has an **action** attribute (not to be confused with the action from the parameters for turnstile captcha) containing the `__cf_chl_f_tk=` parameter:
+- 具有id为**challenge-form**的表单有一个**action**属性（注意不要与turnstile验证码的参数混淆），其中包含`__cf_chl_f_tk=`参数：
 
 ![](1e4dc39f-0a4a-4c29-a48d-abc7a2ec6380.png)
 
-- The page contains two similar `<script>` tags that create a new value in the `window` object:
+- 页面包含两个类似的`<script>`标签，在`window`对象中创建了一个新的值：
 
-![](gif.gif) 
+![](gif.gif)
 
 <details>
-        <summary>Example of solution implementation using Selenium on Node.js</summary>
+        <summary>使用Node.js上的Selenium实现解决方案示例</summary>
 
 ```js
 
@@ -247,7 +247,7 @@ const chrome = require('selenium-webdriver/chrome');
     });
     `)
 
-    driver.get('SITE WITH CAPTCHA');
+    driver.get('站点网址');
     
 
     const params = await driver.executeScript(`
@@ -312,7 +312,7 @@ const chrome = require('selenium-webdriver/chrome');
       
     }
 
-    //DO SOMETHING
+    //做一些事情
   } finally {
     await driver.quit();
   }

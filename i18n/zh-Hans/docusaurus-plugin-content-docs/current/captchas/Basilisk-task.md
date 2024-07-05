@@ -1,21 +1,21 @@
----
+﻿---
 sidebar_position: 17
 sidebar_label: BasiliskTask
 ---
-# Basilisk - FaucetPay Captcha
-:::warning **Warning!**
-This task will be performed using our proxy servers.
+# Basilisk - FaucetPay 验证码
+:::warning **警告！**
+此任务将使用我们的代理服务器执行。
 :::
-## **Object’s structure**
-|**Parameter**|**Type**|**Required**|**Value**|
+## **对象结构**
+|**参数**|**类型**|**必需**|**值**|
 | :-: | :-: | :-: | :- | 
-|type|String|yes|**CustomTask**|
-|class|String|yes|**Basilisk**|
-|websiteURL|String|yes|The address of the main page where the captcha is solved.|
-|websiteKey|String|yes|Can be found in the html code in the attribute **data-sitekey** of the captcha container or in the payload of a POST request to the `https://basiliskcaptcha.com/challenge/check-site` in the field **site_key**|
-|userAgent|String|no|User-Agent browser. **Pass only the current UA from the Windows operating system. This is currently version 126**: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36`|
-## **Example request**
-**Address:** 
+|type|String|是|**CustomTask**|
+|class|String|是|**Basilisk**|
+|websiteURL|String|是|解决验证码的主页地址。|
+|websiteKey|String|是|可以在验证码容器的**data-sitekey**属性中或在向 `https://basiliskcaptcha.com/challenge/check-site`发送的 POST 请求的 **site\_key**字段中找到。|
+|userAgent|String|否|User-Agent 浏览器。**仅传递来自 Windows 操作系统的当前 UA。现在是**： `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36`|
+## **请求示例**
+**地址：**
 ```http
 https://api.capmonster.cloud/createTask
 ```
@@ -31,16 +31,16 @@ https://api.capmonster.cloud/createTask
    }
 }
 ```
-**Example response**
+**响应示例**
 ```json
 {
    "errorId":0,
    "taskId":407533072
 }
 ```
-## **Getting the result**
-Use the method [getTaskResult](../api/methods/get-task-result.md), to get the Basilisk solution.
-**Example response:**
+## **获取结果**
+使用方法[getTaskResult](../api/methods/get-task-result.md)获取Basilisk解决方案。
+**响应示例：**
 ```json
 {
    "errorId":0,
@@ -50,7 +50,7 @@ Use the method [getTaskResult](../api/methods/get-task-result.md), to get the Ba
            "captcha_response": "5620301f30daf284b829fba66fa9b3d0"
        },
        "headers": {
-           "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+           "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
        }
    }
 }

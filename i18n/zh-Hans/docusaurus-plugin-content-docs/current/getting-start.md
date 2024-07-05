@@ -1,36 +1,36 @@
-﻿---
+---
 sidebar_position: 0
 ---
 
-# Getting Started
+# 入门
 
-In this section you can learn how to send captchas to CapMonster Cloud and methods for recognizing them.
+在本节中，您可以了解如何将验证码发送到 CapMonster Cloud 以及识别它们的方法。
 
-:::info Method address
+:::info 方法地址
 ```http
 https://api.capmonster.cloud
 ```
-Request format: `JSON POST`.
-Response is always in the `JSON` format.
+请求格式： `JSON POST`。
+响应始终采用`JSON`格式。
 :::
 
 
-**To solve a captcha, you need:**
+**要解决验证码，您需要：**
 
-1. Create captcha task via [createTask](api/methods/create-task.md) method which will return task ID.
-2. Wait for a while. Depending on the system load, you will receive an answer after a time in the range from 300ms to 6s.
-3. Request captcha solution with [getTaskResult](api/methods/get-task-result.md). If captchas are not solved yet, go to step #2. 
+1. 通过[createTask](api/methods/create-task.md)方法创建验证码任务，它将返回任务 ID。
+2. 稍等片刻。根据系统负载情况，您将在 300 毫秒到 6 秒之间收到应答。
+3. 使用[getTaskResult](api/methods/get-task-result.md)请求验证码解决方案。如果验证码尚未解决，请转到步骤2。
 
-Additional method:
+附加方法：
 
-- [Check](api/methods/get-balance.md) account balance.
+- [检查](api/methods/get-balance.md)账户余额。
 
-### Code examples
+### 代码示例
 
-For your convenience, we’ve created ready-made libraries for fast integration the CapMonster.Cloud API into your code. Recognize reCAPTCHA, hCaptcha and other types of captcha at the lowest prices on the market!
+为了您的方便，我们创建了现成的库，以便将 CapMonster.Cloud API 快速集成到您的代码中。以市场最低的价格识别 reCAPTCHA、hCaptcha 和其他类型的验证码！
 
-|**Language**|**Link to the repository**|
-| :- | :- | 
+|**语言**|**链接至存储库**|
+| :- | :- |
 |С#|- [Nuget](https://www.nuget.org/packages/Zennolab.CapMonsterCloud.Client)<br /> - [Github](https://github.com/ZennoLab/capmonstercloud-client-dotnet) |
 |Python|- [PyPl](https://pypi.org/project/capmonstercloudclient/)<br /> - [Github](https://github.com/ZennoLab/capmonstercloud-client-python)|
 |JS|- [Npm](https://www.npmjs.com/package/@zennolab_com/capmonstercloud-client)<br /> - [Github](https://github.com/ZennoLab/capmonstercloud-client-js)|
@@ -39,87 +39,87 @@ For your convenience, we’ve created ready-made libraries for fast integration 
 
 
 
-## Recognition methods
+## 识别方法
 
-There are 2 captcha recognition methods in CapMonster Cloud service:
+CapMonster Cloud 服务中有 2 种验证码识别方法：
 
-1. Token method.
-2. Click method.
+1. 令牌方法。
+2. 点击方法。
 
-The first method (**via token**) is the initial basic method of recognition, where you have to manually search for parameters and functions in the code of the sites pages, and then construct queries using these parameters or script and perform autosubmit to send the token and signal to the site that the captcha has been solved and the correct input needs to be verified. Token is a unique combination of characters, a response from the server that is generated as a result of a successful captcha solution and is used to validate it. Autosubmit - a function that automatically sends the token to the captcha form and confirms the solution. 
+第一种方法（**通过令牌**）是最初的基本识别方法，您必须手动在网站页面的代码中搜索参数和函数，然后使用这些参数或脚本构建查询并执行自动提交以发送令牌并向网站发出信号，表明验证码已被解决并且需要验证正确的输入。令牌是一个独特的字符组合，是验证码解决方案成功后服务器生成的响应，用于验证验证码。自动提交-自动将令牌发送到验证码表单并确认解决方案的功能。
 
-The search parameters are, for example, SiteKey (websiteKey) - a unique identifier that is used to link the captcha and the target site, website URL - the address of the page where the captcha is located. 
+搜索参数例如：SiteKey（websiteKey）——用于链接验证码和目标站点的唯一标识符，网站URL——验证码所在页面的地址。
 
-After analyzing the page code and making a request, the captcha data is sent to the CapMonster Cloud service for recognition. As a result of successful solving, the site that initiated the request receives a token for further sub-mining. The user can use this method in his code, having correctly formulated the task to send to the server, receive the result, and confirm the solution of the captcha. 
+分析页面代码并发出请求后，验证码数据被发送到CapMonster Cloud服务进行识别。成功解答的结果是，发起请求的站点将收到一个代币，用于进一步进行子挖掘。用户可以在其代码中使用此方法，正确制定要发送到服务器、接收结果并确认验证码解决方案的任务。
 
-The second method (**via clicks**) allows complex captchas to be recognized the way a real person does, using real clicks. This proves to the site that the captcha is recognized manually by a human, not a bot. This method is used in a browser extension for Chrome or Firefox. 
+第二种方法（**通过点击**）可以像真人一样通过真实点击来识别复杂的验证码。这就向网站证明，验证码是由人工而不是机器人识别的。此方法用于 Chrome 或 Firefox 的浏览器扩展。
 
-Another important advantage of this method of recognition is that it is not necessary to independently search for parameters to send to the service and perform autosubmit. It is not a secret that at this step you can face a rather serious and time-consuming task (especially for beginners in programming) of searching for parameters and functions in scripts and data in requests, HTML layout of sites, and structure of scripts through which submit (confirmation of captcha solution) is usually implemented.
+这种识别方法的另一个重要优点是，无需独立搜索要发送给服务的参数和执行自动提交。 众所周知，在这一步，您可能面临一项相当严肃且耗时的任务（特别是对于编程初学者而言），即在脚本中搜索参数和函数以及请求中的数据、网站的 HTML 布局以及通常用于实现提交（验证码解决方案的确认）的脚本结构。
 
-This problem is often aggravated by the fact that sites may use different non-standard ways of parameter setting and submit function implementation. For example, if many third-party parameters are used in requests or if these parameters are encrypted. Click method of solution in most cases allows you to bypass such difficulties without additional complex research and experimentation. 
+由于网站可能使用不同的非标准方式设置参数和实现提交功能，这个问题往往变得更加严重。例如请求中使用了较多第三方参数或者这些参数被加密等。在大多数情况下，点击解决方法可以让您绕过此类困难，而无需额外的复杂研究和实验。
 
-There is also a great opportunity to apply the click method in ZennoPoster. To do this, just install our CapMonster Cloud extension (see section [Instructions for installing CapMonster Cloud extension in ProjectMaker browser](extension/install-instruction.md)) into a project with Chromium engine, enter the API key, and use the extension to work with the project in the same way as it is usually done in the Chrome system browser. 
+在 ZennoPoster 中还有一个很好的机会来应用点击方法。为此，只需将我们的 CapMonster Cloud 扩展程序（请参阅[在 ProjectMaker 浏览器中安装 CapMonster Cloud 扩展程序的说明](extension/install-instruction.md)）安装到具有 Chromium 引擎的项目中，输入 API 密钥，然后使用该扩展程序以与通常在 Chrome 系统浏览器中完成的方式相同的方式处理该项目。
 
-## Token submit examples in Zennoposter
+## Zennoposter 中的 Token 提交示例
 
-Using actions:
+使用动作：
 
-1. Integrate CapMonster Cloud into ProjectMaker (Settings - Captchas - Select CapMonster Cloud module, enter your API key);
+1. 将 CapMonster Cloud 集成到 ProjectMaker（设置 - Captchas - 选择 CapMonster Cloud 模块，输入您的 API 密钥）；
 
-2. Add actions Clear Cookies - Go to page (for example, for reCaptcha v.2 captcha type - [https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high](https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high)) - Recognize ReCaptcha;
+2. 添加操作清除 Cookies - 转到页面（例如，对于 reCaptcha v.2 验证码类型 - [https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high](https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high)）  - 识别 ReCaptcha；
 
-3. In the Properties of the Recognize ReCaptcha action, select the CapMonsterCloud.dll module, specify the reCaptcha v.2 captcha type and the method of solving **In tab** or **Via SiteKey**:
+3. 在识别 ReCaptcha 操作的属性中，选择 CapMonsterCloud.dll 模块，指定 reCaptcha v.2 验证码类型以及**在选项卡中**或**通过 SiteKey**解决的方法：
 
 ![](getting-started-1.png)
 
-4. If you choose the **Via SiteKey** method, specify the captcha data (sitekey) and url - address of the page where you want to solve the captcha: 
+4. 如果选择**通过 SiteKey**方法，请指定验证码数据（sitekey）和 url - 您要解决验证码的页面地址：
 
 ![](getting-started-2.png)
 
 ### reCaptcha v.3
 
-1. Add actions Clear cookies - Go to page (e.g. [https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta](https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta)) - Recognize ReCaptcha;
+1. 添加操作清除 cookie - 转到页面（例如 [https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta](https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta)） - 识别 ReCaptcha；
 
-2. In the Properties of the Recognize ReCaptcha action, select the CapMonsterCloud.dll module, specify the reCaptcha v.3 captcha type, the method In Tab or Via SiteKey, also specify Action and minScore:
+2. 在识别 ReCaptcha 操作的属性中，选择 CapMonsterCloud.dll 模块，指定 reCaptcha v.3 验证码类型，方法在 Tab 或 Via SiteKey 中，还指定 Action 和 minScore：
 
 ![](getting-started-3.png)
 
-### hCaptcha 
+### 验证码
 
-1. Add the action "Recognize hCaptcha" to your project, where you have already navigated to the page with the captcha;
+1. 将操作“识别 hCaptcha”添加到您的项目中，您已经导航到带有验证码的页面；
 
-2. In the Properties of the Recognize hCaptcha action, select the In Tab or Via SiteKey method (when selecting this method, you will need to specify the SiteKey and the URL where the captcha is located):
+2. 在识别 hCaptcha 操作的属性中，选择 In Tab 或 Via SiteKey 方法（选择此方法时，您需要指定 SiteKey 和验证码所在的 URL）：
 
 ![](getting-started-4.png)
 
-### Via HTTP requests
+### 通过 HTTP 请求
 
-For some captcha types, there are no ready-made actions in ProjectMaker, in which case you will need to use an extension or compose your queries to solve the captcha. 
+对于某些验证码类型，ProjectMaker 中没有现成的操作，在这种情况下，您需要使用扩展程序或编写查询来解决验证码问题。
 
-1. "Variable Processing" ("Add Action" - "Data" - "Variable Processing"), select "Set Value" in the properties and write your CapMonster Cloud API key in the value.
+1. “变量处理”（“添加操作”-“数据”-“变量处理”），在属性中选择“设置值”，并在值中写入您的 CapMonster Cloud API 密钥。
 
 ![](getting-started-5.png)
 
-2. "Add Action" - "HTTP" - "POST request" (additionally add your proxy values if needed):
+2. “添加操作” - “HTTP” - “POST 请求”（如果需要，另外添加您的代理值）：
 
 ![](getting-started-6.png)
 
-3. Add a "Process JSON/XML" action ("Add action" - "Data" - "Process JSON/XML"), in the properties select "parsing", type "Json" and for right-click parsing text select "Set value from variable": 
+3. 添加“处理 JSON/XML”操作（“添加操作” - “数据” - “处理 JSON/XML”），在属性中选择“解析”，输入“Json”，右键单击解析文本选择“从变量设置值”：
 
 ![](getting-started-7.png)
 
-4. Add "Variable Processing" action, set \{-Json.taskId-\} in it: 
+4. 添加“变量处理”动作，在其中设置\{-Json.taskId-\}：
 
 ![](getting-started-8.png)
 
-5. Generate a new POST request to get the result:
+5. 生成新的POST请求来获取结果：
 
 ![](getting-started-9.png)
 
-6. Add the value "parsing" in the "JSON/XML Processing" action: 
+6. 在“JSON/XML 处理”操作中添加值“解析”：
 
 ![](getting-started-10.png)
 
-7. Next, you need to substitute the token value into the desired captcha form (by examining the page code) using the "Set Value" action, for example: 
+7. 接下来，您需要使用“设置值”操作将令牌值替换为所需的验证码形式（通过检查页面代码），例如：
 
 ![](getting-started-11.png)
