@@ -48,8 +48,8 @@ export default function Libraries() {
   const titleRu = 'Библиотеки для разработчиков';
   const titleEn = 'Libraries for developers';
   const title = i18n.currentLocale === 'ru' ? titleRu : titleEn;
-  const descriptionRu = 'Для вашего удобства мы создали готовые библиотеки для быстрой интеграции API CapMonster Cloud в свой код'
-  const desciptionEn = 'For your convenience, we\'ve created ready-made libraries for quick integrating the CapMonster Cloud API into your code';
+  const descriptionRu = 'Для вашего удобства мы создали готовые библиотеки для быстрой интеграции API BroCapGPT в свой код'
+  const desciptionEn = 'For your convenience, we\'ve created ready-made libraries for quick integrating the BroCapGPT API into your code';
   const desciption = i18n.currentLocale === 'ru' ? descriptionRu : desciptionEn;
   return (
     <section className={styles.libraries}>

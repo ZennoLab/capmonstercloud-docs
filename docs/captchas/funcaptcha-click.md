@@ -21,7 +21,7 @@ sidebar_label: ComplexImageTask Funcaptcha
 ## **Пример запроса**
 :::info Метод
 ```http
-https://api.brocapgpt/createTask
+https://api.brocapgpt.com/createTask
 ```
 :::
 
@@ -35,7 +35,7 @@ https://api.brocapgpt/createTask
     "metadata": {
       "Task": "Pick the image that is the correct way up"
     },
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36."
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36."
   }
 }
 ```
@@ -51,7 +51,7 @@ https://api.brocapgpt/createTask
 ## **Получение результата**
 :::info Метод
 ```http
-https://api.brocapgpt/getTaskResult
+https://api.brocapgpt.com/getTaskResult
 ```
 :::
 Используйте метод [getTaskResult](../api/methods/get-task-result.md) чтобы получить решение капчи. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 300мс до 6 с.

@@ -21,7 +21,7 @@ The object contains data about the FunCaptcha solving.
 ## **Request example**
 :::info Method
 ```http
-https://api.brocapgpt/createTask
+https://api.brocapgpt.com/createTask
 ```
 :::
 
@@ -35,7 +35,7 @@ https://api.brocapgpt/createTask
     "metadata": {
       "Task": "Pick the image that is the correct way up"
     },
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36."
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36."
   }
 }
 ```
@@ -51,7 +51,7 @@ https://api.brocapgpt/createTask
 ## **Getting the results**
 :::info Method
 ```http
-https://api.brocapgpt/getTaskResult
+https://api.brocapgpt.com/getTaskResult
 ```
 :::
 Use the [getTaskResult](../api/methods/get-task-result.md) method to get the captcha solution. Depending on the system load, you will receive a response after a time ranging from 300ms to 6s.
