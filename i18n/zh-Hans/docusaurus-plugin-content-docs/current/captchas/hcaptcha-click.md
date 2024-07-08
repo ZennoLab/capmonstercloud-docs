@@ -1,0 +1,356 @@
+﻿---
+sidebar_position: 8
+sidebar_label: ComplexImageTask HCaptcha
+---
+
+# ComplexImageTask HCaptcha
+
+在ComplexImageTask中，您需要执行诸如在图像上叠加对象、旋转/修改图像中的对象以匹配某些条件、搜索/识别对象等操作。
+
+该对象包含有关解决 hCaptcha 任务的数据。
+ 
+## **创建任务的请求**
+### **发送对象的结构**
+:::info 方法
+```http
+https://api.capmonster.cloud/createTask
+```
+:::
+|**参数**|**类型**|**必需**|**可能的值**|**描述**|
+| :- | :- | :- | :- | :- |
+|type|String|是|ComplexImageTask|定义任务对象类型。|
+|class|String|是|hcaptcha|定义任务对象类。|
+|imageUrls|Array|是（如果 imagesBase64 没有填充）|[ “[https://i.postimg.cc/kg71cbRt/image-1.jpg](https://i.postimg.cc/kg71cbRt/image-1.jpg)”,… ]|图像地址列表。最多 18 个元素。|
+|imagesBase64|Array|是（如果 imageUrls 没有填充）|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”,… ]|以 Base64 格式的图像列表。最多 18 个元素。|
+|metadata.Task|String|是|`请点击熊猫`和其他|任务文本（<u>英文</u>）。|
+|exampleImageUrls|Array|不一定|[ “[https://i.postimg.cc/GmBgwnDm/4type-example-image.png](https://i.postimg.cc/GmBgwnDm/4type-example-image.png)”]|示例图像地址列表。必须包含 1 个元素。|
+|exampleImagesBase64|Array|不一定|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”]|以 Base64 格式的示例图像列表。必须包含 1 个元素。|
+|metadata.Classes|Array|不一定|[ "鲨鱼", "鸡", "山羊", "刺猬" ] 和其他|在验证码右半部分的字符串值列表（与图像中的顺序相同）。|
+|userAgent|String|否|-|加载图像时使用的浏览器 User-Agent，如果将链接传递给 imageUrls。您应该使用现代浏览器的标识，否则Google将返回一个错误，要求您更新浏览器。|
+|websiteURL|String|否|-|解决验证码的页面地址。|
+
+## **获取响应请求**
+:::info 方法
+```http
+https://api.capmonster.cloud/getTaskResult
+```
+:::
+使用 [getTaskResult](../api/methods/get-task-result.md) 方法获取验证码的解决方案。根据系统负载不同，您将在300毫秒到6秒之间收到响应。
+
+### **解决方案对象的结构**
+|**属性**|**类型**|**描述**|
+| :- | :- | :- |
+|answer|Array of objects|对发送的每个图像的答案列表。|
+|metadata.AnswerType|String|返回响应的类型。|
+
+### **网格响应类型**
+|**响应格式**|**响应示例**|**描述**|
+| :- | :- | :- |
+|Array of boolean|`[true, false, true]`|包含布尔值的列表，true - 表示需要点击相应位置的图像。|
+
+**响应示例**
+```json
+{
+  "errorId":0,
+  "status":"ready",
+  "solution": {
+    "answer": [ false, true ],
+    "metadata": { "AnswerType": "Grid" }
+  }
+}
+```
+
+### **坐标响应类型**
+|**响应格式**|**响应示例**|**描述**|
+| :- | :- | :- |
+|Array of objects|`[{ "X":371, "Y":505.0000112 }, { "X":5, "Y":101.2 }]`|包含要点击的对应图像的坐标列表。|
+
+**响应示例**
+```json
+{
+  "errorId":0,
+  "status":"ready",
+  "solution": { 
+    "answer": [ { "X":371, "Y":505.0000112 }, { "X":5, "Y":101.2 } ],
+    "metadata": { "AnswerType": "Coordinate" }
+  }
+}
+```
+
+## **图像示例（第一种类型）**
+
+![](Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.001.png)
+
+:::info 选择正确的任务类型
+此任务类型不包含参考图像，如[第四种类型](#图片示例第四种类型)
+:::
+
+### **请求示例**
+
+:::info 方法
+```http
+https://api.capmonster.cloud/createTask
+```
+:::
+```json
+{
+  "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
+  "task": {
+    "type": "ComplexImageTask",
+    "class": "hcaptcha",
+    "imageUrls":[ "https://i.postimg.cc/kg71cbRt/image-1.jpg", "https://i.postimg.cc/6381Zx2j/image.jpg" ],
+    "metadata": {
+      "Task": "请点击包含山的每个图像"
+    },
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36.",
+    "websiteUrl": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle"
+  }
+}
+```
+
+**响应示例**
+
+```json
+{
+  "errorId":0,
+  "taskId":407533072
+}
+```
+
+### **获取结果**
+:::info 方法
+```http
+https://api.capmonster.cloud/getTaskResult
+```
+
+:::
+接收到的响应类型 - [**Grid**](#网格响应类型)。
+
+**示例：**
+
+```http
+{
+  "errorId":0,
+  "status":"ready",
+  "solution": {
+    "answer": [ false, true ],
+    "metadata": { "AnswerType": "Grid" }
+  }
+}
+```
+
+### **定价**
+
+|**名称**|**每1000张图片的成本, $**|
+| :-: | :-: |
+|hCaptcha|0.02|
+
+## **图像示例（第二种类型）**
+|![](Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.002.png)|![](Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.003.png)|![](Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.004.png)|
+| :-: | :-: | :-: |
+
+:::info 分享参考图像以获得更好的结果
+如果任务头部有图像，则应将其传递到 `exampleImagesBase64` 或 `exampleImageUrls` 参数中
+
+![small-size](reference-example.png)
+
+:::
+
+### **请求示例**
+
+:::info 方法
+```http
+https://api.capmonster.cloud/createTask
+```
+:::
+```json
+{
+  "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
+  "task": {
+    "type": "ComplexImageTask",
+    "class": "hcaptcha",
+    "exampleImagesBase64":[“/9j/4AAQSkZJRgABAQEAAAAAAAD…”, “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, “/9j/4AAQSkZJRgABAQEAAAAAAAD…”],
+    "imagesBase64": [ “/9j/4AAQSkZJRgABAQEAAAAAAAD…” ],
+    "metadata": {
+      "Task": "请点击熊猫"
+    },
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36."
+  }
+}
+```
+
+**响应示例**
+```json
+{
+  "errorId":0,
+  "taskId":407533072
+}
+```
+
+### **获取结果**
+:::info 方法
+```http
+https://api.capmonster.cloud/getTaskResult
+```
+:::
+接收到的响应类型 - [**Coordinate**](#坐标响应类型)。
+
+**示例：**
+```json
+{
+  "errorId":0,
+  "status":"ready",
+  "solution": { 
+    "answer": [ { "X":371, "Y":505.0000112 } ],
+    "metadata": { "AnswerType": "Coordinate" }
+  }
+}
+```
+
+### **定价：**
+
+|**名称**|**每1000张图片的成本, $**|
+| :-: | :-: |
+|hCaptcha|0.02|
+
+## **图像示例（第三种类型）**
+
+![](Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.005.png)
+
+此类型验证码应包含 **metadata.Classes** 字段。
+
+### **请求示例**
+
+:::info 方法
+```http
+https://api.capmonster.cloud/createTask
+```
+:::
+
+```json
+{
+  "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
+  "task": {
+    "type": "ComplexImageTask",
+    "class": "hcaptcha",
+    "imagesBase64": [ “/9j/4AAQSkZJRgABAQEAAAAAAAD…” ],
+    "metadata": {
+      "Task": "下面的图片展示了什么动物？",
+      "Classes": [ "鲨鱼", "鸡", "山羊", "刺猬" ]
+    },
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36."
+  }
+}
+```
+
+**响应示例**
+```json
+{
+  "errorId":0,
+  "taskId":407533072
+}
+```
+
+### **获取结果**
+:::info 方法
+```http
+https://api.capmonster.cloud/getTaskResult
+```
+:::
+接收到的响应类型 - [**Grid**](#网格响应类型)。
+
+**示例：**
+
+```json
+{
+  "errorId":0,
+  "status":"ready",
+  "solution": { 
+    "answer": [ false, false, true, false ],
+    "metadata": { "AnswerType": "Grid" }
+  }
+}
+```
+
+### **定价：**
+
+|**名称**|**每1000张图片的成本, $**|
+| :-: | :-: |
+|hCaptcha|0.02|
+
+## **图片示例（第四种类型）**
+
+![](hcaptcha-task-types/4type.png)
+
+对于这个请求，需要包含 **exampleImageUrls** 或 **exampleImagesBase64** 字段。它应包含一张图片。
+
+**imageUrls** 或 **imagesBase64** 字段应包含9张图片。
+
+### **请求示例**
+
+:::info 方法
+```http
+https://api.capmonster.cloud/createTask
+```
+:::
+
+```json
+{
+  "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
+  "task": {
+    "type": "ComplexImageTask",
+    "class": "hcaptcha",
+    "imageUrls": [
+      "https://i.postimg.cc/bwVVWbkG/4type-00.jpg",
+      "https://i.postimg.cc/nzBdXP57/4type-01.jpg",
+      "https://i.postimg.cc/zf9tXrd8/4type-02.jpg",
+      "https://i.postimg.cc/2yY0hxRt/4type-03.jpg",
+      "https://i.postimg.cc/rFQfRWhh/4type-04.jpg",
+      "https://i.postimg.cc/Jz0PNnvR/4type-05.jpg",
+      "https://i.postimg.cc/h48ygNVR/4type-06.jpg",
+      "https://i.postimg.cc/yY1yXdtk/4type-07.jpg",
+      "https://i.postimg.cc/Prt6qKMp/4type-08.jpg"
+     ],
+    "exampleImageUrls": [ "https://i.postimg.cc/MpLtdwJV/4type-example.jpg" ],
+    "metadata": {
+      "Task": "请选择所有相对于其他图片更暖和的图片"
+    }
+  }
+}
+```
+
+**响应示例**
+```json
+{
+  "errorId":0,
+  "taskId":407533072
+}
+```
+
+### **获取结果**
+:::info 方法
+```http
+https://api.capmonster.cloud/getTaskResult
+```
+:::
+接收到的响应类型 - [**Grid**](#网格响应类型)。
+
+**示例：**
+
+```json
+{
+  "errorId":0,
+  "status":"ready",
+  "solution": { 
+    "answer": [ true, false, false, false, false, true, false, false, true ],
+    "metadata": { "AnswerType": "Grid" }
+  }
+}
+```
+
+### **定价**
+
+|**名称**|**每1000张图片的成本, $**|
+| :-: | :-: |
+|hCaptcha|0.02|
+

@@ -197,7 +197,7 @@ Training takes one day per module.
 
 Don't panic![(wink)](Aspose.Words.aac7548a-0b79-486d-96ce-e145c7faf5a6.015.png) Just wait a bit. 
 
-If nothing changed in a day, [contact support](https://helpdesk.zennolab.com/en) and we will definitely help you.
+If nothing changed in a day, [contact support](https://helpdesk.zennolab.com) and we will definitely help you.
 
 </details>
 
