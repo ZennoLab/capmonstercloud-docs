@@ -1,0 +1,17 @@
+{
+  "heroTitle": "Документация CapMonster Cloud",
+  "heroDescription": "Обширный набор инструкций и рекомендаций, который поможет вам успешно использовать наш продукт для автоматического распознавания капчи и получить максимальную выгоду от его возможностей.",
+  "goText": "Перейти",
+  "linksTitle": "Полезные ссылки",
+  "linkOneTitle": "CapMonster Cloud",
+  "linkOneDescription": "Облачный сервис для автоматического распознавания reCAPTCHA, hCaptcha и других видов капч",
+  "linkTwoTitle": "Расширение для браузера",
+  "linkTwoDescription": "Автоматическое распознавание капч в браузере Chrome в фоновом режиме",
+  "linkThreeTitle": "Техподдержка",
+  "linkThreeDescription": "Техническая поддержка, на которую можно положиться",
+  "libsTitle": "Библиотеки для разработчиков",
+  "libsDescription": "Для вашего удобства мы создали готовые библиотеки для быстрой интеграции API CapMonster Cloud в свой код",
+  "priceTitle": "Цена",
+  "priceSubTitle": "Прокси включены в цену*: экономьте с CapMonster Cloud",
+  "priceSubTooltipText": "За исключением заданий Cloudflare Bot Challenge, Cloudflare Turnstile"
+}

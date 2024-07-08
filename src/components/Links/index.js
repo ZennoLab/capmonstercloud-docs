@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './styles.module.css';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import getLocaleStrings from '../../locales/index';
 
 function Link({title, Svg, image, desciption, linkUrl }) {
   return (
@@ -26,31 +27,29 @@ function Link({title, Svg, image, desciption, linkUrl }) {
 
 export default function Links() {
   const { i18n } = useDocusaurusContext();
-  const isRULocale = i18n.currentLocale === 'ru'
-  const titleRu = 'Полезные ссылки';
-  const titleEn = 'Useful links';
-  const title = isRULocale ? titleRu : titleEn;
-  
+  const { currentLocale } = i18n;
+  const { linksTitle, linkOneTitle, linkOneDescription, linkTwoTitle, linkTwoDescription, linkThreeTitle, linkThreeDescription } = getLocaleStrings(currentLocale);
+  const isRULocale = currentLocale === 'ru';
 
   const LinksList = [
     {
-      title: 'CapMonster Cloud',
+      title: linkOneTitle,
       Svg: require('@site/static/img/CapCloud_icon.svg').default,
-      desciption: isRULocale ? 'Облачный сервис для автоматического распознавания reCAPTCHA, hCaptcha и других видов капч' : 'Cloud service for automatic recognition of reCAPTCHA, hCaptcha and other types of captchas',
+      desciption: linkOneDescription,
       image: isRULocale ? '/img/ru_dashboard.png' : '/img/en_dashboard.png',
       linkUrl: 'https://capmonster.cloud/Dashboard'
     },
     {
-      title: isRULocale ? 'Расширение для браузера' : 'Browser extension',
+      title: linkTwoTitle,
       Svg: require('@site/static/img/Ext_icon.svg').default,
-      desciption: isRULocale ? 'Автоматическое распознавание капч в браузере Chrome в фоновом режиме' : 'Automatic captcha recognition in the Chrome browser in the background',
+      desciption: linkTwoDescription,
       image: isRULocale ? '/img/ru_extension.png' : '/img/en_extension.png',
       linkUrl: 'https://capmonster.cloud/#new-extension-block'
     },
     {
-      title: isRULocale ? 'Техподдержка' : 'Support',
+      title: linkThreeTitle,
       Svg: require('@site/static/img/Sup_icon.svg').default,
-      desciption: isRULocale ? 'Техническая поддержка, на которую можно положиться' : 'Technical support you can rely on',
+      desciption: linkThreeDescription,
       image: isRULocale ? '/img/ru_support.png' : '/img/en_support.png',
       linkUrl: 'https://helpdesk.zennolab.com/conversation/new'
     },
@@ -59,7 +58,7 @@ export default function Links() {
   return (
     <section className={styles.links}>
       <div className="container">
-        <div className={styles.mainTitle}>{title}</div>
+        <div className={styles.mainTitle}>{linksTitle}</div>
 
         <div className={styles.libsBlock}>
           {LinksList.map(link => (

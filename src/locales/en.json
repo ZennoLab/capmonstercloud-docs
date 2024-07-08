@@ -1,0 +1,17 @@
+{
+  "heroTitle": "CapMonster Cloud Documentation",
+  "heroDescription": "A comprehensive set of instructions and recommendations to help you successfully use our automatic captcha recognition tool and get the most out of its features.",
+  "goText": "View",
+  "linksTitle": "Useful links",
+  "linkOneTitle": "CapMonster Cloud",
+  "linkOneDescription": "Cloud service for automatic recognition of reCAPTCHA, hCaptcha and other types of captchas",
+  "linkTwoTitle": "Browser extension",
+  "linkTwoDescription": "Automatic captcha recognition in the Chrome browser in the background",
+  "linkThreeTitle": "Support",
+  "linkThreeDescription": "Technical support you can rely on",
+  "libsTitle": "Libraries for developers",
+  "libsDescription": "For your convenience, we've created ready-made libraries for quick integrating the CapMonster Cloud API into your code",
+  "priceTitle": "Price",
+  "priceSubTitle": "Proxy price inclusions*: save with CapMonster Cloud",
+  "priceSubTooltipText": "Excluding Cloudflare Bot Challenge, Cloudflare Turnstile"
+}
