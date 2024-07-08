@@ -122,6 +122,7 @@ https://api.capmonster.cloud/createTask
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
+
 :::
 Type of received response - [**Grid**](#grid-response-type).
 

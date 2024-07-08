@@ -1,0 +1,74 @@
+﻿---
+sidebar_position: 16
+sidebar_label: AmazonTask
+---
+
+# AmazonTask | AWS WAF 验证码与挑战
+解决 AWS WAF 中的验证码和挑战
+:::warning **警告！**
+此任务将使用我们的代理服务器执行。
+:::
+## **对象结构**
+|**参数**|**类型**|**必填**|**值**|
+| :-: | :-: | :-: | :- |
+|type|String|是|**AmazonTaskProxyless**|
+|websiteURL|String|是|T解决验证码的主页地址。|
+|challengeScript|String|是|challenge.js 的链接（请参阅表格下方的描述）。|
+|captchaScript|String|是|captcha.js 的链接（请参阅表格下方的描述）。|
+|websiteKey|String|是|可以从带有验证码的 HTML 页面或通过执行 `window.gokuProps.key`的 JavaScript 脚本中检索到的字符串。|
+|context|String|是|可以从带有验证码的 HTML 页面或通过执行 `window.gokuProps.context`的 JavaScript 脚本中检索到的字符串。|
+|iv|String|是|可以从带有验证码的 HTML 页面或通过执行 `window.gokuProps.iv`的 JavaScript 脚本中检索到的字符串。|
+|cookieSolution|Boolean|否|默认为 **false**。如果需要使用名为 "aws-waf-token" 的 cookie，请指定值为 **true**。否则，您将得到 "captcha_voucher" 和 "existing_token"。
+### 如何获取 websiteKey、context、iv 和 challengeScript 参数
+当您访问一个网站时，您可能会收到一个 405 响应和一个带有验证码的 HTML 页面。您可以从这个页面获取所有参数： 
+![](aws1.png)
+![](aws2.png)
+## **请求示例**
+:::info 方法
+```http
+https://api.capmonster.cloud/createTask
+```
+:::
+```json
+{
+    "clientKey": "API_KEY",
+    "task": {
+        "type": "AmazonTaskProxyless",
+        "websiteURL": "https://efw47fpad9.execute-api.us-east-1.amazonaws.com/latest",
+        "challengeScript": "https://41bcdd4fb3cb.610cd090.us-east-1.token.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/challenge.js",
+        "captchaScript": "https://41bcdd4fb3cb.610cd090.us-east-1.captcha.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/captcha.js",
+        "websiteKey": "AQIDA...wZwdADFLWk7XOA==",
+        "context": "qoJYgnKsc...aormh/dYYK+Y=",
+        "iv": "CgAAXFFFFSAAABVk",
+        "cookieSolution": true
+    }
+}
+```
+**响应示例**
+```json
+{
+    "errorId":0,
+    "taskId":407533072
+}
+```
+## **获取结果**
+:::info 方法
+```http
+https://api.capmonster.cloud/getTaskResult
+```
+:::
+使用[getTaskResult](../api/methods/get-task-result.md)方法获取 AmazonTask 的解决方案。
+
+**响应示例：**
+```json
+{
+    "errorId":0,
+    "status":"ready",
+    "solution": {
+        "cookies": {
+            "aws-waf-token": "10115f5b-ebd8-45c7-851e-cfd4f6a82e3e:EAoAua1QezAhAAAA:dp7sp2rXIRcnJcmpWOC1vIu+yq/A3EbR6b6K7c67P49usNF1f1bt/Af5pNcZ7TKZlW+jIZ7QfNs8zjjqiu8C9XQq50Pmv2DxUlyFtfPZkGwk0d27Ocznk18/IOOa49Rydx+/XkGA7xoGLNaUelzNX34PlyXjoOtL0rzYBxMAQy0D1tn+Q5u97kJBjs5Mytqu9tXPIPCTSn4dfXv5llSkv9pxBEnnhwz6HEdmdJMdfur+YRW1MgCX7i3L2Y0/CNL8kd8CEhTMzwyoXekrzBM="
+        },
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+    }
+}
+```
