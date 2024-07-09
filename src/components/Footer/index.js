@@ -1,11 +1,13 @@
 import React from 'react';
 import styles from './styles.module.css';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { localesMappings } from '../../locales/index';
 
 export default function Footer() {
   const { i18n } = useDocusaurusContext();
-  const isRULocale = i18n.currentLocale === 'ru'
-  const footerLink = isRULocale ? 'https://capmonster.cloud/footer?culture=ru-RU' : 'https://capmonster.cloud/footer?culture=en-US';
+  const { currentLocale } = i18n;
+
+  const footerLink = `https://capmonster.cloud/footer?culture=${localesMappings[currentLocale] || localesMappings.en}`
 
   return (
     <section className={styles.footerWrap}>
