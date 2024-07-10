@@ -79,7 +79,7 @@ sidebar_position: 0
 
 ![](extension.example.png)
 
-:::info！
+:::info !
 
 您可能需要重新加载带有验证码的页面以使更改生效！
 
