@@ -2,24 +2,21 @@ import React from 'react';
 import styles from './styles.module.css';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { Tooltip } from 'react-tooltip'
+import getLocaleStrings from '../../locales/index';
+import { localesMappings } from '../../locales/index';
 
 export default function Prices() {
   const { i18n } = useDocusaurusContext();
-  const isRULocale = i18n.currentLocale === 'ru'
-  const titleRu = 'Цена';
-  const titleEn = 'Price';
-  const title = isRULocale ? titleRu : titleEn;
-  const priceLink = isRULocale ? 'https://capmonster.cloud/prices?culture=ru-RU' : 'https://capmonster.cloud/prices?culture=en-US';
+  const { currentLocale } = i18n;
+  const { priceTitle, priceSubTitle, priceSubTooltipText } = getLocaleStrings(currentLocale);
 
-  const subTitle = isRULocale ? 'Прокси включены в цену*: экономьте с CapMonster Cloud' : 'Proxy price inclusions*: save with CapMonster Cloud';
-
-  const priceSubTooltipText = isRULocale ? 'За исключением заданий Cloudflare Bot Challenge, Cloudflare Turnstile' : 'Excluding Cloudflare Bot Challenge, Cloudflare Turnstile';
+  const priceLink = `https://capmonster.cloud/prices?culture=${localesMappings[currentLocale] || localesMappings.en}`
 
   return (
     <section className={styles.pricesWrap}>
       <div className="container">
-        <div className={styles.mainTitle}>{title}</div>
-        <div className={`${styles.subTitle} priceSub`}>{subTitle}</div>
+        <div className={styles.mainTitle}>{priceTitle}</div>
+        <div className={`${styles.subTitle} priceSub`}>{priceSubTitle}</div>
         <Tooltip anchorSelect=".priceSub" place="top" style={{ backgroundColor: 'white', color: "#222" }}>
           {priceSubTooltipText}
         </Tooltip>

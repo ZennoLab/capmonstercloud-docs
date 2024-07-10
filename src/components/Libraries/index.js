@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './styles.module.css';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import getLocaleStrings from '../../locales/index';
 
 
 const LibrariesList = [
@@ -59,17 +60,14 @@ function Library({title, Svg, githubLink, customLinkName, customLinkUrl }) {
 
 export default function Libraries() {
   const { i18n } = useDocusaurusContext();
-  const titleRu = 'Библиотеки для разработчиков';
-  const titleEn = 'Libraries for developers';
-  const title = i18n.currentLocale === 'ru' ? titleRu : titleEn;
-  const descriptionRu = 'Для вашего удобства мы создали готовые библиотеки для быстрой интеграции API CapMonster Cloud в свой код'
-  const desciptionEn = 'For your convenience, we\'ve created ready-made libraries for quick integrating the CapMonster Cloud API into your code';
-  const desciption = i18n.currentLocale === 'ru' ? descriptionRu : desciptionEn;
+  const { currentLocale } = i18n;
+  const { libsTitle,libsDescription } = getLocaleStrings(currentLocale);
+
   return (
     <section className={styles.libraries}>
       <div className="container">
-        <div className={styles.mainTitle}>{title}</div>
-        <div className={styles.subTitle}>{desciption}</div>
+        <div className={styles.mainTitle}>{libsTitle}</div>
+        <div className={styles.subTitle}>{libsDescription}</div>
         <div className={styles.libsBlock}>
           {LibrariesList.map(lib => (
             <Library title={lib.title}

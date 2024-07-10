@@ -15,6 +15,7 @@ sidebar_label: Firefox 浏览器扩展
 1. 打开 [Firefox 插件商店](https://addons.mozilla.org/en-US/firefox/addon/capmonster-cloud/)。
 2. 点击 **Add to Firefox**。
 3. 在模态窗口中点击 "Add" 按钮确认添加扩展。
+   
    ![](modal.png)
 
 要开始使用扩展，请点击地址栏右侧的扩展图标。前往 [设置页面](extension-firefox.md#设置)。
