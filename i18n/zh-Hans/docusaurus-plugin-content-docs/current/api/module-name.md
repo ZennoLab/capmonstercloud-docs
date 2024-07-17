@@ -44,11 +44,8 @@ sidebar_position: 5
 <td align="center">![](images\mailru.png)</td>
 </tr>
 <tr>
-<td align="center">ok</td>
-<td rowspan="2" align="center">![](images\ok.png)</td>
-</tr>
-<tr>
-<td align="center">oknew</td>
+<td align="center">okrus</td>
+<td align="center">![](images\okrus.png)</td>
 </tr>
 <tr>
 <td align="center">ramblerrus</td>
