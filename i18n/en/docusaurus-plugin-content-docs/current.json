@@ -8,7 +8,7 @@
     "description": "The label for category API in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.API.link.generated-index.description": {
-    "message": "Basic methods for working with Capmonster Cloud API",
+    "message": "Basic methods for working with BroCapGPT API",
     "description": "The generated-index page description for category API in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.Методы": {
@@ -32,7 +32,7 @@
     "description": "The label for category Расширение in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.Методы.link.generated-index.description": {
-    "message": "Basic methods for working with Capmonster Cloud API",
+    "message": "Basic methods for working with BroCapGPT API",
     "description": "The generated-index page description for category Методы in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.Внешние сервисы.link.generated-index.description": {

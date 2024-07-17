@@ -1,7 +1,7 @@
 <p align="center"><img src="https://github.com/ZennoLab/capmonstercloud-docs/blob/master/static/img/logo_docs.svg"></p>
 
 
-# Documentation for CapMonster Cloud
+# Documentation for BroCapGPT
 
 This website is built using [Docusaurus 3](https://docusaurus.io/), a modern static website generator.
 

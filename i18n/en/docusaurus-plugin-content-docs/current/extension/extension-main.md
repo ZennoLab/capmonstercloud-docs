@@ -24,30 +24,30 @@ To get started with the extension, click on its icon to the right of the address
 
 1. Download the [archive with the extension](https://zenno.link/CapMonsterCloud-chrome-extension).
 
-1. Unpack it to any folder. 
+2. Unpack it to any folder. 
    
    **WARNING**: the folder shouldn’t be deleted, otherwise the extension stop working.
-1. In the Google Chrome browser open the “Extension” page. There are several ways to do this: 
+3. In the Google Chrome browser open the “Extension” page. There are several ways to do this: 
    1. Type chrome://extensions in the address bar of a browser and press Enter.
    2. From the menu: click the three vertical dots in the upper right corner (near the profile picture), then "More Tools", then "Extensions".
 
   ![](359d5afb-d644-45c2-a882-e7fc3da759eb.png)
 
-   3. Or go to the Google Chrome settings and select "Extensions" (at the very bottom) in the right menu.
+4. Or go to the Google Chrome settings and select "Extensions" (at the very bottom) in the right menu.
 
   ![](61a9b824-b0d2-4808-8bb8-feac4b25d0b7.png)
 
-1. Enable “Developer Mode”.
-1. Then click on “Load unpacked”.
+5. Enable “Developer Mode”.
+6. Then click on “Load unpacked”.
 
   ![](load-unpacked.png)
 
-1. Find and choose the folder where you unpacked the extension.
-1. After that the extension should appear in the list of the installed extensions.
+7. Find and choose the folder where you unpacked the extension.
+8. After that the extension should appear in the list of the installed extensions.
 
 ![](extension1.png)
 
-  </details>
+</details>
 
 <details>
     <summary>Manual update of the extension</summary>
@@ -68,6 +68,7 @@ By default the installed extension is hidden. To pin it you have to click on the
 </details>
 
 After launching the extension you’ll see this window:
+
 ![](extension4.png)
 
 ### <a name="id-browserextension-apikey"></a>**API key**
@@ -75,14 +76,17 @@ Enter API key in the corresponding field(1), press save button(2). If you entere
 ![](extension5.png)
 
 ### <a name="id-browserextension-automaticcaptchasolving"></a>**Automated captcha solving**
-Here you can select the types of captchas that the extension will recognize automatically.
+Here you can choose how to solve FunCaptcha - using tokens or clicks.
 
 ### <a name="id-browserextension-repeatcaptchasolvingincaseofanerror"></a>**Repeat captcha solving in case of an error**
 If the first attempt to solve the captcha is failed, the extension will send repeated tasks until the captcha is not solved, or until the limit specified in this setting will not be reached.
+
 ![](extension7.png) 
 
 ### <a name="id-browserextension-proxy"></a>**Proxy**
+
 ![](extension8.png)  
+
 Here you can specify the proxy that will be sent along with the recognition task.
 The "Login" and "Password" are optional.
 
@@ -103,8 +107,8 @@ Examples:
 
 |**Filter**|**Description**|
 | :-: | :-: |
-|`https://zennolab.com`|Prohibition of the extension on the site `https://zennolab.com`|
-|`https://*.zennolab.com`|Prohibition of the extension on all subdomains `https://zennolab.com`|
+|`https://brocapgpt.com`|Prohibition of the extension on the site `https://brocapgpt.com`|
+|`https://*.brocapgpt.com`|Prohibition of the extension on all subdomains `https://brocapgpt.com`|
 |`https://www.google.*`|Prohibiting the extension from working on Google in all zones (ru, com, com.ua, etc.)|
 
 [ref1]: Aspose.Words.d14847ca-5ce8-4c9f-8081-1ec99b44a6b3.001.png

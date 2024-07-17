@@ -33,7 +33,7 @@ sidebar_label: FunCaptchaTask
 
 :::info Метод
 ```http
-https://api.brocapgpt/createTask
+https://api.brocapgpt.com/createTask
 ```
 :::
 
@@ -52,7 +52,7 @@ https://api.brocapgpt/createTask
     "proxyPort":8080,
     "proxyLogin":"proxyLoginHere",
     "proxyPassword":"proxyPasswordHere",
-    "userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.132 Safari/537.36"
+    "userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
   }
 }
 ```
@@ -84,7 +84,7 @@ https://api.brocapgpt/createTask
 
 :::info Метод
 ```http
-https://api.brocapgpt/getTaskResult
+https://api.brocapgpt.com/getTaskResult
 ```
 :::
 
