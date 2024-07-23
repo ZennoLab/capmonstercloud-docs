@@ -115,7 +115,7 @@ const config = {
           },
 
           {
-            href: '',
+            href: 'https://brocapgpt.com',
             label: 'Расширение',
             position: 'left',
           },
