@@ -115,7 +115,7 @@ const config = {
           },
 
           {
-            href: 'https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh',
+            href: '',
             label: 'Расширение',
             position: 'left',
           },
