@@ -12,7 +12,7 @@ The extension works in the Google Chrome browser.
 ## **Automatic installation**
 **Important!** You cannot install extensions in incognito mode and guest mode.
 
-1. Open the [Chrome Web Store](https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=en).
+1. Open the [Chrome Web Store](https://brocapgpt.com).
 2. Click **Install**.
 
 To get started with the extension, click on its icon to the right of the address bar. Go to the [settings](extension-main.md#settings).

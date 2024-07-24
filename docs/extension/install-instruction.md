@@ -13,10 +13,10 @@ draft: true
 :::
 
 ## **Способ №1: Установка с помощью CRX-файла.**
-1. Скачать [CRX-файл BroCapGPT](https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=ru);
+1. Скачать [CRX-файл BroCapGPT](https://brocapgpt.com);
 
 :::info
-Инструкцию по установке CRX-файла можно посмотреть [тут](https://zennolab.atlassian.net/wiki/spaces/RU/pages/2081423361#%D0%9A%D0%B0%D0%BA-%D1%81%D0%BA%D0%B0%D1%87%D0%B0%D1%82%D1%8C-crx-%D1%84%D0%B0%D0%B9%D0%BB-%D1%80%D0%B0%D1%81%D1%88%D0%B8%D1%80%D0%B5%D0%BD%D0%B8%D1%8F).
+Инструкцию по установке CRX-файла можно посмотреть [тут](https://brocapgpt.com).
 :::
 
 2. Открыть ProjectMaker;
@@ -32,7 +32,7 @@ draft: true
 1. Ввести API-key из личного кабинета CapMonster Cloud в открывшемся окне расширения.
 ## **Способ №2: Установка через интернет-магазин Google Chrome.**
 1. Открыть ProjectMaker;
-1. Перейти на страницу расширения `<https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=ru>` ;
+1. Перейти на страницу расширения `https://brocapgpt.com` ;
 1. Установить расширение, нажав кнопку «Установить»;
 1. Добавить экшен «Активировать расширение»;
 

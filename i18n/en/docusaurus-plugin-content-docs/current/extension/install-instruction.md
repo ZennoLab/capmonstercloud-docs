@@ -13,10 +13,10 @@ The extension only works with the Chromium browser!
 :::
 
 ## **Method #1: Installation using a CRX file.**
-1. Download [CRX file BroCapGPT](https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=en);
+1. Download [CRX file BroCapGPT](https://brocapgpt.com);
 
 :::info
-[Here](https://zennolab.atlassian.net/wiki/spaces/RU/pages/2081423361#%D0%9A%D0%B0%D0%BA-%D1%81%D0%BA%D0%B0%D1%87%D0%B0%D1%82%D1%8C-crx-%D1%84%D0%B0%D0%B9%D0%BB-%D1%80%D0%B0%D1%81%D1%88%D0%B8%D1%80%D0%B5%D0%BD%D0%B8%D1%8F) you can find instructions for installing the CRX file.
+[Here](https://brocapgpt.com) you can find instructions for installing the CRX file.
 :::
 
 2. Open ProjectMaker;
@@ -32,7 +32,7 @@ The extension only works with the Chromium browser!
 6. In the extension window that opens, enter the API key from your CapMonster Cloud personal account.
 ## **Method #2: Installation via the Chrome Web Store.**
 1. Open ProjectMaker;
-2. Go to the extension page `<https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=en>`;
+2. Go to the extension page `https://brocapgpt.com`;
 3. Click the “Install” button and install the extension;
 4. Add “Activate extension” action;
 
