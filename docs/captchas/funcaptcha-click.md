@@ -15,8 +15,8 @@ sidebar_label: ComplexImageTask Funcaptcha
 |imageUrls|Array|да (если не заполнено imagesBase64)|[ “[https://i.postimg.cc/s2ZDrHXy/fc1.jpg](https://i.postimg.cc/s2ZDrHXy/fc1.jpg)”, … ]|[Цельное изображение](https://postimg.cc/5HbM53Lk) (в массиве).|
 |imagesBase64|Array|да (если не заполнено imageUrls)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, … ]|[Цельное изображение](https://i.postimg.cc/s2ZDrHXy/fc1.jpg) в формате base64 (в массиве).|
 |metadata.Task|String|да|`Pick the image that is the correct way up` и другие|Текст задания (<u>на английском</u>).|
-|userAgent|String|нет|-|User-Agent браузера, используемый при загрузке изображений, если были переданы ссылки в imageUrls. Необходимо использовать подпись современного браузера, иначе Google будет возвращать ошибку, требуя обновить браузер.|
-|websiteURL|String|нет|-|Адрес страницы на которой решается капча.|
+|userAgent|String|нет|Передавайте только актуальный UA от ОС Windows. Сейчас таковым является: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36|User-Agent браузера, используемый при загрузке изображений, если были переданы ссылки в imageUrls. Необходимо использовать подпись современного браузера, иначе Google будет возвращать ошибку, требуя обновить браузер.|
+|websiteURL|String|нет|"https://www.example.com/i/flow/signup"| Адрес страницы на которой решается капча.|
 
 ## **Пример запроса**
 :::info Метод
