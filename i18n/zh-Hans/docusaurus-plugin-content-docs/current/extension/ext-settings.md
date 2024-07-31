@@ -33,7 +33,7 @@ sidebar_position: 4
 
 ## 安装之前更改设置
 
-通过包（可通过[链接](https://drive.google.com/drive/folders/1ErdzNr6yF8g9fWpNSenaQ-93mANG6wLC)下载）安装扩展时，可以设置扩展将使用的初始参数。为此，您需要解压缩包并编辑 defaultSettings.json 文件，然后重新打包。
+通过包（可通过[链接](https://drive.google.com/file/d/11pVyiPltRW_vEPPnRnQJLNiX0J0GVhBe/view?usp=drive_link) 下载）安装扩展时，可以设置扩展将使用的初始参数。为此，您需要解压缩包并编辑 defaultSettings.json 文件，然后重新打包。
 
 ### **defaultSettings.json 设置文件的描述**
 

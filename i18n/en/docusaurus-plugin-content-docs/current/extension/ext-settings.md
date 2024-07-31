@@ -33,7 +33,7 @@ There are several ways to change extension settings:
 
 ## Changing settings before installation
 
-When installing the extension via a package (downloadable [at the link](https://drive.google.com/drive/folders/1ErdzNr6yF8g9fWpNSenaQ-93mANG6wLC)), it is possible to set the initial parameters with which the extension will work. To do this, you need to unpack the package and edit the defaultSettings.json file, and then repackage it.
+When installing the extension via a package (downloadable [at the link](https://drive.google.com/file/d/11pVyiPltRW_vEPPnRnQJLNiX0J0GVhBe/view?usp=drive_link)), it is possible to set the initial parameters with which the extension will work. To do this, you need to unpack the package and edit the defaultSettings.json file, and then repackage it.
 
 ### **Description of the settings file defaultSettings.json**
 
