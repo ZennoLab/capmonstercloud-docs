@@ -68,6 +68,11 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  color: #191E32;
+}
+
+.priceTypeTitle span {
+  color: #191E32;
 }
 
 .itemPrice {
@@ -98,6 +103,10 @@
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+.paramTitle span {
+  color: #191E32;
 }
 
 .param {

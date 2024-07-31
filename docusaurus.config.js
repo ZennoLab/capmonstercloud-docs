@@ -94,6 +94,7 @@ const config = {
         logo: {
           alt: 'My Site Logo',
           src: 'img/logo_landing.svg',
+          srcDark: 'img/logo_landing_dark.svg'
         },
         items: [
           {
