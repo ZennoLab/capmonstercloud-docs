@@ -14,6 +14,9 @@ export default function Prices() {
   const speedRecognition = isRULocale ? 'Скорость распознавания' : 'Recognition speed';
   const successRecognition = isRULocale ? 'Успешность распознавания' : 'Recognition success rate';
 
+
+  const seconds = isRULocale ? 'сек' : 'seconds'
+
   const btnText = isRULocale ? 'Попробовать прямо сейчас' : 'Try now';
 
   return (
@@ -53,7 +56,7 @@ export default function Prices() {
                   <img src="/img/20x20_speed.svg" />
                   <span>{speedRecognition}</span>
                 </div>
-                <div className={styles.speedParam}>13 сек</div>
+                <div className={styles.speedParam}>13 {seconds}</div>
               </div>
               <div className={styles.param}>
                 <div className={styles.paramTitle}>
