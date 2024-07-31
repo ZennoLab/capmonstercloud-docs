@@ -49,7 +49,7 @@ sidebar_label: Инструкция по установке расширения
 
 ***Минимальная версия ZennoPoster 7.6.1***
 
-[![Extension_Example](Aspose.Words.d33c25f1-0d68-4361-bcfb-da50f3892df4.002.png)](https://drive.google.com/file/d/1k9suZUafyr-UR14Fm4BFrGDr3cGmodwq/view?usp=drive_link)
+[![Extension_Example](Aspose.Words.d33c25f1-0d68-4361-bcfb-da50f3892df4.002.png)](https://drive.google.com/file/d/1eOv1wXnjf202yDavB4051-XFM7vUGiGN/view?usp=sharing)
 :::caution
 При установке расширения CapMonster Cloud через CRX-файл необходимо следить за актуальностью версии расширения. В случае обновления версии нужно заново скачать актуальный CRX-файл и переустановить его.
 :::

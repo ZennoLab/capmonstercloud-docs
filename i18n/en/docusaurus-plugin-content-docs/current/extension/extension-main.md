@@ -22,12 +22,12 @@ To get started with the extension, click on its icon to the right of the address
 <details>
     <summary>Manual installation</summary>
 
-1. Download the [archive with the extension](https://drive.google.com/drive/folders/1ErdzNr6yF8g9fWpNSenaQ-93mANG6wLC?usp=drive_link).
+1. Download the [archive with the extension](https://drive.google.com/file/d/11pVyiPltRW_vEPPnRnQJLNiX0J0GVhBe/view?usp=drive_link).
 
 2. Unpack it to any folder. 
    
    **WARNING**: the folder shouldn’t be deleted, otherwise the extension stop working.
-3. In the Google Chrome browser open the “Extension” page. There are several ways to do this: 
+3. In the Google Chrome browser open the “Extension” page. There are several ways to do this:
    1. Type chrome://extensions in the address bar of a browser and press Enter.
    2. From the menu: click the three vertical dots in the upper right corner (near the profile picture), then "More Tools", then "Extensions".
 
