@@ -49,7 +49,7 @@ CapMonster Cloud扩展的新版本支持解决reCAPTCHA2、reCAPTCHA Enterprise�
 
 ***ZennoPoster的最低版本要求为7.6.1***
 
-![Extension\_Example](Aspose.Words.d33c25f1-0d68-4361-bcfb-da50f3892df4.002.png)[](https://drive.google.com/file/d/1k9suZUafyr-UR14Fm4BFrGDr3cGmodwq/view?usp=drive_link)
+[![Extension_Example](Aspose.Words.d33c25f1-0d68-4361-bcfb-da50f3892df4.002.png)](https://drive.google.com/file/d/1eOv1wXnjf202yDavB4051-XFM7vUGiGN/view?usp=sharing)
 :::caution 警告
 通过CRX文件安装CapMonster Cloud扩展时，需要保持扩展程序版本更新。如果有版本更新，需要重新下载当前的CRX文件并重新安装。
 :::

@@ -22,7 +22,7 @@ sidebar_position: 0
 <details>
     <summary>手动安装</summary>
 
-1. 下载带有扩展的[存档文件](https://drive.google.com/drive/folders/1ErdzNr6yF8g9fWpNSenaQ-93mANG6wLC?usp=drive_link)。
+1. 下载带有扩展的[存档文件](https://drive.google.com/file/d/11pVyiPltRW_vEPPnRnQJLNiX0J0GVhBe/view?usp=drive_link).
 
 2. 将其解压缩到任意文件夹。
 
