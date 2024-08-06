@@ -7,25 +7,22 @@ import MainHero from '../components/MainHero';
 import Prices from '../components/Prices';
 import Head from '@docusaurus/Head';
 import Footer from '../components/Footer';
+import getLocaleStrings from '../locales/index';
 
 export default function Home() {
   const {siteConfig, i18n} = useDocusaurusContext();
-  const titleRu = 'Документация для обхода капчи | CapMonster Cloud ';
-  const titleEn = 'CapMonster Cloud Docs | How to Bypass Any Type of Captcha '
-  const title = i18n.currentLocale === 'ru' ? titleRu : titleEn;
-
-  const descriptionRu = 'Как обходить  reCAPTCHA, hCaptcha и другие типы капчи при помощи CapMonster Cloud.';
-  const descriptionEn = 'How to  bypass  reCAPTCHA, hCaptcha and other types of captcha by CapMonster Cloud.'
-  const description = i18n.currentLocale === 'ru' ? descriptionRu : descriptionEn;
-
+  const { currentLocale } = i18n;
+  const { metaTitle, metaDescription } = getLocaleStrings(currentLocale);
 
   const hideThemeToggle = () => {
     const toggle = document.querySelector('button.clean-btn:not(.navbar__toggle)');
     toggle.parentElement.style.display = 'none';
   }
+
   useEffect(() => {
     hideThemeToggle();
   })
+
   return (
     <Layout
       title={`Hello from ${siteConfig.title}`}
@@ -33,8 +30,8 @@ export default function Home() {
       <main>
         <Head>
         <meta name="google-site-verification" content="LTaYcyNwaZKXhoWI-eqaxSJ1IX6zF3NJrjACTp41Tyg" />
-          <title>{title}</title>
-          <meta name="description" content={description}></meta>
+        <title>{metaTitle}</title>
+        <meta name="description" content={metaDescription}></meta>
         </Head>
         <MainHero />
         <Libraries />
