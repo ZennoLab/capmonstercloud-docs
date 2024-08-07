@@ -38,7 +38,7 @@ export default function Home() {
           <meta name="description" content={description}></meta>
         </Head>
         <MainHero />
-        <Libraries />
+        {/* <Libraries /> */}
         <Prices />
         <Links />
         <Footer />
