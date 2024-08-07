@@ -73,24 +73,15 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      // announcementBar: {
-      //   id: 'support_us',
-      //   content:
-      //     'Попробуйте наше <a target="_blank" rel="noopener noreferrer" href="https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh">расширение</a> для автоматического решения капч',
-      //   backgroundColor: '#0FB97D',
-      //   textColor: 'white',
-      //   isCloseable: false,
-      // },
       algolia: {
         appId: 'IUKL1ONOLG',
         apiKey: 'df90fcc07870b0dfda29e86e993cda42',
         indexName: 'capmonster-cloud-netlify',
         contextualSearch: true,
       },
-      // Replace with your project's social card
+
       image: 'img/social-card.jpg',
       navbar: {
-        // title: 'My Site',
         logo: {
           alt: 'My Site Logo',
           src: 'img/logo_landing.svg',
@@ -115,17 +106,16 @@ const config = {
             position: 'left',
           },
 
+          // {
+          //   href: 'https://brocapgpt.com',
+          //   label: 'Расширение',
+          //   position: 'left',
+          // },
+
           {
-            href: 'https://brocapgpt.com',
-            label: 'Расширение',
-            position: 'left',
+            type: 'localeDropdown',
+            position: 'right',
           },
-          
-          // {to: '/blog', label: 'Пресс релизы', position: 'left'},
-            {
-              type: 'localeDropdown',
-              position: 'right',
-            },
           
         ],
       },

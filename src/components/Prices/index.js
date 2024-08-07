@@ -15,7 +15,7 @@ export default function Prices() {
   const successRecognition = isRULocale ? 'Успешность распознавания' : 'Recognition success rate';
 
 
-  const seconds = isRULocale ? 'сек' : 'seconds'
+  const seconds = isRULocale ? 'сек' : 's'
 
   const btnText = isRULocale ? 'Попробовать прямо сейчас' : 'Try now';
 
@@ -66,7 +66,7 @@ export default function Prices() {
                 <div className={styles.successParam}>95%</div>
               </div>
             </div>
-            <a href="https://brocapgpt.com" className={styles.btn}>
+            <a href="https://brocapgpt.com/sign-up" className={styles.btn}>
               {btnText}
             </a>
           </div>

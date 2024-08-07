@@ -13,6 +13,7 @@ import Navbar from '@theme/Navbar';
 import Footer from '@theme/Footer';
 import LayoutProvider from '@theme/Layout/Provider';
 import ErrorPageContent from '@theme/ErrorPageContent';
+import { useUpdateHeaderLinks } from '../../utils/useUpdateHeaderLinks';
 import styles from './styles.module.css';
 export default function Layout(props) {
   const {
@@ -24,6 +25,8 @@ export default function Layout(props) {
     description,
   } = props;
   useKeyboardNavigation();
+  useUpdateHeaderLinks();
+
   return (
     <LayoutProvider>
       <script src="//code.jivo.ru/widget/WpVD61Nt3T" async></script>

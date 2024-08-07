@@ -62,7 +62,7 @@ export default function Links() {
             title="BroCapGPT"
             image="/img/84x84_dashboard.svg"
             desciption={isRULocale ? 'Облачный AI сервис для автоматического распознавания капч' : 'Cloud AI service for automatic captcha recognition'}
-            bottomBlock={<a href="https://brocapgpt.com" className={styles.btn}>{isRULocale ? 'Перейти' : 'Try now'}</a>}
+            bottomBlock={<a href="https://brocapgpt.com/sign-up" className={styles.btn}>{isRULocale ? 'Перейти' : 'Try now'}</a>}
           />
           <Link
             title={isRULocale ? 'Расширение для браузера' : 'Browser extension'}
