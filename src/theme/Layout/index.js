@@ -29,7 +29,7 @@ export default function Layout(props) {
 
   return (
     <LayoutProvider>
-      <script src="//code.jivo.ru/widget/WpVD61Nt3T" async></script>
+      <script src="//code.tidio.co/zudj8rvfoimbts4749iizjx5hhztv8xg.js" async></script>
 
       <PageMetadata title={title} description={description} />
 
