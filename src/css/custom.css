@@ -132,6 +132,14 @@
   margin-right: 12px;
 }
 
+.theme-doc-sidebar-item-link-level-1:nth-child(6) > .menu__link::before {
+  content: '';
+  background: url('/img/18x18_news.svg');
+  width: 18px;
+  height: 18px;
+  margin-right: 12px;
+}
+
 .navbar__link--active {
   font-weight: bold;
 }
@@ -369,4 +377,11 @@ a[class*='cardContainer'] {
   .navbar__logo img {
     max-width: 180px;
   }
+}
+
+.news-banner {
+  border-radius: 10px;
+  overflow: hidden;
+  object-fit: cover;
+  margin-bottom: 30px;
 }

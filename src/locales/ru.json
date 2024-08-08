@@ -13,5 +13,7 @@
   "libsDescription": "Для вашего удобства мы создали готовые библиотеки для быстрой интеграции API CapMonster Cloud в свой код",
   "priceTitle": "Цена",
   "priceSubTitle": "Прокси включены в цену*: экономьте с CapMonster Cloud",
-  "priceSubTooltipText": "За исключением заданий Cloudflare Bot Challenge, Cloudflare Turnstile"
+  "priceSubTooltipText": "За исключением заданий Cloudflare Bot Challenge, Cloudflare Turnstile",
+  "metaTitle": "Документация для обхода капчи | CapMonster Cloud",
+  "metaDescription": "Как обходить  reCAPTCHA, hCaptcha и другие типы капчи при помощи CapMonster Cloud."
 }
