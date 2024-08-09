@@ -59,7 +59,7 @@ sidebar_label: Firefox 浏览器扩展
 
 启动扩展后，您将看到此窗口：
 
-![](ext.screen.en.png)
+![](ext.screen.enf.png)
 ### <a name="id-browserextension-apikey"></a>**API 密钥**
 在相应的字段中输入 API 密钥(1)，点击保存按钮(2)。如果您输入了正确的密钥，您的余额将显示在下方(3)。
 
@@ -67,7 +67,7 @@ sidebar_label: Firefox 浏览器扩展
 ### <a name="id-browserextension-automaticcaptchasolving"></a>**自动识别验证码**
 在这里，您可以选择扩展将自动识别的验证码类型。
 
-![](extension.example.png)
+![](extension.examplef.png)
 
 :::info !
 
