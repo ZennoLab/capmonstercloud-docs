@@ -13,5 +13,7 @@
   "libsDescription": "为了方便起见，我们创建了现成的程序库，以便将 CapMonster Cloud API 快速集成到您的代码中",
   "priceTitle": "价格",
   "priceSubTitle": "代理价格涵盖*：使用 CapMonster Cloud，节省费用",
-  "priceSubTooltipText": "但不包括 Cloudflare Bot Challenge、Cloudflare Turnstile"
+  "priceSubTooltipText": "但不包括 Cloudflare Bot Challenge、Cloudflare Turnstile",
+  "metaTitle": "CapMonster Cloud 文档 | 如何绕过任何类型的验证码",
+  "metaDescription": "如何通过 CapMonster Cloud 绕过 reCAPTCHA、hCaptcha 和其他类型的验证码。"
 }
