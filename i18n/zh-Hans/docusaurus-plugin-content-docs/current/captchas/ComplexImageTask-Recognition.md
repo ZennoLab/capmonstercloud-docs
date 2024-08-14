@@ -14,7 +14,7 @@ sidebar_label: ComplexImageTask Recognition
 |type|String|是|ComplexImageTask|指定任务对象类型|
 |class|String|是|recognition|指定任务对象类|
 |imagesBase64|Array|是|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”]|仅图像的Base64编码|
-|metadata.Task|String|是|`oocl_rotate_new` and others|任务名称|
+|metadata.Task|String|是|`oocl_rotate_new` 等等|任务名称|
 
 ## **当前可用任务**
 
@@ -22,9 +22,9 @@ sidebar_label: ComplexImageTask Recognition
 
 在请求中传递两个图像，第一个是背景图像，第二个是圆形图像。
 
-**响应**: 旋转圆形图像的角度（顺时针方向）。
+响应: 旋转圆形图像的角度（顺时针方向）。
 
-请求示例：
+**请求示例**：
 
 :::info 方法
 ```http
@@ -63,10 +63,10 @@ https://api.capmonster.cloud/createTask
 
 在请求中传递三个图像，分别是背景图像、环形图像和圆形图像。
 
-**响应**: 环形图像旋转角度（逆时针方向）
+响应: 环形图像旋转角度（逆时针方向）
 圆形图像旋转角度（顺时针方向）。
 
-请求示例
+**请求示例**
 
 :::info 方法
 ```http
