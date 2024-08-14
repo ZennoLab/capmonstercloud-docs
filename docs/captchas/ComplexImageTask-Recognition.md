@@ -28,7 +28,8 @@ https://api.capmonster.cloud/createTask
 ```
 :::
 ```json
- "clientKey": "{apiKey}",
+{
+     "clientKey": "{apiKey}",
     "task": {
         "type": "ComplexImageTask",
         "class": "recognition",
@@ -64,7 +65,8 @@ https://api.capmonster.cloud/createTask
 ```
 :::
 ```json
-"clientKey": "{apiKey}",
+{ 
+    "clientKey": "{apiKey}",
     "task": {
         "type": "ComplexImageTask",
         "class": "recognition",
