@@ -12,9 +12,9 @@ sidebar_label: ComplexImageTask Recognition
 |type|String|да|ComplexImageTask|Определяет тип объекта задачи.|
 |class|String|да|recognition|Определяет класс объекта задачи.|
 |imagesBase64|Array|да|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”]|Массив изображений в кодировке base64.|
-|metadata.Task|String|да|`oocl_rotate_new` и другие|Текст задания (<u>на английском</u>).|
+|metadata.Task|String|да|`oocl_rotate_new` и другие|Имя задания (<u>на английском</u>).|
 
-## **Типы заданий**
+## **Доступные типы заданий**
 
 ### **Пример запроса oocl_rotate_new**
 

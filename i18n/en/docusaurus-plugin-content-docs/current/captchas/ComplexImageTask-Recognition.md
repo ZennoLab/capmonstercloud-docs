@@ -12,9 +12,9 @@ sidebar_label: ComplexImageTask Recognition
 |type|String|yes|ComplexImageTask|Specifies the task object type.|
 |class|String|yes|recognition|Specifies the task object class.|
 |imagesBase64|Array|yes|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”]|Images array in base64 encoding.|
-|metadata.Task|String|yes|`oocl_rotate_new` and others|Task text (<u>in English</u>).|
+|metadata.Task|String|yes|`oocl_rotate_new` and others|Task name (<u>in English</u>).|
 
-## **Task types**
+## **Available task types**
 
 ### **Example of oocl_rotate_new request**
 

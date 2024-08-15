@@ -16,7 +16,7 @@ sidebar_label: ComplexImageTask Recognition
 |imagesBase64|Array|是|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”]|仅图像的Base64编码|
 |metadata.Task|String|是|`oocl_rotate_new` 等等|任务名称|
 
-## **当前可用任务**
+## **可用任务类型**
 
 ### **oocl_rotate_new**
 
