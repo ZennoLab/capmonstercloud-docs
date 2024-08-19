@@ -74,7 +74,7 @@ https://api.capmonster.cloud/createTask
 
 ```json 
 {
-  "clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
+  "clientKey":"API_KEY",
   "task": {
     "type":"GeeTestTask",
     "websiteURL":"https://www.geetest.com/en/demo",
@@ -94,7 +94,7 @@ https://api.capmonster.cloud/createTask
 
 ```json
 {
-    "clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
+    "clientKey":"API_KEY",
     "task":
     {
         "type":"GeeTestTaskProxyless",
@@ -162,7 +162,7 @@ https://api.capmonster.cloud/createTask
 ### 在测试站点上使用代理的 GeeTestTask
 ```json
 {
-  "clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
+  "clientKey":"API_KEY",
   "task": {
     "type":"GeeTestTask",
     "websiteURL":"https://gt4.geetest.com/",
@@ -184,7 +184,7 @@ https://api.capmonster.cloud/createTask
 ### 在测试站点上无代理的 GeeTestTaskProxyless
 ```json
 {
-    "clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
+    "clientKey":"API_KEY",
     "task":
     {
         "type":"GeeTestTaskProxyless",

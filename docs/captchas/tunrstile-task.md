@@ -96,7 +96,7 @@ https://api.capmonster.cloud/createTask
 :::
 ```json
 {
-    "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
+    "clientKey":"API_KEY",
     "task":
     {
         "type":"TurnstileTaskProxyless",
@@ -122,7 +122,7 @@ https://api.capmonster.cloud/createTask
 :::
 ```json
 {
-	"clientKey": "dce6bcbb1a728ea8d871de6d169a2057",
+	"clientKey": "API_KEY",
 	"task": {
 		"type": "TurnstileTask",
 		"websiteURL": "https://site.com",
@@ -144,7 +144,7 @@ https://api.capmonster.cloud/createTask
 :::
 ```json 
   {
-  "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
+  "clientKey":"API_KEY",
   "task": {
     "type":"TurnstileTask",
     "websiteURL":"https://nowsecure.nl",

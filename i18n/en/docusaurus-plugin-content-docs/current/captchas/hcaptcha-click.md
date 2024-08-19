@@ -94,7 +94,7 @@ https://api.capmonster.cloud/createTask
 :::
 ```json
 {
-  "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
+  "clientKey":"API_KEY",
   "task": {
     "type": "ComplexImageTask",
     "class": "hcaptcha",
@@ -165,7 +165,7 @@ https://api.capmonster.cloud/createTask
 :::
 ```json
 {
-  "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
+  "clientKey":"API_KEY",
   "task": {
     "type": "ComplexImageTask",
     "class": "hcaptcha",
@@ -229,7 +229,7 @@ https://api.capmonster.cloud/createTask
 
 ```json
 {
-  "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
+  "clientKey":"API_KEY",
   "task": {
     "type": "ComplexImageTask",
     "class": "hcaptcha",
@@ -296,7 +296,7 @@ https://api.capmonster.cloud/createTask
 
 ```json
 {
-  "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
+  "clientKey":"API_KEY",
   "task": {
     "type": "ComplexImageTask",
     "class": "hcaptcha",

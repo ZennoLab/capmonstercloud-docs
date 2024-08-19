@@ -96,7 +96,7 @@ https://api.capmonster.cloud/createTask
 ### RecaptchaV2EnterpriseTask (С использованием прокси)
 ```json
 {
-  "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
+  "clientKey":"API_KEY",
   "task": {
     "type":"RecaptchaV2EnterpriseTask",
     "websiteURL":"https://mydomain.com/page-with-recaptcha-enterprise",
@@ -117,7 +117,7 @@ https://api.capmonster.cloud/createTask
 ### RecaptchaV2EnterpriseTaskProxyless (Без использования прокси)
 ```json
 {
-  "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
+  "clientKey":"API_KEY",
   "task": {
     "type":"RecaptchaV2EnterpriseTaskProxyless",
     "websiteURL":"https://mydomain.com/page-with-recaptcha-enterprise",
