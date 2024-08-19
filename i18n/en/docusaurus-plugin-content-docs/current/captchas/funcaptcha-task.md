@@ -41,7 +41,7 @@ https://api.capmonster.cloud/createTask
 ### FunCaptchaTask (With proxy)
 ```json
 {
-  "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
+  "clientKey":"API_KEY",
   "task": {
     "type":"FunCaptchaTask",
     "websiteURL":"http://mywebsite.com/",
@@ -60,7 +60,7 @@ https://api.capmonster.cloud/createTask
 ### FunCaptchaTaskProxyless (without proxy)
 ```json
 {
-  "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
+  "clientKey":"API_KEY",
   "task": {
     "type":"FunCaptchaTaskProxyless",
     "websiteURL":"http://mywebsite.com/",

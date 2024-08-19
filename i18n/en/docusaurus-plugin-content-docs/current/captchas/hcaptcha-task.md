@@ -47,7 +47,7 @@ https://api.capmonster.cloud/createTask
 ### HCaptchaTask (with a proxy)
 ```json
 {
-    "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
+    "clientKey":"API_KEY",
     "task":
     {
         "type":"HCaptchaTask",
@@ -66,7 +66,7 @@ https://api.capmonster.cloud/createTask
 ### HCaptchaTaskProxyless (without a proxy)
 ```json
 {
-    "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
+    "clientKey":"API_KEY",
     "task":
     {
         "type":"HCaptchaTaskProxyless",

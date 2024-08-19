@@ -39,7 +39,7 @@ https://api.capmonster.cloud/createTask
 ### RecaptchaV2Task
 ```json
 {
-  "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
+  "clientKey":"API_KEY",
   "task": {
     "type":"RecaptchaV2Task",
     "websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
@@ -57,7 +57,7 @@ https://api.capmonster.cloud/createTask
 ### RecaptchaV2TaskProxyless
 ```json
 {
-  "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
+  "clientKey":"API_KEY",
   "task": {
     "type":"RecaptchaV2TaskProxyless",
     "websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",

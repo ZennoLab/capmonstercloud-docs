@@ -21,7 +21,7 @@ sidebar_position: 7
 
 В настройках используемого софта допишите параметр nocache, через двойное подчёркивание, в самом конце API ключа:
 
-`dce6bcbb1a728ea8d871de6d169a2057__nocache`
+`API_KEY__nocache`
 
 ### **При запросе к createTask**
 
@@ -31,7 +31,7 @@ sidebar_position: 7
 
 ```json
 {
-  "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
+  "clientKey":"API_KEY",
 
   "task": 
   {
@@ -52,7 +52,7 @@ sidebar_position: 7
 В примере ниже параметр добавлен в самый конец.
 :::
 
-`http://api.capmonster.cloud/in.php?key=dce6bcbb1a728ea8d871de6d169a2057&method=userrecaptcha&googlekey=6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd&pageurl=https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high&nocache=1`
+`http://api.capmonster.cloud/in.php?key=API_KEY&method=userrecaptcha&googlekey=6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd&pageurl=https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high&nocache=1`
 
 ---
 

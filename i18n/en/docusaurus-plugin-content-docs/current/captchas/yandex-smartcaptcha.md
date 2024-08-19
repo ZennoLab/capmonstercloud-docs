@@ -30,7 +30,7 @@ https://api.capmonster.cloud/createTask
 
 ```json
 {
-    "clientKey": "b06025dbcd87ee02a315f0faadefa63c",
+    "clientKey": "API_KEY",
     "task": {
         "type": "ComplexImageTask",
         "class": "yandexsmartcaptcha",
