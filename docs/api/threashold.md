@@ -25,7 +25,7 @@ https://api.capmonster.cloud/createTask
     ...
     "recognizingThreshold" : 70
   },
-  "clientKey":"234234234234234234234234",
+  "clientKey":"API_KEY",
   "softId" : 345
 
 }
@@ -35,13 +35,13 @@ https://api.capmonster.cloud/createTask
 
 Другой способ передачи порога - использовать только поле для указания ApiKey. Вы можете дописать информацию о пороге в следующем формате: "`{apikey}__recognizingthreshold_{value}`"
 
-Например, “00f87cb0f01330d33709ce3339ad0c8c\_\_recognizingthreshold\_70”
+Например, “API_KEY\_\_recognizingthreshold\_70”
 
 Также вы можете указать вместе с ключем имя модуля в следующем формате: "`{apikey}__имя-модуля`".
 
 Ключ, порог уверенности и имя модуля указываются с разделителем “\_\_”
 
-Пример: “00f87cb0f01330d33709ce3339ad0c8c\_\_solvemedia\_\_recognizingthreshold\_70”
+Пример: “API_KEY\_\_solvemedia\_\_recognizingthreshold\_70”
 
 :::note
 Если у вас не получилось настроить порог уверенности в ответе, пожалуйста, напишите нам в **[службу поддержки](https://helpdesk.zennolab.com/conversation/new)**, мы поможем вам в настройке!

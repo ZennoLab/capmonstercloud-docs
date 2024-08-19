@@ -82,7 +82,7 @@ https://api.capmonster.cloud/createTask
 
 ```json
 {
-   "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
+   "clientKey":"API_KEY",
    "task":{
       "type":"YandexSmartCaptchaTaskProxyless",
       "websiteURL":"https://ya.ru/showcaptcha?cc=1&mt=C934C537A3644...",
@@ -108,7 +108,7 @@ https://api.capmonster.cloud/createTask
 
 ```json
 {
-	"clientKey": "dce6bcbb1a728ea8d871de6d169a2057",
+	"clientKey": "API_KEY",
 	"taskId": 407533072
 }
 ```
@@ -143,7 +143,7 @@ https://api.capmonster.cloud/createTask
 
 ```json
 {
-   "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
+   "clientKey":"API_KEY",
    "task":{
       "type":"YandexSmartCaptchaTaskProxyless",
       "websiteURL":"https://example.com/captcha",
@@ -167,7 +167,7 @@ https://api.capmonster.cloud/createTask
 
 ```json
 {
-	"clientKey": "dce6bcbb1a728ea8d871de6d169a2057",
+	"clientKey": "API_KEY",
 	"taskId": 407533072
 }
 ```

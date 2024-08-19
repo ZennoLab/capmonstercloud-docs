@@ -16,14 +16,14 @@ sidebar_position: 7
 
 在使用的软件设置中，将 `nocache` 参数添加到API密钥的最后，使用双下划线：
 
-`dce6bcbb1a728ea8d871de6d169a2057__nocache`
+`API_KEY__nocache`
 ### **创建任务时**
 :::tip 提示
 注意 *task* 对象的 *nocache* 属性
 :::
 ``` json
 {
-  "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
+  "clientKey":"API_KEY",
 
   "task": 
   {
@@ -42,7 +42,7 @@ sidebar_position: 7
 在下面的示例中，参数添加到URL的末尾。
 :::
 
-`http://api.capmonster.cloud/in.php?key=dce6bcbb1a728ea8d871de6d169a2057&method=userrecaptcha&googlekey=6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd&pageurl=https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high&nocache=1`
+`http://api.capmonster.cloud/in.php?key=API_KEY&method=userrecaptcha&googlekey=6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd&pageurl=https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high&nocache=1`
 
 -----
 ## **此参数适用于哪些类型的验证码？**

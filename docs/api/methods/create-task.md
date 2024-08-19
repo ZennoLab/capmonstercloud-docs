@@ -46,7 +46,7 @@ Type: `String` <br />
 
 ```json
 {
-  "clientKey": "67b6bcbb1a728ea8d563de6d169a2057",
+  "clientKey": "API_KEY",
   "task": {
     "type": "NoCaptchaTaskProxyless",
     "websiteURL": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
@@ -70,7 +70,7 @@ import CodeBlock from '@theme/CodeBlock';
   <Tabs>
     <TabItem value="apple" label="Задача решения обычной капчи с изображением">
     <CodeBlock className="language-json">{JSON.stringify({
-      "clientKey":"67b6bcbb1a728ea8d563de6d169a2057",
+      "clientKey":"API_KEY",
       "task": {
         "type":"ImageToTextTask",
         "body":"BASE64\_BODY\_HERE!"
@@ -78,7 +78,7 @@ import CodeBlock from '@theme/CodeBlock';
     }, null, 2)}</CodeBlock>
     </TabItem>
     <TabItem value="orange" label="Задача решения ReCaptcha2"><CodeBlock className="language-json">{JSON.stringify({
-      "clientKey":"67b6bcbb1a728ea8d563de6d169a2057",
+      "clientKey":"API_KEY",
       "task": {
         "type":"NoCaptchaTaskProxyless","websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2\_simple.php?level=high",
         "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI\_iqRyTwd"
@@ -96,7 +96,7 @@ import CodeBlock from '@theme/CodeBlock';
 
 ```json
     {
-      "clientKey":"67b6bcbb1a728ea8d563de6d169a2057",
+      "clientKey":"API_KEY",
       "task": 
       {
         "type":"ImageToTextTask",
@@ -113,7 +113,7 @@ import CodeBlock from '@theme/CodeBlock';
 
 ```json
     {
-      "clientKey":"67b6bcbb1a728ea8d563de6d169a2057",
+      "clientKey":"API_KEY",
       "task": 
       {
         "type":"RecaptchaV2Task",

@@ -21,7 +21,7 @@ Will be applied to all sent captchas.
 
 In the settings of the used software, add the nocache parameter, with a double underscore, at the very end of the API key:
 
-`dce6bcbb1a728ea8d871de6d169a2057__nocache`
+`API_KEY__nocache`
 
 ### **When requesting createTask**
 
@@ -31,7 +31,7 @@ Notice the *nocache* property of the *task* object
 
 ```json
 {
-  "clientKey":"dce6bcbb1a728ea8d871de6d169a2057",
+  "clientKey":"API_KEY",
 
   "task": 
   {
@@ -52,7 +52,7 @@ Add `nocache=1` to the URL.
 In the example below, the parameter is added to the very end.
 :::
 
-`http://api.capmonster.cloud/in.php?key=dce6bcbb1a728ea8d871de6d169a2057&method=userrecaptcha&googlekey=6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd&pageurl=https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high&nocache=1`
+`http://api.capmonster.cloud/in.php?key=API_KEY&method=userrecaptcha&googlekey=6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd&pageurl=https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high&nocache=1`
 
 ---
 

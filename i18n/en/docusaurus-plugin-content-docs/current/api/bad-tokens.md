@@ -54,7 +54,7 @@ Also supported paths:
 ```json
 {
 
-  "clientKey":"67b6bcbb1a728ea8d563de6d169a2057",
+  "clientKey":"API_KEY",
   "taskId": 7654321
 
 }

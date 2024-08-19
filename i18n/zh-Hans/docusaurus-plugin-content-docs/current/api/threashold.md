@@ -20,7 +20,7 @@ https://api.capmonster.cloud/createTask
     ...
     "recognizingThreshold" : 70
   },
-  "clientKey":"234234234234234234234234",
+  "clientKey":"API_KEY",
   "softId" : 345
 
 }
@@ -31,13 +31,13 @@ https://api.capmonster.cloud/createTask
 
 另一种通过阈值传递的方式是仅使用字段来指定 ApiKey。您可以以以下格式添加阈值信息：`{apikey}__recognizingthreshold_{value}`
 
-例如，“00f87cb0f01330d33709ce3339ad0c8c\_\_recognizingthreshold\_70”
+例如，“API_KEY\_\_recognizingthreshold\_70”
 
 您还可以使用以下格式输入带有模块名称的密钥：`{apikey}__module-name`。
 
 密钥、置信度阈值和模块名称用下划线 “\_\_” 标示
 
-示例：“00f87cb0f01330d33709ce3339ad0c8c\_\_solvemedia\_\_recognizingthreshold\_70”
+示例：“API_KEY\_\_solvemedia\_\_recognizingthreshold\_70”
 
 :::note 注意
 如果您无法设置响应的置信度阈值，请联系我们的[**支持团队**](https://helpdesk.zennolab.com/conversation/new)，我们将帮助您进行设置！
