@@ -15,9 +15,9 @@ sidebar_label: ImageToTextTask
 | :-: | :-: | :-: | :-: | :-: |
 |type|String|是|**ImageToTextTask**|定义任务类型。|
 |body|String|是|-|以base64编码的文件主体。确保发送时没有换行符。|
-|CapMonsterModule|String|否|yandex, special 等|识别模块的名称，例如“yandex”。可以通过[这里](../api/module-name.md)找到模块名称及所有可用模块的列表。|
+|capMonsterModule|String|否|yandex, special 等|识别模块的名称，例如“yandex”。可以通过[这里](../api/module-name.md)找到模块名称及所有可用模块的列表。|
 |recognizingThreshold|Int|否|0-100|验证码识别阈值，可取值范围为0到100。例如，如果将 recognizingThreshold 设置为90，并且任务以80的置信度解决，则不会收费。在这种情况下，用户会收到 ERROR\_CAPTCHA\_UNSOLVABLE 的响应。|
-|Case|Boolean|否|true, false|true - 如果验证码区分大小写。|
+|case|Boolean|否|true, false|true - 如果验证码区分大小写。|
 |numeric|Int|否|0, 1|1 - 如果验证码仅包含数字。|
 |math|Boolean|否|true, false|false — 未定义；<br />true — 如果验证码需要数学操作（例如：验证码 2 + 6 = 将返回值 8）。|
 
