@@ -29,14 +29,14 @@ https://api.capmonster.cloud/createTask
 :::
 ```json
 {
-     "clientKey": "API_KEY",
+    "clientKey": "API_KEY",
     "task": {
         "type": "ComplexImageTask",
         "class": "recognition",
         "imagesBase64": [
-"{background_base64}",
-"{circle_base64}"
-],
+			"{background_base64}",
+			"{circle_base64}"
+		],
         "metadata": {
             "Task": "oocl_rotate_new"
         }
@@ -44,11 +44,11 @@ https://api.capmonster.cloud/createTask
 }
 ```
 
-Пример фона(*background_base64*):
+Пример фона (*background_base64*):
 
 ![](ex1.png)
 
-Пример круга(*circle_base64*):
+Пример круга (*circle_base64*):
 
 ![](ex2.png)
 
@@ -71,10 +71,10 @@ https://api.capmonster.cloud/createTask
         "type": "ComplexImageTask",
         "class": "recognition",
         "imagesBase64": [
-"{background_base64}",
-"{ring_base64}",
-"{circle_base64}"
-],
+			"{background_base64}",
+			"{ring_base64}",
+			"{circle_base64}"
+		],
         "metadata": {
             "Task": "oocl_rotate_double_new"
         }
@@ -82,14 +82,46 @@ https://api.capmonster.cloud/createTask
 }
 ```
 
-Фон(*background_base64*):
+Фон (*background_base64*):
 
 ![](ex3.png)
 
-Кольцо(*ring_base64*):
+Кольцо (*ring_base64*):
 
 ![](ex4.png)
 
-Круг(*circle_base64*):
+Круг (*circle_base64*):
 
 ![](ex5.png)
+
+
+### **Пример запроса shopee_slide**
+
+В запросе передаем изображение: фон со слайдером.
+
+**Ответ**: Координаты X,Y левого верхнего угла и X,Y правого нижнего угла нужного пазла.
+
+:::info Метод
+```http
+https://api.capmonster.cloud/createTask
+```
+:::
+```json
+{
+    "clientKey": "API_KEY",
+    "task": {
+        "type": "ComplexImageTask",
+        "class": "recognition",
+        "imagesBase64": [
+			"{image_base64}"
+		],
+        "metadata": {
+            "Task": "shopee_slide"
+        }
+    }
+}
+```
+
+Пример изображения (*image_base64*):
+
+![](ex6.png)

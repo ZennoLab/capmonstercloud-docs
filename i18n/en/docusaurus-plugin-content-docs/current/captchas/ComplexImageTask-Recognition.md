@@ -29,14 +29,14 @@ https://api.capmonster.cloud/createTask
 :::
 ```json
 {
-     "clientKey": "API_KEY",
+    "clientKey": "API_KEY",
     "task": {
         "type": "ComplexImageTask",
         "class": "recognition",
         "imagesBase64": [
-"{background_base64}",
-"{circle_base64}"
-],
+			"{background_base64}",
+			"{circle_base64}"
+		],
         "metadata": {
             "Task": "oocl_rotate_new"
         }
@@ -44,11 +44,11 @@ https://api.capmonster.cloud/createTask
 }
 ```
 
-Background example(*background_base64*):
+Background example (*background_base64*):
 
 ![](ex1.png)
 
-Circle example(*circle_base64*):
+Circle example (*circle_base64*):
 
 ![](ex2.png)
 
@@ -57,7 +57,7 @@ Circle example(*circle_base64*):
 
 In the request we pass three images: background, ring, circle.
 
-**Ответ**: degrees by which the ring should be turned counterclockwise and the circle clockwise.
+**Response**: degrees by which the ring should be turned counterclockwise and the circle clockwise.
 
 :::info Method
 ```http
@@ -71,10 +71,10 @@ https://api.capmonster.cloud/createTask
         "type": "ComplexImageTask",
         "class": "recognition",
         "imagesBase64": [
-"{background_base64}",
-"{ring_base64}",
-"{circle_base64}"
-],
+			"{background_base64}",
+			"{ring_base64}",
+			"{circle_base64}"
+		],
         "metadata": {
             "Task": "oocl_rotate_double_new"
         }
@@ -82,14 +82,46 @@ https://api.capmonster.cloud/createTask
 }
 ```
 
-Background(*background_base64*):
+Background (*background_base64*):
 
 ![](ex3.png)
 
-Ring(*ring_base64*):
+Ring (*ring_base64*):
 
 ![](ex4.png)
 
-Circle(*circle_base64*):
+Circle (*circle_base64*):
 
 ![](ex5.png)
+
+
+### **Example of shopee_slide request**
+
+In the request we pass the image: background with slider.
+
+**Response**: The X,Y coordinates of the upper left corner and the X,Y coordinates of the lower right corner of the desired puzzle.
+
+:::info Method
+```http
+https://api.capmonster.cloud/createTask
+```
+:::
+```json
+{
+    "clientKey": "API_KEY",
+    "task": {
+        "type": "ComplexImageTask",
+        "class": "recognition",
+        "imagesBase64": [
+			"{image_base64}"
+		],
+        "metadata": {
+            "Task": "shopee_slide"
+        }
+    }
+}
+```
+
+Image example (*image_base64*):
+
+![](ex6.png)
