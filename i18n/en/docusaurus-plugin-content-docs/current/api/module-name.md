@@ -86,6 +86,10 @@ The list of available module names:
         <tr>
             <td align="center">yandexwave</td>
         </tr>
+		<tr>
+            <td align="center">partiallyblur</td>
+			<td align="center">![](images\partiallyblur.png)</td>
+        </tr>
         <tr>
             <td align="center">universal (all other text captcha types)</td>
             <td align="center">![](images\universal.png)</td>
