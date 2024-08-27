@@ -93,35 +93,3 @@ Ring (*ring_base64*):
 Circle (*circle_base64*):
 
 ![](ex5.png)
-
-
-### **Example of shopee_slide request**
-
-In the request we pass the image: background with slider.
-
-**Response**: The X,Y coordinates of the upper left corner and the X,Y coordinates of the lower right corner of the desired puzzle.
-
-:::info Method
-```http
-https://api.capmonster.cloud/createTask
-```
-:::
-```json
-{
-    "clientKey": "API_KEY",
-    "task": {
-        "type": "ComplexImageTask",
-        "class": "recognition",
-        "imagesBase64": [
-			"{image_base64}"
-		],
-        "metadata": {
-            "Task": "shopee_slide"
-        }
-    }
-}
-```
-
-Image example (*image_base64*):
-
-![](ex6.png)
