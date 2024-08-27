@@ -93,35 +93,3 @@ https://api.capmonster.cloud/createTask
 Круг (*circle_base64*):
 
 ![](ex5.png)
-
-
-### **Пример запроса shopee_slide**
-
-В запросе передаем изображение: фон со слайдером.
-
-**Ответ**: Координаты X,Y левого верхнего угла и X,Y правого нижнего угла нужного пазла.
-
-:::info Метод
-```http
-https://api.capmonster.cloud/createTask
-```
-:::
-```json
-{
-    "clientKey": "API_KEY",
-    "task": {
-        "type": "ComplexImageTask",
-        "class": "recognition",
-        "imagesBase64": [
-			"{image_base64}"
-		],
-        "metadata": {
-            "Task": "shopee_slide"
-        }
-    }
-}
-```
-
-Пример изображения (*image_base64*):
-
-![](ex6.png)
