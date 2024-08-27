@@ -50,11 +50,11 @@ https://api.capmonster.cloud/createTask
 
 **示例图像**：
 
-背景图像(*background_base64*):
+背景图像 (*background_base64*):
 
 ![](ex1.png)
 
-圆形图像(*circle_base64*):
+圆形图像 (*circle_base64*):
 
 ![](ex2.png)
 
@@ -93,14 +93,50 @@ https://api.capmonster.cloud/createTask
 
 **示例图像**:
 
-背景图像(*background_base64*):
+背景图像 (*background_base64*):
 
 ![](ex3.png)
 
-环形图像(*ring_base64*):
+环形图像 (*ring_base64*):
 
 ![](ex4.png)
 
-圆形图像(*circle_base64*):
+圆形图像 (*circle_base64*):
 
 ![](ex5.png)
+
+
+### **shopee_slide**
+
+在请求中我们传递图像：带有滑块的背景。
+
+**响应**：所需拼图的左上角的 X,Y 坐标和右下角的 X,Y 坐标。
+
+**请求示例**：
+
+:::info 方法
+```http
+https://api.capmonster.cloud/createTask
+```
+:::
+```json
+{
+    "clientKey": "API_KEY",
+    "task": {
+        "type": "ComplexImageTask",
+        "class": "recognition",
+        "imagesBase64": [
+			"{image_base64}"
+		],
+        "metadata": {
+            "Task": "shopee_slide"
+        }
+    }
+}
+```
+
+**示例图像**：
+
+图片示例 (*image_base64*):
+
+![](ex6.png)

@@ -86,6 +86,10 @@ sidebar_position: 5
         <tr>
             <td align="center">yandexwave</td>
         </tr>
+		<tr>
+            <td align="center">partiallyblur</td>
+			<td align="center">![](images\partiallyblur.png)</td>
+        </tr>
         <tr>
             <td align="center">universal (все остальные текстовые капчи)</td>
             <td align="center">![](images\universal.png)</td>
