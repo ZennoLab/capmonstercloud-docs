@@ -3,6 +3,8 @@ sidebar_position: 7
 ---
 # Token acceptance issues
 
+If you encounter issues with token acceptance, please contact our support team. We will promptly take the necessary actions to resolve the issue.
+
 ## What to do if a site is only accepting a portion of tokens from CapMonster Cloud?
 
 ## **Description**
