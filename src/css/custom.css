@@ -393,4 +393,22 @@ a[class*='cardContainer'] {
 .full-width-tabs li{
   width: 100%;
   justify-content: center;
+  
+}
+
+.filled-tabs li.tabs__item--active {
+  background: #7D6EFF;
+  color: white
+}
+
+.filled-tabs li{
+  border-bottom: 2px solid #7D6EFF;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.bordered-panel {
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid #f0f2f5;
 }
