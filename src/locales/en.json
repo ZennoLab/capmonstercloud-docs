@@ -15,5 +15,7 @@
   "priceSubTitle": "Proxy price inclusions*: save with CapMonster Cloud",
   "priceSubTooltipText": "Excluding Cloudflare Bot Challenge, Cloudflare Turnstile",
   "metaTitle": "CapMonster Cloud Docs | How to Bypass Any Type of Captcha",
-  "metaDescription": "How to  bypass  reCAPTCHA, hCaptcha and other types of captcha by CapMonster Cloud."
+  "metaDescription": "How to  bypass  reCAPTCHA, hCaptcha and other types of captcha by CapMonster Cloud.",
+  "tokenProblems": "Are you experiencing issues obtaining the token?",
+  "callSupport": "Contact support"
 }
