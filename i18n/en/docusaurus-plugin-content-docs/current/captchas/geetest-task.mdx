@@ -34,8 +34,8 @@ V4 (captcha_id = gt)
 
 ### **Request parameters**
 
-<Tabs className="full-width-tabs filled-tabs">
-  <TabItem value="intelligent" label="GeeTestTask" className="bordered-panel">
+<Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
+  <TabItem value="proxy" label="GeeTestTask (using proxy)" className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **GeeTestTask**
 
@@ -87,7 +87,7 @@ V4 (captcha_id = gt)
     <ParamItem title="userAgent" type="string" />
     Browser User-Agent used to recognize captcha.
   </TabItem>
-  <TabItem value="slide" label="GeeTestTaskProxyless" default className="bordered-panel">
+  <TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **GeeTestTaskProxyless**
 
@@ -121,22 +121,23 @@ V4 (captcha_id = gt)
   </TabItem>
 </Tabs>
 
+<br />
 
-## **GeeTest V3**
+## <span style={{fontSize: '2.25rem'}}>**GeeTest V3**</span>
 
 ### **Possible captcha variants**
 
 <Tabs className="full-width-tabs">
-  <TabItem value="intelligent" label="Intelligent mode" default>
+  <TabItem value="intelligent" label="Intelligent mode" default className="bordered-panel">
     ![](intelligent.png)
   </TabItem>
-  <TabItem value="slide" label="Slide CAPTCHA">
+  <TabItem value="slide" label="Slide CAPTCHA" className="bordered-panel">
     ![](slide.png)
   </TabItem>
-  <TabItem value="icon" label="Icon CAPTCHA">
+  <TabItem value="icon" label="Icon CAPTCHA" className="bordered-panel">
     ![](icon.png)
   </TabItem>
-  <TabItem value="space" label="Space CAPTCHA">
+  <TabItem value="space" label="Space CAPTCHA" className="bordered-panel">
     ![](space.png)
   </TabItem>
 </Tabs>
@@ -145,15 +146,14 @@ V4 (captcha_id = gt)
 
 ### **Request example**
 
+<Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
+  <TabItem value="proxy" label="GeeTestTask (using proxy)" className="bordered-panel">
+
 :::info Method
 ```http
 https://api.capmonster.cloud/createTask
 ```
 :::
-
-
-<Tabs className="full-width-tabs filled-tabs">
-  <TabItem value="intelligent" label="GeeTestTask" className="bordered-panel">
 
 ```json 
   {
@@ -173,7 +173,13 @@ https://api.capmonster.cloud/createTask
   }
 ```
   </TabItem>
-  <TabItem value="slide" label="GeeTestTaskProxyless" default className="bordered-panel">
+  <TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="bordered-panel">
+
+:::info Method
+```http
+https://api.capmonster.cloud/createTask
+```
+:::
 
 ```json
 {
@@ -193,7 +199,7 @@ https://api.capmonster.cloud/createTask
 </Tabs>
 
 
-**Response example**
+### **Response example**
 ```json
 {
   "errorId":0,
@@ -230,22 +236,26 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the res
   }
 }
 ```
+<br />
 
-## **GeeTest V4**
+## <span style={{fontSize: '2.25rem'}}>**GeeTest V4**</span>
 
 ### **Possible captcha variant**
 
 ![](geetest4.png)
 
+
+
 ### **Request example**
+
+<Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
+  <TabItem value="proxy" label="GeeTestTask (using proxy)" className="bordered-panel">
+
 :::info Method
 ```http
 https://api.capmonster.cloud/createTask
 ```
 :::
-
-<Tabs className="full-width-tabs filled-tabs">
-  <TabItem value="intelligent" label="GeeTestTask" className="bordered-panel">
 
 ```json
 {
@@ -269,7 +279,13 @@ https://api.capmonster.cloud/createTask
 }
 ```
   </TabItem>
-  <TabItem value="slide" label="GeeTestTaskProxyless" default className="bordered-panel">
+  <TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="bordered-panel">
+
+:::info Method
+```http
+https://api.capmonster.cloud/createTask
+```
+:::
 
 ```json
 {
