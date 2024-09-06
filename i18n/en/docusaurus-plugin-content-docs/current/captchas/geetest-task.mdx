@@ -17,7 +17,7 @@ The result of solving the problem is three or five tokens for submitting the for
 Proxies with IP authorization are not yet supported.
 :::
 
-## **Object structure**
+## Object structure
 
 :::info
 - The `gt`, `challenge` and `geetestApiServerSubdomain` parameters are most often found inside the `initGeetest` JavaScript function.
@@ -32,7 +32,7 @@ V4 (captcha_id = gt)
 :::
 
 
-### **Request parameters**
+### Request parameters
 
 <Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
   <TabItem value="proxy" label="GeeTestTask (using proxy)" className="bordered-panel">
@@ -123,9 +123,9 @@ V4 (captcha_id = gt)
 
 <br />
 
-## <span style={{fontSize: '2.25rem'}}>**GeeTest V3**</span>
+## <span style={{fontSize: '2.25rem'}}>GeeTest V3</span>
 
-### **Possible captcha variants**
+### Possible captcha variants
 
 <Tabs className="full-width-tabs">
   <TabItem value="intelligent" label="Intelligent mode" default className="bordered-panel">
@@ -144,7 +144,7 @@ V4 (captcha_id = gt)
 
 
 
-### **Request example**
+### Create Task Request example
 
 <Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
   <TabItem value="proxy" label="GeeTestTask (using proxy)" className="bordered-panel">
@@ -199,7 +199,7 @@ https://api.capmonster.cloud/createTask
 </Tabs>
 
 
-### **Response example**
+### Create Task Response example
 ```json
 {
   "errorId":0,
@@ -207,23 +207,44 @@ https://api.capmonster.cloud/createTask
 }
 ```
 
-### **Getting the result**
+### Get task result request example
+
+
+ <TabItem value="any" label="GeeTestTaskProxyless (without proxy)" default className="bordered-panel">
 :::info Method
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
 :::
+
+```json
+{
+  "clientKey":"API_KEY",
+  "taskId": 407533072
+}
+```
+</TabItem>
+
+<br />
+
 Use the [getTaskResult](../api/methods/get-task-result.md) method to get the result of GeeTest recognition. Depending on the system load, you will receive a response after a time in the range from 10 s to 30 s.
 
-<table><tr>
-<th><b>Property</b></th><th><b>Type</b></th><th><b>Description</b></th>
-</tr>
-<tr><td>challenge</td><td>String</td><td rowspan="3">All three parameters are required when submitting the form on the target site.</td></tr>
-<tr><td>validate</td><td>String</td></tr>
-<tr><td>seccode</td><td>String</td></tr>
-</table>
+### Result response parameters
 
-**Example:**
+<TabItem value="any" label="GeeTestTaskProxyless (without proxy)" default className="bordered-panel">
+  <ParamItem title="errorId" type="number" response/>
+  Error code
+  <ParamItem title="status" type="string" response/>
+  Status
+  <ParamItem title="solution" type="object" response>
+    All three parameters are required when submitting the form on the target site.
+    <ParamItem title="challenge" type="string" response/> <br />
+    <ParamItem title="validate" type="string" response/> <br />
+    <ParamItem title="seccode" type="string" response/> <br />
+  </ParamItem>
+</TabItem>
+
+### Result response example:
 
 ```json
 {
@@ -238,15 +259,15 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the res
 ```
 <br />
 
-## <span style={{fontSize: '2.25rem'}}>**GeeTest V4**</span>
+## <span style={{fontSize: '2.25rem'}}>GeeTest V4</span>
 
-### **Possible captcha variant**
+### Possible captcha variant
 
 ![](geetest4.png)
 
 
 
-### **Request example**
+### Create Task Request example
 
 <Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
   <TabItem value="proxy" label="GeeTestTask (using proxy)" className="bordered-panel">
@@ -307,7 +328,7 @@ https://api.capmonster.cloud/createTask
   </TabItem>
 </Tabs>
 
-**Response example**
+### Create Task Response example
 
 ```json
 {
@@ -316,28 +337,45 @@ https://api.capmonster.cloud/createTask
 }
 ```
 
-### **Getting the result**
+### Get task result request example
+
+<TabItem value="any" label="GeeTestTaskProxyless (without proxy)" default className="bordered-panel">
 :::info Method
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
 :::
+
+```json
+{
+  "clientKey":"API_KEY",
+  "taskId": 407533072
+}
+```
+</TabItem>
+
+<br />
+
 Use the [getTaskResult](../api/methods/get-task-result.md) to get the result of GeeTest recognition. Depending on the system load, you will receive a response after a time in the range from 10 s to 30 s.
 
-<table>
-<tr>
-<th><b>Property</b></th><th><b>Type</b></th><th><b>Description</b></th>
-</tr>
-<tr>
-<td>captcha_id</td><td>String</td><td rowspan="5">All five parameters are required when submitting the form on the target site.<br />input[name=captcha_id]<br />input[name=lot_number]<br />input[name=pass_token]<br />input[name=gen_time]<br />input[name=captcha_output]</td>
-</tr>
-<tr><td>lot_number</td><td>String</td></tr>
-<tr><td>pass_token</td><td>String</td></tr>
-<tr><td>gen_time</td><td>String</td></tr>
-<tr><td>captcha_output</td><td>String</td></tr>
-</table>
+### Result response parameters
 
-**Example:**
+<TabItem value="any" label="GeeTestTaskProxyless (without proxy)" default className="bordered-panel">
+  <ParamItem title="errorId" type="number" response/>
+  Error code
+  <ParamItem title="status" type="ready | " response/>
+  Status
+  <ParamItem title="solution" type="object" response>
+    All five parameters are required when submitting the form on the target site.<br />input[name=captcha_id]<br />input[name=lot_number]<br />input[name=pass_token]<br />input[name=gen_time]<br />input[name=captcha_output]
+    <ParamItem title="captcha_id" type="string" response/> <br />
+    <ParamItem title="lot_number" type="string" response/> <br />
+    <ParamItem title="pass_token" type="string" response/> <br />
+    <ParamItem title="gen_time" type="string" response/> <br />
+    <ParamItem title="captcha_output" type="string" response/> <br />
+  </ParamItem>
+</TabItem>
+
+### Result response example:
 ```json
 {
   "errorId":0,
