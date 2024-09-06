@@ -385,3 +385,7 @@ a[class*='cardContainer'] {
   object-fit: cover;
   margin-bottom: 30px;
 }
+
+.markdown li {
+  margin-top: var(--ifm-list-item-margin);
+}
