@@ -389,3 +389,8 @@ a[class*='cardContainer'] {
 .markdown li {
   margin-top: var(--ifm-list-item-margin);
 }
+
+.full-width-tabs li{
+  width: 100%;
+  justify-content: center;
+}
