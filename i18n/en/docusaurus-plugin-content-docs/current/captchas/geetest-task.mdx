@@ -52,14 +52,14 @@ V4 (captcha_id = gt)
     It is necessary to examine the requests and find the one in which this value is returned and, before each creation of the recognition task, execute this request and parse the challenge from it.
     </p>
 
+    <ParamItem title="version" type="integer" required="required only for V4"/>
+    Version number (default is 3). Possible values: 3, 4.
+
     <ParamItem title="geetestApiServerSubdomain" type="string" />
     Geetest API subdomain server (must be different from api.geetest.com). <br />Optional parameter. May be required for some sites.
 
     <ParamItem title="geetestGetLib" type="string" />
     Path to the captcha script to display it on the page. <br /> Optional parameter. May be required for some sites. <br />Send JSON as a string.
-
-    <ParamItem title="version" type="integer" />
-    Version number (default is 3). Possible values: 3, 4.
 
     <ParamItem title="initParameters" type="object" />
     Additional parameters for version 4, used together with “riskType” (captcha type/characteristics of its verification).
@@ -104,14 +104,14 @@ V4 (captcha_id = gt)
     It is necessary to examine the requests and find the one in which this value is returned and, before each creation of the recognition task, execute this request and parse the challenge from it.
     </p>
 
+    <ParamItem title="version" type="integer" required="required only for V4"/>
+    Version number (default is 3). Possible values: 3, 4.
+
     <ParamItem title="geetestApiServerSubdomain" type="string" />
     Geetest API subdomain server (must be different from api.geetest.com). <br />Optional parameter. May be required for some sites.
 
     <ParamItem title="geetestGetLib" type="string" />
     Path to the captcha script to display it on the page. <br /> Optional parameter. May be required for some sites. <br />Send JSON as a string.
-
-    <ParamItem title="version" type="integer" />
-    Version number (default is 3). Possible values: 3, 4.
 
     <ParamItem title="initParameters" type="object" />
     Additional parameters for version 4, used together with “riskType” (captcha type/characteristics of its verification).
