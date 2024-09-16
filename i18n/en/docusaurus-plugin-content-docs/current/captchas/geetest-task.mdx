@@ -6,6 +6,8 @@ sidebar_label: GeeTestTask
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
 
 # GeeTestTask
 This type of task is for solving GeeTest captcha using your proxies.
@@ -144,9 +146,9 @@ V4 (captcha_id = gt)
 
 
 
-### Create Task Request example
+### Create Task Request
 
-<Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="proxy" label="GeeTestTask (using proxy)" className="bordered-panel">
 
 :::info Method
@@ -173,14 +175,14 @@ https://api.capmonster.cloud/createTask
   }
 ```
   </TabItem>
-  <TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="bordered-panel">
-
-:::info Method
-```http
-https://api.capmonster.cloud/createTask
-```
-:::
-
+  <TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+<MethodDescription>
+**Request**
 ```json
 {
     "clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
@@ -194,12 +196,7 @@ https://api.capmonster.cloud/createTask
     }
 }
 ```
-
-  </TabItem>
-</Tabs>
-
-
-### Create Task Response example
+**Response**
 ```json
 {
   "errorId":0,
@@ -207,45 +204,32 @@ https://api.capmonster.cloud/createTask
 }
 ```
 
-### Get task result request example
+</MethodDescription>
+  </TabItem>
+</Tabs>
+
+<br />
+
+Use the [getTaskResult](../api/methods/get-task-result.md) method to get the result of GeeTest recognition. Depending on the system load, you will receive a response after a time in the range from 10 s to 30 s.
+
+### Get task result
 
 
- <TabItem value="any" label="GeeTestTaskProxyless (without proxy)" default className="bordered-panel">
-:::info Method
+  <TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
+    <MethodItem>
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
-:::
-
+    </MethodItem>
+    <MethodDescription>
+**Request**
 ```json
 {
   "clientKey":"API_KEY",
   "taskId": 407533072
 }
 ```
-</TabItem>
-
-<br />
-
-Use the [getTaskResult](../api/methods/get-task-result.md) method to get the result of GeeTest recognition. Depending on the system load, you will receive a response after a time in the range from 10 s to 30 s.
-
-### Result response parameters
-
-<TabItem value="any" label="GeeTestTaskProxyless (without proxy)" default className="bordered-panel">
-  <ParamItem title="errorId" type="number" response/>
-  Error code
-  <ParamItem title="status" type="string" response/>
-  Status
-  <ParamItem title="solution" type="object" response>
-    All three parameters are required when submitting the form on the target site.
-    <ParamItem title="challenge" type="string" response/> <br />
-    <ParamItem title="validate" type="string" response/> <br />
-    <ParamItem title="seccode" type="string" response/> <br />
-  </ParamItem>
-</TabItem>
-
-### Result response example:
-
+**Response**
 ```json
 {
   "errorId":0,
@@ -257,6 +241,9 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the res
   }
 }
 ```
+  </MethodDescription>
+  </TabItem>
+
 <br />
 
 ## <span style={{fontSize: '2.25rem'}}>GeeTest V4</span>

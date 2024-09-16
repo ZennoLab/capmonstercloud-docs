@@ -412,3 +412,26 @@ a[class*='cardContainer'] {
   border-radius: 10px;
   border: 1px solid #f0f2f5;
 }
+
+.request-tabs {
+  margin-bottom: -1rem;
+}
+
+.method-panel {
+  border: 1px solid #f0f2f5;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.method-panel-full {
+  border: 1px solid #f0f2f5;
+  border-radius: 10px;
+}
+
+.method-item .theme-code-block {
+  margin-bottom: 0;
+}
+
+.method-item code {
+  background: white;
+}
