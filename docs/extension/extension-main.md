@@ -23,7 +23,7 @@ sidebar_position: 0
 <details>
     <summary>Ручная установка расширения</summary>
 
-1. Скачайте [архив с раcширением](https://drive.google.com/file/d/11pVyiPltRW_vEPPnRnQJLNiX0J0GVhBe/view?usp=drive_link).
+1. Скачайте [архив с раcширением](https://drive.google.com/file/d/10xXeDqllYo6Ilvr5lUXEVIFw283QzPFL/view?usp=drive_link).
 
 2. Распакуйте скачанный архив в папку с любым именем. 
    
