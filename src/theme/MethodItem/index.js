@@ -1,9 +1,12 @@
 import React from 'react';
+import styles from './styles.module.css';
 
-const MethodItem = ({ type = 'GET', children }) => {
+const MethodItem = ({ type = 'POST', children }) => {
   return (
-    <div style={{ fontSize: '16px', fontWeight: 'bold' }} className="method-item">
-      {children && (<div style={{ padding: '17px', background: '#EBF5FF', borderBottom: '1px solid #D2E9FF'  }}>
+    <div className={`${styles.wrap} method-item`}>
+      
+      {children && (<div className={styles.childrenWrap}>
+        <div className={styles.method}>{type}</div>
         {children}
       </div>)}
     </div>
