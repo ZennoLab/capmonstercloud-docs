@@ -51,3 +51,7 @@
 .hiddenBlock {
   display: none !important;
 }
+
+.mainText {
+  color: #14193C;
+}
