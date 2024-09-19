@@ -14,6 +14,7 @@ import Footer from '@theme/Footer';
 import LayoutProvider from '@theme/Layout/Provider';
 import ErrorPageContent from '@theme/ErrorPageContent';
 import styles from './styles.module.css';
+import BadTokenBlock from '../BadTokenBlock';
 export default function Layout(props) {
   const {
     children,
@@ -82,6 +83,8 @@ export default function Layout(props) {
       <AnnouncementBar />
 
       <Navbar />
+
+      <BadTokenBlock />
 
       <div
         id={SkipToContentFallbackId}
