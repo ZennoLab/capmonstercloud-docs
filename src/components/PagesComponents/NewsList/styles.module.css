@@ -5,6 +5,9 @@
   margin-bottom: 8px;
 }
 
+html[data-theme=dark] .newsArticleTitle {
+  color: #b5a1ff;
+}
 .newsArticleTitle {
   display: block;
   color: #14193C;

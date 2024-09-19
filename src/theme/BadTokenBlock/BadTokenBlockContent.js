@@ -30,7 +30,7 @@ const BadTokenBlockContent = ({ isMobile }) => {
       <span className={styles.supportIconWrap}>
         <SupportIcon />
       </span>
-      <span>
+      <span className={styles.mainText}>
         {tokenProblems}<br /> 
         <a href="https://helpdesk.zennolab.com/conversation/new" target='_blank'> {callSupport}</a>
       </span>
