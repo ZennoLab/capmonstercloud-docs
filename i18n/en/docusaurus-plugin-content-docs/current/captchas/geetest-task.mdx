@@ -33,10 +33,63 @@ V4 (captcha_id = gt)
 ![](Aspose.Words.09e28b99-ec8b-4638-848b-cdd6fefc7ac8.002.png)
 :::
 
+<br />
 
-### Request parameters
+## <span style={{fontSize: '2.25rem'}}>GeeTest V3</span>
+
+### <span style={{fontSize: '1.5rem'}}>Possible captcha variants</span>
+
+<Tabs className="full-width-tabs">
+  <TabItem value="intelligent" label="Intelligent mode" default className="bordered-panel">
+    ![](intelligent.png)
+  </TabItem>
+  <TabItem value="slide" label="Slide CAPTCHA" className="bordered-panel">
+    ![](slide.png)
+  </TabItem>
+  <TabItem value="icon" label="Icon CAPTCHA" className="bordered-panel">
+    ![](icon.png)
+  </TabItem>
+  <TabItem value="space" label="Space CAPTCHA" className="bordered-panel">
+    ![](space.png)
+  </TabItem>
+</Tabs>
+
+
+### <span style={{fontSize: '1.5rem'}}>Request parameters</span>
 
 <Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
+<TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="bordered-panel">
+    <ParamItem title="type" required type="string" />
+    **GeeTestTaskProxyless**
+
+    <ParamItem title="websiteURL" required type="string" />
+    Address of the page on which the captcha is solved.
+
+    <ParamItem title="gt" required type="string" />
+    The GeeTest identifier key for the domain. Static value, rarely updated.<br />If v4 then this is the clientId parameter.
+
+    <ParamItem title="challenge" required="required only for V3" type="string" />
+    <p>
+    A dynamic key.<br />Each time our API is called, we need to get a new key value. If the captcha is loaded on the page, then the `challenge` value is no longer valid and you will get the [error](../api/api-errors.md) `ERROR_TOKEN_EXPIRED`. <br />
+    You will be charged for tasks with `ERROR_TOKEN_EXPIRED` error.
+    It is necessary to examine the requests and find the one in which this value is returned and, before each creation of the recognition task, execute this request and parse the challenge from it.
+    </p>
+
+    <ParamItem title="version" type="integer" required="required only for V4"/>
+    Version number (default is 3). Possible values: 3, 4.
+
+    <ParamItem title="geetestApiServerSubdomain" type="string" />
+    Geetest API subdomain server (must be different from api.geetest.com). <br />Optional parameter. May be required for some sites.
+
+    <ParamItem title="geetestGetLib" type="string" />
+    Path to the captcha script to display it on the page. <br /> Optional parameter. May be required for some sites. <br />Send JSON as a string.
+
+    <ParamItem title="initParameters" type="object" />
+    Additional parameters for version 4, used together with “riskType” (captcha type/characteristics of its verification).
+
+    <ParamItem title="userAgent" type="string" />
+    Browser User-Agent used to recognize captcha.
+  </TabItem>
   <TabItem value="proxy" label="GeeTestTask (using proxy)" className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **GeeTestTask**
@@ -89,61 +142,8 @@ V4 (captcha_id = gt)
     <ParamItem title="userAgent" type="string" />
     Browser User-Agent used to recognize captcha.
   </TabItem>
-  <TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="bordered-panel">
-    <ParamItem title="type" required type="string" />
-    **GeeTestTaskProxyless**
-
-    <ParamItem title="websiteURL" required type="string" />
-    Address of the page on which the captcha is solved.
-
-    <ParamItem title="gt" required type="string" />
-    The GeeTest identifier key for the domain. Static value, rarely updated.<br />If v4 then this is the clientId parameter.
-
-    <ParamItem title="challenge" required="required only for V3" type="string" />
-    <p>
-    A dynamic key.<br />Each time our API is called, we need to get a new key value. If the captcha is loaded on the page, then the `challenge` value is no longer valid and you will get the [error](../api/api-errors.md) `ERROR_TOKEN_EXPIRED`. <br />
-    You will be charged for tasks with `ERROR_TOKEN_EXPIRED` error.
-    It is necessary to examine the requests and find the one in which this value is returned and, before each creation of the recognition task, execute this request and parse the challenge from it.
-    </p>
-
-    <ParamItem title="version" type="integer" required="required only for V4"/>
-    Version number (default is 3). Possible values: 3, 4.
-
-    <ParamItem title="geetestApiServerSubdomain" type="string" />
-    Geetest API subdomain server (must be different from api.geetest.com). <br />Optional parameter. May be required for some sites.
-
-    <ParamItem title="geetestGetLib" type="string" />
-    Path to the captcha script to display it on the page. <br /> Optional parameter. May be required for some sites. <br />Send JSON as a string.
-
-    <ParamItem title="initParameters" type="object" />
-    Additional parameters for version 4, used together with “riskType” (captcha type/characteristics of its verification).
-
-    <ParamItem title="userAgent" type="string" />
-    Browser User-Agent used to recognize captcha.
-  </TabItem>
+  
 </Tabs>
-
-<br />
-
-## <span style={{fontSize: '2.25rem'}}>GeeTest V3</span>
-
-### <span style={{fontSize: '1.5rem'}}>Possible captcha variants</span>
-
-<Tabs className="full-width-tabs">
-  <TabItem value="intelligent" label="Intelligent mode" default className="bordered-panel">
-    ![](intelligent.png)
-  </TabItem>
-  <TabItem value="slide" label="Slide CAPTCHA" className="bordered-panel">
-    ![](slide.png)
-  </TabItem>
-  <TabItem value="icon" label="Icon CAPTCHA" className="bordered-panel">
-    ![](icon.png)
-  </TabItem>
-  <TabItem value="space" label="Space CAPTCHA" className="bordered-panel">
-    ![](space.png)
-  </TabItem>
-</Tabs>
-
 
 
 ### <span style={{fontSize: '1.5rem'}}>Create task</span>
@@ -294,12 +294,104 @@ document.addEventListener('DOMContentLoaded', async () => {
   
 </Tabs>
 
+<br />
+
 ## <span style={{fontSize: '2.25rem'}}>GeeTest V4</span>
 
 ### Possible captcha variant
 
 ![](geetest4.png)
 
+
+### <span style={{fontSize: '1.5rem'}}>Request parameters</span>
+
+<Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
+<TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="bordered-panel">
+    <ParamItem title="type" required type="string" />
+    **GeeTestTaskProxyless**
+
+    <ParamItem title="websiteURL" required type="string" />
+    Address of the page on which the captcha is solved.
+
+    <ParamItem title="gt" required type="string" />
+    The GeeTest identifier key for the domain. Static value, rarely updated.<br />If v4 then this is the clientId parameter.
+
+    <ParamItem title="challenge" required="required only for V3" type="string" />
+    <p>
+    A dynamic key.<br />Each time our API is called, we need to get a new key value. If the captcha is loaded on the page, then the `challenge` value is no longer valid and you will get the [error](../api/api-errors.md) `ERROR_TOKEN_EXPIRED`. <br />
+    You will be charged for tasks with `ERROR_TOKEN_EXPIRED` error.
+    It is necessary to examine the requests and find the one in which this value is returned and, before each creation of the recognition task, execute this request and parse the challenge from it.
+    </p>
+
+    <ParamItem title="version" type="integer" required="required only for V4"/>
+    Version number (default is 3). Possible values: 3, 4.
+
+    <ParamItem title="geetestApiServerSubdomain" type="string" />
+    Geetest API subdomain server (must be different from api.geetest.com). <br />Optional parameter. May be required for some sites.
+
+    <ParamItem title="geetestGetLib" type="string" />
+    Path to the captcha script to display it on the page. <br /> Optional parameter. May be required for some sites. <br />Send JSON as a string.
+
+    <ParamItem title="initParameters" type="object" />
+    Additional parameters for version 4, used together with “riskType” (captcha type/characteristics of its verification).
+
+    <ParamItem title="userAgent" type="string" />
+    Browser User-Agent used to recognize captcha.
+  </TabItem>
+  <TabItem value="proxy" label="GeeTestTask (using proxy)" className="bordered-panel">
+    <ParamItem title="type" required type="string" />
+    **GeeTestTask**
+
+    <ParamItem title="websiteURL" required type="string" />
+    Address of the page on which the captcha is solved.
+
+    <ParamItem title="gt" required type="string" />
+    The GeeTest identifier key for the domain. Static value, rarely updated.<br />If v4 then this is the clientId parameter.
+
+    <ParamItem title="challenge" required="required only for V3" type="string" />
+    <p>
+    A dynamic key.<br />Each time our API is called, we need to get a new key value. If the captcha is loaded on the page, then the `challenge` value is no longer valid and you will get the [error](../api/api-errors.md) `ERROR_TOKEN_EXPIRED`. <br />
+    You will be charged for tasks with `ERROR_TOKEN_EXPIRED` error.
+    It is necessary to examine the requests and find the one in which this value is returned and, before each creation of the recognition task, execute this request and parse the challenge from it.
+    </p>
+
+    <ParamItem title="version" type="integer" required="required only for V4"/>
+    Version number (default is 3). Possible values: 3, 4.
+
+    <ParamItem title="geetestApiServerSubdomain" type="string" />
+    Geetest API subdomain server (must be different from api.geetest.com). <br />Optional parameter. May be required for some sites.
+
+    <ParamItem title="geetestGetLib" type="string" />
+    Path to the captcha script to display it on the page. <br /> Optional parameter. May be required for some sites. <br />Send JSON as a string.
+
+    <ParamItem title="initParameters" type="object" />
+    Additional parameters for version 4, used together with “riskType” (captcha type/characteristics of its verification).
+
+    <ParamItem title="proxyType" required type="string" />
+    **http** - regular http/https proxy;<br />**https** - try this option only if "http" doesn't work (required for some custom proxies);<br />**socks4** - socks4 proxy;<br />**socks5** - socks5 proxy.
+
+    <ParamItem title="proxyAddress" required type="string" />
+    <p>
+      IPv4/IPv6 proxy IP address. Not allowed:
+      - using of hostnames;
+      - using transparent proxies (where you can see the client's IP);
+      - using proxies on local machines.
+    </p>
+
+    <ParamItem title="proxyPort" required type="integer" />
+    Proxy port.
+
+    <ParamItem title="proxyLogin" type="string" />
+    Proxy-server login.
+
+    <ParamItem title="proxyPassword" type="string" />
+    Proxy-server password.
+
+    <ParamItem title="userAgent" type="string" />
+    Browser User-Agent used to recognize captcha.
+  </TabItem>
+  
+</Tabs>
 
 
 ### <span style={{fontSize: '1.5rem'}}>Create task</span>
