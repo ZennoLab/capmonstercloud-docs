@@ -19,8 +19,6 @@ The result of solving the problem is three or five tokens for submitting the for
 Proxies with IP authorization are not yet supported.
 :::
 
-## Object structure
-
 :::info
 - The `gt`, `challenge` and `geetestApiServerSubdomain` parameters are most often found inside the `initGeetest` JavaScript function.
 - Also you can see in the HTML code of the page. You can find it in the `<sсript>` block, which appears after the page is fully loaded in the browser.
@@ -53,7 +51,6 @@ V4 (captcha_id = gt)
     ![](space.png)
   </TabItem>
 </Tabs>
-
 
 ### <span style={{fontSize: '1.5rem'}}>Request parameters</span>
 
@@ -270,24 +267,31 @@ https://api.capmonster.cloud/getTaskResult
 ```js
 // https://github.com/ZennoLab/capmonstercloud-client-js
 
-import { CapMonsterCloudClientFactory, ClientOptions, RecaptchaV2Request } from '@zennolab_com/capmonstercloud-client';
+import { CapMonsterCloudClientFactory, ClientOptions, GeeTestProxylessRequest, /*GeeTestRequest*/ } from '@zennolab_com/capmonstercloud-client';
 
 document.addEventListener('DOMContentLoaded', async () => {
   const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
   console.log(await cmcClient.getBalance());
 
-  const recaptchaV2Request = new RecaptchaV2Request({
-    websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high',
-    websiteKey: '6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd',
-    proxyType: 'http',
-    proxyAddress: '8.8.8.8',
-    proxyPort: 8080,
-    proxyLogin: 'proxyLoginHere',
-    proxyPassword: 'proxyPasswordHere',
-    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.132 Safari/537.36',
-  });
+  const geetestV3Request = new GeeTestProxylessRequest({
+    websiteURL: 'https://example.com/geetest.php',
+    gt: '81dc9bdb52d04dc20036dbd8313ed055',
+    challenge: 'd93591bdf7860e1e4ee2fca799911215',
+  })
 
-  console.log(await cmcClient.Solve(recaptchaV2Request));
+  // const geetestV3Request = new GeeTestRequest({
+  //   websiteURL: 'https://example.com/geetest.php',
+  //   gt: '81dc9bdb52d04dc20036dbd8313ed055',
+  //   challenge: 'd93591bdf7860e1e4ee2fca799911215',
+  //   userAgent: 'userAgentPlaceholder',
+  //   proxyType: 'https',
+  //   proxyAddress: 'https://proxy.com',
+  //   proxyPort: 6045,
+  //   proxyLogin: 'login',
+  //   proxyPassword: 'p@ssword',
+  // })
+
+  console.log(await cmcClient.Solve(geetestV3Request));
 });
 ```
   </TabItem>
@@ -298,7 +302,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 ## <span style={{fontSize: '2.25rem'}}>GeeTest V4</span>
 
-### Possible captcha variant
+### <span style={{fontSize: '1.5rem'}}>Possible captcha variant</span>
 
 ![](geetest4.png)
 
@@ -533,24 +537,39 @@ https://api.capmonster.cloud/getTaskResult
 ```js
 // https://github.com/ZennoLab/capmonstercloud-client-js
 
-import { CapMonsterCloudClientFactory, ClientOptions, RecaptchaV2Request } from '@zennolab_com/capmonstercloud-client';
+import { CapMonsterCloudClientFactory, ClientOptions, GeeTestProxylessRequest, /*GeeTestRequest*/ } from '@zennolab_com/capmonstercloud-client';
 
 document.addEventListener('DOMContentLoaded', async () => {
   const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
   console.log(await cmcClient.getBalance());
 
-  const recaptchaV2Request = new RecaptchaV2Request({
-    websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high',
-    websiteKey: '6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd',
-    proxyType: 'http',
-    proxyAddress: '8.8.8.8',
-    proxyPort: 8080,
-    proxyLogin: 'proxyLoginHere',
-    proxyPassword: 'proxyPasswordHere',
-    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.132 Safari/537.36',
+  const geetestV4Request = new GeeTestProxylessRequest({
+    websiteURL: 'https://example.com/geetest.php',
+    gt: '81dc9bdb52d04dc20036dbd8313ed055',
+    challenge: 'd93591bdf7860e1e4ee2fca799911215',
+    version: '4',
+    initParameters: {
+      riskType: 'slide',
+    },
   });
 
-  console.log(await cmcClient.Solve(recaptchaV2Request));
+  // const geetestV4Request = new GeeTestRequest({
+  //   websiteURL: 'https://example.com/geetest.php',
+  //   gt: '81dc9bdb52d04dc20036dbd8313ed055',
+  //   challenge: 'd93591bdf7860e1e4ee2fca799911215',
+  //   version: '4',
+  //   initParameters: {
+  //     riskType: 'slide',
+  //   },
+  //   userAgent: 'userAgentPlaceholder',
+  //   proxyType: 'https',
+  //   proxyAddress: 'https://proxy.com',
+  //   proxyPort: 6045,
+  //   proxyLogin: 'login',
+  //   proxyPassword: 'p@ssword',
+  // })
+
+  console.log(await cmcClient.Solve(geetestV4Request));
 });
 ```
   </TabItem>
