@@ -3,6 +3,10 @@ import qs from "qs";
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './styles.module.css';
 
+const localeMappings = {
+  'zh-Hans': 'zh'
+}
+
 const NewsList = () => {
   const { i18n } = useDocusaurusContext();
   const [news, setNews] = useState([]);
@@ -10,7 +14,7 @@ const NewsList = () => {
   const fetchNewsByLang = async (locale) => {
     const queryParams = {
       sort: { publishedAt: "desc" },
-      locale,
+      locale: localeMappings[locale] || locale,
       populate: {
         article: { populate: "*" },
       }
@@ -23,7 +27,7 @@ const NewsList = () => {
       const articleCategory = article?.attributes?.category?.data;
       const articleCategorySlug = articleCategory?.attributes?.slug
 
-      return `https://blog.capmonster.cloud/${locale}/blog/${articleCategorySlug}/${articleSlug}`
+      return `https://blog.capmonster.cloud/${localeMappings[locale] || locale}/blog/${articleCategorySlug}/${articleSlug}`
     }
 
     const urlParams = qs.stringify(queryParams);
