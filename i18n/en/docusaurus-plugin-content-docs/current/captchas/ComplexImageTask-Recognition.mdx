@@ -1,0 +1,183 @@
+---
+sidebar_position: 7
+sidebar_label: ComplexImageTask Recognition
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+
+
+# ComplexImageTask Recognition
+
+## Request parameters
+<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (without proxy)" default className="bordered-panel">
+    <ParamItem title="type" required type="string" />
+    **ComplexImageTask**
+
+    ---
+
+    <ParamItem title="class" required type="string" />
+    **recognition**
+
+    ---
+
+    <ParamItem title="imagesBase64" required type="array" />
+    Images array in base64 encoding.
+    Example: [ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”]
+
+    ---
+
+    <ParamItem title="metadata.Task" required type="string" />
+    Possible values: `oocl_rotate_new` and others <br />
+    Task name (<u>in English</u>).
+
+  </TabItem>
+
+## Create task `oocl_rotate_new`
+
+In the request we pass two images: background and circle.
+<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
+<MethodItem>
+  ```http
+  https://api.capmonster.cloud/createTask
+  ```
+</MethodItem>
+<MethodDescription>
+**Request**
+```json
+{
+    "clientKey": "API_KEY",
+    "task": {
+        "type": "ComplexImageTask",
+        "class": "recognition",
+        "imagesBase64": [
+			"{background_base64}",
+			"{circle_base64}"
+		],
+        "metadata": {
+            "Task": "oocl_rotate_new"
+        }
+    }
+}
+```
+
+Background example (*background_base64*):
+
+![](ex1.png)
+
+Circle example (*circle_base64*):
+
+![](ex2.png)
+
+**Response**
+```json
+{
+  "errorId":0,
+  "taskId":407533072
+}
+```
+
+</MethodDescription>
+</TabItem>
+
+
+## Get task result `oocl_rotate_new`
+
+<TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
+    <MethodItem>
+```http
+https://api.capmonster.cloud/getTaskResult
+```
+    </MethodItem>
+    <MethodDescription>
+**Request**
+```json
+{
+  "clientKey":"API_KEY",
+  "taskId": 407533072
+}
+```
+**Response**
+degrees by which the circle should be rotated clockwise.
+
+  </MethodDescription>
+  </TabItem>
+
+
+## Create task `oocl_rotate_double_new`
+
+In the request we pass two images: background and circle.
+<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
+<MethodItem>
+  ```http
+  https://api.capmonster.cloud/createTask
+  ```
+</MethodItem>
+<MethodDescription>
+**Request**
+```json
+{ 
+    "clientKey": "API_KEY",
+    "task": {
+        "type": "ComplexImageTask",
+        "class": "recognition",
+        "imagesBase64": [
+			"{background_base64}",
+			"{ring_base64}",
+			"{circle_base64}"
+		],
+        "metadata": {
+            "Task": "oocl_rotate_double_new"
+        }
+    }
+}
+```
+
+Background (*background_base64*):
+
+![](ex3.png)
+
+Ring (*ring_base64*):
+
+![](ex4.png)
+
+Circle (*circle_base64*):
+
+![](ex5.png)
+
+**Response**
+```json
+{
+  "errorId":0,
+  "taskId":407533072
+}
+```
+
+</MethodDescription>
+</TabItem>
+
+
+## Get task result `oocl_rotate_double_new`
+
+<TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
+    <MethodItem>
+```http
+https://api.capmonster.cloud/getTaskResult
+```
+    </MethodItem>
+    <MethodDescription>
+**Request**
+```json
+{
+  "clientKey":"API_KEY",
+  "taskId": 407533072
+}
+```
+**Response**
+degrees by which the circle should be rotated clockwise.
+
+  </MethodDescription>
+  </TabItem>

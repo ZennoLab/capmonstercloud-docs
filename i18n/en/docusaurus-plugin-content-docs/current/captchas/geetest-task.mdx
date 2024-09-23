@@ -59,11 +59,17 @@ V4 (captcha_id = gt)
     <ParamItem title="type" required type="string" />
     **GeeTestTaskProxyless**
 
+    ---
+
     <ParamItem title="websiteURL" required type="string" />
     Address of the page on which the captcha is solved.
 
+    ---
+
     <ParamItem title="gt" required type="string" />
     The GeeTest identifier key for the domain. Static value, rarely updated.<br />If v4 then this is the clientId parameter.
+
+    ---
 
     <ParamItem title="challenge" required="required only for V3" type="string" />
     <p>
@@ -72,17 +78,27 @@ V4 (captcha_id = gt)
     It is necessary to examine the requests and find the one in which this value is returned and, before each creation of the recognition task, execute this request and parse the challenge from it.
     </p>
 
+    ---
+
     <ParamItem title="version" type="integer" required="required only for V4"/>
     Version number (default is 3). Possible values: 3, 4.
+
+    ---
 
     <ParamItem title="geetestApiServerSubdomain" type="string" />
     Geetest API subdomain server (must be different from api.geetest.com). <br />Optional parameter. May be required for some sites.
 
+    ---
+
     <ParamItem title="geetestGetLib" type="string" />
     Path to the captcha script to display it on the page. <br /> Optional parameter. May be required for some sites. <br />Send JSON as a string.
 
+    ---
+
     <ParamItem title="initParameters" type="object" />
     Additional parameters for version 4, used together with “riskType” (captcha type/characteristics of its verification).
+
+    ---
 
     <ParamItem title="userAgent" type="string" />
     Browser User-Agent used to recognize captcha.
@@ -91,11 +107,17 @@ V4 (captcha_id = gt)
     <ParamItem title="type" required type="string" />
     **GeeTestTask**
 
+    ---
+
     <ParamItem title="websiteURL" required type="string" />
     Address of the page on which the captcha is solved.
 
+    ---
+
     <ParamItem title="gt" required type="string" />
     The GeeTest identifier key for the domain. Static value, rarely updated.<br />If v4 then this is the clientId parameter.
+
+    ---
 
     <ParamItem title="challenge" required="required only for V3" type="string" />
     <p>
@@ -104,20 +126,32 @@ V4 (captcha_id = gt)
     It is necessary to examine the requests and find the one in which this value is returned and, before each creation of the recognition task, execute this request and parse the challenge from it.
     </p>
 
+    ---
+
     <ParamItem title="version" type="integer" required="required only for V4"/>
     Version number (default is 3). Possible values: 3, 4.
+
+    ---
 
     <ParamItem title="geetestApiServerSubdomain" type="string" />
     Geetest API subdomain server (must be different from api.geetest.com). <br />Optional parameter. May be required for some sites.
 
+    ---
+
     <ParamItem title="geetestGetLib" type="string" />
     Path to the captcha script to display it on the page. <br /> Optional parameter. May be required for some sites. <br />Send JSON as a string.
+
+    ---
 
     <ParamItem title="initParameters" type="object" />
     Additional parameters for version 4, used together with “riskType” (captcha type/characteristics of its verification).
 
+    ---
+
     <ParamItem title="proxyType" required type="string" />
     **http** - regular http/https proxy;<br />**https** - try this option only if "http" doesn't work (required for some custom proxies);<br />**socks4** - socks4 proxy;<br />**socks5** - socks5 proxy.
+
+    ---
 
     <ParamItem title="proxyAddress" required type="string" />
     <p>
@@ -127,14 +161,22 @@ V4 (captcha_id = gt)
       - using proxies on local machines.
     </p>
 
+    ---
+
     <ParamItem title="proxyPort" required type="integer" />
     Proxy port.
+
+    ---
 
     <ParamItem title="proxyLogin" type="string" />
     Proxy-server login.
 
+    ---
+
     <ParamItem title="proxyPassword" type="string" />
     Proxy-server password.
+
+    ---
 
     <ParamItem title="userAgent" type="string" />
     Browser User-Agent used to recognize captcha.
@@ -314,11 +356,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     <ParamItem title="type" required type="string" />
     **GeeTestTaskProxyless**
 
+    ---
+
     <ParamItem title="websiteURL" required type="string" />
     Address of the page on which the captcha is solved.
 
+    ---
+
     <ParamItem title="gt" required type="string" />
     The GeeTest identifier key for the domain. Static value, rarely updated.<br />If v4 then this is the clientId parameter.
+
+    ---
 
     <ParamItem title="challenge" required="required only for V3" type="string" />
     <p>
@@ -327,17 +375,27 @@ document.addEventListener('DOMContentLoaded', async () => {
     It is necessary to examine the requests and find the one in which this value is returned and, before each creation of the recognition task, execute this request and parse the challenge from it.
     </p>
 
+    ---
+
     <ParamItem title="version" type="integer" required="required only for V4"/>
     Version number (default is 3). Possible values: 3, 4.
+
+    ---
 
     <ParamItem title="geetestApiServerSubdomain" type="string" />
     Geetest API subdomain server (must be different from api.geetest.com). <br />Optional parameter. May be required for some sites.
 
+    ---
+
     <ParamItem title="geetestGetLib" type="string" />
     Path to the captcha script to display it on the page. <br /> Optional parameter. May be required for some sites. <br />Send JSON as a string.
 
+    ---
+
     <ParamItem title="initParameters" type="object" />
     Additional parameters for version 4, used together with “riskType” (captcha type/characteristics of its verification).
+
+    ---
 
     <ParamItem title="userAgent" type="string" />
     Browser User-Agent used to recognize captcha.
@@ -346,11 +404,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     <ParamItem title="type" required type="string" />
     **GeeTestTask**
 
+    ---
+
     <ParamItem title="websiteURL" required type="string" />
     Address of the page on which the captcha is solved.
 
+    ---
+
     <ParamItem title="gt" required type="string" />
     The GeeTest identifier key for the domain. Static value, rarely updated.<br />If v4 then this is the clientId parameter.
+
+    ---
 
     <ParamItem title="challenge" required="required only for V3" type="string" />
     <p>
@@ -359,20 +423,32 @@ document.addEventListener('DOMContentLoaded', async () => {
     It is necessary to examine the requests and find the one in which this value is returned and, before each creation of the recognition task, execute this request and parse the challenge from it.
     </p>
 
+    ---
+
     <ParamItem title="version" type="integer" required="required only for V4"/>
     Version number (default is 3). Possible values: 3, 4.
+
+    ---
 
     <ParamItem title="geetestApiServerSubdomain" type="string" />
     Geetest API subdomain server (must be different from api.geetest.com). <br />Optional parameter. May be required for some sites.
 
+    ---
+
     <ParamItem title="geetestGetLib" type="string" />
     Path to the captcha script to display it on the page. <br /> Optional parameter. May be required for some sites. <br />Send JSON as a string.
+
+    ---
 
     <ParamItem title="initParameters" type="object" />
     Additional parameters for version 4, used together with “riskType” (captcha type/characteristics of its verification).
 
+    ---
+
     <ParamItem title="proxyType" required type="string" />
     **http** - regular http/https proxy;<br />**https** - try this option only if "http" doesn't work (required for some custom proxies);<br />**socks4** - socks4 proxy;<br />**socks5** - socks5 proxy.
+
+    ---
 
     <ParamItem title="proxyAddress" required type="string" />
     <p>
@@ -382,14 +458,22 @@ document.addEventListener('DOMContentLoaded', async () => {
       - using proxies on local machines.
     </p>
 
+    ---
+
     <ParamItem title="proxyPort" required type="integer" />
     Proxy port.
+
+    ---
 
     <ParamItem title="proxyLogin" type="string" />
     Proxy-server login.
 
+    ---
+
     <ParamItem title="proxyPassword" type="string" />
     Proxy-server password.
+
+    ---
 
     <ParamItem title="userAgent" type="string" />
     Browser User-Agent used to recognize captcha.

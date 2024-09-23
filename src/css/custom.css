@@ -408,9 +408,23 @@ a[class*='cardContainer'] {
 }
 
 .bordered-panel {
-  padding: 16px;
+  padding: 24px;
   border-radius: 10px;
   border: 1px solid #f0f2f5;
+  font-size: 15px;
+  color: #14193C;
+}
+
+.bordered-panel hr {
+  background: #E9EBEE;
+}
+
+
+.bordered-panel :not(.paramItem) code {
+  background: #ECF0F6;
+  color: #14193C;
+  padding:  4px 10px;
+  border: none;
 }
 
 .request-tabs {
