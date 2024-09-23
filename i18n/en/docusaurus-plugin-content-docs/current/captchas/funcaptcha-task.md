@@ -18,9 +18,9 @@ If the proxy is authorized by IP, then be sure to add **116.203.55.208** to the 
 | :- | :- | :- | :- |
 |type|String|yes|**FunCaptchaTaskProxyless** or **FunCaptchaTask** (When using a proxy).|
 |websiteURL|String|yes|Address of a webpage with FunCaptcha.|
-|funcaptchaApiJSSubdomain|String|no|A special subdomain of funcaptcha.com, from which the JS captcha widget should be loaded. It can be found in an element named `fc-token` - the value after the `surl`. It is required if you use a domain other than `client-api.arkoselabs.com`.|
-|websitePublicKey|String|yes|FunCaptcha website key. `<div id="funcaptcha" data-pkey="THAT_ONE"></div>`|
-|data|String|no|Additional parameter that may be required by FunCaptcha implementation.<br/> Use this property to send "blob" value as a stringified array. See example how it may look like: `{"blob":"HERE_COMES_THE_blob_VALUE"}`*|
+|funcaptchaApiJSSubdomain|String|no|A special service domain from which captcha resources are downloaded. It can be obtained from the network traffic log by regular expression: `https://([^.]+\\.arkoselabs\\\.com)/(?:v2\|fc\|cdn)` (the first group) or from the DOM of the captcha frame by input element with the name verification-token or fc-token (CSS selector: input[name=“fc-token”]). In its value (attribute value), which is a string of the form key=value with separator \| , you need to get the value of the surl key. Example JS code for parsing and retrieving surl: `value.split('\|').find((s) => s.startsWith('surl=')).slice(5)`.|
+|websitePublicKey|String|yes|FunCaptcha identifier key on the landing page. It can be obtained from the network traffic log by the regular expression `https://(?:iframe\|[^.]+-api)\\.arkoselabs\\.com/(?:v2/)?([0-9A-F-]+)` (the first group) or by the pk key value from the verification-token or fc-token elements (see above for recommendations on finding and parsing).|
+|data|String|no|A one-time parameter used by some sites to increase captcha protection. When loading captcha via iframe, it can be retrieved by the URL of the loaded iframe from the query-parameter data, the loading of the iframe itself must be blocked, otherwise the blob will be invalid. If the site loads captcha via JS SDK, the blob should be searched for in the network traffic of the site itself in the body of responses or in headers. To reduce the options, you can use the DevTools debugger, set breakpoint on the setConfig\(\{ line, reload the page and trace the data source through the call stack. Example parameter pass: `{“blob”: “HERE_COMES_THE_blob_VALUE”}`.|
 |proxyType|String|yes (if using **FunCaptchaTask**)| Type of the proxy<br/> **http** - usual http/https proxy;<br/>**https** - try this only if "http" doesn't work (required by some custom proxy servers);<br />**socks4** - socks4 proxy;<br />**socks5** - socks5 proxy.|
 |proxyAddress|String|yes (If using **FunCaptchaTask**)|<p>Proxy IP address IPv4/IPv6. Not allowed to use:</p><p>- host names instead of IPs</p><p>- transparent proxies (where client IP is visible)</p><p>- proxies from local networks (192.., 10.., 127...).</p>|
 |proxyPort|Integer|yes (If using **FunCaptchaTask**)|Proxy port.|
@@ -52,7 +52,7 @@ https://api.brocapgpt.com/createTask
     "proxyPort":8080,
     "proxyLogin":"proxyLoginHere",
     "proxyPassword":"proxyPasswordHere",
-    "userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+    "userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
   }
 }
 ```
@@ -137,6 +137,17 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to request ans
 |![](Funcaptcha-task-types/mouse-cheese-2.jpg)|Pick the mouse that can't reach the cheese|
 |![](Funcaptcha-task-types/total-fingers-3.jpg)|Select the image where the total fingers add up to 3|
 |![](Funcaptcha-task-types/wrong-shadow.jpg)|Pick the wrong shadow|
+|![](Funcaptcha-task-types/Orbit.jpg|Use the arrows to select the desired orbit of the object shown in the left image|
+|![](Funcaptcha-task-types/brokenjigsaw.jpg|Use the arrows to select the puzzle with the missing piece indicated in the left image|
+|![](Funcaptcha-task-types/diceico.jpg|Use the arrows to select the dice with the pictures shown in the left image|
+|![](Funcaptcha-task-types/3d_rollball_objects.jpg|Use the arrows to rotate the object in the direction shown in the left image|
+|![](Funcaptcha-task-types/car_distances.jpg|Use the arrows to choose the distance between the cars shown on the left image|
+|![](Funcaptcha-task-types/claw_machine.jpg|Use the arrows to select the claw with the object shown in the left image|
+|![](Funcaptcha-task-types/conveyor.jpg|Use the arrows to select the conveyor with the object shown in the left image|
+|![](Funcaptcha-task-types/numericalmatch.jpg|Use the arrows to select the objects shown in the left image|
+|![](Funcaptcha-task-types/icon_connect.jpg|Use the arrows to select the connected objects shown in the left image|
+|![](Funcaptcha-task-types/rat_maze.jpg|Use the arrows to select a maze with an unavailable amount of cheese for the mouse indicated in the left image|
+|![](Funcaptcha-task-types/darts_matchkey.jpg|Use the arrows to select a dart target with the score indicated on the left image|
 |![](Funcaptcha-task-types/square-three-objects.jpg)|Pick one square that shows three of the same object|
 |![](Funcaptcha-task-types/move-person-cross.png)|Use the arrows to move the person to the spot indicated by the cross|
 |![](Funcaptcha-task-types/move-person-circle.jpg)|Use the arrows to move the person to the icon indicated by the colored circle|
