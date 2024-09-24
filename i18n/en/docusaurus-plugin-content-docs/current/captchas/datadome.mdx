@@ -39,8 +39,13 @@ This task will be performed using our proxy servers. Use the received cookies in
 
     <ParamItem title="metadata.htmlPageBase64" required="required (if metadata.captchaUrl is not filled)" type="string" />
     Object that contains additional data about the captcha: `"htmlPageBase64": "..."` - a base64 encoded html page that comes with a 403 code and a Set-Cookie: datadome="..." header in response to a get request to the target site.
+
+    ---
+
     <ParamItem title="metadata.captchaUrl" required="required (if metadata.htmlPageBase64 is not filled)" type="string" />
     `"captchaUrl"` - link to the captcha. Usually it looks like this: `"https://geo.captcha-delivery.com/captcha/?initialCid=..."`.
+
+    ---
 
     <ParamItem title="metadata.datadomeCookie" required type="string" />
     Your cookies from datadome. You can get it on the page using "document.cookie" or in the Set-Cookie request header: "datadome=..." (see example request /createTask)

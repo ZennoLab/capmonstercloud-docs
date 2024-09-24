@@ -3,6 +3,12 @@ sidebar_position: 4
 sidebar_label: HCaptchaTask
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+
 # HCaptchaTask
 The object contains data for hCaptcha solving task. To provide solid universality for solving this type of task we have reproduce every piece of environment used for an automation task you plan to complete. This includes: proxy access, browser's user-agent, cookies (optionally). This approach will eliminate all possible obstacles which might implement in the future.
 
@@ -10,23 +16,121 @@ This type of captcha might be solved a bit longer than usual image captcha, but 
 
 **Important!** If you are experiencing issues with accepting hcaptcha token, please contact CapMonster Cloud support with the provided url and sitekey. We will try to solve this issue as soon as possible.
 
-## **Object structure**
+## Request parameters
 
-|**Parameter**|**Type**|**Required**|**Value**|
-| :- | :- | :- | :- |
-|type|String|yes|**HCaptchaTaskProxyless** or **HCaptchaTask (when using a proxy)**.|
-|websiteURL|String|yes|Address of a webpage with hCaptcha.|
-|websiteKey|String|yes|hCaptcha website key.|
-|isInvisible|Bool|no|Use true for invisible version of hCaptcha.|
-|data|String|no|<p>Custom data that is used in some implementations of hCaptcha, mostly with `isInvisible=true`.</p>|
-|proxyType|String|yes (for **HCaptchaTask**)|**http** - regular http/https proxy;<br />**https** - try this option only if "http" does not work (required for some custom proxies);<br />**socks4** - socks4 proxy;<br />**socks5** - socks5 proxy.|
-|proxyAddress|String|yes (for **HCaptchaTask**)|<p>IP proxy address IPv4/IPv6. Not allowed:</p><p>- using hostnames;</p><p>- using transparent proxies (where you can see the client’s IP);</p><p>- using proxies on local machines.</p>|
-|proxyPort|Integer|yes (for **HCaptchaTask**)|Proxy port.|
-|proxyLogin|String|no|Proxy server login.|
-|proxyPassword|String|no|Proxy server password.|
-|userAgent|String|no|**Pass only the actual UA from Windows OS. Now this is:** userAgentPlaceholder|
-|cookies|String|no|<p>Additional cookies which we must use during interaction with target page.</p><p>**Format**: cookiename1=cookievalue1; cookiename2=cookievalue2</p>|
-|fallbackToActualUA|Bool|no|<p>**true** - when specifying this parameter, we ignore the irrelevant User Agent that users send in the request, and return our own (relevant) one with getTaskResult. This will improve the acceptance of tokens.</p><p>**false** - we insert the User Agent that is specified in the request. If the User Agent is invalid, you will receive an error ERROR_WRONG_USERAGENT (USERAGENT IS EXPIRED in the log).</p>|
+<Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
+<TabItem value="proxyless" label="HCaptchaTaskProxyless (without proxy)" default className="bordered-panel">
+    <ParamItem title="type" required type="string" />
+    **HCaptchaTaskProxyless**
+
+    ---
+
+    <ParamItem title="websiteURL" required type="string" />
+    Address of a webpage with hCaptcha.
+
+    ---
+
+    <ParamItem title="websiteKey" required type="string" />
+    hCaptcha website key.
+
+    ---
+
+    <ParamItem title="isInvisible" type="boolean" />
+    Use true for invisible version of hCaptcha.
+
+    ---
+
+    <ParamItem title="data" type="string" />
+    <p>Custom data that is used in some implementations of hCaptcha, mostly with `isInvisible=true`.</p>
+
+    ---
+
+    <ParamItem title="userAgent" type="string" />
+    **Pass only the actual UA from Windows OS. Now this is:** userAgentPlaceholder
+
+    ---
+
+    <ParamItem title="cookies" type="string" />
+    <p>Additional cookies which we must use during interaction with target page.</p><p>**Format**: cookiename1=cookievalue1; cookiename2=cookievalue2</p>
+
+    ---
+
+    <ParamItem title="fallbackToActualUA" type="boolean" />
+    <p>**true** - when specifying this parameter, we ignore the irrelevant User Agent that users send in the request, and return our own (relevant) one with getTaskResult. This will improve the acceptance of tokens.</p><p>**false** - we insert the User Agent that is specified in the request. If the User Agent is invalid, you will receive an error ERROR_WRONG_USERAGENT (USERAGENT IS EXPIRED in the log).</p>
+
+  </TabItem>
+  <TabItem value="proxy" label="HCaptchaTask (using proxy)" className="bordered-panel">
+    <ParamItem title="type" required type="string" />
+    **HCaptchaTask**
+
+    ---
+
+    <ParamItem title="websiteURL" required type="string" />
+    Address of a webpage with hCaptcha.
+
+    ---
+
+    <ParamItem title="websiteKey" required type="string" />
+    hCaptcha website key.
+
+    ---
+
+    <ParamItem title="isInvisible" type="boolean" />
+    Use true for invisible version of hCaptcha.
+
+    ---
+
+    <ParamItem title="data" type="string" />
+    <p>Custom data that is used in some implementations of hCaptcha, mostly with `isInvisible=true`.</p>
+
+    ---
+
+    <ParamItem title="userAgent" type="string" />
+    **Pass only the actual UA from Windows OS. Now this is:** userAgentPlaceholder
+
+    ---
+
+    <ParamItem title="cookies" type="string" />
+    <p>Additional cookies which we must use during interaction with target page.</p><p>**Format**: cookiename1=cookievalue1; cookiename2=cookievalue2</p>
+
+    ---
+
+    <ParamItem title="fallbackToActualUA" type="boolean" />
+    <p>**true** - when specifying this parameter, we ignore the irrelevant User Agent that users send in the request, and return our own (relevant) one with getTaskResult. This will improve the acceptance of tokens.</p><p>**false** - we insert the User Agent that is specified in the request. If the User Agent is invalid, you will receive an error ERROR_WRONG_USERAGENT (USERAGENT IS EXPIRED in the log).</p>
+
+    ---
+
+    <ParamItem title="proxyType" required type="string" />
+    **http** - regular http/https proxy;<br />**https** - try this option only if "http" doesn't work (required for some custom proxies);<br />**socks4** - socks4 proxy;<br />**socks5** - socks5 proxy.
+
+    ---
+
+    <ParamItem title="proxyAddress" required type="string" />
+    <p>
+      IPv4/IPv6 proxy IP address. Not allowed:
+      - using of hostnames;
+      - using transparent proxies (where you can see the client's IP);
+      - using proxies on local machines.
+    </p>
+
+    ---
+
+    <ParamItem title="proxyPort" required type="integer" />
+    Proxy port.
+
+    ---
+
+    <ParamItem title="proxyLogin" type="string" />
+    Proxy-server login.
+
+    ---
+
+    <ParamItem title="proxyPassword" type="string" />
+    Proxy-server password.
+
+  </TabItem>
+  
+</Tabs>
 
 **Supported Types**<br/>
 The supported image types are as follows:
@@ -37,14 +141,49 @@ The supported image types are as follows:
 |![](Aspose.Words.fa5d4495-c9e9-41f5-8cb9-c4b900b4bbcf.005.png)|![](Aspose.Words.fa5d4495-c9e9-41f5-8cb9-c4b900b4bbcf.006.png)|
 |![](25940532.png)|
 
-## **Request example**
 
-:::info Method
-```http
-https://api.capmonster.cloud/createTask
+## Create task
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+<TabItem value="proxyless" label="HCaptchaTaskProxyless (without proxy)" default className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+<MethodDescription>
+**Request**
+```json
+{
+    "clientKey":"API_KEY",
+    "task":
+    {
+        "type":"HCaptchaTaskProxyless",
+        "websiteURL":"https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",
+        "websiteKey":"472fc7af-86a4-4382-9a49-ca9090474471",
+        "userAgent": "userAgentPlaceholder",
+        "fallbackToActualUA":true
+    }
+}
 ```
-:::
-### HCaptchaTask (with a proxy)
+**Response**
+```json
+{
+  "errorId":0,
+  "taskId":407533072
+}
+```
+
+</MethodDescription>
+  </TabItem>
+  <TabItem value="proxy" label="HCaptchaTask (using proxy)" className="method-panel">
+<MethodItem>
+  ```http
+  https://api.capmonster.cloud/createTask
+  ```
+</MethodItem>
+<MethodDescription>
+**Request**
 ```json
 {
     "clientKey":"API_KEY",
@@ -63,44 +202,37 @@ https://api.capmonster.cloud/createTask
     }
 }
 ```
-### HCaptchaTaskProxyless (without a proxy)
-```json
-{
-    "clientKey":"API_KEY",
-    "task":
-    {
-        "type":"HCaptchaTaskProxyless",
-        "websiteURL":"https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",
-        "websiteKey":"472fc7af-86a4-4382-9a49-ca9090474471",
-        "userAgent": "userAgentPlaceholder",
-        "fallbackToActualUA":true
-    }
-}
-```
-
-**Response example**
+**Response**
 ```json
 {
   "errorId":0,
   "taskId":407533072
 }
 ```
-## **Getting result**
-:::info Method
+</MethodDescription>
+  </TabItem>
+  
+</Tabs>
+
+
+## Get task result
+Use the [getTaskResult](../api/methods/get-task-result.md) method to request answer for hCaptcha. You will get response within 10 - 80 secs period depending on service workload.
+
+<TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
+    <MethodItem>
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
-:::
-Use the [getTaskResult](../api/methods/get-task-result.md) method to request answer for hCaptcha. You will get response within 10 - 80 secs period depending on service workload.
-
-|**Property**|**Type**|**Description**|
-| :- | :- | :- |
-|gRecaptchaResponse|String|Hash which should be inserted into hCaptcha submit form on target website.|
-|userAgent|String|During submitting, you should use the same *User Agent* with which hCaptcha was solved.|
-|respKey|String|The result of the "window.hcaptcha.getRespKey()" function when available. Some sites use this value for additional verification.|
-
-
-**Example:**
+    </MethodItem>
+    <MethodDescription>
+**Request**
+```json
+{
+  "clientKey":"API_KEY",
+  "taskId": 407533072
+}
+```
+**Response**
 ```json
 {
   "errorId":0,
@@ -112,3 +244,13 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to request ans
   }
 }
 ```
+  </MethodDescription>
+  </TabItem>
+
+<br />
+
+|**Property**|**Type**|**Description**|
+| :- | :- | :- |
+|gRecaptchaResponse|String|Hash which should be inserted into hCaptcha submit form on target website.|
+|userAgent|String|During submitting, you should use the same *User Agent* with which hCaptcha was solved.|
+|respKey|String|The result of the "window.hcaptcha.getRespKey()" function when available. Some sites use this value for additional verification.|
