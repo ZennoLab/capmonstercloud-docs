@@ -126,7 +126,7 @@ captcha3.png:99loe
 ### **4. 向特定模块发送验证码**
 有几种方法可以指定一个解决验证码的模块：
 
-- [在发送 /createTask 请求时添加 CapMonsterModule 参数及模块名称](../captchas/image-to-text.md)（如果您直接与我们的 API 交互）
+- [在发送 /createTask 请求时添加 CapMonsterModule 参数及模块名称](../captchas/image-to-text.mdx)（如果您直接与我们的 API 交互）
 - [在 ApiKey 中指定模块名称](module-name.md)（当您使用第三方程序且无法修改请求时非常方便）
 -----
 ## **常见问题解答**
