@@ -3,6 +3,14 @@ sidebar_position: 6
 sidebar_label: TurnstileTask
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+
+
+
 # TurnstileTask | Cloudflare Challenge
 All Turnstile subtypes are automatically supported: manual, non-interactive, and invisible. Therefore, there is no need to specify a subtype for a regular captcha. 
 
@@ -11,27 +19,76 @@ Check out all three options of captcha recognition and choose the most convenien
 :::
 ## Option 1 (Turnstile)
 You are required to solve a regular turnstile captcha, as here. Note that the CAPTCHA on CloudFlare pages may look identical. Learn more about how to distinguish between a regular Turnstile and a Cloudflare Challenge at the end of the article.
-#### **Object structure**
-|**Parameter**|**Type**|**Required**|**Value**|
-| :- | :- | :- | :- |
-|type|String|yes|**TurnstileTaskProxyless**|
-|websiteURL|String|yes|The page address, where the captcha is solved|
-|websiteKey|String|yes|Turnstile key|
-|pageAction|String|no|The `action` field that can be found in the callback function to load the captcha|
+
+#### Request parameters
+<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (without proxy)" default className="bordered-panel">
+  <ParamItem title="type" required type="string" />
+  **TurnstileTaskProxyless**
+
+  ---
+
+  <ParamItem title="websiteURL" required type="string" />
+  The page address, where the captcha is solved
+
+  ---
+
+  <ParamItem title="websiteKey" required type="string" />
+  Turnstile key
+
+  ---
+
+  <ParamItem title="pageAction" type="string" />
+  The `action` field that can be found in the callback function to load the captcha
+
+</TabItem>
 
 ## Option 2 (CloudFlare)
 You are working through a browser and you need to get a token to pass CloudFlare.
-#### **Object structure**
-|**Parameter**|**Type**|**Required**|**Value**|
-| :- | :- | :- | :- |
-|type|String|yes|**TurnstileTaskProxyless**|
-|websiteURL|String|yes|Address of the page where the captcha is solved|
-|websiteKey|String|yes|Turnstile key|
-|cloudflareTaskType|String|yes|**token**|
-|userAgent|String|yes|Browser User-Agent.<br /> **Pass only the actual UA from Windows OS. Now this is**: userAgentPlaceholder|
-|pageAction|String|yes|The `action` field can be found in the callback function to load the captcha. If cloudflareTaskType is used, the `action` is usually "managed" or "non-interactive".|
-|data|String|yes|The value of the data field can be taken from the `cData` parameter.|
-|pageData|String|yes|The value of the pageData field can be taken from the `chlPageData` parameter.|
+
+#### Request parameters
+<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (without proxy)" default className="bordered-panel">
+  <ParamItem title="type" required type="string" />
+  **TurnstileTaskProxyless**
+
+  ---
+
+  <ParamItem title="websiteURL" required type="string" />
+  The page address, where the captcha is solved
+
+  ---
+
+  <ParamItem title="websiteKey" required type="string" />
+  Turnstile key
+
+  ---
+
+  <ParamItem title="cloudflareTaskType" required type="string" />
+  **token**
+
+  ---
+
+  <ParamItem title="pageAction" required type="string" />
+  The `action` field can be found in the callback function to load the captcha. If cloudflareTaskType is used, the `action` is usually "managed" or "non-interactive".
+
+  ---
+
+  <ParamItem title="userAgent" required type="string" />
+  Browser User-Agent.<br /> **Pass only the actual UA from Windows OS. Now this is**: userAgentPlaceholder
+
+  ---
+
+  <ParamItem title="data" required type="string" />
+  The value of the data field can be taken from the `cData` parameter.
+
+  ---
+
+  <ParamItem title="pageData" required type="string" />
+  The value of the pageData field can be taken from the `chlPageData` parameter.
+
+</TabItem>
+
+<br />
+
 It is not necessary to pass a proxy to get the token.
 
 These parameters are in the object that is passed during captcha creation to the function `window.turnstile.render(el, paramsObj)`. You can get them, for example, by executing JavaScript before loading other scripts:
@@ -71,28 +128,80 @@ When calling `window.turnstile.render(el, paramsObj)` the captcha on the page is
 
 ## Option 3 (CloudFlare)
 You are working using queries, and you need cf_clearance cookies. It is required that you need your proxies.
-#### **Object structure**
-|**Parameter**|**Type**|**Required**|**Value**|
-| :- | :- | :- | :- |
-|type|String|yes|**TurnstileTask**|
-|websiteURL|String|yes|Address of the page on which the captcha is solved|
-|websiteKey|String|yes|Turnstile key (you can pass any string)|
-|cloudflareTaskType|String|no|**cf_clearance**|
-|htmlPageBase64|String|yes|Base64 encoded html page **"Just a moment"** which is given with code 403 when accessing a site with this protection.<br/> Example of obtaining a string htmlPageBase64: *<br/>var htmlContent = document.documentElement.outerHTML;<br/>var htmlBase64 = btoa(unescape(encodeURIComponent(htmlContent)));<br/>console.log(htmlBase64);*|
-|userAgent|String|yes|Browser User-Agent.<br /> **Pass only the actual UA from Windows OS. Now this is version**: `userAgentPlaceholder`|
-|proxyType|String|yes|**http** - normal http/https proxy<br/>**https** - try this option only if "http" doesn't work (required for some custom proxies)<br/>**socks4** - socks4 proxy<br/>**socks5** - socks5 proxy|
-|proxyAddress|String|yes|IP address of the IPv4/IPv6 proxy. Not allowed:<br/>- use of hostnames<br/>- use of transparent proxies (where you can see client IP)<br/>- use of proxies on local machines|
-|proxyPort|Integer|yes|Proxy Port|
-|proxyLogin|String|yes|Proxy server login|
-|proxyPassword|String|yes|Proxy server password|
+
+#### Request parameters
+<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (without proxy)" default className="bordered-panel">
+  <ParamItem title="type" required type="string" />
+  **TurnstileTask**
+
+  ---
+
+  <ParamItem title="websiteURL" required type="string" />
+  The page address, where the captcha is solved
+
+  ---
+
+  <ParamItem title="websiteKey" required type="string" />
+  Turnstile key (you can pass any string)
+
+  ---
+
+  <ParamItem title="cloudflareTaskType" type="string" />
+  **cf_clearance**
+
+  ---
+
+  <ParamItem title="htmlPageBase64" required type="string" />
+  Base64 encoded html page **"Just a moment"** which is given with code 403 when accessing a site with this protection.<br/> Example of obtaining a string htmlPageBase64: *<br/>var htmlContent = document.documentElement.outerHTML;<br/>var htmlBase64 = btoa(unescape(encodeURIComponent(htmlContent)));<br/>console.log(htmlBase64);*
+
+  ---
+
+  <ParamItem title="userAgent" required type="string" />
+  Browser User-Agent.<br /> **Pass only the actual UA from Windows OS. Now this is**: userAgentPlaceholder
+
+  ---
+
+  <ParamItem title="proxyType" required type="string" />
+  **http** - regular http/https proxy;<br />**https** - try this option only if "http" doesn't work (required for some custom proxies);<br />**socks4** - socks4 proxy;<br />**socks5** - socks5 proxy.
+
+  ---
+
+  <ParamItem title="proxyAddress" required type="string" />
+  <p>
+    IPv4/IPv6 proxy IP address. Not allowed:
+    - using of hostnames;
+    - using transparent proxies (where you can see the client's IP);
+    - using proxies on local machines.
+  </p>
+
+  ---
+
+  <ParamItem title="proxyPort" required type="integer" />
+  Proxy port.
+
+  ---
+
+  <ParamItem title="proxyLogin" required type="string" />
+  Proxy-server login.
+
+  ---
+
+  <ParamItem title="proxyPassword" required type="string" />
+  Proxy-server password.
+
+</TabItem>
 
 ## Examples of requests
-### **Option 1: Normal Turnstile**
-:::info METHOD
-```http
-https://api.capmonster.cloud/createTask
-```
-:::
+### Option 1: Normal Turnstile
+
+<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
+<MethodItem>
+  ```http
+  https://api.capmonster.cloud/createTask
+  ```
+</MethodItem>
+<MethodDescription>
+**Request**
 ```json
 {
     "clientKey":"API_KEY",
@@ -104,7 +213,7 @@ https://api.capmonster.cloud/createTask
     }
 }
 ```
-**Example response**
+**Response**
 ```json
 {
   "errorId":0,
@@ -112,12 +221,19 @@ https://api.capmonster.cloud/createTask
 }
 ```
 
-### **Option 2. CloudFlare (token)**
-:::info METHOD
-```http
-https://api.capmonster.cloud/createTask
-```
-:::
+</MethodDescription>
+</TabItem>
+
+### Option 2. CloudFlare (token)
+
+<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
+<MethodItem>
+  ```http
+  https://api.capmonster.cloud/createTask
+  ```
+</MethodItem>
+<MethodDescription>
+**Request**
 ```json
 {
 	"clientKey": "API_KEY",
@@ -133,12 +249,27 @@ https://api.capmonster.cloud/createTask
 	}
 }
 ```
-### Option 3. CloudFlare(cookie)
-:::info METHOD
-```http
-https://api.capmonster.cloud/createTask
+**Response**
+```json
+{
+  "errorId":0,
+  "taskId":407533072
+}
 ```
-:::
+
+</MethodDescription>
+</TabItem>
+
+### Option 3. CloudFlare(cookie)
+
+<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
+<MethodItem>
+  ```http
+  https://api.capmonster.cloud/createTask
+  ```
+</MethodItem>
+<MethodDescription>
+**Request**
 ```json 
   {
   "clientKey":"API_KEY",
@@ -157,15 +288,26 @@ https://api.capmonster.cloud/createTask
   }
 }
 ```
+**Response**
+```json
+{
+  "errorId":0,
+  "taskId":407533072
+}
+```
 
-## **GetTaskResult**
+</MethodDescription>
+</TabItem>
+
+## GetTaskResult
 Use the [getTaskResult](../api/methods/get-task-result.md) method to get the Turnstile solution. Depending on the system load, you will get a response after a time in the range of 5 to 20s.
 
 |**Property**|**Type**|**Description**|
 | :- | :- | :- |
 |cf_clearance|String|A special Cloudflare cookie that you can substitute into your browser|
 |token|String|Use a token when calling a callback function|
-## **How to distinguish between a regular Turnstile and a Cloudflare Challenge**
+
+## How to distinguish between a regular Turnstile and a Cloudflare Challenge
 A Cloudflare challenge can look different.
 
 **Normal variant:**
