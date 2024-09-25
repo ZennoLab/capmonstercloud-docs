@@ -289,3 +289,46 @@ https://api.capmonster.cloud/getTaskResult
 |**Property**|**Type**|**Description**|
 | :- | :- | :- |
 |gRecaptchaResponse|String|Hash which should be inserted into Recaptcha2 submit form in `<textarea id="g-recaptcha-response" ..></textarea>`. It has a length of 500 to 2190 bytes.|
+
+## Use SDK Library
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, RecaptchaV2EnterpriseProxylessRequest, /*RecaptchaV2EnterpriseRequest*/ } from '@zennolab_com/capmonstercloud-client';
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+  console.log(await cmcClient.getBalance());
+
+  const recaptchaV2EnterpriseRequest = new RecaptchaV2EnterpriseProxylessRequest({
+    websiteURL: 'https://mydomain.com/page-with-recaptcha-enterprise',
+    websiteKey: '6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd',
+    enterprisePayload: {
+      s: 'SOME_ADDITIONAL_TOKEN',
+    },
+  })
+
+  // const recaptchaV2EnterpriseRequest = new RecaptchaV2EnterpriseRequest({
+  //   websiteURL: 'https://mydomain.com/page-with-recaptcha-enterprise',
+  //   websiteKey: '6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd',
+  //   enterprisePayload: {
+  //     s: 'SOME_ADDITIONAL_TOKEN',
+  //   },
+  //   proxyType: 'http',
+  //   proxyAddress: '8.8.8.8',
+  //   proxyPort: 8080,
+  //   proxyLogin: 'proxyLoginHere',
+  //   proxyPassword: 'proxyPasswordHere',
+  //   userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.132 Safari/537.36',
+  // })
+
+  console.log(await cmcClient.Solve(recaptchaV2EnterpriseRequest));
+});
+```
+  </TabItem>
+  
+</Tabs>

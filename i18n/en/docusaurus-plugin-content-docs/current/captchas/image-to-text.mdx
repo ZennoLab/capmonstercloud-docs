@@ -151,5 +151,32 @@ https://api.capmonster.cloud/getTaskResult
 | :-: | :-: | :-: |
 |text|String|Captcha answer|
 
+## Use SDK Library
 
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
 
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, ImageToTextRequest } from '@zennolab_com/capmonstercloud-client';
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+  console.log(await cmcClient.getBalance());
+
+  const imageToTextRequest = new ImageToTextRequest({
+    body: 'some base64 body',
+    CapMonsterModule: CapMonsterModules.YandexWave,
+    Case: true,
+    numeric: 1,
+    recognizingThreshold: 65,
+    math: false,
+  });
+
+  console.log(await cmcClient.Solve(imageToTextRequest));
+});
+```
+  </TabItem>
+  
+</Tabs>

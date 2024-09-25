@@ -461,3 +461,40 @@ const chrome = require('selenium-webdriver/chrome');
 })();
 ```
 </details>
+
+
+## Use SDK Library
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, TurnstileRequest } from '@zennolab_com/capmonstercloud-client';
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+  console.log(await cmcClient.getBalance());
+
+  const turnstileRequest = TurnstileRequest({
+    websiteURL: 'https://tsinvisble.zlsupport.com',
+    websiteKey: '0x4AAAAAAABUY0VLtOUMAHxE',
+    cloudflareTaskType: 'cf_clearance',
+    proxyType: 'http',
+    proxyAddress: '8.8.8.8',
+    proxyPort: 8080,
+    proxyLogin: 'proxyLoginHere',
+    proxyPassword: 'proxyPasswordHere',
+    pageData: 'pageDataHere',
+    data: 'dataHere',
+    htmlPageBase64: 'htmlPageBase64Here',
+    userAgent: 'userAgentHere',
+  });
+
+  console.log(await cmcClient.Solve(turnstileRequest));
+});
+```
+  </TabItem>
+  
+</Tabs>

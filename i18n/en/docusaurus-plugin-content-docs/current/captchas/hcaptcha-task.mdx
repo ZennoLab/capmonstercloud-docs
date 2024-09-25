@@ -254,3 +254,37 @@ https://api.capmonster.cloud/getTaskResult
 |gRecaptchaResponse|String|Hash which should be inserted into hCaptcha submit form on target website.|
 |userAgent|String|During submitting, you should use the same *User Agent* with which hCaptcha was solved.|
 |respKey|String|The result of the "window.hcaptcha.getRespKey()" function when available. Some sites use this value for additional verification.|
+
+
+## Use SDK Library
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, HCaptchaRequest } from '@zennolab_com/capmonstercloud-client';
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+  console.log(await cmcClient.getBalance());
+
+  const hCaptchaRequest = new HCaptchaRequest({
+    websiteURL: 'https://lessons.zennolab.com/captchas/hcaptcha/?level=easy',
+    websiteKey: '472fc7af-86a4-4382-9a49-ca9090474471',
+    isInvisible: true,
+    data: 'some data',
+    proxyType: 'https',
+    proxyAddress: 'https://proxy.com',
+    proxyPort: 6045,
+    proxyLogin: 'login',
+    proxyPassword: 'p@ssword',
+  });
+
+  console.log(await cmcClient.Solve(hCaptchaRequest));
+});
+```
+  </TabItem>
+  
+</Tabs>

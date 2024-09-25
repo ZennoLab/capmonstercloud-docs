@@ -165,3 +165,35 @@ https://api.capmonster.cloud/getTaskResult
 | :-: | :-: | :-: | :-: |
 |1|<p>reCAPTCHA 2 (3\*3)</p><p>![](Aspose.Words.3eba36bc-cab6-486e-9e8f-1e38b225e806.001.png)</p><p></p>|0,2|0,04 |
 |2|<p>reCAPTCHA 2 (4\*4)</p><p>![](Aspose.Words.3eba36bc-cab6-486e-9e8f-1e38b225e806.002.png)</p>|0,1|not applicable|
+
+
+## Use SDK Library
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, ComplexImageRecaptchaRequest } from '@zennolab_com/capmonstercloud-client';
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+  console.log(await cmcClient.getBalance());
+
+  const complexImageRecaptchaRequest = new ComplexImageRecaptchaRequest({
+    imageUrls: ['https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg'],
+    metaData: {
+      Grid: '3x3',
+      Task: 'Please click each image containing a mountain',
+      TaskDefinition: '/m/015qff',
+    },
+    websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle',
+  });
+
+  console.log(await cmcClient.Solve(complexImageRecaptchaRequest));
+});
+```
+  </TabItem>
+  
+</Tabs>
