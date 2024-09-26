@@ -419,12 +419,26 @@ a[class*='cardContainer'] {
   background: #E9EBEE;
 }
 
-
 .bordered-panel :not(.paramItem) code {
   background: #ECF0F6;
   color: #14193C;
   padding:  4px 10px;
   border: none;
+}
+
+[data-theme='dark'] .bordered-panel {
+  border: 1px solid #373C46;
+  color: #D2D7E1;
+}
+
+[data-theme='dark'] .bordered-panel hr {
+  background: #373C46;
+}
+
+
+[data-theme='dark'] .bordered-panel :not(.paramItem) code {
+  background: #303237;
+  color: #D2D7E1
 }
 
 .request-tabs {
@@ -435,6 +449,11 @@ a[class*='cardContainer'] {
   border: 1px solid #f0f2f5;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+}
+
+
+.methodDescription pre, .method-panel pre {
+  background: transparent !important;
 }
 
 .method-panel-full {
@@ -448,4 +467,16 @@ a[class*='cardContainer'] {
 
 .method-item code {
   background: white;
+}
+
+[data-theme='dark'] .method-panel {
+  border: 1px solid #373C46;
+}
+
+[data-theme='dark'] .method-panel-full {
+  border: 1px solid #373C46;
+}
+
+[data-theme='dark'] .method-item code {
+  background: #1C202D;
 }

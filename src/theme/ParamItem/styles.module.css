@@ -1,20 +1,9 @@
-.newsArticleDate {
-  color: #555A64;
-  font-size: 16px;
-  line-height: 26px;
-  margin-bottom: 8px;
+.requiredItem {
+  font-size: 14px;
+  font-weight: 500;
+  color: #F04650;
 }
 
-.newsArticleTitle {
-  display: block;
-  color: #14193C;
-  text-decoration: none;
-  font-size: 20px;
-  line-height: 34px;
-}
-
-.newsArticle {
-  margin-bottom: 20px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #E1E6F0;
+[data-theme='dark'] .requiredItem {
+  color: #DC4650;
 }

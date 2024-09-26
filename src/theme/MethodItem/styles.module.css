@@ -28,3 +28,13 @@
 .childrenWrap code {
   padding-left: 105px;
 }
+
+[data-theme='dark'] .childrenWrap {
+  background: #22283E;
+  border-bottom: 1px solid #373C46;
+}
+
+[data-theme='dark'] .method {
+  background: #283250;
+  color: #82BEFF;
+}
