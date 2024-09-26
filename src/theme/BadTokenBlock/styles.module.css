@@ -1,0 +1,57 @@
+.wrapperMain {
+  background: #EEEEFF;
+  width: 267px;
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  padding: 16px;
+  display: flex;
+  font-size: 14px;
+  line-height: 22px;
+  padding-right: 25px;
+  gap: 12px;
+  border-radius: 10px;
+  z-index: 1000;
+  align-items: flex-start;
+}
+
+.mobileWrapper {
+  background: #EEEEFF;
+  width: calc(100% - 32px);
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  padding: 16px;
+  display: flex;
+  font-size: 14px;
+  line-height: 22px;
+  gap: 12px;
+  border-radius: 10px;
+  z-index: 1000;
+  align-items: flex-start;
+  padding-right: 25px;
+}
+
+.supportIconWrap {
+  flex-shrink: 0;
+}
+
+.closeIconWrap {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+}
+
+@media (max-width: 968px) {
+  .wrapperMain {
+    display: none;
+  }
+}
+
+.hiddenBlock {
+  display: none !important;
+}
+
+.mainText {
+  color: #14193C;
+}

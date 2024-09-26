@@ -25,7 +25,7 @@ sidebar_label: Firefox 浏览器扩展
 <details>
     <summary>手动安装</summary>
 
-1. 下载带有扩展的[存档文件](https://drive.google.com/file/d/1BYBxZbn0ToGcb62j_1GKQBZlQjYPnTz0/view?usp=drive_link).
+1. 下载带有扩展的[存档文件](https://drive.google.com/file/d/1rWLOr6p0z8tA6vHooYAJWkcQ3NiWlBK-/view?usp=drive_link).
 
 1. 打开 Firefox 浏览器并进入扩展管理：
    ![](extension-menu.png)
