@@ -7,7 +7,7 @@ This feature allows you to create custom modules that will be trained for one sp
 
 To go to the [module training page](https://capmonster.cloud/UserModules), click the email in the upper-right area of the website and select the relevant option in the menu.
 
-![](834ccbf9-f439-4b1b-8cab-42ed3dbc055c.png)
+![](./images/user-module/834ccbf9-f439-4b1b-8cab-42ed3dbc055c.png)
 
 
 ---
@@ -32,7 +32,7 @@ Now let's go into the details of each step.
 
 To answer this question, mark the types of symbols that your captcha contains, in the form on the [Module training page](https://capmonster.cloud/UserModules). After that, a hint telling you how many captchas to upload will appear above the button for selecting the archive for uploading:
 
-![](module-name.png)
+![](./images/user-module/module-name.png)
 
 #### **Supported image formats**
 
@@ -57,13 +57,13 @@ Do not run captcha collection in tens and hundreds of threads! Few websites woul
 
 ### **2. Sending the captcha archive**
 
-![](a2ba29bd-c910-44cf-9979-ceb143633efd.png)
+![](./images/user-module/a2ba29bd-c910-44cf-9979-ceb143633efd.png)
 
 #### **2.1. Name**
 
 First, set the module name (Latin characters only).
 
-![](fed2d879-b494-4b60-a13a-036c693d0951.png)
+![](./images/user-module/fed2d879-b494-4b60-a13a-036c693d0951.png)
 
 :::warning
 The module name must not contain the word **captcha**.
@@ -77,7 +77,7 @@ What you mark here affects the number of captchas you will need to upload to tra
 
 You can choose one or several options from the suggested.
 
-![](3b39f9e1-d981-41af-842a-a51f4a51a4e0.png)
+![](./images/user-module/3b39f9e1-d981-41af-842a-a51f4a51a4e0.png)
 
 :::info
 You should mark at least one of the following options: "Contains Cyrillic characters", "Contains Latin characters", "Contains numbers"
@@ -87,7 +87,7 @@ You should mark at least one of the following options: "Contains Cyrillic charac
 
 Specify where captcha answers are located.
 
-![](markup-location.png)
+![](./images/user-module/markup-location.png)
 
 It's quite simple: 
 
@@ -110,7 +110,7 @@ captcha3.png:99loe
 
 When you specified the module name, selected symbol types, and location of answers, you need to upload the zip archive with the captchas and send us.
 
-![](archieve.png)
+![](./images/user-module/archieve.png)
 
 #### **2.5. Payment**
 
@@ -129,7 +129,7 @@ The funds allocated to training are not debited but stay on the balance. You can
 
 #### **Validated**
 
-![](validated.png)
+![](./images/user-module/validated.png)
 
 You get this status after you send the form (given that you have done everything correctly). 
 
@@ -139,25 +139,25 @@ Modules with this status can be deleted. If you uploaded the module but realized
 
 #### **Paid**
 
-![](paid.png)
+![](./images/user-module/paid.png)
 
 Your payment for the module was accepted.
 
 #### **ValidatedInDepth**
 
-![](ValidatedInDepth.png)
+![](./images/user-module/ValidatedInDepth.png)
 
 Preparatory works.
 
 #### **Annotated**
 
-![](Annotated.png)
+![](./images/user-module/Annotated.png)
 
 Captcha marking completed. Training is in progress.
 
 #### **Trained**
 
-![](trained.png)
+![](./images/user-module/trained.png)
 
 The module is ready! You can now submit captchas to it.
 
@@ -193,9 +193,9 @@ Training takes one day per module.
 <details>
     <summary>I see the "Error" sign in the "Comment" column next to my module. What should I do?</summary>
 
-![](Error.png)
+![](./images/user-module/Error.png)
 
-Don't panic![(wink)](Aspose.Words.aac7548a-0b79-486d-96ce-e145c7faf5a6.015.png) Just wait a bit. 
+Don't panic![(wink)](./images/user-module/Aspose.Words.aac7548a-0b79-486d-96ce-e145c7faf5a6.015.png) Just wait a bit. 
 
 If nothing changed in a day, [contact support](https://helpdesk.zennolab.com) and we will definitely help you.
 
@@ -244,51 +244,3 @@ No. The trained module is only available in CapMonster.Cloud.
 [Contact our support service](https://helpdesk.zennolab.com/).
 
 </details>
-
-<!-- ![ref1]Как долго длится обучение модуля?
-
-Обучение одного обычно происходит в течение суток.
-
-**Обратите внимание:** обучение производится в рабочие дни с понедельника по пятницу. Если Вы отправили заявку в пятницу, то он будет готов в начале следующей недели. -->
-
-<!-- ![ref1]Я хочу обучить сразу несколько модулей, как мне правильно это сделать?
-
-Алгоритм простой: загружаете первый архив с капчами, оплачиваете его. Затем загружаете второй архив, оплачиваете. И так поступаете со всеми архивами.
-
-Время готовности модулей оценивайте в расчёте, приблизительно, сутки на один модуль. -->
-
-<!-- ![ref1]Напротив моего модуля в колонке “Комментарий” появилась надпись “Ошибка” : Что мне делать?
-
-![](Aspose.Words.aac7548a-0b79-486d-96ce-e145c7faf5a6.014.png) 
-
-Не паникуйте ![(wink)](Aspose.Words.aac7548a-0b79-486d-96ce-e145c7faf5a6.015.png) Подождите немного. 
-
-Если спустя сутки ничего не изменилось, [напишите в поддержку](https://helpdesk.zennolab.com/ru) и мы Вам обязательно поможем. -->
-
-<!-- ![ref1]Я загрузил не тот архив, могу ли я его переотправить?
-
-Если Вы ещё не оплатили модуль и у него статус **Validated**, то Вы можете самостоятельно его удалить. Подробности Вы можете найти в описании статуса **Validated**. -->
-
-<!-- ![ref1]Что за колонка “Управление” в таблице? У меня там ничего нет.
-
-В данной колонке появляется кнопка “Удалить”, но только для модулей со статусом **Validated**. 
-
-Для модулей с другими статусами данная колонка остаётся пустой. -->
-
-<!-- ![ref1]Почему к имени моего модуля были добавлены какие-то символы?
-
-Это сделано для того, чтобы имя модуля было уникальным: несколько пользователей системы могут выбрать одно и тоже имя для своего модуля и чтоб избежать путаницы система автоматически генерирует и добавляет случайные символы к имени модуля. Таким образом каждый пользователь точно будет слать капчи на свой модуль. -->
-
-<!-- ![ref1]Могу ли я получить обученный модуль для программы CapMonster2?
-
-Нет. Обученный модуль доступен только в рамках сервиса CapMonster Cloud. -->
-
-<!-- ![ref1]Меня не устраивает качество обучения. Что делать?
-
-[Пишите в поддержку](https://helpdesk.zennolab.com/ru). 
-
-![ref1]У меня есть вопрос, который здесь не освещён. Куда мне обращаться?
-
-[Пишите в поддержку](https://helpdesk.zennolab.com/ru). 
-
-[ref1]: Aspose.Words.aac7548a-0b79-486d-96ce-e145c7faf5a6.001.png -->

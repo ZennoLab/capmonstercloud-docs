@@ -7,7 +7,7 @@ sidebar_label: DataDome
 
 这种验证码基本上要求用户通过移动滑块来解决拼图以进行确认。
 
-![](datadome.png)
+![](./images/datadome/datadome.png)
 
 :::warning **注意！**
 此任务将使用我们的代理服务器执行。请在您的项目中使用收到的 Cookie 自动通过验证码。
@@ -23,7 +23,7 @@ sidebar_label: DataDome
 |metadata.htmlPageBase64|String|是（如果 metadata.captchaUrl 未填写）|包含验证码附加数据的对象：`"htmlPageBase64": "..."` - 一个 base64 编码的 HTML 页面，在对目标站点的 GET 请求响应中带有 403 状态码和 Set-Cookie: datadome="..." 头。|
 |metadata.captchaUrl|String|是（如果 metadata.htmlPageBase64 未填写）|`"captchaUrl"` - 验证码链接。通常看起来像这样：`"https://geo.captcha-delivery.com/captcha/?initialCid=..."`。|
 |metadata.datadomeCookie|String|是|您的 datadome Cookie。您可以在页面上使用 "document.cookie" 获取，或在 Set-Cookie 请求头中获取："datadome=..."（参见示例请求 /createTask）|
-|userAgent|String|否|浏览器的 User-Agent。<br /> **仅传递来自 Windows 操作系统的实际 UA。现在是**： `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36`|
+|userAgent|String|否|浏览器的 User-Agent。<br /> **仅传递来自 Windows 操作系统的实际 UA。现在是**： `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36`|
 
 ## **真实网站上的请求示例**
 

@@ -10,7 +10,7 @@ draft: true
 
 **图片示例**
 
-![](example-image.png)
+![](./images/yandex-smartcaptcha/example-image.png)
 
 ## **对象结构**
 
@@ -103,7 +103,7 @@ https://api.capmonster.cloud/createTask
 该任务的验证码以一张图片的形式发送。在Yandex服务中，尺寸为300x220，在外部网站上为320x220。<br/>
 从图像到包含任务文本的容器的距离应为4像素（上边距）。原始距离为13像素。
 
-![](image-format.png)
+![](./images/yandex-smartcaptcha/image-format.png)
 
 ## **使用 ZennoPoster**
 
@@ -128,7 +128,7 @@ HtmlElement image = instance.ActiveTab.FindElementByXPath("//div[@class=\"Advanc
 <details>
     <summary>"POST请求" 设置以将验证码发送到CapMonster Cloud</summary>
 
-![](post-request-ex.png)
+![](./images/yandex-smartcaptcha/post-request-ex.png)
 </details>
 
 收到结果后，您可以使用以下C#代码片段单击坐标：

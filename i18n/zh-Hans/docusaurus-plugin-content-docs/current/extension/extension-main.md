@@ -31,21 +31,21 @@ sidebar_position: 0
    1. 在浏览器的地址栏中键入 chrome://extensions 并按 Enter。
    2. 从菜单中：点击右上角的三个竖点（靠近个人资料图片），然后选择“更多工具”，然后选择“扩展程序”。
 
-![](359d5afb-d644-45c2-a882-e7fc3da759eb.png)
+![](./images/extension-main-firefox/359d5afb-d644-45c2-a882-e7fc3da759eb.png)
 
    3. 或者转到 Google Chrome 设置，并在右侧菜单中选择“扩展程序”（位于最底部）。
 
-![](61a9b824-b0d2-4808-8bb8-feac4b25d0b7.png)
+![](./images/extension-main-firefox/61a9b824-b0d2-4808-8bb8-feac4b25d0b7.png)
 
 4. 启用“开发者模式”。
 5. 然后点击“加载已解压的扩展程序”。
 
-![](load-unpacked.png)
+![](./images/extension-main-firefox/load-unpacked.png)
 
 6. 找到并选择您解压缩扩展的文件夹。
 7. 完成后，扩展应出现在已安装扩展的列表中。
 
-![](919a2eab-1651-4b48-8980-b69346d700fd.png)
+![](./images/extension-main-firefox/919a2eab-1651-4b48-8980-b69346d700fd.png)
 
 </details>
 
@@ -54,7 +54,7 @@ sidebar_position: 0
 
 如果您正在安装扩展的更新版本，那么当您更新原始扩展文件时，还需要在“扩展程序”页面上点击更新按钮（如何打开此页面在上面的“手动安装”部分已经描述）。
 
-![](manual-update.png)
+![](./images/extension-main-firefox/manual-update.png)
 </details>
 
 -----
@@ -64,20 +64,20 @@ sidebar_position: 0
 
 默认情况下，安装的扩展是隐藏的。要固定它，您需要点击“固定”按钮：
 
-![](pin1.png)
+![](./images/extension-main-firefox/pin1.png)
 </details>
 
 启动扩展后，您将看到此窗口：
 
-![](ext.screen.en.png)
+![](./images/extension-main-firefox/ext.screen.en.png)
 ### <a name="id-browserextension-apikey"></a>**API 密钥**
 在相应的字段中输入 API 密钥(1)，点击保存按钮(2)。如果您输入了正确的密钥，您的余额将显示在下方(3)。
 
-![](api-key.png)
+![](./images/extension-main-firefox/api-key.png)
 ### <a name="id-browserextension-automaticcaptchasolving"></a>**自动识别验证码**
 在这里，您可以选择扩展将自动识别的验证码类型。
 
-![](extension.example.png)
+![](./images/extension-main-firefox/extension.example.png)
 
 :::info !
 
@@ -87,7 +87,7 @@ sidebar_position: 0
 ### <a name="id-browserextension-repeatcaptchasolvingincaseofanerror"></a>**在出现错误时重复解决验证码**
 如果第一次尝试解决验证码失败，扩展将发送重复的任务，直到验证码解决成功，或者直到达到此设置中指定的限制为止。
 ### <a name="id-browserextension-proxy"></a>**代理**
-![](proxy.png)
+![](./images/extension-main-firefox/proxy.png)
 
 在这里，您可以指定将与识别任务一起发送的代理设置。
 
@@ -97,7 +97,7 @@ sidebar_position: 0
 
 启用此选项后，将会出现一个输入网站的字段：
 
-![](blacklist-control.png)
+![](./images/extension-main-firefox/blacklist-control.png)
 
 域名必须与协议（https:// 或 http://） 一起指定。
 您可以使用通配符：
@@ -112,7 +112,5 @@ sidebar_position: 0
 |`https://zennolab.com`|禁止在 `https://zennolab.com` 网站上使用扩展|
 |`https://*.zennolab.com`|禁止在所有子域名 `https://zennolab.com` 上使用扩展|
 |`https://www.google.*`|禁止在 Google 的所有区域（ru、com、com.ua 等）使用扩展|
-
-[ref1]: Aspose.Words.d14847ca-5ce8-4c9f-8081-1ec99b44a6b3.001.png
 
 当解决验证码时发生错误，请参阅[错误术语表](/api/api-errors.md)。

@@ -10,7 +10,7 @@ The object contains data about the Yandex SmartCaptcha task solving.
 
 **Image example**
 
-![](example-image.png)
+![](./images/yandex-smartcaptcha/example-image.png)
 
 ## **Object structure**
 
@@ -103,7 +103,7 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the cap
 The captcha with the task is sent in one picture. The size on Yandex services is 300x220, on external sites 320x220.. <br/>
 The distance from the image to the container with the task text should be 4px (margin-top). The original is 13px.
 
-![](image-format.png)
+![](./images/yandex-smartcaptcha/image-format.png)
 
 ## **Using ZennoPoster**
 
@@ -128,7 +128,7 @@ If you save the result of executing the action into the *imageBase64* variable, 
 <details>
     <summary>"POST-request" action setting to send captchas to CapMonster Cloud</summary>
 
-![](post-request-ex.png)
+![](./images/yandex-smartcaptcha/post-request-ex.png)
 </details>
 
 After receiving the result, you can use the following C# snippet to click on the coordinates:  

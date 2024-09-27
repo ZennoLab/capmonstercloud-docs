@@ -312,20 +312,20 @@ A Cloudflare challenge can look different.
 
 **Normal variant:**
 
-![](turnstile-simple.png) 
+![](./images/tunrstile-task/turnstile-simple.png) 
 
 **Stylized variants:**
 
 <figure>
 
-![](turnstile-stylized.png)
+![](./images/tunrstile-task/turnstile-stylized.png)
 <figcaption>The challenge is seamlessly integrated into the site itself.</figcaption>
 
 </figure>
 
 <figure>
 
-![](turnstile-stylized-2.png) 
+![](./images/tunrstile-task/turnstile-stylized-2.png) 
 
 <figcaption>It looks like a regular turnstile CAPTCHA, but it's actually a challenge.</figcaption>
 
@@ -335,15 +335,15 @@ To be finally convinced of the presence of Cloudflare, you can open the develope
 
 - The first request to the site returns a 403 code:
 
-![](b61dae70-f056-4257-ab72-05beacb27a0d.png)
+![](./images/tunrstile-task/b61dae70-f056-4257-ab72-05beacb27a0d.png)
 
 - The form with the id **challenge-form** has an **action** attribute (not to be confused with the action from the parameters for turnstile captcha) containing the `__cf_chl_f_tk=` parameter:
 
-![](1e4dc39f-0a4a-4c29-a48d-abc7a2ec6380.png)
+![](./images/tunrstile-task/1e4dc39f-0a4a-4c29-a48d-abc7a2ec6380.png)
 
 - The page contains two similar `<script>` tags that create a new value in the `window` object:
 
-![](gif.gif) 
+![](./images/tunrstile-task/gif.gif) 
 
 <details>
         <summary>Example of solution implementation using Selenium on Node.js</summary>
