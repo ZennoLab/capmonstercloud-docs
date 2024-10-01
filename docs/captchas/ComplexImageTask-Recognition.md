@@ -16,7 +16,7 @@ sidebar_label: ComplexImageTask Recognition
 
 ## **Доступные типы заданий**
 
-### **Пример запроса oocl_rotate_new**
+### Пример запроса oocl_rotate_new
 
 В запросе передаем два изображения: фон и круг.
 
@@ -53,7 +53,7 @@ https://api.capmonster.cloud/createTask
 ![](ex2.png)
 
 
-### **Пример запроса oocl_rotate_double_new**
+### Пример запроса oocl_rotate_double_new
 
 В запросе передаем три изображения: фон, кольцо, круг.
 
@@ -93,3 +93,43 @@ https://api.capmonster.cloud/createTask
 Круг (*circle_base64*):
 
 ![](ex5.png)
+
+
+### Пример запроса betpunch_3x3_rotate
+
+В запросе передаем девять изображений. Передавать изображения нужно в следующем порядке:
+![](betpunch_3x3_rotate_example.png)
+
+**Ответ**: *"answer":[X,X,X,X,X,X,X,X,X]*,
+где *X* - целочисленное значение от 1 до 4 для каждого изображения.
+*4* - означает, что картинку не нужно поворачивать;
+*1-3* - количество поворотов картинки против часовой стрелки.
+
+:::info Метод
+```http
+https://api.capmonster.cloud/createTask
+```
+:::
+```json
+{
+    "clientKey": "API_KEY",
+    "task": {
+        "type": "ComplexImageTask",
+        "class": "recognition",
+        "imagesBase64": [
+			"{image_1_Base64}",
+			"{image_2_Base64}",
+			"{image_3_Base64}",
+			"{image_4_Base64}",
+			"{image_5_Base64}",
+			"{image_6_Base64}",
+			"{image_7_Base64}",
+			"{image_8_Base64}",
+			"{image_9_Base64}",
+		],
+        "metadata": {
+            "Task": "betpunch_3x3_rotate"
+        }
+    }
+}
+```
