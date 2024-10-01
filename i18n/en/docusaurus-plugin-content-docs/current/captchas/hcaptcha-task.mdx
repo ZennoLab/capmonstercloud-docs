@@ -142,7 +142,7 @@ The supported image types are as follows:
 |![](25940532.png)|
 
 
-## Create task
+## Create task method
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 <TabItem value="proxyless" label="HCaptchaTaskProxyless (without proxy)" default className="method-panel">
@@ -215,7 +215,7 @@ The supported image types are as follows:
 </Tabs>
 
 
-## Get task result
+## Get task result method
 Use the [getTaskResult](../api/methods/get-task-result.md) method to request answer for hCaptcha. You will get response within 10 - 80 secs period depending on service workload.
 
 <TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     proxyAddress: 'https://proxy.com',
     proxyPort: 6045,
     proxyLogin: 'login',
-    proxyPassword: 'p@ssword',
+    proxyPassword: 'password',
   });
 
   console.log(await cmcClient.Solve(hCaptchaRequest));

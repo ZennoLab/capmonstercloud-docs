@@ -3,6 +3,13 @@ sidebar_position: 2
 sidebar_label: ReCaptchaV2EnterpriseTask
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+
+
 # RecaptchaV2EnterpriseTask
 Объект содержит данные о задаче на решение ReCaptcha2 от Google версии Enterprise. Для обеспечения универсальности решения этого вида капчи нам необходимо использовать все данные, которые вы используете во время автоматизации заполнения формы на целевом сайте, включая прокси, user-agent браузера и cookies. Это позволит избежать любых проблем при изменении Google кода своей капчи.
 
@@ -16,27 +23,128 @@ sidebar_label: ReCaptchaV2EnterpriseTask
 Если прокси с авторизацией по IP, то необходимо обязательно добавить **116.203.55.208** в белый список.
 :::
 
-## **Структура объекта**
+## Параметры запроса
 
-|**Параметр**|**Тип**|**Обязательный**|**Значение**|
-| :- | :- | :- | :- |
-|type|String|да|**RecaptchaV2EnterpriseTaskProxyless** или **RecaptchaV2EnterpriseTask (При использовании прокси)**|
-|websiteURL|String|да|Адрес страницы, на которой решается капча|
-|websiteKey|String|да|Ключ-идентификатор reCAPTCHA на целевой странице.<br />`<div class="g-recaptcha" data-sitekey="ВОТ_ЭТОТ"></div>`<br/>или `<iframe title="reCAPTCHA" src="...;k=6LdIFr0ZAAAAAO3vz0O0OQrtAefzdJcWQM2TMYQH&amp;...` , где `6LdIFr0ZAAAAAO3vz0O0OQrtAefzdJcWQM2TMYQH` - `websiteKey`|
-|enterprisePayload|String|нет|Некоторые реализации виджета reCAPTCHA Enterprise могут содержать дополнительное поле s в структуре, которая передаётся в метод grecaptcha.enterprise.render вместе с sitekey.Например: `2JvUXHNTnZl1Jb6WEvbDyBMzrMTR7oQ78QRhBcG07rk9bpaAaE0LRq1ZeP5NYa0N` из: `<pre lang="js" ><code>grecaptcha.enterprise.render("some-div-id", {<br /> sitekey: "6Lc_aCMTAAAAABx7u2N0D1XnVbI_v6ZdbM6rYf16"<br/> theme: "dark"<br/> s: "2JvUXHNTnZl1Jb6WEvbDyB...ugQA"<br/>});</code></pre>`|
-|apiDomain|String|нет|<p>Адрес домена с которого загружать reCAPTCHA Enterprise. Например:</p><p>- [www.google.com](http://www.google.com)</p><p>- [www.recaptcha.net](http://www.recaptcha.net)</p><p>Не используйте параметр, если не знаете зачем он нужен.</p>|
-|proxyType|String|да (При использовании **RecaptchaV2EnterpriseTask**)|**http** - обычный http/https прокси<br />**https** - попробуйте эту опцию только если "http" не работает (требуется для некоторых кастомных прокси)<br />**socks4** - socks4 прокси<br/>**socks5** - socks5 прокси|
-|proxyAddress|String|да (При использовании **RecaptchaV2EnterpriseTask**)|<p>IP адрес прокси IPv4/IPv6. Не допускается:</p><p>- использование имен хостов</p><p>- использование прозрачных прокси (там где можно видеть IP клиента)</p><p>- использование прокси на локальных машинах</p>|
-|proxyPort|Integer|да (При использовании **RecaptchaV2EnterpriseTask**)|Порт прокси|
-|proxyLogin|String|нет|Логин прокси-сервера|
-|proxyPassword|String|нет|Пароль прокси-сервера|
-|userAgent|String|нет|User-Agent браузера, используемый в эмуляции. Необходимо использовать подпись современного браузера, иначе Google будет возвращать ошибку, требуя обновить браузер.|
-|cookies|String|нет|<p>Дополнительные cookies которые мы должны использовать во время взаимодействия с целевой страницей.</p><p>**Формат**: cookiename1=cookievalue1; cookiename2=cookievalue2</p>|
+<Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
+<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (без прокси)" default className="bordered-panel">
+    <ParamItem title="type" required type="string" />
+    **RecaptchaV2EnterpriseTaskProxyless**
 
-Для `enterprisePayload` - необходимо заменять функцию `grecaptcha.enterprise.render` перед её вызовом на свою и забирать значение из её параметров. Функция существует после загрузки скрипта, а рендерится капча обычно сразу или по событию страницы, если капча отрендерится с текущим полем `s` на клиенте, то токен с большой вероятностью принят не будет.
-Оригинальную функцию можно вызывать без поля `s`.
+    ---
 
-`apiDomain` – это домен, на котором размещается API-интерфейс для взаимодействия с reCAPTCHA, используется для верификации прохождения капчи пользователем. 
+    <ParamItem title="websiteURL" required type="string" />
+    Адрес страницы, на которой решается капча.
+
+    ---
+
+    <ParamItem title="websiteKey" required type="string" />
+    Ключ-идентификатор reCAPTCHA на целевой странице.
+	<br />`<div class="g-recaptcha" data-sitekey="THIS_ONE"></div>`
+	<br/>или `<iframe title="reCAPTCHA" src="...;k=6LdIFr0ZAAAAAO3vz0O0OQrtAefzdJcWQM2TMYQH&amp;...` , где `6LdIFr0ZAAAAAO3vz0O0OQrtAefzdJcWQM2TMYQH` - `websiteKey`
+
+    ---
+
+    <ParamItem title="enterprisePayload" type="string" />
+    Некоторые реализации виджета reCAPTCHA Enterprise могут содержать дополнительное поле s в структуре, которая передаётся в метод grecaptcha.enterprise.render вместе с sitekey. Например: `2JvUXHNTnZl1Jb6WEvbDyB...ugQA` из `<pre lang="js" ><code>grecaptcha.enterprise.render("some-div-id", {<br /> sitekey: "6Lc_aCMTAAAAABx7u2N0D1XnVbI_v6ZdbM6rYf16"<br/> theme: "dark"<br/> s: "2JvUXHNTnZl1Jb6WEvbDyB...ugQA"<br/>});</code></pre>`
+
+    ---
+
+    <ParamItem title="apiDomain" type="string" />
+    <p>Адрес домена с которого загружать reCAPTCHA Enterprise. Например: 
+	<br/>- [www.google.com](http://www.google.com) 
+	<br />- [www.recaptcha.net](http://www.recaptcha.net)</p>
+	<p>Не используйте параметр, если не знаете зачем он нужен.</p>
+
+    ---
+
+    <ParamItem title="userAgent" type="string" />
+    User-Agent браузера, используемый в эмуляции. Необходимо использовать подпись современного браузера, иначе Google будет возвращать ошибку, требуя обновить браузер.
+
+    ---
+
+    <ParamItem title="cookies" type="string" />
+    <p>Дополнительные cookies которые мы должны использовать во время взаимодействия с целевой страницей. <br />**Формат**: cookiename1=cookievalue1; cookiename2=cookievalue2</p>
+
+  </TabItem>
+  <TabItem value="proxy" label="RecaptchaV2EnterpriseTask (при использовании прокси)" className="bordered-panel">
+    <ParamItem title="type" required type="string" />
+    **RecaptchaV2EnterpriseTask**
+
+    ---
+
+    <ParamItem title="websiteURL" required type="string" />
+    Адрес страницы, на которой решается капча.
+
+    ---
+
+    <ParamItem title="websiteKey" required type="string" />
+    Ключ-идентификатор reCAPTCHA на целевой странице.
+	<br />`<div class="g-recaptcha" data-sitekey="THIS_ONE"></div>`
+	<br/>или `<iframe title="reCAPTCHA" src="...;k=6LdIFr0ZAAAAAO3vz0O0OQrtAefzdJcWQM2TMYQH&amp;...` , где `6LdIFr0ZAAAAAO3vz0O0OQrtAefzdJcWQM2TMYQH` - `websiteKey`
+
+    ---
+
+    <ParamItem title="enterprisePayload" type="string" />
+    Некоторые реализации виджета reCAPTCHA Enterprise могут содержать дополнительное поле s в структуре, которая передаётся в метод grecaptcha.enterprise.render вместе с sitekey. Например: `2JvUXHNTnZl1Jb6WEvbDyB...ugQA` из `<pre lang="js" ><code>grecaptcha.enterprise.render("some-div-id", {<br /> sitekey: "6Lc_aCMTAAAAABx7u2N0D1XnVbI_v6ZdbM6rYf16"<br/> theme: "dark"<br/> s: "2JvUXHNTnZl1Jb6WEvbDyB...ugQA"<br/>});</code></pre>`
+
+    ---
+
+    <ParamItem title="apiDomain" type="string" />
+    <p>Адрес домена с которого загружать reCAPTCHA Enterprise. Например: 
+	<br/>- [www.google.com](http://www.google.com) 
+	<br />- [www.recaptcha.net](http://www.recaptcha.net)</p>
+	<p>Не используйте параметр, если не знаете зачем он нужен.</p>
+
+    ---
+
+    <ParamItem title="userAgent" type="string" />
+    User-Agent браузера, используемый в эмуляции. Необходимо использовать подпись современного браузера, иначе Google будет возвращать ошибку, требуя обновить браузер.
+
+    ---
+
+    <ParamItem title="cookies" type="string" />
+    <p>Дополнительные cookies которые мы должны использовать во время взаимодействия с целевой страницей. <br />**Формат**: cookiename1=cookievalue1; cookiename2=cookievalue2</p>
+
+    ---
+
+    <ParamItem title="proxyType" required type="string" />
+    **http** - обычный http/https прокси;
+	<br />**https** - попробуйте эту опцию только если "http" не работает (требуется для некоторых кастомных прокси);
+	<br />**socks4** - socks4 прокси;
+	<br />**socks5** - socks5 прокси.
+
+    ---
+
+    <ParamItem title="proxyAddress" required type="string" />
+    <p>
+      IP адрес прокси IPv4/IPv6. Не допускается:
+		- использование имен хостов;
+		- использование прозрачных прокси (там где можно видеть IP клиента);
+		- использование прокси на локальных машинах.
+    </p>
+
+    ---
+
+    <ParamItem title="proxyPort" required type="integer" />
+    Порт прокси.
+
+    ---
+
+    <ParamItem title="proxyLogin" type="string" />
+    Логин прокси-сервера.
+
+    ---
+
+    <ParamItem title="proxyPassword" type="string" />
+    Пароль прокси-сервера.
+
+  </TabItem>
+  
+</Tabs>
+
+Для `enterprisePayload` - необходимо заменять функцию `grecaptcha.enterprise.render` перед её вызовом на свою и забирать значение из её параметров. Функция существует после загрузки скрипта, а рендерится капча обычно сразу или по событию страницы, если капча отрендерится с текущим полем `s` на клиенте, то токен с большой вероятностью принят не будет. Оригинальную функцию можно вызывать без поля `s`.
+
+`apiDomain` – это домен, на котором размещается API-интерфейс для взаимодействия с reCAPTCHA, используется для верификации прохождения капчи пользователем.
 
 <details>
     <summary>Скрипт</summary>
@@ -83,17 +191,48 @@ Object.defineProperty(window, 'grecaptcha', {
 
 
 
+## Метод создания задачи
 
-
-## **Пример запроса**
-
-:::info Метод
-```http
-https://api.capmonster.cloud/createTask
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (без прокси)" default className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+<MethodDescription>
+**Запрос**
+```json
+{
+  "clientKey":"API_KEY",
+  "task": {
+    "type":"RecaptchaV2EnterpriseTaskProxyless",
+    "websiteURL":"https://mydomain.com/page-with-recaptcha-enterprise",
+    "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
+    "enterprisePayload": {
+      "s": "SOME_ADDITIONAL_TOKEN"
+    }
+  }
+}
 ```
-:::
+**Ответ**
+```json
+{
+  "errorId":0,
+  "taskId":407533072
+}
+```
 
-### RecaptchaV2EnterpriseTask (С использованием прокси)
+</MethodDescription>
+  </TabItem>
+  <TabItem value="proxy" label="RecaptchaV2EnterpriseTask (при использовании прокси)" className="method-panel">
+<MethodItem>
+  ```http
+  https://api.capmonster.cloud/createTask
+  ```
+</MethodItem>
+<MethodDescription>
+**Запрос**
 ```json
 {
   "clientKey":"API_KEY",
@@ -113,43 +252,37 @@ https://api.capmonster.cloud/createTask
   }
 }
 ```
-
-### RecaptchaV2EnterpriseTaskProxyless (Без использования прокси)
-```json
-{
-  "clientKey":"API_KEY",
-  "task": {
-    "type":"RecaptchaV2EnterpriseTaskProxyless",
-    "websiteURL":"https://mydomain.com/page-with-recaptcha-enterprise",
-    "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
-    "enterprisePayload": {
-      "s": "SOME_ADDITIONAL_TOKEN"
-    }
-  }
-}
-```
-
-**Пример ответа**
-
+**Ответ**
 ```json
 {
   "errorId":0,
   "taskId":407533072
 }
 ```
+</MethodDescription>
+  </TabItem>
+  
+</Tabs>
 
-## **Получение результата**
-:::info Метод
-`<https://api.capmonster.cloud/getTaskResult>`
-:::
 
+## Метод получения результата задачи
 Используйте метод [getTaskResult](../api/methods/get-task-result.md) чтобы получить решение ReCaptcha2. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 10 с до 80 с.
 
-|**Свойство**|**Тип**|**Описание**|
-| :- | :- | :- |
-|gRecaptchaResponse|String|Хеш который необходимо подставить в форму с reCAPTCHA Enterprise в `<textarea id="g-recaptcha-response" ..></textarea>` . Имеет длину от 500 до 2190 байт.|
-
-**Пример:**
+<TabItem value="proxyless" label="RecaptchaV2EnterpriseTask (без прокси)" default className="method-panel-full">
+    <MethodItem>
+```http
+https://api.capmonster.cloud/getTaskResult
+```
+    </MethodItem>
+    <MethodDescription>
+**Запрос**
+```json
+{
+  "clientKey":"API_KEY",
+  "taskId": 407533072
+}
+```
+**Ответ**
 ```json
 {
   "errorId":0,
@@ -159,3 +292,54 @@ https://api.capmonster.cloud/createTask
   }
 }
 ```
+  </MethodDescription>
+  </TabItem>
+
+<br />
+
+|**Свойство**|**Тип**|**Описание**|
+| :- | :- | :- |
+|gRecaptchaResponse|String|Хеш который необходимо подставить в форму с reCAPTCHA Enterprise в `<textarea id="g-recaptcha-response" ..></textarea>`. Имеет длину от 500 до 2190 байт.|
+
+## Используйте библиотеку SDK
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, RecaptchaV2EnterpriseProxylessRequest, /*RecaptchaV2EnterpriseRequest*/ } from '@zennolab_com/capmonstercloud-client';
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+  console.log(await cmcClient.getBalance());
+
+  const recaptchaV2EnterpriseRequest = new RecaptchaV2EnterpriseProxylessRequest({
+    websiteURL: 'https://mydomain.com/page-with-recaptcha-enterprise',
+    websiteKey: '6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd',
+    enterprisePayload: {
+      s: 'SOME_ADDITIONAL_TOKEN',
+    },
+  })
+
+  // const recaptchaV2EnterpriseRequest = new RecaptchaV2EnterpriseRequest({
+  //   websiteURL: 'https://mydomain.com/page-with-recaptcha-enterprise',
+  //   websiteKey: '6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd',
+  //   enterprisePayload: {
+  //     s: 'SOME_ADDITIONAL_TOKEN',
+  //   },
+  //   proxyType: 'http',
+  //   proxyAddress: '8.8.8.8',
+  //   proxyPort: 8080,
+  //   proxyLogin: 'proxyLoginHere',
+  //   proxyPassword: 'proxyPasswordHere',
+  //   userAgent: 'userAgentPlaceholder',
+  // })
+
+  console.log(await cmcClient.Solve(recaptchaV2EnterpriseRequest));
+});
+```
+  </TabItem>
+  
+</Tabs>

@@ -180,7 +180,7 @@ Object.defineProperty(window, 'grecaptcha', {
 
 
 
-## Create task
+## Create task method
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 <TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (without proxy)" default className="method-panel">
@@ -254,10 +254,10 @@ Object.defineProperty(window, 'grecaptcha', {
 </Tabs>
 
 
-## Get task result
+## Get task result method
 Use the [getTaskResult](../api/methods/get-task-result.md) method to request answer for ReCaptcha2. You will get response within 10 - 80 sec period depending on service workload.
 
-<TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
+<TabItem value="proxyless" label="RecaptchaV2EnterpriseTask (without proxy)" default className="method-panel-full">
     <MethodItem>
 ```http
 https://api.capmonster.cloud/getTaskResult
@@ -323,7 +323,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   //   proxyPort: 8080,
   //   proxyLogin: 'proxyLoginHere',
   //   proxyPassword: 'proxyPasswordHere',
-  //   userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.132 Safari/537.36',
+  //   userAgent: 'userAgentPlaceholder',
   // })
 
   console.log(await cmcClient.Solve(recaptchaV2EnterpriseRequest));

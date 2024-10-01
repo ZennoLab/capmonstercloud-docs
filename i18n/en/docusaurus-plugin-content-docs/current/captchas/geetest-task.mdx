@@ -9,6 +9,7 @@ import ParamItem from '@theme/ParamItem';
 import MethodItem from '@theme/MethodItem';
 import MethodDescription from '@theme/MethodDescription'
 
+
 # GeeTestTask
 This type of task is for solving GeeTest captcha using your proxies.
 Your application should send the site address, public domain key (`gt`), key (`challenge`) and proxy.
@@ -482,7 +483,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 </Tabs>
 
 
-### <span style={{fontSize: '1.5rem'}}>Create task</span>
+### <span style={{fontSize: '1.5rem'}}>Create task method</span>
 
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
@@ -564,7 +565,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 Use the [getTaskResult](../api/methods/get-task-result.md) to get the result of GeeTest recognition. Depending on the system load, you will receive a response after a time in the range from 10 s to 30 s.
 
-### <span style={{fontSize: '1.5rem'}}>Get task result</span>
+### <span style={{fontSize: '1.5rem'}}>Get task result method</span>
 
 <TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
     <MethodItem>
@@ -659,4 +660,3 @@ document.addEventListener('DOMContentLoaded', async () => {
   </TabItem>
   
 </Tabs>
-

@@ -3,6 +3,13 @@ sidebar_position: 5
 sidebar_label: GeeTestTask
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+
+
 # GeeTestTask
 Этот тип задач используется для решения капчи GeeTest с использованием ваших прокси.
 Ваше приложение должно прислать адрес сайта, публичный ключ домена (`gt`), ключ (`challenge`) и прокси.
@@ -12,8 +19,6 @@ sidebar_label: GeeTestTask
 :::warning **Внимание!**
 Прокси с авторизацией по IP пока не поддерживаются.
 :::
-
-## **Структура объекта**
 
 :::info
 - Параметры `gt`, `challenge` и `geetestApiServerSubdomain` чаще всего находятся внутри JavaScript функции `initGeetest`.
@@ -26,70 +31,184 @@ V4 (captcha_id = gt)
 
 ![](Aspose.Words.09e28b99-ec8b-4638-848b-cdd6fefc7ac8.002.png)
 :::
-|**Параметр**|**Тип**|**Обязательный**|**Значение**|
-| :- | :- | :- | :- |
-|type|String|да|**GeeTestTaskProxyless** или **GeeTestTask (При использовании прокси)**|
-|websiteURL|String|да|Адрес страницы, на которой решается капча|
-|gt|String|да|Ключ-идентификатор GeeTest для домена. Статическое значение, редко обновляется.<br />Если v4 то это параметр clientId|
-|challenge|String|да, только для V3|<p>Меняющийся ключ.<br />При каждом обращении к нашему API нужно получать новое значение ключа. Если капча загружена на странице, то значение `challenge` уже недействительно и вы получите в ответ [ошибку](../api/api-errors.md) `ERROR_TOKEN_EXPIRED`.</p><p>За задачи с ошибкой `ERROR_TOKEN_EXPIRED` плата взимается как за успешно решённые задачи.</p><p>Нужно изучить запросы и найти тот, в котором возвращается это значение и перед каждым созданием задачи на распознавания выполнять этот запрос и парсить `challenge` из него.</p>|
-|geetestApiServerSubdomain|String|нет| Поддомен сервера Geetest API (должен отличаться от api.geetest.com). <br />Необязательный параметр. Может потребоваться для некоторых сайтов.|
-|geetestGetLib|String|нет|Путь к скрипту капчи для ее отображения на странице. <br /> Необязательный параметр. Может потребоваться для некоторых сайтов. <br />Отправляйте JSON в виде строки.|
-|version|Integer|нет|Номер версии (по умолчанию равен 3). Возможные значения: 3, 4.|
-|initParameters|Object|нет|Дополнительные параметры для 4 версии, используются вместе с “riskType” (тип капчи/характеристики ее проверки).|
-|proxyType|String|да (При использовании **GeeTestTask**)|**http** - обычный http/https прокси<br />**https** - попробуйте эту опцию только если "http" не работает (требуется для некоторых кастомных прокси)<br />**socks4** - socks4 прокси<br />**socks5** - socks5 прокси|
-|proxyAddress|String|да (При использовании **GeeTestTask**)|<p>IP адрес прокси IPv4/IPv6. Не допускается:</p><p>- использование имен хостов</p><p>- использование прозрачных прокси (там, где можно видеть IP клиента)</p><p>- использование прокси на локальных машинах</p>|
-|proxyPort|Integer|да (При использовании **GeeTestTask**)|Порт прокси|
-|proxyLogin|String|нет|Логин прокси-сервера|
-|proxyPassword|String|нет|Пароль прокси-сервера|
-|userAgent|String|нет|User-Agent браузера, используемый для решения капчи.|
-## **GeeTest V3**
 
-### **Примеры заданий**
+<br />
 
-Intelligent mode:
+## <span style={{fontSize: '2.25rem'}}>GeeTest V3</span>
 
-![](intelligent.png)
+### <span style={{fontSize: '1.5rem'}}>Примеры заданий</span>
 
-Slide CAPTCHA:
+<Tabs className="full-width-tabs">
+  <TabItem value="intelligent" label="Intelligent mode" default className="bordered-panel">
+    ![](intelligent.png)
+  </TabItem>
+  <TabItem value="slide" label="Slide CAPTCHA" className="bordered-panel">
+    ![](slide.png)
+  </TabItem>
+  <TabItem value="icon" label="Icon CAPTCHA" className="bordered-panel">
+    ![](icon.png)
+  </TabItem>
+  <TabItem value="space" label="Space CAPTCHA" className="bordered-panel">
+    ![](space.png)
+  </TabItem>
+</Tabs>
 
-![](slide.png)
+### <span style={{fontSize: '1.5rem'}}>Параметры запроса</span>
 
-Icon CAPTCHA:
+<Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
+<TabItem value="proxyless" label="GeeTestTaskProxyless (без прокси)" default className="bordered-panel">
+    <ParamItem title="type" required type="string" />
+    **GeeTestTaskProxyless**
 
-![](icon.png)
+    ---
 
-Space CAPTCHA:
+    <ParamItem title="websiteURL" required type="string" />
+    Адрес страницы, на которой решается капча.
 
-![](space.png)
+    ---
 
-### **Пример запроса**
+    <ParamItem title="gt" required type="string" />
+    Ключ-идентификатор GeeTest для домена. Статическое значение, редко обновляется.
+	<br />Если v4 то это параметр clientId.
 
-:::info Метод
-```http
-https://api.capmonster.cloud/createTask
-```
-:::
+    ---
 
-### GeeTestTask (с использованием прокси) на тестовом сайте 
+    <ParamItem title="challenge" required="required only for V3" type="string" />
+    <p>Меняющийся ключ.
+	<br />При каждом обращении к нашему API нужно получать новое значение ключа. Если капча загружена на странице, то значение `challenge` уже недействительно и вы получите в ответ [error](../api/api-errors.md) `ERROR_TOKEN_EXPIRED`. 
+	<br />За задачи с ошибкой `ERROR_TOKEN_EXPIRED` плата взимается как за успешно решённые задачи.
+    <br />Нужно изучить запросы и найти тот, в котором возвращается это значение и перед каждым созданием задачи на распознавания выполнять этот запрос и парсить `challenge` из него.
+    </p>
 
-```json 
-{
-  "clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
-  "task": {
-    "type":"GeeTestTask",
-    "websiteURL":"https://www.geetest.com/en/demo",
-    "gt":"022397c99c9f646f6477822485f30404",
-    "challenge":"7f044f48bc951ecfbfc03842b5e1fe59",
-    "proxyType":"http",
-    "proxyAddress":"8.8.8.8",
-    "proxyPort":8080,
-    "proxyLogin":"proxyLoginHere",
-    "proxyPassword":"proxyPasswordHere",
-    "userAgent":"userAgentPlaceholder"
-  }
-}
-```
-### GeeTestTaskProxyless (без использования прокси) на тестовом сайте 
+    ---
+
+    <ParamItem title="version" type="integer" required="required only for V4"/>
+    Номер версии (по умолчанию равен 3). Возможные значения: 3, 4.
+
+    ---
+
+    <ParamItem title="geetestApiServerSubdomain" type="string" />
+    Поддомен сервера Geetest API (должен отличаться от api.geetest.com). 
+	<br />Необязательный параметр. Может потребоваться для некоторых сайтов.
+
+    ---
+
+    <ParamItem title="geetestGetLib" type="string" />
+    Путь к скрипту капчи для ее отображения на странице. 
+	<br />Необязательный параметр. Может потребоваться для некоторых сайтов. 
+	<br />Отправляйте JSON в виде строки.
+
+    ---
+
+    <ParamItem title="initParameters" type="object" />
+    Дополнительные параметры для 4 версии, используются вместе с “riskType” (тип капчи/характеристики ее проверки).
+
+    ---
+
+    <ParamItem title="userAgent" type="string" />
+    User-Agent браузера, используемый для решения капчи.
+  </TabItem>
+  
+  <TabItem value="proxy" label="GeeTestTask (при использовании прокси)" className="bordered-panel">
+    <ParamItem title="type" required type="string" />
+    **GeeTestTask**
+
+    ---
+
+    <ParamItem title="websiteURL" required type="string" />
+    Адрес страницы, на которой решается капча.
+
+    ---
+
+    <ParamItem title="gt" required type="string" />
+    Ключ-идентификатор GeeTest для домена. Статическое значение, редко обновляется.
+	<br />Если v4 то это параметр clientId.
+
+    ---
+
+    <ParamItem title="challenge" required="required only for V3" type="string" />
+    <p>Меняющийся ключ.
+	<br />При каждом обращении к нашему API нужно получать новое значение ключа. Если капча загружена на странице, то значение `challenge` уже недействительно и вы получите в ответ [error](../api/api-errors.md) `ERROR_TOKEN_EXPIRED`. 
+	<br />За задачи с ошибкой `ERROR_TOKEN_EXPIRED` плата взимается как за успешно решённые задачи.
+    <br />Нужно изучить запросы и найти тот, в котором возвращается это значение и перед каждым созданием задачи на распознавания выполнять этот запрос и парсить `challenge` из него.
+    </p>
+
+    ---
+
+    <ParamItem title="version" type="integer" required="required only for V4"/>
+    Номер версии (по умолчанию равен 3). Возможные значения: 3, 4.
+
+    ---
+
+    <ParamItem title="geetestApiServerSubdomain" type="string" />
+    Поддомен сервера Geetest API (должен отличаться от api.geetest.com). 
+	<br />Необязательный параметр. Может потребоваться для некоторых сайтов.
+
+    ---
+
+    <ParamItem title="geetestGetLib" type="string" />
+    Путь к скрипту капчи для ее отображения на странице. 
+	<br />Необязательный параметр. Может потребоваться для некоторых сайтов. 
+	<br />Отправляйте JSON в виде строки.
+
+    ---
+
+    <ParamItem title="initParameters" type="object" />
+    Дополнительные параметры для 4 версии, используются вместе с “riskType” (тип капчи/характеристики ее проверки).
+
+    ---
+
+    <ParamItem title="proxyType" required type="string" />
+    **http** - обычный http/https прокси;<br />
+	**https** - попробуйте эту опцию только если "http" не работает (требуется для некоторых кастомных прокси);<br />
+	**socks4** - socks4 прокси;<br />
+	**socks5** - socks5 прокси.
+
+    ---
+
+    <ParamItem title="proxyAddress" required type="string" />
+    <p>
+      IP адрес прокси IPv4/IPv6. Не допускается:
+		- использование имен хостов;
+		- использование прозрачных прокси (там где можно видеть IP клиента);
+		- использование прокси на локальных машинах.
+    </p>
+
+    ---
+
+    <ParamItem title="proxyPort" required type="integer" />
+    Порт прокси.
+
+    ---
+
+    <ParamItem title="proxyLogin" type="string" />
+    Логин прокси-сервера.
+
+    ---
+
+    <ParamItem title="proxyPassword" type="string" />
+    Пароль прокси-сервера.
+
+    ---
+
+    <ParamItem title="userAgent" type="string" />
+    User-Agent браузера, используемый для решения капчи.
+  </TabItem>
+  
+</Tabs>
+
+
+### <span style={{fontSize: '1.5rem'}}>Метод создания задачи</span>
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+<TabItem value="proxyless" label="GeeTestTaskProxyless (без прокси)" default className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+<MethodDescription>
+**Запрос**
 ```json
 {
     "clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
@@ -99,13 +218,11 @@ https://api.capmonster.cloud/createTask
         "websiteURL":"https://www.geetest.com/en/demo",
         "gt":"022397c99c9f646f6477822485f30404",
         "challenge":"7f044f48bc951ecfbfc03842b5e1fe59"
+
     }
 }
 ```
-
-
-
-**Пример ответа**
+**Ответ**
 ```json
 {
   "errorId":0,
@@ -113,23 +230,66 @@ https://api.capmonster.cloud/createTask
 }
 ```
 
-### **Получение результата**
-:::info Метод
+</MethodDescription>
+  </TabItem>
+  <TabItem value="proxy" label="GeeTestTask (при использовании прокси)" className="method-panel">
+<MethodItem>
+  ```http
+  https://api.capmonster.cloud/createTask
+  ```
+</MethodItem>
+<MethodDescription>
+**Запрос**
+```json 
+  {
+    "clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
+    "task": {
+      "type":"GeeTestTask",
+      "websiteURL":"https://www.geetest.com/en/demo",
+      "gt":"022397c99c9f646f6477822485f30404",
+      "challenge":"7f044f48bc951ecfbfc03842b5e1fe59",
+      "proxyType":"http",
+      "proxyAddress":"8.8.8.8",
+      "proxyPort":8080,
+      "proxyLogin":"proxyLoginHere",
+      "proxyPassword":"proxyPasswordHere",
+      "userAgent":"userAgentPlaceholder"
+    }
+  }
+```
+**Ответ**
+```json
+{
+  "errorId":0,
+  "taskId":407533072
+}
+```
+</MethodDescription>
+  </TabItem>
+  
+</Tabs>
+
+
+Используйте метод [getTaskResult](../api/methods/get-task-result.md), чтобы получить решение GeeTest. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 10 с до 30 с.
+
+### <span style={{fontSize: '1.5rem'}}>Метод получения результата задачи</span>
+
+
+  <TabItem value="proxyless" label="GeeTestTaskProxyless (без прокси)" default className="method-panel-full">
+    <MethodItem>
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
-:::
-Используйте метод [getTaskResult](../api/methods/get-task-result.md), чтобы получить решение GeeTest. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 10 с до 30 с.
-
-<table>
-<tr><th><b>Свойство</b></th><th><b>Тип</b></th><th><b>Описание</b></th></tr>
-<tr><td>challenge</td><td>Строка</td><td rowspan="3">Все три параметра необходимы при отправке формы на целевом сайте.</td></tr>
-<tr><td>validate</td><td>Строка</td></tr>
-<tr><td>seccode</td><td>Строка</td></tr>
-</table>
-
-**Пример:**
-
+    </MethodItem>
+    <MethodDescription>
+**Запрос**
+```json
+{
+  "clientKey":"API_KEY",
+  "taskId": 407533072
+}
+```
+**Ответ**
 ```json
 {
   "errorId":0,
@@ -141,21 +301,246 @@ https://api.capmonster.cloud/getTaskResult
   }
 }
 ```
+  </MethodDescription>
+  </TabItem>
 
-## **GeeTest V4**
+<br />
 
-### **Пример задания**
+<table><tr>
+<th><b>Свойство</b></th><th><b>Тип</b></th><th><b>Описание</b></th>
+</tr>
+<tr><td>challenge</td><td>String</td><td rowspan="3">Все три параметра необходимы при отправке формы на целевом сайте.</td></tr>
+<tr><td>validate</td><td>String</td></tr>
+<tr><td>seccode</td><td>String</td></tr>
+</table>
+
+### <span style={{fontSize: '1.5rem'}}>Используйте библиотеку SDK</span>
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, GeeTestProxylessRequest, /*GeeTestRequest*/ } from '@zennolab_com/capmonstercloud-client';
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+  console.log(await cmcClient.getBalance());
+
+  const geetestV3Request = new GeeTestProxylessRequest({
+    websiteURL: 'https://example.com/geetest.php',
+    gt: '81dc9bdb52d04dc20036dbd8313ed055',
+    challenge: 'd93591bdf7860e1e4ee2fca799911215',
+  })
+
+  // const geetestV3Request = new GeeTestRequest({
+  //   websiteURL: 'https://example.com/geetest.php',
+  //   gt: '81dc9bdb52d04dc20036dbd8313ed055',
+  //   challenge: 'd93591bdf7860e1e4ee2fca799911215',
+  //   userAgent: 'userAgentPlaceholder',
+  //   proxyType: 'https',
+  //   proxyAddress: 'https://proxy.com',
+  //   proxyPort: 6045,
+  //   proxyLogin: 'login',
+  //   proxyPassword: 'password',
+  // })
+
+  console.log(await cmcClient.Solve(geetestV3Request));
+});
+```
+  </TabItem>
+  
+</Tabs>
+
+<br />
+
+## <span style={{fontSize: '2.25rem'}}>GeeTest V4</span>
+
+### <span style={{fontSize: '1.5rem'}}>Пример задания</span>
 
 ![](geetest4.png)
 
-### **Пример запроса**
-:::info Метод
-```http
-https://api.capmonster.cloud/createTask
-```
-:::
 
-### GeeTestTask (с использованием прокси) на тестовом сайте 
+### <span style={{fontSize: '1.5rem'}}>Параметры запроса</span>
+
+<Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
+<TabItem value="proxyless" label="GeeTestTaskProxyless (без прокси)" default className="bordered-panel">
+    <ParamItem title="type" required type="string" />
+    **GeeTestTaskProxyless**
+
+    ---
+
+    <ParamItem title="websiteURL" required type="string" />
+    Address of the page on which the captcha is solved.
+
+    ---
+
+    <ParamItem title="gt" required type="string" />
+    The GeeTest identifier key for the domain. Static value, rarely updated.<br />If v4 then this is the clientId parameter.
+
+    ---
+
+    <ParamItem title="challenge" required="required only for V3" type="string" />
+    <p>
+    A dynamic key.<br />Each time our API is called, we need to get a new key value. If the captcha is loaded on the page, then the `challenge` value is no longer valid and you will get the [error](../api/api-errors.md) `ERROR_TOKEN_EXPIRED`. <br />
+    You will be charged for tasks with `ERROR_TOKEN_EXPIRED` error.
+    It is necessary to examine the requests and find the one in which this value is returned and, before each creation of the recognition task, execute this request and parse the challenge from it.
+    </p>
+
+    ---
+
+    <ParamItem title="version" type="integer" required="required only for V4"/>
+    Version number (default is 3). Possible values: 3, 4.
+
+    ---
+
+    <ParamItem title="geetestApiServerSubdomain" type="string" />
+    Geetest API subdomain server (must be different from api.geetest.com). <br />Optional parameter. May be required for some sites.
+
+    ---
+
+    <ParamItem title="geetestGetLib" type="string" />
+    Path to the captcha script to display it on the page. <br /> Optional parameter. May be required for some sites. <br />Send JSON as a string.
+
+    ---
+
+    <ParamItem title="initParameters" type="object" />
+    Additional parameters for version 4, used together with “riskType” (captcha type/characteristics of its verification).
+
+    ---
+
+    <ParamItem title="userAgent" type="string" />
+    Browser User-Agent used to recognize captcha.
+  </TabItem>
+  <TabItem value="proxy" label="GeeTestTask (using proxy)" className="bordered-panel">
+    <ParamItem title="type" required type="string" />
+    **GeeTestTask**
+
+    ---
+
+    <ParamItem title="websiteURL" required type="string" />
+    Address of the page on which the captcha is solved.
+
+    ---
+
+    <ParamItem title="gt" required type="string" />
+    The GeeTest identifier key for the domain. Static value, rarely updated.<br />If v4 then this is the clientId parameter.
+
+    ---
+
+    <ParamItem title="challenge" required="required only for V3" type="string" />
+    <p>
+    A dynamic key.<br />Each time our API is called, we need to get a new key value. If the captcha is loaded on the page, then the `challenge` value is no longer valid and you will get the [error](../api/api-errors.md) `ERROR_TOKEN_EXPIRED`. <br />
+    You will be charged for tasks with `ERROR_TOKEN_EXPIRED` error.
+    It is necessary to examine the requests and find the one in which this value is returned and, before each creation of the recognition task, execute this request and parse the challenge from it.
+    </p>
+
+    ---
+
+    <ParamItem title="version" type="integer" required="required only for V4"/>
+    Version number (default is 3). Possible values: 3, 4.
+
+    ---
+
+    <ParamItem title="geetestApiServerSubdomain" type="string" />
+    Geetest API subdomain server (must be different from api.geetest.com). <br />Optional parameter. May be required for some sites.
+
+    ---
+
+    <ParamItem title="geetestGetLib" type="string" />
+    Path to the captcha script to display it on the page. <br /> Optional parameter. May be required for some sites. <br />Send JSON as a string.
+
+    ---
+
+    <ParamItem title="initParameters" type="object" />
+    Additional parameters for version 4, used together with “riskType” (captcha type/characteristics of its verification).
+
+    ---
+
+    <ParamItem title="proxyType" required type="string" />
+    **http** - regular http/https proxy;<br />**https** - try this option only if "http" doesn't work (required for some custom proxies);<br />**socks4** - socks4 proxy;<br />**socks5** - socks5 proxy.
+
+    ---
+
+    <ParamItem title="proxyAddress" required type="string" />
+    <p>
+      IPv4/IPv6 proxy IP address. Not allowed:
+      - using of hostnames;
+      - using transparent proxies (where you can see the client's IP);
+      - using proxies on local machines.
+    </p>
+
+    ---
+
+    <ParamItem title="proxyPort" required type="integer" />
+    Proxy port.
+
+    ---
+
+    <ParamItem title="proxyLogin" type="string" />
+    Proxy-server login.
+
+    ---
+
+    <ParamItem title="proxyPassword" type="string" />
+    Proxy-server password.
+
+    ---
+
+    <ParamItem title="userAgent" type="string" />
+    Browser User-Agent used to recognize captcha.
+  </TabItem>
+  
+</Tabs>
+
+
+### <span style={{fontSize: '1.5rem'}}>Create task</span>
+
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+<TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+<MethodDescription>
+**Request**
+```json
+{
+    "clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
+    "task":
+    {
+        "type":"GeeTestTaskProxyless",
+        "websiteURL":"https://gt4.geetest.com/",
+        "gt":"54088bb07d2df3c46b79f80300b0abbe",
+        "version": 4,
+        "initParameters": {
+          "riskType": "slide"
+
+        }
+    }
+}
+```
+**Response**
+```json
+{
+  "errorId":0,
+  "taskId":407533072
+}
+```
+
+</MethodDescription>
+  </TabItem>
+  <TabItem value="proxy" label="GeeTestTask (using proxy)" className="method-panel">
+<MethodItem>
+  ```http
+  https://api.capmonster.cloud/createTask
+  ```
+</MethodItem>
+<MethodDescription>
+**Request**
 ```json
 {
   "clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
@@ -173,53 +558,42 @@ https://api.capmonster.cloud/createTask
     "proxyLogin":"proxyLoginHere",
     "proxyPassword":"proxyPasswordHere",
     "userAgent":"userAgentPlaceholder"
+
   }
 }
 ```
-### GeeTestTaskProxyless (без использования прокси) на тестовом сайте 
-```json
-{
-    "clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
-    "task":
-    {
-        "type":"GeeTestTaskProxyless",
-        "websiteURL":"https://gt4.geetest.com/",
-        "gt":"54088bb07d2df3c46b79f80300b0abbe",
-        "version": 4,
-        "initParameters": {
-          "riskType": "slide"
-        }
-    }
-}
-```
 
-**Пример ответа**
-
+**Response**
 ```json
 {
   "errorId":0,
   "taskId":407533072
 }
 ```
+</MethodDescription>
+  </TabItem>
+  
+</Tabs>
 
-### **Получение результата**
-:::info Метод
+Use the [getTaskResult](../api/methods/get-task-result.md) to get the result of GeeTest recognition. Depending on the system load, you will receive a response after a time in the range from 10 s to 30 s.
+
+### <span style={{fontSize: '1.5rem'}}>Get task result</span>
+
+<TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
+    <MethodItem>
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
-:::
-Используйте метод [getTaskResult](../api/methods/get-task-result.md), чтобы получить решение GeeTest. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 10 с до 30 с.
-
-<table>
-<tr><th><b>Свойство</b></th><th><b>Тип</b></th><th><b>Описание</b></th></tr>
-<tr><td>captcha_id</td><td>Строка</td><td rowspan="5">Все пять параметров необходимы при отправке формы на целевом сайте.<br />input[name=captcha_id]<br />input[name=lot_number]<br />input[name=pass_token]<br />input[name=gen_time]<br />input[name=captcha_output]</td></tr>
-<tr><td>lot_number</td><td>Строка</td></tr>
-<tr><td>pass_token</td><td>Строка</td></tr>
-<tr><td>gen_time</td><td>Строка</td></tr>
-<tr><td>captcha_output</td><td>Строка</td></tr>
-</table>
-
-**Пример:**
+    </MethodItem>
+    <MethodDescription>
+**Request**
+```json
+{
+  "clientKey":"API_KEY",
+  "taskId": 407533072
+}
+```
+**Response**
 ```json
 {
   "errorId":0,
@@ -233,3 +607,68 @@ https://api.capmonster.cloud/getTaskResult
   }
 }
 ```
+  </MethodDescription>
+  </TabItem>
+
+<br />
+
+<table>
+<tr>
+<th><b>Property</b></th><th><b>Type</b></th><th><b>Description</b></th>
+</tr>
+<tr>
+<td>captcha_id</td><td>String</td><td rowspan="5">All five parameters are required when submitting the form on the target site.<br />input[name=captcha_id]<br />input[name=lot_number]<br />input[name=pass_token]<br />input[name=gen_time]<br />input[name=captcha_output]</td>
+</tr>
+<tr><td>lot_number</td><td>String</td></tr>
+<tr><td>pass_token</td><td>String</td></tr>
+<tr><td>gen_time</td><td>String</td></tr>
+<tr><td>captcha_output</td><td>String</td></tr>
+</table>
+
+
+### <span style={{fontSize: '1.5rem'}}>Use SDK Library</span>
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, GeeTestProxylessRequest, /*GeeTestRequest*/ } from '@zennolab_com/capmonstercloud-client';
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+  console.log(await cmcClient.getBalance());
+
+  const geetestV4Request = new GeeTestProxylessRequest({
+    websiteURL: 'https://example.com/geetest.php',
+    gt: '81dc9bdb52d04dc20036dbd8313ed055',
+    challenge: 'd93591bdf7860e1e4ee2fca799911215',
+    version: '4',
+    initParameters: {
+      riskType: 'slide',
+    },
+  });
+
+  // const geetestV4Request = new GeeTestRequest({
+  //   websiteURL: 'https://example.com/geetest.php',
+  //   gt: '81dc9bdb52d04dc20036dbd8313ed055',
+  //   challenge: 'd93591bdf7860e1e4ee2fca799911215',
+  //   version: '4',
+  //   initParameters: {
+  //     riskType: 'slide',
+  //   },
+  //   userAgent: 'userAgentPlaceholder',
+  //   proxyType: 'https',
+  //   proxyAddress: 'https://proxy.com',
+  //   proxyPort: 6045,
+  //   proxyLogin: 'login',
+  //   proxyPassword: 'p@ssword',
+  // })
+
+  console.log(await cmcClient.Solve(geetestV4Request));
+});
+```
+  </TabItem>
+  
+</Tabs>
