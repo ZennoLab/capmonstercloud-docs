@@ -170,20 +170,20 @@ Cloudflare 挑战的外观可能不同。
 
 **普通变体：**
 
-![](turnstile-simple.png)
+![](./images/tunrstile-task/turnstile-simple.png)
 
 **风格化变体：**
 
 <figure>
 
-![](turnstile-stylized.png)
+![](./images/tunrstile-task/turnstile-stylized.png)
 <figcaption>挑战无缝集成到网站本身。</figcaption>
 
 </figure>
 
 <figure>
 
-![](turnstile-stylized-2.png)
+![](./images/tunrstile-task/turnstile-stylized-2.png)
 
 <figcaption>外观类似于普通 turnstile CAPTCHA，但实际上是一个挑战。</figcaption>
 
@@ -193,15 +193,15 @@ Cloudflare 挑战的外观可能不同。
 
 - 第一个对站点的请求返回403状态码：
 
-![](b61dae70-f056-4257-ab72-05beacb27a0d.png)
+![](./images/tunrstile-task/b61dae70-f056-4257-ab72-05beacb27a0d.png)
 
 - 具有id为**challenge-form**的表单有一个**action**属性（注意不要与turnstile验证码的参数混淆），其中包含`__cf_chl_f_tk=`参数：
 
-![](1e4dc39f-0a4a-4c29-a48d-abc7a2ec6380.png)
+![](./images/tunrstile-task/1e4dc39f-0a4a-4c29-a48d-abc7a2ec6380.png)
 
 - 页面包含两个类似的`<script>`标签，在`window`对象中创建了一个新的值：
 
-![](gif.gif)
+![](./images/tunrstile-task/gif.gif)
 
 <details>
         <summary>使用Node.js上的Selenium实现解决方案示例</summary>

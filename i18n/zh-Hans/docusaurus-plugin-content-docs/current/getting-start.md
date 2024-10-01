@@ -70,11 +70,11 @@ CapMonster Cloud 服务中有 2 种验证码识别方法：
 
 3. 在识别 ReCaptcha 操作的属性中，选择 CapMonsterCloud.dll 模块，指定 reCaptcha v.2 验证码类型以及**在选项卡中**或**通过 SiteKey**解决的方法：
 
-![](getting-started-1.png)
+![](./images/getting-started-1.png)
 
 4. 如果选择**通过 SiteKey**方法，请指定验证码数据（sitekey）和 url - 您要解决验证码的页面地址：
 
-![](getting-started-2.png)
+![](./images/getting-started-2.png)
 
 ### reCaptcha v.3
 
@@ -82,7 +82,7 @@ CapMonster Cloud 服务中有 2 种验证码识别方法：
 
 2. 在识别 ReCaptcha 操作的属性中，选择 CapMonsterCloud.dll 模块，指定 reCaptcha v.3 验证码类型，方法在 Tab 或 Via SiteKey 中，还指定 Action 和 minScore：
 
-![](getting-started-3.png)
+![](./images/getting-started-3.png)
 
 ### 验证码
 
@@ -90,7 +90,7 @@ CapMonster Cloud 服务中有 2 种验证码识别方法：
 
 2. 在识别 hCaptcha 操作的属性中，选择 In Tab 或 Via SiteKey 方法（选择此方法时，您需要指定 SiteKey 和验证码所在的 URL）：
 
-![](getting-started-4.png)
+![](./images/getting-started-4.png)
 
 ### 通过 HTTP 请求
 
@@ -98,28 +98,28 @@ CapMonster Cloud 服务中有 2 种验证码识别方法：
 
 1. “变量处理”（“添加操作”-“数据”-“变量处理”），在属性中选择“设置值”，并在值中写入您的 CapMonster Cloud API 密钥。
 
-![](getting-started-5.png)
+![](./images/getting-started-5.png)
 
 2. “添加操作” - “HTTP” - “POST 请求”（如果需要，另外添加您的代理值）：
 
-![](getting-started-6.png)
+![](./images/getting-started-6.png)
 
 3. 添加“处理 JSON/XML”操作（“添加操作” - “数据” - “处理 JSON/XML”），在属性中选择“解析”，输入“Json”，右键单击解析文本选择“从变量设置值”：
 
-![](getting-started-7.png)
+![](./images/getting-started-7.png)
 
 4. 添加“变量处理”动作，在其中设置\{-Json.taskId-\}：
 
-![](getting-started-8.png)
+![](./images/getting-started-8.png)
 
 5. 生成新的POST请求来获取结果：
 
-![](getting-started-9.png)
+![](./images/getting-started-9.png)
 
 6. 在“JSON/XML 处理”操作中添加值“解析”：
 
-![](getting-started-10.png)
+![](./images/getting-started-10.png)
 
 7. 接下来，您需要使用“设置值”操作将令牌值替换为所需的验证码形式（通过检查页面代码），例如：
 
-![](getting-started-11.png)
+![](./images/getting-started-11.png)

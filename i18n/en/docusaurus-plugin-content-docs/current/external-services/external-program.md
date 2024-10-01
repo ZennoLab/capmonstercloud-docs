@@ -4,7 +4,7 @@ CapMonster.cloud is compatible with all captcha solvers. To connect CapMonster.c
 <details>
     <summary>ZennoPoster</summary>
 
-![](zennoposter.png)
+![](./images/external-program/zennoposter.png)
 </details>
 
 <details>
@@ -12,7 +12,7 @@ CapMonster.cloud is compatible with all captcha solvers. To connect CapMonster.c
 
 Select “Use CapMonster.cloud” and enter your personal API key.
 
-![](Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.003.png)
+![](./images/external-program/Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.003.png)
 </details>
 
 <details>
@@ -20,17 +20,17 @@ Select “Use CapMonster.cloud” and enter your personal API key.
 
 To solve a reCAPTCHA, select Util::ReCaptcha2 and specify the key for the Provider field.
 
-![](aparser.png) 
+![](./images/external-program/aparser.png) 
 
 To solve standard captchas, select “Util::Antigate“ and specify “api.capmonster.cloud“ as the value for “Antigate domain“. In the "key" field, specify your personal API key.
 
-![](aparser2.png)
+![](./images/external-program/aparser2.png)
 </details>
 
 <details>
     <summary>MailBot by Tavel</summary>
 
-![](Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.006.png)
+![](./images/external-program/Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.006.png)
 </details>
 
 ## **Connecting to programs where you can specify a domain**
@@ -41,7 +41,7 @@ This method works for:
 <details>
     <summary>ZennoDroid</summary>
 
-![](Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.007.png)
+![](./images/external-program/Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.007.png)
 </details>
 
 ## **Connecting to other programs in 3 steps**
@@ -107,7 +107,7 @@ In some cases, you may need admin rights to save the file. In this case, you wil
 
 1. Start typing "Notepad" in the search bar of your taskbar. Once the result is found, RMB-click on it and click "Run as administrator."
 
-  ![](Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.008.png)
+  ![](./images/external-program/Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.008.png)
 
 1. In the Notepad upper menu, click File — Open and specify the path to "hosts": *C:\Windows\System32\drivers\etc.* If there are several files with this name in the folder, open the file that has no extension.
 1. Make changes to "hosts" and then save the file in the menu.
@@ -121,7 +121,7 @@ Try visiting any of these domains. If everything is correct, a white page will o
 
 Open Terminal via Spotlight or Launchpad.
 
-![](Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.009.png) 
+![](./images/external-program/Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.009.png) 
 
 In the application window, enter the command for opening Nano text editor: `sudo nano /etc/hosts`
 
@@ -316,8 +316,6 @@ This method works for many apps, including the following:
 If you couldn't connect CapMonster.Cloud to your app, contact [support](https://helpdesk.zennolab.com/conversation/new), we will help you with all configurations.
 
 :::
-
-[ref1]: Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.001.png
 
 ## **Frequent connection errors. How to avoid them?**
 
