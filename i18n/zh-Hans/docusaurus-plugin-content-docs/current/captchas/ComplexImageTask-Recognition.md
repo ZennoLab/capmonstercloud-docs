@@ -109,6 +109,7 @@ https://api.capmonster.cloud/createTask
 ### betpunch_3x3_rotate
 
 在请求中我们传递了九张图片。图片必须按照以下顺序传递：
+
 ![](betpunch_3x3_rotate_example.png)
 
 **响应**: *"answer":[X,X,X,X,X,X,X,X,X]*,
