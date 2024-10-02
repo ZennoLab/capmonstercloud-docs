@@ -10,8 +10,8 @@ sidebar_label: TurnstileTask
 Ознакомьтесь со всеми тремя вариантами распознавания капчи и выберете наиболее предпочтительный для вас. 
 :::
 
-## Вариант 1 (Turnstile)
-Вам требуется решить **обычную** turstile капчу, как [здесь](http://tsmanaged.zlsupport.com). Обратите внимание, что капча на страницах CloudFlare может выглядеть идентично. Посмотрите в конце статьи как отличить обычный Turnstile от Cloudflare Challenge. 
+## **Вариант 1 (Turnstile)**
+Вам требуется решить **обычную** turstile капчу, как [здесь](https://zenno.link/zl-support). Обратите внимание, что капча на страницах CloudFlare может выглядеть идентично. Посмотрите в конце статьи как отличить обычный Turnstile от Cloudflare Challenge. 
 #### Структура объекта
 |**Параметр**|**Тип**|**Обязательный**|**Значение**|
 | :- | :- | :- | :- |
@@ -20,7 +20,7 @@ sidebar_label: TurnstileTask
 |websiteKey|String|да|Ключ Turnstile|
 |pageAction|String|нет|Поле `action`, которое можно найти в callback функции для загрузки капчи
 
-## Вариант 2 (CloudFlare)
+## **Вариант 2 (CloudFlare)**
 Вы работаете через браузер, и Вам требуется получить токен для прохождения CloudFlare
 #### Структура объекта
 |**Параметр**|**Тип**|**Обязательный**|**Значение**|
@@ -70,7 +70,7 @@ sidebar_label: TurnstileTask
 
 `callback` – функция обратного вызова после успешного прохождения капчи.
 
-## Вариант 3 (CloudFlare)
+## **Вариант 3 (CloudFlare)**
 Вы работаете с помощью запросов, и Вам требуются куки `cf_clearance`. Обязательно нужны ваши прокси
 #### Структура объекта
 |**Параметр**|**Тип**|**Обязательный**|**Значение**|
@@ -87,8 +87,9 @@ sidebar_label: TurnstileTask
 |proxyLogin|String|да|Логин прокси-сервера|
 |proxyPassword|String|да|Пароль прокси-сервера|
 
-## Примеры запросов
-### **Вариант 1. Обычный Turnstile:**
+## **Примеры запросов**
+
+### Вариант 1. Обычный Turnstile:
 :::info Метод
 ```http
 https://api.capmonster.cloud/createTask
@@ -114,7 +115,7 @@ https://api.capmonster.cloud/createTask
 }
 ```
 
-### **Вариант 2. CloudFlare(token)**
+### Вариант 2. CloudFlare(token)
 :::info Метод
 ```http
 https://api.capmonster.cloud/createTask
@@ -168,6 +169,7 @@ https://api.capmonster.cloud/createTask
 | :- | :- | :- |
 |cf_clearance|String|Специальные куки cloudflare, которые вы можете подставить в свой браузер|
 |token|String|Используйте токен при вызове callback функции|
+
 ## **Как отличить обычный Turnstile от Cloudflare Challenge.**
 Cloudflare challenge может выглядеть по-разному. 
 
