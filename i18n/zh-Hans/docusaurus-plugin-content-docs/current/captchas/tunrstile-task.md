@@ -9,8 +9,8 @@ sidebar_label: TurnstileTask
 :::caution 注意！
 请查看所有三个验证码识别选项，并选择最适合您的选项。
 :::
-## 选项 1（Turnstile）
-您需要解决一个常规的 Turnstile 验证码，就像这里一样。请注意，CloudFlare 页面上的验证码可能看起来相同。了解如何区分常规 Turnstile 和 Cloudflare Challenge 的更多信息，请参阅本文末尾。
+## **选项 1（Turnstile）**
+您需要解决一个常规的 Turnstile 验证码，就像这里一[样](https://zenno.link/zl-support)。 请注意，CloudFlare 页面上的验证码可能看起来相同。了解如何区分常规 Turnstile 和 Cloudflare Challenge 的更多信息，请参阅本文末尾。
 #### **对象结构**
 |**参数**|**类型**|**必需**|**值**|
 | :- | :- | :- | :- |
@@ -19,7 +19,7 @@ sidebar_label: TurnstileTask
 |websiteKey|String|是|Turnstile 密钥|
 |pageAction|String|否|可以在加载验证码的回调函数中找到的 `action` 字段|
 
-## 选项 2（CloudFlare）
+## **选项 2（CloudFlare）**
 您正在通过浏览器工作，需要获取一个令牌来通过 CloudFlare。
 #### **对象结构**
 |**参数**|**类型**|**必需**|**值**|
@@ -69,7 +69,7 @@ sidebar_label: TurnstileTask
 
 `callback` – 是一个在成功通过验证码后调用的回调函数。
 
-## 选项 3（CloudFlare）
+## **选项 3（CloudFlare）**
 您正在通过查询工作，并且需要 cf\_clearance cookies。您需要使用代理。
 #### **对象结构**
 |**参数**|**类型**|**必填**|**值**|
@@ -86,8 +86,9 @@ sidebar_label: TurnstileTask
 |proxyLogin|String|是|代理服务器登录|
 |proxyPassword|String|是|代理服务器密码|
 
-## 请求示例
-### **选项 1: 普通 Turnstile**
+## **请求示例**
+
+### 选项 1: 普通 Turnstile
 :::info 方法
 ```http
 https://api.capmonster.cloud/createTask
@@ -112,7 +113,7 @@ https://api.capmonster.cloud/createTask
 }
 ```
 
-### **选项 2.CloudFlare（token）**
+### 选项 2.CloudFlare（token）
 :::info 方法
 ```http
 https://api.capmonster.cloud/createTask
