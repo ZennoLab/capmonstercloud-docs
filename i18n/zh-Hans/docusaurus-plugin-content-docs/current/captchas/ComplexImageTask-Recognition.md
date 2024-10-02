@@ -18,7 +18,7 @@ sidebar_label: ComplexImageTask Recognition
 
 ## **可用任务类型**
 
-### **oocl_rotate_new**
+### oocl_rotate_new
 
 在请求中传递两个图像，第一个是背景图像，第二个是圆形图像。
 
@@ -59,7 +59,7 @@ https://api.capmonster.cloud/createTask
 ![](ex2.png)
 
 
-### **oocl_rotate_double_new**
+### oocl_rotate_double_new
 
 在请求中传递三个图像，分别是背景图像、环形图像和圆形图像。
 
@@ -104,3 +104,45 @@ https://api.capmonster.cloud/createTask
 圆形图像 (*circle_base64*):
 
 ![](ex5.png)
+
+
+### betpunch_3x3_rotate
+
+在请求中我们传递了九张图片。图片必须按照以下顺序传递：
+
+![](betpunch_3x3_rotate_example.png)
+
+**响应**: *"answer":[X,X,X,X,X,X,X,X,X]*,
+其中 *X* 是每个图像的 1 到 4 之间的整数值。
+*4* - 表示图像不需要旋转；
+*1-3* - 图像逆时针旋转的次数。
+
+**请求示例**
+:::info 方法
+```http
+https://api.capmonster.cloud/createTask
+```
+:::
+```json
+{
+    "clientKey": "API_KEY",
+    "task": {
+        "type": "ComplexImageTask",
+        "class": "recognition",
+        "imagesBase64": [
+			"{image_1_Base64}",
+			"{image_2_Base64}",
+			"{image_3_Base64}",
+			"{image_4_Base64}",
+			"{image_5_Base64}",
+			"{image_6_Base64}",
+			"{image_7_Base64}",
+			"{image_8_Base64}",
+			"{image_9_Base64}",
+		],
+        "metadata": {
+            "Task": "betpunch_3x3_rotate"
+        }
+    }
+}
+```
