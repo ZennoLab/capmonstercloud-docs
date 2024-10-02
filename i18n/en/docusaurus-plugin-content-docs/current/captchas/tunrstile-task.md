@@ -9,8 +9,8 @@ All Turnstile subtypes are automatically supported: manual, non-interactive, and
 :::caution Attention!
 Check out all three options of captcha recognition and choose the most convenient one for you.
 :::
-## Option 1 (Turnstile)
-You are required to solve a regular turnstile captcha, as here. Note that the CAPTCHA on CloudFlare pages may look identical. Learn more about how to distinguish between a regular Turnstile and a Cloudflare Challenge at the end of the article.
+## **Option 1 (Turnstile)**
+You are required to solve a regular turnstile captcha, as [here](https://zenno.link/zl-support). Note that the CAPTCHA on CloudFlare pages may look identical. Learn more about how to distinguish between a regular Turnstile and a Cloudflare Challenge at the end of the article.
 #### **Object structure**
 |**Parameter**|**Type**|**Required**|**Value**|
 | :- | :- | :- | :- |
@@ -19,7 +19,7 @@ You are required to solve a regular turnstile captcha, as here. Note that the CA
 |websiteKey|String|yes|Turnstile key|
 |pageAction|String|no|The `action` field that can be found in the callback function to load the captcha|
 
-## Option 2 (CloudFlare)
+## **Option 2 (CloudFlare)**
 You are working through a browser and you need to get a token to pass CloudFlare.
 #### **Object structure**
 |**Parameter**|**Type**|**Required**|**Value**|
@@ -69,7 +69,7 @@ When calling `window.turnstile.render(el, paramsObj)` the captcha on the page is
 
 `callback` – is a callback function after the captcha is successfully passed.
 
-## Option 3 (CloudFlare)
+## **Option 3 (CloudFlare)**
 You are working using queries, and you need cf_clearance cookies. It is required that you need your proxies.
 #### **Object structure**
 |**Parameter**|**Type**|**Required**|**Value**|
@@ -86,8 +86,9 @@ You are working using queries, and you need cf_clearance cookies. It is required
 |proxyLogin|String|yes|Proxy server login|
 |proxyPassword|String|yes|Proxy server password|
 
-## Examples of requests
-### **Option 1: Normal Turnstile**
+## **Examples of requests**
+
+### Option 1: Normal Turnstile
 :::info METHOD
 ```http
 https://api.capmonster.cloud/createTask
@@ -112,7 +113,7 @@ https://api.capmonster.cloud/createTask
 }
 ```
 
-### **Option 2. CloudFlare (token)**
+### Option 2. CloudFlare (token)
 :::info METHOD
 ```http
 https://api.capmonster.cloud/createTask
