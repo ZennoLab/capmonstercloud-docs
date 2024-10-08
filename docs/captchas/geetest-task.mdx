@@ -364,141 +364,157 @@ document.addEventListener('DOMContentLoaded', async () => {
     ---
 
     <ParamItem title="websiteURL" required type="string" />
-    Address of the page on which the captcha is solved.
+    Адрес страницы, на которой решается капча.
 
     ---
 
     <ParamItem title="gt" required type="string" />
-    The GeeTest identifier key for the domain. Static value, rarely updated.<br />If v4 then this is the clientId parameter.
+	Ключ-идентификатор GeeTest для домена. Статическое значение, редко обновляется. <br />
+	Если v4 то это параметр clientId.
 
     ---
 
-    <ParamItem title="challenge" required="required only for V3" type="string" />
+    <ParamItem title="challenge" required="обязательный только для V3" type="string" />
     <p>
-    A dynamic key.<br />Each time our API is called, we need to get a new key value. If the captcha is loaded on the page, then the `challenge` value is no longer valid and you will get the [error](../api/api-errors.md) `ERROR_TOKEN_EXPIRED`. <br />
-    You will be charged for tasks with `ERROR_TOKEN_EXPIRED` error.
-    It is necessary to examine the requests and find the one in which this value is returned and, before each creation of the recognition task, execute this request and parse the challenge from it.
+    Меняющийся ключ. <br />
+	При каждом обращении к нашему API нужно получать новое значение ключа. Если капча загружена на странице, то значение challenge уже недействительно и вы получите в ответ [ошибку](../api/api-errors.md) `ERROR_TOKEN_EXPIRED`. <br />
+    За задачи с ошибкой `ERROR_TOKEN_EXPIRED` плата взимается как за успешно решённые задачи.
+    Нужно изучить запросы и найти тот, в котором возвращается это значение и перед каждым созданием задачи на распознавания выполнять этот запрос и парсить challenge из него.
     </p>
 
     ---
 
     <ParamItem title="version" type="integer" required="required only for V4"/>
-    Version number (default is 3). Possible values: 3, 4.
-
+	Номер версии (по умолчанию равен 3). Возможные значения: 3, 4.
+	
     ---
 
     <ParamItem title="geetestApiServerSubdomain" type="string" />
-    Geetest API subdomain server (must be different from api.geetest.com). <br />Optional parameter. May be required for some sites.
+    Поддомен сервера Geetest API (должен отличаться от api.geetest.com). <br />
+	Необязательный параметр. Может потребоваться для некоторых сайтов.
 
     ---
 
     <ParamItem title="geetestGetLib" type="string" />
-    Path to the captcha script to display it on the page. <br /> Optional parameter. May be required for some sites. <br />Send JSON as a string.
+    Путь к скрипту капчи для ее отображения на странице. <br /> 
+	Необязательный параметр. Может потребоваться для некоторых сайтов. <br />
+	Отправляйте JSON в виде строки.
 
     ---
 
     <ParamItem title="initParameters" type="object" />
-    Additional parameters for version 4, used together with “riskType” (captcha type/characteristics of its verification).
+	Дополнительные параметры для 4 версии, используются вместе с “riskType” (тип капчи/характеристики ее проверки).
 
     ---
 
     <ParamItem title="userAgent" type="string" />
-    Browser User-Agent used to recognize captcha.
+    User-Agent браузера, используемый для решения капчи.
+	
   </TabItem>
-  <TabItem value="proxy" label="GeeTestTask (using proxy)" className="bordered-panel">
+  
+  <TabItem value="proxy" label="GeeTestTask (при использовании прокси)" className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **GeeTestTask**
 
     ---
 
     <ParamItem title="websiteURL" required type="string" />
-    Address of the page on which the captcha is solved.
+    Адрес страницы, на которой решается капча.
 
     ---
 
     <ParamItem title="gt" required type="string" />
-    The GeeTest identifier key for the domain. Static value, rarely updated.<br />If v4 then this is the clientId parameter.
+    Ключ-идентификатор GeeTest для домена. Статическое значение, редко обновляется. <br />
+	Если v4 то это параметр clientId.
 
     ---
 
-    <ParamItem title="challenge" required="required only for V3" type="string" />
+    <ParamItem title="challenge" required="обязательный только для V3" type="string" />
     <p>
-    A dynamic key.<br />Each time our API is called, we need to get a new key value. If the captcha is loaded on the page, then the `challenge` value is no longer valid and you will get the [error](../api/api-errors.md) `ERROR_TOKEN_EXPIRED`. <br />
-    You will be charged for tasks with `ERROR_TOKEN_EXPIRED` error.
-    It is necessary to examine the requests and find the one in which this value is returned and, before each creation of the recognition task, execute this request and parse the challenge from it.
+    Меняющийся ключ. <br />
+	При каждом обращении к нашему API нужно получать новое значение ключа. Если капча загружена на странице, то значение challenge уже недействительно и вы получите в ответ [ошибку](../api/api-errors.md) `ERROR_TOKEN_EXPIRED`. <br />
+    За задачи с ошибкой `ERROR_TOKEN_EXPIRED` плата взимается как за успешно решённые задачи.
+    Нужно изучить запросы и найти тот, в котором возвращается это значение и перед каждым созданием задачи на распознавания выполнять этот запрос и парсить challenge из него.
     </p>
 
     ---
 
     <ParamItem title="version" type="integer" required="required only for V4"/>
-    Version number (default is 3). Possible values: 3, 4.
+    Номер версии (по умолчанию равен 3). Возможные значения: 3, 4.
 
     ---
 
     <ParamItem title="geetestApiServerSubdomain" type="string" />
-    Geetest API subdomain server (must be different from api.geetest.com). <br />Optional parameter. May be required for some sites.
+    Поддомен сервера Geetest API (должен отличаться от api.geetest.com). <br />
+	Необязательный параметр. Может потребоваться для некоторых сайтов.
 
     ---
 
     <ParamItem title="geetestGetLib" type="string" />
-    Path to the captcha script to display it on the page. <br /> Optional parameter. May be required for some sites. <br />Send JSON as a string.
-
+    Путь к скрипту капчи для ее отображения на странице. <br /> 
+	Необязательный параметр. Может потребоваться для некоторых сайтов.	<br />
+	Отправляйте JSON в виде строки.
+	
     ---
 
     <ParamItem title="initParameters" type="object" />
-    Additional parameters for version 4, used together with “riskType” (captcha type/characteristics of its verification).
+    Дополнительные параметры для 4 версии, используются вместе с “riskType” (тип капчи/характеристики ее проверки).
 
     ---
 
     <ParamItem title="proxyType" required type="string" />
-    **http** - regular http/https proxy;<br />**https** - try this option only if "http" doesn't work (required for some custom proxies);<br />**socks4** - socks4 proxy;<br />**socks5** - socks5 proxy.
+    **http** - обычный http/https прокси; <br />
+	**https** - попробуйте эту опцию только если "http" не работает (требуется для некоторых кастомных прокси); <br />
+	**socks4** - socks4 прокси; <br />
+	**socks5** - socks5 прокси.
 
     ---
 
     <ParamItem title="proxyAddress" required type="string" />
     <p>
-      IPv4/IPv6 proxy IP address. Not allowed:
-      - using of hostnames;
-      - using transparent proxies (where you can see the client's IP);
-      - using proxies on local machines.
+      IP адрес прокси IPv4/IPv6. Не допускается:
+		- использование имен хостов;
+		- использование прозрачных прокси (там, где можно видеть IP клиента);
+		- использование прокси на локальных машинах.
     </p>
 
     ---
 
     <ParamItem title="proxyPort" required type="integer" />
-    Proxy port.
+    Порт прокси.
 
     ---
 
     <ParamItem title="proxyLogin" type="string" />
-    Proxy-server login.
+    Логин прокси-сервера.
 
     ---
 
     <ParamItem title="proxyPassword" type="string" />
-    Proxy-server password.
+    Пароль прокси-сервера.
 
     ---
 
     <ParamItem title="userAgent" type="string" />
-    Browser User-Agent used to recognize captcha.
+    User-Agent браузера, используемый для решения капчи.
   </TabItem>
   
 </Tabs>
 
 
-### <span style={{fontSize: '1.5rem'}}>Create task</span>
+### <span style={{fontSize: '1.5rem'}}>Метод создания задачи</span>
 
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-<TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel">
+<TabItem value="proxyless" label="GeeTestTaskProxyless (без прокси)" default className="method-panel">
     <MethodItem>
       ```http
       https://api.capmonster.cloud/createTask
       ```
     </MethodItem>
+	
 <MethodDescription>
-**Request**
+**Запрос**
 ```json
 {
     "clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
@@ -515,7 +531,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 }
 ```
-**Response**
+**Ответ**
 ```json
 {
   "errorId":0,
@@ -523,16 +539,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 }
 ```
 
-</MethodDescription>
+	</MethodDescription>
   </TabItem>
-  <TabItem value="proxy" label="GeeTestTask (using proxy)" className="method-panel">
+  
+  <TabItem value="proxy" label="GeeTestTask (при использовании прокси)" className="method-panel">
 <MethodItem>
   ```http
   https://api.capmonster.cloud/createTask
   ```
 </MethodItem>
 <MethodDescription>
-**Request**
+**Запрос**
 ```json
 {
   "clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
@@ -550,12 +567,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     "proxyLogin":"proxyLoginHere",
     "proxyPassword":"proxyPasswordHere",
     "userAgent":"userAgentPlaceholder"
-
   }
 }
 ```
 
-**Response**
+**Ответ**
 ```json
 {
   "errorId":0,
@@ -567,25 +583,25 @@ document.addEventListener('DOMContentLoaded', async () => {
   
 </Tabs>
 
-Use the [getTaskResult](../api/methods/get-task-result.md) to get the result of GeeTest recognition. Depending on the system load, you will receive a response after a time in the range from 10 s to 30 s.
+Используйте метод [getTaskResult](../api/methods/get-task-result.md), чтобы получить решение GeeTest. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 10 с до 30 с.
 
-### <span style={{fontSize: '1.5rem'}}>Get task result</span>
+### <span style={{fontSize: '1.5rem'}}>Метод получения результата задачи</span>
 
-<TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
+<TabItem value="proxyless" label="GeeTestTaskProxyless (без прокси)" default className="method-panel-full">
     <MethodItem>
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
     </MethodItem>
     <MethodDescription>
-**Request**
+**Запрос**
 ```json
 {
   "clientKey":"API_KEY",
   "taskId": 407533072
 }
 ```
-**Response**
+**Ответ**
 ```json
 {
   "errorId":0,
@@ -606,10 +622,15 @@ https://api.capmonster.cloud/getTaskResult
 
 <table>
 <tr>
-<th><b>Property</b></th><th><b>Type</b></th><th><b>Description</b></th>
+<th><b>Свойство</b></th><th><b>Тип</b></th><th><b>Описание</b></th>
 </tr>
 <tr>
-<td>captcha_id</td><td>String</td><td rowspan="5">All five parameters are required when submitting the form on the target site.<br />input[name=captcha_id]<br />input[name=lot_number]<br />input[name=pass_token]<br />input[name=gen_time]<br />input[name=captcha_output]</td>
+<td>captcha_id</td><td>String</td><td rowspan="5">Все пять параметров необходимы при отправке формы на целевом сайте.<br />
+input[name=captcha_id]<br />
+input[name=lot_number]<br />
+input[name=pass_token]<br />
+input[name=gen_time]<br />
+input[name=captcha_output]</td>
 </tr>
 <tr><td>lot_number</td><td>String</td></tr>
 <tr><td>pass_token</td><td>String</td></tr>
@@ -618,7 +639,7 @@ https://api.capmonster.cloud/getTaskResult
 </table>
 
 
-### <span style={{fontSize: '1.5rem'}}>Use SDK Library</span>
+### <span style={{fontSize: '1.5rem'}}>Используйте библиотеку SDK</span>
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">

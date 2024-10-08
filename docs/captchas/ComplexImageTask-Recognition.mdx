@@ -3,30 +3,52 @@ sidebar_position: 7
 sidebar_label: ComplexImageTask Recognition
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+
+
 # ComplexImageTask Recognition
 
-## **Структура объекта**
+## Параметры запроса
+<TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="bordered-panel">
+    <ParamItem title="type" required type="string" />
+    **ComplexImageTask**
 
-|**Параметр**|**Тип**|**Обязательный**|**Возможные значения**|**Описание**|
-| :- | :- | :- | :- | :- |
-|type|String|да|ComplexImageTask|Определяет тип объекта задачи.|
-|class|String|да|recognition|Определяет класс объекта задачи.|
-|imagesBase64|Array|да|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”]|Массив изображений в кодировке base64.|
-|metadata.Task|String|да|`oocl_rotate_new` и другие|Имя задания (<u>на английском</u>).|
+    ---
 
-## **Доступные типы заданий**
+    <ParamItem title="class" required type="string" />
+    **recognition**
 
-### **Пример запроса oocl_rotate_new**
+    ---
+
+    <ParamItem title="imagesBase64" required type="array" />
+    Массив изображений в кодировке base64.
+    Пример: [ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”]
+
+    ---
+
+    <ParamItem title="metadata.Task" required type="string" />
+    Возможные значения: `oocl_rotate_new` и другие <br />
+    Название задания (<u>на английском</u>).
+</TabItem>
+
+## Доступные типы заданий
+
+### Создание задачи `oocl_rotate_new`
 
 В запросе передаем два изображения: фон и круг.
 
-**Ответ**: градусы, на которые необходимо повернуть круг по часовой стрелке.
-
-:::info Метод
-```http
-https://api.capmonster.cloud/createTask
-```
-:::
+<TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel">
+<MethodItem>
+  ```http
+  https://api.capmonster.cloud/createTask
+  ```
+</MethodItem>
+<MethodDescription>
+**Запрос**
 ```json
 {
     "clientKey": "API_KEY",
@@ -46,24 +68,69 @@ https://api.capmonster.cloud/createTask
 
 Пример фона (*background_base64*):
 
-![](ex1.png)
+![](./images/ComplexImageTask-Recognition/ex1.png)
 
 Пример круга (*circle_base64*):
 
-![](ex2.png)
+![](./images/ComplexImageTask-Recognition/ex2.png)
 
+**Ответ**
+```json
+{
+  "errorId":0,
+  "taskId":407533072
+}
+```
 
-### **Пример запроса oocl_rotate_double_new**
+</MethodDescription>
+</TabItem>
+
+### Получение результата задачи `oocl_rotate_new`
+<TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel-full">
+    <MethodItem>
+```http
+https://api.capmonster.cloud/getTaskResult
+```
+    </MethodItem>
+    <MethodDescription>
+**Запрос**
+```json
+{
+  "clientKey":"API_KEY",
+  "taskId": 407533072
+}
+```
+**Ответ**
+Градусы, на которые необходимо повернуть круг по часовой стрелке.
+```json
+{
+  "errorId":0,
+  "status":"ready",
+  "errorCode":null,
+  "errorDescription":null,
+  "solution": {
+      "answer":[130.90909]
+  },
+   "metadata": {
+      "AnswerType":"NumericArray"
+  }
+}
+```
+  </MethodDescription>
+  </TabItem>
+
+### Создание задачи `oocl_rotate_double_new`
 
 В запросе передаем три изображения: фон, кольцо, круг.
 
-**Ответ**: градусы, на которые необходимо повернуть кольцо против часовой и круг по часовой.
-
-:::info Метод
-```http
-https://api.capmonster.cloud/createTask
-```
-:::
+<TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel">
+<MethodItem>
+  ```http
+  https://api.capmonster.cloud/createTask
+  ```
+</MethodItem>
+<MethodDescription>
+**Запрос**
 ```json
 { 
     "clientKey": "API_KEY",
@@ -84,12 +151,143 @@ https://api.capmonster.cloud/createTask
 
 Фон (*background_base64*):
 
-![](ex3.png)
+![](./images/ComplexImageTask-Recognition/ex3.png)
 
 Кольцо (*ring_base64*):
 
-![](ex4.png)
+![](./images/ComplexImageTask-Recognition/ex4.png)
 
 Круг (*circle_base64*):
 
-![](ex5.png)
+![](./images/ComplexImageTask-Recognition/ex5.png)
+
+**Ответ**
+```json
+{
+  "errorId":0,
+  "taskId":407533072
+}
+```
+
+</MethodDescription>
+</TabItem>
+
+### Получение результата задачи `oocl_rotate_double_new`
+
+<TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel-full">
+    <MethodItem>
+```http
+https://api.capmonster.cloud/getTaskResult
+```
+    </MethodItem>
+    <MethodDescription>
+**Запрос**
+```json
+{
+  "clientKey":"API_KEY",
+  "taskId": 407533072
+}
+```
+**Ответ**
+Градусы, на которые необходимо повернуть кольцо против часовой и круг по часовой.
+```json
+{
+  "errorId":0,
+  "status":"ready",
+  "errorCode":null,
+  "errorDescription":null,
+  "solution": {
+      "answer":[130.90909]
+  },
+   "metadata": {
+      "AnswerType":"NumericArray"
+  }
+}
+```
+
+  </MethodDescription>
+  </TabItem>
+  
+  
+### Создание задачи `betpunch_3x3_rotate request`
+
+В запросе передаем девять изображений. Передавать изображения нужно в следующем порядке:
+![](./images/ComplexImageTask-Recognition/ex6.png)
+
+<TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel">
+<MethodItem>
+  ```http
+  https://api.capmonster.cloud/createTask
+  ```
+</MethodItem>
+<MethodDescription>
+**Запрос**
+```json
+{ 
+    "clientKey": "API_KEY",
+    "task": {
+        "type": "ComplexImageTask",
+        "class": "recognition",
+        "imagesBase64": [
+			"{image_1_Base64}",
+			"{image_2_Base64}",
+			"{image_3_Base64}",
+			"{image_4_Base64}",
+			"{image_5_Base64}",
+			"{image_6_Base64}",
+			"{image_7_Base64}",
+			"{image_8_Base64}",
+			"{image_9_Base64}",
+		],
+        "metadata": {
+            "Task": "betpunch_3x3_rotate"
+        }
+    }
+}
+```
+
+**Ответ**
+```json
+{
+  "errorId":0,
+  "taskId":407533072
+}
+```
+
+</MethodDescription>
+</TabItem>
+
+### Получение результата задачи `betpunch_3x3_rotate request`
+
+<TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel-full">
+    <MethodItem>
+```http
+https://api.capmonster.cloud/getTaskResult
+```
+    </MethodItem>
+    <MethodDescription>
+**Запрос**
+```json
+{
+  "clientKey":"API_KEY",
+  "taskId": 407533072
+}
+```
+**Ответ**
+"answer":[X,X,X,X,X,X,X,X,X], где X - целочисленное значение от 1 до 4 для каждого изображения. 4 - означает, что картинку не нужно поворачивать; 1-3 - количество поворотов картинки против часовой стрелки.
+```json
+{
+	"errorId":0,
+	"status":"ready",
+	"errorCode":null,
+	"errorDescription":null,
+	"solution":
+	{
+		"answer":[4,4,4,4,4,3,1,2,2],
+		"metadata":{"AnswerType":"NumericArray"}
+	}
+}
+```
+
+  </MethodDescription>
+  </TabItem>

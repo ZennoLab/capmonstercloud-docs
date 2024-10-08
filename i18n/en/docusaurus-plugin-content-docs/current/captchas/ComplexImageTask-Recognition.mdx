@@ -13,7 +13,7 @@ import MethodDescription from '@theme/MethodDescription'
 # ComplexImageTask Recognition
 
 ## Request parameters
-<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (without proxy)" default className="bordered-panel">
+<TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **ComplexImageTask**
 
@@ -36,9 +36,11 @@ import MethodDescription from '@theme/MethodDescription'
 
   </TabItem>
 
-## Create task `oocl_rotate_new`
+## Available task types
+### Create task `oocl_rotate_new`
 
 In the request we pass two images: background and circle.
+
 <TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
 <MethodItem>
   ```http
@@ -84,7 +86,7 @@ Circle example (*circle_base64*):
 </TabItem>
 
 
-## Get task result `oocl_rotate_new`
+### Get task result `oocl_rotate_new`
 
 <TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
     <MethodItem>
@@ -101,7 +103,7 @@ https://api.capmonster.cloud/getTaskResult
 }
 ```
 **Response**
-degrees by which the circle should be rotated clockwise.
+Degrees by which the circle should be rotated clockwise.
 ```json
 {
   "errorId":0,
@@ -120,10 +122,10 @@ degrees by which the circle should be rotated clockwise.
   </TabItem>
 
 
-## Create task `oocl_rotate_double_new`
+### Create task `oocl_rotate_double_new`
 
-In the request we pass two images: background and circle.
-<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
+In the request we pass three images: background, ring, circle.
+<TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel">
 <MethodItem>
   ```http
   https://api.capmonster.cloud/createTask
@@ -173,9 +175,9 @@ Circle (*circle_base64*):
 </TabItem>
 
 
-## Get task result `oocl_rotate_double_new`
+### Get task result `oocl_rotate_double_new`
 
-<TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
+<TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="method-panel-full">
     <MethodItem>
 ```http
 https://api.capmonster.cloud/getTaskResult
@@ -190,7 +192,7 @@ https://api.capmonster.cloud/getTaskResult
 }
 ```
 **Response**
-degrees by which the circle should be rotated clockwise.
+Degrees by which the ring should be turned counterclockwise and the circle clockwise.
 ```json
 {
   "errorId":0,
@@ -203,6 +205,90 @@ degrees by which the circle should be rotated clockwise.
    "metadata": {
       "AnswerType":"NumericArray"
   }
+}
+```
+
+  </MethodDescription>
+  </TabItem>
+  
+### Create task `betpunch_3x3_rotate`
+
+In the request we pass nine images. The images must be passed in the following order:
+![](./images/ComplexImageTask-Recognition/ex6.png)
+
+<TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel">
+<MethodItem>
+  ```http
+  https://api.capmonster.cloud/createTask
+  ```
+</MethodItem>
+<MethodDescription>
+**Request**
+```json
+{ 
+    "clientKey": "API_KEY",
+    "task": {
+        "type": "ComplexImageTask",
+        "class": "recognition",
+        "imagesBase64": [
+			"{image_1_Base64}",
+			"{image_2_Base64}",
+			"{image_3_Base64}",
+			"{image_4_Base64}",
+			"{image_5_Base64}",
+			"{image_6_Base64}",
+			"{image_7_Base64}",
+			"{image_8_Base64}",
+			"{image_9_Base64}",
+		],
+        "metadata": {
+            "Task": "betpunch_3x3_rotate"
+        }
+    }
+}
+```
+
+**Response**
+```json
+{
+  "errorId":0,
+  "taskId":407533072
+}
+```
+
+</MethodDescription>
+</TabItem>
+
+
+### Get task result `betpunch_3x3_rotate`
+
+<TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="method-panel-full">
+    <MethodItem>
+```http
+https://api.capmonster.cloud/getTaskResult
+```
+    </MethodItem>
+    <MethodDescription>
+**Request**
+```json
+{
+  "clientKey":"API_KEY",
+  "taskId": 407533072
+}
+```
+**Response**
+"answer":[X,X,X,X,X,X,X,X,X], where X is an integer value from 1 to 4 for each image. 4 - means that the image does not need to be rotated; 1-3 - the number of counterclockwise rotations of the image.
+```json
+{
+	"errorId":0,
+	"status":"ready",
+	"errorCode":null,
+	"errorDescription":null,
+	"solution":
+	{
+		"answer":[4,4,4,4,4,3,1,2,2],
+		"metadata":{"AnswerType":"NumericArray"}
+	}
 }
 ```
 
