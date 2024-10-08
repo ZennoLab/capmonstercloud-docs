@@ -4,7 +4,7 @@
 const lightCodeTheme = require('prism-react-renderer').themes.github;
 const darkCodeTheme = require('prism-react-renderer').themes.dracula;
 
-/** @type {import('@docusaurus/types').Config} */
+/** @type  {import('@docusaurus/types').Config} */
 const config = {
   title: 'BroCapGPT Docs',
   // tagline: 'Dinosaurs are cool',
@@ -73,12 +73,6 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      algolia: {
-        appId: 'IUKL1ONOLG',
-        apiKey: 'df90fcc07870b0dfda29e86e993cda42',
-        indexName: 'capmonster-cloud-netlify',
-        contextualSearch: true,
-      },
 
       image: 'img/social-card.jpg',
       navbar: {
