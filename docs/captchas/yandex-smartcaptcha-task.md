@@ -23,7 +23,7 @@ draft: true
 <details>
     <summary>Внешний вид</summary>
 
-![](appearance.png)
+![](./images/yandex-smartcaptcha/appearance.png)
 </details>
 
 Для создания запроса на решение данного вида капчи потребуются следующие данные:
@@ -51,7 +51,7 @@ draft: true
 <details>
     <summary>Внешний вид</summary>
 
-![](appearance-ext-web.png)
+![](./images/yandex-smartcaptcha/appearance-ext-web.png)
 </details>
 
 Данный вид капчи отлично решается с помощью токена. Запрос на решение такой капчи выглядит совершенно обыденно:
@@ -195,7 +195,7 @@ https://api.capmonster.cloud/createTask
 <details>
     <summary>Страница с капчей</summary>
 
-![](captcha-page.png)
+![](./images/yandex-smartcaptcha/captcha-page.png)
 </details>
 
 Для создания запроса на решение капчи нам нужно получить с этой страницы 2 параметра: *websiteURL* и *htmlPageBase64*. 
@@ -207,7 +207,7 @@ https://api.capmonster.cloud/createTask
 <details>
     <summary>Добавить действие → Табы → Данные</summary>
 
-![](data.png)
+![](./images/yandex-smartcaptcha/data.png)
 </details>
 
 Затем настраиваем кубик следующим образом:
@@ -215,7 +215,7 @@ https://api.capmonster.cloud/createTask
 <details>
     <summary>Настройка кубика "Данные"</summary>
 
-![](data-settings.png)
+![](./images/yandex-smartcaptcha/data-settings.png)
 </details>
 
 После выполения кубика в переменной проекта “html“ будет находиться содержимое страницы. Нам нужно закодировать его в base64. Сделать это можно с помощью короткого C# сниппета:
@@ -227,7 +227,7 @@ return System.Convert.ToBase64String(plainTextBytes);
 <details>
     <summary>Настройка C# сниппета</summary>
 
-![](snippet-settings.png)
+![](./images/yandex-smartcaptcha/snippet-settings.png)
 </details>
 
 Теперь закодированная страница находится в переменной “encodedHtml“. 
@@ -241,7 +241,7 @@ return System.Convert.ToBase64String(plainTextBytes);
 <details>
     <summary>Добавить действие → HTTP → POST-запрос</summary>
 
-![](post-request.png)
+![](./images/yandex-smartcaptcha/post-request.png)
 </details>
 
 Настроим кубик следующим образом:
@@ -249,7 +249,7 @@ return System.Convert.ToBase64String(plainTextBytes);
 <details>
     <summary>Настройка кубика POST-запрос</summary>
 
-![](post-request-settings.png)
+![](./images/yandex-smartcaptcha/post-request-settings.png)
 
 Данные(не забудьте вставить свой ключ от сервиса):
 
@@ -284,13 +284,13 @@ return System.Convert.ToBase64String(plainTextBytes);
 <details>
     <summary>Добавить действие → Данные → Обработка текста</summary>
 
-![](text-processing.png)
+![](./images/yandex-smartcaptcha/text-processing.png)
 </details>
 
 <details>
     <summary>Настройка кубика обработки текста</summary>
 
-![](text-processing-settings.png)
+![](./images/yandex-smartcaptcha/text-processing-settings.png)
 </details>
 
 Похожим образом создаём ещё один кубик POST-запроса, но уже для получения решения от сервиса:
@@ -298,7 +298,7 @@ return System.Convert.ToBase64String(plainTextBytes);
 <details>
     <summary>Настройка кубика "POST-запрос" для /getTaskResult</summary>
 
-!![](get-task-result-settings.png)
+!![](./images/yandex-smartcaptcha/get-task-result-settings.png)
 </details>
 
 Если сервис решил капчу, то после выполнения кубика мы получим следующий ответ:
@@ -325,15 +325,15 @@ return System.Convert.ToBase64String(plainTextBytes);
 <details>
 <summary>Развернуть</summary>
 
-![](step1.png)
-![](step2.png)
+![](./images/yandex-smartcaptcha/step1.png)
+![](./images/yandex-smartcaptcha/step2.png)
 
 Следом тремя кубиками для обработки переменных заполним переменные проекта значениями из полученного JSON:
 
-![](step3.png)
-![](step4.png)
-![](step5.png)
-![](step6.png)
+![](./images/yandex-smartcaptcha/step3.png)
+![](./images/yandex-smartcaptcha/step4.png)
+![](./images/yandex-smartcaptcha/step5.png)
+![](./images/yandex-smartcaptcha/step6.png)
 </details>
 
 **Шаг 3. Применение данных**
@@ -343,8 +343,8 @@ return System.Convert.ToBase64String(plainTextBytes);
 <details>
     <summary>Экспорт кук из браузера</summary>
 
-![Alt text](cookie1.png)
-![Alt text](cookie2.png)
+![Alt text](./images/yandex-smartcaptcha/cookie1.png)
+![Alt text](./images/yandex-smartcaptcha/cookie2.png)
 </details>
 
 В переменной *browserCookies* увидим примерно такой текст:
@@ -361,10 +361,10 @@ return System.Convert.ToBase64String(plainTextBytes);
     <summary>Формирование строки с куками</summary>
 
 Составим regex:
-![](regex1.png)
+![](./images/yandex-smartcaptcha/regex1.png)
 
 Обработаем текст:
-![](regex2.png)
+![](./images/yandex-smartcaptcha/regex2.png)
 
 На дату и время в куках можете не обращать внимание. 
 </details>
@@ -374,7 +374,7 @@ return System.Convert.ToBase64String(plainTextBytes);
 <details>
     <summary>Импорт кук</summary>
 
- ![](import-cookies.png)
+ ![](./images/yandex-smartcaptcha/import-cookies.png)
 </details>
 
 Осталось только перейти на страницу c полученными ранее данными redirectedUrl и referrer:
@@ -382,6 +382,6 @@ return System.Convert.ToBase64String(plainTextBytes);
 <details>
     <summary>Настройка кубика перехода на страницу</summary>
 
- ![](go-to-page.png)
- ![](go-to-page2.png)
+ ![](./images/yandex-smartcaptcha/go-to-page.png)
+ ![](./images/yandex-smartcaptcha/go-to-page2.png)
 </details>

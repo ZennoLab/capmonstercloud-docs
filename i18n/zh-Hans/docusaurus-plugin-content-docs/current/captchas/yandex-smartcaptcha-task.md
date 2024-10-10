@@ -23,7 +23,7 @@ draft: true
 <details>
     <summary>示例</summary>
 
-![](appearance.png)
+![](./images/yandex-smartcaptcha/appearance.png)
 </details>
 
 要创建解决此类验证码的请求，您需要以下数据：
@@ -51,7 +51,7 @@ draft: true
 <details>
     <summary>示例</summary>
 
-![](appearance-ext-web.png)
+![](./images/yandex-smartcaptcha/appearance-ext-web.png)
 </details>
 
 这种类型的验证码可以通过令牌完美解决。解决此类验证码的请求看起来非常普通：

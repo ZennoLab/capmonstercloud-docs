@@ -10,7 +10,7 @@ draft: true
 
 **Пример изображения**
 
-![](example-image.png)
+![](./images/yandex-smartcaptcha/example-image.png)
 
 ## **Структура объекта**
 
@@ -103,7 +103,7 @@ https://api.capmonster.cloud/createTask
 Капча с заданием передается одной картинкой. Размер на сервисах яндекса 300x220, на сторонних сайтах 320x220. <br/>
 Расстояние от картинки до контейнера с текстом задания нужно сделать 4px(margin-top). В оригинале 13px.
 
-![](image-format.png)
+![](./images/yandex-smartcaptcha/image-format.png)
 
 ## **Работа с ZennoPoster**
 
@@ -128,7 +128,7 @@ return image.DrawPartToBitmap(0, 0, 300, 220, false);
 <details>
     <summary>Настройка кубика POST-запрос для отправки капчи в CapMonster Cloud</summary>
 
-![](cube-settings.png)
+![](./images/yandex-smartcaptcha/cube-settings.png)
 </details>
 
 После получения результата распознавания можно воспользоваться следующим C# сниппетом для прокликивания координат: 

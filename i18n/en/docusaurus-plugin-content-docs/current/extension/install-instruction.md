@@ -41,7 +41,7 @@ The extension only works with the Chromium browser!
 :::info
 The new version of the CapMonster Cloud extension has the ability to solve reCAPTCHA2, reCAPTCHA Enterprise, hCaptcha by clicks.
 :::
-![](ext.png) 
+![](./images/install-instruction/ext.png) 
 :::caution
 Please note that when installing the extension the solving type for reCAPTCHA2, reCAPTCHA Enterprise, hCaptcha is set “Click” by default.
 :::
@@ -49,7 +49,7 @@ To make the use of CapMonster Cloud extension in the ProjectMaker easier, we’v
 
 ***Minimum version of ZennoPoster 7.6.1***
 
-[![Extension_Example](Aspose.Words.d33c25f1-0d68-4361-bcfb-da50f3892df4.002.png)](https://drive.google.com/file/d/1eOv1wXnjf202yDavB4051-XFM7vUGiGN/view?usp=sharing)
+[![Extension_Example](./images/install-instruction/Aspose.Words.d33c25f1-0d68-4361-bcfb-da50f3892df4.002.png)](https://drive.google.com/file/d/1eOv1wXnjf202yDavB4051-XFM7vUGiGN/view?usp=sharing)
 :::caution
 When installing the CapMonster Cloud extension via a CRX file, you need to keep the extension version up to date. In case of a version update, you need to re-download the current CRX file and reinstall it.
 :::

@@ -71,11 +71,11 @@ Using actions:
 
 3. In the Properties of the Recognize ReCaptcha action, select the CapMonsterCloud.dll module, specify the reCaptcha v.2 captcha type and the method of solving **In tab** or **Via SiteKey**:
 
-![](getting-started-1.png)
+![](./images/getting-started-1.png)
 
 4. If you choose the **Via SiteKey** method, specify the captcha data (sitekey) and url - address of the page where you want to solve the captcha: 
 
-![](getting-started-2.png)
+![](./images/getting-started-2.png)
 
 ### reCaptcha v.3
 
@@ -83,7 +83,7 @@ Using actions:
 
 2. In the Properties of the Recognize ReCaptcha action, select the CapMonsterCloud.dll module, specify the reCaptcha v.3 captcha type, the method In Tab or Via SiteKey, also specify Action and minScore:
 
-![](getting-started-3.png)
+![](./images/getting-started-3.png)
 
 ### hCaptcha 
 
@@ -91,7 +91,7 @@ Using actions:
 
 2. In the Properties of the Recognize hCaptcha action, select the In Tab or Via SiteKey method (when selecting this method, you will need to specify the SiteKey and the URL where the captcha is located):
 
-![](getting-started-4.png)
+![](./images/getting-started-4.png)
 
 ### Via HTTP requests
 
@@ -99,28 +99,28 @@ For some captcha types, there are no ready-made actions in ProjectMaker, in whic
 
 1. "Variable Processing" ("Add Action" - "Data" - "Variable Processing"), select "Set Value" in the properties and write your CapMonster Cloud API key in the value.
 
-![](getting-started-5.png)
+![](./images/getting-started-5.png)
 
 2. "Add Action" - "HTTP" - "POST request" (additionally add your proxy values if needed):
 
-![](getting-started-6.png)
+![](./images/getting-started-6.png)
 
 3. Add a "Process JSON/XML" action ("Add action" - "Data" - "Process JSON/XML"), in the properties select "parsing", type "Json" and for right-click parsing text select "Set value from variable": 
 
-![](getting-started-7.png)
+![](./images/getting-started-7.png)
 
 4. Add "Variable Processing" action, set \{-Json.taskId-\} in it: 
 
-![](getting-started-8.png)
+![](./images/getting-started-8.png)
 
 5. Generate a new POST request to get the result:
 
-![](getting-started-9.png)
+![](./images/getting-started-9.png)
 
 6. Add the value "parsing" in the "JSON/XML Processing" action: 
 
-![](getting-started-10.png)
+![](./images/getting-started-10.png)
 
 7. Next, you need to substitute the token value into the desired captcha form (by examining the page code) using the "Set Value" action, for example: 
 
-![](getting-started-11.png)
+![](./images/getting-started-11.png)

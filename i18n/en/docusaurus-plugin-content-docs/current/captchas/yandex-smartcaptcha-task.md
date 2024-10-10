@@ -23,7 +23,7 @@ This type of captcha opens on a separate page (for example, https://ya.ru/showca
 <details>
     <summary>Example</summary>
 
-![](appearance.png)
+![](./images/yandex-smartcaptcha/appearance.png)
 </details>
 
 To create a request for solving this type of captcha, you’ll need the following data:
@@ -51,7 +51,7 @@ It looks like many other types of captchas. Simple vidget with checkbox:
 <details>
     <summary>Example</summary>
 
-![](appearance-ext-web.png)
+![](./images/yandex-smartcaptcha/appearance-ext-web.png)
 </details>
 
 This type of captcha is perfectly solved via token. The request to solve such a captcha looks quite ordinary:

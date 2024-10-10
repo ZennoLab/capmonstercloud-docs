@@ -1,0 +1,9 @@
+.requiredItem {
+  font-size: 14px;
+  font-weight: 500;
+  color: #F04650;
+}
+
+[data-theme='dark'] .requiredItem {
+  color: #DC4650;
+}

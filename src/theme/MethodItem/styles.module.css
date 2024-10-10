@@ -1,0 +1,40 @@
+.method {
+  position: absolute;
+  left: 30px;
+  top: 30px;
+  border-radius: 5px;
+  height: 28px;
+  line-height: 28px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background: #E4F0FF;
+  color: #1482EB;
+  z-index: 10;
+  min-width: 80px;
+  text-align: center;
+}
+.wrap {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.childrenWrap {
+  padding: 17px;
+  background: #EBF5FF;
+  border-bottom: 1px solid #D2E9FF;
+  position: relative;
+}
+
+.childrenWrap code {
+  padding-left: 105px;
+}
+
+[data-theme='dark'] .childrenWrap {
+  background: #22283E;
+  border-bottom: 1px solid #373C46;
+}
+
+[data-theme='dark'] .method {
+  background: #283250;
+  color: #82BEFF;
+}
