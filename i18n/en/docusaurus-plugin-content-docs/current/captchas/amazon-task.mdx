@@ -1,5 +1,5 @@
 ---
-sidebar_position: 16
+sidebar_position: 13
 sidebar_label: AmazonTask
 ---
 
@@ -58,14 +58,14 @@ This task will be performed using our proxy servers.
 
   </TabItem>
 
+
 ### How to get websiteKey, context, iv and challengeScript parameters
 When you go to a website, you get a 405 response and an html page with a captcha. It is from this page that you can get all the parameters:
 ![](./images/amazon-task/aws1.png) 
 ![](./images/amazon-task/aws2.png) 
 
-## Create task
 
-
+## Create task method
 <TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
 <MethodItem>
   ```http
@@ -100,7 +100,8 @@ When you go to a website, you get a 405 response and an html page with a captcha
 </MethodDescription>
 </TabItem>
 
-## Get task result
+
+## Get task result method
 Use the [getTaskResult](../api/methods/get-task-result.md) method to get the AmazonTask solution.
 
 <TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">

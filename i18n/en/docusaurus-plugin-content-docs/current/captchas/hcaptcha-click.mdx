@@ -1,5 +1,5 @@
 ﻿---
-sidebar_position: 8
+sidebar_position: 9
 sidebar_label: ComplexImageTask HCaptcha
 ---
 
@@ -75,13 +75,13 @@ The object contains data about the task for solving hCaptcha.
   </TabItem>
 
 
-## Request for a response
+## Get task result method
 :::info Method
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
 :::
-Use the [getTaskResult](../api/methods/get-task-result.md) method to get the captcha solution. Depending on the system load, you will receive a response after a time ranging from 300ms to 6s.
+Use the [getTaskResult](../api/methods/get-task-result.md) method to get the captcha solution. Depending on the system load, you will receive a response after a time ranging from 300 ms to 6s.
 
 ### Structure of the solution object
 |**Property**|**Type**|**Description**|
@@ -132,8 +132,7 @@ This task type does not contain a reference image, such as [fourth type](#image-
 :::
 
 
-### Create task
-
+### Create task method
 
 <TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
 <MethodItem>
@@ -170,7 +169,7 @@ This task type does not contain a reference image, such as [fourth type](#image-
 </TabItem>
 
 
-### Get task result
+### Get task result method
 Type of received response - [**Grid**](#grid-response-type).
 
 <TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
@@ -201,11 +200,13 @@ https://api.capmonster.cloud/getTaskResult
   </MethodDescription>
   </TabItem>
 
+
 ### Pricing
 
 |**Name** |**Cost per 1000 images, $**|
 | :-: | :-: |
 |hCaptcha|0,02|
+
 
 ## Image example (second type)
 |![](./images/hcaptcha-click/Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.002.png)|![](./images/hcaptcha-click/Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.003.png)|![](./images/hcaptcha-click/Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.004.png)|
@@ -219,8 +220,7 @@ Images that are in the task header, if any, should be passed in the `exampleImag
 :::
 
 
-### Create task
-
+### Create task method
 
 <TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
 <MethodItem>
@@ -257,7 +257,7 @@ Images that are in the task header, if any, should be passed in the `exampleImag
 </TabItem>
 
 
-### Get task result
+### Get task result method
 Type of received response - [**Coordinate**](#coordinate-response-type).
 
 <TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
@@ -288,11 +288,13 @@ https://api.capmonster.cloud/getTaskResult
   </MethodDescription>
   </TabItem>
 
-### Pricing:
+
+### Pricing
 
 |**Name** |**Cost per 1000 images, $**|
 | :-: | :-: |
 |hCaptcha|0,02|
+
 
 ## Image example (third type)
 
@@ -301,8 +303,7 @@ https://api.capmonster.cloud/getTaskResult
 This type of captcha should contain the **metadata.Classes** field.
 
 
-### Create task
-
+### Create task method
 
 <TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
 <MethodItem>
@@ -339,7 +340,7 @@ This type of captcha should contain the **metadata.Classes** field.
 </TabItem>
 
 
-### Get task result
+### Get task result method
 Type of received response - [**Grid**](#grid-response-type).
 
 <TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
@@ -370,11 +371,12 @@ https://api.capmonster.cloud/getTaskResult
   </MethodDescription>
   </TabItem>
 
-### Pricing:
+### Pricing
 
 |**Name** |**Cost per 1000 images, $**|
 | :-: | :-: |
 |hCaptcha|0,02|
+
 
 ## Image example (fourth type)
 
@@ -385,8 +387,7 @@ For this request, the required field is **exampleImageUrls** or **exampleImagesB
 The **imageUrls** or **imagesBase64** field should contain 9 images.
 
 
-### Create task
-
+### Create task method
 
 <TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
 <MethodItem>
@@ -432,7 +433,7 @@ The **imageUrls** or **imagesBase64** field should contain 9 images.
 </TabItem>
 
 
-### Get task result
+### Get task result method
 Type of received response - [**Grid**](#grid-response-type).
 
 <TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">

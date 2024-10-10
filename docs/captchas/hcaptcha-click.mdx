@@ -1,7 +1,14 @@
 ﻿---
-sidebar_position: 8
+sidebar_position: 9
 sidebar_label: ComplexImageTask HCaptcha
 ---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+
 
 # ComplexImageTask HCaptcha
 
@@ -9,41 +16,79 @@ sidebar_label: ComplexImageTask HCaptcha
 
 Объект содержит данные о задаче на решение hCaptcha.
 
-## **Запрос на создание задачи**
-### **Структура отправляемого объекта**
-:::info Метод
-```http
-https://api.capmonster.cloud/createTask
-```
-:::
-|**Параметр**|**Тип**|**Обязательный**|**Возможные значения**|**Описание**|
-| :- | :- | :- | :- | :- |
-|type|String|да|ComplexImageTask|Определяет тип объекта задачи|
-|class|String|да|hcaptcha|Определяет класс объекта задачи|
-|imageUrls|Array|да (если не заполнено imagesBase64)|[ “[https://i.postimg.cc/kg71cbRt/image-1.jpg](https://i.postimg.cc/kg71cbRt/image-1.jpg)”,… ]|Список с адресами изображений. Максимум 18 элементов.|
-|imagesBase64|Array|да (если не заполнено imageUrls)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”,… ]|Список с изображениями в формате base64. Максимум 18 элементов.|
-|metadata.Task|String|да|`Please click on the panda` и другие|Текст задания (<u>на английском</u>)|
-|exampleImageUrls|Array|не всегда|[ “[https://i.postimg.cc/GmBgwnDm/4type-example-image.png](https://i.postimg.cc/GmBgwnDm/4type-example-image.png)”]|Список с адресами изображений. Должен содержать 1 или несколько элементов в зависимости от типа задания.|
-|exampleImagesBase64|Array|не всегда|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”]|Список с изображениями в формате base64. Должен содержать 1 или несколько элементов в зависимости от типа задания.|
-|metadata.Classes|Array|не всегда|[ "shark", "chicken", "goat", "hedgehog" ] и другие|Список со строковыми значениями, находящимися на правой половине капчи (в том же порядке, как на изображении)|
-|userAgent|String|нет|-|User-Agent браузера, используемый при загрузке изображений, если были переданы ссылки в imageUrls. Необходимо использовать подпись современного браузера, иначе Google будет возвращать ошибку, требуя обновить браузер.|
-|websiteURL|String|нет|-|Адрес страницы, на которой решается капча|
+## Параметры запроса
+  <TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="bordered-panel">
+    <ParamItem title="type" required type="string" />
+    **ComplexImageTask**
 
-## **Запрос на получение ответа**
+    ---
+
+    <ParamItem title="class" required type="string" />
+    **hcaptcha**
+
+    ---
+
+    <ParamItem title="imageUrls" required="required (если не заполнено imagesBase64)" type="array" />
+    Список с адресами изображений. Максимум 18 элементов.
+    Пример: [ “[https://i.postimg.cc/kg71cbRt/image-1.jpg](https://i.postimg.cc/kg71cbRt/image-1.jpg)”,… ]\
+
+    ---
+
+    <ParamItem title="imagesBase64" required="required (если не заполнено imageUrls)" type="array" />
+    Список с изображениями в формате base64. Максимум 18 элементов.
+    Пример: [ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”]
+
+    ---
+
+    <ParamItem title="metadata.Task" required="required (если не заполнено metadata.TaskDefinition)" type="string" />
+    Возможные значения: `Please click on the panda` и другие <br />
+    Текст задания (<u>на английском</u>).
+
+    ---
+
+    <ParamItem title="exampleImageUrls" type="array" />
+    Список с адресами изображений. Должен содержать 1 или несколько элементов в зависимости от типа задания.
+    Пример: [ “[https://i.postimg.cc/GmBgwnDm/4type-example-image.png](https://i.postimg.cc/GmBgwnDm/4type-example-image.png)”]\
+
+    ---
+
+    <ParamItem title="exampleImagesBase64" type="array" />
+    Список с изображениями в формате base64. Должен содержать 1 или несколько элементов в зависимости от типа задания.
+    Пример: [ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”]
+
+    ---
+
+    <ParamItem title="metadata.Classes" required type="array" />
+    Список со строковыми значениями, находящимися на правой половине капчи (в том же порядке, как на изображении). <br />
+    Возможные значения: [ "shark", "chicken", "goat", "hedgehog" ] и другие.    
+
+    ---
+
+    <ParamItem title="userAgent" type="string" />
+    User-Agent браузера, используемый при загрузке изображений, если были переданы ссылки в imageUrls. Необходимо использовать подпись современного браузера, иначе Google будет возвращать ошибку, требуя обновить браузер.
+
+    ---
+
+    <ParamItem title="websiteURL" type="string" />
+    Адрес страницы, на которой решается капча.
+  </TabItem>
+
+
+## Метод получения результата задачи
 :::info Метод
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
 :::
-Используйте метод [getTaskResult](../api/methods/get-task-result.md), чтобы получить решение капчи. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 300мс до 6 с.
+Используйте метод [getTaskResult](../api/methods/get-task-result.md), чтобы получить решение капчи. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 300 мс до 6 с.
 
-### **Структура объекта solution**
+### Структура объекта solution
 |**Свойство**|**Тип**|**Описание**|
 | :- | :- | :- |
 |answer|Array of objects|Список ответов на каждое из переданных изображений.|
 |metadata.AnswerType|string|Тип возвращаемого ответа.|
 
-### **Тип ответа Grid**
+### Тип ответа Grid
 |**Формат ответа**|**Пример ответа**|**Описание**|
 | :- | :- | :- |
 |Array of boolean|`[true, false, true]`|Список с булевыми значениями, true - означает, что нужно произвести клик на соответствующее этой позиции изображение|
@@ -77,21 +122,25 @@ https://api.capmonster.cloud/getTaskResult
 }
 ```
 
-## **Пример изображения (первый тип)**
+## Пример изображения (первый тип)
 
-![](Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.001.png) 
+![](./images/hcaptcha-click/Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.001.png) 
 
 :::info Правильно выберите тип задания
 Данный тип заданий не содержит референсного изображения, такого как в [четвертом типе](#пример-изображения-четвертый-тип)
 :::
 
-### **Пример запроса**
 
-:::info Метод
-```http
-https://api.capmonster.cloud/createTask
-```
-:::
+### Метод создания задачи
+
+<TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel">
+<MethodItem>
+  ```http
+  https://api.capmonster.cloud/createTask
+  ```
+</MethodItem>
+<MethodDescription>
+**Запрос**
 ```json
 {
   "clientKey":"API_KEY",
@@ -107,9 +156,7 @@ https://api.capmonster.cloud/createTask
   }
 }
 ```
-
-**Пример ответа**
-
+**Ответ**
 ```json
 {
   "errorId":0,
@@ -117,16 +164,28 @@ https://api.capmonster.cloud/createTask
 }
 ```
 
-### **Получение результата**
-:::info Метод
+</MethodDescription>
+</TabItem>
+
+
+### Метод получения результата задачи
+Тип получаемого ответа - [**Grid**](#тип-ответа-grid).
+
+<TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel-full">
+    <MethodItem>
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
-:::
-Тип получаемого ответа - [**Grid**](#тип-ответа-grid).
-
-**Пример:**
-
+    </MethodItem>
+    <MethodDescription>
+**Запрос**
+```json
+{
+  "clientKey":"API_KEY",
+  "taskId": 407533072
+}
+```
+**Ответ**
 ```json
 {
   "errorId":0,
@@ -137,31 +196,39 @@ https://api.capmonster.cloud/getTaskResult
   }
 }
 ```
+  </MethodDescription>
+  </TabItem>
 
-### **Ценообразование**
+
+### Ценообразование
 
 |**Наименование** |**Стоимость за 1000 картинок, $**|
 | :-: | :-: |
 |hCaptcha|0,02|
 
-## **Примеры изображений (второй тип)**
-|![](Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.002.png)|![](Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.003.png)|![](Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.004.png)|
+
+## Примеры изображений (второй тип)
+|![](./images/hcaptcha-click/Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.002.png)|![](./images/hcaptcha-click/Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.003.png)|![](./images/hcaptcha-click/Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.004.png)|
 | :-: | :-: | :-: |
 
 :::info Передавайте референсные изображения для лучшего решения
 Изображения, которые находятся в шапке задания, если они есть, необходимо передавать в параметре `exampleImagesBase64` или `exampleImageUrls`
 
-![small-size](reference-example.png)
+![small-size](./images/hcaptcha-click/reference-example.png)
 
 :::
 
-### **Пример запроса**
 
-:::info Метод
-```http
-https://api.capmonster.cloud/createTask
-```
-:::
+### Метод создания задачи
+
+<TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel">
+<MethodItem>
+  ```http
+  https://api.capmonster.cloud/createTask
+  ```
+</MethodItem>
+<MethodDescription>
+**Запрос**
 ```json
 {
   "clientKey":"API_KEY",
@@ -177,8 +244,7 @@ https://api.capmonster.cloud/createTask
   }
 }
 ```
-
-**Пример ответа**
+**Ответ**
 ```json
 {
   "errorId":0,
@@ -186,15 +252,28 @@ https://api.capmonster.cloud/createTask
 }
 ```
 
-### **Получение результата**
-:::info Метод
+</MethodDescription>
+</TabItem>
+
+
+### Метод получения результата задачи
+Тип получаемого ответа - [**Coordinate**](#тип-ответа-coordinate).
+
+<TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel-full">
+    <MethodItem>
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
-:::
-Тип получаемого ответа - [**Coordinate**](#тип-ответа-coordinate).
-
-**Пример:**
+    </MethodItem>
+    <MethodDescription>
+**Запрос**
+```json
+{
+  "clientKey":"API_KEY",
+  "taskId": 407533072
+}
+```
+**Ответ**
 ```json
 {
   "errorId":0,
@@ -205,27 +284,34 @@ https://api.capmonster.cloud/getTaskResult
   }
 }
 ```
+  </MethodDescription>
+  </TabItem>
 
-### **Ценообразование**
+
+### Ценообразование
 
 |**Наименование** |**Стоимость за 1000 картинок, $**|
 | :-: | :-: |
 |hCaptcha|0,02|
 
-## **Пример изображения (третий тип)**
 
-![](Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.005.png) 
+## Пример изображения (третий тип)
+
+![](./images/hcaptcha-click/Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.005.png) 
 
 Этот тип капч должен содержать поле **metadata.Classes**.
 
-### **Пример запроса**
 
-:::info Метод
-```http
-https://api.capmonster.cloud/createTask
-```
-:::
+### Метод создания задачи
 
+<TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel">
+<MethodItem>
+  ```http
+  https://api.capmonster.cloud/createTask
+  ```
+</MethodItem>
+<MethodDescription>
+**Запрос**
 ```json
 {
   "clientKey":"API_KEY",
@@ -241,8 +327,7 @@ https://api.capmonster.cloud/createTask
   }
 }
 ```
-
-**Пример ответа**
+**Ответ**
 ```json
 {
   "errorId":0,
@@ -250,16 +335,28 @@ https://api.capmonster.cloud/createTask
 }
 ```
 
-### **Получение результата**
-:::info Метод
+</MethodDescription>
+</TabItem>
+
+
+### Метод получения результата задачи
+Тип получаемого ответа - [**Grid**](#тип-ответа-grid).
+
+<TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel-full">
+    <MethodItem>
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
-:::
-Тип получаемого ответа - [**Grid**](#тип-ответа-grid).
-
-**Пример:**
-
+    </MethodItem>
+    <MethodDescription>
+**Запрос**
+```json
+{
+  "clientKey":"API_KEY",
+  "taskId": 407533072
+}
+```
+**Ответ**
 ```json
 {
   "errorId":0,
@@ -270,29 +367,36 @@ https://api.capmonster.cloud/getTaskResult
   }
 }
 ```
+  </MethodDescription>
+  </TabItem>
+  
 
-### **Ценообразование**
+### Ценообразование
 
 |**Наименование** |**Стоимость за 1000 картинок, $**|
 | :-: | :-: |
 |hCaptcha|0,02|
 
-## **Пример изображения (четвертый тип)**
 
-![](hcaptcha-task-types/4type.png)
+## Пример изображения (четвертый тип)
+
+![](./images/hcaptcha-click/4type.png)
 
 Для данного запроса обязательное поле **exampleImageUrls** или **exampleImagesBase64**. Оно должно содержать одну картинку.
 
 Поле **imageUrls** или **imagesBase64** должно содержать 9 картинок.
 
-### **Пример запроса**
 
-:::info Метод
-```http
-https://api.capmonster.cloud/createTask
-```
-:::
+### Метод создания задачи
 
+<TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel">
+<MethodItem>
+  ```http
+  https://api.capmonster.cloud/createTask
+  ```
+</MethodItem>
+<MethodDescription>
+**Запрос**
 ```json
 {
   "clientKey":"API_KEY",
@@ -317,8 +421,7 @@ https://api.capmonster.cloud/createTask
   }
 }
 ```
-
-**Пример ответа**
+**Ответ**
 ```json
 {
   "errorId":0,
@@ -326,16 +429,28 @@ https://api.capmonster.cloud/createTask
 }
 ```
 
-### **Получение результата**
-:::info Метод
+</MethodDescription>
+</TabItem>
+
+
+### Метод получения результата задачи
+Тип получаемого ответа - [**Grid**](#тип-ответа-grid).
+
+<TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel-full">
+    <MethodItem>
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
-:::
-Тип получаемого ответа - [**Grid**](#тип-ответа-grid).
-
-**Пример:**
-
+    </MethodItem>
+    <MethodDescription>
+**Запрос**
+```json
+{
+  "clientKey":"API_KEY",
+  "taskId": 407533072
+}
+```
+**Ответ**
 ```json
 {
   "errorId":0,
@@ -346,10 +461,44 @@ https://api.capmonster.cloud/getTaskResult
   }
 }
 ```
+  </MethodDescription>
+  </TabItem>
 
-### **Ценообразование**
+
+### Ценообразование
 
 |**Наименование** |**Стоимость за 1000 картинок, $**|
 | :-: | :-: |
 |hCaptcha|0,02|
 
+
+## Используйте библиотеку SDK
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, ComplexImageHCaptchaRequest } from '@zennolab_com/capmonstercloud-client';
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+  console.log(await cmcClient.getBalance());
+
+  const complexImageHCaptchaRequest = new ComplexImageHCaptchaRequest({
+    imageUrls: ['https://i.postimg.cc/kg71cbRt/image-1.jpg', 'https://i.postimg.cc/6381Zx2j/image.jpg'],
+    metaData: {
+      Task: 'Please click each image containing a mountain',
+    },
+    websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle',
+    exampleImagesBase64: ['image in base64'],
+    exampleImageUrls: ['https://i.postimg.cc/kg71cbRt/image-1.jpg'],
+  });
+
+  console.log(await cmcClient.Solve(complexImageHCaptchaRequest));
+});
+```
+  </TabItem>
+  
+</Tabs>

@@ -1,34 +1,79 @@
 ---
-sidebar_position: 16
+sidebar_position: 13
 sidebar_label: AmazonTask
 ---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+
 
 # AmazonTask | AWS WAF Captcha and Challenge
 Решение капчи и челленджа в AWS WAF
 :::warning **Внимание!**
 Данная задача будет выполняться с использованием наших прокси-серверов. 
 :::
-## **Структура объекта**
-|**Параметр**|**Тип**|**Обязательный**|**Значение**|
-| :-: | :-: | :-: | :- | 
-|type|String|да|**AmazonTaskProxyless**|
-|websiteURL|String|да|Адрес основной страницы, на которой решается капча.|
-|challengeScript|String|да|Ссылка на challenge.js (см. описание под таблицей)|
-|captchaScript|String|да|Ссылка на captcha.js (см. описание  под таблицей)|
-|websiteKey|String|да|Строка, которую можно получить из html страницы с капчей или с помощью javascript, выполнив `window.gokuProps.key`|
-|context|String|да|Строка, которую можно получить из html страницы с капчей или с помощью javascript, выполнив `window.gokuProps.context`|
-|iv|String|да|Строка, которую можно получить из html страницы с капчей или с помощью javascript, выполнив `window.gokuProps.iv`|
-|cookieSolution|Boolean|нет|По умолчанию **false**. Если вам требуются куки "aws-waf-token", то укажите значение **true**. Иначе в ответ вы получите "captcha_voucher" и "existing_token".|
+
+## Параметры запроса
+<TabItem value="proxyless" label="AmazonTaskProxyless (без прокси)" default className="bordered-panel">
+    <ParamItem title="type" required type="string" />
+    **AmazonTaskProxyless**
+
+    --- 
+
+    <ParamItem title="websiteURL" required type="string" />
+    Адрес основной страницы, на которой решается капча.
+
+    ---
+
+    <ParamItem title="challengeScript" required type="string" />
+    Ссылка на challenge.js (см. описание ниже)
+
+    ---
+
+    <ParamItem title="captchaScript" required type="string" />
+    Ссылка на captcha.js (см. описание ниже)
+
+    ---
+
+    <ParamItem title="websiteKey" required type="string" />
+    Строка, которую можно получить из html страницы с капчей или с помощью javascript, выполнив `window.gokuProps.key`
+
+    ---
+
+    <ParamItem title="context" required type="string" />
+    Строка, которую можно получить из html страницы с капчей или с помощью javascript, выполнив `window.gokuProps.context`
+
+    ---
+
+    <ParamItem title="iv" required type="string" />
+    Строка, которую можно получить из html страницы с капчей или с помощью javascript, выполнив `window.gokuProps.iv`
+
+    ---
+
+    <ParamItem title="cookieSolution" type="boolean" />
+    По умолчанию **false**. Если вам требуются куки "aws-waf-token", то укажите значение **true**. Иначе в ответ вы получите "captcha_voucher" и "existing_token".
+
+  </TabItem>
+
+
 ### Как получить параметры websiteKey, context, iv и challengeScript
 При переходе на сайт вы получаете ответ 405 и html страницу с капчей. Именно из неё можно достать все параметры:
-![](aws1.png) 
-![](aws2.png) 
-## **Пример запроса**
-:::info Метод
-```http
-https://api.capmonster.cloud/createTask
-```
-:::
+![](./images/amazon-task/aws1.png) 
+![](./images/amazon-task/aws2.png) 
+
+
+## Метод создания задачи
+<TabItem value="proxyless" label="AmazonTaskProxyless (без прокси)" default className="method-panel">
+<MethodItem>
+  ```http
+  https://api.capmonster.cloud/createTask
+  ```
+</MethodItem>
+<MethodDescription>
+**Запрос**
 ```json
 {
     "clientKey": "API_KEY",
@@ -44,22 +89,36 @@ https://api.capmonster.cloud/createTask
     }
 }
 ```
-**Пример ответа**
+**Ответ**
 ```json
 {
-    "errorId":0,
-    "taskId":407533072
+  "errorId":0,
+  "taskId":407533072
 }
 ```
-## **Получение результата**
-:::info Метод
+
+</MethodDescription>
+</TabItem>
+
+
+## Метод получения результата задачи
+Используйте метод [getTaskResult](../api/methods/get-task-result.md), чтобы получить решение AmazonTask.
+
+<TabItem value="proxyless" label="AmazonTaskProxyless (без прокси)" default className="method-panel-full">
+    <MethodItem>
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
-:::
-Используйте метод [getTaskResult](../api/methods/get-task-result.md), чтобы получить решение AmazonTask.
-
-**Пример ответа:**
+    </MethodItem>
+    <MethodDescription>
+**Запрос**
+```json
+{
+  "clientKey":"API_KEY",
+  "taskId": 407533072
+}
+```
+**Ответ**
 ```json
 {
     "errorId":0,
@@ -72,3 +131,5 @@ https://api.capmonster.cloud/getTaskResult
     }
 }
 ```
+  </MethodDescription>
+  </TabItem>

@@ -3,6 +3,13 @@ sidebar_position: 6
 sidebar_label: TurnstileTask
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+
+
 # TurnstileTask | Cloudflare Challenge
 Автоматически поддерживаются все подтипы Turnstile: manual, non-interactive и invisible. Поэтому нет необходимости указывать подтип для обычной капчи.
 
@@ -11,7 +18,7 @@ sidebar_label: TurnstileTask
 :::
 
 ## Вариант 1 (Turnstile)
-Вам требуется решить **обычную** turstile капчу, как [здесь](http://tsmanaged.zlsupport.com). Обратите внимание, что капча на страницах CloudFlare может выглядеть идентично. Посмотрите в конце статьи как отличить обычный Turnstile от Cloudflare Challenge. 
+Вам требуется решить **обычную** turstile капчу, как [здесь](https://zenno.link/zl-support). Обратите внимание, что капча на страницах CloudFlare может выглядеть идентично. Посмотрите в конце статьи как отличить обычный Turnstile от Cloudflare Challenge. 
 
 #### Параметры запроса
 <TabItem value="proxyless" label="TurnstileTaskProxyless (без прокси)" default className="bordered-panel">
@@ -310,20 +317,20 @@ Cloudflare challenge может выглядеть по-разному.
 
 **Обычный вариант:**
 
-![](turnstile-simple.png) 
+![](./images/tunrstile-task/turnstile-simple.png) 
 
 **Стилизованные варианты:**
 
 <figure>
 
-![](turnstile-stylized.png)
+![](./images/tunrstile-task/turnstile-stylized.png)
 <figcaption>Челлендж органично встроен в сам сайт</figcaption>
 
 </figure>
 
 <figure>
 
-![](turnstile-stylized-2.png) 
+![](./images/tunrstile-task/turnstile-stylized-2.png) 
 <figcaption>Выглядит как обычная капча turnstile, но на самом деле это challenge</figcaption>
 
 </figure>
@@ -332,15 +339,15 @@ Cloudflare challenge может выглядеть по-разному.
 
 - Первый запрос к сайту возвращает код 403:
 
-![](b61dae70-f056-4257-ab72-05beacb27a0d.png)
+![](./images/tunrstile-task/b61dae70-f056-4257-ab72-05beacb27a0d.png)
 
 - Форма с id **challenge-form** имеет атрибут **action** (не путать с action из параметров для капчи turnstile), содержащий параметр `__cf_chl_f_tk=`:
 
-![](1e4dc39f-0a4a-4c29-a48d-abc7a2ec6380.png)
+![](./images/tunrstile-task/1e4dc39f-0a4a-4c29-a48d-abc7a2ec6380.png)
 
 - На странице находится два похожих тега `<script>`, которые создают новое значение в объекте `window`:
 
-![](gif.gif) 
+![](./images/tunrstile-task/gif.gif) 
 
 <details>
         <summary>Пример реализации решения с помощью Selenium на Node.js</summary>

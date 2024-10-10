@@ -72,11 +72,11 @@ https://api.capmonster.cloud
 
 3. В Свойствах действия “Распознать ReCaptcha” необходимо выбрать модуль CapMonsterCloud.dll, указать тип капчи (reCaptcha v.2) и способ разгадывания (**Во вкладке** или **Через sitekey**):
 
-![](getting-started-1.png)
+![](./images/getting-started-1.png)
 
 4. В случае выбора способа **Через sitekey** укажите данные капчи (sitekey) и url (адрес страницы, на которой нужно решить капчу):  
 
-![](getting-started-2.png)
+![](./images/getting-started-2.png)
 
 ### reCaptcha v.3
 
@@ -84,7 +84,7 @@ https://api.capmonster.cloud
 
 2. В Свойствах действия “Распознать ReCaptcha” выберите модуль CapMonsterCloud.dll, укажите  тип капчи (reCaptcha v.3), способ (Во вкладке или Через Sitekey), также укажите Action и minScore: 
 
-![](getting-started-3.png)
+![](./images/getting-started-3.png)
 
 ### hCaptcha 
 
@@ -92,7 +92,7 @@ https://api.capmonster.cloud
 
 2. В Свойствах действия “Распознать hCaptcha” выберите способ (Во вкладке или Через Sitekey). При выборе через Sitekey нужно указать sitekey и URL, где находится капча: 
 
-![](getting-started-4.png)
+![](./images/getting-started-4.png)
 
 ### С помощью HTTP-запросов 
 
@@ -100,28 +100,28 @@ https://api.capmonster.cloud
 
 1. “Обработка переменных” (“Добавить действие” - “Данные” - “Обработка переменных”), в свойствах выберите “Установить значение” и пропишите в значении ваш API-ключ от CapMonster Cloud:
 
-![](getting-started-5.png)
+![](./images/getting-started-5.png)
 
 2. “Добавить действие” - “HTTP” - “POST-запрос” (дополнительно добавьте значения ваших прокси, если нужно):
 
-![](getting-started-6.png)
+![](./images/getting-started-6.png)
 
 3. Добавьте действие “Обработка JSON/XML” (“Добавить действие” - “Данные” - “Обработка JSON/XML”), в свойствах выберите “парсинг”, тип “Json” и для текста для разбора правой кнопки мыши выберите “Установить значение из переменной”: 
 
-![](getting-started-7.png)
+![](./images/getting-started-7.png)
 
 4. Добавьте экшен “Обработка переменных”,  в нем установите значение \{-Json.taskId-\}: 
 
-![](getting-started-8.png)
+![](./images/getting-started-8.png)
 
 5. Сформируйте новый POST-запрос для получения результата:
 
-![](getting-started-9.png)
+![](./images/getting-started-9.png)
 
 6. Добавьте значение “Парсинг” в экшене “Обработка JSON/XML”: 
 
-![](getting-started-10.png)
+![](./images/getting-started-10.png)
 
 7. Далее необходимо подставить значение токена в нужную форму капчи (изучив код страницы) с помощью экшена “Установить значение”, например: 
 
-![](getting-started-11.png)
+![](./images/getting-started-11.png)

@@ -1,8 +1,7 @@
 ---
-sidebar_position: 15
+sidebar_position: 12
 sidebar_label: TenDI
 ---
-
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -43,13 +42,13 @@ This task will be performed using our proxy servers.
 
   </TabItem>
 
-### How to get websiteKey(captchaAppId)
+
+### How to get websiteKey (captchaAppId)
 Turn on the developer tools, go to the Network tab, activate the captcha and look at the requests. Some of them will contain the parameter value you need. In this case `websiteKey=aid`
 ![](./images/tendi/tendi-devtools.png) 
 
-## Create task
 
-
+## Create task method
 <TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
 <MethodItem>
   ```http
@@ -81,7 +80,8 @@ Turn on the developer tools, go to the Network tab, activate the captcha and loo
 </MethodDescription>
 </TabItem>
 
-## Get task result
+
+## Get task result method
 Use the [getTaskResult](../api/methods/get-task-result.md) method to get the TenDI solution.
 
 <TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">

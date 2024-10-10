@@ -25,11 +25,11 @@ import MethodDescription from '@theme/MethodDescription'
 - Также, эти параметры можно получить из HTML кода страницы. Их можно найти в блоке `<sсript>`, который появляется после полной загрузки страницы в браузере.
   V3
 
-![](Aspose.Words.09e28b99-ec8b-4638-848b-cdd6fefc7ac8.001.png)
+![](./images/geetest-task/Aspose.Words.09e28b99-ec8b-4638-848b-cdd6fefc7ac8.001.png)
 
 V4 (captcha_id = gt)
 
-![](Aspose.Words.09e28b99-ec8b-4638-848b-cdd6fefc7ac8.002.png)
+![](./images/geetest-task/Aspose.Words.09e28b99-ec8b-4638-848b-cdd6fefc7ac8.002.png)
 :::
 
 <br />
@@ -40,16 +40,16 @@ V4 (captcha_id = gt)
 
 <Tabs className="full-width-tabs">
   <TabItem value="intelligent" label="Intelligent mode" default className="bordered-panel">
-    ![](intelligent.png)
+    ![](./images/geetest-task/intelligent.png)
   </TabItem>
   <TabItem value="slide" label="Slide CAPTCHA" className="bordered-panel">
-    ![](slide.png)
+    ![](./images/geetest-task/slide.png)
   </TabItem>
   <TabItem value="icon" label="Icon CAPTCHA" className="bordered-panel">
-    ![](icon.png)
+    ![](./images/geetest-task/icon.png)
   </TabItem>
   <TabItem value="space" label="Space CAPTCHA" className="bordered-panel">
-    ![](space.png)
+    ![](./images/geetest-task/space.png)
   </TabItem>
 </Tabs>
 
@@ -351,7 +351,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 ### <span style={{fontSize: '1.5rem'}}>Пример задания</span>
 
-![](geetest4.png)
+![](./images/geetest-task/geetest4.png)
 
 
 ### <span style={{fontSize: '1.5rem'}}>Параметры запроса</span>
@@ -374,7 +374,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     ---
 
-    <ParamItem title="challenge" required="обязательный только для V3" type="string" />
+    <ParamItem title="challenge" required="required only for V3" type="string" />
     <p>
     Меняющийся ключ. <br />
 	При каждом обращении к нашему API нужно получать новое значение ключа. Если капча загружена на странице, то значение challenge уже недействительно и вы получите в ответ [ошибку](../api/api-errors.md) `ERROR_TOKEN_EXPIRED`. <br />
@@ -429,7 +429,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     ---
 
-    <ParamItem title="challenge" required="обязательный только для V3" type="string" />
+    <ParamItem title="challenge" required="required only for V3" type="string" />
     <p>
     Меняющийся ключ. <br />
 	При каждом обращении к нашему API нужно получать новое значение ключа. Если капча загружена на странице, то значение challenge уже недействительно и вы получите в ответ [ошибку](../api/api-errors.md) `ERROR_TOKEN_EXPIRED`. <br />

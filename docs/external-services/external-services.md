@@ -1,18 +1,18 @@
 ﻿# Распознавание капч через API других сервисов
 CapMonster Cloud поддерживает API сервисов: Anti-Captcha (v1.0, v2.0), RuCaptcha, RipCaptcha, 2Captcha, BypassCaptcha, DeathByCaptcha. Таким образом, вы можете разгадывать капчу через CapMonster.Cloud, даже если в вашей программе нет интеграции с нашим сервисом.
 
-Для этого необходимо установить ![(синяя звезда)](Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.001.png) [**CapMonsterInterceptor**](https://static.zenno.services/ccl/interceptor.msi) (OC Windows)
-![(синяя звезда)](Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.002.png) Поддержка других платформ в разработке.
+Для этого необходимо установить ![(синяя звезда)](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.001.png) [**CapMonsterInterceptor**](https://static.zenno.services/ccl/interceptor.msi) (OC Windows)
+![(синяя звезда)](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.002.png) Поддержка других платформ в разработке.
 
 В процессе установки потребуется указать API-ключ вашего аккаунта, который вы сможете найти в [личном кабинете](https://capmonster.cloud/Dashboard).
 
-![](Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.003.png)
+![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.003.png)
 
-![](Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.004.png) 
+![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.004.png) 
 
 По завершению на рабочем столе будет создан ярлык CapMonsterInterceptor. После запуска программа будет доступна в трее. Никаких настроек не требуется.
 
-![](Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.005.png) 
+![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.005.png) 
 
 Когда CapMonsterInterceptor запущен, все капчи отправленные на распознавание в сервисы *Anti-Captcha (v1.0, v2.0), RuCaptcha, RipCaptcha, 2Captcha, BypassCaptcha, DeathByCaptcha* будут перехватываться и перенаправляться в CapMonster.Cloud.
 ## **Пример**
@@ -20,7 +20,7 @@ CapMonster Cloud поддерживает API сервисов: Anti-Captcha (v1
 
 - **примечание для DeathByCaptcha:** для идентификации пользователя API DeathByCaptcha использует логин и пароль, а не API ключ. В этом случае нужно заполнить 2 поля случайными значениями.
 
-![](Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.006.png) 
+![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.006.png) 
 
 Введите любой API-ключ (*Например, qwerty*).
 
@@ -28,7 +28,7 @@ CapMonster Cloud поддерживает API сервисов: Anti-Captcha (v1
 
 Щёлкнув 2 раза по иконке CapMonsterInterceptor в трее, вы сможете увидеть статистику перехваченных капч, отправленных на распознавание.
 
-![](Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.007.png) 
+![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.007.png) 
 ## **Ответы на вопросы**
 
 <details>
@@ -36,13 +36,13 @@ CapMonster Cloud поддерживает API сервисов: Anti-Captcha (v1
 
 Щелкните 2 раза по иконке CapMonsterInterceptor в трее. В окне программы найдите блок «Settings», замените ключ на новый и нажмите кнопку «Save».
 
-![](Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.009.png) 
+![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.009.png) 
 </details>
 
 <details>
     <summary>Что делать, если возникла ошибка: Сделана попытка доступа к сокету методом, запрещённым правами доступа.</summary>
 
-![](Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.010.png) 
+![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.010.png) 
 
 Если при запуске возникнет ошибка, это означает, что 80 и\или 443 порт занят другим приложением.
 
@@ -50,7 +50,7 @@ CapMonster Cloud поддерживает API сервисов: Anti-Captcha (v1
 
 Запускаем командную строку через меню пуск → поиск → cmd
 
-![](Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.011.png) 
+![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.011.png) 
 
 Вводим команду netstat -a -o | findstr :443
 
@@ -62,6 +62,6 @@ CapMonster Cloud поддерживает API сервисов: Anti-Captcha (v1
 
 Открываем диспетчер задач, переходим во вкладку «Подробности», находим процесс с нужным идентификатором и завершаем задачу.
 
-![](Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.012.png)
+![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.012.png)
 
 </details>
