@@ -1,102 +1,102 @@
-﻿# Creating a user module
+﻿# Criando um módulo de usuário
 
 
-## **Description**
+## **Descrição**
 
-This feature allows you to create custom modules that will be trained for one specific type of captcha. This will help to recognize non-standard captchas faster and more efficiently and reduce the probability of errors.  
+Esse recurso permite que você crie módulos personalizados que serão treinados para um tipo específico de captcha. Isso ajudará a reconhecer captchas não padronizados de forma mais rápida e eficiente, reduzindo a probabilidade de erros.
 
-To go to the [module training page](https://capmonster.cloud/UserModules), click the email in the upper-right area of the website and select the relevant option in the menu.
+Para acessar a [página de treinamento de módulos](https://capmonster.cloud/UserModules), clique no e-mail no canto superior direito do site e selecione a opção relevante no menu.
 
 ![](./images/user-module/834ccbf9-f439-4b1b-8cab-42ed3dbc055c.png)
 
 
 ---
 
-## **How it works**
+## **Como funciona**
 
-Briefly:
+Em resumo:
 
-1. Collect captchas and archive them
-2. Send them to us, specifying the module name
-3. Deposit $10 to the balance (it will remain on your balance)
-4. We create the module
-5. You send requests from your soft, specifying the name of the created module.
+1. Coletar captchas e arquivá-los
+2. Enviá-los para nós, especificando o nome do módulo
+3. Depositar $10 no saldo (ele permanecerá em seu saldo)
+4. Criamos o módulo
+5. Você envia solicitações do seu software, especificando o nome do módulo criado.
 
-Now let's go into the details of each step.
+Agora vamos detalhar cada etapa.
 
 ---
 
-### **1. Collecting captchas**
+### **1. Coletando captchas**
 
-#### **How many captchas do you need?**
+#### **Quantos captchas você precisa?**
 
-To answer this question, mark the types of symbols that your captcha contains, in the form on the [Module training page](https://capmonster.cloud/UserModules). After that, a hint telling you how many captchas to upload will appear above the button for selecting the archive for uploading:
+Para responder a essa pergunta, marque os tipos de símbolos que seu captcha contém, no formulário da [página de treinamento de módulos](https://capmonster.cloud/UserModules). Depois disso, uma dica informando quantos captchas você deve fazer upload aparecerá acima do botão para selecionar o arquivo para upload:
 
 ![](./images/user-module/module-name.png)
 
-#### **Supported image formats**
+#### **Formatos de imagem suportados**
 
 - jpg
 - jpeg
 - png
 
-#### **How to collect captchas?**
+#### **Como coletar captchas?**
 
-Let's look at the example with [ZennoPoster](https://zennolab.atlassian.net/wiki/spaces/EN/pages/924581921/ZennoPoster).
+Vamos olhar o exemplo com o [ZennoPoster](https://zennolab.atlassian.net/wiki/spaces/EN/pages/924581921/ZennoPoster).
 
-Imagine you are registering accounts on the website and it has a captcha a module for which you want to create. There are several options:
+Imagine que você está registrando contas em um site e ele possui um captcha para o qual você deseja criar um módulo. Existem várias opções:
 
-- Most probably, you already have a running project for this website, which means you are already solving this captcha. In the action [Recognize captcha](https://zennolab.atlassian.net/wiki/spaces/EN/pages/924582077/Recognize+captcha), in the *More* tab you can find the [Saving](https://zennolab.atlassian.net/wiki/spaces/EN/pages/924582077/Recognize+captcha#Saving) option, that is created for such cases.
-- You can go an easier way: go to the captcha page. It always has the Refresh button. Send the captcha to the solver or [solve manually](https://zennolab.atlassian.net/wiki/spaces/EN/pages/924484621/Entering+captchas+manually) (previously set in the [Saving](https://zennolab.atlassian.net/wiki/spaces/EN/pages/924582077/Recognize+captcha#Saving) action), refresh the captcha, and send it for solving again. Repeat these steps until you collect enough captchas.
+- Provavelmente, você já tem um projeto em funcionamento para este site, o que significa que já está resolvendo este captcha. Na ação [Reconhecer captcha](https://zennolab.atlassian.net/wiki/spaces/EN/pages/924582077/Recognize+captcha), na guia *Mais*, você pode encontrar a opção [Salvar](https://zennolab.atlassian.net/wiki/spaces/EN/pages/924582077/Recognize+captcha#Saving), que foi criada para esses casos.
+- Você pode seguir um caminho mais simples: vá para a página do captcha. Sempre há um botão de Atualizar. Envie o captcha para o solucionador ou [resolva manualmente](https://zennolab.atlassian.net/wiki/spaces/EN/pages/924484621/Entering+captchas+manually) (anteriormente definido na ação [Salvar](https://zennolab.atlassian.net/wiki/spaces/EN/pages/924582077/Recognize+captcha#Saving)), atualize o captcha e envie-o para solução novamente. Repita esses passos até coletar captchas suficientes.
 
 :::warning
-Do not run captcha collection in tens and hundreds of threads! Few websites would like that.
+Não execute a coleta de captchas em dezenas ou centenas de threads! Poucos sites gostariam disso.
 :::
 
 ---
 
-### **2. Sending the captcha archive**
+### **2. Enviando o arquivo de captchas**
 
 ![](./images/user-module/a2ba29bd-c910-44cf-9979-ceb143633efd.png)
 
-#### **2.1. Name**
+#### **2.1. Nome**
 
-First, set the module name (Latin characters only).
+Primeiro, defina o nome do módulo (apenas caracteres latinos).
 
 ![](./images/user-module/fed2d879-b494-4b60-a13a-036c693d0951.png)
 
 :::warning
-The module name must not contain the word **captcha**.
+O nome do módulo não deve conter a palavra **captcha**.
 :::
 
-#### **2.2. Types of symbols**
+#### **2.2. Tipos de símbolos**
 
-Mark the types of symbols that your captcha contains.
+Marque os tipos de símbolos que seu captcha contém.
 
-What you mark here affects the number of captchas you will need to upload to train the module.
+O que você marcar aqui afeta o número de captchas que você precisará fazer upload para treinar o módulo.
 
-You can choose one or several options from the suggested.
+Você pode escolher uma ou várias opções das sugeridas.
 
 ![](./images/user-module/3b39f9e1-d981-41af-842a-a51f4a51a4e0.png)
 
 :::info
-You should mark at least one of the following options: "Contains Cyrillic characters", "Contains Latin characters", "Contains numbers"
+Você deve marcar pelo menos uma das seguintes opções: "Contém caracteres cirílicos", "Contém caracteres latinos", "Contém números".
 :::
 
-#### **2.3. Markup location**
+#### **2.3. Localização das respostas**
 
-Specify where captcha answers are located.
+Especifique onde as respostas dos captchas estão localizadas.
 
 ![](./images/user-module/markup-location.png)
 
-It's quite simple: 
+É bem simples:
 
-- **None** - select it if you don't have answers to captchas (in this case, module training may take longer).
-- **Located in file names** - select it if the name of every captcha image is the answer to it (sometimes a captcha answers cannot be saved in the file name: operating systems do not allow some symbols in file names).
-- **Located in a separate file in the archieve** - select it if answers are saved in a file (it should be a simple text file—.txt).
-  - File name- answers.txt
-  - Should be located inside the archive with captchas
-  - Format - CaptchaFileName:CaptchaAnswer, each captcha on a new line. Example:
+- **Nenhum** - selecione se você não tiver respostas para os captchas (neste caso, o treinamento do módulo pode demorar mais).
+- **Localizado nos nomes dos arquivos** - selecione se o nome de cada imagem de captcha é a resposta correspondente (às vezes, as respostas de captcha não podem ser salvas no nome do arquivo: sistemas operacionais não permitem alguns símbolos em nomes de arquivos).
+- **Localizado em um arquivo separado no arquivo** - selecione se as respostas estão salvas em um arquivo (deve ser um arquivo de texto simples—.txt).
+  - Nome do arquivo: answers.txt
+  - Deve estar localizado dentro do arquivo com os captchas
+  - Formato - CaptchaFileName:CaptchaAnswer, cada captcha em uma nova linha. Exemplo:
 
 ```
 captcha1.png:d9li1
@@ -106,141 +106,141 @@ captcha2.png:2zhnw
 captcha3.png:99loe
 ```
 
-#### **2.4. Sending the archive**
+#### **2.4. Enviando o arquivo**
 
-When you specified the module name, selected symbol types, and location of answers, you need to upload the zip archive with the captchas and send us.
+Depois de especificar o nome do módulo, selecionar os tipos de símbolos e a localização das respostas, você precisa enviar o arquivo zip com os captchas e nos enviar.
 
 ![](./images/user-module/archieve.png)
 
-#### **2.5. Payment**
+#### **2.5. Pagamento**
 
-- If you did all that correctly, your request will appear in the table with the **Validated** status.
-- After that, you need to deposit $10 per module.
+- Se você fez tudo corretamente, sua solicitação aparecerá na tabela com o status **Validado**.
+- Depois disso, você precisa depositar $10 por módulo.
 
 :::note
-The funds allocated to training are not debited but stay on the balance. You can spend them on solving any captchas, anytime.
+Os fundos alocados para o treinamento não são debitados, mas permanecem no saldo. Você pode gastá-los na resolução de qualquer captcha, a qualquer momento.
 :::
 
-- After successful deposit, the status of the **first** uploaded module will change to **Paid**.
+- Após o depósito bem-sucedido, o status do **primeiro** módulo enviado mudará para **Pago**.
 
 ---
 
-### **3. Statuses**
+### **3. Status**
 
-#### **Validated**
+#### **Validado**
 
 ![](./images/user-module/validated.png)
 
-You get this status after you send the form (given that you have done everything correctly). 
+Você recebe esse status após enviar o formulário (desde que você tenha feito tudo corretamente).
 
 :::note
-Modules with this status can be deleted. If you uploaded the module but realized that you sent a wrong archive or gave a bad name for the module, you can delete it, make changes, and send it again.
+Módulos com esse status podem ser excluídos. Se você enviou o módulo, mas percebeu que enviou um arquivo errado ou deu um nome ruim para o módulo, você pode excluí-lo, fazer as alterações e enviá-lo novamente.
 :::
 
-#### **Paid**
+#### **Pago**
 
 ![](./images/user-module/paid.png)
 
-Your payment for the module was accepted.
+Seu pagamento pelo módulo foi aceito.
 
-#### **ValidatedInDepth**
+#### **ValidadoEmProfundidade**
 
 ![](./images/user-module/ValidatedInDepth.png)
 
-Preparatory works.
+Trabalhos preparatórios.
 
-#### **Annotated**
+#### **Anotado**
 
 ![](./images/user-module/Annotated.png)
 
-Captcha marking completed. Training is in progress.
+Marcação de captcha concluída. O treinamento está em andamento.
 
-#### **Trained**
+#### **Treinado**
 
 ![](./images/user-module/trained.png)
 
-The module is ready! You can now submit captchas to it.
+O módulo está pronto! Agora você pode enviar captchas para ele.
 
-### **4. Sending captchas to a certain module**
+### **4. Enviando captchas para um módulo específico**
 
-There are several ways to specify a module that will solve the captchas:
+Existem várias maneiras de especificar um módulo que resolverá os captchas:
 
-- [Add the argument CapMonsterModule with the module name when sending a /createTask request ](../captchas/image-to-text.mdx) (if you interact directly with our API)
-- [Specify a module name in ApiKey](module-name.md) (very handy when you use third-party programs and cannot modify the requests)
+- [Adicione o argumento CapMonsterModule com o nome do módulo ao enviar uma solicitação /createTask](../captchas/image-to-text.mdx) (se você interagir diretamente com nossa API)
+- [Especifique um nome de módulo na chave API](module-name.md) (muito prático quando você usa programas de terceiros e não pode modificar as solicitações)
 
 ---
 
-## **FAQ**
+## **Perguntas Frequentes**
 
 <details>
-    <summary>How long does the module training take?</summary>
+    <summary>Quanto tempo leva o treinamento do módulo?</summary>
 
-It usually takes one day.
+Geralmente leva um dia.
 
-**Note:** Training goes on business days from Monday to Friday. If you sent a request on Friday, training will be completed at the beginning of the next week.
+**Nota:** O treinamento ocorre em dias úteis, de segunda a sexta-feira. Se você enviar uma solicitação na sexta-feira, o treinamento será concluído no início da próxima semana.
 
 </details>
 
 <details>
-    <summary>I want to train several modules at once, how can I do it correctly?</summary>
+    <summary>Quero treinar vários módulos ao mesmo tempo, como posso fazer isso corretamente?</summary>
 
-The algorithm is simple: you just upload the captcha archive and pay for it. Then, you upload the second archive and pay for it. You do that for all archives.
+O algoritmo é simples: você apenas faz upload do arquivo de captchas e paga por ele. Depois, você faz upload do segundo arquivo e paga por ele. Você faz isso para todos os arquivos.
 
-Training takes one day per module.
+O treinamento leva um dia por módulo.
 
 </details>
 
 <details>
-    <summary>I see the "Error" sign in the "Comment" column next to my module. What should I do?</summary>
+    <summary>Vejo o sinal "Erro" na coluna "Comentário" ao lado do meu módulo. O que devo fazer?</summary>
 
 ![](./images/user-module/Error.png)
 
-Don't panic![(wink)](./images/user-module/Aspose.Words.aac7548a-0b79-486d-96ce-e145c7faf5a6.015.png) Just wait a bit. 
+Não entre em pânico![(wink)](./images/user-module/Aspose.Words.aac7548a-0b79-486d-96ce-e145c7faf5a6.015.png) Apenas espere um pouco.
 
-If nothing changed in a day, [contact support](https://helpdesk.zennolab.com) and we will definitely help you.
-
-</details>
-
-<details>
-    <summary>I uploaded a wrong archive, can I resend it?</summary>
-
-If you didn't pay for the module and it has the **Validated** status, you can delete it. You can find more information in the description of the **Validated** status.
+Se nada mudar em um dia, [entre em contato com o suporte](https://helpdesk.zennolab.com) e nós definitivamente o ajudaremos.
 
 </details>
 
 <details>
-    <summary>What is the “Manage” column in the table? I have nothing there</summary>
+    <summary>Enviei um arquivo errado, posso reenviá-lo?</summary>
 
-You will see the "Delete" button in this column. But it's only available for the modules with the **Validated** status. 
-
-For modules with other statuses, this column remains empty.
+Se você não pagou pelo módulo e ele tem o status **Validado**, você pode excluí-lo. Você pode encontrar mais informações na descrição do status **Validado**.
 
 </details>
 
 <details>
-    <summary>Why were some symbols added to my module name?</summary>
+    <summary>O que é a coluna “Gerenciar” na tabela? Não tenho nada lá</summary>
 
-This is done to make the module name unique. Some systems users may choose the same name for their module. To avoid confusion, the system automatically generates and adds random symbols to module names. This way, every user will send captchas to their module—no confusion.
+Você verá o botão "Excluir" nesta coluna. Mas ele só está disponível para os módulos com o status **Validado**.
 
-</details>
-
-<details>
-    <summary>Can I get a trained module for the CapMonster2 program?</summary>
-
-No. The trained module is only available in CapMonster.Cloud.
+Para módulos com outros status, essa coluna permanece vazia.
 
 </details>
 
 <details>
-    <summary>I am not satisfied with the quality of training. What to do?</summary>
+    <summary>Por que alguns símbolos foram adicionados ao nome do meu módulo?</summary>
 
-[Contact our support service](https://helpdesk.zennolab.com/).
+Isso é feito para tornar o nome do módulo único. Alguns usuários do sistema podem escolher o mesmo nome para seu módulo
 
 </details>
 
 <details>
-    <summary>I have a question that is not covered here. Where should I contact?</summary>
+    <summary>Posso obter um módulo treinado para o programa CapMonster2?</summary>
 
-[Contact our support service](https://helpdesk.zennolab.com/).
+Não. O módulo treinado está disponível apenas no CapMonster.Cloud.
+
+</details>
+
+<details>
+    <summary>Não estou satisfeito com a qualidade do treinamento. O que fazer?</summary>
+
+[Entre em contato com nosso serviço de suporte](https://helpdesk.zennolab.com/).
+
+</details>
+
+<details>
+    <summary>Tenho uma pergunta que não está coberta aqui. Onde devo entrar em contato?</summary>
+
+[Entre em contato com nosso serviço de suporte](https://helpdesk.zennolab.com/).
 
 </details>

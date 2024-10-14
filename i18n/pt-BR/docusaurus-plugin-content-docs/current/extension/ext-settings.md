@@ -3,41 +3,41 @@ sidebar_position: 4
 ---
 
 
-# Extension settings
+# Configurações da extensão
 
-## Settings available for change:
+## Configurações disponíveis para alteração:
 
-|**Key**|**Type**|**Description**|
+|**Chave**|**Tipo**|**Descrição**|
 | :-: | :-: | :-: |
-|`isEnabled`|`Boolean`|Is the extension enabled by default or not|
-|`clientKey`|`String`|API key|
-|`captchaList`|`Array<String>`|List of captchas that are enabled (by default all capthas are enabled)|
-|`captchaExtra`|`Object<{[String]: 1 / 0}>`|List of captchas that can be solved by clicks (Token - 0, Click - 1)|
-|`repeatsCount`|`Number`|Number of repeated solutions after an error|
-|`isEnabledIgnoreList`|`Boolean`|Whether the blacklist of sites specified in the IgnoreList field is enabled|
-|`ignoreList`|`Array<String>`|List of sites to ignore the solving|
-|`proxy`|`Object`|Proxy settings|
-|`isManualResolving`|`Boolean`|Is manual recognition enabled|
-|`delayStartCount`|`Array<{[CaptchaType]: Number}>`|Delay before solving captcha|
-|`autoClick`|`Array<{[CaptchaType]: Boolean}>`|Is the ability to automatically start captcha solving enabled|
-|`autoSolve`|`Array<{[CaptchaType]: Boolean}>`|Is the ability to automatically solve the captcha window enabled|
-|`textCaptchaSaveOnSite`|`Boolean`|Whether to save the selected elements on the site for text captcha|
-|`delayAfterLoadPage`|`Number`|Delay before starting to solve a text captcha, if it was saved for the site|
-|`recaptchaClickSelector`|`String`|DOM Element selector to click when starting a Recaptcha solving|
-|`hCaptchaClickSelector`|`String`|DOM Element selector to click when starting a hCaptcha solving|
-|`globalVariable`|`String`|Name of the field for interaction with the extension via a global object|
+|`isEnabled`|`Boolean`|A extensão está ativada por padrão ou não|
+|`clientKey`|`String`|Chave da API|
+|`captchaList`|`Array<String>`|Lista de captchas que estão ativados (por padrão todos os captchas estão ativados)|
+|`captchaExtra`|`Object<{[String]: 1 / 0}>`|Lista de captchas que podem ser resolvidos por cliques (Token - 0, Clique - 1)|
+|`repeatsCount`|`Number`|Número de tentativas repetidas após um erro|
+|`isEnabledIgnoreList`|`Boolean`|A lista negra de sites especificados no campo IgnoreList está ativada|
+|`ignoreList`|`Array<String>`|Lista de sites para ignorar a solução de captchas|
+|`proxy`|`Object`|Configurações de proxy|
+|`isManualResolving`|`Boolean`|O reconhecimento manual está ativado|
+|`delayStartCount`|`Array<{[CaptchaType]: Number}>`|Atraso antes de começar a resolver o captcha|
+|`autoClick`|`Array<{[CaptchaType]: Boolean}>`|A habilidade de iniciar automaticamente a solução de captcha está ativada|
+|`autoSolve`|`Array<{[CaptchaType]: Boolean}>`|A habilidade de resolver automaticamente a janela de captcha está ativada|
+|`textCaptchaSaveOnSite`|`Boolean`|Se os elementos selecionados no site para captcha de texto serão salvos|
+|`delayAfterLoadPage`|`Number`|Atraso antes de começar a resolver um captcha de texto, se foi salvo para o site|
+|`recaptchaClickSelector`|`String`|Seletor de Elemento DOM para clicar ao iniciar a solução de Recaptcha|
+|`hCaptchaClickSelector`|`String`|Seletor de Elemento DOM para clicar ao iniciar a solução de hCaptcha|
+|`globalVariable`|`String`|Nome do campo para interação com a extensão via objeto global|
 
-There are several ways to change extension settings:
-1. Before installing the extension.
-2. When the extension is already installed.
+Há várias maneiras de alterar as configurações da extensão:
+1. Antes de instalar a extensão.
+2. Quando a extensão já está instalada.
 
-## Changing settings before installation
+## Alterando as configurações antes da instalação
 
-When installing the extension via a package (downloadable [at the link](https://drive.google.com/file/d/11pVyiPltRW_vEPPnRnQJLNiX0J0GVhBe/view?usp=drive_link)), it is possible to set the initial parameters with which the extension will work. To do this, you need to unpack the package and edit the defaultSettings.json file, and then repackage it.
+Ao instalar a extensão via pacote (disponível para download [neste link](https://drive.google.com/file/d/11pVyiPltRW_vEPPnRnQJLNiX0J0GVhBe/view?usp=drive_link)), é possível definir os parâmetros iniciais com os quais a extensão funcionará. Para isso, você precisa descompactar o pacote e editar o arquivo defaultSettings.json, e depois empacotá-lo novamente.
 
-### **Description of the settings file defaultSettings.json**
+### **Descrição do arquivo de configurações defaultSettings.json**
 
-The settings file looks like this:
+O arquivo de configurações é assim:
 
 ```json title="defaultSettings.json"
 {
@@ -72,13 +72,13 @@ The settings file looks like this:
   "manualResolving": false
 }
 ```
-## Changing the settings using JS
+## Alterando as configurações usando JS
 
-After initializing the extension on the current active page, we have a global object that is set in the extension settings, by default CMExtension, with which we can manipulate the extension settings.
+Após inicializar a extensão na página ativa atual, temos um objeto global que é configurado nas configurações da extensão, por padrão `CMExtension`, com o qual podemos manipular as configurações da extensão.
 
-Note that event handlers are attached to the properties, not to the data inside.
+Observe que os manipuladores de eventos estão anexados às propriedades, não aos dados internos.
 
-### **Example:**
+### **Exemplo:**
 ```js
 window.CMExtension.isEnabled = false;
 ```

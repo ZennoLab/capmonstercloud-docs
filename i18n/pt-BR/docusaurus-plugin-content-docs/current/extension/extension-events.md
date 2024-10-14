@@ -3,73 +3,73 @@ sidebar_position: 4
 ---
 
 
-# Receiving events from the extension
+# Recebendo eventos da extensão
 
-Receiving events from the extension helps your code to be aware of events that are happening (such as successfully solving a captcha with a token or clicks) and react accordingly.
+Receber eventos da extensão permite que seu código fique ciente dos eventos que estão acontecendo (como resolver com sucesso um captcha com um token ou cliques) e reaja de acordo.
 
-When solving various types of captchas, the extension sends events to the currently active page in the global window object.
+Ao resolver vários tipos de captchas, a extensão envia eventos para a página atualmente ativa no objeto global `window`.
 
-If necessary, it is possible to subscribe to these events via `window.addEventListener`
+Se necessário, é possível se inscrever nesses eventos por meio do `window.addEventListener`.
 
 :::info
-No parameters are passed to events
+Nenhum parâmetro é passado para os eventos.
 :::
 
-### **Example:**
+### **Exemplo:**
 ```js
 window.addEventListener("onCMExtensionReady", () => {
-  // DO SOMETHING
+  // FAÇA ALGO
 })
 ```
 
-## Available events
+## Eventos disponíveis
 
 ### Global
-|**Event**|**Description**|
+|**Evento**|**Descrição**|
 | :-: | :-: |
-|`onCMExtensionReady`|The extension is fully loaded and ready to work|
+|`onCMExtensionReady`|A extensão está totalmente carregada e pronta para funcionar|
 
 ### HCaptcha
-|**Event**|**Description**|
+|**Evento**|**Descrição**|
 | :-: | :-: |
-|`onHCaptchaClickStart`|Start solving hCaptcha by clicks|
-|`onHCaptchaClickBackendError`|Server error when requesting hCaptcha solution results by clicks|
-|`onHCaptchaClickIncorrect`|Incorrect hCaptcha solving by clicks|
-|`onHCaptchaClickSuccess`|Successful hCaptcha solving by clicks|
-|`onHCaptchaClick`|Clicking on the hCaptcha checkbox when solving by clicks|
-|`onHCaptchaTokenStart`|Start solving hCaptcha by token|
-|`onHCaptchaTokenSuccess`|Successful hCaptcha solving by token|
-|`onHCaptchaTokenError`|Error when solving hCaptcha by token|
+|`onHCaptchaClickStart`|Início da resolução de hCaptcha por cliques|
+|`onHCaptchaClickBackendError`|Erro do servidor ao solicitar resultados da solução de hCaptcha por cliques|
+|`onHCaptchaClickIncorrect`|Erro na resolução de hCaptcha por cliques|
+|`onHCaptchaClickSuccess`|Resolução bem-sucedida de hCaptcha por cliques|
+|`onHCaptchaClick`|Clicar na caixa de seleção do hCaptcha ao resolver por cliques|
+|`onHCaptchaTokenStart`|Início da resolução de hCaptcha por token|
+|`onHCaptchaTokenSuccess`|Resolução bem-sucedida de hCaptcha por token|
+|`onHCaptchaTokenError`|Erro ao resolver hCaptcha por token|
 
 ### ReCaptcha
-|**Event**|**Description**|
+|**Evento**|**Descrição**|
 | :-: | :-: |
-|`onReCaptchaClickStart`|Image click event when solving ReCaptcha by clicks|
-|`onReCaptchaClick`|Submit or next button click event when solving ReCaptcha by clicks|
-|`onReCaptchaClickIncorrect`|Incorrect ReCaptcha solving by clicks|
-|`onReCaptchaClickBackendError`|Error when solving ReCaptcha by clicks|
-|`onReCaptchaClickSuccess`|Successful solving ReCaptcha by clicks|
-|`onRecaptchaTokenStart`|Start solving ReCaptcha by token|
-|`onRecaptchaTokenSuccess`|Successful ReCaptcha solving by token|
-|`onRecaptchaTokenError`|Error when solving ReCaptcha by token|
+|`onReCaptchaClickStart`|Evento de clique na imagem ao resolver ReCaptcha por cliques|
+|`onReCaptchaClick`|Evento de clique no botão de enviar ou próximo ao resolver ReCaptcha por cliques|
+|`onReCaptchaClickIncorrect`|Erro na resolução de ReCaptcha por cliques|
+|`onReCaptchaClickBackendError`|Erro ao resolver ReCaptcha por cliques|
+|`onReCaptchaClickSuccess`|Resolução bem-sucedida de ReCaptcha por cliques|
+|`onRecaptchaTokenStart`|Início da resolução de ReCaptcha por token|
+|`onRecaptchaTokenSuccess`|Resolução bem-sucedida de ReCaptcha por token|
+|`onRecaptchaTokenError`|Erro ao resolver ReCaptcha por token|
 
 ### GeeTest
-|**Event**|**Description**|
+|**Evento**|**Descrição**|
 | :-: | :-: |
-|`onGeeTestTokenStart`|Start of the GeeTest solving by token|
-|`onGeeTestTokenSuccess`|Successful solution of GeeTest by token|
-|`onGeeTestTokenError`|Error when solving GeeTest by token|
+|`onGeeTestTokenStart`|Início da resolução de GeeTest por token|
+|`onGeeTestTokenSuccess`|Resolução bem-sucedida de GeeTest por token|
+|`onGeeTestTokenError`|Erro ao resolver GeeTest por token|
 
 ### Turnstile
-|**Event**|**Description**|
+|**Evento**|**Descrição**|
 | :-: | :-: |
-|`onTurnstileTokenStart`|Start of the Turnstile solving by token|
-|`onTurnstileTokenSuccess`|Successful solution of Turnstile by token|
-|`onTurnstileTokenError`|Error when solving Turnstile by token|
+|`onTurnstileTokenStart`|Início da resolução de Turnstile por token|
+|`onTurnstileTokenSuccess`|Resolução bem-sucedida de Turnstile por token|
+|`onTurnstileTokenError`|Erro ao resolver Turnstile por token|
 
-### Image captcha
-|**Event**|**Description**|
+### Captcha de Imagem
+|**Evento**|**Descrição**|
 | :-: | :-: |
-|`onImageTokenStart`|Start of the Image captcha solving by token|
-|`onImageTokenSuccess`|Successful solving Image captcha by token|
-|`onImageTokenError`|Error when solving Image captcha by token|
+|`onImageTokenStart`|Início da resolução de Captcha de Imagem por token|
+|`onImageTokenSuccess`|Resolução bem-sucedida de Captcha de Imagem por token|
+|`onImageTokenError`|Erro ao resolver Captcha de Imagem por token|

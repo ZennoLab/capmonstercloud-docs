@@ -11,132 +11,132 @@ import MethodDescription from '@theme/MethodDescription'
 
 
 # RecaptchaV2Task
-The object contains data for Google ReCaptcha2 solving task. To ensure the universality of the solution to this type of captcha, you need to use all the data used when automating the filling of the form on the target site, including proxies, browser user-agent and cookies. This will help to avoid any problems when Google changes the code of its captcha.
+Este objeto contém dados para a solução do captcha Google ReCaptcha2. Para garantir a universalidade da solução desse tipo de captcha, você precisa usar todos os dados utilizados na automação do preenchimento do formulário na página de destino, incluindo proxies, o user-agent do navegador e cookies. Isso ajuda a evitar problemas quando o Google altera o código de seu captcha.
 
-This type of captcha might be solved a bit longer than usual image captcha, but this issue is compensated by the fact that g-captcha-response value we send to you is valid for the next 60 seconds after we solves your ReCaptcha2.
+Esse tipo de captcha pode ser resolvido um pouco mais lentamente do que um captcha de imagem comum, mas esse problema é compensado pelo fato de que o valor `g-captcha-response` que enviamos para você é válido pelos próximos 60 segundos após resolvermos seu ReCaptcha2.
 
-:::warning **Attention!**
-If the proxy is authorized by IP, then be sure to add **116.203.55.208** to the white list.
+:::warning **Atenção!**
+Se o proxy for autorizado por IP, certifique-se de adicionar **116.203.55.208** à lista de permissões.
 :::
 
-## Request parameters
+## Parâmetros da solicitação
 
 <Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
-<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="bordered-panel">
-    <ParamItem title="type" required type="string" />
-    **RecaptchaV2TaskProxyless**
+<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (sem proxy)" default className="bordered-panel">
+<ParamItem title="type" required type="string" />
+**RecaptchaV2TaskProxyless**
 
-     ---
+---
 
-    <ParamItem title="websiteURL" required type="string" />
-    Address of a webpage with captcha.
+<ParamItem title="websiteURL" required type="string" />
+Endereço da página da web com captcha.
 
-     ---
+---
 
-    <ParamItem title="websiteKey" required type="string" />
-    Recaptcha website key.<br />`<div class="g-recaptcha" data-sitekey="THIS_ONE"></div>`
+<ParamItem title="websiteKey" required type="string" />
+Chave do site do Recaptcha.<br />`<div class="g-recaptcha" data-sitekey="THIS_ONE"></div>`
 
-     ---
+---
 
-    <ParamItem title="recaptchaDataSValue" type="string" />
-    Some custom implementations may contain additional "data-s" parameter in ReCaptcha2 div, which is in fact a one-time token and must be grabbed every time you want to solve a ReCaptcha2.<br />`<div class="g-recaptcha" data-sitekey="some sitekey" data-s="THIS_ONE"></div>`
+<ParamItem title="recaptchaDataSValue" type="string" />
+Algumas implementações personalizadas podem conter o parâmetro adicional "data-s" no div do ReCaptcha2, que na verdade é um token de uso único e deve ser coletado toda vez que você quiser resolver um ReCaptcha2.<br />`<div class="g-recaptcha" data-sitekey="sitekey" data-s="THIS_ONE"></div>`
 
-     ---
+---
 
-    <ParamItem title="userAgent" type="string" />
-    Browser's User-Agent which is used in emulation. It is required that you use a signature of a modern browser, otherwise Google will ask you to "update your browser".
+<ParamItem title="userAgent" type="string" />
+User-Agent do navegador usado na emulação. É necessário que você use uma assinatura de um navegador moderno, caso contrário, o Google pedirá para você "atualizar seu navegador".
 
-     ---
+---
 
-    <ParamItem title="cookies" type="string" />
-    <p>Additional cookies which we must use during interaction with target page or Google.</p><p>**Format**: cookiename1=cookievalue1; cookiename2=cookievalue2</p>
+<ParamItem title="cookies" type="string" />
+Cookies adicionais que devemos usar durante a interação com a página de destino ou com o Google.<br /><p>**Formato**: cookiename1=cookievalue1; cookiename2=cookievalue2</p>
 
-     ---
+---
 
-    <ParamItem title="isInvisible" type="bool" />
-    true if the captcha is invisible, i.e. has a hidden field for confirmation, no checkbox. If a bot is suspected, an additional check is called.
+<ParamItem title="isInvisible" type="bool" />
+true se o captcha for invisível, ou seja, tem um campo oculto para confirmação, sem caixa de seleção. Se um bot for suspeito, uma verificação adicional será chamada.
+</TabItem>
 
-  </TabItem>
-  <TabItem value="proxy" label="RecaptchaV2Task (using proxy)" className="bordered-panel">
-    <ParamItem title="type" required type="string" />
-    **RecaptchaV2TaskProxyless**
+<TabItem value="proxy" label="RecaptchaV2Task (com proxy)" className="bordered-panel">
+<ParamItem title="type" required type="string" />
+**RecaptchaV2TaskProxyless**
 
-     ---
+---
 
-    <ParamItem title="websiteURL" required type="string" />
-    Address of a webpage with captcha.
+<ParamItem title="websiteURL" required type="string" />
+Endereço da página da web com captcha.
 
-     ---
+---
 
-    <ParamItem title="websiteKey" required type="string" />
-    Recaptcha website key.<br />`<div class="g-recaptcha" data-sitekey="THIS_ONE"></div>`
+<ParamItem title="websiteKey" required type="string" />
+Chave do site do Recaptcha.<br />`<div class="g-recaptcha" data-sitekey="THIS_ONE"></div>`
 
-     ---
+---
 
-    <ParamItem title="recaptchaDataSValue" type="string" />
-    Some custom implementations may contain additional "data-s" parameter in ReCaptcha2 div, which is in fact a one-time token and must be grabbed every time you want to solve a ReCaptcha2.<br />`<div class="g-recaptcha" data-sitekey="some sitekey" data-s="THIS_ONE"></div>`
+<ParamItem title="recaptchaDataSValue" type="string" />
+Algumas implementações personalizadas podem conter o parâmetro adicional "data-s" no div do ReCaptcha2, que na verdade é um token de uso único e deve ser coletado toda vez que você quiser resolver um ReCaptcha2.<br />`<div class="g-recaptcha" data-sitekey="sitekey" data-s="THIS_ONE"></div>`
 
-     ---
+---
 
-    <ParamItem title="userAgent" type="string" />
-    Browser's User-Agent which is used in emulation. It is required that you use a signature of a modern browser, otherwise Google will ask you to "update your browser".
+<ParamItem title="userAgent" type="string" />
+User-Agent do navegador usado na emulação. É necessário que você use uma assinatura de um navegador moderno, caso contrário, o Google pedirá para você "atualizar seu navegador".
 
-     ---
+---
 
-    <ParamItem title="cookies" type="string" />
-    <p>Additional cookies which we must use during interaction with target page or Google.</p><p>**Format**: cookiename1=cookievalue1; cookiename2=cookievalue2</p>
+<ParamItem title="cookies" type="string" />
+Cookies adicionais que devemos usar durante a interação com a página de destino ou com o Google.<br /><p>**Formato**: cookiename1=cookievalue1; cookiename2=cookievalue2</p>
 
-     ---
+---
 
-    <ParamItem title="isInvisible" type="bool" />
-    true if the captcha is invisible, i.e. has a hidden field for confirmation, no checkbox. If a bot is suspected, an additional check is called.
+<ParamItem title="isInvisible" type="bool" />
+true se o captcha for invisível, ou seja, tem um campo oculto para confirmação, sem caixa de seleção. Se um bot for suspeito, uma verificação adicional será chamada.
 
-     ---
+---
 
-    <ParamItem title="proxyType" required type="string" />
-    **http** - regular http/https proxy;<br />**https** - try this option only if "http" doesn't work (required for some custom proxies);<br />**socks4** - socks4 proxy;<br />**socks5** - socks5 proxy.
+<ParamItem title="proxyType" required type="string" />
+**http** - proxy regular http/https;<br />**https** - use essa opção apenas se "http" não funcionar (necessário para alguns proxies personalizados);<br />**socks4** - proxy socks4;<br />**socks5** - proxy socks5.
 
-     ---
+---
 
-    <ParamItem title="proxyAddress" required type="string" />
-    <p>
-      IPv4/IPv6 proxy IP address. Not allowed:
-      - using of hostnames;
-      - using transparent proxies (where you can see the client's IP);
-      - using proxies on local machines.
-    </p>
+<ParamItem title="proxyAddress" required type="string" />
+<p>
+Endereço IP do proxy IPv4/IPv6. Não permitido:
+- uso de nomes de host;
+- uso de proxies transparentes (onde é possível ver o IP do cliente);
+- uso de proxies em máquinas locais.
+</p>
 
-     ---
+---
 
-    <ParamItem title="proxyPort" required type="integer" />
-    Proxy port.
+<ParamItem title="proxyPort" required type="integer" />
+Porta do proxy.
 
-     ---
+---
 
-    <ParamItem title="proxyLogin" type="string" />
-    Proxy-server login.
+<ParamItem title="proxyLogin" type="string" />
+Login do servidor proxy.
 
-     ---
+---
 
-    <ParamItem title="proxyPassword" type="string" />
-    Proxy-server password.
+<ParamItem title="proxyPassword" type="string" />
+Senha do servidor proxy.
 
-  </TabItem>
-  
+</TabItem>
+
 </Tabs>
 
 
-## Create task method
+## Método para criar tarefa
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
-    <MethodItem>
-      ```http
-      https://api.capmonster.cloud/createTask
-      ```
-    </MethodItem>
+<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (sem proxy)" default className="method-panel">
+<MethodItem>
+  ```http
+  https://api.capmonster.cloud/createTask
+  ```
+</MethodItem>
 <MethodDescription>
-**Request**
+**Solicitação**
 ```json
 {
   "clientKey":"API_KEY",
@@ -147,7 +147,7 @@ If the proxy is authorized by IP, then be sure to add **116.203.55.208** to the 
   }
 }
 ```
-**Response**
+**Resposta**
 ```json
 {
   "errorId":0,
@@ -156,15 +156,15 @@ If the proxy is authorized by IP, then be sure to add **116.203.55.208** to the 
 ```
 
 </MethodDescription>
-  </TabItem>
-  <TabItem value="proxy" label="RecaptchaV2Task (using proxy)" className="method-panel">
+</TabItem>
+<TabItem value="proxy" label="RecaptchaV2Task (com proxy)" className="method-panel">
 <MethodItem>
   ```http
   https://api.capmonster.cloud/createTask
   ```
 </MethodItem>
 <MethodDescription>
-**Request**
+**Solicitação**
 ```json
 {
   "clientKey":"API_KEY",
@@ -181,7 +181,7 @@ If the proxy is authorized by IP, then be sure to add **116.203.55.208** to the 
   }
 }
 ```
-**Response**
+**Resposta**
 ```json
 {
   "errorId":0,
@@ -189,28 +189,28 @@ If the proxy is authorized by IP, then be sure to add **116.203.55.208** to the 
 }
 ```
 </MethodDescription>
-  </TabItem>
-  
+</TabItem>
+
 </Tabs>
 
-## Get task result method
-Use the [getTaskResult](../api/methods/get-task-result.md) method to request answer for ReCaptcha2. You will get response within 10 - 80 secs period depending on service workload.
+## Método para obter o resultado da tarefa
+Use o método [getTaskResult](../api/methods/get-task-result.md) para solicitar a resposta para o ReCaptcha2. Você receberá uma resposta dentro de um período de 10 a 80 segundos, dependendo da carga do serviço.
 
-<TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
-    <MethodItem>
+<TabItem value="proxyless" label="GeeTestTaskProxyless (sem proxy)" default className="method-panel-full">
+<MethodItem>
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
-    </MethodItem>
-    <MethodDescription>
-**Request**
+</MethodItem>
+<MethodDescription>
+**Solicitação**
 ```json
 {
   "clientKey":"API_KEY",
   "taskId": 407533072
 }
 ```
-**Response**
+**Resposta**
 ```json
 {
   "errorId":0,
@@ -220,16 +220,16 @@ https://api.capmonster.cloud/getTaskResult
   }
 }
 ```
-  </MethodDescription>
-  </TabItem>
+</MethodDescription>
+</TabItem>
 
 <br />
 
-|**Property**|**Type**|**Description**|
+|**Propriedade**|**Tipo**|**Descrição**|
 | :- | :- | :- |
-|gRecaptchaResponse|String|Hash which should be inserted into Recaptcha2 submit form in `<textarea id="g-recaptcha-response" ..></textarea>` . It has a length of 500 to 2190 bytes.
+|gRecaptchaResponse|String|Hash que deve ser inserido no formulário de envio do Recaptcha2 em `<textarea id="g-recaptcha-response" ..></textarea>`. Possui um comprimento de 500 a 2190 bytes.
 
-## Use SDK Library
+## Usar biblioteca SDK
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">
@@ -262,6 +262,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   console.log(await cmcClient.Solve(recaptchaV2Request));
 });
 ```
-  </TabItem>
-  
+</TabItem>
+
 </Tabs>

@@ -10,11 +10,11 @@ import MethodItem from '@theme/MethodItem';
 import MethodDescription from '@theme/MethodDescription'
 
 # ComplexImageTask Recaptcha
-The object contains data about the task for solving ReCaptcha2 from Google.
+O objeto contém dados sobre a tarefa para resolver o ReCaptcha2 do Google.
 
 
-## Request parameters
-<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (without proxy)" default className="bordered-panel">
+## Parâmetros da solicitação
+<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (sem proxy)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **ComplexImageTask**
 
@@ -25,73 +25,74 @@ The object contains data about the task for solving ReCaptcha2 from Google.
 
     ---
 
-    <ParamItem title="imageUrls" required="required (if imagesBase64 is not filled)" type="array" />
-    Single image 4x4, [3x3](https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg) or a new 1x1 captcha part (in an array).
-    Example: [“[https://i.postimg.cc/yYjg75Kv/img1.jpg](https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg)”]\
+    <ParamItem title="imageUrls" required="required (se imagesBase64 não estiver preenchido)" type="array" />
+    Imagem única 4x4, [3x3](https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg) ou uma nova parte de captcha 1x1 (em um array).
+    Exemplo: [“[https://i.postimg.cc/yYjg75Kv/img1.jpg](https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg)”]\
 
     ---
 
-    <ParamItem title="imagesBase64" required="required (if imageUrls is not filled)" type="array" />
-    Single image 4x4, [3x3](https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg) or a new 1x1 captcha part in base64 format (in an array).
-    Example: [ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”]
+    <ParamItem title="imagesBase64" required="required (se imageUrls não estiver preenchido)" type="array" />
+    Imagem única 4x4, [3x3](https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg) ou uma nova parte de captcha 1x1 no formato base64 (em um array).
+    Exemplo: [ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”]
 
     ---
 
     <ParamItem title="metadata.Grid" required type="string" />
-    Image grid size.
-    Possible values: 4x4, 3x3, 1x1
+    Tamanho da grade de imagem.
+    Valores possíveis: 4x4, 3x3, 1x1
 
     ---
 
-    <ParamItem title="metadata.TaskDefinition" required="required (if metadata.Task is not filled)" type="string" />
-    <p>Technical value that defines the task type</p><p>**How to get TaskDefinition**</p><p>The data can be found in responses to `/recaptcha/{recaptchaApi}/reload` or `/recaptcha/{recaptchaApi}/userverify` requests, where recaptchaApi is "enterprise" or "api2" depending on the Recaptcha type. The response contains json, in which one can take a list of TaskDefinitions for loaded captchas.</p>
+    <ParamItem title="metadata.TaskDefinition" required="required (se metadata.Task não estiver preenchido)" type="string" />
+    <p>Valor técnico que define o tipo de tarefa</p><p>**Como obter TaskDefinition**</p><p>Os dados podem ser encontrados nas respostas das solicitações `/recaptcha/{recaptchaApi}/reload` ou `/recaptcha/{recaptchaApi}/userverify`, onde recaptchaApi é "enterprise" ou "api2" dependendo do tipo de Recaptcha. A resposta contém json, onde pode-se obter uma lista de TaskDefinitions para captchas carregados.</p>
 
     ---
 
-    <ParamItem title="metadata.Task" required="required (if metadata.TaskDefinition is not filled)" type="string" />
-    Possible values: `Click on traffic lights` and others <br />
-    Task name (<u>in English</u>).
+    <ParamItem title="metadata.Task" required="required (se metadata.TaskDefinition não estiver preenchido)" type="string" />
+    Valores possíveis: `Click on traffic lights` e outros <br />
+    Nome da tarefa (<u>em inglês</u>).
 
     ---
 
     <ParamItem title="userAgent" type="string" />
-    The browser User-Agent to use when loading images if links were passed in imageUrls. It is required to use a modern browser signature, otherwise Google will return an error asking for a browser update.
+    O User-Agent do navegador a ser utilizado ao carregar imagens, se os links foram passados em imageUrls. É necessário usar uma assinatura de navegador moderna, caso contrário o Google retornará um erro pedindo para atualizar o navegador.
 
     ---
 
     <ParamItem title="websiteURL" type="string" />
-    URL of the page where the captcha is solved.
+    URL da página onde o captcha está sendo resolvido.
   </TabItem>
 
-### Description of parameters
+### Descrição dos parâmetros
 
-**imageUrls**: links to images.
+**imageUrls**: links para imagens.
 
-**imagesBase64**: images in Base64 format.
+**imagesBase64**: imagens no formato Base64.
 
-**metadata.Grid**: additional metadata related to image grid sizes.
+**metadata.Grid**: metadados adicionais relacionados aos tamanhos da grade de imagens.
 
-**metadata.TaskDefinition**: task description identifier/type, e.g.: `/m/015qff` means "Click on traffic lights".
+**metadata.TaskDefinition**: identificador/tipo da descrição da tarefa, por exemplo: `/m/015qff` significa "Click on traffic lights".
 
 ![](./images/recaptcha-click/taskdefinition.png)
 
-**metadata.Task**: additional metadata related to the task.
+**metadata.Task**: metadados adicionais relacionados à tarefa.
 
-**userAgent**: information about the user agent. Current userAgent: userAgentPlaceholder
+**userAgent**: informações sobre o agente do usuário. Atual userAgent: userAgentPlaceholder
 
-**websiteURL**: address of the web page with the captcha.
+**websiteURL**: endereço da página da web com o captcha.
 
 
-## Create task method
+## Criar tarefa
 
-<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
+
+<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (sem proxy)" default className="method-panel">
 <MethodItem>
   ```http
   https://api.capmonster.cloud/createTask
   ```
 </MethodItem>
 <MethodDescription>
-**Request**
+**Solicitação**
 ```json
 {
   "clientKey":"API_KEY",
@@ -109,7 +110,7 @@ The object contains data about the task for solving ReCaptcha2 from Google.
   }
 }
 ```
-**Response**
+**Resposta**
 ```json
 {
   "errorId":0,
@@ -122,24 +123,24 @@ The object contains data about the task for solving ReCaptcha2 from Google.
 
 
 
-## Get task result method
-Use the [getTaskResult](../api/methods/get-task-result.md) method to get the captcha solution. Depending on the system load, you will receive a response after a time ranging from 300ms to 6s.
+## Obter resultado da tarefa
+Use o método [getTaskResult](../api/methods/get-task-result.md) para obter a solução do captcha. Dependendo da carga do sistema, você receberá uma resposta em um intervalo de tempo de 300ms a 6s.
 
-<TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
+<TabItem value="proxyless" label="GeeTestTaskProxyless (sem proxy)" default className="method-panel-full">
     <MethodItem>
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
     </MethodItem>
     <MethodDescription>
-**Request**
+**Solicitação**
 ```json
 {
   "clientKey":"API_KEY",
   "taskId": 407533072
 }
 ```
-**Response**
+**Resposta**
 ```json
 {
   "errorId":0,
@@ -154,19 +155,19 @@ https://api.capmonster.cloud/getTaskResult
 
 <br />
 
-|**Property**|**Type**|**Description**|
+|**Propriedade**|**Tipo**|**Descrição**|
 | :- | :- | :- |
-|answer|Array|List with boolean values, "true" means that you need to click on the image corresponding to this position.|
+|answer|Array|Lista com valores booleanos, "true" significa que você precisa clicar na imagem correspondente a essa posição.|
 
-## Pricing:
+## Preços:
 
-||**Name**|**Cost per 1000 images, $**|**Cost per 1000 new dynamic images, $**|
+||**Nome**|**Custo por 1000 imagens, $**|**Custo por 1000 novas imagens dinâmicas, $**|
 | :-: | :-: | :-: | :-: |
-|1|<p>reCAPTCHA 2 (3\*3)</p><p>![](./images/recaptcha-click/Aspose.Words.3eba36bc-cab6-486e-9e8f-1e38b225e806.001.png)</p>|0,2|0,04 |
-|2|<p>reCAPTCHA 2 (4\*4)</p><p>![](./images/recaptcha-click/Aspose.Words.3eba36bc-cab6-486e-9e8f-1e38b225e806.002.png)</p>|0,1|not applicable|
+|1|<p>reCAPTCHA 2 (3\*3)</p><p>![](./images/recaptcha-click/Aspose.Words.3eba36bc-cab6-486e-9e8f-1e38b225e806.001.png)</p><p></p>|0,2|0,04 |
+|2|<p>reCAPTCHA 2 (4\*4)</p><p>![](./images/recaptcha-click/Aspose.Words.3eba36bc-cab6-486e-9e8f-1e38b225e806.002.png)</p>|0,1|não aplicável|
 
 
-## Use SDK Library
+## Usar biblioteca SDK
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">

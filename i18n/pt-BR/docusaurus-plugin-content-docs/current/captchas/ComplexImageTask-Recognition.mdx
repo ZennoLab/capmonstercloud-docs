@@ -12,8 +12,8 @@ import MethodDescription from '@theme/MethodDescription'
 
 # ComplexImageTask Recognition
 
-## Request parameters
-<TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="bordered-panel">
+## Parâmetros de solicitação
+<TabItem value="proxyless" label="ComplexImageTask (sem proxy)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **ComplexImageTask**
 
@@ -25,30 +25,30 @@ import MethodDescription from '@theme/MethodDescription'
     ---
 
     <ParamItem title="imagesBase64" required type="array" />
-    Images array in base64 encoding.
-    Example: [ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”]
+    Array de imagens codificadas em base64.
+    Exemplo: [ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”]
 
     ---
 
     <ParamItem title="metadata.Task" required type="string" />
-    Possible values: `oocl_rotate_new` and others <br />
-    Task name (<u>in English</u>).
+    Valores possíveis: `oocl_rotate_new` e outros <br />
+    Nome da tarefa (<u>em inglês</u>).
 
   </TabItem>
 
-## Available task types
-### Create task `oocl_rotate_new`
+## Tipos de tarefas disponíveis
+### Criar tarefa `oocl_rotate_new`
 
-In the request we pass two images: background and circle.
+Na solicitação, passamos duas imagens: fundo e círculo.
 
-<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
+<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (sem proxy)" default className="method-panel">
 <MethodItem>
   ```http
   https://api.capmonster.cloud/createTask
   ```
 </MethodItem>
 <MethodDescription>
-**Request**
+**Solicitação**
 ```json
 {
     "clientKey": "API_KEY",
@@ -66,15 +66,15 @@ In the request we pass two images: background and circle.
 }
 ```
 
-Background example (*background_base64*):
+Exemplo de fundo (*background_base64*):
 
 ![](./images/ComplexImageTask-Recognition/ex1.png)
 
-Circle example (*circle_base64*):
+Exemplo de círculo (*circle_base64*):
 
 ![](./images/ComplexImageTask-Recognition/ex2.png)
 
-**Response**
+**Resposta**
 ```json
 {
   "errorId":0,
@@ -86,24 +86,24 @@ Circle example (*circle_base64*):
 </TabItem>
 
 
-### Get task result `oocl_rotate_new`
+### Obter resultado da tarefa `oocl_rotate_new`
 
-<TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
+<TabItem value="proxyless" label="GeeTestTaskProxyless (sem proxy)" default className="method-panel-full">
     <MethodItem>
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
     </MethodItem>
     <MethodDescription>
-**Request**
+**Solicitação**
 ```json
 {
   "clientKey":"API_KEY",
   "taskId": 407533072
 }
 ```
-**Response**
-Degrees by which the circle should be rotated clockwise.
+**Resposta**
+Graus pelos quais o círculo deve ser girado no sentido horário.
 ```json
 {
   "errorId":0,
@@ -122,17 +122,17 @@ Degrees by which the circle should be rotated clockwise.
   </TabItem>
 
 
-### Create task `oocl_rotate_double_new`
+### Criar tarefa `oocl_rotate_double_new`
 
-In the request we pass three images: background, ring, circle.
-<TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel">
+Na solicitação, passamos três imagens: fundo, anel, círculo.
+<TabItem value="proxyless" label="ComplexImageTask (sem proxy)" default className="method-panel">
 <MethodItem>
   ```http
   https://api.capmonster.cloud/createTask
   ```
 </MethodItem>
 <MethodDescription>
-**Request**
+**Solicitação**
 ```json
 { 
     "clientKey": "API_KEY",
@@ -151,19 +151,19 @@ In the request we pass three images: background, ring, circle.
 }
 ```
 
-Background (*background_base64*):
+Fundo (*background_base64*):
 
 ![](./images/ComplexImageTask-Recognition/ex3.png)
 
-Ring (*ring_base64*):
+Anel (*ring_base64*):
 
 ![](./images/ComplexImageTask-Recognition/ex4.png)
 
-Circle (*circle_base64*):
+Círculo (*circle_base64*):
 
 ![](./images/ComplexImageTask-Recognition/ex5.png)
 
-**Response**
+**Resposta**
 ```json
 {
   "errorId":0,
@@ -175,24 +175,24 @@ Circle (*circle_base64*):
 </TabItem>
 
 
-### Get task result `oocl_rotate_double_new`
+### Obter resultado da tarefa `oocl_rotate_double_new`
 
-<TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="method-panel-full">
+<TabItem value="proxyless" label="ComplexImageTask (sem proxy)" default className="method-panel-full">
     <MethodItem>
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
     </MethodItem>
     <MethodDescription>
-**Request**
+**Solicitação**
 ```json
 {
   "clientKey":"API_KEY",
   "taskId": 407533072
 }
 ```
-**Response**
-Degrees by which the ring should be turned counterclockwise and the circle clockwise.
+**Resposta**
+Graus pelos quais o anel deve ser girado no sentido anti-horário e o círculo no sentido horário.
 ```json
 {
   "errorId":0,
@@ -211,19 +211,19 @@ Degrees by which the ring should be turned counterclockwise and the circle clock
   </MethodDescription>
   </TabItem>
   
-### Create task `betpunch_3x3_rotate`
+### Criar tarefa `betpunch_3x3_rotate`
 
-In the request we pass nine images. The images must be passed in the following order:
-![](./images/ComplexImageTask-Recognition/betpunch_3x3_rotate_example.png)
+Na solicitação, passamos nove imagens. As imagens devem ser passadas na seguinte ordem:
+![](./images/ComplexImageTask-Recognition/ex6.png)
 
-<TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel">
+<TabItem value="proxyless" label="ComplexImageTask (sem proxy)" default className="method-panel">
 <MethodItem>
   ```http
   https://api.capmonster.cloud/createTask
   ```
 </MethodItem>
 <MethodDescription>
-**Request**
+**Solicitação**
 ```json
 { 
     "clientKey": "API_KEY",
@@ -248,7 +248,7 @@ In the request we pass nine images. The images must be passed in the following o
 }
 ```
 
-**Response**
+**Resposta**
 ```json
 {
   "errorId":0,
@@ -260,24 +260,24 @@ In the request we pass nine images. The images must be passed in the following o
 </TabItem>
 
 
-### Get task result `betpunch_3x3_rotate`
+### Obter resultado da tarefa `betpunch_3x3_rotate`
 
-<TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="method-panel-full">
+<TabItem value="proxyless" label="ComplexImageTask (sem proxy)" default className="method-panel-full">
     <MethodItem>
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
     </MethodItem>
     <MethodDescription>
-**Request**
+**Solicitação**
 ```json
 {
   "clientKey":"API_KEY",
   "taskId": 407533072
 }
 ```
-**Response**
-"answer":[X,X,X,X,X,X,X,X,X], where X is an integer value from 1 to 4 for each image. 4 - means that the image does not need to be rotated; 1-3 - the number of counterclockwise rotations of the image.
+**Resposta**
+"answer":[X,X,X,X,X,X,X,X,X], onde X é um valor inteiro de 1 a 4 para cada imagem. 4 - significa que a imagem não precisa ser girada; 1-3 - o número de rotações no sentido anti-horário da imagem.
 ```json
 {
 	"errorId":0,

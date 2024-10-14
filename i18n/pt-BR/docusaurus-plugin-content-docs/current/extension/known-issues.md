@@ -3,12 +3,12 @@ sidebar_position: 6
 ---
 
 
-# Known issues for specific sites
+# Problemas conhecidos para sites específicos
 
 
 <details>
         <summary>store.steampowered.com</summary>
 
-Our service can only solve captchas in English; on this site, the determination of the captcha language comes not from the system settings, but from the language selected on the site, so for a correct solution, be sure to select English.
+Nosso serviço só pode resolver captchas em inglês; neste site, a determinação do idioma do captcha não vem das configurações do sistema, mas do idioma selecionado no site, portanto, para uma solução correta, certifique-se de selecionar o inglês.
 
 </details>

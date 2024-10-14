@@ -1,47 +1,47 @@
-﻿# Reasons for blocking
-## ![](./images/block-reason/Aspose.Words.bbd9194a-7e5f-4818-92e0-dfa2931e5a81.001.png) **How to find out the reason for the ban?**
-In case of blocking, you’ll see a notification in your [personal account](https://capmonster.cloud/Dashboard).
-Ban history is available in the settings.
+﻿# Motivos para bloqueio
+## ![](./images/block-reason/Aspose.Words.bbd9194a-7e5f-4818-92e0-dfa2931e5a81.001.png) **Como descobrir o motivo do bloqueio?**
+Em caso de bloqueio, você verá uma notificação em sua [conta pessoal](https://capmonster.cloud/Dashboard).
+O histórico de bloqueios está disponível nas configurações.
 
 ![](./images/block-reason/ban-history.png) 
-## ![](./images/block-reason/Aspose.Words.bbd9194a-7e5f-4818-92e0-dfa2931e5a81.003.png) **The main reasons for getting a ban:**
+## ![](./images/block-reason/Aspose.Words.bbd9194a-7e5f-4818-92e0-dfa2931e5a81.003.png) **Os principais motivos para receber um bloqueio são:**
 
-- **KeyDoesntExist** (multiple requests without a key / with an invalid key)
-- **ZeroBalance** (multiple requests with zero balance)
+- **KeyDoesntExist** (múltiplas solicitações sem chave / com chave inválida)
+- **ZeroBalance** (múltiplas solicitações com saldo zero)
 - **WrongTaskId**
-  - when exceeding the limit of the 120 requests per task
-  - multiple requests to getTaskResult with wrong TaskId
-- **BadProxy** (multiple requests with a banned proxy)
+  - ao exceder o limite de 120 solicitações por tarefa
+  - múltiplas solicitações para `getTaskResult` com `TaskId` incorreto
+- **BadProxy** (múltiplas solicitações com proxy banido)
 
-Users receive a ban for repeated actions for a limited period of time.
-## ![](./images/block-reason/Aspose.Words.bbd9194a-7e5f-4818-92e0-dfa2931e5a81.004.png) **When will the ban be removed?**
+Os usuários recebem bloqueios por ações repetidas por um período limitado.
+## ![](./images/block-reason/Aspose.Words.bbd9194a-7e5f-4818-92e0-dfa2931e5a81.004.png) **Quando o bloqueio será removido?**
 
-The duration of the block is 10 minutes, provided that you do not continue to break the rules described above.
+A duração do bloqueio é de 10 minutos, desde que você não continue a violar as regras descritas acima.
 
 
 <details>
   <summary>
-    I am constantly banned. What should I do?
+    Estou sendo bloqueado constantemente. O que devo fazer?
   </summary>
 
-The reason is that your app/script sends multiple incorrect API requests. 
+O motivo é que seu aplicativo/script envia várias solicitações incorretas à API. 
 
-**I am a user**
+**Eu sou um usuário**
 
-If you are not the developer of the app/script that sends captchas, contact their support and explain that the captcha recognition service blocks you for multiple incorrect requests (read the explanation of the reasons for getting a ban).
+Se você não for o desenvolvedor do aplicativo/script que envia os captchas, entre em contato com o suporte deles e explique que o serviço de reconhecimento de captcha está bloqueando você por múltiplas solicitações incorretas (leia a explicação dos motivos para receber um bloqueio).
 
-**I am a developer**
+**Eu sou um desenvolvedor**
 
-If you are a developer, make changes yourself according to the rules and limits:
+Se você for desenvolvedor, faça alterações conforme as regras e limites:
 
-- Make sure your app or script is sending correct requests to the API. Make sure all parameters are correct, including keys, task IDs, and other required data.
+- Certifique-se de que seu aplicativo ou script está enviando solicitações corretas à API. Verifique se todos os parâmetros estão corretos, incluindo chaves, `TaskIds` e outros dados necessários.
 
-- Observe the limits on the number of requests per task and other restrictions set by the captcha recognition service. If your app sends too many requests, it can lead to blocking.
+- Respeite os limites no número de solicitações por tarefa e outras restrições impostas pelo serviço de reconhecimento de captcha. Se seu aplicativo enviar muitas solicitações, isso pode levar ao bloqueio.
 
-- Make sure you use reliable proxy servers to avoid blocking due to the use of banned proxies.
+- Certifique-se de usar servidores proxy confiáveis para evitar bloqueios devido ao uso de proxies banidos.
 
-To see examples of valid queries, see [Captcha Types](https://docs.capmonster.cloud/docs/captchas). 
+Para ver exemplos de consultas válidas, consulte [Tipos de Captcha](https://docs.capmonster.cloud/docs/captchas). 
 
-  </details>
+</details>
 
 

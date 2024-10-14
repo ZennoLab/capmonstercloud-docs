@@ -2,37 +2,37 @@
 sidebar_position: 2
 ---
 
-# Solving text captchas
-## **Description**
-We've added the ability to recognize text captchas in our browser extension.
+# Resolving captchas de texto
+## **Descrição**
+Adicionamos a capacidade de reconhecer captchas de texto em nossa extensão de navegador.
 
-![](./images/text-captcha-solve/captcha-solving.png) 
-## **How it works**
-### **Actions in the browser**
-1\. Right-click on the captcha and select "Mark image as captcha" from the pop-up menu.
+![](./images/text-captcha-solve/captcha-solving.png)
+## **Como funciona**
+### **Ações no navegador**
+1. Clique com o botão direito na captcha e selecione "Marcar imagem como captcha" no menu que aparecer.
 
 ![](./images/text-captcha-solve/mark-as-captcha.png)
 
-2\. Right-click on the field for entering the answer and select "Select an input for the captcha result" in the menu that opens..
+2. Clique com o botão direito no campo de entrada da resposta e selecione "Selecionar um campo para o resultado da captcha" no menu que abrir.
 
 ![](./images/text-captcha-solve/select-input.png)
 
-3\. The result is automatically written in the field for entering the answer.
+3. O resultado é automaticamente inserido no campo de resposta.
 
-![](./images/text-captcha-solve/Aspose.Words.f6d390ba-8e92-4611-b5a2-167a5168d8f1.004.png) 
-### **Recognition automation using software**
-To automate the process of recognizing text captchas in the browser (e.g., using *Developer Tool* or *Selenium*)  you need:
-1. Assign the `cm-image-to-text-source="id"` attribute to the element with the image:
+![](./images/text-captcha-solve/Aspose.Words.f6d390ba-8e92-4611-b5a2-167a5168d8f1.004.png)
+### **Automação de reconhecimento usando software**
+Para automatizar o processo de reconhecimento de captchas de texto no navegador (por exemplo, usando *Developer Tool* ou *Selenium*), você precisa:
+1. Atribuir o atributo `cm-image-to-text-source="id"` ao elemento com a imagem:
 
-![](./images/text-captcha-solve/exapmle1.png) 
+![](./images/text-captcha-solve/exapmle1.png)
 
-2. Assign the `cm-image-to-text-input-result="id"` attribute to the element with the input:
+2. Atribuir o atributo `cm-image-to-text-input-result="id"` ao elemento com o campo de entrada:
 
-![](./images/text-captcha-solve/exapmle2.png) 
+![](./images/text-captcha-solve/exapmle2.png)
 
-Where "id" is the captcha identifier (arbitrary value).
-:::info 
-At the same time captchas and inputs corresponding to each other should have the same id.
+Onde "id" é o identificador da captcha (valor arbitrário).
+:::info
+Ao mesmo tempo, captchas e campos de entrada correspondentes devem ter o mesmo id.
 
-You can solve several captchas on the page in parallel, the main thing is that the id within one set is unique and the id of the captcha and input match each other.
+Você pode resolver várias captchas na página em paralelo, o importante é que o id dentro de um conjunto seja único e o id da captcha e do campo de entrada sejam correspondentes.
 :::

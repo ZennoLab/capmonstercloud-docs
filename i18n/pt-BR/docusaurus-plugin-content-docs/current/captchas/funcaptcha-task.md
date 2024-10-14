@@ -5,73 +5,73 @@ draft: true
 ---
 
 # FunCaptchaTask
-This type solving task FunCaptcha. Your app submits website address, public key and proxy.
+Este tipo de tarefa resolve o FunCaptcha. Seu aplicativo envia o endereço do site, chave pública e proxy.
 
-The result of solving task is a token for the submit form.
+O resultado da solução da tarefa é um token para o formulário de envio.
 
-:::warning **Attention!**
-If the proxy is authorized by IP, then be sure to add **116.203.55.208** to the white list.
+:::warning **Atenção!**
+Se o proxy for autorizado por IP, certifique-se de adicionar **116.203.55.208** à lista de permissões.
 :::
 
-## **Object structure**
+## **Estrutura do Objeto**
 
-|**Parameter**|**Type**|**Required**|**Value**|
+|**Parâmetro**|**Tipo**|**Obrigatório**|**Valor**|
 | :- | :- | :- | :- |
-|type|String|yes|**FunCaptchaTaskProxyless** or **FunCaptchaTask** (When using a proxy).|
-|websiteURL|String|yes|Address of a webpage with FunCaptcha.|
-|funcaptchaApiJSSubdomain|String|no|A special subdomain of funcaptcha.com, from which the JS captcha widget should be loaded. It can be found in an element named `fc-token` - the value after the `surl`. It is required if you use a domain other than `client-api.arkoselabs.com`.|
-|websitePublicKey|String|yes|FunCaptcha website key. `<div id="funcaptcha" data-pkey="THAT_ONE"></div>`|
-|data|String|no|Additional parameter that may be required by FunCaptcha implementation.<br/> Use this property to send "blob" value as a stringified array. See example how it may look like: `{"blob":"HERE_COMES_THE_blob_VALUE"}`*|
-|proxyType|String|yes (if using **FunCaptchaTask**)| Type of the proxy<br/> **http** - usual http/https proxy;<br/>**https** - try this only if "http" doesn't work (required by some custom proxy servers);<br />**socks4** - socks4 proxy;<br />**socks5** - socks5 proxy.|
-|proxyAddress|String|yes (If using **FunCaptchaTask**)|<p>Proxy IP address IPv4/IPv6. Not allowed to use:</p><p>- host names instead of IPs</p><p>- transparent proxies (where client IP is visible)</p><p>- proxies from local networks (192.., 10.., 127...).</p>|
-|proxyPort|Integer|yes (If using **FunCaptchaTask**)|Proxy port.|
-|proxyLogin|String|no|Proxy login.|
-|proxyPassword|String|no|Proxy password.|
-|userAgent|String|yes|Browser's User-Agent which is used in emulation. |
-|cookies|String|no|<p>Additional cookies which we must use during interaction with target page.</p><p>**Format**: cookiename1=cookievalue1; cookiename2=cookievalue2</p>|
+|type|String|sim|**FunCaptchaTaskProxyless** ou **FunCaptchaTask** (ao usar proxy).|
+|websiteURL|String|sim|Endereço da página com FunCaptcha.|
+|funcaptchaApiJSSubdomain|String|não|Um subdomínio especial do funcaptcha.com, de onde o widget JS deve ser carregado. Pode ser encontrado em um elemento chamado `fc-token` - o valor após o `surl`. É necessário se você usar um domínio diferente de `client-api.arkoselabs.com`.|
+|websitePublicKey|String|sim|Chave do FunCaptcha.<br/> `<div id="funcaptcha" data-pkey="AQUELA_CHAVE"></div>`|
+|data|String|não|Parâmetro adicional que pode ser exigido pela implementação do FunCaptcha.<br/> Use esta propriedade para enviar o valor "blob" como uma matriz em formato string. Veja o exemplo de como pode ser: `{"blob":"AQUI_VAI_O_VALOR_DO_blob"}`*|
+|proxyType|String|sim (se estiver usando **FunCaptchaTask**)|Tipo do proxy<br/>**http** - proxy http/https usual;<br/>**https** - use isso apenas se "http" não funcionar (requerido por alguns servidores proxy personalizados);<br />**socks4** - proxy socks4;<br />**socks5** - proxy socks5.|
+|proxyAddress|String|sim (se estiver usando **FunCaptchaTask**)|<p>Endereço IP do proxy IPv4/IPv6. Não é permitido usar:</p><p>- nomes de host em vez de IPs</p><p>- proxies transparentes (onde o IP do cliente é visível)</p><p>- proxies de redes locais (192.., 10.., 127...).</p>|
+|proxyPort|Integer|sim (se estiver usando **FunCaptchaTask**)|Porta do proxy.|
+|proxyLogin|String|não|Login do proxy.|
+|proxyPassword|String|não|Senha do proxy.|
+|userAgent|String|sim|User-Agent do navegador usado na emulação.|
+|cookies|String|não|<p>Cookies adicionais que devem ser usados durante a interação com a página de destino.</p><p>**Formato**: cookiename1=cookievalue1; cookiename2=cookievalue2</p>|
 
-## **Request example**
+## **Exemplo de Requisição**
 
-:::info Method
+:::info Método
 ```http
 https://api.capmonster.cloud/createTask
 ```
 :::
 
-### FunCaptchaTask (With proxy)
+### FunCaptchaTask (Com proxy)
 ```json
 {
   "clientKey":"API_KEY",
   "task": {
     "type":"FunCaptchaTask",
-    "websiteURL":"http://mywebsite.com/",
-    "funcaptchaApiJSSubdomain":"mywebsite-api.funcaptcha.com",
+    "websiteURL":"http://meusite.com/",
+    "funcaptchaApiJSSubdomain":"meusite-api.funcaptcha.com",
     "data": "{\"blob\":\"dyXvXANMbHj1iDyz.Qj97JtSqR2n%2BuoY1V%2FbdgbrG7p%2FmKiqdU9AwJ6MifEt0np4vfYn6TTJDJEfZDlcz9Q1XMn9przeOV%2FCr2%2FIpi%2FC1s%3D\"}",
     "websitePublicKey":"69A21A01-CC7B-B9C6-0F9A-E7FA06677FFC",
     "proxyType":"http",
     "proxyAddress":"8.8.8.8",
     "proxyPort":8080,
-    "proxyLogin":"proxyLoginHere",
-    "proxyPassword":"proxyPasswordHere",
+    "proxyLogin":"proxyLoginAqui",
+    "proxyPassword":"proxySenhaAqui",
     "userAgent":"userAgentPlaceholder"
   }
 }
 ```
-### FunCaptchaTaskProxyless (without proxy)
+### FunCaptchaTaskProxyless (sem proxy)
 ```json
 {
   "clientKey":"API_KEY",
   "task": {
     "type":"FunCaptchaTaskProxyless",
-    "websiteURL":"http://mywebsite.com/",
-    "funcaptchaApiJSSubdomain":"mywebsite-api.funcaptcha.com",
+    "websiteURL":"http://meusite.com/",
+    "funcaptchaApiJSSubdomain":"meusite-api.funcaptcha.com",
     "data": "{\"blob\":\"dyXvXANMbHj1iDyz.Qj97JtSqR2n%2BuoY1V%2FbdgbrG7p%2FmKiqdU9AwJ6MifEt0np4vfYn6TTJDJEfZDlcz9Q1XMn9przeOV%2FCr2%2FIpi%2FC1s%3D\"}",
     "websitePublicKey":"69A21A01-CC7B-B9C6-0F9A-E7FA06677FFC"
   }
 }
 ```
 
-**Response example**
+**Exemplo de Resposta**
 
 ```json
 {
@@ -81,21 +81,21 @@ https://api.capmonster.cloud/createTask
 }
 ```
 
-## **Getting result**
+## **Obtendo o resultado**
 
-:::info Method
+:::info Método
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
 :::
 
-Use the [getTaskResult](../api/methods/get-task-result.md) method to request answer for FunCaptcha. You will get response within 10 - 30 secs period depending on service workload.
+Use o método [getTaskResult](../api/methods/get-task-result.md) para solicitar a resposta do FunCaptcha. Você receberá a resposta dentro de um período de 10 - 30 segundos, dependendo da carga de trabalho do serviço.
 
-|**Property**|**Type**|**Description**|
+|**Propriedade**|**Tipo**|**Descrição**|
 | :- | :- | :- |
-|token|String|FunCaptcha token that needs to be substituted into the form.|
+|token|String|Token FunCaptcha que precisa ser inserido no formulário.|
 
-**Example:**
+**Exemplo:**
 ```json
 {
   "errorId":0,
@@ -106,137 +106,137 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to request ans
 }
 ```
 
-## Supported task types
+## Tipos de tarefas suportadas
 
-|**Type**|**Description**|
-| :- | :- |
-|![](Funcaptcha-task-types/matching-reflection.png)|Pick the image with the matching reflection|
-|![](Funcaptcha-task-types/different-object-silhouette.png)|Pick the shadow with a different object silhouette|
-|![](Funcaptcha-task-types/two-identical-objects.gif)|Pick one square that shows two identical objects|
-|![](Funcaptcha-task-types/dice-same-icon.gif)|Pick the dice pair with the same icon facing up|
-|![](Funcaptcha-task-types/dice-to-4.jpg)|Pick the dice pair whose top sides add up to 4|
-|![](Funcaptcha-task-types/dice-5.jpg)|Pick the dice pair whose top sides add up to 5|
-|![](Funcaptcha-task-types/dice-6.jpg)|Pick the dice pair whose top sides add up to 6|
-|![](Funcaptcha-task-types/dice-7.jpg)|Pick the dice pair whose top sides add up to 7|
-|![](Funcaptcha-task-types/dice-8.jpg)|Pick the dice pair whose top sides add up to 8|
-|![](Funcaptcha-task-types/dice-10.jpg)|Pick the dice pair whose top sides add up to 10|
-|![](Funcaptcha-task-types/dice-14.jpg)|Pick the dice pair whose top sides add up to 14|
-|![](Funcaptcha-task-types/darts.jpg)|Pick the image where the darts add up to 8/10/12/14|
-|![](Funcaptcha-task-types/animals-directions.jpg)|Pick the image where all animals are walking in the same direction as the arrow|
-|![](Funcaptcha-task-types/shadows-icons-top.jpg)|Pick the shadow that matches the icons at the top of the image|
-|![](Funcaptcha-task-types/matching-cards.jpg)|Pick the matching cards|
-|![](Funcaptcha-task-types/mouse-cheese.jpg)|Pick the mouse that can reach all the cheese in the maze|
-|![](Funcaptcha-task-types/animal-wrong-head.jpg)|Select the animal with the wrong head|
-|![](Funcaptcha-task-types/penguin.jpg)|Pick the penguin|
-|![](Funcaptcha-task-types/rotate-animal.jpg)|Use the arrows to rotate the animal to face in the direction of the hand|
-|![](Funcaptcha-task-types/image-correct.gif)|Pick the image that is the correct way up|
-|![](Funcaptcha-task-types/spiral-galaxy.gif)|Pick the spiral galaxy|
-|![](Funcaptcha-task-types/one-rope.jpg)|Pick the image with only one rope|
-|![](Funcaptcha-task-types/split-in-half.png)|Pick the cube with icons split in half|
-|![](Funcaptcha-task-types/puzzle-wrong-pieces.png)|Pick the puzzle with the wrong pieces|
-|![](Funcaptcha-task-types/amount-animals.jpg)|Pick the image where the number matches the amount of animals|
-|![](Funcaptcha-task-types/mouse-cheese-2.jpg)|Pick the mouse that can't reach the cheese|
-|![](Funcaptcha-task-types/total-fingers-3.jpg)|Select the image where the total fingers add up to 3|
-|![](Funcaptcha-task-types/wrong-shadow.jpg)|Pick the wrong shadow|
-|![](Funcaptcha-task-types/square-three-objects.jpg)|Pick one square that shows three of the same object|
-|![](Funcaptcha-task-types/move-person-cross.png)|Use the arrows to move the person to the spot indicated by the cross|
-|![](Funcaptcha-task-types/move-person-circle.jpg)|Use the arrows to move the person to the icon indicated by the colored circle|
-|![](Funcaptcha-task-types/rotate-animal-2.png)|Use the arrows to rotate the animal with the same icon to face where the hand is pointing|
-|![](Funcaptcha-task-types/number-objects.png)|Use the arrows to change the number of objects until it matches the left image|
-|![](Funcaptcha-task-types/dice-matches.png)|Change the dice until the count matches the image on the left|
-|![](Funcaptcha-task-types/move-train.png)|Use the arrows to move the train to the coordinates indicated in the left image|
-|![](Funcaptcha-task-types/number-rocks.png)|Match the number of rocks with the number on the left|
-|![](Funcaptcha-task-types/move-person-indicated-seat.png)|Using the arrows move the person to the indicated seat|
-|![](Funcaptcha-task-types/koala.jpg)|Pick the koala|
-|![](Funcaptcha-task-types/ladybug.gif)|Pick the ladybug|
-|![](Funcaptcha-task-types/pig.jpg)|Pick the pig|
-|![](Funcaptcha-task-types/zebra.jpg)|Pick the zebra|
-|![](Funcaptcha-task-types/shark.jpg)|Pick the shark|
-|![](Funcaptcha-task-types/dinosaur.jpg)|Pick the dinosaur|
-|![](Funcaptcha-task-types/duck.jpg)|Pick the duck|
-|![](Funcaptcha-task-types/chicken.jpg)|Pick the chicken|
-|![](Funcaptcha-task-types/rhino.jpg)|Pick the rhino|
-|![](Funcaptcha-task-types/dolphin.jpg)|Pick the dolphin|
-|![](Funcaptcha-task-types/grapes.jpg)|Pick the grapes|
-|![](Funcaptcha-task-types/goat.jpg)|Pick the goat|
-|![](Funcaptcha-task-types/elephant.jpg)|Pick the elephant|
-|![](Funcaptcha-task-types/seal.jpg)|Pick the seal|
-|![](Funcaptcha-task-types/bear.jpg)|Pick the bear|
-|![](Funcaptcha-task-types/mouse.jpg)|Pick the mouse|
-|![](Funcaptcha-task-types/butterfly.jpg)|Pick the butterfly|
-|![](Funcaptcha-task-types/monkey.jpg)|Pick the monkey|
-|![](Funcaptcha-task-types/bread.jpg)|Pick the bread|
-|![](Funcaptcha-task-types/lobster.jpg)|Pick the lobster|
-|![](Funcaptcha-task-types/kangaroo.jpg)|Pick the kangaroo|
-|![](Funcaptcha-task-types/deer.jpg)|Pick the deer|
-|![](Funcaptcha-task-types/apple.jpg)|Pick the apple|
-|![](Funcaptcha-task-types/ant.jpg)|Pick the ant|
-|![](Funcaptcha-task-types/snake.jpg)|Pick the snake|
-|![](Funcaptcha-task-types/icecream.jpg)|Pick the ice cream|
-|![](Funcaptcha-task-types/owl.gif)|Pick the owl|
-|![](Funcaptcha-task-types/pants.gif)|Pick the pants|
-|![](Funcaptcha-task-types/cactus.jpg)|Pick the cactus|
-|![](Funcaptcha-task-types/calculator.jpg)|Pick the calculator|
-|![](Funcaptcha-task-types/shoe.jpg)|Pick the shoe|
-|![](Funcaptcha-task-types/scissors.jpg)|Pick the scissors|
-|![](Funcaptcha-task-types/lion.gif)|Pick the lion|
-|![](Funcaptcha-task-types/crab.jpg)|Pick the crab|
-|![](Funcaptcha-task-types/donut.jpg)|Pick the donut|
-|![](Funcaptcha-task-types/dog.jpg)|Pick the dog|
-|![](Funcaptcha-task-types/bee.jpg)|Pick the bee|
-|![](Funcaptcha-task-types/banana.jpg)|Pick the banana|
-|![](Funcaptcha-task-types/parrot.gif)|Pick the parrot|
-|![](Funcaptcha-task-types/octopus.jpg)|Pick the octopus|
-|![](Funcaptcha-task-types/pencil.gif)|Pick the pencil|
-|![](Funcaptcha-task-types/lamp.gif)|Pick the lamp|
-|![](Funcaptcha-task-types/lock.gif)|Pick the lock|
-|![](Funcaptcha-task-types/turtle.gif)|Pick the turtle|
-|![](Funcaptcha-task-types/camel.gif)|Pick the camel|
-|![](Funcaptcha-task-types/horse.jpg)|Pick the horse|
-|![](Funcaptcha-task-types/pizza.jpg)|Pick the pizza|
-|![](Funcaptcha-task-types/bat.jpg)|Pick the bat|
-|![](Funcaptcha-task-types/watermelon.jpg)|Pick the watermelon|
-|![](Funcaptcha-task-types/controller.gif)|Pick the controller|
-|![](Funcaptcha-task-types/rabbit.jpg)|Pick the rabbit|
-|![](Funcaptcha-task-types/pineapple.jpg)|Pick the pineapple|
-|![](Funcaptcha-task-types/snail.jpg)|Pick the snail|
-|![](Funcaptcha-task-types/glasses.jpg)|Pick the glasses|
-|![](Funcaptcha-task-types/key.gif)|Pick the key|
-|![](Funcaptcha-task-types/hotdog.gif)|Pick the hotdog|
-|![](Funcaptcha-task-types/helmet.gif)|Pick the helmet|
-|![](Funcaptcha-task-types/sock.gif)|Pick the sock|
-|![](Funcaptcha-task-types/starfish.gif)|Pick the starfish|
-|![](Funcaptcha-task-types/frog.gif)|Pick the frog|
-|![](Funcaptcha-task-types/printer.jpg)|Pick the printer|
-|![](Funcaptcha-task-types/umbrella.gif)|Pick the umbrella|
-|![](Funcaptcha-task-types/giraffe.jpg)|Pick the giraffe|
-|![](Funcaptcha-task-types/spaceship.gif)|Pick the spaceship|
-|![](Funcaptcha-task-types/boat.gif)|Pick the boat|
-|![](Funcaptcha-task-types/wrong-shadow-2.jpg)|Pick the wrong shadow|
-|![](Funcaptcha-task-types/helicopter.gif)|Pick the helicopter|
-|![](Funcaptcha-task-types/refrigerator.jpg)|Pick the refrigerator|
-|![](Funcaptcha-task-types/couch.jpg)|Pick the couch|
-|![](Funcaptcha-task-types/money.jpg)|Pick the money|
-|![](Funcaptcha-task-types/mushroom.jpg)|Pick the mushroom|
-|![](Funcaptcha-task-types/fence.jpg)|Pick the fence|
-|![](Funcaptcha-task-types/car.jpg)|Pick the car|
-|![](Funcaptcha-task-types/wristwatch.jpg)|Pick the wristwatch|
-|![](Funcaptcha-task-types/alien.jpg)|Pick the alien|
-|![](Funcaptcha-task-types/fan.jpg)|Pick the fan|
-|![](Funcaptcha-task-types/crown.jpg)|Pick the crown|
-|![](Funcaptcha-task-types/burger.jpg)|Pick the burger|
-|![](Funcaptcha-task-types/train.jpg)|Pick the train|
-|![](Funcaptcha-task-types/trophy.jpg)|Pick the trophy|
-|![](Funcaptcha-task-types/aquarium.jpg)|Pick the aquarium|
-|![](Funcaptcha-task-types/anchor.jpg)|Pick the anchor|
-|![](Funcaptcha-task-types/toaster.jpg)|Pick the toaster|
-|![](Funcaptcha-task-types/stapler.jpg)|Pick the stapler|
-|![](Funcaptcha-task-types/bicycle.jpg)|Pick the bicycle|
-|![](Funcaptcha-task-types/guitar.jpg)|Pick the guitar|
-|![](Funcaptcha-task-types/fire.jpg)|Pick the fire|
-|![](Funcaptcha-task-types/flower.jpg)|Pick the flower|
-|![](Funcaptcha-task-types/snowman.jpg)|Pick the snowman|
-|![](Funcaptcha-task-types/ball.jpg)|Pick the ball|
-|![](Funcaptcha-task-types/ring.jpg)|Pick the ring|
-|![](Funcaptcha-task-types/camera.jpg)|Pick the camera|
-|![](Funcaptcha-task-types/rotate-image.png)|Type of captcha, where you need to rotate the image|
+|**Tipo**|**Descrição**|  
+| :- | :- |  
+|![](Funcaptcha-task-types/matching-reflection.png)|Escolha a imagem com o reflexo correspondente|  
+|![](Funcaptcha-task-types/different-object-silhouette.png)|Escolha a sombra com uma silhueta de objeto diferente|  
+|![](Funcaptcha-task-types/two-identical-objects.gif)|Escolha um quadrado que mostra dois objetos idênticos|  
+|![](Funcaptcha-task-types/dice-same-icon.gif)|Escolha o par de dados com o mesmo ícone voltado para cima|  
+|![](Funcaptcha-task-types/dice-to-4.jpg)|Escolha o par de dados cujas faces superiores somam 4|  
+|![](Funcaptcha-task-types/dice-5.jpg)|Escolha o par de dados cujas faces superiores somam 5|  
+|![](Funcaptcha-task-types/dice-6.jpg)|Escolha o par de dados cujas faces superiores somam 6|  
+|![](Funcaptcha-task-types/dice-7.jpg)|Escolha o par de dados cujas faces superiores somam 7|  
+|![](Funcaptcha-task-types/dice-8.jpg)|Escolha o par de dados cujas faces superiores somam 8|  
+|![](Funcaptcha-task-types/dice-10.jpg)|Escolha o par de dados cujas faces superiores somam 10|  
+|![](Funcaptcha-task-types/dice-14.jpg)|Escolha o par de dados cujas faces superiores somam 14|  
+|![](Funcaptcha-task-types/darts.jpg)|Escolha a imagem onde os dardos somam 8/10/12/14|  
+|![](Funcaptcha-task-types/animals-directions.jpg)|Escolha a imagem onde todos os animais estão caminhando na mesma direção da seta|  
+|![](Funcaptcha-task-types/shadows-icons-top.jpg)|Escolha a sombra que corresponde aos ícones no topo da imagem|  
+|![](Funcaptcha-task-types/matching-cards.jpg)|Escolha as cartas correspondentes|  
+|![](Funcaptcha-task-types/mouse-cheese.jpg)|Escolha o rato que pode alcançar todos os queijos no labirinto|  
+|![](Funcaptcha-task-types/animal-wrong-head.jpg)|Selecione o animal com a cabeça errada|  
+|![](Funcaptcha-task-types/penguin.jpg)|Escolha o pinguim|  
+|![](Funcaptcha-task-types/rotate-animal.jpg)|Use as setas para girar o animal para a direção da mão|  
+|![](Funcaptcha-task-types/image-correct.gif)|Escolha a imagem que está na posição correta|  
+|![](Funcaptcha-task-types/spiral-galaxy.gif)|Escolha a galáxia espiral|  
+|![](Funcaptcha-task-types/one-rope.jpg)|Escolha a imagem com apenas uma corda|  
+|![](Funcaptcha-task-types/split-in-half.png)|Escolha o cubo com ícones divididos ao meio|  
+|![](Funcaptcha-task-types/puzzle-wrong-pieces.png)|Escolha o quebra-cabeça com as peças erradas|  
+|![](Funcaptcha-task-types/amount-animals.jpg)|Escolha a imagem onde o número corresponde à quantidade de animais|  
+|![](Funcaptcha-task-types/mouse-cheese-2.jpg)|Escolha o rato que não consegue alcançar o queijo|  
+|![](Funcaptcha-task-types/total-fingers-3.jpg)|Escolha a imagem onde o total de dedos somam 3|  
+|![](Funcaptcha-task-types/wrong-shadow.jpg)|Escolha a sombra errada|  
+|![](Funcaptcha-task-types/square-three-objects.jpg)|Escolha um quadrado que mostra três objetos idênticos|  
+|![](Funcaptcha-task-types/move-person-cross.png)|Use as setas para mover a pessoa até o local indicado pela cruz|  
+|![](Funcaptcha-task-types/move-person-circle.jpg)|Use as setas para mover a pessoa até o ícone indicado pelo círculo colorido|  
+|![](Funcaptcha-task-types/rotate-animal-2.png)|Use as setas para girar o animal com o mesmo ícone para que fique na direção da mão|  
+|![](Funcaptcha-task-types/number-objects.png)|Use as setas para ajustar o número de objetos até corresponder à imagem à esquerda|  
+|![](Funcaptcha-task-types/dice-matches.png)|Altere os dados até que o número corresponda à imagem à esquerda|  
+|![](Funcaptcha-task-types/move-train.png)|Use as setas para mover o trem até as coordenadas indicadas na imagem à esquerda|  
+|![](Funcaptcha-task-types/number-rocks.png)|Ajuste o número de pedras para corresponder ao número à esquerda|  
+|![](Funcaptcha-task-types/move-person-indicated-seat.png)|Use as setas para mover a pessoa até o assento indicado|  
+|![](Funcaptcha-task-types/koala.jpg)|Escolha o coala|  
+|![](Funcaptcha-task-types/ladybug.gif)|Escolha a joaninha|  
+|![](Funcaptcha-task-types/pig.jpg)|Escolha o porco|  
+|![](Funcaptcha-task-types/zebra.jpg)|Escolha a zebra|  
+|![](Funcaptcha-task-types/shark.jpg)|Escolha o tubarão|  
+|![](Funcaptcha-task-types/dinosaur.jpg)|Escolha o dinossauro|  
+|![](Funcaptcha-task-types/duck.jpg)|Escolha o pato|  
+|![](Funcaptcha-task-types/chicken.jpg)|Escolha a galinha|  
+|![](Funcaptcha-task-types/rhino.jpg)|Escolha o rinoceronte|  
+|![](Funcaptcha-task-types/dolphin.jpg)|Escolha o golfinho|  
+|![](Funcaptcha-task-types/grapes.jpg)|Escolha as uvas|  
+|![](Funcaptcha-task-types/goat.jpg)|Escolha a cabra|  
+|![](Funcaptcha-task-types/elephant.jpg)|Escolha o elefante|  
+|![](Funcaptcha-task-types/seal.jpg)|Escolha a foca|  
+|![](Funcaptcha-task-types/bear.jpg)|Escolha o urso|  
+|![](Funcaptcha-task-types/mouse.jpg)|Escolha o rato|  
+|![](Funcaptcha-task-types/butterfly.jpg)|Escolha a borboleta|  
+|![](Funcaptcha-task-types/monkey.jpg)|Escolha o macaco|  
+|![](Funcaptcha-task-types/bread.jpg)|Escolha o pão|  
+|![](Funcaptcha-task-types/lobster.jpg)|Escolha a lagosta|  
+|![](Funcaptcha-task-types/kangaroo.jpg)|Escolha o canguru|  
+|![](Funcaptcha-task-types/deer.jpg)|Escolha o cervo|  
+|![](Funcaptcha-task-types/apple.jpg)|Escolha a maçã|  
+|![](Funcaptcha-task-types/ant.jpg)|Escolha a formiga|  
+|![](Funcaptcha-task-types/snake.jpg)|Escolha a cobra|  
+|![](Funcaptcha-task-types/icecream.jpg)|Escolha o sorvete|  
+|![](Funcaptcha-task-types/owl.gif)|Escolha a coruja|  
+|![](Funcaptcha-task-types/pants.gif)|Escolha as calças|  
+|![](Funcaptcha-task-types/cactus.jpg)|Escolha o cacto|  
+|![](Funcaptcha-task-types/calculator.jpg)|Escolha a calculadora|  
+|![](Funcaptcha-task-types/shoe.jpg)|Escolha o sapato|  
+|![](Funcaptcha-task-types/scissors.jpg)|Escolha a tesoura|  
+|![](Funcaptcha-task-types/lion.gif)|Escolha o leão|  
+|![](Funcaptcha-task-types/crab.jpg)|Escolha o caranguejo|  
+|![](Funcaptcha-task-types/donut.jpg)|Escolha o donut|  
+|![](Funcaptcha-task-types/dog.jpg)|Escolha o cachorro|  
+|![](Funcaptcha-task-types/bee.jpg)|Escolha a abelha|  
+|![](Funcaptcha-task-types/banana.jpg)|Escolha a banana|  
+|![](Funcaptcha-task-types/parrot.gif)|Escolha o papagaio|  
+|![](Funcaptcha-task-types/octopus.jpg)|Escolha o polvo|  
+|![](Funcaptcha-task-types/pencil.gif)|Escolha o lápis|  
+|![](Funcaptcha-task-types/lamp.gif)|Escolha a lâmpada|  
+|![](Funcaptcha-task-types/lock.gif)|Escolha o cadeado|  
+|![](Funcaptcha-task-types/turtle.gif)|Escolha a tartaruga|  
+|![](Funcaptcha-task-types/camel.gif)|Escolha o camelo|  
+|![](Funcaptcha-task-types/horse.jpg)|Escolha o cavalo|  
+|![](Funcaptcha-task-types/pizza.jpg)|Escolha a pizza|  
+|![](Funcaptcha-task-types/bat.jpg)|Escolha o morcego|  
+|![](Funcaptcha-task-types/watermelon.jpg)|Escolha a melancia|  
+|![](Funcaptcha-task-types/controller.gif)|Escolha o controle|  
+|![](Funcaptcha-task-types/rabbit.jpg)|Escolha o coelho|  
+|![](Funcaptcha-task-types/pineapple.jpg)|Escolha o abacaxi|  
+|![](Funcaptcha-task-types/snail.jpg)|Escolha o caracol|  
+|![](Funcaptcha-task-types/glasses.jpg)|Escolha os óculos|  
+|![](Funcaptcha-task-types/key.gif)|Escolha a chave|  
+|![](Funcaptcha-task-types/hotdog.gif)|Escolha o cachorro-quente|  
+|![](Funcaptcha-task-types/helmet.gif)|Escolha o capacete|  
+|![](Funcaptcha-task-types/sock.gif)|Escolha a meia|  
+|![](Funcaptcha-task-types/starfish.gif)|Escolha a estrela-do-mar|  
+|![](Funcaptcha-task-types/frog.gif)|Escolha o sapo|  
+|![](Funcaptcha-task-types/printer.jpg)|Escolha a impressora|  
+|![](Funcaptcha-task-types/umbrella.gif)|Escolha o guarda-chuva|  
+|![](Funcaptcha-task-types/giraffe.jpg)|Escolha a girafa|  
+|![](Funcaptcha-task-types/spaceship.gif)|Escolha a nave espacial|  
+|![](Funcaptcha-task-types/boat.gif)|Escolha o barco|  
+|![](Funcaptcha-task-types/wrong-shadow-2.jpg)|Escolha a sombra errada|  
+|![](Funcaptcha-task-types/helicopter.gif)|Escolha o helicóptero|  
+|![](Funcaptcha-task-types/refrigerator.jpg)|Escolha a geladeira|  
+|![](Funcaptcha-task-types/couch.jpg)|Escolha o sofá|  
+|![](Funcaptcha-task-types/money.jpg)|Escolha o dinheiro|  
+|![](Funcaptcha-task-types/mushroom.jpg)|Escolha o cogumelo|  
+|![](Funcaptcha-task-types/fence.jpg)|Escolha a cerca|  
+|![](Funcaptcha-task-types/car.jpg)|Escolha o carro|  
+|![](Funcaptcha-task-types/wristwatch.jpg)|Escolha o relógio de pulso|  
+|![](Funcaptcha-task-types/alien.jpg)|Escolha o alienígena|  
+|![](Funcaptcha-task-types/fan.jpg)|Escolha o ventilador|  
+|![](Funcaptcha-task-types/crown.jpg)|Escolha a coroa|  
+|![](Funcaptcha-task-types/burger.jpg)|Escolha o hambúrguer|  
+|![](Funcaptcha-task-types/train.jpg)|Escolha o trem|  
+|![](Funcaptcha-task-types/trophy.jpg)|Escolha o troféu|  
+|![](Funcaptcha-task-types/aquarium.jpg)|Escolha o aquário|  
+|![](Funcaptcha-task-types/anchor.jpg)|Escolha a âncora|  
+|![](Funcaptcha-task-types/toaster.jpg)|Escolha a torradeira|  
+|![](Funcaptcha-task-types/stapler.jpg)|Escolha o grampeador|  
+|![](Funcaptcha-task-types/bicycle.jpg)|Escolha a bicicleta|  
+|![](Funcaptcha-task-types/guitar.jpg)|Escolha o violão|  
+|![](Funcaptcha-task-types/fire.jpg)|Escolha o fogo|  
+|![](Funcaptcha-task-types/flower.jpg)|Escolha a flor|  
+|![](Funcaptcha-task-types/snowman.jpg)|Escolha o boneco de neve|  
+|![](Funcaptcha-task-types/ball.jpg)|Escolha a bola|  
+|![](Funcaptcha-task-types/ring.jpg)|Escolha o anel|  
+|![](Funcaptcha-task-types/camera.jpg)|Escolha a câmera|  
+|![](Funcaptcha-task-types/rotate-image.png)|Tipo de captcha onde você precisa girar a imagem|  

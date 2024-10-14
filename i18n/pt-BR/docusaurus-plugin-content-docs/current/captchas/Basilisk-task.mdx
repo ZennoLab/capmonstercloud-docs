@@ -1,7 +1,8 @@
 ---
-sidebar_position: 14
+sidebar_position: 17
 sidebar_label: BasiliskTask
 ---
+
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -11,48 +12,48 @@ import MethodDescription from '@theme/MethodDescription'
 
 
 # Basilisk - FaucetPay Captcha
-:::warning **Warning!**
-This task will be performed using our proxy servers.
+:::warning **Atenção!**
+Esta tarefa será executada usando nossos servidores proxy.
 :::
 
+## Parâmetros da solicitação
+<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (sem proxy)" default className="bordered-panel">
+<ParamItem title="type" required type="string" />
+**CustomTask**
 
-## Request parameters
-<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (without proxy)" default className="bordered-panel">
-    <ParamItem title="type" required type="string" />
-    **CustomTask**
+---
 
-    ---
+<ParamItem title="class" required type="string" />
+**Basilisk**
 
-    <ParamItem title="class" required type="string" />
-    **Basilisk**
+---
 
-    ---
+<ParamItem title="websiteURL" required type="string" />
+O endereço da página principal onde o captcha é resolvido.
 
-    <ParamItem title="websiteURL" required type="string" />
-    The address of the main page where the captcha is solved.
+---
 
-    ---
+<ParamItem title="websiteKey" required type="string" />
+Pode ser encontrado no código HTML no atributo **data-sitekey** do contêiner do captcha ou no payload de uma solicitação POST para `https://basiliskcaptcha.com/challenge/check-site` no campo **site_key**
 
-    <ParamItem title="websiteKey" required type="string" />
-    Can be found in the html code in the attribute **data-sitekey** of the captcha container or in the payload of a POST request to the `https://basiliskcaptcha.com/challenge/check-site` in the field **site_key**
+---
 
-    ---
+<ParamItem title="userAgent" type="string" />
+User-Agent do navegador. **Passe apenas o UA atual do sistema operacional Windows. Agora este é**: userAgentPlaceholder 
 
-    <ParamItem title="userAgent" type="string" />
-   User-Agent browser. **Pass only the current UA from the Windows operating system. Now this is**: userAgentPlaceholder 
+</TabItem>
 
-  </TabItem>
+## Criar tarefa
 
 
-## Create task method
-<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
+<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (sem proxy)" default className="method-panel">
 <MethodItem>
-  ```http
-  https://api.capmonster.cloud/createTask
-  ```
+```http
+https://api.capmonster.cloud/createTask
+```
 </MethodItem>
 <MethodDescription>
-**Request**
+**Solicitação**
 ```json
 {
    "clientKey": "API_KEY",
@@ -65,7 +66,7 @@ This task will be performed using our proxy servers.
    }
 }
 ```
-**Response**
+**Resposta**
 ```json
 {
   "errorId":0,
@@ -76,25 +77,24 @@ This task will be performed using our proxy servers.
 </MethodDescription>
 </TabItem>
 
+## Obter o resultado da tarefa
+Use o método [getTaskResult](../api/methods/get-task-result.md) para obter a solução do Basilisk.
 
-## Get task result method
-Use the method [getTaskResult](../api/methods/get-task-result.md), to get the Basilisk solution.
-
-<TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
-    <MethodItem>
+<TabItem value="proxyless" label="GeeTestTaskProxyless (sem proxy)" default className="method-panel-full">
+<MethodItem>
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
-    </MethodItem>
-    <MethodDescription>
-**Request**
+</MethodItem>
+<MethodDescription>
+**Solicitação**
 ```json
 {
   "clientKey":"API_KEY",
   "taskId": 407533072
 }
 ```
-**Response**
+**Resposta**
 ```json
 {
    "errorId":0,
@@ -109,5 +109,5 @@ https://api.capmonster.cloud/getTaskResult
    }
 }
 ```
-  </MethodDescription>
-  </TabItem>
+</MethodDescription>
+</TabItem>

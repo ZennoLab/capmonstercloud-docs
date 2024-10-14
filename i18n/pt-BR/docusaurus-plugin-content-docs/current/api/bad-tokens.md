@@ -1,78 +1,78 @@
-﻿# How to report bad tokens
+﻿# Como relatar tokens incorretos
 
-File a complaint about incorrect tokens provided by CapMonster Cloud when they do not result in successful verification on the site or are frequently rejected.
+Faça uma reclamação sobre tokens incorretos fornecidos pela CapMonster Cloud quando eles não resultarem em uma verificação bem-sucedida no site ou forem frequentemente rejeitados.
 
-Examples of situations when you should file a complaint:
+Exemplos de situações em que você deve registrar uma reclamação:
 
-- A user has received a solution token, but the site still does not pass it as a correct captcha solution.
+- Um usuário recebeu um token de solução, mas o site ainda não o aceita como uma solução correta de captcha.
 
-- Some sites are successfully accepting tokens, while others are rejecting them.
+- Alguns sites estão aceitando os tokens com sucesso, enquanto outros os rejeitam.
 
-- Rejection on sites that have previously successfully accepted similar tokens.
+- Rejeição em sites que anteriormente aceitavam tokens semelhantes com sucesso.
 
 
-## **Why to report?**
+## **Por que relatar?**
 
-We need reports so that we automatically analize data on the quality of token issued by our API. Reports are processed automatically, and the team takes actions to improve the quality of the tokens, whether it is updating the system for new tasks, improving grids, etc.
+Precisamos de relatórios para que possamos analisar automaticamente os dados sobre a qualidade dos tokens emitidos por nossa API. Os relatórios são processados automaticamente, e a equipe toma medidas para melhorar a qualidade dos tokens, seja atualizando o sistema para novas tarefas, aprimorando as grades, etc.
 
 ---
 
-### **Method addresses:**
+### **Endereços dos métodos:**
 
 
-:::tip For captcha images reports
+:::tip Para relatórios de captchas de imagem
 ```http
 https://api.capmonster.cloud/reportIncorrectImageCaptcha
 ```
 :::
 
 
-:::tip For token-captcha reports: recaptcha(2,3, enterprise), hcaptcha, geetest, turnstile.
+:::tip Para relatórios de captchas com tokens: recaptcha (2, 3, enterprise), hcaptcha, geetest, turnstile.
 ```http
 https://api.capmonster.cloud/reportIncorrectTokenCaptcha
 ```
 
-Also supported paths:
+Caminhos também suportados:
 
 [https://api.capmonster.cloud/reportIncorrectRecaptcha](https://api.capmonster.cloud/reportIncorrectRecaptcha), 
-[https://api.capmonster.cloud/reportIncorrectHcaptcha](https://api.capmonster.cloud/reportIncorrectHcaptcha) - works the same as [reportIncorrectTokenCaptcha](https://api.capmonster.cloud/reportIncorrectTokenCaptcha)
+[https://api.capmonster.cloud/reportIncorrectHcaptcha](https://api.capmonster.cloud/reportIncorrectHcaptcha) - funcionam da mesma forma que [reportIncorrectTokenCaptcha](https://api.capmonster.cloud/reportIncorrectTokenCaptcha)
 :::
 
 
 
-`Request format: JSON POST`
+`Formato da solicitação: JSON POST`
 
-### **Request parameters**
+### **Parâmetros da solicitação**
 
-| **Parameter** | **Type** | **Required** |                      **Value**                      |
-| :------------------------: | :--------------: | :--------------------------------: | :------------------------------------------------------------------ |
-|         clientKey         |      String      |                Yes                | Your unique account key |
-|           taskId           |     Integer     |                Yes                |              Task ID              |
+| **Parâmetro** | **Tipo** | **Obrigatório** | **Valor** |
+| :------------------------: | :--------------: | :--------------------------------: | :------------------------------------------------------------ |
+|         clientKey         |      String      |                Sim                | Sua chave de conta única |
+|           taskId           |     Integer     |                Sim                |              ID da tarefa              |
 
-**Request example:**
+**Exemplo de solicitação:**
 
 ```json
 {
 
-  "clientKey":"API_KEY",
+  "clientKey": "API_KEY",
   "taskId": 7654321
-
+  
 }
 ```
 
-**Response structure:**
+**Estrutura da resposta:**
 
-| **Property** | **Type** |                                                                                                                 **Value**                                                                                                                 |
-| :------------------------: | :--------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|          errorId          |     Integer     | Error ID.<br />**0** - no errors, no *errorCode* property;<br />**1** - error, information about it is in the *errorCode* property. |
-|         errorCode         |      String      |                                                                  Error code. Check out [error types](./api-errors.md).                                                                  |
-|           status           |      String      |                                           **success** - the report is accepted.<br />If the report is not accepted, then the field is missing, the reason is in the *errorCode*                           |
+| **Propriedade** | **Tipo** | **Valor** |
+| :------------------------: | :--------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|          errorId          |     Integer     | ID do erro.<br />**0** - sem erros, sem a propriedade *errorCode*;<br />**1** - erro, informações sobre ele estão na propriedade *errorCode*. |
+|         errorCode         |      String      | Código de erro. Confira os [tipos de erro](./api-errors.md). |
+|           status           |      String      | **success** - o relatório foi aceito.<br />Se o relatório não foi aceito, o campo está ausente, e o motivo está no *errorCode* |
 
-### **Response example**
+### **Exemplo de resposta**
 
 <details>
   <summary>
-    Response WITHOUT error
+    Resposta SEM erro
   </summary>
 
 ```json
@@ -86,7 +86,7 @@ Also supported paths:
 
 <details>
   <summary>
-    Response WITH an error
+    Resposta COM erro
   </summary>
 
 ```json

@@ -2,22 +2,22 @@
 sidebar_position: 6
 ---
 
-# Setting a write-off threshold
+# Definindo um limite de desconto
 
-## How to set confidence threshold in response below which money won't be charged
+## Como definir o limite de confiança na resposta abaixo do qual o dinheiro não será cobrado
 
-In *CapMonster.Cloud* captchas acceptance depends on its complexity. Clients pay only for correctly solved captchas.
+Na *CapMonster.Cloud*, a aceitação de captchas depende de sua complexidade. Os clientes pagam apenas por captchas resolvidos corretamente.
 
-In order for CapMonster.cloud to return a guaranteed correct result, you can pass along with the captcha recognition request also a **recognizingThreshold** parameter with a value between 0 and 100. This parameter allows you to set the threshold of the system's confidence in the correct answer for the captcha and determines the minimum value below which money will not be deducted from the balance. 
+Para que o CapMonster.Cloud retorne um resultado garantido correto, você pode passar, juntamente com a solicitação de reconhecimento do captcha, um parâmetro **recognizingThreshold** com um valor entre 0 e 100. Esse parâmetro permite que você defina o limite de confiança do sistema na resposta correta para o captcha e determina o valor mínimo abaixo do qual o dinheiro não será descontado do saldo.
 
 ---
 
-### Example
+### Exemplo
 
 POST
 ```http
 https://api.capmonster.cloud/createTask
- ```
+```
 
 ```json
 {
@@ -32,19 +32,18 @@ https://api.capmonster.cloud/createTask
 }
 ```
 ---
-In this case, if the parameter is equal to 70, then only answers in which our system is more than 70% sure will be returned, otherwise will be returned error: “**ERROR_CAPTCHA_UNSOLVABLE**”
+Nesse caso, se o parâmetro for igual a 70, apenas respostas em que nosso sistema tem mais de 70% de certeza serão retornadas; caso contrário, será retornado o erro: “**ERROR_CAPTCHA_UNSOLVABLE**”.
 
-Another way to pass a threshold is to use only the field to specify the ApiKey. You can add threshold information in the following format: `{apikey}__recognizingthreshold_{value}`
+Outra maneira de passar um limite é usar apenas o campo para especificar a ApiKey. Você pode adicionar a informação do limite no seguinte formato: `{apikey}__recognizingthreshold_{value}`
 
-For example, “API_KEY\_\_recognizingthreshold\_70”
+Por exemplo, “API_KEY\_\_recognizingthreshold\_70”.
 
-You can also enter the name of the module with the key in the following format: `{apikey}__module-name`.
+Você também pode inserir o nome do módulo com a chave no seguinte formato: `{apikey}__module-name`.
 
-The key, the confidence threshold and the name of the module are indicated with the underscore “\_\_”
+A chave, o limite de confiança e o nome do módulo são indicados com o sublinhado “\_\_”.
 
-Example: “API_KEY\_\_solvemedia\_\_recognizingthreshold\_70”
+Exemplo: “API_KEY\_\_solvemedia\_\_recognizingthreshold\_70”.
 
 :::note
-If you are unable to set the response confidence threshold, please write to our **[support team](https://helpdesk.zennolab.com/conversation/new)**, we will help you set it up!
+Se você não conseguir definir o limite de confiança da resposta, entre em contato com nossa **[equipe de suporte](https://helpdesk.zennolab.com/conversation/new)**, nós ajudaremos você a configurá-lo!
 :::
-

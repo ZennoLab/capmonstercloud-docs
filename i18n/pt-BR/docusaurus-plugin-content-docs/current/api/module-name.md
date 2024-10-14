@@ -2,17 +2,17 @@
 sidebar_position: 5
 ---
 
-# Passing module name
+# Nome do Módulo
 
-Passing the module name to recognize a specific captcha can be useful in cases of working with a specific service (e.g. Google, SolveMedia, Whatsapp, etc.).  This will increase the speed and quality of recognition and reduce the probability of errors. 
+Passar o nome do módulo para reconhecer um captcha específico pode ser útil em casos de trabalho com um serviço específico (por exemplo, Google, SolveMedia, Whatsapp, etc.). Isso aumentará a velocidade e a qualidade do reconhecimento e reduzirá a probabilidade de erros.
 
-## How to pass module name to CapMonster Cloud, using ApiKey field only
+## Como passar o nome do módulo para CapMonster Cloud, usando apenas o campo ApiKey
 
-In order to send to CapMonsterCloud information about the module that will recognize your captcha, using only the field to specify ApiKey, you can add the module name to the key in the following format: `{apikey}__moduleName`
+Para enviar ao CapMonsterCloud informações sobre o módulo que reconhecerá seu captcha, usando apenas o campo para especificar ApiKey, você pode adicionar o nome do módulo à chave no seguinte formato: `{apikey}__moduleName`
 
-For example, “00f87cb0f01330d33709ce3339ad0c8c__solvemedia” (**!important**, separate the API key and module name with a **double underscore**)
+Por exemplo, “00f87cb0f01330d33709ce3339ad0c8c__solvemedia” (**!importante**, separe a chave da API e o nome do módulo com um **duplo sublinhado**)
 
-The list of available module names:
+A lista de nomes de módulos disponíveis:
 <table>
     <tbody>
         <tr>
@@ -80,7 +80,7 @@ The list of available module names:
             <td align="center">![](images\module-name\yandex.png)</td>
         </tr>
         <tr>
-            <td align="center">yandexnew (two words)</td>
+            <td align="center">yandexnew (duas palavras)</td>
 			<td rowspan="2" align="center">![](images\module-name\yandexwave.png)</td>
         </tr>
         <tr>
@@ -91,12 +91,12 @@ The list of available module names:
 			<td align="center">![](images\module-name\partiallyblur.png)</td>
         </tr>
         <tr>
-            <td align="center">universal (all other text captcha types)</td>
+            <td align="center">universal (todos os outros tipos de captcha de texto)</td>
             <td align="center">![](images\module-name\universal.png)</td>
         </tr>
     </tbody>
 </table>
 
-:::info Info
-If you were unable to send a captcha to a specific module, please write to our [support team](https://helpdesk.zennolab.com/conversation/new), we will help you!
+:::info Informação
+Se você não conseguiu enviar um captcha para um módulo específico, por favor, escreva para nossa [equipe de suporte](https://helpdesk.zennolab.com/conversation/new), nós iremos ajudá-lo!
 :::

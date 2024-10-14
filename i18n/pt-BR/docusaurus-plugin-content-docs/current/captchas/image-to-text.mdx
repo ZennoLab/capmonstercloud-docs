@@ -11,54 +11,54 @@ import MethodDescription from '@theme/MethodDescription'
 
 # ImageToTextTask
 
-This is a regular captcha, which is an image with text to be entered into the corresponding line. 
+Este é um captcha regular, que é uma imagem com texto a ser inserido na linha correspondente.
 
 ![](./images/image-to-text/text-captcha-2.png)
 
 
-## Request parameters
-<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (without proxy)" default className="bordered-panel">
-    <ParamItem title="type" required type="string" />
-    **ImageToTextTask**
+## Parâmetros da solicitação
+<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (sem proxy)" default className="bordered-panel">
+<ParamItem title="type" required type="string" />
+**ImageToTextTask**
 
-    ---
+---
 
-    <ParamItem title="body" required type="string" />
-    File body encoded in base64*. Make sure to send it without line breaks.
+<ParamItem title="body" required type="string" />
+Corpo do arquivo codificado em base64*. Certifique-se de enviá-lo sem quebras de linha.
 
-    ---
+---
 
-    <ParamItem title="capMonsterModule" type="string" />
-    The name of recognizing module, for example, “yandex“. Alternative way to pass module name and list of all available modules you can find [here](../api/module-name.md). <br />
-    Example: yandex, special and others
+<ParamItem title="capMonsterModule" type="string" />
+Nome do módulo de reconhecimento, por exemplo, “yandex“. Forma alternativa de passar o nome do módulo e a lista de todos os módulos disponíveis que você pode encontrar [aqui](../api/module-name.md). <br />
+Exemplo: yandex, special e outros.
 
-    ---
+---
 
-    <ParamItem title="recognizingThreshold" type="integer" />
-    Captcha recognition threshold with a possible value from 0 to 100. For example, if recognizingThreshold was set to 90 and the task was solved with a confidence of 80, you won't be charged. In this case the user will get a response ERROR_CAPTCHA_UNSOLVABLE.
+<ParamItem title="recognizingThreshold" type="integer" />
+Limite de reconhecimento de captcha com valor possível de 0 a 100. Por exemplo, se o recognizingThreshold foi definido como 90 e a tarefa foi resolvida com uma confiança de 80, você não será cobrado. Nesse caso, o usuário receberá uma resposta ERROR_CAPTCHA_UNSOLVABLE.
 
-    ---
+---
 
-    <ParamItem title="case" type="boolean" />
-    true - if captcha is case sensitive.
+<ParamItem title="case" type="boolean" />
+true - se o captcha for sensível a maiúsculas e minúsculas.
 
-    ---
+---
 
-    <ParamItem title="numeric" type="integer" />
-    1 - if captcha contains numbers only. <br />
-    Possible values: 0, 1
+<ParamItem title="numeric" type="integer" />
+1 - se o captcha contiver apenas números. <br />
+Valores possíveis: 0, 1
 
-    ---
+---
 
-    <ParamItem title="math" type="boolean" />
-    false — undefined;<br />true — if captcha requires a mathematical operation (for example: captcha 2 + 6 = will return a value of 8).
-  </TabItem>
+<ParamItem title="math" type="boolean" />
+false — indefinido;<br />true — se o captcha exigir uma operação matemática (por exemplo: captcha 2 + 6 = retornará o valor 8).
+</TabItem>
 
-  <br />
+<br />
 
-*Base64 is a data encoding method that allows you to represent binary data as text. Here is an example of obtaining a captcha image in base64 format using the console in the *Developer Tools*:
+*Base64 é um método de codificação de dados que permite representar dados binários como texto. Aqui está um exemplo de obtenção de uma imagem captcha em formato base64 usando o console nas *Ferramentas de Desenvolvedor*:
 
-```
+```javascript
 const captchaUrl = 'https://example.com/captcha.jpg';
 
 function loadAndEncodeCaptchaToBase64(url) {
@@ -71,8 +71,8 @@ function loadAndEncodeCaptchaToBase64(url) {
             reader.onloadend = function() {
                 const base64Data = reader.result;                
                 console.log('Base64 Encoded Captcha:', base64Data);
-
-                          };
+                          
+						  };
         })
         .catch(error => {
             console.error('Error occurred while loading or encoding the captcha:', error);
@@ -84,16 +84,17 @@ loadAndEncodeCaptchaToBase64(captchaUrl);
 ```
 
 
-## Create task method
+## Criar tarefa
 
-<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
+
+<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (sem proxy)" default className="method-panel">
 <MethodItem>
   ```http
   https://api.capmonster.cloud/createTask
   ```
 </MethodItem>
 <MethodDescription>
-**Request**
+**Solicitação**
 ```json
 {
   "clientKey":"API_KEY",
@@ -103,7 +104,7 @@ loadAndEncodeCaptchaToBase64(captchaUrl);
   }
 }
 ```
-**Response**
+**Resposta**
 ```json
 {
   "errorId":0,
@@ -114,24 +115,24 @@ loadAndEncodeCaptchaToBase64(captchaUrl);
 </MethodDescription>
 </TabItem>
 
-## Get task result method
-Use the [getTaskResult](../api/methods/get-task-result.md) method to get the captcha solution. Depending on the system load, you will receive an answer within an interval from 300 ms to 6 s
+## Obter resultado da tarefa
+Use o método [getTaskResult](../api/methods/get-task-result.md) para obter a solução do captcha. Dependendo da carga do sistema, você receberá uma resposta em um intervalo de 300ms a 6s.
 
-<TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
-    <MethodItem>
+<TabItem value="proxyless" label="GeeTestTaskProxyless (sem proxy)" default className="method-panel-full">
+<MethodItem>
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
-    </MethodItem>
-    <MethodDescription>
-**Request**
+</MethodItem>
+<MethodDescription>
+**Solicitação**
 ```json
 {
   "clientKey":"API_KEY",
   "taskId": 407533072
 }
 ```
-**Response**
+**Resposta**
 ```json
 {
   "errorId":0,
@@ -141,20 +142,19 @@ https://api.capmonster.cloud/getTaskResult
   }
 }
 ```
-  </MethodDescription>
-  </TabItem>
+</MethodDescription>
+</TabItem>
 
- <br />
+<br />
 
-|**Property**|**Type**|**Description**|
+|**Propriedade**|**Tipo**|**Descrição**|
 | :-: | :-: | :-: |
-|text|String|Captcha answer|
+|text|String|Resposta do captcha|
 
-
-## Use SDK Library
+## Usar biblioteca SDK
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-  <TabItem value="js" label="JavaScript" default className="method-panel">
+<TabItem value="js" label="JavaScript" default className="method-panel">
 
 ```js
 // https://github.com/ZennoLab/capmonstercloud-client-js
@@ -177,6 +177,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   console.log(await cmcClient.Solve(imageToTextRequest));
 });
 ```
-  </TabItem>
-  
+</TabItem>
+
 </Tabs>

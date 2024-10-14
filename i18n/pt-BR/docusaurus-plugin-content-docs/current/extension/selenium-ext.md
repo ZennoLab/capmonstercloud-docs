@@ -3,34 +3,34 @@ sidebar_position: 5
 ---
 
 
-# Integrating the extension into Selenium using Node.js
+# Integrando a extensão ao Selenium usando Node.js
 
-In this tutorial, we will show you how to integrate the browser extension using the Selenium WebDriver library and perform automated tasks on a specific website.
+Neste tutorial, mostraremos como integrar a extensão do navegador usando a biblioteca Selenium WebDriver e realizar tarefas automatizadas em um site específico.
 
-## Step 1: Installation
+## Etapa 1: Instalação
 
-1. Install Node.js and npm (Node.js Package Manager) on your computer. You can download it from the [official website](https://nodejs.org/) Node.js.
+1. Instale o Node.js e o npm (Node.js Package Manager) no seu computador. Você pode baixá-los no [site oficial](https://nodejs.org/) do Node.js.
 
-2. Install the required packages using npm:
+2. Instale os pacotes necessários usando o npm:
 
 ```bash
 npm install selenium-webdriver
 ```
-## Step 2: Changing extension parameters
+## Etapa 2: Alterando os parâmetros da extensão
 
-Before you start automation with the extension, you need to add initial settings. You should add `clientKey` to the `defaultSettings.json` file.
+Antes de iniciar a automação com a extensão, você precisa adicionar as configurações iniciais. É necessário adicionar `clientKey` ao arquivo `defaultSettings.json`.
 
-To do this, you need to download the [extension archive](extension-main.md).
+Para isso, você deve baixar o [arquivo da extensão](extension-main.md).
 
-Unpack the extension and and in the root of the unpacked archive there will be a `defaultSettings.json` file where you can change the settings. [Here](ext-settings.md) you can find a description of the parameters.
+Descompacte a extensão e, na raiz do arquivo descompactado, haverá um arquivo `defaultSettings.json` onde você pode alterar as configurações. [Aqui](ext-settings.md) você pode encontrar a descrição dos parâmetros.
 
-After the settings have been successfully changed, you need to archive it back into a .zip file.
+Depois que as configurações forem alteradas com sucesso, você precisará compactá-lo novamente em um arquivo .zip.
 
-## Step 3: Setting Selenium WebDriver to work with the extension​
+## Etapa 3: Configurando o Selenium WebDriver para funcionar com a extensão
 
-Now configure Selenium WebDriver to use the created browser profile.
+Agora configure o Selenium WebDriver para usar o perfil do navegador criado.
 
-To do this, create an `index.js` file with the following content:
+Para fazer isso, crie um arquivo `index.js` com o seguinte conteúdo:
 
 ```js
 const { Builder, By, Key, until } = require('selenium-webdriver');
@@ -38,56 +38,56 @@ const chrome = require('selenium-webdriver/chrome');
 const path = require('path');
 
 (async function example() {
-  // Path to the extension .zip file
+  // Caminho para o arquivo .zip da extensão
   const extensionPath = path.resolve(__dirname, './extension.zip');
 
-  // Creating a browser options object
+  // Criando um objeto de opções do navegador
   const options = new chrome.Options();
   
-  // Adding the extension to browser options
+  // Adicionando a extensão às opções do navegador
   options.addExtensions(extensionPath);
 
-  // Creating a web driver instance
+  // Criando uma instância do driver do navegador
   const driver = new Builder()
     .forBrowser('chrome')
     .setChromeOptions(options)
     .build();
 
   try {
-    // Open Google page
+    // Abrir a página do Google
     await driver.get('https://google.com/');
     
-    // Example: find an element on the page and interacting with it
+    // Exemplo: encontrar um elemento na página e interagir com ele
     const searchBox = await driver.findElement(By.name('q'));
-    await searchBox.sendKeys('Selenium with extension', Key.RETURN);
+    await searchBox.sendKeys('Selenium com extensão', Key.RETURN);
     
-    // Wait for search results
-    await driver.wait(until.titleContains('Selenium with extension'), 5000);
+    // Aguardar os resultados da pesquisa
+    await driver.wait(until.titleContains('Selenium com extensão'), 5000);
   } finally {
-    // Close the browser 
+    // Fechar o navegador
     await driver.quit();
   }
 })();
 ```
 
-## Step 4: Writing automated actions
-Now when the browser extension is configured, you can use WebDriver methods to perform automated actions on your website.
+## Etapa 4: Escrevendo ações automatizadas
+Agora que a extensão do navegador está configurada, você pode usar os métodos do WebDriver para realizar ações automatizadas no seu site.
 
-Example of an automated action:
+Exemplo de uma ação automatizada:
 
 ```js
-// If you want to click on an element on the page
+// Se você quiser clicar em um elemento na página
 driver.findElement(By.xpath("//button[@id='my-button']")).click();
 ```
 
-## Step 5: Running the script
+## Etapa 5: Executando o script
 
-To run our automatic script, which will launch the browser and perform the actions mentioned above, you need to write in the console:
+Para executar nosso script automático, que abrirá o navegador e realizará as ações mencionadas acima, você precisa escrever no console:
 
 ```bash
 node index.js
 ```
 
-To update the extension without data loss, you need to copy all settings and data from the old version, download the new version of the extension, unzip it and replace the old version with the new one.
+Para atualizar a extensão sem perda de dados, você precisa copiar todas as configurações e dados da versão antiga, baixar a nova versão da extensão, descompactá-la e substituir a versão antiga pela nova.
 
-We hope this guide was helpful to you. If you have any questions, please refer to the official Selenium documentation and your browser documentation.
+Esperamos que este guia tenha sido útil para você. Se tiver alguma dúvida, consulte a documentação oficial do Selenium e a documentação do seu navegador.

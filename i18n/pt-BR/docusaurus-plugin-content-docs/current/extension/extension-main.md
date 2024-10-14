@@ -2,115 +2,115 @@
 sidebar_position: 0
 ---
 
-# Chrome browser extension
-## **Description**
-With this extension, you can recognize captchas automatically directly in the browser.
+# Extensão do navegador Chrome
+## **Descrição**
+Com esta extensão, você pode reconhecer captchas automaticamente diretamente no navegador.
 
-The extension works in the Google Chrome browser.
+A extensão funciona no navegador Google Chrome.
 
 -----
-## **Automatic installation**
-**Important!** You cannot install extensions in incognito mode and guest mode.
+## **Instalação automática**
+**Importante!** Não é possível instalar extensões no modo de navegação anônima e no modo visitante.
 
-1. Open the [Chrome Web Store](https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=en).
-2. Click **Install**.
+1. Abra a [Chrome Web Store](https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=en).
+2. Clique em **Instalar**.
 
-To get started with the extension, click on its icon to the right of the address bar. Go to the [settings](extension-main.md#settings).
+Para começar a usar a extensão, clique em seu ícone à direita da barra de endereços. Vá para as [configurações](extension-main.md#settings).
 
-*If for some reason it was not possible to install the extension from the Chrome Web Store, use the instructions for manual installation.*
+*Se por algum motivo não for possível instalar a extensão pela Chrome Web Store, use as instruções para instalação manual.*
 
 <details>
-    <summary>Manual installation</summary>
+    <summary>Instalação manual</summary>
 
-1. Download the [archive with the extension](https://drive.google.com/file/d/160xindQ847ZqmtYZPcqEVv1iXWNuylnR/view?usp=drive_link).
+1. Baixe o [arquivo com a extensão](https://drive.google.com/file/d/10xXeDqllYo6Ilvr5lUXEVIFw283QzPFL/view?usp=drive_link).
 
-2. Unpack it to any folder. 
+2. Descompacte-o para qualquer pasta.
    
-   **WARNING**: the folder shouldn’t be deleted, otherwise the extension stop working.
-3. In the Google Chrome browser open the “Extension” page. There are several ways to do this:
-   1. Type chrome://extensions in the address bar of a browser and press Enter.
-   2. From the menu: click the three vertical dots in the upper right corner (near the profile picture), then "More Tools", then "Extensions".
+   **ATENÇÃO**: a pasta não deve ser excluída, caso contrário, a extensão deixará de funcionar.
+3. No navegador Google Chrome, abra a página “Extensões”. Existem várias maneiras de fazer isso:
+   1. Digite chrome://extensions na barra de endereços do navegador e pressione Enter.
+   2. No menu: clique nos três pontos verticais no canto superior direito (perto da foto do perfil), depois em "Mais Ferramentas", e em seguida "Extensões".
 
   ![](./images/extension-main-firefox/359d5afb-d644-45c2-a882-e7fc3da759eb.png)
 
-   3. Or go to the Google Chrome settings and select "Extensions" (at the very bottom) in the right menu.
+   3. Ou vá para as configurações do Google Chrome e selecione "Extensões" (na parte inferior) no menu à direita.
 
   ![](./images/extension-main-firefox/61a9b824-b0d2-4808-8bb8-feac4b25d0b7.png)
 
-4. Enable “Developer Mode”.
-5. Then click on “Load unpacked”.
+4. Ative o “Modo de desenvolvedor”.
+5. Em seguida, clique em “Carregar sem compactação”.
 
   ![](./images/extension-main-firefox/load-unpacked.png)
 
-6. Find and choose the folder where you unpacked the extension.
-7. After that the extension should appear in the list of the installed extensions.
+6. Encontre e escolha a pasta onde você descompactou a extensão.
+7. Depois disso, a extensão deve aparecer na lista das extensões instaladas.
 
 ![](./images/extension-main-firefox/919a2eab-1651-4b48-8980-b69346d700fd.png)
 
   </details>
 
 <details>
-    <summary>Manual update of the extension</summary>
+    <summary>Atualização manual da extensão</summary>
 
-If you are installing the extension over the previous version, then when you update the original extension files, you also need to click the update button on the "Extensions" page (how to open this page is described above in the "Manual installation" section).
+Se você estiver instalando a extensão sobre a versão anterior, ao atualizar os arquivos originais da extensão, também precisará clicar no botão de atualização na página "Extensões" (como abrir esta página está descrito acima na seção "Instalação manual").
 
 ![](./images/extension-main-firefox/manual-update.png)
 </details>
 
 -----
-## **Settings**
+## **Configurações**
 <details>
-    <summary>How to pin the extension</summary>
+    <summary>Como fixar a extensão</summary>
 
-By default the installed extension is hidden. To pin it you have to click on the “Pin” button:
+Por padrão, a extensão instalada é ocultada. Para fixá-la, você deve clicar no botão “Fixar”:
 
 ![](./images/extension-main-firefox/pin1.png)
 </details>
 
-After launching the extension you’ll see this window:
+Após iniciar a extensão, você verá esta janela:
 
 ![](./images/extension-main-firefox/ext.screen.en.png)
-### <a name="id-browserextension-apikey"></a>**API key**
-Enter API key in the corresponding field(1), press save button(2). If you entered the correct key, your balance will be displayed below(3).
+### <a name="id-browserextension-apikey"></a>**Chave API**
+Insira a chave da API no campo correspondente (1), pressione o botão salvar (2). Se você inseriu a chave correta, seu saldo será exibido abaixo (3).
 
 ![](./images/extension-main-firefox/api-key.png)
-### <a name="id-browserextension-automaticcaptchasolving"></a>**Automated captcha solving**
-Here you can select the types of captchas that the extension will recognize automatically.
+### <a name="id-browserextension-automaticcaptchasolving"></a>**Solução automática de captchas**
+Aqui você pode selecionar os tipos de captchas que a extensão reconhecerá automaticamente.
 
 ![](./images/extension-main-firefox/extension.example.png)
 
 :::info !
 
-You may need to reload the page with captcha for the changes to take effect!
+Pode ser necessário recarregar a página com captcha para que as alterações tenham efeito!
 
 :::
-### <a name="id-browserextension-repeatcaptchasolvingincaseofanerror"></a>**Repeat captcha solving in case of an error**
-If the first attempt to solve the captcha is failed, the extension will send repeated tasks until the captcha is not solved, or until the limit specified in this setting will not be reached.
+### <a name="id-browserextension-repeatcaptchasolvingincaseofanerror"></a>**Repetir solução de captcha em caso de erro**
+Se a primeira tentativa de resolver o captcha falhar, a extensão enviará tarefas repetidas até que o captcha seja resolvido, ou até que o limite especificado nesta configuração seja atingido.
 ### <a name="id-browserextension-proxy"></a>**Proxy**
 ![](./images/extension-main-firefox/proxy.png) 
 
-Here you can specify the proxy that will be sent along with the recognition task.
+Aqui você pode especificar o proxy que será enviado junto com a tarefa de reconhecimento.
 
-The "Login" and "Password" are optional.
-### <a name="id-browserextension-blacklistcontrol"></a>**Blacklist control**
-Using the blacklist you can configure the extension to ignore captchas on specific websites.
+O "Login" e a "Senha" são opcionais.
+### <a name="id-browserextension-blacklistcontrol"></a>**Controle de lista negra**
+Usando a lista negra, você pode configurar a extensão para ignorar captchas em sites específicos.
 
-After enabling this option, a field for entering sites will appear:
+Após ativar esta opção, aparecerá um campo para inserir os sites:
 
 ![](./images/extension-main-firefox/blacklist-control.png)
 
-Domains must be specified along with the protocol (https:// or http://).
-You can use masks:
+Os domínios devem ser especificados junto com o protocolo (https:// ou http://).
+Você pode usar máscaras:
 
-- ? - any one character except period
-- \* - any number of any characters
+- ? - qualquer um caractere, exceto ponto final
+- \* - qualquer número de caracteres
 
-Examples:
+Exemplos:
 
-|**Filter**|**Description**|
+|**Filtro**|**Descrição**|
 | :-: | :-: |
-|`https://zennolab.com`|Prohibition of the extension on the site `https://zennolab.com`|
-|`https://*.zennolab.com`|Prohibition of the extension on all subdomains `https://zennolab.com`|
-|`https://www.google.*`|Prohibiting the extension from working on Google in all zones (ru, com, com.ua, etc.)|
+|`https://zennolab.com`|Proibição da extensão no site `https://zennolab.com`|
+|`https://*.zennolab.com`|Proibição da extensão em todos os subdomínios `https://zennolab.com`|
+|`https://www.google.*`|Proibição da extensão de funcionar no Google em todas as zonas (ru, com, com.ua, etc.)|
 
-When errors occur in solving captchas, see the [error glossary](/api/api-errors.md).
+Quando erros ocorrerem na solução de captchas, veja o [glossário de erros](/api/api-errors.md).

@@ -1,7 +1,8 @@
 ---
-sidebar_position: 12
+sidebar_position: 15
 sidebar_label: TenDI
 ---
+
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -10,13 +11,14 @@ import MethodItem from '@theme/MethodItem';
 import MethodDescription from '@theme/MethodDescription'
 
 
-# TenDI - Tencent captcha
-:::warning **Attention!**
-This task will be performed using our proxy servers.
+# TenDI - Captcha da Tencent
+:::warning **Atenção!**
+Essa tarefa será realizada usando nossos servidores proxy.
 :::
 
-## Request parameters
-<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (without proxy)" default className="bordered-panel">
+## Parâmetros da solicitação
+
+<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (sem proxy)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **CustomTask**
 
@@ -28,35 +30,34 @@ This task will be performed using our proxy servers.
     ---
 
     <ParamItem title="websiteURL" required type="string" />
-    The address of the main page where the captcha is solved.
+    O endereço da página principal onde o captcha é resolvido.
 
     ---
 
     <ParamItem title="websiteKey" required type="string" />
-    captchaAppId. For example `"websiteKey": "189123456"` - is a unique parameter for your site. You can take it from an html page with a captcha or from traffic (see description below).
+    captchaAppId. Por exemplo, `"websiteKey": "189123456"` é um parâmetro único para seu site. Você pode obtê-lo de uma página HTML com captcha ou a partir do tráfego (veja a descrição abaixo).
 
     ---
 
     <ParamItem title="userAgent" type="string" />
-    Browser User-Agent. **Pass only the actual UA from Windows OS. Now this is version**: `userAgentPlaceholder`
+    O User-Agent do navegador. **Passe apenas o UA real de um sistema operacional Windows. Atualmente, a versão é**: `userAgentPlaceholder`
 
-  </TabItem>
+</TabItem>
 
-
-### How to get websiteKey (captchaAppId)
-Turn on the developer tools, go to the Network tab, activate the captcha and look at the requests. Some of them will contain the parameter value you need. In this case `websiteKey=aid`
+### Como obter websiteKey (captchaAppId)
+Ative as ferramentas de desenvolvedor, vá para a aba "Network", ative o captcha e veja as solicitações. Algumas delas conterão o valor do parâmetro que você precisa. Nesse caso, `websiteKey=aid`  
 ![](./images/tendi/tendi-devtools.png) 
 
+## Método de criação da tarefa
 
-## Create task method
-<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
+<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (sem proxy)" default className="method-panel">
 <MethodItem>
   ```http
   https://api.capmonster.cloud/createTask
   ```
 </MethodItem>
 <MethodDescription>
-**Request**
+**Solicitação**
 ```json
 {
     "clientKey": "API_KEY",
@@ -69,7 +70,7 @@ Turn on the developer tools, go to the Network tab, activate the captcha and loo
     }
 }
 ```
-**Response**
+**Resposta**
 ```json
 {
   "errorId":0,
@@ -80,25 +81,24 @@ Turn on the developer tools, go to the Network tab, activate the captcha and loo
 </MethodDescription>
 </TabItem>
 
+## Método de obter resultado da tarefa
+Use o método [getTaskResult](../api/methods/get-task-result.md) para obter a solução do TenDI.
 
-## Get task result method
-Use the [getTaskResult](../api/methods/get-task-result.md) method to get the TenDI solution.
-
-<TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
+<TabItem value="proxyless" label="GeeTestTaskProxyless (sem proxy)" default className="method-panel-full">
     <MethodItem>
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
     </MethodItem>
     <MethodDescription>
-**Request**
+**Solicitação**
 ```json
 {
   "clientKey":"API_KEY",
   "taskId": 407533072
 }
 ```
-**Response**
+**Resposta**
 ```json
 {
     "errorId":0,
@@ -117,7 +117,7 @@ https://api.capmonster.cloud/getTaskResult
   </MethodDescription>
   </TabItem>
 
-## Pricing
-|**Name** |**Cost per 1000 recognitions, $**|
+## Preços
+|**Nome** |**Custo por 1000 reconhecimentos, $**|
 | :-: | :-: |
 |TenDI|1,6|

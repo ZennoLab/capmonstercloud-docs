@@ -1,58 +1,58 @@
 ﻿---
 sidebar_position: 3
-sidebar_label: Instructions for installing the extension in the ProjectMaker browser
+sidebar_label: Instruções para instalar a extensão no navegador ProjectMaker
 ---
 
-# Instructions for installing the CapMonster Cloud extension in the ProjectMaker browser
+# Instruções para instalar a extensão CapMonster Cloud no navegador ProjectMaker
 
 :::info
 
-The extension only works with the Chromium browser!
+A extensão só funciona com o navegador Chromium!
 
 :::
 
-## **Method #1: Installation using a CRX file.**
-1. Download [CRX file CapMonster Cloud](https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=en);
+## **Método #1: Instalação usando um arquivo CRX.**
+1. Baixe o [arquivo CRX CapMonster Cloud](https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=en);
 
 :::info
-[Here](https://zennolab.atlassian.net/wiki/spaces/RU/pages/2081423361#%D0%9A%D0%B0%D0%BA-%D1%81%D0%BA%D0%B0%D1%87%D0%B0%D1%82%D1%8C-crx-%D1%84%D0%B0%D0%B9%D0%BB-%D1%80%D0%B0%D1%81%D1%88%D0%B8%D1%80%D0%B5%D0%BD%D0%B8%D1%8F) you can find instructions for installing the CRX file.
+[Aqui](https://zennolab.atlassian.net/wiki/spaces/RU/pages/2081423361#%D0%9A%D0%B0%D0%BA-%D1%81%D0%BA%D0%B0%D1%87%D0%B0%D1%82%D1%8C-crx-%D1%84%D0%B0%D0%B9%D0%BB-%D1%80%D0%B0%D1%81%D1%88%D0%B8%D1%80%D0%B5%D0%BD%D0%B8%D1%8F) você pode encontrar instruções para instalar o arquivo CRX.
 :::
 
-2. Open ProjectMaker;
+2. Abra o ProjectMaker;
 
-3. Add the “Add extension” action;
+3. Adicione a ação “Adicionar extensão”;
 
-    1. Specify the path to the CRX file in the action settings;
+    1. Especifique o caminho para o arquivo CRX nas configurações da ação;
 
-4. Add the “Activate extension” action;
+4. Adicione a ação “Ativar extensão”;
 
-5. In the action settings, set the extension ID “pabjfbciaedomjjfelfafejkppknjleh”;
+5. Nas configurações da ação, defina o ID da extensão “pabjfbciaedomjjfelfafejkppknjleh”;
 
-6. In the extension window that opens, enter the API key from your CapMonster Cloud personal account.
-## **Method #2: Installation via the Chrome Web Store.**
-1. Open ProjectMaker;
-2. Go to the extension page `<https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=en>`;
-3. Click the “Install” button and install the extension;
-4. Add “Activate extension” action;
+6. Na janela da extensão que abrir, insira a chave API da sua conta pessoal do CapMonster Cloud.
+## **Método #2: Instalação via Chrome Web Store.**
+1. Abra o ProjectMaker;
+2. Vá para a página da extensão `<https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=en>`;
+3. Clique no botão “Instalar” e instale a extensão;
+4. Adicione a ação “Ativar extensão”;
 
-    1. In the action settings, insert the extension ID “pabjfbciaedomjjfelfafejkppknjleh”;
+    1. Nas configurações da ação, insira o ID da extensão “pabjfbciaedomjjfelfafejkppknjleh”;
 
-5. In the extension window that opens, enter the API key from your CapMonster Cloud personal account.
+5. Na janela da extensão que abrir, insira a chave API da sua conta pessoal do CapMonster Cloud.
 :::info
-The new version of the CapMonster Cloud extension has the ability to solve reCAPTCHA2, reCAPTCHA Enterprise, hCaptcha by clicks.
+A nova versão da extensão CapMonster Cloud tem a capacidade de resolver reCAPTCHA2, reCAPTCHA Enterprise e hCaptcha por cliques.
 :::
 ![](./images/install-instruction/ext.png) 
 :::caution
-Please note that when installing the extension the solving type for reCAPTCHA2, reCAPTCHA Enterprise, hCaptcha is set “Click” by default.
+Observe que ao instalar a extensão, o tipo de solução para reCAPTCHA2, reCAPTCHA Enterprise e hCaptcha é definido como “Clique” por padrão.
 :::
-To make the use of CapMonster Cloud extension in the ProjectMaker easier, we’ve prepared a project to automate the installation of the extension, entering the API key and choosing the solving type reCAPTCHA2, reCAPTCHA Enterprise, hCaptcha.
+Para facilitar o uso da extensão CapMonster Cloud no ProjectMaker, preparamos um projeto para automatizar a instalação da extensão, inserção da chave API e escolha do tipo de solução reCAPTCHA2, reCAPTCHA Enterprise e hCaptcha.
 
-***Minimum version of ZennoPoster 7.6.1***
+***Versão mínima do ZennoPoster 7.6.1***
 
-[![Extension_Example](./images/install-instruction/Aspose.Words.d33c25f1-0d68-4361-bcfb-da50f3892df4.002.png)](https://drive.google.com/file/d/1eOv1wXnjf202yDavB4051-XFM7vUGiGN/view?usp=sharing)
+[![Exemplo_Extensão](./images/install-instruction/Aspose.Words.d33c25f1-0d68-4361-bcfb-da50f3892df4.002.png)](https://drive.google.com/file/d/1eOv1wXnjf202yDavB4051-XFM7vUGiGN/view?usp=sharing)
 :::caution
-When installing the CapMonster Cloud extension via a CRX file, you need to keep the extension version up to date. In case of a version update, you need to re-download the current CRX file and reinstall it.
+Ao instalar a extensão CapMonster Cloud via um arquivo CRX, você precisa manter a versão da extensão atualizada. Em caso de atualização de versão, será necessário baixar novamente o arquivo CRX atual e reinstalá-lo.
 :::
 :::caution
-When using the CapMonster Cloud extension, you need to remove captcha recognition actions from your project.
+Ao usar a extensão CapMonster Cloud, você precisa remover as ações de reconhecimento de captcha do seu projeto.
 :::

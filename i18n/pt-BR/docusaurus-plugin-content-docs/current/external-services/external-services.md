@@ -1,66 +1,66 @@
-﻿# Captcha recognition via API of other services
-CapMonster Cloud supports API: Anti-Captcha (v1.0, v2.0), RuCaptcha, RipCaptcha, 2Captcha, BypassCaptcha, DeathByCaptcha. Thus, you can solve captcha through CapMonster.Cloud, even if your program doesn't have integration with our service.
+﻿# Reconhecimento de Captcha via API de outros serviços
+O CapMonster Cloud suporta API: Anti-Captcha (v1.0, v2.0), RuCaptcha, RipCaptcha, 2Captcha, BypassCaptcha, DeathByCaptcha. Assim, você pode resolver captchas através do CapMonster.Cloud, mesmo que seu programa não tenha integração com nosso serviço.
 
-You just need to install ![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.001.png) [**CapMonsterInterceptor**](https://static.zenno.services/ccl/interceptor.msi) (OC Windows)
-![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.002.png) Other platforms support are in development.
+Você só precisa instalar ![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.001.png) [**CapMonsterInterceptor**](https://static.zenno.services/ccl/interceptor.msi) (OC Windows)
+![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.002.png) Suporte para outras plataformas está em desenvolvimento.
 
-During the installation process, you’ll need to specify the API key of your account, which you can find in your [personal area](https://capmonster.cloud/Dashboard).
+Durante o processo de instalação, você precisará especificar a chave da API da sua conta, que pode ser encontrada na sua [área pessoal](https://capmonster.cloud/Dashboard).
 
 ![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.003.png)
 
-![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.004.png) 
+![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.004.png)
 
-When completed, a CapMonsterInterceptor shortcut will be created on the desktop. After launch, the program will be available in the tray. No settings are required.
+Quando a instalação for concluída, um atalho do CapMonsterInterceptor será criado na área de trabalho. Após o lançamento, o programa ficará disponível na bandeja do sistema. Nenhuma configuração adicional é necessária.
 
-![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.005.png) 
+![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.005.png)
 
-When CapMonsterInterceptor is running, all captchas sent for recognition to *Anti-Captcha (v1.0, v2.0), RuCaptcha, RipCaptcha, 2Captcha, BypassCaptcha, DeathByCaptcha* services will be intercepted and redirected to CapMonster.Cloud.
-## **Example**
-Just select one of the recognition services in your program where you need to enter a captcha. In our example, it will be *DeathByCaptcha*.
+Quando o CapMonsterInterceptor estiver em execução, todos os captchas enviados para reconhecimento aos serviços *Anti-Captcha (v1.0, v2.0), RuCaptcha, RipCaptcha, 2Captcha, BypassCaptcha, DeathByCaptcha* serão interceptados e redirecionados para o CapMonster.Cloud.
+## **Exemplo**
+Basta selecionar um dos serviços de reconhecimento no seu programa onde você precisa inserir um captcha. No nosso exemplo, será *DeathByCaptcha*.
 
-- **Note for DeathByCaptcha** to identify a user, the DeathByCaptcha API uses username and password, not an API key. In this case, you need to fill 2 fields with random values.
+- **Nota para DeathByCaptcha:** para identificar um usuário, a API DeathByCaptcha usa nome de usuário e senha, não uma chave de API. Nesse caso, você precisa preencher 2 campos com valores aleatórios.
 
-![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.006.png) 
+![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.006.png)
 
-Enter any API-key (For example, qwerty).
+Insira qualquer chave de API (por exemplo, qwerty).
 
-Now you can run your program. All captchas sent to another service (DeathByCaptcha in our example) will be intercepted and sent to CapMonster Cloud.  
+Agora você pode executar seu programa. Todos os captchas enviados para outro serviço (DeathByCaptcha no nosso exemplo) serão interceptados e enviados para o CapMonster Cloud.
 
-By double-clicking on the CapMonsterInterceptor icon in the tray, you can see the statistics of intercepted captchas sent for recognition.
+Ao clicar duas vezes no ícone do CapMonsterInterceptor na bandeja, você pode ver as estatísticas dos captchas interceptados enviados para reconhecimento.
 
-![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.007.png) 
-## **Questions and answers**
+![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.007.png)
+## **Perguntas e respostas**
 
 <details>
-    <summary>How to change the API-key specified when installing CapMonsterInterceptor?</summary>
+    <summary>Como alterar a chave de API especificada ao instalar o CapMonsterInterceptor?</summary>
 
-Double click on the CapMonsterInterceptor tray icon. In the program window, find the «Settings» block, change the key and click «Save».
+Dê um clique duplo no ícone do CapMonsterInterceptor na bandeja. Na janela do programa, encontre o bloco «Configurações», altere a chave e clique em «Salvar».
 
-![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.009.png) 
+![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.009.png)
 </details>
 
 <details>
-    <summary>What to do if occured an error: An attempt was made to access a socket using a method prohibited by access rights?</summary>
+    <summary>O que fazer se ocorrer um erro: Tentativa de acessar um soquete usando um método proibido pelos direitos de acesso?</summary>
 
-![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.010.png) 
+![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.010.png)
 
-If an error occurs during the launch, it means, that port 80 and/or 443 is occupied by another app.
+Se ocorrer um erro durante a inicialização, isso significa que as portas 80 e/ou 443 estão ocupadas por outro aplicativo.
 
-To fix this error, it is necessary to end the process, that occupies these ports.  
+Para corrigir esse erro, é necessário encerrar o processo que ocupa essas portas.
 
-Run the command line via the start menu →  search → cmd
+Execute o prompt de comando através do menu iniciar → pesquisa → cmd
 
-![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.011.png) 
+![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.011.png)
 
-Enter the command netstat -a -o | findstr :443
+Digite o comando `netstat -a -o | findstr :443`
 
-The ***-a*** key indicates that we are interested in all active connections, ***-o*** — for each of them we need to display the PID (process ID).
-**findstr :443** will show us only the process that occupies the port we need.
+A chave ***-a*** indica que estamos interessados em todas as conexões ativas, ***-o*** — para cada uma delas, precisamos exibir o PID (ID do processo).
+**findstr :443** nos mostrará apenas o processo que ocupa a porta necessária.
 
-The PID of the process will be displayed in the right column, as in the screenshot. 
-Remember it or write it down.
+O PID do processo será exibido na coluna da direita, como na captura de tela.
+Lembre-se ou anote-o.
 
-Open the task manager, go to the «Details» tab, find the process with the necessary ID and end the task.
+Abra o gerenciador de tarefas, vá para a aba «Detalhes», encontre o processo com o ID necessário e finalize a tarefa.
 
 ![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.012.png)
 

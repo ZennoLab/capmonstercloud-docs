@@ -1,60 +1,60 @@
-﻿# How to connect CapMonster.cloud to a program?
-CapMonster.cloud is compatible with all captcha solvers. To connect CapMonster.clod to your program, follow the guide below.
-## **Connecting to programs supporting CapMonster.Cloud** 
+﻿# Como conectar o CapMonster.cloud a um programa?
+CapMonster.cloud é compatível com todos os solucionadores de captchas. Para conectar CapMonster.cloud ao seu programa, siga o guia abaixo.
+## **Conectando a programas que suportam CapMonster.Cloud**
 <details>
-    <summary>ZennoPoster</summary>
+   <summary>ZennoPoster</summary>
 
 ![](./images/external-program/zennoposter.png)
 </details>
 
 <details>
-    <summary>KeyCollector</summary>
+   <summary>KeyCollector</summary>
 
-Select “Use CapMonster.cloud” and enter your personal API key.
+Selecione “Use CapMonster.cloud” e insira sua chave de API pessoal.
 
 ![](./images/external-program/Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.003.png)
 </details>
 
 <details>
-    <summary>A-Parser</summary>
+   <summary>A-Parser</summary>
 
-To solve a reCAPTCHA, select Util::ReCaptcha2 and specify the key for the Provider field.
+Para resolver um reCAPTCHA, selecione Util::ReCaptcha2 e especifique a chave para o campo Provedor.
 
-![](./images/external-program/aparser.png) 
+![](./images/external-program/aparser.png)
 
-To solve standard captchas, select “Util::Antigate“ and specify “api.capmonster.cloud“ as the value for “Antigate domain“. In the "key" field, specify your personal API key.
+Para resolver captchas padrão, selecione “Util::Antigate” e especifique “api.capmonster.cloud” como o valor para “Antigate domain”. No campo "key", especifique sua chave de API pessoal.
 
 ![](./images/external-program/aparser2.png)
 </details>
 
 <details>
-    <summary>MailBot by Tavel</summary>
+   <summary>MailBot by Tavel</summary>
 
 ![](./images/external-program/Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.006.png)
 </details>
 
-## **Connecting to programs where you can specify a domain**
-Copy the domain [api.capmonster.cloud](https://api.capmonster.cloud) and key for CapMonster.cloud.
+## **Conectando a programas onde você pode especificar um domínio**
+Copie o domínio [api.capmonster.cloud](https://api.capmonster.cloud) e a chave para CapMonster.cloud.
 
-This method works for:
+Esse método funciona para:
 
 <details>
-    <summary>ZennoDroid</summary>
+   <summary>ZennoDroid</summary>
 
 ![](./images/external-program/Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.007.png)
 </details>
 
-## **Connecting to other programs in 3 steps**
-1. In your program, select one of the captcha solvers that we support:
+## **Conectando a outros programas em 3 etapas**
+1. No seu programa, selecione um dos solucionadores de captchas que suportamos:
    `Anti-Captcha (v1.0, v2.0), RuCaptcha, RipCaptcha, 2Captcha, BypassCaptcha, DeathByCaptcha`.
-1. Then specify your personal API key for CapMonsterCloud in the relevant field in your program from which you will send captchas.
-   1. **note for DeathByCaptcha:** to identify a user, DeathByCaptcha API employs a username and password, not an API key. In this case, specify the API key for CapMonsterCloud in the password field. Enter any value in the username field.
-1. Last step: match our IP with another service so CapMonster.Cloud can get captchas from the aforementioned services. For that, select your operating system, hit the spoiler, and follow the instruction.
+1. Em seguida, insira sua chave de API pessoal do CapMonsterCloud no campo relevante do programa de onde você enviará os captchas.
+   1. **Nota para DeathByCaptcha:** Para identificar um usuário, a API do DeathByCaptcha usa um nome de usuário e uma senha, não uma chave de API. Nesse caso, insira a chave de API do CapMonsterCloud no campo de senha. Coloque qualquer valor no campo de nome de usuário.
+1. Última etapa: faça a correspondência do nosso IP com outro serviço para que CapMonster.Cloud possa obter captchas dos serviços mencionados. Para isso, selecione seu sistema operacional, abra o spoiler e siga as instruções.
 
 <details>
-    <summary>I have Windows</summary>
+   <summary>Eu tenho Windows</summary>
 
-Go here: C:\Windows\System32\drivers\etc\ and find the file **hosts**. Open it with Notepad and add the following lines to the document end:
+Vá para: C:\Windows\System32\drivers\etc\ e encontre o arquivo **hosts**. Abra-o com o Bloco de Notas e adicione as seguintes linhas ao final do documento:
 
 ```
 # capmonster.cloud begin
@@ -101,43 +101,43 @@ Go here: C:\Windows\System32\drivers\etc\ and find the file **hosts**. Open it w
 
 # capmonster.cloud end
 ```
-Save.
+Salve.
 :::info
-In some cases, you may need admin rights to save the file. In this case, you will have to follow this simple instructions:
+Em alguns casos, pode ser necessário ter direitos de administrador para salvar o arquivo. Nesse caso, você precisará seguir estas instruções simples:
 
-1. Start typing "Notepad" in the search bar of your taskbar. Once the result is found, RMB-click on it and click "Run as administrator."
+1. Comece a digitar "Bloco de Notas" na barra de pesquisa da barra de tarefas. Assim que o resultado for encontrado, clique com o botão direito do mouse sobre ele e clique em "Executar como administrador".
 
-  ![](./images/external-program/Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.008.png)
+   ![](./images/external-program/Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.008.png)
 
-1. In the Notepad upper menu, click File — Open and specify the path to "hosts": *C:\Windows\System32\drivers\etc.* If there are several files with this name in the folder, open the file that has no extension.
-1. Make changes to "hosts" and then save the file in the menu.
+1. No menu superior do Bloco de Notas, clique em Arquivo — Abrir e especifique o caminho para "hosts": *C:\Windows\System32\drivers\etc.* Se houver vários arquivos com esse nome na pasta, abra o arquivo que não possui extensão.
+1. Faça as alterações no arquivo "hosts" e depois salve o arquivo no menu.
 :::
 
-Try visiting any of these domains. If everything is correct, a white page will open. If you couldn't do it, contact [support](https://helpdesk.zennolab.com/conversation/new), we will help you with all configurations!
+Tente visitar qualquer um desses domínios. Se tudo estiver correto, uma página em branco será aberta. Se você não conseguiu, entre em contato com [suporte](https://helpdesk.zennolab.com/conversation/new), nós ajudaremos com todas as configurações!
 </details>
 
 <details>
-    <summary>I have MacOS</summary>
+   <summary>Eu tenho MacOS</summary>
 
-Open Terminal via Spotlight or Launchpad.
+Abra o Terminal via Spotlight ou Launchpad.
 
-![](./images/external-program/Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.009.png) 
+![](./images/external-program/Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.009.png)
 
-In the application window, enter the command for opening Nano text editor: `sudo nano /etc/hosts`
+Na janela do aplicativo, insira o comando para abrir o editor de texto Nano: `sudo nano /etc/hosts`
 
-After you enter the command, click Enter, type your admin password, and hit Enter again.  
-
-:::info
-The process of entering the admin password is not shown. Just enter the password, click Enter, and you will get into the system. 
-:::
-
-Now you are in Nano text editor.
+Após inserir o comando, clique Enter, digite sua senha de administrador e pressione Enter novamente.
 
 :::info
-Neither mouse nor trackpad work here. You can only use the keyboard.
+O processo de digitação da senha de administrador não é exibido. Apenas insira a senha, clique Enter e você estará no sistema.
 :::
 
-Add the following lines to the end of the document:
+Agora você está no editor de texto Nano.
+
+:::info
+Nem o mouse nem o trackpad funcionam aqui. Você só pode usar o teclado.
+:::
+
+Adicione as seguintes linhas ao final do documento:
 
 ```
 # capmonster.cloud begin
@@ -185,21 +185,21 @@ Add the following lines to the end of the document:
 # capmonster.cloud end
 ```
 
-After changes are made, click Ctrl+O to apply them. After that, click Ctrl+X and Enter to leave the editor.
+Após fazer as alterações, clique em Ctrl+O para aplicá-las. Em seguida, clique em Ctrl+X e Enter para sair do editor.
 
-To see the changes, clear the DNS cache. For that, enter the command: `sudo killall -HUP mDNSResponder`. It will clear the DNS cache on your Mac, and the operating system will see the changes in Hosts.
+Para ver as alterações, limpe o cache de DNS. Para isso, insira o comando: `sudo killall -HUP mDNSResponder`. Isso limpará o cache de DNS no seu Mac, e o sistema operacional verá as alterações no arquivo Hosts.
 
-Try visiting any of these domains. If everything is correct, a white page will open. If you couldn't do it, contact [support](https://helpdesk.zennolab.com/conversation/new), we will help you with all configurations.
+Tente visitar qualquer um desses domínios. Se tudo estiver correto, uma página em branco será aberta. Se você não conseguiu, entre em contato com [suporte](https://helpdesk.zennolab.com/conversation/new), nós ajudaremos com todas as configurações.
 </details>
 
 <details>
-    <summary>I have Linux</summary>
+   <summary>Eu tenho Linux</summary>
 
-In the application window, enter the command for opening Nano text editor: `sudo nano /etc/hosts`
+Na janela do aplicativo, insira o comando para abrir o editor de texto Nano: `sudo nano /etc/hosts`
 
-After you enter the command, click Enter. Now you are in Nano text editor.  
+Após inserir o comando, clique Enter. Agora você está no editor de texto Nano.
 
-Add the following lines to the end of the document:
+Adicione as seguintes linhas ao final do documento:
 ```
 # capmonster.cloud begin
 
@@ -246,17 +246,17 @@ Add the following lines to the end of the document:
 # capmonster.cloud end
 ```
 
-After changes are made, click Ctrl+X and then Y to apply them.  
+Após fazer as alterações, clique em Ctrl+X e depois Y para aplicá-las.
 
-Try visiting any of these domains. If everything is correct, a white page will open. If you couldn't do it, contact [support](https://helpdesk.zennolab.com/conversation/new), we will help you with all configurations.
+Tente visitar qualquer um desses domínios. Se tudo estiver correto, uma página em branco será aberta. Se você não conseguiu, entre em contato com [suporte](https://helpdesk.zennolab.com/conversation/new), nós ajudaremos com todas as configurações.
 </details>
 
-This method works for many apps, including the following:
+Este método funciona para muitos aplicativos, incluindo os seguintes:
 
 - BroBot
 - Жукладочник
 - Определяйка
-- PHP скрипты
+- Scripts PHP
 - Словоёб
 - Add2Board
 - AddNews
@@ -309,22 +309,22 @@ This method works for many apps, including the following:
 - X Parser Light
 - XSEOchecker
 - XseoN
-- And others...
+- E outros...
 
-:::info !
+:::info
 
-If you couldn't connect CapMonster.Cloud to your app, contact [support](https://helpdesk.zennolab.com/conversation/new), we will help you with all configurations.
+Se você não conseguiu conectar o CapMonster.Cloud ao seu aplicativo, entre em contato com [suporte](https://helpdesk.zennolab.com/conversation/new), nós ajudaremos com todas as configurações.
 
 :::
 
-## **Frequent connection errors. How to avoid them?**
+## **Erros de conexão frequentes. Como evitá-los?**
 
-**Network problems**: If you are having trouble connecting to CapMonster.Cloud, check your internet connection. An unstable network or routing issues can cause malfunctions with the service.
+**Problemas de rede**: Se você estiver com problemas para se conectar ao CapMonster.Cloud, verifique sua conexão com a Internet. Uma rede instável ou problemas de roteamento podem causar falhas no serviço.
 
-**Program configuration error**: Incorrect program configuration may cause errors when using CapMonster.Cloud. Check the settings of your software and make sure that all parameters are correctly configured to work with the service.
+**Erro de configuração do programa**: Configurações incorretas do programa podem causar erros ao usar o CapMonster.Cloud. Verifique as configurações do seu software e certifique-se de que todos os parâmetros estão configurados corretamente para funcionar com o serviço.
 
-**Exceeded limits**: You may have exceeded the limits for using the CapMonster.Cloud service. Check your account for active limits and make sure they are not exhausted.
+**Limites excedidos**: Você pode ter excedido os limites de uso do serviço CapMonster.Cloud. Verifique sua conta para ver se há limites ativos e se eles não estão esgotados.
 
-**Authentication issues**: Make sure your API key is properly copied and pasted into your software settings.
+**Problemas de autenticação**: Certifique-se de que sua chave de API foi copiada e colada corretamente nas configurações do seu software.
 
-**Errors in proxy settings**: If you use a proxy server to connect to the Internet, make sure that the proxy settings are specified correctly in your software and do not block access to CapMonster.Cloud.
+**Erros nas configurações de proxy**: Se você usa um servidor proxy para se conectar à Internet, verifique se as configurações do proxy estão corretas em seu software e se não bloqueiam o acesso ao CapMonster.Cloud.

@@ -2,102 +2,102 @@
 sidebar_position: 4
 ---
 
-# Errors description
+# Descrição de Erros
 
-:::info Recommendations on how to prevent errors:
-- Ensure that the type of captcha you need to solve is supported by the CapMonster Cloud service.
-- Check for updated documentation to stay up-to-date with the latest API changes and avoid using outdated methods or parameters.
-- Use quality proxies.
+:::info Recomendações sobre como evitar erros:
+- Certifique-se de que o tipo de captcha que você precisa resolver é suportado pelo serviço CapMonster Cloud.
+- Verifique a documentação atualizada para ficar por dentro das últimas mudanças na API e evitar o uso de métodos ou parâmetros desatualizados.
+- Use proxies de qualidade.
 :::
 
-### `INVALID KEY`
-API error code: `ERROR_KEY_DOES_NOT_EXIST` <br />
-Account authorization key not found in the system or has incorrect format.
+### `CHAVE INVÁLIDA`
+Código de erro da API: `ERROR_KEY_DOES_NOT_EXIST` <br />
+A chave de autorização da conta não foi encontrada no sistema ou tem formato incorreto.
 
-### `NO FUNDS`
-API error code: `ERROR_ZERO_BALANCE` <br />
-Account has zero balance. [Add funds](https://capmonster.cloud/SelectPaymentType) to continue recognition. 
+### `SEM FUNDOS`
+Código de erro da API: `ERROR_ZERO_BALANCE` <br />
+A conta está com saldo zero. [Adicione fundos](https://capmonster.cloud/SelectPaymentType) para continuar o reconhecimento.
 
-### `BIG IMAGE SIZE`
-API error code: `ERROR_TOO_BIG_CAPTCHA_FILESIZE` <br />
-The size of the captcha you are uploading is more than 500,000 bytes.
+### `TAMANHO DA IMAGEM MUITO GRANDE`
+Código de erro da API: `ERROR_TOO_BIG_CAPTCHA_FILESIZE` <br />
+O tamanho do captcha que você está enviando é superior a 500.000 bytes.
 
-### `ZERO IMAGE SIZE`
-API error code: `ERROR_ZERO_CAPTCHA_FILESIZE` <br />
-The size of the captcha you are uploading is less than 100 bytes.
+### `TAMANHO DA IMAGEM ZERO`
+Código de erro da API: `ERROR_ZERO_CAPTCHA_FILESIZE` <br />
+O tamanho do captcha que você está enviando é inferior a 100 bytes.
 
-### `CAPTCHA ID IS NOT FOUND`
-API error code: `ERROR_NO_SUCH_CAPCHA_ID`, `WRONG_CAPTCHA_ID` <br />
-The captcha that you are requesting was not found. Make sure you are requesting a status update only within 5 minutes of uploading.
+### `ID DO CAPTCHA NÃO ENCONTRADO`
+Código de erro da API: `ERROR_NO_SUCH_CAPCHA_ID`, `WRONG_CAPTCHA_ID` <br />
+O captcha que você está solicitando não foi encontrado. Certifique-se de que você está solicitando uma atualização de status apenas dentro de 5 minutos após o upload.
 
-### `CAPTCHA UNSOLVABLE`
-API error code: `ERROR_CAPTCHA_UNSOLVABLE` <br />
-This type of captchas is not supported by the service or the image does not contain an answer, perhaps it is too noisy. It could also mean that the image is corrupted or was incorrectly rendered. 
+### `CAPTCHA INRECONHECÍVEL`
+Código de erro da API: `ERROR_CAPTCHA_UNSOLVABLE` <br />
+Esse tipo de captcha não é suportado pelo serviço ou a imagem não contém uma resposta; talvez esteja muito ruidosa. Também pode significar que a imagem está corrompida ou foi renderizada incorretamente.
 
-### `CAPTCHA IS NOT READY`
-API error code: `CAPTCHA_NOT_READY` <br />
-The captcha has not yet been solved.
+### `CAPTCHA NÃO ESTÁ PRONTA`
+Código de erro da API: `CAPTCHA_NOT_READY` <br />
+O captcha ainda não foi resolvido.
 
-### `REQUEST IS NOT ALLOWED FROM YOUR IP`
-API error code: `ERROR_IP_NOT_ALLOWED` <br />
-Request with current account key is not allowed from your IP. Open your account settings and [add your IP to the trusted list](https://capmonster.cloud/Account/Settings).
+### `SOLICITAÇÃO NÃO PERMITIDA DO SEU IP`
+Código de erro da API: `ERROR_IP_NOT_ALLOWED` <br />
+Solicitação com a chave de conta atual não é permitida do seu IP. Abra as configurações da sua conta e [adicione seu IP à lista de confiáveis](https://capmonster.cloud/Account/Settings).
 
-### `IP BANNED`
-API error code: `ERROR_IP_BANNED` <br />
-You have exceeded the limit of requests with the wrong api key, check the correctness of your api key in the control panel and after some time, try again.
+### `IP BANIDO`
+Código de erro da API: `ERROR_IP_BANNED` <br />
+Você excedeu o limite de solicitações com a chave da API incorreta; verifique a correção da sua chave da API no painel de controle e, após algum tempo, tente novamente.
 
-### `INCORRECT METHOD`
-API error code: `ERROR_NO_SUCH_METHOD` <br />
-Incorrect [captcha type](/docs/captchas) (value of the «type» parameter).
+### `MÉTODO INCORRETO`
+Código de erro da API: `ERROR_NO_SUCH_METHOD` <br />
+Tipo de [captcha](/docs/captchas) incorreto (valor do parâmetro «type»).
 
-### `REQUEST LIMIT EXCEEDED`
-API error code: `ERROR_TOO_MUCH_REQUESTS` <br />
-You have exceeded the limit of requests to receive an answer for one task. Try to request [the result of the task](./methods/get-task-result.md) no more than 1 time in 2 seconds.
+### `LIMITE DE SOLICITAÇÕES EXCEDIDO`
+Código de erro da API: `ERROR_TOO_MUCH_REQUESTS` <br />
+Você excedeu o limite de solicitações para receber uma resposta para uma tarefa. Tente solicitar [o resultado da tarefa](./methods/get-task-result.md) no máximo 1 vez a cada 2 segundos.
 
-### `THE DOMAIN IS NOT ALLOWED`
-API error code: `ERROR_DOMAIN_NOT_ALLOWED` <br />
-Captcha from some domains cannot be solved in CapMonster Cloud. If you try to create a task for such a domain, this error will return.
+### `DOMÍNIO NÃO PERMITIDO`
+Código de erro da API: `ERROR_DOMAIN_NOT_ALLOWED` <br />
+Captchas de alguns domínios não podem ser resolvidos no CapMonster Cloud. Se você tentar criar uma tarefa para tal domínio, este erro será retornado.
 
-### `THE TOKEN IS EXPIRED`
-API error code: `ERROR_TOKEN_EXPIRED` <br />
-Captcha provider server reported that the additional token has expired. Try creating task with a new token.
+### `TOKEN EXPIRADO`
+Código de erro da API: `ERROR_TOKEN_EXPIRED` <br />
+O servidor do provedor de captcha informou que o token adicional expirou. Tente criar a tarefa com um novo token.
 
-### `NO FREE SERVERS`
-API error code: `ERROR_NO_SLOT_AVAILABLE` <br />
-At the moment there are no available servers for recognizing this task. Try again after a while.
+### `SEM SERVIDORES LIVRES`
+Código de erro da API: `ERROR_NO_SLOT_AVAILABLE` <br />
+No momento, não há servidores disponíveis para reconhecer essa tarefa. Tente novamente depois de um tempo.
 
-### `INVALID RECAPTCHA SITEKEY`
-API error code: `ERROR_RECAPTCHA_INVALID_SITEKEY` <br />
-Invalid sitekey.
+### `SITEKEY RECAPTCHA INVÁLIDO`
+Código de erro da API: `ERROR_RECAPTCHA_INVALID_SITEKEY` <br />
+Sitekey inválido.
 
-### `INVALID RECAPTCHA DOMAIN`
-API error code: `ERROR_RECAPTCHA_INVALID_DOMAIN` <br />
-Invalid domain for sitekey.
+### `DOMÍNIO RECAPTCHA INVÁLIDO`
+Código de erro da API: `ERROR_RECAPTCHA_INVALID_DOMAIN` <br />
+Domínio inválido para sitekey.
 
-### `RECAPTCHA TIMEOUT`
-API error code: `ERROR_RECAPTCHA_TIMEOUT` <br />
-The timeout of the ReCaptcha recognition has been exceeded, most likely due to a slow proxy or Google server.
+### `TIMER DE RECAPTCHA EXCEDIDO`
+Código de erro da API: `ERROR_RECAPTCHA_TIMEOUT` <br />
+O tempo limite para reconhecimento do ReCaptcha foi excedido, provavelmente devido a um proxy lento ou servidor do Google.
 
-### `YOUR IP IS BLOCKED`
-API error code: `ERROR_IP_BLOCKED` <br />
-Your IP is not allowed to access this API due to a large number of errors.
+### `SEU IP ESTÁ BLOQUEADO`
+Código de erro da API: `ERROR_IP_BLOCKED` <br />
+Seu IP não tem permissão para acessar esta API devido a um grande número de erros.
 
-### `FAILED TO CONNECT PROXY`
-API error code: `ERROR_PROXY_CONNECT_REFUSED` <br />
-Unable to connect to proxy server, connection timeout.
+### `FALHA AO CONECTAR AO PROXY`
+Código de erro da API: `ERROR_PROXY_CONNECT_REFUSED` <br />
+Não foi possível conectar ao servidor proxy, tempo limite de conexão.
 
-### `THE PROXY IP IS BANNED`
-API error code: `ERROR_PROXY_BANNED` <br />
-The proxy IP is banned in the target captcha service. 
+### `O IP DO PROXY ESTÁ BANIDO`
+Código de erro da API: `ERROR_PROXY_BANNED` <br />
+O IP do proxy está banido no serviço de captcha alvo.
 
-### `INCORRECT TASK TYPE`
-API error code: `ERROR_TASK_NOT_SUPPORTED` <br />
-The task type is incorrect or not supported. Check the «type» property in the task object. 
+### `TIPO DE TAREFA INCORRETO`
+Código de erro da API: `ERROR_TASK_NOT_SUPPORTED` <br />
+O tipo de tarefa está incorreto ou não é suportado. Verifique a propriedade «type» no objeto da tarefa.
 
 ### `ERROR_TASK_ABSENT`
-API error code: `ERROR_TASK_ABSENT` <br />
-Task object not found or invalid JSON was sent in [createTask](./methods/create-task.md) request.
+Código de erro da API: `ERROR_TASK_ABSENT` <br />
+Objeto da tarefa não encontrado ou JSON inválido foi enviado na solicitação [createTask](./methods/create-task.md).
 
-### `USERAGENT IS EXPIRED`
-API error code: `ERROR_WRONG_USERAGENT`<br />
-The request specified an invalid User Agent, you can find out the current User Agent in the [article](../captchas/hcaptcha-task.mdx).
+### `USERAGENT EXPIRADO`
+Código de erro da API: `ERROR_WRONG_USERAGENT`<br />
+A solicitação especificou um User Agent inválido; você pode descobrir o User Agent atual no [artigo](../captchas/hcaptcha-task.mdx).

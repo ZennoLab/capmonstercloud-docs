@@ -1,23 +1,23 @@
 ﻿---
-sidebar_position: 9
+sidebar_position: 8  
 sidebar_label: ComplexImageTask HCaptcha
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import ParamItem from '@theme/ParamItem';
-import MethodItem from '@theme/MethodItem';
+import Tabs from '@theme/Tabs';  
+import TabItem from '@theme/TabItem';  
+import ParamItem from '@theme/ParamItem';  
+import MethodItem from '@theme/MethodItem';  
 import MethodDescription from '@theme/MethodDescription'
 
 
 # ComplexImageTask HCaptcha
 
-In ComplexImageTask, you need to perform certain actions such as overlaying objects on the image, rotating/modifying objects in the image to match certain criteria, searching/recognizing objects, and the like. 
+No ComplexImageTask, você precisará realizar ações como sobrepor objetos à imagem, rotacionar/modificar objetos para atender a certos critérios, buscar/reconhecer objetos, e assim por diante. 
 
-The object contains data about the task for solving hCaptcha.
+O objeto contém dados sobre a tarefa para resolver o hCaptcha.
 
-## Request parameters
-<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (without proxy)" default className="bordered-panel">
+## Parâmetros da solicitação
+<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (sem proxy)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **ComplexImageTask**
 
@@ -28,77 +28,77 @@ The object contains data about the task for solving hCaptcha.
 
     ---
 
-    <ParamItem title="imageUrls" required="required (if imagesBase64 is not filled)" type="array" />
-    List with image addresses. Maximum 18 elements.
-    Example: [ “[https://i.postimg.cc/kg71cbRt/image-1.jpg](https://i.postimg.cc/kg71cbRt/image-1.jpg)”,… ]\
+    <ParamItem title="imageUrls" required="obrigatório (se imagesBase64 não estiver preenchido)" type="array" />
+    Lista com endereços de imagens. Máximo de 18 elementos.  
+    Exemplo: [ "[https://i.postimg.cc/kg71cbRt/image-1.jpg](https://i.postimg.cc/kg71cbRt/image-1.jpg)",…]
 
     ---
 
-    <ParamItem title="imagesBase64" required="required (if imageUrls is not filled)" type="array" />
-    List with images in base64 format. Maximum 18 elements.
-    Example: [ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”]
+    <ParamItem title="imagesBase64" required="obrigatório (se imageUrls não estiver preenchido)" type="array" />
+    Lista com imagens no formato base64. Máximo de 18 elementos.  
+    Exemplo: [ "/9j/4AAQSkZJRgABAQEAAAAAAAD…" ]
 
     ---
 
-    <ParamItem title="metadata.Task" required="required (if metadata.TaskDefinition is not filled)" type="string" />
-    Possible values: `Please click on the panda` and others <br />
-    Task name (<u>in English</u>).
+    <ParamItem title="metadata.Task" required="obrigatório (se metadata.TaskDefinition não estiver preenchido)" type="string" />
+    Valores possíveis: `Please click on the panda` e outros.  
+    Nome da tarefa (<u>em inglês</u>).
 
     ---
 
     <ParamItem title="exampleImageUrls" type="array" />
-    List with image addresses. Must contain 1 element.
-    Example: [ “[https://i.postimg.cc/GmBgwnDm/4type-example-image.png](https://i.postimg.cc/GmBgwnDm/4type-example-image.png)”]\
+    Lista com endereços de imagens. Deve conter 1 elemento.  
+    Exemplo: [ "[https://i.postimg.cc/GmBgwnDm/4type-example-image.png](https://i.postimg.cc/GmBgwnDm/4type-example-image.png)" ]
 
     ---
 
     <ParamItem title="exampleImagesBase64" type="array" />
-    List with images in base64 format. Must contain 1 element.
-    Example: [ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”]
+    Lista com imagens no formato base64. Deve conter 1 elemento.  
+    Exemplo: [ "/9j/4AAQSkZJRgABAQEAAAAAAAD…" ]
 
     ---
 
     <ParamItem title="metadata.Classes" required type="array" />
-    A list with string values located on the right half of the captcha (in the same order as in the image).<br />
-    Possible values: [ "shark", "chicken", "goat", "hedgehog" ] and others 
-    
+    Uma lista com valores de string localizados na metade direita do captcha (na mesma ordem que na imagem).  
+    Valores possíveis: ["shark", "chicken", "goat", "hedgehog"] e outros.
+
 
     ---
 
     <ParamItem title="userAgent" type="string" />
-    The browser User-Agent to use when loading images if links were passed in imageUrls. It is required to use a modern browser signature, otherwise Google will return an error asking for a browser update.
+    O User-Agent do navegador para usar ao carregar imagens se links forem passados em imageUrls. É obrigatório usar uma assinatura moderna do navegador, caso contrário o Google retornará um erro solicitando uma atualização do navegador.
 
     ---
 
     <ParamItem title="websiteURL" type="string" />
-    URL of the page where the captcha is solved.
+    URL da página onde o captcha está sendo resolvido.
   </TabItem>
 
 
-## Get task result method
-:::info Method
+## Solicitação de resposta
+:::info Método
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
 :::
-Use the [getTaskResult](../api/methods/get-task-result.md) method to get the captcha solution. Depending on the system load, you will receive a response after a time ranging from 300 ms to 6s.
+Use o método [getTaskResult](../api/methods/get-task-result.md) para obter a solução do captcha. Dependendo da carga do sistema, você receberá uma resposta em um intervalo de 300ms a 6s.
 
-### Structure of the solution object
-|**Property**|**Type**|**Description**|
+### Estrutura do objeto de solução
+| **Propriedade** | **Tipo** | **Descrição** |
 | :- | :- | :- |
-|answer|Array of objects|List of answers to each of the sent images.|
-|metadata.AnswerType|string|Type of the returned response.|
+| answer | Array de objetos | Lista de respostas para cada uma das imagens enviadas. |
+| metadata.AnswerType | string | Tipo da resposta retornada. |
 
-### Grid response type
-|**Response format**|**Response example**|**Description**|
+### Tipo de resposta em grade
+| **Formato de resposta** | **Exemplo de resposta** | **Descrição** |
 | :- | :- | :- |
-|Array of boolean|`[true, false, true]`|List with boolean values, true - means that you need to click on the image corresponding to this position.|
+| Array de booleanos | `[true, false, true]` | Lista com valores booleanos, onde `true` indica que você precisa clicar na imagem correspondente a esta posição. |
 
-**Response example:**
+**Exemplo de resposta:**
 ```json
 {
-  "errorId":0,
-  "status":"ready",
+  "errorId": 0,
+  "status": "ready",
   "solution": {
     "answer": [ false, true ],
     "metadata": { "AnswerType": "Grid" }
@@ -106,16 +106,16 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the cap
 }
 ```
 
-### Coordinate response type
-|**Response format**|**Response example**|**Description**|
+### Tipo de resposta por coordenadas
+| **Formato de resposta** | **Exemplo de resposta** | **Descrição** |
 | :- | :- | :- |
-|Array of objects|`[{ "X":371, "Y":505.0000112 }, { "X":5, "Y":101.2 }]`|A list with coordinates to click on the corresponding image.|
+| Array de objetos | `[{ "X":371, "Y":505.0000112 }, { "X":5, "Y":101.2 }]` | Uma lista com coordenadas para clicar na imagem correspondente. |
 
-**Response example:**
+**Exemplo de resposta:**
 ```json
 {
-  "errorId":0,
-  "status":"ready",
+  "errorId": 0,
+  "status": "ready",
   "solution": { 
     "answer": [ { "X":371, "Y":505.0000112 }, { "X":5, "Y":101.2 } ],
     "metadata": { "AnswerType": "Coordinate" }
@@ -123,32 +123,33 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the cap
 }
 ```
 
-## Image example (first type)
+## Exemplo de imagem (primeiro tipo)
 
-![](./images/hcaptcha-click/Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.001.png) 
+![](./images/hcaptcha-click/Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.001.png)
 
-:::info Choose the right task type
-This task type does not contain a reference image, such as [fourth type](#image-example-fourth-type)
+:::info Escolha o tipo correto de tarefa
+Este tipo de tarefa não contém uma imagem de referência, como [o quarto tipo](#image-example-fourth-type).
 :::
 
 
-### Create task method
+### Criar tarefa
 
-<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
+
+<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (sem proxy)" default className="method-panel">
 <MethodItem>
   ```http
   https://api.capmonster.cloud/createTask
   ```
 </MethodItem>
 <MethodDescription>
-**Request**
+**Solicitação**
 ```json
 {
   "clientKey":"API_KEY",
   "task": {
     "type": "ComplexImageTask",
     "class": "hcaptcha",
-    "imageUrls":[ "https://i.postimg.cc/kg71cbRt/image-1.jpg", "https://i.postimg.cc/6381Zx2j/image.jpg" ],
+    "imageUrls": ["https://i.postimg.cc/kg71cbRt/image-1.jpg", "https://i.postimg.cc/6381Zx2j/image.jpg"],
     "metadata": {
       "Task": "Please click each image containing a mountain"
     },
@@ -157,11 +158,11 @@ This task type does not contain a reference image, such as [fourth type](#image-
   }
 }
 ```
-**Response**
+**Resposta**
 ```json
 {
-  "errorId":0,
-  "taskId":407533072
+  "errorId": 0,
+  "taskId": 407533072
 }
 ```
 
@@ -169,67 +170,66 @@ This task type does not contain a reference image, such as [fourth type](#image-
 </TabItem>
 
 
-### Get task result method
-Type of received response - [**Grid**](#grid-response-type).
+### Obter resultado da tarefa
+Tipo de resposta recebida - [**Grid**](#grid-response-type).
 
-<TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
+<TabItem value="proxyless" label="GeeTestTaskProxyless (sem proxy)" default className="method-panel-full">
     <MethodItem>
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
     </MethodItem>
     <MethodDescription>
-**Request**
+**Solicitação**
 ```json
 {
-  "clientKey":"API_KEY",
+  "clientKey": "API_KEY",
   "taskId": 407533072
 }
 ```
-**Response**
+**Resposta**
 ```json
 {
-  "errorId":0,
-  "status":"ready",
+  "errorId": 0,
+  "status": "ready",
   "solution": {
-    "answer": [ false, true ],
-    "metadata": { "AnswerType": "Grid" }
+    "answer": [false, true],
+    "metadata": {"AnswerType": "Grid"}
   }
 }
 ```
   </MethodDescription>
   </TabItem>
 
+### Preços
 
-### Pricing
-
-|**Name** |**Cost per 1000 images, $**|
+| **Nome** | **Custo por 1000 imagens, $** |
 | :-: | :-: |
-|hCaptcha|0,02|
+| hCaptcha | 0,02 |
 
-
-## Image example (second type)
-|![](./images/hcaptcha-click/Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.002.png)|![](./images/hcaptcha-click/Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.003.png)|![](./images/hcaptcha-click/Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.004.png)|
+## Exemplo de imagem (segundo tipo)
+| ![](./images/hcaptcha-click/Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.002.png) | ![](./images/hcaptcha-click/Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.003.png) | ![](./images/hcaptcha-click/Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.004.png) |
 | :-: | :-: | :-: |
 
-:::info Share reference images for better results
-Images that are in the task header, if any, should be passed in the `exampleImagesBase64` or `exampleImageUrls` parameter
+:::info Compartilhe imagens de referência para melhores resultados
+As imagens que estão no cabeçalho da tarefa, se houver, devem ser passadas no parâmetro `exampleImagesBase64` ou `exampleImageUrls`.
 
-![small-size](./images/hcaptcha-click/reference-example.png)
+![tamanho pequeno](./images/hcaptcha-click/reference-example.png)
 
 :::
 
 
-### Create task method
+### Criar tarefa
 
-<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
+
+<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (sem proxy)" default className="method-panel">
 <MethodItem>
   ```http
   https://api.capmonster.cloud/createTask
   ```
 </MethodItem>
 <MethodDescription>
-**Request**
+**Solicitação**
 ```json
 {
   "clientKey":"API_KEY",
@@ -239,13 +239,13 @@ Images that are in the task header, if any, should be passed in the `exampleImag
     "exampleImagesBase64":[“/9j/4AAQSkZJRgABAQEAAAAAAAD…”, “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, “/9j/4AAQSkZJRgABAQEAAAAAAAD…”],
     "imagesBase64": [ “/9j/4AAQSkZJRgABAQEAAAAAAAD…” ],
     "metadata": {
-      "Task": "Please click on the panda"
+      "Task": "Please click on the panda",
     },
-    "userAgent": "userAgentPlaceholder"
+    "userAgent": "userAgentPlaceholder",
   }
 }
 ```
-**Response**
+**Resposta**
 ```json
 {
   "errorId":0,
@@ -257,24 +257,24 @@ Images that are in the task header, if any, should be passed in the `exampleImag
 </TabItem>
 
 
-### Get task result method
-Type of received response - [**Coordinate**](#coordinate-response-type).
+### Obter resultado da tarefa
+Tipo de resposta recebida - [**Coordenada**](#coordinate-response-type).
 
-<TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
+<TabItem value="proxyless" label="GeeTestTaskProxyless (sem proxy)" default className="method-panel-full">
     <MethodItem>
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
     </MethodItem>
     <MethodDescription>
-**Request**
+**Solicitação**
 ```json
 {
   "clientKey":"API_KEY",
   "taskId": 407533072
 }
 ```
-**Response**
+**Resposta**
 ```json
 {
   "errorId":0,
@@ -288,31 +288,30 @@ https://api.capmonster.cloud/getTaskResult
   </MethodDescription>
   </TabItem>
 
+### Preços:
 
-### Pricing
-
-|**Name** |**Cost per 1000 images, $**|
+|**Nome** |**Custo por 1000 imagens, $**|
 | :-: | :-: |
 |hCaptcha|0,02|
 
-
-## Image example (third type)
+## Exemplo de imagem (terceiro tipo)
 
 ![](./images/hcaptcha-click/Aspose.Words.e3dd6ce8-93b3-4001-a846-cb36c3e4b7b5.005.png) 
 
-This type of captcha should contain the **metadata.Classes** field.
+Este tipo de captcha deve conter o campo **metadata.Classes**.
 
 
-### Create task method
+### Criar tarefa
 
-<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
+
+<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (sem proxy)" default className="method-panel">
 <MethodItem>
   ```http
   https://api.capmonster.cloud/createTask
   ```
 </MethodItem>
 <MethodDescription>
-**Request**
+**Solicitação**
 ```json
 {
   "clientKey":"API_KEY",
@@ -321,14 +320,14 @@ This type of captcha should contain the **metadata.Classes** field.
     "class": "hcaptcha",
     "imagesBase64": [ “/9j/4AAQSkZJRgABAQEAAAAAAAD…” ],
     "metadata": {
-      "Task": "What animal is shown in the image below?",
-      "Classes": [ "shark", "chicken", "goat", "hedgehog" ]
+      "Task": "Qual animal é mostrado na imagem abaixo?",
+      "Classes": [ "tubarão", "galinha", "cabra", "ouriço" ]
     },
     "userAgent": "userAgentPlaceholder"
   }
 }
 ```
-**Response**
+**Resposta**
 ```json
 {
   "errorId":0,
@@ -340,24 +339,24 @@ This type of captcha should contain the **metadata.Classes** field.
 </TabItem>
 
 
-### Get task result method
-Type of received response - [**Grid**](#grid-response-type).
+### Obter resultado da tarefa
+Tipo de resposta recebida - [**Grid**](#grid-response-type).
 
-<TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
+<TabItem value="proxyless" label="GeeTestTaskProxyless (sem proxy)" default className="method-panel-full">
     <MethodItem>
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
     </MethodItem>
     <MethodDescription>
-**Request**
+**Solicitação**
 ```json
 {
   "clientKey":"API_KEY",
   "taskId": 407533072
 }
 ```
-**Response**
+**Resposta**
 ```json
 {
   "errorId":0,
@@ -370,33 +369,33 @@ https://api.capmonster.cloud/getTaskResult
 ```
   </MethodDescription>
   </TabItem>
+ 
+### Preços:
 
-### Pricing
-
-|**Name** |**Cost per 1000 images, $**|
+|**Nome** |**Custo por 1000 imagens, $**|
 | :-: | :-: |
 |hCaptcha|0,02|
 
-
-## Image example (fourth type)
+## Exemplo de imagem (quarto tipo)
 
 ![](./images/hcaptcha-click/4type.png)
 
-For this request, the required field is **exampleImageUrls** or **exampleImagesBase64**. It should contain one image.
+Para esta solicitação, o campo **exampleImageUrls** ou **exampleImagesBase64** é obrigatório. Ele deve conter uma imagem.
 
-The **imageUrls** or **imagesBase64** field should contain 9 images.
+O campo **imageUrls** ou **imagesBase64** deve conter 9 imagens.
 
 
-### Create task method
+### Criar tarefa
 
-<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
+
+<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (sem proxy)" default className="method-panel">
 <MethodItem>
   ```http
   https://api.capmonster.cloud/createTask
   ```
 </MethodItem>
 <MethodDescription>
-**Request**
+**Solicitação**
 ```json
 {
   "clientKey":"API_KEY",
@@ -416,12 +415,12 @@ The **imageUrls** or **imagesBase64** field should contain 9 images.
      ],
     "exampleImageUrls": [ "https://i.postimg.cc/MpLtdwJV/4type-example.jpg" ],
     "metadata": {
-      "Task": "Please select all images that appear warmer in comparison to other images"
+      "Task": "Por favor, selecione todas as imagens que parecem mais quentes em comparação com as outras"
     }
   }
 }
 ```
-**Response**
+**Resposta**
 ```json
 {
   "errorId":0,
@@ -433,24 +432,24 @@ The **imageUrls** or **imagesBase64** field should contain 9 images.
 </TabItem>
 
 
-### Get task result method
-Type of received response - [**Grid**](#grid-response-type).
+### Obter resultado da tarefa
+Tipo de resposta recebida - [**Grid**](#grid-response-type).
 
-<TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
+<TabItem value="proxyless" label="GeeTestTaskProxyless (sem proxy)" default className="method-panel-full">
     <MethodItem>
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
     </MethodItem>
     <MethodDescription>
-**Request**
+**Solicitação**
 ```json
 {
   "clientKey":"API_KEY",
   "taskId": 407533072
 }
 ```
-**Response**
+**Resposta**
 ```json
 {
   "errorId":0,
@@ -464,13 +463,13 @@ https://api.capmonster.cloud/getTaskResult
   </MethodDescription>
   </TabItem>
 
-### Pricing
+### Preços
 
-|**Name** |**Cost per 1000 images, $**|
+|**Nome** |**Custo por 1000 imagens, $**|
 | :-: | :-: |
 |hCaptcha|0,02|
 
-## Use SDK Library
+## Usar biblioteca SDK
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">
@@ -487,10 +486,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   const complexImageHCaptchaRequest = new ComplexImageHCaptchaRequest({
     imageUrls: ['https://i.postimg.cc/kg71cbRt/image-1.jpg', 'https://i.postimg.cc/6381Zx2j/image.jpg'],
     metaData: {
-      Task: 'Please click each image containing a mountain',
+      Task: 'Por favor, clique em cada imagem que contém uma montanha',
     },
     websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle',
-    exampleImagesBase64: ['image in base64'],
+    exampleImagesBase64: ['imagem em base64'],
     exampleImageUrls: ['https://i.postimg.cc/kg71cbRt/image-1.jpg'],
   });
 
@@ -499,4 +498,4 @@ document.addEventListener('DOMContentLoaded', async () => {
 ```
   </TabItem>
   
-</Tabs>
+</Tabs> 

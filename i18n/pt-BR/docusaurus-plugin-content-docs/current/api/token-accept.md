@@ -1,34 +1,34 @@
 ﻿---
 sidebar_position: 7
 ---
-# Token acceptance issues
+# Problemas de aceitação de token
 
-If you encounter issues with token acceptance, please contact our support team. We will promptly take the necessary actions to resolve the issue.
+Se você encontrar problemas com a aceitação de tokens, entre em contato com nossa equipe de suporte. Tomaremos rapidamente as ações necessárias para resolver o problema.
 
-## What to do if a site is only accepting a portion of tokens from CapMonster Cloud?
+## O que fazer se um site aceitar apenas uma parte dos tokens do CapMonster Cloud?
 
-## **Description**
+## **Descrição**
 
-You receive a token from CapMonster Cloud and send it to a site, but the site rejects it. And sometimes the site can accept the token, for example, in one case out of 10 (the success rate in your case may be different). Blocking or rejection of tokens can happen because of frequent requests from one IP address, or because of poor captcha quality (noise on the image), also some sites may use dynamic captcha updates or add additional checks without notification. In this case, the `nocache` parameter can help you.
+Você recebe um token do CapMonster Cloud e o envia para um site, mas o site o rejeita. Às vezes, o site pode aceitar o token, por exemplo, em um caso a cada 10 (a taxa de sucesso no seu caso pode ser diferente). O bloqueio ou a rejeição de tokens pode ocorrer devido a solicitações frequentes de um único endereço IP ou devido à baixa qualidade do captcha (ruído na imagem). Além disso, alguns sites podem usar atualizações dinâmicas de captcha ou adicionar verificações adicionais sem aviso prévio. Nesse caso, o parâmetro `nocache` pode ajudar.
 
 ---
 
-## **How to pass a parameter?**
+## **Como passar um parâmetro?**
 
-### **Via API key**
+### **Via chave API**
 
 :::caution
-Will be applied to all sent captchas.
+Será aplicado a todos os captchas enviados.
 :::
 
-In the settings of the used software, add the nocache parameter, with a double underscore, at the very end of the API key:
+Nas configurações do software utilizado, adicione o parâmetro nocache, com um duplo sublinhado, no final da chave API:
 
 `API_KEY__nocache`
 
-### **When requesting createTask**
+### **Ao solicitar createTask**
 
 :::tip
-Notice the *nocache* property of the *task* object
+Observe a propriedade *nocache* do objeto *task*
 :::
 
 ```json
@@ -46,19 +46,19 @@ Notice the *nocache* property of the *task* object
 }
 ```
 
-### **When creating a task using the RuCaptcha API (via URL parameters)**
+### **Ao criar uma tarefa usando a API RuCaptcha (via parâmetros de URL)**
 
-Add `nocache=1` to the URL.
+Adicione `nocache=1` à URL.
 
 :::tip
-In the example below, the parameter is added to the very end.
+No exemplo abaixo, o parâmetro é adicionado ao final.
 :::
 
 `http://api.capmonster.cloud/in.php?key=API_KEY&method=userrecaptcha&googlekey=6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd&pageurl=https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high&nocache=1`
 
 ---
 
-## **What types of captcha does this parameter apply to?**
+## **Para quais tipos de captcha este parâmetro se aplica?**
 
 - [ReCaptchaV2](../captchas/no-captcha-task.mdx)
 - [ReCaptchaV3](../captchas/recaptcha-v3-task.mdx)

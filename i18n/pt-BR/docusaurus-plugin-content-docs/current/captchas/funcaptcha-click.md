@@ -5,22 +5,22 @@ draft: true
 ---
 
 # ComplexImageTask Funcaptcha
-The object contains data about the FunCaptcha solving.
+O objeto contém dados sobre a resolução do FunCaptcha.
 
-## **Object structure**
+## **Estrutura do Objeto**
 
-|**Parameter**|**Type**|**Required**|**Possible values**|**Description**|
+|**Parâmetro**|**Tipo**|**Obrigatório**|**Valores possíveis**|**Descrição**|
 | :- | :- | :- | :- | :- |
-|type|String|yes|ComplexImageTask|Specifies the type of task object.|
-|class|String|yes|funcaptcha|Specifies the class of task object.|
-|imageUrls|Array|yes (if imagesBase64 is not filled)|[“[https://i.postimg.cc/s2ZDrHXy/fc1.jpg](https://i.postimg.cc/s2ZDrHXy/fc1.jpg)”, …]|[Single image](https://i.postimg.cc/s2ZDrHXy/fc1.jpg) (in an array).|
-|imagesBase64|Array|yes (if imageUrls is not filled)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, … ]|[Single image](https://i.postimg.cc/s2ZDrHXy/fc1.jpg) in base64 format (in an array).|
-|metadata.Task|String|yes|`Pick the image that is the correct way up` and others|Task text (<u>in English</u>).|
-|userAgent|String|no|-|The browser User Agent used when uploading images if links were passed to imageUrls. You should use a modern browser signature or Google will return an error asking you to update your browser.|
-|websiteURL|String|no|-|URL of the page where the captcha is solved.|
+|type|String|sim|ComplexImageTask|Especifica o tipo do objeto de tarefa.|
+|class|String|sim|funcaptcha|Especifica a classe do objeto de tarefa.|
+|imageUrls|Array|sim (se imagesBase64 não estiver preenchido)|[“[https://i.postimg.cc/s2ZDrHXy/fc1.jpg](https://i.postimg.cc/s2ZDrHXy/fc1.jpg)”, …]|[Imagem única](https://i.postimg.cc/s2ZDrHXy/fc1.jpg) (em um array).|
+|imagesBase64|Array|sim (se imageUrls não estiver preenchido)|[ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, … ]|[Imagem única](https://i.postimg.cc/s2ZDrHXy/fc1.jpg) no formato base64 (em um array).|
+|metadata.Task|String|sim|`Escolha a imagem que está de cabeça para cima` e outros|Texto da tarefa (<u>em inglês</u>).|
+|userAgent|String|não|-|O User Agent do navegador usado ao fazer upload das imagens se os links forem passados para imageUrls. Deve-se usar uma assinatura de navegador moderno ou o Google retornará um erro pedindo para atualizar o navegador.|
+|websiteURL|String|não|-|URL da página onde o captcha é resolvido.|
 
-## **Request example**
-:::info Method
+## **Exemplo de solicitação**
+:::info Método
 ```http
 https://api.capmonster.cloud/createTask
 ```
@@ -41,7 +41,7 @@ https://api.capmonster.cloud/createTask
 }
 ```
 
-**Response example**
+**Exemplo de resposta**
 ```json
 {
   "errorId":0,
@@ -49,19 +49,19 @@ https://api.capmonster.cloud/createTask
 }
 ```
 
-## **Getting the results**
-:::info Method
+## **Obtendo os resultados**
+:::info Método
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
 :::
-Use the [getTaskResult](../api/methods/get-task-result.md) method to get the captcha solution. Depending on the system load, you will receive a response after a time ranging from 300ms to 6s.
+Use o método [getTaskResult](../api/methods/get-task-result.md) para obter a solução do captcha. Dependendo da carga do sistema, você receberá uma resposta entre 300ms e 6s.
 
-|**Property**|**Type**|**Description**|
+|**Propriedade**|**Tipo**|**Descrição**|
 | :- | :- | :- |
-|answer|Array|List in boolean values, true - means that you need to click on the image corresponding to this position.|
+|answer|Array|Lista de valores booleanos, `true` significa que você precisa clicar na imagem correspondente a essa posição.|
 
-**Example:**
+**Exemplo:**
 ```json
 {
   "errorId":0,
@@ -72,9 +72,9 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the cap
 }
 ```
 
-## **Pricing**
+## **Preços**
 
-|**Cost**|**Cost per 1000 images, $**|
+|**Custo**|**Custo por 1000 imagens, $**|
 | :-: | :-: |
 |Funcaptcha|0,15|
 

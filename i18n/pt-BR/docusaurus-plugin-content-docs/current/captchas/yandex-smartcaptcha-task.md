@@ -7,74 +7,74 @@ draft: true
 # YandexSmartCaptchaTask
 
 :::info
-Please note that this captcha is divided into two types: 
+Atenção! Esse captcha possui dois tipos:
 
-1. Yandex services
+1. Para serviços Yandex.
 
-2. External websites
+2. Para sites externos.
 
-Methods for solving these types are **different**.
+Os métodos para resolução são **diferentes**.
 :::
 
-## SmartCaptcha on Yandex services
+## Captcha no serviços do Yandex
 
-This type of captcha opens on a separate page (for example, https://ya.ru/showcaptcha?…).
+Esse tipo de captcha é aberto em uma página separada (por exemplo, https://ya.ru/showcaptcha?...).
 
 <details>
-    <summary>Example</summary>
+  <summary>Exemplo</summary>
 
 ![](./images/yandex-smartcaptcha/appearance.png)
 </details>
 
-To create a request for solving this type of captcha, you’ll need the following data:
+Para criar uma solicitação para resolver esse tipo de captcha, você precisará dos seguintes dados:
 
-|**Parameter**|**Type**|**Required**|**Meaning**|
-| :- | :- | :- | :- | 
-|type|String|yes|**YandexSmartCaptchaTaskProxyless**|
-|websiteURL|String|yes|The address of the page, where the captcha is solved. For example, https://ya.ru/showcaptcha?…|
-|websiteKey|String|yes|**yandex**|
-|htmlPageBase64|String|yes|Base64 emcoded html page with captcha.|
-|userAgent|String|yes|UA from Chromium browser.|
+|**Parâmetro**|**Tipo**|**Obrigatório**|**Descrição**|
+| :- | :- | :- | :- |
+|type|String|Sim|**YandexSmartCaptchaTaskProxyless**|
+|websiteURL|String|Sim|Endereço da página onde o captcha está sendo resolvido. Ex: https://ya.ru/showcaptcha?...|
+|websiteKey|String|Sim|**yandex**|
+|htmlPageBase64|String|Sim|Página HTML codificada em Base64 com o captcha.|
+|userAgent|String|Sim|User-Agent de um navegador Chromium.|
 
-In response, you will receive the following object:
+Como resposta, você receberá o seguinte objeto:
 
-|**Parameter**|**Type**|**Description**|
-| :- | :- | :- | 
-|cookies|Object|This property contains an object with cookies that you need to set in your browser or in request headers. At the moment, these are only “spravka” cookies.|
-|redirectedUrl|String|The URL you will need to go to with the set cookies. Use it. It usually contains the page you initially requested.|
-|referrer|String|Referrer, that **MUST** be used when going to redirected URL.|
+|**Parâmetro**|**Tipo**|**Descrição**|
+| :- | :- | :- |
+|cookies|Object|Contém um objeto com cookies que devem ser definidos no navegador ou nos headers da solicitação (atualmente apenas os cookies "spravka").|
+|redirectedUrl|String|URL para qual você deve ir com os cookies configurados. Normalmente contém a página solicitada inicialmente.|
+|referrer|String|O referrer que **DEVE** ser usado ao acessar o URL redirecionado.|
 
-## SmartCaptcha on external websites
+## Captcha em sites externos
 
-It looks like many other types of captchas. Simple vidget with checkbox:
+Esse tipo de captcha é semelhante a outros captchas comuns com um widget de checkbox:
 
 <details>
-    <summary>Example</summary>
+  <summary>Exemplo</summary>
 
 ![](./images/yandex-smartcaptcha/appearance-ext-web.png)
 </details>
 
-This type of captcha is perfectly solved via token. The request to solve such a captcha looks quite ordinary:
+Esse tipo de captcha é perfeitamente resolvido por meio de token. A solicitação para resolver esse tipo de captcha parece bastante comum:
 
-|**Parameter**|**Type**|**Required**|**Meaning**|
+|**Parâmetro**|**Tipo**|**Obrigatório**|**Descrição**|
 | :- | :- | :- | :- |
-|type|String|yes|YandexSmartCaptchaTaskProxyless|
-|websiteURL|String|yes|The address of the page where the captcha is solved.|
-|websiteKey|String|yes|Sitekey with which the captcha is rendered. In most cases, it is taken from the page code.|
+|type|String|Sim|**YandexSmartCaptchaTaskProxyless**|
+|websiteURL|String|Sim|Endereço da página onde o captcha é resolvido.|
+|websiteKey|String|Sim|O sitekey com o qual o captcha é gerado. Normalmente obtido do código da página.|
 
-Response:
+Resposta:
 
-|**Property**|**Type**|**Description**|
+|**Parâmetro**|**Tipo**|**Descrição**|
 | :- | :- | :- |
-|token|String|Insert the value of the token into the smart-token field on the captcha page.|
+|token|String|O valor do token que deve ser inserido no campo "smart-token" na página do captcha.|
 
-## Request examples
+## Exemplos de solicitações
 
-### Yandex services
+### Captcha em serviços do Yandex
 
-**Create a request:**
+**Criação da solicitação:**
 
-:::info Method
+:::info Método
 ```http
 https://api.capmonster.cloud/createTask
 ```
@@ -93,7 +93,7 @@ https://api.capmonster.cloud/createTask
 }
 ```
 
-Response:
+Resposta:
 
 ```json
 {
@@ -102,9 +102,9 @@ Response:
 }
 ```
 
-**Result**
+**Obtenção do resultado:**
 
-Use the [getTaskResult](../api/methods/get-task-result.md) method to get the solution.
+Use o método [getTaskResult](../api/methods/get-task-result.md) para obter a solução.
 
 ```json
 {
@@ -113,7 +113,7 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the sol
 }
 ```
 
-Response:
+Resposta:
 
 ```json
 {
@@ -131,11 +131,11 @@ Response:
 }
 ```
 
-### External websites
+### Captcha em sites externos
 
-**Create a request:**
+**Criação da solicitação:**
 
-:::info Method
+:::info Método
 ```http
 https://api.capmonster.cloud/createTask
 ```
@@ -147,12 +147,12 @@ https://api.capmonster.cloud/createTask
    "task":{
       "type":"YandexSmartCaptchaTaskProxyless",
       "websiteURL":"https://example.com/captcha",
-      "websitekey":"FEXfAbHQsToo9...1DgdxjtNB9"
+      "websiteKey":"FEXfAbHQsToo9...1DgdxjtNB9"
    }
 }
 ```
 
-Response:
+Resposta:
 
 ```json
 {
@@ -161,9 +161,9 @@ Response:
 }
 ```
 
-**Result**
+**Obtenção do resultado:**
 
-Use the [getTaskResult](../api/methods/get-task-result.md) method to get the solution.
+Use o método [getTaskResult](../api/methods/get-task-result.md) para obter a solução.
 
 ```json
 {
@@ -172,7 +172,7 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the sol
 }
 ```
 
-Response:
+Resposta:
 
 ```json
 {

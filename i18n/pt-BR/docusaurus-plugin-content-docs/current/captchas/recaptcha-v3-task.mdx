@@ -11,52 +11,52 @@ import MethodDescription from '@theme/MethodDescription'
 
 
 # RecaptchaV3TaskProxyless
-The object contains data for Google ReCaptcha3 solving task. This task will be executed by our service using our own proxy servers.
+O objeto contém dados para a tarefa de resolução do Google ReCaptcha3. Esta tarefa será executada pelo nosso serviço usando nossos próprios servidores proxy.
 
-ReCaptcha3, unlike ReCaptcha2, does not require any action from the site visitor, it works invisibly in the background of the page, collecting and analyzing data about the user to determine whether he is a human or a bot. Based on this analytics, the site receives a trust rating (from 0.1 to 0.9).
+ReCaptcha3, ao contrário do ReCaptcha2, não requer qualquer ação do visitante do site. Ele funciona invisivelmente em segundo plano na página, coletando e analisando dados sobre o usuário para determinar se ele é humano ou um robô. Com base nessa análise, o site recebe uma pontuação de confiança (de 0,1 a 0,9).
 
-When creating a task, you should additionally pass two parameters - pageAction and minScore.
+Ao criar uma tarefa, você deve passar dois parâmetros adicionais - **pageAction** e **minScore**.
 
-## Request parameters
+## Parâmetros da solicitação
 
 
-<TabItem value="proxyless" label="RecaptchaV3TaskProxyless (without proxy)" default className="bordered-panel">
+<TabItem value="proxyless" label="RecaptchaV3TaskProxyless (sem proxy)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **RecaptchaV3TaskProxyless**
 
     ---
 
     <ParamItem title="websiteURL" required type="string" />
-    Address of a webpage with Google ReCaptcha.
+    Endereço da página da web com Google ReCaptcha.
 
     ---
 
     <ParamItem title="websiteKey" required type="string" />
-   Recaptcha website key.<br/>https://www.google.com/recaptcha/api.js?render=THIS_ONE
+   Chave do site Recaptcha.<br/>https://www.google.com/recaptcha/api.js?render=ESTA_AQUI
 
    ---
 
    <ParamItem title="minScore" type="double" />
-    Value from 0.1 to 0.9
+    Valor de 0,1 a 0,9
 
     ---
 
     <ParamItem title="pageAction" type="string" />
-    <p>Widget action value. Website owner defines what user is doing on the page through this parameter. Default value: *verify*</p><p>Example:<br/>*`grecaptcha.execute('site_key', {action:'login_test'})`*.</p>
+    <p>Valor de ação do widget. O proprietário do site define o que o usuário está fazendo na página através deste parâmetro. Valor padrão: *verify*</p><p>Exemplo:<br/>*`grecaptcha.execute('site_key', {action:'login_test'})`*.</p>
 </TabItem>
 
 
-## Create task method
+## Método de criar tarefa
 
 
-<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
+<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (sem proxy)" default className="method-panel">
 <MethodItem>
   ```http
   https://api.capmonster.cloud/createTask
   ```
 </MethodItem>
 <MethodDescription>
-**Request**
+**Solicitação**
 ```json
 {
   "clientKey":"API_KEY",
@@ -69,7 +69,7 @@ When creating a task, you should additionally pass two parameters - pageAction a
   }
 }
 ```
-**Response**
+**Resposta**
 ```json
 {
   "errorId":0,
@@ -80,24 +80,24 @@ When creating a task, you should additionally pass two parameters - pageAction a
 </MethodDescription>
 </TabItem>
 
-## Get task result method
-Use the [getTaskResult](../api/methods/get-task-result.md) to request answer for ReCaptcha3. You will get response within 10 - 30 sec period depending on service workload.
+## Método de obter resultado da tarefa
+Use o método [getTaskResult](../api/methods/get-task-result.md) para solicitar a resposta do ReCaptcha3. Você receberá a resposta dentro de um período de 10 a 30 segundos, dependendo da carga de trabalho do serviço.
 
-<TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
+<TabItem value="proxyless" label="GeeTestTaskProxyless (sem proxy)" default className="method-panel-full">
     <MethodItem>
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
     </MethodItem>
     <MethodDescription>
-**Request**
+**Solicitação**
 ```json
 {
   "clientKey":"API_KEY",
   "taskId": 407533072
 }
 ```
-**Response**
+**Resposta**
 ```json
 {
   "errorId":0,
@@ -112,11 +112,11 @@ https://api.capmonster.cloud/getTaskResult
 
 <br />
 
-|**Property**|**Type**|**Description**|
+|**Propriedade**|**Tipo**|**Descrição**|
 | :- | :- | :- |
-|gRecaptchaResponse|String|Hash which should be inserted into Recaptcha3 submit form in `<textarea id="g-recaptcha-response" ></textarea>`. It has a length of 500 to 2190 bytes.|
+|gRecaptchaResponse|String|Hash que deve ser inserido no formulário de envio do Recaptcha3 em `<textarea id="g-recaptcha-response" ></textarea>`. Tem um comprimento de 500 a 2190 bytes.|
 
-## Use SDK Library
+## Usar biblioteca SDK
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">

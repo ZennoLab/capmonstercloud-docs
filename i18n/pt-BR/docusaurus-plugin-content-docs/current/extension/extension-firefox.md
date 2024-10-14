@@ -3,103 +3,103 @@ sidebar_position: 1
 sidebar_label: Firefox browser extension
 ---
 
-# Firefox browser extension
+# Extensão do navegador Firefox
 
-## **Description**
-With this extension, you can recognize captchas automatically directly in the browser.
+## **Descrição**
+Com esta extensão, você pode reconhecer captchas automaticamente diretamente no navegador.
 
-The extension works in the Mozilla Firefox browser.
+A extensão funciona no navegador Mozilla Firefox.
 
 -----
-## **Automatic installation**
-1. Open the [Firefox Add-ons Web Store](https://addons.mozilla.org/en-US/firefox/addon/capmonster-cloud/).
-2. Click **Add to Firefox**.
-3. Confirm adding the extension by clicking the "Add" button in the modal window.
+## **Instalação automática**
+1. Abra a [Loja de Add-ons do Firefox](https://addons.mozilla.org/en-US/firefox/addon/capmonster-cloud/).
+2. Clique em **Adicionar ao Firefox**.
+3. Confirme a adição da extensão clicando no botão "Adicionar" na janela modal.
    ![](./images/extension-main-firefox/modal.png)
 
-To get started with the extension, click on its icon to the right of the address bar. Go to the [settings](extension-firefox.md#settings).
+Para começar a usar a extensão, clique em seu ícone à direita da barra de endereços. Vá para as [configurações](extension-firefox.md#settings).
 
-*If for some reason it was not possible to install the extension from the Firefox Add-ons Web Store, use the instructions for manual installation.*
+*Se por algum motivo não for possível instalar a extensão pela Loja de Add-ons do Firefox, use as instruções para instalação manual.*
 
 <details>
-    <summary>Manual installation</summary>
+    <summary>Instalação manual</summary>
 
-1. Download the [archive with the extension](https://drive.google.com/file/d/1VWGD_Am74e7-7Uz4V_N13Yqd5Lnqv_GU/view?usp=drive_link).
+1. Baixe o [arquivo com a extensão](https://drive.google.com/file/d/1rWLOr6p0z8tA6vHooYAJWkcQ3NiWlBK-/view?usp=drive_link).
 
-1. Open the Firefox browser and go to work with extensions:
+1. Abra o navegador Firefox e vá trabalhar com as extensões:
    ![](./images/extension-main-firefox/extension-menu.png)
    
-1. Click the gear button, in the drop-down list that opens, select "Install add-on from file..."
+1. Clique no botão de engrenagem e, na lista suspensa que se abre, selecione "Instalar add-on a partir do arquivo..."
    ![](./images/extension-main-firefox/extension-installation.png)
    
-1. Select the downloaded archive with the extension.
+1. Selecione o arquivo baixado com a extensão.
 
-1. After downloading the extension, go to "Manage Your Extensions" and click on the installed extension. 
+1. Após baixar a extensão, vá para "Gerenciar suas Extensões" e clique na extensão instalada.
    ![](./images/extension-main-firefox/extension1.png)
    
-1. Go to the "Permissions" tab and make sure that all permissions are granted.
+1. Vá para a aba "Permissões" e certifique-se de que todas as permissões estão concedidas.
    ![](./images/extension-main-firefox/extension2.png)
 </details>
 
 <details>
-    <summary>Manual update of the extension</summary>
+    <summary>Atualização manual da extensão</summary>
 
-If you are installing the extension over the previous version, then when you update the original extension files, you also need to click the update button on the "Extensions" page (how to open this page is described above in the "Manual installation" section).
+Se você estiver instalando a extensão sobre a versão anterior, ao atualizar os arquivos originais da extensão, também precisará clicar no botão de atualização na página "Extensões" (como abrir esta página está descrito acima na seção "Instalação manual").
 </details>
 
 -----
-## **Settings**
+## **Configurações**
 <details>
-    <summary>How to pin the extension</summary>
+    <summary>Como fixar a extensão</summary>
 
-By default, a newly installed extension is automatically pinned to the browser panel. 
+Por padrão, uma extensão recém-instalada é fixada automaticamente no painel do navegador. 
    ![](./images/extension-main-firefox/extension-panel.png)
 </details>
 
-After launching the extension you’ll see this window:
+Após iniciar a extensão, você verá esta janela:
 
 ![](./images/extension-main-firefox/ext.screen.enf.png)
-### <a name="id-browserextension-apikey"></a>**API key**
-Enter API key in the corresponding field(1), press save button(2). If you entered the correct key, your balance will be displayed below(3).
+### <a name="id-browserextension-apikey"></a>**Chave API**
+Insira a chave da API no campo correspondente (1), pressione o botão salvar (2). Se você inseriu a chave correta, seu saldo será exibido abaixo (3).
 
 ![](./images/extension-main-firefox/api-key.png)
-### <a name="id-browserextension-automaticcaptchasolving"></a>**Automated captcha solving**
-Here you can select the types of captchas that the extension will recognize automatically.
+### <a name="id-browserextension-automaticcaptchasolving"></a>**Solução automática de captchas**
+Aqui você pode selecionar os tipos de captchas que a extensão reconhecerá automaticamente.
 
 ![](./images/extension-main-firefox/extension.examplef.png)
 
 :::info !
 
-You may need to reload the page with captcha for the changes to take effect!
+Pode ser necessário recarregar a página com captcha para que as alterações tenham efeito!
 
 :::
-### <a name="id-browserextension-repeatcaptchasolvingincaseofanerror"></a>**Repeat captcha solving in case of an error**
-If the first attempt to solve the captcha is failed, the extension will send repeated tasks until the captcha is not solved, or until the limit specified in this setting will not be reached.
+### <a name="id-browserextension-repeatcaptchasolvingincaseofanerror"></a>**Repetir solução de captcha em caso de erro**
+Se a primeira tentativa de resolver o captcha falhar, a extensão enviará tarefas repetidas até que o captcha seja resolvido ou até que o limite especificado nesta configuração seja atingido.
 ### <a name="id-browserextension-proxy"></a>**Proxy**
 ![](./images/extension-main-firefox/proxy.png) 
 
-Here you can specify the proxy that will be sent along with the recognition task.
+Aqui você pode especificar o proxy que será enviado junto com a tarefa de reconhecimento.
 
-The "Login" and "Password" are optional.
-### <a name="id-browserextension-blacklistcontrol"></a>**Blacklist control**
-Using the blacklist you can configure the extension to ignore captchas on specific websites.
+O "Login" e a "Senha" são opcionais.
+### <a name="id-browserextension-blacklistcontrol"></a>**Controle de lista negra**
+Usando a lista negra, você pode configurar a extensão para ignorar captchas em sites específicos.
 
-After enabling this option, a field for entering sites will appear:
+Após ativar esta opção, aparecerá um campo para inserir os sites:
 
 ![](./images/extension-main-firefox/blacklist-control.png)
 
-Domains must be specified along with the protocol (https:// or http://).
-You can use masks:
+Os domínios devem ser especificados junto com o protocolo (https:// ou http://).
+Você pode usar máscaras:
 
-- ? - any one character except period
-- \* - any number of any characters
+- ? - qualquer um caractere, exceto ponto final
+- \* - qualquer número de caracteres
 
-Examples:
+Exemplos:
 
-|**Filter**|**Description**|
+|**Filtro**|**Descrição**|
 | :-: | :-: |
-|`https://zennolab.com`|Prohibition of the extension on the site `https://zennolab.com`|
-|`https://*.zennolab.com`|Prohibition of the extension on all subdomains `https://zennolab.com`|
-|`https://www.google.*`|Prohibiting the extension from working on Google in all zones (ru, com, com.ua, etc.)|
+|`https://zennolab.com`|Proibição da extensão no site `https://zennolab.com`|
+|`https://*.zennolab.com`|Proibição da extensão em todos os subdomínios `https://zennolab.com`|
+|`https://www.google.*`|Proibição da extensão de funcionar no Google em todas as zonas (ru, com, com.ua, etc.)|
 
-When errors occur in solving captchas, see the [error glossary](/api/api-errors.md).
+Quando erros ocorrerem na solução de captchas, veja o [glossário de erros](/api/api-errors.md).

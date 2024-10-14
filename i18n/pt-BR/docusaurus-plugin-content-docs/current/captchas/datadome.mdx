@@ -1,5 +1,5 @@
 ---
-sidebar_position: 11
+sidebar_position: 14
 sidebar_label: DataDome
 ---
 
@@ -11,17 +11,17 @@ import MethodDescription from '@theme/MethodDescription'
 
 # DataDome
 
-This type of captcha basically requires the user to solve a puzzle by moving a slider to confirm. 
+Esse tipo de captcha basicamente exige que o usuário resolva um quebra-cabeça movendo um controle deslizante para confirmar.
 
 ![](./images/datadome/datadome.png)
 
-:::warning **Attention!**
-This task will be performed using our proxy servers. Use the received cookies in your project to automatically pass the captcha.
+:::warning **Atenção!**
+Essa tarefa será realizada utilizando nossos servidores proxy. Use os cookies recebidos em seu projeto para passar automaticamente o captcha.
 :::
 
 
-## Request parameters
-<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (without proxy)" default className="bordered-panel">
+## Parâmetros de solicitação
+<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (sem proxy)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **CustomTask**
 
@@ -33,42 +33,41 @@ This task will be performed using our proxy servers. Use the received cookies in
     ---
 
     <ParamItem title="websiteURL" required type="string" />
-    The address of the main page where the captcha is solved.
+    O endereço da página principal onde o captcha é resolvido.
 
     ---
 
-    <ParamItem title="metadata.htmlPageBase64" required="required (if metadata.captchaUrl is not filled)" type="string" />
-    Object that contains additional data about the captcha: `"htmlPageBase64": "..."` - a base64 encoded html page that comes with a 403 code and a Set-Cookie: datadome="..." header in response to a get request to the target site.
+    <ParamItem title="metadata.htmlPageBase64" required="required (se metadata.captchaUrl não for preenchido)" type="string" />
+    Objeto que contém dados adicionais sobre o captcha: `"htmlPageBase64": "..."` - uma página HTML codificada em base64 que vem com um código 403 e um cabeçalho Set-Cookie: datadome="..." em resposta a uma solicitação get para o site de destino.
 
     ---
 
-    <ParamItem title="metadata.captchaUrl" required="required (if metadata.htmlPageBase64 is not filled)" type="string" />
-    `"captchaUrl"` - link to the captcha. Usually it looks like this: `"https://geo.captcha-delivery.com/captcha/?initialCid=..."`.
+    <ParamItem title="metadata.captchaUrl" required="required (se metadata.htmlPageBase64 não for preenchido)" type="string" />
+    `"captchaUrl"` - link para o captcha. Geralmente se parece com isso: `"https://geo.captcha-delivery.com/captcha/?initialCid=..."`.
 
     ---
 
     <ParamItem title="metadata.datadomeCookie" required type="string" />
-    Your cookies from datadome. You can get it on the page using "document.cookie" or in the Set-Cookie request header: "datadome=..." (see example request /createTask)
+    Seus cookies do datadome. Você pode obtê-los na página usando "document.cookie" ou no cabeçalho da solicitação Set-Cookie: "datadome=..." (ver exemplo de solicitação /createTask)
 
     ---
 
     <ParamItem title="userAgent" type="string" />
-    Browser User-Agent. <br /> 
-	**Pass only the actual UA from Windows OS. Now this is**: userAgentPlaceholder
+    Browser User-Agent.<br /> **Passe apenas o UA real do Windows OS. O atual é**: userAgentPlaceholder
 
   </TabItem>
 
+## Criar tarefa
 
-## Create task method
 
-<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
+<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (sem proxy)" default className="method-panel">
 <MethodItem>
   ```http
   https://api.capmonster.cloud/createTask
   ```
 </MethodItem>
 <MethodDescription>
-**Request**
+**Solicitação**
 ```json
 {
     "clientKey": "API_KEY",
@@ -84,7 +83,7 @@ This task will be performed using our proxy servers. Use the received cookies in
     }
 }
 ```
-**Response**
+**Resposta**
 ```json
 {
   "errorId":0,
@@ -95,24 +94,24 @@ This task will be performed using our proxy servers. Use the received cookies in
 </MethodDescription>
 </TabItem>
 
-## Get task result method
-Use the [getTaskResult](../api/methods/get-task-result.md) method to get the DataDome solution.
+## Obter resultado da tarefa
+Use o método [getTaskResult](../api/methods/get-task-result.md) para obter a solução do DataDome.
 
-<TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
+<TabItem value="proxyless" label="GeeTestTaskProxyless (sem proxy)" default className="method-panel-full">
     <MethodItem>
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
     </MethodItem>
     <MethodDescription>
-**Request**
+**Solicitação**
 ```json
 {
   "clientKey":"API_KEY",
   "taskId": 407533072
 }
 ```
-**Response**
+**Resposta**
 ```json
 {
     "errorId":0,
@@ -132,7 +131,7 @@ https://api.capmonster.cloud/getTaskResult
   </TabItem>
 
 
-## Use SDK Library
+## Usar biblioteca SDK
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">
