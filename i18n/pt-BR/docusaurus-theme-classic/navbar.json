@@ -4,19 +4,19 @@
     "description": "The alt text of navbar logo"
   },
   "item.label.Документация": {
-    "message": "Docs",
+    "message": "Documentos",
     "description": "Navbar item with label Документация"
   },
   "item.label.Пресс релизы": {
-    "message": "Press releases",
+    "message": "Comunicados à imprensa",
     "description": "Navbar item with label press releases"
   },
   "item.label.Расширение": {
-    "message": "Extension",
+    "message": "Extensão",
     "description": "Navbar item with label Расширение"
   },
   "item.label.Личный кабинет": {
-    "message": "Dashboard",
+    "message": "Painel de controle",
     "description": "Navbar item with label Личный кабинет"
   }
 }
