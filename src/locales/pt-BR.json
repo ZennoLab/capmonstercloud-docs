@@ -1,0 +1,21 @@
+{
+  "heroTitle": "Documentação do CapMonster Cloud",
+  "heroDescription": "Um conjunto abrangente de instruções e recomendações para ajudá-lo a usar com sucesso nossa ferramenta automática de reconhecimento de captchas e aproveitar ao máximo seus recursos.",
+  "goText": "Ver",
+  "linksTitle": "Links úteis",
+  "linkOneTitle": "CapMonster Cloud",
+  "linkOneDescription": "Serviço em nuvem para reconhecimento automático de reCAPTCHA, hCaptcha e outros tipos de captchas",
+  "linkTwoTitle": "Extensão de navegador",
+  "linkTwoDescription": "Reconhecimento automático de captchas no navegador Chrome em segundo plano",
+  "linkThreeTitle": "Suporte",
+  "linkThreeDescription": "Suporte técnico em que você pode confiar",
+  "libsTitle": "Bibliotecas para desenvolvedores",
+  "libsDescription": "Para sua conveniência, criamos bibliotecas prontas para integrar rapidamente a API do CapMonster Cloud em seu código",
+  "priceTitle": "Preço",
+  "priceSubTitle": "Inclusões de preço de proxy*: economize com o CapMonster Cloud",
+  "priceSubTooltipText": "Excluindo Cloudflare Bot Challenge, Cloudflare Turnstile",
+  "metaTitle": "Documentação do CapMonster Cloud | Como Evitar Qualquer Tipo de Captcha",
+  "metaDescription": "Como evitar reCAPTCHA, hCaptcha e outros tipos de captcha com o CapMonster Cloud.",
+  "tokenProblems": "Está tendo problemas para obter o token?",
+  "callSupport": "Entre em contato com o suporte"
+}
