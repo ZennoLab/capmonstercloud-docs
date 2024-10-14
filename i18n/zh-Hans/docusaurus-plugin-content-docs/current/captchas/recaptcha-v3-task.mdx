@@ -3,6 +3,12 @@ sidebar_position: 1
 sidebar_label: RecaptchaV3TaskProxyless
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+
 
 # RecaptchaV3TaskProxyless
 该对象包含用于解决 Google ReCaptcha3 任务的数据。此任务将通过我们的服务使用我们自己的代理服务器执行。
@@ -11,59 +17,129 @@ sidebar_label: RecaptchaV3TaskProxyless
 
 创建任务时，您还应额外传递两个参数 - pageAction 和 minScore。
 
-## **对象结构**
 
-|**参数**|**类型**|**必需**|**值**|
-| :- | :- | :- | :- |
-|type|String|是|**RecaptchaV3TaskProxyless**。|
-|websiteURL|String|是|带有 Google ReCaptcha 的网页地址。|
-|websiteKey|String|是|Recaptcha 网站密钥。<br/>https://www.google.com/recaptcha/api.js?render=THIS_ONE|
-|minScore|Double|否|从 0.1 到 0.9 的值。|
-|pageAction|String|否|<p>小部件操作值。网站所有者通过此参数定义用户在页面上的活动。默认值: *verify*</p><p>示例:<br/>*`grecaptcha.execute('site_key', {action:'login_test'})`*。</p>|
+## 请求参数
 
-## **请求示例**
+<TabItem value="proxyless" label="RecaptchaV3TaskProxyless (without proxy)" default className="bordered-panel">
+    <ParamItem title="type" required type="string" />
+    **RecaptchaV3TaskProxyless**
 
-**地址：**
-```http
-https://api.capmonster.cloud/createTask
-```
+    ---
 
-```json
-{
-  "clientKey":"API_KEY",
-  "task": {
-    "type":"RecaptchaV3TaskProxyless",
-    "websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta",
-    "websiteKey":"6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",
-    "minScore": 0.3,
-    "pageAction": "myverify"
-  }
-}
-```
+    <ParamItem title="websiteURL" required type="string" />
+    带有 Google ReCaptcha 的网页地址。
 
-**响应示例**
+    ---
 
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
-## **获取结果**
+    <ParamItem title="websiteKey" required type="string" />
+	Recaptcha 网站密钥。<br/>https://www.google.com/recaptcha/api.js?render=THIS_ONE
+
+	---
+
+	<ParamItem title="minScore" type="double" />
+    从 0.1 到 0.9 的值。
+
+    ---
+
+    <ParamItem title="pageAction" type="string" />
+    <p>小部件操作值。网站所有者通过此参数定义用户在页面上的活动。默认值: *verify*</p><p>示例:<br/>*`grecaptcha.execute('site_key', {action:'login_test'})`*。</p>
+</TabItem>
+
+
+## 创建任务方法 
+
+<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**要求**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "task": {
+			"type":"RecaptchaV3TaskProxyless",
+			"websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta",
+			"websiteKey":"6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",
+			"minScore": 0.3,
+			"pageAction": "myverify"
+		  }
+		}
+		```
+		**回应**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
+</TabItem>
+
+
+## 获取任务结果方法
 使用 [getTaskResult](../api/methods/get-task-result.md) 请求获取 ReCaptcha3 的答案。根据服务负载情况，您将在 10 到 30 秒内收到响应。
+
+<TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
+    <MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+    </MethodItem>
+    <MethodDescription>
+		**要求**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**回应**
+		```json
+		{
+		  "errorId":0,
+		  "status":"ready",
+		  "solution": {
+			"gRecaptchaResponse":"3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
+		  }
+		}
+		```
+	</MethodDescription>
+</TabItem>
+
+<br />
 
 |**属性**|**类型**|**描述**|
 | :- | :- | :- |
 |gRecaptchaResponse|String|应插入到 Recaptcha3 提交表单中的哈希值 `<textarea id="g-recaptcha-response"></textarea>`。长度为 500 到 2190 字节。|
 
-**示例：**
 
-```json
-{
-  "errorId":0,
-  "status":"ready",
-  "solution": {
-    "gRecaptchaResponse":"3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
-  }
-}
+## 使用 SDK 库
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, RecaptchaV3ProxylessRequest } from '@zennolab_com/capmonstercloud-client';
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+  console.log(await cmcClient.getBalance());
+
+  const recaptchaV3Request = new RecaptchaV3ProxylessRequest({
+    websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high',
+    websiteKey: '6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd',
+    minScore: 0.6,
+    pageAction: 'some-action',
+  })
+
+  console.log(await cmcClient.Solve(recaptchaV3Request));
+});
 ```
+  </TabItem>
+  
+</Tabs>

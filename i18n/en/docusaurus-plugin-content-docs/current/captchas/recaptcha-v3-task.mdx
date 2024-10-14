@@ -17,8 +17,8 @@ ReCaptcha3, unlike ReCaptcha2, does not require any action from the site visitor
 
 When creating a task, you should additionally pass two parameters - pageAction and minScore.
 
-## Request parameters
 
+## Request parameters
 
 <TabItem value="proxyless" label="RecaptchaV3TaskProxyless (without proxy)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
@@ -32,11 +32,11 @@ When creating a task, you should additionally pass two parameters - pageAction a
     ---
 
     <ParamItem title="websiteKey" required type="string" />
-   Recaptcha website key.<br/>https://www.google.com/recaptcha/api.js?render=THIS_ONE
+	Recaptcha website key.<br/>https://www.google.com/recaptcha/api.js?render=THIS_ONE
 
-   ---
+	---
 
-   <ParamItem title="minScore" type="double" />
+	<ParamItem title="minScore" type="double" />
     Value from 0.1 to 0.9
 
     ---
@@ -48,36 +48,34 @@ When creating a task, you should additionally pass two parameters - pageAction a
 
 ## Create task method
 
-
 <TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
-<MethodItem>
-  ```http
-  https://api.capmonster.cloud/createTask
-  ```
-</MethodItem>
-<MethodDescription>
-**Request**
-```json
-{
-  "clientKey":"API_KEY",
-  "task": {
-    "type":"RecaptchaV3TaskProxyless",
-    "websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta",
-    "websiteKey":"6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",
-    "minScore": 0.3,
-    "pageAction": "myverify"
-  }
-}
-```
-**Response**
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
-
-</MethodDescription>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "task": {
+			"type":"RecaptchaV3TaskProxyless",
+			"websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta",
+			"websiteKey":"6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",
+			"minScore": 0.3,
+			"pageAction": "myverify"
+		  }
+		}
+		```
+		**Response**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
 </TabItem>
 
 ## Get task result method
@@ -85,30 +83,30 @@ Use the [getTaskResult](../api/methods/get-task-result.md) to request answer for
 
 <TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
     <MethodItem>
-```http
-https://api.capmonster.cloud/getTaskResult
-```
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
     </MethodItem>
     <MethodDescription>
-**Request**
-```json
-{
-  "clientKey":"API_KEY",
-  "taskId": 407533072
-}
-```
-**Response**
-```json
-{
-  "errorId":0,
-  "status":"ready",
-  "solution": {
-    "gRecaptchaResponse":"3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
-  }
-}
-```
-  </MethodDescription>
-  </TabItem>
+		**Request**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**Response**
+		```json
+		{
+		  "errorId":0,
+		  "status":"ready",
+		  "solution": {
+			"gRecaptchaResponse":"3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
+		  }
+		}
+		```
+	</MethodDescription>
+</TabItem>
 
 <br />
 

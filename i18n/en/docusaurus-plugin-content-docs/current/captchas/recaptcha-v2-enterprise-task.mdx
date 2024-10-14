@@ -27,7 +27,7 @@ If the proxy is authorized by IP, then be sure to add 116.203.55.208 to the whit
 ## Request parameters
 
 <Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
-<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (without proxy)" default className="bordered-panel">
+  <TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (without proxy)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **RecaptchaV2EnterpriseTaskProxyless**
 
@@ -126,8 +126,7 @@ If the proxy is authorized by IP, then be sure to add 116.203.55.208 to the whit
     <ParamItem title="proxyPassword" type="string" />
     Proxy-server password.
 
-  </TabItem>
-  
+  </TabItem>  
 </Tabs>
 
 For `enterprisePayload` - before calling it, you need to replace the `grecaptcha.enterprise.render` function with your own and take the value from its parameters. The function exists after loading the script, and the captcha is usually rendered immediately or based on a page event. If the captcha is rendered with the current field `s` on the client, then the token will most likely not be accepted.
@@ -179,78 +178,75 @@ Object.defineProperty(window, 'grecaptcha', {
   </details>
 
 
-
 ## Create task method
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (without proxy)" default className="method-panel">
+  <TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (without proxy)" default className="method-panel">
     <MethodItem>
-      ```http
-      https://api.capmonster.cloud/createTask
-      ```
+		```http
+		https://api.capmonster.cloud/createTask
+		```
     </MethodItem>
-<MethodDescription>
-**Request**
-```json
-{
-  "clientKey":"API_KEY",
-  "task": {
-    "type":"RecaptchaV2EnterpriseTaskProxyless",
-    "websiteURL":"https://mydomain.com/page-with-recaptcha-enterprise",
-    "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
-    "enterprisePayload": {
-      "s": "SOME_ADDITIONAL_TOKEN"
-    }
-  }
-}
-```
-**Response**
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
-
-</MethodDescription>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "task": {
+			"type":"RecaptchaV2EnterpriseTaskProxyless",
+			"websiteURL":"https://mydomain.com/page-with-recaptcha-enterprise",
+			"websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
+			"enterprisePayload": {
+			  "s": "SOME_ADDITIONAL_TOKEN"
+			}
+		  }
+		}
+		```
+		**Response**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
   </TabItem>
   <TabItem value="proxy" label="RecaptchaV2EnterpriseTask (using proxy)" className="method-panel">
-<MethodItem>
-  ```http
-  https://api.capmonster.cloud/createTask
-  ```
-</MethodItem>
-<MethodDescription>
-**Request**
-```json
-{
-  "clientKey":"API_KEY",
-  "task": {
-    "type":"RecaptchaV2EnterpriseTask",
-    "websiteURL":"https://mydomain.com/page-with-recaptcha-enterprise",
-    "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
-    "enterprisePayload": {
-      "s": "SOME_ADDITIONAL_TOKEN"
-    },
-    "proxyType":"http",
-    "proxyAddress":"8.8.8.8",
-    "proxyPort":8080,
-    "proxyLogin":"proxyLoginHere",
-    "proxyPassword":"proxyPasswordHere",
-    "userAgent":"userAgentPlaceholder"
-  }
-}
-```
-**Response**
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
-</MethodDescription>
-  </TabItem>
-  
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "task": {
+			"type":"RecaptchaV2EnterpriseTask",
+			"websiteURL":"https://mydomain.com/page-with-recaptcha-enterprise",
+			"websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
+			"enterprisePayload": {
+			  "s": "SOME_ADDITIONAL_TOKEN"
+			},
+			"proxyType":"http",
+			"proxyAddress":"8.8.8.8",
+			"proxyPort":8080,
+			"proxyLogin":"proxyLoginHere",
+			"proxyPassword":"proxyPasswordHere",
+			"userAgent":"userAgentPlaceholder"
+		  }
+		}
+		```
+		**Response**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
+  </TabItem>  
 </Tabs>
 
 
@@ -258,37 +254,38 @@ Object.defineProperty(window, 'grecaptcha', {
 Use the [getTaskResult](../api/methods/get-task-result.md) method to request answer for ReCaptcha2. You will get response within 10 - 80 sec period depending on service workload.
 
 <TabItem value="proxyless" label="RecaptchaV2EnterpriseTask (without proxy)" default className="method-panel-full">
-    <MethodItem>
-```http
-https://api.capmonster.cloud/getTaskResult
-```
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
     </MethodItem>
     <MethodDescription>
-**Request**
-```json
-{
-  "clientKey":"API_KEY",
-  "taskId": 407533072
-}
-```
-**Response**
-```json
-{
-  "errorId":0,
-  "status":"ready",
-  "solution": {
-    "gRecaptchaResponse":"3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
-  }
-}
-```
-  </MethodDescription>
-  </TabItem>
+		**Request**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**Response**
+		```json
+		{
+		  "errorId":0,
+		  "status":"ready",
+		  "solution": {
+			"gRecaptchaResponse":"3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
+		  }
+		}
+		```
+	</MethodDescription>
+</TabItem>
 
 <br />
 
 |**Property**|**Type**|**Description**|
 | :- | :- | :- |
 |gRecaptchaResponse|String|Hash which should be inserted into Recaptcha2 submit form in `<textarea id="g-recaptcha-response" ..></textarea>`. It has a length of 500 to 2190 bytes.|
+
 
 ## Use SDK Library
 

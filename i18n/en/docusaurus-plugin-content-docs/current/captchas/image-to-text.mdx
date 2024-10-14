@@ -9,6 +9,7 @@ import ParamItem from '@theme/ParamItem';
 import MethodItem from '@theme/MethodItem';
 import MethodDescription from '@theme/MethodDescription'
 
+
 # ImageToTextTask
 
 This is a regular captcha, which is an image with text to be entered into the corresponding line. 
@@ -52,9 +53,9 @@ This is a regular captcha, which is an image with text to be entered into the co
 
     <ParamItem title="math" type="boolean" />
     false — undefined;<br />true — if captcha requires a mathematical operation (for example: captcha 2 + 6 = will return a value of 8).
-  </TabItem>
+</TabItem>
 
-  <br />
+<br />
 
 *Base64 is a data encoding method that allows you to represent binary data as text. Here is an example of obtaining a captcha image in base64 format using the console in the *Developer Tools*:
 
@@ -87,64 +88,64 @@ loadAndEncodeCaptchaToBase64(captchaUrl);
 ## Create task method
 
 <TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
-<MethodItem>
-  ```http
-  https://api.capmonster.cloud/createTask
-  ```
-</MethodItem>
-<MethodDescription>
-**Request**
-```json
-{
-  "clientKey":"API_KEY",
-  "task": {
-    "type":"ImageToTextTask",
-    "body":"BASE64_BODY_HERE!"
-  }
-}
-```
-**Response**
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
-
-</MethodDescription>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "task": {
+			"type":"ImageToTextTask",
+			"body":"BASE64_BODY_HERE!"
+		  }
+		}
+		```
+		**Response**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
 </TabItem>
+
 
 ## Get task result method
 Use the [getTaskResult](../api/methods/get-task-result.md) method to get the captcha solution. Depending on the system load, you will receive an answer within an interval from 300 ms to 6 s
 
 <TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
-    <MethodItem>
-```http
-https://api.capmonster.cloud/getTaskResult
-```
-    </MethodItem>
-    <MethodDescription>
-**Request**
-```json
-{
-  "clientKey":"API_KEY",
-  "taskId": 407533072
-}
-```
-**Response**
-```json
-{
-  "errorId":0,
-  "status":"ready",
-  "solution": {
-    "text":"answer"
-  }
-}
-```
-  </MethodDescription>
-  </TabItem>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**Response**
+		```json
+		{
+		  "errorId":0,
+		  "status":"ready",
+		  "solution": {
+			"text":"answer"
+		  }
+		}
+		```
+	</MethodDescription>
+</TabItem>
 
- <br />
+<br />
 
 |**Property**|**Type**|**Description**|
 | :-: | :-: | :-: |
