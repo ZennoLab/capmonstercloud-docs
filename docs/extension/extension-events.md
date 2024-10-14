@@ -15,7 +15,7 @@ sidebar_position: 4
 Никакие параметры в события не передаются
 :::
 
-### **Пример:**
+### Пример
 ```js
 window.addEventListener("onCMExtensionReady", () => {
   // DO SOMETHING

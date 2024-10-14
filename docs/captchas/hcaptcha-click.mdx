@@ -105,7 +105,7 @@ https://api.capmonster.cloud/getTaskResult
 }
 ```
 
-### **Тип ответа Coordinate**
+### Тип ответа Coordinate
 |**Формат ответа**|**Пример ответа**|**Описание**|
 | :- | :- | :- |
 |Array of objects|`[{ "X":371, "Y":505.0000112 }, { "X":5, "Y":101.2 }]`|Список с координатами, по которым нужно произвести клик на соответствующем изображении|
@@ -132,39 +132,37 @@ https://api.capmonster.cloud/getTaskResult
 
 
 ### Метод создания задачи
-
 <TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel">
-<MethodItem>
-  ```http
-  https://api.capmonster.cloud/createTask
-  ```
-</MethodItem>
-<MethodDescription>
-**Запрос**
-```json
-{
-  "clientKey":"API_KEY",
-  "task": {
-    "type": "ComplexImageTask",
-    "class": "hcaptcha",
-    "imageUrls":[ "https://i.postimg.cc/kg71cbRt/image-1.jpg", "https://i.postimg.cc/6381Zx2j/image.jpg" ],
-    "metadata": {
-      "Task": "Please click each image containing a mountain"
-    },
-    "userAgent": "userAgentPlaceholder",
-    "websiteUrl": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle"
-  }
-}
-```
-**Ответ**
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
-
-</MethodDescription>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Запрос**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "task": {
+			"type": "ComplexImageTask",
+			"class": "hcaptcha",
+			"imageUrls":[ "https://i.postimg.cc/kg71cbRt/image-1.jpg", "https://i.postimg.cc/6381Zx2j/image.jpg" ],
+			"metadata": {
+			  "Task": "Please click each image containing a mountain"
+			},
+			"userAgent": "userAgentPlaceholder",
+			"websiteUrl": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle"
+		  }
+		}
+		```
+		**Ответ**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
 </TabItem>
 
 
@@ -172,32 +170,32 @@ https://api.capmonster.cloud/getTaskResult
 Тип получаемого ответа - [**Grid**](#тип-ответа-grid).
 
 <TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel-full">
-    <MethodItem>
-```http
-https://api.capmonster.cloud/getTaskResult
-```
-    </MethodItem>
-    <MethodDescription>
-**Запрос**
-```json
-{
-  "clientKey":"API_KEY",
-  "taskId": 407533072
-}
-```
-**Ответ**
-```json
-{
-  "errorId":0,
-  "status":"ready",
-  "solution": {
-    "answer": [ false, true ],
-    "metadata": { "AnswerType": "Grid" }
-  }
-}
-```
-  </MethodDescription>
-  </TabItem>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Запрос**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**Ответ**
+		```json
+		{
+		  "errorId":0,
+		  "status":"ready",
+		  "solution": {
+			"answer": [ false, true ],
+			"metadata": { "AnswerType": "Grid" }
+		  }
+		}
+		```
+	</MethodDescription>
+</TabItem>
 
 
 ### Ценообразование
@@ -220,39 +218,37 @@ https://api.capmonster.cloud/getTaskResult
 
 
 ### Метод создания задачи
-
 <TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel">
-<MethodItem>
-  ```http
-  https://api.capmonster.cloud/createTask
-  ```
-</MethodItem>
-<MethodDescription>
-**Запрос**
-```json
-{
-  "clientKey":"API_KEY",
-  "task": {
-    "type": "ComplexImageTask",
-    "class": "hcaptcha",
-    "exampleImagesBase64":[“/9j/4AAQSkZJRgABAQEAAAAAAAD…”, “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, “/9j/4AAQSkZJRgABAQEAAAAAAAD…”],
-    "imagesBase64": [ “/9j/4AAQSkZJRgABAQEAAAAAAAD…” ],
-    "metadata": {
-      "Task": "Please click on the panda"
-    },
-    "userAgent": "userAgentPlaceholder"
-  }
-}
-```
-**Ответ**
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
-
-</MethodDescription>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Запрос**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "task": {
+			"type": "ComplexImageTask",
+			"class": "hcaptcha",
+			"exampleImagesBase64":[“/9j/4AAQSkZJRgABAQEAAAAAAAD…”, “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, “/9j/4AAQSkZJRgABAQEAAAAAAAD…”],
+			"imagesBase64": [ “/9j/4AAQSkZJRgABAQEAAAAAAAD…” ],
+			"metadata": {
+			  "Task": "Please click on the panda"
+			},
+			"userAgent": "userAgentPlaceholder"
+		  }
+		}
+		```
+		**Ответ**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
 </TabItem>
 
 
@@ -260,32 +256,32 @@ https://api.capmonster.cloud/getTaskResult
 Тип получаемого ответа - [**Coordinate**](#тип-ответа-coordinate).
 
 <TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel-full">
-    <MethodItem>
-```http
-https://api.capmonster.cloud/getTaskResult
-```
-    </MethodItem>
-    <MethodDescription>
-**Запрос**
-```json
-{
-  "clientKey":"API_KEY",
-  "taskId": 407533072
-}
-```
-**Ответ**
-```json
-{
-  "errorId":0,
-  "status":"ready",
-  "solution": { 
-    "answer": [ { "X":371, "Y":505.0000112 } ],
-    "metadata": { "AnswerType": "Coordinate" }
-  }
-}
-```
-  </MethodDescription>
-  </TabItem>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Запрос**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**Ответ**
+		```json
+		{
+		  "errorId":0,
+		  "status":"ready",
+		  "solution": { 
+			"answer": [ { "X":371, "Y":505.0000112 } ],
+			"metadata": { "AnswerType": "Coordinate" }
+		  }
+		}
+		```
+	</MethodDescription>
+</TabItem>
 
 
 ### Ценообразование
@@ -305,37 +301,36 @@ https://api.capmonster.cloud/getTaskResult
 ### Метод создания задачи
 
 <TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel">
-<MethodItem>
-  ```http
-  https://api.capmonster.cloud/createTask
-  ```
-</MethodItem>
-<MethodDescription>
-**Запрос**
-```json
-{
-  "clientKey":"API_KEY",
-  "task": {
-    "type": "ComplexImageTask",
-    "class": "hcaptcha",
-    "imagesBase64": [ “/9j/4AAQSkZJRgABAQEAAAAAAAD…” ],
-    "metadata": {
-      "Task": "What animal is shown in the image below?",
-      "Classes": [ "shark", "chicken", "goat", "hedgehog" ]
-    },
-    "userAgent": "userAgentPlaceholder"
-  }
-}
-```
-**Ответ**
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
-
-</MethodDescription>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Запрос**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "task": {
+			"type": "ComplexImageTask",
+			"class": "hcaptcha",
+			"imagesBase64": [ “/9j/4AAQSkZJRgABAQEAAAAAAAD…” ],
+			"metadata": {
+			  "Task": "What animal is shown in the image below?",
+			  "Classes": [ "shark", "chicken", "goat", "hedgehog" ]
+			},
+			"userAgent": "userAgentPlaceholder"
+		  }
+		}
+		```
+		**Ответ**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
 </TabItem>
 
 
@@ -343,32 +338,32 @@ https://api.capmonster.cloud/getTaskResult
 Тип получаемого ответа - [**Grid**](#тип-ответа-grid).
 
 <TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel-full">
-    <MethodItem>
-```http
-https://api.capmonster.cloud/getTaskResult
-```
-    </MethodItem>
-    <MethodDescription>
-**Запрос**
-```json
-{
-  "clientKey":"API_KEY",
-  "taskId": 407533072
-}
-```
-**Ответ**
-```json
-{
-  "errorId":0,
-  "status":"ready",
-  "solution": { 
-    "answer": [ false, false, true, false ],
-    "metadata": { "AnswerType": "Grid" }
-  }
-}
-```
-  </MethodDescription>
-  </TabItem>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Запрос**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**Ответ**
+		```json
+		{
+		  "errorId":0,
+		  "status":"ready",
+		  "solution": { 
+			"answer": [ false, false, true, false ],
+			"metadata": { "AnswerType": "Grid" }
+		  }
+		}
+		```
+	</MethodDescription>
+</TabItem>
   
 
 ### Ценообразование
@@ -388,48 +383,46 @@ https://api.capmonster.cloud/getTaskResult
 
 
 ### Метод создания задачи
-
 <TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel">
-<MethodItem>
-  ```http
-  https://api.capmonster.cloud/createTask
-  ```
-</MethodItem>
-<MethodDescription>
-**Запрос**
-```json
-{
-  "clientKey":"API_KEY",
-  "task": {
-    "type": "ComplexImageTask",
-    "class": "hcaptcha",
-    "imageUrls": [
-      "https://i.postimg.cc/bwVVWbkG/4type-00.jpg",
-      "https://i.postimg.cc/nzBdXP57/4type-01.jpg",
-      "https://i.postimg.cc/zf9tXrd8/4type-02.jpg",
-      "https://i.postimg.cc/2yY0hxRt/4type-03.jpg",
-      "https://i.postimg.cc/rFQfRWhh/4type-04.jpg",
-      "https://i.postimg.cc/Jz0PNnvR/4type-05.jpg",
-      "https://i.postimg.cc/h48ygNVR/4type-06.jpg",
-      "https://i.postimg.cc/yY1yXdtk/4type-07.jpg",
-      "https://i.postimg.cc/Prt6qKMp/4type-08.jpg"
-     ],
-    "exampleImageUrls": [ "https://i.postimg.cc/MpLtdwJV/4type-example.jpg" ],
-    "metadata": {
-      "Task": "Please select all images that appear warmer in comparison to other images"
-    }
-  }
-}
-```
-**Ответ**
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
-
-</MethodDescription>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Запрос**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "task": {
+			"type": "ComplexImageTask",
+			"class": "hcaptcha",
+			"imageUrls": [
+			  "https://i.postimg.cc/bwVVWbkG/4type-00.jpg",
+			  "https://i.postimg.cc/nzBdXP57/4type-01.jpg",
+			  "https://i.postimg.cc/zf9tXrd8/4type-02.jpg",
+			  "https://i.postimg.cc/2yY0hxRt/4type-03.jpg",
+			  "https://i.postimg.cc/rFQfRWhh/4type-04.jpg",
+			  "https://i.postimg.cc/Jz0PNnvR/4type-05.jpg",
+			  "https://i.postimg.cc/h48ygNVR/4type-06.jpg",
+			  "https://i.postimg.cc/yY1yXdtk/4type-07.jpg",
+			  "https://i.postimg.cc/Prt6qKMp/4type-08.jpg"
+			 ],
+			"exampleImageUrls": [ "https://i.postimg.cc/MpLtdwJV/4type-example.jpg" ],
+			"metadata": {
+			  "Task": "Please select all images that appear warmer in comparison to other images"
+			}
+		  }
+		}
+		```
+		**Ответ**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
 </TabItem>
 
 
@@ -437,32 +430,32 @@ https://api.capmonster.cloud/getTaskResult
 Тип получаемого ответа - [**Grid**](#тип-ответа-grid).
 
 <TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel-full">
-    <MethodItem>
-```http
-https://api.capmonster.cloud/getTaskResult
-```
-    </MethodItem>
-    <MethodDescription>
-**Запрос**
-```json
-{
-  "clientKey":"API_KEY",
-  "taskId": 407533072
-}
-```
-**Ответ**
-```json
-{
-  "errorId":0,
-  "status":"ready",
-  "solution": { 
-    "answer": [ true, false, false, false, false, true, false, false, true ],
-    "metadata": { "AnswerType": "Grid" }
-  }
-}
-```
-  </MethodDescription>
-  </TabItem>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Запрос**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**Ответ**
+		```json
+		{
+		  "errorId":0,
+		  "status":"ready",
+		  "solution": { 
+			"answer": [ true, false, false, false, false, true, false, false, true ],
+			"metadata": { "AnswerType": "Grid" }
+		  }
+		}
+		```
+	</MethodDescription>
+</TabItem>
 
 
 ### Ценообразование
@@ -476,29 +469,27 @@ https://api.capmonster.cloud/getTaskResult
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">
+	```js
+	// https://github.com/ZennoLab/capmonstercloud-client-js
 
-```js
-// https://github.com/ZennoLab/capmonstercloud-client-js
+	import { CapMonsterCloudClientFactory, ClientOptions, ComplexImageHCaptchaRequest } from '@zennolab_com/capmonstercloud-client';
 
-import { CapMonsterCloudClientFactory, ClientOptions, ComplexImageHCaptchaRequest } from '@zennolab_com/capmonstercloud-client';
+	document.addEventListener('DOMContentLoaded', async () => {
+	  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+	  console.log(await cmcClient.getBalance());
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
-  console.log(await cmcClient.getBalance());
+	  const complexImageHCaptchaRequest = new ComplexImageHCaptchaRequest({
+		imageUrls: ['https://i.postimg.cc/kg71cbRt/image-1.jpg', 'https://i.postimg.cc/6381Zx2j/image.jpg'],
+		metaData: {
+		  Task: 'Please click each image containing a mountain',
+		},
+		websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle',
+		exampleImagesBase64: ['image in base64'],
+		exampleImageUrls: ['https://i.postimg.cc/kg71cbRt/image-1.jpg'],
+	  });
 
-  const complexImageHCaptchaRequest = new ComplexImageHCaptchaRequest({
-    imageUrls: ['https://i.postimg.cc/kg71cbRt/image-1.jpg', 'https://i.postimg.cc/6381Zx2j/image.jpg'],
-    metaData: {
-      Task: 'Please click each image containing a mountain',
-    },
-    websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle',
-    exampleImagesBase64: ['image in base64'],
-    exampleImageUrls: ['https://i.postimg.cc/kg71cbRt/image-1.jpg'],
-  });
-
-  console.log(await cmcClient.Solve(complexImageHCaptchaRequest));
-});
-```
-  </TabItem>
-  
+	  console.log(await cmcClient.Solve(complexImageHCaptchaRequest));
+	});
+	```
+  </TabItem>    
 </Tabs>

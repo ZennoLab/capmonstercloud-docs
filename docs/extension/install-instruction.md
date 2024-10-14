@@ -6,12 +6,10 @@ sidebar_label: Инструкция по установке расширения
 # Инструкция по установке расширения CapMonster Cloud в браузер ProjectMaker
 
 :::info
-
 Расширение работает только с типом браузера Chromium!
-
 :::
 
-## **Способ №1: Установка с помощью CRX-файла.**
+## Способ №1: Установка с помощью CRX-файла.
 1. Скачать [CRX-файл CapMonster Cloud](https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=ru);
 
 :::info
@@ -29,7 +27,8 @@ sidebar_label: Инструкция по установке расширения
 1. В настройках экшена установить ID расширения «pabjfbciaedomjjfelfafejkppknjleh»;
 
 1. Ввести API-key из личного кабинета CapMonster Cloud в открывшемся окне расширения.
-## **Способ №2: Установка через интернет-магазин Google Chrome.**
+
+## Способ №2: Установка через интернет-магазин Google Chrome.
 1. Открыть ProjectMaker;
 1. Перейти на страницу расширения `<https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=ru>` ;
 1. Установить расширение, нажав кнопку «Установить»;

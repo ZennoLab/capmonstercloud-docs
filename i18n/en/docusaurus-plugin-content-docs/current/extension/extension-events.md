@@ -15,7 +15,7 @@ If necessary, it is possible to subscribe to these events via `window.addEventLi
 No parameters are passed to events
 :::
 
-### **Example:**
+### Example
 ```js
 window.addEventListener("onCMExtensionReady", () => {
   // DO SOMETHING

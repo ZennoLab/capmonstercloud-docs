@@ -20,7 +20,7 @@ import MethodDescription from '@theme/MethodDescription'
 ## Параметры запроса
 
 <Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
-<TabItem value="proxyless" label="HCaptchaTaskProxyless (без прокси)" default className="bordered-panel">
+  <TabItem value="proxyless" label="HCaptchaTaskProxyless (без прокси)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **HCaptchaTaskProxyless**
 
@@ -42,7 +42,8 @@ import MethodDescription from '@theme/MethodDescription'
     ---
 
     <ParamItem title="data" type="string" />
-    <p>Дополнительный параметр, используемый в основном с `isInvisible=true`.</p>
+    <p>Дополнительный параметр, используемый в основном с `isInvisible=true`. <br/>
+	Значение поля data можно взять из параметра `rqdata`, с которым формируется капча. </p>
 
     ---
 
@@ -62,6 +63,7 @@ import MethodDescription from '@theme/MethodDescription'
 	<p>**false** - мы подставляем User Agent, который указан в запросе. Если User Agent неактуален, то получите ошибку ERROR_WRONG_USERAGENT (USERAGENT IS EXPIRED в логе).</p>
 
   </TabItem>
+  
   <TabItem value="proxy" label="HCaptchaTask (при использовании прокси)" className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **HCaptchaTask**
@@ -84,7 +86,8 @@ import MethodDescription from '@theme/MethodDescription'
     ---
 
     <ParamItem title="data" type="string" />
-    <p>Дополнительный параметр, используемый в основном с `isInvisible=true`.</p>
+    <p>Дополнительный параметр, используемый в основном с `isInvisible=true`. <br/>
+	Значение поля data можно взять из параметра `rqdata`, с которым формируется капча. </p>
 
     ---
 
@@ -136,8 +139,7 @@ import MethodDescription from '@theme/MethodDescription'
     <ParamItem title="proxyPassword" type="string" />
     Пароль прокси-сервера.
 
-  </TabItem>
-  
+  </TabItem>  
 </Tabs>
 
 **Поддерживаемые типы**<br/>
@@ -153,73 +155,72 @@ import MethodDescription from '@theme/MethodDescription'
 ## Метод создания задачи
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-<TabItem value="proxyless" label="HCaptchaTaskProxyless (без прокси)" default className="method-panel">
-    <MethodItem>
-      ```http
-      https://api.capmonster.cloud/createTask
-      ```
-    </MethodItem>
-<MethodDescription>
-**Запрос**
-```json
-{
-    "clientKey":"API_KEY",
-    "task":
-    {
-        "type":"HCaptchaTaskProxyless",
-        "websiteURL":"https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",
-        "websiteKey":"472fc7af-86a4-4382-9a49-ca9090474471",
-        "userAgent": "userAgentPlaceholder",
-        "fallbackToActualUA":true
-    }
-}
-```
-**Ответ**
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
+	<TabItem value="proxyless" label="HCaptchaTaskProxyless (без прокси)" default className="method-panel">
+		<MethodItem>
+			```http
+			https://api.capmonster.cloud/createTask
+			```
+		</MethodItem>
+		<MethodDescription>
+			**Запрос**
+			```json
+			{
+				"clientKey":"API_KEY",
+				"task":
+				{
+					"type":"HCaptchaTaskProxyless",
+					"websiteURL":"https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",
+					"websiteKey":"472fc7af-86a4-4382-9a49-ca9090474471",
+					"userAgent": "userAgentPlaceholder",
+					"fallbackToActualUA":true
+				}
+			}
+			```
+			**Ответ**
+			```json
+			{
+			  "errorId":0,
+			  "taskId":407533072
+			}
+			```
+		</MethodDescription>
+	</TabItem>
 
-</MethodDescription>
-  </TabItem>
-  <TabItem value="proxy" label="HCaptchaTask (при использовании прокси)" className="method-panel">
-<MethodItem>
-  ```http
-  https://api.capmonster.cloud/createTask
-  ```
-</MethodItem>
-<MethodDescription>
-**Запрос**
-```json
-{
-    "clientKey":"API_KEY",
-    "task":
-    {
-        "type":"HCaptchaTask",
-        "websiteURL":"https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",
-        "websiteKey":"472fc7af-86a4-4382-9a49-ca9090474471",
-        "userAgent": "userAgentPlaceholder",
-        "fallbackToActualUA":true,
-        "proxyType":"http",
-        "proxyAddress":"8.8.8.8",
-        "proxyPort":8080,
-        "proxyLogin":"proxyLoginHere",
-        "proxyPassword":"proxyPasswordHere"
-    }
-}
-```
-**Ответ**
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
-</MethodDescription>
-  </TabItem>
-  
+	<TabItem value="proxy" label="HCaptchaTask (при использовании прокси)" className="method-panel">
+		<MethodItem>
+			```http
+			https://api.capmonster.cloud/createTask
+			```
+		</MethodItem>
+		<MethodDescription>
+			**Запрос**
+			```json
+			{
+				"clientKey":"API_KEY",
+				"task":
+				{
+					"type":"HCaptchaTask",
+					"websiteURL":"https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",
+					"websiteKey":"472fc7af-86a4-4382-9a49-ca9090474471",
+					"userAgent": "userAgentPlaceholder",
+					"fallbackToActualUA":true,
+					"proxyType":"http",
+					"proxyAddress":"8.8.8.8",
+					"proxyPort":8080,
+					"proxyLogin":"proxyLoginHere",
+					"proxyPassword":"proxyPasswordHere"
+				}
+			}
+			```
+			**Ответ**
+			```json
+			{
+			  "errorId":0,
+			  "taskId":407533072
+			}
+			```
+		</MethodDescription>
+	</TabItem>  
 </Tabs>
 
 
@@ -227,33 +228,33 @@ import MethodDescription from '@theme/MethodDescription'
 Используйте метод [getTaskResult](../api/methods/get-task-result.md) чтобы получить решение hCaptcha. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 10 с до 80 с.
 
 <TabItem value="proxyless" label="HCaptchaTaskProxyless (без прокси)" default className="method-panel-full">
-    <MethodItem>
-```http
-https://api.capmonster.cloud/getTaskResult
-```
-    </MethodItem>
-    <MethodDescription>
-**Запрос**
-```json
-{
-  "clientKey":"API_KEY",
-  "taskId": 407533072
-}
-```
-**Ответ**
-```json
-{
-  "errorId":0,
-  "status":"ready",
-  "solution": {
-    "gRecaptchaResponse": "P1_eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.hKdwYXNza2V5xQb9JvlblBqjTdKpourvlRNpOZLvJb0yJRmsXVFVjyxFWlL1wdYBXaPyFtnxwy2ukbMgwWn62-cjSc98Iw2XIPYWg5MNDKS4_7tBIhjY0PienoKy1...",
-    "respKey": "E0_eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoidjQ3RjlqZGFYTllFQXlZZFYyRTlaWlBVQUdLaFpPakpRNjBXRTljVW40VnY3NnhuN2V3R0wwVWd1MW1Wai90WEdoYmt5a2NqVGlGdWpsSlpmVjcza...",
-    "userAgent": "userAgentPlaceholder"
-  }
-}
-```
-  </MethodDescription>
-  </TabItem>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Запрос**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**Ответ**
+		```json
+		{
+		  "errorId":0,
+		  "status":"ready",
+		  "solution": {
+			"gRecaptchaResponse": "P1_eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.hKdwYXNza2V5xQb9JvlblBqjTdKpourvlRNpOZLvJb0yJRmsXVFVjyxFWlL1wdYBXaPyFtnxwy2ukbMgwWn62-cjSc98Iw2XIPYWg5MNDKS4_7tBIhjY0PienoKy1...",
+			"respKey": "E0_eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoidjQ3RjlqZGFYTllFQXlZZFYyRTlaWlBVQUdLaFpPakpRNjBXRTljVW40VnY3NnhuN2V3R0wwVWd1MW1Wai90WEdoYmt5a2NqVGlGdWpsSlpmVjcza...",
+			"userAgent": "userAgentPlaceholder"
+		  }
+		}
+		```
+	</MethodDescription>
+</TabItem>
 
 <br />
 
@@ -268,31 +269,29 @@ https://api.capmonster.cloud/getTaskResult
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">
+	```js
+	// https://github.com/ZennoLab/capmonstercloud-client-js
 
-```js
-// https://github.com/ZennoLab/capmonstercloud-client-js
+	import { CapMonsterCloudClientFactory, ClientOptions, HCaptchaRequest } from '@zennolab_com/capmonstercloud-client';
 
-import { CapMonsterCloudClientFactory, ClientOptions, HCaptchaRequest } from '@zennolab_com/capmonstercloud-client';
+	document.addEventListener('DOMContentLoaded', async () => {
+	  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+	  console.log(await cmcClient.getBalance());
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
-  console.log(await cmcClient.getBalance());
+	  const hCaptchaRequest = new HCaptchaRequest({
+		websiteURL: 'https://lessons.zennolab.com/captchas/hcaptcha/?level=easy',
+		websiteKey: '472fc7af-86a4-4382-9a49-ca9090474471',
+		isInvisible: true,
+		data: 'some data',
+		proxyType: 'https',
+		proxyAddress: 'https://proxy.com',
+		proxyPort: 6045,
+		proxyLogin: 'login',
+		proxyPassword: 'password',
+	  });
 
-  const hCaptchaRequest = new HCaptchaRequest({
-    websiteURL: 'https://lessons.zennolab.com/captchas/hcaptcha/?level=easy',
-    websiteKey: '472fc7af-86a4-4382-9a49-ca9090474471',
-    isInvisible: true,
-    data: 'some data',
-    proxyType: 'https',
-    proxyAddress: 'https://proxy.com',
-    proxyPort: 6045,
-    proxyLogin: 'login',
-    proxyPassword: 'password',
-  });
-
-  console.log(await cmcClient.Solve(hCaptchaRequest));
-});
-```
-  </TabItem>
-  
+	  console.log(await cmcClient.Solve(hCaptchaRequest));
+	});
+	```
+  </TabItem>  
 </Tabs>

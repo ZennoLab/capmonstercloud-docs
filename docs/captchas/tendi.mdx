@@ -40,7 +40,7 @@ import MethodDescription from '@theme/MethodDescription'
     <ParamItem title="userAgent" type="string" />
     User-Agent браузера. **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является версия**: `userAgentPlaceholder`
 
-  </TabItem>
+</TabItem>
 
 
 ### Как получить websiteKey (captchaAppId)
@@ -50,34 +50,33 @@ import MethodDescription from '@theme/MethodDescription'
 
 ## Метод создания задачи
 <TabItem value="proxyless" label="CustomTask (без прокси)" default className="method-panel">
-<MethodItem>
-  ```http
-  https://api.capmonster.cloud/createTask
-  ```
-</MethodItem>
-<MethodDescription>
-**Запрос**
-```json
-{
-    "clientKey": "API_KEY",
-    "task": {
-        "type": "CustomTask",
-        "class": "TenDI",
-        "websiteURL": "https://domain.com",
-        "websiteKey": "189123456",
-        "userAgent": "userAgentPlaceholder"
-    }
-}
-```
-**Ответ**
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
-
-</MethodDescription>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Запрос**
+		```json
+		{
+			"clientKey": "API_KEY",
+			"task": {
+				"type": "CustomTask",
+				"class": "TenDI",
+				"websiteURL": "https://domain.com",
+				"websiteKey": "189123456",
+				"userAgent": "userAgentPlaceholder"
+			}
+		}
+		```
+		**Ответ**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
 </TabItem>
 
 
@@ -85,37 +84,37 @@ import MethodDescription from '@theme/MethodDescription'
 Используйте метод [getTaskResult](../api/methods/get-task-result.md), чтобы получить решение TenDI.
 
 <TabItem value="proxyless" label="CustomTask (без прокси)" default className="method-panel-full">
-    <MethodItem>
-```http
-https://api.capmonster.cloud/getTaskResult
-```
-    </MethodItem>
-    <MethodDescription>
-**Запрос**
-```json
-{
-  "clientKey":"API_KEY",
-  "taskId": 407533072
-}
-```
-**Ответ**
-```json
-{
-    "errorId":0,
-    "status":"ready",
-    "solution": {
-       "data": {
-            "randstr": "@EcL",
-            "ticket": "tr03lHUhdnuW3neJZu.....7LrIbs*"
-        },
-        "headers": {
-            "User-Agent": "userAgentPlaceholder"
-        }
-    }
-}
-```
-  </MethodDescription>
-  </TabItem>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Запрос**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**Ответ**
+		```json
+		{
+			"errorId":0,
+			"status":"ready",
+			"solution": {
+			   "data": {
+					"randstr": "@EcL",
+					"ticket": "tr03lHUhdnuW3neJZu.....7LrIbs*"
+				},
+				"headers": {
+					"User-Agent": "userAgentPlaceholder"
+				}
+			}
+		}
+		```
+	</MethodDescription>
+</TabItem>
 
 
 ## Ценообразование

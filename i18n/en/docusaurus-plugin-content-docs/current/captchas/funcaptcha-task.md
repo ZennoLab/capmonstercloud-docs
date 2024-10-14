@@ -13,7 +13,7 @@ The result of solving task is a token for the submit form.
 If the proxy is authorized by IP, then be sure to add **116.203.55.208** to the white list.
 :::
 
-## **Object structure**
+## Object structure
 
 |**Parameter**|**Type**|**Required**|**Value**|
 | :- | :- | :- | :- |
@@ -30,7 +30,7 @@ If the proxy is authorized by IP, then be sure to add **116.203.55.208** to the 
 |userAgent|String|yes|Browser's User-Agent which is used in emulation. |
 |cookies|String|no|<p>Additional cookies which we must use during interaction with target page.</p><p>**Format**: cookiename1=cookievalue1; cookiename2=cookievalue2</p>|
 
-## **Request example**
+## Request example
 
 :::info Method
 ```http
@@ -81,7 +81,7 @@ https://api.capmonster.cloud/createTask
 }
 ```
 
-## **Getting result**
+## Getting result
 
 :::info Method
 ```http

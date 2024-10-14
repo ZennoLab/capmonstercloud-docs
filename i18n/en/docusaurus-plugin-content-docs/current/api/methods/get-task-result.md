@@ -4,7 +4,7 @@ sidebar_label: getTaskResult
 ---
 
 # getTaskResult : request task result
-## **Description**
+## Description
 After you have created a task, you need to get its response by periodically checking the solving status.
 
 :::info Method address
@@ -14,16 +14,13 @@ https://api.capmonster.cloud/getTaskResult
 request format: `JSON POST`
 :::
 
-<!-- Адрес метода: <https://api.capmonster.cloud/getTaskResult/>
-Формат запроса: JSON POST -->
-
 :::caution
 Limit: 120 requests per task. If the limit is exceeded, the user's account may be temporarily locked. 
 :::
 
 ---
 
-## **Request parameters:**
+## Request parameters
 
 ### `clientKey`
 Type: `String` <br />
@@ -35,13 +32,8 @@ Type: `Integer` <br />
 Required: `Yes`<br />
 ID which was obtained in [createTask](./create-task.md) method.
 
-
-<!-- |**Параметр**|**Тип**|**Обязательный**|**Значение**|
-| :-: | :-: | :-: | :-: |
-|clientKey|String|Да|Уникальный ключ вашей учетной записи|
-|taskId|Integer|Да|Идентификатор задания полученный в методе [createTask](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/425989/createTask)| -->
 ---
-### **Request example**
+### Request example
 
 ```json
 {
@@ -50,7 +42,7 @@ ID which was obtained in [createTask](./create-task.md) method.
 }
 ```
 --- 
-## **Response structure**
+## Response structure
 
 ### `errorId`
 Type: `Integer` <br />
@@ -68,14 +60,8 @@ Type: `String` <br />
 Type: `Объект` <br />
 Task result data. Different for each type of task.
 
-<!-- |**Свойство**|**Тип**|**Значение**|
-| :-: | :-: | :-: |
-|errorId|Integer|Идентификатор ошибки.<br />**0** - ошибок нет, свойство *errorCode* отсутствует<br />**1** - ошибка, информация о ней находится в свойстве *errorCode*|
-|errorCode|String|Код ошибки. См. [глоссарий ошибок](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/295310).|
-|status|String|**processing** - задача в процессе выполнения<br />**ready** - задача выполнена, решение находится в свойстве *solution*|
-|solution|Объект|Информация о решении задачи. Каждый тип задачи имеет разный формат.| -->
 ---
-### **Response example:**
+### Response example
 
 Response is in process
 
@@ -87,9 +73,6 @@ Response is in process
   "status": "processing"
 }
 ```
-
-<!-- |<p>{</p><p>`    `"errorCode": "null",</p><p>`    `"errorDescription": "null",</p><p>`    `"errorId": 0,</p><p>`    `"status": "processing",</p><p>}</p>|
-| :- | -->
 
 Successful response
 

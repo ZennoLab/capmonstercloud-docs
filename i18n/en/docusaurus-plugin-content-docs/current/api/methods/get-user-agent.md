@@ -5,7 +5,7 @@ sidebar_label: getUserAgent
 
 # getUserAgent
 
-## **Description**
+## Description
 
 It is important that when sending a captcha recognition request, you specify the current userAgent (UA) from the Windows operating system.
 
