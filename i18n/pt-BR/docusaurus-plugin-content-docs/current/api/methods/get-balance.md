@@ -3,33 +3,25 @@ sidebar_position: 3
 sidebar_label: getBalance
 ---
 
-# getBalance : retrieve account balance
+# getBalance : recuperar saldo da conta
 
-:::info Method address
+:::info Endereço do método
 ```http
 https://api.capmonster.cloud/getBalance
 ```
 
-request format: `JSON POST`
+Formato da solicitação: `JSON POST`
 :::
 
-<!-- Адрес метода: <https://api.capmonster.cloud/getBalance>
-
-формат запроса: JSON POST -->
-
-## **Request parameters**
+## **Parâmetros da solicitação**
 
 ### `clientKey`
-Type: `String` <br />
-Required: `Yes`<br />
-Unique key of your account
+Tipo: `String` <br />
+Obrigatório: `Sim`<br />
+Chave única da sua conta
 
-<!-- 
-|**Параметр**|**Тип**|**Обязательный**|**Значение**|
-| :-: | :-: | :-: | :-: |
-|clientKey|String|Да|Уникальный ключ вашей учетной записи| -->
 
-### **Body Example**
+### **Exemplo de Corpo**
 
 ```json
 {
@@ -37,31 +29,26 @@ Unique key of your account
 }
 ```
 
-## **Response structure**
+## **Estrutura da resposta**
 
 ### `errorId`
-Type: `Integer` <br />
-Error identificator.<br />**0** - no error, no *errorCode* property<br />**1** - error, information about it is in the *errorCode* property
+Tipo: `Integer` <br />
+Identificador de erro.<br />**0** - sem erro, a propriedade *errorCode* não está presente<br />**1** - erro, as informações estão na propriedade *errorCode*
 
 ### `errorCode`
-Type: `String` <br />
-Error code. Check out [error list](../api-errors.md).
+Tipo: `String` <br />
+Código de erro. Verifique a [lista de erros](../api-errors.md).
 
 ### `balance`
-Type: `Decimal` <br />
-Amount of money available
+Tipo: `Decimal` <br />
+Valor disponível de saldo.
 
-<!-- |**Свойство**|**Тип**|**Значение**|
-| :-: | :-: | :-: |
-|errorId|Integer|Идентификатор ошибки.<br />**0** - ошибок нет, свойство *errorCode* отсутствует<br />**1** - ошибка, информация о ней находится в свойстве *errorCode*|
-|errorCode|String|Код ошибки. См. [глоссарий ошибок](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/295310).|
-|balance|Decimal|Количество доступных денег| -->
 
-### **Example**
+### **Exemplo**
 
 ```json
 {
- "errorId":0,
+ "errorId": 0,
  "balance": 345.678
 }
 ```

@@ -3,45 +3,39 @@ sidebar_position: 1
 sidebar_label: getTaskResult
 ---
 
-# getTaskResult : request task result
-## **Description**
-After you have created a task, you need to get its response by periodically checking the solving status.
+# getTaskResult : solicitar resultado da tarefa
+## **Descrição**
+Depois de criar uma tarefa, você precisa obter a resposta verificando periodicamente o status da solução.
 
-:::info Method address
+:::info Endereço do método
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
-request format: `JSON POST`
+Formato da solicitação: `JSON POST`
 :::
 
-<!-- Адрес метода: <https://api.capmonster.cloud/getTaskResult/>
-Формат запроса: JSON POST -->
 
 :::caution
-Limit: 120 requests per task. If the limit is exceeded, the user's account may be temporarily locked. 
+Limite: 120 solicitações por tarefa. Se o limite for excedido, a conta do usuário poderá ser bloqueada temporariamente.
 :::
 
 ---
 
-## **Request parameters:**
+## **Parâmetros da solicitação:**
 
 ### `clientKey`
-Type: `String` <br />
-Required: `Yes`<br />
-Unique key of your account.
+Tipo: `String` <br />
+Obrigatório: `Sim`<br />
+Chave única da sua conta.
 
 ### `taskId`
-Type: `Integer` <br />
-Required: `Yes`<br />
-ID which was obtained in [createTask](./create-task.md) method.
+Tipo: `Integer` <br />
+Obrigatório: `Sim`<br />
+ID obtido no método [createTask](./create-task.md).
 
-
-<!-- |**Параметр**|**Тип**|**Обязательный**|**Значение**|
-| :-: | :-: | :-: | :-: |
-|clientKey|String|Да|Уникальный ключ вашей учетной записи|
-|taskId|Integer|Да|Идентификатор задания полученный в методе [createTask](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/425989/createTask)| -->
 ---
-### **Request example**
+
+### **Exemplo de solicitação**
 
 ```json
 {
@@ -49,35 +43,29 @@ ID which was obtained in [createTask](./create-task.md) method.
   "taskId": 7654321
 }
 ```
---- 
-## **Response structure**
+---
+## **Estrutura da resposta**
 
 ### `errorId`
-Type: `Integer` <br />
-Error identificator.<br />**0** - no errors, no *errorCode* property;<br />**1** - error, information about it is in the *errorCode* property.
+Tipo: `Integer` <br />
+Identificador de erro.<br />**0** - sem erros, a propriedade *errorCode* não está presente;<br />**1** - erro, as informações estão na propriedade *errorCode*.
 
 ### `errorCode`
-Type: `String` <br />
-Error code. Check out [error list](../api-errors.md).
+Tipo: `String` <br />
+Código de erro. Verifique a [lista de erros](../api-errors.md).
 
 ### `status`
-Type: `String` <br />
-**processing** -  task is not ready yet;<br />**ready** - task complete, solution object can be found in *solution* property.
+Tipo: `String` <br />
+**processing** - tarefa ainda não está pronta;<br />**ready** - tarefa concluída, o objeto de solução pode ser encontrado na propriedade *solution*.
 
 ### `solution`
-Type: `Объект` <br />
-Task result data. Different for each type of task.
+Tipo: `Objeto` <br />
+Dados do resultado da tarefa. Diferente para cada tipo de tarefa.
 
-<!-- |**Свойство**|**Тип**|**Значение**|
-| :-: | :-: | :-: |
-|errorId|Integer|Идентификатор ошибки.<br />**0** - ошибок нет, свойство *errorCode* отсутствует<br />**1** - ошибка, информация о ней находится в свойстве *errorCode*|
-|errorCode|String|Код ошибки. См. [глоссарий ошибок](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/295310).|
-|status|String|**processing** - задача в процессе выполнения<br />**ready** - задача выполнена, решение находится в свойстве *solution*|
-|solution|Объект|Информация о решении задачи. Каждый тип задачи имеет разный формат.| -->
 ---
-### **Response example:**
+### **Exemplo de resposta**
 
-Response is in process
+Resposta em processo
 
 ```json
 {
@@ -88,10 +76,8 @@ Response is in process
 }
 ```
 
-<!-- |<p>{</p><p>`    `"errorCode": "null",</p><p>`    `"errorDescription": "null",</p><p>`    `"errorId": 0,</p><p>`    `"status": "processing",</p><p>}</p>|
-| :- | -->
 
-Successful response
+Resposta bem-sucedida
 
 ```json
 {

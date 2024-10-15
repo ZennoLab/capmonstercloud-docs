@@ -34,7 +34,7 @@ Se você não for o desenvolvedor do aplicativo/script que envia os captchas, en
 
 Se você for desenvolvedor, faça alterações conforme as regras e limites:
 
-- Certifique-se de que seu aplicativo ou script está enviando solicitações corretas à API. Verifique se todos os parâmetros estão corretos, incluindo chaves, `TaskIds` e outros dados necessários.
+- Certifique-se de que seu aplicativo ou script está enviando solicitações corretas à API. Verifique se todos os parâmetros estão corretos, incluindo chaves, Task IDs e outros dados necessários.
 
 - Respeite os limites no número de solicitações por tarefa e outras restrições impostas pelo serviço de reconhecimento de captcha. Se seu aplicativo enviar muitas solicitações, isso pode levar ao bloqueio.
 
