@@ -15,7 +15,8 @@ CapMonster Cloud поддерживает API сервисов: Anti-Captcha (v1
 ![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.005.png) 
 
 Когда CapMonsterInterceptor запущен, все капчи отправленные на распознавание в сервисы *Anti-Captcha (v1.0, v2.0), RuCaptcha, RipCaptcha, 2Captcha, BypassCaptcha, DeathByCaptcha* будут перехватываться и перенаправляться в CapMonster.Cloud.
-## **Пример**
+
+## Пример
 Просто выберите один из сервисов распознавания в своей программе, где требуется ввод капчи. В нашем примере это будет *DeathByCaptcha*.
 
 - **примечание для DeathByCaptcha:** для идентификации пользователя API DeathByCaptcha использует логин и пароль, а не API ключ. В этом случае нужно заполнить 2 поля случайными значениями.
@@ -29,7 +30,9 @@ CapMonster Cloud поддерживает API сервисов: Anti-Captcha (v1
 Щёлкнув 2 раза по иконке CapMonsterInterceptor в трее, вы сможете увидеть статистику перехваченных капч, отправленных на распознавание.
 
 ![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.007.png) 
-## **Ответы на вопросы**
+
+
+## Ответы на вопросы
 
 <details>
     <summary>Как изменить API-ключ, указанный при установке CapMonsterInterceptor?</summary>

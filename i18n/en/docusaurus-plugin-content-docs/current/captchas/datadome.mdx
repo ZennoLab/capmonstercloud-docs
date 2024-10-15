@@ -56,80 +56,79 @@ This task will be performed using our proxy servers. Use the received cookies in
     Browser User-Agent. <br /> 
 	**Pass only the actual UA from Windows OS. Now this is**: userAgentPlaceholder
 
-  </TabItem>
+</TabItem>
 
 
 ## Create task method
 
 <TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
-<MethodItem>
-  ```http
-  https://api.capmonster.cloud/createTask
-  ```
-</MethodItem>
-<MethodDescription>
-**Request**
-```json
-{
-    "clientKey": "API_KEY",
-    "task": {
-        "type": "CustomTask",
-        "class": "DataDome",
-        "websiteURL": "https://www.leboncoin.fr/",
-        "userAgent": "MuserAgentPlaceholder",
-        "metadata": {
-            "htmlPageBase64": "PGh0bWw+PGhlYWQ+PHRpdGxlPmJs...PC9odG1sPg==",
-            "datadomeCookie": "datadome=VYUWrgJ9ap4zmXq8Mgbp...64emvUPeON45z"
-        }
-    }
-}
-```
-**Response**
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
-
-</MethodDescription>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+			"clientKey": "API_KEY",
+			"task": {
+				"type": "CustomTask",
+				"class": "DataDome",
+				"websiteURL": "https://www.leboncoin.fr/",
+				"userAgent": "MuserAgentPlaceholder",
+				"metadata": {
+					"htmlPageBase64": "PGh0bWw+PGhlYWQ+PHRpdGxlPmJs...PC9odG1sPg==",
+					"datadomeCookie": "datadome=VYUWrgJ9ap4zmXq8Mgbp...64emvUPeON45z"
+				}
+			}
+		}
+		```
+		**Response**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
 </TabItem>
 
 ## Get task result method
 Use the [getTaskResult](../api/methods/get-task-result.md) method to get the DataDome solution.
 
 <TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
-    <MethodItem>
-```http
-https://api.capmonster.cloud/getTaskResult
-```
-    </MethodItem>
-    <MethodDescription>
-**Request**
-```json
-{
-  "clientKey":"API_KEY",
-  "taskId": 407533072
-}
-```
-**Response**
-```json
-{
-    "errorId":0,
-    "status":"ready",
-    "solution": {
-        "domains": {
-            "site.com": {
-                "cookies": {
-                    "datadome": "t355hfeuUFbsWpoMzXyIWL_ewfwgre25345323rwgregeFEkG5iju9esKVfWMzuLAjcfCIJUIHU7332At1l~HY78g782hidwfeO4K2ZP_CFHYUFEgygfiYGfGYEUfgyefWrXG6_3sy; Max-Age=31536000; Domain=.site.com; Path=/; Secure; SameSite=Lax"
-                }
-            }
-        }
-    }
-}
-```
-  </MethodDescription>
-  </TabItem>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**Response**
+		```json
+		{
+			"errorId":0,
+			"status":"ready",
+			"solution": {
+				"domains": {
+					"site.com": {
+						"cookies": {
+							"datadome": "t355hfeuUFbsWpoMzXyIWL_ewfwgre25345323rwgregeFEkG5iju9esKVfWMzuLAjcfCIJUIHU7332At1l~HY78g782hidwfeO4K2ZP_CFHYUFEgygfiYGfGYEUfgyefWrXG6_3sy; Max-Age=31536000; Domain=.site.com; Path=/; Secure; SameSite=Lax"
+						}
+					}
+				}
+			}
+		}
+		```
+	</MethodDescription>
+</TabItem>
 
 
 ## Use SDK Library

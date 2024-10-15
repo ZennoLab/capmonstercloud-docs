@@ -56,7 +56,7 @@ V4 (captcha_id = gt)
 ### <span style={{fontSize: '1.5rem'}}>Параметры запроса</span>
 
 <Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
-<TabItem value="proxyless" label="GeeTestTaskProxyless (без прокси)" default className="bordered-panel">
+  <TabItem value="proxyless" label="GeeTestTaskProxyless (без прокси)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **GeeTestTaskProxyless**
 
@@ -68,9 +68,8 @@ V4 (captcha_id = gt)
     ---
 
     <ParamItem title="gt" required type="string" />
-    Ключ-идентификатор GeeTest для домена. Статическое значение, редко обновляется.
-	<br />Если v4 то это параметр clientId.
-
+    Ключ-идентификатор GeeTest `gt` для домена. Статическое значение, редко обновляется.
+	
     ---
 
     <ParamItem title="challenge" required="required only for V3" type="string" />
@@ -79,7 +78,7 @@ V4 (captcha_id = gt)
     ---
 
     <ParamItem title="version" type="integer" required="required only for V4"/>
-    Номер версии (по умолчанию равен 3). Возможные значения: 3, 4.
+    3 
 
     ---
 
@@ -93,11 +92,6 @@ V4 (captcha_id = gt)
     Путь к скрипту капчи для ее отображения на странице. 
 	<br />Необязательный параметр. Может потребоваться для некоторых сайтов. 
 	<br />Отправляйте JSON в виде строки.
-
-    ---
-
-    <ParamItem title="initParameters" type="object" />
-    Дополнительные параметры для 4 версии, используются вместе с “riskType” (тип капчи/характеристики ее проверки).
 
     ---
 
@@ -117,8 +111,7 @@ V4 (captcha_id = gt)
     ---
 
     <ParamItem title="gt" required type="string" />
-    Ключ-идентификатор GeeTest для домена. Статическое значение, редко обновляется.
-	<br />Если v4 то это параметр clientId.
+    Ключ-идентификатор GeeTest `gt` для домена. Статическое значение, редко обновляется.
 
     ---
 
@@ -128,7 +121,7 @@ V4 (captcha_id = gt)
     ---
 
     <ParamItem title="version" type="integer" required="required only for V4"/>
-    Номер версии (по умолчанию равен 3). Возможные значения: 3, 4.
+    3
 
     ---
 
@@ -142,11 +135,6 @@ V4 (captcha_id = gt)
     Путь к скрипту капчи для ее отображения на странице. 
 	<br />Необязательный параметр. Может потребоваться для некоторых сайтов. 
 	<br />Отправляйте JSON в виде строки.
-
-    ---
-
-    <ParamItem title="initParameters" type="object" />
-    Дополнительные параметры для 4 версии, используются вместе с “riskType” (тип капчи/характеристики ее проверки).
 
     ---
 
@@ -193,108 +181,105 @@ V4 (captcha_id = gt)
 ### <span style={{fontSize: '1.5rem'}}>Метод создания задачи</span>
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-<TabItem value="proxyless" label="GeeTestTaskProxyless (без прокси)" default className="method-panel">
-    <MethodItem>
-      ```http
-      https://api.capmonster.cloud/createTask
-      ```
-    </MethodItem>
-<MethodDescription>
-**Запрос**
-```json
-{
-    "clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
-    "task":
-    {
-        "type":"GeeTestTaskProxyless",
-        "websiteURL":"https://www.geetest.com/en/demo",
-        "gt":"022397c99c9f646f6477822485f30404",
-        "challenge":"7f044f48bc951ecfbfc03842b5e1fe59"
+	<TabItem value="proxyless" label="GeeTestTaskProxyless (без прокси)" default className="method-panel">
+		<MethodItem>
+			```http
+			https://api.capmonster.cloud/createTask
+			```
+		</MethodItem>
+		<MethodDescription>
+			**Запрос**
+			```json
+			{
+				"clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
+				"task":
+				{
+					"type":"GeeTestTaskProxyless",
+					"websiteURL":"https://www.geetest.com/en/demo",
+					"gt":"022397c99c9f646f6477822485f30404",
+					"challenge":"7f044f48bc951ecfbfc03842b5e1fe59"
 
-    }
-}
-```
-**Ответ**
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
-
-</MethodDescription>
-  </TabItem>
-  <TabItem value="proxy" label="GeeTestTask (при использовании прокси)" className="method-panel">
-<MethodItem>
-  ```http
-  https://api.capmonster.cloud/createTask
-  ```
-</MethodItem>
-<MethodDescription>
-**Запрос**
-```json 
-  {
-    "clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
-    "task": {
-      "type":"GeeTestTask",
-      "websiteURL":"https://www.geetest.com/en/demo",
-      "gt":"022397c99c9f646f6477822485f30404",
-      "challenge":"7f044f48bc951ecfbfc03842b5e1fe59",
-      "proxyType":"http",
-      "proxyAddress":"8.8.8.8",
-      "proxyPort":8080,
-      "proxyLogin":"proxyLoginHere",
-      "proxyPassword":"proxyPasswordHere",
-      "userAgent":"userAgentPlaceholder"
-    }
-  }
-```
-**Ответ**
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
-</MethodDescription>
-  </TabItem>
-  
+				}
+			}
+			```
+			**Ответ**
+			```json
+			{
+			  "errorId":0,
+			  "taskId":407533072
+			}
+			```
+		</MethodDescription>
+	</TabItem>
+	
+	<TabItem value="proxy" label="GeeTestTask (при использовании прокси)" className="method-panel">
+		<MethodItem>
+			```http
+			https://api.capmonster.cloud/createTask
+			```
+		</MethodItem>
+		<MethodDescription>
+			**Запрос**
+			```json 
+			  {
+				"clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
+				"task": {
+				  "type":"GeeTestTask",
+				  "websiteURL":"https://www.geetest.com/en/demo",
+				  "gt":"022397c99c9f646f6477822485f30404",
+				  "challenge":"7f044f48bc951ecfbfc03842b5e1fe59",
+				  "proxyType":"http",
+				  "proxyAddress":"8.8.8.8",
+				  "proxyPort":8080,
+				  "proxyLogin":"proxyLoginHere",
+				  "proxyPassword":"proxyPasswordHere",
+				  "userAgent":"userAgentPlaceholder"
+				}
+			  }
+			```
+			**Ответ**
+			```json
+			{
+			  "errorId":0,
+			  "taskId":407533072
+			}
+			```
+		</MethodDescription>
+	</TabItem>  
 </Tabs>
-
 
 Используйте метод [getTaskResult](../api/methods/get-task-result.md), чтобы получить решение GeeTest. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 10 с до 30 с.
 
 ### <span style={{fontSize: '1.5rem'}}>Метод получения результата задачи</span>
 
-
-  <TabItem value="proxyless" label="GeeTestTaskProxyless (без прокси)" default className="method-panel-full">
-    <MethodItem>
-```http
-https://api.capmonster.cloud/getTaskResult
-```
-    </MethodItem>
-    <MethodDescription>
-**Запрос**
-```json
-{
-  "clientKey":"API_KEY",
-  "taskId": 407533072
-}
-```
-**Ответ**
-```json
-{
-  "errorId":0,
-  "status":"ready",
-  "solution": {
-    "challenge":"0f759dd1ea6c4wc76cedc2991039ca4f23",
-    "validate":"6275e26419211d1f526e674d97110e15",
-    "seccode":"510cd9735583edcb158601067195a5eb|jordan"
-  }
-}
-```
-  </MethodDescription>
-  </TabItem>
+<TabItem value="proxyless" label="GeeTestTaskProxyless (без прокси)" default className="method-panel-full">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Запрос**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**Ответ**
+		```json
+		{
+		  "errorId":0,
+		  "status":"ready",
+		  "solution": {
+			"challenge":"0f759dd1ea6c4wc76cedc2991039ca4f23",
+			"validate":"6275e26419211d1f526e674d97110e15",
+			"seccode":"510cd9735583edcb158601067195a5eb|jordan"
+		  }
+		}
+		```
+	</MethodDescription>
+</TabItem>
 
 <br />
 
@@ -310,39 +295,37 @@ https://api.capmonster.cloud/getTaskResult
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">
+	```js
+	// https://github.com/ZennoLab/capmonstercloud-client-js
 
-```js
-// https://github.com/ZennoLab/capmonstercloud-client-js
+	import { CapMonsterCloudClientFactory, ClientOptions, GeeTestProxylessRequest, /*GeeTestRequest*/ } from '@zennolab_com/capmonstercloud-client';
 
-import { CapMonsterCloudClientFactory, ClientOptions, GeeTestProxylessRequest, /*GeeTestRequest*/ } from '@zennolab_com/capmonstercloud-client';
+	document.addEventListener('DOMContentLoaded', async () => {
+	  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+	  console.log(await cmcClient.getBalance());
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
-  console.log(await cmcClient.getBalance());
+	  const geetestV3Request = new GeeTestProxylessRequest({
+		websiteURL: 'https://example.com/geetest.php',
+		gt: '81dc9bdb52d04dc20036dbd8313ed055',
+		challenge: 'd93591bdf7860e1e4ee2fca799911215',
+	  })
 
-  const geetestV3Request = new GeeTestProxylessRequest({
-    websiteURL: 'https://example.com/geetest.php',
-    gt: '81dc9bdb52d04dc20036dbd8313ed055',
-    challenge: 'd93591bdf7860e1e4ee2fca799911215',
-  })
+	  // const geetestV3Request = new GeeTestRequest({
+	  //   websiteURL: 'https://example.com/geetest.php',
+	  //   gt: '81dc9bdb52d04dc20036dbd8313ed055',
+	  //   challenge: 'd93591bdf7860e1e4ee2fca799911215',
+	  //   userAgent: 'userAgentPlaceholder',
+	  //   proxyType: 'https',
+	  //   proxyAddress: 'https://proxy.com',
+	  //   proxyPort: 6045,
+	  //   proxyLogin: 'login',
+	  //   proxyPassword: 'password',
+	  // })
 
-  // const geetestV3Request = new GeeTestRequest({
-  //   websiteURL: 'https://example.com/geetest.php',
-  //   gt: '81dc9bdb52d04dc20036dbd8313ed055',
-  //   challenge: 'd93591bdf7860e1e4ee2fca799911215',
-  //   userAgent: 'userAgentPlaceholder',
-  //   proxyType: 'https',
-  //   proxyAddress: 'https://proxy.com',
-  //   proxyPort: 6045,
-  //   proxyLogin: 'login',
-  //   proxyPassword: 'password',
-  // })
-
-  console.log(await cmcClient.Solve(geetestV3Request));
-});
-```
-  </TabItem>
-  
+	  console.log(await cmcClient.Solve(geetestV3Request));
+	});
+	```
+  </TabItem>  
 </Tabs>
 
 <br />
@@ -357,7 +340,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 ### <span style={{fontSize: '1.5rem'}}>Параметры запроса</span>
 
 <Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
-<TabItem value="proxyless" label="GeeTestTaskProxyless (без прокси)" default className="bordered-panel">
+  <TabItem value="proxyless" label="GeeTestTaskProxyless (без прокси)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **GeeTestTaskProxyless**
 
@@ -369,23 +352,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     ---
 
     <ParamItem title="gt" required type="string" />
-	Ключ-идентификатор GeeTest для домена. Статическое значение, редко обновляется. <br />
-	Если v4 то это параметр clientId.
-
-    ---
-
-    <ParamItem title="challenge" required="required only for V3" type="string" />
-    <p>
-    Меняющийся ключ. <br />
-	При каждом обращении к нашему API нужно получать новое значение ключа. Если капча загружена на странице, то значение challenge уже недействительно и вы получите в ответ [ошибку](../api/api-errors.md) `ERROR_TOKEN_EXPIRED`. <br />
-    За задачи с ошибкой `ERROR_TOKEN_EXPIRED` плата взимается как за успешно решённые задачи.
-    Нужно изучить запросы и найти тот, в котором возвращается это значение и перед каждым созданием задачи на распознавания выполнять этот запрос и парсить challenge из него.
-    </p>
+	Ключ-идентификатор GeeTest для домена - параметр `clientId`.
 
     ---
 
     <ParamItem title="version" type="integer" required="required only for V4"/>
-	Номер версии (по умолчанию равен 3). Возможные значения: 3, 4.
+	4
 	
     ---
 
@@ -424,23 +396,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     ---
 
     <ParamItem title="gt" required type="string" />
-    Ключ-идентификатор GeeTest для домена. Статическое значение, редко обновляется. <br />
-	Если v4 то это параметр clientId.
-
-    ---
-
-    <ParamItem title="challenge" required="required only for V3" type="string" />
-    <p>
-    Меняющийся ключ. <br />
-	При каждом обращении к нашему API нужно получать новое значение ключа. Если капча загружена на странице, то значение challenge уже недействительно и вы получите в ответ [ошибку](../api/api-errors.md) `ERROR_TOKEN_EXPIRED`. <br />
-    За задачи с ошибкой `ERROR_TOKEN_EXPIRED` плата взимается как за успешно решённые задачи.
-    Нужно изучить запросы и найти тот, в котором возвращается это значение и перед каждым созданием задачи на распознавания выполнять этот запрос и парсить challenge из него.
-    </p>
+    Ключ-идентификатор GeeTest для домена - параметр `clientId`.
 
     ---
 
     <ParamItem title="version" type="integer" required="required only for V4"/>
-    Номер версии (по умолчанию равен 3). Возможные значения: 3, 4.
+    4
 
     ---
 
@@ -506,81 +467,77 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-<TabItem value="proxyless" label="GeeTestTaskProxyless (без прокси)" default className="method-panel">
-    <MethodItem>
-      ```http
-      https://api.capmonster.cloud/createTask
-      ```
-    </MethodItem>
-	
-<MethodDescription>
-**Запрос**
-```json
-{
-    "clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
-    "task":
-    {
-        "type":"GeeTestTaskProxyless",
-        "websiteURL":"https://gt4.geetest.com/",
-        "gt":"54088bb07d2df3c46b79f80300b0abbe",
-        "version": 4,
-        "initParameters": {
-          "riskType": "slide"
+	<TabItem value="proxyless" label="GeeTestTaskProxyless (без прокси)" default className="method-panel">
+		<MethodItem>
+			```http
+			https://api.capmonster.cloud/createTask
+			```
+		</MethodItem>
+		<MethodDescription>
+			**Запрос**
+			```json
+			{
+				"clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
+				"task":
+				{
+					"type":"GeeTestTaskProxyless",
+					"websiteURL":"https://gt4.geetest.com/",
+					"gt":"54088bb07d2df3c46b79f80300b0abbe",
+					"version": 4,
+					"initParameters": {
+					  "riskType": "slide"
 
-        }
-    }
-}
-```
-**Ответ**
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
-
-	</MethodDescription>
-  </TabItem>
+					}
+				}
+			}
+			```
+			**Ответ**
+			```json
+			{
+			  "errorId":0,
+			  "taskId":407533072
+			}
+			```
+		</MethodDescription>
+	</TabItem>
   
-  <TabItem value="proxy" label="GeeTestTask (при использовании прокси)" className="method-panel">
-<MethodItem>
-  ```http
-  https://api.capmonster.cloud/createTask
-  ```
-</MethodItem>
-<MethodDescription>
-**Запрос**
-```json
-{
-  "clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
-  "task": {
-    "type":"GeeTestTask",
-    "websiteURL":"https://gt4.geetest.com/",
-    "gt":"54088bb07d2df3c46b79f80300b0abbe",
-    "version": 4,
-    "initParameters": {
-      "riskType": "slide"
-    },
-    "proxyType":"http",
-    "proxyAddress":"8.8.8.8",
-    "proxyPort":8080,
-    "proxyLogin":"proxyLoginHere",
-    "proxyPassword":"proxyPasswordHere",
-    "userAgent":"userAgentPlaceholder"
-  }
-}
-```
-
-**Ответ**
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
-</MethodDescription>
-  </TabItem>
-  
+	<TabItem value="proxy" label="GeeTestTask (при использовании прокси)" className="method-panel">
+		<MethodItem>
+			```http
+			https://api.capmonster.cloud/createTask
+			```
+		</MethodItem>
+		<MethodDescription>
+			**Запрос**
+			```json
+			{
+			  "clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
+			  "task": {
+				"type":"GeeTestTask",
+				"websiteURL":"https://gt4.geetest.com/",
+				"gt":"54088bb07d2df3c46b79f80300b0abbe",
+				"version": 4,
+				"initParameters": {
+				  "riskType": "slide"
+				},
+				"proxyType":"http",
+				"proxyAddress":"8.8.8.8",
+				"proxyPort":8080,
+				"proxyLogin":"proxyLoginHere",
+				"proxyPassword":"proxyPasswordHere",
+				"userAgent":"userAgentPlaceholder"
+			  }
+			}
+			```
+			**Ответ**
+			```json
+			{
+			  "errorId":0,
+			  "taskId":407533072
+			}
+			```
+		</MethodDescription>
+	</TabItem>  
 </Tabs>
 
 Используйте метод [getTaskResult](../api/methods/get-task-result.md), чтобы получить решение GeeTest. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 10 с до 30 с.
@@ -588,35 +545,35 @@ document.addEventListener('DOMContentLoaded', async () => {
 ### <span style={{fontSize: '1.5rem'}}>Метод получения результата задачи</span>
 
 <TabItem value="proxyless" label="GeeTestTaskProxyless (без прокси)" default className="method-panel-full">
-    <MethodItem>
-```http
-https://api.capmonster.cloud/getTaskResult
-```
-    </MethodItem>
-    <MethodDescription>
-**Запрос**
-```json
-{
-  "clientKey":"API_KEY",
-  "taskId": 407533072
-}
-```
-**Ответ**
-```json
-{
-  "errorId":0,
-  "status":"ready",
-  "solution": {
-    "captcha_id":"f5c2ad5a8a3cf37192d8b9c039950f79",
-    "lot_number":"bcb2c6ce2f8e4e9da74f2c1fa63bd713",
-    "pass_token":"edc7a17716535a5ae624ef4707cb6e7e478dc557608b068d202682c8297695cf",
-    "gen_time":"1683794919",
-    "captcha_output":"XwmTZEJCJEnRIJBlvtEAZ662T...[cut]...SQ3fX-MyoYOVDMDXWSRQig56"
-  }
-}
-```
-  </MethodDescription>
-  </TabItem>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Запрос**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**Ответ**
+		```json
+		{
+		  "errorId":0,
+		  "status":"ready",
+		  "solution": {
+			"captcha_id":"f5c2ad5a8a3cf37192d8b9c039950f79",
+			"lot_number":"bcb2c6ce2f8e4e9da74f2c1fa63bd713",
+			"pass_token":"edc7a17716535a5ae624ef4707cb6e7e478dc557608b068d202682c8297695cf",
+			"gen_time":"1683794919",
+			"captcha_output":"XwmTZEJCJEnRIJBlvtEAZ662T...[cut]...SQ3fX-MyoYOVDMDXWSRQig56"
+		  }
+		}
+		```
+	</MethodDescription>
+</TabItem>
 
 <br />
 
@@ -643,45 +600,43 @@ input[name=captcha_output]</td>
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">
+	```js
+	// https://github.com/ZennoLab/capmonstercloud-client-js
 
-```js
-// https://github.com/ZennoLab/capmonstercloud-client-js
+	import { CapMonsterCloudClientFactory, ClientOptions, GeeTestProxylessRequest, /*GeeTestRequest*/ } from '@zennolab_com/capmonstercloud-client';
 
-import { CapMonsterCloudClientFactory, ClientOptions, GeeTestProxylessRequest, /*GeeTestRequest*/ } from '@zennolab_com/capmonstercloud-client';
+	document.addEventListener('DOMContentLoaded', async () => {
+	  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+	  console.log(await cmcClient.getBalance());
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
-  console.log(await cmcClient.getBalance());
+	  const geetestV4Request = new GeeTestProxylessRequest({
+		websiteURL: 'https://example.com/geetest.php',
+		gt: '81dc9bdb52d04dc20036dbd8313ed055',
+		challenge: 'd93591bdf7860e1e4ee2fca799911215',
+		version: '4',
+		initParameters: {
+		  riskType: 'slide',
+		},
+	  });
 
-  const geetestV4Request = new GeeTestProxylessRequest({
-    websiteURL: 'https://example.com/geetest.php',
-    gt: '81dc9bdb52d04dc20036dbd8313ed055',
-    challenge: 'd93591bdf7860e1e4ee2fca799911215',
-    version: '4',
-    initParameters: {
-      riskType: 'slide',
-    },
-  });
+	  // const geetestV4Request = new GeeTestRequest({
+	  //   websiteURL: 'https://example.com/geetest.php',
+	  //   gt: '81dc9bdb52d04dc20036dbd8313ed055',
+	  //   challenge: 'd93591bdf7860e1e4ee2fca799911215',
+	  //   version: '4',
+	  //   initParameters: {
+	  //     riskType: 'slide',
+	  //   },
+	  //   userAgent: 'userAgentPlaceholder',
+	  //   proxyType: 'https',
+	  //   proxyAddress: 'https://proxy.com',
+	  //   proxyPort: 6045,
+	  //   proxyLogin: 'login',
+	  //   proxyPassword: 'p@ssword',
+	  // })
 
-  // const geetestV4Request = new GeeTestRequest({
-  //   websiteURL: 'https://example.com/geetest.php',
-  //   gt: '81dc9bdb52d04dc20036dbd8313ed055',
-  //   challenge: 'd93591bdf7860e1e4ee2fca799911215',
-  //   version: '4',
-  //   initParameters: {
-  //     riskType: 'slide',
-  //   },
-  //   userAgent: 'userAgentPlaceholder',
-  //   proxyType: 'https',
-  //   proxyAddress: 'https://proxy.com',
-  //   proxyPort: 6045,
-  //   proxyLogin: 'login',
-  //   proxyPassword: 'p@ssword',
-  // })
-
-  console.log(await cmcClient.Solve(geetestV4Request));
-});
-```
-  </TabItem>
-  
+	  console.log(await cmcClient.Solve(geetestV4Request));
+	});
+	```
+  </TabItem>  
 </Tabs>

@@ -72,7 +72,7 @@ The object contains data about the task for solving hCaptcha.
 
     <ParamItem title="websiteURL" type="string" />
     URL of the page where the captcha is solved.
-  </TabItem>
+</TabItem>
 
 
 ## Get task result method
@@ -135,37 +135,36 @@ This task type does not contain a reference image, such as [fourth type](#image-
 ### Create task method
 
 <TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
-<MethodItem>
-  ```http
-  https://api.capmonster.cloud/createTask
-  ```
-</MethodItem>
-<MethodDescription>
-**Request**
-```json
-{
-  "clientKey":"API_KEY",
-  "task": {
-    "type": "ComplexImageTask",
-    "class": "hcaptcha",
-    "imageUrls":[ "https://i.postimg.cc/kg71cbRt/image-1.jpg", "https://i.postimg.cc/6381Zx2j/image.jpg" ],
-    "metadata": {
-      "Task": "Please click each image containing a mountain"
-    },
-    "userAgent": "userAgentPlaceholder",
-    "websiteUrl": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle"
-  }
-}
-```
-**Response**
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
-
-</MethodDescription>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "task": {
+			"type": "ComplexImageTask",
+			"class": "hcaptcha",
+			"imageUrls":[ "https://i.postimg.cc/kg71cbRt/image-1.jpg", "https://i.postimg.cc/6381Zx2j/image.jpg" ],
+			"metadata": {
+			  "Task": "Please click each image containing a mountain"
+			},
+			"userAgent": "userAgentPlaceholder",
+			"websiteUrl": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle"
+		  }
+		}
+		```
+		**Response**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
 </TabItem>
 
 
@@ -173,32 +172,32 @@ This task type does not contain a reference image, such as [fourth type](#image-
 Type of received response - [**Grid**](#grid-response-type).
 
 <TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
-    <MethodItem>
-```http
-https://api.capmonster.cloud/getTaskResult
-```
-    </MethodItem>
-    <MethodDescription>
-**Request**
-```json
-{
-  "clientKey":"API_KEY",
-  "taskId": 407533072
-}
-```
-**Response**
-```json
-{
-  "errorId":0,
-  "status":"ready",
-  "solution": {
-    "answer": [ false, true ],
-    "metadata": { "AnswerType": "Grid" }
-  }
-}
-```
-  </MethodDescription>
-  </TabItem>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**Response**
+		```json
+		{
+		  "errorId":0,
+		  "status":"ready",
+		  "solution": {
+			"answer": [ false, true ],
+			"metadata": { "AnswerType": "Grid" }
+		  }
+		}
+		```
+	</MethodDescription>
+</TabItem>
 
 
 ### Pricing
@@ -223,37 +222,36 @@ Images that are in the task header, if any, should be passed in the `exampleImag
 ### Create task method
 
 <TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
-<MethodItem>
-  ```http
-  https://api.capmonster.cloud/createTask
-  ```
-</MethodItem>
-<MethodDescription>
-**Request**
-```json
-{
-  "clientKey":"API_KEY",
-  "task": {
-    "type": "ComplexImageTask",
-    "class": "hcaptcha",
-    "exampleImagesBase64":[“/9j/4AAQSkZJRgABAQEAAAAAAAD…”, “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, “/9j/4AAQSkZJRgABAQEAAAAAAAD…”],
-    "imagesBase64": [ “/9j/4AAQSkZJRgABAQEAAAAAAAD…” ],
-    "metadata": {
-      "Task": "Please click on the panda"
-    },
-    "userAgent": "userAgentPlaceholder"
-  }
-}
-```
-**Response**
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
-
-</MethodDescription>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "task": {
+			"type": "ComplexImageTask",
+			"class": "hcaptcha",
+			"exampleImagesBase64":[“/9j/4AAQSkZJRgABAQEAAAAAAAD…”, “/9j/4AAQSkZJRgABAQEAAAAAAAD…”, “/9j/4AAQSkZJRgABAQEAAAAAAAD…”],
+			"imagesBase64": [ “/9j/4AAQSkZJRgABAQEAAAAAAAD…” ],
+			"metadata": {
+			  "Task": "Please click on the panda"
+			},
+			"userAgent": "userAgentPlaceholder"
+		  }
+		}
+		```
+		**Response**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
 </TabItem>
 
 
@@ -261,32 +259,32 @@ Images that are in the task header, if any, should be passed in the `exampleImag
 Type of received response - [**Coordinate**](#coordinate-response-type).
 
 <TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
-    <MethodItem>
-```http
-https://api.capmonster.cloud/getTaskResult
-```
-    </MethodItem>
-    <MethodDescription>
-**Request**
-```json
-{
-  "clientKey":"API_KEY",
-  "taskId": 407533072
-}
-```
-**Response**
-```json
-{
-  "errorId":0,
-  "status":"ready",
-  "solution": { 
-    "answer": [ { "X":371, "Y":505.0000112 } ],
-    "metadata": { "AnswerType": "Coordinate" }
-  }
-}
-```
-  </MethodDescription>
-  </TabItem>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**Response**
+		```json
+		{
+		  "errorId":0,
+		  "status":"ready",
+		  "solution": { 
+			"answer": [ { "X":371, "Y":505.0000112 } ],
+			"metadata": { "AnswerType": "Coordinate" }
+		  }
+		}
+		```
+	</MethodDescription>
+</TabItem>
 
 
 ### Pricing
@@ -306,37 +304,36 @@ This type of captcha should contain the **metadata.Classes** field.
 ### Create task method
 
 <TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
-<MethodItem>
-  ```http
-  https://api.capmonster.cloud/createTask
-  ```
-</MethodItem>
-<MethodDescription>
-**Request**
-```json
-{
-  "clientKey":"API_KEY",
-  "task": {
-    "type": "ComplexImageTask",
-    "class": "hcaptcha",
-    "imagesBase64": [ “/9j/4AAQSkZJRgABAQEAAAAAAAD…” ],
-    "metadata": {
-      "Task": "What animal is shown in the image below?",
-      "Classes": [ "shark", "chicken", "goat", "hedgehog" ]
-    },
-    "userAgent": "userAgentPlaceholder"
-  }
-}
-```
-**Response**
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
-
-</MethodDescription>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "task": {
+			"type": "ComplexImageTask",
+			"class": "hcaptcha",
+			"imagesBase64": [ “/9j/4AAQSkZJRgABAQEAAAAAAAD…” ],
+			"metadata": {
+			  "Task": "What animal is shown in the image below?",
+			  "Classes": [ "shark", "chicken", "goat", "hedgehog" ]
+			},
+			"userAgent": "userAgentPlaceholder"
+		  }
+		}
+		```
+		**Response**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
 </TabItem>
 
 
@@ -344,32 +341,32 @@ This type of captcha should contain the **metadata.Classes** field.
 Type of received response - [**Grid**](#grid-response-type).
 
 <TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
-    <MethodItem>
-```http
-https://api.capmonster.cloud/getTaskResult
-```
-    </MethodItem>
-    <MethodDescription>
-**Request**
-```json
-{
-  "clientKey":"API_KEY",
-  "taskId": 407533072
-}
-```
-**Response**
-```json
-{
-  "errorId":0,
-  "status":"ready",
-  "solution": { 
-    "answer": [ false, false, true, false ],
-    "metadata": { "AnswerType": "Grid" }
-  }
-}
-```
-  </MethodDescription>
-  </TabItem>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**Response**
+		```json
+		{
+		  "errorId":0,
+		  "status":"ready",
+		  "solution": { 
+			"answer": [ false, false, true, false ],
+			"metadata": { "AnswerType": "Grid" }
+		  }
+		}
+		```
+	</MethodDescription>
+</TabItem>
 
 ### Pricing
 
@@ -390,46 +387,45 @@ The **imageUrls** or **imagesBase64** field should contain 9 images.
 ### Create task method
 
 <TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
-<MethodItem>
-  ```http
-  https://api.capmonster.cloud/createTask
-  ```
-</MethodItem>
-<MethodDescription>
-**Request**
-```json
-{
-  "clientKey":"API_KEY",
-  "task": {
-    "type": "ComplexImageTask",
-    "class": "hcaptcha",
-    "imageUrls": [
-      "https://i.postimg.cc/bwVVWbkG/4type-00.jpg",
-      "https://i.postimg.cc/nzBdXP57/4type-01.jpg",
-      "https://i.postimg.cc/zf9tXrd8/4type-02.jpg",
-      "https://i.postimg.cc/2yY0hxRt/4type-03.jpg",
-      "https://i.postimg.cc/rFQfRWhh/4type-04.jpg",
-      "https://i.postimg.cc/Jz0PNnvR/4type-05.jpg",
-      "https://i.postimg.cc/h48ygNVR/4type-06.jpg",
-      "https://i.postimg.cc/yY1yXdtk/4type-07.jpg",
-      "https://i.postimg.cc/Prt6qKMp/4type-08.jpg"
-     ],
-    "exampleImageUrls": [ "https://i.postimg.cc/MpLtdwJV/4type-example.jpg" ],
-    "metadata": {
-      "Task": "Please select all images that appear warmer in comparison to other images"
-    }
-  }
-}
-```
-**Response**
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
-
-</MethodDescription>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "task": {
+			"type": "ComplexImageTask",
+			"class": "hcaptcha",
+			"imageUrls": [
+			  "https://i.postimg.cc/bwVVWbkG/4type-00.jpg",
+			  "https://i.postimg.cc/nzBdXP57/4type-01.jpg",
+			  "https://i.postimg.cc/zf9tXrd8/4type-02.jpg",
+			  "https://i.postimg.cc/2yY0hxRt/4type-03.jpg",
+			  "https://i.postimg.cc/rFQfRWhh/4type-04.jpg",
+			  "https://i.postimg.cc/Jz0PNnvR/4type-05.jpg",
+			  "https://i.postimg.cc/h48ygNVR/4type-06.jpg",
+			  "https://i.postimg.cc/yY1yXdtk/4type-07.jpg",
+			  "https://i.postimg.cc/Prt6qKMp/4type-08.jpg"
+			 ],
+			"exampleImageUrls": [ "https://i.postimg.cc/MpLtdwJV/4type-example.jpg" ],
+			"metadata": {
+			  "Task": "Please select all images that appear warmer in comparison to other images"
+			}
+		  }
+		}
+		```
+		**Response**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
 </TabItem>
 
 
@@ -437,32 +433,32 @@ The **imageUrls** or **imagesBase64** field should contain 9 images.
 Type of received response - [**Grid**](#grid-response-type).
 
 <TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
-    <MethodItem>
-```http
-https://api.capmonster.cloud/getTaskResult
-```
-    </MethodItem>
-    <MethodDescription>
-**Request**
-```json
-{
-  "clientKey":"API_KEY",
-  "taskId": 407533072
-}
-```
-**Response**
-```json
-{
-  "errorId":0,
-  "status":"ready",
-  "solution": { 
-    "answer": [ true, false, false, false, false, true, false, false, true ],
-    "metadata": { "AnswerType": "Grid" }
-  }
-}
-```
-  </MethodDescription>
-  </TabItem>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**Response**
+		```json
+		{
+		  "errorId":0,
+		  "status":"ready",
+		  "solution": { 
+			"answer": [ true, false, false, false, false, true, false, false, true ],
+			"metadata": { "AnswerType": "Grid" }
+		  }
+		}
+		```
+	</MethodDescription>
+</TabItem>
 
 ### Pricing
 
@@ -474,29 +470,27 @@ https://api.capmonster.cloud/getTaskResult
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">
+	```js
+	// https://github.com/ZennoLab/capmonstercloud-client-js
 
-```js
-// https://github.com/ZennoLab/capmonstercloud-client-js
+	import { CapMonsterCloudClientFactory, ClientOptions, ComplexImageHCaptchaRequest } from '@zennolab_com/capmonstercloud-client';
 
-import { CapMonsterCloudClientFactory, ClientOptions, ComplexImageHCaptchaRequest } from '@zennolab_com/capmonstercloud-client';
+	document.addEventListener('DOMContentLoaded', async () => {
+	  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+	  console.log(await cmcClient.getBalance());
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
-  console.log(await cmcClient.getBalance());
+	  const complexImageHCaptchaRequest = new ComplexImageHCaptchaRequest({
+		imageUrls: ['https://i.postimg.cc/kg71cbRt/image-1.jpg', 'https://i.postimg.cc/6381Zx2j/image.jpg'],
+		metaData: {
+		  Task: 'Please click each image containing a mountain',
+		},
+		websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle',
+		exampleImagesBase64: ['image in base64'],
+		exampleImageUrls: ['https://i.postimg.cc/kg71cbRt/image-1.jpg'],
+	  });
 
-  const complexImageHCaptchaRequest = new ComplexImageHCaptchaRequest({
-    imageUrls: ['https://i.postimg.cc/kg71cbRt/image-1.jpg', 'https://i.postimg.cc/6381Zx2j/image.jpg'],
-    metaData: {
-      Task: 'Please click each image containing a mountain',
-    },
-    websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle',
-    exampleImagesBase64: ['image in base64'],
-    exampleImageUrls: ['https://i.postimg.cc/kg71cbRt/image-1.jpg'],
-  });
-
-  console.log(await cmcClient.Solve(complexImageHCaptchaRequest));
-});
-```
-  </TabItem>
-  
+	  console.log(await cmcClient.Solve(complexImageHCaptchaRequest));
+	});
+	```
+  </TabItem>  
 </Tabs>

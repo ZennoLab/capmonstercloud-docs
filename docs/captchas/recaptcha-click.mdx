@@ -62,9 +62,9 @@ import MethodDescription from '@theme/MethodDescription'
 
     <ParamItem title="websiteURL" type="string" />
     Адрес страницы, на которой решается капча.
-  </TabItem>
+</TabItem>
 
-### **Описание параметров**
+### Описание параметров
 
 **imageUrls**: ссылки на изображения.
 
@@ -82,42 +82,41 @@ import MethodDescription from '@theme/MethodDescription'
 
 **websiteURL**: адрес веб-страницы с капчей. 
 
+
 ## Метод создания задачи
-
 <TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel">
-<MethodItem>
-  ```http
-  https://api.capmonster.cloud/createTask
-  ```
-</MethodItem>
-<MethodDescription>
-**Запрос**
-```json
-{
-  "clientKey":"API_KEY",
-  "task": {
-    "type": "ComplexImageTask",
-    "class": "recaptcha",
-    "imageUrls":[ "https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg" ],
-    "metadata": {
-      "Task": "Click on traffic lights",
-      "Grid": "3x3",
-      "TaskDefinition": "/m/015qff"
-    },
-    "userAgent": "userAgentPlaceholder",
-    "websiteUrl": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle"
-  }
-}
-```
-**Ответ**
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
-
-</MethodDescription>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Запрос**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "task": {
+			"type": "ComplexImageTask",
+			"class": "recaptcha",
+			"imageUrls":[ "https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg" ],
+			"metadata": {
+			  "Task": "Click on traffic lights",
+			  "Grid": "3x3",
+			  "TaskDefinition": "/m/015qff"
+			},
+			"userAgent": "userAgentPlaceholder",
+			"websiteUrl": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle"
+		  }
+		}
+		```
+		**Ответ**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
 </TabItem>
 
 
@@ -125,31 +124,31 @@ import MethodDescription from '@theme/MethodDescription'
 Используйте метод [getTaskResult](../api/methods/get-task-result.md) чтобы получить решение капчи. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 300мс до 6 с.
 
 <TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel-full">
-    <MethodItem>
-```http
-https://api.capmonster.cloud/getTaskResult
-```
-    </MethodItem>
-    <MethodDescription>
-**Запрос**
-```json
-{
-  "clientKey":"API_KEY",
-  "taskId": 407533072
-}
-```
-**Ответ**
-```json
-{
-  "errorId":0,
-  "status":"ready",
-  "solution": {
-    "answer": [ false, false, false, false, true, false, false, false, false ]
-  }
-}
-```
-  </MethodDescription>
-  </TabItem>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Запрос**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**Ответ**
+		```json
+		{
+		  "errorId":0,
+		  "status":"ready",
+		  "solution": {
+			"answer": [ false, false, false, false, true, false, false, false, false ]
+		  }
+		}
+		```
+	</MethodDescription>
+</TabItem>
 
 <br />
 
@@ -157,7 +156,8 @@ https://api.capmonster.cloud/getTaskResult
 | :- | :- | :- |
 |answer|Array|Список в булевыми значениями, true - означает, что нужно произвести клик на соответствующее этой позиции изображение|
 
-## **Ценообразование**: 
+
+## Ценообразование 
 
 ||**Наименование**|**Стоимость за 1000 картинок, $**|**Стоимость за 1000 новых динамических картинок, $**|
 | :-: | :-: | :-: | :-: |
@@ -169,29 +169,27 @@ https://api.capmonster.cloud/getTaskResult
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">
+	```js
+	// https://github.com/ZennoLab/capmonstercloud-client-js
 
-```js
-// https://github.com/ZennoLab/capmonstercloud-client-js
+	import { CapMonsterCloudClientFactory, ClientOptions, ComplexImageRecaptchaRequest } from '@zennolab_com/capmonstercloud-client';
 
-import { CapMonsterCloudClientFactory, ClientOptions, ComplexImageRecaptchaRequest } from '@zennolab_com/capmonstercloud-client';
+	document.addEventListener('DOMContentLoaded', async () => {
+	  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+	  console.log(await cmcClient.getBalance());
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
-  console.log(await cmcClient.getBalance());
+	  const complexImageRecaptchaRequest = new ComplexImageRecaptchaRequest({
+		imageUrls: ['https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg'],
+		metaData: {
+		  Grid: '3x3',
+		  Task: 'Please click each image containing a mountain',
+		  TaskDefinition: '/m/015qff',
+		},
+		websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle',
+	  });
 
-  const complexImageRecaptchaRequest = new ComplexImageRecaptchaRequest({
-    imageUrls: ['https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg'],
-    metaData: {
-      Grid: '3x3',
-      Task: 'Please click each image containing a mountain',
-      TaskDefinition: '/m/015qff',
-    },
-    websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle',
-  });
-
-  console.log(await cmcClient.Solve(complexImageRecaptchaRequest));
-});
-```
-  </TabItem>
-  
+	  console.log(await cmcClient.Solve(complexImageRecaptchaRequest));
+	});
+	```
+  </TabItem>  
 </Tabs>

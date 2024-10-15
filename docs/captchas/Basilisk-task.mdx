@@ -41,39 +41,38 @@ import MethodDescription from '@theme/MethodDescription'
     <ParamItem title="userAgent" type="string" />
     User-Agent браузера. **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является**: userAgentPlaceholder
 
-  </TabItem>
+</TabItem>
 
 
 ## Метод создания задачи
 <TabItem value="proxyless" label="CustomTask (без прокси)" default className="method-panel">
-<MethodItem>
-  ```http
-  https://api.capmonster.cloud/createTask
-  ```
-</MethodItem>
-<MethodDescription>
-**Запрос**
-```json
-{
-   "clientKey": "API_KEY",
-   "task": {
-       "type": "CustomTask",
-       "class": "Basilisk",
-       "websiteURL": "https://domain.io/account/register",
-       "websiteKey": "b7890hre5cf2544b2759c19fb2600897",
-       "userAgent": "userAgentPlaceholder"
-   }
-}
-```
-**Ответ**
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
-
-</MethodDescription>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Запрос**
+		```json
+		{
+		   "clientKey": "API_KEY",
+		   "task": {
+			   "type": "CustomTask",
+			   "class": "Basilisk",
+			   "websiteURL": "https://domain.io/account/register",
+			   "websiteKey": "b7890hre5cf2544b2759c19fb2600897",
+			   "userAgent": "userAgentPlaceholder"
+		   }
+		}
+		```
+		**Ответ**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
 </TabItem>
 
 
@@ -81,33 +80,33 @@ import MethodDescription from '@theme/MethodDescription'
 Используйте метод [getTaskResult](../api/methods/get-task-result.md), чтобы получить решение Basilisk.
 
 <TabItem value="proxyless" label="CustomTask (без прокси)" default className="method-panel-full">
-    <MethodItem>
-```http
-https://api.capmonster.cloud/getTaskResult
-```
-    </MethodItem>
-    <MethodDescription>
-**Запрос**
-```json
-{
-  "clientKey":"API_KEY",
-  "taskId": 407533072
-}
-```
-**Ответ**
-```json
-{
-   "errorId":0,
-   "status":"ready",
-   "solution": {
-      "data": {
-           "captcha_response": "5620301f30daf284b829fba66fa9b3d0"
-       },
-       "headers": {
-           "User-Agent": "userAgentPlaceholder"
-       }
-   }
-}
-```
-  </MethodDescription>
-  </TabItem>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Запрос**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**Ответ**
+		```json
+		{
+		   "errorId":0,
+		   "status":"ready",
+		   "solution": {
+			  "data": {
+				   "captcha_response": "5620301f30daf284b829fba66fa9b3d0"
+			   },
+			   "headers": {
+				   "User-Agent": "userAgentPlaceholder"
+			   }
+		   }
+		}
+		```
+	</MethodDescription>
+</TabItem>

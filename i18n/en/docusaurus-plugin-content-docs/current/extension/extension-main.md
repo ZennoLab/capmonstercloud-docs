@@ -3,13 +3,13 @@ sidebar_position: 0
 ---
 
 # Chrome browser extension
-## **Description**
+## Description
 With this extension, you can recognize captchas automatically directly in the browser.
 
 The extension works in the Google Chrome browser.
 
 -----
-## **Automatic installation**
+## Automatic installation
 **Important!** You cannot install extensions in incognito mode and guest mode.
 
 1. Open the [Chrome Web Store](https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=en).
@@ -58,7 +58,7 @@ If you are installing the extension over the previous version, then when you upd
 </details>
 
 -----
-## **Settings**
+## Settings
 <details>
     <summary>How to pin the extension</summary>
 
@@ -70,11 +70,11 @@ By default the installed extension is hidden. To pin it you have to click on the
 After launching the extension you’ll see this window:
 
 ![](./images/extension-main-firefox/ext.screen.en.png)
-### <a name="id-browserextension-apikey"></a>**API key**
+### <a name="id-browserextension-apikey"></a>API key
 Enter API key in the corresponding field(1), press save button(2). If you entered the correct key, your balance will be displayed below(3).
 
 ![](./images/extension-main-firefox/api-key.png)
-### <a name="id-browserextension-automaticcaptchasolving"></a>**Automated captcha solving**
+### <a name="id-browserextension-automaticcaptchasolving"></a>Automated captcha solving
 Here you can select the types of captchas that the extension will recognize automatically.
 
 ![](./images/extension-main-firefox/extension.example.png)
@@ -84,15 +84,15 @@ Here you can select the types of captchas that the extension will recognize auto
 You may need to reload the page with captcha for the changes to take effect!
 
 :::
-### <a name="id-browserextension-repeatcaptchasolvingincaseofanerror"></a>**Repeat captcha solving in case of an error**
+### <a name="id-browserextension-repeatcaptchasolvingincaseofanerror"></a>Repeat captcha solving in case of an error
 If the first attempt to solve the captcha is failed, the extension will send repeated tasks until the captcha is not solved, or until the limit specified in this setting will not be reached.
-### <a name="id-browserextension-proxy"></a>**Proxy**
+### <a name="id-browserextension-proxy"></a>Proxy
 ![](./images/extension-main-firefox/proxy.png) 
 
 Here you can specify the proxy that will be sent along with the recognition task.
 
 The "Login" and "Password" are optional.
-### <a name="id-browserextension-blacklistcontrol"></a>**Blacklist control**
+### <a name="id-browserextension-blacklistcontrol"></a>Blacklist control
 Using the blacklist you can configure the extension to ignore captchas on specific websites.
 
 After enabling this option, a field for entering sites will appear:

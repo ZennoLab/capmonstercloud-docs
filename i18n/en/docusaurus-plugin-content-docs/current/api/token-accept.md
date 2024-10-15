@@ -7,15 +7,15 @@ If you encounter issues with token acceptance, please contact our support team. 
 
 ## What to do if a site is only accepting a portion of tokens from CapMonster Cloud?
 
-## **Description**
+## Description
 
 You receive a token from CapMonster Cloud and send it to a site, but the site rejects it. And sometimes the site can accept the token, for example, in one case out of 10 (the success rate in your case may be different). Blocking or rejection of tokens can happen because of frequent requests from one IP address, or because of poor captcha quality (noise on the image), also some sites may use dynamic captcha updates or add additional checks without notification. In this case, the `nocache` parameter can help you.
 
 ---
 
-## **How to pass a parameter?**
+## How to pass a parameter?
 
-### **Via API key**
+### Via API key
 
 :::caution
 Will be applied to all sent captchas.
@@ -25,7 +25,7 @@ In the settings of the used software, add the nocache parameter, with a double u
 
 `API_KEY__nocache`
 
-### **When requesting createTask**
+### When requesting createTask
 
 :::tip
 Notice the *nocache* property of the *task* object
@@ -46,7 +46,7 @@ Notice the *nocache* property of the *task* object
 }
 ```
 
-### **When creating a task using the RuCaptcha API (via URL parameters)**
+### When creating a task using the RuCaptcha API (via URL parameters)
 
 Add `nocache=1` to the URL.
 
@@ -58,7 +58,7 @@ In the example below, the parameter is added to the very end.
 
 ---
 
-## **What types of captcha does this parameter apply to?**
+## What types of captcha does this parameter apply to?
 
 - [ReCaptchaV2](../captchas/no-captcha-task.mdx)
 - [ReCaptchaV3](../captchas/recaptcha-v3-task.mdx)
