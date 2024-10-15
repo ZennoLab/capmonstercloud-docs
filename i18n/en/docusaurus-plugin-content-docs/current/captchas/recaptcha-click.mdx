@@ -61,7 +61,7 @@ The object contains data about the task for solving ReCaptcha2 from Google.
 
     <ParamItem title="websiteURL" type="string" />
     URL of the page where the captcha is solved.
-  </TabItem>
+</TabItem>
 
 ### Description of parameters
 
@@ -85,72 +85,70 @@ The object contains data about the task for solving ReCaptcha2 from Google.
 ## Create task method
 
 <TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
-<MethodItem>
-  ```http
-  https://api.capmonster.cloud/createTask
-  ```
-</MethodItem>
-<MethodDescription>
-**Request**
-```json
-{
-  "clientKey":"API_KEY",
-  "task": {
-    "type": "ComplexImageTask",
-    "class": "recaptcha",
-    "imageUrls":[ "https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg" ],
-    "metadata": {
-      "Task": "Click on traffic lights",
-      "Grid": "3x3",
-      "TaskDefinition": "/m/015qff"
-    },
-    "userAgent": "userAgentPlaceholder",
-    "websiteUrl": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle"
-  }
-}
-```
-**Response**
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
-
-</MethodDescription>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "task": {
+			"type": "ComplexImageTask",
+			"class": "recaptcha",
+			"imageUrls":[ "https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg" ],
+			"metadata": {
+			  "Task": "Click on traffic lights",
+			  "Grid": "3x3",
+			  "TaskDefinition": "/m/015qff"
+			},
+			"userAgent": "userAgentPlaceholder",
+			"websiteUrl": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle"
+		  }
+		}
+		```
+		**Response**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
 </TabItem>
-
 
 
 ## Get task result method
 Use the [getTaskResult](../api/methods/get-task-result.md) method to get the captcha solution. Depending on the system load, you will receive a response after a time ranging from 300ms to 6s.
 
 <TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
-    <MethodItem>
-```http
-https://api.capmonster.cloud/getTaskResult
-```
-    </MethodItem>
-    <MethodDescription>
-**Request**
-```json
-{
-  "clientKey":"API_KEY",
-  "taskId": 407533072
-}
-```
-**Response**
-```json
-{
-  "errorId":0,
-  "status":"ready",
-  "solution": {
-    "answer": [ false, false, false, false, true, false, false, false, false ]
-  }
-}
-```
-  </MethodDescription>
-  </TabItem>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**Response**
+		```json
+		{
+		  "errorId":0,
+		  "status":"ready",
+		  "solution": {
+			"answer": [ false, false, false, false, true, false, false, false, false ]
+		  }
+		}
+		```
+	</MethodDescription>
+</TabItem>
 
 <br />
 
@@ -158,7 +156,7 @@ https://api.capmonster.cloud/getTaskResult
 | :- | :- | :- |
 |answer|Array|List with boolean values, "true" means that you need to click on the image corresponding to this position.|
 
-## Pricing:
+## Pricing
 
 ||**Name**|**Cost per 1000 images, $**|**Cost per 1000 new dynamic images, $**|
 | :-: | :-: | :-: | :-: |
@@ -170,29 +168,27 @@ https://api.capmonster.cloud/getTaskResult
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">
+	```js
+	// https://github.com/ZennoLab/capmonstercloud-client-js
 
-```js
-// https://github.com/ZennoLab/capmonstercloud-client-js
+	import { CapMonsterCloudClientFactory, ClientOptions, ComplexImageRecaptchaRequest } from '@zennolab_com/capmonstercloud-client';
 
-import { CapMonsterCloudClientFactory, ClientOptions, ComplexImageRecaptchaRequest } from '@zennolab_com/capmonstercloud-client';
+	document.addEventListener('DOMContentLoaded', async () => {
+	  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+	  console.log(await cmcClient.getBalance());
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
-  console.log(await cmcClient.getBalance());
+	  const complexImageRecaptchaRequest = new ComplexImageRecaptchaRequest({
+		imageUrls: ['https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg'],
+		metaData: {
+		  Grid: '3x3',
+		  Task: 'Please click each image containing a mountain',
+		  TaskDefinition: '/m/015qff',
+		},
+		websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle',
+	  });
 
-  const complexImageRecaptchaRequest = new ComplexImageRecaptchaRequest({
-    imageUrls: ['https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg'],
-    metaData: {
-      Grid: '3x3',
-      Task: 'Please click each image containing a mountain',
-      TaskDefinition: '/m/015qff',
-    },
-    websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle',
-  });
-
-  console.log(await cmcClient.Solve(complexImageRecaptchaRequest));
-});
-```
-  </TabItem>
-  
+	  console.log(await cmcClient.Solve(complexImageRecaptchaRequest));
+	});
+	```
+  </TabItem>  
 </Tabs>

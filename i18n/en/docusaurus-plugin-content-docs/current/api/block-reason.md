@@ -1,10 +1,10 @@
 ﻿# Reasons for blocking
-## ![](./images/block-reason/Aspose.Words.bbd9194a-7e5f-4818-92e0-dfa2931e5a81.001.png) **How to find out the reason for the ban?**
+## ![](./images/block-reason/Aspose.Words.bbd9194a-7e5f-4818-92e0-dfa2931e5a81.001.png) How to find out the reason for the ban?
 In case of blocking, you’ll see a notification in your [personal account](https://capmonster.cloud/Dashboard).
 Ban history is available in the settings.
 
 ![](./images/block-reason/ban-history.png) 
-## ![](./images/block-reason/Aspose.Words.bbd9194a-7e5f-4818-92e0-dfa2931e5a81.003.png) **The main reasons for getting a ban:**
+## ![](./images/block-reason/Aspose.Words.bbd9194a-7e5f-4818-92e0-dfa2931e5a81.003.png) The main reasons for getting a ban:
 
 - **KeyDoesntExist** (multiple requests without a key / with an invalid key)
 - **ZeroBalance** (multiple requests with zero balance)
@@ -14,7 +14,7 @@ Ban history is available in the settings.
 - **BadProxy** (multiple requests with a banned proxy)
 
 Users receive a ban for repeated actions for a limited period of time.
-## ![](./images/block-reason/Aspose.Words.bbd9194a-7e5f-4818-92e0-dfa2931e5a81.004.png) **When will the ban be removed?**
+## ![](./images/block-reason/Aspose.Words.bbd9194a-7e5f-4818-92e0-dfa2931e5a81.004.png) When will the ban be removed?
 
 The duration of the block is 10 minutes, provided that you do not continue to break the rules described above.
 

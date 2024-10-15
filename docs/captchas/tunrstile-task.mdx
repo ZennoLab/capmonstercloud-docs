@@ -42,7 +42,8 @@ import MethodDescription from '@theme/MethodDescription'
 
 </TabItem>
 
-## **Вариант 2 (CloudFlare)**
+
+## Вариант 2 (CloudFlare)
 Вы работаете через браузер, и Вам требуется получить токен для прохождения CloudFlare
 
 #### Параметры запроса
@@ -126,7 +127,8 @@ import MethodDescription from '@theme/MethodDescription'
 
 `callback` – функция обратного вызова после успешного прохождения капчи.
 
-## **Вариант 3 (CloudFlare)**
+
+## Вариант 3 (CloudFlare)
 Вы работаете с помощью запросов, и Вам требуются куки `cf_clearance`. Обязательно нужны ваши прокси
 
 #### Параметры запроса
@@ -199,109 +201,107 @@ import MethodDescription from '@theme/MethodDescription'
 
 </TabItem>
 
-## Примеры запросов
-### **Вариант 1. Обычный Turnstile:**
-<TabItem value="proxyless" label="TurnstileTaskProxyless (без прокси)" default className="method-panel">
-<MethodItem>
-  ```http
-  https://api.capmonster.cloud/createTask
-  ```
-</MethodItem>
-<MethodDescription>
-**Запрос**
-```json
-{
-    "clientKey":"API_KEY",
-    "task":
-    {
-        "type":"TurnstileTaskProxyless",
-        "websiteURL":"http://tsmanaged.zlsupport.com",
-        "websiteKey":"0x4AAAAAAABUYP0XeMJF0xoy"
-    }
-}
-```
-**Ответ**
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
 
-</MethodDescription>
+## Примеры запросов
+### Вариант 1. Обычный Turnstile:
+<TabItem value="proxyless" label="TurnstileTaskProxyless (без прокси)" default className="method-panel">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Запрос**
+		```json
+		{
+			"clientKey":"API_KEY",
+			"task":
+			{
+				"type":"TurnstileTaskProxyless",
+				"websiteURL":"http://tsmanaged.zlsupport.com",
+				"websiteKey":"0x4AAAAAAABUYP0XeMJF0xoy"
+			}
+		}
+		```
+		**Ответ**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
 </TabItem>
 
-### **Вариант 2. CloudFlare (token)**
+### Вариант 2. CloudFlare (token)
 <TabItem value="proxyless" label="TurnstileTask (без прокси)" default className="method-panel">
-<MethodItem>
-  ```http
-  https://api.capmonster.cloud/createTask
-  ```
-</MethodItem>
-<MethodDescription>
-**Запрос**
-```json
-{
-	"clientKey": "API_KEY",
-	"task": {
-		"type": "TurnstileTask",
-		"websiteURL": "https://site.com",
-		"websiteKey": "0x4AAAAAAADnPIDROrmt1Wwj",
-		"cloudflareTaskType": "token",
-		"userAgent":"userAgentPlaceholder",
-		"pageAction": "managed",
-		"pageData": "HUHDWUHuhuwfiweh32..uh2uhuhyugYUG=",
-		"data": "874291f4retD1366"
-	}
-}
-```
-**Ответ**
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
-
-</MethodDescription>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Запрос**
+		```json
+		{
+			"clientKey": "API_KEY",
+			"task": {
+				"type": "TurnstileTask",
+				"websiteURL": "https://site.com",
+				"websiteKey": "0x4AAAAAAADnPIDROrmt1Wwj",
+				"cloudflareTaskType": "token",
+				"userAgent":"userAgentPlaceholder",
+				"pageAction": "managed",
+				"pageData": "HUHDWUHuhuwfiweh32..uh2uhuhyugYUG=",
+				"data": "874291f4retD1366"
+			}
+		}
+		```
+		**Ответ**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
 </TabItem>
 
 ### Вариант 3. CloudFlare (cookie)
 <TabItem value="proxyless" label="TurnstileTask (без прокси)" default className="method-panel">
-<MethodItem>
-  ```http
-  https://api.capmonster.cloud/createTask
-  ```
-</MethodItem>
-<MethodDescription>
-**Запрос**
-```json 
-  {
-  "clientKey":"API_KEY",
-  "task": {
-    "type":"TurnstileTask",
-    "websiteURL":"https://nowsecure.nl",
-    "websiteKey":"xxxxxxxxxx",
-    "cloudflareTaskType": "cf_clearance",
-    "htmlPageBase64": "PCFET0NUWVBFIGh0...vYm9keT48L2h0bWw+",
-    "userAgent": "userAgentPlaceholder",
-    "proxyType":"http",
-    "proxyAddress":"8.8.8.8",
-    "proxyPort":8080,
-    "proxyLogin":"proxyLoginHere",
-    "proxyPassword":"proxyPasswordHere"
-  }
-}
-```
-**Ответ**
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
-
-</MethodDescription>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Запрос**
+		```json 
+		  {
+		  "clientKey":"API_KEY",
+		  "task": {
+			"type":"TurnstileTask",
+			"websiteURL":"https://nowsecure.nl",
+			"websiteKey":"xxxxxxxxxx",
+			"cloudflareTaskType": "cf_clearance",
+			"htmlPageBase64": "PCFET0NUWVBFIGh0...vYm9keT48L2h0bWw+",
+			"userAgent": "userAgentPlaceholder",
+			"proxyType":"http",
+			"proxyAddress":"8.8.8.8",
+			"proxyPort":8080,
+			"proxyLogin":"proxyLoginHere",
+			"proxyPassword":"proxyPasswordHere"
+		  }
+		}
+		```
+		**Ответ**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
 </TabItem>
 
 ## Метод получения результата задачи
@@ -312,7 +312,7 @@ import MethodDescription from '@theme/MethodDescription'
 |cf_clearance|String|Специальные куки cloudflare, которые вы можете подставить в свой браузер|
 |token|String|Используйте токен при вызове callback функции|
 
-## **Как отличить обычный Turnstile от Cloudflare Challenge.**
+## Как отличить обычный Turnstile от Cloudflare Challenge.
 Cloudflare challenge может выглядеть по-разному. 
 
 **Обычный вариант:**
@@ -468,38 +468,37 @@ const chrome = require('selenium-webdriver/chrome');
 
 </details>
 
+
 ## Используйте библиотеку SDK
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">
+	```js
+	// https://github.com/ZennoLab/capmonstercloud-client-js
 
-```js
-// https://github.com/ZennoLab/capmonstercloud-client-js
+	import { CapMonsterCloudClientFactory, ClientOptions, TurnstileRequest } from '@zennolab_com/capmonstercloud-client';
 
-import { CapMonsterCloudClientFactory, ClientOptions, TurnstileRequest } from '@zennolab_com/capmonstercloud-client';
+	document.addEventListener('DOMContentLoaded', async () => {
+	  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+	  console.log(await cmcClient.getBalance());
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
-  console.log(await cmcClient.getBalance());
+	  const turnstileRequest = TurnstileRequest({
+		websiteURL: 'https://tsinvisble.zlsupport.com',
+		websiteKey: '0x4AAAAAAABUY0VLtOUMAHxE',
+		cloudflareTaskType: 'cf_clearance',
+		proxyType: 'http',
+		proxyAddress: '8.8.8.8',
+		proxyPort: 8080,
+		proxyLogin: 'proxyLoginHere',
+		proxyPassword: 'proxyPasswordHere',
+		pageData: 'pageDataHere',
+		data: 'dataHere',
+		htmlPageBase64: 'htmlPageBase64Here',
+		userAgent: 'userAgentHere',
+	  });
 
-  const turnstileRequest = TurnstileRequest({
-    websiteURL: 'https://tsinvisble.zlsupport.com',
-    websiteKey: '0x4AAAAAAABUY0VLtOUMAHxE',
-    cloudflareTaskType: 'cf_clearance',
-    proxyType: 'http',
-    proxyAddress: '8.8.8.8',
-    proxyPort: 8080,
-    proxyLogin: 'proxyLoginHere',
-    proxyPassword: 'proxyPasswordHere',
-    pageData: 'pageDataHere',
-    data: 'dataHere',
-    htmlPageBase64: 'htmlPageBase64Here',
-    userAgent: 'userAgentHere',
-  });
-
-  console.log(await cmcClient.Solve(turnstileRequest));
-});
-```
-  </TabItem>
-  
+	  console.log(await cmcClient.Solve(turnstileRequest));
+	});
+	```
+  </TabItem>  
 </Tabs>

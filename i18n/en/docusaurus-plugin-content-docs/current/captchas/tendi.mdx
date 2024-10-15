@@ -40,7 +40,7 @@ This task will be performed using our proxy servers.
     <ParamItem title="userAgent" type="string" />
     Browser User-Agent. **Pass only the actual UA from Windows OS. Now this is version**: `userAgentPlaceholder`
 
-  </TabItem>
+</TabItem>
 
 
 ### How to get websiteKey (captchaAppId)
@@ -50,34 +50,33 @@ Turn on the developer tools, go to the Network tab, activate the captcha and loo
 
 ## Create task method
 <TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
-<MethodItem>
-  ```http
-  https://api.capmonster.cloud/createTask
-  ```
-</MethodItem>
-<MethodDescription>
-**Request**
-```json
-{
-    "clientKey": "API_KEY",
-    "task": {
-        "type": "CustomTask",
-        "class": "TenDI",
-        "websiteURL": "https://domain.com",
-        "websiteKey": "189123456",
-        "userAgent": "userAgentPlaceholder"
-    }
-}
-```
-**Response**
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
-
-</MethodDescription>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+			"clientKey": "API_KEY",
+			"task": {
+				"type": "CustomTask",
+				"class": "TenDI",
+				"websiteURL": "https://domain.com",
+				"websiteKey": "189123456",
+				"userAgent": "userAgentPlaceholder"
+			}
+		}
+		```
+		**Response**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
 </TabItem>
 
 
@@ -85,37 +84,37 @@ Turn on the developer tools, go to the Network tab, activate the captcha and loo
 Use the [getTaskResult](../api/methods/get-task-result.md) method to get the TenDI solution.
 
 <TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
-    <MethodItem>
-```http
-https://api.capmonster.cloud/getTaskResult
-```
-    </MethodItem>
-    <MethodDescription>
-**Request**
-```json
-{
-  "clientKey":"API_KEY",
-  "taskId": 407533072
-}
-```
-**Response**
-```json
-{
-    "errorId":0,
-    "status":"ready",
-    "solution": {
-       "data": {
-            "randstr": "@EcL",
-            "ticket": "tr03lHUhdnuW3neJZu.....7LrIbs*"
-        },
-        "headers": {
-            "User-Agent": "userAgentPlaceholder"
-        }
-    }
-}
-```
-  </MethodDescription>
-  </TabItem>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**Response**
+		```json
+		{
+			"errorId":0,
+			"status":"ready",
+			"solution": {
+			   "data": {
+					"randstr": "@EcL",
+					"ticket": "tr03lHUhdnuW3neJZu.....7LrIbs*"
+				},
+				"headers": {
+					"User-Agent": "userAgentPlaceholder"
+				}
+			}
+		}
+		```
+	</MethodDescription>
+</TabItem>
 
 ## Pricing
 |**Name** |**Cost per 1000 recognitions, $**|

@@ -13,23 +13,15 @@ https://api.capmonster.cloud/getBalance
 request format: `JSON POST`
 :::
 
-<!-- Адрес метода: <https://api.capmonster.cloud/getBalance>
 
-формат запроса: JSON POST -->
-
-## **Request parameters**
+## Request parameters
 
 ### `clientKey`
 Type: `String` <br />
 Required: `Yes`<br />
 Unique key of your account
 
-<!-- 
-|**Параметр**|**Тип**|**Обязательный**|**Значение**|
-| :-: | :-: | :-: | :-: |
-|clientKey|String|Да|Уникальный ключ вашей учетной записи| -->
-
-### **Body Example**
+### Body Example
 
 ```json
 {
@@ -37,7 +29,7 @@ Unique key of your account
 }
 ```
 
-## **Response structure**
+## Response structure
 
 ### `errorId`
 Type: `Integer` <br />
@@ -51,13 +43,8 @@ Error code. Check out [error list](../api-errors.md).
 Type: `Decimal` <br />
 Amount of money available
 
-<!-- |**Свойство**|**Тип**|**Значение**|
-| :-: | :-: | :-: |
-|errorId|Integer|Идентификатор ошибки.<br />**0** - ошибок нет, свойство *errorCode* отсутствует<br />**1** - ошибка, информация о ней находится в свойстве *errorCode*|
-|errorCode|String|Код ошибки. См. [глоссарий ошибок](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/295310).|
-|balance|Decimal|Количество доступных денег| -->
 
-### **Example**
+### Example
 
 ```json
 {

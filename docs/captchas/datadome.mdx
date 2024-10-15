@@ -56,44 +56,42 @@ import MethodDescription from '@theme/MethodDescription'
     <ParamItem title="userAgent" type="string" />
     User-Agent браузера. <br /> 
 	**Передавайте только актуальный UA от ОС Windows. Сейчас таковым является**: userAgentPlaceholder
-
-  </TabItem>
+</TabItem>
 
 
 ## Метод создания задачи
 
 <TabItem value="proxyless" label="CustomTask (без прокси)" default className="method-panel">
-<MethodItem>
-  ```http
-  https://api.capmonster.cloud/createTask
-  ```
-</MethodItem>
-<MethodDescription>
-**Запрос**
-```json
-{
-    "clientKey": "API_KEY",
-    "task": {
-        "type": "CustomTask",
-        "class": "DataDome",
-        "websiteURL": "https://www.leboncoin.fr/",
-        "userAgent": "MuserAgentPlaceholder",
-        "metadata": {
-            "htmlPageBase64": "PGh0bWw+PGhlYWQ+PHRpdGxlPmJs...PC9odG1sPg==",
-            "datadomeCookie": "datadome=VYUWrgJ9ap4zmXq8Mgbp...64emvUPeON45z"
-        }
-    }
-}
-```
-**Ответ**
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
-
-</MethodDescription>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Запрос**
+		```json
+		{
+			"clientKey": "API_KEY",
+			"task": {
+				"type": "CustomTask",
+				"class": "DataDome",
+				"websiteURL": "https://www.leboncoin.fr/",
+				"userAgent": "MuserAgentPlaceholder",
+				"metadata": {
+					"htmlPageBase64": "PGh0bWw+PGhlYWQ+PHRpdGxlPmJs...PC9odG1sPg==",
+					"datadomeCookie": "datadome=VYUWrgJ9ap4zmXq8Mgbp...64emvUPeON45z"
+				}
+			}
+		}
+		```
+		**Ответ**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
 </TabItem>
 
 
@@ -101,65 +99,63 @@ import MethodDescription from '@theme/MethodDescription'
 Используйте метод [getTaskResult](../api/methods/get-task-result.md), чтобы получить решение DataDome.
 
 <TabItem value="proxyless" label="CustomTask (без прокси)" default className="method-panel-full">
-    <MethodItem>
-```http
-https://api.capmonster.cloud/getTaskResult
-```
-    </MethodItem>
-    <MethodDescription>
-**Запрос**
-```json
-{
-  "clientKey":"API_KEY",
-  "taskId": 407533072
-}
-```
-**Ответ**
-```json
-{
-    "errorId":0,
-    "status":"ready",
-    "solution": {
-        "domains": {
-            "site.com": {
-                "cookies": {
-                    "datadome": "t355hfeuUFbsWpoMzXyIWL_ewfwgre25345323rwgregeFEkG5iju9esKVfWMzuLAjcfCIJUIHU7332At1l~HY78g782hidwfeO4K2ZP_CFHYUFEgygfiYGfGYEUfgyefWrXG6_3sy; Max-Age=31536000; Domain=.site.com; Path=/; Secure; SameSite=Lax"
-                }
-            }
-        }
-    }
-}
-```
-  </MethodDescription>
-  </TabItem>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Запрос**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**Ответ**
+		```json
+		{
+			"errorId":0,
+			"status":"ready",
+			"solution": {
+				"domains": {
+					"site.com": {
+						"cookies": {
+							"datadome": "t355hfeuUFbsWpoMzXyIWL_ewfwgre25345323rwgregeFEkG5iju9esKVfWMzuLAjcfCIJUIHU7332At1l~HY78g782hidwfeO4K2ZP_CFHYUFEgygfiYGfGYEUfgyefWrXG6_3sy; Max-Age=31536000; Domain=.site.com; Path=/; Secure; SameSite=Lax"
+						}
+					}
+				}
+			}
+		}
+		```
+	</MethodDescription>
+</TabItem>
 
 
 ## Используйте библиотеку SDK
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">
+	```js
+	// https://github.com/ZennoLab/capmonstercloud-client-js
 
-```js
-// https://github.com/ZennoLab/capmonstercloud-client-js
+	import { CapMonsterCloudClientFactory, ClientOptions, DataDomeRequest } from '@zennolab_com/capmonstercloud-client';
 
-import { CapMonsterCloudClientFactory, ClientOptions, DataDomeRequest } from '@zennolab_com/capmonstercloud-client';
+	document.addEventListener('DOMContentLoaded', async () => {
+	  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+	  console.log(await cmcClient.getBalance());
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
-  console.log(await cmcClient.getBalance());
+	  const dataDomeRequest = new DataDomeRequest({
+		websiteURL: 'site.com',
+		userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+		metadata: {
+		  captchaUrl: 'https://geo.captcha-delivery.com/captcha/?initialCid=12434324',
+		  datadomeCookie: '',
+		},
+	  });
 
-  const dataDomeRequest = new DataDomeRequest({
-    websiteURL: 'site.com',
-    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-    metadata: {
-      captchaUrl: 'https://geo.captcha-delivery.com/captcha/?initialCid=12434324',
-      datadomeCookie: '',
-    },
-  });
-
-  console.log(await cmcClient.Solve(dataDomeRequest));
-});
-```
+	  console.log(await cmcClient.Solve(dataDomeRequest));
+	});
+	```
   </TabItem>
-  
 </Tabs>

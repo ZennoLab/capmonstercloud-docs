@@ -12,7 +12,7 @@ The object contains data about the Yandex SmartCaptcha task solving.
 
 ![](./images/yandex-smartcaptcha/example-image.png)
 
-## **Object structure**
+## Object structure
 
 |**Parameter**|**Type**|**Required**|**Possible values**|**Description**|
 | :- | :- | :- | :- |:- |
@@ -20,7 +20,7 @@ The object contains data about the Yandex SmartCaptcha task solving.
 |class|String|yes|yandexsmartcaptcha|Defines the task object class.|
 |imagesBase64|Array|yes|[ “iVBORw0KGgoAAAANSUhEUgAAASwLbb” ]|List with one image in base64 format.|
 
-## **Request example**
+## Request example
 
 :::info Method
 ```http
@@ -47,7 +47,7 @@ https://api.capmonster.cloud/createTask
 }
 ```
 
-## **Getting the result**
+## Getting the result
 
 Use the [getTaskResult](../api/methods/get-task-result.md) method to get the captcha solution. Depending on the system load, you will receive a response after a time ranging from 300ms to 6s.
 
@@ -93,19 +93,19 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the cap
 }
 ```
 
-## **Pricing**
+## Pricing
 
 |**Name**|**Cost per 1000 images, $**|
 | :- | :- | 
 |**Yandex SmartCaptcha** (click)|0.2|
 
-## **Image format**
+## Image format
 The captcha with the task is sent in one picture. The size on Yandex services is 300x220, on external sites 320x220.. <br/>
 The distance from the image to the container with the task text should be 4px (margin-top). The original is 13px.
 
 ![](./images/yandex-smartcaptcha/image-format.png)
 
-## **Using ZennoPoster**
+## Using ZennoPoster
 
 We need to prepare a task, take a screenshot of the element and send it to CapMonster Cloud for recognition. <br/>
 
@@ -165,7 +165,7 @@ instance.ActiveTab.FullEmulationMouseClick("left", "click");
 [Final test project](https://drive.google.com/drive/folders/1QNNcBXBGjGZMc6AQ7bdYtr4YEQEumxT4) (don't forget to enter your API key from CapMonster.Cloud).<br/>
 
 
-## **Using other programs**
+## Using other programs
 
 Most automation frameworks (Selenium/Puppeteer/Playwright, etc.) provide options for creating a screenshot.<br/>
 

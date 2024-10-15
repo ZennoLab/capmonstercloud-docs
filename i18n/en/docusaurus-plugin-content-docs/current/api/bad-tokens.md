@@ -11,13 +11,13 @@ Examples of situations when you should file a complaint:
 - Rejection on sites that have previously successfully accepted similar tokens.
 
 
-## **Why to report?**
+## Why to report?
 
 We need reports so that we automatically analize data on the quality of token issued by our API. Reports are processed automatically, and the team takes actions to improve the quality of the tokens, whether it is updating the system for new tasks, improving grids, etc.
 
 ---
 
-### **Method addresses:**
+### Method addresses
 
 
 :::tip For captcha images reports
@@ -42,7 +42,7 @@ Also supported paths:
 
 `Request format: JSON POST`
 
-### **Request parameters**
+### Request parameters
 
 | **Parameter** | **Type** | **Required** |                      **Value**                      |
 | :------------------------: | :--------------: | :--------------------------------: | :------------------------------------------------------------------ |
@@ -68,7 +68,7 @@ Also supported paths:
 |         errorCode         |      String      |                                                                  Error code. Check out [error types](./api-errors.md).                                                                  |
 |           status           |      String      |                                           **success** - the report is accepted.<br />If the report is not accepted, then the field is missing, the reason is in the *errorCode*                           |
 
-### **Response example**
+### Response example
 
 <details>
   <summary>

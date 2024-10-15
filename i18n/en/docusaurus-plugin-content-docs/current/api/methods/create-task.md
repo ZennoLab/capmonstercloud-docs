@@ -5,7 +5,7 @@ sidebar_label: createTask
 
 # createTask : creating a task
 
-## **Description**
+## Description
 This method creates a task for solving selected captcha type. In the parameters you need to pass the client authorization data, typed task data and other optional parameters.
 
 :::info Method address
@@ -16,17 +16,9 @@ https://api.capmonster.cloud/createTask
 Request format: `JSON POST`
 :::
 
-<!-- Адрес метода: <https://api.capmonster.cloud/createTask> 
-Формат запроса: JSON POST -->
 
 -----
-## **Request parameters**
-<!-- 
-|**Параметр**|**Тип**|**Обязательный**|**Значение**|
-| :-: | :-: | :-: | :-: |
-|clientKey|String|Да|Уникальный ключ вашей учетной записи, API ключ (найти можно [тут](https://capmonster.cloud/Dashboard))|
-|task|Объект задачи|Да|Массив данных о задаче. Список типов задач капч [здесь](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/589856).|
-|callbackUrl|String|Нет|Веб адрес для отправки результата задачи капчи. Данные отправляются POST запросом.<br />Содержимое идентично ответу метода [getTaskResult](file:///C:/wiki/spaces/APIS/pages/557078).<br />Содержимое ответа не проверяется и сервер должен успеть принять запрос за 2 секунды, затем соединение закрывается.| -->
+## Request parameters
 
 ### `clientKey`
 Type: `String` <br />
@@ -59,36 +51,7 @@ Example of using the `callbackUrl` function:
 
 --- 
 
-### **Request examples**
-
-<!-- ```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import CodeBlock from '@theme/CodeBlock';
-```
-
-```mdx-code-block
-  <Tabs>
-    <TabItem value="apple" label="Solving a normal captcha with an image">
-    <CodeBlock className="language-json">{JSON.stringify({
-      "clientKey":"API_KEY",
-      "task": {
-        "type":"ImageToTextTask",
-        "body":"BASE64\_BODY\_HERE!"
-      }
-    }, null, 2)}</CodeBlock>
-    </TabItem>
-    <TabItem value="orange" label="Solving ReCaptcha2"><CodeBlock className="language-json">{JSON.stringify({
-      "clientKey":"API_KEY",
-      "task": {
-        "type":"NoCaptchaTaskProxyless","websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2\_simple.php?level=high",
-        "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI\_iqRyTwd"
-      }
-    }
-, null, 2)}</CodeBlock></TabItem>
-  </Tabs>
-``` -->
-
+### Request examples
 
   <details>
     <summary>Solving normal captcha with an image</summary>
@@ -122,13 +85,7 @@ import CodeBlock from '@theme/CodeBlock';
   </details>
 
 -----
-## **Response structure**
-
-<!-- |**Параметр**|**Тип**|**Значение**|
-| :-: | :-: | :-: |
-|errorId|Integer|Идентификатор ошибки.<br />**0** - ошибок нет, задача успешно создана, идентификатор задачи находится в параметре *taskId*<br />**1** - ошибка, информация о ней находится в свойстве *errorCode*|
-|errorCode|String|Код ошибки. См. [глоссарий ошибок](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/295310).|
-|taskId|Integer|Идентификатор задания для последующего использования в методе [getTaskResult](https://zennolab.atlassian.net/wiki/spaces/APIS/pages/557078/getTaskResult).| -->
+## Response structure
 
 ### `errorId`
 Type: `Integer` <br />
@@ -147,7 +104,7 @@ Task ID for further use in [getTaskResult](./get-task-result.md) method.
 
 ---
 
-### **Response example**
+### Response example
 
 <details>
     <summary>Response WITHOUT any error</summary>

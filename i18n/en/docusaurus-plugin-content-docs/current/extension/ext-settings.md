@@ -35,7 +35,7 @@ There are several ways to change extension settings:
 
 When installing the extension via a package (downloadable [at the link](https://drive.google.com/file/d/11pVyiPltRW_vEPPnRnQJLNiX0J0GVhBe/view?usp=drive_link)), it is possible to set the initial parameters with which the extension will work. To do this, you need to unpack the package and edit the defaultSettings.json file, and then repackage it.
 
-### **Description of the settings file defaultSettings.json**
+### Description of the settings file defaultSettings.json
 
 The settings file looks like this:
 
@@ -78,7 +78,7 @@ After initializing the extension on the current active page, we have a global ob
 
 Note that event handlers are attached to the properties, not to the data inside.
 
-### **Example:**
+### Example
 ```js
 window.CMExtension.isEnabled = false;
 ```

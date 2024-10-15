@@ -11,13 +11,13 @@
 - Отклонение на сайтах, которые ранее успешно принимали подобные токены.
 
 
-## **Зачем жаловаться?**
+## Зачем жаловаться?
 
 Жалобы нужны, чтобы мы автоматически анализировали данные о качестве токенов выдаваемых нашим API. Жалобы автоматически обрабатываются, и командой принимаются действия по улучшению качества токенов, будь то доработка системы под новые задания, улучшение сеток и т.д.
 
 ---
 
-### **Адреса методов**
+### Адреса методов
 
 
 :::tip Для жалоб на капчи-картинки
@@ -37,16 +37,9 @@ https://api.capmonster.cloud/reportIncorrectRecaptcha ,
 https://api.capmonster.cloud/reportIncorrectHcaptcha работают аналогично https://api.capmonster.cloud/reportIncorrectTokenCaptcha
 :::
 
-
-<!-- [https://api.capmonster.cloud/reportIncorrectImageCaptcha](https://api.capmonster.cloud/reportIncorrectImageCaptcha) - для жалоб на капчи-картинки -->
-
-<!-- [https://api.capmonster.cloud/reportIncorrectTokenCaptcha](https://api.capmonster.cloud/reportIncorrectTokenCaptcha) - для жалоб на токен-капчи: recaptcha(2,3, enterprise), hcaptcha, geetest, funcaptcha, turnstile.
-Также поддерживаются пути:
-[https://api.capmonster.cloud/reportIncorrectRecaptcha](https://api.capmonster.cloud/reportIncorrectRecaptcha), [https://api.capmonster.cloud/reportIncorrectHcaptcha](https://api.capmonster.cloud/reportIncorrectHcaptcha) - работают аналогично [reportIncorrectTokenCaptcha](https://api.capmonster.cloud/reportIncorrectTokenCaptcha) -->
-
 `Формат запроса: JSON POST`
 
-### **Параметры запроса**
+### Параметры запроса
 
 | **Параметр** | **Тип** | **Обязательный** |                      **Значение**                      |
 | :------------------------: | :--------------: | :--------------------------------: | :------------------------------------------------------------------ |
@@ -72,7 +65,7 @@ https://api.capmonster.cloud/reportIncorrectHcaptcha работают анало
 |         errorCode         |      String      |                                                                  Код ошибки. См.[глоссарий ошибок](api-errors.md).                                                                  |
 |           status           |      String      |                                           **success** - жалоба принята.<br />Если жалоба не принята, то поле отсутствует, причина в *errorCode*                                           |
 
-### **Пример ответа**
+### Пример ответа
 
 <details>
   <summary>

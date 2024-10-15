@@ -7,7 +7,7 @@ draft: true
 # ComplexImageTask Funcaptcha
 The object contains data about the FunCaptcha solving.
 
-## **Object structure**
+## Object structure
 
 |**Parameter**|**Type**|**Required**|**Possible values**|**Description**|
 | :- | :- | :- | :- | :- |
@@ -19,7 +19,7 @@ The object contains data about the FunCaptcha solving.
 |userAgent|String|no|-|The browser User Agent used when uploading images if links were passed to imageUrls. You should use a modern browser signature or Google will return an error asking you to update your browser.|
 |websiteURL|String|no|-|URL of the page where the captcha is solved.|
 
-## **Request example**
+## Request example
 :::info Method
 ```http
 https://api.capmonster.cloud/createTask
@@ -49,7 +49,7 @@ https://api.capmonster.cloud/createTask
 }
 ```
 
-## **Getting the results**
+## Getting the results
 :::info Method
 ```http
 https://api.capmonster.cloud/getTaskResult
@@ -72,7 +72,7 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the cap
 }
 ```
 
-## **Pricing**
+## Pricing
 
 |**Cost**|**Cost per 1000 images, $**|
 | :-: | :-: |

@@ -15,7 +15,8 @@ When completed, a CapMonsterInterceptor shortcut will be created on the desktop.
 ![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.005.png) 
 
 When CapMonsterInterceptor is running, all captchas sent for recognition to *Anti-Captcha (v1.0, v2.0), RuCaptcha, RipCaptcha, 2Captcha, BypassCaptcha, DeathByCaptcha* services will be intercepted and redirected to CapMonster.Cloud.
-## **Example**
+
+## Example
 Just select one of the recognition services in your program where you need to enter a captcha. In our example, it will be *DeathByCaptcha*.
 
 - **Note for DeathByCaptcha** to identify a user, the DeathByCaptcha API uses username and password, not an API key. In this case, you need to fill 2 fields with random values.
@@ -29,7 +30,8 @@ Now you can run your program. All captchas sent to another service (DeathByCaptc
 By double-clicking on the CapMonsterInterceptor icon in the tray, you can see the statistics of intercepted captchas sent for recognition.
 
 ![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.007.png) 
-## **Questions and answers**
+
+## Questions and answers
 
 <details>
     <summary>How to change the API-key specified when installing CapMonsterInterceptor?</summary>

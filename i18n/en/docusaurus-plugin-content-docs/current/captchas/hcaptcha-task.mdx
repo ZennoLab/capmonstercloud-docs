@@ -19,7 +19,7 @@ This type of captcha might be solved a bit longer than usual image captcha, but 
 ## Request parameters
 
 <Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
-<TabItem value="proxyless" label="HCaptchaTaskProxyless (without proxy)" default className="bordered-panel">
+  <TabItem value="proxyless" label="HCaptchaTaskProxyless (without proxy)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **HCaptchaTaskProxyless**
 
@@ -41,7 +41,8 @@ This type of captcha might be solved a bit longer than usual image captcha, but 
     ---
 
     <ParamItem title="data" type="string" />
-    <p>Custom data that is used in some implementations of hCaptcha, mostly with `isInvisible=true`.</p>
+    <p>Custom data that is used in some implementations of hCaptcha, mostly with `isInvisible=true`. <br/>
+	The value of the data field can be taken from the `rqdata` parameter, with which the captcha is rendered. </p>
 
     ---
 
@@ -59,6 +60,7 @@ This type of captcha might be solved a bit longer than usual image captcha, but 
     <p>**true** - when specifying this parameter, we ignore the irrelevant User Agent that users send in the request, and return our own (relevant) one with getTaskResult. This will improve the acceptance of tokens.</p><p>**false** - we insert the User Agent that is specified in the request. If the User Agent is invalid, you will receive an error ERROR_WRONG_USERAGENT (USERAGENT IS EXPIRED in the log).</p>
 
   </TabItem>
+  
   <TabItem value="proxy" label="HCaptchaTask (using proxy)" className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **HCaptchaTask**
@@ -81,7 +83,8 @@ This type of captcha might be solved a bit longer than usual image captcha, but 
     ---
 
     <ParamItem title="data" type="string" />
-    <p>Custom data that is used in some implementations of hCaptcha, mostly with `isInvisible=true`.</p>
+    <p>Custom data that is used in some implementations of hCaptcha, mostly with `isInvisible=true`. <br/>
+	The value of the data field can be taken from the `rqdata` parameter, with which the captcha is rendered. </p>
 
     ---
 
@@ -145,72 +148,72 @@ The supported image types are as follows:
 ## Create task method
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-<TabItem value="proxyless" label="HCaptchaTaskProxyless (without proxy)" default className="method-panel">
-    <MethodItem>
-      ```http
-      https://api.capmonster.cloud/createTask
-      ```
-    </MethodItem>
-<MethodDescription>
-**Request**
-```json
-{
-    "clientKey":"API_KEY",
-    "task":
-    {
-        "type":"HCaptchaTaskProxyless",
-        "websiteURL":"https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",
-        "websiteKey":"472fc7af-86a4-4382-9a49-ca9090474471",
-        "userAgent": "userAgentPlaceholder",
-        "fallbackToActualUA":true
-    }
-}
-```
-**Response**
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
+	<TabItem value="proxyless" label="HCaptchaTaskProxyless (without proxy)" default className="method-panel">
+		<MethodItem>
+			```http
+			https://api.capmonster.cloud/createTask
+			```
+		</MethodItem>
+		<MethodDescription>
+			**Request**
+			```json
+			{
+				"clientKey":"API_KEY",
+				"task":
+				{
+					"type":"HCaptchaTaskProxyless",
+					"websiteURL":"https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",
+					"websiteKey":"472fc7af-86a4-4382-9a49-ca9090474471",
+					"userAgent": "userAgentPlaceholder",
+					"fallbackToActualUA":true
+				}
+			}
+			```
+			**Response**
+			```json
+			{
+			  "errorId":0,
+			  "taskId":407533072
+			}
+			```
+		</MethodDescription>
+	</TabItem>
 
-</MethodDescription>
-  </TabItem>
-  <TabItem value="proxy" label="HCaptchaTask (using proxy)" className="method-panel">
-<MethodItem>
-  ```http
-  https://api.capmonster.cloud/createTask
-  ```
-</MethodItem>
-<MethodDescription>
-**Request**
-```json
-{
-    "clientKey":"API_KEY",
-    "task":
-    {
-        "type":"HCaptchaTask",
-        "websiteURL":"https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",
-        "websiteKey":"472fc7af-86a4-4382-9a49-ca9090474471",
-        "userAgent": "userAgentPlaceholder",
-        "fallbackToActualUA":true,
-        "proxyType":"http",
-        "proxyAddress":"8.8.8.8",
-        "proxyPort":8080,
-        "proxyLogin":"proxyLoginHere",
-        "proxyPassword":"proxyPasswordHere"
-    }
-}
-```
-**Response**
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
-</MethodDescription>
-  </TabItem>
+	<TabItem value="proxy" label="HCaptchaTask (using proxy)" className="method-panel">
+		<MethodItem>
+			```http
+			https://api.capmonster.cloud/createTask
+			```
+		</MethodItem>
+		<MethodDescription>
+			**Request**
+			```json
+			{
+				"clientKey":"API_KEY",
+				"task":
+				{
+					"type":"HCaptchaTask",
+					"websiteURL":"https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",
+					"websiteKey":"472fc7af-86a4-4382-9a49-ca9090474471",
+					"userAgent": "userAgentPlaceholder",
+					"fallbackToActualUA":true,
+					"proxyType":"http",
+					"proxyAddress":"8.8.8.8",
+					"proxyPort":8080,
+					"proxyLogin":"proxyLoginHere",
+					"proxyPassword":"proxyPasswordHere"
+				}
+			}
+			```
+			**Response**
+			```json
+			{
+			  "errorId":0,
+			  "taskId":407533072
+			}
+			```
+		</MethodDescription>
+	</TabItem>
   
 </Tabs>
 
@@ -219,33 +222,33 @@ The supported image types are as follows:
 Use the [getTaskResult](../api/methods/get-task-result.md) method to request answer for hCaptcha. You will get response within 10 - 80 secs period depending on service workload.
 
 <TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
-    <MethodItem>
-```http
-https://api.capmonster.cloud/getTaskResult
-```
-    </MethodItem>
-    <MethodDescription>
-**Request**
-```json
-{
-  "clientKey":"API_KEY",
-  "taskId": 407533072
-}
-```
-**Response**
-```json
-{
-  "errorId":0,
-  "status":"ready",
-  "solution": {
-    "gRecaptchaResponse": "P1_eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.hKdwYXNza2V5xQb9JvlblBqjTdKpourvlRNpOZLvJb0yJRmsXVFVjyxFWlL1wdYBXaPyFtnxwy2ukbMgwWn62-cjSc98Iw2XIPYWg5MNDKS4_7tBIhjY0PienoKy1...",
-    "respKey": "E0_eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoidjQ3RjlqZGFYTllFQXlZZFYyRTlaWlBVQUdLaFpPakpRNjBXRTljVW40VnY3NnhuN2V3R0wwVWd1MW1Wai90WEdoYmt5a2NqVGlGdWpsSlpmVjcza...",
-    "userAgent": "userAgentPlaceholder"
-  }
-}
-```
-  </MethodDescription>
-  </TabItem>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**Response**
+		```json
+		{
+		  "errorId":0,
+		  "status":"ready",
+		  "solution": {
+			"gRecaptchaResponse": "P1_eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.hKdwYXNza2V5xQb9JvlblBqjTdKpourvlRNpOZLvJb0yJRmsXVFVjyxFWlL1wdYBXaPyFtnxwy2ukbMgwWn62-cjSc98Iw2XIPYWg5MNDKS4_7tBIhjY0PienoKy1...",
+			"respKey": "E0_eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoidjQ3RjlqZGFYTllFQXlZZFYyRTlaWlBVQUdLaFpPakpRNjBXRTljVW40VnY3NnhuN2V3R0wwVWd1MW1Wai90WEdoYmt5a2NqVGlGdWpsSlpmVjcza...",
+			"userAgent": "userAgentPlaceholder"
+		  }
+		}
+		```
+	</MethodDescription>
+</TabItem>
 
 <br />
 
@@ -260,31 +263,29 @@ https://api.capmonster.cloud/getTaskResult
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">
+	```js
+	// https://github.com/ZennoLab/capmonstercloud-client-js
 
-```js
-// https://github.com/ZennoLab/capmonstercloud-client-js
+	import { CapMonsterCloudClientFactory, ClientOptions, HCaptchaRequest } from '@zennolab_com/capmonstercloud-client';
 
-import { CapMonsterCloudClientFactory, ClientOptions, HCaptchaRequest } from '@zennolab_com/capmonstercloud-client';
+	document.addEventListener('DOMContentLoaded', async () => {
+	  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+	  console.log(await cmcClient.getBalance());
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
-  console.log(await cmcClient.getBalance());
+	  const hCaptchaRequest = new HCaptchaRequest({
+		websiteURL: 'https://lessons.zennolab.com/captchas/hcaptcha/?level=easy',
+		websiteKey: '472fc7af-86a4-4382-9a49-ca9090474471',
+		isInvisible: true,
+		data: 'some data',
+		proxyType: 'https',
+		proxyAddress: 'https://proxy.com',
+		proxyPort: 6045,
+		proxyLogin: 'login',
+		proxyPassword: 'password',
+	  });
 
-  const hCaptchaRequest = new HCaptchaRequest({
-    websiteURL: 'https://lessons.zennolab.com/captchas/hcaptcha/?level=easy',
-    websiteKey: '472fc7af-86a4-4382-9a49-ca9090474471',
-    isInvisible: true,
-    data: 'some data',
-    proxyType: 'https',
-    proxyAddress: 'https://proxy.com',
-    proxyPort: 6045,
-    proxyLogin: 'login',
-    proxyPassword: 'password',
-  });
-
-  console.log(await cmcClient.Solve(hCaptchaRequest));
-});
-```
-  </TabItem>
-  
+	  console.log(await cmcClient.Solve(hCaptchaRequest));
+	});
+	```
+  </TabItem>  
 </Tabs>

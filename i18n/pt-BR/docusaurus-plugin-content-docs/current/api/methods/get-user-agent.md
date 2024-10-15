@@ -5,12 +5,12 @@ sidebar_label: getUserAgent
 
 # getUserAgent
 
-## **Description**
+## **Descrição**
 
-It is important that when sending a captcha recognition request, you specify the current userAgent (UA) from the Windows operating system.
+É importante que, ao enviar uma solicitação de reconhecimento de captcha, você especifique o *userAgent* (UA) atual do sistema operacional Windows.
 
-Using the current Windows user Agent helps to improve the accuracy of captcha recognition and reduce the number of errors.
-:::info METHOD ADDRESS
+Usar o *userAgent* atual do Windows ajuda a melhorar a precisão do reconhecimento de captcha e a reduzir o número de erros.
+:::info ENDEREÇO DO MÉTODO
 ```http
 https://capmonster.cloud/api/useragent/actual
 ```

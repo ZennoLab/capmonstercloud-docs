@@ -32,11 +32,11 @@ When creating a task, you should additionally pass two parameters - pageAction a
     ---
 
     <ParamItem title="websiteKey" required type="string" />
-   Recaptcha website key.<br/>https://www.google.com/recaptcha/api.js?render=THIS_ONE
+    Recaptcha website key.<br/>https://www.google.com/recaptcha/api.js?render=THIS_ONE
 
-   ---
+    ---
 
-   <ParamItem title="minScore" type="double" />
+    <ParamItem title="minScore" type="double" />
     Value from 0.1 to 0.9
 
     ---
@@ -48,67 +48,66 @@ When creating a task, you should additionally pass two parameters - pageAction a
 
 ## Create task method
 
-
 <TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
-<MethodItem>
-  ```http
-  https://api.capmonster.cloud/createTask
-  ```
-</MethodItem>
-<MethodDescription>
-**Request**
-```json
-{
-  "clientKey":"API_KEY",
-  "task": {
-    "type":"RecaptchaV3TaskProxyless",
-    "websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta",
-    "websiteKey":"6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",
-    "minScore": 0.3,
-    "pageAction": "myverify"
-  }
-}
-```
-**Response**
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
-
-</MethodDescription>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "task": {
+			"type":"RecaptchaV3TaskProxyless",
+			"websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta",
+			"websiteKey":"6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",
+			"minScore": 0.3,
+			"pageAction": "myverify"
+		  }
+		}
+		```
+		**Response**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
 </TabItem>
+
 
 ## Get task result method
 Use the [getTaskResult](../api/methods/get-task-result.md) to request answer for ReCaptcha3. You will get response within 10 - 30 sec period depending on service workload.
 
 <TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
-    <MethodItem>
-```http
-https://api.capmonster.cloud/getTaskResult
-```
-    </MethodItem>
-    <MethodDescription>
-**Request**
-```json
-{
-  "clientKey":"API_KEY",
-  "taskId": 407533072
-}
-```
-**Response**
-```json
-{
-  "errorId":0,
-  "status":"ready",
-  "solution": {
-    "gRecaptchaResponse":"3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
-  }
-}
-```
-  </MethodDescription>
-  </TabItem>
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**Response**
+		```json
+		{
+		  "errorId":0,
+		  "status":"ready",
+		  "solution": {
+			"gRecaptchaResponse":"3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
+		  }
+		}
+		```
+	</MethodDescription>
+</TabItem>
 
 <br />
 
@@ -120,26 +119,24 @@ https://api.capmonster.cloud/getTaskResult
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">
+	```js
+	// https://github.com/ZennoLab/capmonstercloud-client-js
 
-```js
-// https://github.com/ZennoLab/capmonstercloud-client-js
+	import { CapMonsterCloudClientFactory, ClientOptions, RecaptchaV3ProxylessRequest } from '@zennolab_com/capmonstercloud-client';
 
-import { CapMonsterCloudClientFactory, ClientOptions, RecaptchaV3ProxylessRequest } from '@zennolab_com/capmonstercloud-client';
+	document.addEventListener('DOMContentLoaded', async () => {
+	  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+	  console.log(await cmcClient.getBalance());
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
-  console.log(await cmcClient.getBalance());
+	  const recaptchaV3Request = new RecaptchaV3ProxylessRequest({
+		websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high',
+		websiteKey: '6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd',
+		minScore: 0.6,
+		pageAction: 'some-action',
+	  })
 
-  const recaptchaV3Request = new RecaptchaV3ProxylessRequest({
-    websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high',
-    websiteKey: '6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd',
-    minScore: 0.6,
-    pageAction: 'some-action',
-  })
-
-  console.log(await cmcClient.Solve(recaptchaV3Request));
-});
-```
-  </TabItem>
-  
+	  console.log(await cmcClient.Solve(recaptchaV3Request));
+	});
+	```
+  </TabItem>  
 </Tabs>

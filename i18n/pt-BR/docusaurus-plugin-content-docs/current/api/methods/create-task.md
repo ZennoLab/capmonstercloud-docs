@@ -3,47 +3,38 @@ sidebar_position: 0
 sidebar_label: createTask
 ---
 
-# createTask : creating a task
+# createTask : criando uma tarefa
 
-## **Description**
-This method creates a task for solving selected captcha type. In the parameters you need to pass the client authorization data, typed task data and other optional parameters.
+## **Descrição**
+Este método cria uma tarefa para resolver o tipo de captcha selecionado. Nos parâmetros, é necessário passar os dados de autorização do cliente, os dados da tarefa e outros parâmetros opcionais.
 
-:::info Method address
+:::info Endereço do método
 ```http
 https://api.capmonster.cloud/createTask
 ```
 
-Request format: `JSON POST`
+Formato da solicitação: `JSON POST`
 :::
 
-<!-- Адрес метода: <https://api.capmonster.cloud/createTask> 
-Формат запроса: JSON POST -->
-
 -----
-## **Request parameters**
-<!-- 
-|**Параметр**|**Тип**|**Обязательный**|**Значение**|
-| :-: | :-: | :-: | :-: |
-|clientKey|String|Да|Уникальный ключ вашей учетной записи, API ключ (найти можно [тут](https://capmonster.cloud/Dashboard))|
-|task|Объект задачи|Да|Массив данных о задаче. Список типов задач капч [здесь](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/589856).|
-|callbackUrl|String|Нет|Веб адрес для отправки результата задачи капчи. Данные отправляются POST запросом.<br />Содержимое идентично ответу метода [getTaskResult](file:///C:/wiki/spaces/APIS/pages/557078).<br />Содержимое ответа не проверяется и сервер должен успеть принять запрос за 2 секунды, затем соединение закрывается.| -->
+## **Parâmetros da solicitação**
 
 ### `clientKey`
-Type: `String` <br />
-Required: `Yes`<br />
-Your unique account key, API key (You can find it [here](https://capmonster.cloud/Dashboard))
+Tipo: `String` <br />
+Obrigatório: `Sim`<br />
+Sua chave de conta única, chave da API (Você pode encontrá-la [aqui](https://capmonster.cloud/Dashboard))
 
 ### `task`
-Type: `Task object` <br />
-Required: `Yes`<br />
-Task data array. See list of available object descriptions [here](../../captchas).
+Tipo: `Objeto Tarefa` <br />
+Obrigatório: `Sim`<br />
+Array de dados da tarefa. Veja a lista de descrições de objetos disponíveis [aqui](../../captchas).
 
 ### `callbackUrl`
-Type: `String` <br />
-Required: `No`<br />
-Web address for sending the captcha task result. Data is sent by POST request.<br />The content is identical to the response of the [getTaskResult](./get-task-result.md) method.<br />The content of the response is not checked and you should accept the request in 2 seconds then the connection will be closed.
+Tipo: `String` <br />
+Obrigatório: `Não`<br />
+Endereço web para o envio do resultado da tarefa do captcha. Os dados são enviados por solicitação POST.<br />O conteúdo é idêntico à resposta do método [getTaskResult](./get-task-result.md).<br />O conteúdo da resposta não é verificado, e o servidor deve aceitar a solicitação em 2 segundos; após isso, a conexão será encerrada.
 
-Example of using the `callbackUrl` function:
+Exemplo de uso da função `callbackUrl`:
 
 ```json
 {
@@ -59,39 +50,10 @@ Example of using the `callbackUrl` function:
 
 --- 
 
-### **Request examples**
+### **Exemplos de solicitação**
 
-<!-- ```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import CodeBlock from '@theme/CodeBlock';
-```
-
-```mdx-code-block
-  <Tabs>
-    <TabItem value="apple" label="Solving a normal captcha with an image">
-    <CodeBlock className="language-json">{JSON.stringify({
-      "clientKey":"API_KEY",
-      "task": {
-        "type":"ImageToTextTask",
-        "body":"BASE64\_BODY\_HERE!"
-      }
-    }, null, 2)}</CodeBlock>
-    </TabItem>
-    <TabItem value="orange" label="Solving ReCaptcha2"><CodeBlock className="language-json">{JSON.stringify({
-      "clientKey":"API_KEY",
-      "task": {
-        "type":"NoCaptchaTaskProxyless","websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2\_simple.php?level=high",
-        "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI\_iqRyTwd"
-      }
-    }
-, null, 2)}</CodeBlock></TabItem>
-  </Tabs>
-``` -->
-
-
-  <details>
-    <summary>Solving normal captcha with an image</summary>
+<details>
+  <summary>Resolvendo captcha normal com uma imagem</summary>
 
 ```json
     {
@@ -103,10 +65,10 @@ import CodeBlock from '@theme/CodeBlock';
       }
     }
 ```
-  </details>
+</details>
 
-  <details>
-    <summary>Solving ReCaptcha2</summary>
+<details>
+  <summary>Resolvendo ReCaptcha2</summary>
 
 ```json
     {
@@ -119,38 +81,32 @@ import CodeBlock from '@theme/CodeBlock';
       }
     }
 ```
-  </details>
+</details>
 
 -----
-## **Response structure**
-
-<!-- |**Параметр**|**Тип**|**Значение**|
-| :-: | :-: | :-: |
-|errorId|Integer|Идентификатор ошибки.<br />**0** - ошибок нет, задача успешно создана, идентификатор задачи находится в параметре *taskId*<br />**1** - ошибка, информация о ней находится в свойстве *errorCode*|
-|errorCode|String|Код ошибки. См. [глоссарий ошибок](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/295310).|
-|taskId|Integer|Идентификатор задания для последующего использования в методе [getTaskResult](https://zennolab.atlassian.net/wiki/spaces/APIS/pages/557078/getTaskResult).| -->
+## **Estrutura da resposta**
 
 ### `errorId`
-Type: `Integer` <br />
-Required: `Yes`<br />
-Error identificator.<br />**0** - no errors, the task has been successfully created, task ID located in *taskId* property<br />**1** - error, information about it is in the *errorCode* property
+Tipo: `Integer` <br />
+Obrigatório: `Sim`<br />
+Identificador de erro.<br />**0** - sem erros, a tarefa foi criada com sucesso, o ID da tarefa está localizado na propriedade *taskId*<br />**1** - erro, as informações sobre ele estão na propriedade *errorCode*
 
 ### `errorCode`
-Type: `String` <br />
-Required: `No`<br />
-Error code. Check out [error list](../api-errors.md).
+Tipo: `String` <br />
+Obrigatório: `Não`<br />
+Código de erro. Verifique a [lista de erros](../api-errors.md).
 
 ### `taskId`
-Type: `Integer` <br />
-Required: `Yes`<br />
-Task ID for further use in [getTaskResult](./get-task-result.md) method.
+Tipo: `Integer` <br />
+Obrigatório: `Sim`<br />
+ID da tarefa para uso posterior no método [getTaskResult](./get-task-result.md).
 
 ---
 
-### **Response example**
+### **Exemplo de resposta**
 
 <details>
-    <summary>Response WITHOUT any error</summary>
+    <summary>Resposta SEM erro</summary>
 
 ```json
     {
@@ -158,17 +114,17 @@ Task ID for further use in [getTaskResult](./get-task-result.md) method.
       "taskId": 7654321
     }
 ```
-  </details>
+</details>
 
-  <details>
-    <summary>Response WITH an error</summary>
+<details>
+    <summary>Resposta COM erro</summary>
 
 ```json
     {
         "errorId": 1,
         "errorCode": "ERROR_KEY_DOES_NOT_EXIST",
-        "errorDescription": "Account authorization key not found in the system or has incorrect format",
+        "errorDescription": "Chave de autorização da conta não encontrada no sistema ou com formato incorreto",
         "taskId": 0
     }
 ```
-  </details>
+</details>

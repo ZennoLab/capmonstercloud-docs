@@ -1,7 +1,7 @@
 ﻿# Creating a user module
 
 
-## **Description**
+## Description
 
 This feature allows you to create custom modules that will be trained for one specific type of captcha. This will help to recognize non-standard captchas faster and more efficiently and reduce the probability of errors.  
 
@@ -12,7 +12,7 @@ To go to the [module training page](https://capmonster.cloud/UserModules), click
 
 ---
 
-## **How it works**
+## How it works
 
 Briefly:
 
@@ -26,21 +26,21 @@ Now let's go into the details of each step.
 
 ---
 
-### **1. Collecting captchas**
+### 1. Collecting captchas
 
-#### **How many captchas do you need?**
+#### How many captchas do you need?
 
 To answer this question, mark the types of symbols that your captcha contains, in the form on the [Module training page](https://capmonster.cloud/UserModules). After that, a hint telling you how many captchas to upload will appear above the button for selecting the archive for uploading:
 
 ![](./images/user-module/module-name.png)
 
-#### **Supported image formats**
+#### Supported image formats
 
 - jpg
 - jpeg
 - png
 
-#### **How to collect captchas?**
+#### How to collect captchas?
 
 Let's look at the example with [ZennoPoster](https://zennolab.atlassian.net/wiki/spaces/EN/pages/924581921/ZennoPoster).
 
@@ -55,11 +55,11 @@ Do not run captcha collection in tens and hundreds of threads! Few websites woul
 
 ---
 
-### **2. Sending the captcha archive**
+### 2. Sending the captcha archive
 
 ![](./images/user-module/a2ba29bd-c910-44cf-9979-ceb143633efd.png)
 
-#### **2.1. Name**
+#### 2.1. Name
 
 First, set the module name (Latin characters only).
 
@@ -69,7 +69,7 @@ First, set the module name (Latin characters only).
 The module name must not contain the word **captcha**.
 :::
 
-#### **2.2. Types of symbols**
+#### 2.2. Types of symbols
 
 Mark the types of symbols that your captcha contains.
 
@@ -83,7 +83,7 @@ You can choose one or several options from the suggested.
 You should mark at least one of the following options: "Contains Cyrillic characters", "Contains Latin characters", "Contains numbers"
 :::
 
-#### **2.3. Markup location**
+#### 2.3. Markup location
 
 Specify where captcha answers are located.
 
@@ -106,13 +106,13 @@ captcha2.png:2zhnw
 captcha3.png:99loe
 ```
 
-#### **2.4. Sending the archive**
+#### 2.4. Sending the archive
 
 When you specified the module name, selected symbol types, and location of answers, you need to upload the zip archive with the captchas and send us.
 
 ![](./images/user-module/archieve.png)
 
-#### **2.5. Payment**
+#### 2.5. Payment
 
 - If you did all that correctly, your request will appear in the table with the **Validated** status.
 - After that, you need to deposit $10 per module.
@@ -125,9 +125,9 @@ The funds allocated to training are not debited but stay on the balance. You can
 
 ---
 
-### **3. Statuses**
+### 3. Statuses
 
-#### **Validated**
+#### Validated
 
 ![](./images/user-module/validated.png)
 
@@ -137,31 +137,31 @@ You get this status after you send the form (given that you have done everything
 Modules with this status can be deleted. If you uploaded the module but realized that you sent a wrong archive or gave a bad name for the module, you can delete it, make changes, and send it again.
 :::
 
-#### **Paid**
+#### Paid
 
 ![](./images/user-module/paid.png)
 
 Your payment for the module was accepted.
 
-#### **ValidatedInDepth**
+#### ValidatedInDepth
 
 ![](./images/user-module/ValidatedInDepth.png)
 
 Preparatory works.
 
-#### **Annotated**
+#### Annotated
 
 ![](./images/user-module/Annotated.png)
 
 Captcha marking completed. Training is in progress.
 
-#### **Trained**
+#### Trained
 
 ![](./images/user-module/trained.png)
 
 The module is ready! You can now submit captchas to it.
 
-### **4. Sending captchas to a certain module**
+### 4. Sending captchas to a certain module
 
 There are several ways to specify a module that will solve the captchas:
 
@@ -170,7 +170,7 @@ There are several ways to specify a module that will solve the captchas:
 
 ---
 
-## **FAQ**
+## FAQ
 
 <details>
     <summary>How long does the module training take?</summary>
