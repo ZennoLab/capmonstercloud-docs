@@ -1,0 +1,183 @@
+﻿---
+sidebar_position: 10
+sidebar_label: ImageToTextTask
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+
+# ImageToTextTask
+
+Это обычная капча, представляющая собой изображение с текстом, который нужно ввести в соответствующую строку. 
+
+![](./images/image-to-text/text-captcha-2.png)
+
+
+## Параметры запроса
+<TabItem value="proxyless" label="ImageToTextTask (без прокси)" default className="bordered-panel">
+    <ParamItem title="type" required type="string" />
+    **ImageToTextTask**
+
+    ---
+
+    <ParamItem title="body" required type="string" />
+    Содержимое файла капчи закодированное в base64*. Убедитесь что шлете его без переносов строки.
+
+    ---
+
+    <ParamItem title="capMonsterModule" type="string" />
+    Имя модуля, например “yandex“. Альтернативный способ передачи имени модуля и список всех доступных модулей можно найти [здесь](../api/module-name.md). <br />
+    Пример: yandex, special и другие.
+
+    ---
+
+    <ParamItem title="recognizingThreshold" type="integer" />
+    Порог распознавания капчи с возможным значением от 0 до 100. Например, если в систему было отправлено значение 90, и задача решилась с уверенностью 80, то деньги за решение не спишутся. В этом случае пользователь получит ответ ERROR_CAPTCHA_UNSOLVABLE.
+
+    ---
+
+    <ParamItem title="case" type="boolean" />
+    Учитывать регистр при решении или нет. Возможные значения: true, false
+
+    ---
+
+    <ParamItem title="numeric" type="integer" />
+    1 - если капча состоит только из цифр. <br />
+    Возможные значения: 0, 1
+
+    ---
+
+    <ParamItem title="math" type="boolean" />
+    false — не определено; <br />
+	true — капча требует совершения математического действия (например: капча 2 + 6 = вернёт значение 8).
+  </TabItem>
+
+  <br />
+
+*Base64 - это способ кодирования данных, позволяющий представить бинарные данные в виде текста. Пример получения изображения капчи в формате base64 с помощью консоли в *Инструментах разработчика*:
+
+```
+const captchaUrl = 'https://example.com/captcha.jpg';
+
+function loadAndEncodeCaptchaToBase64(url) {
+    fetch(url)
+        .then(response => response.blob())
+        .then(blob => {
+            const reader = new FileReader();
+            reader.readAsDataURL(blob);
+
+            reader.onloadend = function() {
+                const base64Data = reader.result;                
+                console.log('Base64 Encoded Captcha:', base64Data);
+
+                          };
+        })
+        .catch(error => {
+            console.error('Error occurred while loading or encoding the captcha:', error);
+        });
+}
+
+loadAndEncodeCaptchaToBase64(captchaUrl);
+
+```
+
+## Метод создания задачи
+
+<TabItem value="proxyless" label="ImageToTextTask (без прокси)" default className="method-panel">
+<MethodItem>
+  ```http
+  https://api.capmonster.cloud/createTask
+  ```
+</MethodItem>
+<MethodDescription>
+**Запрос**
+```json
+{
+  "clientKey":"API_KEY",
+  "task": {
+    "type":"ImageToTextTask",
+    "body":"BASE64_BODY_HERE!"
+  }
+}
+```
+**Ответ**
+```json
+{
+  "errorId":0,
+  "taskId":407533072
+}
+```
+
+</MethodDescription>
+</TabItem>
+
+
+## Метод получения результата задачи
+Используйте метод [getTaskResult](../api/methods/get-task-result.md) чтобы получить решение капчи. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 300 мс до 6 с.
+
+<TabItem value="proxyless" label="ImageToTextTask (без прокси)" default className="method-panel-full">
+    <MethodItem>
+```http
+https://api.capmonster.cloud/getTaskResult
+```
+    </MethodItem>
+    <MethodDescription>
+**Запрос**
+```json
+{
+  "clientKey":"API_KEY",
+  "taskId": 407533072
+}
+```
+**Ответ**
+```json
+{
+  "errorId":0,
+  "status":"ready",
+  "solution": {
+    "text":"answer"
+  }
+}
+```
+  </MethodDescription>
+  </TabItem>
+
+<br />
+
+|**Свойство**|**Тип**|**Описание**|
+| :-: | :-: | :-: |
+|text|String|Текст решения капчи|
+
+
+## Используйте библиотеку SDK
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, ImageToTextRequest } from '@zennolab_com/capmonstercloud-client';
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+  console.log(await cmcClient.getBalance());
+
+  const imageToTextRequest = new ImageToTextRequest({
+    body: 'some base64 body',
+    CapMonsterModule: CapMonsterModules.YandexWave,
+    Case: true,
+    numeric: 1,
+    recognizingThreshold: 65,
+    math: false,
+  });
+
+  console.log(await cmcClient.Solve(imageToTextRequest));
+});
+```
+  </TabItem>
+  
+</Tabs>

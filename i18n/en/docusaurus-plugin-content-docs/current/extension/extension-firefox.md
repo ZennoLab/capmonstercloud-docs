@@ -15,7 +15,7 @@ The extension works in the Mozilla Firefox browser.
 1. Open the [Firefox Add-ons Web Store](https://addons.mozilla.org/en-US/firefox/addon/capmonster-cloud/).
 2. Click **Add to Firefox**.
 3. Confirm adding the extension by clicking the "Add" button in the modal window.
-   ![](modal.png)
+   ![](./images/extension-main-firefox/modal.png)
 
 To get started with the extension, click on its icon to the right of the address bar. Go to the [settings](extension-firefox.md#settings).
 
@@ -27,18 +27,18 @@ To get started with the extension, click on its icon to the right of the address
 1. Download the [archive with the extension](https://drive.google.com/file/d/1VWGD_Am74e7-7Uz4V_N13Yqd5Lnqv_GU/view?usp=drive_link).
 
 1. Open the Firefox browser and go to work with extensions:
-   ![](extension-menu.png)
+   ![](./images/extension-main-firefox/extension-menu.png)
    
 1. Click the gear button, in the drop-down list that opens, select "Install add-on from file..."
-   ![](extension-installation.png)
+   ![](./images/extension-main-firefox/extension-installation.png)
    
 1. Select the downloaded archive with the extension.
 
 1. After downloading the extension, go to "Manage Your Extensions" and click on the installed extension. 
-   ![](extension1.png)
+   ![](./images/extension-main-firefox/extension1.png)
    
 1. Go to the "Permissions" tab and make sure that all permissions are granted.
-   ![](extension2.png)
+   ![](./images/extension-main-firefox/extension2.png)
 </details>
 
 <details>
@@ -53,20 +53,20 @@ If you are installing the extension over the previous version, then when you upd
     <summary>How to pin the extension</summary>
 
 By default, a newly installed extension is automatically pinned to the browser panel. 
-   ![](extension-panel.png)
+   ![](./images/extension-main-firefox/extension-panel.png)
 </details>
 
 After launching the extension you’ll see this window:
 
-![](ext.screen.enf.png)
+![](./images/extension-main-firefox/ext.screen.enf.png)
 ### <a name="id-browserextension-apikey"></a>**API key**
 Enter API key in the corresponding field(1), press save button(2). If you entered the correct key, your balance will be displayed below(3).
 
-![](api-key.png)
+![](./images/extension-main-firefox/api-key.png)
 ### <a name="id-browserextension-automaticcaptchasolving"></a>**Automated captcha solving**
 Here you can select the types of captchas that the extension will recognize automatically.
 
-![](extension.examplef.png)
+![](./images/extension-main-firefox/extension.examplef.png)
 
 :::info !
 
@@ -76,7 +76,7 @@ You may need to reload the page with captcha for the changes to take effect!
 ### <a name="id-browserextension-repeatcaptchasolvingincaseofanerror"></a>**Repeat captcha solving in case of an error**
 If the first attempt to solve the captcha is failed, the extension will send repeated tasks until the captcha is not solved, or until the limit specified in this setting will not be reached.
 ### <a name="id-browserextension-proxy"></a>**Proxy**
-![](proxy.png) 
+![](./images/extension-main-firefox/proxy.png) 
 
 Here you can specify the proxy that will be sent along with the recognition task.
 
@@ -86,7 +86,7 @@ Using the blacklist you can configure the extension to ignore captchas on specif
 
 After enabling this option, a field for entering sites will appear:
 
-![](blacklist-control.png)
+![](./images/extension-main-firefox/blacklist-control.png)
 
 Domains must be specified along with the protocol (https:// or http://).
 You can use masks:

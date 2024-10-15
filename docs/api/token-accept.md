@@ -60,6 +60,6 @@ sidebar_position: 7
 
 ## **К каким типам капчи применим параметр?**
 
-- [ReCaptchaV2](../captchas/no-captcha-task.md)
-- [ReCaptchaV3](../captchas/recaptcha-v3-task.md)
-- [HCaptcha](../captchas/hcaptcha-task.md)
+- [ReCaptchaV2](../captchas/no-captcha-task.mdx)
+- [ReCaptchaV3](../captchas/recaptcha-v3-task.mdx)
+- [HCaptcha](../captchas/hcaptcha-task.mdx)

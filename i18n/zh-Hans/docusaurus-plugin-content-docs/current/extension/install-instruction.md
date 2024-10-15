@@ -41,7 +41,7 @@ sidebar_label: 在ProjectMaker浏览器中安装扩展的说明
 :::info 信息
 CapMonster Cloud扩展的新版本支持解决reCAPTCHA2、reCAPTCHA Enterprise和hCaptcha（通过点击）。
 :::
-![](ext.png)
+![](./images/install-instruction/ext.png)
 :::caution 警告
 请注意，在安装扩展时，默认将reCAPTCHA2、reCAPTCHA Enterprise和hCaptcha的解决类型设置为“点击”。
 :::
@@ -49,7 +49,7 @@ CapMonster Cloud扩展的新版本支持解决reCAPTCHA2、reCAPTCHA Enterprise�
 
 ***ZennoPoster的最低版本要求为7.6.1***
 
-[![Extension_Example](Aspose.Words.d33c25f1-0d68-4361-bcfb-da50f3892df4.002.png)](https://drive.google.com/file/d/1eOv1wXnjf202yDavB4051-XFM7vUGiGN/view?usp=sharing)
+[![Extension_Example](./images/install-instruction/Aspose.Words.d33c25f1-0d68-4361-bcfb-da50f3892df4.002.png)](https://drive.google.com/file/d/1eOv1wXnjf202yDavB4051-XFM7vUGiGN/view?usp=sharing)
 :::caution 警告
 通过CRX文件安装CapMonster Cloud扩展时，需要保持扩展程序版本更新。如果有版本更新，需要重新下载当前的CRX文件并重新安装。
 :::

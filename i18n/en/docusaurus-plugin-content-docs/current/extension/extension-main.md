@@ -31,21 +31,21 @@ To get started with the extension, click on its icon to the right of the address
    1. Type chrome://extensions in the address bar of a browser and press Enter.
    2. From the menu: click the three vertical dots in the upper right corner (near the profile picture), then "More Tools", then "Extensions".
 
-  ![](359d5afb-d644-45c2-a882-e7fc3da759eb.png)
+  ![](./images/extension-main-firefox/359d5afb-d644-45c2-a882-e7fc3da759eb.png)
 
    3. Or go to the Google Chrome settings and select "Extensions" (at the very bottom) in the right menu.
 
-  ![](61a9b824-b0d2-4808-8bb8-feac4b25d0b7.png)
+  ![](./images/extension-main-firefox/61a9b824-b0d2-4808-8bb8-feac4b25d0b7.png)
 
 4. Enable “Developer Mode”.
 5. Then click on “Load unpacked”.
 
-  ![](load-unpacked.png)
+  ![](./images/extension-main-firefox/load-unpacked.png)
 
 6. Find and choose the folder where you unpacked the extension.
 7. After that the extension should appear in the list of the installed extensions.
 
-![](919a2eab-1651-4b48-8980-b69346d700fd.png)
+![](./images/extension-main-firefox/919a2eab-1651-4b48-8980-b69346d700fd.png)
 
   </details>
 
@@ -54,7 +54,7 @@ To get started with the extension, click on its icon to the right of the address
 
 If you are installing the extension over the previous version, then when you update the original extension files, you also need to click the update button on the "Extensions" page (how to open this page is described above in the "Manual installation" section).
 
-![](manual-update.png)
+![](./images/extension-main-firefox/manual-update.png)
 </details>
 
 -----
@@ -64,20 +64,20 @@ If you are installing the extension over the previous version, then when you upd
 
 By default the installed extension is hidden. To pin it you have to click on the “Pin” button:
 
-![](pin1.png)
+![](./images/extension-main-firefox/pin1.png)
 </details>
 
 After launching the extension you’ll see this window:
 
-![](ext.screen.en.png)
+![](./images/extension-main-firefox/ext.screen.en.png)
 ### <a name="id-browserextension-apikey"></a>**API key**
 Enter API key in the corresponding field(1), press save button(2). If you entered the correct key, your balance will be displayed below(3).
 
-![](api-key.png)
+![](./images/extension-main-firefox/api-key.png)
 ### <a name="id-browserextension-automaticcaptchasolving"></a>**Automated captcha solving**
 Here you can select the types of captchas that the extension will recognize automatically.
 
-![](extension.example.png)
+![](./images/extension-main-firefox/extension.example.png)
 
 :::info !
 
@@ -87,7 +87,7 @@ You may need to reload the page with captcha for the changes to take effect!
 ### <a name="id-browserextension-repeatcaptchasolvingincaseofanerror"></a>**Repeat captcha solving in case of an error**
 If the first attempt to solve the captcha is failed, the extension will send repeated tasks until the captcha is not solved, or until the limit specified in this setting will not be reached.
 ### <a name="id-browserextension-proxy"></a>**Proxy**
-![](proxy.png) 
+![](./images/extension-main-firefox/proxy.png) 
 
 Here you can specify the proxy that will be sent along with the recognition task.
 
@@ -97,7 +97,7 @@ Using the blacklist you can configure the extension to ignore captchas on specif
 
 After enabling this option, a field for entering sites will appear:
 
-![](blacklist-control.png)
+![](./images/extension-main-firefox/blacklist-control.png)
 
 Domains must be specified along with the protocol (https:// or http://).
 You can use masks:
@@ -112,7 +112,5 @@ Examples:
 |`https://zennolab.com`|Prohibition of the extension on the site `https://zennolab.com`|
 |`https://*.zennolab.com`|Prohibition of the extension on all subdomains `https://zennolab.com`|
 |`https://www.google.*`|Prohibiting the extension from working on Google in all zones (ru, com, com.ua, etc.)|
-
-[ref1]: Aspose.Words.d14847ca-5ce8-4c9f-8081-1ec99b44a6b3.001.png
 
 When errors occur in solving captchas, see the [error glossary](/api/api-errors.md).

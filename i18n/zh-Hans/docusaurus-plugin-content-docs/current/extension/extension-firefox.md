@@ -16,7 +16,7 @@ sidebar_label: Firefox 浏览器扩展
 2. 点击 **Add to Firefox**。
 3. 在模态窗口中点击 "Add" 按钮确认添加扩展。
    
-   ![](modal.png)
+   ![](./images/extension-main-firefox/modal.png)
 
 要开始使用扩展，请点击地址栏右侧的扩展图标。前往 [设置页面](extension-firefox.md#设置)。
 
@@ -28,18 +28,18 @@ sidebar_label: Firefox 浏览器扩展
 1. 下载带有扩展的[存档文件](https://drive.google.com/file/d/1VWGD_Am74e7-7Uz4V_N13Yqd5Lnqv_GU/view?usp=drive_link).
 
 1. 打开 Firefox 浏览器并进入扩展管理：
-   ![](extension-menu.png)
+   ![](./images/extension-main-firefox/extension-menu.png)
    
 1. 点击齿轮按钮，在打开的下拉列表中选择 "从文件安装附加组件..."
-   ![](extension-installation.png)
+   ![](./images/extension-main-firefox/extension-installation.png)
    
 1. 选择已下载的带有扩展的存档文件。
 
 1. 下载完扩展后，转到 "管理您的扩展程序" 并点击安装的扩展。
-   ![](extension1.png)
+   ![](./images/extension-main-firefox/extension1.png)
    
 1. 进入 "权限" 选项卡，确保所有权限已被授予。
-   ![](extension2.png)
+   ![](./images/extension-main-firefox/extension2.png)
 </details>
 
 <details>
@@ -54,20 +54,20 @@ sidebar_label: Firefox 浏览器扩展
     <summary>如何固定扩展</summary>
 
 默认情况下，新安装的扩展会自动固定在浏览器面板上。
-![](extension-panel.png)
+![](./images/extension-main-firefox/extension-panel.png)
 </details>
 
 启动扩展后，您将看到此窗口：
 
-![](ext.screen.enf.png)
+![](./images/extension-main-firefox/ext.screen.enf.png)
 ### <a name="id-browserextension-apikey"></a>**API 密钥**
 在相应的字段中输入 API 密钥(1)，点击保存按钮(2)。如果您输入了正确的密钥，您的余额将显示在下方(3)。
 
-![](api-key.png)
+![](./images/extension-main-firefox/api-key.png)
 ### <a name="id-browserextension-automaticcaptchasolving"></a>**自动识别验证码**
 在这里，您可以选择扩展将自动识别的验证码类型。
 
-![](extension.examplef.png)
+![](./images/extension-main-firefox/extension.examplef.png)
 
 :::info !
 
@@ -77,7 +77,7 @@ sidebar_label: Firefox 浏览器扩展
 ### <a name="id-browserextension-repeatcaptchasolvingincaseofanerror"></a>**在出现错误时重复解决验证码**
 如果第一次尝试解决验证码失败，扩展将发送重复的任务，直到验证码解决成功，或者直到达到此设置中指定的限制为止。
 ### <a name="id-browserextension-proxy"></a>**代理**
-![](proxy.png)
+![](./images/extension-main-firefox/proxy.png)
 
 在这里，您可以指定将与识别任务一起发送的代理设置。
 
@@ -87,7 +87,7 @@ sidebar_label: Firefox 浏览器扩展
 
 启用此选项后，将会出现一个输入网站的字段：
 
-![](blacklist-control.png)
+![](./images/extension-main-firefox/blacklist-control.png)
 
 域名必须与协议（https:// 或 http://） 一起指定。
 您可以使用通配符：

@@ -1,0 +1,164 @@
+---
+sidebar_position: 11
+sidebar_label: DataDome
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+
+# DataDome
+
+This type of captcha basically requires the user to solve a puzzle by moving a slider to confirm. 
+
+![](./images/datadome/datadome.png)
+
+:::warning **Attention!**
+This task will be performed using our proxy servers. Use the received cookies in your project to automatically pass the captcha.
+:::
+
+
+## Request parameters
+<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (without proxy)" default className="bordered-panel">
+    <ParamItem title="type" required type="string" />
+    **CustomTask**
+
+    ---
+
+    <ParamItem title="class" required type="string" />
+    **DataDome**
+
+    ---
+
+    <ParamItem title="websiteURL" required type="string" />
+    The address of the main page where the captcha is solved.
+
+    ---
+
+    <ParamItem title="metadata.htmlPageBase64" required="required (if metadata.captchaUrl is not filled)" type="string" />
+    Object that contains additional data about the captcha: `"htmlPageBase64": "..."` - a base64 encoded html page that comes with a 403 code and a Set-Cookie: datadome="..." header in response to a get request to the target site.
+
+    ---
+
+    <ParamItem title="metadata.captchaUrl" required="required (if metadata.htmlPageBase64 is not filled)" type="string" />
+    `"captchaUrl"` - link to the captcha. Usually it looks like this: `"https://geo.captcha-delivery.com/captcha/?initialCid=..."`.
+
+    ---
+
+    <ParamItem title="metadata.datadomeCookie" required type="string" />
+    Your cookies from datadome. You can get it on the page using "document.cookie" or in the Set-Cookie request header: "datadome=..." (see example request /createTask)
+
+    ---
+
+    <ParamItem title="userAgent" type="string" />
+    Browser User-Agent. <br /> 
+	**Pass only the actual UA from Windows OS. Now this is**: userAgentPlaceholder
+
+  </TabItem>
+
+
+## Create task method
+
+<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
+<MethodItem>
+  ```http
+  https://api.capmonster.cloud/createTask
+  ```
+</MethodItem>
+<MethodDescription>
+**Request**
+```json
+{
+    "clientKey": "API_KEY",
+    "task": {
+        "type": "CustomTask",
+        "class": "DataDome",
+        "websiteURL": "https://www.leboncoin.fr/",
+        "userAgent": "MuserAgentPlaceholder",
+        "metadata": {
+            "htmlPageBase64": "PGh0bWw+PGhlYWQ+PHRpdGxlPmJs...PC9odG1sPg==",
+            "datadomeCookie": "datadome=VYUWrgJ9ap4zmXq8Mgbp...64emvUPeON45z"
+        }
+    }
+}
+```
+**Response**
+```json
+{
+  "errorId":0,
+  "taskId":407533072
+}
+```
+
+</MethodDescription>
+</TabItem>
+
+## Get task result method
+Use the [getTaskResult](../api/methods/get-task-result.md) method to get the DataDome solution.
+
+<TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
+    <MethodItem>
+```http
+https://api.capmonster.cloud/getTaskResult
+```
+    </MethodItem>
+    <MethodDescription>
+**Request**
+```json
+{
+  "clientKey":"API_KEY",
+  "taskId": 407533072
+}
+```
+**Response**
+```json
+{
+    "errorId":0,
+    "status":"ready",
+    "solution": {
+        "domains": {
+            "site.com": {
+                "cookies": {
+                    "datadome": "t355hfeuUFbsWpoMzXyIWL_ewfwgre25345323rwgregeFEkG5iju9esKVfWMzuLAjcfCIJUIHU7332At1l~HY78g782hidwfeO4K2ZP_CFHYUFEgygfiYGfGYEUfgyefWrXG6_3sy; Max-Age=31536000; Domain=.site.com; Path=/; Secure; SameSite=Lax"
+                }
+            }
+        }
+    }
+}
+```
+  </MethodDescription>
+  </TabItem>
+
+
+## Use SDK Library
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, DataDomeRequest } from '@zennolab_com/capmonstercloud-client';
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+  console.log(await cmcClient.getBalance());
+
+  const dataDomeRequest = new DataDomeRequest({
+    websiteURL: 'site.com',
+    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    metadata: {
+      captchaUrl: 'https://geo.captcha-delivery.com/captcha/?initialCid=12434324',
+      datadomeCookie: '',
+    },
+  });
+
+  console.log(await cmcClient.Solve(dataDomeRequest));
+});
+```
+  </TabItem>
+  
+</Tabs>
+

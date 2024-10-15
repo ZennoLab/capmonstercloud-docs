@@ -17,82 +17,82 @@ sidebar_position: 5
     <tbody>
         <tr>
             <td align="center">amazon</td>
-            <td align="center">![](images\amazon.png)</td>
+            <td align="center">![](images\module-name\amazon.png)</td>
         </tr>
         <tr>
             <td align="center">whatsapp</td>
-            <td align="center">![](images\whatsapp.png)</td>
+            <td align="center">![](images\module-name\whatsapp.png)</td>
         </tr>
         <tr>
             <td align="center">botdetect</td>
-            <td align="center">![](images\botdetect.png)</td>
+            <td align="center">![](images\module-name\botdetect.png)</td>
         </tr>
         <tr>
             <td align="center">facebook</td>
-            <td align="center">![](images\facebook.png)</td>
+            <td align="center">![](images\module-name\facebook.png)</td>
         </tr>
         <tr>
             <td align="center">gmx</td>
-            <td align="center">![](images\gmx.png)</td>
+            <td align="center">![](images\module-name\gmx.png)</td>
         </tr>
         <tr>
             <td align="center">google</td>
-            <td align="center">![](images\google.png)</td>
+            <td align="center">![](images\module-name\google.png)</td>
         </tr>
         <tr>
             <td align="center">hotmail</td>
-            <td align="center">![](images\hotmail.png)</td>
+            <td align="center">![](images\module-name\hotmail.png)</td>
         </tr>
         <tr>
             <td align="center">mailru</td>
-            <td align="center">![](images\mailru.png)</td>
+            <td align="center">![](images\module-name\mailru.png)</td>
         </tr>
         <tr>
             <td align="center">okrus</td>
-            <td align="center">![](images\okrus.png)</td>
+            <td align="center">![](images\module-name\okrus.png)</td>
         </tr>
 		<tr>
             <td align="center">okeng</td>
-            <td align="center">![](images\okeng.png)</td>
+            <td align="center">![](images\module-name\okeng.png)</td>
         </tr>
         <tr>
             <td align="center">ramblerrus</td>
-            <td align="center">![](images\rambler.png)</td>
+            <td align="center">![](images\module-name\rambler.png)</td>
         </tr>
 		<tr>
             <td align="center">ramblerrusnew</td>
-            <td align="center">![](images\ramblerrusnew.png)</td>
+            <td align="center">![](images\module-name\ramblerrusnew.png)</td>
         </tr>
         <tr>
             <td align="center">solvemedia</td>
-            <td align="center">![](images\solvemedia.png)</td>
+            <td align="center">![](images\module-name\solvemedia.png)</td>
         </tr>
         <tr>
             <td align="center">steam</td>
-            <td align="center">![](images\steam.png)</td>
+            <td align="center">![](images\module-name\steam.png)</td>
         </tr>
         <tr>
             <td align="center">vk</td>
-            <td align="center">![](images\vk.png)</td>
+            <td align="center">![](images\module-name\vk.png)</td>
         </tr>
         <tr>
             <td align="center">yandex</td>
-            <td align="center">![](images\yandex.png)</td>
+            <td align="center">![](images\module-name\yandex.png)</td>
         </tr>
         <tr>
             <td align="center">yandexnew (двух-словная капча)</td>
-			<td rowspan="2" align="center">![](images\yandexwave.png)</td>
+			<td rowspan="2" align="center">![](images\module-name\yandexwave.png)</td>
         </tr>
         <tr>
             <td align="center">yandexwave</td>
         </tr>
 		<tr>
             <td align="center">partiallyblur</td>
-			<td align="center">![](images\partiallyblur.png)</td>
+			<td align="center">![](images\module-name\partiallyblur.png)</td>
         </tr>
         <tr>
             <td align="center">universal (все остальные текстовые капчи)</td>
-            <td align="center">![](images\universal.png)</td>
+            <td align="center">![](images\module-name\universal.png)</td>
         </tr>
     </tbody>
 </table>

@@ -385,3 +385,98 @@ a[class*='cardContainer'] {
   object-fit: cover;
   margin-bottom: 30px;
 }
+
+.markdown li {
+  margin-top: var(--ifm-list-item-margin);
+}
+
+.full-width-tabs li{
+  width: 100%;
+  justify-content: center;
+  
+}
+
+.filled-tabs li.tabs__item--active {
+  background: #7D6EFF;
+  color: white
+}
+
+.filled-tabs li{
+  border-bottom: 2px solid #7D6EFF;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.bordered-panel {
+  padding: 24px;
+  border-radius: 10px;
+  border: 1px solid #f0f2f5;
+  font-size: 15px;
+  color: #14193C;
+}
+
+.bordered-panel hr {
+  background: #E9EBEE;
+}
+
+.bordered-panel :not(.paramItem) code {
+  background: #ECF0F6;
+  color: #14193C;
+  padding:  4px 10px;
+  border: none;
+}
+
+[data-theme='dark'] .bordered-panel {
+  border: 1px solid #373C46;
+  color: #D2D7E1;
+}
+
+[data-theme='dark'] .bordered-panel hr {
+  background: #373C46;
+}
+
+
+[data-theme='dark'] .bordered-panel :not(.paramItem) code {
+  background: #303237;
+  color: #D2D7E1
+}
+
+.request-tabs {
+  margin-bottom: -1rem;
+}
+
+.method-panel {
+  border: 1px solid #f0f2f5;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+
+.methodDescription pre, .method-panel pre {
+  background: transparent !important;
+}
+
+.method-panel-full {
+  border: 1px solid #f0f2f5;
+  border-radius: 10px;
+}
+
+.method-item .theme-code-block {
+  margin-bottom: 0;
+}
+
+.method-item code {
+  background: white;
+}
+
+[data-theme='dark'] .method-panel {
+  border: 1px solid #373C46;
+}
+
+[data-theme='dark'] .method-panel-full {
+  border: 1px solid #373C46;
+}
+
+[data-theme='dark'] .method-item code {
+  background: #1C202D;
+}

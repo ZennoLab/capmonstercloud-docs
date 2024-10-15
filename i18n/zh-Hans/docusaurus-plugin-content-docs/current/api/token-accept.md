@@ -60,6 +60,6 @@ sidebar_position: 7
 
 ## **此参数适用于哪些类型的验证码？**
 
-- [ReCaptchaV2](../captchas/no-captcha-task.md)
-- [ReCaptchaV3](../captchas/recaptcha-v3-task.md)
-- [HCaptcha](../captchas/hcaptcha-task.md)
+- [ReCaptchaV2](../captchas/no-captcha-task.mdx)
+- [ReCaptchaV3](../captchas/recaptcha-v3-task.mdx)
+- [HCaptcha](../captchas/hcaptcha-task.mdx)

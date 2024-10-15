@@ -15,7 +15,7 @@ sidebar_label: Расширение для браузера Firefox
 1. Откройте [Интернет-магазин Firefox](https://addons.mozilla.org/ru/firefox/addon/capmonster-cloud/).
 2. Нажмите **Добавить в Firefox**.
 3. Подтвердите добавление расширения, нажав кнопку "Добавить" в модальном окне.
-   ![](modal.png)
+   ![](./images/extension-main-firefox/modal.png)
 
 Чтобы начать работу с расширением, нажмите на его значок справа от адресной строки. Переходите к [настройкам](#настройки).
 
@@ -27,18 +27,18 @@ sidebar_label: Расширение для браузера Firefox
 1. Скачайте [архив с расширением](https://drive.google.com/file/d/1VWGD_Am74e7-7Uz4V_N13Yqd5Lnqv_GU/view?usp=drive_link).
 
 1. Откройте браузер Firefox и перейдите к работе с расширениями:
-   ![](extension-menu.png)
+   ![](./images/extension-main-firefox/extension-menu.png)
    
 1. Нажмите кнопку шестеренки, в открывшемся выпадающем списке выберите пункт "Установить дополнение из файла…"
-   ![](extension-installation.png)
+   ![](./images/extension-main-firefox/extension-installation.png)
    
 1. Выберите скачанный архив с расширением.
 
 1. После загрузки расширения перейдите в "Управление расширениями" и нажмите на установленное расширение. 
-   ![](extension1.png)
+   ![](./images/extension-main-firefox/extension1.png)
    
 1. Перейдите во вкладку "Разрешения" и убедитесь, что все разрешения выданы.
-   ![](extension2.png)
+   ![](./images/extension-main-firefox/extension2.png)
 </details>
 
 <details>
@@ -53,20 +53,20 @@ sidebar_label: Расширение для браузера Firefox
     <summary>Как закрепить расширение</summary>
 
 По умолчанию вновь установленное расширение автоматически закрепляется на панели браузера. 
-   ![](extension-panel.png)
+   ![](./images/extension-main-firefox/extension-panel.png)
 </details>
 
 После активации Вы увидите перед собой такое окно:
 
-![](ext.screen.ruf.png) 
+![](./images/extension-main-firefox/ext.screen.ruf.png) 
 ### <a name="id-расширениедлябраузера-apiключ"></a>**API ключ**
 Введите API ключ в соответствующее поле(1), нажмите кнопку сохранить(2). Если Вы ввели правильный ключ, то чуть ниже отобразится Ваш баланс(3)
 
-![](Aspose.Words.d14847ca-5ce8-4c9f-8081-1ec99b44a6b3.011.png) 
+![](./images/extension-main-firefox/Aspose.Words.d14847ca-5ce8-4c9f-8081-1ec99b44a6b3.011.png) 
 ### <a name="id-расширениедлябраузера-автоматическоерешениекапч"></a>**Автоматическое решение капч**
 Здесь Вы можете выбрать те типы капч, которые расширение будет распознавать автоматически
 
-![](extension.examplef.png) 
+![](./images/extension-main-firefox/extension.examplef.png) 
 
 :::info !
 
@@ -76,7 +76,7 @@ sidebar_label: Расширение для браузера Firefox
 ### <a name="id-расширениедлябраузера-повторнорешатькапчивслучаеошибки"></a>**Повторно решать капчи в случае ошибки**
 Если с первой попытки не удалось решить капчу, то расширение будет отправлять повторные задание, пока капча не будет решена, либо пока не будет достигнут лимит, указанный в данной настройке.
 ### <a name="id-расширениедлябраузера-прокси"></a>**Прокси**
-![](Aspose.Words.d14847ca-5ce8-4c9f-8081-1ec99b44a6b3.013.png) 
+![](./images/extension-main-firefox/Aspose.Words.d14847ca-5ce8-4c9f-8081-1ec99b44a6b3.013.png) 
 
 Здесь можно указать прокси, который будет отправлен вместе с задачей на распознавание.
 
@@ -86,7 +86,7 @@ sidebar_label: Расширение для браузера Firefox
 
 После включения данной опции появится поле для ввода сайтов:
 
-![](Aspose.Words.d14847ca-5ce8-4c9f-8081-1ec99b44a6b3.014.png) 
+![](./images/extension-main-firefox/Aspose.Words.d14847ca-5ce8-4c9f-8081-1ec99b44a6b3.014.png) 
 
 Домены нужно указывать вместе с протоколом (https:// или http://)
 Можно использовать маски поиска:

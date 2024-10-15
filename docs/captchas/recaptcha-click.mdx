@@ -1,0 +1,197 @@
+﻿---
+sidebar_position: 8
+sidebar_label: ComplexImageTask Recaptcha
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+
+# ComplexImageTask Recaptcha
+Объект содержит данные о задаче на решение ReCaptcha2 от Google.
+
+## Параметры запроса
+<TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="bordered-panel">
+    <ParamItem title="type" required type="string" />
+    **ComplexImageTask**
+
+    ---
+
+    <ParamItem title="class" required type="string" />
+    **recaptcha**
+
+    ---
+
+    <ParamItem title="imageUrls" required="required (если не заполнено imagesBase64)" type="array" />
+    Цельное изображение 4x4, [3x3](https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg) или новой части капчи 1x1 (в массиве).
+    Пример: [“[https://i.postimg.cc/yYjg75Kv/img1.jpg](https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg)”]\
+
+    ---
+
+    <ParamItem title="imagesBase64" required="required (если не заполнено imageUrls)" type="array" />
+    Цельное изображение 4x4, [3x3](https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg) или новой части капчи 1x1 в формате base64 (в массиве).
+    Пример: [ “/9j/4AAQSkZJRgABAQEAAAAAAAD…”]
+
+    ---
+
+    <ParamItem title="metadata.Grid" required type="string" />
+    Размер сетки с изображениями.
+    Возможные значения: 4x4, 3x3, 1x1
+
+    ---
+
+    <ParamItem title="metadata.TaskDefinition" required="required (если не заполнено metadata.Task)" type="string" />    
+	<p>Техническое значение, определяющее тип задания</p>
+	<p>**Как получить TaskDefinition**</p>
+	<p>Данные можно найти в ответах на запросы `/recaptcha/{recaptchaApi}/reload` или `/recaptcha/{recaptchaApi}/userverify`, где recaptchaApi - это "enterprise" или "api2" в зависимости от типа Recaptcha. В ответе лежит json, в котором можно взять список TaskDefinition-ов для подгруженных капч.</p>
+
+    ---
+
+    <ParamItem title="metadata.Task" required="required (если не заполнено metadata.TaskDefinition)" type="string" />
+    Возможные значения: `Click on traffic lights` и другие <br />
+    Текст задания (<u>на английском</u>).
+
+    ---
+
+    <ParamItem title="userAgent" type="string" />
+    User-Agent браузера, используемый при загрузке изображений, если были переданы ссылки в imageUrls. Необходимо использовать подпись современного браузера, иначе Google будет возвращать ошибку, требуя обновить браузер.
+
+    ---
+
+    <ParamItem title="websiteURL" type="string" />
+    Адрес страницы, на которой решается капча.
+  </TabItem>
+
+### **Описание параметров**
+
+**imageUrls**: ссылки на изображения.
+
+**imagesBase64**: изображения в формате Base64.
+
+**metadata.Grid**: дополнительные метаданные, связанные с размерами сетки изображений.
+
+**metadata.TaskDefinition**: идентификатор/тип описания задания, например: `/m/015qff` означает “Click on traffic lights”. 
+
+![](./images/recaptcha-click/taskdefinition.png)
+
+**metadata.Task**: дополнительные метаданные, связанные с задачей.
+
+**userAgent**: информация о пользовательском агенте. Актуальный userAgent: userAgentPlaceholder
+
+**websiteURL**: адрес веб-страницы с капчей. 
+
+## Метод создания задачи
+
+<TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel">
+<MethodItem>
+  ```http
+  https://api.capmonster.cloud/createTask
+  ```
+</MethodItem>
+<MethodDescription>
+**Запрос**
+```json
+{
+  "clientKey":"API_KEY",
+  "task": {
+    "type": "ComplexImageTask",
+    "class": "recaptcha",
+    "imageUrls":[ "https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg" ],
+    "metadata": {
+      "Task": "Click on traffic lights",
+      "Grid": "3x3",
+      "TaskDefinition": "/m/015qff"
+    },
+    "userAgent": "userAgentPlaceholder",
+    "websiteUrl": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle"
+  }
+}
+```
+**Ответ**
+```json
+{
+  "errorId":0,
+  "taskId":407533072
+}
+```
+
+</MethodDescription>
+</TabItem>
+
+
+## Метод получения результата задачи
+Используйте метод [getTaskResult](../api/methods/get-task-result.md) чтобы получить решение капчи. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 300мс до 6 с.
+
+<TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel-full">
+    <MethodItem>
+```http
+https://api.capmonster.cloud/getTaskResult
+```
+    </MethodItem>
+    <MethodDescription>
+**Запрос**
+```json
+{
+  "clientKey":"API_KEY",
+  "taskId": 407533072
+}
+```
+**Ответ**
+```json
+{
+  "errorId":0,
+  "status":"ready",
+  "solution": {
+    "answer": [ false, false, false, false, true, false, false, false, false ]
+  }
+}
+```
+  </MethodDescription>
+  </TabItem>
+
+<br />
+
+|**Свойство**|**Тип**|**Описание**|
+| :- | :- | :- |
+|answer|Array|Список в булевыми значениями, true - означает, что нужно произвести клик на соответствующее этой позиции изображение|
+
+## **Ценообразование**: 
+
+||**Наименование**|**Стоимость за 1000 картинок, $**|**Стоимость за 1000 новых динамических картинок, $**|
+| :-: | :-: | :-: | :-: |
+|1|<p>reCAPTCHA 2 (3\*3)</p><p>![](./images/recaptcha-click/Aspose.Words.3eba36bc-cab6-486e-9e8f-1e38b225e806.001.png)</p>|0,2|0,04 |
+|2|<p>reCAPTCHA 2 (4\*4)</p><p>![](./images/recaptcha-click/Aspose.Words.3eba36bc-cab6-486e-9e8f-1e38b225e806.002.png)</p>|0,1|неприменимо |
+
+
+## Используйте библиотеку SDK
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, ComplexImageRecaptchaRequest } from '@zennolab_com/capmonstercloud-client';
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+  console.log(await cmcClient.getBalance());
+
+  const complexImageRecaptchaRequest = new ComplexImageRecaptchaRequest({
+    imageUrls: ['https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg'],
+    metaData: {
+      Grid: '3x3',
+      Task: 'Please click each image containing a mountain',
+      TaskDefinition: '/m/015qff',
+    },
+    websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle',
+  });
+
+  console.log(await cmcClient.Solve(complexImageRecaptchaRequest));
+});
+```
+  </TabItem>
+  
+</Tabs>
