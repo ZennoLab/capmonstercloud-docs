@@ -15,7 +15,7 @@ A extensão funciona no navegador Google Chrome.
 1. Abra a [Chrome Web Store](https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=en).
 2. Clique em **Instalar**.
 
-Para começar a usar a extensão, clique em seu ícone à direita da barra de endereços. Vá para as [configurações](extension-main.md#settings).
+Para começar a usar a extensão, clique em seu ícone à direita da barra de endereços. Vá para as [configurações](extension-main.md#configurações).
 
 *Se por algum motivo não for possível instalar a extensão pela Chrome Web Store, use as instruções para instalação manual.*
 
