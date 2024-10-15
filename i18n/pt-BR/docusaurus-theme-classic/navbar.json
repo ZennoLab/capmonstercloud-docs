@@ -1,0 +1,22 @@
+{
+  "logo.alt": {
+    "message": "My Site Logo",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.Документация": {
+    "message": "Documentos",
+    "description": "Navbar item with label Документация"
+  },
+  "item.label.Пресс релизы": {
+    "message": "Comunicados à imprensa",
+    "description": "Navbar item with label press releases"
+  },
+  "item.label.Расширение": {
+    "message": "Extensão",
+    "description": "Navbar item with label Расширение"
+  },
+  "item.label.Личный кабинет": {
+    "message": "Painel de controle",
+    "description": "Navbar item with label Личный кабинет"
+  }
+}
