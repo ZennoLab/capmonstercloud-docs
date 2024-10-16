@@ -54,7 +54,7 @@ This task will be performed using our proxy servers. Use the received cookies in
 
     <ParamItem title="userAgent" type="string" />
     Browser User-Agent. <br /> 
-	**Pass only the actual UA from Windows OS. Now this is**: userAgentPlaceholder
+	**Pass only the actual UA from Windows OS. Now this is**: Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/21F90 Safari/604.1
 
 </TabItem>
 
@@ -76,7 +76,7 @@ This task will be performed using our proxy servers. Use the received cookies in
 				"type": "CustomTask",
 				"class": "DataDome",
 				"websiteURL": "https://www.leboncoin.fr/",
-				"userAgent": "MuserAgentPlaceholder",
+				"userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/21F90 Safari/604.1",
 				"metadata": {
 					"htmlPageBase64": "PGh0bWw+PGhlYWQ+PHRpdGxlPmJs...PC9odG1sPg==",
 					"datadomeCookie": "datadome=VYUWrgJ9ap4zmXq8Mgbp...64emvUPeON45z"
@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const dataDomeRequest = new DataDomeRequest({
     websiteURL: 'site.com',
-    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/21F90 Safari/604.1',
     metadata: {
       captchaUrl: 'https://geo.captcha-delivery.com/captcha/?initialCid=12434324',
       datadomeCookie: '',
