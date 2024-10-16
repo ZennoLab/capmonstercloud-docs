@@ -1,0 +1,41 @@
+.wrapBlock {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.wrapBlockImage {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.mainTitle, .successRateText {
+  font-size: 16px;
+  line-height: 23px;
+  color: #14193C;
+}
+
+.priceWrap {
+  display: flex;
+  align-items: center;
+}
+
+.successRateBlock {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.titleWrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.priceText {
+  font-weight: 600;
+  color: #14193C;
+}
+
+.subText { 
+  color: #7D828C;
+}

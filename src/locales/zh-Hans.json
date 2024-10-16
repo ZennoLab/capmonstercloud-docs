@@ -17,5 +17,9 @@
   "metaTitle": "CapMonster Cloud 文档 | 如何绕过任何类型的验证码",
   "metaDescription": "如何通过 CapMonster Cloud 绕过 reCAPTCHA、hCaptcha 和其他类型的验证码。",
   "tokenProblems": "获取令牌时遇到问题吗",
-  "callSupport": "联系支持"
+  "callSupport": "联系支持",
+  "hundredTokens": "1000 tokens",
+  "hundredImages": "1000 images",
+  "fullPriceText": "View full price",
+  "dynamicHundredImages": "1000张动态图片"
 }
