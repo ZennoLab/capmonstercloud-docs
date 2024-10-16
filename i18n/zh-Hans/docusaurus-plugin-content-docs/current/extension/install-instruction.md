@@ -1,5 +1,5 @@
 ﻿---
-sidebar_position: 3
+sidebar_position: 4
 sidebar_label: 在ProjectMaker浏览器中安装扩展的说明
 ---
 
