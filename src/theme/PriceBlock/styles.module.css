@@ -39,3 +39,15 @@
 .subText { 
   color: #7D828C;
 }
+
+[data-theme='dark'] .mainTitle, [data-theme='dark'] .successRateText{
+  color: #D2D7E1
+}
+
+[data-theme='dark'] .priceText {
+  color: #D2D7E1;
+}
+
+[data-theme='dark'] .subText {
+  color: #828791;
+}

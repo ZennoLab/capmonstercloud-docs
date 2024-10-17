@@ -10,31 +10,13 @@
   padding-bottom: 16px;
 }
 
-.mainTitle, .successRateText {
-  font-size: 16px;
-  line-height: 23px;
-  color: #14193C;
+[data-theme='dark'] .wrapBlock{
+  box-shadow: none;
+  background: #282A36;
 }
 
-.successRateBlock {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.titleWrap {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.priceText {
-  font-weight: 600;
-  color: #14193C;
-}
-
-.subText { 
-  color: #7D828C;
+[data-theme='dark'] .wrapBlock > *:not(:last-child) {
+  border-bottom: 1px solid #373C46;
 }
 
 .link {
