@@ -13,7 +13,7 @@ export default function Prices() {
   const priceLink = `https://capmonster.cloud/prices?culture=${localesMappings[currentLocale] || localesMappings.en}`
 
   return (
-    <section className={styles.pricesWrap}>
+    <section className={styles.pricesWrap} id="price">
       <div className="container">
         <div className={styles.mainTitle}>{priceTitle}</div>
         <div className={`${styles.subTitle} priceSub`}>{priceSubTitle}</div>
