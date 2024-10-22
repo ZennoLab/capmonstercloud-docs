@@ -1,79 +1,161 @@
 ﻿---
-sidebar_position: 14
+sidebar_position: 11
 sidebar_label: DataDome
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+
+
 # DataDome
-
 这种验证码基本上要求用户通过移动滑块来解决拼图以进行确认。
-
 ![](./images/datadome/datadome.png)
 
 :::warning **注意！**
 此任务将使用我们的代理服务器执行。请在您的项目中使用收到的 Cookie 自动通过验证码。
 :::
 
-## **对象结构**
 
-|**参数**|**类型**|**必需**|**值**|
-| :-: | :-: | :-: | :- | 
-|type|String|是|**CustomTask**|
-|class|String|是|**DataDome**|
-|websiteURL|String|是|解决验证码的主页面地址。|
-|metadata.htmlPageBase64|String|是（如果 metadata.captchaUrl 未填写）|包含验证码附加数据的对象：`"htmlPageBase64": "..."` - 一个 base64 编码的 HTML 页面，在对目标站点的 GET 请求响应中带有 403 状态码和 Set-Cookie: datadome="..." 头。|
-|metadata.captchaUrl|String|是（如果 metadata.htmlPageBase64 未填写）|`"captchaUrl"` - 验证码链接。通常看起来像这样：`"https://geo.captcha-delivery.com/captcha/?initialCid=..."`。|
-|metadata.datadomeCookie|String|是|您的 datadome Cookie。您可以在页面上使用 "document.cookie" 获取，或在 Set-Cookie 请求头中获取："datadome=..."（参见示例请求 /createTask）|
-|userAgent|String|否|浏览器的 User-Agent。<br /> **仅传递来自 Windows 操作系统的实际 UA。现在是**： `Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/21F90 Safari/604.1`|
+## 请求参数
+<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (without proxy)" default className="bordered-panel">
+    <ParamItem title="type" required type="string" />
+    **CustomTask**
 
-## **真实网站上的请求示例**
+    ---
 
-**地址：**
-```http
-https://api.capmonster.cloud/createTask
-```
+    <ParamItem title="class" required type="string" />
+    **DataDome**
 
-```json
-{
-    "clientKey": "API_KEY",
-    "task": {
-        "type": "CustomTask",
-        "class": "DataDome",
-        "websiteURL": "https://www.leboncoin.fr/",
-        "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/21F90 Safari/604.1",
-        "metadata": {
-            "htmlPageBase64": "PGh0bWw+PGhlYWQ+PHRpdGxlPmJs...PC9odG1sPg==",
-            "datadomeCookie": "datadome=VYUWrgJ9ap4zmXq8Mgbp...64emvUPeON45z"
-        }
-    }
-}
-```
+    ---
 
-**响应示例**
+    <ParamItem title="websiteURL" required type="string" />
+    解决验证码的主页面地址。
 
-```json
-{
-    "errorId":0,
-    "taskId":407533072
-}
-```
+    ---
 
-## **获取结果**
+    <ParamItem title="metadata.htmlPageBase64" required="required (if metadata.captchaUrl is not filled)" type="string" />
+    包含验证码附加数据的对象：`"htmlPageBase64": "..."` - 一个 base64 编码的 HTML 页面，在对目标站点的 GET 请求响应中带有 403 状态码和 Set-Cookie: datadome="..." 头。
+
+    ---
+
+    <ParamItem title="metadata.captchaUrl" required="required (if metadata.htmlPageBase64 is not filled)" type="string" />
+    `"captchaUrl"` - 验证码链接。通常看起来像这样：`"https://geo.captcha-delivery.com/captcha/?initialCid=..."`。
+
+    ---
+
+    <ParamItem title="metadata.datadomeCookie" required type="string" />
+    您的 datadome Cookie。您可以在页面上使用 "document.cookie" 获取，或在 Set-Cookie 请求头中获取："datadome=..."（参见示例请求 /createTask）
+
+    ---
+
+    <ParamItem title="userAgent" type="string" />
+    User-Agent。<br /> **仅传递来自 Windows 操作系统的实际 UA。现在是**： userAgentPlaceholder
+
+</TabItem>
+
+
+## 创建任务方法 
+
+<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**要求**
+		```json
+		{
+			"clientKey": "API_KEY",
+			"task": {
+				"type": "CustomTask",
+				"class": "DataDome",
+				"websiteURL": "https://www.leboncoin.fr/",
+				"userAgent": "MuserAgentPlaceholder",
+				"metadata": {
+					"htmlPageBase64": "PGh0bWw+PGhlYWQ+PHRpdGxlPmJs...PC9odG1sPg==",
+					"datadomeCookie": "datadome=VYUWrgJ9ap4zmXq8Mgbp...64emvUPeON45z"
+				}
+			}
+		}
+		```
+		**回应**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
+</TabItem>
+
+
+## 获取任务结果方法
 使用 [getTaskResult](../api/methods/get-task-result.md) 方法获取 DataDome 的解决方案。
 
-**响应示例：**
+<TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**要求**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**回应**
+		```json
+		{
+			"errorId":0,
+			"status":"ready",
+			"solution": {
+				"domains": {
+					"site.com": {
+						"cookies": {
+							"datadome": "t355hfeuUFbsWpoMzXyIWL_ewfwgre25345323rwgregeFEkG5iju9esKVfWMzuLAjcfCIJUIHU7332At1l~HY78g782hidwfeO4K2ZP_CFHYUFEgygfiYGfGYEUfgyefWrXG6_3sy; Max-Age=31536000; Domain=.site.com; Path=/; Secure; SameSite=Lax"
+						}
+					}
+				}
+			}
+		}
+		```
+	</MethodDescription>
+</TabItem>
 
-```json
-{
-    "errorId":0,
-    "status":"ready",
-    "solution": {
-        "domains": {
-            "site.com": {
-                "cookies": {
-                    "datadome": "t355hfeuUFbsWpoMzXyIWL_ewfwgre25345323rwgregeFEkG5iju9esKVfWMzuLAjcfCIJUIHU7332At1l~HY78g782hidwfeO4K2ZP_CFHYUFEgygfiYGfGYEUfgyefWrXG6_3sy; Max-Age=31536000; Domain=.site.com; Path=/; Secure; SameSite=Lax"
-                }
-            }
-        }
-    }
-}
+
+## 使用 SDK 库
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, DataDomeRequest } from '@zennolab_com/capmonstercloud-client';
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+  console.log(await cmcClient.getBalance());
+
+  const dataDomeRequest = new DataDomeRequest({
+    websiteURL: 'site.com',
+    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    metadata: {
+      captchaUrl: 'https://geo.captcha-delivery.com/captcha/?initialCid=12434324',
+      datadomeCookie: '',
+    },
+  });
+
+  console.log(await cmcClient.Solve(dataDomeRequest));
+});
 ```
+  </TabItem>
+  
+</Tabs>

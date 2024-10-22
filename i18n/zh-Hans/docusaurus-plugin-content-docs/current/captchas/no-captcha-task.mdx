@@ -3,6 +3,13 @@ sidebar_position: 0
 sidebar_label: RecaptchaV2Task
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+
+
 # RecaptchaV2Task
 该对象包含 Google ReCaptcha2 解决任务的数据。为确保解决此类验证码的普遍性，您需要使用在自动填写目标网站表单时使用的所有数据，包括代理、浏览器用户代理和 cookies。这将有助于避免在 Google 更改其验证码代码时出现任何问题。
 
@@ -12,85 +19,247 @@ sidebar_label: RecaptchaV2Task
 如果代理由 IP 授权，请确保将 **116.203.55.208** 添加到白名单中。
 :::
 
-## **对象结构**
+## 对象结构
+<Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
+  <TabItem value="proxyless" label="RecaptchaV2TaskProxyless (无代理)" default className="bordered-panel">
+    <ParamItem title="type" required type="string" />
+    **RecaptchaV2TaskProxyless**
 
-|**参数**|**类型**|**必需**|**是**|
-| :- | :- | :- | :- |
-|type|String|是|**RecaptchaV2TaskProxyless**或**RecaptchaV2Task（使用代理时）**。|
-|websiteURL|String|是|带有验证码的网页地址。|
-|websiteKey|String|是|ReCaptcha 网站密钥。<br />`<div class="g-recaptcha" data-sitekey="THIS_ONE"></div>`|
-|recaptchaDataSValue|String|否|某些自定义实现可能包含 ReCaptcha2 div 中的额外 "data-s" 参数，实际上是一次性令牌，每次解决 ReCaptcha2 都必须获取。<br />`<div class="g-recaptcha" data-sitekey="some sitekey" data-s="THIS_ONE"></div>`|
-|proxyType|String|是（对于**RecaptchaV2Task**）|**http** - 普通的 http/https 代理；<br />**https** - 仅在 "http" 不起作用时尝试（某些自定义代理服务器要求）；<br />**socks4** - socks4 代理；<br />**socks5** - socks5 代理。|
-|proxyAddress|String|是（对于**RecaptchaV2Task**）|<p>代理 IP 地址 IPv4/IPv6。不允许：</p><p> - 使用主机名；</p><p> - 使用透明代理（其中客户端 IP 可见）；</p><p>- 使用来自本地网络的代理。</p>|
-|proxyPort|Integer|是（对于**RecaptchaV2Task**）|代理端口。|
-|proxyLogin|String|否|代理登录。|
-|proxyPassword|String|否|代理密码。|
-|userAgent|String|否|用于仿真的浏览器用户代理。必须使用现代浏览器的签名，否则 Google 将要求您 "更新您的浏览器"。|
-|cookies|String|否|<p>额外的 Cookie，我们在与目标页面或谷歌的交互过程中必须使用</p><p>**格式**：cookiename1=cookievalue1; cookiename2=cookievalue2</p>|
-|isInvisible|bool|否|"true" 如果验证码是隐形的，即没有确认复选框，而是有一个隐藏字段。如果怀疑是机器人，则进行额外检查。|
+     ---
 
-## **请求示例**
+    <ParamItem title="websiteURL" required type="string" />
+    带有验证码的网页地址。
 
-**地址**： 
-```http
-https://api.capmonster.cloud/createTask
-```
+     ---
 
-### RecaptchaV2Task
-```json
-{
-  "clientKey":"API_KEY",
-  "task": {
-    "type":"RecaptchaV2Task",
-    "websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
-    "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
-    "proxyType":"http",
-    "proxyAddress":"8.8.8.8",
-    "proxyPort":8080,
-    "proxyLogin":"proxyLoginHere",
-    "proxyPassword":"proxyPasswordHere",
-    "userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
-  }
-}
-```
+    <ParamItem title="websiteKey" required type="string" />
+    ReCaptcha 网站密钥。<br />`<div class="g-recaptcha" data-sitekey="THIS_ONE"></div>`
 
-### RecaptchaV2TaskProxyless
-```json
-{
-  "clientKey":"API_KEY",
-  "task": {
-    "type":"RecaptchaV2TaskProxyless",
-    "websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
-    "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"
-  }
-}
-```
+     ---
+
+    <ParamItem title="recaptchaDataSValue" type="string" />
+    某些自定义实现可能包含 ReCaptcha2 div 中的额外 "data-s" 参数，实际上是一次性令牌，每次解决 ReCaptcha2 都必须获取。<br />`<div class="g-recaptcha" data-sitekey="some sitekey" data-s="THIS_ONE"></div>`
+
+     ---
+
+    <ParamItem title="userAgent" type="string" />
+    用于仿真的浏览器用户代理。必须使用现代浏览器的签名，否则 Google 将要求您 "更新您的浏览器"。
+
+     ---
+
+    <ParamItem title="cookies" type="string" />
+    <p>额外的 Cookie，我们在与目标页面或谷歌的交互过程中必须使用</p><p>**格式**：cookiename1=cookievalue1; cookiename2=cookievalue2</p>
+
+     ---
+
+    <ParamItem title="isInvisible" type="bool" />
+    "true" 如果验证码是隐形的，即没有确认复选框，而是有一个隐藏字段。如果怀疑是机器人，则进行额外检查。
+
+  </TabItem>
+  <TabItem value="proxy" label="RecaptchaV2Task (使用代理)" className="bordered-panel">
+    <ParamItem title="type" required type="string" />
+    **RecaptchaV2Task**
+
+     ---
+
+    <ParamItem title="websiteURL" required type="string" />
+    带有验证码的网页地址。
+
+     ---
+
+    <ParamItem title="websiteKey" required type="string" />
+    ReCaptcha 网站密钥。<br />`<div class="g-recaptcha" data-sitekey="THIS_ONE"></div>`
+
+     ---
+
+    <ParamItem title="recaptchaDataSValue" type="string" />
+    某些自定义实现可能包含 ReCaptcha2 div 中的额外 "data-s" 参数，实际上是一次性令牌，每次解决 ReCaptcha2 都必须获取。<br />`<div class="g-recaptcha" data-sitekey="some sitekey" data-s="THIS_ONE"></div>`
+
+     ---
+
+    <ParamItem title="userAgent" type="string" />
+    用于仿真的浏览器用户代理。必须使用现代浏览器的签名，否则 Google 将要求您 "更新您的浏览器"。
+
+     ---
+
+    <ParamItem title="cookies" type="string" />
+    <p>额外的 Cookie，我们在与目标页面或谷歌的交互过程中必须使用</p><p>**格式**：cookiename1=cookievalue1; cookiename2=cookievalue2</p>
+
+     ---
+
+    <ParamItem title="isInvisible" type="bool" />
+    "true" 如果验证码是隐形的，即没有确认复选框，而是有一个隐藏字段。如果怀疑是机器人，则进行额外检查。
+
+     ---
+
+    <ParamItem title="proxyType" required type="string" />
+    **http** - 普通的 http/https 代理；<br />**https** - 仅在 "http" 不起作用时尝试（某些自定义代理服务器要求）；<br />**socks4** - socks4 代理；<br />**socks5** - socks5 代理。
+
+     ---
+
+    <ParamItem title="proxyAddress" required type="string" />
+    <p>
+	  代理 IP 地址 IPv4/IPv6。不允许：
+		- 使用主机名；
+		- 使用透明代理（其中客户端 IP 可见）；
+		- 使用来自本地网络的代理。
+	</p>
+
+     ---
+
+    <ParamItem title="proxyPort" required type="integer" />
+    代理端口。
+
+     ---
+
+    <ParamItem title="proxyLogin" type="string" />
+    代理登录。
+
+     ---
+
+    <ParamItem title="proxyPassword" type="string" />
+    代理密码。
+
+  </TabItem>  
+</Tabs>
 
 
-**响应示例**
+## 创建任务方法
 
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="proxyless" label="RecaptchaV2TaskProxyless (无代理)" default className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+	<MethodDescription>
+		**要求**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "task": {
+			"type":"RecaptchaV2TaskProxyless",
+			"websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
+			"websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"
+		  }
+		}
+		```
+		**回应**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
+  </TabItem>
+  <TabItem value="proxy" label="RecaptchaV2Task (使用代理)" className="method-panel">
+	<MethodItem>
+	  ```http
+	  https://api.capmonster.cloud/createTask
+	  ```
+	</MethodItem>
+	<MethodDescription>
+		**要求**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "task": {
+			"type":"RecaptchaV2Task",
+			"websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
+			"websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
+			"proxyType":"http",
+			"proxyAddress":"8.8.8.8",
+			"proxyPort":8080,
+			"proxyLogin":"proxyLoginHere",
+			"proxyPassword":"proxyPasswordHere",
+			"userAgent":"userAgentPlaceholder"
+		  }
+		}
+		```
+		**回应**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
+  </TabItem>
+</Tabs>
 
-## **获取结果**
+
+## 获取任务结果方法
 使用[getTaskResult](../api/methods/get-task-result.md)方法请求 ReCaptcha2 的答案。您将在服务工作负载下的10到80秒内收到响应。
+
+<TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
+    <MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+    </MethodItem>
+    <MethodDescription>
+		**要求**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**回应**
+		```json
+		{
+		  "errorId":0,
+		  "status":"ready",
+		  "solution": {
+			"gRecaptchaResponse":"3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
+		  }
+		}
+		```
+	</MethodDescription>
+</TabItem>
+
+<br />
 
 |**属性**|**类型**|**描述**|
 | :- | :- | :- |
 |gRecaptchaResponse|String|应插入到 Recaptcha2 提交表单中的哈希值，格式如 `<textarea id="g-recaptcha-response" ..></textarea>`。长度为500到2190字节。|
 
-**示例：**
 
-```json
-{
-  "errorId":0,
-  "status":"ready",
-  "solution": {
-    "gRecaptchaResponse":"3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
-  }
-}
+## 使用 SDK 库
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, RecaptchaV2ProxylessRequest, /*RecaptchaV2Request*/ } from '@zennolab_com/capmonstercloud-client';
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+  console.log(await cmcClient.getBalance());
+
+  const recaptchaV2Request = new RecaptchaV2ProxylessRequest({
+    websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high',
+    websiteKey: '6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd',
+  });
+
+//  const recaptchaV2Request = new RecaptchaV2Request({
+//     websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high',
+//     websiteKey: '6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd',
+//     proxyType: 'http',
+//     proxyAddress: '8.8.8.8',
+//     proxyPort: 8080,
+//     proxyLogin: 'proxyLoginHere',
+//     proxyPassword: 'proxyPasswordHere',
+//     userAgent: 'userAgentPlaceholder',
+//   });
+
+  console.log(await cmcClient.Solve(recaptchaV2Request));
+});
 ```
+  </TabItem>
+  
+</Tabs>
