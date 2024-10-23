@@ -3,23 +3,59 @@ sidebar_position: 10
 sidebar_label: ImageToTextTask
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+
+
 # ImageToTextTask
 
 这是常规验证码，即包含文本的图片，需要输入相应的文本。
 
 ![](./images/image-to-text/text-captcha-2.png)
 
-## **对象结构**
 
-|**参数**|**类型**|**必填**|**可能的值**|**描述**|
-| :-: | :-: | :-: | :-: | :-: |
-|type|String|是|**ImageToTextTask**|定义任务类型。|
-|body|String|是|-|以base64编码的文件主体。确保发送时没有换行符。|
-|capMonsterModule|String|否|yandex, special 等|识别模块的名称，例如“yandex”。可以通过[这里](../api/module-name.md)找到模块名称及所有可用模块的列表。|
-|recognizingThreshold|Int|否|0-100|验证码识别阈值，可取值范围为0到100。例如，如果将 recognizingThreshold 设置为90，并且任务以80的置信度解决，则不会收费。在这种情况下，用户会收到 ERROR\_CAPTCHA\_UNSOLVABLE 的响应。|
-|case|Boolean|否|true, false|true - 如果验证码区分大小写。|
-|numeric|Int|否|0, 1|1 - 如果验证码仅包含数字。|
-|math|Boolean|否|true, false|false — 未定义；<br />true — 如果验证码需要数学操作（例如：验证码 2 + 6 = 将返回值 8）。|
+## 请求参数
+<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (without proxy)" default className="bordered-panel">
+    <ParamItem title="type" required type="string" />
+    **ImageToTextTask**
+
+    ---
+
+    <ParamItem title="body" required type="string" />
+    以base64编码的文件主体。确保发送时没有换行符。
+
+    ---
+
+    <ParamItem title="capMonsterModule" type="string" />
+    识别模块的名称，例如“yandex”。可以通过[这里](../api/module-name.md)找到模块名称及所有可用模块的列表。 <br />
+    示例: yandex, special 及其他
+
+    ---
+
+    <ParamItem title="recognizingThreshold" type="integer" />
+    验证码识别阈值，可取值范围为0到100。例如，如果将 recognizingThreshold 设置为90，并且任务以80的置信度解决，则不会收费。在这种情况下，用户会收到 ERROR_CAPTCHA_UNSOLVABLE 的响应。
+
+    ---
+
+    <ParamItem title="case" type="boolean" />
+    true - 如果验证码区分大小写。
+
+    ---
+
+    <ParamItem title="numeric" type="integer" />
+    1 - 如果验证码仅包含数字。 <br />
+    可能的值: 0, 1
+
+    ---
+
+    <ParamItem title="math" type="boolean" />
+    false — 未定义；<br />true — 如果验证码需要数学操作（例如：验证码 2 + 6 = 将返回值 8）。
+</TabItem>
+
+<br />
 
 Base64 是一种数据编码方法，允许将二进制数据表示为文本。以下是使用*开发者工具*中的控制台获取验证码图像的 base64 格式的示例：
 
@@ -49,52 +85,99 @@ loadAndEncodeCaptchaToBase64(captchaUrl);
 ```
 
 
-## **请求示例**
+## 创建任务方法 
 
-:::info 方法
-```http
-https://api.capmonster.cloud/createTask
-```
-:::
-```json
-{
-  "clientKey":"API_KEY",
-  "task": {
-    "type":"ImageToTextTask",
-    "body":"BASE64_BODY_HERE!"
-  }
-}
-```
+<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**要求**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "task": {
+			"type":"ImageToTextTask",
+			"body":"BASE64_BODY_HERE!"
+		  }
+		}
+		```
+		**回应**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
+</TabItem>
 
 
-**响应示例**
-```json
-{
-  "errorId":0,
-  "taskId":53456
-}
-```
-
-## **获取结果**
-:::info 方法
-~~~ http
-https://api.capmonster.cloud/getTaskResult
-~~~
-
-:::
+## 获取任务结果方法
 使用[getTaskResult](../api/methods/get-task-result.md)方法获取验证码的解决方案。根据系统负载，您将在300毫秒到6秒的时间范围内收到答案。
+
+<TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**要求**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**回应**
+		```json
+		{
+		  "errorId":0,
+		  "status":"ready",
+		  "solution": {
+			"text":"answer"
+		  }
+		}
+		```
+	</MethodDescription>
+</TabItem>
+
+<br />
 
 |**属性**|**类型**|**描述**|
 | :-: | :-: | :-: |
 |text|String|验证码答案|
 
-**示例：**
-```http
-{
-  "errorId":0,
-  "status":"ready",
-  "solution": {
-    "text":"answer"
-  }
-}
+
+## 使用 SDK 库
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, ImageToTextRequest } from '@zennolab_com/capmonstercloud-client';
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+  console.log(await cmcClient.getBalance());
+
+  const imageToTextRequest = new ImageToTextRequest({
+    body: 'some base64 body',
+    CapMonsterModule: CapMonsterModules.YandexWave,
+    Case: true,
+    numeric: 1,
+    recognizingThreshold: 65,
+    math: false,
+  });
+
+  console.log(await cmcClient.Solve(imageToTextRequest));
+});
 ```
+  </TabItem>
+  
+</Tabs>

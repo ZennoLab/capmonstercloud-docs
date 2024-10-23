@@ -8,8 +8,17 @@ import TabItem from '@theme/TabItem';
 import ParamItem from '@theme/ParamItem';
 import MethodItem from '@theme/MethodItem';
 import MethodDescription from '@theme/MethodDescription'
+import PriceBlock from '@theme/PriceBlock';
+import PriceBlockWrap from '@theme/PriceBlockWrap';
 
 # ComplexImageTask Recaptcha
+
+<PriceBlockWrap>
+  <PriceBlock title="reCAPTCHA 2 (3x3)" name="recaptcha3x3Image"/>
+  <PriceBlock title="reCAPTCHA 2 (3x3)" name="recaptcha3x3DynamicImage"/>
+  <PriceBlock title="reCAPTCHA 2 (4x4)" name="recaptcha4x4Image"/>
+</PriceBlockWrap>
+
 O objeto contém dados sobre a tarefa para resolver o ReCaptcha2 do Google.
 
 
@@ -158,14 +167,6 @@ https://api.capmonster.cloud/getTaskResult
 |**Propriedade**|**Tipo**|**Descrição**|
 | :- | :- | :- |
 |answer|Array|Lista com valores booleanos, "true" significa que você precisa clicar na imagem correspondente a essa posição.|
-
-## Preços:
-
-||**Nome**|**Custo por 1000 imagens, $**|**Custo por 1000 novas imagens dinâmicas, $**|
-| :-: | :-: | :-: | :-: |
-|1|<p>reCAPTCHA 2 (3\*3)</p><p>![](./images/recaptcha-click/Aspose.Words.3eba36bc-cab6-486e-9e8f-1e38b225e806.001.png)</p><p></p>|0,2|0,04 |
-|2|<p>reCAPTCHA 2 (4\*4)</p><p>![](./images/recaptcha-click/Aspose.Words.3eba36bc-cab6-486e-9e8f-1e38b225e806.002.png)</p>|0,1|não aplicável|
-
 
 ## Usar biblioteca SDK
 

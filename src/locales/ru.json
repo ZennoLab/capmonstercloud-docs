@@ -19,5 +19,9 @@
   "tokenProblems": "Возникают проблемы с получением токена?",
   "callSupport": "Свяжитесь с поддержкой",
   "allCategoriesText": "Все",
-  "emptyUpdatesText": "Пока нет обновлений"
+  "emptyUpdatesText": "Пока нет обновлений",
+  "hundredTokens": "1000 токенов",
+  "hundredImages": "1000 картинок",
+  "fullPriceText": "Посмотреть полный прайс",
+  "dynamicHundredImages": "1000 дин. картинок"
 }

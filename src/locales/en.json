@@ -19,5 +19,9 @@
   "tokenProblems": "Are you experiencing issues obtaining the token?",
   "callSupport": "Contact support",
   "allCategoriesText": "All",
-  "emptyUpdatesText": "No updates yet"
+  "emptyUpdatesText": "No updates yet",
+  "hundredTokens": "1000 tokens",
+  "hundredImages": "1000 images",
+  "fullPriceText": "View full price",
+  "dynamicHundredImages": "1000 dynamic images"
 }
