@@ -19,8 +19,18 @@ export default function Home() {
     toggle.parentElement.style.display = 'none';
   }
 
+  const scrollToHash = () => {
+    if (window.location.hash === '#price') {
+      const priceElement = document.getElementById('price');
+      if (priceElement) {
+        priceElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }
+
   useEffect(() => {
     hideThemeToggle();
+    scrollToHash();
   })
 
   return (
