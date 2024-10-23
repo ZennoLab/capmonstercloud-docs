@@ -383,7 +383,8 @@ a[class*='cardContainer'] {
   border-radius: 10px;
   overflow: hidden;
   object-fit: cover;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
+  width: 100%;
 }
 
 .markdown li {
@@ -480,3 +481,23 @@ a[class*='cardContainer'] {
 [data-theme='dark'] .method-item code {
   background: #1C202D;
 }
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #FFF;
+  border-bottom-color: #7D6EFF;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+0% {
+    transform: rotate(0deg);
+}
+100% {
+    transform: rotate(360deg);
+}
+} 

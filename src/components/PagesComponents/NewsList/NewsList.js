@@ -2,16 +2,20 @@ import React, { useEffect, useState } from 'react';
 import qs from "qs";
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './styles.module.css';
-
-const localeMappings = {
-  'zh-Hans': 'zh'
-}
+import NewsFilter from './NewsFilter';
+import { localeMappings } from './localeMappings';
+import EmptyBoxIcon from './EmptyBoxIcon';
+import getLocaleStrings from '../../../locales/index';
 
 const NewsList = () => {
   const { i18n } = useDocusaurusContext();
   const [news, setNews] = useState([]);
+  const { currentLocale } = i18n;
+  const { emptyUpdatesText } = getLocaleStrings(currentLocale);
+  const [isLoading, setIsLoading] = useState(false)
 
-  const fetchNewsByLang = async (locale) => {
+  const fetchNewsByLang = async (locale, categoryId) => {
+    setIsLoading(true)
     const queryParams = {
       sort: { publishedAt: "desc" },
       locale: localeMappings[locale] || locale,
@@ -19,6 +23,16 @@ const NewsList = () => {
         article: { populate: "*" },
       }
     };
+
+    if (categoryId) {
+      queryParams.filters = {
+        changelog_category: {
+          id: {
+            $eq: categoryId
+          }
+        }
+      }
+    }
 
     const getLink = (changelog) => {
       const article = changelog?.attributes?.article?.data;
@@ -34,7 +48,8 @@ const NewsList = () => {
     fetch(`https://blog-api.capmonster.cloud/api/changelogs?${urlParams}`)
       .then((response) => response.json())
       .then((data) => {
-        if (data.data && data.data.length > 0 ) {
+        setIsLoading(false)
+        if (data.data) {
           const mappedNews = data.data.map((changelog) => ({ 
             title: changelog?.attributes?.title,
             date: new Date(changelog?.attributes?.createdAt).toLocaleDateString(),
@@ -45,10 +60,20 @@ const NewsList = () => {
       })
       .catch((error) => {
         console.error("Error:", error);
+        setIsLoading(false)
       });
-
-    
   }
+
+  const onFilterChange = (id) => {
+    if (id === 'all') {
+      fetchNewsByLang(i18n.currentLocale)
+      return;
+    }
+
+    fetchNewsByLang(i18n.currentLocale, id)
+  }
+  
+
 
   useEffect(() => {
     fetchNewsByLang(i18n.currentLocale)
@@ -56,6 +81,12 @@ const NewsList = () => {
   
   return (
     <div>
+      <NewsFilter handleChange={onFilterChange} />
+      {isLoading && <div className={styles.emptyWrap}><span class="loader"></span></div>}
+      {news && news.length === 0 && !isLoading && <div className={styles.emptyWrap}>
+        <EmptyBoxIcon />
+        <div className={styles.emptyText}>{emptyUpdatesText}</div>
+      </div>}
       {
         news.map((article) => (
           <div className={styles.newsArticle}>

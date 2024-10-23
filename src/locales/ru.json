@@ -17,5 +17,7 @@
   "metaTitle": "Документация для обхода капчи | CapMonster Cloud",
   "metaDescription": "Как обходить  reCAPTCHA, hCaptcha и другие типы капчи при помощи CapMonster Cloud.",
   "tokenProblems": "Возникают проблемы с получением токена?",
-  "callSupport": "Свяжитесь с поддержкой"
+  "callSupport": "Свяжитесь с поддержкой",
+  "allCategoriesText": "Все",
+  "emptyUpdatesText": "Пока нет обновлений"
 }

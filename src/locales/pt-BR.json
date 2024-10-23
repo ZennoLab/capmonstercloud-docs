@@ -17,5 +17,7 @@
   "metaTitle": "Documentação do CapMonster Cloud | Como Evitar Qualquer Tipo de Captcha",
   "metaDescription": "Como evitar reCAPTCHA, hCaptcha e outros tipos de captcha com o CapMonster Cloud.",
   "tokenProblems": "Está tendo problemas para obter o token?",
-  "callSupport": "Entre em contato com o suporte"
+  "callSupport": "Entre em contato com o suporte",
+  "allCategoriesText": "Todos",
+  "emptyUpdatesText": "Ainda não há atualizações"
 }
