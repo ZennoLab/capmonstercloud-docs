@@ -18,6 +18,8 @@
   "metaDescription": "Como evitar reCAPTCHA, hCaptcha e outros tipos de captcha com o CapMonster Cloud.",
   "tokenProblems": "Está tendo problemas para obter o token?",
   "callSupport": "Entre em contato com o suporte",
+  "allCategoriesText": "Todos",
+  "emptyUpdatesText": "Ainda não há atualizações",
   "hundredTokens": "1000 tokens",
   "hundredImages": "1000 imagens",
   "fullPriceText": "Ver preço completo",

@@ -18,6 +18,8 @@
   "metaDescription": "Как обходить  reCAPTCHA, hCaptcha и другие типы капчи при помощи CapMonster Cloud.",
   "tokenProblems": "Возникают проблемы с получением токена?",
   "callSupport": "Свяжитесь с поддержкой",
+  "allCategoriesText": "Все",
+  "emptyUpdatesText": "Пока нет обновлений",
   "hundredTokens": "1000 токенов",
   "hundredImages": "1000 картинок",
   "fullPriceText": "Посмотреть полный прайс",
