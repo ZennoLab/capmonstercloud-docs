@@ -8,9 +8,16 @@ import TabItem from '@theme/TabItem';
 import ParamItem from '@theme/ParamItem';
 import MethodItem from '@theme/MethodItem';
 import MethodDescription from '@theme/MethodDescription'
-
+import PriceBlock from '@theme/PriceBlock';
+import PriceBlockWrap from '@theme/PriceBlockWrap';
 
 # RecaptchaV2EnterpriseTask
+
+<PriceBlockWrap>
+  <PriceBlock title="Recaptcha Enterprise" name="recaptchaV2EnterpriseToken"/>
+  <PriceBlock title="Recaptcha Enterprise (Spotify, Yahoo)" name="recaptchaV2EnterpriseSpotifyToken"/>
+</PriceBlockWrap>
+
 该对象包含用于解决Google reCAPTCHA Enterprise任务的数据。为了提供解决此类任务的通用性，我们已经再现了您计划完成的自动化任务所需的每一个环境因素。包括代理访问、浏览器的用户代理、Cookies（可选）。
 
 这种类型的验证码与ReCaptcha v.2在视觉上没有区别，您可以通过使用开发者工具中的网络选项卡下的查询来查看验证码代码的差异，例如：

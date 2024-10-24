@@ -31,18 +31,18 @@
 
 .prices iframe {
   width: 100%;
-  height: 1120px;
+  height: 1180px;
 }
 
 @media (max-width: 800px) {
   .prices iframe {
-    height: 1310px;
+    height: 1460px;
   }
 }
 
 @media (max-width: 424px) {
   .prices iframe {
-    height: 1460px;
+    height: 1520px;
   }
 }
 
