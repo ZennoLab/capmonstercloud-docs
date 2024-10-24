@@ -8,8 +8,16 @@ import TabItem from '@theme/TabItem';
 import ParamItem from '@theme/ParamItem';
 import MethodItem from '@theme/MethodItem';
 import MethodDescription from '@theme/MethodDescription'
+import PriceBlock from '@theme/PriceBlock';
+import PriceBlockWrap from '@theme/PriceBlockWrap';
 
 # HCaptchaTask
+
+<PriceBlockWrap>
+  <PriceBlock title="hCaptcha" name="hCaptchaToken"/>
+  <PriceBlock title="hCaptcha Enterprise" name="hCaptchaEnterpriseToken"/>
+</PriceBlockWrap>
+
 对象包含用于解决 hCaptcha 任务的数据。为了提供对这种类型任务的稳定普适性，我们复制了用于完成自动化任务的每一个环境因素。这包括：代理访问、浏览器的用户代理、cookies（可选）。这种方法将消除未来可能出现的所有可能障碍。
 
 相较于通常的图片验证码，这种类型的验证码可能需要更长时间来解决，但通过发送给您的 g-captcha-response 值在我们解决您的验证码后仍然有效，有效期为60秒。
