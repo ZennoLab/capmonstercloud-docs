@@ -14,7 +14,7 @@ export default function Prices() {
 
   return (
     <section className={styles.pricesWrap} id="price">
-      <div className="container">
+      <div className={`container ${styles.pricesContainer}`}>
         <div className={styles.mainTitle}>{priceTitle}</div>
         <div className={`${styles.subTitle} priceSub`}>{priceSubTitle}</div>
         <Tooltip anchorSelect=".priceSub" place="top" style={{ backgroundColor: 'white', color: "#222" }}>

@@ -28,6 +28,13 @@ html[data-theme=dark] .newsArticleTitle {
   margin-bottom: 30px;
 }
 
+@media (max-width: 768px) {
+  .categoryBlock {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+}
+
 .categoryItem {
   padding: 5px 20px;
   border-radius: 8px;
