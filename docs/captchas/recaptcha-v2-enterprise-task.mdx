@@ -1,4 +1,4 @@
-﻿---
+---
 sidebar_position: 2
 sidebar_label: ReCaptchaV2EnterpriseTask
 ---
@@ -354,5 +354,134 @@ Object.defineProperty(window, 'grecaptcha', {
 	  console.log(await cmcClient.Solve(recaptchaV2EnterpriseRequest));
 	});
 	```
-  </TabItem>  
+  </TabItem> 
+	<TabItem value="python" label="Python" className="method-panel">
+	```python
+	# https://github.com/ZennoLab/capmonstercloud-client-python
+
+   # RecaptchaV2EnterpriseProxyless
+
+   import asyncio
+   from capmonstercloudclient import CapMonsterClient, ClientOptions
+   from capmonstercloudclient.requests import RecaptchaV2EnterpriseProxylessRequest
+
+   client_options = ClientOptions(api_key = "your_api_key")  # Replace with your CapMonsterCloud API key
+   cap_monster_client = CapMonsterClient(options=client_options)
+
+   recaptcha2request = RecaptchaV2EnterpriseProxylessRequest(
+       websiteUrl = "https://example.com",  # Website with the captcha
+       websiteKey = "6Lf26sUnAAAAAIKLuWNYgRsFUfmI-3Lex3xT5N-s",  # Replace with your websiteKey
+       enterprisePayload = {
+           "s": "SOME_ADDITIONAL_TOKEN" 
+       }
+   )
+
+   async def solve_captcha():
+       return await cap_monster_client.solve_captcha(recaptcha2request)
+
+   responses = asyncio.run(solve_captcha())
+   print(responses)
+    ```
+
+    ```python
+   # ReCaptchaV2Enterprise:
+
+   import asyncio
+   from capmonstercloudclient import CapMonsterClient, ClientOptions
+   from capmonstercloudclient.requests import RecaptchaV2EnterpriseRequest
+
+   client_options = ClientOptions(api_key = "your_api_key")  # Replace with your CapMonsterCloud API key
+   cap_monster_client = CapMonsterClient(options=client_options)
+
+   recaptcha2request = RecaptchaV2EnterpriseRequest(
+       websiteUrl = "https://example.com",  # Website with the captcha
+       websiteKey = "6Lf26sUnAAAAAIKLuWNYgRsFUfmI-3Lex3xT5N-s",  # Replace with your websiteKey
+       enterprisePayload={
+           "s": "SOME_ADDITIONAL_TOKEN"  
+       },
+       proxy_type = "http",  # Proxy type (http, https, socks5)
+       proxy_address = "8.8.8.8",  
+       proxy_port = 8080,  
+       proxy_login = "proxyLoginHere",  
+       proxy_password = "proxyPasswordHere"
+   )
+
+   async def solve_captcha():
+       return await cap_monster_client.solve_captcha(recaptcha2request)
+
+   responses = asyncio.run(solve_captcha())
+   print(responses)
+	```
+	</TabItem>
+  <TabItem value="csharp" label="C#" className="method-panel">
+    ```csharp
+    // https://github.com/ZennoLab/capmonstercloud-client-dotnet
+
+// RecaptchaV2EnterpriseProxyless
+
+   using Zennolab.CapMonsterCloud.Requests;
+   using Zennolab.CapMonsterCloud;
+
+   class Program
+   {
+       static async Task Main(string[] args)
+       {
+           var clientOptions = new ClientOptions
+           {
+               ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
+           };
+
+           var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+           var recaptchaV2EnterpriseRequest = new RecaptchaV2EnterpriseProxylessRequest
+           {
+               WebsiteUrl = "https://example.com", // Website with the captcha
+               WebsiteKey = "6Lf26sUnAAAAAIKLuWNYgRsFUfmI-3Lex3xT5N-s", // Replace with your website key
+               EnterprisePayload = "{\"s\":\"SOME_ADDITIONAL_TOKEN\"}"
+           };
+
+           var recaptchaV2EnterpriseResult = await cmCloudClient.SolveAsync(recaptchaV2EnterpriseRequest);
+
+           Console.WriteLine("Captcha Solution: " + recaptchaV2EnterpriseResult.Solution.Value);
+       }
+   }
+    ```
+
+    ```csharp
+
+   // ReCaptchaV2Enterprise:
+
+   using Zennolab.CapMonsterCloud.Requests;
+   using Zennolab.CapMonsterCloud;
+
+   class Program
+   {
+       static async Task Main(string[] args)
+       {
+           var clientOptions = new ClientOptions
+           {
+               ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
+           };
+
+           var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+           var recaptchaV2EnterpriseRequest = new RecaptchaV2EnterpriseRequest
+           {
+               WebsiteUrl = "https://example.com", // Website with the captcha
+               WebsiteKey = "6Lf26sUnAAAAAIKLuWNYgRsFUfmI-3Lex3xT5N-s", // Replace with your website key
+               EnterprisePayload = "{\"s\":\"SOME_ADDITIONAL_TOKEN\"}",
+               ProxyType = ProxyType.Http,
+               ProxyAddress = "8.8.8.8",
+               ProxyPort = 8080,
+               ProxyLogin = "proxyLoginHere",
+               ProxyPassword = "proxyPasswordHere"
+           };
+
+           var recaptchaV2EnterpriseResult = await cmCloudClient.SolveAsync(recaptchaV2EnterpriseRequest);
+
+           Console.WriteLine("Captcha Solution: " + recaptchaV2EnterpriseResult.Solution.Value);
+       }
+   }
+    ```
+  </TabItem>
 </Tabs>
