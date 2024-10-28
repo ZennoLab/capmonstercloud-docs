@@ -1,66 +1,130 @@
 ﻿---
-sidebar_position: 15
+sidebar_position: 12
 sidebar_label: TenDI
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+import PriceBlock from '@theme/PriceBlock';
+import PriceBlockWrap from '@theme/PriceBlockWrap';
+
+
 # TenDI - 腾讯验证码
+
+<PriceBlockWrap>
+  <PriceBlock title="Tencent captcha" name="tencentToken"/>
+</PriceBlockWrap>
+
 :::warning **注意！**
 此任务将使用我们的代理服务器执行。
 :::
-## **对象结构**
-|**参数**|**类型**|**必需**|**值**|
-| :-: | :-: | :-: | :- |
-|type|String|是|**CustomTask**|
-|class|String|是|**TenDI**|
-|websiteURL|String|是|解决验证码的主页地址。|
-|websiteKey|String|是|captchaAppId。例如 `"websiteKey": "189123456"` - 是您网站的唯一参数。您可以从带有验证码的HTML页面或流量中获取它（参见下面的描述）。|
-|userAgent|String|否|浏览器用户代理。**仅传递来自Windows操作系统的实际UA。现在这是126版本**： `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36`|
+
+
+## 请求参数
+<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (without proxy)" default className="bordered-panel">
+    <ParamItem title="type" required type="string" />
+    **CustomTask**
+
+    ---
+
+    <ParamItem title="class" required type="string" />
+    **TenDI**
+
+    ---
+
+    <ParamItem title="websiteURL" required type="string" />
+    解决验证码的主页地址。
+
+    ---
+
+    <ParamItem title="websiteKey" required type="string" />
+    captchaAppId。例如 `"websiteKey": "189123456"` - 是您网站的唯一参数。您可以从带有验证码的HTML页面或流量中获取它（参见下面的描述）。
+
+    ---
+
+    <ParamItem title="userAgent" type="string" />
+    浏览器用户代理。**只传递 Windows 操作系统的实际 UA。现在是版本**： `userAgentPlaceholder`
+
+</TabItem>
+
+
 ### 如何获取网站密钥（captchaAppId）
 打开开发者工具，转到网络标签，激活验证码并查看请求。其中一些将包含您需要的参数值。在这种情况下，`websiteKey=aid`
 ![](./images/tendi/tendi-devtools.png)
-## **请求示例**
-**地址：**
-```http
-https://api.capmonster.cloud/createTask
-```
-```json
-{
-    "clientKey": "API_KEY",
-    "task": {
-        "type": "CustomTask",
-        "class": "TenDI",
-        "websiteURL": "https://domain.com",
-        "websiteKey": "189123456",
-        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36"
-    }
-}
-```
-**响应示例**
-```json
-{
-    "errorId":0,
-    "taskId":407533072
-}
-```
-## **获取结果**
+
+
+## 创建任务方法 
+<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**要求**
+		```json
+		{
+			"clientKey": "API_KEY",
+			"task": {
+				"type": "CustomTask",
+				"class": "TenDI",
+				"websiteURL": "https://domain.com",
+				"websiteKey": "189123456",
+				"userAgent": "userAgentPlaceholder"
+			}
+		}
+		```
+		**回应**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
+</TabItem>
+
+
+## 获取任务结果方法
 使用[getTaskResult](../api/methods/get-task-result.md)方法获取TenDI的解决方案。
-**响应示例：**
-```json
-{
-    "errorId":0,
-    "status":"ready",
-    "solution": {
-       "data": {
-            "randstr": "@EcL",
-            "ticket": "tr03lHUhdnuW3neJZu.....7LrIbs*"
-        },
-        "headers": {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36"
-        }
-    }
-}
-```
-## **定价**
+
+<TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**要求**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**回应**
+		```json
+		{
+			"errorId":0,
+			"status":"ready",
+			"solution": {
+			   "data": {
+					"randstr": "@EcL",
+					"ticket": "tr03lHUhdnuW3neJZu.....7LrIbs*"
+				},
+				"headers": {
+					"User-Agent": "userAgentPlaceholder"
+				}
+			}
+		}
+		```
+	</MethodDescription>
+</TabItem>
+
+## 定价
 |**名称**|**每1000次识别的成本, $**|
 | :-: | :-: |
 |TenDI|1.6|
