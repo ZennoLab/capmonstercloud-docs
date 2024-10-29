@@ -127,24 +127,84 @@ ReCaptcha3, в отличие от ReCaptcha2, не требует от посе
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">
-	```js
-	// https://github.com/ZennoLab/capmonstercloud-client-js
+    ```js
+    // https://github.com/ZennoLab/capmonstercloud-client-js
 
-	import { CapMonsterCloudClientFactory, ClientOptions, RecaptchaV3ProxylessRequest } from '@zennolab_com/capmonstercloud-client';
+    import { CapMonsterCloudClientFactory, ClientOptions, RecaptchaV3ProxylessRequest } from '@zennolab_com/capmonstercloud-client';
 
-	document.addEventListener('DOMContentLoaded', async () => {
-	  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
-	  console.log(await cmcClient.getBalance());
+    document.addEventListener('DOMContentLoaded', async () => {
+      const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+      console.log(await cmcClient.getBalance());
 
-	  const recaptchaV3Request = new RecaptchaV3ProxylessRequest({
-		websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high',
-		websiteKey: '6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd',
-		minScore: 0.6,
-		pageAction: 'some-action',
-	  })
+      const recaptchaV3Request = new RecaptchaV3ProxylessRequest({
+        websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high',
+        websiteKey: '6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd',
+        minScore: 0.6,
+        pageAction: 'some-action',
+      });
 
-	  console.log(await cmcClient.Solve(recaptchaV3Request));
-	});
-	```
-  </TabItem>  
+      console.log(await cmcClient.Solve(recaptchaV3Request));
+    });
+    ```
+  </TabItem>
+  
+  <TabItem value="python" label="Python" className="method-panel">
+    ```python
+    # https://github.com/Zennolab/capmonstercloud-client-python
+
+    import asyncio
+    from capmonstercloudclient import CapMonsterClient, ClientOptions
+    from capmonstercloudclient.requests import RecaptchaV3ProxylessRequest
+
+    client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonster Cloud API key
+    cap_monster_client = CapMonsterClient(options=client_options)
+
+    recaptcha_v3_request = RecaptchaV3ProxylessRequest(
+        websiteUrl="https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta",  # URL with captcha
+        websiteKey="6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",  # Replace with the correct website key
+        minScore=0.6,
+        pageAction="myverify"
+    )
+
+    async def solve_captcha():
+        return await cap_monster_client.solve_captcha(recaptcha_v3_request)
+
+    responses = asyncio.run(solve_captcha())
+    print(responses)
+    ```
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    ```csharp
+    // https://github.com/ZennoLab/capmonstercloud-client-dotnet
+
+    using Zennolab.CapMonsterCloud.Requests;
+    using Zennolab.CapMonsterCloud;
+
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            var clientOptions = new ClientOptions
+            {
+                ClientKey = "your_api_key"  // Replace with your CapMonster Cloud API key
+            };
+
+            var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+            var recaptchaV3Request = new RecaptchaV3ProxylessRequest
+            {
+                WebsiteUrl = "https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta",  // URL with captcha
+                WebsiteKey = "6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",  // Replace with the correct website key
+                MinScore = 0.6,
+                PageAction = "myverify"
+            };
+
+            var recaptchaV3Result = await cmCloudClient.SolveAsync(recaptchaV3Request);
+
+            Console.WriteLine("Captcha Solution: " + recaptchaV3Result.Solution.Value);
+        }
+    }
+    ```
+  </TabItem>
 </Tabs>
