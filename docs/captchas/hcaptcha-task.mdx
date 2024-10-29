@@ -276,29 +276,154 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">
-	```js
-	// https://github.com/ZennoLab/capmonstercloud-client-js
+    ```js
+    // https://github.com/ZennoLab/capmonstercloud-client-js
 
-	import { CapMonsterCloudClientFactory, ClientOptions, HCaptchaRequest } from '@zennolab_com/capmonstercloud-client';
+    import { CapMonsterCloudClientFactory, ClientOptions, HCaptchaRequest } from '@zennolab_com/capmonstercloud-client';
 
-	document.addEventListener('DOMContentLoaded', async () => {
-	  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
-	  console.log(await cmcClient.getBalance());
+    document.addEventListener('DOMContentLoaded', async () => {
+      const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+      console.log(await cmcClient.getBalance());
 
-	  const hCaptchaRequest = new HCaptchaRequest({
-		websiteURL: 'https://lessons.zennolab.com/captchas/hcaptcha/?level=easy',
-		websiteKey: '472fc7af-86a4-4382-9a49-ca9090474471',
-		isInvisible: true,
-		data: 'some data',
-		proxyType: 'https',
-		proxyAddress: 'https://proxy.com',
-		proxyPort: 6045,
-		proxyLogin: 'login',
-		proxyPassword: 'password',
-	  });
+      const hCaptchaRequest = new HCaptchaRequest({
+        websiteURL: 'https://lessons.zennolab.com/captchas/hcaptcha/?level=easy',
+        websiteKey: '472fc7af-86a4-4382-9a49-ca9090474471',
+        isInvisible: true,
+        data: 'some data',
+        proxyType: 'https',
+        proxyAddress: 'https://proxy.com',
+        proxyPort: 6045,
+        proxyLogin: 'login',
+        proxyPassword: 'password',
+      });
 
-	  console.log(await cmcClient.Solve(hCaptchaRequest));
-	});
-	```
+      console.log(await cmcClient.Solve(hCaptchaRequest));
+    });
+    ```
+  </TabItem>
+
+  <TabItem value="python" label="Python" className="method-panel">
+    ```python
+    # https://github.com/ZennoLab/capmonstercloud-client-python
+
+    # HCaptchaProxyless
+
+    import asyncio
+    from capmonstercloudclient import CapMonsterClient, ClientOptions
+    from capmonstercloudclient.requests import HcaptchaProxylessRequest
+
+    client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonster Cloud API key
+    cap_monster_client = CapMonsterClient(options=client_options)
+
+    hcaptcha_request = HcaptchaProxylessRequest(
+        websiteUrl="https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",  # Website with the captcha
+        websiteKey="472fc7af-86a4-4382-9a49-ca9090474471",  # Replace with your websiteKey
+        userAgent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",  # Use the current userAgent
+        fallbackToActualUA=True
+    )
+
+    async def solve_captcha():
+        return await cap_monster_client.solve_captcha(hcaptcha_request)
+
+    responses = asyncio.run(solve_captcha())
+    print(responses)
+    ```
+
+    ```python
+    # HCaptcha
+
+    import asyncio
+    from capmonstercloudclient import CapMonsterClient, ClientOptions
+    from capmonstercloudclient.requests import HcaptchaRequest
+
+    client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonster Cloud API key
+    cap_monster_client = CapMonsterClient(options=client_options)
+
+    hcaptcha_request = HcaptchaRequest(
+        websiteUrl="https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",  # Website with the captcha
+        websiteKey="472fc7af-86a4-4382-9a49-ca9090474471",  # Replace with your websiteKey
+        userAgent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",  # Use the current userAgent
+        proxyType="http",  # Type of proxy (http, https, socks4, socks5)
+        proxyAddress="8.8.8.8",
+        proxyPort=8080,
+        proxyLogin="proxyLoginHere",
+        proxyPassword="proxyPasswordHere",
+        fallbackToActualUA=True
+    )
+
+    async def solve_captcha():
+        return await cap_monster_client.solve_captcha(hcaptcha_request)
+
+    responses = asyncio.run(solve_captcha())
+    print(responses)
+    ```
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    ```csharp
+    // https://github.com/ZennoLab/capmonstercloud-client-dotnet
+
+    // HCaptchaProxyless:
+
+    using Zennolab.CapMonsterCloud.Requests;
+    using Zennolab.CapMonsterCloud;
+
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            var clientOptions = new ClientOptions
+            {
+                ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
+            };
+
+            var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+            var hcaptchaRequest = new HCaptchaProxylessRequest
+            {
+                WebsiteUrl = "https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",
+                WebsiteKey = "472fc7af-86a4-4382-9a49-ca9090474471",
+            };
+            var hcaptchaResult = await cmCloudClient.SolveAsync(hcaptchaRequest);
+
+            Console.WriteLine("Captcha Solution: " + hcaptchaResult.Solution.Value);
+        }
+    }
+    ```
+
+    ```csharp
+    // HCaptcha:
+
+    using Zennolab.CapMonsterCloud.Requests;
+    using Zennolab.CapMonsterCloud;
+
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            var clientOptions = new ClientOptions
+            {
+                ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
+            };
+
+            var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+            var hcaptchaRequest = new HCaptchaRequest
+            {
+                WebsiteUrl = "https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",
+                WebsiteKey = "472fc7af-86a4-4382-9a49-ca9090474471",
+                ProxyType = ProxyType.Http,
+                ProxyAddress = "8.8.8.8",
+                ProxyPort = 8080,
+                ProxyLogin = "proxyLoginHere",
+                ProxyPassword = "proxyPasswordHere"
+            };
+
+            var hcaptchaResult = await cmCloudClient.SolveAsync(hcaptchaRequest);
+
+            Console.WriteLine("Captcha Solution: " + hcaptchaResult.Solution.Value);
+        }
+    }
+    ```
   </TabItem>  
 </Tabs>

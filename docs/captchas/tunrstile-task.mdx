@@ -479,32 +479,224 @@ const chrome = require('selenium-webdriver/chrome');
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">
-	```js
-	// https://github.com/ZennoLab/capmonstercloud-client-js
+    ```js
+    // https://github.com/ZennoLab/capmonstercloud-client-js
 
-	import { CapMonsterCloudClientFactory, ClientOptions, TurnstileRequest } from '@zennolab_com/capmonstercloud-client';
+    import { CapMonsterCloudClientFactory, ClientOptions, TurnstileRequest } from '@zennolab_com/capmonstercloud-client';
 
-	document.addEventListener('DOMContentLoaded', async () => {
-	  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
-	  console.log(await cmcClient.getBalance());
+    document.addEventListener('DOMContentLoaded', async () => {
+      const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+      console.log(await cmcClient.getBalance());
 
-	  const turnstileRequest = TurnstileRequest({
-		websiteURL: 'https://tsinvisble.zlsupport.com',
-		websiteKey: '0x4AAAAAAABUY0VLtOUMAHxE',
-		cloudflareTaskType: 'cf_clearance',
-		proxyType: 'http',
-		proxyAddress: '8.8.8.8',
-		proxyPort: 8080,
-		proxyLogin: 'proxyLoginHere',
-		proxyPassword: 'proxyPasswordHere',
-		pageData: 'pageDataHere',
-		data: 'dataHere',
-		htmlPageBase64: 'htmlPageBase64Here',
-		userAgent: 'userAgentHere',
-	  });
+      const turnstileRequest = new TurnstileRequest({
+        websiteURL: 'https://tsinvisble.zlsupport.com',
+        websiteKey: '0x4AAAAAAABUY0VLtOUMAHxE',
+        cloudflareTaskType: 'cf_clearance',
+        proxyType: 'http',
+        proxyAddress: '8.8.8.8',
+        proxyPort: 8080,
+        proxyLogin: 'proxyLoginHere',
+        proxyPassword: 'proxyPasswordHere',
+        pageData: 'pageDataHere',
+        data: 'dataHere',
+        htmlPageBase64: 'htmlPageBase64Here',
+        userAgent: 'userAgentHere',
+      });
 
-	  console.log(await cmcClient.Solve(turnstileRequest));
-	});
-	```
-  </TabItem>  
+      console.log(await cmcClient.Solve(turnstileRequest));
+    });
+    ```
+  </TabItem>
+  
+  <TabItem value="python" label="Python" className="method-panel">
+    ```python
+    # https://github.com/ZennoLab/capmonstercloud-client-python
+
+    # Cloudflare Turnstile:
+
+    import asyncio
+    from capmonstercloudclient import CapMonsterClient, ClientOptions
+    from capmonstercloudclient.requests import TurnstileRequest
+
+    client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonsterCloud API key
+    cap_monster_client = CapMonsterClient(options=client_options)
+
+    turnstile_request = TurnstileRequest(
+        websiteURL="http://tsmanaged.zlsupport.com",  # Replace with the URL of the page with the captcha
+        websiteKey="0x4AAAAAAABUYP0XeMJF0xoy"  # Replace with the website key for the captcha
+    )
+
+    async def solve_captcha():
+        return await cap_monster_client.solve_captcha(turnstile_request)
+
+    responses = asyncio.run(solve_captcha())
+    print(responses)
+    ```
+
+    ```python
+    # Cloudflare Challenge (token)
+
+    import asyncio
+    from capmonstercloudclient import CapMonsterClient, ClientOptions
+    from capmonstercloudclient.requests import TurnstileProxylessRequest
+
+    client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonsterCloud API key
+    cap_monster_client = CapMonsterClient(options=client_options)
+
+    turnstile_request = TurnstileProxylessRequest(
+        websiteURL="https://example.com",  # Replace with the URL of the page with the captcha
+        websiteKey="0x4AAAAAAABUYP0XeMJF0xoy",  # Replace with the website key for the captcha
+        data="YOUR_DATA_HERE",
+        pageAction="managed",
+        cloudflareTaskType="token",
+        pageData="YOUR_PAGE_DATA_HERE",
+        userAgent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"  # Use the current userAgent
+    )
+
+    async def solve_captcha():
+        return await cap_monster_client.solve_captcha(turnstile_request)
+
+    responses = asyncio.run(solve_captcha())
+    print(responses)
+    ```
+
+    ```python
+    # Cloudflare Challenge (cookie cf_clearance)
+
+    import asyncio
+    from capmonstercloudclient import CapMonsterClient, ClientOptions
+    from capmonstercloudclient.requests import TurnstileRequest
+
+    client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonsterCloud API key
+    cap_monster_client = CapMonsterClient(options=client_options)
+
+    turnstile_request = TurnstileRequest(
+        websiteURL="https://example.com",  # Replace with the URL of the page with the captcha
+        websiteKey="0x4AAAAAAABUYP0XeMJF0xoy",  # Replace with the website key for the captcha
+        cloudflareTaskType="cf_clearance",
+        userAgent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",  # Use the current userAgent
+        htmlPageBase64="htmlPageBase64Here",
+        proxyType="http",  # Type of proxy (http, https, socks4, socks5)
+        proxyAddress="8.8.8.8",
+        proxyPort=8000,
+        proxyLogin="proxyLoginHere",
+        proxyPassword="proxyPasswordHere"
+    )
+
+    async def solve_captcha():
+        return await cap_monster_client.solve_captcha(turnstile_request)
+
+    responses = asyncio.run(solve_captcha())
+    print(responses)
+    ```
+  </TabItem>
+  
+  <TabItem value="csharp" label="C#" className="method-panel">
+    ```csharp
+    // https://github.com/ZennoLab/capmonstercloud-client-dotnet
+
+    // Cloudflare Turnstile:
+
+    using Zennolab.CapMonsterCloud.Requests;
+    using Zennolab.CapMonsterCloud;
+
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            var clientOptions = new ClientOptions
+            {
+                ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
+            };
+
+            var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+            var turnstileRequest = new TurnstileProxylessRequest
+            {
+                WebsiteUrl = "http://tsmanaged.zlsupport.com",  // Replace with the URL of the page with the captcha
+                WebsiteKey = "0x4AAAAAAABUYP0XeMJF0xoy"  // Replace with the website key for the captcha
+            };
+
+            var turnstileResult = await cmCloudClient.SolveAsync(turnstileRequest);
+
+            Console.WriteLine("Captcha Solution: " + turnstileResult.Solution.Value);
+        }
+    }
+    ```
+
+    ```csharp
+    // Cloudflare Challenge (token):
+
+    using Zennolab.CapMonsterCloud.Requests;
+    using Zennolab.CapMonsterCloud;
+
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            var clientOptions = new ClientOptions
+            {
+                ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
+            };
+
+            var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+            var turnstileRequest = new TurnstileProxylessRequest
+            {
+                WebsiteUrl = "https://example.com",  // Replace with the URL of the page with the captcha
+                WebsiteKey = "0x4AAAAAAABUYP0XeMJF0xoy",  // Replace with the website key for the captcha
+                Data = "data_here",
+                PageAction = "managed",
+                CloudflareTaskType = "token",
+                PageData = "pagedata_here",
+                UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36" // Use the current UserAgent
+            };
+
+            var turnstileResult = await cmCloudClient.SolveAsync(turnstileRequest);
+
+            Console.WriteLine("Captcha Solution: " + turnstileResult.Solution.Value);
+        }
+    }
+    ```
+
+    ```csharp
+    // Cloudflare Challenge (cookie cf_clearance):
+
+    using Zennolab.CapMonsterCloud.Requests;
+    using Zennolab.CapMonsterCloud;
+
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            var clientOptions = new ClientOptions
+            {
+                ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
+            };
+
+            var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+            var turnstileRequest = new TurnstileRequest
+            {
+                WebsiteUrl = "https://example.com", // URL with Turnstile challenge
+                WebsiteKey = "0x4AAAAAAADnPIDROrmt1Wwj", // Replace with the correct website key
+                CloudflareTaskType = "cf_clearance",
+                ProxyType = ProxyType.Http, // Replace with the required type
+                ProxyAddress = "8.8.8.8",
+                ProxyPort = 8000,
+                ProxyLogin = "proxyLoginHere",
+                ProxyPassword = "proxyPasswordHere",
+                PageData = "pageDataHere",
+                Data = "pageDataHere",
+                HtmlPageBase64 = "htmlPageBase64Here",
+                UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36" // Use an up-to-date userAgent
+            };
+
+            var turnstileResult = await cmCloudClient.SolveAsync(turnstileRequest);
+
+            Console.WriteLine("Captcha Solved. cf_clearance cookie: " + turnstileResult.Solution.Clearance);
+        }
+    }
+    ```
+  </TabItem>
 </Tabs>
