@@ -220,7 +220,7 @@ Graus pelos quais o anel deve ser girado no sentido anti-horário e o círculo n
 ### Criar tarefa `betpunch_3x3_rotate`
 
 Na solicitação, passamos nove imagens. As imagens devem ser passadas na seguinte ordem:
-![](./images/ComplexImageTask-Recognition/ex6.png)
+![](./images/ComplexImageTask-Recognition/betpunch_3x3_rotate_example.png)
 
 <TabItem value="proxyless" label="ComplexImageTask (sem proxy)" default className="method-panel">
 <MethodItem>
@@ -300,3 +300,105 @@ https://api.capmonster.cloud/getTaskResult
 
   </MethodDescription>
   </TabItem>
+  
+  
+### Criar tarefa `bls`
+
+Na solicitação, enviamos 9 imagens no formato base64.
+Também passamos o valor buscado TaskArgument nos metadados.
+
+<TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="method-panel">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Solicitação**
+		```json
+		{
+			"clientKey":{{API_key}},
+			"task": 
+			{
+				"type": "ComplexImageTask",
+				"class": "recognition",
+				"imagesBase64": [
+					"image1_to_base64",
+					"image2_to_base64",
+					"image3_to_base64",
+					"image4_to_base64",
+					"image5_to_base64",
+					"image6_to_base64",
+					"image7_to_base64",
+					"image8_to_base64",
+					"image9_to_base64"
+				],
+				"metadata": {
+					"Task": "bls_3x3",
+					"TaskArgument": "123"
+				}
+			}
+		}
+		```
+
+		Exemplo de tarefa:
+
+		![](./images/ComplexImageTask-Recognition/bls.png)
+
+		Enviar imagens convertidas para base64:
+		
+		![](./images/ComplexImageTask-Recognition/image1.gif)
+		![](./images/ComplexImageTask-Recognition/image2.gif)
+		![](./images/ComplexImageTask-Recognition/image3.gif)
+		![](./images/ComplexImageTask-Recognition/image4.gif)
+		![](./images/ComplexImageTask-Recognition/image5.gif)
+		![](./images/ComplexImageTask-Recognition/image6.gif)
+		![](./images/ComplexImageTask-Recognition/image7.gif)
+		![](./images/ComplexImageTask-Recognition/image8.gif)
+		![](./images/ComplexImageTask-Recognition/image9.gif)
+		
+		Para este exemplo: "TaskArgument": "546"
+
+		**Resposta**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":143998457
+		}
+		```
+	</MethodDescription>
+</TabItem>
+
+### Obter resultado da tarefa `bls`
+<TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="method-panel-full">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Solicitação**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 143998457
+		}
+		```
+		**Resposta**
+		Um array de valores com elementos true ou false, dependendo se o número na imagem é o argumento buscado ou não. 
+		```json
+		{
+		  "errorId":0,
+		  "status":"ready",
+		  "errorCode":null,
+		  "errorDescription":null,
+		  "solution": {
+			"answer":[true,true,false,false,true,false,false,true,true],
+			"metadata": {
+			  "AnswerType":"Grid"
+			}
+		  }
+		}
+		```
+	</MethodDescription>
+</TabItem>

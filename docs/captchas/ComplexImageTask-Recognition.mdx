@@ -292,3 +292,105 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 		```
 	</MethodDescription>
 </TabItem>
+
+
+### Создание задачи `bls`
+
+В запросе передаем 9 изображений в формате base64.
+Также в metadata передаем искомое значение TaskArgument.
+
+<TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Запрос**
+		```json
+		{
+			"clientKey":{{API_key}},
+			"task": 
+			{
+				"type": "ComplexImageTask",
+				"class": "recognition",
+				"imagesBase64": [
+					"image1_to_base64",
+					"image2_to_base64",
+					"image3_to_base64",
+					"image4_to_base64",
+					"image5_to_base64",
+					"image6_to_base64",
+					"image7_to_base64",
+					"image8_to_base64",
+					"image9_to_base64"
+				],
+				"metadata": {
+					"Task": "bls_3x3",
+					"TaskArgument": "123"
+				}
+			}
+		}
+		```
+
+		Пример задания:
+
+		![](./images/ComplexImageTask-Recognition/bls.png)
+
+		Передавать сконвертированные в base64 картинки:
+		
+		![](./images/ComplexImageTask-Recognition/image1.gif)
+		![](./images/ComplexImageTask-Recognition/image2.gif)
+		![](./images/ComplexImageTask-Recognition/image3.gif)
+		![](./images/ComplexImageTask-Recognition/image4.gif)
+		![](./images/ComplexImageTask-Recognition/image5.gif)
+		![](./images/ComplexImageTask-Recognition/image6.gif)
+		![](./images/ComplexImageTask-Recognition/image7.gif)
+		![](./images/ComplexImageTask-Recognition/image8.gif)
+		![](./images/ComplexImageTask-Recognition/image9.gif)
+		
+		Для данного примера: "TaskArgument": "546"
+
+		**Ответ**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":143998457
+		}
+		```
+	</MethodDescription>
+</TabItem>
+
+### Получение результата задачи `bls`
+<TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel-full">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Запрос**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 143998457
+		}
+		```
+		**Ответ**
+		Массив значений с элементами true или false, в зависимости от того является ли число на картинке искомым аргументом или нет.  
+		```json
+		{
+		  "errorId":0,
+		  "status":"ready",
+		  "errorCode":null,
+		  "errorDescription":null,
+		  "solution": {
+			"answer":[true,true,false,false,true,false,false,true,true],
+			"metadata": {
+			  "AnswerType":"Grid"
+			}
+		  }
+		}
+		```
+	</MethodDescription>
+</TabItem>
