@@ -160,29 +160,96 @@ https://api.capmonster.cloud/getTaskResult
 ## Usar biblioteca SDK
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-<TabItem value="js" label="JavaScript" default className="method-panel">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+    ```js
+    // https://github.com/ZennoLab/capmonstercloud-client-js
 
-```js
-// https://github.com/ZennoLab/capmonstercloud-client-js
+    import { CapMonsterCloudClientFactory, ClientOptions, ImageToTextRequest } from '@zennolab_com/capmonstercloud-client';
 
-import { CapMonsterCloudClientFactory, ClientOptions, ImageToTextRequest } from '@zennolab_com/capmonstercloud-client';
+    document.addEventListener('DOMContentLoaded', async () => {
+      const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+      console.log(await cmcClient.getBalance());
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
-  console.log(await cmcClient.getBalance());
+      const imageToTextRequest = new ImageToTextRequest({
+        body: 'some base64 body',
+        CapMonsterModule: CapMonsterModules.YandexWave,
+        Case: true,
+        numeric: 1,
+        recognizingThreshold: 65,
+        math: false,
+      });
 
-  const imageToTextRequest = new ImageToTextRequest({
-    body: 'some base64 body',
-    CapMonsterModule: CapMonsterModules.YandexWave,
-    Case: true,
-    numeric: 1,
-    recognizingThreshold: 65,
-    math: false,
-  });
+      console.log(await cmcClient.Solve(imageToTextRequest));
+    });
+    ```
+  </TabItem>
 
-  console.log(await cmcClient.Solve(imageToTextRequest));
-});
-```
-</TabItem>
+  <TabItem value="python" label="Python" className="method-panel">
+    ```python
+    # https://github.com/ZennoLab/capmonstercloud-client-python
 
+    import asyncio
+    import base64
+    from capmonstercloudclient import CapMonsterClient, ClientOptions
+    from capmonstercloudclient.requests import ImageToTextRequest
+
+    client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonsterCloud API key
+    cap_monster_client = CapMonsterClient(options=client_options)
+
+    image_base64 = "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgc…wwzqR4U/yZ//Z"
+
+    image_bytes = base64.b64decode(image_base64)
+
+    image_to_text_request = ImageToTextRequest(
+        image_bytes=image_bytes,
+        module_name=None,  # Optional, can specify a module name if needed
+        threshold=50,      # Optional, set a threshold value between 1 and 100
+        case=True,         # Optional, specify whether case sensitivity is required
+        numeric=0,         # Optional, set numeric flag (0 or 1)
+        math=False         # Optional, specify whether math operations are involved
+    )
+
+    async def solve_captcha():
+        return await cap_monster_client.solve_captcha(image_to_text_request)
+
+    responses = asyncio.run(solve_captcha())
+    print(responses)
+    ```
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    ```csharp
+    // https://github.com/ZennoLab/capmonstercloud-client-dotnet
+
+    using Zennolab.CapMonsterCloud.Requests;
+    using Zennolab.CapMonsterCloud;
+
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            var clientOptions = new ClientOptions
+            {
+                ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
+            };
+
+            var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+            var imageToTextRequest = new ImageToTextRequest
+            {
+                Body = "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMj", // Base64 encoded image
+                CapMonsterModule = "None",  // Optional, can specify a module name if needed
+                RecognizingThreshold = 70, // Optional, set a threshold value between 1 and 100
+                CaseSensitive = true, // Optional, specify whether case sensitivity is required
+                Numeric = false, 
+                Math = false
+            };
+
+            var imageToTextResult = await cmCloudClient.SolveAsync(imageToTextRequest);
+
+            Console.WriteLine("Captcha Solved: " + imageToTextResult.Solution.Value);
+        }
+    }
+    ```
+  </TabItem>
 </Tabs>

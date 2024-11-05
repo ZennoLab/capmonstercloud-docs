@@ -141,29 +141,56 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the Dat
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">
+    ```js
+    // https://github.com/ZennoLab/capmonstercloud-client-js
 
-```js
-// https://github.com/ZennoLab/capmonstercloud-client-js
+    import { CapMonsterCloudClientFactory, ClientOptions, DataDomeRequest } from '@zennolab_com/capmonstercloud-client';
 
-import { CapMonsterCloudClientFactory, ClientOptions, DataDomeRequest } from '@zennolab_com/capmonstercloud-client';
+    document.addEventListener('DOMContentLoaded', async () => {
+      const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+      console.log(await cmcClient.getBalance());
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
-  console.log(await cmcClient.getBalance());
+      const dataDomeRequest = new DataDomeRequest({
+        websiteURL: 'site.com',
+        userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/21F90 Safari/604.1',
+        metadata: {
+          captchaUrl: 'https://geo.captcha-delivery.com/captcha/?initialCid=12434324',
+          datadomeCookie: '',
+        },
+      });
 
-  const dataDomeRequest = new DataDomeRequest({
-    websiteURL: 'site.com',
-    userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/21F90 Safari/604.1',
-    metadata: {
-      captchaUrl: 'https://geo.captcha-delivery.com/captcha/?initialCid=12434324',
-      datadomeCookie: '',
-    },
-  });
-
-  console.log(await cmcClient.Solve(dataDomeRequest));
-});
-```
+      console.log(await cmcClient.Solve(dataDomeRequest));
+    });
+    ```
   </TabItem>
-  
+
+  <TabItem value="python" label="Python" className="method-panel">
+    ```python
+    # https://github.com/ZennoLab/capmonstercloud-client-python
+
+    import asyncio
+    from capmonstercloudclient import CapMonsterClient, ClientOptions
+    from capmonstercloudclient.requests import DataDomeCustomTaskProxylessRequest
+
+    client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonster Cloud API key
+    cap_monster_client = CapMonsterClient(options=client_options)
+
+    data_dome_request = DataDomeCustomTaskProxylessRequest(
+        websiteUrl="https://example.com",  # URL with the captcha
+
+        userAgent="Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/21F90 Safari/604.1",  # Use the current userAgent
+        metadata={
+            "htmlPageBase64": "PGh0bWw+PGhlYWQ+PHRpdGxlPn...+48L2h0bWw+",  # Replace with your HTML base64 or use captchaUrl
+            "datadomeCookie": "datadome=oZJnhpo...1PuyGg"  # Replace with your DataDome cookie
+        }
+    )
+
+    async def solve_captcha():
+        return await cap_monster_client.solve_captcha(data_dome_request)
+
+    responses = asyncio.run(solve_captcha())
+    print(responses)
+    ```
+  </TabItem>
 </Tabs>
 

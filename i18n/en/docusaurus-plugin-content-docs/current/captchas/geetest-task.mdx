@@ -301,39 +301,171 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the res
 ### <span style={{fontSize: '1.5rem'}}>Use SDK Library</span>
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-	<TabItem value="js" label="JavaScript" default className="method-panel">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+    ```js
+    // https://github.com/ZennoLab/capmonstercloud-client-js
 
-		```js
-		// https://github.com/ZennoLab/capmonstercloud-client-js
+    import { CapMonsterCloudClientFactory, ClientOptions, GeeTestProxylessRequest, /*GeeTestRequest*/ } from '@zennolab_com/capmonstercloud-client';
 
-		import { CapMonsterCloudClientFactory, ClientOptions, GeeTestProxylessRequest, /*GeeTestRequest*/ } from '@zennolab_com/capmonstercloud-client';
+    document.addEventListener('DOMContentLoaded', async () => {
+      const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+      console.log(await cmcClient.getBalance());
 
-		document.addEventListener('DOMContentLoaded', async () => {
-		  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
-		  console.log(await cmcClient.getBalance());
+      const geetestV3Request = new GeeTestProxylessRequest({
+        websiteURL: 'https://example.com/geetest.php',
+        gt: '81dc9bdb52d04dc20036dbd8313ed055',
+        challenge: 'd93591bdf7860e1e4ee2fca799911215',
+      });
 
-		  const geetestV3Request = new GeeTestProxylessRequest({
-			websiteURL: 'https://example.com/geetest.php',
-			gt: '81dc9bdb52d04dc20036dbd8313ed055',
-			challenge: 'd93591bdf7860e1e4ee2fca799911215',
-		  })
+      // const geetestV3Request = new GeeTestRequest({
+      //   websiteURL: 'https://example.com/geetest.php',
+      //   gt: '81dc9bdb52d04dc20036dbd8313ed055',
+      //   challenge: 'd93591bdf7860e1e4ee2fca799911215',
+      //   userAgent: 'userAgentPlaceholder',
+      //   proxyType: 'https',
+      //   proxyAddress: 'https://proxy.com',
+      //   proxyPort: 6045,
+      //   proxyLogin: 'login',
+      //   proxyPassword: 'password',
+      // });
 
-		  // const geetestV3Request = new GeeTestRequest({
-		  //   websiteURL: 'https://example.com/geetest.php',
-		  //   gt: '81dc9bdb52d04dc20036dbd8313ed055',
-		  //   challenge: 'd93591bdf7860e1e4ee2fca799911215',
-		  //   userAgent: 'userAgentPlaceholder',
-		  //   proxyType: 'https',
-		  //   proxyAddress: 'https://proxy.com',
-		  //   proxyPort: 6045,
-		  //   proxyLogin: 'login',
-		  //   proxyPassword: 'p@ssword',
-		  // })
+      console.log(await cmcClient.Solve(geetestV3Request));
+    });
+    ```
+  </TabItem>
 
-		  console.log(await cmcClient.Solve(geetestV3Request));
-		});
-		```
-	</TabItem>  
+  <TabItem value="python" label="Python" className="method-panel">
+    ```python
+    # https://github.com/ZennoLab/capmonstercloud-client-python
+
+    # GeeTestV3Proxyless:
+
+    import asyncio
+    from capmonstercloudclient import CapMonsterClient, ClientOptions
+    from capmonstercloudclient.requests import GeetestProxylessRequest
+
+    client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonsterCloud API key
+    cap_monster_client = CapMonsterClient(options=client_options)
+
+    geetest_request = GeetestProxylessRequest(
+        websiteUrl="https://example.com",  # Website with the captcha
+        gt="your_gt_value",  # Replace with the 'gt' parameter
+        challenge="your_challenge_value"  # Replace with the 'challenge' parameter
+    )
+
+    async def solve_captcha():
+        return await cap_monster_client.solve_captcha(geetest_request)
+
+    responses = asyncio.run(solve_captcha())
+    print(responses)
+    ```
+
+    ```python
+    # Geetest V3
+
+    import asyncio
+    from capmonstercloudclient import CapMonsterClient, ClientOptions
+    from capmonstercloudclient.requests import GeetestRequest
+
+    client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonsterCloud API key
+    cap_monster_client = CapMonsterClient(options=client_options)
+
+    geetest_request = GeetestRequest(
+        websiteUrl="https://example.com",  # Website with the captcha
+        gt="your_gt_value",  
+        challenge="your_challenge_value",  
+        proxyType="http",  # Type of proxy (http, https, socks4, socks5)
+        proxyAddress="8.8.8.8",  
+        proxyPort=8080,  
+        proxyLogin="proxyLoginHere",  
+        proxyPassword="proxyPasswordHere", 
+        user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"  # Use the current userAgent
+    )
+
+    async def solve_captcha():
+        return await cap_monster_client.solve_captcha(geetest_request)
+
+    responses = asyncio.run(solve_captcha())
+    print(responses)
+    ```
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    ```csharp
+    // https://github.com/ZennoLab/capmonstercloud-client-dotnet
+
+    // GeeTestV3Proxyless:
+
+    using Zennolab.CapMonsterCloud.Requests;
+    using Zennolab.CapMonsterCloud;
+
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            var clientOptions = new ClientOptions
+            {
+                ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
+            };
+
+            var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+            var geetestRequest = new GeeTestProxylessRequest
+            {
+                WebsiteUrl = "https://example.com/demo/geetest", // URL with the captcha
+                Gt = "your_gt_value", // Replace with the actual gt value
+                Challenge = "your_challenge_value" // Replace with the actual challenge value
+            };
+
+            var geetestResult = await cmCloudClient.SolveAsync(geetestRequest);
+
+            Console.WriteLine("Captcha Solution:");
+            Console.WriteLine($"Challenge: {geetestResult.Solution.Challenge}");
+            Console.WriteLine($"Validate:  {geetestResult.Solution.Validate}");
+            Console.WriteLine($"SecCode:   {geetestResult.Solution.SecCode}");
+        }
+    }
+    ```
+
+    ```csharp
+    // Geetest V3
+
+    using Zennolab.CapMonsterCloud.Requests;
+    using Zennolab.CapMonsterCloud;
+
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            var clientOptions = new ClientOptions
+            {
+                ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
+            };
+
+            var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+            var geetestRequest = new GeeTestRequest
+            {
+                WebsiteUrl = "https://example.com/demo/geetest", // URL with the captcha
+                Gt = "your_gt_value", // Replace with the actual gt value
+                Challenge = "your_challenge_value",
+                ProxyType = ProxyType.Http,
+                ProxyAddress = "8.8.8.8",
+                ProxyPort = 8080,
+                ProxyLogin = "proxyLoginHere",
+                ProxyPassword = "proxyPasswordHere"
+            };
+
+            var geetestResult = await cmCloudClient.SolveAsync(geetestRequest);
+
+            Console.WriteLine("Captcha Solution:");
+            Console.WriteLine($"Challenge: {geetestResult.Solution.Challenge}");
+            Console.WriteLine($"Validate:  {geetestResult.Solution.Validate}");
+            Console.WriteLine($"SecCode:   {geetestResult.Solution.SecCode}");
+        }
+    }
+    ```
+  </TabItem>  
 </Tabs>
 
 <br />
@@ -595,44 +727,185 @@ Use the [getTaskResult](../api/methods/get-task-result.md) to get the result of 
 ### <span style={{fontSize: '1.5rem'}}>Use SDK Library</span>
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-	<TabItem value="js" label="JavaScript" default className="method-panel">
-		```js
-		// https://github.com/ZennoLab/capmonstercloud-client-js
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+    ```js
+    // https://github.com/ZennoLab/capmonstercloud-client-js
 
-		import { CapMonsterCloudClientFactory, ClientOptions, GeeTestProxylessRequest, /*GeeTestRequest*/ } from '@zennolab_com/capmonstercloud-client';
+    import { CapMonsterCloudClientFactory, ClientOptions, GeeTestProxylessRequest, /*GeeTestRequest*/ } from '@zennolab_com/capmonstercloud-client';
 
-		document.addEventListener('DOMContentLoaded', async () => {
-		  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
-		  console.log(await cmcClient.getBalance());
+    document.addEventListener('DOMContentLoaded', async () => {
+      const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+      console.log(await cmcClient.getBalance());
 
-		  const geetestV4Request = new GeeTestProxylessRequest({
-			websiteURL: 'https://example.com/geetest.php',
-			gt: '81dc9bdb52d04dc20036dbd8313ed055',
-			challenge: 'd93591bdf7860e1e4ee2fca799911215',
-			version: '4',
-			initParameters: {
-			  riskType: 'slide',
-			},
-		  });
+      const geetestV4Request = new GeeTestProxylessRequest({
+        websiteURL: 'https://example.com/geetest.php',
+        gt: '81dc9bdb52d04dc20036dbd8313ed055',
+        challenge: 'd93591bdf7860e1e4ee2fca799911215',
+        version: '4',
+        initParameters: {
+          riskType: 'slide',
+        },
+      });
 
-		  // const geetestV4Request = new GeeTestRequest({
-		  //   websiteURL: 'https://example.com/geetest.php',
-		  //   gt: '81dc9bdb52d04dc20036dbd8313ed055',
-		  //   challenge: 'd93591bdf7860e1e4ee2fca799911215',
-		  //   version: '4',
-		  //   initParameters: {
-		  //     riskType: 'slide',
-		  //   },
-		  //   userAgent: 'userAgentPlaceholder',
-		  //   proxyType: 'https',
-		  //   proxyAddress: 'https://proxy.com',
-		  //   proxyPort: 6045,
-		  //   proxyLogin: 'login',
-		  //   proxyPassword: 'p@ssword',
-		  // })
+      // const geetestV4Request = new GeeTestRequest({
+      //   websiteURL: 'https://example.com/geetest.php',
+      //   gt: '81dc9bdb52d04dc20036dbd8313ed055',
+      //   challenge: 'd93591bdf7860e1e4ee2fca799911215',
+      //   version: '4',
+      //   initParameters: {
+      //     riskType: 'slide',
+      //   },
+      //   userAgent: 'userAgentPlaceholder',
+      //   proxyType: 'https',
+      //   proxyAddress: 'https://proxy.com',
+      //   proxyPort: 6045,
+      //   proxyLogin: 'login',
+      //   proxyPassword: 'p@ssword',
+      // })
 
-		  console.log(await cmcClient.Solve(geetestV4Request));
-		});
-		```
-	</TabItem>  
+      console.log(await cmcClient.Solve(geetestV4Request));
+    });
+    ```
+  </TabItem>
+  
+  <TabItem value="python" label="Python" className="method-panel">
+    ```python
+    # https://github.com/ZennoLab/capmonstercloud-client-python
+
+    # GeeTestV4Proxyless
+    import asyncio
+    from capmonstercloudclient import CapMonsterClient, ClientOptions
+    from capmonstercloudclient.requests import GeetestProxylessRequest
+
+    client_options = ClientOptions(api_key = "your_api_key")  # Replace with your CapMonsterCloud API key
+    cap_monster_client = CapMonsterClient(options = client_options)
+
+    gee_test_request = GeetestProxylessRequest(
+        websiteUrl    = "https://example.com/",  # Website with the captcha 
+        gt            = "54088bb07d2df3c46b79f80300b0abbe",  
+        version       = 4,  
+        initParameters = {
+            "riskType": "slide"
+        }
+    )
+
+    async def solve_captcha():
+        return await cap_monster_client.solve_captcha(gee_test_request)
+
+    responses = asyncio.run(solve_captcha())
+    print(responses)
+    ```
+
+    ```python
+    # GeeTestV4
+    import asyncio
+    from capmonstercloudclient import CapMonsterClient, ClientOptions
+    from capmonstercloudclient.requests import GeetestRequest
+
+    client_options = ClientOptions(api_key = "your_api_key")  # Replace with your CapMonsterCloud API key
+    cap_monster_client = CapMonsterClient(options = client_options)
+
+    gee_test_request = GeetestRequest(
+        websiteUrl    = "https://example.com/",  # Website with the captcha
+        gt            = "54088bb07d2df3c46b79f80300b0abbe",  
+        version       = 4,  
+        initParameters = {
+            "riskType": "slide"
+        },
+        proxyType     = "http",  # Type of proxy (http, https, socks4, socks5)
+        proxyAddress  = "8.8.8.8",  
+        proxyPort     = 8080, 
+        proxyLogin    = "proxyLoginHere",  
+        proxyPassword = "proxyPasswordHere",
+        user_agent    = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"  # Use the current userAgent
+    )
+
+    async def solve_captcha():
+        return await cap_monster_client.solve_captcha(gee_test_request)
+
+    responses = asyncio.run(solve_captcha())
+    print(responses)
+    ```
+  </TabItem>
+  
+  <TabItem value="csharp" label="C#" className="method-panel">
+    ```csharp
+    // https://github.com/ZennoLab/capmonstercloud-client-dotnet
+
+    // GeeTestV4Proxyless
+    using Zennolab.CapMonsterCloud.Requests;
+    using Zennolab.CapMonsterCloud;
+
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            var clientOptions = new ClientOptions
+            {
+                ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
+            };
+
+            var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+            var geetestRequest = new GeeTestProxylessRequest
+            {
+                WebsiteUrl = "https://example.com/", // Website with the captcha
+                Gt = "54088bb07d2df3c46b79f80300b0abbe",
+                Version = 4,
+                InitParameters = new Dictionary<string, string> { { "riskType", "slide" } }
+            };
+
+            var geetestResult = await cmCloudClient.SolveAsync(geetestRequest);
+
+            Console.WriteLine("Captcha Solution:");
+            Console.WriteLine($"CaptchaId: {geetestResult.Solution.CaptchaId}");
+            Console.WriteLine($"LotNumber: {geetestResult.Solution.LotNumber}");
+            Console.WriteLine($"PassToken: {geetestResult.Solution.PassToken}");
+            Console.WriteLine($"GenTime: {geetestResult.Solution.GenTime}");
+            Console.WriteLine($"CaptchaOutput: {geetestResult.Solution.CaptchaOutput}");
+        }
+    }
+    ```
+
+    ```csharp
+    // Geetest V4
+    using Zennolab.CapMonsterCloud.Requests;
+    using Zennolab.CapMonsterCloud;
+
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            var clientOptions = new ClientOptions
+            {
+                ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
+            };
+
+            var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+            var geetestRequest = new GeeTestRequest
+            {
+                WebsiteUrl = "https://example.com/", // Website with the captcha
+                Gt = "54088bb07d2df3c46b79f80300b0abbe", // Replace with the correct gt value
+                Version = 4,
+                InitParameters = new Dictionary<string, string> { { "riskType", "slide" } },
+                ProxyType = ProxyType.Http,
+                ProxyAddress = "8.8.8.8",
+                ProxyPort = 8080,
+                ProxyLogin = "proxyLoginHere",
+                ProxyPassword = "proxyPasswordHere"
+            };
+
+            var geetestResult = await cmCloudClient.SolveAsync(geetestRequest);
+
+            Console.WriteLine("Captcha Solution:");
+            Console.WriteLine($"CaptchaId: {geetestResult.Solution.CaptchaId}");
+            Console.WriteLine($"LotNumber: {geetestResult.Solution.LotNumber}");
+            Console.WriteLine($"PassToken: {geetestResult.Solution.PassToken}");
+            Console.WriteLine($"GenTime: {geetestResult.Solution.GenTime}");
+            Console.WriteLine($"CaptchaOutput: {geetestResult.Solution.CaptchaOutput}");
+        }
+    }
+    ```
+  </TabItem>
 </Tabs>

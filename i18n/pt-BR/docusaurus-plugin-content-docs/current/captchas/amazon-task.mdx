@@ -139,3 +139,75 @@ https://api.capmonster.cloud/getTaskResult
 ```
 </MethodDescription>
 </TabItem>
+
+
+## Usar biblioteca SDK
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="python" label="Python" default className="method-panel">
+    ```python
+    # https://github.com/ZennoLab/capmonstercloud-client-python
+
+    import asyncio
+    from capmonstercloudclient import CapMonsterClient, ClientOptions
+    from capmonstercloudclient.requests import AmazonWafProxylessRequest
+
+    client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonster Cloud API key
+    cap_monster_client = CapMonsterClient(options=client_options)
+
+    amazon_waf_request = AmazonWafProxylessRequest(
+        websiteUrl="https://example.com",  # URL с CAPTCHA
+        challengeScript="https://example.com/path/to/challenge.js",
+        captchaScript="https://example.com/path/to/captcha.js",
+        websiteKey="your_website_key",
+        context="your_context_value",
+        iv="your_iv_value",
+        cookieSolution=False
+    )
+
+    async def solve_captcha():
+        return await cap_monster_client.solve_captcha(amazon_waf_request)
+
+    responses = asyncio.run(solve_captcha())
+    print(responses)
+    ```
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    ```csharp
+    // https://github.com/ZennoLab/capmonstercloud-client-dotnet
+
+    using Zennolab.CapMonsterCloud.Requests;
+    using Zennolab.CapMonsterCloud;
+
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            var clientOptions = new ClientOptions
+            {
+                ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
+            };
+
+            var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+            var amazonWafRequest = new AmazonWafProxylessRequest
+            {
+                WebsiteUrl = "https://example.com", // URL with the captcha
+                ChallengeScript = "URL_of_challenge.js",
+                CaptchaScript = "URL_of_captcha.js",
+                WebsiteKey = "website_key",
+                Context = "context_value",
+                Iv = "iv_value",
+                CookieSolution = false
+            };
+
+            var solveResult = await cmCloudClient.SolveAsync(amazonWafRequest);
+
+            Console.WriteLine("ExistingToken: " + solveResult.Solution.ExistingToken); // Adjust based on your expected solution format
+            Console.WriteLine("CaptchaVoucher: " + solveResult.Solution.CaptchaVoucher);
+        }
+    }
+    ```
+  </TabItem>
+</Tabs>

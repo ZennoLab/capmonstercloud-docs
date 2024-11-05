@@ -123,3 +123,66 @@ https://api.capmonster.cloud/getTaskResult
 ```
   </MethodDescription>
   </TabItem>
+  
+  
+## Usar biblioteca SDK
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="python" label="Python" default className="method-panel">
+    ```python
+    # https://github.com/ZennoLab/capmonstercloud-client-python
+
+    import asyncio
+    from capmonstercloudclient import CapMonsterClient, ClientOptions
+    from capmonstercloudclient.requests import TenDiCustomTaskProxylessRequest
+
+    client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonster Cloud API key
+    cap_monster_client = CapMonsterClient(options=client_options)
+
+    ten_di_request = TenDiCustomTaskProxylessRequest(
+        websiteUrl="https://example.com",  # URL with the captcha
+        websiteKey="189956587",  # Replace with the website key for the captcha
+        userAgent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"  # Use the current userAgent
+    )
+
+    async def solve_captcha():
+        return await cap_monster_client.solve_captcha(ten_di_request)
+
+    responses = asyncio.run(solve_captcha())
+    print(responses)
+    ```
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    ```csharp
+    // https://github.com/ZennoLab/capmonstercloud-client-dotnet
+
+    using Zennolab.CapMonsterCloud.Requests;
+    using Zennolab.CapMonsterCloud;
+
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            var clientOptions = new ClientOptions
+            {
+                ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
+            };
+
+            var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+            var tenDiRequest = new TenDiCustomTaskProxylessRequest
+            {
+                WebsiteUrl = "https://example.com", // URL with the captcha
+                WebsiteKey = "189956587", // Replace with the correct website key
+                UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36" // Use the current userAgent
+            };
+
+            var tenDiRequestResult = await cmCloudClient.SolveAsync(tenDiRequest);
+            Console.WriteLine("Captcha Solution: " + string.Join(", ", tenDiRequestResult.Solution.Data));
+            Console.WriteLine("Captcha Solution: " + string.Join(", ", tenDiRequestResult.Solution.Headers));
+        }
+    }
+    ```
+  </TabItem>
+</Tabs>

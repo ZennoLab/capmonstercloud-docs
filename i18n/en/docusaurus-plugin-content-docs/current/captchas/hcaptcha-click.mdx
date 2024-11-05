@@ -449,27 +449,127 @@ Type of received response - [**Grid**](#grid-response-type).
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">
-	```js
-	// https://github.com/ZennoLab/capmonstercloud-client-js
+    ```js
+    // https://github.com/ZennoLab/capmonstercloud-client-js
 
-	import { CapMonsterCloudClientFactory, ClientOptions, ComplexImageHCaptchaRequest } from '@zennolab_com/capmonstercloud-client';
+    import { CapMonsterCloudClientFactory, ClientOptions, ComplexImageHCaptchaRequest } from '@zennolab_com/capmonstercloud-client';
 
-	document.addEventListener('DOMContentLoaded', async () => {
-	  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
-	  console.log(await cmcClient.getBalance());
+    document.addEventListener('DOMContentLoaded', async () => {
+      const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+      console.log(await cmcClient.getBalance());
 
-	  const complexImageHCaptchaRequest = new ComplexImageHCaptchaRequest({
-		imageUrls: ['https://i.postimg.cc/kg71cbRt/image-1.jpg', 'https://i.postimg.cc/6381Zx2j/image.jpg'],
-		metaData: {
-		  Task: 'Please click each image containing a mountain',
-		},
-		websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle',
-		exampleImagesBase64: ['image in base64'],
-		exampleImageUrls: ['https://i.postimg.cc/kg71cbRt/image-1.jpg'],
-	  });
+      const complexImageHCaptchaRequest = new ComplexImageHCaptchaRequest({
+        imageUrls: [
+          'https://i.postimg.cc/kg71cbRt/image-1.jpg',
+          'https://i.postimg.cc/6381Zx2j/image.jpg'
+        ],
+        metaData: {
+          Task: 'Please click each image containing a mountain',
+        },
+        websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle',
+        exampleImagesBase64: ['image in base64'],
+        exampleImageUrls: ['https://i.postimg.cc/kg71cbRt/image-1.jpg'],
+      });
 
-	  console.log(await cmcClient.Solve(complexImageHCaptchaRequest));
-	});
-	```
-  </TabItem>  
+      console.log(await cmcClient.Solve(complexImageHCaptchaRequest));
+    });
+    ```
+  </TabItem>
+
+  <TabItem value="python" label="Python" className="method-panel">
+    ```python
+    # https://github.com/ZennoLab/capmonstercloud-client-python
+
+    import asyncio
+    from capmonstercloudclient import CapMonsterClient, ClientOptions
+    from capmonstercloudclient.requests import HcaptchaComplexImageTaskRequest
+
+    # Replace with your CapMonster Cloud API key
+    client_options = ClientOptions(api_key="your_api_key")  
+    cap_monster_client = CapMonsterClient(options=client_options)
+
+    hcaptcha_complex_image_request = HcaptchaComplexImageTaskRequest(
+        captchaClass="hcaptcha",
+        imagesUrls=[
+            "https://i.postimg.cc/bwVVWbkG/4type-00.jpg",  # Replace with your values
+            "https://i.postimg.cc/nzBdXP57/4type-01.jpg",
+            "https://i.postimg.cc/zf9tXrd8/4type-02.jpg",
+            "https://i.postimg.cc/2yY0hxRt/4type-03.jpg",
+            "https://i.postimg.cc/rFQfRWhh/4type-04.jpg",
+            "https://i.postimg.cc/Jz0PNnvR/4type-05.jpg",
+            "https://i.postimg.cc/h48ygNVR/4type-06.jpg",
+            "https://i.postimg.cc/yY1yXdtk/4type-07.jpg",
+            "https://i.postimg.cc/Prt6qKMp/4type-08.jpg"
+        ],
+        exampleImageUrls=["https://i.postimg.cc/MpLtdwJV/4type-example.jpg"],
+        metadata={
+            "Task": "Please select all images that appear warmer in comparison to other images"
+        },
+        userAgent=(
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+            "(KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"  # Use your current userAgent
+        )
+    )
+
+    async def solve_captcha():
+        return await cap_monster_client.solve_captcha(hcaptcha_complex_image_request)
+
+    responses = asyncio.run(solve_captcha())
+    print(responses)
+    ```
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    ```csharp
+    // https://github.com/ZennoLab/capmonstercloud-client-dotnet
+
+    using Zennolab.CapMonsterCloud;
+    using Zennolab.CapMonsterCloud.Requests;
+
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            var clientOptions = new ClientOptions
+            {
+                ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
+            };
+
+            var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+            var hCaptchaRequest = new HCaptchaComplexImageTaskRequest
+            {
+                // Image URLs used in the hCaptcha challenge (replace with your own URLs)
+                ImageUrls = new[]
+                {
+                    "https://i.postimg.cc/bwVVWbkG/4type-00.jpg",
+                    "https://i.postimg.cc/nzBdXP57/4type-01.jpg",
+                    "https://i.postimg.cc/zf9tXrd8/4type-02.jpg",
+                    "https://i.postimg.cc/2yY0hxRt/4type-03.jpg",
+                    "https://i.postimg.cc/rFQfRWhh/4type-04.jpg",
+                    "https://i.postimg.cc/Jz0PNnvR/4type-05.jpg",
+                    "https://i.postimg.cc/h48ygNVR/4type-06.jpg",
+                    "https://i.postimg.cc/yY1yXdtk/4type-07.jpg",
+                    "https://i.postimg.cc/Prt6qKMp/4type-08.jpg"
+                },
+
+                ExampleImageUrls = new[]
+                {
+                    "https://i.postimg.cc/MpLtdwJV/4type-example.jpg"
+                },
+                Metadata = new HCaptchaComplexImageTaskRequest.HCaptchaMetadata
+                {
+                    Task = "Please select all images that appear warmer in comparison to other images" // Task description
+                },
+                UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36", // Use your current UserAgent
+                WebsiteUrl = "https://lessons.zennolab.com/captchas/hcaptcha/?level=easy" // URL with the hCaptcha
+            };
+
+            var hCaptchaResult = await cmCloudClient.SolveAsync(hCaptchaRequest);
+
+            Console.WriteLine("Captcha Solution: " + string.Join(", ", hCaptchaResult.Solution.Answer));
+        }
+    }
+    ```
+  </TabItem>
 </Tabs>
