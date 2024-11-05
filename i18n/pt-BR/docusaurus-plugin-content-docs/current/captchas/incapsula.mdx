@@ -126,32 +126,3 @@ Use o método [getTaskResult](../api/methods/get-task-result.md) para obter a so
 		```
 	</MethodDescription>
 </TabItem>
-
-
-## Usar biblioteca SDK
-
-<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-  <TabItem value="js" label="JavaScript" default className="method-panel">
-    ```js
-    // https://github.com/ZennoLab/capmonstercloud-client-js
-
-    import { CapMonsterCloudClientFactory, ClientOptions, DataDomeRequest } from '@zennolab_com/capmonstercloud-client';
-
-    document.addEventListener('DOMContentLoaded', async () => {
-      const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
-      console.log(await cmcClient.getBalance());
-
-      const incapsulaRequest = new IncapsulaRequest({
-        websiteURL: 'site.com',
-        userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/21F90 Safari/604.1',
-        metadata: {
-          incapsulaScriptBase64: "dmFyIF8weGQ2ZmU9Wydce..eDUzXHg2YVx4NGYnKV09XzB4Mjk3MTIxO319KCkpOw=="
-          incapsulaSessionCookie: "l/LsGnrvyB9lNhXI8borDKa2IGcAAAAAX0qAEHheCWuNDquzwb44cw=",
-        },
-      });
-
-      console.log(await cmcClient.Solve(incapsulaRequest));
-    });
-    ```
-  </TabItem>
-</Tabs>
