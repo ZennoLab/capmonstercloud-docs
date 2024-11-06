@@ -295,3 +295,105 @@ In the request we pass nine images. The images must be passed in the following o
 		```
 	</MethodDescription>
 </TabItem>
+
+
+### Create task `bls`
+
+In the request, we send 9 images in base64 format. 
+We also pass the sought value TaskArgument in the metadata.
+
+<TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="method-panel">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+			"clientKey":{{API_key}},
+			"task": 
+			{
+				"type": "ComplexImageTask",
+				"class": "recognition",
+				"imagesBase64": [
+					"image1_to_base64",
+					"image2_to_base64",
+					"image3_to_base64",
+					"image4_to_base64",
+					"image5_to_base64",
+					"image6_to_base64",
+					"image7_to_base64",
+					"image8_to_base64",
+					"image9_to_base64"
+				],
+				"metadata": {
+					"Task": "bls_3x3",
+					"TaskArgument": "123"
+				}
+			}
+		}
+		```
+
+		Example task:
+
+		![](./images/ComplexImageTask-Recognition/bls.png)
+
+		Send images converted to base64:
+		
+		![](./images/ComplexImageTask-Recognition/image1.gif)
+		![](./images/ComplexImageTask-Recognition/image2.gif)
+		![](./images/ComplexImageTask-Recognition/image3.gif)
+		![](./images/ComplexImageTask-Recognition/image4.gif)
+		![](./images/ComplexImageTask-Recognition/image5.gif)
+		![](./images/ComplexImageTask-Recognition/image6.gif)
+		![](./images/ComplexImageTask-Recognition/image7.gif)
+		![](./images/ComplexImageTask-Recognition/image8.gif)
+		![](./images/ComplexImageTask-Recognition/image9.gif)
+		
+		For this example: "TaskArgument": "546"
+
+		**Response**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":143998457
+		}
+		```
+	</MethodDescription>
+</TabItem>
+
+### Get task result `bls`
+<TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="method-panel-full">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 143998457
+		}
+		```
+		**Response**
+		An array of values with elements true or false, depending on whether the number in the image is the sought argument or not.  
+		```json
+		{
+		  "errorId":0,
+		  "status":"ready",
+		  "errorCode":null,
+		  "errorDescription":null,
+		  "solution": {
+			"answer":[true,true,false,false,true,false,false,true,true],
+			"metadata": {
+			  "AnswerType":"Grid"
+			}
+		  }
+		}
+		```
+	</MethodDescription>
+</TabItem>

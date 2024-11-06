@@ -125,7 +125,7 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 	</MethodDescription>
 </TabItem>
 
-### 创建任务“oocl_rotate_double_new”
+### 创建任务`oocl_rotate_double_new`
 
 在请求中我们传递三张图片：背景、环形和圆形。
 
@@ -262,7 +262,7 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 </TabItem>
 
 
-### 获取任务结果‘betpunch_3x3_rotate’
+### 获取任务结果`betpunch_3x3_rotate`
 
 <TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="method-panel-full">
 	<MethodItem>
@@ -291,6 +291,108 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 				"answer":[4,4,4,4,4,3,1,2,2],
 				"metadata":{"AnswerType":"NumericArray"}
 			}
+		}
+		```
+	</MethodDescription>
+</TabItem>
+
+
+### 创建任务 `bls`
+
+在请求中，我们发送9张以base64格式编码的图片。
+我们还在元数据中传递所需的值TaskArgument。
+
+<TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="method-panel">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**要求**
+		```json
+		{
+			"clientKey":{{API_key}},
+			"task": 
+			{
+				"type": "ComplexImageTask",
+				"class": "recognition",
+				"imagesBase64": [
+					"image1_to_base64",
+					"image2_to_base64",
+					"image3_to_base64",
+					"image4_to_base64",
+					"image5_to_base64",
+					"image6_to_base64",
+					"image7_to_base64",
+					"image8_to_base64",
+					"image9_to_base64"
+				],
+				"metadata": {
+					"Task": "bls_3x3",
+					"TaskArgument": "123"
+				}
+			}
+		}
+		```
+
+		示例任务：
+
+		![](./images/ComplexImageTask-Recognition/bls.png)
+
+		发送转换为base64的图片：
+		
+		![](./images/ComplexImageTask-Recognition/image1.gif)
+		![](./images/ComplexImageTask-Recognition/image2.gif)
+		![](./images/ComplexImageTask-Recognition/image3.gif)
+		![](./images/ComplexImageTask-Recognition/image4.gif)
+		![](./images/ComplexImageTask-Recognition/image5.gif)
+		![](./images/ComplexImageTask-Recognition/image6.gif)
+		![](./images/ComplexImageTask-Recognition/image7.gif)
+		![](./images/ComplexImageTask-Recognition/image8.gif)
+		![](./images/ComplexImageTask-Recognition/image9.gif)
+		
+		对于此示例： "TaskArgument": "546"
+
+		**回应**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":143998457
+		}
+		```
+	</MethodDescription>
+</TabItem>
+
+### 获取任务结果 `bls`
+<TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="method-panel-full">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**要求**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 143998457
+		}
+		```
+		**回应**
+		一个值的数组，元素为 true 或 false，取决于图片中的数字是否为所需的参数。 
+		```json
+		{
+		  "errorId":0,
+		  "status":"ready",
+		  "errorCode":null,
+		  "errorDescription":null,
+		  "solution": {
+			"answer":[true,true,false,false,true,false,false,true,true],
+			"metadata": {
+			  "AnswerType":"Grid"
+			}
+		  }
 		}
 		```
 	</MethodDescription>
