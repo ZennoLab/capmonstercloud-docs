@@ -13,10 +13,6 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 
 # ComplexImageTask Recognition
 
-<PriceBlockWrap>
-  <PriceBlock title="ComplexImageTask" name="textCaptchaToken"/>
-</PriceBlockWrap>
-
 ## 请求参数
 <TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
@@ -45,6 +41,10 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 ## 可用任务类型
 
 ### 创建任务`oocl_rotate_new`
+
+<PriceBlockWrap>
+  <PriceBlock title="ComplexImageTask" name="textCaptchaToken"/>
+</PriceBlockWrap>
 
 <TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
 	<MethodItem>
@@ -92,6 +92,7 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 
 ### 获取任务结果`oocl_rotate_new`
 
+
 <TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
 	<MethodItem>
 		```http
@@ -126,6 +127,10 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 </TabItem>
 
 ### 创建任务`oocl_rotate_double_new`
+
+<PriceBlockWrap>
+  <PriceBlock title="ComplexImageTask" name="textCaptchaToken"/>
+</PriceBlockWrap>
 
 在请求中我们传递三张图片：背景、环形和圆形。
 
@@ -215,6 +220,10 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 
 ### 创建任务`betpunch_3x3_rotate`
 
+<PriceBlockWrap>
+  <PriceBlock title="ComplexImageTask" name="textCaptchaToken"/>
+</PriceBlockWrap>
+
 在请求中我们传递九张图片。图片必须按以下顺序传递：
 
 ![](./images/ComplexImageTask-Recognition/betpunch_3x3_rotate_example.png)
@@ -298,6 +307,10 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 
 
 ### 创建任务 `bls`
+
+<PriceBlockWrap>
+  <PriceBlock title="Bls" name="bls"/>
+</PriceBlockWrap>
 
 在请求中，我们发送9张以base64格式编码的图片。
 我们还在元数据中传递所需的值TaskArgument。

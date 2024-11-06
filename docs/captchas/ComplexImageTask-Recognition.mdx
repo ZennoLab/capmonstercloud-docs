@@ -13,10 +13,6 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 
 # ComplexImageTask Recognition
 
-<PriceBlockWrap>
-  <PriceBlock title="ComplexImageTask" name="textCaptchaToken"/>
-</PriceBlockWrap>
-
 ## Параметры запроса
 <TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
@@ -44,6 +40,10 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 ## Доступные типы заданий
 
 ### Создание задачи `oocl_rotate_new`
+
+<PriceBlockWrap>
+  <PriceBlock title="ComplexImageTask" name="textCaptchaToken"/>
+</PriceBlockWrap>
 
 В запросе передаем два изображения: фон и круг.
 
@@ -125,6 +125,10 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 </TabItem>
 
 ### Создание задачи `oocl_rotate_double_new`
+
+<PriceBlockWrap>
+  <PriceBlock title="ComplexImageTask" name="textCaptchaToken"/>
+</PriceBlockWrap>
 
 В запросе передаем три изображения: фон, кольцо, круг.
 
@@ -214,6 +218,10 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
   
 ### Создание задачи `betpunch_3x3_rotate request`
 
+<PriceBlockWrap>
+  <PriceBlock title="ComplexImageTask" name="textCaptchaToken"/>
+</PriceBlockWrap>
+
 В запросе передаем девять изображений. Передавать изображения нужно в следующем порядке:
 ![](./images/ComplexImageTask-Recognition/betpunch_3x3_rotate_example.png)
 
@@ -295,6 +303,10 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 
 
 ### Создание задачи `bls`
+
+<PriceBlockWrap>
+  <PriceBlock title="Bls" name="bls"/>
+</PriceBlockWrap>
 
 В запросе передаем 9 изображений в формате base64.
 Также в metadata передаем искомое значение TaskArgument.
