@@ -15,7 +15,7 @@ sidebar_position: 6
 事件不传递任何参数
 :::
 
-### **示例：**
+### 示例：
 ```js
 window.addEventListener("onCMExtensionReady", () => {
   // 执行某些操作

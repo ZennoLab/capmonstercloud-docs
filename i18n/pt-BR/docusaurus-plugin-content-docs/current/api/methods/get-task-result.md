@@ -4,7 +4,7 @@ sidebar_label: getTaskResult
 ---
 
 # getTaskResult : solicitar resultado da tarefa
-## **Descrição**
+## Descrição
 Depois de criar uma tarefa, você precisa obter a resposta verificando periodicamente o status da solução.
 
 :::info Endereço do método
@@ -21,7 +21,7 @@ Limite: 120 solicitações por tarefa. Se o limite for excedido, a conta do usu�
 
 ---
 
-## **Parâmetros da solicitação:**
+## Parâmetros da solicitação:
 
 ### `clientKey`
 Tipo: `String` <br />
@@ -35,7 +35,7 @@ ID obtido no método [createTask](./create-task.md).
 
 ---
 
-### **Exemplo de solicitação**
+### Exemplo de solicitação
 
 ```json
 {
@@ -44,7 +44,7 @@ ID obtido no método [createTask](./create-task.md).
 }
 ```
 ---
-## **Estrutura da resposta**
+## Estrutura da resposta
 
 ### `errorId`
 Tipo: `Integer` <br />
@@ -63,7 +63,7 @@ Tipo: `Objeto` <br />
 Dados do resultado da tarefa. Diferente para cada tipo de tarefa.
 
 ---
-### **Exemplo de resposta**
+### Exemplo de resposta
 
 Resposta em processo
 

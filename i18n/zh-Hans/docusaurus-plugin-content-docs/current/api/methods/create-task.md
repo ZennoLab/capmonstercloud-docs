@@ -4,7 +4,7 @@ sidebar_label: createTask
 ---
 
 # createTask：创建任务
-## **描述**
+## 描述
 此方法用于创建解决所选验证码类型的任务。在参数中，您需要传递客户端授权数据、任务数据和其他可选参数。
 
 :::info 方法地址
@@ -19,7 +19,7 @@ https://api.capmonster.cloud/createTask
 ` `请求格式：JSON POST -->
 
 -----
-## **请求参数**
+## 请求参数
 <!--
 
 |**参数** |**类型**|**必填**|**值**|
@@ -55,7 +55,7 @@ https://api.capmonster.cloud/createTask
 ```
 
 -----
-### **请求示例**
+### 请求示例
 <!-- ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -119,7 +119,7 @@ import CodeBlock from '@theme/CodeBlock';
 </details>
 
 -----
-## **响应结构**
+## 响应结构
 <!-- |**参数**|**类型**|**值**|
 \| :-: | :-: | :-: |
 |errorId|整数|错误标识符。<br />**0** - 没有错误，任务已成功创建，任务ID位于 *taskId*<br />**1** - 发生错误，有关错误的信息在 *errorCode* 属性中|
@@ -139,7 +139,7 @@ import CodeBlock from '@theme/CodeBlock';
 T任务ID，用于后续在 [getTaskResult](./get-task-result) 方法中使用。
 
 -----
-### **响应示例**
+### 响应示例
 <details>
 <summary>无任何错误的响应</summary>
 

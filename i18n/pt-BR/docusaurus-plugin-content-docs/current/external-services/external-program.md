@@ -1,6 +1,6 @@
 ﻿# Como conectar o CapMonster.cloud a um programa?
 CapMonster.cloud é compatível com todos os solucionadores de captchas. Para conectar CapMonster.cloud ao seu programa, siga o guia abaixo.
-## **Conectando a programas que suportam CapMonster.Cloud**
+## Conectando a programas que suportam CapMonster.Cloud
 <details>
    <summary>ZennoPoster</summary>
 
@@ -33,7 +33,7 @@ Para resolver captchas padrão, selecione “Util::Antigate” e especifique “
 ![](./images/external-program/Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.006.png)
 </details>
 
-## **Conectando a programas onde você pode especificar um domínio**
+## Conectando a programas onde você pode especificar um domínio
 Copie o domínio [api.capmonster.cloud](https://api.capmonster.cloud) e a chave para CapMonster.cloud.
 
 Esse método funciona para:
@@ -44,7 +44,7 @@ Esse método funciona para:
 ![](./images/external-program/Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.007.png)
 </details>
 
-## **Conectando a outros programas em 3 etapas**
+## Conectando a outros programas em 3 etapas
 1. No seu programa, selecione um dos solucionadores de captchas que suportamos:
    `Anti-Captcha (v1.0, v2.0), RuCaptcha, RipCaptcha, 2Captcha, BypassCaptcha, DeathByCaptcha`.
 1. Em seguida, insira sua chave de API pessoal do CapMonsterCloud no campo relevante do programa de onde você enviará os captchas.
@@ -317,7 +317,7 @@ Se você não conseguiu conectar o CapMonster.Cloud ao seu aplicativo, entre em 
 
 :::
 
-## **Erros de conexão frequentes. Como evitá-los?**
+## Erros de conexão frequentes. Como evitá-los?
 
 **Problemas de rede**: Se você estiver com problemas para se conectar ao CapMonster.Cloud, verifique sua conexão com a Internet. Uma rede instável ou problemas de roteamento podem causar falhas no serviço.
 

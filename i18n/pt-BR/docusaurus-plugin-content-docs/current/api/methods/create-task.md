@@ -5,7 +5,7 @@ sidebar_label: createTask
 
 # createTask : criando uma tarefa
 
-## **Descrição**
+## Descrição
 Este método cria uma tarefa para resolver o tipo de captcha selecionado. Nos parâmetros, é necessário passar os dados de autorização do cliente, os dados da tarefa e outros parâmetros opcionais.
 
 :::info Endereço do método
@@ -17,7 +17,7 @@ Formato da solicitação: `JSON POST`
 :::
 
 -----
-## **Parâmetros da solicitação**
+## Parâmetros da solicitação
 
 ### `clientKey`
 Tipo: `String` <br />
@@ -50,7 +50,7 @@ Exemplo de uso da função `callbackUrl`:
 
 --- 
 
-### **Exemplos de solicitação**
+### Exemplos de solicitação
 
 <details>
   <summary>Resolvendo captcha normal com uma imagem</summary>
@@ -84,7 +84,7 @@ Exemplo de uso da função `callbackUrl`:
 </details>
 
 -----
-## **Estrutura da resposta**
+## Estrutura da resposta
 
 ### `errorId`
 Tipo: `Integer` <br />
@@ -103,7 +103,7 @@ ID da tarefa para uso posterior no método [getTaskResult](./get-task-result.md)
 
 ---
 
-### **Exemplo de resposta**
+### Exemplo de resposta
 
 <details>
     <summary>Resposta SEM erro</summary>

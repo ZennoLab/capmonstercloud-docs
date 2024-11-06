@@ -35,7 +35,7 @@ sidebar_position: 5
 
 通过包（可通过[链接](https://drive.google.com/file/d/11pVyiPltRW_vEPPnRnQJLNiX0J0GVhBe/view?usp=drive_link) 下载）安装扩展时，可以设置扩展将使用的初始参数。为此，您需要解压缩包并编辑 defaultSettings.json 文件，然后重新打包。
 
-### **defaultSettings.json 设置文件的描述**
+### defaultSettings.json 设置文件的描述
 
 设置文件如下所示：
 
@@ -78,7 +78,7 @@ sidebar_position: 5
 
 请注意，事件处理程序附加到属性，而不是数据内部。
 
-### **例如：**
+### 例如：
 ```js
 window.CMExtension.isEnabled = false;
 ```

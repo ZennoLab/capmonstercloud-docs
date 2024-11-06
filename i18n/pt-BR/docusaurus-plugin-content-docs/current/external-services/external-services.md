@@ -15,7 +15,7 @@ Quando a instalação for concluída, um atalho do CapMonsterInterceptor será c
 ![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.005.png)
 
 Quando o CapMonsterInterceptor estiver em execução, todos os captchas enviados para reconhecimento aos serviços *Anti-Captcha (v1.0, v2.0), RuCaptcha, RipCaptcha, 2Captcha, BypassCaptcha, DeathByCaptcha* serão interceptados e redirecionados para o CapMonster.Cloud.
-## **Exemplo**
+## Exemplo
 Basta selecionar um dos serviços de reconhecimento no seu programa onde você precisa inserir um captcha. No nosso exemplo, será *DeathByCaptcha*.
 
 - **Nota para DeathByCaptcha:** para identificar um usuário, a API DeathByCaptcha usa nome de usuário e senha, não uma chave de API. Nesse caso, você precisa preencher 2 campos com valores aleatórios.
@@ -29,7 +29,7 @@ Agora você pode executar seu programa. Todos os captchas enviados para outro se
 Ao clicar duas vezes no ícone do CapMonsterInterceptor na bandeja, você pode ver as estatísticas dos captchas interceptados enviados para reconhecimento.
 
 ![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.007.png)
-## **Perguntas e respostas**
+## Perguntas e respostas
 
 <details>
     <summary>Como alterar a chave de API especificada ao instalar o CapMonsterInterceptor?</summary>

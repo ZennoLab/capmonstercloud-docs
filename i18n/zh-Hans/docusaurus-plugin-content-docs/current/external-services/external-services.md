@@ -15,7 +15,7 @@ CapMonster Cloud支持API：Anti-Captcha（v1.0，v2.0）、RuCaptcha、RipCaptc
 ![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.005.png)
 
 当CapMonsterInterceptor运行时，发送到*Anti-Captcha（v1.0，v2.0）、RuCaptcha、RipCaptcha、2Captcha、BypassCaptcha、DeathByCaptcha*服务进行识别的所有验证码将被拦截并重定向到CapMonster.Cloud。
-## **示例**
+## 示例
 只需在您的程序中选择需要输入验证码的识别服务之一。在我们的示例中，将选择 *DeathByCaptcha*。
 
 - **关于DeathByCaptcha的注意事项**，用于识别用户的DeathByCaptcha API使用用户名和密码，而不是API密钥。在这种情况下，您需要填写两个字段，可以填写随机值。
@@ -29,7 +29,7 @@ CapMonster Cloud支持API：Anti-Captcha（v1.0，v2.0）、RuCaptcha、RipCaptc
 双击系统托盘中的CapMonsterInterceptor图标，您可以查看发送到识别的拦截验证码的统计信息。
 
 ![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.007.png)
-## **问题与答案**
+## 问题与答案
 <details>
 <summary>如何在安装CapMonsterInterceptor时更改指定的API密钥？</summary>
 

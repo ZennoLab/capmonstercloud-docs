@@ -11,7 +11,7 @@ A extensão só funciona com o navegador Chromium!
 
 :::
 
-## **Método #1: Instalação usando um arquivo CRX.**
+## Método #1: Instalação usando um arquivo CRX.
 1. Baixe o [arquivo CRX CapMonster Cloud](https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=en);
 
 :::info
@@ -29,7 +29,7 @@ A extensão só funciona com o navegador Chromium!
 5. Nas configurações da ação, defina o ID da extensão “pabjfbciaedomjjfelfafejkppknjleh”;
 
 6. Na janela da extensão que abrir, insira a chave API da sua conta pessoal do CapMonster Cloud.
-## **Método #2: Instalação via Chrome Web Store.**
+## Método #2: Instalação via Chrome Web Store.
 1. Abra o ProjectMaker;
 2. Vá para a página da extensão `<https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=en>`;
 3. Clique no botão “Instalar” e instale a extensão;
