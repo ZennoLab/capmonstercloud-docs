@@ -11,7 +11,7 @@ sidebar_label: 在ProjectMaker浏览器中安装扩展的说明
 
 :::
 
-## **方法一：使用CRX文件安装。**
+## 方法一：使用CRX文件安装。
 1. 下载 [CRX文件 CapMonster Cloud](https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=en)；
 
 :::info 信息
@@ -29,7 +29,7 @@ sidebar_label: 在ProjectMaker浏览器中安装扩展的说明
 5. 在操作设置中设置扩展ID为“pabjfbciaedomjjfelfafejkppknjleh”；
 
 6. 在打开的扩展窗口中，输入来自您的CapMonster Cloud个人账户的API密钥。
-## **方法二：通过Chrome Web Store安装。**
+## 方法二：通过Chrome Web Store安装。
 1. 打开ProjectMaker；
 2. 转到扩展页面` <https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=en>`;
 3. 点击“安装”按钮并安装扩展；

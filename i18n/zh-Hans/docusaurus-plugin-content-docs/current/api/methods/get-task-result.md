@@ -3,7 +3,7 @@ sidebar_position: 1
 sidebar_label: getTaskResult
 ---
 # getTaskResult：请求任务结果
-## **描述**
+## 描述
 创建任务后，您需要通过定期检查解决状态来获取其响应。
 
 :::info 信息 方法地址
@@ -22,7 +22,7 @@ https://api.capmonster.cloud/getTaskResult
 :::
 
 ---
-## **请求参数：**
+## 请求参数：
 ### `clientKey`
 类型: `字符串` <br />
 必需: `是`<br />
@@ -36,7 +36,7 @@ https://api.capmonster.cloud/getTaskResult
 |clientKey|字符串|是|您账户的唯一密钥|
 |taskId|整数|是|在 [createTask](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/425989/createTask)方法中获得的任务 ID| -->
 ----------------------------------------------------------------------------------------------------------------------
-### **请求示例**
+### 请求示例
 ``` json
 {
   "clientKey":"API_KEY",
@@ -45,7 +45,7 @@ https://api.capmonster.cloud/getTaskResult
 ```
 
 ---
-## **响应结构**
+## 响应结构
 ### `errorId`
 类型: `整数` <br />
 错误标识符。<br />**0** - 无错误，*errorCode* 属性不存在；<br />**1** - 发生错误，错误信息在 *errorCode* 属性中。
@@ -65,7 +65,7 @@ https://api.capmonster.cloud/getTaskResult
 |status|字符串|**processing** - 任务尚未完成<br />**ready** - 任务完成，解决方案可以在 *solution* 属性中找到|
 |solution|对象|任务结果数据。不同类型的任务有不同的格式。| -->
 ------------------------------------------------------------------------------------------------
-### **响应示例：**
+### 响应示例：
 处理中的响应
 ``` json
 {

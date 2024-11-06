@@ -1,10 +1,10 @@
 ﻿# Motivos para bloqueio
-## ![](./images/block-reason/Aspose.Words.bbd9194a-7e5f-4818-92e0-dfa2931e5a81.001.png) **Como descobrir o motivo do bloqueio?**
+## ![](./images/block-reason/Aspose.Words.bbd9194a-7e5f-4818-92e0-dfa2931e5a81.001.png) Como descobrir o motivo do bloqueio?
 Em caso de bloqueio, você verá uma notificação em sua [conta pessoal](https://capmonster.cloud/Dashboard).
 O histórico de bloqueios está disponível nas configurações.
 
 ![](./images/block-reason/ban-history.png) 
-## ![](./images/block-reason/Aspose.Words.bbd9194a-7e5f-4818-92e0-dfa2931e5a81.003.png) **Os principais motivos para receber um bloqueio são:**
+## ![](./images/block-reason/Aspose.Words.bbd9194a-7e5f-4818-92e0-dfa2931e5a81.003.png) Os principais motivos para receber um bloqueio são:
 
 - **KeyDoesntExist** (múltiplas solicitações sem chave / com chave inválida)
 - **ZeroBalance** (múltiplas solicitações com saldo zero)
@@ -14,7 +14,7 @@ O histórico de bloqueios está disponível nas configurações.
 - **BadProxy** (múltiplas solicitações com proxy banido)
 
 Os usuários recebem bloqueios por ações repetidas por um período limitado.
-## ![](./images/block-reason/Aspose.Words.bbd9194a-7e5f-4818-92e0-dfa2931e5a81.004.png) **Quando o bloqueio será removido?**
+## ![](./images/block-reason/Aspose.Words.bbd9194a-7e5f-4818-92e0-dfa2931e5a81.004.png) Quando o bloqueio será removido?
 
 A duração do bloqueio é de 10 minutos, desde que você não continue a violar as regras descritas acima.
 

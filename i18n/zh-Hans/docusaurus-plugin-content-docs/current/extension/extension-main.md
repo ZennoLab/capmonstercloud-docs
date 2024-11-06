@@ -3,13 +3,13 @@ sidebar_position: 0
 ---
 
 # Chrome 浏览器扩展
-## **描述**
+## 描述
 通过此扩展，您可以直接在浏览器中自动识别验证码。
 
 该扩展适用于 Google Chrome 浏览器。
 
 -----
-## **自动安装**
+## 自动安装
 **重要提示！** 您不能在隐身模式和访客模式下安装扩展程序。
 
 1. 打开 [Chrome 网上应用店](https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=en)。
@@ -58,7 +58,7 @@ sidebar_position: 0
 </details>
 
 -----
-## **设置**
+## 设置
 <details>
 <summary>如何固定扩展</summary>
 
@@ -70,11 +70,11 @@ sidebar_position: 0
 启动扩展后，您将看到此窗口：
 
 ![](./images/extension-main-firefox/ext.screen.en.png)
-### <a name="id-browserextension-apikey"></a>**API 密钥**
+### <a name="id-browserextension-apikey"></a>API 密钥
 在相应的字段中输入 API 密钥(1)，点击保存按钮(2)。如果您输入了正确的密钥，您的余额将显示在下方(3)。
 
 ![](./images/extension-main-firefox/api-key.png)
-### <a name="id-browserextension-automaticcaptchasolving"></a>**自动识别验证码**
+### <a name="id-browserextension-automaticcaptchasolving"></a>自动识别验证码
 在这里，您可以选择扩展将自动识别的验证码类型。
 
 ![](./images/extension-main-firefox/extension.example.png)
@@ -84,15 +84,15 @@ sidebar_position: 0
 您可能需要重新加载带有验证码的页面以使更改生效！
 
 :::
-### <a name="id-browserextension-repeatcaptchasolvingincaseofanerror"></a>**在出现错误时重复解决验证码**
+### <a name="id-browserextension-repeatcaptchasolvingincaseofanerror"></a>在出现错误时重复解决验证码
 如果第一次尝试解决验证码失败，扩展将发送重复的任务，直到验证码解决成功，或者直到达到此设置中指定的限制为止。
-### <a name="id-browserextension-proxy"></a>**代理**
+### <a name="id-browserextension-proxy"></a>代理
 ![](./images/extension-main-firefox/proxy.png)
 
 在这里，您可以指定将与识别任务一起发送的代理设置。
 
 “登录”和“密码”是可选的。
-### <a name="id-browserextension-blacklistcontrol"></a>**黑名单控制**
+### <a name="id-browserextension-blacklistcontrol"></a>黑名单控制
 使用黑名单，您可以配置扩展程序在特定网站上忽略验证码。
 
 启用此选项后，将会出现一个输入网站的字段：

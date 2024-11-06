@@ -3,13 +3,13 @@ sidebar_position: 0
 ---
 
 # Extensão do navegador Chrome
-## **Descrição**
+## Descrição
 Com esta extensão, você pode reconhecer captchas automaticamente diretamente no navegador.
 
 A extensão funciona no navegador Google Chrome.
 
 -----
-## **Instalação automática**
+## Instalação automática
 **Importante!** Não é possível instalar extensões no modo de navegação anônima e no modo visitante.
 
 1. Abra a [Chrome Web Store](https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=en).
@@ -58,7 +58,7 @@ Se você estiver instalando a extensão sobre a versão anterior, ao atualizar o
 </details>
 
 -----
-## **Configurações**
+## Configurações
 <details>
     <summary>Como fixar a extensão</summary>
 
@@ -70,11 +70,11 @@ Por padrão, a extensão instalada é ocultada. Para fixá-la, você deve clicar
 Após iniciar a extensão, você verá esta janela:
 
 ![](./images/extension-main-firefox/ext.screen.en.png)
-### <a name="id-browserextension-apikey"></a>**Chave API**
+### <a name="id-browserextension-apikey"></a>Chave API
 Insira a chave da API no campo correspondente (1), pressione o botão salvar (2). Se você inseriu a chave correta, seu saldo será exibido abaixo (3).
 
 ![](./images/extension-main-firefox/api-key.png)
-### <a name="id-browserextension-automaticcaptchasolving"></a>**Solução automática de captchas**
+### <a name="id-browserextension-automaticcaptchasolving"></a>Solução automática de captchas
 Aqui você pode selecionar os tipos de captchas que a extensão reconhecerá automaticamente.
 
 ![](./images/extension-main-firefox/extension.example.png)
@@ -84,15 +84,15 @@ Aqui você pode selecionar os tipos de captchas que a extensão reconhecerá aut
 Pode ser necessário recarregar a página com captcha para que as alterações tenham efeito!
 
 :::
-### <a name="id-browserextension-repeatcaptchasolvingincaseofanerror"></a>**Repetir solução de captcha em caso de erro**
+### <a name="id-browserextension-repeatcaptchasolvingincaseofanerror"></a>Repetir solução de captcha em caso de erro
 Se a primeira tentativa de resolver o captcha falhar, a extensão enviará tarefas repetidas até que o captcha seja resolvido, ou até que o limite especificado nesta configuração seja atingido.
-### <a name="id-browserextension-proxy"></a>**Proxy**
+### <a name="id-browserextension-proxy"></a>Proxy
 ![](./images/extension-main-firefox/proxy.png) 
 
 Aqui você pode especificar o proxy que será enviado junto com a tarefa de reconhecimento.
 
 O "Login" e a "Senha" são opcionais.
-### <a name="id-browserextension-blacklistcontrol"></a>**Controle de lista negra**
+### <a name="id-browserextension-blacklistcontrol"></a>Controle de lista negra
 Usando a lista negra, você pode configurar a extensão para ignorar captchas em sites específicos.
 
 Após ativar esta opção, aparecerá um campo para inserir os sites:

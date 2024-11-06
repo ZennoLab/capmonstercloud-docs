@@ -11,13 +11,13 @@
 - 在先前成功接受类似令牌的网站上被拒绝。
 
 
-## **为什么要报告？**
+## 为什么要报告？
 
 我们需要报告，以便自动分析由我们的API发行的令牌质量数据。报告会自动处理，团队会采取措施改进令牌的质量，无论是更新系统以适应新任务，改进网格等。
 
 ---
 
-### **方法地址：**
+### 方法地址：
 
 
 :::tip 提示 用于验证码图片报告
@@ -42,7 +42,7 @@ https://api.capmonster.cloud/reportIncorrectTokenCaptcha
 
 `请求格式：JSON POST`
 
-### **请求参数**
+### 请求参数
 
 |**参数**|**类型**|**必需**|**值**|
 | :-: | :-: | :-: | :- |
@@ -68,7 +68,7 @@ https://api.capmonster.cloud/reportIncorrectTokenCaptcha
 |errorCode|String|错误代码。请查看[错误类型](./api-errors.md)。|
 |status|String|**success** - 报告已接受。<br />如果报告未被接受，则此字段缺失，原因在 *errorCode* 中|
 
-### **响应示例**
+### 响应示例
 
 <details>
   <summary>

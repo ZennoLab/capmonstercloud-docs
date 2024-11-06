@@ -1,6 +1,6 @@
 ﻿# 如何将 CapMonster.cloud 连接到程序？
 CapMonster.cloud 兼容所有验证码解决方案。要将 CapMonster.cloud 连接到您的程序，请按照以下指南操作。
-## **连接到支持 CapMonster.Cloud 的程序**
+## 连接到支持 CapMonster.Cloud 的程序
 <details>
 <summary>ZennoPoster</summary>
 
@@ -32,7 +32,7 @@ CapMonster.cloud 兼容所有验证码解决方案。要将 CapMonster.cloud 连
 
 ![](./images/external-program/Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.006.png)
 </details>
-## **连接到可以指定域名的程序**
+## 连接到可以指定域名的程序
 复制域名 [api.capmonster.cloud](https://api.capmonster.cloud) 和 CapMonster.cloud 的密钥。
 
 此方法适用于以下程序：
@@ -42,7 +42,7 @@ CapMonster.cloud 兼容所有验证码解决方案。要将 CapMonster.cloud 连
 
 ![](./images/external-program/Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.007.png)
 </details>
-## **连接到其他程序的三个步骤**
+## 连接到其他程序的三个步骤
 1. 在您的程序中，选择我们支持的一个验证码解决方案：
    ` Anti-Captcha（v1.0, v2.0）, RuCaptcha, RipCaptcha, 2Captcha, BypassCaptcha, DeathByCaptcha`。
 1. 然后在您的程序中的相应字段中指定您的 CapMonsterCloud 个人 API 密钥，用于发送验证码。
@@ -315,7 +315,7 @@ CapMonster.cloud 兼容所有验证码解决方案。要将 CapMonster.cloud 连
 
 :::
 
-## **频繁连接错误。如何避免？**
+## 频繁连接错误。如何避免？
 **网络问题**：如果您无法连接到 CapMonster.Cloud，请检查您的互联网连接。不稳定的网络或路由问题可能导致服务出现故障。
 
 **程序配置错误**：不正确的程序配置可能导致使用 CapMonster.Cloud 时出现错误。检查您软件的设置，确保所有参数都正确配置以与服务配合工作。
