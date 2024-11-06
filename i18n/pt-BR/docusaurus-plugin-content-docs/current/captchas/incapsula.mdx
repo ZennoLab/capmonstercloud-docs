@@ -1,6 +1,6 @@
 ---
 sidebar_position: 15
-sidebar_label: Incapsula
+sidebar_label: Imperva (Incapsula)
 ---
 
 import Tabs from '@theme/Tabs';
@@ -11,7 +11,7 @@ import MethodDescription from '@theme/MethodDescription'
 import PriceBlock from '@theme/PriceBlock';
 import PriceBlockWrap from '@theme/PriceBlockWrap';
 
-# Incapsula
+# Imperva (Incapsula)
 
 <PriceBlockWrap>
   <PriceBlock title="Imperva" name="Imperva"/>
@@ -31,7 +31,7 @@ A solução Imperva (Incapsula), disponível no CapMonster Cloud, é fornecida e
     ---
 
     <ParamItem title="class" required type="string" />
-    **Incapsula**
+    **Imperva**
 
     ---
 
@@ -40,12 +40,18 @@ A solução Imperva (Incapsula), disponível no CapMonster Cloud, é fornecida e
 
     ---
     <ParamItem title="metadata.incapsulaScriptBase64" required="required" type="string" />
-    `"incapsulaScriptBase64": "..."` - o conteúdo em base64 do script JavaScript do Incapsula. 
+    `"incapsulaScriptBase64": "..."` - o conteúdo em base64 do script JavaScript do Incapsula. Para obter este valor, você precisa acessar a página do script em https://site.com/_Incapsula_Resource?SWJIYLWA=719...3&ns=1&cb=1...1
+	
+	![](./images/incapsula/incapsula1.png)
+	
+	O valor retornado deve ser codificado no formato base64. Este será o valor para o parâmetro incapsulaScriptBase64.
 
     ---
 
     <ParamItem title="metadata.incapsulaSessionCookie" required type="string" />
-	Seus cookies do Incapsula. Você pode obtê-los na página usando "document.cookie" ou no cabeçalho da solicitação Set-Cookie: "incap_sess_*=..." (veja o exemplo de solicitação /createTask).
+	Seus cookies do Incapsula. Você pode obtê-los na página usando "document.cookie" ou no cabeçalho da solicitação Set-Cookie: "incap_sess_*=..." 
+	
+	![](./images/incapsula/incapsula2.png)
 
     ---
 
@@ -70,7 +76,7 @@ A solução Imperva (Incapsula), disponível no CapMonster Cloud, é fornecida e
 			"clientKey": "API_KEY",
 			"task": {
 				"type": "CustomTask",
-				"class": "Incapsula",
+				"class": "Imperva",
 				"websiteURL": "site.com",
 				"userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/21F90 Safari/604.1",
 				"metadata": {
