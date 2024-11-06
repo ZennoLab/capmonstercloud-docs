@@ -10,6 +10,7 @@ import TencentIcon from './icons/TencentIcon';
 import TextCaptchaIcon from './icons/TextCaptchaIcon';
 import DataDomeIcon from './icons/DataDomeIcon';
 import AmazonIcon from './icons/AmazonIcon';
+import ImervaIcon from './icons/ImervaIcon';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import getLocaleStrings from '../../locales/index';
 
@@ -118,7 +119,19 @@ const captchaPrices = {
     rate: 99,
     icon: <RecaptchaIcon />,
     image: <img src="/img/4x4.svg" />
-  }
+  },
+  Imperva: {
+    price: 2,
+    type: 'token',
+    rate: 99,
+    icon: <ImervaIcon />,
+  },
+  bls: {
+    price: 0.12,
+    type: 'image',
+    rate: 99,
+    icon: <TextCaptchaIcon />
+  },
 }
 
 const PriceBlock = ({ title, name, successRate = 0, price = 0, subText, icon }) => {
