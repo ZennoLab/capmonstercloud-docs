@@ -13,10 +13,6 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 
 # ComplexImageTask Recognition
 
-<PriceBlockWrap>
-  <PriceBlock title="ComplexImageTask" name="textCaptchaToken"/>
-</PriceBlockWrap>
-
 ## Параметры запроса
 <TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
@@ -44,6 +40,10 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 ## Доступные типы заданий
 
 ### Создание задачи `oocl_rotate_new`
+
+<PriceBlockWrap>
+  <PriceBlock title="ComplexImageTask" name="textCaptchaToken"/>
+</PriceBlockWrap>
 
 В запросе передаем два изображения: фон и круг.
 
@@ -125,6 +125,10 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 </TabItem>
 
 ### Создание задачи `oocl_rotate_double_new`
+
+<PriceBlockWrap>
+  <PriceBlock title="ComplexImageTask" name="textCaptchaToken"/>
+</PriceBlockWrap>
 
 В запросе передаем три изображения: фон, кольцо, круг.
 
@@ -214,6 +218,10 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
   
 ### Создание задачи `betpunch_3x3_rotate request`
 
+<PriceBlockWrap>
+  <PriceBlock title="ComplexImageTask" name="textCaptchaToken"/>
+</PriceBlockWrap>
+
 В запросе передаем девять изображений. Передавать изображения нужно в следующем порядке:
 ![](./images/ComplexImageTask-Recognition/betpunch_3x3_rotate_example.png)
 
@@ -288,6 +296,112 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 				"answer":[4,4,4,4,4,3,1,2,2],
 				"metadata":{"AnswerType":"NumericArray"}
 			}
+		}
+		```
+	</MethodDescription>
+</TabItem>
+
+
+### Создание задачи `bls`
+
+<PriceBlockWrap>
+  <PriceBlock title="Bls" name="bls"/>
+</PriceBlockWrap>
+
+В запросе передаем 9 изображений в формате base64.
+Также в metadata передаем искомое значение TaskArgument.
+
+<TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Запрос**
+		```json
+		{
+			"clientKey":{{API_key}},
+			"task": 
+			{
+				"type": "ComplexImageTask",
+				"class": "recognition",
+				"imagesBase64": [
+					"image1_to_base64",
+					"image2_to_base64",
+					"image3_to_base64",
+					"image4_to_base64",
+					"image5_to_base64",
+					"image6_to_base64",
+					"image7_to_base64",
+					"image8_to_base64",
+					"image9_to_base64"
+				],
+				"metadata": {
+					"Task": "bls_3x3",
+					"TaskArgument": "123"
+				}
+			}
+		}
+		```
+
+		Пример задания:
+
+		![](./images/ComplexImageTask-Recognition/bls.png)
+
+		Передавать сконвертированные в base64 картинки:
+		
+		![](./images/ComplexImageTask-Recognition/image1.gif)
+		![](./images/ComplexImageTask-Recognition/image2.gif)
+		![](./images/ComplexImageTask-Recognition/image3.gif)
+		![](./images/ComplexImageTask-Recognition/image4.gif)
+		![](./images/ComplexImageTask-Recognition/image5.gif)
+		![](./images/ComplexImageTask-Recognition/image6.gif)
+		![](./images/ComplexImageTask-Recognition/image7.gif)
+		![](./images/ComplexImageTask-Recognition/image8.gif)
+		![](./images/ComplexImageTask-Recognition/image9.gif)
+		
+		Для данного примера: "TaskArgument": "546"
+
+		**Ответ**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":143998457
+		}
+		```
+	</MethodDescription>
+</TabItem>
+
+### Получение результата задачи `bls`
+<TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel-full">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Запрос**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 143998457
+		}
+		```
+		**Ответ**
+		Массив значений с элементами true или false, в зависимости от того является ли число на картинке искомым аргументом или нет.  
+		```json
+		{
+		  "errorId":0,
+		  "status":"ready",
+		  "errorCode":null,
+		  "errorDescription":null,
+		  "solution": {
+			"answer":[true,true,false,false,true,false,false,true,true],
+			"metadata": {
+			  "AnswerType":"Grid"
+			}
+		  }
 		}
 		```
 	</MethodDescription>

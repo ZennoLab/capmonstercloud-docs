@@ -11,13 +11,13 @@ Exemplos de situações em que você deve registrar uma reclamação:
 - Rejeição em sites que anteriormente aceitavam tokens semelhantes com sucesso.
 
 
-## **Por que relatar?**
+## Por que relatar?
 
 Precisamos de relatórios para que possamos analisar automaticamente os dados sobre a qualidade dos tokens emitidos por nossa API. Os relatórios são processados automaticamente, e a equipe toma medidas para melhorar a qualidade dos tokens, seja atualizando o sistema para novas tarefas, aprimorando as grades, etc.
 
 ---
 
-### **Endereços dos métodos:**
+### Endereços dos métodos:
 
 
 :::tip Para relatórios de captchas de imagem
@@ -42,7 +42,7 @@ Caminhos também suportados:
 
 `Formato da solicitação: JSON POST`
 
-### **Parâmetros da solicitação**
+### Parâmetros da solicitação
 
 | **Parâmetro** | **Tipo** | **Obrigatório** | **Valor** |
 | :------------------------: | :--------------: | :--------------------------------: | :------------------------------------------------------------ |
@@ -68,7 +68,7 @@ Caminhos também suportados:
 |         errorCode         |      String      | Código de erro. Confira os [tipos de erro](./api-errors.md). |
 |           status           |      String      | **success** - o relatório foi aceito.<br />Se o relatório não foi aceito, o campo está ausente, e o motivo está no *errorCode* |
 
-### **Exemplo de resposta**
+### Exemplo de resposta
 
 <details>
   <summary>

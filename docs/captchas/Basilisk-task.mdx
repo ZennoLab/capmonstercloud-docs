@@ -116,3 +116,65 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 		```
 	</MethodDescription>
 </TabItem>
+
+
+## Используйте библиотеку SDK
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="python" label="Python" default className="method-panel">
+    ```python
+    # https://github.com/ZennoLab/capmonstercloud-client-python
+
+    import asyncio
+    from capmonstercloudclient import CapMonsterClient, ClientOptions
+    from capmonstercloudclient.requests import BasiliskCustomTaskProxylessRequest
+
+    client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonster Cloud API key
+    cap_monster_client = CapMonsterClient(options=client_options)
+
+    basilisk_request = BasiliskCustomTaskProxylessRequest(
+        websiteUrl="https://example.com",  # URL with captcha
+        websiteKey="b3760bfe5cf4254b2759c19fg2698og"  # Replace with the correct website key
+    )
+
+    async def solve_captcha():
+        return await cap_monster_client.solve_captcha(basilisk_request)
+
+    responses = asyncio.run(solve_captcha())
+    print(responses)
+    ```
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    ```csharp
+    // https://github.com/ZennoLab/capmonstercloud-client-dotnet
+
+    using Zennolab.CapMonsterCloud.Requests;
+    using Zennolab.CapMonsterCloud;
+
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            var clientOptions = new ClientOptions
+            {
+                ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
+            };
+
+            var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+            var basiliskRequest = new BasiliskCustomTaskProxylessRequest
+            {
+                WebsiteUrl = "https://example.com", // URL with captcha
+                WebsiteKey = "b3760bfe5cf4254b2759c19fg2698og" // Replace with the correct website key
+            };
+
+            var basiliskResult = await cmCloudClient.SolveAsync(basiliskRequest);
+
+            Console.WriteLine("Captcha Solution: " + string.Join(", ", basiliskResult.Solution.Data));
+            Console.WriteLine("Captcha Solution: " + string.Join(", ", basiliskResult.Solution.Headers));
+        }
+    }
+    ```
+  </TabItem>
+</Tabs>

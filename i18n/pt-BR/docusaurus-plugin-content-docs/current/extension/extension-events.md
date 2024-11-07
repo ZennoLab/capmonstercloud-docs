@@ -15,7 +15,7 @@ Se necessário, é possível se inscrever nesses eventos por meio do `window.add
 Nenhum parâmetro é passado para os eventos.
 :::
 
-### **Exemplo:**
+### Exemplo:
 ```js
 window.addEventListener("onCMExtensionReady", () => {
   // FAÇA ALGO

@@ -13,7 +13,7 @@ https://api.capmonster.cloud/getBalance
 Formato da solicitação: `JSON POST`
 :::
 
-## **Parâmetros da solicitação**
+## Parâmetros da solicitação
 
 ### `clientKey`
 Tipo: `String` <br />
@@ -21,7 +21,7 @@ Obrigatório: `Sim`<br />
 Chave única da sua conta
 
 
-### **Exemplo de Corpo**
+### Exemplo de Corpo
 
 ```json
 {
@@ -29,7 +29,7 @@ Chave única da sua conta
 }
 ```
 
-## **Estrutura da resposta**
+## Estrutura da resposta
 
 ### `errorId`
 Tipo: `Integer` <br />
@@ -44,7 +44,7 @@ Tipo: `Decimal` <br />
 Valor disponível de saldo.
 
 
-### **Exemplo**
+### Exemplo
 
 ```json
 {

@@ -35,7 +35,7 @@ Há várias maneiras de alterar as configurações da extensão:
 
 Ao instalar a extensão via pacote (disponível para download [neste link](https://drive.google.com/file/d/11pVyiPltRW_vEPPnRnQJLNiX0J0GVhBe/view?usp=drive_link)), é possível definir os parâmetros iniciais com os quais a extensão funcionará. Para isso, você precisa descompactar o pacote e editar o arquivo defaultSettings.json, e depois empacotá-lo novamente.
 
-### **Descrição do arquivo de configurações defaultSettings.json**
+### Descrição do arquivo de configurações defaultSettings.json
 
 O arquivo de configurações é assim:
 
@@ -78,7 +78,7 @@ Após inicializar a extensão na página ativa atual, temos um objeto global que
 
 Observe que os manipuladores de eventos estão anexados às propriedades, não aos dados internos.
 
-### **Exemplo:**
+### Exemplo:
 ```js
 window.CMExtension.isEnabled = false;
 ```

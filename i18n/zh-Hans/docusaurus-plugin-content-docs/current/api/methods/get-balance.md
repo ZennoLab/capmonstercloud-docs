@@ -14,7 +14,7 @@ https://api.capmonster.cloud/getBalance
 <!-- 方法地址：<https://api.capmonster.cloud/getBalance> -->
 
 请求格式：JSON POST 
-## **请求参数**
+## 请求参数
 ### `clientKey`
 类型: `字符串` <br />
 必需: `是`<br />
@@ -26,13 +26,13 @@ https://api.capmonster.cloud/getBalance
 | :-: | :-: | :-: | :-: |
 |clientKey|字符串|是|您的账户的唯一密钥| -->
 
-### **请求示例**
+### 请求示例
 ``` json
 {
   "clientKey": "API_KEY"
 }
 ```
-## **响应结构**
+## 响应结构
 ### `errorId`
 类型: `整数` <br />
 错误标识符。<br />**0** - 无错误，*errorCode*属性不存在<br />**1** - 有错误，错误信息在 *errorCode* 属性中
@@ -48,7 +48,7 @@ https://api.capmonster.cloud/getBalance
 |errorId|整数|错误标识符。<br />**0** - 无错误，*errorCode*属性不存在<br />**1** - 有错误，错误信息在 *errorCode* 属性中|
 |errorCode|字符串|错误代码。查看[错误列表](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/295310)。|
 |balance|小数|可用余额| -->
-### **示例**
+### 示例
 ``` json
 {
  "errorId":0,

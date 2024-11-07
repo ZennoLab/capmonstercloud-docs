@@ -169,27 +169,93 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">
-	```js
-	// https://github.com/ZennoLab/capmonstercloud-client-js
+    ```js
+    // https://github.com/ZennoLab/capmonstercloud-client-js
 
-	import { CapMonsterCloudClientFactory, ClientOptions, ComplexImageRecaptchaRequest } from '@zennolab_com/capmonstercloud-client';
+    import { CapMonsterCloudClientFactory, ClientOptions, ComplexImageRecaptchaRequest } from '@zennolab_com/capmonstercloud-client';
 
-	document.addEventListener('DOMContentLoaded', async () => {
-	  const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
-	  console.log(await cmcClient.getBalance());
+    document.addEventListener('DOMContentLoaded', async () => {
+      const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+      console.log(await cmcClient.getBalance());
 
-	  const complexImageRecaptchaRequest = new ComplexImageRecaptchaRequest({
-		imageUrls: ['https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg'],
-		metaData: {
-		  Grid: '3x3',
-		  Task: 'Please click each image containing a mountain',
-		  TaskDefinition: '/m/015qff',
-		},
-		websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle',
-	  });
+      const complexImageRecaptchaRequest = new ComplexImageRecaptchaRequest({
+        imageUrls: ['https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg'],
+        metaData: {
+          Grid: '3x3',
+          Task: 'Please click each image containing a mountain',
+          TaskDefinition: '/m/015qff',
+        },
+        websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle',
+      });
 
-	  console.log(await cmcClient.Solve(complexImageRecaptchaRequest));
-	});
-	```
-  </TabItem>  
+      console.log(await cmcClient.Solve(complexImageRecaptchaRequest));
+    });
+    ```
+  </TabItem>
+  
+  <TabItem value="python" label="Python" className="method-panel">
+    ```python
+    # https://github.com/ZennoLab/capmonstercloud-client-python
+
+    import asyncio
+    from capmonstercloudclient import CapMonsterClient, ClientOptions
+    from capmonstercloudclient.requests import RecaptchaComplexImageTaskRequest
+
+    client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonsterCloud API key
+    cap_monster_client = CapMonsterClient(options=client_options)
+
+    complex_image_recaptcha_request = RecaptchaComplexImageTaskRequest(
+        imagesUrls=["https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg"],  # Replace with your values
+        metadata={
+            "Task": "Click on traffic lights",
+            "Grid": "3x3",
+            "TaskDefinition": "/m/015qff",
+            "websiteUrl": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle",  # Website with the captcha
+        }
+    )
+
+    async def solve_captcha():
+        return await cap_monster_client.solve_captcha(complex_image_recaptcha_request)
+
+    responses = asyncio.run(solve_captcha())
+    print(responses)
+    ```
+  </TabItem>
+  
+  <TabItem value="csharp" label="C#" className="method-panel">
+    ```csharp
+    // https://github.com/ZennoLab/capmonstercloud-client-dotnet
+
+    using Zennolab.CapMonsterCloud.Requests;
+    using Zennolab.CapMonsterCloud;
+
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            var clientOptions = new ClientOptions
+            {
+                ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
+            };
+
+            var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+            var complexImageRecaptchaRequest = new RecaptchaComplexImageTaskRequest
+            {
+                ImageUrls = new[] { "https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg" }, // Replace with your image URL
+                Metadata = new RecaptchaComplexImageTaskRequest.RecaptchaMetadata
+                {
+                    Task = "Click on traffic lights", // Task description
+                    Grid = RecaptchaComplexImageTaskRequest.RecaptchaMetadata.GridSize.Grid3x3, // Set the grid size
+                    TaskDefinition = "/m/015qff", // Task definition
+                }
+            };
+
+            var complexImageRecaptchaResult = await cmCloudClient.SolveAsync(complexImageRecaptchaRequest);
+
+            Console.WriteLine("Captcha Solution: " + string.Join(", ", complexImageRecaptchaResult.Solution.Answer));
+        }
+    }
+    ```
+  </TabItem>
 </Tabs>
