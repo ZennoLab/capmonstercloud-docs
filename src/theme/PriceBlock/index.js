@@ -163,8 +163,6 @@ const PriceBlock = ({ title, name, successRate = 0, price = 0, subText, icon }) 
 
           const data = await response.json();
 
-          console.log(data)
-
           if (data) {
             setPriceRate(data)
           }
@@ -176,7 +174,6 @@ const PriceBlock = ({ title, name, successRate = 0, price = 0, subText, icon }) 
   }
 
   useEffect(() => {
-    console.log(currentLocale)
     updatePriceToRub()
   }, [currentLocale]);
 
