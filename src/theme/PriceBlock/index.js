@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './styles.module.css';
 import SuccessRateIcon from './icons/SuccessRateIcon';
 import RecaptchaIcon from './icons/RecaptchaIcon';
@@ -144,6 +144,52 @@ const PriceBlock = ({ title, name, successRate = 0, price = 0, subText, icon }) 
     dynamic: dynamicHundredImages
   }
 
+  const [priceRate, setPriceRate] = useState(1)
+
+  const updatePriceToRub = async () => {
+      const url = 'https://capmonster.cloud/currency/rate?from=usd&to=rub';
+
+      try {
+          const response = await fetch(url, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+              }
+          });
+
+          if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const data = await response.json();
+
+          if (data) {
+            setPriceRate(data)
+          }
+          return data;
+      } catch (error) {
+          console.error('Error fetching data:', error);
+          throw error;
+      }
+  }
+
+  useEffect(() => {
+    updatePriceToRub()
+  }, [currentLocale]);
+
+  const priceText = () => {
+    if (currentLocale === 'ru') {
+      if (priceRate === 1) {
+        return ''
+      } else {
+        return `${Number(captchaPrices[name]?.price * priceRate).toFixed(2)}₽`
+      }
+      
+    } else {
+      return `$${captchaPrices[name]?.price || price}`
+    }
+  }
+
   return (
     <div className={captchaPrices[name]?.image ? styles.wrapBlockImage : styles.wrapBlock}>
       <div className={styles.titleWrap}>
@@ -155,7 +201,7 @@ const PriceBlock = ({ title, name, successRate = 0, price = 0, subText, icon }) 
 
       <div className={styles.priceWrap}>
         <div>
-          <span className={styles.priceText}>${captchaPrices[name]?.price || price} </span>
+          <span className={styles.priceText}>{priceText()}</span>
           <span className={styles.subText}> / {captchaPrices[name]?.type ? typeLocalization[captchaPrices[name]?.type] : subText}</span>
         </div>
       </div>
