@@ -16,6 +16,6 @@ Nosso serviço só pode resolver captchas em inglês; neste site, a determinaç�
 <details>
         <summary>Erro 'Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'click')'</summary>
 
-"Se ao resolver o captcha usando o método de cliques (ComplexImageTask) através da extensão CapMonster Cloud você encontrar o erro 'Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'click')', conforme mostrado na captura de tela, recomenda-se definir o valor de 'Delay between click' na extensão — isso pode ajudar a resolver o problema."
+Se ao resolver o captcha usando o método de cliques (ComplexImageTask) através da extensão CapMonster Cloud você encontrar o erro 'Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'click')', conforme mostrado na captura de tela, recomenda-se definir o valor de 'Delay between click' na extensão — isso pode ajudar a resolver o problema.
 ![](./images/known-issues/Uncaught.png)
 </details>
