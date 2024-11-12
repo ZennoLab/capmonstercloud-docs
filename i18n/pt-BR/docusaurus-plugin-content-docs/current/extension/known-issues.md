@@ -3,7 +3,7 @@ sidebar_position: 8
 ---
 
 
-# Problemas conhecidos para sites específicos
+# Problemas conhecidos
 
 
 <details>
