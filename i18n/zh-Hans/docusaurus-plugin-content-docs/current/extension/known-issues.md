@@ -16,6 +16,6 @@ sidebar_position: 8
 <details>
         <summary>错误 'Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'click')'</summary>
 
-"如果在通过 CapMonster Cloud 扩展使用点击方法 (ComplexImageTask) 解验证码时出现错误 'Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'click')'，如截图所示，建议在扩展中设置 'Delay between click' 值 —— 这可能有助于解决问题。"
+如果在通过 CapMonster Cloud 扩展使用点击方法 (ComplexImageTask) 解验证码时出现错误 'Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'click')'，如截图所示，建议在扩展中设置 'Delay between click' 值 —— 这可能有助于解决问题。
 ![](./images/known-issues/Uncaught.png)
 </details>
