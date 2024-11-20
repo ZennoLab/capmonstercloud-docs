@@ -62,4 +62,4 @@ No exemplo abaixo, o parâmetro é adicionado ao final.
 
 - [ReCaptchaV2](../captchas/no-captcha-task.mdx)
 - [ReCaptchaV3](../captchas/recaptcha-v3-task.mdx)
-<!-- - [HCaptcha](../captchas/hcaptcha-task.mdx) --> 
+<!-- - HCaptcha --> 
