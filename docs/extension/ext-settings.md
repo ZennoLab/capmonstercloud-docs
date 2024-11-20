@@ -24,7 +24,7 @@ sidebar_position: 5
 |`textCaptchaSaveOnSite`|`Boolean`|Сохранять ли выбранные элементы на сайте для текстовой капчи|
 |`delayAfterLoadPage`|`Number`|Задержка перед началом решения текстовой капчи, если она была сохранена для сайта |
 |`recaptchaClickSelector`|`String`|DOM Селектор элемента для нажатия при начале решения Recaptcha|
-|`hCaptchaClickSelector`|`String`|DOM Селектор элемента для нажатия при начале решения hCaptcha|
+<!-- |`hCaptchaClickSelector`|`String`|DOM Селектор элемента для нажатия при начале решения hCaptcha| --> 
 |`globalVariable`|`String`|Название поля для взаимодействия с расширением через глобальный объект|
 
 Есть несколько путей изменения настроек расширения:
@@ -47,14 +47,12 @@ sidebar_position: 5
     "ReCaptcha3",
     "ReCaptchaEnterprise",
     "FunCaptcha",
-    "HCaptcha",
     "GeeTest",
     "ImageToText",
     "Turnstile"
   ],
   "captchaExtra": {
     "ReCaptcha2": 1,
-    "HCaptcha": 1,
     "FunCaptcha": 1
   },
   "repeatsCount": 0,

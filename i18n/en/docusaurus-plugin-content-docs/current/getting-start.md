@@ -29,7 +29,7 @@ Additional method:
 
 ### Code examples
 
-For your convenience, we’ve created ready-made libraries for fast integration the CapMonster.Cloud API into your code. Recognize reCAPTCHA, hCaptcha and other types of captcha at the lowest prices on the market!
+For your convenience, we’ve created ready-made libraries for fast integration the CapMonster.Cloud API into your code. Recognize different types of captchas at the lowest prices on the market!
 
 |**Language**|**Link to the repository**|
 | :- | :- | 
@@ -85,13 +85,13 @@ Using actions:
 
 ![](./images/getting-started-3.png)
 
-### hCaptcha 
+<!-- ### hCaptcha 
 
 1. Add the action "Recognize hCaptcha" to your project, where you have already navigated to the page with the captcha;
 
 2. In the Properties of the Recognize hCaptcha action, select the In Tab or Via SiteKey method (when selecting this method, you will need to specify the SiteKey and the URL where the captcha is located):
 
-![](./images/getting-started-4.png)
+![](./images/getting-started-4.png) --> 
 
 ### Via HTTP requests
 

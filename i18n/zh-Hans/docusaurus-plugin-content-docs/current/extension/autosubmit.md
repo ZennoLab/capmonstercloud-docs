@@ -21,7 +21,6 @@ sidebar_label: 扩展中的自动提交功能
 ## 自动提交的可用性
 目前，自动提交功能只能在使用令牌解决 CAPTCHA 时，通过 **Google Chrome** 扩展使用。
 自动提交适用于以下 CAPTCHA 类型：
-- HCaptcha,
 - ReCaptcha,
 - GeeTest,
 - Turnstile.

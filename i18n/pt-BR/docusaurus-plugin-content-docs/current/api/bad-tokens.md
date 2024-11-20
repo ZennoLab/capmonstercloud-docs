@@ -27,15 +27,14 @@ https://api.capmonster.cloud/reportIncorrectImageCaptcha
 :::
 
 
-:::tip Para relatórios de captchas com tokens: recaptcha (2, 3, enterprise), hcaptcha, geetest, turnstile.
+:::tip Para relatórios de captchas com tokens: recaptcha (2, 3, enterprise), geetest, turnstile.
 ```http
 https://api.capmonster.cloud/reportIncorrectTokenCaptcha
 ```
 
 Caminhos também suportados:
 
-[https://api.capmonster.cloud/reportIncorrectRecaptcha](https://api.capmonster.cloud/reportIncorrectRecaptcha), 
-[https://api.capmonster.cloud/reportIncorrectHcaptcha](https://api.capmonster.cloud/reportIncorrectHcaptcha) - funcionam da mesma forma que [reportIncorrectTokenCaptcha](https://api.capmonster.cloud/reportIncorrectTokenCaptcha)
+[https://api.capmonster.cloud/reportIncorrectRecaptcha](https://api.capmonster.cloud/reportIncorrectRecaptcha) - funcionam da mesma forma que [reportIncorrectTokenCaptcha](https://api.capmonster.cloud/reportIncorrectTokenCaptcha)
 :::
 
 

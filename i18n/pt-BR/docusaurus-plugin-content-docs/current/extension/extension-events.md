@@ -29,7 +29,7 @@ window.addEventListener("onCMExtensionReady", () => {
 | :-: | :-: |
 |`onCMExtensionReady`|A extensão está totalmente carregada e pronta para funcionar|
 
-### HCaptcha
+<!-- ### HCaptcha
 |**Evento**|**Descrição**|
 | :-: | :-: |
 |`onHCaptchaClickStart`|Início da resolução de hCaptcha por cliques|
@@ -39,7 +39,7 @@ window.addEventListener("onCMExtensionReady", () => {
 |`onHCaptchaClick`|Clicar na caixa de seleção do hCaptcha ao resolver por cliques|
 |`onHCaptchaTokenStart`|Início da resolução de hCaptcha por token|
 |`onHCaptchaTokenSuccess`|Resolução bem-sucedida de hCaptcha por token|
-|`onHCaptchaTokenError`|Erro ao resolver hCaptcha por token|
+|`onHCaptchaTokenError`|Erro ao resolver hCaptcha por token| -->
 
 ### ReCaptcha
 |**Evento**|**Descrição**|

@@ -38,13 +38,13 @@ sidebar_label: Инструкция по установке расширения
 
 1. Ввести API-key из личного кабинета CapMonster Cloud в открывшемся окне расширения.
 :::info
-В новой версии расширения CapMonster Cloud добавлена возможность решения  reCAPTCHA2, reCAPTCHA Enterprise, hCaptcha с помощью кликов.
+В новой версии расширения CapMonster Cloud добавлена возможность решения  reCAPTCHA2, reCAPTCHA Enterprise с помощью кликов.
 :::
 ![](./images/install-instruction/Aspose.Words.d33c25f1-0d68-4361-bcfb-da50f3892df4.001.png) 
 :::caution
-Обратите внимание, что при установке расширения, по дефолту устанавливается тип решения  reCAPTCHA2, reCAPTCHA Enterprise, hCaptcha через клики.
+Обратите внимание, что при установке расширения, по дефолту устанавливается тип решения  reCAPTCHA2, reCAPTCHA Enterprise через клики.
 :::
-Для удобства использования расширения CapMonster Cloud в браузере ProjectMaker мы подготовили проект для автоматизации установки расширения, ввода Api-Key, а также выбор типа решения reCAPTCHA2, reCAPTCHA Enterprise, hCaptcha.
+Для удобства использования расширения CapMonster Cloud в браузере ProjectMaker мы подготовили проект для автоматизации установки расширения, ввода Api-Key, а также выбор типа решения reCAPTCHA2, reCAPTCHA Enterprise.
 
 ***Минимальная версия ZennoPoster 7.6.1***
 

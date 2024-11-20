@@ -29,7 +29,7 @@ window.addEventListener("onCMExtensionReady", () => {
 | :-: | :-: |
 |`onCMExtensionReady`|Расширение полностью загрузилось и готово к работе|
 
-### HCaptcha
+<!-- ### HCaptcha
 |**Событие**|**Описание**|
 | :-: | :-: |
 |`onHCaptchaClickStart`|Начало решения hCaptcha кликами|
@@ -39,7 +39,7 @@ window.addEventListener("onCMExtensionReady", () => {
 |`onHCaptchaClick`|Нажатие на чекбокс hCaptcha при решении кликами|
 |`onHCaptchaTokenStart`|Начало решения hCaptcha токеном|
 |`onHCaptchaTokenSuccess`|Успешное решение hCaptcha токеном|
-|`onHCaptchaTokenError`|Ошибка решения hCaptcha токеном|
+|`onHCaptchaTokenError`|Ошибка решения hCaptcha токеном| -->
 
 ### ReCaptcha
 |**Событие**|**Описание**|

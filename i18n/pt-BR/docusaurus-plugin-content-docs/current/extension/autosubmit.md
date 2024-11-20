@@ -22,7 +22,6 @@ A extensão CapMonster Cloud permite selecionar um elemento para clique automát
 ## Disponibilidade do Autosubmit
 Atualmente, o autosubmit pode ser usado apenas na extensão **Google Chrome** ao resolver com um **token**. 
 O autosubmit está disponível para os seguintes tipos de CAPTCHA:
-- HCaptcha,
 - ReCaptcha,
 - GeeTest,
 - Turnstile.

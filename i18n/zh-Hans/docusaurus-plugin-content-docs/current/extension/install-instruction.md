@@ -39,13 +39,13 @@ sidebar_label: 在ProjectMaker浏览器中安装扩展的说明
    
 5. 在打开的扩展窗口中，输入来自您的CapMonster Cloud个人账户的API密钥。
 :::info 信息
-CapMonster Cloud扩展的新版本支持解决reCAPTCHA2、reCAPTCHA Enterprise和hCaptcha（通过点击）。
+CapMonster Cloud扩展的新版本支持解决reCAPTCHA2、reCAPTCHA Enterprise（通过点击）。
 :::
 ![](./images/install-instruction/ext.png)
 :::caution 警告
-请注意，在安装扩展时，默认将reCAPTCHA2、reCAPTCHA Enterprise和hCaptcha的解决类型设置为“点击”。
+请注意，在安装扩展时，默认将reCAPTCHA2、reCAPTCHA Enterprise的解决类型设置为“点击”。
 :::
-为了使CapMonster Cloud扩展在ProjectMaker中更易于使用，我们准备了一个项目来自动化安装扩展、输入API密钥以及选择解决类型reCAPTCHA2、reCAPTCHA Enterprise和hCaptcha。
+为了使CapMonster Cloud扩展在ProjectMaker中更易于使用，我们准备了一个项目来自动化安装扩展、输入API密钥以及选择解决类型reCAPTCHA2、reCAPTCHA Enterprise。
 
 ***ZennoPoster的最低版本要求为7.6.1***
 
