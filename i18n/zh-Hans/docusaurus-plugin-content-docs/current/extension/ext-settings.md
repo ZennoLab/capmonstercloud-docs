@@ -24,8 +24,8 @@ sidebar_position: 5
 |`textCaptchaSaveOnSite`|`布尔值`|是否保存网站上选定的文本验证码元素|
 |`delayAfterLoadPage`|`数字`|如果为网站保存了文本验证码，开始解决前的延迟|
 |`recaptchaClickSelector`|`字符串`|开始解决 reCaptcha 时要点击的 DOM 元素选择器|
-<!-- |`hCaptchaClickSelector`|`字符串`|开始解决 hCaptcha 时要点击的 DOM 元素选择器| -->
 |`globalVariable`|`字符串`|通过全局对象与扩展交互的字段名称|
+<!-- |`hCaptchaClickSelector`|`字符串`|开始解决 hCaptcha 时要点击的 DOM 元素选择器| -->
 
 更改扩展设置有几种方法：
 1. 安装扩展程序之前。

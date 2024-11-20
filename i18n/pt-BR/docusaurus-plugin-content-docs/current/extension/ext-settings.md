@@ -24,8 +24,8 @@ sidebar_position: 5
 |`textCaptchaSaveOnSite`|`Boolean`|Se os elementos selecionados no site para captcha de texto serão salvos|
 |`delayAfterLoadPage`|`Number`|Atraso antes de começar a resolver um captcha de texto, se foi salvo para o site|
 |`recaptchaClickSelector`|`String`|Seletor de Elemento DOM para clicar ao iniciar a solução de Recaptcha|
-<!-- |`hCaptchaClickSelector`|`String`|Seletor de Elemento DOM para clicar ao iniciar a solução de hCaptcha| -->
 |`globalVariable`|`String`|Nome do campo para interação com a extensão via objeto global|
+<!-- |`hCaptchaClickSelector`|`String`|Seletor de Elemento DOM para clicar ao iniciar a solução de hCaptcha| -->
 
 Há várias maneiras de alterar as configurações da extensão:
 1. Antes de instalar a extensão.
