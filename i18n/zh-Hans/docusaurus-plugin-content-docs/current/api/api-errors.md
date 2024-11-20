@@ -76,4 +76,4 @@ API 错误代码：`ERROR_TASK_ABSENT` <br />
 未找到任务对象或在 [createTask](./methods/create-task.md) 请求中发送了无效的 JSON。
 ### `USERAGENT IS EXPIRED`
 API 错误代码：`ERROR_WRONG_USERAGENT` <br />
-请求指定了无效的用户代理，请查看[文章](../captchas/hcaptcha-task.mdx)中的当前用户代理信息。
+请求指定了无效的用户代理，请查看[文章](./methods/get-user-agent.mdx)中的当前用户代理信息。
