@@ -100,4 +100,4 @@ IP прокси забанен на целевом сервисе капчи.
 
 ### `USERAGENT IS EXPIRED`
 Код ошибки в API: `ERROR_WRONG_USERAGENT`<br />
-В запросе указан невалидный User Agent, ознакомиться с текущим User Agent вы можете в [статье](./methods/get-user-agent.mdx).
+В запросе указан невалидный User Agent, ознакомиться с текущим User Agent вы можете в [статье](./methods/get-user-agent.md).

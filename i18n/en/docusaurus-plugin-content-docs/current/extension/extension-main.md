@@ -22,7 +22,7 @@ To get started with the extension, click on its icon to the right of the address
 <details>
     <summary>Manual installation</summary>
 
-1. Download the [archive with the extension](https://drive.google.com/file/d/1N-MmSF00hC8aHaJmmDg9ZcSsbkp8psaS/view?usp=drive_link).
+1. Download the [archive with the extension](https://drive.google.com/file/d/1W8vpo9tlNmJECXmoEaKCF0pzTQ_ml70f/view?usp=drive_link).
 
 2. Unpack it to any folder. 
    
