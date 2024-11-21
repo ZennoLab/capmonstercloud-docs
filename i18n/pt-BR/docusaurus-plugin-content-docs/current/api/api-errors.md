@@ -100,4 +100,4 @@ Objeto da tarefa não encontrado ou JSON inválido foi enviado na solicitação 
 
 ### `USERAGENT EXPIRADO`
 Código de erro da API: `ERROR_WRONG_USERAGENT`<br />
-A solicitação especificou um User Agent inválido; você pode descobrir o User Agent atual no [artigo](../captchas/hcaptcha-task.mdx).
+A solicitação especificou um User Agent inválido; você pode descobrir o User Agent atual no [artigo](./methods/get-user-agent.md).

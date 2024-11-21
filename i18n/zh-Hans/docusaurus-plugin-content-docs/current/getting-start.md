@@ -27,7 +27,7 @@ https://api.capmonster.cloud
 
 ### 代码示例
 
-为了您的方便，我们创建了现成的库，以便将 CapMonster.Cloud API 快速集成到您的代码中。以市场最低的价格识别 reCAPTCHA、hCaptcha 和其他类型的验证码！
+为了您的方便，我们创建了现成的库，以便将 CapMonster.Cloud API 快速集成到您的代码中。 以市场最低的价格识别不同类型的验证码！
 
 |**语言**|**链接至存储库**|
 | :- | :- |
@@ -84,13 +84,13 @@ CapMonster Cloud 服务中有 2 种验证码识别方法：
 
 ![](./images/getting-started-3.png)
 
-### 验证码
+<!-- ### 验证码
 
 1. 将操作“识别 hCaptcha”添加到您的项目中，您已经导航到带有验证码的页面；
 
 2. 在识别 hCaptcha 操作的属性中，选择 In Tab 或 Via SiteKey 方法（选择此方法时，您需要指定 SiteKey 和验证码所在的 URL）：
 
-![](./images/getting-started-4.png)
+![](./images/getting-started-4.png) --> 
 
 ### 通过 HTTP 请求
 

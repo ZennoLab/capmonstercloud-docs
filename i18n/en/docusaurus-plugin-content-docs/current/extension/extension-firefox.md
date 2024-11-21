@@ -24,7 +24,7 @@ To get started with the extension, click on its icon to the right of the address
 <details>
     <summary>Manual installation</summary>
 
-1. Download the [archive with the extension](https://drive.google.com/file/d/1VWGD_Am74e7-7Uz4V_N13Yqd5Lnqv_GU/view?usp=drive_link).
+1. Download the [archive with the extension](https://drive.google.com/file/d/1Aa-aE9IW095ggFWDmZQrVcAQD1q5BIpv/view?usp=drive_link).
 
 1. Open the Firefox browser and go to work with extensions:
    ![](./images/extension-main-firefox/extension-menu.png)

@@ -40,13 +40,13 @@ The extension only works with the Chromium browser!
 
 5. In the extension window that opens, enter the API key from your CapMonster Cloud personal account.
 :::info
-The new version of the CapMonster Cloud extension has the ability to solve reCAPTCHA2, reCAPTCHA Enterprise, hCaptcha by clicks.
+The new version of the CapMonster Cloud extension has the ability to solve reCAPTCHA2, reCAPTCHA Enterprise by clicks.
 :::
 ![](./images/install-instruction/ext.png) 
 :::caution
-Please note that when installing the extension the solving type for reCAPTCHA2, reCAPTCHA Enterprise, hCaptcha is set “Click” by default.
+Please note that when installing the extension the solving type for reCAPTCHA2, reCAPTCHA Enterprise is set “Click” by default.
 :::
-To make the use of CapMonster Cloud extension in the ProjectMaker easier, we’ve prepared a project to automate the installation of the extension, entering the API key and choosing the solving type reCAPTCHA2, reCAPTCHA Enterprise, hCaptcha.
+To make the use of CapMonster Cloud extension in the ProjectMaker easier, we’ve prepared a project to automate the installation of the extension, entering the API key and choosing the solving type reCAPTCHA2, reCAPTCHA Enterprise.
 
 ***Minimum version of ZennoPoster 7.6.1***
 
