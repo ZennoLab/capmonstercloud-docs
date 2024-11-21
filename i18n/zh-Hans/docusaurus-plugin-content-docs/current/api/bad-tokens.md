@@ -27,15 +27,14 @@ https://api.capmonster.cloud/reportIncorrectImageCaptcha
 :::
 
 
-:::tip 提示 用于令牌验证码报告：recaptcha(2,3, enterprise), hcaptcha, geetest, turnstile.
+:::tip 提示 用于令牌验证码报告：recaptcha(2,3, enterprise), geetest, turnstile.
 ```http
 https://api.capmonster.cloud/reportIncorrectTokenCaptcha
 ```
 
 此外支持的路径：
 
-[https://api.capmonster.cloud/reportIncorrectRecaptcha](https://api.capmonster.cloud/reportIncorrectRecaptcha),
-[https://api.capmonster.cloud/reportIncorrectHcaptcha](https://api.capmonster.cloud/reportIncorrectHcaptcha) - 与 [reportIncorrectTokenCaptcha](https://api.capmonster.cloud/reportIncorrectTokenCaptcha) 功能相同。
+[https://api.capmonster.cloud/reportIncorrectRecaptcha](https://api.capmonster.cloud/reportIncorrectRecaptcha) - 与 [reportIncorrectTokenCaptcha](https://api.capmonster.cloud/reportIncorrectTokenCaptcha) 功能相同。
 :::
 
 

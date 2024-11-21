@@ -39,13 +39,13 @@ A extensão só funciona com o navegador Chromium!
 
 5. Na janela da extensão que abrir, insira a chave API da sua conta pessoal do CapMonster Cloud.
 :::info
-A nova versão da extensão CapMonster Cloud tem a capacidade de resolver reCAPTCHA2, reCAPTCHA Enterprise e hCaptcha por cliques.
+A nova versão da extensão CapMonster Cloud tem a capacidade de resolver reCAPTCHA2, reCAPTCHA Enterprise por cliques.
 :::
 ![](./images/install-instruction/ext.png) 
 :::caution
-Observe que ao instalar a extensão, o tipo de solução para reCAPTCHA2, reCAPTCHA Enterprise e hCaptcha é definido como “Clique” por padrão.
+Observe que ao instalar a extensão, o tipo de solução para reCAPTCHA2, reCAPTCHA Enterprise é definido como “Clique” por padrão.
 :::
-Para facilitar o uso da extensão CapMonster Cloud no ProjectMaker, preparamos um projeto para automatizar a instalação da extensão, inserção da chave API e escolha do tipo de solução reCAPTCHA2, reCAPTCHA Enterprise e hCaptcha.
+Para facilitar o uso da extensão CapMonster Cloud no ProjectMaker, preparamos um projeto para automatizar a instalação da extensão, inserção da chave API e escolha do tipo de solução reCAPTCHA2, reCAPTCHA Enterprise.
 
 ***Versão mínima do ZennoPoster 7.6.1***
 

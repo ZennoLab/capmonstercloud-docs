@@ -182,7 +182,7 @@ const PriceBlock = ({ title, name, successRate = 0, price = 0, subText, icon }) 
       if (priceRate === 1) {
         return ''
       } else {
-        return `${Number(captchaPrices[name]?.price * priceRate).toFixed(2)}₽`
+        return `${Number(captchaPrices[name]?.price * priceRate).toFixed(2)}₽ ($${captchaPrices[name]?.price})`
       }
       
     } else {

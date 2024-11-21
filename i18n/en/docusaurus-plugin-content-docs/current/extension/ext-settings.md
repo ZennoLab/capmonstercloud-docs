@@ -24,8 +24,8 @@ sidebar_position: 5
 |`textCaptchaSaveOnSite`|`Boolean`|Whether to save the selected elements on the site for text captcha|
 |`delayAfterLoadPage`|`Number`|Delay before starting to solve a text captcha, if it was saved for the site|
 |`recaptchaClickSelector`|`String`|DOM Element selector to click when starting a Recaptcha solving|
-|`hCaptchaClickSelector`|`String`|DOM Element selector to click when starting a hCaptcha solving|
 |`globalVariable`|`String`|Name of the field for interaction with the extension via a global object|
+<!-- |`hCaptchaClickSelector`|`String`|DOM Element selector to click when starting a hCaptcha solving| -->
 
 There are several ways to change extension settings:
 1. Before installing the extension.
@@ -48,14 +48,12 @@ The settings file looks like this:
     "ReCaptcha3",
     "ReCaptchaEnterprise",
     "FunCaptcha",
-    "HCaptcha",
     "GeeTest",
     "ImageToText",
     "Turnstile"
   ],
   "captchaExtra": {
     "ReCaptcha2": 1,
-    "HCaptcha": 1,
     "FunCaptcha": 1
   },
   "repeatsCount": 0,

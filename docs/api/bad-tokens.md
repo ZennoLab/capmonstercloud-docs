@@ -26,15 +26,14 @@ https://api.capmonster.cloud/reportIncorrectImageCaptcha
 ```
 :::
 
-:::tip Для жалоб на токен-капчи: recaptcha(2,3, enterprise), hcaptcha, geetest, turnstile.
+:::tip Для жалоб на токен-капчи: recaptcha(2,3, enterprise), geetest, turnstile.
 ```http
 https://api.capmonster.cloud/reportIncorrectTokenCaptcha
 ```
 
-Также поддерживаются пути:
+Также поддерживается путь:
 
-https://api.capmonster.cloud/reportIncorrectRecaptcha , 
-https://api.capmonster.cloud/reportIncorrectHcaptcha работают аналогично https://api.capmonster.cloud/reportIncorrectTokenCaptcha
+https://api.capmonster.cloud/reportIncorrectRecaptcha работает аналогично https://api.capmonster.cloud/reportIncorrectTokenCaptcha
 :::
 
 `Формат запроса: JSON POST`

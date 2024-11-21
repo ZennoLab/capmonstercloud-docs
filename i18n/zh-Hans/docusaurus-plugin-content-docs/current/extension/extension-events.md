@@ -29,7 +29,7 @@ window.addEventListener("onCMExtensionReady", () => {
 | :-: | :-: |
 |`onCMExtensionReady`|扩展程序完全加载并准备工作|
 
-### HCaptcha
+<!-- ### HCaptcha
 |**事件**|**描述**|
 | :-: | :-: |
 |`onHCaptchaClickStart`|开始通过点击解决 hCaptcha|
@@ -39,7 +39,7 @@ window.addEventListener("onCMExtensionReady", () => {
 |`onHCaptchaClick`|在解决 hCaptcha 时点击复选框|
 |`onHCaptchaTokenStart`|开始通过令牌解决 hCaptcha|
 |`onHCaptchaTokenSuccess`|通过令牌成功解决 hCaptcha|
-|`onHCaptchaTokenError`|通过令牌解决 hCaptcha 时出错|
+|`onHCaptchaTokenError`|通过令牌解决 hCaptcha 时出错| -->
 
 ### ReCaptcha
 |**事件**|**描述**|

@@ -28,7 +28,7 @@ Método adicional:
 
 ### Exemplos de código
 
-Para sua conveniência, criamos bibliotecas prontas para rápida integração da API do CapMonster.Cloud em seu código. Reconheça reCAPTCHA, hCaptcha e outros tipos de captcha pelos menores preços do mercado!
+Para sua conveniência, criamos bibliotecas prontas para rápida integração da API do CapMonster.Cloud em seu código. Reconheça diferentes tipos de captchas com os menores preços do mercado!
 
 |**Linguagem**|**Link para o repositório**|
 | :- | :- | 
@@ -84,13 +84,13 @@ Usando ações:
 
 ![](./images/getting-started-3.png)
 
-### hCaptcha 
+<!-- ### hCaptcha 
 
 1. Adicione a ação "Reconhecer hCaptcha" ao seu projeto, onde você já navegou até a página com o captcha;
 
 2. Nas Propriedades da ação Reconhecer hCaptcha, selecione o método No Tab ou Via SiteKey (ao selecionar esse método, você precisará especificar o SiteKey e a URL onde o captcha está localizado):
 
-![](./images/getting-started-4.png)
+![](./images/getting-started-4.png) --> 
 
 ### Via solicitações HTTP
 
