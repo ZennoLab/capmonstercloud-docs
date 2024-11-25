@@ -10,9 +10,40 @@ import MethodItem from '@theme/MethodItem';
 import MethodDescription from '@theme/MethodDescription'
 import PriceBlock from '@theme/PriceBlock';
 import PriceBlockWrap from '@theme/PriceBlockWrap';
+import TaskImageWrapper from '@theme/TaskImageWrapper';
+import TaskImageBlock from '@theme/TaskImageBlock';
+import TaskImage from '@theme/TaskImage';
+import TaskImageText from '@theme/TaskImageText'
 
 
 # ComplexImageTask Recognition
+
+<TaskImageWrapper>
+  <TaskImageBlock link="/pt-BR/docs/captchas/ComplexImageTask-Recognition#oocl_rotate_new">
+    <TaskImage>
+      ![](./images/ComplexImageTask-Recognition/oocl_img.png)
+    </TaskImage>
+    <TaskImageText title="Oocl_rotate_new" price={0.3} />
+  </TaskImageBlock>
+  <TaskImageBlock link="/pt-BR/docs/captchas/ComplexImageTask-Recognition#oocl_rotate_double_new">
+    <TaskImage>
+      ![](./images/ComplexImageTask-Recognition/oocl_rotate_img.png)
+    </TaskImage>
+    <TaskImageText title="Oocl_rotate_double_new" price={0.3} />
+  </TaskImageBlock>
+  <TaskImageBlock link="/pt-BR/docs/captchas/ComplexImageTask-Recognition#betpunch_3x3_rotate">
+    <TaskImage>
+      ![](./images/ComplexImageTask-Recognition/betpunch_img.png)
+    </TaskImage>
+    <TaskImageText title="Betpunch_3x3_rotate request" price={0.3} />
+  </TaskImageBlock>
+  <TaskImageBlock link="/pt-BR/docs/captchas/ComplexImageTask-Recognition#bls">
+    <TaskImage>
+      ![](./images/ComplexImageTask-Recognition/bls_img.png)
+    </TaskImage>
+    <TaskImageText title="Bls" price={0.12} />
+  </TaskImageBlock>
+</TaskImageWrapper>
 
 ## Parâmetros de solicitação
 <TabItem value="proxyless" label="ComplexImageTask (sem proxy)" default className="bordered-panel">
@@ -38,7 +69,7 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 
   </TabItem>
 
-## Tipos de tarefas disponíveis
+## oocl_rotate_new
 ### Criar tarefa `oocl_rotate_new`
 
 <PriceBlockWrap>
@@ -127,7 +158,7 @@ Graus pelos quais o círculo deve ser girado no sentido horário.
   </MethodDescription>
   </TabItem>
 
-
+## oocl_rotate_double_new
 ### Criar tarefa `oocl_rotate_double_new`
 
 <PriceBlockWrap>
@@ -220,7 +251,8 @@ Graus pelos quais o anel deve ser girado no sentido anti-horário e o círculo n
 
   </MethodDescription>
   </TabItem>
-  
+
+## betpunch_3x3_rotate
 ### Criar tarefa `betpunch_3x3_rotate`
 
 <PriceBlockWrap>
@@ -309,7 +341,7 @@ https://api.capmonster.cloud/getTaskResult
   </MethodDescription>
   </TabItem>
   
-  
+## bls
 ### Criar tarefa `bls`
 
 <PriceBlockWrap>

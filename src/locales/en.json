@@ -23,5 +23,6 @@
   "hundredTokens": "1000 tokens",
   "hundredImages": "1000 images",
   "fullPriceText": "View full price",
-  "dynamicHundredImages": "1000 dynamic images"
+  "dynamicHundredImages": "1000 dynamic images",
+  "complexImageAnswers": "1000 answers"
 }

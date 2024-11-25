@@ -10,8 +10,39 @@ import MethodItem from '@theme/MethodItem';
 import MethodDescription from '@theme/MethodDescription'
 import PriceBlock from '@theme/PriceBlock';
 import PriceBlockWrap from '@theme/PriceBlockWrap';
+import TaskImageWrapper from '@theme/TaskImageWrapper';
+import TaskImageBlock from '@theme/TaskImageBlock';
+import TaskImage from '@theme/TaskImage';
+import TaskImageText from '@theme/TaskImageText'
 
 # ComplexImageTask Recognition
+
+<TaskImageWrapper>
+  <TaskImageBlock link="/ru/docs/captchas/ComplexImageTask-Recognition#oocl_rotate_new">
+    <TaskImage>
+      ![](./images/ComplexImageTask-Recognition/oocl_img.png)
+    </TaskImage>
+    <TaskImageText title="Oocl_rotate_new" price={0.3} />
+  </TaskImageBlock>
+  <TaskImageBlock link="/ru/docs/captchas/ComplexImageTask-Recognition#oocl_rotate_double_new">
+    <TaskImage>
+      ![](./images/ComplexImageTask-Recognition/oocl_rotate_img.png)
+    </TaskImage>
+    <TaskImageText title="Oocl_rotate_double_new" price={0.3} />
+  </TaskImageBlock>
+  <TaskImageBlock link="/ru/docs/captchas/ComplexImageTask-Recognition#betpunch_3x3_rotate">
+    <TaskImage>
+      ![](./images/ComplexImageTask-Recognition/betpunch_img.png)
+    </TaskImage>
+    <TaskImageText title="Betpunch_3x3_rotate request" price={0.3} />
+  </TaskImageBlock>
+  <TaskImageBlock link="/ru/docs/captchas/ComplexImageTask-Recognition#bls">
+    <TaskImage>
+      ![](./images/ComplexImageTask-Recognition/bls_img.png)
+    </TaskImage>
+    <TaskImageText title="Bls" price={0.12} />
+  </TaskImageBlock>
+</TaskImageWrapper>
 
 ## Параметры запроса
 <TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="bordered-panel">
@@ -37,7 +68,7 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 </TabItem>
 
 
-## Доступные типы заданий
+## oocl_rotate_new
 
 ### Создание задачи `oocl_rotate_new`
 
@@ -124,6 +155,7 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 	</MethodDescription>
 </TabItem>
 
+## oocl_rotate_double_new
 ### Создание задачи `oocl_rotate_double_new`
 
 <PriceBlockWrap>
@@ -214,7 +246,8 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 		```
 	</MethodDescription>
 </TabItem>
-  
+
+## betpunch_3x3_rotate
 ### Создание задачи `betpunch_3x3_rotate request`
 
 <PriceBlockWrap>
@@ -300,6 +333,7 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 	</MethodDescription>
 </TabItem>
 
+## bls
 ### Создание задачи `bls`
 
 <PriceBlockWrap>
