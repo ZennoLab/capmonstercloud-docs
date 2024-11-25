@@ -1,0 +1,141 @@
+---
+sidebar_position: 16
+sidebar_label: Binance
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+import PriceBlock from '@theme/PriceBlock';
+import PriceBlockWrap from '@theme/PriceBlockWrap';
+
+
+# Binance - Binance captcha
+
+<PriceBlockWrap>
+  <PriceBlock title="Binance captcha" name="binanceToken"/>
+</PriceBlockWrap>
+
+:::warning **注意！**
+此任务将通过我们的代理服务器执行。
+:::
+
+## 请求参数
+<TabItem value="proxyless" label="CustomTask (without proxy)" default className="bordered-panel">
+    <ParamItem title="type" required type="string" />
+    **BinanceTask**
+
+    ---
+
+    <ParamItem title="websiteURL" required type="string" />
+    解决 CAPTCHA 的主页面地址。
+
+    ---
+
+    <ParamItem title="websiteKey" required type="string" />
+    您网站部分的唯一参数。参数 `bizId`、`bizType` 或 `bizCode` 的值。可以从流量中获取（请参见下面的描述）。
+
+    ---
+
+    <ParamItem title="validateId" required type="string" />
+    动态密钥。参数 `validateId`、`securityId` 或 `securityCheckResponseValidateId` 的值。可以从流量中获取（请参见下面的描述）。
+
+    ---
+
+    <ParamItem title="userAgent" type="string" />
+    浏览器的 User-Agent。**您可以提供自己的 User-Agent，或指定来自 Windows 操作系统的最新 User-Agent。**: `userAgentPlaceholder`
+
+</TabItem>
+
+
+### 如何获取 `websiteKey` 和 `validateId`
+启用开发者工具，进入 "Network"（网络）标签，激活 CAPTCHA，然后查看请求。有些请求会包含所需的参数值。
+例如，参数:
+bizCode: "CMC_register"
+securityId: "09295759baca4d4fbeae80d9ffeaefd8"
+![](./images/binance/binance1.png) 
+
+或者 
+bizId: "CMC_register" 
+securityCheckResponseValidateId: "09295759baca4d4fbeae80d9ffeaefd8"
+![](./images/binance/binance2.png) 
+
+或者 
+bizType: "login"
+validateId: "ff965ea6216b46f3825fa827ecaf297f"
+![](./images/binance/binance3.png) 
+
+或者
+bizId: "login" 
+securityCheckResponseValidateId: "ff965ea6216b46f3825fa827ecaf297f"
+![](./images/binance/binance4.png) 
+
+
+## 创建任务方法
+<TabItem value="proxyless" label="CustomTask (без прокси)" default className="method-panel">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**要求**
+		```json
+		{
+			"clientKey": "API_KEY",
+			"task": {
+				"type": "BinanceTask",
+				"websiteURL": "https://binance.com/login",
+				"websiteKey": "login",
+				"validateId": "cb0bfefa598b4c3887661fde54ecd57b",
+				"userAgent": "userAgentPlaceholder"
+			}
+		}
+		```
+		**回应**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
+</TabItem>
+
+
+## 获取任务结果方法
+Use the method [getTaskResult](../api/methods/get-task-result.md) to obtain the Binance solution.
+
+<TabItem value="proxyless" label="CustomTask (without proxy)" default className="method-panel-full">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**要求**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**回应**
+		```json
+		{
+			"errorId":0,
+			"status":"ready",
+			"solution": 
+			{
+			    "gRecaptchaResponse":
+			    {
+					"token":"captcha#09ba4905a79f44f2a99e44f234439644-ioVA7neog7eRHCDAsC0MixpZvt5kc99maS943qIsquNP9D77",
+					"userAgent":"userAgentPlaceholder"
+				}
+			}
+		}
+		```
+	</MethodDescription>
+</TabItem>
