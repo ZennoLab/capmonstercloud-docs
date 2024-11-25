@@ -93,7 +93,8 @@ securityCheckResponseValidateId: "ff965ea6216b46f3825fa827ecaf297f"
 		```json
 		{
 			"clientKey": "API_KEY",
-			"task": {
+			"task": 
+			{
 				"type": "BinanceTask",
 				"websiteURL": "https://binance.com/login",
 				"websiteKey": "login",
@@ -105,8 +106,8 @@ securityCheckResponseValidateId: "ff965ea6216b46f3825fa827ecaf297f"
 		**Resposta**
 		```json
 		{
-		  "errorId":0,
-		  "taskId":407533072
+			"errorId":0,
+			"taskId":407533072
 		}
 		```
 	</MethodDescription>
@@ -126,8 +127,8 @@ Use o método [getTaskResult](../api/methods/get-task-result.md) para obter a so
 		**Solicitação**
 		```json
 		{
-		  "clientKey":"API_KEY",
-		  "taskId": 407533072
+			"clientKey":"API_KEY",
+			"taskId": 407533072
 		}
 		```
 		**Resposta**
@@ -137,8 +138,8 @@ Use o método [getTaskResult](../api/methods/get-task-result.md) para obter a so
 			"status":"ready",
 			"solution": 
 			{
-			    "gRecaptchaResponse":
-			    {
+				"gRecaptchaResponse":
+				{
 					"token":"captcha#09ba4905a79f44f2a99e44f234439644-ioVA7neog7eRHCDAsC0MixpZvt5kc99maS943qIsquNP9D77",
 					"userAgent":"userAgentPlaceholder"
 				}
