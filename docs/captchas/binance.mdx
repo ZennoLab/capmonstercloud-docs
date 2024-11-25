@@ -53,23 +53,31 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 ### Как получить `websiteKey` и `validateId`
 Включите инструменты разработчика, перейдите на вкладку Network, активируйте капчу и посмотрите запросы. В некоторых из них будет нужное вам значение параметров. 
 Например, параметры:
-bizCode: "CMC_register"
+
+bizCode: "CMC_register",
 securityId: "09295759baca4d4fbeae80d9ffeaefd8"
+
 ![](./images/binance/binance1.png) 
 
 или 
-bizId: "CMC_register" 
+
+bizId: "CMC_register", 
 securityCheckResponseValidateId: "09295759baca4d4fbeae80d9ffeaefd8"
+
 ![](./images/binance/binance2.png) 
 
 или 
-bizType: "login"
+
+bizType: "login",
 validateId: "ff965ea6216b46f3825fa827ecaf297f"
+
 ![](./images/binance/binance3.png) 
 
 или
-bizId: "login" 
+
+bizId: "login",
 securityCheckResponseValidateId: "ff965ea6216b46f3825fa827ecaf297f"
+
 ![](./images/binance/binance4.png) 
 
 
