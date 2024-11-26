@@ -40,6 +40,7 @@ export default function Home() {
       <main>
         <Head>
         <meta name="google-site-verification" content="LTaYcyNwaZKXhoWI-eqaxSJ1IX6zF3NJrjACTp41Tyg" />
+        <meta name="algolia-site-verification"  content="11F1E44583A33489" />
         <title>{metaTitle}</title>
         <meta name="description" content={metaDescription}></meta>
         </Head>
