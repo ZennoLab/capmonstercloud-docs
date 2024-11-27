@@ -39,7 +39,7 @@ export const PriceRateProvider = ({ children }) => {
 
   useEffect(() => {
     updatePriceToRub();
-  }, [/* currentLocale */]); // Замените currentLocale на реальный параметр, если нужен
+  }, []);
 
   return (
     <PriceRateContext.Provider value={{ priceRate, setPriceRate }}>
