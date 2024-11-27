@@ -1,11 +1,13 @@
 import React from 'react';
 import styles from './styles.module.css';
-
+import { PriceRateProvider } from './PriceRateProvider';
 const TaskImageWrapper = ({ children }) => {
   return (
-    <div className={styles.wrap}>
-      { children }
-    </div>
+    <PriceRateProvider>
+      <div className={styles.wrap}>
+        { children }
+      </div>
+    </PriceRateProvider>
   );
 };
 

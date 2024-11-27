@@ -16,6 +16,6 @@
   text-decoration: none;
 }
 
-.link:hover .taskImageTitle {
+.link:hover strong {
   color: #8264FF !important;
 }
