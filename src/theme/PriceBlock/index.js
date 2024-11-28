@@ -11,6 +11,7 @@ import TextCaptchaIcon from './icons/TextCaptchaIcon';
 import DataDomeIcon from './icons/DataDomeIcon';
 import AmazonIcon from './icons/AmazonIcon';
 import ImervaIcon from './icons/ImervaIcon';
+import ComplexIcon from './icons/ComplexIcon';
 import BinanceIcon from './icons/BinanceIcon'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import getLocaleStrings from '../../locales/index';
@@ -131,7 +132,13 @@ const captchaPrices = {
     price: 0.12,
     type: 'image',
     rate: 99,
-    icon: <TextCaptchaIcon />
+    icon: <ComplexIcon />
+  },
+  complexImage: {
+    price: 0.3,
+    type: 'answers',
+    rate: 99,
+    icon: <ComplexIcon />
   },
   binanceToken: {
     price: 1,
@@ -144,11 +151,12 @@ const captchaPrices = {
 const PriceBlock = ({ title, name, successRate = 0, price = 0, subText, icon }) => {
   const { i18n } = useDocusaurusContext();
   const { currentLocale } = i18n;
-  const { hundredTokens, hundredImages, dynamicHundredImages } = getLocaleStrings(currentLocale);
+  const { hundredTokens, hundredImages, dynamicHundredImages, complexImageAnswers } = getLocaleStrings(currentLocale);
   const typeLocalization = {
     token: hundredTokens,
     image: hundredImages,
-    dynamic: dynamicHundredImages
+    dynamic: dynamicHundredImages,
+    answers: complexImageAnswers
   }
 
   const [priceRate, setPriceRate] = useState(1)

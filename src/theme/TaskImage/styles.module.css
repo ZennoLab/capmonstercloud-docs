@@ -1,0 +1,12 @@
+.wrap {
+  max-width: 160px;
+}
+.wrap p {
+  margin: 0;
+  padding: 0;
+}
+.wrap img {
+  max-width: 100%;
+  border-radius: 5px;
+  overflow: hidden;
+}
