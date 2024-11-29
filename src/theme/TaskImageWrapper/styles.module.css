@@ -1,0 +1,5 @@
+.wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Две колонки одинаковой ширины */
+  gap: 10px; /* Расстояние между колонками и строками */
+}

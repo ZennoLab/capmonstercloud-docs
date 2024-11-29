@@ -1,0 +1,147 @@
+---
+sidebar_position: 16
+sidebar_label: Binance
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+import PriceBlock from '@theme/PriceBlock';
+import PriceBlockWrap from '@theme/PriceBlockWrap';
+
+
+# Binance - Binance captcha
+
+<PriceBlockWrap>
+  <PriceBlock title="Binance captcha" name="binanceToken"/>
+</PriceBlockWrap>
+
+:::warning **Внимание!**
+Данная задача будет выполняться с использованием наших прокси-серверов.
+:::
+
+## Параметры запроса
+<TabItem value="proxyless" label="CustomTask (без прокси)" default className="bordered-panel">
+    <ParamItem title="type" required type="string" />
+    **BinanceTask**
+
+    ---
+
+    <ParamItem title="websiteURL" required type="string" />
+    Адрес основной страницы, на которой решается капча.
+
+    ---
+
+    <ParamItem title="websiteKey" required type="string" />
+    Уникальный параметр для раздела вашего сайта. Значение параметра `bizId`, `bizType` или `bizCode`. Его можно взять из трафика (см. описание ниже).
+
+    ---
+
+    <ParamItem title="validateId" required type="string" />
+    Динамический ключ. Значение параметра `validateId`, `securityId` или `securityCheckResponseValidateId`. Ег можно взять из трафика (см. описание ниже).
+
+    ---
+
+    <ParamItem title="userAgent" type="string" />
+    User-Agent браузера. **Можно передать свой или указать последний UA от ОС Windows**: `userAgentPlaceholder`
+
+</TabItem>
+
+
+### Как получить `websiteKey` и `validateId`
+Включите инструменты разработчика, перейдите на вкладку Network, активируйте капчу и посмотрите запросы. В некоторых из них будет нужное вам значение параметров. 
+Например, параметры:
+
+bizCode: "CMC_register",
+securityId: "09295759baca4d4fbeae80d9ffeaefd8"
+
+![](./images/binance/binance1.png) 
+
+или 
+
+bizId: "CMC_register", 
+securityCheckResponseValidateId: "09295759baca4d4fbeae80d9ffeaefd8"
+
+![](./images/binance/binance2.png) 
+
+или 
+
+bizType: "login",
+validateId: "ff965ea6216b46f3825fa827ecaf297f"
+
+![](./images/binance/binance3.png) 
+
+или
+
+bizId: "login",
+securityCheckResponseValidateId: "ff965ea6216b46f3825fa827ecaf297f"
+
+![](./images/binance/binance4.png) 
+
+
+## Метод создания задачи
+<TabItem value="proxyless" label="CustomTask (без прокси)" default className="method-panel">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Запрос**
+		```json
+		{
+			"clientKey": "API_KEY",
+			"task": 
+			{
+				"type": "BinanceTask",
+				"websiteURL": "https://binance.com/login",
+				"websiteKey": "login",
+				"validateId": "cb0bfefa598b4c3887661fde54ecd57b",
+				"userAgent": "userAgentPlaceholder"
+			}
+		}
+		```
+		**Ответ**
+		```json
+		{
+			"errorId":0,
+			"taskId":407533072
+		}
+		```
+	</MethodDescription>
+</TabItem>
+
+
+## Метод получения результата задачи
+Используйте метод [getTaskResult](../api/methods/get-task-result.md), чтобы получить решение Binance.
+
+<TabItem value="proxyless" label="CustomTask (без прокси)" default className="method-panel-full">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Запрос**
+		```json
+		{
+			"clientKey":"API_KEY",
+			"taskId": 407533072
+		}
+		```
+		**Ответ**
+		```json
+		{
+			"errorId":0,
+			"status":"ready",
+			"solution": 
+			{
+				"token":"captcha#09ba4905a79f44f2a99e44f234439644-ioVA7neog7eRHCDAsC0MixpZvt5kc99maS943qIsquNP9D77",
+				"userAgent":"userAgentPlaceholder"
+			}
+		}
+		```
+	</MethodDescription>
+</TabItem>

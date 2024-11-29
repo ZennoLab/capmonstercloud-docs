@@ -11,7 +11,7 @@ const PriceBlockWrap = ({ children }) => {
   return (
     <div className={styles.wrap}>
       <div className={styles.linkWrap}>
-        <a href={`/${currentLocale}#price`} className={styles.link}>{fullPriceText}</a>
+        <a href={currentLocale === 'en' ? `/#price` : `/${currentLocale}#price`} className={styles.link}>{fullPriceText}</a>
       </div>
       <div className={styles.wrapBlock}>
         {children}

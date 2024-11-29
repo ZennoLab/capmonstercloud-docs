@@ -1,0 +1,17 @@
+.mainText {
+  font-size: 14px;
+  line-height: 24px;
+  color: #14193C;
+  font-weight: 600;
+}
+.subText {
+  font-weight: 400;
+  color: #7D828C;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 22px;
+  color: #14193C;
+}
