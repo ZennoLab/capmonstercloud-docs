@@ -19,7 +19,8 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 </PriceBlockWrap>
 
 :::warning **注意！**
-此任务将通过我们的代理服务器执行。
+* 此任务将通过我们的代理服务器执行。
+* 仅可使用您的账户登录。
 :::
 
 ## 请求参数
@@ -79,6 +80,26 @@ bizId: "login",
 securityCheckResponseValidateId: "ff965ea6216b46f3825fa827ecaf297f"
 
 ![](./images/binance/binance4.png) 
+
+要解决验证码所需的参数可以通过执行 JavaScript 获得: 
+	```json
+		let originalBCaptcha = window.BCaptcha;
+		let BCaptchaData;
+		Object.defineProperty(window, 'BCaptcha', {
+			get: function() {
+				return function(args) {
+					const BCaptcha = new originalBCaptcha(args);
+					let BCaptchaShow = BCaptcha.__proto__.show
+					BCaptcha.__proto__.show = function(args) {
+						BCaptchaData = args;
+						return 1;
+					};
+					return BCaptcha;
+				}
+			}
+		});
+	```
+然后，您可以像这样检索参数，例如 `BCaptchaData.securityCheckResponseValidateId`.
 
 
 ## 创建任务方法

@@ -19,7 +19,8 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 </PriceBlockWrap>
 
 :::warning **Внимание!**
-Данная задача будет выполняться с использованием наших прокси-серверов.
+* Данная задача будет выполняться с использованием наших прокси-серверов.
+* Используйте только для входа в систему с помощью своей учетной записи.
 :::
 
 ## Параметры запроса
@@ -78,7 +79,27 @@ validateId: "ff965ea6216b46f3825fa827ecaf297f"
 bizId: "login",
 securityCheckResponseValidateId: "ff965ea6216b46f3825fa827ecaf297f"
 
-![](./images/binance/binance4.png) 
+![](./images/binance/binance4.png)
+
+Необходимые для решения капчи параметры можно получить, выполнив JavaScript: 
+	```json
+		let originalBCaptcha = window.BCaptcha;
+		let BCaptchaData;
+		Object.defineProperty(window, 'BCaptcha', {
+			get: function() {
+				return function(args) {
+					const BCaptcha = new originalBCaptcha(args);
+					let BCaptchaShow = BCaptcha.__proto__.show
+					BCaptcha.__proto__.show = function(args) {
+						BCaptchaData = args;
+						return 1;
+					};
+					return BCaptcha;
+				}
+			}
+		});
+	```
+Затем можно получить параметры, например так `BCaptchaData.securityCheckResponseValidateId`.
 
 
 ## Метод создания задачи
