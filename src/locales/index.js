@@ -1,20 +1,20 @@
 import en from './en.json';
 import ru from './ru.json';
-import zhHans from './zh-Hans.json'
-import ptBR from './pt-BR.json'
+import zh from './zh.json'
+import ptBR from './pt-br.json'
 
 const locales = {
   en,
   ru,
-  'zh-Hans': zhHans,
-  'pt-BR': ptBR
+  zh,
+  'pt-br': ptBR
 };
 
 export const localesMappings = {
   ru: 'ru-RU',
   en: 'en-US',
-  'zh-Hans': 'zh-Hans',
-  'pt-BR': 'pt-BR'
+  zh: 'zh-Hans',
+  'pt-br': 'pt-BR'
 }
 
 
