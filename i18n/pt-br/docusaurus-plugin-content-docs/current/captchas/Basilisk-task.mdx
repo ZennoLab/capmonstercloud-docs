@@ -1,0 +1,182 @@
+---
+sidebar_position: 13
+sidebar_label: BasiliskTask
+---
+
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+import PriceBlock from '@theme/PriceBlock';
+import PriceBlockWrap from '@theme/PriceBlockWrap';
+
+
+# Basilisk - FaucetPay Captcha
+
+<PriceBlockWrap>
+  <PriceBlock title="Basilisk" name="basiliskToken"/>
+</PriceBlockWrap>
+
+:::warning **Atenção!**
+Esta tarefa será executada usando nossos servidores proxy.
+:::
+
+## Parâmetros da solicitação
+<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (sem proxy)" default className="bordered-panel">
+<ParamItem title="type" required type="string" />
+**CustomTask**
+
+---
+
+<ParamItem title="class" required type="string" />
+**Basilisk**
+
+---
+
+<ParamItem title="websiteURL" required type="string" />
+O endereço da página principal onde o captcha é resolvido.
+
+---
+
+<ParamItem title="websiteKey" required type="string" />
+Pode ser encontrado no código HTML no atributo **data-sitekey** do contêiner do captcha ou no payload de uma solicitação POST para `https://basiliskcaptcha.com/challenge/check-site` no campo **site_key**
+
+---
+
+<ParamItem title="userAgent" type="string" />
+User-Agent do navegador. **Passe apenas o UA atual do sistema operacional Windows. Agora este é**: userAgentPlaceholder 
+
+</TabItem>
+
+## Criar tarefa
+
+
+<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (sem proxy)" default className="method-panel">
+<MethodItem>
+```http
+https://api.capmonster.cloud/createTask
+```
+</MethodItem>
+<MethodDescription>
+**Solicitação**
+```json
+{
+   "clientKey": "API_KEY",
+   "task": {
+       "type": "CustomTask",
+       "class": "Basilisk",
+       "websiteURL": "https://domain.io/account/register",
+       "websiteKey": "b7890hre5cf2544b2759c19fb2600897",
+       "userAgent": "userAgentPlaceholder"
+   }
+}
+```
+**Resposta**
+```json
+{
+  "errorId":0,
+  "taskId":407533072
+}
+```
+
+</MethodDescription>
+</TabItem>
+
+## Obter o resultado da tarefa
+Use o método [getTaskResult](../api/methods/get-task-result.md) para obter a solução do Basilisk.
+
+<TabItem value="proxyless" label="GeeTestTaskProxyless (sem proxy)" default className="method-panel-full">
+<MethodItem>
+```http
+https://api.capmonster.cloud/getTaskResult
+```
+</MethodItem>
+<MethodDescription>
+**Solicitação**
+```json
+{
+  "clientKey":"API_KEY",
+  "taskId": 407533072
+}
+```
+**Resposta**
+```json
+{
+   "errorId":0,
+   "status":"ready",
+   "solution": {
+      "data": {
+           "captcha_response": "5620301f30daf284b829fba66fa9b3d0"
+       },
+       "headers": {
+           "User-Agent": "userAgentPlaceholder"
+       }
+   }
+}
+```
+</MethodDescription>
+</TabItem>
+
+
+## Usar biblioteca SDK
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="python" label="Python" default className="method-panel">
+    ```python
+    # https://github.com/ZennoLab/capmonstercloud-client-python
+
+    import asyncio
+    from capmonstercloudclient import CapMonsterClient, ClientOptions
+    from capmonstercloudclient.requests import BasiliskCustomTaskProxylessRequest
+
+    client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonster Cloud API key
+    cap_monster_client = CapMonsterClient(options=client_options)
+
+    basilisk_request = BasiliskCustomTaskProxylessRequest(
+        websiteUrl="https://example.com",  # URL with captcha
+        websiteKey="b3760bfe5cf4254b2759c19fg2698og"  # Replace with the correct website key
+    )
+
+    async def solve_captcha():
+        return await cap_monster_client.solve_captcha(basilisk_request)
+
+    responses = asyncio.run(solve_captcha())
+    print(responses)
+    ```
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    ```csharp
+    // https://github.com/ZennoLab/capmonstercloud-client-dotnet
+
+    using Zennolab.CapMonsterCloud.Requests;
+    using Zennolab.CapMonsterCloud;
+
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            var clientOptions = new ClientOptions
+            {
+                ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
+            };
+
+            var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+            var basiliskRequest = new BasiliskCustomTaskProxylessRequest
+            {
+                WebsiteUrl = "https://example.com", // URL with captcha
+                WebsiteKey = "b3760bfe5cf4254b2759c19fg2698og" // Replace with the correct website key
+            };
+
+            var basiliskResult = await cmCloudClient.SolveAsync(basiliskRequest);
+
+            Console.WriteLine("Captcha Solution: " + string.Join(", ", basiliskResult.Solution.Data));
+            Console.WriteLine("Captcha Solution: " + string.Join(", ", basiliskResult.Solution.Headers));
+        }
+    }
+    ```
+  </TabItem>
+</Tabs>
