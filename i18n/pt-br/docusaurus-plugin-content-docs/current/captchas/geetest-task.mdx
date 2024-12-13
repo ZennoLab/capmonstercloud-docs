@@ -76,7 +76,7 @@ V4 (captcha_id = gt)
     ---
 
     <ParamItem title="gt" required type="string" />
-    A chave de identificação GeeTest para o domínio. Valor estático, raramente atualizado.<br />Se v4, então este é o parâmetro clientId.
+    A chave identificadora do GeeTest `gt` para o domínio. Valor estático, raramente atualizado.
 
     ---
 
@@ -90,7 +90,7 @@ V4 (captcha_id = gt)
     ---
 
     <ParamItem title="version" type="integer" required="required apenas para V4"/>
-    Número da versão (o padrão é 3). Valores possíveis: 3, 4.
+    3
 
     ---
 
@@ -101,11 +101,6 @@ V4 (captcha_id = gt)
 
     <ParamItem title="geetestGetLib" type="string" />
     Caminho para o script do captcha para exibi-lo na página. <br /> Parâmetro opcional. Pode ser necessário para alguns sites. <br />Enviar JSON como string.
-
-    ---
-
-    <ParamItem title="initParameters" type="object" />
-    Parâmetros adicionais para a versão 4, usados juntamente com “riskType” (tipo de captcha/características de sua verificação).
 
     ---
 
@@ -124,7 +119,7 @@ V4 (captcha_id = gt)
     ---
 
     <ParamItem title="gt" required type="string" />
-    A chave de identificação GeeTest para o domínio. Valor estático, raramente atualizado.<br />Se v4, então este é o parâmetro clientId.
+    A chave identificadora do GeeTest `gt` para o domínio. Valor estático, raramente atualizado.
 
     ---
 
@@ -138,7 +133,7 @@ V4 (captcha_id = gt)
     ---
 
     <ParamItem title="version" type="integer" required="required apenas para V4"/>
-    Número da versão (o padrão é 3). Valores possíveis: 3, 4.
+    3
 
     ---
 
@@ -149,11 +144,6 @@ V4 (captcha_id = gt)
 
     <ParamItem title="geetestGetLib" type="string" />
     Caminho para o script do captcha para exibi-lo na página. <br /> Parâmetro opcional. Pode ser necessário para alguns sites. <br />Enviar JSON como string.
-
-    ---
-
-    <ParamItem title="initParameters" type="object" />
-    Parâmetros adicionais para a versão 4, usados juntamente com “riskType” (tipo de captcha/características de sua verificação).
 
     ---
 
@@ -504,21 +494,12 @@ Endereço da página onde o captcha está sendo resolvido.
 ---
 
 <ParamItem title="gt" required type="string" />
-A chave identificadora GeeTest para o domínio. Valor estático, raramente atualizado.<br />Se for v4, este é o parâmetro clientId.
-
----
-
-<ParamItem title="challenge" required="required only for V3" type="string" />
-<p>
-Uma chave dinâmica.<br />Cada vez que nossa API for chamada, precisamos obter um novo valor de chave. Se o captcha for carregado na página, o valor `challenge` não será mais válido, e você receberá o [erro](../api/api-errors.md) `ERROR_TOKEN_EXPIRED`. <br />
-Você será cobrado por tarefas com erro `ERROR_TOKEN_EXPIRED`.
-É necessário examinar as requisições e encontrar aquela em que este valor é retornado e, antes de cada criação de tarefa de reconhecimento, executar esta requisição e extrair o desafio dela.
-</p>
+A chave do identificador GeeTest para o domínio - o parâmetro `captcha_id`.
 
 ---
 
 <ParamItem title="version" type="integer" required="required only for V4"/>
-Número da versão (o padrão é 3). Valores possíveis: 3, 4.
+4
 
 ---
 
@@ -552,21 +533,12 @@ Endereço da página onde o captcha está sendo resolvido.
 ---
 
 <ParamItem title="gt" required type="string" />
-A chave identificadora GeeTest para o domínio. Valor estático, raramente atualizado.<br />Se for v4, este é o parâmetro clientId.
-
----
-
-<ParamItem title="challenge" required="required only for V3" type="string" />
-<p>
-Uma chave dinâmica.<br />Cada vez que nossa API for chamada, precisamos obter um novo valor de chave. Se o captcha for carregado na página, o valor `challenge` não será mais válido, e você receberá o [erro](../api/api-errors.md) `ERROR_TOKEN_EXPIRED`. <br />
-Você será cobrado por tarefas com erro `ERROR_TOKEN_EXPIRED`.
-É necessário examinar as requisições e encontrar aquela em que este valor é retornado e, antes de cada criação de tarefa de reconhecimento, executar esta requisição e extrair o desafio dela.
-</p>
+A chave do identificador GeeTest para o domínio - o parâmetro `captcha_id`.
 
 ---
 
 <ParamItem title="version" type="integer" required="required only for V4"/>
-Número da versão (o padrão é 3). Valores possíveis: 3, 4.
+4
 
 ---
 
