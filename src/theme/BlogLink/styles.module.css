@@ -1,0 +1,54 @@
+.wrapper {
+  border: 1px solid #D2D7FF;
+  background: #F2F4FF;
+  padding: 15px 16px;
+  border-radius: 12px;
+  min-height: 130px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.moreText {
+  color: #555A64;
+  font-size: 16px;
+  margin-bottom: 6px;
+ }
+ 
+ .title {
+   font-size: 20px;
+   color: #000000;
+   font-weight: 600;
+   line-height: 26px;
+ }
+ 
+ 
+ 
+ .image {
+   height: 100px;
+   border-radius: 8px;
+ }
+
+.wrapper:hover, .wrapper:focus, .wrapper:active {
+  text-decoration: none;
+}
+
+.wrapper:hover .title {
+  text-decoration: underline;
+}
+.customBlock {
+  overflow: hidden;
+  border-radius: 8px;
+}
+.customBlock *{
+  margin: 0;
+  padding: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  height: auto;
+}
