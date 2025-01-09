@@ -1,6 +1,8 @@
 ﻿---
 sidebar_position: 1
 sidebar_label: getTaskResult
+title: "getTaskResult: как получить результат задачи по решению капчи"
+description: "Узнайте, как использовать метод getTaskResult в API Capmonster Cloud для получения результата задачи. Подробное описание параметров, ответов и примеров запроса. Быстрое и удобное решение капч онлайн!"
 ---
 
 # getTaskResult : получить результат задачи

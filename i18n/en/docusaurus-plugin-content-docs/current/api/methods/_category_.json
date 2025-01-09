@@ -5,6 +5,7 @@
   "link": {
     "type": "generated-index",
     "slug": "methods",
-    "description": "Basic methods for working with Capmonster Cloud API"
+	"title": "Methods for recognising captchas via Capmonster Cloud APIs",
+    "description": "Methods for solving captchas using Capmonster Cloud API! Check out the methods or ask questions to our support team."
   }
 }

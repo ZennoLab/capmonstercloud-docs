@@ -1,4 +1,10 @@
-﻿# Reasons for blocking
+﻿---
+sidebar_position: 9
+title: "Reasons for blocking captcha recognition"
+description: "How can I find out the reason for a captcha recognition ban using Capmonster Cloud API? Read about the reasons of blocking when bypassing captchas in the service documentation."
+---
+
+# Reasons for blocking
 ## ![](./images/block-reason/Aspose.Words.bbd9194a-7e5f-4818-92e0-dfa2931e5a81.001.png) How to find out the reason for the ban?
 In case of blocking, you’ll see a notification in your [personal account](https://capmonster.cloud/Dashboard).
 Ban history is available in the settings.

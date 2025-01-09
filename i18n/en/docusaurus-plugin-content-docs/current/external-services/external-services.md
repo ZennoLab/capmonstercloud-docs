@@ -1,4 +1,10 @@
-﻿# Captcha recognition via API of other services
+﻿---
+sidebar_position: 2
+title: "Captcha recognition via API of other services"
+description: "Learn how to use external services with CapMonster.Cloud. A complete guide on how to integrate and automate when recognising and bypassing captchas."
+---
+
+# Captcha recognition via API of other services
 CapMonster Cloud supports API: Anti-Captcha (v1.0, v2.0), RuCaptcha, RipCaptcha, 2Captcha, BypassCaptcha, DeathByCaptcha. Thus, you can solve captcha through CapMonster.Cloud, even if your program doesn't have integration with our service.
 
 You just need to install ![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.001.png) [**CapMonsterInterceptor**](https://static.zenno.services/ccl/interceptor.msi) (OC Windows)

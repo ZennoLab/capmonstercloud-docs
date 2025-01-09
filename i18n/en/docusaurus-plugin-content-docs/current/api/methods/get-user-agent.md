@@ -1,6 +1,8 @@
 ﻿---
 sidebar_position: 4
 sidebar_label: getUserAgent 
+title: "Method getUserAgent - generate User-Agent for efficient captcha solving"
+description: "Learn how to get User-Agent for captcha handling via Capmonster Cloud API. GetUserAgent method: description, sample requests and responses."
 ---
 
 # getUserAgent

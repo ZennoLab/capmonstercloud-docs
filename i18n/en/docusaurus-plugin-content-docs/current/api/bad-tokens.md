@@ -1,4 +1,10 @@
-﻿# How to report bad tokens
+﻿---
+sidebar_position: 8
+title: "Bad Tokens method - handling incorrect captcha tokens"
+description: "File a complaint about incorrect tokens provided by CapMonster Cloud when they do not result in successful verification on the site or are frequently rejected."
+---
+
+# How to report bad tokens
 
 File a complaint about incorrect tokens provided by CapMonster Cloud when they do not result in successful verification on the site or are frequently rejected.
 

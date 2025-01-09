@@ -4,6 +4,7 @@
   "collapsed": true,
   "link": {
     "type": "generated-index",
-    "description": "Документация по работе с API Capmonster Cloud"
+	"title": "Документация API для автоматического распознавания и обхода капчи",
+	"description": "API сервиса автоматического распознавания и обхода капч Capmonster Cloud! Ознакомьтесь с методами и примерами кода для мгновенного обхода капчи через API!"
   }
 }

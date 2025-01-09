@@ -4,6 +4,7 @@
   "collapsed": true,
   "link": {
     "type": "generated-index",
-    "description": "Документация по основным типам капч"
+	"title": "Recognising, solving and bypassing captchas via Capmonster Cloud API - Supported Types",
+    "description": "Check out all the captcha types supported by Capmonster Cloud. Full list, description and API integration examples."
   }
 }

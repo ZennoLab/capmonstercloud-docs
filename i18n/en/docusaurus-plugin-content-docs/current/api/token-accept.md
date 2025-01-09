@@ -1,6 +1,9 @@
 ﻿---
 sidebar_position: 7
+title: "Token Accept method - check tokens for captchas via API"
+description: "If you have problems accepting the token, please contact our support team. If you are having problems accepting the token, please contact our support team. We will promptly take the necessary steps to resolve the issue."
 ---
+
 # Token acceptance issues
 
 If you encounter issues with token acceptance, please contact our support team. We will promptly take the necessary actions to resolve the issue.

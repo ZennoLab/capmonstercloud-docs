@@ -1,6 +1,8 @@
 ﻿---
 sidebar_position: 1
 sidebar_label: getTaskResult
+title: "getTaskResult: how to get the result of a captcha task"
+description: "Learn how to use the getTaskResult method in the Capmonster Cloud API to get the result of a task. Detailed description of parameters, responses and sample queries. Fast and convenient captcha solution online!"
 ---
 
 # getTaskResult : request task result
