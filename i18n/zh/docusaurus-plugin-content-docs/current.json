@@ -42,5 +42,21 @@
   "sidebar.tutorialSidebar.category.Расширение.link.generated-index.description": {
     "message": "Documentation for working with the extension",
     "description": "The generated-index page description for category Расширение in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.API.link.generated-index.title": {
+    "message": "Документация API для автоматического распознавания и обхода капчи",
+    "description": "The generated-index page title for category API in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Методы.link.generated-index.title": {
+    "message": "Методы для распознавания капч через API Capmonster Cloud",
+    "description": "The generated-index page title for category Методы in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Типы капч.link.generated-index.title": {
+    "message": "Recognising, solving and bypassing captchas via Capmonster Cloud API - Supported Types",
+    "description": "The generated-index page title for category Типы капч in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Внешние сервисы.link.generated-index.title": {
+    "message": "Подключение CapMonster.Cloud к внешним сервисам",
+    "description": "The generated-index page title for category Внешние сервисы in sidebar tutorialSidebar"
   }
 }
