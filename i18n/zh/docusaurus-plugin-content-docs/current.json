@@ -8,7 +8,7 @@
     "description": "The label for category API in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.API.link.generated-index.description": {
-    "message": "Basic methods for working with Capmonster Cloud API",
+    "message": "Capmonster Cloud 自动验证码识别和绕过服务的 API！熟悉通过 API 进行即时验证码遍历的方法和代码示例！",
     "description": "The generated-index page description for category API in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.Методы": {
@@ -20,7 +20,7 @@
     "description": "The label for category Типы капч in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.Типы капч.link.generated-index.description": {
-    "message": "Documentation on the main types of captchas",
+    "message": "查看 Capmonster Cloud 支持的所有验证码类型。完整列表、说明和 API 集成示例。",
     "description": "The generated-index page description for category Типы капч in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.Внешние сервисы": {
@@ -32,11 +32,11 @@
     "description": "The label for category Расширение in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.Методы.link.generated-index.description": {
-    "message": "Basic methods for working with Capmonster Cloud API",
+    "message": "使用 Capmonster Cloud API 解决验证码的方法！查看方法或向我们的支持团队提问。",
     "description": "The generated-index page description for category Методы in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.Внешние сервисы.link.generated-index.description": {
-    "message": "Documentation for working with external services",
+    "message": "了解如何集成外部服务（包括通过 API）以与 CapMonster.Cloud 配合使用。功能和示例的详细描述。",
     "description": "The generated-index page description for category Внешние сервисы in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.Расширение.link.generated-index.description": {
@@ -44,19 +44,19 @@
     "description": "The generated-index page description for category Расширение in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.API.link.generated-index.title": {
-    "message": "Документация API для автоматического распознавания и обхода капчи",
+    "message": "自动验证码识别和绕过的 API 文档。",
     "description": "The generated-index page title for category API in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.Методы.link.generated-index.title": {
-    "message": "Методы для распознавания капч через API Capmonster Cloud",
+    "message": "通过 Capmonster Cloud API 识别验证码的方法。",
     "description": "The generated-index page title for category Методы in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.Типы капч.link.generated-index.title": {
-    "message": "Recognising, solving and bypassing captchas via Capmonster Cloud API - Supported Types",
+    "message": "通过 Capmonster Cloud API 识别、解决和绕过验证码 - 支持的类型。",
     "description": "The generated-index page title for category Типы капч in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.Внешние сервисы.link.generated-index.title": {
-    "message": "Подключение CapMonster.Cloud к внешним сервисам",
+    "message": "将外部服务连接到 CapMonster Cloud。",
     "description": "The generated-index page title for category Внешние сервисы in sidebar tutorialSidebar"
   }
 }
