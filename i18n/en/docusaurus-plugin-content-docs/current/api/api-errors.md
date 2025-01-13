@@ -1,5 +1,7 @@
 ---
 sidebar_position: 4
+title: "Description of Capmonster Cloud Docs captcha recognition errors"
+description: "API error codes when recognising captchas, reasons and recommendations for preventing errors when integrating APIs for solving and bypassing captchas on the Capmonster Cloud service website!"
 ---
 
 # Errors description

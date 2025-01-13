@@ -8,7 +8,7 @@
     "description": "The label for category API in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.API.link.generated-index.description": {
-    "message": "Basic methods for working with Capmonster Cloud API",
+    "message": "API of Capmonster Cloud automatic captcha recognition and bypassing service! Familiarise yourself with methods and code examples for instant captcha traversal via API!",
     "description": "The generated-index page description for category API in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.Методы": {
@@ -20,7 +20,7 @@
     "description": "The label for category Типы капч in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.Типы капч.link.generated-index.description": {
-    "message": "Documentation on the main types of captchas",
+    "message": "Check out all the captcha types supported by Capmonster Cloud. Full list, description and API integration examples.",
     "description": "The generated-index page description for category Типы капч in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.Внешние сервисы": {
@@ -32,15 +32,31 @@
     "description": "The label for category Расширение in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.Методы.link.generated-index.description": {
-    "message": "Basic methods for working with Capmonster Cloud API",
+    "message": "Methods for solving captchas using Capmonster Cloud API! Check out the methods or ask questions to our support team.",
     "description": "The generated-index page description for category Методы in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.Внешние сервисы.link.generated-index.description": {
-    "message": "Documentation for working with external services",
+    "message": "Learn how to integrate external services (including via API) to work with CapMonster.Cloud. Detailed description of features and examples.",
     "description": "The generated-index page description for category Внешние сервисы in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.Расширение.link.generated-index.description": {
     "message": "Documentation for working with the extension",
     "description": "The generated-index page description for category Расширение in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.API.link.generated-index.title": {
+    "message": "API documentation for automatic captcha recognition and bypassing",
+    "description": "The generated-index page title for category API in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Методы.link.generated-index.title": {
+    "message": "Methods for recognising captchas via Capmonster Cloud APIs",
+    "description": "The generated-index page title for category Методы in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Типы капч.link.generated-index.title": {
+    "message": "Recognising, solving and bypassing captchas via Capmonster Cloud API - Supported Types",
+    "description": "The generated-index page title for category Типы капч in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Внешние сервисы.link.generated-index.title": {
+    "message": "Connecting external services to CapMonster Cloud",
+    "description": "The generated-index page title for category Внешние сервисы in sidebar tutorialSidebar"
   }
 }

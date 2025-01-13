@@ -5,6 +5,7 @@
   "link": {
     "type": "generated-index",
     "slug": "external",
-    "description": "Основные методы для работы с API Capmonster Cloud"
+	"title": "Connecting external services to CapMonster Cloud",
+    "description": "Learn how to integrate external services (including via API) to work with CapMonster.Cloud. Detailed description of features and examples."
   }
 }

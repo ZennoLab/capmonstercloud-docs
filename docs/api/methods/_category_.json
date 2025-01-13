@@ -5,6 +5,7 @@
   "link": {
     "slug": "methods",
     "type": "generated-index",
-    "description": "Основные методы для работы с API Capmonster Cloud"
+	"title": "Методы для распознавания капч через API Capmonster Cloud",
+    "description": "Методы для решения капч с помощью API сервиса автоматического распознавания Capmonster Cloud! Ознакомьтесь с методами или задайте интересующие вопросы специалистам службы поддержки."
   }
 }
