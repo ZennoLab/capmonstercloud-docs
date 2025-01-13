@@ -4,6 +4,7 @@
   "collapsed": true,
   "link": {
     "type": "generated-index",
-    "description": "Основные методы для работы с API Capmonster Cloud"
+	"title": "API documentation for automatic captcha recognition and bypassing",
+    "description": "API of Capmonster Cloud automatic captcha recognition and bypassing service! Familiarise yourself with methods and code examples for instant captcha traversal via API!"
   }
 }

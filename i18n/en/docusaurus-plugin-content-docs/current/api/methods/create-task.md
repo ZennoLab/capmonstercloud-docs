@@ -1,6 +1,8 @@
 ﻿---
 sidebar_position: 0
 sidebar_label: createTask
+title: "createTask: how to create a captcha task"
+description: "createTask: The method creates a task to solve captcha of a certain type. The parameters include client data for authorisation, typed task data and other additional parameters."
 ---
 
 # createTask : creating a task

@@ -1,6 +1,8 @@
 ﻿---
 sidebar_position: 3
 sidebar_label: getBalance
+title: "Method getBalanse - check the Balance for solving captchas in Capmonster Cloud API"
+description: "Full description of Capmonster Cloud API getBalance method. Learn how to check your captcha account balance using the user-friendly API in the Capmonster Cloud Docs guide."
 ---
 
 # getBalance : retrieve account balance
