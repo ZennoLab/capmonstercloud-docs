@@ -15,3 +15,10 @@ Usar o *userAgent* atual do Windows ajuda a melhorar a precisão do reconhecimen
 https://capmonster.cloud/api/useragent/actual
 ```
 :::
+
+Para o tipo de captcha DataDome, um User-Agent diferente é usado. Você pode obter seu valor atual usando o seguinte método:
+:::info
+```http
+https://capmonster.cloud/api/useragent/actual/datadome
+```
+:::
