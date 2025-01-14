@@ -14,3 +14,10 @@ sidebar_label: getUserAgent
 https://capmonster.cloud/api/useragent/actual
 ```
 :::
+
+对于DataDome验证码类型，使用了不同的用户代理（userAgent）。您可以使用以下方法获取其当前值：
+:::info 方法地址
+```http
+https://capmonster.cloud/api/useragent/actual/datadome
+```
+:::
