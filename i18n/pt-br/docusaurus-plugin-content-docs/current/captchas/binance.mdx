@@ -24,7 +24,36 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 :::
 
 ## Parâmetros da solicitação
-<TabItem value="proxyless" label="CustomTask (without proxy)" default className="bordered-panel">
+<Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
+  <TabItem value="proxyless" label="BinanceTaskProxyless (sem proxy)" default className="bordered-panel">
+
+    <ParamItem title="type" required type="string" />
+    **BinanceTaskProxyless**
+
+    ---
+
+    <ParamItem title="websiteURL" required type="string" />
+    O endereço da página principal onde o CAPTCHA é resolvido.
+
+    ---
+
+    <ParamItem title="websiteKey" required type="string" />
+    Um parâmetro exclusivo para a seção do seu site. O valor do parâmetro `bizId`, `bizType` ou `bizCode`. Ele pode ser obtido a partir do tráfego (veja a descrição abaixo).
+
+    ---
+
+    <ParamItem title="validateId" required type="string" />
+    Uma chave dinâmica. O valor do parâmetro `validateId`, `securityId` ou `securityCheckResponseValidateId`. Ele pode ser obtido a partir do tráfego (veja a descrição abaixo).
+
+    ---
+
+    <ParamItem title="userAgent" type="string" />
+    User-Agent do navegador. **Você pode fornecer o seu próprio ou especificar o último UA do sistema operacional Windows.**: `userAgentPlaceholder`
+
+  </TabItem>
+
+  <TabItem value="proxy" label="BinanceTask (com proxy)" default className="bordered-panel">
+
     <ParamItem title="type" required type="string" />
     **BinanceTask**
 
@@ -47,8 +76,39 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 
     <ParamItem title="userAgent" type="string" />
     User-Agent do navegador. **Você pode fornecer o seu próprio ou especificar o último UA do sistema operacional Windows.**: `userAgentPlaceholder`
+	
+	---
 
-</TabItem>
+	<ParamItem title="proxyType" required type="string" />
+	**http** - proxy regular http/https;<br />**https** - use essa opção apenas se "http" não funcionar (necessário para alguns proxies personalizados);<br />**socks4** - proxy socks4;<br />**socks5** - proxy socks5.
+
+	---
+
+	<ParamItem title="proxyAddress" required type="string" />
+	<p>
+	Endereço IP do proxy IPv4/IPv6. Não permitido:
+	- uso de nomes de host;
+	- uso de proxies transparentes (onde é possível ver o IP do cliente);
+	- uso de proxies em máquinas locais.
+	</p>
+
+	---
+
+	<ParamItem title="proxyPort" required type="integer" />
+	Porta do proxy.
+
+	---
+
+	<ParamItem title="proxyLogin" type="string" />
+	Login do servidor proxy.
+
+	---
+
+	<ParamItem title="proxyPassword" type="string" />
+	Senha do servidor proxy.
+
+  </TabItem>
+</Tabs>
 
 
 ### Como obter `websiteKey` e `validateId`
@@ -103,7 +163,39 @@ Em seguida, você pode recuperar os parâmetros, por exemplo, da seguinte forma 
 
 
 ## Criar método de tarefa
-<TabItem value="proxyless" label="CustomTask (без прокси)" default className="method-panel">
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="proxyless" label="BinanceTaskProxyless (sem proxy)" default className="method-panel">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Solicitação**
+		```json
+		{
+			"clientKey": "API_KEY",
+			"task": 
+			{
+				"type": "BinanceTaskProxyless",
+				"websiteURL": "https://binance.com/login",
+				"websiteKey": "login",
+				"validateId": "cb0bfefa598b4c3887661fde54ecd57b",
+				"userAgent": "userAgentPlaceholder"
+			}
+		}
+		```
+		**Resposta**
+		```json
+		{
+			"errorId":0,
+			"taskId":407533072
+		}
+		```
+	</MethodDescription>
+  </TabItem>
+
+  <TabItem value="proxy" label="BinanceTask (com proxy)" default className="method-panel">
 	<MethodItem>
 		```http
 		https://api.capmonster.cloud/createTask
@@ -120,7 +212,12 @@ Em seguida, você pode recuperar os parâmetros, por exemplo, da seguinte forma 
 				"websiteURL": "https://binance.com/login",
 				"websiteKey": "login",
 				"validateId": "cb0bfefa598b4c3887661fde54ecd57b",
-				"userAgent": "userAgentPlaceholder"
+				"userAgent": "userAgentPlaceholder",
+				"proxyType":"http",
+				"proxyAddress":"8.8.8.8",
+				"proxyPort":8080,
+				"proxyLogin":"proxyLoginHere",
+				"proxyPassword":"proxyPasswordHere"
 			}
 		}
 		```
@@ -132,7 +229,8 @@ Em seguida, você pode recuperar os parâmetros, por exemplo, da seguinte forma 
 		}
 		```
 	</MethodDescription>
-</TabItem>
+  </TabItem>
+</Tabs>
 
 
 ## Obter resultado da tarefa

@@ -26,7 +26,37 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 :::
 
 ## Request parameters
-<TabItem value="proxyless" label="CustomTask (without proxy)" default className="bordered-panel">
+
+<Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
+  <TabItem value="proxyless" label="BinanceTaskProxyless (without proxy)" default className="bordered-panel">
+
+    <ParamItem title="type" required type="string" />
+    **BinanceTaskProxyless**
+
+    ---
+
+    <ParamItem title="websiteURL" required type="string" />
+    The address of the main page where the captcha is solved.
+
+    ---
+
+    <ParamItem title="websiteKey" required type="string" />
+    A unique parameter for your website's section. The value of the parameter `bizId`, `bizType`, or `bizCode`. It can be taken from the traffic (see the description below).
+
+    ---
+
+    <ParamItem title="validateId" required type="string" />
+    A dynamic key. The value of the parameter `validateId`, `securityId`, or `securityCheckResponseValidateId`. It can be taken from the traffic (see the description below).
+
+    ---
+
+    <ParamItem title="userAgent" type="string" />
+    The browser's User-Agent. **You can provide your own or specify the latest UA from Windows OS.**: `userAgentPlaceholder`
+
+  </TabItem>
+
+  <TabItem value="proxy" label="BinanceTask (using proxy)" default className="bordered-panel">
+
     <ParamItem title="type" required type="string" />
     **BinanceTask**
 
@@ -49,8 +79,39 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 
     <ParamItem title="userAgent" type="string" />
     The browser's User-Agent. **You can provide your own or specify the latest UA from Windows OS.**: `userAgentPlaceholder`
+	
+	 ---
 
-</TabItem>
+    <ParamItem title="proxyType" required type="string" />
+    **http** - regular http/https proxy;<br />**https** - try this option only if "http" doesn't work (required for some custom proxies);<br />**socks4** - socks4 proxy;<br />**socks5** - socks5 proxy.
+	
+	 ---
+
+    <ParamItem title="proxyAddress" required type="string" />
+    <p>
+      IPv4/IPv6 proxy IP address. Not allowed:
+      - using of hostnames;
+      - using transparent proxies (where you can see the client's IP);
+      - using proxies on local machines.
+    </p>
+
+     ---
+
+    <ParamItem title="proxyPort" required type="integer" />
+    Proxy port.
+
+     ---
+
+    <ParamItem title="proxyLogin" type="string" />
+    Proxy-server login.
+
+     ---
+
+    <ParamItem title="proxyPassword" type="string" />
+    Proxy-server password.
+
+  </TabItem>
+</Tabs>
 
 
 ### How to obtain `websiteKey` and `validateId`
@@ -105,7 +166,40 @@ Then, you can retrieve the parameters, for example, like this `BCaptchaData.secu
 
 
 ## Create task method
-<TabItem value="proxyless" label="CustomTask (без прокси)" default className="method-panel">
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="proxyless" label="BinanceTaskProxyless (without proxy)" default className="method-panel">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+			"clientKey": "API_KEY",
+			"task": 
+			{
+				"type": "BinanceTaskProxyless",
+				"websiteURL": "https://binance.com/login",
+				"websiteKey": "login",
+				"validateId": "cb0bfefa598b4c3887661fde54ecd57b",
+				"userAgent": "userAgentPlaceholder"
+			}
+		}
+		```
+		**Response**
+		```json
+		{
+			"errorId":0,
+			"taskId":407533072
+		}
+		```
+	</MethodDescription>
+  </TabItem>
+
+  <TabItem value="proxy" label="BinanceTask (using proxy)" default className="method-panel">
 	<MethodItem>
 		```http
 		https://api.capmonster.cloud/createTask
@@ -122,7 +216,12 @@ Then, you can retrieve the parameters, for example, like this `BCaptchaData.secu
 				"websiteURL": "https://binance.com/login",
 				"websiteKey": "login",
 				"validateId": "cb0bfefa598b4c3887661fde54ecd57b",
-				"userAgent": "userAgentPlaceholder"
+				"userAgent": "userAgentPlaceholder",
+				"proxyType":"http",
+				"proxyAddress":"8.8.8.8",
+				"proxyPort":8080,
+				"proxyLogin":"proxyLoginHere",
+				"proxyPassword":"proxyPasswordHere"
 			}
 		}
 		```
@@ -134,7 +233,8 @@ Then, you can retrieve the parameters, for example, like this `BCaptchaData.secu
 		}
 		```
 	</MethodDescription>
-</TabItem>
+  </TabItem>
+</Tabs>
 
 
 ## Get task result method
