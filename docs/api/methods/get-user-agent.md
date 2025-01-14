@@ -19,7 +19,7 @@ https://capmonster.cloud/api/useragent/actual
 :::
 
 Для типа капч DataDome используется другой userAgent. Получить его актуальное значение можно следующим методом:
-:::info
+:::info АДРЕС МЕТОДА
 ```http
 https://capmonster.cloud/api/useragent/actual/datadome
 ```
