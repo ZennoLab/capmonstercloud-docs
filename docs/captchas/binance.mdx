@@ -26,7 +26,36 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 :::
 
 ## Параметры запроса
-<TabItem value="proxyless" label="CustomTask (без прокси)" default className="bordered-panel">
+
+<Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
+  <TabItem value="proxyless" label="BinanceTaskProxyless (без прокси)" default className="bordered-panel">
+  
+    <ParamItem title="type" required type="string" />
+    **BinanceTaskProxyless**
+
+    ---
+
+    <ParamItem title="websiteURL" required type="string" />
+    Адрес основной страницы, на которой решается капча.
+
+    ---
+
+    <ParamItem title="websiteKey" required type="string" />
+    Уникальный параметр для раздела вашего сайта. Значение параметра `bizId`, `bizType` или `bizCode`. Его можно взять из трафика (см. описание ниже).
+
+    ---
+
+    <ParamItem title="validateId" required type="string" />
+    Динамический ключ. Значение параметра `validateId`, `securityId` или `securityCheckResponseValidateId`. Ег можно взять из трафика (см. описание ниже).
+
+    ---
+
+    <ParamItem title="userAgent" type="string" />
+    User-Agent браузера. **Можно передать свой или указать последний UA от ОС Windows**: `userAgentPlaceholder`
+
+  </TabItem>
+  
+  <TabItem value="proxy" label="BinanceTask (при использовании прокси)" className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **BinanceTask**
 
@@ -49,8 +78,42 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 
     <ParamItem title="userAgent" type="string" />
     User-Agent браузера. **Можно передать свой или указать последний UA от ОС Windows**: `userAgentPlaceholder`
+	
+	 ---
 
-</TabItem>
+    <ParamItem title="proxyType" required type="string" />
+    **http** - обычный http/https прокси;<br />
+	**https** - попробуйте эту опцию только если "http" не работает (требуется для некоторых кастомных прокси);<br />
+	**socks4** - socks4 прокси;<br />
+	**socks5** - socks5 прокси.
+
+     ---
+
+    <ParamItem title="proxyAddress" required type="string" />
+    <p>
+      IP адрес прокси IPv4/IPv6. Не допускается:
+		- использование имен хостов;
+		- использование прозрачных прокси (там где можно видеть IP клиента);
+		- использование прокси на локальных машинах.
+    </p>
+
+     ---
+
+    <ParamItem title="proxyPort" required type="integer" />
+    Порт прокси.
+
+     ---
+
+    <ParamItem title="proxyLogin" type="string" />
+    Логин прокси-сервера.
+
+     ---
+
+    <ParamItem title="proxyPassword" type="string" />
+    Пароль прокси-сервера.
+
+  </TabItem>
+</Tabs>
 
 
 ### Как получить `websiteKey` и `validateId`
@@ -105,7 +168,39 @@ securityCheckResponseValidateId: "ff965ea6216b46f3825fa827ecaf297f"
 
 
 ## Метод создания задачи
-<TabItem value="proxyless" label="CustomTask (без прокси)" default className="method-panel">
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="proxyless" label="BinanceTaskProxyless (без прокси)" default className="method-panel">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Запрос**
+		```json
+		{
+			"clientKey": "API_KEY",
+			"task": 
+			{
+				"type": "BinanceTaskProxyless",
+				"websiteURL": "https://binance.com/login",
+				"websiteKey": "login",
+				"validateId": "cb0bfefa598b4c3887661fde54ecd57b",
+				"userAgent": "userAgentPlaceholder"
+			}
+		}
+		```
+		**Ответ**
+		```json
+		{
+			"errorId":0,
+			"taskId":407533072
+		}
+		```
+	</MethodDescription>
+  </TabItem>
+  
+  <TabItem value="proxy" label="BinanceTask (при использовании прокси)" default className="method-panel">
 	<MethodItem>
 		```http
 		https://api.capmonster.cloud/createTask
@@ -122,7 +217,12 @@ securityCheckResponseValidateId: "ff965ea6216b46f3825fa827ecaf297f"
 				"websiteURL": "https://binance.com/login",
 				"websiteKey": "login",
 				"validateId": "cb0bfefa598b4c3887661fde54ecd57b",
-				"userAgent": "userAgentPlaceholder"
+				"userAgent": "userAgentPlaceholder",
+				"proxyType":"http",
+				"proxyAddress":"8.8.8.8",
+				"proxyPort":8080,
+				"proxyLogin":"proxyLoginHere",
+				"proxyPassword":"proxyPasswordHere"
 			}
 		}
 		```
@@ -134,7 +234,8 @@ securityCheckResponseValidateId: "ff965ea6216b46f3825fa827ecaf297f"
 		}
 		```
 	</MethodDescription>
-</TabItem>
+  </TabItem>
+</Tabs>
 
 
 ## Метод получения результата задачи
