@@ -72,7 +72,10 @@ sidebar_position: 5
 ```
 ## 使用JavaScript更改设置
 
-在当前活动页面上初始化扩展后，我们会有一个在扩展设置中设置的全局对象，默认是 CMExtension，我们可以通过它来操作扩展设置。
+全局变量的名称必须在扩展中指定，例如，CMExtension。
+![](./images/ext-settings/GlobalObjectName.png) 
+
+在当前活动页面上初始化扩展后，会出现指定的全局变量，从而允许我们操作扩展的设置。
 
 请注意，事件处理程序附加到属性，而不是数据内部。
 
