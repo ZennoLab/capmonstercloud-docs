@@ -72,7 +72,10 @@ O arquivo de configurações é assim:
 ```
 ## Alterando as configurações usando JS
 
-Após inicializar a extensão na página ativa atual, temos um objeto global que é configurado nas configurações da extensão, por padrão `CMExtension`, com o qual podemos manipular as configurações da extensão.
+O nome da variável global deve ser especificado na extensão, por exemplo, CMExtension. 
+![](./images/ext-settings/GlobalObjectName.png) 
+
+Após inicializar a extensão na página ativa, a variável global especificada aparece, permitindo que manipulemos as configurações da extensão.
 
 Observe que os manipuladores de eventos estão anexados às propriedades, não aos dados internos.
 

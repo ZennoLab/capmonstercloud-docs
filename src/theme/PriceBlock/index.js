@@ -62,7 +62,7 @@ const captchaPrices = {
   geeTestToken: {
     price: 1.2,
     type: 'token',
-    rate: 92,
+    rate: 98,
     icon: <GeeTestIcon />
   },
   turnstileToken: {
