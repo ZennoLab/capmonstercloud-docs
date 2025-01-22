@@ -73,6 +73,7 @@ sidebar_position: 5
 ## 使用JavaScript更改设置
 
 全局变量的名称必须在扩展中指定，例如，CMExtension。
+
 ![](./images/ext-settings/GlobalObjectName.png) 
 
 在当前活动页面上初始化扩展后，会出现指定的全局变量，从而允许我们操作扩展的设置。
