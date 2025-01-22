@@ -10,6 +10,7 @@ import MethodItem from '@theme/MethodItem';
 import MethodDescription from '@theme/MethodDescription'
 import PriceBlock from '@theme/PriceBlock';
 import PriceBlockWrap from '@theme/PriceBlockWrap';
+import BlogLink from '@theme/BlogLink';
 
 # ComplexImageTask Recaptcha
 
@@ -20,6 +21,8 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 </PriceBlockWrap>
 
 Объект содержит данные о задаче на решение ReCaptcha2 от Google.
+
+<BlogLink url="https://blog.capmonster.cloud/ru/blog/re-captcha/how-to-bypass-recaptcha-v2-using-capmonster-cloud"/>
 
 ## Параметры запроса
 <TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="bordered-panel">
@@ -91,6 +94,7 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 
 **websiteURL**: адрес веб-страницы с капчей. 
 
+<BlogLink url="https://blog.capmonster.cloud/ru/blog/bypass-captcha/dynamic-captcha-parameters-how-to-identify"/>
 
 ## Метод создания задачи
 <TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel">
@@ -191,6 +195,9 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
       console.log(await cmcClient.Solve(complexImageRecaptchaRequest));
     });
     ```
+	
+	<BlogLink url="https://blog.capmonster.cloud/ru/blog/re-1/javascript-recaptcha-v2"/>
+	
   </TabItem>
   
   <TabItem value="python" label="Python" className="method-panel">
@@ -220,6 +227,9 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
     responses = asyncio.run(solve_captcha())
     print(responses)
     ```
+	
+	<BlogLink url="https://blog.capmonster.cloud/ru/blog/re-1/python-recaptcha-v2"/>
+	
   </TabItem>
   
   <TabItem value="csharp" label="C#" className="method-panel">
@@ -257,5 +267,8 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
         }
     }
     ```
+	
+	<BlogLink url="https://blog.capmonster.cloud/ru/blog/re-1/c-recaptcha-v2"/>
+	
   </TabItem>
 </Tabs>

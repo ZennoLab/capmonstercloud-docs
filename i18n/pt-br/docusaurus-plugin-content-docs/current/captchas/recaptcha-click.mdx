@@ -10,6 +10,7 @@ import MethodItem from '@theme/MethodItem';
 import MethodDescription from '@theme/MethodDescription'
 import PriceBlock from '@theme/PriceBlock';
 import PriceBlockWrap from '@theme/PriceBlockWrap';
+import BlogLink from '@theme/BlogLink';
 
 # ComplexImageTask Recaptcha
 
@@ -20,6 +21,8 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 </PriceBlockWrap>
 
 O objeto contém dados sobre a tarefa para resolver o ReCaptcha2 do Google.
+
+<BlogLink url="https://blog.capmonster.cloud/pt-BR/blog/re-captcha/how-to-bypass-recaptcha-v2-using-capmonster-cloud"/>
 
 
 ## Parâmetros da solicitação
@@ -90,6 +93,7 @@ O objeto contém dados sobre a tarefa para resolver o ReCaptcha2 do Google.
 
 **websiteURL**: endereço da página da web com o captcha.
 
+<BlogLink url="https://blog.capmonster.cloud/pt-BR/blog/bypass-captcha/dynamic-captcha-parameters-how-to-identify"/>
 
 ## Criar tarefa
 
@@ -194,6 +198,9 @@ https://api.capmonster.cloud/getTaskResult
       console.log(await cmcClient.Solve(complexImageRecaptchaRequest));
     });
     ```
+	
+	<BlogLink url="https://blog.capmonster.cloud/pt-BR/blog/re-1/javascript-recaptcha-v2"/>
+	
   </TabItem>
   
   <TabItem value="python" label="Python" className="method-panel">
@@ -223,6 +230,9 @@ https://api.capmonster.cloud/getTaskResult
     responses = asyncio.run(solve_captcha())
     print(responses)
     ```
+	
+	<BlogLink url="https://blog.capmonster.cloud/pt-BR/blog/re-1/python-recaptcha-v2"/>
+	
   </TabItem>
   
   <TabItem value="csharp" label="C#" className="method-panel">
@@ -260,5 +270,8 @@ https://api.capmonster.cloud/getTaskResult
         }
     }
     ```
+	
+	<BlogLink url="https://blog.capmonster.cloud/pt-BR/blog/re-1/c-recaptcha-v2"/>
+	
   </TabItem>
 </Tabs>
