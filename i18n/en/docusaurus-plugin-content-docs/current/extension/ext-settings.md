@@ -72,7 +72,10 @@ The settings file looks like this:
 ```
 ## Changing the settings using JS
 
-After initializing the extension on the current active page, we have a global object that is set in the extension settings, by default CMExtension, with which we can manipulate the extension settings.
+The name of the global variable must be specified in the extension, for example, CMExtension. 
+![](./images/ext-settings/GlobalObjectName.png) 
+
+After initializing the extension on the currently active page, the specified global variable appears, which allows us to manipulate the extension's settings.
 
 Note that event handlers are attached to the properties, not to the data inside.
 
