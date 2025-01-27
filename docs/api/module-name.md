@@ -21,14 +21,14 @@ description: "Передача имени модуля для распознав
             <td align="center">amazon</td>
             <td align="center">![](images\module-name\amazon.png)</td>
         </tr>
-        <tr>
-            <td align="center">whatsapp</td>
-            <td align="center">![](images\module-name\whatsapp.png)</td>
+		<tr>
+            <td align="center">apple</td>
+			<td align="center">![](images\module-name\apple.png)</td>
         </tr>
-        <tr>
+		<tr>
             <td align="center">botdetect</td>
             <td align="center">![](images\module-name\botdetect.png)</td>
-        </tr>
+        </tr>                
         <tr>
             <td align="center">facebook</td>
             <td align="center">![](images\module-name\facebook.png)</td>
@@ -49,13 +49,17 @@ description: "Передача имени модуля для распознав
             <td align="center">mailru</td>
             <td align="center">![](images\module-name\mailru.png)</td>
         </tr>
+		<tr>
+            <td align="center">okeng</td>
+            <td align="center">![](images\module-name\okeng.png)</td>
+        </tr>
         <tr>
             <td align="center">okrus</td>
             <td align="center">![](images\module-name\okrus.png)</td>
         </tr>
 		<tr>
-            <td align="center">okeng</td>
-            <td align="center">![](images\module-name\okeng.png)</td>
+            <td align="center">partiallyblur</td>
+			<td align="center">![](images\module-name\partiallyblur.png)</td>
         </tr>
         <tr>
             <td align="center">ramblerrus</td>
@@ -77,21 +81,21 @@ description: "Передача имени модуля для распознав
             <td align="center">vk</td>
             <td align="center">![](images\module-name\vk.png)</td>
         </tr>
+		<tr>
+            <td align="center">whatsapp</td>
+            <td align="center">![](images\module-name\whatsapp.png)</td>
+        </tr>
         <tr>
             <td align="center">yandex</td>
             <td align="center">![](images\module-name\yandex.png)</td>
-        </tr>
+        </tr>		
         <tr>
             <td align="center">yandexnew (двух-словная капча)</td>
 			<td rowspan="2" align="center">![](images\module-name\yandexwave.png)</td>
         </tr>
         <tr>
             <td align="center">yandexwave</td>
-        </tr>
-		<tr>
-            <td align="center">partiallyblur</td>
-			<td align="center">![](images\module-name\partiallyblur.png)</td>
-        </tr>
+        </tr>		
         <tr>
             <td align="center">universal (все остальные текстовые капчи)</td>
             <td align="center">![](images\module-name\universal.png)</td>
