@@ -19,9 +19,9 @@ A lista de nomes de módulos disponíveis:
             <td align="center">amazon</td>
             <td align="center">![](images\module-name\amazon.png)</td>
         </tr>
-        <tr>
-            <td align="center">whatsapp</td>
-            <td align="center">![](images\module-name\whatsapp.png)</td>
+		<tr>
+            <td align="center">apple</td>
+			<td align="center">![](images\module-name\apple.png)</td>
         </tr>
         <tr>
             <td align="center">botdetect</td>
@@ -47,13 +47,17 @@ A lista de nomes de módulos disponíveis:
             <td align="center">mailru</td>
             <td align="center">![](images\module-name\mailru.png)</td>
         </tr>
-        <tr>
-            <td align="center">okrus</td>
-            <td align="center">![](images\module-name\okrus.png)</td>
-        </tr>
 		<tr>
             <td align="center">okeng</td>
             <td align="center">![](images\module-name\okeng.png)</td>
+        </tr>
+        <tr>
+            <td align="center">okrus</td>
+            <td align="center">![](images\module-name\okrus.png)</td>
+        </tr>	
+		<tr>
+            <td align="center">partiallyblur</td>
+			<td align="center">![](images\module-name\partiallyblur.png)</td>
         </tr>
         <tr>
             <td align="center">ramblerrus</td>
@@ -75,6 +79,10 @@ A lista de nomes de módulos disponíveis:
             <td align="center">vk</td>
             <td align="center">![](images\module-name\vk.png)</td>
         </tr>
+		<tr>
+            <td align="center">whatsapp</td>
+            <td align="center">![](images\module-name\whatsapp.png)</td>
+        </tr>
         <tr>
             <td align="center">yandex</td>
             <td align="center">![](images\module-name\yandex.png)</td>
@@ -85,15 +93,7 @@ A lista de nomes de módulos disponíveis:
         </tr>
         <tr>
             <td align="center">yandexwave</td>
-        </tr>
-		<tr>
-            <td align="center">partiallyblur</td>
-			<td align="center">![](images\module-name\partiallyblur.png)</td>
-        </tr>
-		<tr>
-            <td align="center">apple</td>
-			<td align="center">![](images\module-name\apple.png)</td>
-        </tr>
+        </tr>		
         <tr>
             <td align="center">universal (todos os outros tipos de captcha de texto)</td>
             <td align="center">![](images\module-name\universal.png)</td>
