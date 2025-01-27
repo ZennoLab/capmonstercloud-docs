@@ -92,6 +92,10 @@ description: "Передача имени модуля для распознав
             <td align="center">partiallyblur</td>
 			<td align="center">![](images\module-name\partiallyblur.png)</td>
         </tr>
+		<tr>
+            <td align="center">apple</td>
+			<td align="center">![](images\module-name\apple.png)</td>
+        </tr>
         <tr>
             <td align="center">universal (все остальные текстовые капчи)</td>
             <td align="center">![](images\module-name\universal.png)</td>

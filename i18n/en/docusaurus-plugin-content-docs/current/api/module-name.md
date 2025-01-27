@@ -92,6 +92,10 @@ The list of available module names:
             <td align="center">partiallyblur</td>
 			<td align="center">![](images\module-name\partiallyblur.png)</td>
         </tr>
+		<tr>
+            <td align="center">apple</td>
+			<td align="center">![](images\module-name\apple.png)</td>
+        </tr>
         <tr>
             <td align="center">universal (all other text captcha types)</td>
             <td align="center">![](images\module-name\universal.png)</td>

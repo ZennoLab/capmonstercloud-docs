@@ -83,6 +83,10 @@ sidebar_position: 5
 			<td align="center">![](images\module-name\partiallyblur.png)</td>
         </tr>
 		<tr>
+            <td align="center">apple</td>
+			<td align="center">![](images\module-name\apple.png)</td>
+        </tr>
+		<tr>
 			<td align="center">universal (所有其他文本验证码类型)</td>
 			<td align="center">![](images\module-name\universal.png)</td>
 		</tr>
