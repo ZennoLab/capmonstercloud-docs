@@ -49,6 +49,36 @@ This task will be performed using our proxy servers.
 
     <ParamItem title="userAgent" type="string" />
     Browser User-Agent. **Pass only the actual UA from Windows OS. Now this is version**: `userAgentPlaceholder`
+	
+     ---
+
+    <ParamItem title="proxyType" type="string" />
+    **http** - regular http/https proxy;<br />**https** - try this option only if "http" doesn't work (required for some custom proxies);<br />**socks4** - socks4 proxy;<br />**socks5** - socks5 proxy.
+
+     ---
+
+    <ParamItem title="proxyAddress" type="string" />
+    <p>
+      IPv4/IPv6 proxy IP address. Not allowed:
+      - using of hostnames;
+      - using transparent proxies (where you can see the client's IP);
+      - using proxies on local machines.
+    </p>
+
+     ---
+
+    <ParamItem title="proxyPort" type="integer" />
+    Proxy port.
+
+     ---
+
+    <ParamItem title="proxyLogin" type="string" />
+    Proxy-server login.
+
+     ---
+
+    <ParamItem title="proxyPassword" type="string" />
+    Proxy-server password.
 
 </TabItem>
 

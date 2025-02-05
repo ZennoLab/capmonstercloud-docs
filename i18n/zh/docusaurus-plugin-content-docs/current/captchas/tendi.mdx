@@ -50,6 +50,36 @@ import BlogLink from '@theme/BlogLink';
 
     <ParamItem title="userAgent" type="string" />
     浏览器用户代理。**只传递 Windows 操作系统的实际 UA。现在是版本**： `userAgentPlaceholder`
+	
+     ---
+
+    <ParamItem title="proxyType" type="string" />
+    **http** - 普通的 http/https 代理；<br />**https** - 仅在 "http" 不起作用时尝试（某些自定义代理服务器要求）；<br />**socks4** - socks4 代理；<br />**socks5** - socks5 代理。
+
+     ---
+
+    <ParamItem title="proxyAddress" type="string" />
+    <p>
+	  代理 IP 地址 IPv4/IPv6。不允许：
+		- 使用主机名；
+		- 使用透明代理（其中客户端 IP 可见）；
+		- 使用来自本地网络的代理。
+	</p>
+
+     ---
+
+    <ParamItem title="proxyPort" type="integer" />
+    代理端口。
+
+     ---
+
+    <ParamItem title="proxyLogin" type="string" />
+    代理登录。
+
+     ---
+
+    <ParamItem title="proxyPassword" type="string" />
+    代理密码。
 
 </TabItem>
 

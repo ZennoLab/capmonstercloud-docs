@@ -49,6 +49,39 @@ import BlogLink from '@theme/BlogLink';
 
     <ParamItem title="userAgent" type="string" />
     User-Agent браузера. **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является версия**: `userAgentPlaceholder`
+	
+     ---
+
+    <ParamItem title="proxyType" type="string" />
+    **http** - обычный http/https прокси;<br />
+	**https** - попробуйте эту опцию только если "http" не работает (требуется для некоторых кастомных прокси);<br />
+	**socks4** - socks4 прокси;<br />
+	**socks5** - socks5 прокси.
+
+     ---
+
+    <ParamItem title="proxyAddress" type="string" />
+    <p>
+      IP адрес прокси IPv4/IPv6. Не допускается:
+		- использование имен хостов;
+		- использование прозрачных прокси (там где можно видеть IP клиента);
+		- использование прокси на локальных машинах.
+    </p>
+
+     ---
+
+    <ParamItem title="proxyPort" type="integer" />
+    Порт прокси.
+
+     ---
+
+    <ParamItem title="proxyLogin" type="string" />
+    Логин прокси-сервера.
+
+     ---
+
+    <ParamItem title="proxyPassword" type="string" />
+    Пароль прокси-сервера.
 
 </TabItem>
 
