@@ -123,6 +123,26 @@ https://api.capmonster.cloud/getTaskResult
 ## Usar biblioteca SDK
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+    ```js
+    // https://github.com/ZennoLab/capmonstercloud-client-js
+
+    import { CapMonsterCloudClientFactory, ClientOptions, BasiliskCustomTaskProxylessRequest } from '@zennolab_com/capmonstercloud-client';
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+      console.log(await cmcClient.getBalance());
+
+      const basilisk_request = new BasiliskCustomTaskProxylessRequest({
+        websiteURL: 'https://example.com',
+        websiteKey: 'b3760bfe5cf4254b2759c19fg2698og',
+      });
+
+      console.log(await cmcClient.Solve(basilisk_request));
+    });
+    ```
+  </TabItem>
+  
   <TabItem value="python" label="Python" default className="method-panel">
     ```python
     # https://github.com/ZennoLab/capmonstercloud-client-python

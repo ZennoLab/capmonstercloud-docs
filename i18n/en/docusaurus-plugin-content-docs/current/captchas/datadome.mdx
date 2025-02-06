@@ -194,5 +194,42 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the Dat
     print(responses)
     ```
   </TabItem>
+  
+  <TabItem value="csharp" label="C#" className="method-panel">
+    ```csharp
+    // https://github.com/ZennoLab/capmonstercloud-client-dotnet
+
+    using Zennolab.CapMonsterCloud.Requests;
+    using Zennolab.CapMonsterCloud;
+
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            var clientOptions = new ClientOptions
+            {
+                ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
+            };
+
+            var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+            var data_dome_request = new DataDomeCustomTaskProxylessRequest
+            {
+                websiteUrl = "https://example.com", // URL with the captcha
+                userAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/21F90 Safari/604.1",  # Use the current userAgent
+				metadata = new DataDomeCustomTaskProxylessRequest.DataDomeMetadata
+				{
+					htmlPageBase64 = "PGh0bWw+PGhlYWQ+PHRpdGxlPn...+48L2h0bWw+",  # Replace with your HTML base64 or use captchaUrl
+					datadomeCookie = "datadome=oZJnhpo...1PuyGg"  # Replace with your DataDome cookie
+				}
+            };
+
+            var solveResult = await cmCloudClient.SolveAsync(data_dome_request);
+
+            Console.WriteLine("CaptchaVoucher: " + solveResult.Solution.CaptchaVoucher);
+        }
+    }
+    ```
+  </TabItem>
 </Tabs>
 

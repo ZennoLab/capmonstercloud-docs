@@ -147,3 +147,100 @@ Use the method [getTaskResult](../api/methods/get-task-result.md) to obtain the 
 ## Access denied
 
 Error 16 - this error is related to the use of proxy servers that do not match the required geolocation.
+
+## Use SDK Library
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+    ```js
+    // https://github.com/ZennoLab/capmonstercloud-client-js
+
+    import { CapMonsterCloudClientFactory, ClientOptions, ImpervaCustomTaskProxylessRequest } from '@zennolab_com/capmonstercloud-client';
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+      console.log(await cmcClient.getBalance());
+
+      const imperva_request = new ImpervaCustomTaskProxylessRequest({
+        websiteURL: 'https://example.com',
+        userAgent: 'userAgentPlaceholder',
+		metadata: {
+			incapsulaScriptBase64: 'dmFyIF8weGQ2ZmU9Wydce..eDUzXHg2YVx4NGYnKV09XzB4Mjk3MTIxO319KCkpOw==',
+			incapsulaSessionCookie: 'l/LsGnrvyB9lNhXI8borDKa2IGcAAAAAX0qAEHheCWuNDquzwb44cw=',
+            reese84UrlEndpoint: 'Built-with-the-For-hopence-Hurleysurfecting-the-'
+		},
+      });
+
+      console.log(await cmcClient.Solve(imperva_request));
+    });
+    ```
+  </TabItem>
+  
+  <TabItem value="python" label="Python" default className="method-panel">
+    ```python
+    # https://github.com/ZennoLab/capmonstercloud-client-python
+
+    import asyncio
+    from capmonstercloudclient import CapMonsterClient, ClientOptions
+    from capmonstercloudclient.requests import ImpervaCustomTaskProxylessRequest
+
+    client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonster Cloud API key
+    cap_monster_client = CapMonsterClient(options=client_options)
+
+    imperva_request = ImpervaCustomTaskProxylessRequest(
+        websiteUrl="https://example.com",  # URL with captcha
+        userAgent="userAgentPlaceholder",
+		metadata={
+			"incapsulaScriptBase64": "dmFyIF8weGQ2ZmU9Wydce..eDUzXHg2YVx4NGYnKV09XzB4Mjk3MTIxO319KCkpOw==",
+			"incapsulaSessionCookie": "l/LsGnrvyB9lNhXI8borDKa2IGcAAAAAX0qAEHheCWuNDquzwb44cw=",
+            "reese84UrlEndpoint": "Built-with-the-For-hopence-Hurleysurfecting-the-"
+		},
+    )
+
+    async def solve_captcha():
+        return await cap_monster_client.solve_captcha(imperva_request)
+
+    responses = asyncio.run(solve_captcha())
+    print(responses)
+    ```
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    ```csharp
+    // https://github.com/ZennoLab/capmonstercloud-client-dotnet
+
+    using Zennolab.CapMonsterCloud.Requests;
+    using Zennolab.CapMonsterCloud;
+
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            var clientOptions = new ClientOptions
+            {
+                ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
+            };
+
+            var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+            var imperva_request = new ImpervaCustomTaskProxylessRequest
+            {
+                websiteUrl = "https://example.com", // URL with captcha
+                userAgent = "userAgentPlaceholder",
+				metadata = new ImpervaCustomTaskProxylessRequest.ImpervaMetadata
+				{
+					incapsulaScriptBase64 = "dmFyIF8weGQ2ZmU9Wydce..eDUzXHg2YVx4NGYnKV09XzB4Mjk3MTIxO319KCkpOw==",
+					incapsulaSessionCookie = "l/LsGnrvyB9lNhXI8borDKa2IGcAAAAAX0qAEHheCWuNDquzwb44cw=",
+					reese84UrlEndpoint = "Built-with-the-For-hopence-Hurleysurfecting-the-"
+				}
+            };
+
+            var impervaResult = await cmCloudClient.SolveAsync(imperva_request);
+
+            Console.WriteLine("Captcha Solution: " + string.Join(", ", impervaResult.Solution.Data));
+            Console.WriteLine("Captcha Solution: " + string.Join(", ", impervaResult.Solution.Headers));
+        }
+    }
+    ```
+  </TabItem>
+</Tabs>
