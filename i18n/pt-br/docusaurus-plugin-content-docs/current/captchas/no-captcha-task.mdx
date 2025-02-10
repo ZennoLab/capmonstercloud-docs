@@ -10,6 +10,7 @@ import MethodItem from '@theme/MethodItem';
 import MethodDescription from '@theme/MethodDescription'
 import PriceBlock from '@theme/PriceBlock';
 import PriceBlockWrap from '@theme/PriceBlockWrap';
+import BlogLink from '@theme/BlogLink';
 
 
 # RecaptchaV2Task
@@ -21,6 +22,8 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 Este objeto contém dados para a solução do captcha Google ReCaptcha2. Para garantir a universalidade da solução desse tipo de captcha, você precisa usar todos os dados utilizados na automação do preenchimento do formulário na página de destino, incluindo proxies, o user-agent do navegador e cookies. Isso ajuda a evitar problemas quando o Google altera o código de seu captcha.
 
 Esse tipo de captcha pode ser resolvido um pouco mais lentamente do que um captcha de imagem comum, mas esse problema é compensado pelo fato de que o valor `g-captcha-response` que enviamos para você é válido pelos próximos 60 segundos após resolvermos seu ReCaptcha2.
+
+<BlogLink url="https://blog.capmonster.cloud/pt-BR/blog/re-1/how-to-bypass-recaptcha-v2-using-capmonster-cloud"/>
 
 :::warning **Atenção!**
 Se o proxy for autorizado por IP, certifique-se de adicionar **116.203.55.208** à lista de permissões.
@@ -131,7 +134,6 @@ Senha do servidor proxy.
 </TabItem>
 
 </Tabs>
-
 
 ## Método para criar tarefa
 
@@ -268,6 +270,7 @@ https://api.capmonster.cloud/getTaskResult
       console.log(await cmcClient.Solve(recaptchaV2Request));
     });
     ```
+	<BlogLink url="https://blog.capmonster.cloud/pt-BR/blog/re-1/javascript-recaptcha-v2"/>
   </TabItem>
   <TabItem value="python" label="Python" className="method-panel">
     ```python
@@ -321,6 +324,7 @@ https://api.capmonster.cloud/getTaskResult
     response = asyncio.run(solve_captcha())
     print(response)
     ```
+	<BlogLink url="https://blog.capmonster.cloud/pt-BR/blog/re-1/python-recaptcha-v2"/>
   </TabItem>
   <TabItem value="csharp" label="C#" className="method-panel">
     ```csharp
@@ -389,5 +393,6 @@ https://api.capmonster.cloud/getTaskResult
         }
     }
     ```
+	<BlogLink url="https://blog.capmonster.cloud/pt-BR/blog/re-1/c-recaptcha-v2"/>
   </TabItem>
 </Tabs>

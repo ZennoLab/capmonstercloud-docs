@@ -12,6 +12,7 @@ import MethodItem from '@theme/MethodItem';
 import MethodDescription from '@theme/MethodDescription'
 import PriceBlock from '@theme/PriceBlock';
 import PriceBlockWrap from '@theme/PriceBlockWrap';
+import BlogLink from '@theme/BlogLink';
 
 # ComplexImageTask Recaptcha
 
@@ -91,7 +92,6 @@ The object contains data about the task for solving ReCaptcha2 from Google.
 **userAgent**: information about the user agent. Current userAgent: userAgentPlaceholder
 
 **websiteURL**: address of the web page with the captcha.
-
 
 ## Create task method
 
@@ -193,6 +193,7 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the cap
       console.log(await cmcClient.Solve(complexImageRecaptchaRequest));
     });
     ```
+	
   </TabItem>
   
   <TabItem value="python" label="Python" className="method-panel">
@@ -222,6 +223,7 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the cap
     responses = asyncio.run(solve_captcha())
     print(responses)
     ```
+	
   </TabItem>
   
   <TabItem value="csharp" label="C#" className="method-panel">
@@ -259,5 +261,6 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the cap
         }
     }
     ```
+	
   </TabItem>
 </Tabs>
