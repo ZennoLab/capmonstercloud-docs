@@ -12,6 +12,7 @@ import MethodItem from '@theme/MethodItem';
 import MethodDescription from '@theme/MethodDescription';
 import PriceBlock from '@theme/PriceBlock';
 import PriceBlockWrap from '@theme/PriceBlockWrap';
+import BlogLink from '@theme/BlogLink';
 
 
 # RecaptchaV2Task
@@ -23,6 +24,8 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 The object contains data for Google ReCaptcha2 solving task. To ensure the universality of the solution to this type of captcha, you need to use all the data used when automating the filling of the form on the target site, including proxies, browser user-agent and cookies. This will help to avoid any problems when Google changes the code of its captcha.
 
 This type of captcha might be solved a bit longer than usual image captcha, but this issue is compensated by the fact that g-captcha-response value we send to you is valid for the next 60 seconds after we solves your ReCaptcha2.
+
+<BlogLink url="https://blog.capmonster.cloud/en/blog/re-captcha/how-to-bypass-recaptcha-v2-using-capmonster-cloud"/>
 
 :::warning **Attention!**
 If the proxy is authorized by IP, then be sure to add **116.203.55.208** to the white list.
@@ -133,7 +136,6 @@ If the proxy is authorized by IP, then be sure to add **116.203.55.208** to the 
 
   </TabItem>  
 </Tabs>
-
 
 ## Create task method
 
@@ -269,6 +271,7 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to request ans
       console.log(await cmcClient.Solve(recaptchaV2Request));
     });
     ```
+	<BlogLink url="https://blog.capmonster.cloud/en/blog/re-1/javascript-recaptcha-v2"/>
   </TabItem>
   <TabItem value="python" label="Python" className="method-panel">
     ```python
@@ -322,6 +325,7 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to request ans
     response = asyncio.run(solve_captcha())
     print(response)
     ```
+	<BlogLink url="https://blog.capmonster.cloud/en/blog/re-1/python-recaptcha-v2"/>
   </TabItem>
   <TabItem value="csharp" label="C#" className="method-panel">
     ```csharp
@@ -390,5 +394,6 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to request ans
         }
     }
     ```
+	<BlogLink url="https://blog.capmonster.cloud/en/blog/re-1/c-recaptcha-v2"/>
   </TabItem>
 </Tabs>

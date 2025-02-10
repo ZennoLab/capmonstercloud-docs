@@ -60,6 +60,36 @@ Essa tarefa será realizada utilizando nossos servidores proxy. Use os cookies r
 
     <ParamItem title="userAgent" type="string" />
     Browser User-Agent.<br /> **Passe apenas o UA real. O atual é**: Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/21F90 Safari/604.1
+	
+---
+
+<ParamItem title="proxyType" type="string" />
+**http** - proxy regular http/https;<br />**https** - use essa opção apenas se "http" não funcionar (necessário para alguns proxies personalizados);<br />**socks4** - proxy socks4;<br />**socks5** - proxy socks5.
+
+---
+
+<ParamItem title="proxyAddress" type="string" />
+<p>
+Endereço IP do proxy IPv4/IPv6. Não permitido:
+- uso de nomes de host;
+- uso de proxies transparentes (onde é possível ver o IP do cliente);
+- uso de proxies em máquinas locais.
+</p>
+
+---
+
+<ParamItem title="proxyPort" type="integer" />
+Porta do proxy.
+
+---
+
+<ParamItem title="proxyLogin" type="string" />
+Login do servidor proxy.
+
+---
+
+<ParamItem title="proxyPassword" type="string" />
+Senha do servidor proxy.
 
   </TabItem>
 
