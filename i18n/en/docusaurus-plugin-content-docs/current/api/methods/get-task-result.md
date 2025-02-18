@@ -59,7 +59,7 @@ Type: `String` <br />
 **processing** -  task is not ready yet;<br />**ready** - task complete, solution object can be found in *solution* property.
 
 ### `solution`
-Type: `Объект` <br />
+Type: `Object` <br />
 Task result data. Different for each type of task.
 
 ---
