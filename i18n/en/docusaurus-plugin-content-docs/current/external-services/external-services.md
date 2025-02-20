@@ -1,5 +1,6 @@
 ﻿---
 sidebar_position: 2
+sidebar_label: Captcha recognition via API of other services
 title: "Captcha recognition via API of other services"
 description: "Learn how to use external services with CapMonster.Cloud. A complete guide on how to integrate and automate when recognising and bypassing captchas."
 ---

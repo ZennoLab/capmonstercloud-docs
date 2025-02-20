@@ -1,5 +1,6 @@
 ﻿---
 sidebar_position: 10
+sidebar_label: Creating a user module
 title: "Creating a custom module to configure captcha recognition"
 description: "Creating a custom module allows you to create custom modules that will be trained for one specific type of captcha. This will allow faster and more efficient recognition of non-standard captchas and reduce the probability of errors."
 ---

@@ -1,5 +1,6 @@
 ﻿---
 sidebar_position: 9
+sidebar_label: Reasons for blocking
 title: "Reasons for blocking captcha recognition"
 description: "How can I find out the reason for a captcha recognition ban using Capmonster Cloud API? Read about the reasons of blocking when bypassing captchas in the service documentation."
 ---
