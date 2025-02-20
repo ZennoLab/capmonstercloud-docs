@@ -1,5 +1,6 @@
 ﻿---
 sidebar_position: 6
+sidebar_label: Setting a write-off threshold
 title: "Setting the threshold for charging money during captcha recognition"
 description: "Learn how to set the Capmonster Cloud captcha recognition and traversal service to a threshold of system confidence in the answer, below which money is not deducted."
 ---

@@ -1,5 +1,6 @@
 ---
 sidebar_position: 5
+sidebar_label: Passing module name
 title: "Passing the module name for captcha recognition"
 description: "Passing the module name to recognize a specific captcha can be useful in cases of working with a specific service (e.g. Google, SolveMedia, Whatsapp, etc.).  This will increase the speed and quality of recognition and reduce the probability of errors." 
 ---

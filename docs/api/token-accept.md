@@ -1,5 +1,6 @@
 ﻿---
 sidebar_position: 7
+sidebar_label: Проблемы принимаемости токенов
 title: "Метод Token Accept — проверка токенов для капч через API"
 description: "Узнайте, как использовать метод Token Accept в API Capmonster Cloud для проверки валидности токенов капч. Подробное описание параметров и примеров."
 ---

@@ -1,5 +1,6 @@
 ﻿---
 sidebar_position: 1
+sidebar_label: How to connect CapMonster.cloud to a program?
 title: "Integration of external programmes with CapMonster Cloud"
 description: "Detailed guide on how to integrate external programs with CapMonster.Cloud service for automatic captcha recognition and solving."
 ---
