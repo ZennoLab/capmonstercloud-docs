@@ -1,5 +1,6 @@
 ﻿---
 sidebar_position: 2
+sidebar_label: Распознавание капч через API других сервисов
 title: "Распознавание капч через API других сервисов"
 description: "CapMonster Cloud поддерживает API сервисов - Anti-Captcha (v1.0, v2.0), RuCaptcha, RipCaptcha, 2Captcha, BypassCaptcha, DeathByCaptcha. Таким образом, вы можете разгадывать капчу через CapMonster.Cloud, даже если в вашей программе нет интеграции с нашим сервисом."
 ---

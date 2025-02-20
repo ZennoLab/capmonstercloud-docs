@@ -1,5 +1,6 @@
 ﻿---
 sidebar_position: 1
+sidebar_label: Как подключить CapMonster.cloud к нужной программе?
 title: "Интеграция внешних программ с CapMonster.Cloud"
 description: "Подробное руководство по интеграции внешних программ с сервисом CapMonster.Cloud для автоматического распознавания и решения капч."
 ---
