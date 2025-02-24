@@ -133,29 +133,28 @@ https://api.capmonster.cloud/getTaskResult
 ```
     </MethodItem>
     <MethodDescription>
-**Solicitação**
-```json
-{
-  "clientKey":"API_KEY",
-  "taskId": 407533072
-}
-```
-**Resposta**
-Graus pelos quais o círculo deve ser girado no sentido horário.
-```json
-{
-  "errorId":0,
-  "status":"ready",
-  "errorCode":null,
-  "errorDescription":null,
-  "solution": {
-      "answer":[130.90909]
-  },
-   "metadata": {
-      "AnswerType":"NumericArray"
-  }
-}
-```
+		**Solicitação**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**Resposta**
+		Graus pelos quais o círculo deve ser girado no sentido horário.
+		```json
+		{
+		  "errorId":0,
+		  "status":"ready",
+		  "errorCode":null,
+		  "errorDescription":null,
+		  "solution": 
+		  {
+			  "answer":[130.90909],
+			  "metadata":{"AnswerType":"NumericArray"}
+		  }		   
+		}
+		```
   </MethodDescription>
   </TabItem>
 
@@ -226,30 +225,28 @@ https://api.capmonster.cloud/getTaskResult
 ```
     </MethodItem>
     <MethodDescription>
-**Solicitação**
-```json
-{
-  "clientKey":"API_KEY",
-  "taskId": 407533072
-}
-```
-**Resposta**
-Graus pelos quais o anel deve ser girado no sentido anti-horário e o círculo no sentido horário.
-```json
-{
-  "errorId":0,
-  "status":"ready",
-  "errorCode":null,
-  "errorDescription":null,
-  "solution": {
-      "answer":[130.90909]
-  },
-   "metadata": {
-      "AnswerType":"NumericArray"
-  }
-}
-```
-
+		**Solicitação**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**Resposta**
+		Graus pelos quais o anel deve ser girado no sentido anti-horário e o círculo no sentido horário.
+		```json
+		{
+		  "errorId":0,
+		  "status":"ready",
+		  "errorCode":null,
+		  "errorDescription":null,
+		  "solution": 
+		  {
+			  "answer":[130.90909],
+			  "metadata":{"AnswerType":"NumericArray"}
+		  }		   
+		}
+		```
   </MethodDescription>
   </TabItem>
 
@@ -316,29 +313,28 @@ https://api.capmonster.cloud/getTaskResult
 ```
     </MethodItem>
     <MethodDescription>
-**Solicitação**
-```json
-{
-  "clientKey":"API_KEY",
-  "taskId": 407533072
-}
-```
-**Resposta**
-"answer":[X,X,X,X,X,X,X,X,X], onde X é um valor inteiro de 1 a 4 para cada imagem. 4 - significa que a imagem não precisa ser girada; 1-3 - o número de rotações no sentido anti-horário da imagem.
-```json
-{
-	"errorId":0,
-	"status":"ready",
-	"errorCode":null,
-	"errorDescription":null,
-	"solution":
-	{
-		"answer":[4,4,4,4,4,3,1,2,2],
-		"metadata":{"AnswerType":"NumericArray"}
-	}
-}
-```
-
+		**Solicitação**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**Resposta**
+		"answer":[X,X,X,X,X,X,X,X,X], onde X é um valor inteiro de 1 a 4 para cada imagem. 4 - significa que a imagem não precisa ser girada; 1-3 - o número de rotações no sentido anti-horário da imagem.
+		```json
+		{
+			"errorId":0,
+			"status":"ready",
+			"errorCode":null,
+			"errorDescription":null,
+			"solution":
+			{
+				"answer":[4,4,4,4,4,3,1,2,2],
+				"metadata":{"AnswerType":"NumericArray"}
+			}
+		}
+		```
   </MethodDescription>
   </TabItem>
   
@@ -439,11 +435,10 @@ Também passamos o valor buscado TaskArgument nos metadados.
 		  "status":"ready",
 		  "errorCode":null,
 		  "errorDescription":null,
-		  "solution": {
+		  "solution": 
+		  {
 			"answer":[true,true,false,false,true,false,false,true,true],
-			"metadata": {
-			  "AnswerType":"Grid"
-			}
+			"metadata":{"AnswerType":"Grid"}
 		  }
 		}
 		```
