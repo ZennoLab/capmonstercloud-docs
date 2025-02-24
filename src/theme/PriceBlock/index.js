@@ -144,7 +144,13 @@ const captchaPrices = {
     price: 1,
     type: 'token',
     rate: 98,
-    icon: <BinanceIcon />,
+    icon: <BinanceIcon />
+  },
+  prosopoToken: {
+    price: 1.3,
+    type: 'token',
+    rate: 99,
+    icon: <BinanceIcon />
   }
 }
 

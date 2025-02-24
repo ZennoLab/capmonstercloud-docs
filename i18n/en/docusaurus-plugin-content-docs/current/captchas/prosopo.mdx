@@ -1,0 +1,196 @@
+---
+sidebar_position: 17
+sidebar_label: Prosopo
+title: "Automatically recognise and bypass Prosopo captcha | API"
+description: "Learn how to bypass Prosopo captcha using Capmonster Cloud API! Detailed description of features and examples."
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+import PriceBlock from '@theme/PriceBlock';
+import PriceBlockWrap from '@theme/PriceBlockWrap';
+
+
+# Prosopo Procaptcha
+
+<PriceBlockWrap>
+  <PriceBlock title="Prosopo captcha" name="prosopoToken"/>
+</PriceBlockWrap>
+
+The token-based automatic CAPTCHA solving method Prosopo Procaptcha.
+
+## Request parameters
+
+<Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
+  <TabItem value="proxyless" label="ProsopoTaskProxyless (without proxy)" default className="bordered-panel">
+
+    <ParamItem title="type" required type="string" />
+    **ProsopoTaskProxyless**
+
+    ---
+
+    <ParamItem title="websiteURL" required type="string" />
+    The full URL of the CAPTCHA page.
+
+    ---
+
+    <ParamItem title="websiteKey" required type="string" />
+    The value of the `siteKey` parameter found on the page.
+
+  </TabItem>
+
+  <TabItem value="proxy" label="ProsopoTask (using proxy)" default className="bordered-panel">
+
+    <ParamItem title="type" required type="string" />
+    **ProsopoTask**
+
+    ---
+
+    <ParamItem title="websiteURL" required type="string" />
+    The full URL of the CAPTCHA page.
+
+    ---
+
+    <ParamItem title="websiteKey" required type="string" />
+    The value of the `siteKey` parameter found on the page.
+	
+	---
+
+    <ParamItem title="proxyType" required type="string" />
+    **http** - regular http/https proxy;<br />**https** - try this option only if "http" doesn't work (required for some custom proxies);<br />**socks4** - socks4 proxy;<br />**socks5** - socks5 proxy.
+	
+	---
+
+    <ParamItem title="proxyAddress" required type="string" />
+    <p>
+      IPv4/IPv6 proxy IP address. Not allowed:
+      - using of hostnames;
+      - using transparent proxies (where you can see the client's IP);
+      - using proxies on local machines.
+    </p>
+
+    ---
+
+    <ParamItem title="proxyPort" required type="integer" />
+    Proxy port.
+
+    ---
+
+    <ParamItem title="proxyLogin" type="string" />
+    Proxy-server login.
+
+    ---
+
+    <ParamItem title="proxyPassword" type="string" />
+    Proxy-server password.
+
+  </TabItem>
+</Tabs>
+
+
+## Create task method
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="proxyless" label="ProsopoTaskProxyless (without proxy)" default className="method-panel">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+			"clientKey": "API_KEY",
+			"task": 
+			{
+				"type": "ProsopoTaskProxyless",
+				"websiteURL": "https://www.example.com",
+				"websiteKey": "5EPQoMZEDc5LpN7gtxMMzYPTzA6UeWqL2stk1rso9gy4Ahqt"
+			}
+		}
+		```
+		**Response**
+		```json
+		{
+			"errorId":0,
+			"taskId":407533077
+		}
+		```
+	</MethodDescription>
+  </TabItem>
+  
+  <TabItem value="proxy" label="ProsopoTask (using proxy)" default className="method-panel">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+			"clientKey": "API_KEY",
+			"task": 
+			{
+				"type": "ProsopoTask",
+				"websiteURL": "https://www.example.com",
+				"websiteKey": "5EPQoMZEDc5LpN7gtxMMzYPTzA6UeWqL2stk1rso9gy4Ahqt",
+				"proxyType":"http",
+				"proxyAddress":"8.8.8.8",
+				"proxyPort":8080,
+				"proxyLogin":"proxyLoginHere",
+				"proxyPassword":"proxyPasswordHere"
+			}
+		}
+		```
+		**Response**
+		```json
+		{
+			"errorId":0,
+			"taskId":407533077
+		}
+		```
+	</MethodDescription>
+  </TabItem>
+</Tabs>
+
+
+## Get task result method
+Use the method [getTaskResult](../api/methods/get-task-result.md) to obtain the Prosopo solution.
+
+<TabItem value="proxyless" label="CustomTask (without proxy)" default className="method-panel-full">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+			"clientKey":"API_KEY",
+			"taskId": 407533077
+		}
+		```
+		**Response**
+		```json
+		{
+			"errorId":0,
+			"status":"ready",
+			"solution": 
+			{
+				"token": "0x00016c68747470733a2f2f70726f6e6f6465332e70726f736f706f2e696fc0354550516f4d5a454463354c704e376774784d4d7a5950547a4136..."
+			},
+			"cost": "0.00299",
+			"ip": "1.2.3.4",
+			"createTime": 1692863536,
+			"endTime": 1692863556,
+			"solveCount": 1
+		}
+		```
+	</MethodDescription>
+</TabItem>
