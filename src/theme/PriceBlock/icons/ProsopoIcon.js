@@ -9,20 +9,20 @@ const ProsopoIcon = () => {
       <path d="M20.9865 19.749C20.88 18.9133 20.1715 18.3411 19.3983 18.3451C18.6529 18.349 17.9111 18.2658 17.1892 18.0961C16.017 17.8205 14.9203 17.3222 13.9618 16.6296C13.0033 15.9371 12.2016 15.0639 11.6027 14.0598C11.2987 13.5502 11.0499 13.012 10.8593 12.4534C10.5534 11.5572 9.76743 10.8848 8.89944 11.0165C8.0315 11.1483 7.41326 12.0304 7.67221 12.944C9.14544 18.1415 14.1318 21.645 19.785 21.3983C20.5575 21.3646 21.093 20.5846 20.9865 19.749Z" fill="url(#paint3_linear_5324_981)"/>
       <defs>
       <linearGradient id="paint0_linear_5324_981" x1="5" y1="0" x2="22.5849" y2="9.74876" gradientUnits="userSpaceOnUse">
-      <stop stopСolor="#8E87FF"/>
-      <stop offset="1" stopСolor="#5046DE"/>
+      <stop stopColor="#8E87FF"/>
+      <stop offset="1" stopColor="#5046DE"/>
       </linearGradient>
       <linearGradient id="paint1_linear_5324_981" x1="5" y1="0" x2="22.5849" y2="9.74876" gradientUnits="userSpaceOnUse">
-      <stop stopСolor="#8E87FF"/>
-      <stop offset="1" stopСolor="#5046DE"/>
+      <stop stopColor="#8E87FF"/>
+      <stop offset="1" stopColor="#5046DE"/>
       </linearGradient>
       <linearGradient id="paint2_linear_5324_981" x1="5" y1="12" x2="24.7392" y2="22.0291" gradientUnits="userSpaceOnUse">
-      <stop stopСolor="#8E87FF"/>
-      <stop offset="1" stopСolor="#5046DE"/>
+      <stop stopColor="#8E87FF"/>
+      <stop offset="1" stopColor="#5046DE"/>
       </linearGradient>
       <linearGradient id="paint3_linear_5324_981" x1="5" y1="12" x2="24.7392" y2="22.0291" gradientUnits="userSpaceOnUse">
-      <stop stopСolor="#8E87FF"/>
-      <stop offset="1" stopСolor="#5046DE"/>
+      <stop stopColor="#8E87FF"/>
+      <stop offset="1" stopColor="#5046DE"/>
       </linearGradient>
       </defs>
     </svg>
