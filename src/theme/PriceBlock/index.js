@@ -12,7 +12,8 @@ import DataDomeIcon from './icons/DataDomeIcon';
 import AmazonIcon from './icons/AmazonIcon';
 import ImervaIcon from './icons/ImervaIcon';
 import ComplexIcon from './icons/ComplexIcon';
-import BinanceIcon from './icons/BinanceIcon'
+import BinanceIcon from './icons/BinanceIcon';
+import ProsopoIcon from './icons/ProsopoIcon';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import getLocaleStrings from '../../locales/index';
 
@@ -144,7 +145,13 @@ const captchaPrices = {
     price: 1,
     type: 'token',
     rate: 98,
-    icon: <BinanceIcon />,
+    icon: <BinanceIcon />
+  },
+  prosopoToken: {
+    price: 1.3,
+    type: 'token',
+    rate: 99,
+    icon: <ProsopoIcon />
   }
 }
 

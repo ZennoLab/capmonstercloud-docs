@@ -1,0 +1,187 @@
+---
+sidebar_position: 17
+sidebar_label: Prosopo
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+import PriceBlock from '@theme/PriceBlock';
+import PriceBlockWrap from '@theme/PriceBlockWrap';
+
+
+# Prosopo Procaptcha
+
+<PriceBlockWrap>
+  <PriceBlock title="Prosopo captcha" name="prosopoToken"/>
+</PriceBlockWrap>
+
+O método automático de resolução de CAPTCHA baseado em tokens Prosopo Procaptcha.
+
+## Parâmetros da solicitação
+<Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
+  <TabItem value="proxyless" label="ProsopoTaskProxyless (sem proxy)" default className="bordered-panel">
+
+    <ParamItem title="type" required type="string" />
+    **ProsopoTaskProxyless**
+
+    ---
+
+    <ParamItem title="websiteURL" required type="string" />
+    A URL completa da página do CAPTCHA.
+
+    ---
+
+    <ParamItem title="websiteKey" required type="string" />
+    O valor do parâmetro `siteKey` encontrado na página.
+    
+  </TabItem>
+
+  <TabItem value="proxy" label="ProsopoTask (com proxy)" default className="bordered-panel">
+
+    <ParamItem title="type" required type="string" />
+    **ProsopoTask**
+
+    ---
+
+    <ParamItem title="websiteURL" required type="string" />
+    A URL completa da página do CAPTCHA.
+
+    ---
+
+    <ParamItem title="websiteKey" required type="string" />
+    O valor do parâmetro `siteKey` encontrado na página.
+
+	---
+
+	<ParamItem title="proxyType" required type="string" />
+	**http** - proxy regular http/https;<br />**https** - use essa opção apenas se "http" não funcionar (necessário para alguns proxies personalizados);<br />**socks4** - proxy socks4;<br />**socks5** - proxy socks5.
+
+	---
+
+	<ParamItem title="proxyAddress" required type="string" />
+	<p>
+	Endereço IP do proxy IPv4/IPv6. Não permitido:
+	- uso de nomes de host;
+	- uso de proxies transparentes (onde é possível ver o IP do cliente);
+	- uso de proxies em máquinas locais.
+	</p>
+
+	---
+
+	<ParamItem title="proxyPort" required type="integer" />
+	Porta do proxy.
+
+	---
+
+	<ParamItem title="proxyLogin" type="string" />
+	Login do servidor proxy.
+
+	---
+
+	<ParamItem title="proxyPassword" type="string" />
+	Senha do servidor proxy.
+
+  </TabItem>
+</Tabs>
+
+
+## Criar método de tarefa
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="proxyless" label="ProsopoTaskProxyless (sem proxy)" default className="method-panel">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Solicitação**
+		```json
+		{
+			"clientKey": "API_KEY",
+			"task": 
+			{
+				"type": "ProsopoTaskProxyless",
+				"websiteURL": "https://www.example.com",
+				"websiteKey": "5EPQoMZEDc5LpN7gtxMMzYPTzA6UeWqL2stk1rso9gy4Ahqt"
+			}
+		}
+		```
+		**Resposta**
+		```json
+		{
+			"errorId":0,
+			"taskId":407533077
+		}
+		```
+	</MethodDescription>
+  </TabItem>
+
+  <TabItem value="proxy" label="ProsopoTask (com proxy)" default className="method-panel">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Solicitação**
+		```json
+		{
+			"clientKey": "API_KEY",
+			"task": 
+			{
+				"type": "ProsopoTask",
+				"websiteURL": "https://www.example.com",
+				"websiteKey": "5EPQoMZEDc5LpN7gtxMMzYPTzA6UeWqL2stk1rso9gy4Ahqt",
+				"proxyType":"http",
+				"proxyAddress":"8.8.8.8",
+				"proxyPort":8080,
+				"proxyLogin":"proxyLoginHere",
+				"proxyPassword":"proxyPasswordHere"
+			}
+		}
+		```
+		**Resposta**
+		```json
+		{
+			"errorId":0,
+			"taskId":407533077
+		}
+		```
+	</MethodDescription>
+  </TabItem>
+</Tabs>
+
+
+## Obter resultado da tarefa
+Use o método [getTaskResult](../api/methods/get-task-result.md) para obter a solução Prosopo.
+
+<TabItem value="proxyless" label="CustomTask (without proxy)" default className="method-panel-full">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Solicitação**
+		```json
+		{
+			"clientKey":"API_KEY",
+			"taskId": 407533077
+		}
+		```
+		**Resposta**
+		```json
+		{
+			"errorId":0,
+			"status":"ready",
+			"solution": 
+			{
+				"token": "0x00016c68747470733a2f2f70726f6e6f6465332e70726f736f706f2e696fc0354550516f4d5a454463354c704e376774784d4d7a5950547a4136..."
+			}
+		}
+		```
+	</MethodDescription>
+</TabItem>
