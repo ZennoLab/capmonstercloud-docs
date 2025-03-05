@@ -24,7 +24,7 @@ Para começar a usar a extensão, clique em seu ícone à direita da barra de en
 <details>
     <summary>Instalação manual</summary>
 
-1. Baixe o [arquivo com a extensão](https://drive.google.com/file/d/1Aa-aE9IW095ggFWDmZQrVcAQD1q5BIpv/view?usp=drive_link).
+1. Baixe o [arquivo com a extensão](https://drive.google.com/file/d/1Esu3x15oEbtXaoDUbyJD7dsy07mt02jY/view?usp=drive_link).
 
 1. Abra o navegador Firefox e vá trabalhar com as extensões:
    ![](./images/extension-main-firefox/extension-menu.png)
