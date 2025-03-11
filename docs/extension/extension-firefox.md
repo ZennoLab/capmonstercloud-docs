@@ -24,7 +24,7 @@ sidebar_label: Расширение для браузера Firefox
 <details>
     <summary>Ручная установка расширения</summary>
 
-1. Скачайте [архив с расширением](https://drive.google.com/file/d/1Esu3x15oEbtXaoDUbyJD7dsy07mt02jY/view?usp=drive_link).
+1. Скачайте [архив с расширением](https://drive.google.com/file/d/1vjSKEa80Ei6ftJ_PYsU57AE5pLIHSShI/view?usp=drive_link).
 
 1. Откройте браузер Firefox и перейдите к работе с расширениями:
    ![](./images/extension-main-firefox/extension-menu.png)
