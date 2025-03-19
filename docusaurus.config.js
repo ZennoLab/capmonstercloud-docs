@@ -3,7 +3,7 @@
 
 const lightCodeTheme = require('prism-react-renderer').themes.github;
 const darkCodeTheme = require('prism-react-renderer').themes.dracula;
-
+require('dotenv').config();
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Capmonster Cloud Docs',
@@ -82,9 +82,9 @@ const config = {
       //   isCloseable: false,
       // },
       algolia: {
-        appId: 'IUKL1ONOLG',
-        apiKey: 'df90fcc07870b0dfda29e86e993cda42',
-        indexName: 'capmonster-cloud-netlify',
+        appId: process.env.ALGOLIA_APP_ID,
+        apiKey: process.env.ALGOLIA_API_KEY,
+        indexName: process.env.ALGOLIA_INDEX_NAME,
         contextualSearch: true,
       },
       // Replace with your project's social card
