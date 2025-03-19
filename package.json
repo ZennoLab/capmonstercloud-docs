@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "start": "export $(cat .env | xargs)\ndocusaurus start --host 0.0.0.0",
-    "build": "export $(cat .env | xargs)\ndocusaurus build",
+    "start": "docusaurus start --host 0.0.0.0",
+    "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",

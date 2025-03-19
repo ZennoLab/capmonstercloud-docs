@@ -3,7 +3,7 @@
 
 const lightCodeTheme = require('prism-react-renderer').themes.github;
 const darkCodeTheme = require('prism-react-renderer').themes.dracula;
-
+require('dotenv').config();
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Capmonster Cloud Docs',
@@ -85,7 +85,7 @@ const config = {
         appId: process.env.ALGOLIA_APP_ID,
         apiKey: process.env.ALGOLIA_API_KEY,
         indexName: process.env.ALGOLIA_INDEX_NAME,
-        contextualSearch: false,
+        contextualSearch: true,
       },
       // Replace with your project's social card
       image: 'img/social-card.jpg',
