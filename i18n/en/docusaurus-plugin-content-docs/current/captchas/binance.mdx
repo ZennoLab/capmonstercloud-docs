@@ -268,3 +268,39 @@ Use the method [getTaskResult](../api/methods/get-task-result.md) to obtain the 
 		```
 	</MethodDescription>
 </TabItem>
+
+## Use SDK Library
+
+	<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+		<TabItem value="js" label="JavaScript" default className="method-panel">
+			```js
+			// https://github.com/ZennoLab/capmonstercloud-client-js
+
+			import { CapMonsterCloudClientFactory, ClientOptions, BinanceProxylessRequest /*BinanceRequest*/ } from '@zennolab_com/capmonstercloud-client';
+
+			document.addEventListener('DOMContentLoaded', async () => {
+				const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+				console.log(await cmcClient.getBalance());
+				
+				const binanceRequest = new BinanceProxylessRequest({
+					websiteURL: 'https://example.com',
+					websiteKey: 'websiteKey',
+					validateId: 'validateId',
+				});
+
+				// const binanceRequest = new BinanceRequest({
+				//  websiteURL: 'https://example.com',
+				//	websiteKey: 'websiteKey',
+				//	validateId: 'validateId',
+				//	proxyType: 'http',
+				//	proxyAddress: '8.8.8.8',
+				//	proxyPort: 8080,
+				//	proxyLogin: 'proxyLoginHere',
+				//	proxyPassword: 'proxyPasswordHere',
+				// });
+
+				console.log(await cmcClient.Solve(binanceRequest));
+			});
+			```
+		</TabItem>
+	</Tabs>

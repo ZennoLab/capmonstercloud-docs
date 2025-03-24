@@ -442,3 +442,26 @@ We also pass the sought value TaskArgument in the metadata.
 		```
 	</MethodDescription>
 </TabItem>
+
+## Use SDK Library
+	<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+		<TabItem value="js" label="JavaScript" default className="method-panel">
+			```js
+			// https://github.com/ZennoLab/capmonstercloud-client-js
+
+			import { CapMonsterCloudClientFactory, ClientOptions, ComplexImageTaskRecognitionRequest } from '@zennolab_com/capmonstercloud-client';
+
+			document.addEventListener('DOMContentLoaded', async () => {
+				const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+				console.log(await cmcClient.getBalance());
+				
+				const binanceRequest = new ComplexImageTaskRecognitionRequest({
+					imagesBase64: ['/9xwee/'],
+					metaData: { Task: 'oocl_rotate' },
+				});
+
+				console.log(await cmcClient.Solve(binanceRequest));
+			});
+			```
+		</TabItem>
+	</Tabs>

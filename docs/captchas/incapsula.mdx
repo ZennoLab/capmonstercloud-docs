@@ -151,3 +151,30 @@ import BlogLink from '@theme/BlogLink';
 ## Access denied
 
 Error 16 - данная ошибка связана с применением прокси-серверов, не соответствующих требуемой геолокации.
+
+## Используйте библиотеку SDK
+
+	<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+		<TabItem value="js" label="JavaScript" default className="method-panel">
+			```js
+			// https://github.com/ZennoLab/capmonstercloud-client-js
+
+			import { CapMonsterCloudClientFactory, ClientOptions, ImpervaRequest } from '@zennolab_com/capmonstercloud-client';
+
+			document.addEventListener('DOMContentLoaded', async () => {
+				const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+				console.log(await cmcClient.getBalance());
+
+				const impervaRequest = new ImpervaRequest({
+					websiteURL: 'https://example.com',
+					metadata: {
+						incapsulaScriptBase64: 'dmFyIF8weGQ2ZmU9Wydce..eDUzXHg2YV',
+						incapsulaSessionCookie: 'l/LsGnrvyB9lNhXI8borDKa2IGc',
+					},
+				});
+
+				console.log(await cmcClient.Solve(impervaRequest));
+			});
+			```
+		</TabItem>
+	</Tabs>
