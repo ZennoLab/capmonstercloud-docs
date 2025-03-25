@@ -299,4 +299,40 @@ Use o método [getTaskResult](../api/methods/get-task-result.md) para obter a so
 			});
 			```
 		</TabItem>
+		
+		<TabItem value="csharp" label="C#" className="method-panel">
+			```csharp
+			// https://github.com/ZennoLab/capmonstercloud-client-dotnet
+
+			// BinanceTaskRequest:
+
+			using Zennolab.CapMonsterCloud.Requests;
+			using Zennolab.CapMonsterCloud;
+
+			class Program
+			{
+				static async Task Main(string[] args)
+				{
+					var clientOptions = new ClientOptions
+					{
+						ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
+					};
+
+					var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+					var binanceRequest = new BinanceTaskRequest
+					{
+						WebsiteUrl = "https://example.com",
+						WebsiteKey = "login",
+						ValidateId = "cb0bfefa598b4c3887661fde54ecd57b",
+						UserAgent = "userAgentPlaceholder" // Use the current userAgent
+					};
+
+					var binanceResult = await cmCloudClient.SolveAsync(binanceRequest);
+
+					Console.WriteLine("Captcha Solution: " + binanceResult.Solution.Value);
+				}
+			}
+			```
+		</TabItem>
 	</Tabs>

@@ -457,13 +457,50 @@ Também passamos o valor buscado TaskArgument nos metadados.
 				const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
 				console.log(await cmcClient.getBalance());
 				
-				const binanceRequest = new ComplexImageTaskRecognitionRequest({
+				const citRecognitionRequest = new ComplexImageTaskRecognitionRequest({
 					imagesBase64: ['/9xwee/'],
 					metaData: { Task: 'oocl_rotate' },
 				});
 
-				console.log(await cmcClient.Solve(binanceRequest));
+				console.log(await cmcClient.Solve(citRecognitionRequest));
 			});
+			```
+		</TabItem>
+		
+		<TabItem value="csharp" label="C#" className="method-panel">
+			```csharp
+			// https://github.com/ZennoLab/capmonstercloud-client-dotnet
+
+			// RecognitionComplexImageTaskRequest:
+
+			using Zennolab.CapMonsterCloud.Requests;
+			using Zennolab.CapMonsterCloud;
+
+			class Program
+			{
+				static async Task Main(string[] args)
+				{
+					var clientOptions = new ClientOptions
+					{
+						ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
+					};
+
+					var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+					var recognitionCITRequest = new RecognitionComplexImageTaskRequest
+					{
+						ImagesBase64 = ["/9j/4AAQSkZJRgABAQEAAAAAAAD…"],
+						metadata = new RecognitionComplexImageTaskRequest.Metadata
+						{
+							Task = "oocl_rotate_new"
+						}
+					};
+
+					var recognitionCITResult = await cmCloudClient.SolveAsync(recognitionCITRequest);
+
+					Console.WriteLine("Captcha Solution: " + recognitionCITResult.Solution.Value);
+				}
+			}
 			```
 		</TabItem>
 	</Tabs>

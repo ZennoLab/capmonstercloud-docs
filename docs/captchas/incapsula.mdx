@@ -177,4 +177,44 @@ Error 16 - данная ошибка связана с применением п
 			});
 			```
 		</TabItem>
+		
+		<TabItem value="csharp" label="C#" className="method-panel">
+			```csharp
+			// https://github.com/ZennoLab/capmonstercloud-client-dotnet
+
+			// ImpervaCustomTaskRequest:
+
+			using Zennolab.CapMonsterCloud.Requests;
+			using Zennolab.CapMonsterCloud;
+
+			class Program
+			{
+				static async Task Main(string[] args)
+				{
+					var clientOptions = new ClientOptions
+					{
+						ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
+					};
+
+					var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+					var impervaRequest = new ImpervaCustomTaskRequest
+					{
+						WebsiteUrl = "https://example.com",
+						UserAgent = "userAgentPlaceholder", // Use the current userAgent
+						metadata = new ImpervaCustomTaskRequest.Metadata
+						{
+							incapsulaScriptBase64 = "dmFyIF8weGQ2ZmU9Wydce..eDUzXHg2YVx4NGYnKV09XzB4Mjk3MTIxO319KCkpOw==",
+							incapsulaSessionCookie = "l/LsGnrvyB9lNhXI8borDKa2IGcAAAAAX0qAEHheCWuNDquzwb44cw=",
+							reese84UrlEndpoint = "Built-with-the-For-hopence-Hurleysurfecting-the-"
+						}               
+					};
+
+					var impervaResult = await cmCloudClient.SolveAsync(impervaRequest);
+
+					Console.WriteLine("Captcha Solution: " + impervaResult.Solution.Domains.Cookies);
+				}
+			}
+			```
+		</TabItem>
 	</Tabs>

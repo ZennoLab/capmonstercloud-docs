@@ -222,5 +222,45 @@ https://api.capmonster.cloud/getTaskResult
     print(responses)
     ```
   </TabItem>
+  
+	<TabItem value="csharp" label="C#" className="method-panel">
+		```csharp
+		// https://github.com/ZennoLab/capmonstercloud-client-dotnet
+
+		// DataDomeCustomTaskRequest:
+
+		using Zennolab.CapMonsterCloud.Requests;
+		using Zennolab.CapMonsterCloud;
+
+		class Program
+		{
+			static async Task Main(string[] args)
+			{
+				var clientOptions = new ClientOptions
+				{
+					ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
+				};
+
+				var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+				var DataDomeRequest = new DataDomeCustomTaskRequest
+				{
+					WebsiteUrl = "https://example.com",
+					UserAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/21F90 Safari/604.1", // Use the current userAgent
+					metadata = new DataDomeCustomTaskRequest.Metadata
+					{
+						datadomeCookie = "datadome=6BvxqELMoorFNoo7GT1...JyfP_mhz",
+						captchaUrl = "https://example.com",
+						htmlPageBase64 = "PGh0bWw+PGhlYWQ+PHRpdGxlPmJs...N0E5QTA1"
+					}               
+				};
+
+				var DataDomeResult = await cmCloudClient.SolveAsync(DataDomeRequest);
+
+				Console.WriteLine("Captcha Solution: " + DataDomeResult.Solution.Domains.Cookies);
+			}
+		}
+		```
+	</TabItem>
 </Tabs>
 
