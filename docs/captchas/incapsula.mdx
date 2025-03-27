@@ -178,18 +178,45 @@ Error 16 - данная ошибка связана с применением п
 			```
 		</TabItem>
 		
+		<TabItem value="python" label="Python" default className="method-panel">
+			```python
+			# https://github.com/ZennoLab/capmonstercloud-client-python
+	 
+			import asyncio
+			from capmonstercloudclient import CapMonsterClient, ClientOptions
+			from capmonstercloudclient.requests import ImpervaCustomTaskProxylessRequest
+	 
+			client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonster Cloud API key
+			cap_monster_client = CapMonsterClient(options=client_options)
+	 
+			imperva_request = ImpervaCustomTaskProxylessRequest(
+				websiteUrl="https://example.com",  # URL with captcha
+				userAgent="userAgentPlaceholder",
+				metadata={
+					"incapsulaScriptBase64": "dmFyIF8weGQ2ZmU9Wydce..eDUzXHg2YVx4NGYnKV09XzB4Mjk3MTIxO319KCkpOw==",
+					"incapsulaSessionCookie": "l/LsGnrvyB9lNhXI8borDKa2IGcAAAAAX0qAEHheCWuNDquzwb44cw=",
+					"reese84UrlEndpoint": "Built-with-the-For-hopence-Hurleysurfecting-the-"
+				},
+			)
+	 
+			async def solve_captcha():
+				return await cap_monster_client.solve_captcha(imperva_request)
+	 
+			responses = asyncio.run(solve_captcha())
+			print(responses)
+			```
+		</TabItem>
+		
 		<TabItem value="csharp" label="C#" className="method-panel">
 			```csharp
 			// https://github.com/ZennoLab/capmonstercloud-client-dotnet
-
-			// ImpervaCustomTaskRequest:
 
 			using Zennolab.CapMonsterCloud.Requests;
 			using Zennolab.CapMonsterCloud;
 
 			class Program
 			{
-				static async Task Main(string[] args)
+				static async Task MainImperva(string[] args)
 				{
 					var clientOptions = new ClientOptions
 					{
@@ -198,21 +225,15 @@ Error 16 - данная ошибка связана с применением п
 
 					var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
-					var impervaRequest = new ImpervaCustomTaskRequest
+					var impervaRequest = new ImpervaCustomTaskRequest(incapsulaScriptBase64: "dmFyIF8weGQ2ZmU9Wydce..eDUzXHg2YVx4NGYnKV09XzB4Mjk3MTIxO319KCkpOw==", incapsulaSessionCookie: "l/LsGnrvyB9lNhXI8borDKa2IGcAAAAAX0qAEHheCWuNDquzwb44cw=", reese84UrlEndpoint: "Built-with-the-For-hopence-Hurleysurfecting-the-")
 					{
 						WebsiteUrl = "https://example.com",
 						UserAgent = "userAgentPlaceholder", // Use the current userAgent
-						metadata = new ImpervaCustomTaskRequest.Metadata
-						{
-							incapsulaScriptBase64 = "dmFyIF8weGQ2ZmU9Wydce..eDUzXHg2YVx4NGYnKV09XzB4Mjk3MTIxO319KCkpOw==",
-							incapsulaSessionCookie = "l/LsGnrvyB9lNhXI8borDKa2IGcAAAAAX0qAEHheCWuNDquzwb44cw=",
-							reese84UrlEndpoint = "Built-with-the-For-hopence-Hurleysurfecting-the-"
-						}               
 					};
 
 					var impervaResult = await cmCloudClient.SolveAsync(impervaRequest);
 
-					Console.WriteLine("Captcha Solution: " + impervaResult.Solution.Domains.Cookies);
+					Console.WriteLine("Captcha Solution: " + JsonSerializer.Serialize(impervaResult.Solution));
 				}
 			}
 			```

@@ -471,14 +471,12 @@ Também passamos o valor buscado TaskArgument nos metadados.
 			```csharp
 			// https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
-			// RecognitionComplexImageTaskRequest:
-
 			using Zennolab.CapMonsterCloud.Requests;
 			using Zennolab.CapMonsterCloud;
 
 			class Program
 			{
-				static async Task Main(string[] args)
+				static async Task MainComplexImageTaskRecognition(string[] args)
 				{
 					var clientOptions = new ClientOptions
 					{
@@ -489,8 +487,11 @@ Também passamos o valor buscado TaskArgument nos metadados.
 
 					var recognitionCITRequest = new RecognitionComplexImageTaskRequest
 					{
-						ImagesBase64 = ["/9j/4AAQSkZJRgABAQEAAAAAAAD…"],
-						metadata = new RecognitionComplexImageTaskRequest.Metadata
+						ImagesBase64 = new List<string>
+						{
+							"/9j/4AAQSkZJRgABAQEAAAAAAAD…"
+						},
+						Metadata = new RecognitionComplexImageTaskRequest.RecognitionMetadata
 						{
 							Task = "oocl_rotate_new"
 						}
@@ -498,7 +499,10 @@ Também passamos o valor buscado TaskArgument nos metadados.
 
 					var recognitionCITResult = await cmCloudClient.SolveAsync(recognitionCITRequest);
 
-					Console.WriteLine("Captcha Solution: " + recognitionCITResult.Solution.Value);
+					if(recognitionCITResult.Solution.Answer.IsGrid)
+						Console.WriteLine("Captcha Solution: " + recognitionCITResult.Solution.Answer.GridAnswer);
+					else if (recognitionCITResult.Solution.Answer.IsNumeric)
+						Console.WriteLine("Captcha Solution: " + recognitionCITResult.Solution.Answer.NumericAnswer);
 				}
 			}
 			```
