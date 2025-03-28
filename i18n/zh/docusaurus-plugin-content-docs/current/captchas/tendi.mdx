@@ -161,6 +161,26 @@ import BlogLink from '@theme/BlogLink';
 ## 使用 SDK 库
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+	<TabItem value="js" label="JavaScript" default className="method-panel">
+		```js
+		// https://github.com/ZennoLab/capmonstercloud-client-js
+
+		import { CapMonsterCloudClientFactory, ClientOptions, TenDIRequest } from '@zennolab_com/capmonstercloud-client';
+
+		document.addEventListener('DOMContentLoaded', async () => {
+			const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+			console.log(await cmcClient.getBalance());
+
+			const tenDIRequest = new TenDIRequest({
+				websiteURL: 'https://example.com',
+				websiteKey: 'websiteKey',
+			});
+
+			console.log(await cmcClient.Solve(tenDIRequest));
+		});
+		```
+	</TabItem>
+	
   <TabItem value="python" label="Python" default className="method-panel">
     ```python
     # https://github.com/ZennoLab/capmonstercloud-client-python

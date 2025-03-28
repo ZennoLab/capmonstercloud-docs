@@ -120,6 +120,26 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 ## 使用 SDK 库
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+	<TabItem value="js" label="JavaScript" default className="method-panel">
+		```js
+		// https://github.com/ZennoLab/capmonstercloud-client-js
+
+		import { CapMonsterCloudClientFactory, ClientOptions, BasiliskRequest } from '@zennolab_com/capmonstercloud-client';
+
+		document.addEventListener('DOMContentLoaded', async () => {
+			const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+			console.log(await cmcClient.getBalance());
+
+			const basiliskRequest = new BasiliskRequest({
+				websiteURL: 'https://example.com',
+				websiteKey: 'websiteKey',
+			});
+
+			console.log(await cmcClient.Solve(basiliskRequest));
+		});
+		```
+	</TabItem>
+
   <TabItem value="python" label="Python" default className="method-panel">
     ```python
     # https://github.com/ZennoLab/capmonstercloud-client-python

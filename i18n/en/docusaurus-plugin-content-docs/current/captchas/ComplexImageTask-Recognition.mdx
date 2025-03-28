@@ -442,3 +442,67 @@ We also pass the sought value TaskArgument in the metadata.
 		```
 	</MethodDescription>
 </TabItem>
+
+## Use SDK Library
+	<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+		<TabItem value="js" label="JavaScript" default className="method-panel">
+			```js
+			// https://github.com/ZennoLab/capmonstercloud-client-js
+
+			import { CapMonsterCloudClientFactory, ClientOptions, ComplexImageTaskRecognitionRequest } from '@zennolab_com/capmonstercloud-client';
+
+			document.addEventListener('DOMContentLoaded', async () => {
+				const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+				console.log(await cmcClient.getBalance());
+				
+				const citRecognitionRequest = new ComplexImageTaskRecognitionRequest({
+					imagesBase64: ['/9xwee/'],
+					metaData: { Task: 'oocl_rotate' },
+				});
+
+				console.log(await cmcClient.Solve(citRecognitionRequest));
+			});
+			```
+		</TabItem>
+		
+		<TabItem value="csharp" label="C#" className="method-panel">
+			```csharp
+			// https://github.com/ZennoLab/capmonstercloud-client-dotnet
+
+			using Zennolab.CapMonsterCloud.Requests;
+			using Zennolab.CapMonsterCloud;
+
+			class Program
+			{
+				static async Task MainComplexImageTaskRecognition(string[] args)
+				{
+					var clientOptions = new ClientOptions
+					{
+						ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
+					};
+
+					var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+					var recognitionCITRequest = new RecognitionComplexImageTaskRequest
+					{
+						ImagesBase64 = new List<string>
+						{
+							"/9j/4AAQSkZJRgABAQEAAAAAAAD…"
+						},
+						Metadata = new RecognitionComplexImageTaskRequest.RecognitionMetadata
+						{
+							Task = "oocl_rotate_new"
+						}
+					};
+
+					var recognitionCITResult = await cmCloudClient.SolveAsync(recognitionCITRequest);
+
+					if(recognitionCITResult.Solution.Answer.IsGrid)
+						Console.WriteLine("Captcha Solution: " + recognitionCITResult.Solution.Answer.GridAnswer);
+					else if (recognitionCITResult.Solution.Answer.IsNumeric)
+						Console.WriteLine("Captcha Solution: " + recognitionCITResult.Solution.Answer.NumericAnswer);
+				}
+			}
+			```
+		</TabItem>
+	</Tabs>
