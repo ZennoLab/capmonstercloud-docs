@@ -1,4 +1,3 @@
-// @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
 const lightCodeTheme = require('prism-react-renderer').themes.github;
@@ -43,7 +42,7 @@ const config = {
           showLastUpdateTime: true,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl: (params) => {
+          editUrl: (params: { versionDocsDirPath: string; docPath: string; locale: string; }) => {
             const  {
               versionDocsDirPath, 
               docPath,
