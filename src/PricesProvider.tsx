@@ -3,16 +3,25 @@ import { useFetchPriceRate } from './hooks/useFetchPriceRate';
 import { useFetchPrices } from './hooks/useFetchPrices';
 import { NormalizedPrices } from './types/price.types';
 
-const PricesContext = createContext<{ priceRate: number; normalizedPrices: Partial<NormalizedPrices> }>({
+const PricesContext = createContext<{
+  isLoading: boolean;
+  priceRate: number;
+  normalizedPrices: Partial<NormalizedPrices>;
+}>({
   normalizedPrices: {},
   priceRate: 1,
+  isLoading: false,
 });
 
 export const usePricesContext = () => useContext(PricesContext);
 
 export const PricesProvider = ({ children }: React.PropsWithChildren) => {
-  const { normalizedPrices } = useFetchPrices();
-  const { priceRate } = useFetchPriceRate();
+  const { normalizedPrices, loading: isPricesLoading } = useFetchPrices();
+  const { priceRate, loading: isPriceRateLoading } = useFetchPriceRate();
 
-  return <PricesContext.Provider value={{ priceRate, normalizedPrices }}>{children}</PricesContext.Provider>;
+  return (
+    <PricesContext.Provider value={{ isLoading: isPricesLoading || isPriceRateLoading, priceRate, normalizedPrices }}>
+      {children}
+    </PricesContext.Provider>
+  );
 };

@@ -6,6 +6,7 @@ import getLocaleStrings from '../../locales/index';
 import { getPriceText } from '../../utils/price.utils';
 import { CaptchaTokenType } from '../../types/price.types';
 import { usePricesContext } from '../../PricesProvider';
+import { Loader } from '../../components/Loader';
 
 type PriceBlockProps = {
   title: string;
@@ -24,7 +25,11 @@ const PriceBlock = ({ title, name }: PriceBlockProps) => {
     answers: complexImageAnswers,
   };
 
-  const { priceRate, normalizedPrices } = usePricesContext();
+  const { priceRate, normalizedPrices, isLoading } = usePricesContext();
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   const captchaData = normalizedPrices[name];
 

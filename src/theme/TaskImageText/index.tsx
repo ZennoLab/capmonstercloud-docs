@@ -5,6 +5,7 @@ import getLocaleStrings from '../../locales/index';
 import { usePricesContext } from '../../PricesProvider';
 import { CaptchaTokenType } from '../../types/price.types';
 import { getPriceText } from '../../utils/price.utils';
+import { Loader } from '../../components/Loader';
 
 type Props = {
   title?: string;
@@ -15,7 +16,11 @@ export const TaskImageText = ({ title, name }: Props) => {
   const { i18n } = useDocusaurusContext();
   const { currentLocale } = i18n;
   const { complexImageAnswers } = getLocaleStrings(currentLocale);
-  const { priceRate, normalizedPrices } = usePricesContext();
+  const { priceRate, normalizedPrices, isLoading } = usePricesContext();
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   const captchaData = normalizedPrices[name];
 
