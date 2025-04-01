@@ -22,7 +22,7 @@ Para começar a usar a extensão, clique em seu ícone à direita da barra de en
 <details>
     <summary>Instalação manual</summary>
 
-1. Baixe o [arquivo com a extensão](https://drive.google.com/file/d/12ajrprhqyhtNAi4IOh6TPyq-ERMy1IFF/view?usp=drive_link).
+1. Baixe o [arquivo com a extensão](https://drive.google.com/file/d/180Wx6xMcK4iG9SDWpgEJ6IXa0uwWEftR/view?usp=drive_link).
 
 2. Descompacte-o para qualquer pasta.
    
