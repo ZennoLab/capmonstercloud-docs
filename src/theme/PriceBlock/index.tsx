@@ -44,14 +44,14 @@ const PriceBlock = ({ title, name }: PriceBlockProps) => {
   return (
     <div className={imagePath ? styles.wrapBlockImage : styles.wrapBlock}>
       <div className={styles.titleWrap}>
-        <img src={`https://cmadmin.dev.k8s.zenno.services${logoPath}`} alt={`${name}-logo`} />
+        <img src={`https://capmonster.cloud${logoPath}`} alt={`${name}-logo`} />
         <div className={styles.mainTitle}>{title}</div>
       </div>
       {imagePath && <img src={imagePath} alt={imagePath} />}
       <div className={styles.priceWrap}>
         <div>
           <span className={styles.priceText}>{priceText}</span>{' '}
-          <span className={styles.subText}>{typeLocalization[type]}</span>
+          <span className={styles.subText}>/ {typeLocalization[type]}</span>
         </div>
       </div>
 

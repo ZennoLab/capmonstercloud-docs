@@ -35,7 +35,7 @@ const commonTokenKeyMap = {
 } as const;
 
 const complexImageTaskRecaptchaMap = {
-  'complex-rc2_3x3-dynamic': 'recaptcha3x3DynamicImage',
+  'complex-rc2_3x3_dynamic': 'recaptcha3x3DynamicImage',
   'complex-rc2_4x4': 'recaptcha4x4Image',
   'complex-rc2_3x3': 'recaptcha3x3Image',
 } as const;

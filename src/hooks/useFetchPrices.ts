@@ -15,8 +15,7 @@ export const useFetchPrices = () => {
     const fetchPrices = async () => {
       setLoading(true);
       try {
-        // поправить потом урл на прод
-        const response = await fetch('https://cmadmin.dev.k8s.zenno.services/api/prices?all=true');
+        const response = await fetch('https://capmonster.cloud/api/prices?all=true');
         if (!response.ok) {
           throw new Error('Failed to fetch prices');
         }
