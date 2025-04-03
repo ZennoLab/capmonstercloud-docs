@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "jsx": "react",
+    "strict": true,
+    "esModuleInterop": true,
+    "allowJs": true,
+    "checkJs": false,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+  },
+  "include": [
+    "src/**/*",
+    "docusaurus.config.ts",
+    "src/pages/**/*",
+    "docs/**/*",
+    "*.mdx",
+  ],
+  "exclude": [
+    "node_modules",
+    "build"
+  ]
+}

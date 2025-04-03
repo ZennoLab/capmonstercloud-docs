@@ -5,17 +5,16 @@ title: "Recognise and solve captchas with complex images - ComplexImageTask | AP
 description: "Use the ComplexImageTask method to automatically recognise and solve (bypass) complex captchas via the Capmonster Cloud API."
 ---
 
-import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ParamItem from '@theme/ParamItem';
 import MethodItem from '@theme/MethodItem';
 import MethodDescription from '@theme/MethodDescription'
-import PriceBlock from '@theme/PriceBlock';
+import PriceBlock from '../../../../../src/theme/PriceBlock';
 import PriceBlockWrap from '@theme/PriceBlockWrap';
 import TaskImageWrapper from '@theme/TaskImageWrapper';
 import TaskImageBlock from '@theme/TaskImageBlock';
 import TaskImage from '@theme/TaskImage';
-import TaskImageText from '@theme/TaskImageText';
+import { TaskImageText } from '../../../../../src/theme/TaskImageText';
 import BlogLink from '@theme/BlogLink';
 
 # ComplexImageTask Recognition
@@ -25,25 +24,25 @@ import BlogLink from '@theme/BlogLink';
     <TaskImage>
       ![](./images/ComplexImageTask-Recognition/oocl_img.png)
     </TaskImage>
-    <TaskImageText title="Oocl_rotate_new" price={0.3} />
+    <TaskImageText title="Oocl_rotate_new" name="complex-rec_oocl_rotate_new" />
   </TaskImageBlock>
   <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#oocl_rotate_double_new">
     <TaskImage>
       ![](./images/ComplexImageTask-Recognition/oocl_rotate_img.png)
     </TaskImage>
-    <TaskImageText title="Oocl_rotate_double_new" price={0.3} />
+    <TaskImageText title="Oocl_rotate_double_new" name="complex-rec_oocl_rotate_double_new" />
   </TaskImageBlock>
   <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#betpunch_3x3_rotate">
     <TaskImage>
       ![](./images/ComplexImageTask-Recognition/betpunch_img.png)
     </TaskImage>
-    <TaskImageText title="Betpunch_3x3_rotate request" price={0.3} />
+    <TaskImageText title="Betpunch_3x3_rotate request"  name="complex-rec_betpunch_3x3_rotate request" />
   </TaskImageBlock>
   <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#bls">
     <TaskImage>
       ![](./images/ComplexImageTask-Recognition/bls_img.png)
     </TaskImage>
-    <TaskImageText title="Bls" price={0.12} />
+    <TaskImageText title="Bls" name="bls" />
   </TaskImageBlock>
 </TaskImageWrapper>
 
@@ -75,7 +74,7 @@ import BlogLink from '@theme/BlogLink';
 ### Create task `oocl_rotate_new`
 
 <PriceBlockWrap>
-  <PriceBlock title="ComplexImageTask" name="complexImage"/>
+  <PriceBlock title="ComplexImageTask" name="complex-rec_oocl_rotate_new"/>
 </PriceBlockWrap>
 
 In the request we pass two images: background and circle.
@@ -162,7 +161,8 @@ In the request we pass two images: background and circle.
 ### Create task `oocl_rotate_double_new`
 
 <PriceBlockWrap>
-  <PriceBlock title="ComplexImageTask" name="complexImage"/>
+  <PriceBlock title="ComplexImageTask" name="complex-rec_oocl_rotate_double_new"/>
+  <PriceBlock title="ComplexImageTask" name="complex-rec_oocl_rotate_double_new"/>
 </PriceBlockWrap>
 
 In the request we pass three images: background, ring, circle.
@@ -253,7 +253,7 @@ In the request we pass three images: background, ring, circle.
 ### Create task `betpunch_3x3_rotate`
 
 <PriceBlockWrap>
-  <PriceBlock title="ComplexImageTask" name="complexImage"/>
+  <PriceBlock title="ComplexImageTask" name="complex-rec_betpunch_3x3_rotate request"/>
 </PriceBlockWrap>
 
 In the request we pass nine images. The images must be passed in the following order:
