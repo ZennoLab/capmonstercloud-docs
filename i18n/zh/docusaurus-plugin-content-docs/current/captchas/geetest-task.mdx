@@ -73,7 +73,7 @@ V4 (captcha_id = gt)
     ---
 
     <ParamItem title="websiteURL" required type="string" />
-    解决验证码的页面地址。
+    解决验证码的页面地址。正確的 Url 始終會傳給請求 https://api-na.geetest.com/gettype.php 上的 Referer？舉例來說： 我們在 https://example.com#login，但我們看到驗證碼實際上沒有在那裡初始化，而是在 https://example.com。
 
     ---
 
@@ -113,7 +113,7 @@ V4 (captcha_id = gt)
     ---
 
     <ParamItem title="websiteURL" required type="string" />
-    解决验证码的页面地址。
+    解决验证码的页面地址。正確的 Url 始終會傳給請求 https://api-na.geetest.com/gettype.php 上的 Referer？舉例來說： 我們在 https://example.com#login，但我們看到驗證碼實際上沒有在那裡初始化，而是在 https://example.com。
 
     ---
 
@@ -193,7 +193,8 @@ V4 (captcha_id = gt)
 					"type":"GeeTestTaskProxyless",
 					"websiteURL":"https://www.geetest.com/en/demo",
 					"gt":"022397c99c9f646f6477822485f30404",
-					"challenge":"7f044f48bc951ecfbfc03842b5e1fe59"
+					"challenge":"7f044f48bc951ecfbfc03842b5e1fe59",
+					"geetestApiServerSubdomain":"api-na.geetest.com"
 
 				}
 			}
@@ -224,6 +225,7 @@ V4 (captcha_id = gt)
 				  "websiteURL":"https://www.geetest.com/en/demo",
 				  "gt":"022397c99c9f646f6477822485f30404",
 				  "challenge":"7f044f48bc951ecfbfc03842b5e1fe59",
+				  "geetestApiServerSubdomain":"api-na.geetest.com",
 				  "proxyType":"http",
 				  "proxyAddress":"8.8.8.8",
 				  "proxyPort":8080,
