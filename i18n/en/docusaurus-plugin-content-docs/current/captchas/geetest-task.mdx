@@ -72,7 +72,7 @@ V4 (captcha_id = gt)
     ---
 
     <ParamItem title="websiteURL" required type="string" />
-    Address of the page on which the captcha is solved.
+    Address of the page on which the captcha is solved. The correct Url is always passed to Referer on the request https://api-na.geetest.com/gettype.php? For example: We are at https://example.com#login, but we see that the captcha is not actually initialised there, but at https://example.com.
 
     ---
 
@@ -116,7 +116,7 @@ V4 (captcha_id = gt)
     ---
 
     <ParamItem title="websiteURL" required type="string" />
-    Address of the page on which the captcha is solved.
+    Address of the page on which the captcha is solved. The correct Url is always passed to Referer on the request https://api-na.geetest.com/gettype.php? For example: We are at https://example.com#login, but we see that the captcha is not actually initialised there, but at https://example.com.
 
     ---
 
@@ -205,7 +205,8 @@ V4 (captcha_id = gt)
 					"type":"GeeTestTaskProxyless",
 					"websiteURL":"https://www.geetest.com/en/demo",
 					"gt":"022397c99c9f646f6477822485f30404",
-					"challenge":"7f044f48bc951ecfbfc03842b5e1fe59"
+					"challenge":"7f044f48bc951ecfbfc03842b5e1fe59",
+					"geetestApiServerSubdomain":"api-na.geetest.com"
 
 				}
 			}
@@ -236,6 +237,7 @@ V4 (captcha_id = gt)
 				  "websiteURL":"https://www.geetest.com/en/demo",
 				  "gt":"022397c99c9f646f6477822485f30404",
 				  "challenge":"7f044f48bc951ecfbfc03842b5e1fe59",
+				  "geetestApiServerSubdomain":"api-na.geetest.com",
 				  "proxyType":"http",
 				  "proxyAddress":"8.8.8.8",
 				  "proxyPort":8080,
