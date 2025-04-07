@@ -62,7 +62,7 @@ Esta tarefa será executada usando nossos servidores proxy.
 
 ## Opção 2
 ## Parâmetros da solicitação
-<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (sem proxy)" default className="bordered-panel">
+<TabItem value="proxyless" label="AmazonTaskProxyless (sem proxy)" default className="bordered-panel">
 <ParamItem title="type" required type="string" />
 **AmazonTaskProxyless**
 
@@ -78,7 +78,7 @@ Link para o challenge.js (veja a descrição abaixo)
 
 ---
 
-    <ParamItem title=“captchaScript” type='string' />
+    <ParamItem title="captchaScript" type="string" />
     Link para captcha.js (talvez esteja faltando se você tiver apenas um desafio)
 
 ---
@@ -108,9 +108,9 @@ Ao acessar um site, você recebe uma resposta 405 e uma página HTML com um capt
 ![](./images/amazon-task/aws1.png) 
 ![](./images/amazon-task/aws2.png)
 
-##Task Creation Methods
+##Métodos de criação de tarefas
 ##Opção 1
-<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (sem proxy)" default className="method-panel">
+<TabItem value="proxyless" label="AmazonTaskProxyless (sem proxy)" default className="method-panel">
 <MethodItem>
   ```http
   https://api.capmonster.cloud/createTask
