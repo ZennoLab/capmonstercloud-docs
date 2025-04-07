@@ -33,6 +33,34 @@ import BlogLink from '@theme/BlogLink';
 ![](./images/amazon-task/Waf2.png)
 ![](./images/amazon-task/Waf3.png)
 
+## Вариант 1
+<TabItem value="proxyless" label="AmazonTaskProxyless (без прокси)" default className="bordered-panel">
+    <ParamItem title="type" required type="string" />
+    **AmazonTaskProxyless**
+
+    --- 
+
+    <ParamItem title="websiteURL" required type="string" />
+    Адрес основной страницы, на которой решается капча.
+
+    ---
+	
+	<ParamItem title="websiteKey" required type="string" />
+    Можно найти в поле `apiKey` при рендеринге капчи
+
+    ---
+
+    <ParamItem title="captchaScript" required type="string" />
+    Ссылка на jsapi.js на html странице, имеет вид <Integration URL>/jsapi.js
+
+    ---
+
+    <ParamItem title="cookieSolution" type="boolean" />
+    По умолчанию **false**. Если вам требуются куки "aws-waf-token", то укажите значение **true**. Иначе в ответ вы получите "captcha_voucher" и "existing_token".
+
+</TabItem>
+
+## Вариант 2
 ## Параметры запроса
 <TabItem value="proxyless" label="AmazonTaskProxyless (без прокси)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
@@ -50,8 +78,8 @@ import BlogLink from '@theme/BlogLink';
 
     ---
 
-    <ParamItem title="captchaScript" required type="string" />
-    Ссылка на captcha.js (см. описание ниже)
+    <ParamItem title="captchaScript" type="string" />
+    Ссылка на captcha.js (может отсутствовать, если у вас просто челлендж)
 
     ---
 
@@ -82,7 +110,40 @@ import BlogLink from '@theme/BlogLink';
 ![](./images/amazon-task/aws2.png) 
 
 
-## Метод создания задачи
+## Методы создания задачи
+###Вариант 1
+<TabItem value="proxyless" label="AmazonTaskProxyless (без прокси)" default className="method-panel">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Запрос**
+		```json
+		{
+			"clientKey": "",
+			"task": {
+				"type": "AmazonTaskProxyless",
+				"websiteURL": "https://example.com/index.html",
+				"websiteKey": "h15hX7brbaRTR...Za1_1",
+				"userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+				"captchaScript": "https://234324vgvc23.yejk.captcha-sdk.awswaf.com/234324vgvc23/jsapi.js",
+				"cookieSolution": true
+			}
+		}
+		```
+		**Ответ**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
+</TabItem>
+
+###Вариант 2
 <TabItem value="proxyless" label="AmazonTaskProxyless (без прокси)" default className="method-panel">
 	<MethodItem>
 		```http
