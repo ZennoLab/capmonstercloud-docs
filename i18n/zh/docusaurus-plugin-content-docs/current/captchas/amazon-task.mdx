@@ -34,35 +34,35 @@ import BlogLink from '@theme/BlogLink';
 ![](./images/amazon-task/Waf3.png)
 
 ## 选项 1
-<TabItem value='proxyless' label='AmazonTaskProxyless (no proxy)' default className='bordered-panel'>
+<TabItem value="proxyless" label="AmazonTaskProxyless (no proxy)" default className="bordered-panel">
     <ParamItem title='type' required type='string' />
     **AmazonTaskProxyless**
 
     --- 
 
-    <ParamItem title='websiteURL' required type='string' /> 网站地址。
+    <ParamItem title="websiteURL" required type="string" /> 网站地址。
     解决验证码的主页面地址。
 
     ---
 	
-	<ParamItem title='websiteKey' required type='string' /> 验证码的主页面地址。
+	<ParamItem title="websiteKey" required type="string" /> 验证码的主页面地址。
     在渲染验证码时，可以在 `apiKey` 字段中找到。
 
     ---
 
-    <ParamItem title=‘captchaScript’ required type='string' />
-    链接到 HTML 页面上的 jsapi.js，形式为 <集成 URL>/jsapi.js
+    <ParamItem title="captchaScript" required type="string" />
+    链接到 HTML 页面上的 jsapi.js，形式为 <Integration URL>/jsapi.js
 
     ---
 
-    <ParamItem title='cookieSolution' type='boolean' />
+    <ParamItem title="cookieSolution" type="boolean" />
     默认为**false**。如果需要 “aws-waf-token ”cookie，则指定值为**true**。否则，您将得到 “验证码_凭证 ”和 “现有令牌 ”的响应。
 
 </TabItem> 标签
 
 ## 选项 2
 ## 请求参数
-<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (无代理)" default className="bordered-panel">
+<TabItem value="proxyless" label="AmazonTaskProxyless (无代理)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **AmazonTaskProxyless**
 
@@ -78,7 +78,7 @@ import BlogLink from '@theme/BlogLink';
 
     ---
 
-    <ParamItem title=“captchaScript” type='string' />
+    <ParamItem title="captchaScript" type="string" />
     到 captcha.js 的链接（如果只是挑战，可能会丢失）
 
     ---
@@ -119,7 +119,7 @@ import BlogLink from '@theme/BlogLink';
 
 ##任务创建方法
 ##选项 1
-<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (无代理)" default className="method-panel">
+<TabItem value="proxyless" label="AmazonTaskProxyless (无代理)" default className="method-panel">
 	<MethodItem>
 		```http
 		https://api.capmonster.cloud/createTask
