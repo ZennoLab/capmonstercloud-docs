@@ -34,35 +34,35 @@ This task will be performed using our proxy servers.
 ![](./images/amazon-task/Waf3.png)
 
 ## Option 1
-<TabItem value=‘proxyless’ label=‘AmazonTaskProxyless (no proxy)’ default className=‘bordered-panel’>
-    <ParamItem title=‘type’ required type=‘string’ />
+<TabItem value="proxyless" label="AmazonTaskProxyless (without proxy)" default className="bordered-panel">
+    <ParamItem title="type" required type="string" />
     **AmazonTaskProxyless**
 
     --- 
 
-    <ParamItem title=‘websiteURL’ required type=‘string’ />
+    <ParamItem title="websiteURL" required type="string" />
     The address of the main page where the captcha is solved.
 
     ---
 	
-	<ParamItem title=‘websiteKey’ required type=‘string’ />
+	<ParamItem title="websiteKey" required type=‘string’ />
     Can be found in the `apiKey` field when rendering the captcha
 
     ---
 
-    <ParamItem title=‘captchaScript’ required type=‘string’ />
+    <ParamItem title="captchaScript" required type="string" />
     Link to jsapi.js on html page, has the form <Integration URL>/jsapi.js
 
     ---
 
-    <ParamItem title=‘cookieSolution’ type=‘boolean’ />
-    Default **false**. If you require an ‘aws-waf-token’ cookie, then specify a value of **true**. Otherwise you will get ‘captcha_voucher’ and ‘existing_token’ in response.
+    <ParamItem title="cookieSolution" type="boolean" />
+    Default **false**. If you require an ‘aws-waf-token’ cookie, then specify a value of **true**. Otherwise you will get "captcha_voucher" and "existing_token" in response.
 
 </TabItem>
 
 ## Option 2
 ## Request parameters
-<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (without proxy)" default className="bordered-panel">
+<TabItem value="proxyless" label="AmazonTaskProxyless (without proxy)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **AmazonTaskProxyless**
 
@@ -78,7 +78,7 @@ This task will be performed using our proxy servers.
 
     ---
 
-    <ParamItem title="captchaScript" type=‘string’ />
+    <ParamItem title="captchaScript" type="string" />
     Link to captcha.js (maybe missing if you just have a challenge)
 
     ---
@@ -112,7 +112,7 @@ When you go to a website, you get a 405 response and an html page with a captcha
 
 ##Task Creation Methods
 ##Option 1
-<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
+<TabItem value="proxyless" label="AmazonTaskProxyless (without proxy)" default className="method-panel">
 	<MethodItem>
 		```http
 		https://api.capmonster.cloud/createTask
