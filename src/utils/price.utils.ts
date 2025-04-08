@@ -32,6 +32,7 @@ const commonTokenKeyMap = {
   Prosopo: 'prosopoToken',
   'Text Captcha': 'textCaptchaToken',
   Binance: 'binanceToken',
+  Temu: 'temuToken'
 } as const;
 
 const complexImageTaskRecaptchaMap = {
