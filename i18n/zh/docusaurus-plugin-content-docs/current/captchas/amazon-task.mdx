@@ -1,6 +1,8 @@
 ﻿---
 sidebar_position: 13
 sidebar_label: AmazonTask
+title: “通过 Capmonster Cloud API 自动识别并绕过亚马逊 AWS WAF 验证码”
+description: “了解如何使用 Capmonster Cloud 的自动验证码识别和解决方案服务的 API 绕过亚马逊验证码（AWS WAF）"。
 ---
 
 import Tabs from '@theme/Tabs';
@@ -32,7 +34,35 @@ import BlogLink from '@theme/BlogLink';
 ![](./images/amazon-task/Waf3.png)
 
 ## 请求参数
-<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (without proxy)" default className="bordered-panel">
+## 选项 1
+<TabItem value="proxyless" label="AmazonTaskProxyless (no proxy)" default className="bordered-panel">
+    <ParamItem title='type' required type='string' />
+    **AmazonTaskProxyless**
+
+    --- 
+
+    <ParamItem title="websiteURL" required type="string" /> 
+    网站地址。解决验证码的主页面地址。
+
+    ---
+	
+    <ParamItem title="websiteKey" required type="string" /> 
+    验证码的主页面地址。在渲染验证码时，可以在 `apiKey` 字段中找到。
+
+    ---
+
+    <ParamItem title="captchaScript" required type="string" />
+    链接到 HTML 页面上的 jsapi.js，形式为 \<Integration URL\>/jsapi.js
+
+    ---
+
+    <ParamItem title="cookieSolution" type="boolean" />
+    默认为**false**。如果需要 “aws-waf-token ”cookie，则指定值为**true**。否则，您将得到 “验证码_凭证 ”和 “现有令牌 ”的响应。
+
+</TabItem> 
+
+## 选项 2
+<TabItem value="proxyless" label="AmazonTaskProxyless (无代理)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **AmazonTaskProxyless**
 
@@ -48,8 +78,8 @@ import BlogLink from '@theme/BlogLink';
 
     ---
 
-    <ParamItem title="captchaScript" required type="string" />
-    captcha.js 的链接（请参阅表格下方的描述）。
+    <ParamItem title="captchaScript" type="string" />
+    到 captcha.js 的链接（如果只是挑战，可能会丢失）
 
     ---
 
@@ -70,8 +100,10 @@ import BlogLink from '@theme/BlogLink';
 
     <ParamItem title="cookieSolution" type="boolean" />
     默认为 **false**。如果需要使用名为 "aws-waf-token" 的 cookie，请指定值为 **true**。否则，您将得到 "captcha_voucher" 和 "existing_token"。
-	
+
 </TabItem>
+
+
 
 
 ### 如何获取 websiteKey、context、iv 和 challengeScript 参数
@@ -80,8 +112,14 @@ import BlogLink from '@theme/BlogLink';
 ![](./images/amazon-task/aws2.png)
 
 
-## 创建任务方法 
-<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
+
+
+
+
+
+## 任务创建方法
+## 选项 1
+<TabItem value="proxyless" label="AmazonTaskProxyless (无代理)" default className="method-panel">
 	<MethodItem>
 		```http
 		https://api.capmonster.cloud/createTask
@@ -94,7 +132,39 @@ import BlogLink from '@theme/BlogLink';
 			"clientKey": "API_KEY",
 			"task": {
 				"type": "AmazonTaskProxyless",
-				"websiteURL": "https://efw47fpad9.execute-api.us-east-1.amazonaws.com/latest",
+				"websiteURL": "https://example.com/index.html",
+				"websiteKey": "h15hX7brbaRTR...Za1_1",
+				"userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+				"captchaScript": "https://234324vgvc23.yejk.captcha-sdk.awswaf.com/234324vgvc23/jsapi.js",
+				"cookieSolution": true
+			}
+		}
+		```
+		**回应**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
+</TabItem>
+
+## 选项 2
+<TabItem value="proxyless" label="AmazonTaskProxyless (无代理)" default className="method-panel">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**要求**
+		```json
+		{
+			"clientKey": "API_KEY",
+			"task": {
+				"type": "AmazonTaskProxyless",
+				"websiteURL": "https://example.com",
 				"challengeScript": "https://41bcdd4fb3cb.610cd090.us-east-1.token.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/challenge.js",
 				"captchaScript": "https://41bcdd4fb3cb.610cd090.us-east-1.captcha.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/captcha.js",
 				"websiteKey": "AQIDA...wZwdADFLWk7XOA==",
@@ -114,9 +184,12 @@ import BlogLink from '@theme/BlogLink';
 	</MethodDescription>
 </TabItem>
 
-
 ## 获取任务结果方法
 使用[getTaskResult](../api/methods/get-task-result.md)方法获取 AmazonTask 的解决方案。
+
+
+
+
 
 <TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
 	<MethodItem>

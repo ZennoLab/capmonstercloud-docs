@@ -1,6 +1,8 @@
 ---
 sidebar_position: 12
 sidebar_label: AmazonTask
+title: “Reconhecer e contornar automaticamente o captcha do Amazon AWS WAF por meio da API do Capmonster Cloud”
+description: “Aprenda a ignorar o captcha da Amazon (AWS WAF) usando a API do serviço de solução e reconhecimento automático de captcha do Capmonster Cloud.”
 ---
 
 import Tabs from '@theme/Tabs';
@@ -32,7 +34,35 @@ Esta tarefa será executada usando nossos servidores proxy.
 ![](./images/amazon-task/Waf3.png)
 
 ## Parâmetros da solicitação
-<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (sem proxy)" default className="bordered-panel">
+## Opção 1
+<TabItem value='proxyless' label='AmazonTaskProxyless (sem proxy)' default className='bordered-panel'>
+    <ParamItem title='type' required type='string' />
+    **AmazonTaskProxyless**
+
+    --- 
+
+    <ParamItem title='websiteURL' required type='string' />
+    O endereço da página principal em que o captcha é resolvido.
+
+    ---
+	
+	<ParamItem title='websiteKey' required type='string' />
+    Pode ser encontrado no campo `apiKey` ao renderizar o captcha
+
+    ---
+
+    <ParamItem title='captchaScript' required type='string' />
+    Link para jsapi.js na página html, com o formato \<Integration URL\>/jsapi.js
+
+    ---
+
+    <ParamItem title='cookieSolution' type='boolean' />
+    Padrão **false**. Se você precisar de um cookie “aws-waf-token”, especifique um valor de **true**. Caso contrário, você receberá “captcha_voucher” e “existing_token” como resposta.
+
+</TabItem>
+
+## Opção 2
+<TabItem value="proxyless" label="AmazonTaskProxyless (sem proxy)" default className="bordered-panel">
 <ParamItem title="type" required type="string" />
 **AmazonTaskProxyless**
 
@@ -48,8 +78,8 @@ Link para o challenge.js (veja a descrição abaixo)
 
 ---
 
-<ParamItem title="captchaScript" required type="string" />
-Link para o captcha.js (veja a descrição abaixo)
+    <ParamItem title="captchaScript" type="string" />
+    Link para captcha.js (talvez esteja faltando se você tiver apenas um desafio)
 
 ---
 
@@ -78,10 +108,9 @@ Ao acessar um site, você recebe uma resposta 405 e uma página HTML com um capt
 ![](./images/amazon-task/aws1.png) 
 ![](./images/amazon-task/aws2.png)
 
-## Criar tarefa
-
-
-<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (sem proxy)" default className="method-panel">
+## Métodos de criação de tarefas
+## Opção 1
+<TabItem value="proxyless" label="AmazonTaskProxyless (sem proxy)" default className="method-panel">
 <MethodItem>
   ```http
   https://api.capmonster.cloud/createTask
@@ -91,28 +120,59 @@ Ao acessar um site, você recebe uma resposta 405 e uma página HTML com um capt
 **Solicitação**
 ```json
 {
-    "clientKey": "API_KEY",
-    "task": {
-        "type": "AmazonTaskProxyless",
-        "websiteURL": "https://efw47fpad9.execute-api.us-east-1.amazonaws.com/latest",
-        "challengeScript": "https://41bcdd4fb3cb.610cd090.us-east-1.token.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/challenge.js",
-        "captchaScript": "https://41bcdd4fb3cb.610cd090.us-east-1.captcha.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/captcha.js",
-        "websiteKey": "AQIDA...wZwdADFLWk7XOA==",
-        "context": "qoJYgnKsc...aormh/dYYK+Y=",
-        "iv": "CgAAXFFFFSAAABVk",
-        "cookieSolution": true
-    }
-}
-```
-**Resposta**
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
+			"clientKey": "API_KEY",
+			"task": {
+				"type": "AmazonTaskProxyless",
+				"websiteURL": "https://example.com/index.html",
+				"websiteKey": "h15hX7brbaRTR...Za1_1",
+				"userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+				"captchaScript": "https://234324vgvc23.yejk.captcha-sdk.awswaf.com/234324vgvc23/jsapi.js",
+				"cookieSolution": true
+			}
+		}
+		```
+		**Resposta**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
+</TabItem>
 
-</MethodDescription>
+## Opção 2
+<TabItem value="proxyless" label="AmazonTaskProxyless (sem proxy)" default className="method-panel">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Solicitação**
+		```json
+		{
+			"clientKey": "API_KEY",
+			"task": {
+				"type": "AmazonTaskProxyless",
+				"websiteURL": "https://example.com",
+				"challengeScript": "https://41bcdd4fb3cb.610cd090.us-east-1.token.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/challenge.js",
+				"captchaScript": "https://41bcdd4fb3cb.610cd090.us-east-1.captcha.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/captcha.js",
+				"websiteKey": "AQIDA...wZwdADFLWk7XOA==",
+				"context": "qoJYgnKsc...aormh/dYYK+Y=",
+				"iv": "CgAAXFFFFSAAABVk",
+				"cookieSolution": true
+			}
+		}
+		```
+		**Resposta**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
 </TabItem>
 
 ## Obter o resultado da tarefa

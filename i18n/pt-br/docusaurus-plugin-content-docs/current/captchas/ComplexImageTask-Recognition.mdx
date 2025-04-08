@@ -8,12 +8,12 @@ import TabItem from '@theme/TabItem';
 import ParamItem from '@theme/ParamItem';
 import MethodItem from '@theme/MethodItem';
 import MethodDescription from '@theme/MethodDescription'
-import PriceBlock from '@theme/PriceBlock';
+import PriceBlock from '../../../../../src/theme/PriceBlock';
 import PriceBlockWrap from '@theme/PriceBlockWrap';
 import TaskImageWrapper from '@theme/TaskImageWrapper';
 import TaskImageBlock from '@theme/TaskImageBlock';
 import TaskImage from '@theme/TaskImage';
-import TaskImageText from '@theme/TaskImageText';
+import { TaskImageText } from '../../../../../src/theme/TaskImageText';
 import BlogLink from '@theme/BlogLink';
 
 
@@ -24,25 +24,25 @@ import BlogLink from '@theme/BlogLink';
     <TaskImage>
       ![](./images/ComplexImageTask-Recognition/oocl_img.png)
     </TaskImage>
-    <TaskImageText title="Oocl_rotate_new" price={0.3} />
+    <TaskImageText title="Oocl_rotate_new" name="complex-rec_oocl_rotate_new" />
   </TaskImageBlock>
   <TaskImageBlock link="/pt-br/docs/captchas/ComplexImageTask-Recognition#oocl_rotate_double_new">
     <TaskImage>
       ![](./images/ComplexImageTask-Recognition/oocl_rotate_img.png)
     </TaskImage>
-    <TaskImageText title="Oocl_rotate_double_new" price={0.3} />
+    <TaskImageText title="Oocl_rotate_double_new" name="complex-rec_oocl_rotate_double_new" />
   </TaskImageBlock>
   <TaskImageBlock link="/pt-br/docs/captchas/ComplexImageTask-Recognition#betpunch_3x3_rotate">
     <TaskImage>
       ![](./images/ComplexImageTask-Recognition/betpunch_img.png)
     </TaskImage>
-    <TaskImageText title="Betpunch_3x3_rotate request" price={0.3} />
+    <TaskImageText title="Betpunch_3x3_rotate request" name="complex-rec_betpunch_3x3_rotate request" />
   </TaskImageBlock>
   <TaskImageBlock link="/pt-br/docs/captchas/ComplexImageTask-Recognition#bls">
     <TaskImage>
       ![](./images/ComplexImageTask-Recognition/bls_img.png)
     </TaskImage>
-    <TaskImageText title="Bls" price={0.12} />
+    <TaskImageText title="Bls" name="bls" />
   </TaskImageBlock>
 </TaskImageWrapper>
 
@@ -74,7 +74,7 @@ import BlogLink from '@theme/BlogLink';
 ### Criar tarefa `oocl_rotate_new`
 
 <PriceBlockWrap>
-  <PriceBlock title="ComplexImageTask" name="complexImage"/>
+  <PriceBlock title="ComplexImageTask" name="complex-rec_oocl_rotate_new"/>
 </PriceBlockWrap>
 
 Na solicitação, passamos duas imagens: fundo e círculo.
@@ -162,7 +162,7 @@ https://api.capmonster.cloud/getTaskResult
 ### Criar tarefa `oocl_rotate_double_new`
 
 <PriceBlockWrap>
-  <PriceBlock title="ComplexImageTask" name="complexImage"/>
+  <PriceBlock title="ComplexImageTask" name="complex-rec_oocl_rotate_double_new"/>
 </PriceBlockWrap>
 
 Na solicitação, passamos três imagens: fundo, anel, círculo.
@@ -254,7 +254,7 @@ https://api.capmonster.cloud/getTaskResult
 ### Criar tarefa `betpunch_3x3_rotate`
 
 <PriceBlockWrap>
-  <PriceBlock title="ComplexImageTask" name="complexImage"/>
+  <PriceBlock title="ComplexImageTask" name="complex-rec_betpunch_3x3_rotate request"/>
 </PriceBlockWrap>
 
 Na solicitação, passamos nove imagens. As imagens devem ser passadas na seguinte ordem:
