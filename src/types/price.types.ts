@@ -11,7 +11,8 @@ type FamilyName =
   | 'Text Captcha'
   | 'Binance'
   | 'ComplexImageTask Recaptcha'
-  | 'ComplexImageTask Recognition';
+  | 'ComplexImageTask Recognition'
+  | 'Temu';
 
 type ComplexId =
   | 'complex-rc2'
@@ -59,7 +60,8 @@ export type CaptchaTokenType =
   | 'prosopoToken'
   | 'complex-rec_oocl_rotate_new'
   | 'complex-rec_oocl_rotate_double_new'
-  | 'complex-rec_betpunch_3x3_rotate request';
+  | 'complex-rec_betpunch_3x3_rotate request'
+  | 'temuToken';
 
 type PriceType = 'token' | 'image' | 'answers' | 'dynamic';
 
