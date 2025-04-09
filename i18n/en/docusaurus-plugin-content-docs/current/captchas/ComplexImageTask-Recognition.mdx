@@ -444,6 +444,88 @@ We also pass the sought value TaskArgument in the metadata.
 	</MethodDescription>
 </TabItem>
 
+## shein
+### Create task `shein`
+
+<PriceBlockWrap>
+  <PriceBlock title="shein" name="complex-rec_oocl_rotate_new"/>
+</PriceBlockWrap>
+
+In the request, we pass one image in base64 format.
+
+<TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="method-panel">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+{
+		    "clientKey": "API_KEY",
+		    "task": {
+			"type": "ComplexImageTask",
+			"class": "recognition",
+			"imagesBase64": [
+			   "base64"
+			],
+			"metadata": {
+			    "Task": "shein"
+		        }
+	        }
+}
+		```
+
+		Example task:
+
+		![](./images/ComplexImageTask-Recognition/shein1.png)
+		![](./images/ComplexImageTask-Recognition/shein2.png)
+
+		**Response**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":143998457
+		}
+		```
+	</MethodDescription>
+</TabItem>
+
+### Get task result `shein`
+<TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="method-panel-full">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 143998457
+		}
+		```
+		**Response**
+		Coordinates to be clicked on in a specific order.  
+		```json
+{
+    "solution":
+	{
+	    "answer":[{"X":68.99999964,"Y":201.954889},{"X":127.99999783999999,"Y":281.54887104},{"X":181.00000776,"Y":49.894734680000006}],
+		"metadata":{"AnswerType":"Coordinate"}
+	},
+		"cost":0.0003,
+		"status":"ready",
+		"errorId":0,
+		"errorCode":null,
+		"errorDescription":null
+}
+		```
+	</MethodDescription>
+</TabItem>
+
 ## Use SDK Library
 	<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 		<TabItem value="js" label="JavaScript" default className="method-panel">
