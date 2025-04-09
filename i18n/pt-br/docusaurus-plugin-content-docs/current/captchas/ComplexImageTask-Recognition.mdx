@@ -445,6 +445,88 @@ Também passamos o valor buscado TaskArgument nos metadados.
 	</MethodDescription>
 </TabItem>
 
+## Shein
+### Criar tarefa `Shein`
+
+<PriceBlockWrap>
+  <PriceBlock title="Shein" name="complex-rec_oocl_rotate_new"/>
+</PriceBlockWrap>
+
+Na solicitação, passamos uma imagem no formato base64.
+
+<TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="method-panel">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Solicitação**
+		```json
+{
+    "clientKey": "API_KEY",
+    "task": {
+        "type": "ComplexImageTask",
+        "class": "recognition",
+        "imagesBase64": [
+            "base64"
+        ],
+        "metadata": {
+            "Task": "shein"
+        }
+    }
+}
+		```
+
+		Exemplo de tarefa:
+
+		![](./images/ComplexImageTask-Recognition/shein1.png)
+		![](./images/ComplexImageTask-Recognition/shein2.png)
+
+		**Resposta**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":143998457
+		}
+		```
+	</MethodDescription>
+</TabItem>
+
+### Obter resultado da tarefa `Shein`
+<TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="method-panel-full">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Solicitação**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 143998457
+		}
+		```
+		**Resposta**
+		Coordenadas a serem clicadas em uma ordem específica.  
+		```json
+{
+    "solution":
+	{
+	    "answer":[{"X":68.99999964,"Y":201.954889},{"X":127.99999783999999,"Y":281.54887104},{"X":181.00000776,"Y":49.894734680000006}],
+		"metadata":{"AnswerType":"Coordinate"}
+	},
+		"cost":0.0003,
+		"status":"ready",
+		"errorId":0,
+		"errorCode":null,
+		"errorDescription":null
+}
+		```
+	</MethodDescription>
+</TabItem>
+
 ## Usar biblioteca SDK
 	<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 		<TabItem value="js" label="JavaScript" default className="method-panel">

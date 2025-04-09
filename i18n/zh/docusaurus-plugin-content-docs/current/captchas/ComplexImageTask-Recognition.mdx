@@ -442,6 +442,88 @@ import BlogLink from '@theme/BlogLink';
 	</MethodDescription>
 </TabItem>
 
+## Shein
+### 创建任务 `Shein`
+
+<PriceBlockWrap>
+  <PriceBlock title="Shein" name="complex-rec_oocl_rotate_new"/>
+</PriceBlockWrap>
+
+在请求中，我们传递一张 base64 格式的图片。
+
+<TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="method-panel">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**要求**
+		```json
+{
+    "clientKey": "API_KEY",
+    "task": {
+        "type": "ComplexImageTask",
+        "class": "recognition",
+        "imagesBase64": [
+            "base64"
+        ],
+        "metadata": {
+            "Task": "shein"
+        }
+    }
+}
+		```
+
+		示例任务：
+
+		![](./images/ComplexImageTask-Recognition/shein1.png)
+		![](./images/ComplexImageTask-Recognition/shein2.png)
+
+		**回应**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":143998457
+		}
+		```
+	</MethodDescription>
+</TabItem>
+
+### 获取任务结果 `Shein`
+<TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="method-panel-full">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**要求**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 143998457
+		}
+		```
+		**回应**
+		按特定顺序点击的坐标。
+		```json
+{
+    "solution":
+	{
+	    "answer":[{"X":68.99999964,"Y":201.954889},{"X":127.99999783999999,"Y":281.54887104},{"X":181.00000776,"Y":49.894734680000006}],
+		"metadata":{"AnswerType":"Coordinate"}
+	},
+		"cost":0.0003,
+		"status":"ready",
+		"errorId":0,
+		"errorCode":null,
+		"errorDescription":null
+}
+		```
+	</MethodDescription>
+</TabItem>
+
 ## 使用 SDK 库
 	<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 		<TabItem value="js" label="JavaScript" default className="method-panel">
