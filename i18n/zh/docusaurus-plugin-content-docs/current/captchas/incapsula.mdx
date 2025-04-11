@@ -34,7 +34,7 @@ CapMonster Cloud 提供的 Imperva (Incapsula) 解决方案仅用于测试和分
     ---
 
     <ParamItem title="class" required type="string" />
-    **Imperva**
+    **Incapsula**
 
     ---
 
@@ -42,17 +42,13 @@ CapMonster Cloud 提供的 Imperva (Incapsula) 解决方案仅用于测试和分
     Incapsula 所在的主页面地址。 
 
     ---
-    <ParamItem title="metadata.incapsulaScriptBase64" required="required" type="string" />
-    `"incapsulaScriptBase64": "..."` - Incapsula JavaScript 脚本的 base64 编码内容。 要获取此值，您需要访问脚本页面： https://site.com/_Incapsula_Resource?SWJIYLWA=719...3&ns=1&cb=1...1
-	
-	![](./images/incapsula/incapsula1.png)
-	
-	此src加载的脚本内容必须以base64格式进行编码。 这将是参数 incapsulaScriptBase64 的值。
+    <ParamItem title="metadata.incapsulaScriptUrl" required="required" type="string" />
+    `"incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3"` - Incapsula JS 文件的名称。
 
     ---
 
-    <ParamItem title="metadata.incapsulaSessionCookie" required type="string" />
-	您从 Incapsula 获取的 Cookie。您可以在页面上使用 "document.cookie" 或在请求头 Set-Cookie: "incap_sess_*=..." 中获取
+    <ParamItem title="metadata.incapsulaCookie" required type="string" />
+    你从 Incapsula 获取的 cookies。可以通过在页面中使用 document.cookie 获取，或者在请求头中通过 Set-Cookie: "incap_sess_*=...; visid_incap_*=..." 获取（参见 /createTask 请求示例）。
 	
 	![](./images/incapsula/incapsula2.png)
 	
@@ -86,13 +82,13 @@ CapMonster Cloud 提供的 Imperva (Incapsula) 解决方案仅用于测试和分
 			"clientKey": "API_KEY",
 			"task": {
 				"type": "CustomTask",
-				"class": "Imperva",
+				"class": "Incapsula",
 				"websiteURL": "https://example.com",
 				"userAgent": "userAgentPlaceholder",
 				"metadata": {
-					"incapsulaScriptBase64": "dmFyIF8weGQ2ZmU9Wydce..eDUzXHg2YVx4NGYnKV09XzB4Mjk3MTIxO319KCkpOw==",
-					"incapsulaSessionCookie": "l/LsGnrvyB9lNhXI8borDKa2IGcAAAAAX0qAEHheCWuNDquzwb44cw=",
-                    			"reese84UrlEndpoint":"Built-with-the-For-hopence-Hurleysurfecting-the-"
+					"incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3",
+					"incapsulaCookies": "incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;",
+                                "reese84UrlEndpoint":"Built-with-the-For-hopence-Hurleysurfecting-the-"
 				}
 			}
 		}
@@ -165,8 +161,8 @@ Error 16 - 此错误与使用不符合要求地理位置的代理服务器有关
 				const impervaRequest = new ImpervaRequest({
 					websiteURL: 'https://example.com',
 					metadata: {
-						incapsulaScriptBase64: 'dmFyIF8weGQ2ZmU9Wydce..eDUzXHg2YV',
-						incapsulaSessionCookie: 'l/LsGnrvyB9lNhXI8borDKa2IGc',
+						"incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3",
+						"incapsulaCookies": "incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;",
 					},
 				});
 
@@ -190,8 +186,8 @@ Error 16 - 此错误与使用不符合要求地理位置的代理服务器有关
 				websiteUrl="https://example.com",  # URL with captcha
 				userAgent="userAgentPlaceholder",
 				metadata={
-					"incapsulaScriptBase64": "dmFyIF8weGQ2ZmU9Wydce..eDUzXHg2YVx4NGYnKV09XzB4Mjk3MTIxO319KCkpOw==",
-					"incapsulaSessionCookie": "l/LsGnrvyB9lNhXI8borDKa2IGcAAAAAX0qAEHheCWuNDquzwb44cw=",
+					"incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3",
+					"incapsulaCookies": "incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;",
 					"reese84UrlEndpoint": "Built-with-the-For-hopence-Hurleysurfecting-the-"
 				},
 			)
@@ -222,7 +218,7 @@ Error 16 - 此错误与使用不符合要求地理位置的代理服务器有关
 
 					var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
-					var impervaRequest = new ImpervaCustomTaskRequest(incapsulaScriptBase64: "dmFyIF8weGQ2ZmU9Wydce..eDUzXHg2YVx4NGYnKV09XzB4Mjk3MTIxO319KCkpOw==", incapsulaSessionCookie: "l/LsGnrvyB9lNhXI8borDKa2IGcAAAAAX0qAEHheCWuNDquzwb44cw=", reese84UrlEndpoint: "Built-with-the-For-hopence-Hurleysurfecting-the-")
+					var impervaRequest = new ImpervaCustomTaskRequest("incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3", "incapsulaCookies": "incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;", reese84UrlEndpoint: "Built-with-the-For-hopence-Hurleysurfecting-the-")
 					{
 						WebsiteUrl = "https://example.com",
 						UserAgent = "userAgentPlaceholder", // Use the current userAgent

@@ -36,7 +36,7 @@ The Imperva (Incapsula) solution, available in CapMonster Cloud, is provided exc
     ---
 
     <ParamItem title="class" required type="string" />
-    **Imperva**
+    **Incapsula**
 
     ---
 
@@ -44,17 +44,13 @@ The Imperva (Incapsula) solution, available in CapMonster Cloud, is provided exc
     The address of the main page where Incapsula is located. 
 
     ---
-    <ParamItem title="metadata.incapsulaScriptBase64" required="required" type="string" />
-    `"incapsulaScriptBase64": "..."` - the base64-encoded content of the Incapsula JavaScript script. To obtain this value, you need to go to the script page at https://site.com/_Incapsula_Resource?SWJIYLWA=719...3&ns=1&cb=1...1
-	
-	![](./images/incapsula/incapsula1.png)
-	
-	The script content loaded by this src must be encoded in base64 format. This will be the value for the parameter incapsulaScriptBase64.
+    <ParamItem title="metadata.incapsulaScriptUrl" required="required" type="string" />
+    `"incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3"` - Name of the Incapsula JS file.
 
     ---
 
-    <ParamItem title="metadata.incapsulaSessionCookie" required type="string" />
-	Your cookies from Incapsula. You can obtain them on the page using "document.cookie" or in the request header Set-Cookie: "incap_sess_*=..."
+    <ParamItem title="metadata.incapsulaCookie" required type="string" />
+    Your cookies from Incapsula. They can be obtained on the page using document.cookie or in the request header Set-Cookie: "incap_sess_*=...; visid_incap_*=..." (see the /createTask request example).
 	
 	![](./images/incapsula/incapsula2.png)
 	
@@ -88,13 +84,13 @@ The Imperva (Incapsula) solution, available in CapMonster Cloud, is provided exc
 			"clientKey": "API_KEY",
 			"task": {
 				"type": "CustomTask",
-				"class": "Imperva",
+				"class": "Incapsula",
 				"websiteURL": "https://example.com",
 				"userAgent": "userAgentPlaceholder",
 				"metadata": {
-					"incapsulaScriptBase64": "dmFyIF8weGQ2ZmU9Wydce..eDUzXHg2YVx4NGYnKV09XzB4Mjk3MTIxO319KCkpOw==",
-					"incapsulaSessionCookie": "l/LsGnrvyB9lNhXI8borDKa2IGcAAAAAX0qAEHheCWuNDquzwb44cw=",
-                    			"reese84UrlEndpoint":"Built-with-the-For-hopence-Hurleysurfecting-the-"
+					"incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3",
+					"incapsulaCookies": "incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;",
+                                "reese84UrlEndpoint":"Built-with-the-For-hopence-Hurleysurfecting-the-"
 				}
 			}
 		}
@@ -167,8 +163,8 @@ Error 16 - this error is related to the use of proxy servers that do not match t
 				const impervaRequest = new ImpervaRequest({
 					websiteURL: 'https://example.com',
 					metadata: {
-						incapsulaScriptBase64: 'dmFyIF8weGQ2ZmU9Wydce..eDUzXHg2YV',
-						incapsulaSessionCookie: 'l/LsGnrvyB9lNhXI8borDKa2IGc',
+						"incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3",
+						"incapsulaCookies": "incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;",
 					},
 				});
 
@@ -192,8 +188,8 @@ Error 16 - this error is related to the use of proxy servers that do not match t
 				websiteUrl="https://example.com",  # URL with captcha
 				userAgent="userAgentPlaceholder",
 				metadata={
-					"incapsulaScriptBase64": "dmFyIF8weGQ2ZmU9Wydce..eDUzXHg2YVx4NGYnKV09XzB4Mjk3MTIxO319KCkpOw==",
-					"incapsulaSessionCookie": "l/LsGnrvyB9lNhXI8borDKa2IGcAAAAAX0qAEHheCWuNDquzwb44cw=",
+					"incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3",
+					"incapsulaCookies": "incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;",
 					"reese84UrlEndpoint": "Built-with-the-For-hopence-Hurleysurfecting-the-"
 				},
 			)
@@ -224,7 +220,7 @@ Error 16 - this error is related to the use of proxy servers that do not match t
 
 					var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
-					var impervaRequest = new ImpervaCustomTaskRequest(incapsulaScriptBase64: "dmFyIF8weGQ2ZmU9Wydce..eDUzXHg2YVx4NGYnKV09XzB4Mjk3MTIxO319KCkpOw==", incapsulaSessionCookie: "l/LsGnrvyB9lNhXI8borDKa2IGcAAAAAX0qAEHheCWuNDquzwb44cw=", reese84UrlEndpoint: "Built-with-the-For-hopence-Hurleysurfecting-the-")
+					var impervaRequest = new ImpervaCustomTaskRequest("incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3", "incapsulaCookies": "incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;", reese84UrlEndpoint: "Built-with-the-For-hopence-Hurleysurfecting-the-")
 					{
 						WebsiteUrl = "https://example.com",
 						UserAgent = "userAgentPlaceholder", // Use the current userAgent
