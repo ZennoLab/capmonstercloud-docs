@@ -33,10 +33,10 @@ import BlogLink from '@theme/BlogLink';
 
 ## Параметры запроса
 
-<Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
-  <TabItem value="proxyless" label="RecaptchaV2TaskProxyless (без прокси)" default className="bordered-panel">
+  
+  <TabItem value="proxy" label="RecaptchaV2Task" className="bordered-panel">
     <ParamItem title="type" required type="string" />
-    **RecaptchaV2TaskProxyless**
+    **RecaptchaV2Task**
 
      ---
 
@@ -71,48 +71,9 @@ import BlogLink from '@theme/BlogLink';
     <ParamItem title="isInvisible" type="bool" />
     true, если капча невидимая, т.е. имеет скрытое поле для подтверждения, чекбокс отсутствует. При подозрении на бота вызывается дополнительная проверка.
 
-  </TabItem>
-  
-  <TabItem value="proxy" label="RecaptchaV2Task (при использовании прокси)" className="bordered-panel">
-    <ParamItem title="type" required type="string" />
-    **RecaptchaV2Task**
-
      ---
 
-    <ParamItem title="websiteURL" required type="string" />
-    Адрес страницы, на которой решается капча
-
-     ---
-
-    <ParamItem title="websiteKey" required type="string" />
-    Ключ-идентификатор ReCaptcha2 на целевой странице.
-	<br />`<div class="g-recaptcha" data-sitekey="THIS_ONE"></div>`
-
-     ---
-
-    <ParamItem title="recaptchaDataSValue" type="string" />
-    Некоторые реализации виджета ReCaptcha2 могут содержать дополнительный параметр "data-s" в div'е ReCaptcha2, который является одноразовым токеном и должен собираться каждый раз при решении ReCaptcha2.
-	<br />`<div class="g-recaptcha" data-sitekey="some sitekey" data-s="THIS_ONE"></div>`
-
-     ---
-
-    <ParamItem title="userAgent" type="string" />
-    User-Agent браузера, используемый в эмуляции. Необходимо использовать подпись современного браузера, иначе Google будет возвращать ошибку, требуя обновить браузер.
-
-     ---
-
-    <ParamItem title="cookies" type="string" />
-    <p>Дополнительные cookies, которые мы должны использовать во время взаимодействия с целевой страницей.</p>
-	<p>**Формат**: cookiename1=cookievalue1; cookiename2=cookievalue2</p>
-
-     ---
-
-    <ParamItem title="isInvisible" type="bool" />
-    true, если капча невидимая, т.е. имеет скрытое поле для подтверждения, чекбокс отсутствует. При подозрении на бота вызывается дополнительная проверка.
-
-     ---
-
-    <ParamItem title="proxyType" required type="string" />
+    <ParamItem title="proxyType" type="string" />
     **http** - обычный http/https прокси;<br />
 	**https** - попробуйте эту опцию только если "http" не работает (требуется для некоторых кастомных прокси);<br />
 	**socks4** - socks4 прокси;<br />
@@ -120,7 +81,7 @@ import BlogLink from '@theme/BlogLink';
 
      ---
 
-    <ParamItem title="proxyAddress" required type="string" />
+    <ParamItem title="proxyAddress" type="string" />
     <p>
       IP адрес прокси IPv4/IPv6. Не допускается:
 		- использование имен хостов;
@@ -130,7 +91,7 @@ import BlogLink from '@theme/BlogLink';
 
      ---
 
-    <ParamItem title="proxyPort" required type="integer" />
+    <ParamItem title="proxyPort" type="integer" />
     Порт прокси.
 
      ---
@@ -144,12 +105,11 @@ import BlogLink from '@theme/BlogLink';
     Пароль прокси-сервера.
 
   </TabItem>  
-</Tabs>
 
 ## Метод создания задачи
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-	<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (без прокси)" default className="method-panel">
+	<TabItem value="proxyless" label="RecaptchaV2Task (без прокси)" default className="method-panel">
 		<MethodItem>
 			```http
 			https://api.capmonster.cloud/createTask
@@ -161,7 +121,7 @@ import BlogLink from '@theme/BlogLink';
 			{
 			  "clientKey":"API_KEY",
 			  "task": {
-				"type":"RecaptchaV2TaskProxyless",
+				"type":"RecaptchaV2Task",
 				"websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
 				"websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"
 			  }
@@ -216,7 +176,7 @@ import BlogLink from '@theme/BlogLink';
 ## Метод получения результата задачи
 Используйте метод [getTaskResult](../api/methods/get-task-result.md) чтобы получить решение ReCaptcha2. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 10 с до 80 с.
 
-<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (без прокси)" default className="method-panel-full">
+<TabItem value="proxyless" label="RecaptchaV2Task (без прокси)" default className="method-panel-full">
 	<MethodItem>
 		```http
 		https://api.capmonster.cloud/getTaskResult
@@ -263,7 +223,7 @@ import BlogLink from '@theme/BlogLink';
       const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
       console.log(await cmcClient.getBalance());
 
-      const recaptchaV2Request = new RecaptchaV2ProxylessRequest({
+      const recaptchaV2Request = new RecaptchaV2Request({
         websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high',
         websiteKey: '6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd',
       });
@@ -288,11 +248,11 @@ import BlogLink from '@theme/BlogLink';
     ```python
     # https://github.com/ZennoLab/capmonstercloud-client-python
 
-    # ReСaptchaV2Proxyless:
+    # ReСaptchaV2:
 
     import asyncio
     from capmonstercloudclient import CapMonsterClient, ClientOptions
-    from capmonstercloudclient.requests import RecaptchaV2ProxylessRequest
+    from capmonstercloudclient.requests import RecaptchaV2Request
 
     client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonster Cloud API key
     cap_monster_client = CapMonsterClient(options=client_options)
@@ -342,7 +302,7 @@ import BlogLink from '@theme/BlogLink';
     ```csharp
     // https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
-    // ReСaptchaV2Proxyless:
+    // ReСaptchaV2:
 
     using Zennolab.CapMonsterCloud.Requests;
     using Zennolab.CapMonsterCloud;
@@ -358,7 +318,7 @@ import BlogLink from '@theme/BlogLink';
 
             var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
-            var recaptchaV2Request = new RecaptchaV2ProxylessRequest
+            var recaptchaV2Request = new RecaptchaV2Request
             {
                 WebsiteUrl = "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",  // URL with captcha
                 WebsiteKey = "6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",  // Replace with the correct website key

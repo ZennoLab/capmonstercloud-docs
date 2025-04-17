@@ -24,24 +24,6 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 
 ## Параметры запроса
 
-<Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
-  <TabItem value="proxyless" label="ProsopoTaskProxyless (без прокси)" default className="bordered-panel">
-  
-    <ParamItem title="type" required type="string" />
-    **ProsopoTaskProxyless**
-
-    ---
-
-    <ParamItem title="websiteURL" required type="string" />
-    Полный URL страницы с капчей.
-
-    ---
-
-    <ParamItem title="websiteKey" required type="string" />
-    Значение параметра `siteKey`, найденное на странице.
-
-  </TabItem>
-  
   <TabItem value="proxy" label="ProsopoTask (при использовании прокси)" className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **ProsopoTask**
@@ -58,7 +40,7 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 	
     ---
 
-    <ParamItem title="proxyType" required type="string" />
+    <ParamItem title="proxyType" type="string" />
     **http** - обычный http/https прокси;<br />
 	**https** - попробуйте эту опцию только если "http" не работает (требуется для некоторых кастомных прокси);<br />
 	**socks4** - socks4 прокси;<br />
@@ -66,7 +48,7 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 
     ---
 
-    <ParamItem title="proxyAddress" required type="string" />
+    <ParamItem title="proxyAddress" type="string" />
     <p>
       IP адрес прокси IPv4/IPv6. Не допускается:
 		- использование имен хостов;
@@ -76,7 +58,7 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 
     ---
 
-    <ParamItem title="proxyPort" required type="integer" />
+    <ParamItem title="proxyPort" type="integer" />
     Порт прокси.
 
     ---
@@ -90,12 +72,11 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
     Пароль прокси-сервера.
 
   </TabItem>
-</Tabs>
 
 
 ## Метод создания задачи
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-  <TabItem value="proxyless" label="ProsopoTaskProxyless (без прокси)" default className="method-panel">
+  <TabItem value="proxyless" label="ProsopoTask (без прокси)" default className="method-panel">
 	<MethodItem>
 		```http
 		https://api.capmonster.cloud/createTask
@@ -108,7 +89,7 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 			"clientKey": "API_KEY",
 			"task": 
 			{
-				"type": "ProsopoTaskProxyless",
+				"type": "ProsopoTask",
 				"websiteURL": "https://www.example.com",
 				"websiteKey": "5EZU3LG31uzq1Mwi8inwqxmfvFDpj7VzwDnZwj4Q3syyxBwV"
 			}

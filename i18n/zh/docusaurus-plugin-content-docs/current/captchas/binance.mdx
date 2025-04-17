@@ -24,33 +24,7 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 :::
 
 ## 请求参数
-<Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
-  <TabItem value="proxyless" label="BinanceTaskProxyless (无代理)" default className="bordered-panel">
-    <ParamItem title="type" required type="string" />
-    **BinanceTaskProxyless**
 
-    ---
-
-    <ParamItem title="websiteURL" required type="string" />
-    解决 CAPTCHA 的主页面地址。
-
-    ---
-
-    <ParamItem title="websiteKey" required type="string" />
-    您网站部分的唯一参数。参数 `bizId`、`bizType` 或 `bizCode` 的值。可以从流量中获取（请参见下面的描述）。
-
-    ---
-
-    <ParamItem title="validateId" required type="string" />
-    动态密钥。参数 `validateId`、`securityId` 或 `securityCheckResponseValidateId` 的值。可以从流量中获取（请参见下面的描述）。
-
-    ---
-
-    <ParamItem title="userAgent" type="string" />
-    浏览器的 User-Agent。**您可以提供自己的 User-Agent，或指定来自 Windows 操作系统的最新 User-Agent。**: `userAgentPlaceholder`
-
-  </TabItem>
-  
   <TabItem value="proxy" label="BinanceTask (使用代理)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **BinanceTask**
@@ -77,12 +51,12 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 	
 	 ---
 
-    <ParamItem title="proxyType" required type="string" />
+    <ParamItem title="proxyType" type="string" />
     **http** - 普通的 http/https 代理；<br />**https** - 仅在 "http" 不起作用时尝试（某些自定义代理服务器要求）；<br />**socks4** - socks4 代理；<br />**socks5** - socks5 代理。
 
      ---
 
-    <ParamItem title="proxyAddress" required type="string" />
+    <ParamItem title="proxyAddress" type="string" />
     <p>
 	  代理 IP 地址 IPv4/IPv6。不允许：
 		- 使用主机名；
@@ -92,7 +66,7 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 
      ---
 
-    <ParamItem title="proxyPort" required type="integer" />
+    <ParamItem title="proxyPort" type="integer" />
     代理端口。
 
      ---
@@ -106,7 +80,6 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
     代理密码。
 
   </TabItem>
-</Tabs>
 
 
 ### 如何获取 `websiteKey` 和 `validateId`
@@ -162,7 +135,7 @@ securityCheckResponseValidateId: "ff965ea6216b46f3825fa827ecaf297f"
 
 ## 创建任务方法
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-  <TabItem value="proxyless" label="BinanceTaskProxyless (无代理)" default className="method-panel">
+  <TabItem value="proxyless" label="BinanceTask (无代理)" default className="method-panel">
 	<MethodItem>
 		```http
 		https://api.capmonster.cloud/createTask
@@ -175,7 +148,7 @@ securityCheckResponseValidateId: "ff965ea6216b46f3825fa827ecaf297f"
 			"clientKey": "API_KEY",
 			"task": 
 			{
-				"type": "BinanceTaskProxyless",
+				"type": "BinanceTask",
 				"websiteURL": "https://example.com",
 				"websiteKey": "login",
 				"validateId": "cb0bfefa598b4c3887661fde54ecd57b",
@@ -270,13 +243,13 @@ securityCheckResponseValidateId: "ff965ea6216b46f3825fa827ecaf297f"
 			```js
 			// https://github.com/ZennoLab/capmonstercloud-client-js
 
-			import { CapMonsterCloudClientFactory, ClientOptions, BinanceProxylessRequest /*BinanceRequest*/ } from '@zennolab_com/capmonstercloud-client';
+			import { CapMonsterCloudClientFactory, ClientOptions, BinanceRequest /*BinanceRequest*/ } from '@zennolab_com/capmonstercloud-client';
 
 			document.addEventListener('DOMContentLoaded', async () => {
 				const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
 				console.log(await cmcClient.getBalance());
 				
-				const binanceRequest = new BinanceProxylessRequest({
+				const binanceRequest = new BinanceRequest({
 					websiteURL: 'https://example.com',
 					websiteKey: 'websiteKey',
 					validateId: 'validateId',

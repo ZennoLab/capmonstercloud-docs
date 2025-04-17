@@ -24,24 +24,6 @@ The token-based automatic CAPTCHA solving method Prosopo Procaptcha.
 
 ## Request parameters
 
-<Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
-  <TabItem value="proxyless" label="ProsopoTaskProxyless (without proxy)" default className="bordered-panel">
-
-    <ParamItem title="type" required type="string" />
-    **ProsopoTaskProxyless**
-
-    ---
-
-    <ParamItem title="websiteURL" required type="string" />
-    The full URL of the CAPTCHA page.
-
-    ---
-
-    <ParamItem title="websiteKey" required type="string" />
-    The value of the `siteKey` parameter found on the page.
-
-  </TabItem>
-
   <TabItem value="proxy" label="ProsopoTask (using proxy)" default className="bordered-panel">
 
     <ParamItem title="type" required type="string" />
@@ -59,12 +41,12 @@ The token-based automatic CAPTCHA solving method Prosopo Procaptcha.
 	
 	---
 
-    <ParamItem title="proxyType" required type="string" />
+    <ParamItem title="proxyType" type="string" />
     **http** - regular http/https proxy;<br />**https** - try this option only if "http" doesn't work (required for some custom proxies);<br />**socks4** - socks4 proxy;<br />**socks5** - socks5 proxy.
 	
 	---
 
-    <ParamItem title="proxyAddress" required type="string" />
+    <ParamItem title="proxyAddress" type="string" />
     <p>
       IPv4/IPv6 proxy IP address. Not allowed:
       - using of hostnames;
@@ -74,7 +56,7 @@ The token-based automatic CAPTCHA solving method Prosopo Procaptcha.
 
     ---
 
-    <ParamItem title="proxyPort" required type="integer" />
+    <ParamItem title="proxyPort" type="integer" />
     Proxy port.
 
     ---
@@ -88,13 +70,12 @@ The token-based automatic CAPTCHA solving method Prosopo Procaptcha.
     Proxy-server password.
 
   </TabItem>
-</Tabs>
 
 
 ## Create task method
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-  <TabItem value="proxyless" label="ProsopoTaskProxyless (without proxy)" default className="method-panel">
+  <TabItem value="proxyless" label="ProsopoTask (without proxy)" default className="method-panel">
 	<MethodItem>
 		```http
 		https://api.capmonster.cloud/createTask
@@ -107,7 +88,7 @@ The token-based automatic CAPTCHA solving method Prosopo Procaptcha.
 			"clientKey": "API_KEY",
 			"task": 
 			{
-				"type": "ProsopoTaskProxyless",
+				"type": "ProsopoTask",
 				"websiteURL": "https://www.example.com",
 				"websiteKey": "5EZU3LG31uzq1Mwi8inwqxmfvFDpj7VzwDnZwj4Q3syyxBwV"
 			}
