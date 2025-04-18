@@ -64,50 +64,6 @@ V4 (captcha_id = gt)
 
 ### <span style={{fontSize: '1.5rem'}}>Параметры запроса</span>
 
-<Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
-  <TabItem value="proxyless" label="GeeTestTaskProxyless (без прокси)" default className="bordered-panel">
-    <ParamItem title="type" required type="string" />
-    **GeeTestTaskProxyless**
-
-    ---
-
-    <ParamItem title="websiteURL" required type="string" />
-    Адрес страницы, на которой решается капча. Правильный Url всегда передается в Referer на запросе https://api-na.geetest.com/gettype.php?. Например: Мы находимся на https://example.com#login, но видим что фактически капча инициализируется не там, а на https://example.com.
-
-    ---
-
-    <ParamItem title="gt" required type="string" />
-    Ключ-идентификатор GeeTest `gt` для домена. Статическое значение, редко обновляется.
-	
-    ---
-
-    <ParamItem title="challenge" required="required only for V3" type="string" />
-    <p>Меняющийся ключ. <br />При каждом обращении к нашему API нужно получать новое значение ключа. Если капча загружена на странице, то значение `challenge` уже недействительно и вы получите в ответ [error](../api/api-errors.md) `ERROR_TOKEN_EXPIRED`. <br />За задачи с ошибкой `ERROR_TOKEN_EXPIRED` плата взимается как за успешно решённые задачи. <br />Нужно изучить запросы и найти тот, в котором возвращается это значение и перед каждым созданием задачи на распознавания выполнять этот запрос и парсить `challenge` из него. </p>
-
-    ---
-
-    <ParamItem title="version" type="integer" required="required only for V4"/>
-    3 
-
-    ---
-
-    <ParamItem title="geetestApiServerSubdomain" type="string" />
-    Поддомен сервера Geetest API (должен отличаться от api.geetest.com). 
-	<br />Необязательный параметр. Может потребоваться для некоторых сайтов.
-
-    ---
-
-    <ParamItem title="geetestGetLib" type="string" />
-    Путь к скрипту капчи для ее отображения на странице. 
-	<br />Необязательный параметр. Может потребоваться для некоторых сайтов. 
-	<br />Отправляйте JSON в виде строки.
-
-    ---
-
-    <ParamItem title="userAgent" type="string" />
-    User-Agent браузера, используемый для решения капчи.
-  </TabItem>
-  
   <TabItem value="proxy" label="GeeTestTask (при использовании прокси)" className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **GeeTestTask**
@@ -147,7 +103,7 @@ V4 (captcha_id = gt)
 
     ---
 
-    <ParamItem title="proxyType" required type="string" />
+    <ParamItem title="proxyType" type="string" />
     **http** - обычный http/https прокси;<br />
 	**https** - попробуйте эту опцию только если "http" не работает (требуется для некоторых кастомных прокси);<br />
 	**socks4** - socks4 прокси;<br />
@@ -155,7 +111,7 @@ V4 (captcha_id = gt)
 
     ---
 
-    <ParamItem title="proxyAddress" required type="string" />
+    <ParamItem title="proxyAddress" type="string" />
     <p>
       IP адрес прокси IPv4/IPv6. Не допускается:
 		- использование имен хостов;
@@ -165,7 +121,7 @@ V4 (captcha_id = gt)
 
     ---
 
-    <ParamItem title="proxyPort" required type="integer" />
+    <ParamItem title="proxyPort" type="integer" />
     Порт прокси.
 
     ---
@@ -184,13 +140,12 @@ V4 (captcha_id = gt)
     User-Agent браузера, используемый для решения капчи.
   </TabItem>
   
-</Tabs>
 
 
 ### <span style={{fontSize: '1.5rem'}}>Метод создания задачи</span>
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-	<TabItem value="proxyless" label="GeeTestTaskProxyless (без прокси)" default className="method-panel">
+	<TabItem value="proxyless" label="GeeTestTask (без прокси)" default className="method-panel">
 		<MethodItem>
 			```http
 			https://api.capmonster.cloud/createTask
@@ -203,7 +158,7 @@ V4 (captcha_id = gt)
 				"clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
 				"task":
 				{
-					"type":"GeeTestTaskProxyless",
+					"type":"GeeTestTask",
 					"websiteURL":"https://www.geetest.com/en/demo",
 					"gt":"022397c99c9f646f6477822485f30404",
 					"challenge":"7f044f48bc951ecfbfc03842b5e1fe59",
@@ -263,7 +218,7 @@ V4 (captcha_id = gt)
 
 ### <span style={{fontSize: '1.5rem'}}>Метод получения результата задачи</span>
 
-<TabItem value="proxyless" label="GeeTestTaskProxyless (без прокси)" default className="method-panel-full">
+<TabItem value="proxyless" label="GeeTestTask (без прокси)" default className="method-panel-full">
 	<MethodItem>
 		```http
 		https://api.capmonster.cloud/getTaskResult
@@ -309,13 +264,13 @@ V4 (captcha_id = gt)
     ```js
     // https://github.com/ZennoLab/capmonstercloud-client-js
 
-    import { CapMonsterCloudClientFactory, ClientOptions, GeeTestProxylessRequest, /*GeeTestRequest*/ } from '@zennolab_com/capmonstercloud-client';
+    import { CapMonsterCloudClientFactory, ClientOptions, GeeTestRequest, /*GeeTestRequest*/ } from '@zennolab_com/capmonstercloud-client';
 
     document.addEventListener('DOMContentLoaded', async () => {
       const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
       console.log(await cmcClient.getBalance());
 
-      const geetestV3Request = new GeeTestProxylessRequest({
+      const geetestV3Request = new GeeTestRequest({
         websiteURL: 'https://example.com/geetest.php',
         gt: '81dc9bdb52d04dc20036dbd8313ed055',
         challenge: 'd93591bdf7860e1e4ee2fca799911215',
@@ -342,16 +297,16 @@ V4 (captcha_id = gt)
     ```python
     # https://github.com/ZennoLab/capmonstercloud-client-python
 
-    # GeeTestV3Proxyless:
+    # GeeTestV3:
 
     import asyncio
     from capmonstercloudclient import CapMonsterClient, ClientOptions
-    from capmonstercloudclient.requests import GeetestProxylessRequest
+    from capmonstercloudclient.requests import GeetestRequest
 
     client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonsterCloud API key
     cap_monster_client = CapMonsterClient(options=client_options)
 
-    geetest_request = GeetestProxylessRequest(
+    geetest_request = GeetestRequest(
         websiteUrl="https://example.com",  # Website with the captcha
         gt="your_gt_value",  # Replace with the 'gt' parameter
         challenge="your_challenge_value"  # Replace with the 'challenge' parameter
@@ -398,7 +353,7 @@ V4 (captcha_id = gt)
     ```csharp
     // https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
-    // GeeTestV3Proxyless:
+    // GeeTestV3:
 
     using Zennolab.CapMonsterCloud.Requests;
     using Zennolab.CapMonsterCloud;
@@ -414,7 +369,7 @@ V4 (captcha_id = gt)
 
             var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
-            var geetestRequest = new GeeTestProxylessRequest
+            var geetestRequest = new GeeTestRequest
             {
                 WebsiteUrl = "https://example.com/demo/geetest", // URL with the captcha
                 Gt = "your_gt_value", // Replace with the actual gt value
@@ -484,51 +439,6 @@ V4 (captcha_id = gt)
 
 ### <span style={{fontSize: '1.5rem'}}>Параметры запроса</span>
 
-<Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
-  <TabItem value="proxyless" label="GeeTestTaskProxyless (без прокси)" default className="bordered-panel">
-    <ParamItem title="type" required type="string" />
-    **GeeTestTaskProxyless**
-
-    ---
-
-    <ParamItem title="websiteURL" required type="string" />
-    Адрес страницы, на которой решается капча.
-
-    ---
-
-    <ParamItem title="gt" required type="string" />
-	Ключ-идентификатор GeeTest для домена - параметр `captcha_id`.
-
-    ---
-
-    <ParamItem title="version" type="integer" required="required only for V4"/>
-	4
-	
-    ---
-
-    <ParamItem title="geetestApiServerSubdomain" type="string" />
-    Поддомен сервера Geetest API (должен отличаться от api.geetest.com). <br />
-	Необязательный параметр. Может потребоваться для некоторых сайтов.
-
-    ---
-
-    <ParamItem title="geetestGetLib" type="string" />
-    Путь к скрипту капчи для ее отображения на странице. <br /> 
-	Необязательный параметр. Может потребоваться для некоторых сайтов. <br />
-	Отправляйте JSON в виде строки.
-
-    ---
-
-    <ParamItem title="initParameters" type="object" />
-	Дополнительные параметры для 4 версии, используются вместе с “riskType” (тип капчи/характеристики ее проверки).
-
-    ---
-
-    <ParamItem title="userAgent" type="string" />
-    User-Agent браузера, используемый для решения капчи.
-	
-  </TabItem>
-  
   <TabItem value="proxy" label="GeeTestTask (при использовании прокси)" className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **GeeTestTask**
@@ -568,7 +478,7 @@ V4 (captcha_id = gt)
 
     ---
 
-    <ParamItem title="proxyType" required type="string" />
+    <ParamItem title="proxyType" type="string" />
     **http** - обычный http/https прокси; <br />
 	**https** - попробуйте эту опцию только если "http" не работает (требуется для некоторых кастомных прокси); <br />
 	**socks4** - socks4 прокси; <br />
@@ -576,7 +486,7 @@ V4 (captcha_id = gt)
 
     ---
 
-    <ParamItem title="proxyAddress" required type="string" />
+    <ParamItem title="proxyAddress" type="string" />
     <p>
       IP адрес прокси IPv4/IPv6. Не допускается:
 		- использование имен хостов;
@@ -586,7 +496,7 @@ V4 (captcha_id = gt)
 
     ---
 
-    <ParamItem title="proxyPort" required type="integer" />
+    <ParamItem title="proxyPort" type="integer" />
     Порт прокси.
 
     ---
@@ -604,15 +514,13 @@ V4 (captcha_id = gt)
     <ParamItem title="userAgent" type="string" />
     User-Agent браузера, используемый для решения капчи.
   </TabItem>
-  
-</Tabs>
 
 
 ### <span style={{fontSize: '1.5rem'}}>Метод создания задачи</span>
 
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-	<TabItem value="proxyless" label="GeeTestTaskProxyless (без прокси)" default className="method-panel">
+	<TabItem value="proxyless" label="GeeTestTask (без прокси)" default className="method-panel">
 		<MethodItem>
 			```http
 			https://api.capmonster.cloud/createTask
@@ -625,7 +533,7 @@ V4 (captcha_id = gt)
 				"clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
 				"task":
 				{
-					"type":"GeeTestTaskProxyless",
+					"type":"GeeTestTask",
 					"websiteURL":"https://gt4.geetest.com/",
 					"gt":"54088bb07d2df3c46b79f80300b0abbe",
 					"version": 4,
@@ -689,7 +597,7 @@ V4 (captcha_id = gt)
 
 ### <span style={{fontSize: '1.5rem'}}>Метод получения результата задачи</span>
 
-<TabItem value="proxyless" label="GeeTestTaskProxyless (без прокси)" default className="method-panel-full">
+<TabItem value="proxyless" label="GeeTestTask (без прокси)" default className="method-panel-full">
 	<MethodItem>
 		```http
 		https://api.capmonster.cloud/getTaskResult
@@ -748,13 +656,13 @@ input[name=captcha_output]</td>
     ```js
     // https://github.com/ZennoLab/capmonstercloud-client-js
 
-    import { CapMonsterCloudClientFactory, ClientOptions, GeeTestProxylessRequest, /*GeeTestRequest*/ } from '@zennolab_com/capmonstercloud-client';
+    import { CapMonsterCloudClientFactory, ClientOptions, GeeTestRequest, /*GeeTestRequest*/ } from '@zennolab_com/capmonstercloud-client';
 
     document.addEventListener('DOMContentLoaded', async () => {
       const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
       console.log(await cmcClient.getBalance());
 
-      const geetestV4Request = new GeeTestProxylessRequest({
+      const geetestV4Request = new GeeTestRequest({
         websiteURL: 'https://example.com/geetest.php',
         gt: '81dc9bdb52d04dc20036dbd8313ed055',
         challenge: 'd93591bdf7860e1e4ee2fca799911215',
@@ -789,15 +697,15 @@ input[name=captcha_output]</td>
     ```python
     # https://github.com/ZennoLab/capmonstercloud-client-python
 
-    # GeeTestV4Proxyless
+    # GeeTestV4
     import asyncio
     from capmonstercloudclient import CapMonsterClient, ClientOptions
-    from capmonstercloudclient.requests import GeetestProxylessRequest
+    from capmonstercloudclient.requests import GeetestRequest
 
     client_options = ClientOptions(api_key = "your_api_key")  # Replace with your CapMonsterCloud API key
     cap_monster_client = CapMonsterClient(options = client_options)
 
-    gee_test_request = GeetestProxylessRequest(
+    gee_test_request = GeetestRequest(
         websiteUrl    = "https://example.com/",  # Website with the captcha 
         gt            = "54088bb07d2df3c46b79f80300b0abbe",  
         version       = 4,  
@@ -849,7 +757,7 @@ input[name=captcha_output]</td>
     ```csharp
     // https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
-    // GeeTestV4Proxyless
+    // GeeTestV4
     using Zennolab.CapMonsterCloud.Requests;
     using Zennolab.CapMonsterCloud;
 
@@ -864,7 +772,7 @@ input[name=captcha_output]</td>
 
             var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
-            var geetestRequest = new GeeTestProxylessRequest
+            var geetestRequest = new GeeTestRequest
             {
                 WebsiteUrl = "https://example.com/", // Website with the captcha
                 Gt = "54088bb07d2df3c46b79f80300b0abbe",

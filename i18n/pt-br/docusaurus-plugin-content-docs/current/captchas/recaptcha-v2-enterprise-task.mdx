@@ -37,42 +37,6 @@ Se o proxy estiver autorizado por IP, certifique-se de adicionar 116.203.55.208 
 
 ## Parâmetros da solicitação
 
-<Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
-<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (sem proxy)" default className="bordered-panel">
-    <ParamItem title="type" required type="string" />
-    **RecaptchaV2EnterpriseTaskProxyless**
-
-    ---
-
-    <ParamItem title="websiteURL" required type="string" />
-    Endereço de uma página da web com o Google ReCaptcha Enterprise.
-
-    ---
-
-    <ParamItem title="websiteKey" required type="string" />
-    Chave do site do Recaptcha.<br />`<div class="g-recaptcha" data-sitekey="THIS_ONE"></div>`<br/>ou `<iframe title="reCAPTCHA" src="...;k=6LdIFr0ZAAAAAO3vz0O0OQrtAefzdJcWQM2TMYQH&amp;...` , onde `6LdIFr0ZAAAAAO3vz0O0OQrtAefzdJcWQM2TMYQH` é a `websiteKey`.
-
-    ---
-
-    <ParamItem title="enterprisePayload" type="string" />
-    Algumas implementações do widget reCAPTCHA Enterprise podem conter parâmetros adicionais que são passados ao método “grecaptcha.enterprise.render” junto com o sitekey. Por exemplo: `<pre lang="js" ><code>grecaptcha.enterprise.render("some-div-id", {<br /> sitekey: "6Lc_aCMTAAAAABx7u2N0D1XnVbI_v6ZdbM6rYf16"<br/> theme: "dark"<br/> s: "2JvUXHNTnZl1Jb6WEvbDyB...ugQA"<br/>});</code></pre>`
-
-    ---
-
-    <ParamItem title="apiDomain" type="string" />
-    <p>Endereço do domínio a partir do qual carregar o reCAPTCHA Enterprise. Por exemplo:<br/>- [www.google.com](http://www.google.com) <br />- [www.recaptcha.net](http://www.recaptcha.net)</p><p>Não utilize um parâmetro se você não souber por que ele é necessário.</p>
-
-    ---
-
-    <ParamItem title="userAgent" type="string" />
-    O User-Agent do navegador usado na emulação. É necessário utilizar uma assinatura de um navegador moderno; caso contrário, o Google pedirá para "atualizar seu navegador".
-
-    ---
-
-    <ParamItem title="cookies" type="string" />
-    <p>Cookies adicionais que devemos usar durante a interação com a página de destino ou com o Google.<br />**Formato**: cookiename1=cookievalue1; cookiename2=cookievalue2</p>
-
-  </TabItem>
   <TabItem value="proxy" label="RecaptchaV2EnterpriseTask (usando proxy)" className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **RecaptchaV2EnterpriseTask**
@@ -109,12 +73,12 @@ Se o proxy estiver autorizado por IP, certifique-se de adicionar 116.203.55.208 
 
     ---
 
-    <ParamItem title="proxyType" required type="string" />
+    <ParamItem title="proxyType" type="string" />
     **http** - proxy http/https regular;<br />**https** - tente essa opção apenas se "http" não funcionar (necessário para alguns proxies personalizados);<br />**socks4** - proxy socks4;<br />**socks5** - proxy socks5.
 
     ---
 
-    <ParamItem title="proxyAddress" required type="string" />
+    <ParamItem title="proxyAddress" type="string" />
     <p>
 	  Endereço IP do proxy IPv4/IPv6. Não é permitido:
       - usar nomes de host;
@@ -124,7 +88,7 @@ Se o proxy estiver autorizado por IP, certifique-se de adicionar 116.203.55.208 
 
     ---
 
-    <ParamItem title="proxyPort" required type="integer" />
+    <ParamItem title="proxyPort" type="integer" />
     Porta do proxy.
 
     ---
@@ -138,9 +102,8 @@ Se o proxy estiver autorizado por IP, certifique-se de adicionar 116.203.55.208 
     Senha do servidor proxy.
 
   </TabItem>
-  
-</Tabs>
 
+<br />
 Para `enterprisePayload` - antes de chamá-lo, você precisa substituir a função `grecaptcha.enterprise.render` pela sua própria e capturar o valor de seus parâmetros. A função existe após o carregamento do script, e o captcha geralmente é renderizado imediatamente ou com base em um evento da página. Se o captcha for renderizado com o campo `s` atual no cliente, o token provavelmente não será aceito. 
 A função original pode ser chamada sem o campo `s`.
 
@@ -192,7 +155,7 @@ Object.defineProperty(window, 'grecaptcha', {
 ## Criar método de tarefa
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (without proxy)" default className="method-panel">
+<TabItem value="proxyless" label="RecaptchaV2EnterpriseTask (without proxy)" default className="method-panel">
     <MethodItem>
       ```http
       https://api.capmonster.cloud/createTask
@@ -204,7 +167,7 @@ Object.defineProperty(window, 'grecaptcha', {
 {
   "clientKey":"API_KEY",
   "task": {
-    "type":"RecaptchaV2EnterpriseTaskProxyless",
+    "type":"RecaptchaV2EnterpriseTask",
     "websiteURL":"https://mydomain.com/page-with-recaptcha-enterprise",
     "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
     "enterprisePayload": {
@@ -306,13 +269,13 @@ https://api.capmonster.cloud/getTaskResult
     ```js
     // https://github.com/ZennoLab/capmonstercloud-client-js
 
-    import { CapMonsterCloudClientFactory, ClientOptions, RecaptchaV2EnterpriseProxylessRequest, /*RecaptchaV2EnterpriseRequest*/ } from '@zennolab_com/capmonstercloud-client';
+    import { CapMonsterCloudClientFactory, ClientOptions, RecaptchaV2EnterpriseRequest, /*RecaptchaV2EnterpriseRequest*/ } from '@zennolab_com/capmonstercloud-client';
 
     document.addEventListener('DOMContentLoaded', async () => {
       const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
       console.log(await cmcClient.getBalance());
 
-      const recaptchaV2EnterpriseRequest = new RecaptchaV2EnterpriseProxylessRequest({
+      const recaptchaV2EnterpriseRequest = new RecaptchaV2EnterpriseRequest({
         websiteURL: 'https://mydomain.com/page-with-recaptcha-enterprise',
         websiteKey: '6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd',
         enterprisePayload: {
@@ -345,16 +308,16 @@ https://api.capmonster.cloud/getTaskResult
     ```python
     # https://github.com/ZennoLab/capmonstercloud-client-python
 
-    # RecaptchaV2EnterpriseProxyless
+    # RecaptchaV2Enterprise
 
     import asyncio
     from capmonstercloudclient import CapMonsterClient, ClientOptions
-    from capmonstercloudclient.requests import RecaptchaV2EnterpriseProxylessRequest
+    from capmonstercloudclient.requests import RecaptchaV2EnterpriseRequest
 
     client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonster Cloud API key
     cap_monster_client = CapMonsterClient(options=client_options)
 
-    recaptcha2request = RecaptchaV2EnterpriseProxylessRequest(
+    recaptcha2request = RecaptchaV2EnterpriseRequest(
         websiteUrl="https://example.com",  # Website with the captcha
         websiteKey="6Lf26sUnAAAAAIKLuWNYgRsFUfmI-3Lex3xT5N-s",  # Replace with your websiteKey
         enterprisePayload={
@@ -406,7 +369,7 @@ https://api.capmonster.cloud/getTaskResult
     ```csharp
     // https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
-    // RecaptchaV2EnterpriseProxyless
+    // RecaptchaV2Enterprise
 
     using Zennolab.CapMonsterCloud.Requests;
     using Zennolab.CapMonsterCloud;
@@ -422,7 +385,7 @@ https://api.capmonster.cloud/getTaskResult
 
             var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
-            var recaptchaV2EnterpriseRequest = new RecaptchaV2EnterpriseProxylessRequest
+            var recaptchaV2EnterpriseRequest = new RecaptchaV2EnterpriseRequest
             {
                 WebsiteUrl = "https://example.com", // Website with the captcha
                 WebsiteKey = "6Lf26sUnAAAAAIKLuWNYgRsFUfmI-3Lex3xT5N-s", // Replace with your website key

@@ -24,33 +24,6 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 :::
 
 ## Parâmetros da solicitação
-<Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
-  <TabItem value="proxyless" label="BinanceTaskProxyless (sem proxy)" default className="bordered-panel">
-
-    <ParamItem title="type" required type="string" />
-    **BinanceTaskProxyless**
-
-    ---
-
-    <ParamItem title="websiteURL" required type="string" />
-    O endereço da página principal onde o CAPTCHA é resolvido.
-
-    ---
-
-    <ParamItem title="websiteKey" required type="string" />
-    Um parâmetro exclusivo para a seção do seu site. O valor do parâmetro `bizId`, `bizType` ou `bizCode`. Ele pode ser obtido a partir do tráfego (veja a descrição abaixo).
-
-    ---
-
-    <ParamItem title="validateId" required type="string" />
-    Uma chave dinâmica. O valor do parâmetro `validateId`, `securityId` ou `securityCheckResponseValidateId`. Ele pode ser obtido a partir do tráfego (veja a descrição abaixo).
-
-    ---
-
-    <ParamItem title="userAgent" type="string" />
-    User-Agent do navegador. **Você pode fornecer o seu próprio ou especificar o último UA do sistema operacional Windows.**: `userAgentPlaceholder`
-
-  </TabItem>
 
   <TabItem value="proxy" label="BinanceTask (com proxy)" default className="bordered-panel">
 
@@ -79,12 +52,12 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 	
 	---
 
-	<ParamItem title="proxyType" required type="string" />
+	<ParamItem title="proxyType" type="string" />
 	**http** - proxy regular http/https;<br />**https** - use essa opção apenas se "http" não funcionar (necessário para alguns proxies personalizados);<br />**socks4** - proxy socks4;<br />**socks5** - proxy socks5.
 
 	---
 
-	<ParamItem title="proxyAddress" required type="string" />
+	<ParamItem title="proxyAddress" type="string" />
 	<p>
 	Endereço IP do proxy IPv4/IPv6. Não permitido:
 	- uso de nomes de host;
@@ -94,7 +67,7 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 
 	---
 
-	<ParamItem title="proxyPort" required type="integer" />
+	<ParamItem title="proxyPort" type="integer" />
 	Porta do proxy.
 
 	---
@@ -108,7 +81,6 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 	Senha do servidor proxy.
 
   </TabItem>
-</Tabs>
 
 
 ### Como obter `websiteKey` e `validateId`
@@ -164,7 +136,7 @@ Em seguida, você pode recuperar os parâmetros, por exemplo, da seguinte forma 
 
 ## Criar método de tarefa
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-  <TabItem value="proxyless" label="BinanceTaskProxyless (sem proxy)" default className="method-panel">
+  <TabItem value="proxyless" label="BinanceTask (sem proxy)" default className="method-panel">
 	<MethodItem>
 		```http
 		https://api.capmonster.cloud/createTask
@@ -177,7 +149,7 @@ Em seguida, você pode recuperar os parâmetros, por exemplo, da seguinte forma 
 			"clientKey": "API_KEY",
 			"task": 
 			{
-				"type": "BinanceTaskProxyless",
+				"type": "BinanceTask",
 				"websiteURL": "https://example.com",
 				"websiteKey": "login",
 				"validateId": "cb0bfefa598b4c3887661fde54ecd57b",
@@ -272,13 +244,13 @@ Use o método [getTaskResult](../api/methods/get-task-result.md) para obter a so
 			```js
 			// https://github.com/ZennoLab/capmonstercloud-client-js
 
-			import { CapMonsterCloudClientFactory, ClientOptions, BinanceProxylessRequest /*BinanceRequest*/ } from '@zennolab_com/capmonstercloud-client';
+			import { CapMonsterCloudClientFactory, ClientOptions, BinanceRequest /*BinanceRequest*/ } from '@zennolab_com/capmonstercloud-client';
 
 			document.addEventListener('DOMContentLoaded', async () => {
 				const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
 				console.log(await cmcClient.getBalance());
 				
-				const binanceRequest = new BinanceProxylessRequest({
+				const binanceRequest = new BinanceRequest({
 					websiteURL: 'https://example.com',
 					websiteKey: 'websiteKey',
 					validateId: 'validateId',
