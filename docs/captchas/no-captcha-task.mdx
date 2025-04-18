@@ -217,7 +217,7 @@ import BlogLink from '@theme/BlogLink';
     ```js
     // https://github.com/ZennoLab/capmonstercloud-client-js
 
-    import { CapMonsterCloudClientFactory, ClientOptions, RecaptchaV2ProxylessRequest, /*RecaptchaV2Request*/ } from '@zennolab_com/capmonstercloud-client';
+    import { CapMonsterCloudClientFactory, ClientOptions, RecaptchaV2Request, /*RecaptchaV2Request*/ } from '@zennolab_com/capmonstercloud-client';
 
     document.addEventListener('DOMContentLoaded', async () => {
       const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
@@ -257,7 +257,7 @@ import BlogLink from '@theme/BlogLink';
     client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonster Cloud API key
     cap_monster_client = CapMonsterClient(options=client_options)
 
-    recaptcha2request = RecaptchaV2ProxylessRequest(
+    recaptcha2request = RecaptchaV2Request(
         websiteUrl="https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",  # URL with captcha
         websiteKey="6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"  # Replace with the correct website key
     )
