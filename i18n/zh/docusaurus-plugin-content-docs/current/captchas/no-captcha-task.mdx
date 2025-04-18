@@ -30,42 +30,7 @@ import BlogLink from '@theme/BlogLink';
 :::
 
 ## 对象结构
-<Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
-  <TabItem value="proxyless" label="RecaptchaV2TaskProxyless (无代理)" default className="bordered-panel">
-    <ParamItem title="type" required type="string" />
-    **RecaptchaV2TaskProxyless**
 
-     ---
-
-    <ParamItem title="websiteURL" required type="string" />
-    带有验证码的网页地址。
-
-     ---
-
-    <ParamItem title="websiteKey" required type="string" />
-    ReCaptcha 网站密钥。<br />`<div class="g-recaptcha" data-sitekey="THIS_ONE"></div>`
-
-     ---
-
-    <ParamItem title="recaptchaDataSValue" type="string" />
-    某些自定义实现可能包含 ReCaptcha2 div 中的额外 "data-s" 参数，实际上是一次性令牌，每次解决 ReCaptcha2 都必须获取。<br />`<div class="g-recaptcha" data-sitekey="some sitekey" data-s="THIS_ONE"></div>`
-
-     ---
-
-    <ParamItem title="userAgent" type="string" />
-    用于仿真的浏览器用户代理。必须使用现代浏览器的签名，否则 Google 将要求您 "更新您的浏览器"。
-
-     ---
-
-    <ParamItem title="cookies" type="string" />
-    <p>额外的 Cookie，我们在与目标页面或谷歌的交互过程中必须使用</p><p>**格式**：cookiename1=cookievalue1; cookiename2=cookievalue2</p>
-
-     ---
-
-    <ParamItem title="isInvisible" type="bool" />
-    "true" 如果验证码是隐形的，即没有确认复选框，而是有一个隐藏字段。如果怀疑是机器人，则进行额外检查。
-
-  </TabItem>
   <TabItem value="proxy" label="RecaptchaV2Task (使用代理)" className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **RecaptchaV2Task**
@@ -102,12 +67,12 @@ import BlogLink from '@theme/BlogLink';
 
      ---
 
-    <ParamItem title="proxyType" required type="string" />
+    <ParamItem title="proxyType" type="string" />
     **http** - 普通的 http/https 代理；<br />**https** - 仅在 "http" 不起作用时尝试（某些自定义代理服务器要求）；<br />**socks4** - socks4 代理；<br />**socks5** - socks5 代理。
 
      ---
 
-    <ParamItem title="proxyAddress" required type="string" />
+    <ParamItem title="proxyAddress" type="string" />
     <p>
 	  代理 IP 地址 IPv4/IPv6。不允许：
 		- 使用主机名；
@@ -117,7 +82,7 @@ import BlogLink from '@theme/BlogLink';
 
      ---
 
-    <ParamItem title="proxyPort" required type="integer" />
+    <ParamItem title="proxyPort" type="integer" />
     代理端口。
 
      ---
@@ -131,13 +96,12 @@ import BlogLink from '@theme/BlogLink';
     代理密码。
 
   </TabItem>  
-</Tabs>
 
 
 ## 创建任务方法
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-  <TabItem value="proxyless" label="RecaptchaV2TaskProxyless (无代理)" default className="method-panel">
+  <TabItem value="proxyless" label="RecaptchaV2Task (无代理)" default className="method-panel">
     <MethodItem>
       ```http
       https://api.capmonster.cloud/createTask
@@ -149,7 +113,7 @@ import BlogLink from '@theme/BlogLink';
 		{
 		  "clientKey":"API_KEY",
 		  "task": {
-			"type":"RecaptchaV2TaskProxyless",
+			"type":"RecaptchaV2Task",
 			"websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
 			"websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"
 		  }
@@ -202,7 +166,7 @@ import BlogLink from '@theme/BlogLink';
 ## 获取任务结果方法
 使用[getTaskResult](../api/methods/get-task-result.md)方法请求 ReCaptcha2 的答案。您将在服务工作负载下的10到80秒内收到响应。
 
-<TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
+<TabItem value="proxyless" label="RecaptchaV2Task (without proxy)" default className="method-panel-full">
     <MethodItem>
 		```http
 		https://api.capmonster.cloud/getTaskResult
@@ -243,13 +207,13 @@ import BlogLink from '@theme/BlogLink';
     ```js
     // https://github.com/ZennoLab/capmonstercloud-client-js
 
-    import { CapMonsterCloudClientFactory, ClientOptions, RecaptchaV2ProxylessRequest, /*RecaptchaV2Request*/ } from '@zennolab_com/capmonstercloud-client';
+    import { CapMonsterCloudClientFactory, ClientOptions, RecaptchaV2Request, /*RecaptchaV2Request*/ } from '@zennolab_com/capmonstercloud-client';
 
     document.addEventListener('DOMContentLoaded', async () => {
       const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
       console.log(await cmcClient.getBalance());
 
-      const recaptchaV2Request = new RecaptchaV2ProxylessRequest({
+      const recaptchaV2Request = new RecaptchaV2Request({
         websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high',
         websiteKey: '6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd',
       });
@@ -274,16 +238,16 @@ import BlogLink from '@theme/BlogLink';
     ```python
     # https://github.com/ZennoLab/capmonstercloud-client-python
 
-    # ReСaptchaV2Proxyless:
+    # ReСaptchaV2:
 
     import asyncio
     from capmonstercloudclient import CapMonsterClient, ClientOptions
-    from capmonstercloudclient.requests import RecaptchaV2ProxylessRequest
+    from capmonstercloudclient.requests import RecaptchaV2Request
 
     client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonster Cloud API key
     cap_monster_client = CapMonsterClient(options=client_options)
 
-    recaptcha2request = RecaptchaV2ProxylessRequest(
+    recaptcha2request = RecaptchaV2Request(
         websiteUrl="https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",  # URL with captcha
         websiteKey="6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"  # Replace with the correct website key
     )
@@ -328,7 +292,7 @@ import BlogLink from '@theme/BlogLink';
     ```csharp
     // https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
-    // ReСaptchaV2Proxyless:
+    // ReСaptchaV2:
 
     using Zennolab.CapMonsterCloud.Requests;
     using Zennolab.CapMonsterCloud;
@@ -344,7 +308,7 @@ import BlogLink from '@theme/BlogLink';
 
             var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
-            var recaptchaV2Request = new RecaptchaV2ProxylessRequest
+            var recaptchaV2Request = new RecaptchaV2Request
             {
                 WebsiteUrl = "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",  // URL with captcha
                 WebsiteKey = "6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",  // Replace with the correct website key

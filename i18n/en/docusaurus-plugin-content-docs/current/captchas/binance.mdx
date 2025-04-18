@@ -27,34 +27,6 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 
 ## Request parameters
 
-<Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
-  <TabItem value="proxyless" label="BinanceTaskProxyless (without proxy)" default className="bordered-panel">
-
-    <ParamItem title="type" required type="string" />
-    **BinanceTaskProxyless**
-
-    ---
-
-    <ParamItem title="websiteURL" required type="string" />
-    The address of the main page where the captcha is solved.
-
-    ---
-
-    <ParamItem title="websiteKey" required type="string" />
-    A unique parameter for your website's section. The value of the parameter `bizId`, `bizType`, or `bizCode`. It can be taken from the traffic (see the description below).
-
-    ---
-
-    <ParamItem title="validateId" required type="string" />
-    A dynamic key. The value of the parameter `validateId`, `securityId`, or `securityCheckResponseValidateId`. It can be taken from the traffic (see the description below).
-
-    ---
-
-    <ParamItem title="userAgent" type="string" />
-    The browser's User-Agent. **You can provide your own or specify the latest UA from Windows OS.**: `userAgentPlaceholder`
-
-  </TabItem>
-
   <TabItem value="proxy" label="BinanceTask (using proxy)" default className="bordered-panel">
 
     <ParamItem title="type" required type="string" />
@@ -82,12 +54,12 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 	
 	 ---
 
-    <ParamItem title="proxyType" required type="string" />
+    <ParamItem title="proxyType" type="string" />
     **http** - regular http/https proxy;<br />**https** - try this option only if "http" doesn't work (required for some custom proxies);<br />**socks4** - socks4 proxy;<br />**socks5** - socks5 proxy.
 	
 	 ---
 
-    <ParamItem title="proxyAddress" required type="string" />
+    <ParamItem title="proxyAddress" type="string" />
     <p>
       IPv4/IPv6 proxy IP address. Not allowed:
       - using of hostnames;
@@ -97,7 +69,7 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 
      ---
 
-    <ParamItem title="proxyPort" required type="integer" />
+    <ParamItem title="proxyPort" type="integer" />
     Proxy port.
 
      ---
@@ -111,7 +83,6 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
     Proxy-server password.
 
   </TabItem>
-</Tabs>
 
 
 ### How to obtain `websiteKey` and `validateId`
@@ -168,7 +139,7 @@ Then, you can retrieve the parameters, for example, like this `BCaptchaData.secu
 ## Create task method
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-  <TabItem value="proxyless" label="BinanceTaskProxyless (without proxy)" default className="method-panel">
+  <TabItem value="proxyless" label="BinanceTask (without proxy)" default className="method-panel">
 	<MethodItem>
 		```http
 		https://api.capmonster.cloud/createTask
@@ -181,7 +152,7 @@ Then, you can retrieve the parameters, for example, like this `BCaptchaData.secu
 			"clientKey": "API_KEY",
 			"task": 
 			{
-				"type": "BinanceTaskProxyless",
+				"type": "BinanceTask",
 				"websiteURL": "https://example.com",
 				"websiteKey": "login",
 				"validateId": "cb0bfefa598b4c3887661fde54ecd57b",
@@ -276,13 +247,13 @@ Use the method [getTaskResult](../api/methods/get-task-result.md) to obtain the 
 			```js
 			// https://github.com/ZennoLab/capmonstercloud-client-js
 
-			import { CapMonsterCloudClientFactory, ClientOptions, BinanceProxylessRequest /*BinanceRequest*/ } from '@zennolab_com/capmonstercloud-client';
+			import { CapMonsterCloudClientFactory, ClientOptions, BinanceRequest /*BinanceRequest*/ } from '@zennolab_com/capmonstercloud-client';
 
 			document.addEventListener('DOMContentLoaded', async () => {
 				const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
 				console.log(await cmcClient.getBalance());
 				
-				const binanceRequest = new BinanceProxylessRequest({
+				const binanceRequest = new BinanceRequest({
 					websiteURL: 'https://example.com',
 					websiteKey: 'websiteKey',
 					validateId: 'validateId',
