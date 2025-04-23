@@ -1,15 +1,19 @@
 ﻿---
 sidebar_position: 6
-sidebar_label: Setting a write-off threshold
+sidebar_label: Setting the confidence threshold for text CAPTCHA recognition
 title: "Setting the threshold for charging money during captcha recognition"
 description: "Learn how to set the Capmonster Cloud captcha recognition and traversal service to a threshold of system confidence in the answer, below which money is not deducted."
 ---
 
-# Setting a write-off threshold
+# Setting the confidence threshold for text CAPTCHA recognition
 
 ## How to set confidence threshold in response below which money won't be charged
 
 In *CapMonster.Cloud* captchas acceptance depends on its complexity. Clients pay only for correctly solved captchas.
+
+:::warning **Please note!**
+The **recognizingThreshold** parameter applies only to **ImageToTextTask** (text captchas). For other types of captchas (ReCaptcha, Turnstile, etc.) this parameter is not used and does not affect the result.
+:::
 
 In order for CapMonster.cloud to return a guaranteed correct result, you can pass along with the captcha recognition request also a **recognizingThreshold** parameter with a value between 0 and 100. This parameter allows you to set the threshold of the system's confidence in the correct answer for the captcha and determines the minimum value below which money will not be deducted from the balance. 
 
@@ -36,6 +40,10 @@ https://api.capmonster.cloud/createTask
 ```
 ---
 In this case, if the parameter is equal to 70, then only answers in which our system is more than 70% sure will be returned, otherwise will be returned error: “**ERROR_CAPTCHA_UNSOLVABLE**”
+
+:::info
+The confidence threshold is an internal metric used by the system to assess the likelihood that the recognized text is correct. The higher the threshold, the more accurate the responses, but the more frequently tasks may be considered unsolvable (ERROR_CAPTCHA_UNSOLVABLE).
+:::
 
 Another way to pass a threshold is to use only the field to specify the ApiKey. You can add threshold information in the following format: `{apikey}__recognizingthreshold_{value}`
 
