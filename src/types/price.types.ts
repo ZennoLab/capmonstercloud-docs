@@ -1,7 +1,7 @@
 type FamilyName =
   | 'reCAPTCHA'
   | 'GeeTest'
-  | 'Cloudflare Turnstile / Bot Challenge'
+  | `Cloudflare Turnstile / \nBot Challenge`
   | 'DataDome'
   | 'Tencent captcha'
   | 'Amazon Waf'
