@@ -23,7 +23,7 @@ const reCaptchaKeyMap = {
 
 const commonTokenKeyMap = {
   GeeTest: 'geeTestToken',
-  'Cloudflare Turnstile / Bot Challenge': 'turnstileToken',
+  [`Cloudflare Turnstile / \nBot Challenge`]: 'turnstileToken',
   'Faucet Pay': 'basiliskToken',
   DataDome: 'dataDomeToken',
   'Amazon Waf': 'amazonToken',
