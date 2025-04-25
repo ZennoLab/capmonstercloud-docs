@@ -23,7 +23,7 @@ const reCaptchaKeyMap = {
 
 const commonTokenKeyMap = {
   GeeTest: 'geeTestToken',
-  [`Cloudflare Turnstile / \nBot Challenge`]: 'turnstileToken',
+  'Cloudflare Turnstile': 'turnstileToken',
   'Faucet Pay': 'basiliskToken',
   DataDome: 'dataDomeToken',
   'Amazon Waf': 'amazonToken',
@@ -32,7 +32,7 @@ const commonTokenKeyMap = {
   Prosopo: 'prosopoToken',
   'Text Captcha': 'textCaptchaToken',
   Binance: 'binanceToken',
-  Temu: 'temuToken'
+  Temu: 'temuToken',
 } as const;
 
 const complexImageTaskRecaptchaMap = {
