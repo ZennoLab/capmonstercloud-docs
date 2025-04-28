@@ -31,7 +31,7 @@ export default function Prices() {
               <div className={styles.priceTitle}>FunCaptcha</div>
             </div>
             <div className={styles.priceTypes}>
-              <div className={styles.priceType}>
+              {/* <div className={styles.priceType}>
                 <div className={styles.priceTypeTitle}>
                   <span>{priceForCount}</span>
                   <img src="/img/image-icon.svg" />
@@ -39,7 +39,7 @@ export default function Prices() {
                 <div className={styles.itemPrice}>
                   $0.15
                 </div>
-              </div>
+              </div> */}
               <div className={styles.priceType}>
                 <div className={styles.priceTypeTitle}>
                   <span>{priceForCount}</span>
