@@ -82,23 +82,23 @@ const config = {
           srcDark: 'img/logo_landing_dark.svg'
         },
         items: [
-          {
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
-            position: 'left',
-            label: 'Документация',
-          },
-          {
-            href: 'https://brocapgpt.com',
-            label: 'BroCapGPT',
-            position: 'left',
-          },
+          // {
+          //   type: 'docSidebar',
+          //   sidebarId: 'tutorialSidebar',
+          //   position: 'left',
+          //   label: 'Документация',
+          // },
+          // {
+          //   href: 'https://brocapgpt.com',
+          //   label: 'BroCapGPT',
+          //   position: 'left',
+          // },
 
-          {
-            href: 'https://brocapgpt.com/sign-in',
-            label: 'Панель управления',
-            position: 'left',
-          },
+          // {
+          //   href: 'https://brocapgpt.com/sign-in',
+          //   label: 'Панель управления',
+          //   position: 'left',
+          // },
 
           // {
           //   href: 'https://brocapgpt.com',
