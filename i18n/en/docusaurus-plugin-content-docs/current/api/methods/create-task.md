@@ -55,26 +55,6 @@ Web address for sending the captcha task result. Data is sent by POST request.<b
 ```
   </details>
 
-  <details>
-    <summary>Solving ComplexImageTask</summary>
-
-```json
-    {
-		"clientKey":"67b6bcbb1a728ea8d563de6d169a2057",
-		"task": 
-		{
-			"type": "ComplexImageTask",
-			"class": "funcaptcha",
-			"imageUrls":[ "https://i.postimg.cc/s2ZDrHXy/fc1.jpg" ],
-			"metadata": 
-			{
-			  "Task": "Pick the image that is the correct way up"
-			},
-			"userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
-		}
-	}
-```
-  </details>
 
 -----
 ## **Response structure**
