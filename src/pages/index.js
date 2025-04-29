@@ -40,7 +40,7 @@ export default function Home() {
         <MainHero />
         {/* <Libraries /> */}
         <Prices />
-        <Links />
+        {/* <Links /> */}
         <Footer />
       </main>
     </Layout>
