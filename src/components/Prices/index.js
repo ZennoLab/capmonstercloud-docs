@@ -66,9 +66,9 @@ export default function Prices() {
                 <div className={styles.successParam}>95%</div>
               </div>
             </div>
-            <a href="https://brocapgpt.com/sign-up" className={styles.btn}>
+            {/* <a href="https://brocapgpt.com/sign-up" className={styles.btn}>
               {btnText}
-            </a>
+            </a> */}
           </div>
         </div>
       </div>
