@@ -86,6 +86,10 @@ description: "Передача имени модуля для распознав
             <td align="center">whatsapp</td>
             <td align="center">![](images\module-name\whatsapp.png)</td>
         </tr>
+		<tr>
+            <td align="center">wikimedia_paddle_ensemble</td>
+            <td align="center">![](images\module-name\wikimedia.png)</td>
+        </tr>
         <tr>
             <td align="center">yandex</td>
             <td align="center">![](images\module-name\yandex.png)</td>
