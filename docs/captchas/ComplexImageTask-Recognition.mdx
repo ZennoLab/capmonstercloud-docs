@@ -51,6 +51,12 @@ import BlogLink from '@theme/BlogLink';
     </TaskImage>
     <TaskImageText title="shein" name="complex-rec_oocl_rotate_new" />
   </TaskImageBlock>
+  <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#baidu">
+    <TaskImage>
+      ![](./images/ComplexImageTask-Recognition/baidu_img.png)
+    </TaskImage>
+    <TaskImageText title="baidu" name="complex-rec_oocl_rotate_new" />
+  </TaskImageBlock>
 </TaskImageWrapper>
 
 ## Параметры запроса
@@ -525,6 +531,86 @@ import BlogLink from '@theme/BlogLink';
 		"errorCode":null,
 		"errorDescription":null
 }
+		```
+	</MethodDescription>
+</TabItem>
+
+## baidu
+### Создание задачи `baidu`
+
+<PriceBlockWrap>
+  <PriceBlock title="baidu" name="complex-rec_oocl_rotate_new"/>
+</PriceBlockWrap>
+
+В запросе передаем одно изображение в формате base64.
+
+<TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Запрос**
+		```json
+		{
+			"clientKey": "API_KEY",
+			"task": 
+			{
+				"type": "ComplexImageTask",
+				"class": "recognition",
+				"imagesBase64": ["base64"],
+				"metadata": {
+					"Task": "baidu"
+				}
+			}
+		}
+		```
+
+		Примеры задания:
+
+		![](./images/ComplexImageTask-Recognition/baidu.png)
+
+		**Ответ**
+		```json
+		{
+			"errorId":0,
+			"taskId":143998457
+		}
+		```
+	</MethodDescription>
+</TabItem>
+
+### Получение результата задачи `baidu`
+<TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel-full">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Запрос**
+		```json
+		{
+			"clientKey":"API_KEY",
+			"taskId": 143998457
+		}
+		```
+		**Ответ**
+		Градусы, на которые необходимо повернуть картинку по часовой стрелке.
+		```json
+		{
+			"solution":
+			{
+				"answer":[297],
+				"metadata":{"AnswerType":"NumericArray"}
+			},
+			"cost":0.0005,
+			"status":"ready",
+			"errorId":0,
+			"errorCode":null,
+			"errorDescription":null
+		}
 		```
 	</MethodDescription>
 </TabItem>

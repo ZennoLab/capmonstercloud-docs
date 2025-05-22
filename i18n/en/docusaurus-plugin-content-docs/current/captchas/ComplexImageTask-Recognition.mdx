@@ -51,6 +51,12 @@ import BlogLink from '@theme/BlogLink';
     </TaskImage>
     <TaskImageText title="shein" name="complex-rec_oocl_rotate_new" />
   </TaskImageBlock>
+  <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#baidu">
+    <TaskImage>
+      ![](./images/ComplexImageTask-Recognition/baidu_img.png)
+    </TaskImage>
+    <TaskImageText title="baidu" name="complex-rec_oocl_rotate_new" />
+  </TaskImageBlock>
 </TaskImageWrapper>
 
 ## Request parameters
@@ -168,7 +174,6 @@ In the request we pass two images: background and circle.
 ### Create task `oocl_rotate_double_new`
 
 <PriceBlockWrap>
-  <PriceBlock title="ComplexImageTask" name="complex-rec_oocl_rotate_double_new"/>
   <PriceBlock title="ComplexImageTask" name="complex-rec_oocl_rotate_double_new"/>
 </PriceBlockWrap>
 
@@ -528,6 +533,86 @@ In the request, we pass one image in base64 format.
 		"errorCode":null,
 		"errorDescription":null
 }
+		```
+	</MethodDescription>
+</TabItem>
+
+## baidu
+### Create task `baidu`
+
+<PriceBlockWrap>
+  <PriceBlock title="baidu" name="complex-rec_oocl_rotate_new"/>
+</PriceBlockWrap>
+
+In the request, we pass one image in base64 format.
+
+<TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="method-panel">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+			"clientKey": "API_KEY",
+			"task": 
+			{
+				"type": "ComplexImageTask",
+				"class": "recognition",
+				"imagesBase64": ["base64"],
+				"metadata": {
+					"Task": "baidu"
+				}
+			}
+		}
+		```
+
+		Example task:
+
+		![](./images/ComplexImageTask-Recognition/baidu.png)
+
+		**Response**
+		```json
+		{
+			"errorId":0,
+			"taskId":143998457
+		}
+		```
+	</MethodDescription>
+</TabItem>
+
+### Get task result `baidu`
+<TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="method-panel-full">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+			"clientKey":"API_KEY",
+			"taskId": 143998457
+		}
+		```
+		**Response**
+		The degrees by which the image needs to be rotated clockwise.  
+		```json
+		{
+			"solution":
+			{
+				"answer":[297],
+				"metadata":{"AnswerType":"NumericArray"}
+			},
+			"cost":0.0005,
+			"status":"ready",
+			"errorId":0,
+			"errorCode":null,
+			"errorDescription":null
+		}
 		```
 	</MethodDescription>
 </TabItem>
