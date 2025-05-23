@@ -15,7 +15,6 @@ import LayoutProvider from '@theme/Layout/Provider';
 import ErrorPageContent from '@theme/ErrorPageContent';
 import { useUpdateHeaderLinks } from '../../utils/useUpdateHeaderLinks';
 import styles from './styles.module.css';
-import { waitForTelegram } from '../../utils/waitForTelegram';
 
 export default function Layout(props) {
   const {
@@ -28,49 +27,6 @@ export default function Layout(props) {
   } = props;
   useKeyboardNavigation();
   useUpdateHeaderLinks();
-
-  useEffect(() => {
-    const updateBackButtonVisibility = () => {
-      if (window.history.length <= 1) {
-        Telegram.BackButton.hide();
-      } else {
-        Telegram.BackButton.show();
-      }
-    };
-    waitForTelegram().then((tg) => {
-      const Telegram = tg.WebApp;
-
-      Telegram.ready();
-      Telegram.BackButton.show();
-
-      const handleBackClick = () => {
-        window.history.back();
-      };
-
-      Telegram.BackButton.onClick(handleBackClick);
-
-      const updateBackButtonVisibility = () => {
-        if (window.history.length <= 1) {
-          Telegram.BackButton.hide();
-        } else {
-          Telegram.BackButton.show();
-        }
-      };
-
-      window.addEventListener('popstate', updateBackButtonVisibility);
-      updateBackButtonVisibility(); // Initial check
-    }).catch((err) => console.error(err));
-  
-    return () => {
-      if (window.Telegram?.WebApp) {
-        window.Telegram?.WebApp.BackButton.offClick(handleBackClick);
-        window.removeEventListener('popstate', updateBackButtonVisibility);
-        window.Telegram?.WebApp.BackButton.hide();
-      }
-    };
-  }, []);
-
-
   
   return (
     <LayoutProvider>
