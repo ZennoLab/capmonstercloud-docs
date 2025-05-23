@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import ErrorBoundary from '@docusaurus/ErrorBoundary';
 import {
@@ -26,6 +26,46 @@ export default function Layout(props) {
   } = props;
   useKeyboardNavigation();
   useUpdateHeaderLinks();
+
+  useEffect(() => {
+    // Check if running in Telegram Mini App
+    if (window.Telegram?.WebApp) {
+      const Telegram = window.Telegram.WebApp;
+
+      // Initialize the Telegram Web App
+      Telegram.ready();
+
+      // Show the back button
+      Telegram.BackButton.show();
+
+      // Handle back button click
+      const handleBackClick = () => {
+        window.history.back();
+      };
+
+      Telegram.BackButton.onClick(handleBackClick);
+
+      // Hide back button on first page (no history to go back to)
+      const updateBackButtonVisibility = () => {
+        if (window.history.length <= 1) {
+          Telegram.BackButton.hide();
+        } else {
+          Telegram.BackButton.show();
+        }
+      };
+
+      // Update visibility on page navigation
+      window.addEventListener('popstate', updateBackButtonVisibility);
+      updateBackButtonVisibility(); // Initial check
+
+      // Cleanup on component unmount
+      return () => {
+        Telegram.BackButton.offClick(handleBackClick);
+        window.removeEventListener('popstate', updateBackButtonVisibility);
+        Telegram.BackButton.hide();
+      };
+    }
+  }, []);
 
   return (
     <LayoutProvider>
