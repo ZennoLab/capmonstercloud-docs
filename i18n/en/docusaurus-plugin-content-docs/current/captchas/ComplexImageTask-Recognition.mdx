@@ -1,15 +1,15 @@
 ---
 sidebar_position: 7
 sidebar_label: ComplexImageTask Recognition
-title: "Recognise and solve captchas with complex images - ComplexImageTask | API"
-description: "Use the ComplexImageTask method to automatically recognise and solve (bypass) complex captchas via the Capmonster Cloud API."
+title: 'Recognise and solve captchas with complex images - ComplexImageTask | API'
+description: 'Use the ComplexImageTask method to automatically recognise and solve (bypass) complex captchas via the Capmonster Cloud API.'
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ParamItem from '@theme/ParamItem';
 import MethodItem from '@theme/MethodItem';
-import MethodDescription from '@theme/MethodDescription'
+import MethodDescription from '@theme/MethodDescription';
 import PriceBlock from '../../../../../src/theme/PriceBlock';
 import PriceBlockWrap from '@theme/PriceBlockWrap';
 import TaskImageWrapper from '@theme/TaskImageWrapper';
@@ -22,44 +22,33 @@ import BlogLink from '@theme/BlogLink';
 
 <TaskImageWrapper>
   <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#oocl_rotate_new">
-    <TaskImage>
-      ![](./images/ComplexImageTask-Recognition/oocl_img.png)
-    </TaskImage>
+    <TaskImage>![](./images/ComplexImageTask-Recognition/oocl_img.png)</TaskImage>
     <TaskImageText title="Oocl_rotate_new" name="complex-rec_oocl_rotate_new" />
   </TaskImageBlock>
   <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#oocl_rotate_double_new">
-    <TaskImage>
-      ![](./images/ComplexImageTask-Recognition/oocl_rotate_img.png)
-    </TaskImage>
+    <TaskImage>![](./images/ComplexImageTask-Recognition/oocl_rotate_img.png)</TaskImage>
     <TaskImageText title="Oocl_rotate_double_new" name="complex-rec_oocl_rotate_double_new" />
   </TaskImageBlock>
   <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#betpunch_3x3_rotate">
-    <TaskImage>
-      ![](./images/ComplexImageTask-Recognition/betpunch_img.png)
-    </TaskImage>
-    <TaskImageText title="Betpunch_3x3_rotate request"  name="complex-rec_betpunch_3x3_rotate request" />
+    <TaskImage>![](./images/ComplexImageTask-Recognition/betpunch_img.png)</TaskImage>
+    <TaskImageText title="Betpunch_3x3_rotate request" name="complex-rec_betpunch_3x3_rotate request" />
   </TaskImageBlock>
   <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#bls">
-    <TaskImage>
-      ![](./images/ComplexImageTask-Recognition/bls_img.png)
-    </TaskImage>
+    <TaskImage>![](./images/ComplexImageTask-Recognition/bls_img.png)</TaskImage>
     <TaskImageText title="Bls" name="bls" />
   </TaskImageBlock>
   <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#shein">
-    <TaskImage>
-      ![](./images/ComplexImageTask-Recognition/shein3.png)
-    </TaskImage>
+    <TaskImage>![](./images/ComplexImageTask-Recognition/shein3.png)</TaskImage>
     <TaskImageText title="shein" name="complex-rec_oocl_rotate_new" />
   </TaskImageBlock>
   <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#baidu">
-    <TaskImage>
-      ![](./images/ComplexImageTask-Recognition/baidu_img.png)
-    </TaskImage>
-    <TaskImageText title="baidu" name="complex-rec_oocl_rotate_new" />
+    <TaskImage>![](./images/ComplexImageTask-Recognition/baidu_img.png)</TaskImage>
+    <TaskImageText title="baidu" name="complex-rec_baidu" />
   </TaskImageBlock>
 </TaskImageWrapper>
 
 ## Request parameters
+
 <TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **ComplexImageTask**
@@ -84,10 +73,11 @@ import BlogLink from '@theme/BlogLink';
 </TabItem>
 
 ## oocl_rotate_new
+
 ### Create task `oocl_rotate_new`
 
 <PriceBlockWrap>
-  <PriceBlock title="ComplexImageTask" name="complex-rec_oocl_rotate_new"/>
+  <PriceBlock title="ComplexImageTask" name="complex-rec_oocl_rotate_new" />
 </PriceBlockWrap>
 
 In the request we pass two images: background and circle.
@@ -117,24 +107,24 @@ In the request we pass two images: background and circle.
 		}
 		```
 
-		Background example (*background_base64*):
+    	Background example (*background_base64*):
 
-		![](./images/ComplexImageTask-Recognition/ex1.png)
+    	![](./images/ComplexImageTask-Recognition/ex1.png)
 
-		Circle example (*circle_base64*):
+    	Circle example (*circle_base64*):
 
-		![](./images/ComplexImageTask-Recognition/ex2.png)
+    	![](./images/ComplexImageTask-Recognition/ex2.png)
 
-		**Response**
-		```json
-		{
-		  "errorId":0,
-		  "taskId":407533072
-		}
-		```
-	</MethodDescription>
+    	**Response**
+    	```json
+    	{
+    	  "errorId":0,
+    	  "taskId":407533072
+    	}
+    	```
+    </MethodDescription>
+
 </TabItem>
-
 
 ### Get task result `oocl_rotate_new`
 
@@ -171,13 +161,15 @@ In the request we pass two images: background and circle.
 </TabItem>
 
 ## oocl_rotate_double_new
+
 ### Create task `oocl_rotate_double_new`
 
 <PriceBlockWrap>
-  <PriceBlock title="ComplexImageTask" name="complex-rec_oocl_rotate_double_new"/>
+  <PriceBlock title="ComplexImageTask" name="complex-rec_oocl_rotate_double_new" />
 </PriceBlockWrap>
 
 In the request we pass three images: background, ring, circle.
+
 <TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel">
 	<MethodItem>
 		```http
@@ -204,28 +196,28 @@ In the request we pass three images: background, ring, circle.
 		}
 		```
 
-		Background (*background_base64*):
+    	Background (*background_base64*):
 
-		![](./images/ComplexImageTask-Recognition/ex3.png)
+    	![](./images/ComplexImageTask-Recognition/ex3.png)
 
-		Ring (*ring_base64*):
+    	Ring (*ring_base64*):
 
-		![](./images/ComplexImageTask-Recognition/ex4.png)
+    	![](./images/ComplexImageTask-Recognition/ex4.png)
 
-		Circle (*circle_base64*):
+    	Circle (*circle_base64*):
 
-		![](./images/ComplexImageTask-Recognition/ex5.png)
+    	![](./images/ComplexImageTask-Recognition/ex5.png)
 
-		**Response**
-		```json
-		{
-		  "errorId":0,
-		  "taskId":407533072
-		}
-		```
-	</MethodDescription>
+    	**Response**
+    	```json
+    	{
+    	  "errorId":0,
+    	  "taskId":407533072
+    	}
+    	```
+    </MethodDescription>
+
 </TabItem>
-
 
 ### Get task result `oocl_rotate_double_new`
 
@@ -262,10 +254,11 @@ In the request we pass three images: background, ring, circle.
 </TabItem>
 
 ## betpunch_3x3_rotate
+
 ### Create task `betpunch_3x3_rotate`
 
 <PriceBlockWrap>
-  <PriceBlock title="ComplexImageTask" name="complex-rec_betpunch_3x3_rotate request"/>
+  <PriceBlock title="ComplexImageTask" name="complex-rec_betpunch_3x3_rotate request" />
 </PriceBlockWrap>
 
 In the request we pass nine images. The images must be passed in the following order:
@@ -303,16 +296,16 @@ In the request we pass nine images. The images must be passed in the following o
 		}
 		```
 
-		**Response**
-		```json
-		{
-		  "errorId":0,
-		  "taskId":407533072
-		}
-		```
-	</MethodDescription>
-</TabItem>
+    	**Response**
+    	```json
+    	{
+    	  "errorId":0,
+    	  "taskId":407533072
+    	}
+    	```
+    </MethodDescription>
 
+</TabItem>
 
 ### Get task result `betpunch_3x3_rotate`
 
@@ -349,16 +342,17 @@ In the request we pass nine images. The images must be passed in the following o
 </TabItem>
 
 ## bls
+
 ### Create task `bls`
 
 <PriceBlockWrap>
-  <PriceBlock title="Bls" name="bls"/>
+  <PriceBlock title="Bls" name="bls" />
 </PriceBlockWrap>
 
-In the request, we send 9 images in base64 format. 
+In the request, we send 9 images in base64 format.
 We also pass the sought value TaskArgument in the metadata.
 
-<BlogLink url="https://capmonster.cloud/en/blog/news/bls-solve-extension"/>
+<BlogLink url="https://capmonster.cloud/en/blog/news/bls-solve-extension" />
 
 <TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="method-panel">
 	<MethodItem>
@@ -394,35 +388,37 @@ We also pass the sought value TaskArgument in the metadata.
 		}
 		```
 
-		Example task:
+    	Example task:
 
-		![](./images/ComplexImageTask-Recognition/bls.png)
+    	![](./images/ComplexImageTask-Recognition/bls.png)
 
-		Send images converted to base64:
-		
-		![](./images/ComplexImageTask-Recognition/image1.gif)
-		![](./images/ComplexImageTask-Recognition/image2.gif)
-		![](./images/ComplexImageTask-Recognition/image3.gif)
-		![](./images/ComplexImageTask-Recognition/image4.gif)
-		![](./images/ComplexImageTask-Recognition/image5.gif)
-		![](./images/ComplexImageTask-Recognition/image6.gif)
-		![](./images/ComplexImageTask-Recognition/image7.gif)
-		![](./images/ComplexImageTask-Recognition/image8.gif)
-		![](./images/ComplexImageTask-Recognition/image9.gif)
-		
-		For this example: "TaskArgument": "546"
+    	Send images converted to base64:
 
-		**Response**
-		```json
-		{
-		  "errorId":0,
-		  "taskId":143998457
-		}
-		```
-	</MethodDescription>
+    	![](./images/ComplexImageTask-Recognition/image1.gif)
+    	![](./images/ComplexImageTask-Recognition/image2.gif)
+    	![](./images/ComplexImageTask-Recognition/image3.gif)
+    	![](./images/ComplexImageTask-Recognition/image4.gif)
+    	![](./images/ComplexImageTask-Recognition/image5.gif)
+    	![](./images/ComplexImageTask-Recognition/image6.gif)
+    	![](./images/ComplexImageTask-Recognition/image7.gif)
+    	![](./images/ComplexImageTask-Recognition/image8.gif)
+    	![](./images/ComplexImageTask-Recognition/image9.gif)
+
+    	For this example: "TaskArgument": "546"
+
+    	**Response**
+    	```json
+    	{
+    	  "errorId":0,
+    	  "taskId":143998457
+    	}
+    	```
+    </MethodDescription>
+
 </TabItem>
 
 ### Get task result `bls`
+
 <TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="method-panel-full">
 	<MethodItem>
 		```http
@@ -456,10 +452,11 @@ We also pass the sought value TaskArgument in the metadata.
 </TabItem>
 
 ## shein
+
 ### Create task `shein`
 
 <PriceBlockWrap>
-  <PriceBlock title="shein" name="complex-rec_oocl_rotate_new"/>
+  <PriceBlock title="shein" name="complex-rec_oocl_rotate_new" />
 </PriceBlockWrap>
 
 In the request, we pass one image in base64 format.
@@ -488,22 +485,24 @@ In the request, we pass one image in base64 format.
 }
 		```
 
-		Example task:
+    	Example task:
 
-		![](./images/ComplexImageTask-Recognition/shein1.png)
-		![](./images/ComplexImageTask-Recognition/shein2.png)
+    	![](./images/ComplexImageTask-Recognition/shein1.png)
+    	![](./images/ComplexImageTask-Recognition/shein2.png)
 
-		**Response**
-		```json
-		{
-		  "errorId":0,
-		  "taskId":143998457
-		}
-		```
-	</MethodDescription>
+    	**Response**
+    	```json
+    	{
+    	  "errorId":0,
+    	  "taskId":143998457
+    	}
+    	```
+    </MethodDescription>
+
 </TabItem>
 
 ### Get task result `shein`
+
 <TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="method-panel-full">
 	<MethodItem>
 		```http
@@ -538,10 +537,11 @@ In the request, we pass one image in base64 format.
 </TabItem>
 
 ## baidu
+
 ### Create task `baidu`
 
 <PriceBlockWrap>
-  <PriceBlock title="baidu" name="complex-rec_oocl_rotate_new"/>
+  <PriceBlock title="baidu" name="complex-rec_baidu" />
 </PriceBlockWrap>
 
 In the request, we pass one image in base64 format.
@@ -569,21 +569,23 @@ In the request, we pass one image in base64 format.
 		}
 		```
 
-		Example task:
+    	Example task:
 
-		![](./images/ComplexImageTask-Recognition/baidu.png)
+    	![](./images/ComplexImageTask-Recognition/baidu.png)
 
-		**Response**
-		```json
-		{
-			"errorId":0,
-			"taskId":143998457
-		}
-		```
-	</MethodDescription>
+    	**Response**
+    	```json
+    	{
+    		"errorId":0,
+    		"taskId":143998457
+    	}
+    	```
+    </MethodDescription>
+
 </TabItem>
 
 ### Get task result `baidu`
+
 <TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="method-panel-full">
 	<MethodItem>
 		```http
@@ -618,65 +620,66 @@ In the request, we pass one image in base64 format.
 </TabItem>
 
 ## Use SDK Library
-	<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-		<TabItem value="js" label="JavaScript" default className="method-panel">
-			```js
-			// https://github.com/ZennoLab/capmonstercloud-client-js
 
-			import { CapMonsterCloudClientFactory, ClientOptions, ComplexImageTaskRecognitionRequest } from '@zennolab_com/capmonstercloud-client';
+    <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+    	<TabItem value="js" label="JavaScript" default className="method-panel">
+    		```js
+    		// https://github.com/ZennoLab/capmonstercloud-client-js
 
-			document.addEventListener('DOMContentLoaded', async () => {
-				const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
-				console.log(await cmcClient.getBalance());
-				
-				const citRecognitionRequest = new ComplexImageTaskRecognitionRequest({
-					imagesBase64: ['/9xwee/'],
-					metaData: { Task: 'oocl_rotate' },
-				});
+    		import { CapMonsterCloudClientFactory, ClientOptions, ComplexImageTaskRecognitionRequest } from '@zennolab_com/capmonstercloud-client';
 
-				console.log(await cmcClient.Solve(citRecognitionRequest));
-			});
-			```
-		</TabItem>
-		
-		<TabItem value="csharp" label="C#" className="method-panel">
-			```csharp
-			// https://github.com/ZennoLab/capmonstercloud-client-dotnet
+    		document.addEventListener('DOMContentLoaded', async () => {
+    			const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+    			console.log(await cmcClient.getBalance());
 
-			using Zennolab.CapMonsterCloud.Requests;
-			using Zennolab.CapMonsterCloud;
+    			const citRecognitionRequest = new ComplexImageTaskRecognitionRequest({
+    				imagesBase64: ['/9xwee/'],
+    				metaData: { Task: 'oocl_rotate' },
+    			});
 
-			class Program
-			{
-				static async Task MainComplexImageTaskRecognition(string[] args)
-				{
-					var clientOptions = new ClientOptions
-					{
-						ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
-					};
+    			console.log(await cmcClient.Solve(citRecognitionRequest));
+    		});
+    		```
+    	</TabItem>
 
-					var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+    	<TabItem value="csharp" label="C#" className="method-panel">
+    		```csharp
+    		// https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
-					var recognitionCITRequest = new RecognitionComplexImageTaskRequest
-					{
-						ImagesBase64 = new List<string>
-						{
-							"/9j/4AAQSkZJRgABAQEAAAAAAAD…"
-						},
-						Metadata = new RecognitionComplexImageTaskRequest.RecognitionMetadata
-						{
-							Task = "oocl_rotate_new"
-						}
-					};
+    		using Zennolab.CapMonsterCloud.Requests;
+    		using Zennolab.CapMonsterCloud;
 
-					var recognitionCITResult = await cmCloudClient.SolveAsync(recognitionCITRequest);
+    		class Program
+    		{
+    			static async Task MainComplexImageTaskRecognition(string[] args)
+    			{
+    				var clientOptions = new ClientOptions
+    				{
+    					ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
+    				};
 
-					if(recognitionCITResult.Solution.Answer.IsGrid)
-						Console.WriteLine("Captcha Solution: " + recognitionCITResult.Solution.Answer.GridAnswer);
-					else if (recognitionCITResult.Solution.Answer.IsNumeric)
-						Console.WriteLine("Captcha Solution: " + recognitionCITResult.Solution.Answer.NumericAnswer);
-				}
-			}
-			```
-		</TabItem>
-	</Tabs>
+    				var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+    				var recognitionCITRequest = new RecognitionComplexImageTaskRequest
+    				{
+    					ImagesBase64 = new List<string>
+    					{
+    						"/9j/4AAQSkZJRgABAQEAAAAAAAD…"
+    					},
+    					Metadata = new RecognitionComplexImageTaskRequest.RecognitionMetadata
+    					{
+    						Task = "oocl_rotate_new"
+    					}
+    				};
+
+    				var recognitionCITResult = await cmCloudClient.SolveAsync(recognitionCITRequest);
+
+    				if(recognitionCITResult.Solution.Answer.IsGrid)
+    					Console.WriteLine("Captcha Solution: " + recognitionCITResult.Solution.Answer.GridAnswer);
+    				else if (recognitionCITResult.Solution.Answer.IsNumeric)
+    					Console.WriteLine("Captcha Solution: " + recognitionCITResult.Solution.Answer.NumericAnswer);
+    			}
+    		}
+    		```
+    	</TabItem>
+    </Tabs>
