@@ -15,6 +15,8 @@ import LayoutProvider from '@theme/Layout/Provider';
 import ErrorPageContent from '@theme/ErrorPageContent';
 import { useUpdateHeaderLinks } from '../../utils/useUpdateHeaderLinks';
 import styles from './styles.module.css';
+import { waitForTelegram } from '../../utils/waitForTelegram';
+
 export default function Layout(props) {
   const {
     children,
@@ -28,24 +30,25 @@ export default function Layout(props) {
   useUpdateHeaderLinks();
 
   useEffect(() => {
-    // Check if running in Telegram Mini App
-    if (window.Telegram?.WebApp) {
-      const Telegram = window.Telegram.WebApp;
+    const updateBackButtonVisibility = () => {
+      if (window.history.length <= 1) {
+        Telegram.BackButton.hide();
+      } else {
+        Telegram.BackButton.show();
+      }
+    };
+    waitForTelegram().then((tg) => {
+      const Telegram = tg.WebApp;
 
-      // Initialize the Telegram Web App
       Telegram.ready();
-
-      // Show the back button
       Telegram.BackButton.show();
 
-      // Handle back button click
       const handleBackClick = () => {
         window.history.back();
       };
 
       Telegram.BackButton.onClick(handleBackClick);
 
-      // Hide back button on first page (no history to go back to)
       const updateBackButtonVisibility = () => {
         if (window.history.length <= 1) {
           Telegram.BackButton.hide();
@@ -54,23 +57,23 @@ export default function Layout(props) {
         }
       };
 
-      // Update visibility on page navigation
       window.addEventListener('popstate', updateBackButtonVisibility);
       updateBackButtonVisibility(); // Initial check
-
-      // Cleanup on component unmount
-      return () => {
-        Telegram.BackButton.offClick(handleBackClick);
+    }).catch((err) => console.error(err));
+  
+    return () => {
+      if (window.Telegram?.WebApp) {
+        window.Telegram?.WebApp.BackButton.offClick(handleBackClick);
         window.removeEventListener('popstate', updateBackButtonVisibility);
-        Telegram.BackButton.hide();
-      };
-    }
+        window.Telegram?.WebApp.BackButton.hide();
+      }
+    };
   }, []);
 
+
+  
   return (
     <LayoutProvider>
-      <script src="//code.tidio.co/zudj8rvfoimbts4749iizjx5hhztv8xg.js" async></script>
-
       <PageMetadata title={title} description={description} />
 
       <SkipToContent />
