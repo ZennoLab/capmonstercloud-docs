@@ -7,7 +7,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ParamItem from '@theme/ParamItem';
 import MethodItem from '@theme/MethodItem';
-import MethodDescription from '@theme/MethodDescription'
+import MethodDescription from '@theme/MethodDescription';
 import PriceBlock from '../../../../../src/theme/PriceBlock';
 import PriceBlockWrap from '@theme/PriceBlockWrap';
 import TaskImageWrapper from '@theme/TaskImageWrapper';
@@ -20,38 +20,33 @@ import BlogLink from '@theme/BlogLink';
 
 <TaskImageWrapper>
   <TaskImageBlock link="/zh/docs/captchas/ComplexImageTask-Recognition#oocl_rotate_new">
-    <TaskImage>
-      ![](./images/ComplexImageTask-Recognition/oocl_img.png)
-    </TaskImage>
+    <TaskImage>![](./images/ComplexImageTask-Recognition/oocl_img.png)</TaskImage>
     <TaskImageText title="Oocl_rotate_new" name="complex-rec_oocl_rotate_new" />
   </TaskImageBlock>
   <TaskImageBlock link="/zh/docs/captchas/ComplexImageTask-Recognition#oocl_rotate_double_new">
-    <TaskImage>
-      ![](./images/ComplexImageTask-Recognition/oocl_rotate_img.png)
-    </TaskImage>
+    <TaskImage>![](./images/ComplexImageTask-Recognition/oocl_rotate_img.png)</TaskImage>
     <TaskImageText title="Oocl_rotate_double_new" name="complex-rec_oocl_rotate_double_new" />
   </TaskImageBlock>
   <TaskImageBlock link="/zh/docs/captchas/ComplexImageTask-Recognition#betpunch_3x3_rotate">
-    <TaskImage>
-      ![](./images/ComplexImageTask-Recognition/betpunch_img.png)
-    </TaskImage>
+    <TaskImage>![](./images/ComplexImageTask-Recognition/betpunch_img.png)</TaskImage>
     <TaskImageText title="Betpunch_3x3_rotate request" name="complex-rec_betpunch_3x3_rotate request" />
   </TaskImageBlock>
   <TaskImageBlock link="/zh/docs/captchas/ComplexImageTask-Recognition#bls">
-    <TaskImage>
-      ![](./images/ComplexImageTask-Recognition/bls_img.png)
-    </TaskImage>
+    <TaskImage>![](./images/ComplexImageTask-Recognition/bls_img.png)</TaskImage>
     <TaskImageText title="Bls" name="bls" />
   </TaskImageBlock>
   <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#shein">
-    <TaskImage>
-      ![](./images/ComplexImageTask-Recognition/shein3.png)
-    </TaskImage>
+    <TaskImage>![](./images/ComplexImageTask-Recognition/shein3.png)</TaskImage>
     <TaskImageText title="shein" name="complex-rec_oocl_rotate_new" />
+  </TaskImageBlock>
+  <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#baidu">
+    <TaskImage>![](./images/ComplexImageTask-Recognition/baidu_img.png)</TaskImage>
+    <TaskImageText title="baidu" name="complex-rec_baidu" />
   </TaskImageBlock>
 </TaskImageWrapper>
 
 ## 请求参数
+
 <TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **ComplexImageTask**
@@ -71,16 +66,16 @@ import BlogLink from '@theme/BlogLink';
 
     <ParamItem title="metadata.Task" required type="string" />
     可能的值：`oocl_rotate_new` 等。
-	任务名称（<u>英文</u>）。
+    任务名称（<u>英文</u>）。
 
 </TabItem>
 
-
 ## oocl_rotate_new
+
 ### 创建任务`oocl_rotate_new`
 
 <PriceBlockWrap>
-  <PriceBlock title="ComplexImageTask" name="complex-rec_oocl_rotate_new"/>
+  <PriceBlock title="ComplexImageTask" name="complex-rec_oocl_rotate_new" />
 </PriceBlockWrap>
 
 <TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
@@ -108,27 +103,26 @@ import BlogLink from '@theme/BlogLink';
 		}
 		```
 
-		背景图像 (*background_base64*):
+    	背景图像 (*background_base64*):
 
-		![](./images/ComplexImageTask-Recognition/ex1.png)
+    	![](./images/ComplexImageTask-Recognition/ex1.png)
 
-		圆形图像 (*circle_base64*):
+    	圆形图像 (*circle_base64*):
 
-		![](./images/ComplexImageTask-Recognition/ex2.png)
+    	![](./images/ComplexImageTask-Recognition/ex2.png)
 
-		**回应**
-		```json
-		{
-		  "errorId":0,
-		  "taskId":407533072
-		}
-		```
-	</MethodDescription>
+    	**回应**
+    	```json
+    	{
+    	  "errorId":0,
+    	  "taskId":407533072
+    	}
+    	```
+    </MethodDescription>
+
 </TabItem>
 
-
 ### 获取任务结果`oocl_rotate_new`
-
 
 <TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
 	<MethodItem>
@@ -163,10 +157,11 @@ import BlogLink from '@theme/BlogLink';
 </TabItem>
 
 ## oocl_rotate_double_new
+
 ### 创建任务`oocl_rotate_double_new`
 
 <PriceBlockWrap>
-  <PriceBlock title="ComplexImageTask" name="complex-rec_oocl_rotate_double_new"/>
+  <PriceBlock title="ComplexImageTask" name="complex-rec_oocl_rotate_double_new" />
 </PriceBlockWrap>
 
 在请求中我们传递三张图片：背景、环形和圆形。
@@ -197,26 +192,27 @@ import BlogLink from '@theme/BlogLink';
 		}
 		```
 
-		背景图像 (*background_base64*):
+    	背景图像 (*background_base64*):
 
-		![](./images/ComplexImageTask-Recognition/ex3.png)
+    	![](./images/ComplexImageTask-Recognition/ex3.png)
 
-		环形图像 (*ring_base64*):
+    	环形图像 (*ring_base64*):
 
-		![](./images/ComplexImageTask-Recognition/ex4.png)
+    	![](./images/ComplexImageTask-Recognition/ex4.png)
 
-		圆形图像 (*circle_base64*):
+    	圆形图像 (*circle_base64*):
 
-		![](./images/ComplexImageTask-Recognition/ex5.png)
+    	![](./images/ComplexImageTask-Recognition/ex5.png)
 
-		**回应**
-		```json
-		{
-		  "errorId":0,
-		  "taskId":407533072
-		}
-		```
-	</MethodDescription>
+    	**回应**
+    	```json
+    	{
+    	  "errorId":0,
+    	  "taskId":407533072
+    	}
+    	```
+    </MethodDescription>
+
 </TabItem>
 
 ### 获取任务结果`oocl_rotate_double_new`
@@ -254,10 +250,11 @@ import BlogLink from '@theme/BlogLink';
 </TabItem>
 
 ## betpunch_3x3_rotate
+
 ### 创建任务`betpunch_3x3_rotate`
 
 <PriceBlockWrap>
-  <PriceBlock title="ComplexImageTask" name="complex-rec_betpunch_3x3_rotate request"/>
+  <PriceBlock title="ComplexImageTask" name="complex-rec_betpunch_3x3_rotate request" />
 </PriceBlockWrap>
 
 在请求中我们传递九张图片。图片必须按以下顺序传递：
@@ -296,16 +293,16 @@ import BlogLink from '@theme/BlogLink';
 		}
 		```
 
-		**回应**
-		```json
-		{
-		  "errorId":0,
-		  "taskId":407533072
-		}
-		```
-	</MethodDescription>
-</TabItem>
+    	**回应**
+    	```json
+    	{
+    	  "errorId":0,
+    	  "taskId":407533072
+    	}
+    	```
+    </MethodDescription>
 
+</TabItem>
 
 ### 获取任务结果`betpunch_3x3_rotate`
 
@@ -342,16 +339,17 @@ import BlogLink from '@theme/BlogLink';
 </TabItem>
 
 ## bls
+
 ### 创建任务 `bls`
 
 <PriceBlockWrap>
-  <PriceBlock title="Bls" name="bls"/>
+  <PriceBlock title="Bls" name="bls" />
 </PriceBlockWrap>
 
 在请求中，我们发送9张以base64格式编码的图片。
 我们还在元数据中传递所需的值TaskArgument。
 
-<BlogLink url="https://capmonster.cloud/zh/blog/news/bls-solve-extension"/>
+<BlogLink url="https://capmonster.cloud/zh/blog/news/bls-solve-extension" />
 
 <TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="method-panel">
 	<MethodItem>
@@ -387,35 +385,37 @@ import BlogLink from '@theme/BlogLink';
 		}
 		```
 
-		示例任务：
+    	示例任务：
 
-		![](./images/ComplexImageTask-Recognition/bls.png)
+    	![](./images/ComplexImageTask-Recognition/bls.png)
 
-		发送转换为base64的图片：
-		
-		![](./images/ComplexImageTask-Recognition/image1.gif)
-		![](./images/ComplexImageTask-Recognition/image2.gif)
-		![](./images/ComplexImageTask-Recognition/image3.gif)
-		![](./images/ComplexImageTask-Recognition/image4.gif)
-		![](./images/ComplexImageTask-Recognition/image5.gif)
-		![](./images/ComplexImageTask-Recognition/image6.gif)
-		![](./images/ComplexImageTask-Recognition/image7.gif)
-		![](./images/ComplexImageTask-Recognition/image8.gif)
-		![](./images/ComplexImageTask-Recognition/image9.gif)
-		
-		对于此示例： "TaskArgument": "546"
+    	发送转换为base64的图片：
 
-		**回应**
-		```json
-		{
-		  "errorId":0,
-		  "taskId":143998457
-		}
-		```
-	</MethodDescription>
+    	![](./images/ComplexImageTask-Recognition/image1.gif)
+    	![](./images/ComplexImageTask-Recognition/image2.gif)
+    	![](./images/ComplexImageTask-Recognition/image3.gif)
+    	![](./images/ComplexImageTask-Recognition/image4.gif)
+    	![](./images/ComplexImageTask-Recognition/image5.gif)
+    	![](./images/ComplexImageTask-Recognition/image6.gif)
+    	![](./images/ComplexImageTask-Recognition/image7.gif)
+    	![](./images/ComplexImageTask-Recognition/image8.gif)
+    	![](./images/ComplexImageTask-Recognition/image9.gif)
+
+    	对于此示例： "TaskArgument": "546"
+
+    	**回应**
+    	```json
+    	{
+    	  "errorId":0,
+    	  "taskId":143998457
+    	}
+    	```
+    </MethodDescription>
+
 </TabItem>
 
 ### 获取任务结果 `bls`
+
 <TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="method-panel-full">
 	<MethodItem>
 		```http
@@ -449,10 +449,11 @@ import BlogLink from '@theme/BlogLink';
 </TabItem>
 
 ## shein
+
 ### 创建任务 `shein`
 
 <PriceBlockWrap>
-  <PriceBlock title="shein" name="complex-rec_oocl_rotate_new"/>
+  <PriceBlock title="shein" name="complex-rec_oocl_rotate_new" />
 </PriceBlockWrap>
 
 在请求中，我们传递一张 base64 格式的图片。
@@ -481,22 +482,24 @@ import BlogLink from '@theme/BlogLink';
 }
 		```
 
-		示例任务：
+    	示例任务：
 
-		![](./images/ComplexImageTask-Recognition/shein1.png)
-		![](./images/ComplexImageTask-Recognition/shein2.png)
+    	![](./images/ComplexImageTask-Recognition/shein1.png)
+    	![](./images/ComplexImageTask-Recognition/shein2.png)
 
-		**回应**
-		```json
-		{
-		  "errorId":0,
-		  "taskId":143998457
-		}
-		```
-	</MethodDescription>
+    	**回应**
+    	```json
+    	{
+    	  "errorId":0,
+    	  "taskId":143998457
+    	}
+    	```
+    </MethodDescription>
+
 </TabItem>
 
 ### 获取任务结果 `shein`
+
 <TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="method-panel-full">
 	<MethodItem>
 		```http
@@ -530,66 +533,150 @@ import BlogLink from '@theme/BlogLink';
 	</MethodDescription>
 </TabItem>
 
-## 使用 SDK 库
-	<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-		<TabItem value="js" label="JavaScript" default className="method-panel">
-			```js
-			// https://github.com/ZennoLab/capmonstercloud-client-js
+## baidu
 
-			import { CapMonsterCloudClientFactory, ClientOptions, ComplexImageTaskRecognitionRequest } from '@zennolab_com/capmonstercloud-client';
+### 创建任务 `baidu`
 
-			document.addEventListener('DOMContentLoaded', async () => {
-				const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
-				console.log(await cmcClient.getBalance());
-				
-				const citRecognitionRequest = new ComplexImageTaskRecognitionRequest({
-					imagesBase64: ['/9xwee/'],
-					metaData: { Task: 'oocl_rotate' },
-				});
+<PriceBlockWrap>
+  <PriceBlock title="baidu" name="complex-rec_baidu" />
+</PriceBlockWrap>
 
-				console.log(await cmcClient.Solve(citRecognitionRequest));
-			});
-			```
-		</TabItem>
-		
-		<TabItem value="csharp" label="C#" className="method-panel">
-			```csharp
-			// https://github.com/ZennoLab/capmonstercloud-client-dotnet
+在请求中，我们传递一张 base64 格式的图片。
 
-			using Zennolab.CapMonsterCloud.Requests;
-			using Zennolab.CapMonsterCloud;
-
-			class Program
+<TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="method-panel">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**要求**
+		```json
+		{
+			"clientKey": "API_KEY",
+			"task": 
 			{
-				static async Task MainComplexImageTaskRecognition(string[] args)
-				{
-					var clientOptions = new ClientOptions
-					{
-						ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
-					};
-
-					var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
-
-					var recognitionCITRequest = new RecognitionComplexImageTaskRequest
-					{
-						ImagesBase64 = new List<string>
-						{
-							"/9j/4AAQSkZJRgABAQEAAAAAAAD…"
-						},
-						Metadata = new RecognitionComplexImageTaskRequest.RecognitionMetadata
-						{
-							Task = "oocl_rotate_new"
-						}
-					};
-
-					var recognitionCITResult = await cmCloudClient.SolveAsync(recognitionCITRequest);
-
-					if(recognitionCITResult.Solution.Answer.IsGrid)
-						Console.WriteLine("Captcha Solution: " + recognitionCITResult.Solution.Answer.GridAnswer);
-					else if (recognitionCITResult.Solution.Answer.IsNumeric)
-						Console.WriteLine("Captcha Solution: " + recognitionCITResult.Solution.Answer.NumericAnswer);
+				"type": "ComplexImageTask",
+				"class": "recognition",
+				"imagesBase64": ["base64"],
+				"metadata": {
+					"Task": "baidu"
 				}
 			}
-			```
-		</TabItem>
-	</Tabs>
+		}
+		```
+
+    	示例任务：
+
+    	![](./images/ComplexImageTask-Recognition/baidu.png)
+
+    	**回应**
+    	```json
+    	{
+    		"errorId":0,
+    		"taskId":143998457
+    	}
+    	```
+    </MethodDescription>
+
+</TabItem>
+
+### 获取任务结果 `baidu`
+
+<TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="method-panel-full">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**要求**
+		```json
+		{
+			"clientKey":"API_KEY",
+			"taskId": 143998457
+		}
+		```
+		**回应**
+		顺时针旋转图像所需的角度。
+		```json
+		{
+			"solution":
+			{
+				"answer":[297],
+				"metadata":{"AnswerType":"NumericArray"}
+			},
+			"cost":0.0005,
+			"status":"ready",
+			"errorId":0,
+			"errorCode":null,
+			"errorDescription":null
+		}
+		```
+	</MethodDescription>
+</TabItem>
+
+## 使用 SDK 库
+
+    <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+    	<TabItem value="js" label="JavaScript" default className="method-panel">
+    		```js
+    		// https://github.com/ZennoLab/capmonstercloud-client-js
+
+    		import { CapMonsterCloudClientFactory, ClientOptions, ComplexImageTaskRecognitionRequest } from '@zennolab_com/capmonstercloud-client';
+
+    		document.addEventListener('DOMContentLoaded', async () => {
+    			const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+    			console.log(await cmcClient.getBalance());
+
+    			const citRecognitionRequest = new ComplexImageTaskRecognitionRequest({
+    				imagesBase64: ['/9xwee/'],
+    				metaData: { Task: 'oocl_rotate' },
+    			});
+
+    			console.log(await cmcClient.Solve(citRecognitionRequest));
+    		});
+    		```
+    	</TabItem>
+
+    	<TabItem value="csharp" label="C#" className="method-panel">
+    		```csharp
+    		// https://github.com/ZennoLab/capmonstercloud-client-dotnet
+
+    		using Zennolab.CapMonsterCloud.Requests;
+    		using Zennolab.CapMonsterCloud;
+
+    		class Program
+    		{
+    			static async Task MainComplexImageTaskRecognition(string[] args)
+    			{
+    				var clientOptions = new ClientOptions
+    				{
+    					ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
+    				};
+
+    				var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+    				var recognitionCITRequest = new RecognitionComplexImageTaskRequest
+    				{
+    					ImagesBase64 = new List<string>
+    					{
+    						"/9j/4AAQSkZJRgABAQEAAAAAAAD…"
+    					},
+    					Metadata = new RecognitionComplexImageTaskRequest.RecognitionMetadata
+    					{
+    						Task = "oocl_rotate_new"
+    					}
+    				};
+
+    				var recognitionCITResult = await cmCloudClient.SolveAsync(recognitionCITRequest);
+
+    				if(recognitionCITResult.Solution.Answer.IsGrid)
+    					Console.WriteLine("Captcha Solution: " + recognitionCITResult.Solution.Answer.GridAnswer);
+    				else if (recognitionCITResult.Solution.Answer.IsNumeric)
+    					Console.WriteLine("Captcha Solution: " + recognitionCITResult.Solution.Answer.NumericAnswer);
+    			}
+    		}
+    		```
+    	</TabItem>
+    </Tabs>
