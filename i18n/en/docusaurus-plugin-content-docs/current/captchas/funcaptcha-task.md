@@ -4,9 +4,10 @@ sidebar_label: FunCaptchaTask
 ---
 
 # FunCaptchaTask
-This type solving task FunCaptcha. Your app submits website address, public key and proxy.
+This task type is designed to solve FunCaptcha challenges. To create the task, provide the following parameters: website URL, public key, and proxy.
 
-The result of solving task is a token for the submit form.
+The result of the solved task is a **token** that can be used in the form submission.
+
 
 :::warning **Attention!**
 If the proxy is authorized by IP, then be sure to add **116.203.55.208** to the white list.
