@@ -4,7 +4,7 @@ sidebar_position: 0
 
 # Getting Start
 
-In this section you can learn how to send captchas to BroCapGPT and methods for recognizing them.
+In this section, you'll learn how to send captchas to BroCapGPT and explore various methods for solving them.
 
 :::info Method address
 ```http
@@ -15,11 +15,11 @@ Response is always in the `JSON` format.
 :::
 
 
-**To solve a captcha, you need:**
+## **How to Solve a CAPTCHA**
 
-1. Create captcha task via [createTask](api/methods/create-task.md) method which will return task ID.
-2. Wait for a while. Depending on the system load, you will receive an answer after a time in the range from 300ms to 6s.
-3. Request captcha solution with [getTaskResult](api/methods/get-task-result.md). If captchas are not solved yet, go to step #2. 
+1. Create a captcha task using the [createTask](api/methods/create-task.md) method.
+2. Wait for a while. Depending on the system load, you will receive an answer a response after a time in the range from 300ms to 6s within 300 ms to 6 s.
+3. Request the captcha solution with [getTaskResult](api/methods/get-task-result.md). If captchas are not solved yet, go to step #2. 
 
 Additional method:
 
@@ -27,7 +27,7 @@ Additional method:
 
 ### Code examples
 
-For your convenience, we’ve created ready-made libraries for fast integration the BroCapGPT API into your code. Recognize FunCaptcha at the lowest prices on the market!
+For your convenience, we provide ready-to-use libraries that allow you to quickly integrate the BroCapGPT API into your codebase. Recognize FunCaptcha at the lowest prices on the market!
 
 |**Language**|**Link to the repository**|
 | :- | :- | 

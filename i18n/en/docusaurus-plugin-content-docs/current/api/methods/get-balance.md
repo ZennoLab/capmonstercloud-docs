@@ -40,7 +40,7 @@ Error code. Check out [error list](../api-errors).
 
 ### `balance`
 Type: `Decimal` <br />
-Amount of money available
+The amount of funds currently available in the account.
 
 ### **Example**
 

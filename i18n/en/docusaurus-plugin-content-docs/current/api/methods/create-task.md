@@ -6,7 +6,8 @@ sidebar_label: createTask
 # createTask : creating a task
 
 ## **Description**
-This method creates a task for solving selected captcha type. In the parameters you need to pass the client authorization data, typed task data and other optional parameters.
+This method creates a task to solve the selected CAPTCHA type. You need to provide client authorization data, task-specific information, and any optional parameters in the request.
+
 
 :::info Method address
 ```http
