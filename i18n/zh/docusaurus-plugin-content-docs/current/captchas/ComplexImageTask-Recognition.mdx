@@ -616,6 +616,467 @@ import BlogLink from '@theme/BlogLink';
 	</MethodDescription>
 </TabItem>
 
+## 如何查找任务创建所需的所有参数
+
+### 手动方式
+
+1. 请在浏览器中访问您的网站，该网站包含验证码功能。
+2. 右键点击验证码元素，选择 **检查（Inspect）**。
+
+#### base64
+
+网页上的图片可以以URL或Base64编码格式直接呈现。要找到所需的值，右键点击图片，选择 **检查**，仔细查看 **元素** 部分或网络请求网格——在那里可以找到URL或编码内容。
+
+![base64ComplexImage](images/ComplexImageTask-Recognition/base64.png)
+
+### 自动方法
+
+一种方便的自动化获取所有必要参数的方式。
+某些参数每次页面加载时都会重新生成，因此需要通过浏览器（普通或无头模式，如使用**Playwright**）提取它们。
+由于动态参数值的有效期很短，获取后必须立即解决验证码。
+
+:::warning **重要提示！**
+提供的代码片段是用于熟悉参数提取的基本示例。具体实现将取决于验证码页面、其结构及使用的HTML元素/选择器。
+:::
+
+<Tabs className="full-width-tabs filled-tabs request-tabs">
+
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+    <details>
+      <summary>显示代码 (Node.js)</summary>
+
+      ```js
+      import { chromium } from 'playwright';
+
+      // 从src中提取base64的函数
+      async function getBase64FromSrc(elementHandle) {
+        const src = await elementHandle.getAttribute('src');
+        if (src && src.startsWith('data:image')) {
+          return src.split(',')[1];
+        }
+        return null;
+      }
+
+      // 使用截图获取base64的函数（如果src不是base64格式）
+      async function elementToBase64(elementHandle) {
+        const base64 = await getBase64FromSrc(elementHandle);
+        if (base64) {
+          return base64; // 如果图片已经是base64格式，直接返回
+        }
+        const buffer = await elementHandle.screenshot();
+        return buffer.toString('base64');
+      }
+
+      // 将元素数组转换为base64字符串数组的函数
+      async function multipleElementsToBase64(elements) {
+        const base64Array = [];
+        for (const el of elements) {
+          const base64 = await elementToBase64(el);
+          base64Array.push(base64);
+        }
+        return base64Array;
+      }
+
+      // -------------------------------------------------------------
+      // 为不同类型的验证码准备base64
+      // -------------------------------------------------------------
+
+      // 1. oocl_rotate_new (背景 + 圆圈)
+      async function prepareOoclRotateNew(page) {
+        const background = await page.$('img.background');
+        const circle = await page.$('img.circle');
+
+        const backgroundBase64 = await elementToBase64(background);
+        const circleBase64 = await elementToBase64(circle);
+
+        return { backgroundBase64, circleBase64 };
+      }
+
+      // 2. oocl_rotate_double_new (背景 + 圆环 + 圆圈)
+      async function prepareOoclRotateDoubleNew(page) {
+        const background = await page.$('img.background');
+        const ring = await page.$('img.ring');
+        const circle = await page.$('img.circle');
+
+        const backgroundBase64 = await elementToBase64(background);
+        const ringBase64 = await elementToBase64(ring);
+        const circleBase64 = await elementToBase64(circle);
+
+        return { backgroundBase64, ringBase64, circleBase64 };
+      }
+
+      // 3. betpunch_3x3_rotate (9张小图片)
+      async function prepareBetpunch3x3(page) {
+        const sectors = await page.$$('img.sector');
+
+        const sectorsBase64 = await multipleElementsToBase64(sectors);
+
+        return { sectorsBase64 };
+      }
+
+      // 4. bls (9张小图片用于点击)
+      async function prepareBls(page) {
+        const sectors = await page.$$('img.sector');
+
+        const sectorsBase64 = await multipleElementsToBase64(sectors);
+
+        return { sectorsBase64 };
+      }
+
+      // 5. shein (1张大图片)
+      async function prepareShein(page) {
+        const captchaImage = await page.$('img.captcha');
+
+        const captchaBase64 = await elementToBase64(captchaImage);
+
+        return { captchaBase64 };
+      }
+
+      // Playwright示例
+      async function run() {
+        const browser = await chromium.launch();
+        const page = await browser.newPage();
+        await page.goto('https://example.com'); // 替换为实际URL
+
+        // 获取oocl_rotate_new的base64示例
+        const { backgroundBase64, circleBase64 } = await prepareOoclRotateNew(page);
+        console.log('Base64背景:', backgroundBase64);
+        console.log('Base64圆圈:', circleBase64);
+
+        await browser.close();
+      }
+
+      run();
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="python" label="Python" className="method-panel">
+    <details>
+      <summary>显示代码</summary>
+
+      ```python
+      import base64
+      import asyncio
+      from playwright.async_api import async_playwright
+
+      # 从src中提取base64的函数
+      async def get_base64_from_src(element_handle):
+          src = await element_handle.get_attribute("src")
+          if src and src.startswith("data:image"):
+              return src.split(",")[1]
+          return None
+
+      # 使用截图获取base64的函数（如果src不是base64格式）
+      async def element_to_base64(element_handle):
+          base64_str = await get_base64_from_src(element_handle)
+          if base64_str:
+              return base64_str  # 如果图片已经是base64格式，直接返回
+          screenshot = await element_handle.screenshot()
+          return base64.b64encode(screenshot).decode("utf-8")
+
+      # 将元素数组转换为base64字符串数组的函数
+      async def multiple_elements_to_base64(elements):
+          base64_list = []
+          for el in elements:
+              base64_str = await element_to_base64(el)
+              base64_list.append(base64_str)
+          return base64_list
+
+      # -------------------------------------------------------------
+      # 为不同类型的验证码准备base64
+      # -------------------------------------------------------------
+
+      # 1. oocl_rotate_new (背景 + 圆圈)
+      async def prepare_oocl_rotate_new(page):
+          background = await page.query_selector("img.background")
+          circle = await page.query_selector("img.circle")
+
+          background_base64 = await element_to_base64(background)
+          circle_base64 = await element_to_base64(circle)
+
+          return {"backgroundBase64": background_base64, "circleBase64": circle_base64}
+
+      # 2. oocl_rotate_double_new (背景 + 圆环 + 圆圈)
+      async def prepare_oocl_rotate_double_new(page):
+          background = await page.query_selector("img.background")
+          ring = await page.query_selector("img.ring")
+          circle = await page.query_selector("img.circle")
+
+          background_base64 = await element_to_base64(background)
+          ring_base64 = await element_to_base64(ring)
+          circle_base64 = await element_to_base64(circle)
+
+          return {"backgroundBase64": background_base64, "ringBase64": ring_base64, "circleBase64": circle_base64}
+
+      # 3. betpunch_3x3_rotate (9张小图片)
+      async def prepare_betpunch3x3(page):
+          sectors = await page.query_selector_all("img.sector")
+          sectors_base64 = await multiple_elements_to_base64(sectors)
+
+          return {"sectorsBase64": sectors_base64}
+
+      # 4. bls (9张小图片用于点击)
+      async def prepare_bls(page):
+          sectors = await page.query_selector_all("img.sector")
+          sectors_base64 = await multiple_elements_to_base64(sectors)
+
+          return {"sectorsBase64": sectors_base64}
+
+      # 5. shein (1张大图片)
+      async def prepare_shein(page):
+          captcha_image = await page.query_selector("img.captcha")
+          captcha_base64 = await element_to_base64(captcha_image)
+
+          return {"captchaBase64": captcha_base64}
+
+      # Playwright示例
+      async def run():
+          async with async_playwright() as p:
+              browser = await p.chromium.launch()
+              page = await browser.new_page()
+              await page.goto("https://example.com")
+
+              # 获取oocl_rotate_new的base64示例
+              result = await prepare_oocl_rotate_new(page)
+              print(result)
+
+              await browser.close()
+
+      if __name__ == "__main__":
+          asyncio.run(run())
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    <details>
+      <summary>显示代码</summary>
+
+      ```csharp
+      using System;
+      using System.Collections.Generic;
+      using System.Threading.Tasks;
+      using Microsoft.Playwright;
+
+      class Program
+      {
+          // 从src中提取base64的函数
+          private static async Task<string?> GetBase64FromSrcAsync(IElementHandle elementHandle)
+          {
+              var src = await elementHandle.GetAttributeAsync("src");
+              if (!string.IsNullOrEmpty(src) && src.StartsWith("data:image"))
+              {
+                  return src.Split(',')[1];
+              }
+              return null;
+          }
+
+          // 使用截图获取base64的函数（如果src不是base64格式）
+          private static async Task<string> ElementToBase64Async(IElementHandle elementHandle)
+          {
+              var base64Str = await GetBase64FromSrcAsync(elementHandle);
+              if (base64Str != null)
+              {
+                  return base64Str; // 如果图片已经是base64格式，直接返回
+              }
+
+              var screenshot = await elementHandle.ScreenshotAsync();
+              return Convert.ToBase64String(screenshot);
+          }
+
+          // 将元素数组转换为base64字符串数组的函数
+          private static async Task<List<string>> MultipleElementsToBase64Async(IEnumerable<IElementHandle> elements)
+          {
+              var base64List = new List<string>();
+              foreach (var el in elements)
+              {
+                  var base64Str = await ElementToBase64Async(el);
+                  base64List.Add(base64Str);
+              }
+              return base64List;
+          }
+
+          // -------------------------------------------------------------
+          // 为不同类型的验证码准备base64
+          // -------------------------------------------------------------
+
+          // 1. oocl_rotate_new (背景 + 圆圈)
+          private static async Task<Dictionary<string, string>> PrepareOoclRotateNewAsync(IPage page)
+          {
+              var background = await page.QuerySelectorAsync("img.background");
+              var circle = await page.QuerySelectorAsync("img.circle");
+
+              var backgroundBase64 = await ElementToBase64Async(background);
+              var circleBase64 = await ElementToBase64Async(circle);
+
+              return new Dictionary<string, string>
+              {
+                  ["backgroundBase64"] = backgroundBase64,
+                  ["circleBase64"] = circleBase64
+              };
+          }
+
+          // 2. oocl_rotate_double_new (背景 + 圆环 + 圆圈)
+          private static async Task<Dictionary<string, string>> PrepareOoclRotateDoubleNewAsync(IPage page)
+          {
+              var background = await page.QuerySelectorAsync("img.background");
+              var ring = await page.QuerySelectorAsync("img.ring");
+              var circle = await page.QuerySelectorAsync("img.circle");
+
+              var backgroundBase64 = await ElementToBase64Async(background);
+              var ringBase64 = await ElementToBase64Async(ring);
+              var circleBase64 = await ElementToBase64Async(circle);
+
+              return new Dictionary<string, string>
+              {
+                  ["backgroundBase64"] = backgroundBase64,
+                  ["ringBase64"] = ringBase64,
+                  ["circleBase64"] = circleBase64
+              };
+          }
+
+          // 3. betpunch_3x3_rotate (9张小图片)
+          private static async Task<Dictionary<string, List<string>>> PrepareBetpunch3x3Async(IPage page)
+          {
+              var sectors = await page.QuerySelectorAllAsync("img.sector");
+              var sectorsBase64 = await MultipleElementsToBase64Async(sectors);
+
+              return new Dictionary<string, List<string>>
+              {
+                  ["sectorsBase64"] = sectorsBase64
+              };
+          }
+
+          // 4. bls (9张小图片用于点击)
+          private static async Task<Dictionary<string, List<string>>> PrepareBlsAsync(IPage page)
+          {
+              var sectors = await page.QuerySelectorAllAsync("img.sector");
+              var sectorsBase64 = await MultipleElementsToBase64Async(sectors);
+
+              return new Dictionary<string, List<string>>
+              {
+                  ["sectorsBase64"] = sectorsBase64
+              };
+          }
+
+          // 5. shein (1张大图片)
+          private static async Task<Dictionary<string, string>> PrepareSheinAsync(IPage page)
+          {
+              var captchaImage = await page.QuerySelectorAsync("img.captcha");
+              var captchaBase64 = await ElementToBase64Async(captchaImage);
+
+              return new Dictionary<string, string>
+              {
+                  ["captchaBase64"] = captchaBase64
+              };
+          }
+
+          public static async Task Main()
+          {
+              using var playwright = await Playwright.CreateAsync();
+              var browser = await playwright.Chromium.LaunchAsync();
+              var page = await browser.NewPageAsync();
+              await page.GotoAsync("https://example.com");
+
+              var result = await PrepareOoclRotateNewAsync(page);
+              Console.WriteLine($"Background base64 length: {result["backgroundBase64"].Length}");
+              Console.WriteLine($"Circle base64 length: {result["circleBase64"].Length}");
+
+              await browser.CloseAsync();
+          }
+      }
+      ```
+    </details>
+  </TabItem>
+
+</Tabs>
+
+<details>
+        <summary>在Node.js中搜索oocl参数的示例</summary>
+
+```js
+import { chromium } from "playwright";
+
+// 代理（可选）
+// const proxyHost = "";
+// const proxyUsername = "";
+// const proxyPassword = "";
+
+async function getBase64FromSrc(elementHandle) {
+  const src = await elementHandle.getAttribute("src");
+  if (src && src.startsWith("data:image")) {
+    return src.split(",")[1];
+  }
+  return null;
+}
+
+async function elementToBase64(elementHandle) {
+  const base64 = await getBase64FromSrc(elementHandle);
+  if (base64) {
+    return base64;
+  }
+  const buffer = await elementHandle.screenshot();
+  return buffer.toString("base64");
+}
+
+async function extractVerifyImagesBase64(page) {
+  const imgSelectors = [".verify-img-panel img", ".verify-sub-block img"];
+
+  const imageHandles = (
+    await Promise.all(imgSelectors.map((selector) => page.$$(selector)))
+  ).flat();
+
+  if (imageHandles.length === 0) {
+    throw new Error(
+      "在verify-img-panel或verify-sub-block中未找到图片。"
+    );
+  }
+
+  const imagesBase64 = [];
+  for (const handle of imageHandles) {
+    const base64 = await elementToBase64(handle);
+    imagesBase64.push({
+      src: await handle.getAttribute("src"),
+      base64,
+    });
+  }
+
+  return imagesBase64;
+}
+
+async function run() {
+  const browser = await chromium.launch({
+    headless: false,
+    // proxy: {
+    //   server: `http://${proxyHost}`,
+    //   username: proxyUsername,
+    //   password: proxyPassword,
+    // },
+  });
+
+  const page = await browser.newPage();
+  await page.goto(
+    "https://example.com/registration/form?appurl=https://example.com"
+  );
+
+  try {
+    const images = await extractVerifyImagesBase64(page);
+    for (const { src, base64 } of images) {
+      console.log("来源:", src);
+      console.log("Base64:", base64);
+    }
+  } catch (err) {
+    console.error(err.message);
+  }
+
+  await browser.close();
+}
+
+run();
+```
+</details>
+
 ## 使用 SDK 库
 
     <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">

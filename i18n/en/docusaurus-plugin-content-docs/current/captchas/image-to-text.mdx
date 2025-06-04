@@ -157,6 +157,142 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the cap
 | :-: | :-: | :-: |
 |text|String|Captcha answer|
 
+## How to Find All Required Parameters for Task Creation
+
+### Manually
+
+1. Open your website where the captcha appears in the browser.
+2. Right-click on the captcha element and select **Inspect**.
+
+#### base64
+
+Locate the required element in the DOM tree and hover over it – the *base64*-encoded image will be displayed directly in the element's attributes:
+
+![base64elements](images\image-to-text\base64-elements.png)
+
+If the image references an external URL rather than containing base64-encoded data, you can find it in the network requests (**Network**). Right-click on the relevant request and select **Copy image as data URI**. This will copy the *base64*-encoded image data to your clipboard.
+
+![base64network](images\image-to-text\base64-network.png)
+
+### Automatically
+
+A convenient way to automate the search for all necessary parameters.
+Some parameters are regenerated every time the page loads, so you'll need to extract them through a browser — either regular or headless (e.g., using **Playwright**).
+Since the values of dynamic parameters are short-lived, the captcha must be solved immediately after retrieving them.
+
+:::warning **Important!**
+The code snippets provided are basic examples for familiarization with extracting the required parameters. The exact implementation will depend on your captcha page, its structure, and the HTML elements/selectors it uses.
+:::
+
+<Tabs className="full-width-tabs filled-tabs request-tabs">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+    <details>
+      <summary>Show code (for browser)</summary>
+      ```js
+      (async () => {
+        const img = document.querySelector('img'); // Example selector
+
+        const imageUrl = img.src;
+
+        const response = await fetch(imageUrl);
+
+        if (!response.ok) {
+          throw new Error("Failed to load image");
+        }
+
+        const buffer = await response.arrayBuffer();
+
+        // Convert binary data to base64
+        const base64Image = btoa(String.fromCharCode(...new Uint8Array(buffer)));
+
+        console.log(base64Image); 
+      })();
+      ```
+    </details>
+
+    <details>
+      <summary>Show code (Node.js)</summary>
+      ```js
+      (async () => {
+        const imageUrl = "https://example/img/.jpg"; // Image URL
+
+        const response = await fetch(imageUrl);
+
+        if (!response.ok) {
+          throw new Error("Failed to load image");
+        }
+
+        const buffer = await response.arrayBuffer();
+
+        // Convert data to base64
+        const base64Image = Buffer.from(buffer).toString("base64");
+
+        console.log(base64Image);
+      })();
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="python" label="Python" className="method-panel">
+    <details>
+      <summary>Show code</summary>
+      ```python
+      import requests
+      import base64
+
+      # Image URL
+      image_url = "https://example/img.jpg"
+
+      response = requests.get(image_url)
+
+      if response.status_code == 200:
+          # Convert image binary data to base64
+          base64_image = base64.b64encode(response.content).decode('utf-8')
+
+          print(base64_image)
+      else:
+          print("Failed to load image")
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    <details>
+      <summary>Show code</summary>
+      ```csharp
+      using System;
+      using System.Net.Http;
+      using System.Threading.Tasks;
+
+      class Program
+      {
+          static async Task Main(string[] args)
+          {
+              // Image URL
+              string imageUrl = "https://example/img.jpg";
+
+              using (HttpClient client = new HttpClient())
+              {
+                  try
+                  {
+                      byte[] imageBytes = await client.GetByteArrayAsync(imageUrl);
+
+                      // Convert image binary data to base64
+                      string base64Image = Convert.ToBase64String(imageBytes);
+
+                      Console.WriteLine(base64Image);
+                  }
+                  catch (Exception ex)
+                  {
+                      Console.WriteLine("Failed to load image: " + ex.Message);
+                  }
+              }
+          }
+      }
+      ```
+    </details>
+  </TabItem>
+</Tabs>
 
 ## Use SDK Library
 

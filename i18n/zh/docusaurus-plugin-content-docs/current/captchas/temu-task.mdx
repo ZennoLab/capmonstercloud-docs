@@ -132,3 +132,105 @@ import BlogLink from '@theme/BlogLink';
 		```
 	</MethodDescription>
 </TabItem>
+
+## 如何查找任务创建所需的所有参数
+
+### 自动方法
+
+一种方便的自动化获取所有必要参数的方式。
+某些参数每次页面加载时都会重新生成，因此需要通过浏览器（普通或无头模式，如使用**Playwright**）提取它们。
+由于动态参数值的有效期很短，获取后必须立即解决验证码。
+
+:::warning **重要提示！**
+提供的代码片段是用于熟悉参数提取的基本示例。具体实现将取决于验证码页面、其结构及使用的HTML元素/选择器。
+:::
+
+<Tabs className="full-width-tabs filled-tabs request-tabs">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+    <details>
+      <summary>显示代码 (Node.js)</summary>
+
+      ```js
+      import { chromium } from 'playwright';
+
+      (async () => {
+        const browser = await chromium.launch();
+        const page = await browser.newPage();
+
+        await page.goto('https://example.com');
+
+        // 获取 cookies
+        const cookies = await page.context().cookies();
+        console.log('Cookies:', cookies);
+
+        await browser.close();
+      })();
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="python" label="Python" className="method-panel">
+    <details>
+      <summary>显示代码</summary>
+
+      ```python
+      import asyncio
+      from playwright.async_api import async_playwright
+
+      async def run():
+          async with async_playwright() as p:
+              browser = await p.chromium.launch()
+              page = await browser.new_page()
+
+              await page.goto('https://example.com')
+
+              # 获取 cookies
+              cookies = await page.context.cookies()
+              print('Cookies:', cookies)
+
+              await browser.close()
+
+      asyncio.run(run())
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    <details>
+      <summary>显示代码</summary>
+
+      ```csharp
+      using System;
+      using System.Linq;
+      using System.Threading.Tasks;
+      using Microsoft.Playwright;
+
+      class Program
+      {
+          public static async Task Main()
+          {
+              using var playwright = await Playwright.CreateAsync();
+              var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+              {
+                  Headless = true
+              });
+
+              var context = await browser.NewContextAsync();
+              var page = await context.NewPageAsync();
+
+              await page.GotoAsync("https://example.com");
+
+              var cookies = await context.CookiesAsync();
+              Console.WriteLine("Cookies:");
+              foreach (var cookie in cookies)
+              {
+                  Console.WriteLine($"{cookie.Name}: {cookie.Value}");
+              }
+
+              await browser.CloseAsync();
+          }
+      }
+      ```
+    </details>
+  </TabItem>
+</Tabs>

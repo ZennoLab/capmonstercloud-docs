@@ -221,6 +221,155 @@ import BlogLink from '@theme/BlogLink';
 	</MethodDescription>
 </TabItem>
 
+## 如何查找任务创建所需的所有参数
+
+### 自动方法
+
+一种方便的自动化获取所有必要参数的方式。
+某些参数每次页面加载时都会重新生成，因此需要通过浏览器（普通或无头模式，如使用**Playwright**）提取它们。
+由于动态参数值的有效期很短，获取后必须立即解决验证码。
+
+:::warning **重要提示！**
+提供的代码片段是用于熟悉参数提取的基本示例。具体实现将取决于验证码页面、其结构及使用的HTML元素/选择器。
+:::
+
+<Tabs className="full-width-tabs filled-tabs request-tabs">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+    <details>
+      <summary>显示代码 (Node.js)</summary>
+      ```js
+      import { chromium } from "playwright";
+
+      const CAPTCHA_URL = "https://example.com";
+
+      (async () => {
+        const browser = await chromium.launch({ headless: false });
+        const page = await browser.newPage();
+
+        await page.goto(CAPTCHA_URL);
+
+        const captchaParams = await page.evaluate(() => {
+          const gokuProps = window.gokuProps || {};
+          const scripts = Array.from(document.querySelectorAll("script"));
+
+          return {
+            websiteKey: gokuProps.key || "未找到",
+            context: gokuProps.context || "未找到",
+            iv: gokuProps.iv || "未找到",
+            challengeScriptUrl:
+              scripts.find((script) => script.src.includes("challenge.js"))?.src ||
+              "未找到",
+            captchaScriptUrl:
+              scripts.find((script) => script.src.includes("captcha.js"))?.src ||
+              "未找到",
+          };
+        });
+
+        console.log("验证码参数:", captchaParams);
+
+        await browser.close();
+      })();
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="python" label="Python" className="method-panel">
+  <details>
+    <summary>显示代码</summary>
+    ```python
+    import asyncio
+    from playwright.async_api import async_playwright
+
+    CAPTCHA_URL = "https://example.com"
+
+    async def main():
+        async with async_playwright() as p:
+            browser = await p.chromium.launch(headless=False)
+            page = await browser.new_page()
+
+            await page.goto(CAPTCHA_URL)
+
+            captcha_params = await page.evaluate("""
+                () => {
+                    const gokuProps = window.gokuProps || {};
+                    const scripts = Array.from(document.querySelectorAll('script'));
+
+                    return {
+                        websiteKey: gokuProps.key || "未找到",
+                        context: gokuProps.context || "未找到",
+                        iv: gokuProps.iv || "未找到",
+                        challengeScriptUrl: scripts.find(script => script.src.includes('challenge.js'))?.src || 
+                            "未找到",
+                        captchaScriptUrl: scripts.find(script => script.src.includes('captcha.js'))?.src || 
+                            "未找到"
+                    };
+                }
+            """)
+
+            print("验证码参数:", captcha_params)
+
+            await browser.close()
+
+    asyncio.run(main())
+    ```
+  </details>
+</TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    <details>
+      <summary>显示代码</summary>
+      ```csharp
+      using System;
+      using System.Collections.Generic;
+      using System.Threading.Tasks;
+      using Microsoft.Playwright;
+
+      class Program
+      {
+          public static async Task Main(string[] args)
+          {
+              const string CAPTCHA_URL = "https://example.com";
+
+              using var playwright = await Playwright.CreateAsync();
+              var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+              {
+                  Headless = false
+              });
+
+              var context = await browser.NewContextAsync();
+              var page = await context.NewPageAsync();
+
+              await page.GotoAsync(CAPTCHA_URL);
+
+              var captchaParams = await page.EvaluateAsync<Dictionary<string, string>>(@"
+                  (() => {
+                      const gokuProps = window.gokuProps || {};
+                      const scripts = Array.from(document.querySelectorAll('script'));
+                      return {
+                          websiteKey: gokuProps.key || '未找到',
+                          context: gokuProps.context || '未找到',
+                          iv: gokuProps.iv || '未找到',
+                          challengeScriptUrl: scripts.find(script => script.src.includes('challenge.js'))?.src || 
+                          '未找到',
+                          captchaScriptUrl: scripts.find(script => script.src.includes('captcha.js'))?.src || 
+                          '未找到'
+                      };
+                  })()
+              ");
+
+              Console.WriteLine("验证码参数:");
+              foreach (var param in captchaParams)
+              {
+                  Console.WriteLine($"{param.Key}: {param.Value}");
+              }
+
+              await browser.CloseAsync();
+          }
+      }
+      ```
+    </details>
+  </TabItem>
+</Tabs>
 
 ## 使用 SDK 库
 

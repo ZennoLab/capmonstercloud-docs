@@ -267,6 +267,300 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to request ans
 | :- | :- | :- |
 |gRecaptchaResponse|String|Hash which should be inserted into Recaptcha2 submit form in `<textarea id="g-recaptcha-response" ..></textarea>`. It has a length of 500 to 2190 bytes.|
 
+## How to Find All Required Parameters for Task Creation
+
+### Manually
+
+1. Open your website where the captcha appears in the browser.
+2. Right-click on the captcha element and select **Inspect**.
+
+#### websiteKey
+
+Public site key (sitekey). You can find the websiteKey in the **Elements**:
+
+![sitekeyEntpr](images\recaptcha-enterprise\sitekey-elements-entpr.png)
+
+Or in **Network** requests:
+
+![sitekeyEntpr1](images\recaptcha-enterprise\sitekey-network-entpr.png)
+
+### Automatically
+
+A convenient way to automate the search for all necessary parameters.
+Some parameters are regenerated every time the page loads, so you'll need to extract them through a browser — either regular or headless (e.g., using **Playwright**).
+Since the values of dynamic parameters are short-lived, the captcha must be solved immediately after retrieving them.
+
+:::warning **Important!**
+The code snippets provided are basic examples for familiarization with extracting the required parameters. The exact implementation will depend on your captcha page, its structure, and the HTML elements/selectors it uses.
+:::
+
+<Tabs className="full-width-tabs filled-tabs request-tabs">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+    <details>
+      <summary>Show Code (in browser)</summary>
+
+      ```js
+      (() => {
+        const payload = {};
+        let sitekey = null;
+
+        document.querySelectorAll('.g-recaptcha').forEach(div => {
+          if (div.dataset.sitekey) sitekey = div.dataset.sitekey;
+
+          for (const [key, value] of Object.entries(div.dataset)) {
+            if (key !== 'sitekey') {
+              payload[key] = value;
+            }
+          }
+        });
+
+        const scriptTags = Array.from(document.querySelectorAll("script:not([src])"));
+        const regex = /grecaptcha\.enterprise\.render\([^,]+,\s*\{(.*?)\}/s;
+
+        scriptTags.forEach(tag => {
+          const match = regex.exec(tag.textContent);
+          if (match) {
+            const obj = match[1];
+            const paramRegex = /(\w+)\s*:\s*['"]([^'"]+)['"]/g;
+            let p;
+            while ((p = paramRegex.exec(obj)) !== null) {
+              const key = p[1];
+              const val = p[2];
+              if (key === "sitekey") sitekey = val;
+              else payload[key] = val;
+            }
+          }
+        });
+
+        console.log("sitekey:", sitekey);
+        console.log("enterprisePayload:", payload);
+      })();
+      ```
+    </details>
+
+    <details>
+      <summary>Show Code (Node.js)</summary>
+
+      ```js
+      import { chromium } from 'playwright';
+
+      (async () => {
+        const browser = await chromium.launch({ headless: false });
+        const context = await browser.newContext();
+        const page = await context.newPage();
+
+        let sitekey = null;
+        const enterprisePayload = {};
+
+        const targetUrl = 'https://example.com';
+        await page.goto(targetUrl, { timeout: 60000 });
+        await page.waitForTimeout(3000);
+
+        const recaptchaDivs = await page.$$('.g-recaptcha');
+        for (const div of recaptchaDivs) {
+          const attrs = ['data-sitekey', 'data-s', 'data-cdata', 'data-type', 'data-context'];
+          for (const attr of attrs) {
+            const val = await div.getAttribute(attr);
+            if (val) {
+              const key = attr.replace('data-', '');
+              if (key === 'sitekey') {
+                sitekey = val;
+              } else {
+                enterprisePayload[key] = val;
+              }
+            }
+          }
+        }
+
+        const inlineScripts = await page.$$eval("script:not([src])", (scripts) =>
+          scripts.map((s) => s.textContent)
+        );
+
+        const pattern = /grecaptcha\.enterprise\.render\([^,]+,\s*\{(.*?)\}/s;
+
+        for (const script of inlineScripts) {
+          const match = script.match(pattern);
+          if (match) {
+            const obj = match[1];
+            const keyValuePattern = /(\w+)\s*:\s*['"]([^'"]+)['"]/g;
+            let keyValueMatch;
+            while ((keyValueMatch = keyValuePattern.exec(obj)) !== null) {
+              const key = keyValueMatch[1];
+              const val = keyValueMatch[2];
+              if (key === 'sitekey') {
+                sitekey = val;
+              } else {
+                enterprisePayload[key] = val;
+              }
+            }
+            break;
+          }
+        }
+
+        console.log(`sitekey: ${sitekey}`);
+        console.log("enterprisePayload:");
+        for (const [key, value] of Object.entries(enterprisePayload)) {
+          console.log(`  ${key}: ${value}`);
+        }
+
+        await browser.close();
+      })();
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="python" label="Python" className="method-panel">
+    <details>
+      <summary>Show Code</summary>
+
+      ```python
+      import asyncio
+      import re
+      from playwright.async_api import async_playwright
+
+      async def extract_recaptcha_v2_enterprise(url):
+          async with async_playwright() as p:
+              browser = await p.chromium.launch(headless=False)
+              context = await browser.new_context()
+              page = await context.new_page()
+
+              sitekey = None
+              enterprise_payload = {}
+
+              await page.goto(url, timeout=60000)
+              await page.wait_for_timeout(3000)
+
+              recaptcha_divs = await page.query_selector_all(".g-recaptcha")
+              for div in recaptcha_divs:
+                  attrs = ["data-sitekey", "data-s", "data-cdata", "data-type", "data-context"]
+                  for attr in attrs:
+                      val = await div.get_attribute(attr)
+                      if val:
+                          key = attr.replace("data-", "")
+                          if key == "sitekey":
+                              sitekey = val
+                          else:
+                              enterprise_payload[key] = val
+
+              inline_scripts = await page.locator("script:not([src])").all_text_contents()
+              pattern = re.compile(r"grecaptcha\.enterprise\.render\([^,]+,\s*\{(.*?)\}", re.DOTALL)
+
+              for script in inline_scripts:
+                  match = pattern.search(script)
+                  if match:
+                      obj = match.group(1)
+                      for pair in re.finditer(r"(\w+)\s*:\s*['\"]([^'\"]+)['\"]", obj):
+                          key = pair.group(1)
+                          val = pair.group(2)
+                          if key == "sitekey":
+                              sitekey = val
+                          else:
+                              enterprise_payload[key] = val
+                      break
+
+              await browser.close()
+
+              print(f"sitekey: {sitekey}")
+              print("enterprisePayload:")
+              for k, v in enterprise_payload.items():
+                  print(f"  {k}: {v}")
+
+      asyncio.run(extract_recaptcha_v2_enterprise("https://example.com"))
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    <details>
+      <summary>Show Code</summary>
+
+      ```csharp
+      using System;
+      using System.Text.RegularExpressions;
+      using System.Threading.Tasks;
+      using Microsoft.Playwright;
+      using System.Collections.Generic;
+
+      class Program
+      {
+          public static async Task Main(string[] args)
+          {
+              await ExtractRecaptchaV2Enterprise("https://example.com");
+          }
+
+          public static async Task ExtractRecaptchaV2Enterprise(string url)
+          {
+              using var playwright = await Playwright.CreateAsync();
+              var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = false });
+              var context = await browser.NewContextAsync();
+              var page = await context.NewPageAsync();
+
+              string sitekey = null;
+              var enterprisePayload = new Dictionary<string, string>();
+
+              await page.GotoAsync(url, new PageGotoOptions { Timeout = 60000 });
+              await page.WaitForTimeoutAsync(3000);
+
+              var recaptchaDivs = await page.QuerySelectorAllAsync(".g-recaptcha");
+
+              foreach (var div in recaptchaDivs)
+              {
+                  var sitekeyAttr = await div.GetAttributeAsync("data-sitekey");
+                  if (!string.IsNullOrEmpty(sitekeyAttr))
+                      sitekey = sitekeyAttr;
+
+                  var attributes = new[] { "data-s", "data-cdata", "data-type", "data-context" };
+                  foreach (var attr in attributes)
+                  {
+                      var value = await div.GetAttributeAsync(attr);
+                      if (!string.IsNullOrEmpty(value))
+                      {
+                          enterprisePayload[attr.Replace("data-", "")] = value;
+                      }
+                  }
+              }
+
+              var scripts = await page.Locator("script:not([src])").AllTextContentsAsync();
+              var pattern = new Regex(@"grecaptcha\.enterprise\.render\([^,]+,\s*\{(.*?)\}", 
+              RegexOptions.Singleline);
+
+              foreach (var script in scripts)
+              {
+                  var match = pattern.Match(script);
+                  if (match.Success)
+                  {
+                      var obj = match.Groups[1].Value;
+
+                      var keyMatches = Regex.Matches(obj, @"(\w+)\s*:\s*['""]([^'""]+)['""]");
+                      foreach (Match m in keyMatches)
+                      {
+                          var key = m.Groups[1].Value.Trim();
+                          var val = m.Groups[2].Value.Trim();
+
+                          if (key == "sitekey")
+                              sitekey = val;
+                          else
+                              enterprisePayload[key] = val;
+                      }
+                      break;
+                  }
+              }
+
+              Console.WriteLine($"Sitekey: {sitekey}");
+              Console.WriteLine("Enterprise Payload:");
+              foreach (var kv in enterprisePayload)
+              {
+                  Console.WriteLine($"  {kv.Key}: {kv.Value}");
+              }
+
+              await browser.CloseAsync();
+          }
+      }
+      ```
+    </details>
+  </TabItem>
+</Tabs>
+
 ## Use SDK Library
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">

@@ -267,6 +267,299 @@ Object.defineProperty(window, 'grecaptcha', {
 | :- | :- | :- |
 |gRecaptchaResponse|String|应插入到 Recaptcha2 提交表单中的哈希值 `<textarea id="g-recaptcha-response" ..></textarea>`。长度为 500 到 2190 字节。|
 
+## 如何查找任务创建所需的所有参数
+
+### 手动方式
+
+1. 请在浏览器中访问您的网站，该网站包含验证码功能。
+2. 右键点击验证码元素，选择 **检查（Inspect）**。
+
+#### websiteKey
+
+Public site key（网站公钥，sitekey）。您可以在 **Elements（元素）** 中找到 websiteKey：
+
+![sitekeyEntpr](images\recaptcha-enterprise\sitekey-elements-entpr.png)
+
+或在 **Network（网络）** 请求中找到：
+
+![sitekeyEntpr1](images\recaptcha-enterprise\sitekey-network-entpr.png)
+
+### 自动方法
+
+一种方便的自动化获取所有必要参数的方式。
+某些参数每次页面加载时都会重新生成，因此需要通过浏览器（普通或无头模式，如使用**Playwright**）提取它们。
+由于动态参数值的有效期很短，获取后必须立即解决验证码。
+
+:::warning **重要提示！**
+提供的代码片段是用于熟悉参数提取的基本示例。具体实现将取决于验证码页面、其结构及使用的HTML元素/选择器。
+:::
+
+<Tabs className="full-width-tabs filled-tabs request-tabs">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+    <details>
+      <summary>显示代码（浏览器中）</summary>
+
+      ```js
+      (() => {
+        const payload = {};
+        let sitekey = null;
+
+        document.querySelectorAll('.g-recaptcha').forEach(div => {
+          if (div.dataset.sitekey) sitekey = div.dataset.sitekey;
+
+          for (const [key, value] of Object.entries(div.dataset)) {
+            if (key !== 'sitekey') {
+              payload[key] = value;
+            }
+          }
+        });
+
+        const scriptTags = Array.from(document.querySelectorAll("script:not([src])"));
+        const regex = /grecaptcha\.enterprise\.render\([^,]+,\s*\{(.*?)\}/s;
+
+        scriptTags.forEach(tag => {
+          const match = regex.exec(tag.textContent);
+          if (match) {
+            const obj = match[1];
+            const paramRegex = /(\w+)\s*:\s*['"]([^'"]+)['"]/g;
+            let p;
+            while ((p = paramRegex.exec(obj)) !== null) {
+              const key = p[1];
+              const val = p[2];
+              if (key === "sitekey") sitekey = val;
+              else payload[key] = val;
+            }
+          }
+        });
+
+        console.log("sitekey:", sitekey);
+        console.log("enterprisePayload:", payload);
+      })();
+      ```
+    </details>
+
+    <details>
+      <summary>显示代码（Node.js）</summary>
+
+      ```js
+      import { chromium } from 'playwright';
+
+      (async () => {
+        const browser = await chromium.launch({ headless: false });
+        const context = await browser.newContext();
+        const page = await context.newPage();
+
+        let sitekey = null;
+        const enterprisePayload = {};
+
+        const targetUrl = 'https://example.com';
+        await page.goto(targetUrl, { timeout: 60000 });
+        await page.waitForTimeout(3000);
+
+        const recaptchaDivs = await page.$$('.g-recaptcha');
+        for (const div of recaptchaDivs) {
+          const attrs = ['data-sitekey', 'data-s', 'data-cdata', 'data-type', 'data-context'];
+          for (const attr of attrs) {
+            const val = await div.getAttribute(attr);
+            if (val) {
+              const key = attr.replace('data-', '');
+              if (key === 'sitekey') {
+                sitekey = val;
+              } else {
+                enterprisePayload[key] = val;
+              }
+            }
+          }
+        }
+
+        const inlineScripts = await page.$$eval("script:not([src])", (scripts) =>
+          scripts.map((s) => s.textContent)
+        );
+
+        const pattern = /grecaptcha\.enterprise\.render\([^,]+,\s*\{(.*?)\}/s;
+
+        for (const script of inlineScripts) {
+          const match = script.match(pattern);
+          if (match) {
+            const obj = match[1];
+            const keyValuePattern = /(\w+)\s*:\s*['"]([^'"]+)['"]/g;
+            let keyValueMatch;
+            while ((keyValueMatch = keyValuePattern.exec(obj)) !== null) {
+              const key = keyValueMatch[1];
+              const val = keyValueMatch[2];
+              if (key === 'sitekey') {
+                sitekey = val;
+              } else {
+                enterprisePayload[key] = val;
+              }
+            }
+            break;
+          }
+        }
+
+        console.log(`sitekey: ${sitekey}`);
+        console.log("enterprisePayload:");
+        for (const [key, value] of Object.entries(enterprisePayload)) {
+          console.log(`  ${key}: ${value}`);
+        }
+
+        await browser.close();
+      })();
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="python" label="Python" className="method-panel">
+    <details>
+      <summary>显示代码</summary>
+
+      ```python
+      import asyncio
+      import re
+      from playwright.async_api import async_playwright
+
+      async def extract_recaptcha_v2_enterprise(url):
+          async with async_playwright() as p:
+              browser = await p.chromium.launch(headless=False)
+              context = await browser.new_context()
+              page = await context.new_page()
+
+              sitekey = None
+              enterprise_payload = {}
+
+              await page.goto(url, timeout=60000)
+              await page.wait_for_timeout(3000)
+
+              recaptcha_divs = await page.query_selector_all(".g-recaptcha")
+              for div in recaptcha_divs:
+                  attrs = ["data-sitekey", "data-s", "data-cdata", "data-type", "data-context"]
+                  for attr in attrs:
+                      val = await div.get_attribute(attr)
+                      if val:
+                          key = attr.replace("data-", "")
+                          if key == "sitekey":
+                              sitekey = val
+                          else:
+                              enterprise_payload[key] = val
+
+              inline_scripts = await page.locator("script:not([src])").all_text_contents()
+              pattern = re.compile(r"grecaptcha\.enterprise\.render\([^,]+,\s*\{(.*?)\}", re.DOTALL)
+
+              for script in inline_scripts:
+                  match = pattern.search(script)
+                  if match:
+                      obj = match.group(1)
+                      for pair in re.finditer(r"(\w+)\s*:\s*['\"]([^'\"]+)['\"]", obj):
+                          key = pair.group(1)
+                          val = pair.group(2)
+                          if key == "sitekey":
+                              sitekey = val
+                          else:
+                              enterprise_payload[key] = val
+                      break
+
+              await browser.close()
+
+              print(f"sitekey: {sitekey}")
+              print("enterprisePayload:")
+              for k, v in enterprise_payload.items():
+                  print(f"  {k}: {v}")
+
+      asyncio.run(extract_recaptcha_v2_enterprise("https://example.com"))
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    <details>
+      <summary>显示代码</summary>
+
+      ```csharp
+      using System;
+      using System.Text.RegularExpressions;
+      using System.Threading.Tasks;
+      using Microsoft.Playwright;
+      using System.Collections.Generic;
+
+      class Program
+      {
+          public static async Task Main(string[] args)
+          {
+              await ExtractRecaptchaV2Enterprise("https://example.com");
+          }
+
+          public static async Task ExtractRecaptchaV2Enterprise(string url)
+          {
+              using var playwright = await Playwright.CreateAsync();
+              var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = false });
+              var context = await browser.NewContextAsync();
+              var page = await context.NewPageAsync();
+
+              string sitekey = null;
+              var enterprisePayload = new Dictionary<string, string>();
+
+              await page.GotoAsync(url, new PageGotoOptions { Timeout = 60000 });
+              await page.WaitForTimeoutAsync(3000);
+
+              var recaptchaDivs = await page.QuerySelectorAllAsync(".g-recaptcha");
+
+              foreach (var div in recaptchaDivs)
+              {
+                  var sitekeyAttr = await div.GetAttributeAsync("data-sitekey");
+                  if (!string.IsNullOrEmpty(sitekeyAttr))
+                      sitekey = sitekeyAttr;
+
+                  var attributes = new[] { "data-s", "data-cdata", "data-type", "data-context" };
+                  foreach (var attr in attributes)
+                  {
+                      var value = await div.GetAttributeAsync(attr);
+                      if (!string.IsNullOrEmpty(value))
+                      {
+                          enterprisePayload[attr.Replace("data-", "")] = value;
+                      }
+                  }
+              }
+
+              var scripts = await page.Locator("script:not([src])").AllTextContentsAsync();
+              var pattern = new Regex(@"grecaptcha\.enterprise\.render\([^,]+,\s*\{(.*?)\}", 
+              RegexOptions.Singleline);
+
+              foreach (var script in scripts)
+              {
+                  var match = pattern.Match(script);
+                  if (match.Success)
+                  {
+                      var obj = match.Groups[1].Value;
+
+                      var keyMatches = Regex.Matches(obj, @"(\w+)\s*:\s*['""]([^'""]+)['""]");
+                      foreach (Match m in keyMatches)
+                      {
+                          var key = m.Groups[1].Value.Trim();
+                          var val = m.Groups[2].Value.Trim();
+
+                          if (key == "sitekey")
+                              sitekey = val;
+                          else
+                              enterprisePayload[key] = val;
+                      }
+                      break;
+                  }
+              }
+
+              Console.WriteLine($"Sitekey: {sitekey}");
+              Console.WriteLine("Enterprise Payload:");
+              foreach (var kv in enterprisePayload)
+              {
+                  Console.WriteLine($"  {kv.Key}: {kv.Value}");
+              }
+
+              await browser.CloseAsync();
+          }
+      }
+      ```
+    </details>
+  </TabItem>
+</Tabs>
 
 ## 使用 SDK 库
 

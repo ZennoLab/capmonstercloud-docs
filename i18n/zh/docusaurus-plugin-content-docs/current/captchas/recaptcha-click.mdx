@@ -175,6 +175,333 @@ import BlogLink from '@theme/BlogLink';
 |1|<p>reCAPTCHA 2 (3\*3)</p><p>![](./images/recaptcha-click/Aspose.Words.3eba36bc-cab6-486e-9e8f-1e38b225e806.001.png)</p><p></p>|0.2|0.04|
 |2|<p>reCAPTCHA 2 (4\*4)</p><p>![](./images/recaptcha-click/Aspose.Words.3eba36bc-cab6-486e-9e8f-1e38b225e806.002.png)</p>|0.1|不适用|
 
+## 如何查找任务创建所需的所有参数
+
+### 手动方式
+
+1. 请在浏览器中访问您的网站，该网站包含验证码功能。
+2. 右键点击验证码元素，选择 **检查（Inspect）**。
+
+#### websitekey：
+
+查找方式类似于 [ReCaptchaV2Task](https://docs.capmonster.cloud/zh/docs/captchas/no-captcha-task#如何查找任务创建所需的所有参数) 和 [ReCaptchaV2Enterprise](https://docs.capmonster.cloud/zh/docs/captchas/recaptcha-v2-enterprise-task#如何查找任务创建所需的所有参数)。
+
+#### imageUrls：
+
+在元素属性中查找 URL：
+
+![imgUrl](images\recaptcha-click\img-url-elements.png)
+
+您也可以通过右键点击图像并选择 **在新标签页中打开图像** 来获取完整的图像 URL。然后，直接从浏览器地址栏复制该 URL。
+
+![imgUrl1](images\recaptcha-click\recap-img-url.png)
+
+#### metadata.Task
+
+任务描述。右键点击任务文字，然后在 **开发者工具** 中找到页面结构中对应的元素：
+
+![metadata](images\recaptcha-click\metadata.png)
+
+### 自动方法
+
+一种方便的自动化获取所有必要参数的方式。
+某些参数每次页面加载时都会重新生成，因此需要通过浏览器（普通或无头模式，如使用**Playwright**）提取它们。
+由于动态参数值的有效期很短，获取后必须立即解决验证码。
+
+:::warning **重要提示！**
+提供的代码片段是用于熟悉参数提取的基本示例。具体实现将取决于验证码页面、其结构及使用的HTML元素/选择器。
+:::
+
+<Tabs className="full-width-tabs filled-tabs request-tabs">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+    <details>
+      <summary>显示代码（浏览器端）</summary>
+      ```js
+      const img = document.querySelector('img.rc-image-tile-33') || document.querySelector('img.rc-image-tile-44');
+      const src = img ? img.src : null;
+      console.log(src);
+
+      // 任务描述
+      const descEl =
+        document.querySelector('.rc-imageselect-desc-no-canonical') ||
+        document.querySelector('.rc-imageselect-desc');
+
+      const taskDescription = descEl
+        ? descEl.textContent.trim()
+        : '未找到任务描述';
+
+      console.log(taskDescription);
+
+      // 可见的图片块数量
+      const tiles = document.querySelectorAll('.rc-imageselect-tile');
+      const visibleTiles = Array.from(tiles).filter(tile => tile.offsetParent !== null);
+
+      const tileCount = visibleTiles.length;
+
+      let gridSize;
+      if (tileCount === 9) {
+        gridSize = '3x3';
+      } else if (tileCount === 16) {
+        gridSize = '4x4';
+      } else if (tileCount === 25) {
+        gridSize = '5x5';
+      } else {
+        gridSize = '未知';
+      }
+
+      console.log(`网格大小: ${gridSize}`);
+      ```
+    </details>
+    <details>
+      <summary>显示代码（Node.js）</summary>
+      ```js
+      import { chromium } from "playwright";
+
+      async function extractCaptchaInfo() {
+        const browser = await chromium.launch({ headless: false });
+        const page = await browser.newPage();
+
+        const url =
+          "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high";
+        await page.goto(url);
+
+        const frames = page.frames();
+        const checkboxFrame = frames.find((f) => f.url().includes("api2/anchor"));
+
+        if (!checkboxFrame) {
+          console.error("未找到 reCAPTCHA 的复选框 iframe");
+          await browser.close();
+          return;
+        }
+
+        const checkbox = await checkboxFrame.waitForSelector("#recaptcha-anchor", {
+          timeout: 5000,
+        });
+        await checkbox.click();
+
+        await page.waitForTimeout(1000);
+        const updatedFrames = page.frames();
+        const challengeFrame = updatedFrames.find((f) =>
+          f.url().includes("api2/bframe")
+        );
+
+        if (!challengeFrame) {
+          console.error("未找到 reCAPTCHA 的挑战 iframe");
+          await browser.close();
+          return;
+        }
+
+        // 图像
+        const img =
+          (await challengeFrame.$("img.rc-image-tile-33")) ||
+          (await challengeFrame.$("img.rc-image-tile-44"));
+        const src = img ? await img.getAttribute("src") : null;
+        console.log("图像:", src);
+
+        // 任务描述
+        try {
+          await challengeFrame.waitForSelector(
+            ".rc-imageselect-desc-no-canonical, .rc-imageselect-desc",
+            {
+              timeout: 5000,
+            }
+          );
+          const taskDescription = await challengeFrame.$eval(
+            ".rc-imageselect-desc-no-canonical, .rc-imageselect-desc",
+            (el) => {
+              const strong = el.querySelector("strong");
+              const text = strong ? strong.textContent.trim() : "未找到";
+              return text;
+            }
+          );
+          console.log("任务: 选择所有含有：", taskDescription, " 的图像");
+        } catch (error) {
+          console.log("未找到任务描述。");
+        }
+
+        // 网格大小
+        const tiles = await challengeFrame.$$(".rc-imageselect-tile");
+        const visibleTiles = await Promise.all(tiles.map((tile) => tile.isVisible()));
+        const tileCount = visibleTiles.filter(Boolean).length;
+
+        let gridSize;
+        if (tileCount === 9) {
+          gridSize = "3x3";
+        } else if (tileCount === 16) {
+          gridSize = "4x4";
+        } else if (tileCount === 25) {
+          gridSize = "5x5";
+        } else {
+          gridSize = "未知";
+        }
+
+        console.log(`网格大小: ${gridSize}`);
+
+        await browser.close();
+      }
+
+      extractCaptchaInfo();
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="python" label="Python" className="method-panel">
+    <details>
+      <summary>显示代码</summary>
+      ```python
+      import asyncio
+      from playwright.async_api import async_playwright
+
+      async def extract_captcha_info():
+          async with async_playwright() as p:
+              browser = await p.chromium.launch(headless=False)
+              page = await browser.new_page()
+
+              await page.goto("https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high")
+
+              # 查找复选框 iframe
+              checkbox_frame = next((f for f in page.frames if "api2/anchor" in f.url), None)
+              if not checkbox_frame:
+                  print("未找到 reCAPTCHA 的复选框 iframe")
+                  await browser.close()
+                  return
+
+              checkbox = await checkbox_frame.wait_for_selector("#recaptcha-anchor", timeout=5000)
+              await checkbox.click()
+
+              await page.wait_for_timeout(1000)
+
+              # 查找挑战 iframe
+              challenge_frame = next((f for f in page.frames if "api2/bframe" in f.url), None)
+              if not challenge_frame:
+                  print("未找到 reCAPTCHA 的挑战 iframe")
+                  await browser.close()
+                  return
+
+              # 图像
+              img = await challenge_frame.query_selector("img.rc-image-tile-33") or await challenge_frame.query_selector("img.rc-image-tile-44")
+              src = await img.get_attribute("src") if img else None
+              print("图像:", src)
+
+              # 任务描述
+              try:
+                  await challenge_frame.wait_for_selector(".rc-imageselect-desc-no-canonical, .rc-imageselect-desc", timeout=5000)
+                  task_text = await challenge_frame.eval_on_selector(
+                      ".rc-imageselect-desc-no-canonical, .rc-imageselect-desc",
+                      "el => el.querySelector('strong')?.textContent?.trim() || '未找到'"
+                  )
+                  print("任务: 选择所有含有：", task_text, " 的图像")
+              except:
+                  print("未找到任务描述。")
+
+              # 网格大小
+              tiles = await challenge_frame.query_selector_all(".rc-imageselect-tile")
+              visible_count = 0
+              for tile in tiles:
+                  if await tile.is_visible():
+                      visible_count += 1
+
+              if visible_count == 9:
+                  grid = "3x3"
+              elif visible_count == 16:
+                  grid = "4x4"
+              elif visible_count == 25:
+                  grid = "5x5"
+              else:
+                  grid = "未知"
+
+              print("网格大小:", grid)
+              await browser.close()
+
+      asyncio.run(extract_captcha_info())
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    <details>
+      <summary>显示代码</summary>
+      ```csharp
+      using System;
+      using System.Linq;
+      using System.Threading.Tasks;
+      using Microsoft.Playwright;
+
+      class Program
+      {
+          public static async Task Main()
+          {
+              using var playwright = await Playwright.CreateAsync();
+              var browser = await playwright.Chromium.LaunchAsync(new() { Headless = false });
+              var page = await browser.NewPageAsync();
+
+              await page.GotoAsync("https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high");
+
+              var checkboxFrame = page.Frames.FirstOrDefault(f => f.Url.Contains("api2/anchor"));
+              if (checkboxFrame == null)
+              {
+                  Console.WriteLine("未找到 reCAPTCHA 的复选框 iframe");
+                  await browser.CloseAsync();
+                  return;
+              }
+
+              var checkbox = await checkboxFrame.WaitForSelectorAsync("#recaptcha-anchor");
+              await checkbox.ClickAsync();
+
+              await page.WaitForTimeoutAsync(1000);
+
+              var challengeFrame = page.Frames.FirstOrDefault(f => f.Url.Contains("api2/bframe"));
+              if (challengeFrame == null)
+              {
+                  Console.WriteLine("未找到 reCAPTCHA 的挑战 iframe");
+                  await browser.CloseAsync();
+                  return;
+              }
+
+              var img = await challengeFrame.QuerySelectorAsync("img.rc-image-tile-33") ?? await challengeFrame.QuerySelectorAsync("img.rc-image-tile-44");
+              var src = img != null ? await img.GetAttributeAsync("src") : null;
+              Console.WriteLine("图像: " + src);
+
+              try
+              {
+                  await challengeFrame.WaitForSelectorAsync(".rc-imageselect-desc-no-canonical, .rc-imageselect-desc");
+                  var taskText = await challengeFrame.EvalOnSelectorAsync<string>(
+                      ".rc-imageselect-desc-no-canonical, .rc-imageselect-desc",
+                      @"el => {
+                          const strong = el.querySelector('strong');
+                          return strong ? strong.textContent.trim() : '未找到';
+                      }");
+                  Console.WriteLine("任务: 选择所有含有：" + taskText + " 的图像");
+              }
+              catch
+              {
+                  Console.WriteLine("未找到任务描述。");
+              }
+
+              var tiles = await challengeFrame.QuerySelectorAllAsync(".rc-imageselect-tile");
+              int visibleCount = 0;
+              foreach (var tile in tiles)
+              {
+                  if (await tile.IsVisibleAsync())
+                      visibleCount++;
+              }
+
+              string gridSize = visibleCount switch
+              {
+                  9 => "3x3",
+                  16 => "4x4",
+                  25 => "5x5",
+                  _ => "未知"
+              };
+
+              Console.WriteLine("网格大小: " + gridSize);
+              await browser.CloseAsync();
+          }
+      }
+      ```
+    </details>
+  </TabItem>
+</Tabs>
 
 ## 使用 SDK 库
 
