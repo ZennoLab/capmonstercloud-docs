@@ -132,3 +132,105 @@ Use o método [getTaskResult](../api/methods/get-task-result.md) para obter a so
 		```
 	</MethodDescription>
 </TabItem>
+
+## Como Encontrar Todos os Parâmetros Necessários para a Criação da Tarefa
+
+### Automaticamente
+
+Uma forma conveniente de automatizar a busca por todos os parâmetros necessários.  
+Alguns parâmetros são regenerados a cada carregamento da página, então você precisará extraí-los através de um navegador — seja normal ou headless (por exemplo, usando **Playwright**).  
+Como os valores dos parâmetros dinâmicos são de curta duração, o captcha deve ser resolvido imediatamente após a captura deles.
+
+:::warning **Importante!**  
+Os trechos de código fornecidos são exemplos básicos para familiarização com a extração dos parâmetros necessários. A implementação exata dependerá da sua página de captcha, sua estrutura e dos elementos/seletores HTML que ela utiliza.  
+:::
+
+<Tabs className="full-width-tabs filled-tabs request-tabs">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+    <details>
+      <summary>Mostrar código (Node.js)</summary>
+
+      ```js
+      import { chromium } from 'playwright';
+
+      (async () => {
+        const browser = await chromium.launch();
+        const page = await browser.newPage();
+
+        await page.goto('https://example.com');
+
+        // Obter cookies
+        const cookies = await page.context().cookies();
+        console.log('Cookies:', cookies);
+
+        await browser.close();
+      })();
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="python" label="Python" className="method-panel">
+    <details>
+      <summary>Mostrar código</summary>
+
+      ```python
+      import asyncio
+      from playwright.async_api import async_playwright
+
+      async def run():
+          async with async_playwright() as p:
+              browser = await p.chromium.launch()
+              page = await browser.new_page()
+
+              await page.goto('https://example.com')
+
+              # Obter cookies
+              cookies = await page.context.cookies()
+              print('Cookies:', cookies)
+
+              await browser.close()
+
+      asyncio.run(run())
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    <details>
+      <summary>Mostrar código</summary>
+
+      ```csharp
+      using System;
+      using System.Linq;
+      using System.Threading.Tasks;
+      using Microsoft.Playwright;
+
+      class Program
+      {
+          public static async Task Main()
+          {
+              using var playwright = await Playwright.CreateAsync();
+              var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+              {
+                  Headless = true
+              });
+
+              var context = await browser.NewContextAsync();
+              var page = await context.NewPageAsync();
+
+              await page.GotoAsync("https://example.com");
+
+              var cookies = await context.CookiesAsync();
+              Console.WriteLine("Cookies:");
+              foreach (var cookie in cookies)
+              {
+                  Console.WriteLine($"{cookie.Name}: {cookie.Value}");
+              }
+
+              await browser.CloseAsync();
+          }
+      }
+      ```
+    </details>
+  </TabItem>
+</Tabs>
