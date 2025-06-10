@@ -249,8 +249,7 @@ The code snippets provided are basic examples for familiarization with extractin
 
       ```js
       (() => {
-        const iframeEl = document.querySelector('iframe[src^=
-        "https://www.google.com/recaptcha/api2/anchor?"]');
+        const iframeEl = document.querySelector('iframe[src^="https://www.google.com/recaptcha/api2/anchor?"]');
         const captchaUrl = iframeEl?.getAttribute('src');
 
         if (captchaUrl) {

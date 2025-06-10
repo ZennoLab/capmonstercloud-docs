@@ -247,8 +247,7 @@ import BlogLink from '@theme/BlogLink';
 
       ```js
       (() => {
-        const iframeEl = document.querySelector('iframe[src^=
-        "https://www.google.com/recaptcha/api2/anchor?"]');
+        const iframeEl = document.querySelector('iframe[src^="https://www.google.com/recaptcha/api2/anchor?"]');
         const captchaUrl = iframeEl?.getAttribute('src');
 
         if (captchaUrl) {
