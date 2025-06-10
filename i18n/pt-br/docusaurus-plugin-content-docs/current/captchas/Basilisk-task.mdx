@@ -119,6 +119,152 @@ https://api.capmonster.cloud/getTaskResult
 </MethodDescription>
 </TabItem>
 
+## Como Encontrar Todos os Parâmetros Necessários para a Criação da Tarefa
+
+### Manualmente
+
+1. Abra seu site onde o captcha aparece no navegador.
+2. Clique com o botão direito no elemento do captcha e selecione **Inspecionar**.
+
+#### websiteKey
+
+Na aba **Network**, filtre as requisições usando palavras-chave relacionadas a captchas, como *site_key*. Essas requisições conterão o parâmetro *site_key* — um valor usado para identificar o site durante o processo de resolução do captcha:
+
+![site-key-basilisk](images\basilisk\site-key.png)
+
+### Automaticamente
+
+Uma forma conveniente de automatizar a busca por todos os parâmetros necessários.  
+Alguns parâmetros são regenerados a cada carregamento da página, então você precisará extraí-los através de um navegador — seja normal ou headless (por exemplo, usando **Playwright**).  
+Como os valores dos parâmetros dinâmicos são de curta duração, o captcha deve ser resolvido imediatamente após a captura deles.
+
+:::warning **Importante!**  
+Os trechos de código fornecidos são exemplos básicos para familiarização com a extração dos parâmetros necessários. A implementação exata dependerá da sua página de captcha, sua estrutura e dos elementos/seletores HTML que ela utiliza.  
+:::
+
+<Tabs className="full-width-tabs filled-tabs request-tabs">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+    <details>
+      <summary>Mostrar código (para navegador)</summary>
+      ```js
+      // Procure por um elemento com o atributo data-sitekey
+      const captchaElement = document.querySelector('[data-sitekey]');
+
+      // Extraia o valor do sitekey
+      if (captchaElement) {
+        const siteKey = captchaElement.getAttribute('data-sitekey');
+        console.log('Site-key encontrado:', siteKey);
+      } else {
+        console.log('site-key não encontrado');
+      }
+      ```
+    </details>
+
+    <details>
+      <summary>Mostrar código (Node.js)</summary>
+      ```js
+      import { chromium } from 'playwright';
+
+      async function extractSiteKey() {
+        const browser = await chromium.launch({ headless: true });
+        const page = await browser.newPage();
+
+        const url = 'https://example.com';
+        await page.goto(url);
+
+        // Procure por um elemento com o atributo data-sitekey
+        const captchaElement = await page.$('[data-sitekey]');
+
+        // Extraia o valor do sitekey
+        if (captchaElement) {
+          const siteKey = await captchaElement.getAttribute('data-sitekey');
+          console.log('Site-key encontrado:', siteKey);
+        } else {
+          console.log('site-key não encontrado');
+        }
+
+        await browser.close();
+      }
+
+      extractSiteKey();
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="python" label="Python" className="method-panel">
+    <details>
+      <summary>Mostrar código</summary>
+      ```python
+      import asyncio
+      from playwright.async_api import async_playwright
+
+      async def main():
+          async with async_playwright() as p:
+              browser = await p.chromium.launch(headless=False)
+              page = await browser.new_page()
+
+              url = 'https://example.com/captcha-page'
+              await page.goto(url)
+
+              # Procure por um elemento com o atributo data-sitekey
+              captcha_element = await page.query_selector('[data-sitekey]')
+
+              # Extraia o valor do sitekey se o elemento for encontrado
+              if captcha_element:
+                  site_key = await captcha_element.get_attribute('data-sitekey')
+                  print('Site-key encontrado:', site_key)
+              else:
+                  print('site-key não encontrado')
+
+              await browser.close()
+
+      asyncio.run(main())
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    <details>
+      <summary>Mostrar código</summary>
+      ```csharp
+      using System;
+      using System.Threading.Tasks;
+      using Microsoft.Playwright;
+
+      class Program
+      {
+          static async Task Main(string[] args)
+          {
+              string url = "https://example.com/captcha-page";
+
+              using var playwright = await Playwright.CreateAsync();
+              var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { 
+              Headless = false });
+              var page = await browser.NewPageAsync();
+
+              await page.GotoAsync(url);
+
+              // Procure por um elemento com o atributo data-sitekey
+              var captchaElement = await page.QuerySelectorAsync("[data-sitekey]");
+
+              // Extraia o valor do sitekey se o elemento for encontrado
+              if (captchaElement != null)
+              {
+                  var siteKey = await captchaElement.GetAttributeAsync("data-sitekey");
+                  Console.WriteLine("Site-key encontrado: " + siteKey);
+              }
+              else
+              {
+                  Console.WriteLine("site-key não encontrado");
+              }
+
+              await browser.CloseAsync();
+          }
+      }
+      ```
+    </details>
+  </TabItem>
+</Tabs>
 
 ## Usar biblioteca SDK
 

@@ -123,6 +123,282 @@ import BlogLink from '@theme/BlogLink';
 | :- | :- | :- |
 |gRecaptchaResponse|String|应插入到 Recaptcha3 提交表单中的哈希值 `<textarea id="g-recaptcha-response"></textarea>`。长度为 500 到 2190 字节。|
 
+## 如何查找任务创建所需的所有参数
+
+### 手动方式
+
+1. 请在浏览器中访问您的网站，该网站包含验证码功能。
+2. 右键点击验证码元素，选择 **检查（Inspect）**。
+
+#### websiteKey
+
+公开站点密钥(sitekey)，通常可以在包含的脚本中找到：
+
+在**Elements**中：
+
+![elements](images\recaptcha-v3\sitekey-elements.png)
+
+在**Network**标签页中：
+
+![network](images\recaptcha-v3\sitekey-network.png)
+
+#### pageAction
+
+传递给*grecaptcha.execute()*的动作名称，例如：
+
+![action](images\recaptcha-v3\action.png)
+
+### 自动方法
+
+一种方便的自动化获取所有必要参数的方式。
+某些参数每次页面加载时都会重新生成，因此需要通过浏览器（普通或无头模式，如使用**Playwright**）提取它们。
+由于动态参数值的有效期很短，获取后必须立即解决验证码。
+
+:::warning **重要提示！**
+提供的代码片段是用于熟悉参数提取的基本示例。具体实现将取决于验证码页面、其结构及使用的HTML元素/选择器。
+:::
+
+<Tabs className="full-width-tabs filled-tabs request-tabs">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+    <details>
+      <summary>显示代码（浏览器中）</summary>
+
+      ```js
+      (() => {
+          const originalGrecaptcha = window.grecaptcha;
+
+          if (!originalGrecaptcha || !originalGrecaptcha.execute) {
+              console.warn("未找到grecaptcha.execute，请等待加载完成");
+              return;
+          }
+
+          window.__extractedParams = null;
+
+          window.grecaptcha = {
+              ...originalGrecaptcha,
+              execute: function(sitekey, config) {
+                  console.log("已捕获！");
+                  console.log("sitekey:", sitekey);
+                  console.log("action:", config?.action);
+                  window.__extractedParams = {
+                      sitekey,
+                      action: config?.action
+                  };
+
+                  return originalGrecaptcha.execute(sitekey, config);
+              },
+              ready: originalGrecaptcha.ready
+          };
+
+          console.log("grecaptcha.execute已被封装。点击按钮-参数将被捕获");
+      })();
+      ```
+    </details>
+
+    <details>
+      <summary>显示代码（Node.js）</summary>
+
+      ```js
+      import { chromium } from "playwright";
+
+      (async () => {
+        const browser = await chromium.launch({ headless: false });
+        const context = await browser.newContext();
+        const page = await context.newPage();
+
+        const jsContents = [];
+
+        page.on("response", async (response) => {
+          try {
+            const url = response.url();
+            const ct = response.headers()["content-type"] || "";
+            if (ct.includes("javascript") || url.endsWith(".js")) {
+              const text = await response.text();
+              jsContents.push(text);
+            }
+          } catch (e) {}
+        });
+
+        const targetUrl = "https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta";
+        await page.goto(targetUrl, { timeout: 60000 });
+        await page.waitForTimeout(3000);
+
+        const inlineScripts = await page.$$eval("script:not([src])", (scripts) =>
+          scripts.map((s) => s.textContent)
+        );
+        jsContents.push(...inlineScripts);
+
+        const executeRegex =
+          /grecaptcha\.execute\(\s*['"]
+          (?<sitekey>[^'"]+)['"]\s*,\s*\{[^}]*action\s*:\s*['"](?<action>[^'"]+)['"]/i;
+
+        let foundSitekey = null;
+        let foundAction = null;
+
+        for (const js of jsContents) {
+          const match = js.match(executeRegex);
+          if (match && match.groups) {
+            foundSitekey = match.groups.sitekey;
+            foundAction = match.groups.action;
+            break;
+          }
+        }
+
+        console.log({
+          sitekey: foundSitekey,
+          action: foundAction,
+        });
+
+        await browser.close();
+      })();
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="python" label="Python" className="method-panel">
+    <details>
+      <summary>显示代码</summary>
+
+      ```python
+      import asyncio
+      import re
+      from playwright.async_api import async_playwright
+
+      async def extract_recaptcha_v3_execute(url):
+          async with async_playwright() as p:
+              browser = await p.chromium.launch(headless=False)
+              context = await browser.new_context()
+              page = await context.new_page()
+
+              execute_pattern = re.compile(
+                  r"grecaptcha\.execute\(\s*['\"]"
+                  r"(?P<sitekey>[^'\"]+)['\"]\s*,\s*\{[^}]*action\s*:\s*['\"](?P<action>[^'\"]+)['\"]",
+                  re.IGNORECASE
+              )
+
+              found_sitekey = None
+              found_action = None
+              js_contents = []
+
+              async def handle_response(response):
+                  try:
+                      ct = response.headers.get("content-type", "")
+                      if "javascript" in ct or response.url.endswith(".js"):
+                          text = await response.text()
+                          js_contents.append(text)
+                  except:
+                      pass
+
+              page.on("response", handle_response)
+
+              await page.goto(url, timeout=60000)
+              await page.wait_for_timeout(3000)
+
+              inline_scripts = await page.locator("script:not([src])").all_text_contents()
+              js_contents += inline_scripts
+
+              for js in js_contents:
+                  match = execute_pattern.search(js)
+                  if match:
+                      found_sitekey = match.group("sitekey")
+                      found_action = match.group("action")
+                      break
+
+              await browser.close()
+
+              print({
+                  "sitekey": found_sitekey,
+                  "action": found_action
+              })
+
+      asyncio.run(extract_recaptcha_v3_execute("https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta"))
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    <details>
+      <summary>显示代码</summary>
+
+      ```csharp
+      using System;
+      using System.Text.RegularExpressions;
+      using System.Threading.Tasks;
+      using Microsoft.Playwright;
+      using System.Collections.Generic;
+
+      class Program
+      {
+          public static async Task Main(string[] args)
+          {
+              await ExtractRecaptchaV3Execute
+              ("https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta");
+          }
+
+          public static async Task ExtractRecaptchaV3Execute(string url)
+          {
+              using var playwright = await Playwright.CreateAsync();
+              var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+              {
+                  Headless = false
+              });
+
+              var context = await browser.NewContextAsync();
+              var page = await context.NewPageAsync();
+
+              string foundSitekey = null;
+              string foundAction = null;
+              var jsContents = new List<string>();
+
+              page.Response += async (_, response) =>
+              {
+                  try
+                  {
+                      var ct = response.Headers.ContainsKey("content-type") ? 
+                      response.Headers["content-type"] : "";
+                      if ((ct != null && ct.Contains("javascript")) || response.Url.EndsWith(".js"))
+                      {
+                          var text = await response.TextAsync();
+                          jsContents.Add(text);
+                      }
+                  }
+                  catch { }
+              };
+
+              await page.GotoAsync(url, new PageGotoOptions { Timeout = 60000 });
+              await page.WaitForTimeoutAsync(3000);
+
+              var inlineScripts = await page.EvalOnSelectorAllAsync<string[]>(
+                  "script:not([src])",
+                  "els => els.map(e => e.textContent)"
+              );
+              jsContents.AddRange(inlineScripts);
+
+              var regex = new Regex(@"grecaptcha\.execute\(\s*['""]"
+              + @"(?<sitekey>[^'""]+)['""]\s*,\s*\{[^}]*action\s*:\s*['""](?<action>[^'""]+)['""]", 
+              RegexOptions.IgnoreCase);
+
+              foreach (var js in jsContents)
+              {
+                  var match = regex.Match(js);
+                  if (match.Success)
+                  {
+                      foundSitekey = match.Groups["sitekey"].Value;
+                      foundAction = match.Groups["action"].Value;
+                      break;
+                  }
+              }
+
+              Console.WriteLine($"sitekey: {foundSitekey}");
+              Console.WriteLine($"action: {foundAction}");
+
+              await browser.CloseAsync();
+          }
+      }
+      ```
+    </details>
+  </TabItem>
+</Tabs>
 
 ## 使用 SDK 库
 

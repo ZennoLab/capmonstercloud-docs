@@ -145,6 +145,137 @@ Use o método [getTaskResult](../api/methods/get-task-result.md) para obter a so
 
 Error 16 - este erro está relacionado ao uso de servidores proxy que não correspondem à geolocalização exigida.
 
+## Como Encontrar Todos os Parâmetros Necessários para a Criação da Tarefa
+
+### Automaticamente
+
+Uma forma conveniente de automatizar a busca por todos os parâmetros necessários.  
+Alguns parâmetros são regenerados a cada carregamento da página, então você precisará extraí-los através de um navegador — seja normal ou headless (por exemplo, usando **Playwright**).  
+Como os valores dos parâmetros dinâmicos são de curta duração, o captcha deve ser resolvido imediatamente após a captura deles.
+
+:::warning **Importante!**  
+Os trechos de código fornecidos são exemplos básicos para familiarização com a extração dos parâmetros necessários. A implementação exata dependerá da sua página de captcha, sua estrutura e dos elementos/seletores HTML que ela utiliza.  
+:::
+
+<Tabs className="full-width-tabs filled-tabs request-tabs">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+    <details>
+      <summary>Mostrar código (Node.js)</summary>
+      ```js
+      import { chromium } from "playwright";
+
+      (async () => {
+        const browser = await chromium.launch({ headless: false });
+        const page = await browser.newPage();
+
+        await page.goto("https://www.example.com/");
+
+        // Extraia o atributo src do iframe com id main-iframe
+        const iframeSrc = await page.$eval("#main-iframe", (iframe) =>
+          iframe.getAttribute("src")
+        );
+        console.log("src do iframe:", iframeSrc);
+
+        // Obtenha todos os cookies
+        const cookies = await page.context().cookies();
+
+        // Filtre cookies que começam com visid_incap_ ou incap_ses_
+        const filteredCookies = cookies.filter(
+          (cookie) =>
+            cookie.name.startsWith("visid_incap_") ||
+            cookie.name.startsWith("incap_ses_")
+        );
+
+        filteredCookies.forEach((cookie) => {
+          console.log(`${cookie.name}=${cookie.value}`);
+        });
+
+        await browser.close();
+      })();
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="python" label="Python" className="method-panel">
+    <details>
+      <summary>Mostrar código</summary>
+      ```python
+      import asyncio
+      from playwright.async_api import async_playwright
+
+      async def main():
+          async with async_playwright() as p:
+              browser = await p.chromium.launch(headless=False)
+              page = await browser.new_page()
+
+              await page.goto("https://www.example.com/")
+
+              # Extraia o atributo src do iframe com id main-iframe
+              iframe_src = await page.locator("#main-iframe").get_attribute("src")
+              print("src do iframe:", iframe_src)  # Exibe o valor do src
+
+              # Obtenha todos os cookies
+              cookies = await page.context.cookies()
+
+              # Filtre cookies que começam com visid_incap_ ou incap_ses_
+              filtered_cookies = [
+                  cookie for cookie in cookies
+                  if cookie["name"].startswith("visid_incap_") or cookie["name"].startswith("incap_ses_")
+              ]
+
+              for cookie in filtered_cookies:
+                  print(f"{cookie['name']}={cookie['value']}")
+
+              await browser.close()
+
+      asyncio.run(main())
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    <details>
+      <summary>Mostrar código</summary>
+      ```csharp
+      using System;
+      using System.Linq;
+      using System.Threading.Tasks;
+      using Microsoft.Playwright;
+
+      class Program
+      {
+          public static async Task Main(string[] args)
+          {
+              var playwright = await Playwright.CreateAsync();
+              var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = false });
+              var page = await browser.NewPageAsync();
+
+              await page.GotoAsync("https://www.example.com/");
+
+              // Extraia o atributo src do iframe com id main-iframe
+              var iframeSrc = await page.GetAttributeAsync("#main-iframe", "src");
+              Console.WriteLine("src do iframe: " + iframeSrc); // Exibe o valor do src
+
+              // Obtenha todos os cookies
+              var cookies = await page.Context.CookiesAsync();
+
+              // Filtre cookies que começam com visid_incap_ ou incap_ses_
+              var filteredCookies = cookies.Where(cookie =>
+                  cookie.Name.StartsWith("visid_incap_") || cookie.Name.StartsWith("incap_ses_"));
+
+              foreach (var cookie in filteredCookies)
+              {
+                  Console.WriteLine($"{cookie.Name}={cookie.Value}");
+              }
+
+              await browser.CloseAsync();
+          }
+      }
+      ```
+    </details>
+  </TabItem>
+</Tabs>
+
 ## Usar biblioteca SDK
 
 	<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">

@@ -156,6 +156,142 @@ loadAndEncodeCaptchaToBase64(captchaUrl);
 | :-: | :-: | :-: |
 |text|String|验证码答案|
 
+## 如何查找任务创建所需的所有参数
+
+### 手动方式
+
+1. 请在浏览器中访问您的网站，该网站包含验证码功能。
+2. 右键点击验证码元素，选择 **检查（Inspect）**。
+
+#### base64
+
+在 DOM 树中找到所需的元素并将鼠标悬停在其上——*base64* 编码的图片会直接显示在元素的属性中：
+
+![base64elements](images\image-to-text\base64-elements.png)
+
+如果图片引用的是外部 URL，而不是包含 base64 编码的数据，你可以在网络请求（**Network**）中找到它。右键点击相关请求，选择 **复制图片为数据 URI**。这会将 *base64* 编码的图片数据复制到剪贴板。
+
+![base64network](images\image-to-text\base64-network.png)
+
+### 自动方法
+
+一种方便的自动化获取所有必要参数的方式。
+某些参数每次页面加载时都会重新生成，因此需要通过浏览器（普通或无头模式，如使用**Playwright**）提取它们。
+由于动态参数值的有效期很短，获取后必须立即解决验证码。
+
+:::warning **重要提示！**
+提供的代码片段是用于熟悉参数提取的基本示例。具体实现将取决于验证码页面、其结构及使用的HTML元素/选择器。
+:::
+
+<Tabs className="full-width-tabs filled-tabs request-tabs">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+    <details>
+      <summary>显示代码（浏览器端）</summary>
+      ```js
+      (async () => {
+        const img = document.querySelector('img'); // 示例选择器
+
+        const imageUrl = img.src;
+
+        const response = await fetch(imageUrl);
+
+        if (!response.ok) {
+          throw new Error("加载图片失败");
+        }
+
+        const buffer = await response.arrayBuffer();
+
+        // 将二进制数据转换为 base64
+        const base64Image = btoa(String.fromCharCode(...new Uint8Array(buffer)));
+
+        console.log(base64Image); 
+      })();
+      ```
+    </details>
+
+    <details>
+      <summary>显示代码（Node.js）</summary>
+      ```js
+      (async () => {
+        const imageUrl = "https://example/img/.jpg"; // 图片 URL
+
+        const response = await fetch(imageUrl);
+
+        if (!response.ok) {
+          throw new Error("加载图片失败");
+        }
+
+        const buffer = await response.arrayBuffer();
+
+        // 转换数据为 base64
+        const base64Image = Buffer.from(buffer).toString("base64");
+
+        console.log(base64Image);
+      })();
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="python" label="Python" className="method-panel">
+    <details>
+      <summary>显示代码</summary>
+      ```python
+      import requests
+      import base64
+
+      # 图片 URL
+      image_url = "https://example/img.jpg"
+
+      response = requests.get(image_url)
+
+      if response.status_code == 200:
+          # 将图片二进制数据转换为 base64
+          base64_image = base64.b64encode(response.content).decode('utf-8')
+
+          print(base64_image)
+      else:
+          print("加载图片失败")
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    <details>
+      <summary>显示代码</summary>
+      ```csharp
+      using System;
+      using System.Net.Http;
+      using System.Threading.Tasks;
+
+      class Program
+      {
+          static async Task Main(string[] args)
+          {
+              // 图片 URL
+              string imageUrl = "https://example/img.jpg";
+
+              using (HttpClient client = new HttpClient())
+              {
+                  try
+                  {
+                      byte[] imageBytes = await client.GetByteArrayAsync(imageUrl);
+
+                      // 将图片二进制数据转换为 base64
+                      string base64Image = Convert.ToBase64String(imageBytes);
+
+                      Console.WriteLine(base64Image);
+                  }
+                  catch (Exception ex)
+                  {
+                      Console.WriteLine("加载图片失败: " + ex.Message);
+                  }
+              }
+          }
+      }
+      ```
+    </details>
+  </TabItem>
+</Tabs>
 
 ## 使用 SDK 库
 

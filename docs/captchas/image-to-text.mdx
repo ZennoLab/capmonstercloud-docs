@@ -159,6 +159,142 @@ loadAndEncodeCaptchaToBase64(captchaUrl);
 | :-: | :-: | :-: |
 |text|String|Текст решения капчи|
 
+## Как найти все нужные параметры для создания задачи на решение
+
+### Вручную
+
+1. Откройте ваш сайт, где отображается капча, в браузере.
+2. Правой кнопкой кликните по элементу капчи и выберите **Inspect**.
+
+#### base64
+
+Найдите нужный элемент в DOM-дереве и наведите на него курсор – закодированное в *base64* изображение отобразится непосредственно в атрибутах элемента:
+
+![base64elements](images\image-to-text\base64-elements.png)
+
+Если изображение ссылается на внешний URL, а не содержит данные в формате base64, его можно найти в разделе сетевых запросов (**Network**). Кликните правой кнопкой мыши по нужному запросу и выберите **Copy image as data URI**. Вы сразу получите кодировку изображения в формате *base64*, скопированную в буфер обмена.
+
+![base64network](images\image-to-text\base64-network.png)
+
+### Автоматически
+
+Удобный способ автоматизировать поиск всех необходимых параметров.
+Некоторые параметры генерируются заново при каждой загрузке страницы, поэтому для их извлечения потребуется работать через браузер – обычный или в режиме headless (например, с помощью **Playwright**).
+Так как значения динамических параметров хранятся недолго, капчу нужно решать сразу после их получения.
+
+:::warning **Важно!**
+Приведённые фрагменты кода являются базовыми примерами для ознакомления в извлечении необходимых параметров. Точная реализация будет зависеть от вашего сайта с капчей, его структуры и используемых HTML-элементов и селекторов.
+:::
+
+<Tabs className="full-width-tabs filled-tabs request-tabs">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+    <details>
+      <summary>Показать код (для браузера)</summary>
+      ```js
+      (async () => {
+        const img = document.querySelector('img'); // Пример селектора
+
+        const imageUrl = img.src;
+
+        const response = await fetch(imageUrl);
+
+        if (!response.ok) {
+          throw new Error("Ошибка загрузки изображения");
+        }
+
+        const buffer = await response.arrayBuffer();
+
+        // Преобразуем бинарные данные в base64
+        const base64Image = btoa(String.fromCharCode(...new Uint8Array(buffer)));
+
+        console.log(base64Image); 
+      })();
+      ```
+    </details>
+
+    <details>
+      <summary>Показать код (Node.js)</summary>
+      ```js
+      (async () => {
+        const imageUrl = "https://example/img/.jpg"; // Ссылка на изображение
+
+        const response = await fetch(imageUrl);
+
+        if (!response.ok) {
+          throw new Error("Ошибка загрузки изображения");
+        }
+
+        const buffer = await response.arrayBuffer();
+
+        // Преобразуем данные в base64
+        const base64Image = Buffer.from(buffer).toString("base64");
+
+        console.log(base64Image);
+      })();
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="python" label="Python" className="method-panel">
+    <details>
+      <summary>Показать код</summary>
+      ```python
+      import requests
+      import base64
+
+      # Ссылка на изображение
+      image_url = "https://example/img.jpg"
+
+      response = requests.get(image_url)
+
+      if response.status_code == 200:
+          # Преобразуем бинарные данные изображения в base64
+          base64_image = base64.b64encode(response.content).decode('utf-8')
+
+          print(base64_image)
+      else:
+          print("Ошибка загрузки изображения")
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    <details>
+      <summary>Показать код</summary>
+      ```csharp
+      using System;
+      using System.Net.Http;
+      using System.Threading.Tasks;
+
+      class Program
+      {
+          static async Task Main(string[] args)
+          {
+              // Ссылка на изображение
+              string imageUrl = "https://example/img.jpg";
+
+              using (HttpClient client = new HttpClient())
+              {
+                  try
+                  {
+                      byte[] imageBytes = await client.GetByteArrayAsync(imageUrl);
+
+                      // Преобразуем бинарные данные изображения в base64
+                      string base64Image = Convert.ToBase64String(imageBytes);
+
+                      Console.WriteLine(base64Image);
+                  }
+                  catch (Exception ex)
+                  {
+                      Console.WriteLine("Ошибка загрузки изображения: " + ex.Message);
+                  }
+              }
+          }
+      }
+      ```
+    </details>
+  </TabItem>
+</Tabs>
 
 ## Используйте библиотеку SDK
 
