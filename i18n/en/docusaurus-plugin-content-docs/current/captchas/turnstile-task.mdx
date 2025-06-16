@@ -481,6 +481,577 @@ const chrome = require('selenium-webdriver/chrome');
 ```
 </details>
 
+## How to Find All Required Parameters for Task Creation
+
+### Manually
+
+1. Open your website where the captcha appears in the browser.
+2. Right-click on the captcha element and select **Inspect**.
+
+#### Option 1.
+
+#### websiteKey
+
+Can be found in **Elements**:
+
+![sitekeyTurnstile](images/tunrstile-task/sitekey-turnstile.png)
+
+![sitekeyTurnstile1](images/tunrstile-task/sitekey-turnstile1.png)
+
+You can also use a console command by opening the captcha URL (starting with `https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/g…`) in a separate tab:
+
+`console.log(window._cf_chl_opt.chlApiSitekey);`
+
+*chlApiSitekey* is the sitekey.
+
+#### pageAction
+
+*Action* and *sitekey* can also be found in the *callback* function:
+
+![callbackTurnstile](images/tunrstile-task/turnstile-callback.png)
+
+For **Options 2** and **3**, it's better to extract the parameters automatically:
+
+### Automatically
+
+A convenient way to automate the search for all necessary parameters.
+Some parameters are regenerated every time the page loads, so you'll need to extract them through a browser — either regular or headless (e.g., using **Playwright**).
+Since the values of dynamic parameters are short-lived, the captcha must be solved immediately after retrieving them.
+
+:::warning **Important!**
+The code snippets provided are basic examples for familiarization with extracting the required parameters. The exact implementation will depend on your captcha page, its structure, and the HTML elements/selectors it uses.
+:::
+
+<Tabs className="full-width-tabs filled-tabs request-tabs">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+    <details>
+      <summary>Option 1 (In Browser)</summary>
+
+      ```js
+      // Function to check for the presence of window.onloadTurnstileCallback
+      const checkTurnstileCallback = () => {
+        return new Promise((resolve, reject) => {
+          const timeout = setTimeout(() => reject('Callback timeout'), 30000);
+
+          const interval = setInterval(() => {
+            if (window.onloadTurnstileCallback !== undefined) {
+              clearInterval(interval);
+              clearTimeout(timeout);
+
+              const callbackDetails = window.onloadTurnstileCallback.toString();
+              const sitekeyMatch = callbackDetails.match(/sitekey: ['"]([^'"]+)['"]/);
+              const actionMatch = callbackDetails.match(/action: ['"]([^'"]+)['"]/);
+
+              resolve({
+                sitekey: sitekeyMatch ? sitekeyMatch[1] : null,
+                action: actionMatch ? actionMatch[1] : null,
+              });
+            }
+          }, 500);
+        });
+      };
+
+      // Try to find any element with data-sitekey
+      const turnstileElement = document.querySelector('[data-sitekey]');
+
+      if (turnstileElement) {
+        // Extract the data-sitekey attribute value
+        const sitekey = turnstileElement.getAttribute("data-sitekey");
+        console.log("Turnstile Sitekey (from element):", sitekey);
+      } else {
+        console.log("Turnstile element not found. Checking via callback...");
+
+        // If the element is not found, check via window.onloadTurnstileCallback
+        checkTurnstileCallback()
+          .then((data) => {
+            console.log("Turnstile Params (from callback):", data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+      ```
+    </details>
+
+    <details>
+      <summary>Option 2 (Node.js)</summary>
+
+      ```js
+      import { chromium } from "playwright";
+
+      (async () => {
+        const browser = await chromium.launch({ headless: false });
+        const page = await browser.newPage();
+
+        let params = null;
+
+        try {
+          while (!params) {
+            await page.goto("https://example.com");
+
+            await page.evaluate(() => {
+              window.turnstile = new Proxy(window.turnstile, {
+                get(target, prop) {
+                  if (prop === "render") {
+                    return function (a, b) {
+                      const p = {
+                        websiteKey: b.sitekey,
+                        websiteURL: window.location.href,
+                        data: b.cData,
+                        pagedata: b.chlPageData,
+                        action: b.action,
+                        userAgent: navigator.userAgent,
+                      };
+                      window.params = p;
+                      return target.render.apply(this, arguments);
+                    };
+                  }
+                  return target[prop];
+                },
+              });
+            });
+
+            params = await page.evaluate(() => {
+              return new Promise((resolve) => {
+                setTimeout(() => resolve(window.params || null), 5000);
+              });
+            });
+
+            if (!params) {
+              await page.waitForTimeout(3000);
+            }
+          }
+
+          console.log("Turnstile Params:", params);
+        } finally {
+          await browser.close();
+        }
+      })();
+      ```
+    </details>
+
+    <details>
+      <summary>Option 3 (Node.js)</summary>
+
+      ```js
+      import { chromium } from "playwright";
+      import { Buffer } from "buffer";
+
+      (async () => {
+        const browser = await chromium.launch({ headless: false });
+        const page = await browser.newPage();
+
+        let websiteKey = null;
+
+        while (!websiteKey) {
+          await page.goto("https://example.com");
+
+          await page.evaluate(() => {
+            window.turnstile = new Proxy(window.turnstile, {
+              get(target, prop) {
+                if (prop === "render") {
+                  return function (a, b) {
+                    window.websiteKey = b.sitekey;
+                    return target.render.apply(this, arguments);
+                  };
+                }
+                return target[prop];
+              },
+            });
+          });
+
+          websiteKey = await page.evaluate(() => {
+            return new Promise((resolve) => {
+              setTimeout(() => resolve(window.websiteKey || null), 5000);
+            });
+          });
+
+          if (!websiteKey) {
+            await page.waitForTimeout(3000);
+          }
+        }
+
+        const html = await page.content();
+        const htmlPageBase64 = Buffer.from(html).toString("base64");
+
+        const result = {
+          websiteKey,
+          htmlPageBase64,
+        };
+
+        console.log(result);
+
+        await browser.close();
+      })();
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="python" label="Python" className="method-panel">
+    <details>
+      <summary>Option 1</summary>
+
+      ```python
+      import asyncio
+      from playwright.async_api import async_playwright
+
+      async def run():
+          async with async_playwright() as p:
+              browser = await p.chromium.launch(headless=False)
+              context = await browser.new_context()
+              page = await context.new_page()
+
+              await page.goto("https://example.com")  # Replace with your website
+
+              # Try to find an element with data-sitekey
+              element = await page.query_selector('[data-sitekey]')
+              if element:
+                  sitekey = await element.get_attribute("data-sitekey")
+                  print("Turnstile Sitekey (from element):", sitekey)
+              else:
+                  print("Turnstile element not found. Checking via callback...")
+
+                  try:
+                      result = await page.evaluate('''() => {
+                          return new Promise((resolve, reject) => {
+                              const timeout = setTimeout(() => reject('Callback timeout'), 30000);
+                              const interval = setInterval(() => {
+                                  if (window.onloadTurnstileCallback !== undefined) {
+                                      clearInterval(interval);
+                                      clearTimeout(timeout);
+                                      const cbStr = window.onloadTurnstileCallback.toString();
+                                      const sitekeyMatch = cbStr.match(/sitekey: ['"]([^'"]+)['"]/);
+                                      const actionMatch = cbStr.match(/action: ['"]([^'"]+)['"]/);
+                                      resolve({
+                                          sitekey: sitekeyMatch ? sitekeyMatch[1] : null,
+                                          action: actionMatch ? actionMatch[1] : null,
+                                      });
+                                  }
+                              }, 500);
+                          });
+                      }''')
+                      print("Turnstile Params (from callback):", result)
+                  except Exception as e:
+                      print("Error:", e)
+
+              await browser.close()
+
+      asyncio.run(run())
+      ```
+    </details>
+
+    <details>
+      <summary>Option 2</summary>
+
+      ```python
+      import asyncio
+      from playwright.async_api import async_playwright
+
+      async def extract_turnstile_params():
+          async with async_playwright() as p:
+              browser = await p.chromium.launch(headless=False)
+              page = await browser.new_page()
+
+              params = None
+
+              while not params:
+                  await page.goto("https://example.com")
+
+                  await page.evaluate("""
+                      window.turnstile = new Proxy(window.turnstile, {
+                        get(target, prop) {
+                          if (prop === "render") {
+                            return function(a, b) {
+                              const p = {
+                                websiteKey: b.sitekey,
+                                websiteURL: window.location.href,
+                                data: b.cData,
+                                pagedata: b.chlPageData,
+                                action: b.action,
+                                userAgent: navigator.userAgent
+                              };
+                              window.params = p;
+                              return target.render.apply(this, arguments);
+                            };
+                          }
+                          return target[prop];
+                        }
+                      });
+                  """)
+
+                  await page.wait_for_timeout(5000)
+
+                  params = await page.evaluate("window.params || null")
+
+                  if not params:
+                      await page.wait_for_timeout(3000)
+
+              print("Turnstile Params:", params)
+
+              await browser.close()
+
+      asyncio.run(extract_turnstile_params())
+      ```
+    </details>
+
+    <details>
+      <summary>Option 3</summary>
+
+      ```python
+      import asyncio
+      import base64
+      from playwright.async_api import async_playwright
+
+      async def main():
+          async with async_playwright() as p:
+              browser = await p.chromium.launch(headless=False)
+              page = await browser.new_page()
+
+              website_key = None
+
+              while not website_key:
+                  await page.goto("https://example.com")
+
+                  await page.evaluate("""
+                      () => {
+                          window.turnstile = new Proxy(window.turnstile, {
+                              get(target, prop) {
+                                  if (prop === 'render') {
+                                      return function(a, b) {
+                                          window.websiteKey = b.sitekey;
+                                          return target.render.apply(this, arguments);
+                                      };
+                                  }
+                                  return target[prop];
+                              }
+                          });
+                      }
+                  """)
+
+                  website_key = await page.evaluate("""
+                      () => new Promise(resolve => {
+                          setTimeout(() => resolve(window.websiteKey || null), 5000);
+                      })
+                  """)
+
+                  if not website_key:
+                      await page.wait_for_timeout(3000)
+
+              html = await page.content()
+              html_base64 = base64.b64encode(html.encode("utf-8")).decode("utf-8")
+
+              result = {
+                  "websiteKey": website_key,
+                  "htmlPageBase64": html_base64
+              }
+
+              print(result)
+
+              await browser.close()
+
+      asyncio.run(main())
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    <details>
+      <summary>Option 1</summary>
+
+      ```csharp
+      using System;
+      using System.Text.RegularExpressions;
+      using System.Threading.Tasks;
+      using Microsoft.Playwright;
+
+      class Program
+      {
+          public static async Task Main()
+          {
+              using var playwright = await Playwright.CreateAsync();
+              var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+              {
+                  Headless = false
+              });
+
+              var context = await browser.NewContextAsync();
+              var page = await context.NewPageAsync();
+
+              await page.GotoAsync("https://example.com"); // Replace with the target URL
+
+              var element = await page.QuerySelectorAsync("[data-sitekey]");
+
+              if (element != null)
+              {
+                  var sitekey = await element.GetAttributeAsync("data-sitekey");
+                  Console.WriteLine($"Turnstile Sitekey (from element): {sitekey}");
+              }
+              else
+              {
+                  Console.WriteLine("Turnstile element not found. Checking via callback...");
+
+                  try
+                  {
+                      var result = await page.EvaluateAsync(@"() => {
+                          return new Promise((resolve, reject) => {
+                              const timeout = setTimeout(() => reject('Callback timeout'), 30000);
+                              const interval = setInterval(() => {
+                                  if (window.onloadTurnstileCallback !== undefined) {
+                                      clearInterval(interval);
+                                      clearTimeout(timeout);
+                                      const cbStr = window.onloadTurnstileCallback.toString();
+                                      const sitekeyMatch = cbStr.match(/sitekey: ['""]([^'""]+)['""]/);
+                                      const actionMatch = cbStr.match(/action: ['""]([^'""]+)['""]/);
+                                      resolve({
+                                          sitekey: sitekeyMatch ? sitekeyMatch[1] : null,
+                                          action: actionMatch ? actionMatch[1] : null
+                                      });
+                                  }
+                              }, 500);
+                          });
+                      }");
+
+                      Console.WriteLine("Turnstile Params (from callback): " + result?.ToString());
+                  }
+                  catch (Exception ex)
+                  {
+                      Console.WriteLine("Error: " + ex.Message);
+                  }
+              }
+
+              await browser.CloseAsync();
+          }
+      }
+      ```
+    </details>
+
+    <details>
+      <summary>Option 2</summary>
+
+      ```csharp
+      using Microsoft.Playwright;
+      using System.Text.Json;
+
+      class Program
+      {
+          public static async Task Main()
+          {
+              using var playwright = await Playwright.CreateAsync();
+              var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+              {
+                  Headless = false
+              });
+
+              var page = await browser.NewPageAsync();
+              object? parameters = null;
+
+              while (parameters == null)
+              {
+                  await page.GotoAsync("https://example.com");
+
+                  await page.EvaluateAsync(@"() => {
+                      window.turnstile = new Proxy(window.turnstile, {
+                          get(target, prop) {
+                              if (prop === 'render') {
+                                  return function(a, b) {
+                                      const p = {
+                                          websiteKey: b.sitekey,
+                                          websiteURL: window.location.href,
+                                          data: b.cData,
+                                          pagedata: b.chlPageData,
+                                          action: b.action,
+                                          userAgent: navigator.userAgent
+                                      };
+                                      window.params = p;
+                                      return target.render.apply(this, arguments);
+                                  };
+                              }
+                              return target[prop];
+                          }
+                      });
+                  }");
+
+                  parameters = await page.EvaluateAsync(@"() => new Promise(resolve => {
+                      setTimeout(() => resolve(window.params || null), 5000);
+                  })");
+
+                  if (parameters == null)
+                  {
+                      await page.WaitForTimeoutAsync(3000);
+                  }
+              }
+
+              Console.WriteLine("Turnstile Params:");
+              Console.WriteLine(JsonSerializer.Serialize(parameters, new JsonSerializerOptions { WriteIndented = true }));
+
+              await browser.CloseAsync();
+          }
+      }
+      ```
+    </details>
+
+    <details>
+      <summary>Option 3</summary>
+
+      ```csharp
+      using System;
+      using System.Text;
+      using System.Threading.Tasks;
+      using Microsoft.Playwright;
+
+      class Program
+      {
+          public static async Task Main()
+          {
+              using var playwright = await Playwright.CreateAsync();
+              var browser = await playwright.Chromium.LaunchAsync(
+                new BrowserTypeLaunchOptions { Headless = false });
+              var page = await browser.NewPageAsync();
+
+              string websiteKey = null;
+
+              while (websiteKey == null)
+              {
+                  await page.GotoAsync("https://example.com");
+
+                  await page.EvaluateAsync(@"() => {
+                      window.turnstile = new Proxy(window.turnstile, {
+                          get(target, prop) {
+                              if (prop === 'render') {
+                                  return function(a, b) {
+                                      window.websiteKey = b.sitekey;
+                                      return target.render.apply(this, arguments);
+                                  };
+                              }
+                              return target[prop];
+                          }
+                      });
+                  }");
+
+                  websiteKey = await page.EvaluateAsync<string>(@"() => 
+                  new Promise(resolve => {
+                      setTimeout(() => resolve(window.websiteKey || null), 5000);
+                  })");
+
+                  if (websiteKey == null)
+                  {
+                      await page.WaitForTimeoutAsync(3000);
+                  }
+              }
+
+              var html = await page.ContentAsync();
+              var htmlBase64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(html));
+
+              Console.WriteLine($"websiteKey: {websiteKey}");
+              Console.WriteLine($"htmlPageBase64: {htmlBase64}");
+
+              await browser.CloseAsync();
+          }
+      }
+      ```
+    </details>
+  </TabItem>
+</Tabs>
 
 ## Use SDK Library
 

@@ -619,6 +619,467 @@ Na solicitação, passamos uma imagem no formato base64.
 	</MethodDescription>
 </TabItem>
 
+## Como Encontrar Todos os Parâmetros Necessários para a Criação da Tarefa
+
+### Manualmente
+
+1. Abra seu site onde o captcha aparece no navegador.
+2. Clique com o botão direito no elemento do captcha e selecione **Inspecionar**.
+
+#### base64
+
+Imagens em páginas web podem ser representadas como URL ou codificadas diretamente em formato Base64. Para encontrar o valor necessário, clique com o botão direito na imagem, selecione **Inspecionar** e examine cuidadosamente a seção **Elements** ou a grade de requisições de rede - lá você pode encontrar a URL ou o conteúdo codificado.
+
+![base64ComplexImage](images/ComplexImageTask-Recognition/base64.png)
+
+### Automaticamente
+
+Uma forma conveniente de automatizar a busca por todos os parâmetros necessários.  
+Alguns parâmetros são regenerados a cada carregamento da página, então você precisará extraí-los através de um navegador — seja normal ou headless (por exemplo, usando **Playwright**).  
+Como os valores dos parâmetros dinâmicos são de curta duração, o captcha deve ser resolvido imediatamente após a captura deles.
+
+:::warning **Importante!**  
+Os trechos de código fornecidos são exemplos básicos para familiarização com a extração dos parâmetros necessários. A implementação exata dependerá da sua página de captcha, sua estrutura e dos elementos/seletores HTML que ela utiliza.  
+:::
+
+<Tabs className="full-width-tabs filled-tabs request-tabs">
+
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+    <details>
+      <summary>Mostrar Código (Node.js)</summary>
+
+      ```js
+      import { chromium } from 'playwright';
+
+      // Função para extrair base64 do src
+      async function getBase64FromSrc(elementHandle) {
+        const src = await elementHandle.getAttribute('src');
+        if (src && src.startsWith('data:image')) {
+          return src.split(',')[1];
+        }
+        return null;
+      }
+
+      // Função para obter base64 usando screenshot (se src não estiver em base64)
+      async function elementToBase64(elementHandle) {
+        const base64 = await getBase64FromSrc(elementHandle);
+        if (base64) {
+          return base64; // Se a imagem já estiver em base64, retorná-la
+        }
+        const buffer = await elementHandle.screenshot();
+        return buffer.toString('base64');
+      }
+
+      // Função para converter array de elementos em array de strings base64
+      async function multipleElementsToBase64(elements) {
+        const base64Array = [];
+        for (const el of elements) {
+          const base64 = await elementToBase64(el);
+          base64Array.push(base64);
+        }
+        return base64Array;
+      }
+
+      // -------------------------------------------------------------
+      // Preparando base64 para diferentes tipos de captcha
+      // -------------------------------------------------------------
+
+      // 1. oocl_rotate_new (fundo + círculo)
+      async function prepareOoclRotateNew(page) {
+        const background = await page.$('img.background');
+        const circle = await page.$('img.circle');
+
+        const backgroundBase64 = await elementToBase64(background);
+        const circleBase64 = await elementToBase64(circle);
+
+        return { backgroundBase64, circleBase64 };
+      }
+
+      // 2. oocl_rotate_double_new (fundo + anel + círculo)
+      async function prepareOoclRotateDoubleNew(page) {
+        const background = await page.$('img.background');
+        const ring = await page.$('img.ring');
+        const circle = await page.$('img.circle');
+
+        const backgroundBase64 = await elementToBase64(background);
+        const ringBase64 = await elementToBase64(ring);
+        const circleBase64 = await elementToBase64(circle);
+
+        return { backgroundBase64, ringBase64, circleBase64 };
+      }
+
+      // 3. betpunch_3x3_rotate (9 pequenas imagens)
+      async function prepareBetpunch3x3(page) {
+        const sectors = await page.$$('img.sector');
+
+        const sectorsBase64 = await multipleElementsToBase64(sectors);
+
+        return { sectorsBase64 };
+      }
+
+      // 4. bls (9 pequenas imagens para clicar)
+      async function prepareBls(page) {
+        const sectors = await page.$$('img.sector');
+
+        const sectorsBase64 = await multipleElementsToBase64(sectors);
+
+        return { sectorsBase64 };
+      }
+
+      // 5. shein (1 imagem grande)
+      async function prepareShein(page) {
+        const captchaImage = await page.$('img.captcha');
+
+        const captchaBase64 = await elementToBase64(captchaImage);
+
+        return { captchaBase64 };
+      }
+
+      // Exemplo com Playwright
+      async function run() {
+        const browser = await chromium.launch();
+        const page = await browser.newPage();
+        await page.goto('https://example.com'); // Substituir pela URL real
+
+        // Exemplo de obtenção de base64 para oocl_rotate_new
+        const { backgroundBase64, circleBase64 } = await prepareOoclRotateNew(page);
+        console.log('Base64 do fundo:', backgroundBase64);
+        console.log('Base64 do círculo:', circleBase64);
+
+        await browser.close();
+      }
+
+      run();
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="python" label="Python" className="method-panel">
+    <details>
+      <summary>Mostrar Código</summary>
+
+      ```python
+      import base64
+      import asyncio
+      from playwright.async_api import async_playwright
+
+      # Função para extrair base64 do src
+      async def get_base64_from_src(element_handle):
+          src = await element_handle.get_attribute("src")
+          if src and src.startswith("data:image"):
+              return src.split(",")[1]
+          return None
+
+      # Função para obter base64 usando screenshot (se src não estiver em base64)
+      async def element_to_base64(element_handle):
+          base64_str = await get_base64_from_src(element_handle)
+          if base64_str:
+              return base64_str  # Se a imagem já estiver em base64, retorná-la
+          screenshot = await element_handle.screenshot()
+          return base64.b64encode(screenshot).decode("utf-8")
+
+      # Função para converter array de elementos em array de strings base64
+      async def multiple_elements_to_base64(elements):
+          base64_list = []
+          for el in elements:
+              base64_str = await element_to_base64(el)
+              base64_list.append(base64_str)
+          return base64_list
+
+      # -------------------------------------------------------------
+      # Preparando base64 para diferentes tipos de captcha
+      # -------------------------------------------------------------
+
+      # 1. oocl_rotate_new (fundo + círculo)
+      async def prepare_oocl_rotate_new(page):
+          background = await page.query_selector("img.background")
+          circle = await page.query_selector("img.circle")
+
+          background_base64 = await element_to_base64(background)
+          circle_base64 = await element_to_base64(circle)
+
+          return {"backgroundBase64": background_base64, "circleBase64": circle_base64}
+
+      # 2. oocl_rotate_double_new (fundo + anel + círculo)
+      async def prepare_oocl_rotate_double_new(page):
+          background = await page.query_selector("img.background")
+          ring = await page.query_selector("img.ring")
+          circle = await page.query_selector("img.circle")
+
+          background_base64 = await element_to_base64(background)
+          ring_base64 = await element_to_base64(ring)
+          circle_base64 = await element_to_base64(circle)
+
+          return {"backgroundBase64": background_base64, "ringBase64": ring_base64, "circleBase64": circle_base64}
+
+      # 3. betpunch_3x3_rotate (9 pequenas imagens)
+      async def prepare_betpunch3x3(page):
+          sectors = await page.query_selector_all("img.sector")
+          sectors_base64 = await multiple_elements_to_base64(sectors)
+
+          return {"sectorsBase64": sectors_base64}
+
+      # 4. bls (9 pequenas imagens para clicar)
+      async def prepare_bls(page):
+          sectors = await page.query_selector_all("img.sector")
+          sectors_base64 = await multiple_elements_to_base64(sectors)
+
+          return {"sectorsBase64": sectors_base64}
+
+      # 5. shein (1 imagem grande)
+      async def prepare_shein(page):
+          captcha_image = await page.query_selector("img.captcha")
+          captcha_base64 = await element_to_base64(captcha_image)
+
+          return {"captchaBase64": captcha_base64}
+
+      # Exemplo com Playwright
+      async def run():
+          async with async_playwright() as p:
+              browser = await p.chromium.launch()
+              page = await browser.new_page()
+              await page.goto("https://example.com")
+
+              # Exemplo de obtenção de base64 para oocl_rotate_new
+              result = await prepare_oocl_rotate_new(page)
+              print(result)
+
+              await browser.close()
+
+      if __name__ == "__main__":
+          asyncio.run(run())
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    <details>
+      <summary>Mostrar Código</summary>
+
+      ```csharp
+      using System;
+      using System.Collections.Generic;
+      using System.Threading.Tasks;
+      using Microsoft.Playwright;
+
+      class Program
+      {
+          // Função para extrair base64 do src
+          private static async Task<string?> GetBase64FromSrcAsync(IElementHandle elementHandle)
+          {
+              var src = await elementHandle.GetAttributeAsync("src");
+              if (!string.IsNullOrEmpty(src) && src.StartsWith("data:image"))
+              {
+                  return src.Split(',')[1];
+              }
+              return null;
+          }
+
+          // Função para obter base64 usando screenshot (se src não estiver em base64)
+          private static async Task<string> ElementToBase64Async(IElementHandle elementHandle)
+          {
+              var base64Str = await GetBase64FromSrcAsync(elementHandle);
+              if (base64Str != null)
+              {
+                  return base64Str; // Se a imagem já estiver em base64, retorná-la
+              }
+
+              var screenshot = await elementHandle.ScreenshotAsync();
+              return Convert.ToBase64String(screenshot);
+          }
+
+          // Função para converter array de elementos em array de strings base64
+          private static async Task<List<string>> MultipleElementsToBase64Async(IEnumerable<IElementHandle> elements)
+          {
+              var base64List = new List<string>();
+              foreach (var el in elements)
+              {
+                  var base64Str = await ElementToBase64Async(el);
+                  base64List.Add(base64Str);
+              }
+              return base64List;
+          }
+
+          // -------------------------------------------------------------
+          // Preparando base64 para diferentes tipos de captcha
+          // -------------------------------------------------------------
+
+          // 1. oocl_rotate_new (fundo + círculo)
+          private static async Task<Dictionary<string, string>> PrepareOoclRotateNewAsync(IPage page)
+          {
+              var background = await page.QuerySelectorAsync("img.background");
+              var circle = await page.QuerySelectorAsync("img.circle");
+
+              var backgroundBase64 = await ElementToBase64Async(background);
+              var circleBase64 = await ElementToBase64Async(circle);
+
+              return new Dictionary<string, string>
+              {
+                  ["backgroundBase64"] = backgroundBase64,
+                  ["circleBase64"] = circleBase64
+              };
+          }
+
+          // 2. oocl_rotate_double_new (fundo + anel + círculo)
+          private static async Task<Dictionary<string, string>> PrepareOoclRotateDoubleNewAsync(IPage page)
+          {
+              var background = await page.QuerySelectorAsync("img.background");
+              var ring = await page.QuerySelectorAsync("img.ring");
+              var circle = await page.QuerySelectorAsync("img.circle");
+
+              var backgroundBase64 = await ElementToBase64Async(background);
+              var ringBase64 = await ElementToBase64Async(ring);
+              var circleBase64 = await ElementToBase64Async(circle);
+
+              return new Dictionary<string, string>
+              {
+                  ["backgroundBase64"] = backgroundBase64,
+                  ["ringBase64"] = ringBase64,
+                  ["circleBase64"] = circleBase64
+              };
+          }
+
+          // 3. betpunch_3x3_rotate (9 pequenas imagens)
+          private static async Task<Dictionary<string, List<string>>> PrepareBetpunch3x3Async(IPage page)
+          {
+              var sectors = await page.QuerySelectorAllAsync("img.sector");
+              var sectorsBase64 = await MultipleElementsToBase64Async(sectors);
+
+              return new Dictionary<string, List<string>>
+              {
+                  ["sectorsBase64"] = sectorsBase64
+              };
+          }
+
+          // 4. bls (9 pequenas imagens para clicar)
+          private static async Task<Dictionary<string, List<string>>> PrepareBlsAsync(IPage page)
+          {
+              var sectors = await page.QuerySelectorAllAsync("img.sector");
+              var sectorsBase64 = await MultipleElementsToBase64Async(sectors);
+
+              return new Dictionary<string, List<string>>
+              {
+                  ["sectorsBase64"] = sectorsBase64
+              };
+          }
+
+          // 5. shein (1 imagem grande)
+          private static async Task<Dictionary<string, string>> PrepareSheinAsync(IPage page)
+          {
+              var captchaImage = await page.QuerySelectorAsync("img.captcha");
+              var captchaBase64 = await ElementToBase64Async(captchaImage);
+
+              return new Dictionary<string, string>
+              {
+                  ["captchaBase64"] = captchaBase64
+              };
+          }
+
+          public static async Task Main()
+          {
+              using var playwright = await Playwright.CreateAsync();
+              var browser = await playwright.Chromium.LaunchAsync();
+              var page = await browser.NewPageAsync();
+              await page.GotoAsync("https://example.com");
+
+              var result = await PrepareOoclRotateNewAsync(page);
+              Console.WriteLine($"Tamanho do base64 do fundo: {result["backgroundBase64"].Length}");
+              Console.WriteLine($"Tamanho do base64 do círculo: {result["circleBase64"].Length}");
+
+              await browser.CloseAsync();
+          }
+      }
+      ```
+    </details>
+  </TabItem>
+
+</Tabs>
+
+<details>
+        <summary>Exemplo de Busca por Parâmetros oocl em Node.js</summary>
+
+```js
+import { chromium } from "playwright";
+
+// Proxy (opcional)
+// const proxyHost = "";
+// const proxyUsername = "";
+// const proxyPassword = "";
+
+async function getBase64FromSrc(elementHandle) {
+  const src = await elementHandle.getAttribute("src");
+  if (src && src.startsWith("data:image")) {
+    return src.split(",")[1];
+  }
+  return null;
+}
+
+async function elementToBase64(elementHandle) {
+  const base64 = await getBase64FromSrc(elementHandle);
+  if (base64) {
+    return base64;
+  }
+  const buffer = await elementHandle.screenshot();
+  return buffer.toString("base64");
+}
+
+async function extractVerifyImagesBase64(page) {
+  const imgSelectors = [".verify-img-panel img", ".verify-sub-block img"];
+
+  const imageHandles = (
+    await Promise.all(imgSelectors.map((selector) => page.$$(selector)))
+  ).flat();
+
+  if (imageHandles.length === 0) {
+    throw new Error(
+      "Nenhuma imagem encontrada em verify-img-panel ou verify-sub-block."
+    );
+  }
+
+  const imagesBase64 = [];
+  for (const handle of imageHandles) {
+    const base64 = await elementToBase64(handle);
+    imagesBase64.push({
+      src: await handle.getAttribute("src"),
+      base64,
+    });
+  }
+
+  return imagesBase64;
+}
+
+async function run() {
+  const browser = await chromium.launch({
+    headless: false,
+    // proxy: {
+    //   server: `http://${proxyHost}`,
+    //   username: proxyUsername,
+    //   password: proxyPassword,
+    // },
+  });
+
+  const page = await browser.newPage();
+  await page.goto(
+    "https://example.com/registration/form?appurl=https://example.com"
+  );
+
+  try {
+    const images = await extractVerifyImagesBase64(page);
+    for (const { src, base64 } of images) {
+      console.log("Fonte:", src);
+      console.log("Base64:", base64);
+    }
+  } catch (err) {
+    console.error(err.message);
+  }
+
+  await browser.close();
+}
+
+run();
+```
+</details>
+
 ## Usar biblioteca SDK
 
     <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
