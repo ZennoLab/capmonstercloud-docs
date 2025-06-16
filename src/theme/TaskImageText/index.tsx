@@ -29,7 +29,7 @@ export const TaskImageText = ({ title, captchaId }: Props) => {
   }
 
   const { Price, Name } = captchaData;
-  console.log('Name', Name);
+
   const priceText = getPriceText({ price: Price, priceRate, currentLocale });
 
   return (
