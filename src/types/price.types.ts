@@ -1,5 +1,7 @@
-type FamilyName =
-  | 'reCAPTCHA'
+export type PriceName =
+  | 'reCAPTCHA v2'
+  | 'reCAPTCHA v3'
+  | 'reCAPTCHA Enterprise'
   | 'GeeTest'
   | 'Cloudflare Turnstile'
   | 'Cloudflare Bot Challenge'
@@ -13,65 +15,57 @@ type FamilyName =
   | 'Binance'
   | 'ComplexImageTask Recaptcha'
   | 'ComplexImageTask Recognition'
+  | 'reCAPTCHA Enterprise (Spotify, Yahoo)'
   | 'Temu';
 
-type ComplexId =
-  | 'complex-rc2'
-  | 'complex-rc2e'
+export type PriceId =
+  | 'rc2'
+  | 'recaptcha3'
+  | 'rc2e'
+  | 'geetest'
+  | 'cf-turnstile'
+  | 'cf-botchallenge'
+  | 'datadome'
+  | 'tencent'
+  | 'amazonwaf'
+  | 'faucetpay'
+  | 'imperva'
+  | 'prosopo'
+  | 'text'
+  | 'binance'
   | 'complex-rc2_3x3'
   | 'complex-rc2_3x3_dynamic'
   | 'complex-rc2_4x4'
   | 'complex-rec_oocl_rotate_new'
   | 'complex-rec_oocl_rotate_double_new'
-  | 'complex-rec_betpunch_3x3_rotate request'
-  | 'complex-rec_bls';
+  | 'complex-rec_betpunch_3x3_rotate_request'
+  | 'complex-rec_bls'
+  | 'rc2e-spotify-yahoo'
+  | 'temu'
+  | 'complex-rc2e-spotify-yahoo'
+  | 'complex-rc2e'
+  | 'complex-rc2'
+  | 'complex-rec_baidu';
 
 export type PriceResponseItem = {
-  Type: 'v2' | 'v3' | 'Enterprise' | 'Enterprise (Spotify, Yahoo)' | null;
-  FamilyName: FamilyName;
-  ComplexId: ComplexId | null;
+  Id: PriceId;
+  Name: PriceName;
   LogoPath: string;
   SubType: null | string;
   SubTypeLogoPath: null | string;
-  TokenPrice: number | null;
-  PicturePrice: number | null;
+  Price: number;
   SuccessRate: number;
   Speed: number;
   LinkKey: string;
+  ResultType: 'token' | 'image' | 'answers' | 'dynamic';
 };
 
-export type CaptchaTokenType =
-  | 'recaptchaV2Token'
-  | 'recaptchaV3Token'
-  | 'recaptchaV2EnterpriseToken'
-  | 'recaptchaV2EnterpriseSpotifyToken'
-  | 'geeTestToken'
-  | 'turnstileToken'
-  | 'basiliskToken'
-  | 'tencentToken'
-  | 'textCaptchaToken'
-  | 'dataDomeToken'
-  | 'amazonToken'
-  | 'recaptcha3x3Image'
-  | 'recaptcha3x3DynamicImage'
-  | 'recaptcha4x4Image'
-  | 'Imperva'
-  | 'bls'
-  | 'binanceToken'
-  | 'prosopoToken'
-  | 'complex-rec_oocl_rotate_new'
-  | 'complex-rec_oocl_rotate_double_new'
-  | 'complex-rec_betpunch_3x3_rotate request'
-  | 'temuToken';
+export type FetchPricesResponse = {
+  PricesV2: PriceResponseItem[];
+};
 
-type PriceType = 'token' | 'image' | 'answers' | 'dynamic';
-
-export interface NormalizedPriceItem {
-  price: number;
-  type: PriceType;
-  rate: number;
-  logoPath: string;
+export type NormalizedPriceItem = PriceResponseItem & {
   imagePath?: string;
-}
+};
 
-export type NormalizedPrices = Record<CaptchaTokenType, NormalizedPriceItem>;
+export type NormalizedPrices = Record<PriceId, NormalizedPriceItem>;

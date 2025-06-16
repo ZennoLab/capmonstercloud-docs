@@ -4,16 +4,16 @@ import { SuccessRateIcon } from './icons/SuccessRateIcon';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import getLocaleStrings from '../../locales/index';
 import { getPriceText } from '../../utils/price.utils';
-import { CaptchaTokenType } from '../../types/price.types';
+import { PriceId } from '../../types/price.types';
 import { usePricesContext } from '../../PricesProvider';
 import { Loader } from '../../components/Loader';
 
 type PriceBlockProps = {
-  title: string;
-  name: CaptchaTokenType;
+  title?: string;
+  captchaId: PriceId;
 };
 
-const PriceBlock = ({ title, name }: PriceBlockProps) => {
+const PriceBlock = ({ title, captchaId }: PriceBlockProps) => {
   const { i18n } = useDocusaurusContext();
   const { currentLocale } = i18n;
   const { hundredTokens, hundredImages, dynamicHundredImages, complexImageAnswers } = getLocaleStrings(currentLocale);
@@ -31,33 +31,33 @@ const PriceBlock = ({ title, name }: PriceBlockProps) => {
     return <Loader />;
   }
 
-  const captchaData = normalizedPrices[name];
+  const captchaData = normalizedPrices[captchaId];
 
   if (!captchaData) {
     return null;
   }
 
-  const { imagePath, logoPath, rate, type, price } = captchaData;
+  const { imagePath, LogoPath, SuccessRate, ResultType, Price, Id, Name } = captchaData;
 
-  const priceText = getPriceText({ price, priceRate, currentLocale });
+  const priceText = getPriceText({ price: Price, priceRate, currentLocale });
 
   return (
     <div className={imagePath ? styles.wrapBlockImage : styles.wrapBlock}>
       <div className={styles.titleWrap}>
-        <img src={`https://capmonster.cloud${logoPath}`} alt={`${name}-logo`} />
-        <div className={styles.mainTitle}>{title}</div>
+        <img src={`https://capmonster.cloud${LogoPath}`} alt={`${Id}-logo`} />
+        <div className={styles.mainTitle}>{title ?? Name}</div>
       </div>
       {imagePath && <img src={imagePath} alt={imagePath} />}
       <div className={styles.priceWrap}>
         <div>
           <span className={styles.priceText}>{priceText}</span>{' '}
-          <span className={styles.subText}>/ {typeLocalization[type]}</span>
+          <span className={styles.subText}>/ {typeLocalization[ResultType]}</span>
         </div>
       </div>
 
       <div className={styles.successRateBlock}>
         <SuccessRateIcon />
-        <div className={styles.successRateText}>{rate}%</div>
+        <div className={styles.successRateText}>{SuccessRate}%</div>
       </div>
     </div>
   );

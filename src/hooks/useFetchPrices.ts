@@ -1,10 +1,6 @@
 import { useState, useEffect } from 'react';
-import { PriceResponseItem } from '../types/price.types';
+import { FetchPricesResponse, PriceResponseItem } from '../types/price.types';
 import { normalizePrices } from '../utils/price.utils';
-
-interface FetchPricesResponse {
-  Prices: PriceResponseItem[];
-}
 
 export const useFetchPrices = () => {
   const [prices, setPrices] = useState<PriceResponseItem[]>([]);
@@ -14,12 +10,13 @@ export const useFetchPrices = () => {
   const fetchPrices = async () => {
     setLoading(true);
     try {
-      const response = await fetch('https://capmonster.cloud/api/prices?all=true');
+      // const response = await fetch('https://capmonster.cloud/api/prices?all=true');
+      const response = await fetch('https://cmadmin.dev.k8s.zenno.services/api/prices?all=true');
       if (!response.ok) {
         throw new Error('Failed to fetch prices');
       }
       const data: FetchPricesResponse = await response.json();
-      setPrices(data.Prices);
+      setPrices(data.PricesV2);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Unknown error');
     } finally {

@@ -3,16 +3,16 @@ import styles from './styles.module.css';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import getLocaleStrings from '../../locales/index';
 import { usePricesContext } from '../../PricesProvider';
-import { CaptchaTokenType } from '../../types/price.types';
+import { PriceId } from '../../types/price.types';
 import { getPriceText } from '../../utils/price.utils';
 import { Loader } from '../../components/Loader';
 
 type Props = {
   title?: string;
-  name: CaptchaTokenType;
+  captchaId: PriceId;
 };
 
-export const TaskImageText = ({ title, name }: Props) => {
+export const TaskImageText = ({ title, captchaId }: Props) => {
   const { i18n } = useDocusaurusContext();
   const { currentLocale } = i18n;
   const { complexImageAnswers } = getLocaleStrings(currentLocale);
@@ -22,20 +22,20 @@ export const TaskImageText = ({ title, name }: Props) => {
     return <Loader />;
   }
 
-  const captchaData = normalizedPrices[name];
+  const captchaData = normalizedPrices[captchaId];
 
   if (!captchaData) {
     return null;
   }
 
-  const { price } = captchaData;
-
-  const priceText = getPriceText({ price, priceRate, currentLocale });
+  const { Price, Name } = captchaData;
+  console.log('Name', Name);
+  const priceText = getPriceText({ price: Price, priceRate, currentLocale });
 
   return (
     <div>
-      {title && <strong className={`${styles.title} taskImageTitle`}>{title}</strong>}
-      {price && (
+      <strong className={`${styles.title} taskImageTitle`}>{title ?? Name}</strong>
+      {Price && (
         <div className={styles.mainText}>
           {priceText}
           <span className={styles.subText}> / {complexImageAnswers}</span>
