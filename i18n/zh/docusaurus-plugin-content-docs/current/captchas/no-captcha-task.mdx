@@ -199,6 +199,198 @@ import BlogLink from '@theme/BlogLink';
 | :- | :- | :- |
 |gRecaptchaResponse|String|应插入到 Recaptcha2 提交表单中的哈希值，格式如 `<textarea id="g-recaptcha-response" ..></textarea>`。长度为500到2190字节。|
 
+## 如何查找任务创建所需的所有参数
+
+### 手动方式
+
+1. 请在浏览器中访问您的网站，该网站包含验证码功能。
+2. 右键点击验证码元素，选择 **检查（Inspect）**。
+
+#### websiteKey（data-sitekey）
+
+在 **Elements（元素）** 标签页中：查找页面上的 `<div class="g-recaptcha">` 元素。复制其 *data-sitekey* 属性的值，例如：
+
+![sitekey](images\no-captcha\sitekey.png)
+
+在 **Network（网络）** 标签页：
+
+打开 **Network** 标签页并重新加载包含验证码的页面。查找如下请求（**k** 值即为 *data-sitekey*）：
+
+![sitekey1](images\no-captcha\sitekey1.png)
+
+#### recaptchaDataSValue（如果使用）
+
+如果页面包含 *data-s* 属性，在 HTML 中查找它：
+
+![datas](images\no-captcha\data-s.png)
+
+#### isInvisible（是否为隐形验证码）
+
+在 **Network** 标签页中：如果是隐形验证码，元素将包含 *size="invisible"* 属性，例如：
+
+![isinvisible](images\no-captcha\isinvisible.png)
+
+### 自动方法
+
+一种方便的自动化获取所有必要参数的方式。
+某些参数每次页面加载时都会重新生成，因此需要通过浏览器（普通或无头模式，如使用**Playwright**）提取它们。
+由于动态参数值的有效期很短，获取后必须立即解决验证码。
+
+:::warning **重要提示！**
+提供的代码片段是用于熟悉参数提取的基本示例。具体实现将取决于验证码页面、其结构及使用的HTML元素/选择器。
+:::
+
+<Tabs className="full-width-tabs filled-tabs request-tabs">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+    <details>
+      <summary>显示代码（浏览器端）</summary>
+
+      ```js
+      (() => {
+        const iframeEl = document.querySelector('iframe[src^="https://www.google.com/recaptcha/api2/anchor?"]');
+        const captchaUrl = iframeEl?.getAttribute('src');
+
+        if (captchaUrl) {
+          const urlParams = new URLSearchParams(captchaUrl.split('?')[1]);
+          
+          const sitekey = urlParams.get('k');
+          const size = urlParams.get('size');
+          
+          const isInvisible = size === 'invisible';
+
+          const sitekeyEl = document.querySelector('[data-sitekey]');
+          const datasEl = document.querySelector('[data-s]');
+          const datas = datasEl?.getAttribute('data-s');
+
+          console.log({
+            sitekey: sitekey || sitekeyEl?.getAttribute('data-sitekey'),
+            datas,
+            isInvisible
+          });
+        }
+      })();
+      ```
+    </details>
+
+    <details>
+      <summary>显示代码（Node.js）</summary>
+
+      ```js
+      import { chromium } from "playwright";
+
+      (async () => {
+        const browser = await chromium.launch({ headless: false });
+        const page = await browser.newPage();
+
+        await page.goto("https://example.com");
+
+        await page.waitForSelector('iframe[src^="https://www.google.com/recaptcha/api2/anchor?"]');
+
+        const captchaData = await page.evaluate(() => {
+          const iframeEl = document.querySelector('iframe[src^=
+          "https://www.google.com/recaptcha/api2/anchor?"]');
+          const captchaUrl = iframeEl?.getAttribute("src");
+
+          if (captchaUrl) {
+            const urlParams = new URLSearchParams(captchaUrl.split("?")[1]);
+            const sitekey = urlParams.get("k");
+            const size = urlParams.get("size");
+            const isInvisible = size === "invisible";
+
+            const sitekeyEl = document.querySelector("[data-sitekey]");
+            const datasEl = document.querySelector("[data-s]");
+            const datas = datasEl?.getAttribute("data-s");
+
+            return {
+              sitekey: sitekey || sitekeyEl?.getAttribute("data-sitekey"),
+              datas,
+              isInvisible,
+            };
+          }
+          return null;
+        });
+
+        console.log(captchaData);
+        await browser.close();
+      })();
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="python" label="Python" className="method-panel">
+    <details>
+      <summary>显示代码</summary>
+
+      ```python
+      import asyncio
+      from urllib.parse import urlparse, parse_qs
+      from playwright.async_api import async_playwright
+
+      def parse_recaptcha_url(url):
+          parsed_url = urlparse(url)
+          params = parse_qs(parsed_url.query)
+          sitekey = params.get('k', [None])[0]
+          size = params.get('size', [None])[0]
+          return sitekey, size == 'invisible'
+
+      async def main():
+          async with async_playwright() as p:
+              browser = await p.chromium.launch(headless=True)
+              page = await browser.new_page()
+              await page.goto("https://example.com", timeout=60000)
+              captcha_url = await page.locator('iframe[
+              src^="https://www.google.com/recaptcha/api2/anchor?"]').get_attribute('src')
+              if captcha_url:
+                  sitekey, is_invisible = parse_recaptcha_url(captcha_url)
+                  print({"sitekey": sitekey, "isInvisible": is_invisible})
+              await browser.close()
+
+      asyncio.run(main())
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    <details>
+      <summary>显示代码</summary>
+
+      ```csharp
+      using Microsoft.Playwright;
+      using System;
+      using System.Linq;
+      using System.Threading.Tasks;
+      using System.Web;
+
+      class Program
+      {
+          static (string sitekey, bool isInvisible) ParseRecaptchaUrl(string url)
+          {
+              var uri = new Uri(url);
+              var queryParams = HttpUtility.ParseQueryString(uri.Query);
+              return (queryParams["k"], queryParams["size"] == "invisible");
+          }
+
+          static async Task Main(string[] args)
+          {
+              var playwright = await Playwright.CreateAsync();
+              var browser = await playwright.Chromium.LaunchAsync(
+                new BrowserTypeLaunchOptions { Headless = true });
+              var page = await browser.NewPageAsync();
+              await page.GotoAsync("https://example.com", new PageGotoOptions { Timeout = 60000 });
+              var captchaUrl = await page.Locator(
+                "iframe[src^='https://www.google.com/recaptcha/api2/anchor?']").GetAttributeAsync("src");
+              if (captchaUrl != null)
+              {
+                  var (sitekey, isInvisible) = ParseRecaptchaUrl(captchaUrl);
+                  Console.WriteLine($"{{\"sitekey\": \"{sitekey}\", \"isInvisible\": {isInvisible}}}");
+              }
+              await browser.CloseAsync();
+          }
+      }
+      ```
+    </details>
+  </TabItem>
+</Tabs>
 
 ## 使用 SDK 库
 

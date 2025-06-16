@@ -133,3 +133,105 @@ import BlogLink from '@theme/BlogLink';
 		```
 	</MethodDescription>
 </TabItem>
+
+## Как найти все нужные параметры для создания задачи на решение
+
+### Автоматически
+
+Удобный способ автоматизировать поиск всех необходимых параметров.
+Некоторые параметры генерируются заново при каждой загрузке страницы, поэтому для их извлечения потребуется работать через браузер – обычный или в режиме headless (например, с помощью **Playwright**).
+Так как значения динамических параметров хранятся недолго, капчу нужно решать сразу после их получения.
+
+:::warning **Важно!**
+Приведённые фрагменты кода являются базовыми примерами для ознакомления в извлечении необходимых параметров. Точная реализация будет зависеть от вашего сайта с капчей, его структуры и используемых HTML-элементов и селекторов.
+:::
+
+<Tabs className="full-width-tabs filled-tabs request-tabs">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+    <details>
+      <summary>Показать код (Node.js)</summary>
+
+      ```js
+      import { chromium } from 'playwright';
+
+      (async () => {
+        const browser = await chromium.launch();
+        const page = await browser.newPage();
+
+        await page.goto('https://example.com');
+
+        // Получаем куки
+        const cookies = await page.context().cookies();
+        console.log('Cookies:', cookies);
+
+        await browser.close();
+      })();
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="python" label="Python" className="method-panel">
+    <details>
+      <summary>Показать код</summary>
+
+      ```python
+      import asyncio
+      from playwright.async_api import async_playwright
+
+      async def run():
+          async with async_playwright() as p:
+              browser = await p.chromium.launch()
+              page = await browser.new_page()
+
+              await page.goto('https://example.com')
+
+              # Получаем куки
+              cookies = await page.context.cookies()
+              print('Cookies:', cookies)
+
+              await browser.close()
+
+      asyncio.run(run())
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    <details>
+      <summary>Показать код</summary>
+
+      ```csharp
+      using System;
+      using System.Linq;
+      using System.Threading.Tasks;
+      using Microsoft.Playwright;
+
+      class Program
+      {
+          public static async Task Main()
+          {
+              using var playwright = await Playwright.CreateAsync();
+              var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+              {
+                  Headless = true
+              });
+
+              var context = await browser.NewContextAsync();
+              var page = await context.NewPageAsync();
+
+              await page.GotoAsync("https://example.com");
+
+              var cookies = await context.CookiesAsync();
+              Console.WriteLine("Cookies:");
+              foreach (var cookie in cookies)
+              {
+                  Console.WriteLine($"{cookie.Name}: {cookie.Value}");
+              }
+
+              await browser.CloseAsync();
+          }
+      }
+      ```
+    </details>
+  </TabItem>
+</Tabs>

@@ -212,6 +212,155 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the Ama
 	</MethodDescription>
 </TabItem>
 
+## How to Find All Required Parameters for Task Creation
+
+### Automatically
+
+A convenient way to automate the search for all necessary parameters.
+Some parameters are regenerated every time the page loads, so you'll need to extract them through a browser — either regular or headless (e.g., using **Playwright**).
+Since the values of dynamic parameters are short-lived, the captcha must be solved immediately after retrieving them.
+
+:::warning **Important!**
+The code snippets provided are basic examples for familiarization with extracting the required parameters. The exact implementation will depend on your captcha page, its structure, and the HTML elements/selectors it uses.
+:::
+
+<Tabs className="full-width-tabs filled-tabs request-tabs">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+    <details>
+      <summary>Show code (Node.js)</summary>
+      ```js
+      import { chromium } from "playwright";
+
+      const CAPTCHA_URL = "https://example.com";
+
+      (async () => {
+        const browser = await chromium.launch({ headless: false });
+        const page = await browser.newPage();
+
+        await page.goto(CAPTCHA_URL);
+
+        const captchaParams = await page.evaluate(() => {
+          const gokuProps = window.gokuProps || {};
+          const scripts = Array.from(document.querySelectorAll("script"));
+
+          return {
+            websiteKey: gokuProps.key || "Not found",
+            context: gokuProps.context || "Not found",
+            iv: gokuProps.iv || "Not found",
+            challengeScriptUrl:
+              scripts.find((script) => script.src.includes("challenge.js"))?.src ||
+              "Not found",
+            captchaScriptUrl:
+              scripts.find((script) => script.src.includes("captcha.js"))?.src ||
+              "Not found",
+          };
+        });
+
+        console.log("Captcha params:", captchaParams);
+
+        await browser.close();
+      })();
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="python" label="Python" className="method-panel">
+  <details>
+    <summary>Show code</summary>
+    ```python
+    import asyncio
+    from playwright.async_api import async_playwright
+
+    CAPTCHA_URL = "https://example.com"
+
+    async def main():
+        async with async_playwright() as p:
+            browser = await p.chromium.launch(headless=False)
+            page = await browser.new_page()
+
+            await page.goto(CAPTCHA_URL)
+
+            captcha_params = await page.evaluate("""
+                () => {
+                    const gokuProps = window.gokuProps || {};
+                    const scripts = Array.from(document.querySelectorAll('script'));
+
+                    return {
+                        websiteKey: gokuProps.key || "Not found",
+                        context: gokuProps.context || "Not found",
+                        iv: gokuProps.iv || "Not found",
+                        challengeScriptUrl: scripts.find(script => script.src.includes('challenge.js'))?.src || 
+                            "Not found",
+                        captchaScriptUrl: scripts.find(script => script.src.includes('captcha.js'))?.src || 
+                            "Not found"
+                    };
+                }
+            """)
+
+            print("Captcha params:", captcha_params)
+
+            await browser.close()
+
+    asyncio.run(main())
+    ```
+  </details>
+</TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    <details>
+      <summary>Show code</summary>
+      ```csharp
+      using System;
+      using System.Collections.Generic;
+      using System.Threading.Tasks;
+      using Microsoft.Playwright;
+
+      class Program
+      {
+          public static async Task Main(string[] args)
+          {
+              const string CAPTCHA_URL = "https://example.com";
+
+              using var playwright = await Playwright.CreateAsync();
+              var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+              {
+                  Headless = false
+              });
+
+              var context = await browser.NewContextAsync();
+              var page = await context.NewPageAsync();
+
+              await page.GotoAsync(CAPTCHA_URL);
+
+              var captchaParams = await page.EvaluateAsync<Dictionary<string, string>>(@"
+                  (() => {
+                      const gokuProps = window.gokuProps || {};
+                      const scripts = Array.from(document.querySelectorAll('script'));
+                      return {
+                          websiteKey: gokuProps.key || 'Not found',
+                          context: gokuProps.context || 'Not found',
+                          iv: gokuProps.iv || 'Not found',
+                          challengeScriptUrl: scripts.find(script => script.src.includes('challenge.js'))?.src || 
+                          'Not found',
+                          captchaScriptUrl: scripts.find(script => script.src.includes('captcha.js'))?.src || 
+                          'Not found'
+                      };
+                  })()
+              ");
+
+              Console.WriteLine("Captcha params:");
+              foreach (var param in captchaParams)
+              {
+                  Console.WriteLine($"{param.Key}: {param.Value}");
+              }
+
+              await browser.CloseAsync();
+          }
+      }
+      ```
+    </details>
+  </TabItem>
+</Tabs>
 
 ## Use SDK Library
 
