@@ -48,6 +48,10 @@ This task will be performed using our proxy servers.
     captchaAppId. For example `"websiteKey": "189123456"` - is a unique parameter for your site. You can take it from an html page with a captcha or from traffic (see description below).
 
     ---
+    <ParamItem title="metadata.captchaUrl" type="string" />
+    Link to the captcha script. It usually ends with `TCaptcha.js` or `TCaptcha-global.js`. You can find it in the list of requests (see example below).
+
+    ---
 
     <ParamItem title="userAgent" type="string" />
     Browser User-Agent. **Pass only the actual UA from Windows OS. Now this is version**: `userAgentPlaceholder`
@@ -86,9 +90,13 @@ This task will be performed using our proxy servers.
 
 
 ### How to get websiteKey (captchaAppId)
-Turn on the developer tools, go to the Network tab, activate the captcha and look at the requests. Some of them will contain the parameter value you need. In this case `websiteKey=aid`
+Turn on the *Developer Tools*, go to the **Network** tab, activate the captcha and look at the requests. Some of them will contain the parameter value you need. In this case `websiteKey=aid`
 ![](./images/tendi/tendi-devtools.png) 
 
+### How to get captchaUrl
+Open *Developer Tools*, go to the **Network** tab, trigger the captcha, and inspect the network requests. Among them, you will find `TCaptcha.js` or `TCaptcha-global.js`, where you can find a link like this:
+
+![](./images/tendi/tendi_captchaUrl.png)
 
 ## Create task method
 <TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">

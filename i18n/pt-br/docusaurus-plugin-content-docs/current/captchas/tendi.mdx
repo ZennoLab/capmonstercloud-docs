@@ -49,6 +49,11 @@ Essa tarefa será realizada usando nossos servidores proxy.
 
     ---
 
+    <ParamItem title="metadata.captchaUrl" type="string" />
+    Link para o script do captcha. Normalmente termina com `TCaptcha.js` ou `TCaptcha-global.js`. Pode ser encontrado na lista de requisições (veja o exemplo abaixo).
+	
+    ---
+
     <ParamItem title="userAgent" type="string" />
     O User-Agent do navegador. **Passe apenas o UA real de um sistema operacional Windows. Atualmente, a versão é**: `userAgentPlaceholder`
 	
@@ -85,8 +90,13 @@ Senha do servidor proxy.
 </TabItem>
 
 ### Como obter websiteKey (captchaAppId)
-Ative as ferramentas de desenvolvedor, vá para a aba "Network", ative o captcha e veja as solicitações. Algumas delas conterão o valor do parâmetro que você precisa. Nesse caso, `websiteKey=aid`  
+Ative as *Ferramentas de Desenvolvedor*, vá para a aba **Network**, ative o captcha e veja as solicitações. Algumas delas conterão o valor do parâmetro que você precisa. Nesse caso, `websiteKey=aid`  
 ![](./images/tendi/tendi-devtools.png) 
+
+### Como obter captchaUrl
+Abra *Ferramentas de Desenvolvedor*, vá para a aba **Network**, ative o captcha e examine as requisições de rede. Entre elas aparecerá `TCaptcha.js` ou `TCaptcha-global.js`, no qual você pode encontrar um link semelhante a este:
+
+![](./images/tendi/tendi_captchaUrl.png)
 
 ## Método de criação da tarefa
 
