@@ -48,6 +48,11 @@ import BlogLink from '@theme/BlogLink';
 
     ---
 
+    <ParamItem title="metadata.captchaUrl" type="string" />
+    验证码脚本的链接。 通常以 `TCaptcha.js` 或 `TCaptcha-global.js` 结尾。可以在请求列表中找到（见下方示例）。
+	
+    ---
+
     <ParamItem title="userAgent" type="string" />
     浏览器用户代理。**只传递 Windows 操作系统的实际 UA。现在是版本**： `userAgentPlaceholder`
 	
@@ -88,6 +93,10 @@ import BlogLink from '@theme/BlogLink';
 打开开发者工具，转到网络标签，激活验证码并查看请求。其中一些将包含您需要的参数值。在这种情况下，`websiteKey=aid`
 ![](./images/tendi/tendi-devtools.png)
 
+### 如何获取 captchaUrl
+打开 *开发者工具*，切换到 **Network** 选项卡，激活验证码并检查网络请求。在其中会出现 `TCaptcha.js` 或 `TCaptcha-global.js`，您可以在其中找到类似这样的链接：
+
+![](./images/tendi/tendi_captchaUrl.png)
 
 ## 创建任务方法 
 <TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
