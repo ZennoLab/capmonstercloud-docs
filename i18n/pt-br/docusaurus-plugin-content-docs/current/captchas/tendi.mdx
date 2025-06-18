@@ -101,34 +101,37 @@ Abra *Ferramentas de Desenvolvedor*, vá para a aba **Network**, ative o captcha
 ## Método de criação da tarefa
 
 <TabItem value="proxyless" label="RecaptchaV2TaskProxyless (sem proxy)" default className="method-panel">
-<MethodItem>
-  ```http
-  https://api.capmonster.cloud/createTask
-  ```
-</MethodItem>
-<MethodDescription>
-**Solicitação**
-```json
-{
-    "clientKey": "API_KEY",
-    "task": {
+  <MethodItem>
+    ```http
+    https://api.capmonster.cloud/createTask
+    ```
+  </MethodItem>
+  <MethodDescription>
+    **Solicitação**
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "task": {
         "type": "CustomTask",
         "class": "TenDI",
         "websiteURL": "https://example.com",
         "websiteKey": "189123456",
-        "userAgent": "userAgentPlaceholder"
+        "userAgent": "userAgentPlaceholder",
+        "metadata": {
+          "captchaUrl": "https://global.captcha.example.com/TCaptcha-global.js"
+        }
+      }
     }
-}
-```
-**Resposta**
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
+    ```
 
-</MethodDescription>
+    **Resposta**
+    ```json
+    {
+      "errorId": 0,
+      "taskId": 407533072
+    }
+    ```
+  </MethodDescription>
 </TabItem>
 
 ## Método de obter resultado da tarefa

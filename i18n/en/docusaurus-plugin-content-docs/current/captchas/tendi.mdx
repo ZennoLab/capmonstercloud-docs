@@ -100,35 +100,38 @@ Open *Developer Tools*, go to the **Network** tab, trigger the captcha, and insp
 
 ## Create task method
 <TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
-	<MethodItem>
-		```http
-		https://api.capmonster.cloud/createTask
-		```
-	</MethodItem>
-	<MethodDescription>
-		**Request**
-		```json
-		{
-			"clientKey": "API_KEY",
-			"task": {
-				"type": "CustomTask",
-				"class": "TenDI",
-				"websiteURL": "https://example.com",
-				"websiteKey": "189123456",
-				"userAgent": "userAgentPlaceholder"
-			}
-		}
-		```
-		**Response**
-		```json
-		{
-		  "errorId":0,
-		  "taskId":407533072
-		}
-		```
-	</MethodDescription>
-</TabItem>
+  <MethodItem>
+    ```http
+    https://api.capmonster.cloud/createTask
+    ```
+  </MethodItem>
+  <MethodDescription>
+    **Request**
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "task": {
+        "type": "CustomTask",
+        "class": "TenDI",
+        "websiteURL": "https://example.com",
+        "websiteKey": "189123456",
+        "userAgent": "userAgentPlaceholder",
+        "metadata": {
+          "captchaUrl": "https://global.captcha.example.com/TCaptcha-global.js"
+        }
+      }
+    }
+    ```
 
+    **Response**
+    ```json
+    {
+      "errorId": 0,
+      "taskId": 407533072
+    }
+    ```
+  </MethodDescription>
+</TabItem>
 
 ## Get task result method
 Use the [getTaskResult](../api/methods/get-task-result.md) method to get the TenDI solution.
