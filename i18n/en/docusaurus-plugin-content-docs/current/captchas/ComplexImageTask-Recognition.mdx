@@ -23,27 +23,27 @@ import BlogLink from '@theme/BlogLink';
 <TaskImageWrapper>
   <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#oocl_rotate_new">
     <TaskImage>![](./images/ComplexImageTask-Recognition/oocl_img.png)</TaskImage>
-    <TaskImageText title="Oocl_rotate_new" name="complex-rec_oocl_rotate_new" />
+    <TaskImageText title="Oocl_rotate_new" captchaId="complex-rec_oocl_rotate_new" />
   </TaskImageBlock>
   <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#oocl_rotate_double_new">
     <TaskImage>![](./images/ComplexImageTask-Recognition/oocl_rotate_img.png)</TaskImage>
-    <TaskImageText title="Oocl_rotate_double_new" name="complex-rec_oocl_rotate_double_new" />
+    <TaskImageText title="Oocl_rotate_double_new" captchaId="complex-rec_oocl_rotate_double_new" />
   </TaskImageBlock>
   <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#betpunch_3x3_rotate">
     <TaskImage>![](./images/ComplexImageTask-Recognition/betpunch_img.png)</TaskImage>
-    <TaskImageText title="Betpunch_3x3_rotate request" name="complex-rec_betpunch_3x3_rotate request" />
+    <TaskImageText title="Betpunch_3x3_rotate request" captchaId="complex-rec_betpunch_3x3_rotate_request" />
   </TaskImageBlock>
   <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#bls">
     <TaskImage>![](./images/ComplexImageTask-Recognition/bls_img.png)</TaskImage>
-    <TaskImageText title="Bls" name="bls" />
+    <TaskImageText  captchaId="complex-rec_bls" />
   </TaskImageBlock>
   <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#shein">
     <TaskImage>![](./images/ComplexImageTask-Recognition/shein3.png)</TaskImage>
-    <TaskImageText title="shein" name="complex-rec_oocl_rotate_new" />
+    <TaskImageText title="shein" captchaId="complex-rec_oocl_rotate_new" />
   </TaskImageBlock>
   <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#baidu">
     <TaskImage>![](./images/ComplexImageTask-Recognition/baidu_img.png)</TaskImage>
-    <TaskImageText title="baidu" name="complex-rec_baidu" />
+    <TaskImageText title="baidu" captchaId="complex-rec_baidu" />
   </TaskImageBlock>
 </TaskImageWrapper>
 
@@ -77,7 +77,7 @@ import BlogLink from '@theme/BlogLink';
 ### Create task `oocl_rotate_new`
 
 <PriceBlockWrap>
-  <PriceBlock title="ComplexImageTask" name="complex-rec_oocl_rotate_new" />
+  <PriceBlock  captchaId="complex-rec_oocl_rotate_new" />
 </PriceBlockWrap>
 
 In the request we pass two images: background and circle.
@@ -165,7 +165,7 @@ In the request we pass two images: background and circle.
 ### Create task `oocl_rotate_double_new`
 
 <PriceBlockWrap>
-  <PriceBlock title="ComplexImageTask" name="complex-rec_oocl_rotate_double_new" />
+  <PriceBlock  captchaId="complex-rec_oocl_rotate_double_new"/>
 </PriceBlockWrap>
 
 In the request we pass three images: background, ring, circle.
@@ -258,7 +258,7 @@ In the request we pass three images: background, ring, circle.
 ### Create task `betpunch_3x3_rotate`
 
 <PriceBlockWrap>
-  <PriceBlock title="ComplexImageTask" name="complex-rec_betpunch_3x3_rotate request" />
+  <PriceBlock captchaId="complex-rec_betpunch_3x3_rotate_request" />
 </PriceBlockWrap>
 
 In the request we pass nine images. The images must be passed in the following order:
@@ -346,7 +346,7 @@ In the request we pass nine images. The images must be passed in the following o
 ### Create task `bls`
 
 <PriceBlockWrap>
-  <PriceBlock title="Bls" name="bls" />
+  <PriceBlock  captchaId="complex-rec_bls" />
 </PriceBlockWrap>
 
 In the request, we send 9 images in base64 format.
@@ -456,7 +456,7 @@ We also pass the sought value TaskArgument in the metadata.
 ### Create task `shein`
 
 <PriceBlockWrap>
-  <PriceBlock title="shein" name="complex-rec_oocl_rotate_new" />
+  <PriceBlock title="shein" captchaId="complex-rec_oocl_rotate_new" />
 </PriceBlockWrap>
 
 In the request, we pass one image in base64 format.
@@ -557,7 +557,7 @@ In the request, we pass one image in base64 format.
 		```json
 		{
 			"clientKey": "API_KEY",
-			"task": 
+			"task":
 			{
 				"type": "ComplexImageTask",
 				"class": "recognition",
@@ -601,7 +601,7 @@ In the request, we pass one image in base64 format.
 		}
 		```
 		**Response**
-		The degrees by which the image needs to be rotated clockwise.  
+		The degrees by which the image needs to be rotated clockwise.
 		```json
 		{
 			"solution":
