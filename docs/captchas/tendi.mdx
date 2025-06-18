@@ -49,6 +49,11 @@ import BlogLink from '@theme/BlogLink';
 
     ---
 
+    <ParamItem title="metadata.captchaUrl" type="string" />
+    Ссылка на скрипт с капчей. Обычно заканчивается на `TCaptcha.js` или `TCaptcha-global.js`. Можно найти в списке запросов (см. пример ниже).
+	
+    ---
+
     <ParamItem title="userAgent" type="string" />
     User-Agent браузера. **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является версия**: `userAgentPlaceholder`
 	
@@ -89,41 +94,47 @@ import BlogLink from '@theme/BlogLink';
 
 
 ### Как получить websiteKey (captchaAppId)
-Включите инструменты разработчика, перейдите на вкладку Network, активируйте капчу и посмотрите запросы. В некотрых из них будет нужное вам значение параметра. В данном случае `websiteKey=aid`
+Включите *Инструменты разработчика*, перейдите на вкладку **Network**, активируйте капчу и посмотрите запросы. В некоторых из них будет нужное вам значение параметра. В данном случае `websiteKey=aid`
+
 ![](./images/tendi/tendi-devtools.png) 
 
+### Как получить captchaUrl
+Откройте *Инструменты разработчика*, перейдите на вкладку **Network**, активируйте капчу и изучите сетевые запросы. Среди них появится `TCaptcha.js` или `TCaptcha-global.js`, в котором можно найти подобную ссылку: 
 
-## Метод создания задачи
+![](./images/tendi/tendi_captchaUrl.png)
+
 <TabItem value="proxyless" label="CustomTask (без прокси)" default className="method-panel">
-	<MethodItem>
-		```http
-		https://api.capmonster.cloud/createTask
-		```
-	</MethodItem>
-	<MethodDescription>
-		**Запрос**
-		```json
-		{
-			"clientKey": "API_KEY",
-			"task": {
-				"type": "CustomTask",
-				"class": "TenDI",
-				"websiteURL": "https://example.com",
-				"websiteKey": "189123456",
-				"userAgent": "userAgentPlaceholder"
-			}
-		}
-		```
-		**Ответ**
-		```json
-		{
-		  "errorId":0,
-		  "taskId":407533072
-		}
-		```
-	</MethodDescription>
+  <MethodItem>
+    ```http
+    https://api.capmonster.cloud/createTask
+    ```
+  </MethodItem>
+  <MethodDescription>
+    **Запрос**
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "task": {
+        "type": "CustomTask",
+        "class": "TenDI",
+        "websiteURL": "https://example.com",
+        "websiteKey": "189123456",
+        "userAgent": "userAgentPlaceholder",
+        "metadata": {
+          "captchaUrl": "https://global.captcha.example.com/TCaptcha-global.js"
+        }
+      }
+    }
+    ```
+    **Ответ**
+    ```json
+    {
+      "errorId": 0,
+      "taskId": 407533072
+    }
+    ```
+  </MethodDescription>
 </TabItem>
-
 
 ## Метод получения результата задачи
 Используйте метод [getTaskResult](../api/methods/get-task-result.md), чтобы получить решение TenDI.
