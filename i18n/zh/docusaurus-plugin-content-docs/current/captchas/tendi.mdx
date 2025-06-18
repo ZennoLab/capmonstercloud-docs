@@ -99,36 +99,40 @@ import BlogLink from '@theme/BlogLink';
 ![](./images/tendi/tendi_captchaUrl.png)
 
 ## 创建任务方法 
-<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
-	<MethodItem>
-		```http
-		https://api.capmonster.cloud/createTask
-		```
-	</MethodItem>
-	<MethodDescription>
-		**要求**
-		```json
-		{
-			"clientKey": "API_KEY",
-			"task": {
-				"type": "CustomTask",
-				"class": "TenDI",
-				"websiteURL": "https://example.com",
-				"websiteKey": "189123456",
-				"userAgent": "userAgentPlaceholder"
-			}
-		}
-		```
-		**回应**
-		```json
-		{
-		  "errorId":0,
-		  "taskId":407533072
-		}
-		```
-	</MethodDescription>
-</TabItem>
 
+<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
+  <MethodItem>
+    ```http
+    https://api.capmonster.cloud/createTask
+    ```
+  </MethodItem>
+  <MethodDescription>
+    **要求**
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "task": {
+        "type": "CustomTask",
+        "class": "TenDI",
+        "websiteURL": "https://example.com",
+        "websiteKey": "189123456",
+        "userAgent": "userAgentPlaceholder",
+        "metadata": {
+          "captchaUrl": "https://global.captcha.example.com/TCaptcha-global.js"
+        }
+      }
+    }
+    ```
+
+    **回应**
+    ```json
+    {
+      "errorId": 0,
+      "taskId": 407533072
+    }
+    ```
+  </MethodDescription>
+</TabItem>
 
 ## 获取任务结果方法
 使用[getTaskResult](../api/methods/get-task-result.md)方法获取TenDI的解决方案。
