@@ -13,7 +13,8 @@ type FamilyName =
   | 'Binance'
   | 'ComplexImageTask Recaptcha'
   | 'ComplexImageTask Recognition'
-  | 'Temu';
+  | 'Temu'
+  | 'Yidun';
 
 type ComplexId =
   | 'complex-rc2'
@@ -62,7 +63,8 @@ export type CaptchaTokenType =
   | 'complex-rec_oocl_rotate_new'
   | 'complex-rec_oocl_rotate_double_new'
   | 'complex-rec_betpunch_3x3_rotate request'
-  | 'temuToken';
+  | 'temuToken'
+  | 'yidunToken';
 
 type PriceType = 'token' | 'image' | 'answers' | 'dynamic';
 
