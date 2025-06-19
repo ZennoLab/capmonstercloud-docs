@@ -51,6 +51,10 @@
   --ifm-color-success-contrast-background: #32413C;
 }
 
+[data-theme='light'] main{
+  background: white;
+}
+
 .DocSearch-Button {
  border-radius: 5px !important;
  /* background: #3264EB !important; */
