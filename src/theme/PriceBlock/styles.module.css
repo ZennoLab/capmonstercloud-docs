@@ -7,10 +7,11 @@
   grid-template-columns: repeat(4, 1fr);
 }
 
-.mainTitle, .successRateText {
+.mainTitle,
+.successRateText {
   font-size: 16px;
   line-height: 23px;
-  color: #14193C;
+  color: #14193c;
 }
 
 .priceWrap {
@@ -33,19 +34,24 @@
 
 .priceText {
   font-weight: 600;
-  color: #14193C;
+  color: #14193c;
 }
 
-.subText { 
-  color: #7D828C;
+.captchaIcon {
+  max-width: 35px;
 }
 
-[data-theme='dark'] .mainTitle, [data-theme='dark'] .successRateText{
-  color: #D2D7E1
+.subText {
+  color: #7d828c;
+}
+
+[data-theme='dark'] .mainTitle,
+[data-theme='dark'] .successRateText {
+  color: #d2d7e1;
 }
 
 [data-theme='dark'] .priceText {
-  color: #D2D7E1;
+  color: #d2d7e1;
 }
 
 [data-theme='dark'] .subText {
