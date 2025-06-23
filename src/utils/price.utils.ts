@@ -33,6 +33,7 @@ const commonTokenKeyMap = {
   'Text Captcha': 'textCaptchaToken',
   Binance: 'binanceToken',
   Temu: 'temuToken',
+  Yidun: 'yidunToken',
 } as const;
 
 const complexImageTaskRecaptchaMap = {
