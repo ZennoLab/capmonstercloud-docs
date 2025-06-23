@@ -44,7 +44,7 @@ const PriceBlock = ({ title, name }: PriceBlockProps) => {
   return (
     <div className={imagePath ? styles.wrapBlockImage : styles.wrapBlock}>
       <div className={styles.titleWrap}>
-        <img src={`https://capmonster.cloud${logoPath}`} alt={`${name}-logo`} />
+        <img src={`https://capmonster.cloud${logoPath}`} alt={`${name}-logo`} className={styles.captchaIcon} />
         <div className={styles.mainTitle}>{title}</div>
       </div>
       {imagePath && <img src={imagePath} alt={imagePath} />}
