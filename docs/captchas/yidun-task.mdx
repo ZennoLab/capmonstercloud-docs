@@ -83,10 +83,18 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 
   </TabItem>
 
-### Как получить websiteKey
-Откройте *Инструменты разработчика*, активируйте капчу, перейдите во вкладку **Network** и среди запросов найдите тот, который начинается на `get?referer=`. Значение *id* означает `websiteKey`.
+### Как получить websiteURL и websiteKey
+Откройте *Инструменты разработчика*, активируйте капчу, перейдите во вкладку **Network** и среди запросов найдите тот, который начинается на `get?referer=` или `check?referer=`. Значение *referer* - это `websiteURL`. 
 
-![](./images/yidun-task/yidun-websitekey.png)
+![](./images/yidun-task/websiteurl.png)
+
+Иногда в URL `referer` закодирован, например: *https%3A%2F%2Fid.example.com%2F*. Чтобы получить читаемый адрес, его нужно декодировать, например, с помощью консоли в браузере:
+
+![](./images/yidun-task/decode-websiteurl.png)
+
+Значение *id* - это `websiteKey`.
+
+![](./images/yidun-task/websitekey.png)
 
 ## Метод создания задачи
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">

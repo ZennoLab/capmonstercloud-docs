@@ -82,10 +82,18 @@ This task will be executed using our proxy servers.
 
 </TabItem>
 
-### How to find `websiteKey`
-Open *Developer Tools*, trigger the CAPTCHA, go to the **Network** tab and find the request that starts with `get?referer=`. The value of the *id* parameter is your `websiteKey`.
+### How to Get websiteURL and websiteKey
+Open the *Developer Tools*, activate the captcha, go to the **Network** tab, and find the request that starts with `get?referer=` or `check?referer=`. The value of *referer* is the `websiteURL`.
 
-![](./images/yidun-task/yidun-websitekey.png)
+![](./images/yidun-task/websiteurl.png)
+
+Sometimes the `referer` in the URL is encoded, for example: *https%3A%2F%2Fid.example.com%2F*. To get a readable address, you need to decode it, for example, using the browser console:
+
+![](./images/yidun-task/decode-websiteurl.png)
+
+The value of *id* is the `websiteKey`.
+
+![](./images/yidun-task/websitekey.png)
 
 ## Create Task Method
 
