@@ -4,7 +4,7 @@
   "goText": "View",
   "linksTitle": "Useful links",
   "linkOneTitle": "CapMonster Cloud",
-  "linkOneDescription": "Cloud service for automatic recognition of reCAPTCHA, hCaptcha and other types of captchas",
+  "linkOneDescription": "Cloud service for automatic recognition of reCAPTCHA, GeeTest and other types of captchas",
   "linkTwoTitle": "Browser extension",
   "linkTwoDescription": "Automatic captcha recognition in the Chrome browser in the background",
   "linkThreeTitle": "Support",

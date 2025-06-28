@@ -24,7 +24,8 @@ import BlogLink from '@theme/BlogLink';
 <BlogLink url="https://capmonster.cloud/ru/blog/ten-1/what-is-tencent-captcha-and-how-do-i-bypass-it"/>
 
 :::warning **Внимание!**
-Данная задача будет выполняться с использованием наших прокси-серверов.
+По умолчанию задача будет решаться через прокси самого сервиса.
+Однако вы можете указать свои прокси - они будут использованы, если прокси сервиса станут недоступны. Это позволяет не менять API-логику при сбоях.
 :::
 
 ## Параметры запроса
@@ -49,7 +50,7 @@ import BlogLink from '@theme/BlogLink';
 
     ---
 
-    <ParamItem title="metadata.captchaUrl" type="string" />
+    <ParamItem title="captchaUrl (внутри metadata)" type="string" />
     Ссылка на скрипт с капчей. Обычно заканчивается на `TCaptcha.js` или `TCaptcha-global.js`. Можно найти в списке запросов (см. пример ниже).
 	
     ---

@@ -64,7 +64,7 @@ import BlogLink from '@theme/BlogLink';
 
     ---
 
-    <ParamItem title="metadata.Task" required type="string" />
+    <ParamItem title="Task (dentro dos metadados)" required type="string" />
     Valores possíveis: `oocl_rotate_new` e outros <br />
     Nome da tarefa (<u>em inglês</u>).
 
@@ -543,6 +543,10 @@ Na solicitação, passamos uma imagem no formato base64.
 <PriceBlockWrap>
   <PriceBlock title="baidu" name="complex-rec_baidu" />
 </PriceBlockWrap>
+
+:::warning **Atenção!**
+No início do processo de resolução, podem ocorrer respostas temporárias *unsolvable*. Isso **não é um erro** – o captcha continuará a ser resolvido com sucesso após a inicialização.  
+:::
 
 Na solicitação, passamos uma imagem no formato base64.
 

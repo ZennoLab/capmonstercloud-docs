@@ -47,18 +47,18 @@ O objeto contém dados sobre a tarefa para resolver o ReCaptcha2 do Google.
 
     ---
 
-    <ParamItem title="metadata.Grid" required type="string" />
+    <ParamItem title="Grid (dentro dos metadados)" required type="string" />
     Tamanho da grade de imagem.
     Valores possíveis: 4x4, 3x3, 1x1
 
     ---
 
-    <ParamItem title="metadata.TaskDefinition" required="required (se metadata.Task não estiver preenchido)" type="string" />
+    <ParamItem title="TaskDefinition (dentro dos metadados)" required="required (se Task não estiver preenchido)" type="string" />
     <p>Valor técnico que define o tipo de tarefa</p><p>**Como obter TaskDefinition**</p><p>Os dados podem ser encontrados nas respostas das solicitações `/recaptcha/{recaptchaApi}/reload` ou `/recaptcha/{recaptchaApi}/userverify`, onde recaptchaApi é "enterprise" ou "api2" dependendo do tipo de Recaptcha. A resposta contém json, onde pode-se obter uma lista de TaskDefinitions para captchas carregados.</p>
 
     ---
 
-    <ParamItem title="metadata.Task" required="required (se metadata.TaskDefinition não estiver preenchido)" type="string" />
+    <ParamItem title="Task (dentro dos metadados)" required="required (se TaskDefinition não estiver preenchido)" type="string" />
     Valores possíveis: `Click on traffic lights` e outros <br />
     Nome da tarefa (<u>em inglês</u>).
 
@@ -79,13 +79,13 @@ O objeto contém dados sobre a tarefa para resolver o ReCaptcha2 do Google.
 
 **imagesBase64**: imagens no formato Base64.
 
-**metadata.Grid**: metadados adicionais relacionados aos tamanhos da grade de imagens.
+**Grid (dentro dos metadados)**: metadados adicionais relacionados aos tamanhos da grade de imagens.
 
-**metadata.TaskDefinition**: identificador/tipo da descrição da tarefa, por exemplo: `/m/015qff` significa "Click on traffic lights".
+**TaskDefinition (dentro dos metadados)**: identificador/tipo da descrição da tarefa, por exemplo: `/m/015qff` significa "Click on traffic lights".
 
 ![](./images/recaptcha-click/taskdefinition.png)
 
-**metadata.Task**: metadados adicionais relacionados à tarefa.
+**Task (dentro dos metadados)**: metadados adicionais relacionados à tarefa.
 
 **userAgent**: informações sobre o agente do usuário. Atual userAgent: userAgentPlaceholder
 
@@ -189,7 +189,7 @@ Você também pode obter a URL completa da imagem clicando com o botão direito 
 
 ![imgUrl1](images\recaptcha-click\recap-img-url.png)
 
-#### metadata.Task
+#### Task (dentro dos metadados)
 
 Descrição da tarefa. Clique com o botão direito no texto da tarefa e, nas **Ferramentas do Desenvolvedor**, encontre o elemento correspondente na estrutura da página:
 

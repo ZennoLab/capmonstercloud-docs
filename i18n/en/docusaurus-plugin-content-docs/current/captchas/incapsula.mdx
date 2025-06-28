@@ -44,19 +44,19 @@ The Imperva (Incapsula) solution, available in CapMonster Cloud, is provided exc
     The address of the main page where Incapsula is located. 
 
     ---
-    <ParamItem title="metadata.incapsulaScriptUrl" required="required" type="string" />
+    <ParamItem title="incapsulaScriptUrl (inside metadata)" required="required" type="string" />
     `"incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3"` - Name of the Incapsula JS file.
 
     ---
 
-    <ParamItem title="metadata.incapsulaCookie" required type="string" />
+    <ParamItem title="incapsulaCookie (inside metadata)" required type="string" />
     Your cookies from Incapsula. They can be obtained on the page using document.cookie or in the request header Set-Cookie: "incap_sess_*=...; visid_incap_*=..." (see the /createTask request example).
 	
 	![](./images/incapsula/incapsula2.png)
 	
 	---
 
-    <ParamItem title="metadata.reese84UrlEndpoint" type="string" />
+    <ParamItem title="reese84UrlEndpoint (inside metadata)" type="string" />
     The name of the endpoint where the reese84 fingerprint is sent can be found among the requests and ends with ?d=site.com
 
     ![](./images/incapsula/incapsula3.png)	

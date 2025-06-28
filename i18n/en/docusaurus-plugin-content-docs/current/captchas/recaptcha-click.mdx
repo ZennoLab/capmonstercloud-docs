@@ -49,18 +49,18 @@ The object contains data about the task for solving ReCaptcha2 from Google.
 
     ---
 
-    <ParamItem title="metadata.Grid" required type="string" />
+    <ParamItem title="Grid (inside metadata)" required type="string" />
     Image grid size.
     Possible values: 4x4, 3x3, 1x1
 
     ---
 
-    <ParamItem title="metadata.TaskDefinition" required="required (if metadata.Task is not filled)" type="string" />
+    <ParamItem title="TaskDefinition (inside metadata)" required="required (if Task is not filled)" type="string" />
     <p>Technical value that defines the task type</p><p>**How to get TaskDefinition**</p><p>The data can be found in responses to `/recaptcha/{recaptchaApi}/reload` or `/recaptcha/{recaptchaApi}/userverify` requests, where recaptchaApi is "enterprise" or "api2" depending on the Recaptcha type. The response contains json, in which one can take a list of TaskDefinitions for loaded captchas.</p>
 
     ---
 
-    <ParamItem title="metadata.Task" required="required (if metadata.TaskDefinition is not filled)" type="string" />
+    <ParamItem title="Task (inside metadata)" required="required (if TaskDefinition is not filled)" type="string" />
     Possible values: `Click on traffic lights` and others <br />
     Task name (<u>in English</u>).
 
@@ -81,13 +81,13 @@ The object contains data about the task for solving ReCaptcha2 from Google.
 
 **imagesBase64**: images in Base64 format.
 
-**metadata.Grid**: additional metadata related to image grid sizes.
+**Grid (inside metadata)**: additional metadata related to image grid sizes.
 
-**metadata.TaskDefinition**: task description identifier/type, e.g.: `/m/015qff` means "Click on traffic lights".
+**TaskDefinition (inside metadata)**: task description identifier/type, e.g.: `/m/015qff` means "Click on traffic lights".
 
 ![](./images/recaptcha-click/taskdefinition.png)
 
-**metadata.Task**: additional metadata related to the task.
+**Task (inside metadata)**: additional metadata related to the task.
 
 **userAgent**: information about the user agent. Current userAgent: userAgentPlaceholder
 
@@ -188,7 +188,7 @@ You can also get the full image URL by right-clicking on the image and selecting
 
 ![imgUrl1](images\recaptcha-click\recap-img-url.png)
 
-#### metadata.Task
+#### Task (inside metadata)
 
 Task description. Right-click on the task text and in **Developer Tools**, find the corresponding element in the page structure:
 

@@ -64,7 +64,7 @@ import BlogLink from '@theme/BlogLink';
 
     ---
 
-    <ParamItem title="metadata.Task" required type="string" />
+    <ParamItem title="Task（在元数据中）" required type="string" />
     可能的值：`oocl_rotate_new` 等。
     任务名称（<u>英文</u>）。
 
@@ -540,6 +540,11 @@ import BlogLink from '@theme/BlogLink';
 <PriceBlockWrap>
   <PriceBlock title="baidu" name="complex-rec_baidu" />
 </PriceBlockWrap>
+
+:::warning 注意！
+在解决流程开始时，可能会暂时出现 unsolvable 的结果。
+这不是错误 —— 验证码将在初始化完成后继续成功解决。
+:::
 
 在请求中，我们传递一张 base64 格式的图片。
 

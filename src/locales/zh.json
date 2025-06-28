@@ -4,7 +4,7 @@
   "goText": "查看",
   "linksTitle": "常用链接",
   "linkOneTitle": "CapMonster 云服务",
-  "linkOneDescription": "云服务可以自动识别 reCAPTCHA、hCaptcha 和其他类型验证码",
+  "linkOneDescription": "云服务可以自动识别 reCAPTCHA、GeeTest 和其他类型验证码",
   "linkTwoTitle": "浏览器扩展程序",
   "linkTwoDescription": "Chrome 浏览器后台自动识别验证码",
   "linkThreeTitle": "技术支持",
