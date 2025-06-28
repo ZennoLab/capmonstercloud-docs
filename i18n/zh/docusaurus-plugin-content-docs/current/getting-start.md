@@ -28,7 +28,7 @@ sidebar\_position: 0
 
 ## 发送请求和获取结果的方法
 
-\:::info 接口地址
+:::info 接口地址
 
 ```http
 https://api.capmonster.cloud

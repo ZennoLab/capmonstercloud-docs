@@ -20,7 +20,7 @@ Antes de começar a resolver captchas, registre-se em [CapMonster Cloud](https:/
 
 ## Passo 2. Recarregue o saldo
 
-O serviço suporta vários métodos de recarga.
+O serviço suporta vários métodos de recarga. 
 
 ![](./images/payment.png)
 
