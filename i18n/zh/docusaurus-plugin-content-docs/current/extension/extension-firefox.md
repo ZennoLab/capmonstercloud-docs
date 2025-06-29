@@ -25,20 +25,20 @@ sidebar_label: Firefox 浏览器扩展
 <details>
     <summary>手动安装</summary>
 
-1. 下载带有扩展的[存档文件](https://drive.google.com/file/d/1eKY5_nFmu-_BUuyewgLPIvf1S5wY8qYE/view?usp=drive_link).
+1. 下载带有扩展的[存档文件](https://zenno.link/firefox-actual-build).
 
-1. 打开 Firefox 浏览器并进入扩展管理：
+2. 打开 Firefox 浏览器并进入扩展管理：
    ![](./images/extension-main-firefox/extension-menu.png)
    
-1. 点击齿轮按钮，在打开的下拉列表中选择 "从文件安装附加组件..."
+3. 点击齿轮按钮，在打开的下拉列表中选择 "从文件安装附加组件..."
    ![](./images/extension-main-firefox/extension-installation.png)
    
-1. 选择已下载的带有扩展的存档文件。
+4. 选择已下载的带有扩展的存档文件。
 
-1. 下载完扩展后，转到 "管理您的扩展程序" 并点击安装的扩展。
+5. 下载完扩展后，转到 "管理您的扩展程序" 并点击安装的扩展。
    ![](./images/extension-main-firefox/extension1.png)
    
-1. 进入 "权限" 选项卡，确保所有权限已被授予。
+6. 进入 "权限" 选项卡，确保所有权限已被授予。
    ![](./images/extension-main-firefox/extension2.png)
 </details>
 
