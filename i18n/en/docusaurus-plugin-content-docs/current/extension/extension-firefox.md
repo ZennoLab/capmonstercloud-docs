@@ -24,20 +24,20 @@ To get started with the extension, click on its icon to the right of the address
 <details>
     <summary>Manual installation</summary>
 
-1. Download the [archive with the extension](https://drive.google.com/file/d/1eKY5_nFmu-_BUuyewgLPIvf1S5wY8qYE/view?usp=drive_link).
+1. Download the [archive with the extension](https://zenno.link/firefox-actual-build).
 
-1. Open the Firefox browser and go to work with extensions:
+2. Open the Firefox browser and go to work with extensions:
    ![](./images/extension-main-firefox/extension-menu.png)
    
-1. Click the gear button, in the drop-down list that opens, select "Install add-on from file..."
+3. Click the gear button, in the drop-down list that opens, select "Install add-on from file..."
    ![](./images/extension-main-firefox/extension-installation.png)
    
-1. Select the downloaded archive with the extension.
+4. Select the downloaded archive with the extension.
 
-1. After downloading the extension, go to "Manage Your Extensions" and click on the installed extension. 
+5. After downloading the extension, go to "Manage Your Extensions" and click on the installed extension. 
    ![](./images/extension-main-firefox/extension1.png)
    
-1. Go to the "Permissions" tab and make sure that all permissions are granted.
+6. Go to the "Permissions" tab and make sure that all permissions are granted.
    ![](./images/extension-main-firefox/extension2.png)
 </details>
 
