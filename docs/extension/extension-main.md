@@ -23,7 +23,7 @@ sidebar_position: 0
 <details>
     <summary>Ручная установка расширения</summary>
 
-1. Скачайте [архив с раcширением](https://drive.google.com/file/d/180Wx6xMcK4iG9SDWpgEJ6IXa0uwWEftR/view?usp=drive_link).
+1. Скачайте [архив с раcширением](https://zenno.link/chrome-actual-build).
 
 2. Распакуйте скачанный архив в папку с любым именем. 
    

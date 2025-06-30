@@ -24,20 +24,20 @@ Para começar a usar a extensão, clique em seu ícone à direita da barra de en
 <details>
     <summary>Instalação manual</summary>
 
-1. Baixe o [arquivo com a extensão](https://drive.google.com/file/d/1eKY5_nFmu-_BUuyewgLPIvf1S5wY8qYE/view?usp=drive_link).
+1. Baixe o [arquivo com a extensão](https://zenno.link/firefox-actual-build).
 
-1. Abra o navegador Firefox e vá trabalhar com as extensões:
+2. Abra o navegador Firefox e vá trabalhar com as extensões:
    ![](./images/extension-main-firefox/extension-menu.png)
    
-1. Clique no botão de engrenagem e, na lista suspensa que se abre, selecione "Instalar add-on a partir do arquivo..."
+3. Clique no botão de engrenagem e, na lista suspensa que se abre, selecione "Instalar add-on a partir do arquivo..."
    ![](./images/extension-main-firefox/extension-installation.png)
    
-1. Selecione o arquivo baixado com a extensão.
+4. Selecione o arquivo baixado com a extensão.
 
-1. Após baixar a extensão, vá para "Gerenciar suas Extensões" e clique na extensão instalada.
+5. Após baixar a extensão, vá para "Gerenciar suas Extensões" e clique na extensão instalada.
    ![](./images/extension-main-firefox/extension1.png)
    
-1. Vá para a aba "Permissões" e certifique-se de que todas as permissões estão concedidas.
+6. Vá para a aba "Permissões" e certifique-se de que todas as permissões estão concedidas.
    ![](./images/extension-main-firefox/extension2.png)
 </details>
 

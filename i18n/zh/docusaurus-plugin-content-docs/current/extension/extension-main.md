@@ -22,7 +22,7 @@ sidebar_position: 0
 <details>
     <summary>手动安装</summary>
 
-1. 下载带有扩展的[存档文件](https://drive.google.com/file/d/180Wx6xMcK4iG9SDWpgEJ6IXa0uwWEftR/view?usp=drive_link).
+1. 下载带有扩展的[存档文件](https://zenno.link/chrome-actual-build).
 
 2. 将其解压缩到任意文件夹。
 
