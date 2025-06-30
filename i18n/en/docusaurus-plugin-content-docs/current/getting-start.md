@@ -1,12 +1,28 @@
 ﻿---
 sidebar_position: 0
-sidebar_label: Getting Started
+# id: my-home-doc
+# slug: /
 ---
 
+# Getting started
 
-# Getting Started
+This section contains instructions on how to get started with the service, as well as describes the main methods for sending captchas and recognizing them.
 
-In this section you can learn how to send captchas to CapMonster Cloud and methods for recognizing them.
+## Step 1. Create an account
+
+Before solving captchas, register on [CapMonster Cloud](https://capmonster.cloud/) in a way convenient for you. Then go to your [Dashboard](https://capmonster.cloud/Dashboard), where you will find all the necessary information — current balance, API key, and statistics on solved and unsolved tasks.
+
+![](./images/dashboard.png)
+
+## Step 2. Top up your balance
+
+The service supports several payment methods.
+
+![](./images/payment.png)
+
+Now you can solve captchas automatically using the [browser extension](https://docs.capmonster.cloud/docs/extension) or by creating tasks via API.
+
+## Methods of sending and receiving results
 
 :::info Method address
 ```http
@@ -16,20 +32,19 @@ Request format: `JSON POST`.
 Response is always in the `JSON` format.
 :::
 
+**To solve a captcha, you need to:**
 
-**To solve a captcha, you need:**
-
-1. Create captcha task via [createTask](api/methods/create-task.md) method which will return task ID.
-2. Wait for a while. Depending on the system load, you will receive an answer after a time in the range from 300ms to 6s.
-3. Request captcha solution with [getTaskResult](api/methods/get-task-result.md). If captchas are not solved yet, go to step #2. 
+1. Create a captcha task using the [createTask](api/methods/create-task.md) method.  
+2. Wait some time. Depending on the system load, the response may come in 300 ms to 6 seconds.  
+3. Request the captcha solution with the [getTaskResult](api/methods/get-task-result.md) method. If the captcha is not solved yet, go back to step 2.
 
 Additional method:
 
-- [Check](api/methods/get-balance.md) account balance.
+- [Get](api/methods/get-balance.md) the current account balance.
 
 ### Code examples
 
-For your convenience, we’ve created ready-made libraries for fast integration the CapMonster.Cloud API into your code. Recognize different types of captchas at the lowest prices on the market!
+For your convenience, we have created ready-made libraries for quick integration of the CapMonster.Cloud API into your code. Solve various captcha types at the lowest prices on the market!
 
 |**Language**|**Link to the repository**|
 | :- | :- | 
@@ -39,88 +54,116 @@ For your convenience, we’ve created ready-made libraries for fast integration 
 |GO|- [Pkg.go.dev](https://pkg.go.dev/github.com/ZennoLab/capmonstercloud-client-go)<br /> - [Github](https://github.com/ZennoLab/capmonstercloud-client-go)|
 |PHP|- [Packagist](https://packagist.org/packages/zennolab/capmonstercloud.client)<br /> - [Github](https://github.com/ZennoLab/capmonstercloud-client-php)|
 
+## Captcha recognition methods
 
-## Recognition methods
+### 1. Via token
 
-There are 2 captcha recognition methods in CapMonster Cloud service:
+This is the basic way to recognize captchas, which requires:
 
-1. Token method.
-2. Click method.
+- Manually find parameters on the page such as:  
+  - `sitekey` (or `websiteKey`) — unique captcha identifier;  
+  - `websiteURL` — the page URL where the captcha is displayed;  
+- Analyze JavaScript code and network requests to obtain these parameters;  
+- Send a task to CapMonster Cloud with the necessary parameters;  
+- Receive a **token** — a unique code confirming the captcha solution;  
+- Perform **autosubmit** — send the token back to the site to confirm captcha completion.
 
-The first method (**via token**) is the initial basic method of recognition, where you have to manually search for parameters and functions in the code of the sites pages, and then construct queries using these parameters or script and perform autosubmit to send the token and signal to the site that the captcha has been solved and the correct input needs to be verified. Token is a unique combination of characters, a response from the server that is generated as a result of a successful captcha solution and is used to validate it. Autosubmit - a function that automatically sends the token to the captcha form and confirms the solution. 
+> Suitable for developers ready to manually analyze code and build the logic for sending the solution.
 
-The search parameters are, for example, SiteKey (websiteKey) - a unique identifier that is used to link the captcha and the target site, website URL - the address of the page where the captcha is located. 
+---
 
-After analyzing the page code and making a request, the captcha data is sent to the CapMonster Cloud service for recognition. As a result of successful solving, the site that initiated the request receives a token for further sub-mining. The user can use this method in his code, having correctly formulated the task to send to the server, receive the result, and confirm the solution of the captcha. 
+### 2. Via clicks
 
-The second method (**via clicks**) allows complex captchas to be recognized the way a real person does, using real clicks. This proves to the site that the captcha is recognized manually by a human, not a bot. This method is used in a browser extension for Chrome or Firefox. 
+This method simulates user actions (mouse movements, clicks, image selections). It is used through the official browser extension and does not require:
 
-Another important advantage of this method of recognition is that it is not necessary to independently search for parameters to send to the service and perform autosubmit. It is not a secret that at this step you can face a rather serious and time-consuming task (especially for beginners in programming) of searching for parameters and functions in scripts and data in requests, HTML layout of sites, and structure of scripts through which submit (confirmation of captcha solution) is usually implemented.
+- Manual searching for `sitekey` or other parameters;  
+- Analyzing HTML or JavaScript;  
+- Implementing autosubmit logic.
 
-This problem is often aggravated by the fact that sites may use different non-standard ways of parameter setting and submit function implementation. For example, if many third-party parameters are used in requests or if these parameters are encrypted. Click method of solution in most cases allows you to bypass such difficulties without additional complex research and experimentation. 
+This method is useful if:
 
-There is also a great opportunity to apply the click method in ZennoPoster. To do this, just install our CapMonster Cloud extension (see section [Instructions for installing CapMonster Cloud extension in ProjectMaker browser](extension/install-instruction.md)) into a project with Chromium engine, enter the API key, and use the extension to work with the project in the same way as it is usually done in the Chrome system browser. 
+- The site uses a non-standard captcha implementation;  
+- Parameters are encrypted or dynamically inserted;  
+- The submit function is deeply hidden in scripts.
 
-## Token submit examples in Zennoposter
+> Optimal for complex cases and users without programming experience.
+
+---
+
+Both methods use CapMonster Cloud for recognition but differ in setup complexity.  
+The choice depends on the specific site and the user’s skill level.
+
+There is also a great option to apply the clicks method in [ZennoPoster](https://zennolab.com/en/products/zennoposter/). Just install our CapMonster Cloud extension (see section [CapMonster Cloud Extension Installation in ProjectMaker Browser](extension/install-instruction.md)) into your Chromium-based project, enter your API key, and use the extension similarly to how you use Chrome.
+
+## Token submission examples in ZennoPoster
 
 Using actions:
 
-1. Integrate CapMonster Cloud into ProjectMaker (Settings - Captchas - Select CapMonster Cloud module, enter your API key);
+1. Integrate CapMonster Cloud in ProjectMaker (“Settings” → “Captchas” → Select CapMonster Cloud module, enter your API key);
 
-2. Add actions Clear Cookies - Go to page (for example, for reCaptcha v.2 captcha type - [https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high](https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high)) - Recognize ReCaptcha;
+2. Add actions “Clear Cookies” → “Navigate to page” (for example, for reCaptcha v.2 — [https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high](https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high)) → “Recognize ReCaptcha”;
 
-3. In the Properties of the Recognize ReCaptcha action, select the CapMonsterCloud.dll module, specify the reCaptcha v.2 captcha type and the method of solving **In tab** or **Via SiteKey**:
+3. In the “Recognize ReCaptcha” action properties, select the CapMonsterCloud.dll module, specify captcha type (reCaptcha v.2) and solving method (**In tab** or **Via sitekey**):
 
 ![](./images/getting-started-1.png)
 
-4. If you choose the **Via SiteKey** method, specify the captcha data (sitekey) and url - address of the page where you want to solve the captcha: 
+4. If choosing **Via sitekey**, specify captcha data (`sitekey`) and URL (the page where the captcha must be solved):
 
 ![](./images/getting-started-2.png)
 
 ### reCaptcha v.3
 
-1. Add actions Clear cookies - Go to page (e.g. [https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta](https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta)) - Recognize ReCaptcha;
+1. Add actions “Clear Cookies” → “Navigate to page” (for example, [https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta](https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta)) → “Recognize ReCaptcha”;
 
-2. In the Properties of the Recognize ReCaptcha action, select the CapMonsterCloud.dll module, specify the reCaptcha v.3 captcha type, the method In Tab or Via SiteKey, also specify Action and minScore:
+2. In the “Recognize ReCaptcha” properties, select CapMonsterCloud.dll module, specify captcha type (reCaptcha v.3), method (In tab or Via Sitekey), and also specify `Action` and `minScore`:
 
 ![](./images/getting-started-3.png)
 
-<!-- ### hCaptcha 
+<!-- ### hCaptcha
 
-1. Add the action "Recognize hCaptcha" to your project, where you have already navigated to the page with the captcha;
+1. Add the action “Recognize hCaptcha” where the captcha page navigation is done;
 
-2. In the Properties of the Recognize hCaptcha action, select the In Tab or Via SiteKey method (when selecting this method, you will need to specify the SiteKey and the URL where the captcha is located):
+2. In the action properties select method (In tab or Via Sitekey). When choosing Via Sitekey, specify the sitekey and URL with the captcha:
 
-![](./images/getting-started-4.png) --> 
+![](./images/getting-started-4.png) -->
 
 ### Via HTTP requests
 
-For some captcha types, there are no ready-made actions in ProjectMaker, in which case you will need to use an extension or compose your queries to solve the captcha. 
+For some captcha types, ready-made actions in ProjectMaker are missing, so you need to use the extension or compose requests manually.
 
-1. "Variable Processing" ("Add Action" - "Data" - "Variable Processing"), select "Set Value" in the properties and write your CapMonster Cloud API key in the value.
+1. Add “Variable Processing” action (Add Action → Data → Variable Processing), select “Set Value” and enter your CapMonster Cloud API key:
 
 ![](./images/getting-started-5.png)
 
-2. "Add Action" - "HTTP" - "POST request" (additionally add your proxy values if needed):
+2. Add “HTTP” → “POST Request” action (add proxy info if necessary):
 
 ![](./images/getting-started-6.png)
 
-3. Add a "Process JSON/XML" action ("Add action" - "Data" - "Process JSON/XML"), in the properties select "parsing", type "Json" and for right-click parsing text select "Set value from variable": 
+3. Add “JSON/XML Processing” action (Add Action → Data → JSON/XML Processing), choose “Parsing”, type “JSON”, and set the text to parse by selecting “Set Value from Variable”:
 
 ![](./images/getting-started-7.png)
 
-4. Add "Variable Processing" action, set \{-Json.taskId-\} in it: 
+4. Add “Variable Processing” action and set the value to `{-Json.taskId-}`:
 
 ![](./images/getting-started-8.png)
 
-5. Generate a new POST request to get the result:
+5. Create a new POST request for retrieving the result:
 
 ![](./images/getting-started-9.png)
 
-6. Add the value "parsing" in the "JSON/XML Processing" action: 
+6. Add “Parsing” in “JSON/XML Processing” action:
 
 ![](./images/getting-started-10.png)
 
-7. Next, you need to substitute the token value into the desired captcha form (by examining the page code) using the "Set Value" action, for example: 
+7. Insert the token value into the required captcha form (after analyzing page code) using the “Set Value” action:
 
 ![](./images/getting-started-11.png)
+
+## Video guide: solving captchas via API and ZennoPoster
+
+This video demonstrates solving captchas through CapMonster Cloud using the API and [ZennoPoster](https://zennolab.com/en/products/zennoposter/), providing practical advice on quick setup and service usage.
+
+<video width="100%" height="400" controls>
+  <source src="/videos/Capmonster Cloud-EN.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
