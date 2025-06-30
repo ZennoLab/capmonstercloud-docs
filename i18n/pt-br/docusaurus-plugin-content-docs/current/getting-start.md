@@ -1,7 +1,5 @@
 ﻿---
 sidebar_position: 0
-# id: my-home-doc
-# slug: /
 ---
 
 # Primeiros Passos

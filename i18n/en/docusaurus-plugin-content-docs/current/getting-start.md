@@ -1,7 +1,6 @@
 ﻿---
 sidebar_position: 0
-# id: my-home-doc
-# slug: /
+sidebar_label: Getting Started
 ---
 
 # Getting started
