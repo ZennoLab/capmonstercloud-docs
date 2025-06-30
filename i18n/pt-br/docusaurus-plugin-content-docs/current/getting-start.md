@@ -1,11 +1,7 @@
 ﻿---
-
 sidebar\_position: 0
-
 # id: my-home-doc
-
 # slug: /
-
 ---
 
 # Começando
@@ -29,14 +25,11 @@ Agora você pode resolver captchas automaticamente usando a [extensão](https://
 ## Métodos para envio e obtenção do resultado
 
 :::info Endereço do método
-
 ```http
 https://api.capmonster.cloud
 ```
-
 Formato da requisição: `JSON POST`.
 Formato da resposta é sempre `JSON`.
-
 :::
 
 **Para resolver uma captcha, você precisa**:

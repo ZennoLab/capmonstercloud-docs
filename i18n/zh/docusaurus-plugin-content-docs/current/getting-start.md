@@ -1,11 +1,7 @@
 ---
-
 sidebar\_position: 0
-
 # id: my-home-doc
-
 # slug: /
-
 ---
 
 # 入门指南
@@ -29,11 +25,9 @@ sidebar\_position: 0
 ## 发送请求和获取结果的方法
 
 :::info 接口地址
-
 ```http
 https://api.capmonster.cloud
 ```
-:::
 请求格式：`JSON POST`。
 响应格式始终为 `JSON`。
 :::
@@ -108,7 +102,7 @@ https://api.capmonster.cloud
 
 1. 在 ProjectMaker 集成 CapMonster Cloud（“设置” - “验证码” - 选择 CapMonster Cloud 模块，输入您的 API 密钥）；
 
-2. 添加动作“清除 Cookie” - “打开页面”（例如 reCaptcha v.2 – [https://lessons.zennolab.com/captchas/recaptcha/v2\_simple.php?level=high](https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high)）- “识别 ReCaptcha”；
+2. 添加动作“清除 Cookie” - “打开页面”（例如 reCaptcha v.2 – [https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high](https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high)）- “识别 ReCaptcha”；
 
 3. 在“识别 ReCaptcha”动作属性中，选择模块 CapMonsterCloud.dll，指定验证码类型（reCaptcha v.2）及识别方式（**标签页内** 或 **通过 sitekey**）：
 

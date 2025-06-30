@@ -1,11 +1,7 @@
 ﻿---
-
 sidebar\_position: 0
-
 # id: my-home-doc
-
 # slug: /
-
 ---
 
 # Getting Started
@@ -29,11 +25,9 @@ Now you can solve captchas automatically using the [browser extension](https://d
 ## Methods for submitting and retrieving results
 
 :::info Endpoint URL
-
 ```http
 https://api.capmonster.cloud
 ```
-
 :::
 
 **To solve a captcha, you need to**:
