@@ -21,7 +21,7 @@ https://api.brocapgpt.com/createTask
 ### `clientKey`
 Type: `String` <br />
 Обязательный: `Да` <br />
-Уникальный ключ вашей учетной записи, API ключ (найти можно [тут](https://brocapgpt.com/dashboard)
+Уникальный ключ вашей учетной записи, API ключ
 
 ### `task`
 Type: `Объект задачи` <br />

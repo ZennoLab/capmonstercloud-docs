@@ -25,13 +25,3 @@ Additional method:
 
 - [Check](api/methods/get-balance.md) account balance.
 
-### Code examples
-
-For your convenience, we provide ready-to-use libraries that allow you to quickly integrate the BroCapGPT API into your codebase. Recognize FunCaptcha at the lowest prices on the market!
-
-|**Language**|**Link to the repository**|
-| :- | :- | 
-|С#|- [Nuget](https://www.nuget.org/packages/Zennolab.CapMonsterCloud.Client)<br /> - [Github](https://github.com/ZennoLab/capmonstercloud-client-dotnet) |
-|Python|- [PyPl](https://pypi.org/project/capmonstercloudclient/)<br /> - [Github](https://github.com/ZennoLab/capmonstercloud-client-python)|
-|JS|- [Npm](https://www.npmjs.com/package/@zennolab_com/capmonstercloud-client)<br /> - [Github](https://github.com/ZennoLab/capmonstercloud-client-js)|
-

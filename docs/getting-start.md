@@ -26,14 +26,3 @@ https://api.brocapgpt.com
 Дополнительный метод:
 
 - [Получить](api/methods/get-balance.md) актуальный баланс аккаунта.
-
-### Примеры кода
-
-Для вашего удобства мы создали готовые библиотеки для быстрой интеграции API BroCapGPT в свой код. Распознавайте FunCaptcha по самым низким ценам на рынке!
-
-|**Язык**|**Ссылка на репозиторий**|
-| :- | :- | 
-|С#|- [Nuget](https://www.nuget.org/packages/Zennolab.CapMonsterCloud.Client)<br /> - [Github](https://github.com/ZennoLab/capmonstercloud-client-dotnet) |
-|Python|- [PyPl](https://pypi.org/project/capmonstercloudclient/)<br /> - [Github](https://github.com/ZennoLab/capmonstercloud-client-python)|
-|JS|- [Npm](https://www.npmjs.com/package/@zennolab_com/capmonstercloud-client)<br /> - [Github](https://github.com/ZennoLab/capmonstercloud-client-js)|
-

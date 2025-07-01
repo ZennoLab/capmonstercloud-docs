@@ -23,7 +23,7 @@ Request format: `JSON POST`
 ### `clientKey`
 Type: `String` <br />
 Required: `Yes`<br />
-Your unique account key, API key (You can find it [here](https://brocapgpt.com/dashboard)
+Your unique account key, API key
 
 ### `task`
 Type: `Task object` <br />
