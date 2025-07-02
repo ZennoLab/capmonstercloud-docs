@@ -44,19 +44,19 @@ import BlogLink from '@theme/BlogLink';
     Адрес основной страницы, на которой находится инкапсула.
 
     ---
-    <ParamItem title="metadata.incapsulaScriptUrl" required="required" type="string" />
+    <ParamItem title="incapsulaScriptUrl (внутри metadata)" required="required" type="string" />
     `"incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3"` - Название js файла инкапсулы
 
     ---
 
-    <ParamItem title="metadata.incapsulaCookie" required type="string" />
+    <ParamItem title="incapsulaCookie (внутри metadata)" required type="string" />
     Ваши куки от incapsula. Можно получить на странице с помощью "document.cookie" или в заголовке запроса Set-Cookie: "incap_sess_*=...; visid_incap_*=..." (см. пример запроса /createTask)
 	
 	![](./images/incapsula/incapsula2.png)
 
 	---
 
-    <ParamItem title="metadata.reese84UrlEndpoint" type="string" />
+    <ParamItem title="reese84UrlEndpoint (внутри metadata)" type="string" />
     Название эндпоинта куда отравляется reese84 fingerprint. Можно найти среди запросов, оканчивается на ?d=site.com
 
     ![](./images/incapsula/incapsula3.png)	

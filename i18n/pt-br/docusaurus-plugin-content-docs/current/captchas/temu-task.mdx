@@ -36,7 +36,7 @@ import BlogLink from '@theme/BlogLink';
     A URL completa da página onde a CAPTCHA está carregada ( https://www.temu.com/bgn_verification.html?....... )
 
     ---
-    <ParamItem title="metadata.cookie" required="required" type="string" />
+    <ParamItem title="cookie (dentro da metadata)" required="required" type="string" />
     Cookies obtidos via `document.cookie` na página onde a CAPTCHA está carregada
 
     ---
@@ -46,8 +46,8 @@ import BlogLink from '@theme/BlogLink';
 	**Passe apenas o UA atual. O atual é**: userAgentPlaceholder
 </TabItem>
 
-### Como obter o parâmetro metadata.cookie
-O valor do parâmetro `metadata.cookie` pode ser obtido na página da CAPTCHA via a propriedade `document.cookie`.
+### Como obter o parâmetro cookie (dentro da metadata)
+O valor do parâmetro `cookie` pode ser obtido na página da CAPTCHA via a propriedade `document.cookie`.
 ![](./images/temu/temu-cookie.png) 
 
 

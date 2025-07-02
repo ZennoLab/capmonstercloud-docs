@@ -42,19 +42,19 @@ CapMonster Cloud 提供的 Imperva (Incapsula) 解决方案仅用于测试和分
     Incapsula 所在的主页面地址。 
 
     ---
-    <ParamItem title="metadata.incapsulaScriptUrl" required="required" type="string" />
+    <ParamItem title="incapsulaScriptUrl（在 metadata 中）" required="required" type="string" />
     `"incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3"` - Incapsula JS 文件的名称。
 
     ---
 
-    <ParamItem title="metadata.incapsulaCookie" required type="string" />
+    <ParamItem title="incapsulaCookie（在 metadata 中）" required type="string" />
     你从 Incapsula 获取的 cookies。可以通过在页面中使用 document.cookie 获取，或者在请求头中通过 Set-Cookie: "incap_sess_*=...; visid_incap_*=..." 获取（参见 /createTask 请求示例）。
 	
 	![](./images/incapsula/incapsula2.png)
 	
 	---
 
-    <ParamItem title="metadata.reese84UrlEndpoint" type="string" />
+    <ParamItem title="reese84UrlEndpoint（在 metadata 中）" type="string" />
 	reese84 指纹发送的端点名称可以在请求中找到，并以 ?d=site.com 结尾。
 
     ![](./images/incapsula/incapsula3.png)	

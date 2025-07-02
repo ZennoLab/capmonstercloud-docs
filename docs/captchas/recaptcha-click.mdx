@@ -48,20 +48,20 @@ import BlogLink from '@theme/BlogLink';
 
     ---
 
-    <ParamItem title="metadata.Grid" required type="string" />
+    <ParamItem title="Grid (внутри metadata)" required type="string" />
     Размер сетки с изображениями.
     Возможные значения: 4x4, 3x3, 1x1
 
     ---
 
-    <ParamItem title="metadata.TaskDefinition" required="required (если не заполнено metadata.Task)" type="string" />    
+    <ParamItem title="TaskDefinition (внутри metadata)" required="required (если не заполнено Task)" type="string" />    
 	<p>Техническое значение, определяющее тип задания</p>
 	<p>**Как получить TaskDefinition**</p>
 	<p>Данные можно найти в ответах на запросы `/recaptcha/{recaptchaApi}/reload` или `/recaptcha/{recaptchaApi}/userverify`, где recaptchaApi - это "enterprise" или "api2" в зависимости от типа Recaptcha. В ответе лежит json, в котором можно взять список TaskDefinition-ов для подгруженных капч.</p>
 
     ---
 
-    <ParamItem title="metadata.Task" required="required (если не заполнено metadata.TaskDefinition)" type="string" />
+    <ParamItem title="Task (внутри metadata)" required="required (если не заполнено TaskDefinition)" type="string" />
     Возможные значения: `Click on traffic lights` и другие <br />
     Текст задания (<u>на английском</u>).
 
@@ -82,13 +82,13 @@ import BlogLink from '@theme/BlogLink';
 
 **imagesBase64**: изображения в формате Base64.
 
-**metadata.Grid**: дополнительные метаданные, связанные с размерами сетки изображений.
+**Grid (внутри metadata)**: дополнительные метаданные, связанные с размерами сетки изображений.
 
-**metadata.TaskDefinition**: идентификатор/тип описания задания, например: `/m/015qff` означает “Click on traffic lights”. 
+**TaskDefinition (внутри metadata)**: идентификатор/тип описания задания, например: `/m/015qff` означает “Click on traffic lights”. 
 
 ![](./images/recaptcha-click/taskdefinition.png)
 
-**metadata.Task**: дополнительные метаданные, связанные с задачей.
+**Task (внутри metadata)**: дополнительные метаданные, связанные с задачей.
 
 **userAgent**: информация о пользовательском агенте. Актуальный userAgent: userAgentPlaceholder
 
@@ -188,7 +188,7 @@ import BlogLink from '@theme/BlogLink';
 
 ![imgUrl1](images\recaptcha-click\recap-img-url.png)
 
-#### metadata.Task
+#### Task (внутри metadata)
 
 Описание задания. Кликните правой кнопкой мыши на текст задания и в **Инструментах разработчика** найдите соответствующий элемент в структуре страницы:
 
