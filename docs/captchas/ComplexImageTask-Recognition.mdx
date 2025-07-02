@@ -66,7 +66,7 @@ import BlogLink from '@theme/BlogLink';
 
     ---
 
-    <ParamItem title="metadata.Task" required type="string" />
+    <ParamItem title="Task (внутри metadata)" required type="string" />
     Возможные значения: `oocl_rotate_new` и другие <br />
     Название задания (<u>на английском</u>).
 
@@ -543,6 +543,10 @@ import BlogLink from '@theme/BlogLink';
 <PriceBlockWrap>
   <PriceBlock title="baidu" name="complex-rec_baidu" />
 </PriceBlockWrap>
+
+:::warning **Внимание!**
+В начале процесса решения возможны временные *unsolvable*-ответы. Это **не является ошибкой** - капча продолжит успешно решаться после инициализации.  
+:::
 
 В запросе передаем одно изображение в формате base64.
 

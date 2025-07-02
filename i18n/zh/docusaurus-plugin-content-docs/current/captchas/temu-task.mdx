@@ -36,7 +36,7 @@ import BlogLink from '@theme/BlogLink';
     加载验证码的页面的完整URL ( https://www.temu.com/bgn_verification.html?....... )
 
     ---
-    <ParamItem title="metadata.cookie" required="required" type="string" />
+    <ParamItem title="cookie（在 metadata 中）" required="required" type="string" />
     通过 `document.cookie` 在加载验证码的页面上获取的 Cookies
 
     ---
@@ -46,8 +46,8 @@ import BlogLink from '@theme/BlogLink';
 	**只传递当前的 UA。当前的 UA 是**: userAgentPlaceholder
 </TabItem>
 
-### 如何获取 metadata.cookie 参数
-可以通过 `document.cookie` 属性在验证码页面上获取 `metadata.cookie` 参数的值。
+### 如何获取 cookie（在 metadata 中） 参数
+可以通过 `document.cookie` 属性在验证码页面上获取 `cookie` 参数的值。
 ![](./images/temu/temu-cookie.png) 
 
 
