@@ -159,11 +159,3 @@ https://api.capmonster.cloud
 
 ![](./images/getting-started-11.png)
 
-## Видеоинструкция: решение капч через API и ZennoPoster
-
-Данное видео демонстрирует решение капч через CapMonster Cloud с использованием API и [ZennoPoster](https://zennolab.com/en/products/zennoposter/), а также даёт практические советы по быстрой настройке и применению сервиса.
-
-<video width="100%" height="400" controls>
-  <source src="/videos/Capmonster Cloud-RU.mp4" type="video/mp4" />
-  Ваш браузер не поддерживает видео.
-</video>

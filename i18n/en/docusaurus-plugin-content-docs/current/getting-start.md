@@ -158,11 +158,3 @@ For some captcha types, ready-made actions in ProjectMaker are missing, so you n
 
 ![](./images/getting-started-11.png)
 
-## Video guide: solving captchas via API and ZennoPoster
-
-This video demonstrates solving captchas through CapMonster Cloud using the API and [ZennoPoster](https://zennolab.com/en/products/zennoposter/), providing practical advice on quick setup and service usage.
-
-<video width="100%" height="400" controls>
-  <source src="/videos/Capmonster Cloud-EN.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>

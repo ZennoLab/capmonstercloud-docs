@@ -37,7 +37,7 @@ import BlogLink from '@theme/BlogLink';
     Полный адрес страницы, на которой прогружена капча ( https://www.temu.com/bgn_verification.html?....... )
 
     ---
-    <ParamItem title="metadata.cookie" required="required" type="string" />
+    <ParamItem title="cookie (внутри metadata)" required="required" type="string" />
     Куки, полученные через `document.cookie` на прогруженной странице капчи
 
     ---
@@ -47,8 +47,8 @@ import BlogLink from '@theme/BlogLink';
 	**Передавайте только актуальный UA от ОС Windows. Сейчас таковым является**: userAgentPlaceholder
 </TabItem>
 
-### Как получить параметр metadata.cookie
-Значение для параметра `metadata.cookie` можно получить на странице с капчей через свойство `document.cookie`.
+### Как получить параметр cookie (внутри metadata)
+Значение для параметра `cookie` можно получить на странице с капчей через свойство `document.cookie`.
 ![](./images/temu/temu-cookie.png) 
 
 

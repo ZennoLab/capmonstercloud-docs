@@ -157,11 +157,3 @@ Para alguns tipos de captchas não há ações prontas no ProjectMaker, então �
 
 ![](./images/getting-started-11.png)
 
-## Vídeo tutorial: resolvendo captchas via API e ZennoPoster
-
-Este vídeo demonstra como resolver captchas com CapMonster Cloud usando API e [ZennoPoster](https://zennolab.com/en/products/zennoposter/), além de fornecer dicas práticas para rápida configuração e uso do serviço.
-
-<video width="100%" height="400" controls>
-  <source src="/videos/Capmonster Cloud-PT.mp4" type="video/mp4" />
-  Seu navegador não suporta vídeo.
-</video>

@@ -64,7 +64,7 @@ import BlogLink from '@theme/BlogLink';
 
     ---
 
-    <ParamItem title="metadata.Task" required type="string" />
+    <ParamItem title="Task (dentro da metadata)" required type="string" />
     Valores possíveis: `oocl_rotate_new` e outros <br />
     Nome da tarefa (<u>em inglês</u>).
 
@@ -350,7 +350,7 @@ https://api.capmonster.cloud/getTaskResult
 </PriceBlockWrap>
 
 Na solicitação, enviamos 9 imagens no formato base64.
-Também passamos o valor buscado TaskArgument nos metadados.
+Também passamos o valor buscado TaskArgument nos metadata.
 
 <BlogLink url="https://capmonster.cloud/pt-BR/blog/news/bls-solve-extension" />
 
@@ -543,6 +543,10 @@ Na solicitação, passamos uma imagem no formato base64.
 <PriceBlockWrap>
   <PriceBlock title="baidu" name="complex-rec_baidu" />
 </PriceBlockWrap>
+
+:::warning **Atenção!**
+No início do processo de resolução, podem ocorrer respostas temporárias *unsolvable*. Isso **não é um erro** – o captcha continuará a ser resolvido com sucesso após a inicialização.  
+:::
 
 Na solicitação, passamos uma imagem no formato base64.
 

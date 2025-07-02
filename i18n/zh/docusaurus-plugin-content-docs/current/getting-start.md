@@ -163,12 +163,3 @@ https://api.capmonster.cloud
 7. 使用“设置值”操作将 token 插入目标表单中（需根据页面代码调整）：
 
 ![](./images/getting-started-11.png)
-
-## 视频教程：使用 API 和 ZennoPoster 解决验证码
-
-以下视频展示如何通过 CapMonster Cloud 的 API 和 [ZennoPoster](https://zennolab.com/en/products/zennoposter/) 解决验证码，并提供快速设置和使用建议。
-
-<video width="100%" height="400" controls>
-  <source src="/videos/Capmonster Cloud-ZH.mp4" type="video/mp4" />
-  您的浏览器不支持 video 标签。
-</video>

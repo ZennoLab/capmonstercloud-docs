@@ -48,18 +48,18 @@ import BlogLink from '@theme/BlogLink';
 
     ---
 
-    <ParamItem title="metadata.Grid" required type="string" />
+    <ParamItem title="Grid （在 metadata 中）" required type="string" />
     图片网格大小。
     可能的值: 4x4, 3x3, 1x1
 
     ---
 
-    <ParamItem title="metadata.TaskDefinition" required="required (如果 metadata.Task 未填写)" type="string" />
+    <ParamItem title="TaskDefinition （在 metadata 中）" required="required (如果 Task 未填写)" type="string" />
     定义任务类型的技术值 如何获取 TaskDefinition。该数据可以在对 `/recaptcha/{recaptchaApi}/reload` 或 `/recaptcha/{recaptchaApi}/userverify` 请求的响应中找到，其中 recaptchaApi 是 "enterprise" 或 "api2"，具体取决于 Recaptcha 的类型。响应包含 JSON，可以从中获取加载的验证码的 TaskDefinitions 列表。
 
     ---
 
-    <ParamItem title="metadata.Task" required="required (if metadata.TaskDefinition is not filled)" type="string" />
+    <ParamItem title="Task （在 metadata 中）" required="required (if TaskDefinition is not filled)" type="string" />
     可能的值：`点击交通灯` 及其他 <br /> 任务名称 (<u>英文</u>)。
 
     ---
@@ -80,13 +80,13 @@ import BlogLink from '@theme/BlogLink';
 
 **imagesBase64**：Base64 格式的图像。
 
-**metadata.Grid**：与图像网格大小相关的附加元数据。
+**Grid （在 metadata 中）**：与图像网格大小相关的附加元数据。
 
-**metadata.TaskDefinition**：任务描述标识符/类型，例如：`/m/015qff` 表示“点击红绿灯”。
+**TaskDefinition （在 metadata 中）**：任务描述标识符/类型，例如：`/m/015qff` 表示“点击红绿灯”。
 
 ![](./images/recaptcha-click/taskdefinition.png)
 
-**metadata.Task**：与任务相关的附加元数据。
+**Task（在 metadata 中）**：与任务相关的附加元数据。
 
 **userAgent**：用户代理信息。当前 userAgent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36
 
@@ -196,7 +196,7 @@ import BlogLink from '@theme/BlogLink';
 
 ![imgUrl1](images\recaptcha-click\recap-img-url.png)
 
-#### metadata.Task
+#### Task（在 metadata 中）
 
 任务描述。右键点击任务文字，然后在 **开发者工具** 中找到页面结构中对应的元素：
 
