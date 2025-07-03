@@ -48,6 +48,11 @@ import BlogLink from '@theme/BlogLink';
 
     ---
 
+    <ParamItem title="captchaUrl（在 metadata 中）" type="string" />
+    验证码脚本的链接。 通常以 `TCaptcha.js` 或 `TCaptcha-global.js` 结尾。可以在请求列表中找到（见下方示例）。
+	
+    ---
+
     <ParamItem title="userAgent" type="string" />
     浏览器用户代理。**只传递 Windows 操作系统的实际 UA。现在是版本**： `userAgentPlaceholder`
 	
@@ -88,38 +93,46 @@ import BlogLink from '@theme/BlogLink';
 打开开发者工具，转到网络标签，激活验证码并查看请求。其中一些将包含您需要的参数值。在这种情况下，`websiteKey=aid`
 ![](./images/tendi/tendi-devtools.png)
 
+### 如何获取 captchaUrl
+打开 *开发者工具*，切换到 **Network** 选项卡，激活验证码并检查网络请求。在其中会出现 `TCaptcha.js` 或 `TCaptcha-global.js`，您可以在其中找到类似这样的链接：
+
+![](./images/tendi/tendi_captchaUrl.png)
 
 ## 创建任务方法 
-<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
-	<MethodItem>
-		```http
-		https://api.capmonster.cloud/createTask
-		```
-	</MethodItem>
-	<MethodDescription>
-		**要求**
-		```json
-		{
-			"clientKey": "API_KEY",
-			"task": {
-				"type": "CustomTask",
-				"class": "TenDI",
-				"websiteURL": "https://example.com",
-				"websiteKey": "189123456",
-				"userAgent": "userAgentPlaceholder"
-			}
-		}
-		```
-		**回应**
-		```json
-		{
-		  "errorId":0,
-		  "taskId":407533072
-		}
-		```
-	</MethodDescription>
-</TabItem>
 
+<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
+  <MethodItem>
+    ```http
+    https://api.capmonster.cloud/createTask
+    ```
+  </MethodItem>
+  <MethodDescription>
+    **要求**
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "task": {
+        "type": "CustomTask",
+        "class": "TenDI",
+        "websiteURL": "https://example.com",
+        "websiteKey": "189123456",
+        "userAgent": "userAgentPlaceholder",
+        "metadata": {
+          "captchaUrl": "https://global.captcha.example.com/TCaptcha-global.js"
+        }
+      }
+    }
+    ```
+
+    **回应**
+    ```json
+    {
+      "errorId": 0,
+      "taskId": 407533072
+    }
+    ```
+  </MethodDescription>
+</TabItem>
 
 ## 获取任务结果方法
 使用[getTaskResult](../api/methods/get-task-result.md)方法获取TenDI的解决方案。
@@ -157,6 +170,127 @@ import BlogLink from '@theme/BlogLink';
 	</MethodDescription>
 </TabItem>
 
+## 如何查找任务创建所需的所有参数
+
+### 自动方法
+
+一种方便的自动化获取所有必要参数的方式。
+某些参数每次页面加载时都会重新生成，因此需要通过浏览器（普通或无头模式，如使用**Playwright**）提取它们。
+由于动态参数值的有效期很短，获取后必须立即解决验证码。
+
+:::warning **重要提示！**
+提供的代码片段是用于熟悉参数提取的基本示例。具体实现将取决于验证码页面、其结构及使用的HTML元素/选择器。
+:::
+
+<Tabs className="full-width-tabs filled-tabs request-tabs">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+    <details>
+      <summary>显示代码 (Node.js)</summary>
+      ```js
+      import { chromium } from "playwright";
+
+      (async () => {
+        const browser = await chromium.launch({ headless: false });
+        const page = await browser.newPage();
+
+        // 拦截请求
+        page.on("request", (request) => {
+          const url = request.url();
+          if (
+            url.startsWith("https://sg.captcha.qcloud.com/cap_union_prehandle?aid=")
+          ) {
+            const parsedUrl = new URL(url);
+            const aid = parsedUrl.searchParams.get("aid");
+            console.log("提取到的 aid:", aid);
+          }
+        });
+
+        await page.goto("https://www.example.com/", { waitUntil: "load" });
+
+        await page.waitForTimeout(5000);
+
+        await browser.close();
+      })();
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="python" label="Python" className="method-panel">
+    <details>
+      <summary>显示代码</summary>
+      ```python
+      import asyncio
+      from playwright.async_api import async_playwright
+
+      async def main():
+          async with async_playwright() as p:
+              browser = await p.chromium.launch(headless=False)
+              page = await browser.new_page()
+
+              # 拦截请求
+              page.on("request", lambda request: handle_request(request))
+
+              await page.goto("https://www.example.com/", wait_until="load")
+
+              await asyncio.sleep(5)
+
+              await browser.close()
+
+      def handle_request(request):
+          url = request.url
+          if url.startswith("https://sg.captcha.qcloud.com/cap_union_prehandle?aid="):
+              parsed_url = request.url.split('?')[1]
+              params = dict(param.split('=') for param in parsed_url.split('&') if '=' in param)
+              aid = params.get('aid')
+              print("提取到的 aid:", aid)
+
+      asyncio.run(main())
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    <details>
+      <summary>显示代码</summary>
+      ```csharp
+      using System;
+      using System.Threading.Tasks;
+      using Microsoft.Playwright;
+
+      class Program
+      {
+          public static async Task Main()
+          {
+              using var playwright = await Playwright.CreateAsync();
+              await using var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions {
+                 Headless = false });
+              var page = await browser.NewPageAsync();
+
+              // 拦截请求
+              page.Request += (_, request) =>
+              {
+                  var url = request.Url;
+                  if (url.StartsWith("https://sg.captcha.qcloud.com/cap_union_prehandle?aid="))
+                  {
+                      var uri = new Uri(url);
+                      var queryParams = System.Web.HttpUtility.ParseQueryString(uri.Query);
+                      var aid = queryParams.Get("aid");
+                      Console.WriteLine("提取到的 aid: " + aid);
+                  }
+              };
+
+              await page.GotoAsync("https://www.example.com/", new PageGotoOptions {
+               WaitUntil = WaitUntilState.Load });
+
+              await Task.Delay(5000);
+
+              await browser.CloseAsync();
+          }
+      }
+      ```
+    </details>
+  </TabItem>
+</Tabs>
 
 ## 使用 SDK 库
 

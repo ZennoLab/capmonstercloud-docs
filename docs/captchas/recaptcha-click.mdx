@@ -48,20 +48,20 @@ import BlogLink from '@theme/BlogLink';
 
     ---
 
-    <ParamItem title="metadata.Grid" required type="string" />
+    <ParamItem title="Grid (внутри metadata)" required type="string" />
     Размер сетки с изображениями.
     Возможные значения: 4x4, 3x3, 1x1
 
     ---
 
-    <ParamItem title="metadata.TaskDefinition" required="required (если не заполнено metadata.Task)" type="string" />    
+    <ParamItem title="TaskDefinition (внутри metadata)" required="required (если не заполнено Task)" type="string" />    
 	<p>Техническое значение, определяющее тип задания</p>
 	<p>**Как получить TaskDefinition**</p>
 	<p>Данные можно найти в ответах на запросы `/recaptcha/{recaptchaApi}/reload` или `/recaptcha/{recaptchaApi}/userverify`, где recaptchaApi - это "enterprise" или "api2" в зависимости от типа Recaptcha. В ответе лежит json, в котором можно взять список TaskDefinition-ов для подгруженных капч.</p>
 
     ---
 
-    <ParamItem title="metadata.Task" required="required (если не заполнено metadata.TaskDefinition)" type="string" />
+    <ParamItem title="Task (внутри metadata)" required="required (если не заполнено TaskDefinition)" type="string" />
     Возможные значения: `Click on traffic lights` и другие <br />
     Текст задания (<u>на английском</u>).
 
@@ -82,13 +82,13 @@ import BlogLink from '@theme/BlogLink';
 
 **imagesBase64**: изображения в формате Base64.
 
-**metadata.Grid**: дополнительные метаданные, связанные с размерами сетки изображений.
+**Grid (внутри metadata)**: дополнительные метаданные, связанные с размерами сетки изображений.
 
-**metadata.TaskDefinition**: идентификатор/тип описания задания, например: `/m/015qff` означает “Click on traffic lights”. 
+**TaskDefinition (внутри metadata)**: идентификатор/тип описания задания, например: `/m/015qff` означает “Click on traffic lights”. 
 
 ![](./images/recaptcha-click/taskdefinition.png)
 
-**metadata.Task**: дополнительные метаданные, связанные с задачей.
+**Task (внутри metadata)**: дополнительные метаданные, связанные с задачей.
 
 **userAgent**: информация о пользовательском агенте. Актуальный userAgent: userAgentPlaceholder
 
@@ -166,6 +166,335 @@ import BlogLink from '@theme/BlogLink';
 |**Свойство**|**Тип**|**Описание**|
 | :- | :- | :- |
 |answer|Array|Список в булевыми значениями, true - означает, что нужно произвести клик на соответствующее этой позиции изображение|
+
+## Как найти все нужные параметры для создания задачи на решение
+
+### Вручную
+
+1. Откройте ваш сайт, где отображается капча, в браузере.
+2. Правой кнопкой кликните по элементу капчи и выберите **Inspect**.
+
+#### websitekey:
+
+Процесс поиска аналогичен поиску websitekey [ReCaptchaV2Task](https://docs.capmonster.cloud/ru/docs/captchas/no-captcha-task#как-найти-все-нужные-параметры-для-создания-задачи-на-решение) и [ReCaptchaV2Enterprise](https://docs.capmonster.cloud/ru/docs/captchas/recaptcha-v2-enterprise-task#как-найти-все-нужные-параметры-для-создания-задачи-на-решение).
+
+#### imageUrls:
+
+Найдите ссылку в атрибутах элемента:
+
+![imgUrl](images\recaptcha-click\img-url-elements.png)
+
+Также ссылку цельного изображения можно получить, просто кликнув правой кнопкой мыши по изображению и выбрать **Открыть изображение в новой вкладке**. После этого ссылку можно скопировать прямо из адресной строки браузера.
+
+![imgUrl1](images\recaptcha-click\recap-img-url.png)
+
+#### Task (внутри metadata)
+
+Описание задания. Кликните правой кнопкой мыши на текст задания и в **Инструментах разработчика** найдите соответствующий элемент в структуре страницы:
+
+![metadata](images\recaptcha-click\metadata.png)
+
+### Автоматически
+
+Удобный способ автоматизировать поиск всех необходимых параметров.
+Некоторые параметры генерируются заново при каждой загрузке страницы, поэтому для их извлечения потребуется работать через браузер – обычный или в режиме headless (например, с помощью **Playwright**).
+Так как значения динамических параметров хранятся недолго, капчу нужно решать сразу после их получения.
+
+:::warning **Важно!**
+Приведённые фрагменты кода являются базовыми примерами для ознакомления в извлечении необходимых параметров. Точная реализация будет зависеть от вашего сайта с капчей, его структуры и используемых HTML-элементов и селекторов.
+:::
+
+<Tabs className="full-width-tabs filled-tabs request-tabs">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+    <details>
+      <summary>Показать код (для браузера)</summary>
+      ```js
+      const img = document.querySelector('img.rc-image-tile-33') || document.querySelector('img.rc-image-tile-44');
+      const src = img ? img.src : null;
+      console.log(src);
+
+      // Описание задания
+      const descEl =
+        document.querySelector('.rc-imageselect-desc-no-canonical') ||
+        document.querySelector('.rc-imageselect-desc');
+
+      const taskDescription = descEl
+        ? descEl.textContent.trim()
+        : 'Описание задания не найдено';
+
+      console.log(taskDescription);
+
+      // Количество видимых плиток
+      const tiles = document.querySelectorAll('.rc-imageselect-tile');
+      const visibleTiles = Array.from(tiles).filter(tile => tile.offsetParent !== null);
+
+      const tileCount = visibleTiles.length;
+
+      let gridSize;
+      if (tileCount === 9) {
+        gridSize = '3x3';
+      } else if (tileCount === 16) {
+        gridSize = '4x4';
+      } else if (tileCount === 25) {
+        gridSize = '5x5';
+      } else {
+        gridSize = 'Unknown';
+      }
+
+      console.log(`Размер сетки: ${gridSize}`);
+      ```
+    </details>
+    <details>
+      <summary>Показать код (Node.js)</summary>
+      ```js
+      import { chromium } from "playwright";
+
+      async function extractCaptchaInfo() {
+        const browser = await chromium.launch({ headless: false });
+        const page = await browser.newPage();
+
+        const url =
+          "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high";
+        await page.goto(url);
+
+        const frames = page.frames();
+        const checkboxFrame = frames.find((f) => f.url().includes("api2/anchor"));
+
+        if (!checkboxFrame) {
+          console.error("Не найден iframe с чекбоксом reCAPTCHA");
+          await browser.close();
+          return;
+        }
+
+        const checkbox = await checkboxFrame.waitForSelector("#recaptcha-anchor", {
+          timeout: 5000,
+        });
+        await checkbox.click();
+
+        await page.waitForTimeout(1000);
+        const updatedFrames = page.frames();
+        const challengeFrame = updatedFrames.find((f) =>
+          f.url().includes("api2/bframe")
+        );
+
+        if (!challengeFrame) {
+          console.error("Не найден iframe с заданием reCAPTCHA");
+          await browser.close();
+          return;
+        }
+
+        // Изображение
+        const img =
+          (await challengeFrame.$("img.rc-image-tile-33")) ||
+          (await challengeFrame.$("img.rc-image-tile-44"));
+        const src = img ? await img.getAttribute("src") : null;
+        console.log("Изображение:", src);
+
+        // Задание
+        try {
+          await challengeFrame.waitForSelector(
+            ".rc-imageselect-desc-no-canonical, .rc-imageselect-desc",
+            {
+              timeout: 5000,
+            }
+          );
+          const taskDescription = await challengeFrame.$eval(
+            ".rc-imageselect-desc-no-canonical, .rc-imageselect-desc",
+            (el) => {
+              const strong = el.querySelector("strong");
+              const text = strong ? strong.textContent.trim() : "Не найдено";
+              return text;
+            }
+          );
+          console.log("Задание: выбрать все изображения с:", taskDescription);
+        } catch (error) {
+          console.log("Описание задания не найдено.");
+        }
+
+        // Размер сетки
+        const tiles = await challengeFrame.$$(".rc-imageselect-tile");
+        const visibleTiles = await Promise.all(tiles.map((tile) => tile.isVisible()));
+        const tileCount = visibleTiles.filter(Boolean).length;
+
+        let gridSize;
+        if (tileCount === 9) {
+          gridSize = "3x3";
+        } else if (tileCount === 16) {
+          gridSize = "4x4";
+        } else if (tileCount === 25) {
+          gridSize = "5x5";
+        } else {
+          gridSize = "Unknown";
+        }
+
+        console.log(`Размер сетки: ${gridSize}`);
+
+        await browser.close();
+      }
+
+      extractCaptchaInfo();
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="python" label="Python" className="method-panel">
+    <details>
+      <summary>Показать код</summary>
+      ```python
+      import asyncio
+      from playwright.async_api import async_playwright
+
+      async def extract_captcha_info():
+          async with async_playwright() as p:
+              browser = await p.chromium.launch(headless=False)
+              page = await browser.new_page()
+
+              await page.goto("https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high")
+
+              # Поиск iframe с чекбоксом
+              checkbox_frame = next((f for f in page.frames if "api2/anchor" in f.url), None)
+              if not checkbox_frame:
+                  print("Не найден iframe с чекбоксом reCAPTCHA")
+                  await browser.close()
+                  return
+
+              checkbox = await checkbox_frame.wait_for_selector("#recaptcha-anchor", timeout=5000)
+              await checkbox.click()
+
+              await page.wait_for_timeout(1000)
+
+              # Поиск фрейма с заданием
+              challenge_frame = next((f for f in page.frames if "api2/bframe" in f.url), None)
+              if not challenge_frame:
+                  print("Не найден iframe с заданием reCAPTCHA")
+                  await browser.close()
+                  return
+
+              # Изображение: ищем с классами rc-image-tile-33 или rc-image-tile-44
+              img = await challenge_frame.query_selector("img.rc-image-tile-33") or await challenge_frame.query_selector("img.rc-image-tile-44")
+              src = await img.get_attribute("src") if img else None
+              print("Изображение:", src)
+
+              # Задание
+              try:
+                  await challenge_frame.wait_for_selector(".rc-imageselect-desc-no-canonical, .rc-imageselect-desc", timeout=5000)
+                  task_text = await challenge_frame.eval_on_selector(
+                      ".rc-imageselect-desc-no-canonical, .rc-imageselect-desc",
+                      "el => el.querySelector('strong')?.textContent?.trim() || 'Не найдено'"
+                  )
+                  print("Задание: выбрать все изображения с:", task_text)
+              except:
+                  print("Описание задания не найдено.")
+
+              # Размер сетки
+              tiles = await challenge_frame.query_selector_all(".rc-imageselect-tile")
+              visible_count = 0
+              for tile in tiles:
+                  if await tile.is_visible():
+                      visible_count += 1
+
+              if visible_count == 9:
+                  grid = "3x3"
+              elif visible_count == 16:
+                  grid = "4x4"
+              elif visible_count == 25:
+                  grid = "5x5"
+              else:
+                  grid = "Unknown"
+
+              print("Размер сетки:", grid)
+              await browser.close()
+
+      asyncio.run(extract_captcha_info())
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    <details>
+      <summary>Показать код</summary>
+      ```csharp
+      using System;
+      using System.Linq;
+      using System.Threading.Tasks;
+      using Microsoft.Playwright;
+
+      class Program
+      {
+          public static async Task Main()
+          {
+              using var playwright = await Playwright.CreateAsync();
+              var browser = await playwright.Chromium.LaunchAsync(new() { Headless = false });
+              var page = await browser.NewPageAsync();
+
+              await page.GotoAsync("https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high");
+
+              var checkboxFrame = page.Frames.FirstOrDefault(f => f.Url.Contains("api2/anchor"));
+              if (checkboxFrame == null)
+              {
+                  Console.WriteLine("Не найден iframe с чекбоксом reCAPTCHA");
+                  await browser.CloseAsync();
+                  return;
+              }
+
+              var checkbox = await checkboxFrame.WaitForSelectorAsync("#recaptcha-anchor");
+              await checkbox.ClickAsync();
+
+              await page.WaitForTimeoutAsync(1000);
+
+              var challengeFrame = page.Frames.FirstOrDefault(f => f.Url.Contains("api2/bframe"));
+              if (challengeFrame == null)
+              {
+                  Console.WriteLine("Не найден iframe с заданием reCAPTCHA");
+                  await browser.CloseAsync();
+                  return;
+              }
+
+              // Ищем изображение с классами rc-image-tile-33 или rc-image-tile-44
+              var img = await challengeFrame.QuerySelectorAsync("img.rc-image-tile-33") ?? await challengeFrame.QuerySelectorAsync("img.rc-image-tile-44");
+              var src = img != null ? await img.GetAttributeAsync("src") : null;
+              Console.WriteLine("Изображение: " + src);
+
+              try
+              {
+                  await challengeFrame.WaitForSelectorAsync(".rc-imageselect-desc-no-canonical, .rc-imageselect-desc");
+                  var taskText = await challengeFrame.EvalOnSelectorAsync<string>(
+                      ".rc-imageselect-desc-no-canonical, .rc-imageselect-desc",
+                      @"el => {
+                          const strong = el.querySelector('strong');
+                          return strong ? strong.textContent.trim() : 'Не найдено';
+                      }");
+                  Console.WriteLine("Задание: выбрать все изображения с: " + taskText);
+              }
+              catch
+              {
+                  Console.WriteLine("Описание задания не найдено.");
+              }
+
+              var tiles = await challengeFrame.QuerySelectorAllAsync(".rc-imageselect-tile");
+              int visibleCount = 0;
+              foreach (var tile in tiles)
+              {
+                  if (await tile.IsVisibleAsync())
+                      visibleCount++;
+              }
+
+              string gridSize = visibleCount switch
+              {
+                  9 => "3x3",
+                  16 => "4x4",
+                  25 => "5x5",
+                  _ => "Unknown"
+              };
+
+              Console.WriteLine("Размер сетки: " + gridSize);
+              await browser.CloseAsync();
+          }
+      }
+      ```
+    </details>
+  </TabItem>
+</Tabs>
 
 ## Используйте библиотеку SDK
 

@@ -44,19 +44,19 @@ The Imperva (Incapsula) solution, available in CapMonster Cloud, is provided exc
     The address of the main page where Incapsula is located. 
 
     ---
-    <ParamItem title="metadata.incapsulaScriptUrl" required="required" type="string" />
+    <ParamItem title="incapsulaScriptUrl (inside metadata)" required="required" type="string" />
     `"incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3"` - Name of the Incapsula JS file.
 
     ---
 
-    <ParamItem title="metadata.incapsulaCookie" required type="string" />
+    <ParamItem title="incapsulaCookie (inside metadata)" required type="string" />
     Your cookies from Incapsula. They can be obtained on the page using document.cookie or in the request header Set-Cookie: "incap_sess_*=...; visid_incap_*=..." (see the /createTask request example).
 	
 	![](./images/incapsula/incapsula2.png)
 	
 	---
 
-    <ParamItem title="metadata.reese84UrlEndpoint" type="string" />
+    <ParamItem title="reese84UrlEndpoint (inside metadata)" type="string" />
     The name of the endpoint where the reese84 fingerprint is sent can be found among the requests and ends with ?d=site.com
 
     ![](./images/incapsula/incapsula3.png)	
@@ -146,6 +146,137 @@ Use the method [getTaskResult](../api/methods/get-task-result.md) to obtain the 
 ## Access denied
 
 Error 16 - this error is related to the use of proxy servers that do not match the required geolocation.
+
+## How to Find All Required Parameters for Task Creation
+
+### Automatically
+
+A convenient way to automate the search for all necessary parameters.
+Some parameters are regenerated every time the page loads, so you'll need to extract them through a browser — either regular or headless (e.g., using **Playwright**).
+Since the values of dynamic parameters are short-lived, the captcha must be solved immediately after retrieving them.
+
+:::warning **Important!**
+The code snippets provided are basic examples for familiarization with extracting the required parameters. The exact implementation will depend on your captcha page, its structure, and the HTML elements/selectors it uses.
+:::
+
+<Tabs className="full-width-tabs filled-tabs request-tabs">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+    <details>
+      <summary>Show code (Node.js)</summary>
+      ```js
+      import { chromium } from "playwright";
+
+      (async () => {
+        const browser = await chromium.launch({ headless: false });
+        const page = await browser.newPage();
+
+        await page.goto("https://www.example.com/");
+
+        // Extract the src attribute from the iframe with id main-iframe
+        const iframeSrc = await page.$eval("#main-iframe", (iframe) =>
+          iframe.getAttribute("src")
+        );
+        console.log("iframe src:", iframeSrc);
+
+        // Get all cookies
+        const cookies = await page.context().cookies();
+
+        // Filter cookies that start with visid_incap_ or incap_ses_
+        const filteredCookies = cookies.filter(
+          (cookie) =>
+            cookie.name.startsWith("visid_incap_") ||
+            cookie.name.startsWith("incap_ses_")
+        );
+
+        filteredCookies.forEach((cookie) => {
+          console.log(`${cookie.name}=${cookie.value}`);
+        });
+
+        await browser.close();
+      })();
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="python" label="Python" className="method-panel">
+    <details>
+      <summary>Show code</summary>
+      ```python
+      import asyncio
+      from playwright.async_api import async_playwright
+
+      async def main():
+          async with async_playwright() as p:
+              browser = await p.chromium.launch(headless=False)
+              page = await browser.new_page()
+
+              await page.goto("https://www.example.com/")
+
+              # Extract the src attribute from the iframe with id main-iframe
+              iframe_src = await page.locator("#main-iframe").get_attribute("src")
+              print("iframe src:", iframe_src)  # Output the src value
+
+              # Get all cookies
+              cookies = await page.context.cookies()
+
+              # Filter cookies that start with visid_incap_ or incap_ses_
+              filtered_cookies = [
+                  cookie for cookie in cookies
+                  if cookie["name"].startswith("visid_incap_") or cookie["name"].startswith("incap_ses_")
+              ]
+
+              for cookie in filtered_cookies:
+                  print(f"{cookie['name']}={cookie['value']}")
+
+              await browser.close()
+
+      asyncio.run(main())
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    <details>
+      <summary>Show code</summary>
+      ```csharp
+      using System;
+      using System.Linq;
+      using System.Threading.Tasks;
+      using Microsoft.Playwright;
+
+      class Program
+      {
+          public static async Task Main(string[] args)
+          {
+              var playwright = await Playwright.CreateAsync();
+              var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = false });
+              var page = await browser.NewPageAsync();
+
+              await page.GotoAsync("https://www.example.com/");
+
+              // Extract the src attribute from the iframe with id main-iframe
+              var iframeSrc = await page.GetAttributeAsync("#main-iframe", "src");
+              Console.WriteLine("iframe src: " + iframeSrc); // Output the src value
+
+              // Get all cookies
+              var cookies = await page.Context.CookiesAsync();
+
+              // Filter cookies that start with visid_incap_ or incap_ses_
+              var filteredCookies = cookies.Where(cookie =>
+                  cookie.Name.StartsWith("visid_incap_") || cookie.Name.StartsWith("incap_ses_"));
+
+              foreach (var cookie in filteredCookies)
+              {
+                  Console.WriteLine($"{cookie.Name}={cookie.Value}");
+              }
+
+              await browser.CloseAsync();
+          }
+      }
+      ```
+    </details>
+  </TabItem>
+</Tabs>
 
 ## Use SDK Library
 

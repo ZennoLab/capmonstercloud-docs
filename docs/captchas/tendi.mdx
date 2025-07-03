@@ -49,6 +49,11 @@ import BlogLink from '@theme/BlogLink';
 
     ---
 
+    <ParamItem title="captchaUrl (внутри metadata)" type="string" />
+    Ссылка на скрипт с капчей. Обычно заканчивается на `TCaptcha.js` или `TCaptcha-global.js`. Можно найти в списке запросов (см. пример ниже).
+	
+    ---
+
     <ParamItem title="userAgent" type="string" />
     User-Agent браузера. **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является версия**: `userAgentPlaceholder`
 	
@@ -89,41 +94,50 @@ import BlogLink from '@theme/BlogLink';
 
 
 ### Как получить websiteKey (captchaAppId)
-Включите инструменты разработчика, перейдите на вкладку Network, активируйте капчу и посмотрите запросы. В некотрых из них будет нужное вам значение параметра. В данном случае `websiteKey=aid`
+Включите *Инструменты разработчика*, перейдите на вкладку **Network**, активируйте капчу и посмотрите запросы. В некоторых из них будет нужное вам значение параметра. В данном случае `websiteKey=aid`
+
 ![](./images/tendi/tendi-devtools.png) 
 
+### Как получить captchaUrl
+Откройте *Инструменты разработчика*, перейдите на вкладку **Network**, активируйте капчу и изучите сетевые запросы. Среди них появится `TCaptcha.js` или `TCaptcha-global.js`, в котором можно найти подобную ссылку: 
+
+![](./images/tendi/tendi_captchaUrl.png)
 
 ## Метод создания задачи
-<TabItem value="proxyless" label="CustomTask (без прокси)" default className="method-panel">
-	<MethodItem>
-		```http
-		https://api.capmonster.cloud/createTask
-		```
-	</MethodItem>
-	<MethodDescription>
-		**Запрос**
-		```json
-		{
-			"clientKey": "API_KEY",
-			"task": {
-				"type": "CustomTask",
-				"class": "TenDI",
-				"websiteURL": "https://example.com",
-				"websiteKey": "189123456",
-				"userAgent": "userAgentPlaceholder"
-			}
-		}
-		```
-		**Ответ**
-		```json
-		{
-		  "errorId":0,
-		  "taskId":407533072
-		}
-		```
-	</MethodDescription>
-</TabItem>
 
+<TabItem value="proxyless" label="CustomTask (без прокси)" default className="method-panel">
+  <MethodItem>
+    ```http
+    https://api.capmonster.cloud/createTask
+    ```
+  </MethodItem>
+  <MethodDescription>
+    **Запрос**
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "task": {
+        "type": "CustomTask",
+        "class": "TenDI",
+        "websiteURL": "https://example.com",
+        "websiteKey": "189123456",
+        "userAgent": "userAgentPlaceholder",
+        "metadata": {
+          "captchaUrl": "https://global.captcha.example.com/TCaptcha-global.js"
+        }
+      }
+    }
+    ```
+
+    **Ответ**
+    ```json
+    {
+      "errorId": 0,
+      "taskId": 407533072
+    }
+    ```
+  </MethodDescription>
+</TabItem>
 
 ## Метод получения результата задачи
 Используйте метод [getTaskResult](../api/methods/get-task-result.md), чтобы получить решение TenDI.
@@ -161,6 +175,127 @@ import BlogLink from '@theme/BlogLink';
 	</MethodDescription>
 </TabItem>
 
+## Как найти все нужные параметры для создания задачи на решение
+
+### Автоматически
+
+Удобный способ автоматизировать поиск всех необходимых параметров.
+Некоторые параметры генерируются заново при каждой загрузке страницы, поэтому для их извлечения потребуется работать через браузер – обычный или в режиме headless (например, с помощью **Playwright**).
+Так как значения динамических параметров хранятся недолго, капчу нужно решать сразу после их получения.
+
+:::warning **Важно!**
+Приведённые фрагменты кода являются базовыми примерами для ознакомления в извлечении необходимых параметров. Точная реализация будет зависеть от вашего сайта с капчей, его структуры и используемых HTML-элементов и селекторов.
+:::
+
+<Tabs className="full-width-tabs filled-tabs request-tabs">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+    <details>
+      <summary>Показать код (Node.js)</summary>
+      ```js
+      import { chromium } from "playwright";
+
+      (async () => {
+        const browser = await chromium.launch({ headless: false });
+        const page = await browser.newPage();
+
+        // Ловим запросы
+        page.on("request", (request) => {
+          const url = request.url();
+          if (
+            url.startsWith("https://sg.captcha.qcloud.com/cap_union_prehandle?aid=")
+          ) {
+            const parsedUrl = new URL(url);
+            const aid = parsedUrl.searchParams.get("aid");
+            console.log("Extracted aid:", aid);
+          }
+        });
+
+        await page.goto("https://www.example.com/", { waitUntil: "load" });
+
+        await page.waitForTimeout(5000);
+
+        await browser.close();
+      })();
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="python" label="Python" className="method-panel">
+    <details>
+      <summary>Показать код</summary>
+      ```python
+      import asyncio
+      from playwright.async_api import async_playwright
+
+      async def main():
+          async with async_playwright() as p:
+              browser = await p.chromium.launch(headless=False)
+              page = await browser.new_page()
+
+              # Ловим запросы
+              page.on("request", lambda request: handle_request(request))
+
+              await page.goto("https://www.example.com/", wait_until="load")
+
+              await asyncio.sleep(5)
+
+              await browser.close()
+
+      def handle_request(request):
+          url = request.url
+          if url.startswith("https://sg.captcha.qcloud.com/cap_union_prehandle?aid="):
+              parsed_url = request.url.split('?')[1]
+              params = dict(param.split('=') for param in parsed_url.split('&') if '=' in param)
+              aid = params.get('aid')
+              print("Extracted aid:", aid)
+
+      asyncio.run(main())
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    <details>
+      <summary>Показать код</summary>
+      ```csharp
+      using System;
+      using System.Threading.Tasks;
+      using Microsoft.Playwright;
+
+      class Program
+      {
+          public static async Task Main()
+          {
+              using var playwright = await Playwright.CreateAsync();
+              await using var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions {
+                 Headless = false });
+              var page = await browser.NewPageAsync();
+
+              // Ловим запросы
+              page.Request += (_, request) =>
+              {
+                  var url = request.Url;
+                  if (url.StartsWith("https://sg.captcha.qcloud.com/cap_union_prehandle?aid="))
+                  {
+                      var uri = new Uri(url);
+                      var queryParams = System.Web.HttpUtility.ParseQueryString(uri.Query);
+                      var aid = queryParams.Get("aid");
+                      Console.WriteLine("Extracted aid: " + aid);
+                  }
+              };
+
+              await page.GotoAsync("https://www.example.com/", new PageGotoOptions {
+               WaitUntil = WaitUntilState.Load });
+
+              await Task.Delay(5000);
+
+              await browser.CloseAsync();
+          }
+      }
+      ```
+    </details>
+  </TabItem>
+</Tabs>
 
 ## Используйте библиотеку SDK
 

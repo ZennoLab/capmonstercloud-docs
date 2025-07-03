@@ -47,18 +47,18 @@ O objeto contém dados sobre a tarefa para resolver o ReCaptcha2 do Google.
 
     ---
 
-    <ParamItem title="metadata.Grid" required type="string" />
+    <ParamItem title="Grid (dentro da metadata)" required type="string" />
     Tamanho da grade de imagem.
     Valores possíveis: 4x4, 3x3, 1x1
 
     ---
 
-    <ParamItem title="metadata.TaskDefinition" required="required (se metadata.Task não estiver preenchido)" type="string" />
+    <ParamItem title="TaskDefinition (dentro da metadata)" required="required (se Task não estiver preenchido)" type="string" />
     <p>Valor técnico que define o tipo de tarefa</p><p>**Como obter TaskDefinition**</p><p>Os dados podem ser encontrados nas respostas das solicitações `/recaptcha/{recaptchaApi}/reload` ou `/recaptcha/{recaptchaApi}/userverify`, onde recaptchaApi é "enterprise" ou "api2" dependendo do tipo de Recaptcha. A resposta contém json, onde pode-se obter uma lista de TaskDefinitions para captchas carregados.</p>
 
     ---
 
-    <ParamItem title="metadata.Task" required="required (se metadata.TaskDefinition não estiver preenchido)" type="string" />
+    <ParamItem title="Task (dentro da metadata)" required="required (se TaskDefinition não estiver preenchido)" type="string" />
     Valores possíveis: `Click on traffic lights` e outros <br />
     Nome da tarefa (<u>em inglês</u>).
 
@@ -79,13 +79,13 @@ O objeto contém dados sobre a tarefa para resolver o ReCaptcha2 do Google.
 
 **imagesBase64**: imagens no formato Base64.
 
-**metadata.Grid**: metadados adicionais relacionados aos tamanhos da grade de imagens.
+**Grid (dentro da metadata)**: metadata adicionais relacionados aos tamanhos da grade de imagens.
 
-**metadata.TaskDefinition**: identificador/tipo da descrição da tarefa, por exemplo: `/m/015qff` significa "Click on traffic lights".
+**TaskDefinition (dentro da metadata)**: identificador/tipo da descrição da tarefa, por exemplo: `/m/015qff` significa "Click on traffic lights".
 
 ![](./images/recaptcha-click/taskdefinition.png)
 
-**metadata.Task**: metadados adicionais relacionados à tarefa.
+**Task (dentro da metadata)**: metadata adicionais relacionados à tarefa.
 
 **userAgent**: informações sobre o agente do usuário. Atual userAgent: userAgentPlaceholder
 
@@ -167,6 +167,335 @@ https://api.capmonster.cloud/getTaskResult
 |**Propriedade**|**Tipo**|**Descrição**|
 | :- | :- | :- |
 |answer|Array|Lista com valores booleanos, "true" significa que você precisa clicar na imagem correspondente a essa posição.|
+
+## Como Encontrar Todos os Parâmetros Necessários para a Criação da Tarefa
+
+### Manualmente
+
+1. Abra seu site onde o captcha aparece no navegador.
+2. Clique com o botão direito no elemento do captcha e selecione **Inspecionar**.
+
+#### websitekey:
+
+O processo é semelhante a encontrar o websitekey para [ReCaptchaV2Task](https://docs.capmonster.cloud/pt-br/docs/captchas/no-captcha-task#como-encontrar-todos-os-parâmetros-necessários-para-a-criação-da-tarefa) e [ReCaptchaV2Enterprise](https://docs.capmonster.cloud/pt-br/docs/captchas/recaptcha-v2-enterprise-task#como-encontrar-todos-os-parâmetros-necessários-para-a-criação-da-tarefa).
+
+#### imageUrls:
+
+Encontre a URL nos atributos do elemento:
+
+![imgUrl](images\recaptcha-click\img-url-elements.png)
+
+Você também pode obter a URL completa da imagem clicando com o botão direito na imagem e selecionando **Abrir imagem em uma nova guia**. Em seguida, copie a URL diretamente da barra de endereços do navegador.
+
+![imgUrl1](images\recaptcha-click\recap-img-url.png)
+
+#### Task (dentro da metadata)
+
+Descrição da tarefa. Clique com o botão direito no texto da tarefa e, nas **Ferramentas do Desenvolvedor**, encontre o elemento correspondente na estrutura da página:
+
+![metadata](images\recaptcha-click\metadata.png)
+
+### Automaticamente
+
+Uma forma conveniente de automatizar a busca por todos os parâmetros necessários.  
+Alguns parâmetros são regenerados a cada carregamento da página, então você precisará extraí-los através de um navegador — seja normal ou headless (por exemplo, usando **Playwright**).  
+Como os valores dos parâmetros dinâmicos são de curta duração, o captcha deve ser resolvido imediatamente após a captura deles.
+
+:::warning **Importante!**  
+Os trechos de código fornecidos são exemplos básicos para familiarização com a extração dos parâmetros necessários. A implementação exata dependerá da sua página de captcha, sua estrutura e dos elementos/seletores HTML que ela utiliza.  
+:::
+
+<Tabs className="full-width-tabs filled-tabs request-tabs">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+    <details>
+      <summary>Mostrar código (para navegador)</summary>
+      ```js
+      const img = document.querySelector('img.rc-image-tile-33') || document.querySelector('img.rc-image-tile-44');
+      const src = img ? img.src : null;
+      console.log(src);
+
+      // Descrição da tarefa
+      const descEl =
+        document.querySelector('.rc-imageselect-desc-no-canonical') ||
+        document.querySelector('.rc-imageselect-desc');
+
+      const taskDescription = descEl
+        ? descEl.textContent.trim()
+        : 'Descrição da tarefa não encontrada';
+
+      console.log(taskDescription);
+
+      // Número de blocos visíveis
+      const tiles = document.querySelectorAll('.rc-imageselect-tile');
+      const visibleTiles = Array.from(tiles).filter(tile => tile.offsetParent !== null);
+
+      const tileCount = visibleTiles.length;
+
+      let gridSize;
+      if (tileCount === 9) {
+        gridSize = '3x3';
+      } else if (tileCount === 16) {
+        gridSize = '4x4';
+      } else if (tileCount === 25) {
+        gridSize = '5x5';
+      } else {
+        gridSize = 'Desconhecido';
+      }
+
+      console.log(`Tamanho da grade: ${gridSize}`);
+      ```
+    </details>
+    <details>
+      <summary>Mostrar código (Node.js)</summary>
+      ```js
+      import { chromium } from "playwright";
+
+      async function extractCaptchaInfo() {
+        const browser = await chromium.launch({ headless: false });
+        const page = await browser.newPage();
+
+        const url =
+          "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high";
+        await page.goto(url);
+
+        const frames = page.frames();
+        const checkboxFrame = frames.find((f) => f.url().includes("api2/anchor"));
+
+        if (!checkboxFrame) {
+          console.error("Iframe de checkbox para reCAPTCHA não encontrado");
+          await browser.close();
+          return;
+        }
+
+        const checkbox = await checkboxFrame.waitForSelector("#recaptcha-anchor", {
+          timeout: 5000,
+        });
+        await checkbox.click();
+
+        await page.waitForTimeout(1000);
+        const updatedFrames = page.frames();
+        const challengeFrame = updatedFrames.find((f) =>
+          f.url().includes("api2/bframe")
+        );
+
+        if (!challengeFrame) {
+          console.error("Iframe de desafio para reCAPTCHA não encontrado");
+          await browser.close();
+          return;
+        }
+
+        // Imagem
+        const img =
+          (await challengeFrame.$("img.rc-image-tile-33")) ||
+          (await challengeFrame.$("img.rc-image-tile-44"));
+        const src = img ? await img.getAttribute("src") : null;
+        console.log("Imagem:", src);
+
+        // Tarefa
+        try {
+          await challengeFrame.waitForSelector(
+            ".rc-imageselect-desc-no-canonical, .rc-imageselect-desc",
+            {
+              timeout: 5000,
+            }
+          );
+          const taskDescription = await challengeFrame.$eval(
+            ".rc-imageselect-desc-no-canonical, .rc-imageselect-desc",
+            (el) => {
+              const strong = el.querySelector("strong");
+              const text = strong ? strong.textContent.trim() : "Não encontrado";
+              return text;
+            }
+          );
+          console.log("Tarefa: selecione todas as imagens com:", taskDescription);
+        } catch (error) {
+          console.log("Descrição da tarefa não encontrada.");
+        }
+
+        // Tamanho da grade
+        const tiles = await challengeFrame.$$(".rc-imageselect-tile");
+        const visibleTiles = await Promise.all(tiles.map((tile) => tile.isVisible()));
+        const tileCount = visibleTiles.filter(Boolean).length;
+
+        let gridSize;
+        if (tileCount === 9) {
+          gridSize = "3x3";
+        } else if (tileCount === 16) {
+          gridSize = "4x4";
+        } else if (tileCount === 25) {
+          gridSize = "5x5";
+        } else {
+          gridSize = "Desconhecido";
+        }
+
+        console.log(`Tamanho da grade: ${gridSize}`);
+
+        await browser.close();
+      }
+
+      extractCaptchaInfo();
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="python" label="Python" className="method-panel">
+    <details>
+      <summary>Mostrar código</summary>
+      ```python
+      import asyncio
+      from playwright.async_api import async_playwright
+
+      async def extract_captcha_info():
+          async with async_playwright() as p:
+              browser = await p.chromium.launch(headless=False)
+              page = await browser.new_page()
+
+              await page.goto("https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high")
+
+              # Encontrar o iframe do checkbox
+              checkbox_frame = next((f for f in page.frames if "api2/anchor" in f.url), None)
+              if not checkbox_frame:
+                  print("Iframe de checkbox para reCAPTCHA não encontrado")
+                  await browser.close()
+                  return
+
+              checkbox = await checkbox_frame.wait_for_selector("#recaptcha-anchor", timeout=5000)
+              await checkbox.click()
+
+              await page.wait_for_timeout(1000)
+
+              # Encontrar o iframe de desafio
+              challenge_frame = next((f for f in page.frames if "api2/bframe" in f.url), None)
+              if not challenge_frame:
+                  print("Iframe de desafio para reCAPTCHA não encontrado")
+                  await browser.close()
+                  return
+
+              # Imagem: procurar por classes rc-image-tile-33 ou rc-image-tile-44
+              img = await challenge_frame.query_selector("img.rc-image-tile-33") or await challenge_frame.query_selector("img.rc-image-tile-44")
+              src = await img.get_attribute("src") if img else None
+              print("Imagem:", src)
+
+              # Tarefa
+              try:
+                  await challenge_frame.wait_for_selector(".rc-imageselect-desc-no-canonical, .rc-imageselect-desc", timeout=5000)
+                  task_text = await challenge_frame.eval_on_selector(
+                      ".rc-imageselect-desc-no-canonical, .rc-imageselect-desc",
+                      "el => el.querySelector('strong')?.textContent?.trim() || 'Não encontrado'"
+                  )
+                  print("Tarefa: selecione todas as imagens com:", task_text)
+              except:
+                  print("Descrição da tarefa não encontrada.")
+
+              # Tamanho da grade
+              tiles = await challenge_frame.query_selector_all(".rc-imageselect-tile")
+              visible_count = 0
+              for tile in tiles:
+                  if await tile.is_visible():
+                      visible_count += 1
+
+              if visible_count == 9:
+                  grid = "3x3"
+              elif visible_count == 16:
+                  grid = "4x4"
+              elif visible_count == 25:
+                  grid = "5x5"
+              else:
+                  grid = "Desconhecido"
+
+              print("Tamanho da grade:", grid)
+              await browser.close()
+
+      asyncio.run(extract_captcha_info())
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    <details>
+      <summary>Mostrar código</summary>
+      ```csharp
+      using System;
+      using System.Linq;
+      using System.Threading.Tasks;
+      using Microsoft.Playwright;
+
+      class Program
+      {
+          public static async Task Main()
+          {
+              using var playwright = await Playwright.CreateAsync();
+              var browser = await playwright.Chromium.LaunchAsync(new() { Headless = false });
+              var page = await browser.NewPageAsync();
+
+              await page.GotoAsync("https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high");
+
+              var checkboxFrame = page.Frames.FirstOrDefault(f => f.Url.Contains("api2/anchor"));
+              if (checkboxFrame == null)
+              {
+                  Console.WriteLine("Iframe de checkbox para reCAPTCHA não encontrado");
+                  await browser.CloseAsync();
+                  return;
+              }
+
+              var checkbox = await checkboxFrame.WaitForSelectorAsync("#recaptcha-anchor");
+              await checkbox.ClickAsync();
+
+              await page.WaitForTimeoutAsync(1000);
+
+              var challengeFrame = page.Frames.FirstOrDefault(f => f.Url.Contains("api2/bframe"));
+              if (challengeFrame == null)
+              {
+                  Console.WriteLine("Iframe de desafio para reCAPTCHA não encontrado");
+                  await browser.CloseAsync();
+                  return;
+              }
+
+              // Procurar imagem com classes rc-image-tile-33 ou rc-image-tile-44
+              var img = await challengeFrame.QuerySelectorAsync("img.rc-image-tile-33") ?? await challengeFrame.QuerySelectorAsync("img.rc-image-tile-44");
+              var src = img != null ? await img.GetAttributeAsync("src") : null;
+              Console.WriteLine("Imagem: " + src);
+
+              try
+              {
+                  await challengeFrame.WaitForSelectorAsync(".rc-imageselect-desc-no-canonical, .rc-imageselect-desc");
+                  var taskText = await challengeFrame.EvalOnSelectorAsync<string>(
+                      ".rc-imageselect-desc-no-canonical, .rc-imageselect-desc",
+                      @"el => {
+                          const strong = el.querySelector('strong');
+                          return strong ? strong.textContent.trim() : 'Não encontrado';
+                      }");
+                  Console.WriteLine("Tarefa: selecione todas as imagens com: " + taskText);
+              }
+              catch
+              {
+                  Console.WriteLine("Descrição da tarefa não encontrada.");
+              }
+
+              var tiles = await challengeFrame.QuerySelectorAllAsync(".rc-imageselect-tile");
+              int visibleCount = 0;
+              foreach (var tile in tiles)
+              {
+                  if (await tile.IsVisibleAsync())
+                      visibleCount++;
+              }
+
+              string gridSize = visibleCount switch
+              {
+                  9 => "3x3",
+                  16 => "4x4",
+                  25 => "5x5",
+                  _ => "Desconhecido"
+              };
+
+              Console.WriteLine("Tamanho da grade: " + gridSize);
+              await browser.CloseAsync();
+          }
+      }
+      ```
+    </details>
+  </TabItem>
+</Tabs>
 
 ## Usar biblioteca SDK
 

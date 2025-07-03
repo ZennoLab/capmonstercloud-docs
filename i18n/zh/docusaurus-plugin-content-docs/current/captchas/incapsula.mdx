@@ -42,19 +42,19 @@ CapMonster Cloud 提供的 Imperva (Incapsula) 解决方案仅用于测试和分
     Incapsula 所在的主页面地址。 
 
     ---
-    <ParamItem title="metadata.incapsulaScriptUrl" required="required" type="string" />
+    <ParamItem title="incapsulaScriptUrl（在 metadata 中）" required="required" type="string" />
     `"incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3"` - Incapsula JS 文件的名称。
 
     ---
 
-    <ParamItem title="metadata.incapsulaCookie" required type="string" />
+    <ParamItem title="incapsulaCookie（在 metadata 中）" required type="string" />
     你从 Incapsula 获取的 cookies。可以通过在页面中使用 document.cookie 获取，或者在请求头中通过 Set-Cookie: "incap_sess_*=...; visid_incap_*=..." 获取（参见 /createTask 请求示例）。
 	
 	![](./images/incapsula/incapsula2.png)
 	
 	---
 
-    <ParamItem title="metadata.reese84UrlEndpoint" type="string" />
+    <ParamItem title="reese84UrlEndpoint（在 metadata 中）" type="string" />
 	reese84 指纹发送的端点名称可以在请求中找到，并以 ?d=site.com 结尾。
 
     ![](./images/incapsula/incapsula3.png)	
@@ -144,6 +144,137 @@ CapMonster Cloud 提供的 Imperva (Incapsula) 解决方案仅用于测试和分
 ## Access denied
 
 Error 16 - 此错误与使用不符合要求地理位置的代理服务器有关。
+
+## 如何查找任务创建所需的所有参数
+
+### 自动方法
+
+一种方便的自动化获取所有必要参数的方式。
+某些参数每次页面加载时都会重新生成，因此需要通过浏览器（普通或无头模式，如使用**Playwright**）提取它们。
+由于动态参数值的有效期很短，获取后必须立即解决验证码。
+
+:::warning **重要提示！**
+提供的代码片段是用于熟悉参数提取的基本示例。具体实现将取决于验证码页面、其结构及使用的HTML元素/选择器。
+:::
+
+<Tabs className="full-width-tabs filled-tabs request-tabs">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+    <details>
+      <summary>显示代码 (Node.js)</summary>
+      ```js
+      import { chromium } from "playwright";
+
+      (async () => {
+        const browser = await chromium.launch({ headless: false });
+        const page = await browser.newPage();
+
+        await page.goto("https://www.example.com/");
+
+        // 提取 id 为 main-iframe 的 iframe 的 src 属性
+        const iframeSrc = await page.$eval("#main-iframe", (iframe) =>
+          iframe.getAttribute("src")
+        );
+        console.log("iframe src:", iframeSrc);
+
+        // 获取所有 cookies
+        const cookies = await page.context().cookies();
+
+        // 过滤出以 visid_incap_ 或 incap_ses_ 开头的 cookies
+        const filteredCookies = cookies.filter(
+          (cookie) =>
+            cookie.name.startsWith("visid_incap_") ||
+            cookie.name.startsWith("incap_ses_")
+        );
+
+        filteredCookies.forEach((cookie) => {
+          console.log(`${cookie.name}=${cookie.value}`);
+        });
+
+        await browser.close();
+      })();
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="python" label="Python" className="method-panel">
+    <details>
+      <summary>显示代码</summary>
+      ```python
+      import asyncio
+      from playwright.async_api import async_playwright
+
+      async def main():
+          async with async_playwright() as p:
+              browser = await p.chromium.launch(headless=False)
+              page = await browser.new_page()
+
+              await page.goto("https://www.example.com/")
+
+              # 提取 id 为 main-iframe 的 iframe 的 src 属性
+              iframe_src = await page.locator("#main-iframe").get_attribute("src")
+              print("iframe src:", iframe_src)  # 输出 src 值
+
+              # 获取所有 cookies
+              cookies = await page.context.cookies()
+
+              # 过滤出以 visid_incap_ 或 incap_ses_ 开头的 cookies
+              filtered_cookies = [
+                  cookie for cookie in cookies
+                  if cookie["name"].startswith("visid_incap_") or cookie["name"].startswith("incap_ses_")
+              ]
+
+              for cookie in filtered_cookies:
+                  print(f"{cookie['name']}={cookie['value']}")
+
+              await browser.close()
+
+      asyncio.run(main())
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    <details>
+      <summary>显示代码</summary>
+      ```csharp
+      using System;
+      using System.Linq;
+      using System.Threading.Tasks;
+      using Microsoft.Playwright;
+
+      class Program
+      {
+          public static async Task Main(string[] args)
+          {
+              var playwright = await Playwright.CreateAsync();
+              var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = false });
+              var page = await browser.NewPageAsync();
+
+              await page.GotoAsync("https://www.example.com/");
+
+              // 提取 id 为 main-iframe 的 iframe 的 src 属性
+              var iframeSrc = await page.GetAttributeAsync("#main-iframe", "src");
+              Console.WriteLine("iframe src: " + iframeSrc); // 输出 src 值
+
+              // 获取所有 cookies
+              var cookies = await page.Context.CookiesAsync();
+
+              // 过滤出以 visid_incap_ 或 incap_ses_ 开头的 cookies
+              var filteredCookies = cookies.Where(cookie =>
+                  cookie.Name.StartsWith("visid_incap_") || cookie.Name.StartsWith("incap_ses_"));
+
+              foreach (var cookie in filteredCookies)
+              {
+                  Console.WriteLine($"{cookie.Name}={cookie.Value}");
+              }
+
+              await browser.CloseAsync();
+          }
+      }
+      ```
+    </details>
+  </TabItem>
+</Tabs>
 
 ## 使用 SDK 库
 

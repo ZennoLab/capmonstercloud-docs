@@ -119,6 +119,152 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 	</MethodDescription>
 </TabItem>
 
+## Как найти все нужные параметры для создания задачи на решение
+
+### Вручную
+
+1. Откройте ваш сайт, где отображается капча, в браузере.
+2. Правой кнопкой кликните по элементу капчи и выберите **Inspect**.
+
+#### websiteKey
+
+Во вкладке **Network** фильтруйте запросы по ключевым словам, связанным с капчей, например, *site_key*. В запросах будет присутствовать параметр *site_key* – параметр для идентификации сайта в процессе прохождения капчи:
+
+![site-key-basilisk](images\basilisk\site-key.png)
+
+### Автоматически
+
+Удобный способ автоматизировать поиск всех необходимых параметров.
+Некоторые параметры генерируются заново при каждой загрузке страницы, поэтому для их извлечения потребуется работать через браузер – обычный или в режиме headless (например, с помощью **Playwright**).
+Так как значения динамических параметров хранятся недолго, капчу нужно решать сразу после их получения.
+
+:::warning **Важно!**
+Приведённые фрагменты кода являются базовыми примерами для ознакомления в извлечении необходимых параметров. Точная реализация будет зависеть от вашего сайта с капчей, его структуры и используемых HTML-элементов и селекторов.
+:::
+
+<Tabs className="full-width-tabs filled-tabs request-tabs">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+    <details>
+      <summary>Показать код (для браузера)</summary>
+      ```js
+      // Ищем элемент с атрибутом data-sitekey
+      const captchaElement = document.querySelector('[data-sitekey]');
+
+      // Извлекаем значение sitekey
+      if (captchaElement) {
+        const siteKey = captchaElement.getAttribute('data-sitekey');
+        console.log('Found site-key:', siteKey);
+      } else {
+        console.log('site-key not found');
+      }
+      ```
+    </details>
+
+    <details>
+      <summary>Показать код (Node.js)</summary>
+      ```js
+      import { chromium } from 'playwright';
+
+      async function extractSiteKey() {
+        const browser = await chromium.launch({ headless: true });
+        const page = await browser.newPage();
+
+        const url = 'https://example.com';
+        await page.goto(url);
+
+        // Ищем элемент с атрибутом data-sitekey
+        const captchaElement = await page.$('[data-sitekey]');
+
+        // Извлекаем значение sitekey
+        if (captchaElement) {
+          const siteKey = await captchaElement.getAttribute('data-sitekey');
+          console.log('Found site-key:', siteKey);
+        } else {
+          console.log('site-key not found');
+        }
+
+        await browser.close();
+      }
+
+      extractSiteKey();
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="python" label="Python" className="method-panel">
+    <details>
+      <summary>Показать код</summary>
+      ```python
+      import asyncio
+      from playwright.async_api import async_playwright
+
+      async def main():
+          async with async_playwright() as p:
+              browser = await p.chromium.launch(headless=False)
+              page = await browser.new_page()
+
+              url = 'https://example.com/captcha-page'
+              await page.goto(url)
+
+              # Ищем элемент с атрибутом data-sitekey
+              captcha_element = await page.query_selector('[data-sitekey]')
+
+              # Извлекаем значение sitekey, если элемент найден
+              if captcha_element:
+                  site_key = await captcha_element.get_attribute('data-sitekey')
+                  print('Found site-key:', site_key)
+              else:
+                  print('site-key not found')
+
+              await browser.close()
+
+      asyncio.run(main())
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    <details>
+      <summary>Показать код</summary>
+      ```csharp
+      using System;
+      using System.Threading.Tasks;
+      using Microsoft.Playwright;
+
+      class Program
+      {
+          static async Task Main(string[] args)
+          {
+              string url = "https://example.com/captcha-page";
+
+              using var playwright = await Playwright.CreateAsync();
+              var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { 
+              Headless = false });
+              var page = await browser.NewPageAsync();
+
+              await page.GotoAsync(url);
+
+              // Ищем элемент с атрибутом data-sitekey
+              var captchaElement = await page.QuerySelectorAsync("[data-sitekey]");
+
+              // Извлекаем значение sitekey, если элемент найден
+              if (captchaElement != null)
+              {
+                  var siteKey = await captchaElement.GetAttributeAsync("data-sitekey");
+                  Console.WriteLine("Found site-key: " + siteKey);
+              }
+              else
+              {
+                  Console.WriteLine("site-key not found");
+              }
+
+              await browser.CloseAsync();
+          }
+      }
+      ```
+    </details>
+  </TabItem>
+</Tabs>
 
 ## Используйте библиотеку SDK
 

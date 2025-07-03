@@ -49,6 +49,11 @@ Essa tarefa será realizada usando nossos servidores proxy.
 
     ---
 
+    <ParamItem title="captchaUrl (dentro da metadata)" type="string" />
+    Link para o script do captcha. Normalmente termina com `TCaptcha.js` ou `TCaptcha-global.js`. Pode ser encontrado na lista de requisições (veja o exemplo abaixo).
+	
+    ---
+
     <ParamItem title="userAgent" type="string" />
     O User-Agent do navegador. **Passe apenas o UA real de um sistema operacional Windows. Atualmente, a versão é**: `userAgentPlaceholder`
 	
@@ -85,40 +90,48 @@ Senha do servidor proxy.
 </TabItem>
 
 ### Como obter websiteKey (captchaAppId)
-Ative as ferramentas de desenvolvedor, vá para a aba "Network", ative o captcha e veja as solicitações. Algumas delas conterão o valor do parâmetro que você precisa. Nesse caso, `websiteKey=aid`  
+Ative as *Ferramentas de Desenvolvedor*, vá para a aba **Network**, ative o captcha e veja as solicitações. Algumas delas conterão o valor do parâmetro que você precisa. Nesse caso, `websiteKey=aid`  
 ![](./images/tendi/tendi-devtools.png) 
+
+### Como obter captchaUrl
+Abra *Ferramentas de Desenvolvedor*, vá para a aba **Network**, ative o captcha e examine as requisições de rede. Entre elas aparecerá `TCaptcha.js` ou `TCaptcha-global.js`, no qual você pode encontrar um link semelhante a este:
+
+![](./images/tendi/tendi_captchaUrl.png)
 
 ## Método de criação da tarefa
 
 <TabItem value="proxyless" label="RecaptchaV2TaskProxyless (sem proxy)" default className="method-panel">
-<MethodItem>
-  ```http
-  https://api.capmonster.cloud/createTask
-  ```
-</MethodItem>
-<MethodDescription>
-**Solicitação**
-```json
-{
-    "clientKey": "API_KEY",
-    "task": {
+  <MethodItem>
+    ```http
+    https://api.capmonster.cloud/createTask
+    ```
+  </MethodItem>
+  <MethodDescription>
+    **Solicitação**
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "task": {
         "type": "CustomTask",
         "class": "TenDI",
         "websiteURL": "https://example.com",
         "websiteKey": "189123456",
-        "userAgent": "userAgentPlaceholder"
+        "userAgent": "userAgentPlaceholder",
+        "metadata": {
+          "captchaUrl": "https://global.captcha.example.com/TCaptcha-global.js"
+        }
+      }
     }
-}
-```
-**Resposta**
-```json
-{
-  "errorId":0,
-  "taskId":407533072
-}
-```
+    ```
 
-</MethodDescription>
+    **Resposta**
+    ```json
+    {
+      "errorId": 0,
+      "taskId": 407533072
+    }
+    ```
+  </MethodDescription>
 </TabItem>
 
 ## Método de obter resultado da tarefa
@@ -156,7 +169,128 @@ https://api.capmonster.cloud/getTaskResult
 ```
   </MethodDescription>
   </TabItem>
-  
+
+## Como Encontrar Todos os Parâmetros Necessários para a Criação da Tarefa
+
+### Automaticamente
+
+Uma forma conveniente de automatizar a busca por todos os parâmetros necessários.  
+Alguns parâmetros são regenerados a cada carregamento da página, então você precisará extraí-los através de um navegador — seja normal ou headless (por exemplo, usando **Playwright**).  
+Como os valores dos parâmetros dinâmicos são de curta duração, o captcha deve ser resolvido imediatamente após a captura deles.
+
+:::warning **Importante!**  
+Os trechos de código fornecidos são exemplos básicos para familiarização com a extração dos parâmetros necessários. A implementação exata dependerá da sua página de captcha, sua estrutura e dos elementos/seletores HTML que ela utiliza.  
+:::
+
+<Tabs className="full-width-tabs filled-tabs request-tabs">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+    <details>
+      <summary>Mostrar código (Node.js)</summary>
+      ```js
+      import { chromium } from "playwright";
+
+      (async () => {
+        const browser = await chromium.launch({ headless: false });
+        const page = await browser.newPage();
+
+        // Interceptar requisições
+        page.on("request", (request) => {
+          const url = request.url();
+          if (
+            url.startsWith("https://sg.captcha.qcloud.com/cap_union_prehandle?aid=")
+          ) {
+            const parsedUrl = new URL(url);
+            const aid = parsedUrl.searchParams.get("aid");
+            console.log("Aid extraído:", aid);
+          }
+        });
+
+        await page.goto("https://www.example.com/", { waitUntil: "load" });
+
+        await page.waitForTimeout(5000);
+
+        await browser.close();
+      })();
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="python" label="Python" className="method-panel">
+    <details>
+      <summary>Mostrar código</summary>
+      ```python
+      import asyncio
+      from playwright.async_api import async_playwright
+
+      async def main():
+          async with async_playwright() as p:
+              browser = await p.chromium.launch(headless=False)
+              page = await browser.new_page()
+
+              # Interceptar requisições
+              page.on("request", lambda request: handle_request(request))
+
+              await page.goto("https://www.example.com/", wait_until="load")
+
+              await asyncio.sleep(5)
+
+              await browser.close()
+
+      def handle_request(request):
+          url = request.url
+          if url.startswith("https://sg.captcha.qcloud.com/cap_union_prehandle?aid="):
+              parsed_url = request.url.split('?')[1]
+              params = dict(param.split('=') for param in parsed_url.split('&') if '=' in param)
+              aid = params.get('aid')
+              print("Aid extraído:", aid)
+
+      asyncio.run(main())
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    <details>
+      <summary>Mostrar código</summary>
+      ```csharp
+      using System;
+      using System.Threading.Tasks;
+      using Microsoft.Playwright;
+
+      class Program
+      {
+          public static async Task Main()
+          {
+              using var playwright = await Playwright.CreateAsync();
+              await using var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions {
+                 Headless = false });
+              var page = await browser.NewPageAsync();
+
+              // Interceptar requisições
+              page.Request += (_, request) =>
+              {
+                  var url = request.Url;
+                  if (url.StartsWith("https://sg.captcha.qcloud.com/cap_union_prehandle?aid="))
+                  {
+                      var uri = new Uri(url);
+                      var queryParams = System.Web.HttpUtility.ParseQueryString(uri.Query);
+                      var aid = queryParams.Get("aid");
+                      Console.WriteLine("Aid extraído: " + aid);
+                  }
+              };
+
+              await page.GotoAsync("https://www.example.com/", new PageGotoOptions {
+               WaitUntil = WaitUntilState.Load });
+
+              await Task.Delay(5000);
+
+              await browser.CloseAsync();
+          }
+      }
+      ```
+    </details>
+  </TabItem>
+</Tabs>  
   
 ## Usar biblioteca SDK
 

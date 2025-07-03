@@ -116,6 +116,152 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 	</MethodDescription>
 </TabItem>
 
+## 如何查找任务创建所需的所有参数
+
+### 手动方式
+
+1. 请在浏览器中访问您的网站，该网站包含验证码功能。
+2. 右键点击验证码元素，选择 **检查（Inspect）**。
+
+#### websiteKey
+
+在 **网络** (Network) 选项卡中，使用与验证码相关的关键词过滤请求，比如 *site_key*。这些请求会包含 *site_key* 参数——这是一个用于在验证码解决过程中识别网站的值：
+
+![site-key-basilisk](images\basilisk\site-key.png)
+
+### 自动方法
+
+一种方便的自动化获取所有必要参数的方式。
+某些参数每次页面加载时都会重新生成，因此需要通过浏览器（普通或无头模式，如使用**Playwright**）提取它们。
+由于动态参数值的有效期很短，获取后必须立即解决验证码。
+
+:::warning **重要提示！**
+提供的代码片段是用于熟悉参数提取的基本示例。具体实现将取决于验证码页面、其结构及使用的HTML元素/选择器。
+:::
+
+<Tabs className="full-width-tabs filled-tabs request-tabs">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+    <details>
+      <summary>显示代码（浏览器中）</summary>
+      ```js
+      // 查找具有 data-sitekey 属性的元素
+      const captchaElement = document.querySelector('[data-sitekey]');
+
+      // 提取 sitekey 值
+      if (captchaElement) {
+        const siteKey = captchaElement.getAttribute('data-sitekey');
+        console.log('找到 site-key:', siteKey);
+      } else {
+        console.log('未找到 site-key');
+      }
+      ```
+    </details>
+
+    <details>
+      <summary>显示代码（Node.js）</summary>
+      ```js
+      import { chromium } from 'playwright';
+
+      async function extractSiteKey() {
+        const browser = await chromium.launch({ headless: true });
+        const page = await browser.newPage();
+
+        const url = 'https://example.com';
+        await page.goto(url);
+
+        // 查找具有 data-sitekey 属性的元素
+        const captchaElement = await page.$('[data-sitekey]');
+
+        // 提取 sitekey 值
+        if (captchaElement) {
+          const siteKey = await captchaElement.getAttribute('data-sitekey');
+          console.log('找到 site-key:', siteKey);
+        } else {
+          console.log('未找到 site-key');
+        }
+
+        await browser.close();
+      }
+
+      extractSiteKey();
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="python" label="Python" className="method-panel">
+    <details>
+      <summary>显示代码</summary>
+      ```python
+      import asyncio
+      from playwright.async_api import async_playwright
+
+      async def main():
+          async with async_playwright() as p:
+              browser = await p.chromium.launch(headless=False)
+              page = await browser.new_page()
+
+              url = 'https://example.com/captcha-page'
+              await page.goto(url)
+
+              # 查找具有 data-sitekey 属性的元素
+              captcha_element = await page.query_selector('[data-sitekey]')
+
+              # 如果找到元素则提取 sitekey 值
+              if captcha_element:
+                  site_key = await captcha_element.get_attribute('data-sitekey')
+                  print('找到 site-key:', site_key)
+              else:
+                  print('未找到 site-key')
+
+              await browser.close()
+
+      asyncio.run(main())
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    <details>
+      <summary>显示代码</summary>
+      ```csharp
+      using System;
+      using System.Threading.Tasks;
+      using Microsoft.Playwright;
+
+      class Program
+      {
+          static async Task Main(string[] args)
+          {
+              string url = "https://example.com/captcha-page";
+
+              using var playwright = await Playwright.CreateAsync();
+              var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { 
+              Headless = false });
+              var page = await browser.NewPageAsync();
+
+              await page.GotoAsync(url);
+
+              // 查找具有 data-sitekey 属性的元素
+              var captchaElement = await page.QuerySelectorAsync("[data-sitekey]");
+
+              // 如果找到元素则提取 sitekey 值
+              if (captchaElement != null)
+              {
+                  var siteKey = await captchaElement.GetAttributeAsync("data-sitekey");
+                  Console.WriteLine("找到 site-key: " + siteKey);
+              }
+              else
+              {
+                  Console.WriteLine("未找到 site-key");
+              }
+
+              await browser.CloseAsync();
+          }
+      }
+      ```
+    </details>
+  </TabItem>
+</Tabs>
 
 ## 使用 SDK 库
 
