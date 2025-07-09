@@ -114,3 +114,34 @@ Examples:
 |`https://www.google.*`|Prohibiting the extension from working on Google in all zones (ru, com, com.ua, etc.)|
 
 When errors occur in solving captchas, see the [error glossary](/api/api-errors.md).
+
+## Captcha parameter mapping
+
+The **CapMonster Cloud** extension provides a convenient way to view the parameters of various captcha types required for correct task submission and successful solving. The displayed data helps ensure that the parameters you send are accurate and can be used as examples when forming your API requests.
+
+### Supported captcha types and their parameters
+
+| Captcha type                 | Displayed parameters                                                                 |
+|-----------------------------|----------------------------------------------------------------------------------------|
+| **reCAPTCHA V2**            | `class`, `imageUrls`, `Task` (inside `metadata`), `Grid` (inside `metadata`), `recognizingThreshold`, `userAgent`, `type` |
+| **reCAPTCHA V2 Invisible**  | `class`, `imageUrls`, `Task` (inside `metadata`), `Grid` (inside `metadata`), `recognizingThreshold`, `userAgent`, `type` |
+| **reCAPTCHA V2 Enterprise** | `class`, `imageUrls`, `Task` (inside `metadata`), `Grid` (inside `metadata`), `recognizingThreshold`, `userAgent`, `type` |
+| **GeeTest v3**              | `websiteURL`, `gt`, `challenge`, `userAgent`, `type`                                  |
+| **GeeTest v4**              | `websiteURL`, `gt` (`captcha_id`), `userAgent`, `version`, `type`                     |
+| **Cloudflare Turnstile**    | `websiteURL`, `websiteKey`, `userAgent`, `type`                                       |
+| **Cloudflare Challenge**    | `websiteURL`, `websiteKey`, `userAgent`, `pageAction`, `data`, `pageData`, `cloudflareTaskType`, `type` |
+| **ImageToText**             | `body` (in `base64` format), `type`                                                   |
+| **BLS**                     | `class`, `imagesBase64`, `Task` (inside `metadata`), `TaskArgument` (inside `metadata`), `type` |
+| **Binance**                 | `websiteURL`, `websiteKey`, `validateId`, `userAgent`, `type`                         |
+
+To use this feature, activate the extension, open the captcha page (make sure the captcha type is supported and selected for solving), then follow these steps:
+
+1. Open **Developer Tools** (DevTools) and go to the **CapMonster Cloud tab**:  
+   
+   ![](./images/params_extension.png)
+
+2. Reload the page.
+
+Captcha parameters will be displayed automatically:  
+
+![](./images/params_extension1.png)

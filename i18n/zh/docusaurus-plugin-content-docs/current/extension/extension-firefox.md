@@ -104,3 +104,35 @@ sidebar_label: Firefox 浏览器扩展
 |`https://www.google.*`|禁止在所有 Google 域名下（ru、com、com.ua 等）使用扩展|
 
 当解决验证码时出现错误，请参阅[错误术语表](/api/api-errors.md)。
+
+## 验证码参数映射
+
+**CapMonster Cloud** 扩展程序提供了一种便捷方式，可用于查看各种验证码类型所需的参数，从而正确发送至服务器并成功完成识别。所显示的数据有助于确认所传参数的准确性，并可作为构建 API 请求的示例。
+
+### 支持的验证码类型及其参数
+
+| 验证码类型                  | 显示的参数                                                                         |
+|-----------------------------|----------------------------------------------------------------------------------------|
+| **reCAPTCHA V2**            | `class`、`imageUrls`、`Task`（在 `metadata` 内）、`Grid`（在 `metadata` 内）、`recognizingThreshold`、`userAgent`、`type` |
+| **reCAPTCHA V2 Invisible**  | `class`、`imageUrls`、`Task`（在 `metadata` 内）、`Grid`（在 `metadata` 内）、`recognizingThreshold`、`userAgent`、`type` |
+| **reCAPTCHA V2 Enterprise** | `class`、`imageUrls`、`Task`（在 `metadata` 内）、`Grid`（在 `metadata` 内）、`recognizingThreshold`、`userAgent`、`type` |
+| **GeeTest v3**              | `websiteURL`、`gt`、`challenge`、`userAgent`、`type`                                   |
+| **GeeTest v4**              | `websiteURL`、`gt`（`captcha_id`）、`userAgent`、`version`、`type`                     |
+| **Cloudflare Turnstile**    | `websiteURL`、`websiteKey`、`userAgent`、`type`                                       |
+| **Cloudflare Challenge**    | `websiteURL`、`websiteKey`、`userAgent`、`pageAction`、`data`、`pageData`、`cloudflareTaskType`、`type` |
+| **ImageToText**             | `body`（Base64 格式）、`type`                                                        |
+| **BLS**                     | `class`、`imagesBase64`、`Task`（在 `metadata` 内）、`TaskArgument`（在 `metadata` 内）、`type` |
+| **Binance**                 | `websiteURL`、`websiteKey`、`validateId`、`userAgent`、`type`                          |
+
+
+使用该功能，请启用扩展程序，打开验证码页面（确保验证码类型受支持并已选中进行解决），然后按照以下步骤操作：
+
+1. 打开开发者工具（DevTools），进入 **CapMonster Cloud** 选项卡： 
+    
+   ![](./images/extension-main-firefox/params_extenstion2.png)
+
+2. 刷新页面。
+
+所选验证码的参数将自动显示： 
+ 
+![](./images/extension-main-firefox/params_extenstion3.png)
