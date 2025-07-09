@@ -144,4 +144,5 @@ Para usar este recurso, ative a extensão, abra a página do captcha (certifique
 2. Recarregue a página.
 
 Os parâmetros do captcha selecionado serão exibidos automaticamente:  
+
 ![](./images/params_extension1.png)

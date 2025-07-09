@@ -137,10 +137,12 @@ sidebar_position: 0
 
 使用此功能，请启用扩展程序，打开验证码页面（确保验证码类型受支持并已选中），然后按以下步骤操作：
 
-1. 打开开发者工具（DevTools），进入 **CapMonster Cloud** 选项卡：  
+1. 打开开发者工具（DevTools），进入 **CapMonster Cloud** 选项卡： 
+    
    ![](./images/params_extension.png)
 
 2. 刷新页面。
 
 所选验证码的参数将自动显示：  
+
 ![](./images/params_extension1.png)
