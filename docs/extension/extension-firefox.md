@@ -103,3 +103,35 @@ sidebar_label: Расширение для браузера Firefox
 |`https://www.google.*`|Запрет работы расширения на google во всех зонах (ru, com, com.ua и т.д.)|
 
 При возникновении ошибок в разгадывании капч см. [глоссарий ошибок](/api/api-errors.md).
+
+## Маппинг (отображение) параметров капч
+
+Расширение CapMonster Cloud предоставляет удобный способ просмотра параметров различных типов капч, необходимых для их правильной отправки на сервер и успешного решения. Отображаемые данные позволяют убедиться в корректности передаваемых параметров и могут использоваться в качестве примера при формировании ваших API-запросов.
+
+### Поддерживаемые типы капч и их параметры
+
+
+| Тип капчи                     | Какие параметры отображаются                                                                 |
+|------------------------------|----------------------------------------------------------------------------------------------|
+| **reCAPTCHA V2**             | `class`, `imageUrls`, `Task` (внутри `metadata`), `Grid` (внутри `metadata`), `recognizingThreshold`, `userAgent`, `type` |
+| **reCAPTCHA V2 Invisible**  | `class`, `imageUrls`, `Task` (внутри `metadata`), `Grid` (внутри `metadata`), `recognizingThreshold`, `userAgent`, `type` |
+| **reCAPTCHA V2 Enterprise** | `class`, `imageUrls`, `Task` (внутри `metadata`), `Grid` (внутри `metadata`), `recognizingThreshold`, `userAgent`, `type` |
+| **GeeTest v3**              | `websiteURL`, `gt`, `challenge`, `userAgent`, `type`                                         |
+| **GeeTest v4**              | `websiteURL`, `gt` (`captcha_id`), `userAgent`, `version`, `type`                            |
+| **Cloudflare Turnstile**    | `websiteURL`, `websiteKey`, `userAgent`, `type`                                              |
+| **Cloudflare Challenge**    | `websiteURL`, `websiteKey`, `userAgent`, `pageAction`, `data`, `pageData`, `cloudflareTaskType`, `type` |
+| **ImageToText**             | `body` (в формате `base64`), `type`                                                          |
+| **BLS**                     | `class`, `imagesBase64`, `Task` (внутри `metadata`), `TaskArgument` (внутри `metadata`), `type` |
+| **Binance**                 | `websiteURL`, `websiteKey`, `validateId`, `userAgent`, `type`                                |
+
+Чтобы воспользоваться этой функцией, активируйте расширение, откройте страницу с капчей (убедитесь, что её тип поддерживается и выбран для решения), затем выполните следующие шаги:
+
+1. Откройте **Инструменты разработчика (DevTools)** и перейдите на вкладку **Capmonster Cloud**:
+   
+   ![](.\images\extension-main-firefox\params_extenstion2.png)
+
+2. Перезагрузите страницу.
+
+Параметры выбранной капчи отобразятся автоматически:
+
+![](.\images\extension-main-firefox\params_extenstion3.png)

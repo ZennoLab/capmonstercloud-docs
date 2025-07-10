@@ -21,27 +21,27 @@ import BlogLink from '@theme/BlogLink';
 <TaskImageWrapper>
   <TaskImageBlock link="/pt-br/docs/captchas/ComplexImageTask-Recognition#oocl_rotate_new">
     <TaskImage>![](./images/ComplexImageTask-Recognition/oocl_img.png)</TaskImage>
-    <TaskImageText title="Oocl_rotate_new" name="complex-rec_oocl_rotate_new" />
+    <TaskImageText title="Oocl_rotate_new" captchaId="complex-rec_oocl_rotate_new" />
   </TaskImageBlock>
   <TaskImageBlock link="/pt-br/docs/captchas/ComplexImageTask-Recognition#oocl_rotate_double_new">
     <TaskImage>![](./images/ComplexImageTask-Recognition/oocl_rotate_img.png)</TaskImage>
-    <TaskImageText title="Oocl_rotate_double_new" name="complex-rec_oocl_rotate_double_new" />
+    <TaskImageText title="Oocl_rotate_double_new" captchaId="complex-rec_oocl_rotate_double_new" />
   </TaskImageBlock>
   <TaskImageBlock link="/pt-br/docs/captchas/ComplexImageTask-Recognition#betpunch_3x3_rotate">
     <TaskImage>![](./images/ComplexImageTask-Recognition/betpunch_img.png)</TaskImage>
-    <TaskImageText title="Betpunch_3x3_rotate request" name="complex-rec_betpunch_3x3_rotate request" />
+    <TaskImageText title="Betpunch_3x3_rotate request" captchaId="complex-rec_betpunch_3x3_rotate_request" />
   </TaskImageBlock>
   <TaskImageBlock link="/pt-br/docs/captchas/ComplexImageTask-Recognition#bls">
     <TaskImage>![](./images/ComplexImageTask-Recognition/bls_img.png)</TaskImage>
-    <TaskImageText title="Bls" name="bls" />
+    <TaskImageText title="Bls" captchaId="complex-rec_bls" />
   </TaskImageBlock>
   <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#shein">
     <TaskImage>![](./images/ComplexImageTask-Recognition/shein3.png)</TaskImage>
-    <TaskImageText title="shein" name="complex-rec_oocl_rotate_new" />
+    <TaskImageText title="shein" captchaId="complex-rec_oocl_rotate_new" />
   </TaskImageBlock>
   <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#baidu">
     <TaskImage>![](./images/ComplexImageTask-Recognition/baidu_img.png)</TaskImage>
-    <TaskImageText title="baidu" name="complex-rec_baidu" />
+    <TaskImageText title="baidu" captchaId="complex-rec_baidu" />
   </TaskImageBlock>
 </TaskImageWrapper>
 
@@ -75,7 +75,7 @@ import BlogLink from '@theme/BlogLink';
 ### Criar tarefa `oocl_rotate_new`
 
 <PriceBlockWrap>
-  <PriceBlock title="ComplexImageTask" name="complex-rec_oocl_rotate_new" />
+  <PriceBlock title="ComplexImageTask" captchaId="complex-rec_oocl_rotate_new" />
 </PriceBlockWrap>
 
 Na solicitação, passamos duas imagens: fundo e círculo.
@@ -164,7 +164,7 @@ https://api.capmonster.cloud/getTaskResult
 ### Criar tarefa `oocl_rotate_double_new`
 
 <PriceBlockWrap>
-  <PriceBlock title="ComplexImageTask" name="complex-rec_oocl_rotate_double_new" />
+  <PriceBlock title="ComplexImageTask" captchaId="complex-rec_oocl_rotate_double_new" />
 </PriceBlockWrap>
 
 Na solicitação, passamos três imagens: fundo, anel, círculo.
@@ -258,7 +258,7 @@ https://api.capmonster.cloud/getTaskResult
 ### Criar tarefa `betpunch_3x3_rotate`
 
 <PriceBlockWrap>
-  <PriceBlock title="ComplexImageTask" name="complex-rec_betpunch_3x3_rotate request" />
+  <PriceBlock title="ComplexImageTask" captchaId="complex-rec_betpunch_3x3_rotate_request" />
 </PriceBlockWrap>
 
 Na solicitação, passamos nove imagens. As imagens devem ser passadas na seguinte ordem:
@@ -346,7 +346,7 @@ https://api.capmonster.cloud/getTaskResult
 ### Criar tarefa `bls`
 
 <PriceBlockWrap>
-  <PriceBlock title="Bls" name="bls" />
+  <PriceBlock title="Bls" captchaId="complex-rec_bls" />
 </PriceBlockWrap>
 
 Na solicitação, enviamos 9 imagens no formato base64.
@@ -456,7 +456,7 @@ Também passamos o valor buscado TaskArgument nos metadata.
 ### Criar tarefa `shein`
 
 <PriceBlockWrap>
-  <PriceBlock title="shein" name="complex-rec_oocl_rotate_new" />
+  <PriceBlock title="shein" captchaId="complex-rec_oocl_rotate_new" />
 </PriceBlockWrap>
 
 Na solicitação, passamos uma imagem no formato base64.
@@ -541,7 +541,7 @@ Na solicitação, passamos uma imagem no formato base64.
 ### Criar tarefa `baidu`
 
 <PriceBlockWrap>
-  <PriceBlock title="baidu" name="complex-rec_baidu" />
+  <PriceBlock title="baidu" captchaId="complex-rec_baidu" />
 </PriceBlockWrap>
 
 :::warning **Atenção!**
