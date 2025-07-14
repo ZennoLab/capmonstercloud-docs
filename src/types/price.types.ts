@@ -16,7 +16,8 @@ export type PriceName =
   | 'ComplexImageTask Recaptcha'
   | 'ComplexImageTask Recognition'
   | 'reCAPTCHA Enterprise (Spotify, Yahoo)'
-  | 'Temu';
+  | 'Temu'
+  | 'Yidun';
 
 export type PriceId =
   | 'rc2'
@@ -45,7 +46,8 @@ export type PriceId =
   | 'complex-rc2e-spotify-yahoo'
   | 'complex-rc2e'
   | 'complex-rc2'
-  | 'complex-rec_baidu';
+  | 'complex-rec_baidu'
+  | 'yidun';
 
 export type PriceResponseItem = {
   Id: PriceId;
