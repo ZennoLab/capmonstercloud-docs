@@ -3,9 +3,9 @@ import styles from './styles.module.css';
 import CloseIcon from './CloseIcon';
 import SupportIcon from './SupportIcon';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import getLocaleStrings from '../../locales/index'
+import getLocaleStrings from '../../locales/index';
 
-const BadTokenBlockContent = ({ isMobile }) => {
+const BadTokenBlockContent = ({}) => {
   const { i18n } = useDocusaurusContext();
   const { currentLocale } = i18n;
   const { tokenProblems, callSupport } = getLocaleStrings(currentLocale);
@@ -21,18 +21,21 @@ const BadTokenBlockContent = ({ isMobile }) => {
   }, []);
 
   const handleClose = () => {
-    setIsShow(false);
     sessionStorage.setItem('isHidden', 'true');
   };
 
   return (
-    <div className={`${isMobile ? styles.mobileWrapper : styles.wrapperMain} ${!isShow ? styles.hiddenBlock : ''}`}>
+    <div className={`${styles.wrapperMain} ${isShow ? '' : styles.hiddenBlock} `}>
       <span className={styles.supportIconWrap}>
         <SupportIcon />
       </span>
       <span className={styles.mainText}>
-        {tokenProblems}<br /> 
-        <a href="https://helpdesk.zennolab.com/conversation/new" target='_blank'> {callSupport}</a>
+        {tokenProblems}
+        <br />
+        <a href="https://helpdesk.zennolab.com/conversation/new" target="_blank">
+          {' '}
+          {callSupport}
+        </a>
       </span>
       <span className={styles.closeIconWrap} onClick={handleClose}>
         <CloseIcon />
