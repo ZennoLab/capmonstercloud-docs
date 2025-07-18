@@ -10,7 +10,7 @@ export default function Prices() {
   const { currentLocale } = i18n;
   const { priceTitle, priceSubTitle, priceSubTooltipText } = getLocaleStrings(currentLocale);
 
-  const priceLink = `https://capmonster.cloud/pricesFrame?culture=${currentLocale}`;
+  const priceLink = `https://capmonster.cloud/pricesFrame?culture=${localesMappings[currentLocale]}`;
 
   return (
     <section className={styles.pricesWrap} id="price">
