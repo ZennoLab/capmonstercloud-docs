@@ -104,7 +104,7 @@ const config: Config = {
           position: 'right',
         },
         {
-          href: 'https://capmonster.cloud/#new-extension-block',
+          href: 'https://capmonster.cloud/#new-plans',
           label: 'Расширение',
           position: 'right',
         },
