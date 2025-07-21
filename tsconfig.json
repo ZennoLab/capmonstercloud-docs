@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "nodenext",
     "jsx": "react",
     "strict": true,
     "esModuleInterop": true,
@@ -10,7 +10,13 @@
     "checkJs": false,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
+    "allowImportingTsExtensions": true,
+    "baseUrl": ".",
+    "paths": {
+      "@theme/*": ["src/theme/*"]
+    }
   },
+  "@theme/*": ["src/theme/*"],
   "include": [
     "src/**/*",
     "docusaurus.config.ts",
