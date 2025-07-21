@@ -13,15 +13,12 @@ const BadTokenBlockContent = ({}) => {
 
   useEffect(() => {
     const isHidden = sessionStorage.getItem('isHidden');
-    if (isHidden) {
-      setIsShow(false);
-    } else {
-      setIsShow(true);
-    }
+    setIsShow(!isHidden);
   }, []);
 
   const handleClose = () => {
     sessionStorage.setItem('isHidden', 'true');
+    setIsShow(false);
   };
 
   return (
