@@ -11,10 +11,6 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "allowImportingTsExtensions": true,
-    "baseUrl": ".",
-    "paths": {
-      "@theme/*": ["src/theme/*"]
-    }
   },
   "@theme/*": ["src/theme/*"],
   "include": [
