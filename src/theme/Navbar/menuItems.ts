@@ -1,4 +1,5 @@
 import { DefaultNavbarItemProps } from '@theme/NavbarItem';
+import { localesMappings } from '../../locales';
 
 const leftItems: DefaultNavbarItemProps[] = [
   {
@@ -10,6 +11,7 @@ const leftItems: DefaultNavbarItemProps[] = [
 ];
 
 export const getMenuItems = (locale: string) => {
+  const typedLocales = localesMappings as Record<string, string>;
   const rightItems: DefaultNavbarItemProps[] = [
     {
       type: 'docSidebar',
@@ -27,12 +29,12 @@ export const getMenuItems = (locale: string) => {
       label: '',
     },
     {
-      href: `https://capmonster.cloud/${locale}/browser-extension-captcha`,
+      href: `https://capmonster.cloud/${typedLocales[locale]}/browser-extension-captcha`,
       label: 'Extension',
       position: 'right',
     },
     {
-      href: `https://dash.capmonster.cloud?culture=${locale}`,
+      href: `https://dash.capmonster.cloud?culture=${typedLocales[locale]}`,
       label: 'Dashboard',
       position: 'right',
       className: 'lk-link',

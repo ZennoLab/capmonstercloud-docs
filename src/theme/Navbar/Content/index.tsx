@@ -6,7 +6,7 @@ import NavbarColorModeToggle from '@theme/Navbar/ColorModeToggle';
 import NavbarMobileSidebarToggle from '@theme/Navbar/MobileSidebar/Toggle';
 import NavbarLogo from '@theme/Navbar/Logo';
 import styles from './styles.module.css';
-import { getMenuItems } from '../const.ts';
+import { getMenuItems } from '../menuItems';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 function NavbarItems({ items }: { items: Props[] }) {
