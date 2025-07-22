@@ -1,5 +1,22 @@
 import { DefaultNavbarItemProps } from '@theme/NavbarItem';
+
 import { localesMappings } from '../../locales';
+import ptBrNavbar from '../../../i18n/pt-br/docusaurus-theme-classic/navbar.json';
+import enNavbar from '../../../i18n/en/docusaurus-theme-classic/navbar.json';
+import ruNavbar from '../../../i18n/ru/docusaurus-theme-classic/navbar.json';
+import zhNavbar from '../../../i18n/zh/docusaurus-theme-classic/navbar.json';
+
+const messages: Record<string, Record<string, { message: string; description: string }>> = {
+  en: enNavbar,
+  'pt-br': ptBrNavbar,
+  zh: zhNavbar,
+  ru: ruNavbar,
+};
+
+const getLabel = (locale: string, key: string, fallback: string) => {
+  const messageSet = messages[locale];
+  return messageSet?.[key]?.message || fallback;
+};
 
 const leftItems: DefaultNavbarItemProps[] = [
   {
@@ -17,7 +34,7 @@ export const getMenuItems = (locale: string) => {
       type: 'docSidebar',
       sidebarId: 'tutorialSidebar',
       position: 'right',
-      label: 'Docs',
+      label: getLabel(locale, 'item.label.Документация', 'Docs'),
       href: '',
     },
     {
@@ -30,12 +47,12 @@ export const getMenuItems = (locale: string) => {
     },
     {
       href: `https://capmonster.cloud/${typedLocales[locale]}/browser-extension-captcha`,
-      label: 'Extension',
+      label: getLabel(locale, 'item.label.Расширение', 'Extension'),
       position: 'right',
     },
     {
       href: `https://dash.capmonster.cloud?culture=${typedLocales[locale]}`,
-      label: 'Dashboard',
+      label: getLabel(locale, 'item.label.Личный кабинет', 'Dashboard'),
       position: 'right',
       className: 'lk-link',
     },
