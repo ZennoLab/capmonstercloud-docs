@@ -62,6 +62,17 @@ ReCaptcha 识别超时，可能是因为慢代理或 Google 服务器。
 ### `YOUR IP IS BLOCKED`
 API 错误代码：`ERROR_IP_BLOCKED` <br />
 由于错误次数过多，您的 IP 不允许访问此 API。
+### `MISSING PROXY`
+API 错误代码: `ERROR_PROXY_MISSING`<br />
+未在必填字段中设置代理参数，或指定了错误的 **proxyType**。请填写所有必需参数：**proxyType**、**proxyAddress**、**proxyPort**。请检查 **proxyType** 是否正确。
+
+### `PROXY NOT AUTHORIZED`
+API 错误代码: `ERROR_PROXY_NOT_AUTHORISED`<br />
+代理验证数据无效：**proxyLogin** 或 **proxyPassword**。请检查 **proxyLogin** 和 **proxyPassword**。确保验证数据正确且可用。
+
+### `PROXY READ TIMEOUT`
+API 错误代码: `ERROR_PROXY_READ_TIMEOUT`<br />
+**proxyAddress** 或 **proxyPort** 错误，导致连接超时。请检查 **proxyAddress** 和 **proxyPort**。确保代理可访问并正常工作。
 ### `FAILED TO CONNECT PROXY`
 API 错误代码：`ERROR_PROXY_CONNECT_REFUSED` <br />
 无法连接到代理服务器，连接超时。

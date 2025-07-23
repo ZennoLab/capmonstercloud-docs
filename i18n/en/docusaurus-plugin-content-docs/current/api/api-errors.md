@@ -85,6 +85,18 @@ The timeout of the ReCaptcha recognition has been exceeded, most likely due to a
 API error code: `ERROR_IP_BLOCKED` <br />
 Your IP is not allowed to access this API due to a large number of errors.
 
+### `MISSING PROXY`
+API error code: `ERROR_PROXY_MISSING`<br />
+Proxy parameters are not set in the required fields or an incorrect **proxyType** is specified. Provide all required parameters: **proxyType**, **proxyAddress**, **proxyPort**. Check that **proxyType** is correct.
+
+### `PROXY NOT AUTHORIZED`
+API error code: `ERROR_PROXY_NOT_AUTHORISED`<br />
+Invalid proxy authentication data: **proxyLogin** or **proxyPassword**. Verify **proxyLogin** and **proxyPassword**. Ensure the authentication data is correct and active.
+
+### `PROXY READ TIMEOUT`
+API error code: `ERROR_PROXY_READ_TIMEOUT`<br />
+Incorrect **proxyAddress** or **proxyPort**, causing a connection timeout. Check **proxyAddress** and **proxyPort**. Ensure the proxy is accessible and working properly.
+
 ### `FAILED TO CONNECT PROXY`
 API error code: `ERROR_PROXY_CONNECT_REFUSED` <br />
 Unable to connect to proxy server, connection timeout.

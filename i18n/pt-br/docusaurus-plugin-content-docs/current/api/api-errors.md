@@ -82,6 +82,18 @@ O tempo limite para reconhecimento do ReCaptcha foi excedido, provavelmente devi
 Código de erro da API: `ERROR_IP_BLOCKED` <br />
 Seu IP não tem permissão para acessar esta API devido a um grande número de erros.
 
+### `MISSING PROXY`
+Código de erro da API: `ERROR_PROXY_MISSING`<br />
+Parâmetros do proxy não foram definidos nos campos obrigatórios ou um **proxyType** incorreto foi especificado. Informe todos os parâmetros obrigatórios: **proxyType**, **proxyAddress**, **proxyPort**. Verifique se **proxyType** está correto.
+
+### `PROXY NOT AUTHORIZED`
+Código de erro da API: `ERROR_PROXY_NOT_AUTHORISED`<br />
+Dados de autenticação do proxy inválidos: **proxyLogin** ou **proxyPassword**. Verifique **proxyLogin** e **proxyPassword**. Certifique-se de que os dados de autenticação estão corretos e ativos.
+
+### `PROXY READ TIMEOUT`
+Código de erro da API: `ERROR_PROXY_READ_TIMEOUT`<br />
+**proxyAddress** ou **proxyPort** incorretos, causando um tempo limite de conexão. Verifique **proxyAddress** e **proxyPort**. Certifique-se de que o proxy está acessível e funcionando corretamente.
+
 ### `FALHA AO CONECTAR AO PROXY`
 Código de erro da API: `ERROR_PROXY_CONNECT_REFUSED` <br />
 Não foi possível conectar ao servidor proxy, tempo limite de conexão.

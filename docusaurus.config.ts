@@ -82,37 +82,16 @@ const config: Config = {
     // Replace with your project's social card
     image: 'img/social-card.jpg',
     navbar: {
-      // title: 'My Site',
       logo: {
         alt: 'My Site Logo',
         src: 'img/logo_landing.svg',
       },
       items: [
+        // костыль для мобильного меню, что бы бургер-меню отрендрилось, так работает useNavbarMobileSidebar
         {
-          type: 'search',
+          label: 'Пусто',
+          to: '#',
           position: 'left',
-        },
-        {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
-          position: 'right',
-          label: 'Документация',
-        },
-        // {to: '/blog', label: 'Пресс релизы', position: 'left'},
-        {
-          type: 'localeDropdown',
-          position: 'right',
-        },
-        {
-          href: 'https://capmonster.cloud/#new-plans',
-          label: 'Расширение',
-          position: 'right',
-        },
-        {
-          href: 'https://capmonster.cloud/Dashboard',
-          label: 'Личный кабинет',
-          position: 'right',
-          className: 'lk-link',
         },
       ],
     },

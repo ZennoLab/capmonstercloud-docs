@@ -1,0 +1,210 @@
+---
+sidebar_position: 5
+sidebar_label: FAQ
+title: "Frequently Asked Questions (FAQ)"
+description: "Answers to frequently asked questions about using CapMonster Cloud."
+---
+
+# Frequently Asked Questions (FAQ)
+
+This section provides answers to common questions about CapMonster Cloud, including supported captcha types, recognition process, API integration, browser extension and SDK usage, as well as recommendations for optimal service usage.
+
+:::info
+If you didn’t find the answer you were looking for, please contact [support](https://helpdesk.zennolab.com/conversation/new).
+:::
+
+---
+
+## General
+
+<details>
+  <summary>What is CapMonster Cloud and what is it used for?</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <p>
+      <strong>CapMonster Cloud</strong> is a cloud-based service for automatic recognition of various captcha types:  
+      reCaptcha V2, reCaptcha V3, reCaptcha Enterprise, GeeTest, Amazon (AWS WAF), Cloudflare Turnstile, Cloudflare Challenge, and more.
+    </p>
+  </div>
+</details>
+
+<details>
+  <summary>How does CapMonster Cloud differ from other captcha recognition services?</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <p><strong>Advantages of CapMonster Cloud:</strong></p>
+    <ul style={{ color: 'black' }}>
+      <li><strong>Reliability and scalability:</strong> The system operates stably under any load, handles large volumes of tasks, scales with project growth, and provides a high percentage of valid tokens — a key factor for effectively bypassing protections.</li>
+      <li><strong>Support for all major captcha types:</strong> from popular to rare and custom ones.</li>
+      <li><strong>Flexible and transparent pricing:</strong> suitable for both small businesses and large-scale projects.</li>
+    </ul>
+  </div>
+</details>
+
+<details>
+  <summary>Which captcha types are supported by CapMonster Cloud?</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <p>Supported types:</p>
+    <ul style={{ color: 'black' }}>
+      <li>reCaptcha V2, reCaptcha V3, reCaptcha Enterprise</li>
+      <li>GeeTest</li>
+      <li>Amazon (AWS WAF)</li>
+      <li>Cloudflare Turnstile/Challenge</li>
+      <li>Imperva (Incapsula)</li>
+      <li>Text captcha (ImageToTextTask), complex image captchas (BLS, Shein, etc.)</li>
+      <li>Basilisk, TenDl, Prosopo, Binance, Temu</li>
+      <li>Yidun (NECaptcha)</li>
+    </ul>
+  </div>
+</details>
+
+<details>
+  <summary>Do you have a partner program for developers?</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <p>Yes, the partner program allows you to earn up to <strong>30%</strong> of the expenses from users solving captchas.</p>
+  </div>
+</details>
+
+<details>
+  <summary>How do I get started with CapMonster Cloud?</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <ol style={{ color: 'black' }}>
+      <li>Register on the <a href="https://dash.capmonster.cloud/?culture=en" target="_blank" rel="noopener noreferrer">website</a>.</li>
+      <li>Top up your balance.</li>
+      <li>Use your personal <strong>API key</strong> to integrate with your project.</li>
+    </ol>
+    <p>You can also download the <a href="https://capmonster.cloud/en/browser-extension-captcha" target="_blank" rel="noopener noreferrer">CapMonster Cloud browser extension</a>.</p>
+  </div>
+</details>
+
+<details>
+  <summary>How do I install the CapMonster Cloud browser extension?</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <ol style={{ color: 'black' }}>
+      <li>Download the extension for <a href="https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=en" target="_blank" rel="noopener noreferrer">Firefox</a>.</li>
+      <li>Activate the extension, insert your <strong>API key</strong>, and ensure your balance is sufficient.</li>
+      <li>Configure and start recognizing captchas.</li>
+    </ol>
+    <p>For more details, see the <a href="https://docs.capmonster.cloud/docs/extension" target="_blank" rel="noopener noreferrer">Extension</a> section in the documentation.</p>
+  </div>
+</details>
+
+<details>
+  <summary>Which captchas can be solved using the extension?</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <ul style={{ color: 'black' }}>
+      <li>ReCaptcha V2, ReCaptcha V3, ReCaptcha Enterprise</li>
+      <li>GeeTest</li>
+      <li>Cloudflare Turnstile / Challenge</li>
+      <li>Text captcha (ImageToTextTask)</li>
+      <li>Binance Captcha</li>
+      <li>BLS Captcha</li>
+    </ul>
+  </div>
+</details>
+
+<hr/>
+
+## Technical
+
+<details>
+  <summary>What should I do if there is an error in the recognition status?</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <p>Examples of errors:</p>
+    <ul style={{ color: 'black' }}>
+      <li><strong>ERROR_KEY_DOES_NOT_EXIST</strong> — Invalid or non-existent API key. Check the key’s correctness.</li>
+      <li><strong>ERROR_ZERO_BALANCE</strong> — Balance is zero. Top up your balance to continue.</li>
+      <li><strong>ERROR_CAPTCHA_UNSOLVABLE</strong> — The request may be incorrect, the captcha type may not be supported, or the captcha is broken or displayed incorrectly. We recommend double-checking the request parameters and ensuring the chosen captcha type is supported by CapMonster Cloud.</li>
+    </ul>
+    <p>See the <a href="https://docs.capmonster.cloud/docs/api/api-errors" target="_blank" rel="noopener noreferrer">error documentation</a> or contact support.</p>
+  </div>
+</details>
+
+<details>
+  <summary>What is the average recognition speed for various captcha types?</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <p>On average, between <strong>1 and 30 seconds</strong>, depending on the captcha type.</p>
+  </div>
+</details>
+
+<details>
+  <summary>What are the main usage limits for the service?</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <p>Limit: <strong>120 requests per task</strong>. Exceeding this limit may result in temporary account suspension.</p>
+  </div>
+</details>
+
+<details>
+  <summary>How can I integrate CapMonster Cloud with my software or bot?</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <p>Use your <strong>API key</strong> to connect. There are also <a href="https://docs.capmonster.cloud/docs/getting-start#code-examples" target="_blank" rel="noopener noreferrer">libraries</a> available to integrate the CapMonster Cloud API into your code.</p>
+  </div>
+</details>
+
+<details>
+  <summary>Where can I find the latest CapMonster Cloud API documentation?</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <p>In the <a href="https://docs.capmonster.cloud/docs/category/api" target="_blank" rel="noopener noreferrer">API</a> section on the website.</p>
+  </div>
+</details>
+
+<details>
+  <summary>Does CapMonster Cloud support solving ReCaptcha Enterprise?</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <p>Yes, the service supports both regular <strong>ReCaptcha v2/v3</strong> and <strong>ReCaptcha Enterprise</strong>.</p>
+  </div>
+</details>
+
+<details>
+  <summary>How can I find all the necessary captcha parameters for a request?</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <p>Parameters can be obtained through:</p>
+    <ul style={{ color: 'black' }}>
+      <li><strong>Browser developer tools</strong>.</li>
+      <li><strong>Parser scripts</strong> (see details in the captcha types section under <em>"How to find all necessary parameters for task creation"</em>).</li>
+      <li><strong>CapMonster Cloud Extension</strong> — provides all required parameters for various captcha types (see the <a href="https://docs.capmonster.cloud/docs/extension/extension-main#captcha-parameter-mapping" target="_blank" rel="noopener noreferrer">"Parameter Mapping"</a> section for details).</li>
+    </ul>
+  </div>
+</details>
+
+<hr/>
+
+## Payments
+
+<details>
+  <summary>Which payment methods does CapMonster Cloud support?</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <ul style={{ color: 'black' }}>
+      <li>Bank cards</li>
+      <li>Cryptocurrencies</li>
+      <li>Other popular methods</li>
+    </ul>
+    <p>(See details in the <a href="https://dash.capmonster.cloud/SelectPaymentType" target="_blank" rel="noopener noreferrer">Payments</a> section).</p>
+  </div>
+</details>
+
+<details>
+  <summary>Can I pay with cryptocurrency?</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <p>Yes, cryptocurrency payments are supported.</p>
+  </div>
+</details>
+
+<details>
+  <summary>Is it possible to get a refund?</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <p>Yes, a refund is possible within <strong>3 days</strong> after purchase if the service does not meet your needs.</p>
+  </div>
+</details>
+
+<details>
+  <summary>How can I top up my balance and where can I see it?</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <p>You can top up your balance in your <a href="https://capmonster.cloud/Dashboard" target="_blank" rel="noopener noreferrer">account dashboard</a>, where your current balance is also displayed.</p>
+  </div>
+</details>
+
+<details>
+  <summary>Do you offer a trial period or free plan?</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <p>Yes, a <strong>$0.01</strong> test balance is provided upon request to support. ZennoPoster users also receive a bonus of 5,000 free captchas for testing the service.</p>
+  </div>
+</details>
