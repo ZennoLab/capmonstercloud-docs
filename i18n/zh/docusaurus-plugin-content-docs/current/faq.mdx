@@ -1,0 +1,210 @@
+---
+sidebar_position: 5
+sidebar_label: 常见问题
+title: "常见问题 (FAQ)"
+description: "关于使用 CapMonster Cloud 的常见问题解答。"
+---
+
+# 常见问题 (FAQ)
+
+本部分收集了关于 CapMonster Cloud 的常见问题，包括支持的验证码类型、识别流程、API 集成、浏览器扩展与 SDK 使用，以及服务最佳实践的建议。
+
+:::info
+如果您未找到需要的答案，请联系 [客服支持](https://helpdesk.zennolab.com/conversation/new)。
+:::
+
+---
+
+## 常规问题
+
+<details>
+  <summary>什么是 CapMonster Cloud？它的用途是什么？</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <p>
+      <strong>CapMonster Cloud</strong> 是一个基于云的验证码自动识别服务：  
+      支持 reCaptcha V2、reCaptcha V3、reCaptcha Enterprise、GeeTest、Amazon（AWS WAF）、Cloudflare Turnstile、Cloudflare Challenge 等多种验证码。
+    </p>
+  </div>
+</details>
+
+<details>
+  <summary>CapMonster Cloud 与其他验证码识别服务有何不同？</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <p><strong>CapMonster Cloud 的优势：</strong></p>
+    <ul style={{ color: 'black' }}>
+      <li><strong>可靠性与可扩展性：</strong> 系统在高负载下稳定运行，可处理大量任务，能随着项目增长而扩展，并提供高比例的有效令牌，这对绕过防护至关重要。</li>
+      <li><strong>支持所有主要类型的验证码：</strong> 从常见类型到稀有或定制类型。</li>
+      <li><strong>灵活透明的价格策略：</strong> 适合中小型企业和大型项目。</li>
+    </ul>
+  </div>
+</details>
+
+<details>
+  <summary>CapMonster Cloud 支持哪些类型的验证码？</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <p>支持类型：</p>
+    <ul style={{ color: 'black' }}>
+      <li>reCaptcha V2、reCaptcha V3、reCaptcha Enterprise</li>
+      <li>GeeTest</li>
+      <li>Amazon（AWS WAF）</li>
+      <li>Cloudflare Turnstile/Challenge</li>
+      <li>Imperva（Incapsula）</li>
+      <li>文本验证码（ImageToTextTask）、复杂图像验证码（BLS、Shein 等）</li>
+      <li>Basilisk、TenDl、Prosopo、Binance、Temu</li>
+      <li>Yidun（NECaptcha）</li>
+    </ul>
+  </div>
+</details>
+
+<details>
+  <summary>是否有开发者合作计划？</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <p>有的，合作计划可让您赚取用户解码验证码费用的 <strong>30%</strong>。</p>
+  </div>
+</details>
+
+<details>
+  <summary>如何开始使用 CapMonster Cloud？</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <ol style={{ color: 'black' }}>
+      <li>在 <a href="https://dash.capmonster.cloud/?culture=zh" target="_blank" rel="noopener noreferrer">网站</a> 注册。</li>
+      <li>充值余额。</li>
+      <li>使用个人 <strong>API 密钥</strong> 将其集成到您的项目中。</li>
+    </ol>
+    <p>您也可以下载 <a href="https://capmonster.cloud/zh/browser-extension-captcha" target="_blank" rel="noopener noreferrer">CapMonster Cloud 浏览器扩展</a>。</p>
+  </div>
+</details>
+
+<details>
+  <summary>如何安装 CapMonster Cloud 浏览器扩展？</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <ol style={{ color: 'black' }}>
+      <li>下载适用于 <a href="https://chromewebstore.google.com/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=zh" target="_blank" rel="noopener noreferrer">Chrome</a> 或 <a href="https://addons.mozilla.org/zh-CN/firefox/addon/capmonster-cloud/" target="_blank" rel="noopener noreferrer">Firefox</a> 的扩展。</li>
+      <li>激活扩展，输入 <strong>API 密钥</strong> 并确保余额充足。</li>
+      <li>配置并开始识别验证码。</li>
+    </ol>
+    <p>详情请查看文档中的 <a href="https://docs.capmonster.cloud/zh/docs/extension" target="_blank" rel="noopener noreferrer">扩展</a> 部分。</p>
+  </div>
+</details>
+
+<details>
+  <summary>扩展可解决哪些验证码？</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <ul style={{ color: 'black' }}>
+      <li>ReCaptcha V2、ReCaptcha V3、ReCaptcha Enterprise</li>
+      <li>GeeTest</li>
+      <li>Cloudflare Turnstile / Challenge</li>
+      <li>文本验证码（ImageToTextTask）</li>
+      <li>Binance Captcha</li>
+      <li>BLS Captcha</li>
+    </ul>
+  </div>
+</details>
+
+<hr/>
+
+## 技术问题
+
+<details>
+  <summary>识别状态出现错误时该怎么办？</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <p>常见错误示例：</p>
+    <ul style={{ color: 'black' }}>
+      <li><strong>ERROR_KEY_DOES_NOT_EXIST</strong> — API 密钥无效或不存在，请检查密钥是否正确。</li>
+      <li><strong>ERROR_ZERO_BALANCE</strong> — 余额为零，请充值以继续使用。</li>
+      <li><strong>ERROR_CAPTCHA_UNSOLVABLE</strong> — 请求可能有误、验证码类型不受支持，或验证码已损坏/显示异常。建议仔细检查请求参数，并确认所选验证码类型受 CapMonster Cloud 支持。</li>
+    </ul>
+    <p>请参阅 <a href="https://docs.capmonster.cloud/zh/docs/api/api-errors" target="_blank" rel="noopener noreferrer">错误文档</a> 或联系客服。</p>
+  </div>
+</details>
+
+<details>
+  <summary>不同验证码类型的平均识别速度是多少？</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <p>平均速度在 <strong>1 至 30 秒</strong> 之间，具体取决于验证码类型。</p>
+  </div>
+</details>
+
+<details>
+  <summary>服务的主要使用限制是什么？</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <p>限制：<strong>每个任务 120 次请求</strong>。超出限制可能导致账户临时冻结。</p>
+  </div>
+</details>
+
+<details>
+  <summary>如何将 CapMonster Cloud 集成到我的软件或机器人？</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <p>使用您的 <strong>API 密钥</strong> 进行连接。此外，提供了 <a href="https://docs.capmonster.cloud/zh/docs/getting-start#code-examples" target="_blank" rel="noopener noreferrer">代码库</a> 以将 CapMonster Cloud API 集成到您的项目中。</p>
+  </div>
+</details>
+
+<details>
+  <summary>在哪里可以找到最新的 CapMonster Cloud API 文档？</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <p>请访问官网的 <a href="https://docs.capmonster.cloud/zh/docs/category/api" target="_blank" rel="noopener noreferrer">API</a> 部分。</p>
+  </div>
+</details>
+
+<details>
+  <summary>CapMonster Cloud 是否支持 ReCaptcha Enterprise？</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <p>支持，服务可识别 <strong>ReCaptcha v2/v3</strong> 和 <strong>ReCaptcha Enterprise</strong>。</p>
+  </div>
+</details>
+
+<details>
+  <summary>如何找到请求所需的所有验证码参数？</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <p>参数可以通过以下方式获取：</p>
+    <ul style={{ color: 'black' }}>
+      <li><strong>浏览器开发者工具</strong>。</li>
+      <li><strong>解析脚本</strong>（详见验证码类型章节的 <em>“如何找到所有必要的任务参数”</em>）。</li>
+      <li><strong>CapMonster Cloud 浏览器扩展</strong> — 可显示各种验证码类型所需的全部参数（详情请查看 <a href="https://docs.capmonster.cloud/zh/docs/extension/extension-main/#%E9%AA%8C%E8%AF%81%E7%A0%81%E5%8F%82%E6%95%B0%E6%98%A0%E5%B0%84" target="_blank" rel="noopener noreferrer">“参数映射”</a> 部分）。</li>
+    </ul>
+  </div>
+</details>
+
+<hr/>
+
+## 支付相关
+
+<details>
+  <summary>CapMonster Cloud 支持哪些支付方式？</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <ul style={{ color: 'black' }}>
+      <li>银行卡</li>
+      <li>加密货币</li>
+      <li>其他常用支付方式</li>
+    </ul>
+    <p>（详情请查看 <a href="https://dash.capmonster.cloud/SelectPaymentType" target="_blank" rel="noopener noreferrer">支付</a> 页面）。</p>
+  </div>
+</details>
+
+<details>
+  <summary>可以用加密货币支付吗？</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <p>可以，支持加密货币支付。</p>
+  </div>
+</details>
+
+<details>
+  <summary>是否可以申请退款？</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <p>可以，购买后 <strong>3 天内</strong> 如果服务不满足需求，可申请退款。</p>
+  </div>
+</details>
+
+<details>
+  <summary>如何充值并查看余额？</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <p>可在 <a href="https://capmonster.cloud/Dashboard" target="_blank" rel="noopener noreferrer">个人账户面板</a> 充值并查看当前余额。</p>
+  </div>
+</details>
+
+<details>
+  <summary>是否有试用期或免费套餐？</summary>
+  <div style={{ fontWeight: 'normal' }}>
+    <p>有的，可通过联系客服获得 <strong>$0.01</strong> 测试余额。ZennoPoster 用户可额外获赠 5000 次免费验证码测试额度。</p>
+  </div>
+</details>
