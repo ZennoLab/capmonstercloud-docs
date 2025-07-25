@@ -128,7 +128,9 @@ description: "关于使用 CapMonster Cloud 的常见问题解答。"
 <details>
   <summary>服务的主要使用限制是什么？</summary>
   <div style={{ fontWeight: 'normal' }}>
-    <p>限制：<strong>每个任务 120 次请求</strong>。超出限制可能导致账户临时冻结。</p>
+    <p>
+      存在 <strong>每个任务最多 120 次请求</strong> 的限制。这意味着在通过 <code>createTask</code> 方法创建任务后，您可以定期使用 <code>getTaskResult</code> 检查任务状态，但建议间隔不低于每 2–5 秒一次请求。
+    </p>
   </div>
 </details>
 
