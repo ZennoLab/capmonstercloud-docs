@@ -1253,3 +1253,80 @@ input[name=captcha_output]</td>
     ```
   </TabItem>
 </Tabs>
+
+## Особенности решения GeeTest на app.gal**.com
+
+:::warning **Внимание!**
+ Данный раздел актуален **только для капчи GeeTest на сайте `app.gal**.com`**. Для других сайтов использовать эти значения не требуется.
+:::
+
+<details>
+  <summary>Когда использовать поле <code>challenge</code>?</summary>
+
+Для сайта **`app.gal**.com`** необходимо указывать значение поля `challenge` в зависимости от выполняемого действия.
+Если это поле не указано, по умолчанию используется значение **`AddTypedCredentialItems`**, но это подходит не для всех сценариев.
+
+Список возможных значений `challenge`:
+| Действие на сайте `app.gal**.com`         | Значение challenge          |
+| ----------------------------------------- | --------------------------- |
+| Отправка email-кода                       | `SendEmailCode`             |
+| Подтверждение действия (например, логина) | `SendVerifyCode`            |
+| Получение награды                         | `ClaimUserTask`             |
+| Открытие коробки-сюрприза                 | `OpenMysteryBox`            |
+| Покупка в GGShop                          | `BuyGGShop`                 |
+| Подготовка к покупке билетов              | `PrepareBuyGGRaffleTickets` |
+| Добавление учётных данных                 | `AddTypedCredentialItems`   |
+| Создание тикета                           | `CreateReportTicket`        |
+| Участие в активности                      | `PrepareParticipate`        |
+| Обновление данных учётных данных          | `RefreshCredentialValue`    |
+| Синхронизация данных                      | `SyncCredentialValue`       |
+| Вход через соцсеть                        | `GetSocialAuthUrl`          |
+
+
+> Значение `challenge` должно совпадать с `operationName`, который можно увидеть в сетевых запросах (`Network`) через DevTools.
+
+![](./images/geetest-task/geetest_galxe.png)
+
+
+</details>
+
+<details>
+  <summary>Пример отправки задачи</summary>
+
+```json
+{
+  "type": "GeeTestTaskProxyLess",
+  "websiteURL": "https://app.gal**.com/accountSetting/social",
+  "gt": "244bcb8b9846215df5af4c624a750db4",
+  "challenge": "SendVerifyCode"
+}
+```
+
+>Примечание: GT-ключ для gal**.com всегда равен 244bcb8b9846215df5af4c624a750db4. Это значение можно оставить по умолчанию.
+
+</details>
+
+<details>
+  <summary>Пример ответа</summary>
+
+```json
+{
+  "errorId": 0,
+  "errorCode": null,
+  "errorDescription": null,
+  "solution": {
+    "lotNumber": "e0c84aab60867ad1316f8606d31ab58d2a54d8a4ca8e78b9339abd8ea62967cb",
+    "captchaOutput": "7DlZW2dul...cbEA5uIbwg==",
+    "passToken": "ce024389a0926e0d1081792c83e0c46f882084e45e95afa0e148fd03aed3ae10",
+    "genTime": "1753158042",
+    "encryptedData": ""
+  },
+  "status": "ready",
+  "ProxySource": "Config",
+  "ServiceInfo": null
+}
+```
+
+Поле `encryptedData` на стороне сайта обычно пустое, так как логика клиента игнорирует его. Хотя значение возвращается через WebAssembly, на практике оно не используется.
+
+</details>
