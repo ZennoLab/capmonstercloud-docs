@@ -128,7 +128,9 @@ Se você não encontrou a resposta que procurava, entre em contato com o [suport
 <details>
   <summary>Quais são os principais limites de uso do serviço?</summary>
   <div style={{ fontWeight: 'normal' }}>
-    <p>Limite: <strong>120 solicitações por tarefa</strong>. Exceder esse limite pode resultar em suspensão temporária da conta.</p>
+    <p>
+      Existe um limite de <strong>120 solicitações por tarefa</strong> para obter um resultado. Isso significa que, após criar uma tarefa pelo método <code>createTask</code>, você pode verificar periodicamente seu status usando <code>getTaskResult</code>, mas recomenda-se fazer isso em intervalos de no mínimo uma solicitação a cada 2–5 segundos.
+    </p>
   </div>
 </details>
 
