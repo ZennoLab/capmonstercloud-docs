@@ -1233,3 +1233,79 @@ V4 (captcha_id = gt)
     ```
   </TabItem>
 </Tabs>
+
+## app.gal\*\*.com 上的 GeeTest 解决方案特点
+
+:::warning **注意！**
+本节内容 **仅适用于 `app.gal**.com` 网站上的 GeeTest 验证码**。这些值不应在其他网站上使用。
+:::
+
+<details>
+  <summary>何时使用 <code>challenge</code> 字段？</summary>
+
+对于 **`app.gal**.com`** 网站，需要根据执行的操作指定 `challenge` 字段的值。如果未指定该字段，则默认使用 **`AddTypedCredentialItems`**，但这并不适用于所有场景。
+
+`challenge` 可选值列表：
+
+| `app.gal**.com` 网站上的操作 | challenge 值                 |
+| ---------------------- | --------------------------- |
+| 发送邮箱验证码                | `SendEmailCode`             |
+| 确认操作（例如登录）             | `SendVerifyCode`            |
+| 领取奖励                   | `ClaimUserTask`             |
+| 打开神秘盒子                 | `OpenMysteryBox`            |
+| 在 GGShop 购买            | `BuyGGShop`                 |
+| 准备购买抽奖票                | `PrepareBuyGGRaffleTickets` |
+| 添加凭据                   | `AddTypedCredentialItems`   |
+| 创建报告工单                 | `CreateReportTicket`        |
+| 参加活动                   | `PrepareParticipate`        |
+| 更新凭据数据                 | `RefreshCredentialValue`    |
+| 同步数据                   | `SyncCredentialValue`       |
+| 社交登录                   | `GetSocialAuthUrl`          |
+
+> `challenge` 的值必须与 DevTools 的网络请求（`Network` 标签）中看到的 `operationName` 一致。
+
+![](./images/geetest-task/geetest_galxe.png)
+
+</details>
+
+<details>
+  <summary>提交任务示例</summary>
+
+```json
+{
+  "type": "GeeTestTaskProxyLess",
+  "websiteURL": "https://app.gal**.com/accountSetting/social",
+  "gt": "244bcb8b9846215df5af4c624a750db4",
+  "challenge": "SendVerifyCode"
+}
+```
+
+> 注意：gal\*\*.com 的 GT key 始终为 `244bcb8b9846215df5af4c624a750db4`。可以将该值保持为默认。
+
+</details>
+
+<details>
+  <summary>响应示例</summary>
+
+```json
+{
+  "errorId": 0,
+  "errorCode": null,
+  "errorDescription": null,
+  "solution": {
+    "lotNumber": "e0c84aab60867ad1316f8606d31ab58d2a54d8a4ca8e78b9339abd8ea62967cb",
+    "captchaOutput": "7DlZW2dul...cbEA5uIbwg==",
+    "passToken": "ce024389a0926e0d1081792c83e0c46f882084e45e95afa0e148fd03aed3ae10",
+    "genTime": "1753158042",
+    "encryptedData": ""
+  },
+  "status": "ready",
+  "ProxySource": "Config",
+  "ServiceInfo": null
+}
+```
+
+`encryptedData` 字段在网站端通常为空，因为客户端逻辑会忽略它。虽然该值通过 WebAssembly 返回，但在实际中并未使用。
+
+</details>
+
