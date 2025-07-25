@@ -1243,3 +1243,78 @@ Os trechos de código fornecidos são exemplos básicos para familiarização co
     ```
   </TabItem>
 </Tabs>
+
+## Características da solução GeeTest em app.gal\*\*.com
+
+:::warning **Atenção!**
+Esta seção é **apenas relevante para o captcha GeeTest no site `app.gal**.com`**. Estes valores não devem ser usados em outros sites.
+:::
+
+<details>
+  <summary>Quando usar o campo <code>challenge</code>?</summary>
+
+Para o site **`app.gal**.com`**, é necessário especificar o valor do campo `challenge` de acordo com a ação a ser realizada. Se este campo não for especificado, o valor padrão **`AddTypedCredentialItems`** será usado, mas isso não serve para todos os cenários.
+
+Lista de valores possíveis para `challenge`:
+
+| Ação no site `app.gal**.com`        | Valor do challenge          |
+| ----------------------------------- | --------------------------- |
+| Enviar código por e-mail            | `SendEmailCode`             |
+| Confirmar ação (por exemplo, login) | `SendVerifyCode`            |
+| Resgatar recompensa                 | `ClaimUserTask`             |
+| Abrir caixa misteriosa              | `OpenMysteryBox`            |
+| Comprar na GGShop                   | `BuyGGShop`                 |
+| Preparar compra de bilhetes         | `PrepareBuyGGRaffleTickets` |
+| Adicionar credenciais               | `AddTypedCredentialItems`   |
+| Criar ticket de suporte             | `CreateReportTicket`        |
+| Participar de atividade             | `PrepareParticipate`        |
+| Atualizar dados de credenciais      | `RefreshCredentialValue`    |
+| Sincronizar dados                   | `SyncCredentialValue`       |
+| Login via redes sociais             | `GetSocialAuthUrl`          |
+
+> O valor de `challenge` deve corresponder ao `operationName` visível nas requisições de rede (`Network`) no DevTools.
+
+![](./images/geetest-task/geetest_galxe.png)
+
+</details>
+
+<details>
+  <summary>Exemplo de envio de tarefa</summary>
+
+```json
+{
+  "type": "GeeTestTaskProxyLess",
+  "websiteURL": "https://app.gal**.com/accountSetting/social",
+  "gt": "244bcb8b9846215df5af4c624a750db4",
+  "challenge": "SendVerifyCode"
+}
+```
+
+> Observação: A chave GT para gal\*\*.com é sempre `244bcb8b9846215df5af4c624a750db4`. Este valor pode ser mantido como padrão.
+
+</details>
+
+<details>
+  <summary>Exemplo de resposta</summary>
+
+```json
+{
+  "errorId": 0,
+  "errorCode": null,
+  "errorDescription": null,
+  "solution": {
+    "lotNumber": "e0c84aab60867ad1316f8606d31ab58d2a54d8a4ca8e78b9339abd8ea62967cb",
+    "captchaOutput": "7DlZW2dul...cbEA5uIbwg==",
+    "passToken": "ce024389a0926e0d1081792c83e0c46f882084e45e95afa0e148fd03aed3ae10",
+    "genTime": "1753158042",
+    "encryptedData": ""
+  },
+  "status": "ready",
+  "ProxySource": "Config",
+  "ServiceInfo": null
+}
+```
+
+O campo `encryptedData` no site geralmente está vazio, pois a lógica do cliente o ignora. Embora o valor seja retornado via WebAssembly, na prática ele não é utilizado.
+
+</details>
