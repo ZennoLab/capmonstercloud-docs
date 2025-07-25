@@ -128,7 +128,9 @@ If you didn’t find the answer you were looking for, please contact [support](h
 <details>
   <summary>What are the main usage limits for the service?</summary>
   <div style={{ fontWeight: 'normal' }}>
-    <p>Limit: <strong>120 requests per task</strong>. Exceeding this limit may result in temporary account suspension.</p>
+    <p>
+      There is a limit of <strong>120 requests per task</strong> to obtain a result. This means that after creating a task via the <code>createTask</code> method, you can periodically check its status using <code>getTaskResult</code>, but it is recommended to do so at intervals no more frequent than one request every 2–5 seconds.
+    </p>
   </div>
 </details>
 
