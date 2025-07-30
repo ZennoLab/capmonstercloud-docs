@@ -1,0 +1,228 @@
+---
+sidebar_position: 20
+sidebar_label: MTCaptchaTask
+title: "Reconhecimento automático e bypass do MTCaptcha | API"
+description: "Descubra como contornar o MTCaptcha usando a API do serviço de reconhecimento e solução de captchas Capmonster Cloud!"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+import PriceBlock from '@theme/PriceBlock';
+import PriceBlockWrap from '@theme/PriceBlockWrap';
+
+# MTCaptcha
+
+<PriceBlockWrap>
+  <PriceBlock title="MTCaptcha task" captchaId="mtcaptcha"/>
+</PriceBlockWrap>
+
+![](./images/mtcaptcha/mtcaptcha.png)
+
+:::warning **Atenção!**
+Por padrão, o CapMonster Cloud usa servidores proxy integrados.
+Se necessário, você pode configurar proxies próprios para garantir funcionamento estável e compatibilidade, caso o acesso aos serviços integrados esteja restrito.
+:::
+
+## Parâmetros da solicitação
+
+<TabItem value="proxy" label="MTCaptchaTask" className="bordered-panel">
+<ParamItem title="type" required type="string" />
+**MTCaptchaTask**
+
+---
+
+<ParamItem title="websiteURL" required type="string" />
+Endereço da página onde o captcha é resolvido.
+
+---
+
+<ParamItem title="websiteKey" required type="string" />
+Chave do MTcaptcha, enviada na solicitação nos parâmetros como `sk` (*veja exemplo abaixo de como encontrá-la*).
+
+---
+
+<ParamItem title="pageAction" type="string" />
+O parâmetro *action* é enviado como `act` e aparece na validação do token. Informe-o apenas se o valor for diferente do padrão - **%24**.  
+Exemplo em HTML:
+```
+
+<script>
+var mtcaptchaConfig = {
+      "sitekey": "MTPublic-abCDEFJAB",
+      "action": "login"
+};
+</script>
+
+````
+
+---
+
+<ParamItem title="isInvisible" type="bool" />
+**true**, se o captcha for invisível, ou seja, com campo oculto para confirmação. Em caso de suspeita de bot, uma verificação extra é disparada.
+
+---
+
+<ParamItem title="userAgent" type="string" />
+User-Agent do navegador. <br />  
+**Informe apenas um UA atual do Windows. Atualmente válido:** userAgentPlaceholder
+
+---
+
+<ParamItem title="proxyType" type="string" />
+**http** - proxy http/https comum;<br />
+**https** - tente esta opção apenas se "http" não funcionar (necessário para alguns proxies personalizados);<br />
+**socks4** - proxy socks4;<br />
+**socks5** - proxy socks5.
+
+---
+
+<ParamItem title="proxyAddress" type="string" />
+<p>
+Endereço IP do proxy IPv4/IPv6. Não é permitido:
+- uso de nomes de host;
+- uso de proxies transparentes (que revelem o IP do cliente);
+- uso de proxies em máquinas locais.
+</p>
+
+---
+
+<ParamItem title="proxyPort" type="integer" />
+Porta do proxy.
+
+---
+
+<ParamItem title="proxyLogin" type="string" />
+Login do servidor proxy.
+
+---
+
+<ParamItem title="proxyPassword" type="string" />
+Senha do servidor proxy.
+
+</TabItem>
+
+## Método para criar tarefa
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+<TabItem value="proxyless" label="MTCaptchaTask (sem proxy)" default className="method-panel">
+<MethodItem>
+```http
+https://api.capmonster.cloud/createTask
+````
+
+</MethodItem>
+<MethodDescription>
+**Solicitação**
+```json
+{
+  "clientKey": "API_KEY",
+  "task": 
+  {
+    "type": "MTCaptchaTask",
+    "websiteURL": "https://www.example.com",
+    "websiteKey": "MTPublic-abCDEFJAB",
+    "isInvisible": false,
+    "pageAction": "login"
+  }
+}
+```
+**Resposta**
+```json
+{
+  "errorId":0,
+  "taskId":407533077
+}
+```
+</MethodDescription>
+</TabItem>
+
+<TabItem value="proxy" label="MTCaptchaTask (com proxy)" default className="method-panel">
+<MethodItem>
+```http
+https://api.capmonster.cloud/createTask
+```
+</MethodItem>
+<MethodDescription>
+**Solicitação**
+```json
+{
+  "clientKey": "API_KEY",
+  "task": 
+  {
+    "type": "MTCaptchaTask",
+    "websiteURL": "https://www.example.com",
+    "websiteKey": "MTPublic-abCDEFJAB",
+    "isInvisible": false,
+    "pageAction": "login",
+    "proxyType":"http",
+    "proxyAddress":"8.8.8.8",
+    "proxyPort":8080,
+    "proxyLogin":"proxyLoginHere",
+    "proxyPassword":"proxyPasswordHere"
+  }
+}
+```
+**Resposta**
+```json
+{
+  "errorId":0,
+  "taskId":407533077
+}
+```
+</MethodDescription>
+</TabItem>
+</Tabs>
+
+## Método para obter o resultado da tarefa
+
+Use o método [getTaskResult](../api/methods/get-task-result.md) para obter a solução do captcha MTCaptcha.
+
+<TabItem value="proxyless" label="CustomTask (sem proxy)" default className="method-panel-full">
+<MethodItem>
+```http
+https://api.capmonster.cloud/getTaskResult
+```
+</MethodItem>
+<MethodDescription>
+**Solicitação**
+```json
+{
+  "clientKey": "API_KEY",
+  "taskId": 407533077
+}
+```
+
+**Resposta**
+
+```json
+{
+  "errorId": 0,
+  "errorCode": null,
+  "errorDescription": null,
+  "solution": {
+    "token": "v1(155506dc,c8c2e356,MTPublic-abCDEFJAB,70f03532a53...5FSDA**)"
+  },
+  "status": "ready"
+}
+```
+
+</MethodDescription>
+</TabItem>
+
+## Como encontrar os parâmetros do captcha
+
+### websiteKey
+
+Este parâmetro pode ser encontrado na aba **Network** das *Ferramentas de Desenvolvedor*.
+Procure por solicitações que comecem, por exemplo, com `getchallenge.json` — o parâmetro **sk** corresponde ao `websiteKey`.
+
+![](./images/mtcaptcha/mtcaptcha_websitekey.png)
+
+### pageAction
+
+A mesma solicitação também inclui o parâmetro `pageAction`: o valor desejado é passado como **act**.
+Por padrão é **%24**; se for diferente (por exemplo, *..\&act=login&...*), especifique-o ao criar a tarefa.
+
+![](./images/mtcaptcha/mtcaptcha_act.png)
