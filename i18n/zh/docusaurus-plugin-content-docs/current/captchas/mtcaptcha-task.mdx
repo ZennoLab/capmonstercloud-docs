@@ -1,0 +1,228 @@
+---
+sidebar_position: 20
+sidebar_label: MTCaptchaTask
+title: "自动识别与绕过 MTCaptcha | API"
+description: "了解如何使用 Capmonster Cloud 提供的自动识别与解决验证码服务 API 来绕过 MTCaptcha！"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+import PriceBlock from '@theme/PriceBlock';
+import PriceBlockWrap from '@theme/PriceBlockWrap';
+
+# MTCaptcha
+
+<PriceBlockWrap>
+  <PriceBlock title="MTCaptcha task" captchaId="mtcaptcha"/>
+</PriceBlockWrap>
+
+![](./images/mtcaptcha/mtcaptcha.png)
+
+:::warning **注意！**
+CapMonster Cloud 默认使用内置代理服务器。
+如有需要，您可以配置自定义代理，以确保稳定运行并在内置服务访问受限时保持兼容性。
+:::
+
+## 请求参数
+
+<TabItem value="proxy" label="MTCaptchaTask" className="bordered-panel">
+<ParamItem title="type" required type="string" />
+**MTCaptchaTask**
+
+---
+
+<ParamItem title="websiteURL" required type="string" />
+进行验证码识别的网页地址。
+
+---
+
+<ParamItem title="websiteKey" required type="string" />
+MTCaptcha 的密钥，在请求中以参数 `sk` 传递（*请参见下方示例说明如何查找*）。
+
+---
+
+<ParamItem title="pageAction" type="string" />
+*action* 参数在请求中以 `act` 传递，并在 token 验证时显示。仅当值不同于默认值 **%24** 时才需要填写。  
+HTML 示例：
+```
+
+<script>
+var mtcaptchaConfig = {
+      "sitekey": "MTPublic-abCDEFJAB",
+      "action": "login"
+};
+</script>
+
+````
+
+---
+
+<ParamItem title="isInvisible" type="bool" />
+如果验证码为不可见模式（即隐藏的验证字段），请设为 **true**。当系统怀疑为机器人时将触发额外验证。
+
+---
+
+<ParamItem title="userAgent" type="string" />
+浏览器的 User-Agent。<br />  
+**请仅填写当前 Windows 系统下有效的 UA，例如：** userAgentPlaceholder
+
+---
+
+<ParamItem title="proxyType" type="string" />
+**http** - 常规 http/https 代理；<br />
+**https** - 仅当 "http" 无效时使用（某些自定义代理需要）；<br />
+**socks4** - socks4 代理；<br />
+**socks5** - socks5 代理。
+
+---
+
+<ParamItem title="proxyAddress" type="string" />
+<p>
+代理的 IPv4/IPv6 地址。禁止以下使用方式：
+- 使用主机名；
+- 使用透明代理（可暴露客户端 IP）；
+- 使用本地机器上的代理。
+</p>
+
+---
+
+<ParamItem title="proxyPort" type="integer" />
+代理端口。
+
+---
+
+<ParamItem title="proxyLogin" type="string" />
+代理服务器登录用户名。
+
+---
+
+<ParamItem title="proxyPassword" type="string" />
+代理服务器登录密码。
+
+</TabItem>
+
+## 创建任务的方法
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+<TabItem value="proxyless" label="MTCaptchaTask（无代理）" default className="method-panel">
+<MethodItem>
+```http
+https://api.capmonster.cloud/createTask
+````
+
+</MethodItem>
+<MethodDescription>
+**请求**
+```json
+{
+  "clientKey": "API_KEY",
+  "task": 
+  {
+    "type": "MTCaptchaTask",
+    "websiteURL": "https://www.example.com",
+    "websiteKey": "MTPublic-abCDEFJAB",
+    "isInvisible": false,
+    "pageAction": "login"
+  }
+}
+```
+**响应**
+```json
+{
+  "errorId":0,
+  "taskId":407533077
+}
+```
+</MethodDescription>
+</TabItem>
+
+<TabItem value="proxy" label="MTCaptchaTask（使用代理）" default className="method-panel">
+<MethodItem>
+```http
+https://api.capmonster.cloud/createTask
+```
+</MethodItem>
+<MethodDescription>
+**请求**
+```json
+{
+  "clientKey": "API_KEY",
+  "task": 
+  {
+    "type": "MTCaptchaTask",
+    "websiteURL": "https://www.example.com",
+    "websiteKey": "MTPublic-abCDEFJAB",
+    "isInvisible": false,
+    "pageAction": "login",
+    "proxyType":"http",
+    "proxyAddress":"8.8.8.8",
+    "proxyPort":8080,
+    "proxyLogin":"proxyLoginHere",
+    "proxyPassword":"proxyPasswordHere"
+  }
+}
+```
+**响应**
+```json
+{
+  "errorId":0,
+  "taskId":407533077
+}
+```
+</MethodDescription>
+</TabItem>
+</Tabs>
+
+## 获取任务结果的方法
+
+使用方法 [getTaskResult](../api/methods/get-task-result.md) 获取 MTCaptcha 的解决方案。
+
+<TabItem value="proxyless" label="CustomTask（无代理）" default className="method-panel-full">
+<MethodItem>
+```http
+https://api.capmonster.cloud/getTaskResult
+```
+</MethodItem>
+<MethodDescription>
+**请求**
+```json
+{
+  "clientKey": "API_KEY",
+  "taskId": 407533077
+}
+```
+
+**响应**
+
+```json
+{
+  "errorId": 0,
+  "errorCode": null,
+  "errorDescription": null,
+  "solution": {
+    "token": "v1(155506dc,c8c2e356,MTPublic-abCDEFJAB,70f03532a53...5FSDA**)"
+  },
+  "status": "ready"
+}
+```
+
+</MethodDescription>
+</TabItem>
+
+## 如何查找验证码参数
+
+### websiteKey
+
+在开发者工具的 **Network** 标签中可以找到此参数。
+查找类似以 `getchallenge.json` 开头的请求 — 参数 **sk** 对应 `websiteKey`。
+
+![](./images/mtcaptcha/mtcaptcha_websitekey.png)
+
+### pageAction
+
+该请求中也包含参数 `pageAction`，其值通过 **act** 传递。
+默认值为 **%24**；若值不同（如 *..\&act=login&...*），请在创建任务时传入。
+
+![](./images/mtcaptcha/mtcaptcha_act.png)
