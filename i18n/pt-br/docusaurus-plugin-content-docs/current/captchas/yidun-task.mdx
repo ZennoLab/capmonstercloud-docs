@@ -1,8 +1,8 @@
 ---
 sidebar_position: 19
 sidebar_label: YidunTask
-title: "Reconhecimento e bypass automático do CAPTCHA Yidun (NECaptcha) | API"
-description: "Saiba como contornar o CAPTCHA Yidun usando a API do Capmonster Cloud para reconhecimento e resolução automáticos!"
+title: "Reconhecimento e bypass automático do captcha Yidun (NECaptcha) | API"
+description: "Descubra como contornar o captcha Yidun usando a API do serviço Capmonster Cloud para reconhecimento e resolução automática de captchas!" 
 ---
 
 import Tabs from '@theme/Tabs';
@@ -22,47 +22,82 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 ![](./images/yidun-task/yidun-captcha.png)
 
 :::warning **Atenção!**
-Esta tarefa será executada usando nossos servidores proxy.
+Por padrão, o CapMonster Cloud utiliza servidores proxy integrados.  
+Se o acesso aos serviços internos estiver restrito, você pode especificar seus próprios proxies para garantir o funcionamento estável.
 :::
 
-## Parâmetros da solicitação
+## Parâmetros da requisição
 
 <TabItem value="proxy" label="YidunTask (com proxy)" className="bordered-panel">
+
   <ParamItem title="type" required type="string" />
   **YidunTask**
 
   ---
 
   <ParamItem title="websiteURL" required type="string" />
-  URL completa da página que contém o CAPTCHA.
+  URL completo da página com o captcha.
 
   ---
 
   <ParamItem title="websiteKey" required type="string" />
-  Valor do parâmetro `siteKey`, encontrado na página (*veja abaixo como localizá-lo*).
+  Valor do parâmetro `siteKey` encontrado na página (*veja o exemplo abaixo sobre como encontrá-lo*).
 
   ---
 
   <ParamItem title="userAgent" type="string" />
   User-Agent do navegador. <br />
-  **Forneça um User-Agent válido do sistema Windows. O recomendado atualmente é**: userAgentPlaceholder
+  **Utilize apenas um User-Agent atual do Windows. O recomendado é:** `userAgentPlaceholder`
+
+  ---
+
+  <ParamItem title="yidunGetLib" type="string" optional />
+  Caminho para o arquivo JavaScript que carrega o captcha na página.  
+  **Importante**: forneça a URL completa (https://...).  
+  Recomendado quando os campos `challenge`, `hcg` ou `hct` estiverem presentes no site.
+
+  ---
+
+  <ParamItem title="yidunApiServerSubdomain" type="string" optional />
+  Subdomínio do servidor API do Yidun.  
+  **Importante**: deve ser diferente dos padrões `c.dun.163.com` e `c-v6.dun.163.com`.  
+  Pode ser informado com ou sem `https://`.  
+  Necessário quando um servidor personalizado é usado (comum nas versões Enterprise).
+
+  ---
+
+  <ParamItem title="challenge" type="string" optional />
+  Identificador único do captcha atual.  
+  Geralmente enviado nas requisições de rede ao inicializar ou exibir o captcha.  
+  Indica o uso de captcha Enterprise.
+
+  ---
+
+  <ParamItem title="hcg" type="string" optional />
+  Hash do captcha utilizado na requisição.  
+  Pode ser obtido junto com o `challenge`.
+
+  ---
+
+  <ParamItem title="hct" type="integer" optional />
+  Identificador de tempo numérico usado na validação de captchas Enterprise.
 
   ---
 
   <ParamItem title="proxyType" type="string" />
-  **http** – proxy HTTP/HTTPS padrão;<br />
-  **https** – use esta opção apenas se "http" não funcionar (necessário para alguns proxies personalizados);<br />
-  **socks4** – proxy SOCKS4;<br />
-  **socks5** – proxy SOCKS5.
+  **http** - proxy padrão http/https;<br />
+  **https** - tente essa opção se "http" não funcionar (necessário para alguns proxies personalizados);<br />
+  **socks4** - proxy socks4;<br />
+  **socks5** - proxy socks5.
 
   ---
 
   <ParamItem title="proxyAddress" type="string" />
   <p>
-    Endereço IP do proxy (IPv4/IPv6). Não é permitido:
+    Endereço IP do proxy IPv4/IPv6. Não é permitido:
     - uso de nomes de host;
-    - uso de proxies transparentes (onde o IP do cliente pode ser visto);
-    - uso de proxies em máquinas locais.
+    - uso de proxies transparentes (aqueles que revelam o IP do cliente);
+    - uso de proxies locais.
   </p>
 
   ---
@@ -73,27 +108,16 @@ Esta tarefa será executada usando nossos servidores proxy.
   ---
 
   <ParamItem title="proxyLogin" type="string" />
-  Nome de usuário do proxy.
+  Login do proxy.
 
   ---
 
   <ParamItem title="proxyPassword" type="string" />
   Senha do proxy.
 
+  ---
+
 </TabItem>
-
-### Como obter websiteURL e websiteKey
-Abra as *Ferramentas de Desenvolvedor*, ative o captcha, vá para a aba **Network** e encontre a requisição que começa com `get?referer=` ou `check?referer=`. O valor de *referer* é o `websiteURL`.
-
-![](./images/yidun-task/websiteurl.png)
-
-Às vezes, o `referer` na URL está codificado, por exemplo: *https%3A%2F%2Fid.example.com%2F*. Para obter um endereço legível, você precisa decodificá-lo, por exemplo, usando o console do navegador:
-
-![](./images/yidun-task/decode-websiteurl.png)
-
-O valor de *id* é o `websiteKey`.
-
-![](./images/yidun-task/websitekey.png)
 
 ## Método de criação da tarefa
 
@@ -105,70 +129,68 @@ O valor de *id* é o `websiteKey`.
       ```
     </MethodItem>
     <MethodDescription>
-
-    **Solicitação**
-    ```json
-    {
-      "clientKey": "API_KEY",
-      "task": {
-        "type": "YidunTask",
-        "websiteURL": "https://www.example.com",
-        "websiteKey": "6cw0f0485d5d46auacf9b735d20218a5",
-        "userAgent": "userAgentPlaceholder"
+      **Requisição**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": 
+        {
+          "type": "YidunTask",
+          "websiteURL": "https://www.example.com",
+          "websiteKey": "6cw0f0485d5d46auacf9b735d20218a5",
+          "userAgent": "userAgentPlaceholder"
+        }
       }
-    }
-    ```
-
-    **Resposta**
-    ```json
-    {
-      "errorId": 0,
-      "taskId": 407533077
-    }
-    ```
+      ```
+      **Resposta**
+      ```json
+      {
+        "errorId":0,
+        "taskId":407533077
+      }
+      ```
     </MethodDescription>
   </TabItem>
 
-  <TabItem value="proxy" label="YidunTask (com proxy)" default className="method-panel">
+  <TabItem value="proxy" label="YidunTask (com proxy)" className="method-panel">
     <MethodItem>
       ```http
       https://api.capmonster.cloud/createTask
       ```
     </MethodItem>
     <MethodDescription>
-
-    **Solicitação**
-    ```json
-    {
-      "clientKey": "API_KEY",
-      "task": {
-        "type": "YidunTask",
-        "websiteURL": "https://www.example.com",
-        "websiteKey": "6cw0f0485d5d46auacf9b735d20218a5",
-        "userAgent": "userAgentPlaceholder",
-        "proxyType": "http",
-        "proxyAddress": "8.8.8.8",
-        "proxyPort": 8080,
-        "proxyLogin": "proxyLoginHere",
-        "proxyPassword": "proxyPasswordHere"
+      **Requisição**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": 
+        {
+          "type": "YidunTask",
+          "websiteURL": "https://www.example.com",
+          "websiteKey": "6cw0f0485d5d46auacf9b735d20218a5",
+          "userAgent": "userAgentPlaceholder",
+          "proxyType":"http",
+          "proxyAddress":"8.8.8.8",
+          "proxyPort":8080,
+          "proxyLogin":"proxyLoginHere",
+          "proxyPassword":"proxyPasswordHere"
+        }
       }
-    }
-    ```
-
-    **Resposta**
-    ```json
-    {
-      "errorId": 0,
-      "taskId": 407533077
-    }
-    ```
+      ```
+      **Resposta**
+      ```json
+      {
+        "errorId":0,
+        "taskId":407533077
+      }
+      ```
     </MethodDescription>
   </TabItem>
 </Tabs>
 
-## Método para obter o resultado da tarefa
+## Método de obter resultado da tarefa
 
-Use o método [getTaskResult](../api/methods/get-task-result.md) para obter a solução do CAPTCHA Yidun.
+Use o método [getTaskResult](../api/methods/get-task-result.md) para obter a solução do captcha Yidun.
 
 <TabItem value="proxyless" label="CustomTask (sem proxy)" default className="method-panel-full">
   <MethodItem>
@@ -178,25 +200,89 @@ Use o método [getTaskResult](../api/methods/get-task-result.md) para obter a so
   </MethodItem>
   <MethodDescription>
 
-  **Solicitação**
+  **Requisição**
   ```json
   {
     "clientKey": "API_KEY",
     "taskId": 407533077
   }
-  ```
+````
 
-  **Resposta**
-  ```json
-  {
-    "errorId": 0,
-    "errorCode": null,
-    "errorDescription": null,
-    "solution": {
-      "token": "CN31_9AwsPmaYcJameP_09rA0vkVMQsPij...RXTlFJFc3"
-    },
-    "status": "ready"
-  }
-  ```
+**Resposta**
+
+```json
+{
+  "errorId": 0,
+  "errorCode": null,
+  "errorDescription": null,
+  "solution": {
+    "token": "CN31_9AwsPmaYcJameP_09rA0vkVMQsPij...RXTlFJFc3"
+  },
+  "status": "ready"
+}
+```
+
   </MethodDescription>
 </TabItem>
+
+### Quando usar `yidunGetLib` e `yidunApiServerSubdomain`?
+
+Se na aba **Network** dos desenvolvedores você encontrar os parâmetros `challenge`, `hcg`, `hct`, então a versão Enterprise (ou Business) do Yidun está em uso, e você deve fornecer também `yidunGetLib` e `yidunApiServerSubdomain` para resolução correta.
+
+<details>
+  <summary>Exemplo de tarefa</summary>
+
+```json
+{
+  "type": "YidunTask",
+  "websiteURL": "https://id7.cloud.example.com/IframeLogin.html",
+  "websiteKey": "0f123r2a6am56431yg17n8rz6grz0ym6",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+  "yidunGetLib": "https://example.com/captcha/b/v3//static/load.min.js",
+  "yidunApiServerSubdomain": "csc-captcha-example.com",
+  "challenge": "abc55382321547556267884cc3ba57c3d8a7c14f541fd9c6a7f1ce3173d3b9a1",
+  "hcg": "9a217825f3dcfac3d34e551e93819d610dec931e5e2a2236edf0e1f3f320c191",
+  "hct": 1751469954806
+}
+```
+
+</details>
+
+## Como encontrar `websiteURL` e `websiteKey`
+
+Abra as *Ferramentas do desenvolvedor*, ative o captcha, vá até a aba **Network** e localize uma requisição que comece com `get?referer=` ou `check?referer=`. O valor de *referer* é o `websiteURL`.
+
+![](./images/yidun-task/websiteurl.png)
+
+Às vezes o `referer` está codificado, por exemplo: *https%3A%2F%2Fid.example.com%2F*. Para obter o endereço legível, decodifique com o console do navegador:
+
+![](./images/yidun-task/decode-websiteurl.png)
+
+O valor de *id* é o `websiteKey`.
+
+![](./images/yidun-task/websitekey.png)
+
+---
+
+**Para Yidun Enterprise:**
+
+Os parâmetros `websiteURL`, `websiteKey` e `yidunApiServerSubdomain` podem ser encontrados da mesma forma que no captcha Yidun comum, em requisições que comecem com `get?referer=` ou `check?referer=`
+
+![](./images/yidun-task/business_yidun2.png)
+
+---
+
+**`yidunGetLib`**
+
+Caminho para o arquivo JavaScript responsável por carregar o captcha.
+Normalmente pode ser encontrado nas requisições de rede, com nomes como `load.min.js`.
+
+![](./images/yidun-task/business_yidun.png)
+
+---
+
+**`challenge`**, **`hcg`**, **`hct`**
+
+Todos esses parâmetros podem ser encontrados nas requisições de rede. A requisição relevante normalmente começa com `cscPreprocess?reflushCode=`.
+
+![](./images/yidun-task/business_yidun1.png)

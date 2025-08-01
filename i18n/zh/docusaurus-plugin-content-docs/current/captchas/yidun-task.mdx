@@ -1,8 +1,8 @@
 ---
 sidebar_position: 19
 sidebar_label: YidunTask
-title: "自动识别与绕过 Yidun（网易易盾）验证码 | API"
-description: "了解如何通过 Capmonster Cloud API 自动识别和解决 Yidun 验证码！"
+title: "Yidun（NECaptcha）验证码的自动识别与绕过 | API"
+description: "了解如何使用 Capmonster Cloud 的 API 自动识别并绕过 Yidun 验证码！" 
 ---
 
 import Tabs from '@theme/Tabs';
@@ -13,7 +13,7 @@ import MethodDescription from '@theme/MethodDescription'
 import PriceBlock from '@theme/PriceBlock';
 import PriceBlockWrap from '@theme/PriceBlockWrap';
 
-# Yidun - 网易易盾验证码（NECaptcha）
+# Yidun - NECaptcha
 
 <PriceBlockWrap>
   <PriceBlock title="Yidun task" captchaId="yidun"/>
@@ -22,155 +22,177 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 ![](./images/yidun-task/yidun-captcha.png)
 
 :::warning **注意！**
-该任务将在我们的代理服务器上执行。
+CapMonster Cloud 默认使用内置代理服务器。  
+如果您无法访问默认服务，可以设置自定义代理以保证任务正常运行。
 :::
 
 ## 请求参数
 
 <TabItem value="proxy" label="YidunTask（使用代理）" className="bordered-panel">
+
   <ParamItem title="type" required type="string" />
   **YidunTask**
 
   ---
 
   <ParamItem title="websiteURL" required type="string" />
-  包含验证码的页面完整 URL。
+  验证码页面的完整网址。
 
   ---
 
   <ParamItem title="websiteKey" required type="string" />
-  页面中找到的 `siteKey` 参数的值（*见下方示例说明如何查找*）。
+  页面中找到的 `siteKey` 参数的值（*查看下方示例了解如何获取*）。
 
   ---
 
   <ParamItem title="userAgent" type="string" />
   浏览器的 User-Agent。<br />
-  **请仅提供 Windows 系统中的有效 User-Agent，当前推荐的为**：userAgentPlaceholder
+  **请仅传递最新的 Windows 系统 UA，目前推荐使用**：`userAgentPlaceholder`
+
+  ---
+
+  <ParamItem title="yidunGetLib" type="string" optional />
+  加载验证码的 JavaScript 文件路径。  
+  **重要**：请提供完整链接（以 https:// 开头）。  
+  推荐在页面中存在 `challenge`、`hcg` 或 `hct` 字段时使用。
+
+  ---
+
+  <ParamItem title="yidunApiServerSubdomain" type="string" optional />
+  Yidun API 服务器的子域名。  
+  **重要**：必须不同于默认的 `c.dun.163.com` 或 `c-v6.dun.163.com`。  
+  可包含 `https://`，也可以省略。  
+  当使用自定义服务器（常见于企业版本）时是必填项。
+
+  ---
+
+  <ParamItem title="challenge" type="string" optional />
+  当前验证码的唯一标识符。  
+  通常在验证码初始化或展示时通过网络请求传输。  
+  是 Enterprise 验证码的标志。
+
+  ---
+
+  <ParamItem title="hcg" type="string" optional />
+  验证码的哈希值，用于构建请求。  
+  通常与 `challenge` 一起提供。
+
+  ---
+
+  <ParamItem title="hct" type="integer" optional />
+  时间戳，用于验证 Enterprise 版本的验证码。
 
   ---
 
   <ParamItem title="proxyType" type="string" />
-  **http** – 标准 HTTP/HTTPS 代理；<br />
-  **https** – 如果 "http" 不工作，可以尝试此选项（某些自定义代理可能需要）；<br />
-  **socks4** – SOCKS4 代理；<br />
-  **socks5** – SOCKS5 代理。
+  **http** - 普通 http/https 代理；<br />
+  **https** - 如果 http 不工作，可以尝试此选项（部分自定义代理要求）；<br />
+  **socks4** - socks4 代理；<br />
+  **socks5** - socks5 代理。
 
   ---
 
   <ParamItem title="proxyAddress" type="string" />
   <p>
-    代理服务器的 IPv4/IPv6 地址。请勿使用：
-    - 主机名；
-    - 透明代理（即能识别客户端 IP 的代理）；
-    - 本地机器上的代理。
+    代理的 IPv4 或 IPv6 地址。禁止以下情况：
+    - 使用主机名；
+    - 使用透明代理（即暴露真实客户端 IP）；
+    - 使用本地代理地址。
   </p>
 
   ---
 
   <ParamItem title="proxyPort" type="integer" />
-  代理端口号。
+  代理端口。
 
   ---
 
   <ParamItem title="proxyLogin" type="string" />
-  代理服务器的用户名。
+  代理用户名。
 
   ---
 
   <ParamItem title="proxyPassword" type="string" />
-  代理服务器的密码。
+  代理密码。
+
+  ---
 
 </TabItem>
-
-### 如何获取 websiteURL 和 websiteKey
-打开*开发者工具*，激活验证码，切换到**网络(Network)**标签，找到以 `get?referer=` 或 `check?referer=` 开头的请求。*referer* 的值就是 `websiteURL`。
-
-![](./images/yidun-task/websiteurl.png)
-
-有时 URL 中的 `referer` 是编码过的，例如：*https%3A%2F%2Fid.example.com%2F*。要获得可读地址，需要对其进行解码，比如使用浏览器控制台：
-
-![](./images/yidun-task/decode-websiteurl.png)
-
-*id* 的值就是 `websiteKey`。
-
-![](./images/yidun-task/websitekey.png)
 
 ## 创建任务的方法
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-  <TabItem value="proxyless" label="YidunTask（无需代理）" default className="method-panel">
+  <TabItem value="proxyless" label="YidunTask（无代理）" default className="method-panel">
     <MethodItem>
       ```http
       https://api.capmonster.cloud/createTask
       ```
     </MethodItem>
     <MethodDescription>
-
-    **请求**
-    ```json
-    {
-      "clientKey": "API_KEY",
-      "task": {
-        "type": "YidunTask",
-        "websiteURL": "https://www.example.com",
-        "websiteKey": "6cw0f0485d5d46auacf9b735d20218a5",
-        "userAgent": "userAgentPlaceholder"
+      **请求**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": 
+        {
+          "type": "YidunTask",
+          "websiteURL": "https://www.example.com",
+          "websiteKey": "6cw0f0485d5d46auacf9b735d20218a5",
+          "userAgent": "userAgentPlaceholder"
+        }
       }
-    }
-    ```
-
-    **响应**
-    ```json
-    {
-      "errorId": 0,
-      "taskId": 407533077
-    }
-    ```
+      ```
+      **响应**
+      ```json
+      {
+        "errorId":0,
+        "taskId":407533077
+      }
+      ```
     </MethodDescription>
   </TabItem>
 
-  <TabItem value="proxy" label="YidunTask（使用代理）" default className="method-panel">
+  <TabItem value="proxy" label="YidunTask（使用代理）" className="method-panel">
     <MethodItem>
       ```http
       https://api.capmonster.cloud/createTask
       ```
     </MethodItem>
     <MethodDescription>
-
-    **请求**
-    ```json
-    {
-      "clientKey": "API_KEY",
-      "task": {
-        "type": "YidunTask",
-        "websiteURL": "https://www.example.com",
-        "websiteKey": "6cw0f0485d5d46auacf9b735d20218a5",
-        "userAgent": "userAgentPlaceholder",
-        "proxyType": "http",
-        "proxyAddress": "8.8.8.8",
-        "proxyPort": 8080,
-        "proxyLogin": "proxyLoginHere",
-        "proxyPassword": "proxyPasswordHere"
+      **请求**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": 
+        {
+          "type": "YidunTask",
+          "websiteURL": "https://www.example.com",
+          "websiteKey": "6cw0f0485d5d46auacf9b735d20218a5",
+          "userAgent": "userAgentPlaceholder",
+          "proxyType":"http",
+          "proxyAddress":"8.8.8.8",
+          "proxyPort":8080,
+          "proxyLogin":"proxyLoginHere",
+          "proxyPassword":"proxyPasswordHere"
+        }
       }
-    }
-    ```
-
-    **响应**
-    ```json
-    {
-      "errorId": 0,
-      "taskId": 407533077
-    }
-    ```
+      ```
+      **响应**
+      ```json
+      {
+        "errorId":0,
+        "taskId":407533077
+      }
+      ```
     </MethodDescription>
   </TabItem>
 </Tabs>
 
-## 获取任务结果的方法
+## 获取结果的方法
 
 使用方法 [getTaskResult](../api/methods/get-task-result.md) 获取 Yidun 验证码的解决结果。
 
-<TabItem value="proxyless" label="CustomTask（无需代理）" default className="method-panel-full">
+<TabItem value="proxyless" label="CustomTask（无代理）" default className="method-panel-full">
   <MethodItem>
     ```http
     https://api.capmonster.cloud/getTaskResult
@@ -184,19 +206,83 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
     "clientKey": "API_KEY",
     "taskId": 407533077
   }
-  ```
+````
 
-  **响应**
-  ```json
-  {
-    "errorId": 0,
-    "errorCode": null,
-    "errorDescription": null,
-    "solution": {
-      "token": "CN31_9AwsPmaYcJameP_09rA0vkVMQsPij...RXTlFJFc3"
-    },
-    "status": "ready"
-  }
-  ```
+**响应**
+
+```json
+{
+  "errorId": 0,
+  "errorCode": null,
+  "errorDescription": null,
+  "solution": {
+    "token": "CN31_9AwsPmaYcJameP_09rA0vkVMQsPij...RXTlFJFc3"
+  },
+  "status": "ready"
+}
+```
+
   </MethodDescription>
 </TabItem>
+
+### 何时需要传递 `yidunGetLib` 和 `yidunApiServerSubdomain`？
+
+如果您在开发者工具的 **Network** 标签中发现 `challenge`、`hcg` 或 `hct` 字段，则说明该网站使用的是 Enterprise（或 Business）版本的 Yidun，此时需额外传递 `yidunGetLib` 和 `yidunApiServerSubdomain` 参数，以便正确解决。
+
+<details>
+  <summary>任务示例</summary>
+
+```json
+{
+  "type": "YidunTask",
+  "websiteURL": "https://id7.cloud.example.com/IframeLogin.html",
+  "websiteKey": "0f123r2a6am56431yg17n8rz6grz0ym6",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+  "yidunGetLib": "https://example.com/captcha/b/v3//static/load.min.js",
+  "yidunApiServerSubdomain": "csc-captcha-example.com",
+  "challenge": "abc55382321547556267884cc3ba57c3d8a7c14f541fd9c6a7f1ce3173d3b9a1",
+  "hcg": "9a217825f3dcfac3d34e551e93819d610dec931e5e2a2236edf0e1f3f320c191",
+  "hct": 1751469954806
+}
+```
+
+</details>
+
+## 如何查找 `websiteURL` 和 `websiteKey`
+
+打开开发者工具，启动验证码，在 **Network** 标签中查找以 `get?referer=` 或 `check?referer=` 开头的请求。参数 `referer` 的值就是 `websiteURL`。
+
+![](./images/yidun-task/websiteurl.png)
+
+有时 `referer` 是 URL 编码的，例如：*https%3A%2F%2Fid.example.com%2F*。可在浏览器控制台中解码查看：
+
+![](./images/yidun-task/decode-websiteurl.png)
+
+`id` 值即为 `websiteKey`。
+
+![](./images/yidun-task/websitekey.png)
+
+---
+
+**Yidun Enterprise 情况下：**
+
+`websiteURL`、`websiteKey` 和 `yidunApiServerSubdomain` 可通过查找以 `get?referer=` 或 `check?referer=` 开头的请求获得。
+
+![](./images/yidun-task/business_yidun2.png)
+
+---
+
+**`yidunGetLib`**
+
+负责加载验证码的 JavaScript 文件路径，通常可在网络请求中找到，文件名类似于 `load.min.js`。
+
+![](./images/yidun-task/business_yidun.png)
+
+---
+
+**`challenge`**、**`hcg`**、**`hct`**
+
+这些参数都可在网络请求中找到。相关请求通常以 `cscPreprocess?reflushCode=` 开头。
+
+![](./images/yidun-task/business_yidun1.png)
+
