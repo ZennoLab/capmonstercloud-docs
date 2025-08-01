@@ -23,78 +23,102 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 ![](./images/yidun-task/yidun-captcha.png)
 
 :::warning **Внимание!**
-Данная задача будет выполняться с использованием наших прокси-серверов.
+По умолчанию CapMonster Cloud использует встроенные прокси-серверы.
+Если доступ к встроенным сервисам будет ограничен, вы можете задать собственные прокси для обеспечения стабильной работы.
 :::
 
 ## Параметры запроса
 
-  <TabItem value="proxy" label="YidunTask (при использовании прокси)" className="bordered-panel">
-    <ParamItem title="type" required type="string" />
-    **YidunTask**
+<TabItem value="proxy" label="YidunTask (при использовании прокси)" className="bordered-panel">
 
-    ---
+  <ParamItem title="type" required type="string" />
+  **YidunTask**
 
-    <ParamItem title="websiteURL" required type="string" />
-    Полный URL страницы с капчей.
+  ---
 
-    ---
+  <ParamItem title="websiteURL" required type="string" />
+  Полный URL страницы с капчей.
 
-    <ParamItem title="websiteKey" required type="string" />
-    Значение параметра siteKey, найденное на странице (*см. пример ниже, как его найти*).
-	
-    ---
+  ---
 
-	<ParamItem title="userAgent" type="string" />
-    User-Agent браузера. <br /> 
-	**Передавайте только актуальный UA от ОС Windows. Сейчас таковым является**: userAgentPlaceholder
+  <ParamItem title="websiteKey" required type="string" />
+  Значение параметра siteKey, найденное на странице (*см. пример ниже, как его найти*).
 
-	---
+  ---
 
-    <ParamItem title="proxyType" type="string" />
-    **http** - обычный http/https прокси;<br />
-	**https** - попробуйте эту опцию только если "http" не работает (требуется для некоторых кастомных прокси);<br />
-	**socks4** - socks4 прокси;<br />
-	**socks5** - socks5 прокси.
+  <ParamItem title="userAgent" type="string" />
+  User-Agent браузера. <br />
+  **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является**: `userAgentPlaceholder`
 
-    ---
+  ---
 
-    <ParamItem title="proxyAddress" type="string" />
-    <p>
-      IP адрес прокси IPv4/IPv6. Не допускается:
-		- использование имен хостов;
-		- использование прозрачных прокси (там где можно видеть IP клиента);
-		- использование прокси на локальных машинах.
-    </p>
+  <ParamItem title="yidunGetLib" type="string" optional />
+  Путь к JavaScript-файлу, загружающему капчу на странице.  
+  **Важно**: указывайте полную ссылку (https://...).  
+  Рекомендуется использовать, если на сайте присутствуют поля `challenge`, `hcg`, `hct`.
 
-    ---
+  ---
 
-    <ParamItem title="proxyPort" type="integer" />
-    Порт прокси.
+  <ParamItem title="yidunApiServerSubdomain" type="string" optional />
+  Поддомен Yidun API сервера.  
+  **Важно**: должен отличаться от стандартных `c.dun.163.com` и `c-v6.dun.163.com`.  
+  Допустимо указывать как с https://, так и без.  
+  Обязателен, если используется кастомный сервер (часто бывает в Enterprise-версиях).
 
-    ---
+  ---
 
-    <ParamItem title="proxyLogin" type="string" />
-    Логин прокси-сервера.
+  <ParamItem title="challenge" type="string" optional />
+  Уникальный идентификатор текущей капчи.  
+  Обычно передаётся в сетевых запросах при инициализации или отображении капчи.  
+  Признак Enterprise-капчи.
 
-    ---
+  ---
 
-    <ParamItem title="proxyPassword" type="string" />
-    Пароль прокси-сервера.
+  <ParamItem title="hcg" type="string" optional />
+  Хеш капчи, используется при формировании запроса.  
+  Можно получить вместе с `challenge`.
 
-  </TabItem>
+  ---
 
-### Как получить websiteURL и websiteKey
-Откройте *Инструменты разработчика*, активируйте капчу, перейдите во вкладку **Network** и среди запросов найдите тот, который начинается на `get?referer=` или `check?referer=`. Значение *referer* - это `websiteURL`. 
+  <ParamItem title="hct" type="integer" optional />
+  Числовой временной идентификатор/штамп, используемый при валидации Enterprise-версии.
 
-![](./images/yidun-task/websiteurl.png)
+  ---
 
-Иногда в URL `referer` закодирован, например: *https%3A%2F%2Fid.example.com%2F*. Чтобы получить читаемый адрес, его нужно декодировать, например, с помощью консоли в браузере:
+  <ParamItem title="proxyType" type="string" />
+  **http** - обычный http/https прокси;<br />
+  **https** - попробуйте эту опцию только если "http" не работает (требуется для некоторых кастомных прокси);<br />
+  **socks4** - socks4 прокси;<br />
+  **socks5** - socks5 прокси.
 
-![](./images/yidun-task/decode-websiteurl.png)
+  ---
 
-Значение *id* - это `websiteKey`.
+  <ParamItem title="proxyAddress" type="string" />
+  <p>
+    IP адрес прокси IPv4/IPv6. Не допускается:
+    - использование имен хостов;
+    - использование прозрачных прокси (там где можно видеть IP клиента);
+    - использование прокси на локальных машинах.
+  </p>
 
-![](./images/yidun-task/websitekey.png)
+  ---
+
+  <ParamItem title="proxyPort" type="integer" />
+  Порт прокси.
+
+  ---
+
+  <ParamItem title="proxyLogin" type="string" />
+  Логин прокси-сервера.
+
+  ---
+
+  <ParamItem title="proxyPassword" type="string" />
+  Пароль прокси-сервера.
+
+  ---
+
+</TabItem>
 
 ## Метод создания задачи
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
@@ -164,7 +188,6 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
   </TabItem>
 </Tabs>
 
-
 ## Метод получения результата задачи
 Используйте метод [getTaskResult](../api/methods/get-task-result.md), чтобы получить решение Yidun капчи.
 
@@ -198,3 +221,60 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
   ```
   </MethodDescription>
 </TabItem>
+
+### Когда нужны `yidunGetLib` и `yidunApiServerSubdomain`?
+Если на странице в сетевых запросах (**Network**) вы находите параметры `challenge`, `hcg`, `hct` - значит, используется Enterprise (или Business) версия Yidun, и следует дополнительно передать `yidunGetLib` и `yidunApiServerSubdomain` для корректного решения.
+
+<details>
+  <summary>Пример задачи</summary>
+
+```json
+{
+  "type": "YidunTask",
+  "websiteURL": "https://id7.cloud.example.com/IframeLogin.html",
+  "websiteKey": "0f123r2a6am56431yg17n8rz6grz0ym6",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+  "yidunGetLib": "https://example.com/captcha/b/v3//static/load.min.js",
+  "yidunApiServerSubdomain": "csc-captcha-example.com",
+  "challenge": "abc55382321547556267884cc3ba57c3d8a7c14f541fd9c6a7f1ce3173d3b9a1",
+  "hcg": "9a217825f3dcfac3d34e551e93819d610dec931e5e2a2236edf0e1f3f320c191",
+  "hct": 1751469954806
+}
+```
+</details> 
+---
+
+## Как найти `websiteURL` и `websiteKey`
+Откройте *Инструменты разработчика*, активируйте капчу, перейдите во вкладку **Network** и среди запросов найдите тот, который начинается на `get?referer=` или `check?referer=`. Значение *referer* - это `websiteURL`. 
+
+![](./images/yidun-task/websiteurl.png)
+
+Иногда в URL `referer` закодирован, например: *https%3A%2F%2Fid.example.com%2F*. Чтобы получить читаемый адрес, его нужно декодировать, например, с помощью консоли в браузере:
+
+![](./images/yidun-task/decode-websiteurl.png)
+
+Значение *id* - это `websiteKey`.
+
+![](./images/yidun-task/websitekey.png)
+
+---
+
+**Для Yidun Enterprise:**
+
+`websiteURL`, `websiteKey` и `yidunApiServerSubdomain` можно найти аналогично обычной Yidun капче в запросах, начинающихся на `get?referer=` или `check?referer=`
+
+![](./images/yidun-task/business_yidun2.png)
+
+---
+**`yidunGetLib`**
+
+Путь к JavaScript-файлу, который отвечает за загрузку капчи на странице, обычно можно найти в сетевых запросах. Чаще всего он имеет имя вроде `load.min.js`.
+
+![](./images/yidun-task/business_yidun.png)
+
+---
+**`challenge`**, **`hcg`**, **`hct`**
+
+Все эти параметры можно найти в сетевых запросах. Обычно соответствующий запрос начинается с `cscPreprocess?reflushCode=`.
+
+![](./images/yidun-task/business_yidun1.png)
