@@ -1,8 +1,8 @@
 ---
 sidebar_position: 19
 sidebar_label: YidunTask
-title: "Automatic Recognition and Bypass of Yidun (NECaptcha) CAPTCHA | API"
-description: "Learn how to bypass Yidun CAPTCHA using the Capmonster Cloud API for automatic recognition and solving!"
+title: "Automatic Recognition and Bypass of Yidun (NECaptcha) Captcha | API"
+description: "Learn how to bypass Yidun captcha using the Capmonster Cloud API for automated captcha recognition and solving!"
 ---
 
 import Tabs from '@theme/Tabs';
@@ -21,48 +21,83 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 
 ![](./images/yidun-task/yidun-captcha.png)
 
-:::warning **Warning!**
-This task will be executed using our proxy servers.
+:::warning **Attention!**
+By default, CapMonster Cloud uses built-in proxy servers.  
+If access to built-in services is restricted, you can specify your own proxies to ensure stable operation.
 :::
 
-## Request Parameters
+## Request parameters
 
 <TabItem value="proxy" label="YidunTask (with proxy)" className="bordered-panel">
+
   <ParamItem title="type" required type="string" />
   **YidunTask**
 
   ---
 
   <ParamItem title="websiteURL" required type="string" />
-  Full URL of the page containing the CAPTCHA.
+  Full URL of the page with the captcha.
 
   ---
 
   <ParamItem title="websiteKey" required type="string" />
-  The value of the `siteKey` parameter found on the page (*see the example below on how to find it*).
+  The `siteKey` value found on the page (*see example below on how to find it*).
 
   ---
 
   <ParamItem title="userAgent" type="string" />
   Browser User-Agent. <br />
-  **You must provide a valid User-Agent from a Windows OS. The currently recommended one is**: userAgentPlaceholder
+  **Only pass a current UA for Windows OS. Recommended value:** `userAgentPlaceholder`
+
+  ---
+
+  <ParamItem title="yidunGetLib" type="string" optional />
+  Path to the JavaScript file responsible for loading the captcha on the page.  
+  **Important**: specify the full URL (https://...).  
+  Recommended if fields like `challenge`, `hcg`, or `hct` are present on the site.
+
+  ---
+
+  <ParamItem title="yidunApiServerSubdomain" type="string" optional />
+  Subdomain of the Yidun API server.  
+  **Important**: must differ from the standard domains `c.dun.163.com` and `c-v6.dun.163.com`.  
+  You can include or omit `https://`.  
+  Required when using a custom server (often in Enterprise versions).
+
+  ---
+
+  <ParamItem title="challenge" type="string" optional />
+  Unique identifier of the current captcha.  
+  Typically passed in network requests during initialization or rendering of the captcha.  
+  Indicates Enterprise captcha.
+
+  ---
+
+  <ParamItem title="hcg" type="string" optional />
+  Captcha hash used in the request.  
+  Can be obtained together with `challenge`.
+
+  ---
+
+  <ParamItem title="hct" type="integer" optional />
+  Numeric timestamp used in Enterprise version validation.
 
   ---
 
   <ParamItem title="proxyType" type="string" />
-  **http** – standard HTTP/HTTPS proxy;<br />
-  **https** – try this only if "http" doesn't work (required for some custom proxies);<br />
-  **socks4** – SOCKS4 proxy;<br />
-  **socks5** – SOCKS5 proxy.
+  **http** - standard http/https proxy;<br />
+  **https** - try this if "http" doesn't work (needed for some custom proxies);<br />
+  **socks4** - socks4 proxy;<br />
+  **socks5** - socks5 proxy.
 
   ---
 
   <ParamItem title="proxyAddress" type="string" />
   <p>
-    Proxy IP address (IPv4/IPv6). The following are not allowed:
+    IP address of the proxy (IPv4/IPv6). Not allowed:
     - using hostnames;
-    - using transparent proxies (where the client IP is visible);
-    - using proxies from local machines.
+    - using transparent proxies (those exposing the client IP);
+    - using local machine proxies.
   </p>
 
   ---
@@ -73,21 +108,153 @@ This task will be executed using our proxy servers.
   ---
 
   <ParamItem title="proxyLogin" type="string" />
-  Proxy server login.
+  Proxy login.
 
   ---
 
   <ParamItem title="proxyPassword" type="string" />
-  Proxy server password.
+  Proxy password.
+
+  ---
 
 </TabItem>
 
-### How to Get websiteURL and websiteKey
-Open the *Developer Tools*, activate the captcha, go to the **Network** tab, and find the request that starts with `get?referer=` or `check?referer=`. The value of *referer* is the `websiteURL`.
+## Create task method
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="proxyless" label="YidunTask (without proxy)" default className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      **Request**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": 
+        {
+          "type": "YidunTask",
+          "websiteURL": "https://www.example.com",
+          "websiteKey": "6cw0f0485d5d46auacf9b735d20218a5",
+          "userAgent": "userAgentPlaceholder"
+        }
+      }
+      ```
+      **Response**
+      ```json
+      {
+        "errorId":0,
+        "taskId":407533077
+      }
+      ```
+    </MethodDescription>
+  </TabItem>
+
+  <TabItem value="proxy" label="YidunTask (with proxy)" className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      **Request**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": 
+        {
+          "type": "YidunTask",
+          "websiteURL": "https://www.example.com",
+          "websiteKey": "6cw0f0485d5d46auacf9b735d20218a5",
+          "userAgent": "userAgentPlaceholder",
+          "proxyType":"http",
+          "proxyAddress":"8.8.8.8",
+          "proxyPort":8080,
+          "proxyLogin":"proxyLoginHere",
+          "proxyPassword":"proxyPasswordHere"
+        }
+      }
+      ```
+      **Response**
+      ```json
+      {
+        "errorId":0,
+        "taskId":407533077
+      }
+      ```
+    </MethodDescription>
+  </TabItem>
+</Tabs>
+
+## Get task result method
+
+Use the [getTaskResult](../api/methods/get-task-result.md) method to retrieve the Yidun captcha solution.
+
+<TabItem value="proxyless" label="CustomTask (without proxy)" default className="method-panel-full">
+  <MethodItem>
+    ```http
+    https://api.capmonster.cloud/getTaskResult
+    ```
+  </MethodItem>
+  <MethodDescription>
+  **Request**
+  ```json
+  {
+    "clientKey": "API_KEY",
+    "taskId": 407533077
+  }
+````
+
+**Response**
+
+```json
+{
+  "errorId": 0,
+  "errorCode": null,
+  "errorDescription": null,
+  "solution": {
+    "token": "CN31_9AwsPmaYcJameP_09rA0vkVMQsPij...RXTlFJFc3"
+  },
+  "status": "ready"
+}
+```
+
+  </MethodDescription>
+</TabItem>
+
+### When are `yidunGetLib` and `yidunApiServerSubdomain` needed?
+
+If you find the `challenge`, `hcg`, and `hct` parameters in network requests on the page (**Network tab**), this means the Enterprise (or Business) version of Yidun is in use. You should also provide `yidunGetLib` and `yidunApiServerSubdomain` to solve it correctly.
+
+<details>
+  <summary>Example task</summary>
+
+```json
+{
+  "type": "YidunTask",
+  "websiteURL": "https://id7.cloud.example.com/IframeLogin.html",
+  "websiteKey": "0f123r2a6am56431yg17n8rz6grz0ym6",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+  "yidunGetLib": "https://example.com/captcha/b/v3//static/load.min.js",
+  "yidunApiServerSubdomain": "csc-captcha-example.com",
+  "challenge": "abc55382321547556267884cc3ba57c3d8a7c14f541fd9c6a7f1ce3173d3b9a1",
+  "hcg": "9a217825f3dcfac3d34e551e93819d610dec931e5e2a2236edf0e1f3f320c191",
+  "hct": 1751469954806
+}
+```
+
+</details>
+
+---
+## How to find `websiteURL` and `websiteKey`
+
+Open *Developer Tools*, activate the captcha, go to the **Network** tab, and find a request that starts with `get?referer=` or `check?referer=`. The value of *referer* is your `websiteURL`.
 
 ![](./images/yidun-task/websiteurl.png)
 
-Sometimes the `referer` in the URL is encoded, for example: *https%3A%2F%2Fid.example.com%2F*. To get a readable address, you need to decode it, for example, using the browser console:
+Sometimes, the `referer` is URL-encoded, such as: *https%3A%2F%2Fid.example.com%2F*. To decode it into a readable address, you can use the browser console:
 
 ![](./images/yidun-task/decode-websiteurl.png)
 
@@ -95,108 +262,28 @@ The value of *id* is the `websiteKey`.
 
 ![](./images/yidun-task/websitekey.png)
 
-## Create Task Method
+---
 
-<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-  <TabItem value="proxyless" label="YidunTask (proxyless)" default className="method-panel">
-    <MethodItem>
-      ```http
-      https://api.capmonster.cloud/createTask
-      ```
-    </MethodItem>
-    <MethodDescription>
+**For Yidun Enterprise:**
 
-    **Request**
-    ```json
-    {
-      "clientKey": "API_KEY",
-      "task": {
-        "type": "YidunTask",
-        "websiteURL": "https://www.example.com",
-        "websiteKey": "6cw0f0485d5d46auacf9b735d20218a5",
-        "userAgent": "userAgentPlaceholder"
-      }
-    }
-    ```
+`websiteURL`, `websiteKey`, and `yidunApiServerSubdomain` can be found the same way as regular Yidun captcha - in requests starting with `get?referer=` or `check?referer=`
 
-    **Response**
-    ```json
-    {
-      "errorId": 0,
-      "taskId": 407533077
-    }
-    ```
-    </MethodDescription>
-  </TabItem>
+![](./images/yidun-task/business_yidun2.png)
 
-  <TabItem value="proxy" label="YidunTask (with proxy)" default className="method-panel">
-    <MethodItem>
-      ```http
-      https://api.capmonster.cloud/createTask
-      ```
-    </MethodItem>
-    <MethodDescription>
+---
 
-    **Request**
-    ```json
-    {
-      "clientKey": "API_KEY",
-      "task": {
-        "type": "YidunTask",
-        "websiteURL": "https://www.example.com",
-        "websiteKey": "6cw0f0485d5d46auacf9b735d20218a5",
-        "userAgent": "userAgentPlaceholder",
-        "proxyType": "http",
-        "proxyAddress": "8.8.8.8",
-        "proxyPort": 8080,
-        "proxyLogin": "proxyLoginHere",
-        "proxyPassword": "proxyPasswordHere"
-      }
-    }
-    ```
+**`yidunGetLib`**
 
-    **Response**
-    ```json
-    {
-      "errorId": 0,
-      "taskId": 407533077
-    }
-    ```
-    </MethodDescription>
-  </TabItem>
-</Tabs>
+This is the path to the JavaScript file responsible for loading the captcha on the page.
+You can find it in the network tab - it’s usually named something like `load.min.js`.
 
-## Get Task Result Method
+![](./images/yidun-task/business_yidun.png)
 
-Use the [getTaskResult](../api/methods/get-task-result.md) method to retrieve the solution for the Yidun CAPTCHA.
+---
 
-<TabItem value="proxyless" label="CustomTask (proxyless)" default className="method-panel-full">
-  <MethodItem>
-    ```http
-    https://api.capmonster.cloud/getTaskResult
-    ```
-  </MethodItem>
-  <MethodDescription>
+**`challenge`**, **`hcg`**, **`hct`**
 
-  **Request**
-  ```json
-  {
-    "clientKey": "API_KEY",
-    "taskId": 407533077
-  }
-  ```
+All these parameters can be found in network requests. Typically, the relevant request starts with `cscPreprocess?reflushCode=`.
 
-  **Response**
-  ```json
-  {
-    "errorId": 0,
-    "errorCode": null,
-    "errorDescription": null,
-    "solution": {
-      "token": "CN31_9AwsPmaYcJameP_09rA0vkVMQsPij...RXTlFJFc3"
-    },
-    "status": "ready"
-  }
-  ```
-  </MethodDescription>
-</TabItem>
+![](./images/yidun-task/business_yidun1.png)
+
