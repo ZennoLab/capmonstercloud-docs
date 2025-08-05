@@ -1,6 +1,8 @@
+import { useLocation } from '@docusaurus/router';
 import { useEffect } from 'react';
 
 export function useReplaceUserAgent(): void {
+  const location = useLocation();
   useEffect(() => {
     async function updateUserAgent() {
       try {
@@ -30,5 +32,5 @@ export function useReplaceUserAgent(): void {
     }
 
     updateUserAgent();
-  }, []);
+  }, [location.pathname]);
 }
