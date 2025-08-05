@@ -12,7 +12,7 @@ export const useFetchPriceRate = () => {
   const fetchPriceRate = async () => {
     setLoading(true);
     try {
-      const response = await fetch('https://capmonster.cloud/currency/rate?from=usd&to=rub', {
+      const response = await fetch('https://dash.capmonster.cloud/currency/rate?from=usd&to=rub', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
