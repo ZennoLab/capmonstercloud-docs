@@ -10,7 +10,7 @@ export const useFetchPrices = () => {
   const fetchPrices = async () => {
     setLoading(true);
     try {
-      const response = await fetch('https://capmonster.cloud/api/prices?all=true');
+      const response = await fetch('https://dash.capmonster.cloud/api/prices?all=true');
       if (!response.ok) {
         throw new Error('Failed to fetch prices');
       }
