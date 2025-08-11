@@ -61,7 +61,7 @@ Você excedeu o limite de requisições com chave de API incorreta. Verifique a 
 
 ### `INCORRECT METHOD`
 Código de erro na API: `ERROR_NO_SUCH_METHOD` <br />
-Tipo de tarefa incorreto (parâmetro *type*). Verifique a lista de [tipos de captcha suportados](../captchas) (valor do parâmetro *type*).
+Tipo de tarefa incorreto (parâmetro *type*). Verifique a lista de [tipos de captcha suportados](https://docs.capmonster.cloud/pt-br/docs/captchas/) (valor do parâmetro *type*).
 
 ### `REQUEST LIMIT EXCEEDED`
 Código de erro na API: `ERROR_TOO_MUCH_REQUESTS` <br />

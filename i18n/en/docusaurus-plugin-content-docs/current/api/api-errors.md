@@ -61,7 +61,7 @@ You have exceeded the request limit with an incorrect API key. Check the key in 
 
 ### `INCORRECT METHOD`
 API error code: `ERROR_NO_SUCH_METHOD` <br />
-An incorrect task type (parameter *type*) is specified. Check the list of supported [captcha types](../captchas) (parameter type value).
+An incorrect task type (parameter *type*) is specified. Check the list of supported [captcha types](https://docs.capmonster.cloud/docs/captchas/) (parameter type value).
 
 ### `REQUEST LIMIT EXCEEDED`
 API error code: `ERROR_TOO_MUCH_REQUESTS` <br />
