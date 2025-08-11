@@ -61,7 +61,7 @@ API 错误代码: `ERROR_IP_BANNED` <br />
 
 ### `INCORRECT METHOD`
 API 错误代码: `ERROR_NO_SUCH_METHOD` <br />
-任务类型（参数 *type*）不正确。请检查支持的[验证码类型列表](../captchas)（参数 *type* 的值）。
+任务类型（参数 *type*）不正确。请检查支持的[验证码类型列表](https://docs.capmonster.cloud/zh/docs/captchas/)（参数 *type* 的值）。
 
 ### `REQUEST LIMIT EXCEEDED`
 API 错误代码: `ERROR_TOO_MUCH_REQUESTS` <br />
