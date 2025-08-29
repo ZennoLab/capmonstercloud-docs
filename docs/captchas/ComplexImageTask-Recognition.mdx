@@ -1087,65 +1087,104 @@ run();
 
 ## Используйте библиотеку SDK
 
-    <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-    	<TabItem value="js" label="JavaScript" default className="method-panel">
-    		```js
-    		// https://github.com/ZennoLab/capmonstercloud-client-js
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 
-    		import { CapMonsterCloudClientFactory, ClientOptions, ComplexImageTaskRecognitionRequest } from '@zennolab_com/capmonstercloud-client';
+  <TabItem value="js" label="JavaScript" default className="method-panel">
 
-    		document.addEventListener('DOMContentLoaded', async () => {
-    			const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
-    			console.log(await cmcClient.getBalance());
+  ```js
+  // https://github.com/ZennoLab/capmonstercloud-client-js
 
-    			const citRecognitionRequest = new ComplexImageTaskRecognitionRequest({
-    				imagesBase64: ['/9xwee/'],
-    				metaData: { Task: 'oocl_rotate' },
-    			});
+  import { CapMonsterCloudClientFactory, ClientOptions, ComplexImageTaskRecognitionRequest } from '@zennolab_com/capmonstercloud-client';
 
-    			console.log(await cmcClient.Solve(citRecognitionRequest));
-    		});
-    		```
-    	</TabItem>
+  document.addEventListener('DOMContentLoaded', async () => {
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+      new ClientOptions({ clientKey: '<your capmonster.cloud API key>' })
+    );
+    console.log(await cmcClient.getBalance());
 
-    	<TabItem value="csharp" label="C#" className="method-panel">
-    		```csharp
-    		// https://github.com/ZennoLab/capmonstercloud-client-dotnet
+    const citRecognitionRequest = new ComplexImageTaskRecognitionRequest({
+      imagesBase64: ['/9xwee/'], // Изображение в формате base64
+      metaData: { Task: 'oocl_rotate' },
+    });
 
-    		using Zennolab.CapMonsterCloud.Requests;
-    		using Zennolab.CapMonsterCloud;
+    console.log(await cmcClient.Solve(citRecognitionRequest));
+  });
+````
 
-    		class Program
-    		{
-    			static async Task MainComplexImageTaskRecognition(string[] args)
-    			{
-    				var clientOptions = new ClientOptions
-    				{
-    					ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
-    				};
+  </TabItem>
 
-    				var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+  <TabItem value="python" label="Python" className="method-panel">
 
-    				var recognitionCITRequest = new RecognitionComplexImageTaskRequest
-    				{
-    					ImagesBase64 = new List<string>
-    					{
-    						"/9j/4AAQSkZJRgABAQEAAAAAAAD…"
-    					},
-    					Metadata = new RecognitionComplexImageTaskRequest.RecognitionMetadata
-    					{
-    						Task = "oocl_rotate_new"
-    					}
-    				};
+```python
+# https://github.com/ZennoLab/capmonstercloud-client-python
 
-    				var recognitionCITResult = await cmCloudClient.SolveAsync(recognitionCITRequest);
+import asyncio
+from capmonstercloudclient import CapMonsterClient, ClientOptions
+from capmonstercloudclient.requests import RecognitionComplexImageTaskRequest
 
-    				if(recognitionCITResult.Solution.Answer.IsGrid)
-    					Console.WriteLine("Captcha Solution: " + recognitionCITResult.Solution.Answer.GridAnswer);
-    				else if (recognitionCITResult.Solution.Answer.IsNumeric)
-    					Console.WriteLine("Captcha Solution: " + recognitionCITResult.Solution.Answer.NumericAnswer);
-    			}
-    		}
-    		```
-    	</TabItem>
-    </Tabs>
+# Ваш API-ключ CapMonster Cloud
+client_options = ClientOptions(api_key="your_api_key")  # Ваш API-ключ CapMonster Cloud
+cap_monster_client = CapMonsterClient(options=client_options)
+
+complexImage_request = RecognitionComplexImageTaskRequest(
+    imagesBase64=[
+        "/9xwee/"  # изображение в формате base64
+    ],
+    metadata={"Task": "oocl_rotate"}
+)
+
+async def solve_captcha():
+    solution = await cap_monster_client.solve_captcha(complexImage_request)
+    return solution
+
+responses = asyncio.run(solve_captcha())
+print(responses)
+```
+
+  <BlogLink url="https://capmonster.cloud/ru/blog/re-1/python-recaptcha-v2"/>
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+
+```csharp
+// https://github.com/ZennoLab/capmonstercloud-client-dotnet
+
+using Zennolab.CapMonsterCloud.Requests;
+using Zennolab.CapMonsterCloud;
+
+class Program
+{
+    static async Task MainComplexImageTaskRecognition(string[] args)
+    {
+        var clientOptions = new ClientOptions
+        {
+            ClientKey = "your_api_key" // Ваш API-ключ CapMonster Cloud 
+        };
+
+        var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+        var recognitionCITRequest = new RecognitionComplexImageTaskRequest
+        {
+            ImagesBase64 = new List<string>
+            {
+                "/9j/4AAQSkZJRgABAQEAAAAAAAD…" // Изображение в формате base64
+            },
+            Metadata = new RecognitionComplexImageTaskRequest.RecognitionMetadata
+            {
+                Task = "oocl_rotate_new"
+            }
+        };
+
+        var recognitionCITResult = await cmCloudClient.SolveAsync(recognitionCITRequest);
+
+        if(recognitionCITResult.Solution.Answer.IsGrid)
+            Console.WriteLine("Captcha Solution: " + recognitionCITResult.Solution.Answer.GridAnswer);
+        else if (recognitionCITResult.Solution.Answer.IsNumeric)
+            Console.WriteLine("Captcha Solution: " + recognitionCITResult.Solution.Answer.NumericAnswer);
+    }
+}
+```
+
+  </TabItem>
+
+</Tabs>

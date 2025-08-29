@@ -19,7 +19,31 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
   <PriceBlock title="Yidun task" captchaId="yidun"/>
 </PriceBlockWrap>
 
-![](./images/yidun-task/yidun-captcha.png)
+## Examples of tasks
+
+<Tabs className="full-width-tabs">
+  <TabItem value="jigsaw" label="Jigsaw" default>
+    ![](./images/yidun-task/jigsaw.png)
+  </TabItem>
+  <TabItem value="picture-click" label="Picture-click">
+    ![](./images/yidun-task/picture-click.png)
+  </TabItem>
+  <TabItem value="avoid" label="Avoid">
+    ![](./images/yidun-task/avoid.png)
+  </TabItem>
+  <TabItem value="icon-click" label="Icon-click">
+    ![](./images/yidun-task/icon-click.png)
+  </TabItem>
+  <TabItem value="inference" label="Inference">
+    ![](./images/yidun-task/inference.png)
+  </TabItem>
+  <TabItem value="sense" label="Sense">
+    ![](./images/yidun-task/sense.png)
+  </TabItem>
+  <TabItem value="space-inference" label="Space-inference">
+    ![](./images/yidun-task/space-inference.png)
+  </TabItem>
+</Tabs>
 
 :::warning **Attention!**
 By default, CapMonster Cloud uses built-in proxy servers.  
@@ -287,3 +311,144 @@ All these parameters can be found in network requests. Typically, the relevant r
 
 ![](./images/yidun-task/business_yidun1.png)
 
+## Use the SDK Library
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+
+  ```js
+  // https://github.com/ZennoLab/capmonstercloud-client-js
+
+  import { CapMonsterCloudClientFactory, ClientOptions, YidunRequest } from '@zennolab_com/capmonstercloud-client';
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+      new ClientOptions({ clientKey: '<your capmonster.cloud API key>' })
+    );
+
+    console.log(await cmcClient.getBalance());
+
+    const yidunRequest = new YidunRequest({
+      websiteURL: 'https://www.example.com', // Page URL with captcha 
+      websiteKey: '6cw0f0485d5d46auacf9b735d20218a5', // Replace with correct value
+      userAgent: 'userAgentPlaceholder', // Use the current UserAgent
+      /*
+      // If you need to use a proxy:
+      proxy: {
+        type: 'http',
+        address: '127.0.0.1',
+        port: 8000,
+        login: 'user',
+        password: 'password'
+      }
+      */
+    });
+
+    console.log(await cmcClient.Solve(yidunRequest));
+  });
+````
+
+  </TabItem>
+
+  <TabItem value="python" label="Python" default className="method-panel">
+
+```python
+# https://github.com/ZennoLab/capmonstercloud-client-python
+
+import asyncio
+from capmonstercloudclient import CapMonsterClient, ClientOptions
+from capmonstercloudclient.requests import YidunRequest
+
+# Your CapMonster Cloud API key
+client_options = ClientOptions(api_key="API_KEY")
+cap_monster_client = CapMonsterClient(options=client_options)
+
+# Option 1: Without proxy
+yidun_request = YidunRequest(
+    websiteUrl="https://www.example.com", # Page URL with captcha 
+    websiteKey="6cw0f0485d5d46auacf9b735d20218a5", # Replace with correct value
+    userAgent="userAgentPlaceholder" # Use the current UserAgent
+)
+
+# Option 2: With proxy
+# Uncomment if you need to use a proxy
+# yidun_request = YidunRequest(
+#     websiteUrl="https://www.example.com",
+#     websiteKey="6cw0f0485d5d46auacf9b735d20218a5",
+#     userAgent="userAgentPlaceholder",
+#     proxyType="http",
+#     proxyAddress="123.45.67.89",
+#     proxyPort=8080,
+#     proxyLogin="proxyUser",
+#     proxyPassword="proxyPass"
+# )
+
+async def solve_captcha():
+    return await cap_monster_client.solve_captcha(yidun_request)
+
+responses = asyncio.run(solve_captcha())
+print(responses)
+```
+
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+
+```csharp
+// https://github.com/ZennoLab/capmonstercloud-client-dotnet
+
+using System;
+using System.Threading.Tasks;
+using Zennolab.CapMonsterCloud;
+using Zennolab.CapMonsterCloud.Requests;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        // Your CapMonster Cloud API key
+        var clientOptions = new ClientOptions
+        {
+            ClientKey = "your_api_key" // Your CapMonster Cloud API key
+        };
+
+        var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+        // Option 1: Yidun without proxy
+        var yidunRequest = new YidunTaskRequest
+        {
+            WebsiteUrl = "https://example.com", // Page URL with captcha 
+            WebsiteKey = "7ce0f0475b5d46acacf9b732a29218d9", // Replace with correct value
+            UserAgent = "userAgentPlaceholder" // Use the current UserAgent
+        };
+
+        // Option 2: Yidun with proxy
+        // Uncomment if you need to use a proxy
+        /*
+        var yidunRequest = new YidunTaskRequest
+        {
+            WebsiteUrl = "https://example.com",
+            WebsiteKey = "6ce0f0475b5d46acacf9b732d29218d8",
+            UserAgent = "userAgentPlaceholder",
+
+            Proxy = new ProxyContainer(
+                "123.45.67.89",
+                8080,
+                ProxyType.Http,
+                "proxyLogin",
+                "proxyPassword"
+            )
+        };
+        */
+
+        var yidunResult = await cmCloudClient.SolveAsync(yidunRequest);
+
+        Console.WriteLine("Yidun Solution: " + yidunResult.Solution.Value);
+    }
+}
+```
+
+  </TabItem>
+
+</Tabs>

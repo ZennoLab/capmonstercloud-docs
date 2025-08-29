@@ -74,7 +74,7 @@ ReCaptcha3, в отличие от ReCaptcha2, не требует от посе
 			"type":"RecaptchaV3TaskProxyless",
 			"websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta",
 			"websiteKey":"6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",
-			"minScore": 0.3,
+			"minScore": 0.3, 
 			"pageAction": "myverify"
 		  }
 		}
@@ -91,6 +91,11 @@ ReCaptcha3, в отличие от ReCaptcha2, не требует от посе
 
 
 ## Метод получения результата задачи
+
+:::warning **Внимание!**
+На некоторых сайтах важно, чтобы UserAgent совпадал с тем, что использовался при решении капчи. Поэтому, если вместе с токеном CapMonster Cloud возвращает UserAgent, **обязательно** применяйте его при отправке формы или подтверждении решения на целевой странице.
+:::
+
 Используйте метод [getTaskResult](../api/methods/get-task-result.md), чтобы получить решение ReCaptcha3. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 10 с до 30 с.
 
 <TabItem value="proxyless" label="RecaptchaV3TaskProxyless (без прокси)" default className="method-panel-full">
@@ -114,6 +119,20 @@ ReCaptcha3, в отличие от ReCaptcha2, не требует от посе
 		  "status":"ready",
 		  "solution": {
 			"gRecaptchaResponse":"3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
+		  }
+		}
+		```
+
+    Для некоторых сайтов ответ может быть примерно такой (применяйте полученный UserAgent при подтверждении решения):
+ 
+		```json
+		{
+		  "errorId":0,
+		  "status":"ready",
+		  "solution": {
+			"userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36", 
+                "gRecaptchaResponse": "0cAFcWeA5Y3...hF8UWA", 
+                "cookies": {"nocookies": "true"}}"
 		  }
 		}
 		```
@@ -407,90 +426,104 @@ ReCaptcha3, в отличие от ReCaptcha2, не требует от посе
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">
-    ```js
-    // https://github.com/ZennoLab/capmonstercloud-client-js
-
-    import { CapMonsterCloudClientFactory, ClientOptions, RecaptchaV3ProxylessRequest } from '@zennolab_com/capmonstercloud-client';
-
-    document.addEventListener('DOMContentLoaded', async () => {
-      const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
-      console.log(await cmcClient.getBalance());
-
-      const recaptchaV3Request = new RecaptchaV3ProxylessRequest({
-        websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high',
-        websiteKey: '6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd',
-        minScore: 0.6,
-        pageAction: 'some-action',
-      });
-
-      console.log(await cmcClient.Solve(recaptchaV3Request));
-    });
-    ```
-	<BlogLink url="https://capmonster.cloud/ru/blog/re-1/javascript-recaptcha-v3"/>
-	
-  </TabItem>
   
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { 
+  CapMonsterCloudClientFactory, 
+  ClientOptions, 
+  RecaptchaV3ProxylessRequest 
+} from '@zennolab_com/capmonstercloud-client';
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const cmcClient = CapMonsterCloudClientFactory.Create(
+    new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }) // Ваш API-ключ CapMonster Cloud
+  );
+
+  console.log(await cmcClient.getBalance());
+
+  const recaptchaV3Request = new RecaptchaV3ProxylessRequest({
+    websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high', // URL страницы с капчей
+    websiteKey: '6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd', // Замените на корректное значение
+    minScore: 0.6, 
+    pageAction: 'some-action', 
+  });
+
+  console.log(await cmcClient.Solve(recaptchaV3Request));
+});
+````
+
+<BlogLink url="https://capmonster.cloud/ru/blog/re-1/javascript-recaptcha-v3"/>
+
+  </TabItem>
+
   <TabItem value="python" label="Python" className="method-panel">
-    ```python
-    # https://github.com/Zennolab/capmonstercloud-client-python
 
-    import asyncio
-    from capmonstercloudclient import CapMonsterClient, ClientOptions
-    from capmonstercloudclient.requests import RecaptchaV3ProxylessRequest
+```python
+# https://github.com/Zennolab/capmonstercloud-client-python
 
-    client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonster Cloud API key
-    cap_monster_client = CapMonsterClient(options=client_options)
+import asyncio
+from capmonstercloudclient import CapMonsterClient, ClientOptions
+from capmonstercloudclient.requests import RecaptchaV3ProxylessRequest
 
-    recaptcha_v3_request = RecaptchaV3ProxylessRequest(
-        websiteUrl="https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta",  # URL with captcha
-        websiteKey="6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",  # Replace with the correct website key
-        minScore=0.6,
-        pageAction="myverify"
-    )
+client_options = ClientOptions(api_key="your_api_key")  # Ваш API-ключ CapMonster Cloud
+cap_monster_client = CapMonsterClient(options=client_options)
 
-    async def solve_captcha():
-        return await cap_monster_client.solve_captcha(recaptcha_v3_request)
+recaptcha_v3_request = RecaptchaV3ProxylessRequest(
+    websiteUrl="https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta",  # URL страницы с капчей
+    websiteKey="6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",  # Замените на корректное значение
+    minScore=0.6,  
+    pageAction="myverify"  
+)
 
-    responses = asyncio.run(solve_captcha())
-    print(responses)
-    ```
-	<BlogLink url="https://capmonster.cloud/ru/blog/re-1/python-recaptcha-v3"/>
-	
+async def solve_captcha():
+    return await cap_monster_client.solve_captcha(recaptcha_v3_request)
+
+responses = asyncio.run(solve_captcha())
+print(responses)
+```
+
+<BlogLink url="https://capmonster.cloud/ru/blog/re-1/python-recaptcha-v3"/>
+
   </TabItem>
 
   <TabItem value="csharp" label="C#" className="method-panel">
-    ```csharp
-    // https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
-    using Zennolab.CapMonsterCloud.Requests;
-    using Zennolab.CapMonsterCloud;
+```csharp
+// https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
-    class Program
+using Zennolab.CapMonsterCloud.Requests;
+using Zennolab.CapMonsterCloud;
+
+class Program
+{
+    static async Task Main(string[] args)
     {
-        static async Task Main(string[] args)
+        var clientOptions = new ClientOptions
         {
-            var clientOptions = new ClientOptions
-            {
-                ClientKey = "your_api_key"  // Replace with your CapMonster Cloud API key
-            };
+            ClientKey = "your_api_key"  // Ваш API-ключ CapMonster Cloud
+        };
 
-            var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+        var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
-            var recaptchaV3Request = new RecaptchaV3ProxylessRequest
-            {
-                WebsiteUrl = "https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta",  // URL with captcha
-                WebsiteKey = "6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",  // Replace with the correct website key
-                MinScore = 0.6,
-                PageAction = "myverify"
-            };
+        var recaptchaV3Request = new RecaptchaV3ProxylessRequest
+        {
+            WebsiteUrl = "https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta",  // URL страницы с капчей
+            WebsiteKey = "6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",  // Замените на корректное значение
+            MinScore = 0.6, 
+            PageAction = "myverify"
+        };
 
-            var recaptchaV3Result = await cmCloudClient.SolveAsync(recaptchaV3Request);
+        var recaptchaV3Result = await cmCloudClient.SolveAsync(recaptchaV3Request);
 
-            Console.WriteLine("Captcha Solution: " + recaptchaV3Result.Solution.Value);
-        }
+        Console.WriteLine("Решение капчи: " + recaptchaV3Result.Solution.Value);
     }
-    ```
-	<BlogLink url="https://capmonster.cloud/ru/blog/re-1/c-recaptcha-v3"/>
-	
+}
+```
+
+<BlogLink url="https://capmonster.cloud/ru/blog/re-1/c-recaptcha-v3"/>
+
   </TabItem>
 </Tabs>
+

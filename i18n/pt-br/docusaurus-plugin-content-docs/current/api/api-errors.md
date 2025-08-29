@@ -7,8 +7,7 @@ description: "Códigos de erro da API ao reconhecer captchas, causas e recomenda
 
 # Descrição dos erros
 
-:::info 
-Recomendações para evitar erros:
+:::info Recomendações para evitar erros:
 - Certifique-se de que o tipo de captcha que você precisa resolver é suportado pelo serviço CapMonster Cloud. Se esse tipo de captcha não for suportado, por favor, escreva para nós — consideraremos a possibilidade de adicioná-lo.
 - Verifique regularmente as atualizações da documentação para estar ciente das últimas mudanças na API e evitar o uso de métodos ou parâmetros obsoletos.
 - Use proxies de alta qualidade.
