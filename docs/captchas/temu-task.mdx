@@ -235,3 +235,150 @@ import BlogLink from '@theme/BlogLink';
     </details>
   </TabItem>
 </Tabs>
+
+## Используйте библиотеку SDK
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+
+  ```js
+  // https://github.com/ZennoLab/capmonstercloud-client-js
+
+  import { CapMonsterCloudClientFactory, ClientOptions, TemuRequest } from '@zennolab_com/capmonstercloud-client';
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+      new ClientOptions({ clientKey: '<your capmonster.cloud API key>' })
+    );
+
+    console.log(await cmcClient.getBalance());
+
+    const temuRequest = new TemuRequest({
+      class: 'Temu',
+      websiteURL: 'https://www.example.com/bgn_verification.html?verifyCode=', // URL страницы с капчей
+      userAgent: 'userAgentPlaceholder', // Используйте актуальный UserAgent
+      metadata: {
+        cookie: 'region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab'
+      },
+      /*
+      // Если нужно использовать прокси:
+      proxy: {
+        type: 'http',
+        address: '127.0.0.1',
+        port: 8000,
+        login: 'user',
+        password: 'password'
+      }
+      */
+    });
+
+    console.log(await cmcClient.Solve(temuRequest));
+  });
+````
+
+  </TabItem>
+
+  <TabItem value="python" label="Python" default className="method-panel">
+
+```python
+# https://github.com/ZennoLab/capmonstercloud-client-python
+
+import asyncio
+from capmonstercloudclient import CapMonsterClient, ClientOptions
+from capmonstercloudclient.requests import TemuCustomTaskRequest
+
+client_options = ClientOptions(api_key="API_KEY")  # Ваш API-ключ CapMonster Cloud
+cap_monster_client = CapMonsterClient(options=client_options)
+
+# Вариант 1: Без прокси
+temu_request = TemuCustomTaskRequest(
+    websiteUrl="https://www.example.com/bgn_verification.html?verifyCode=",
+    userAgent="userAgentPlaceholder",  # Используйте актуальный UserAgent
+    metadata={
+        "cookie": "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab"
+    }
+)
+
+# Вариант 2: С прокси
+# Раскомментируйте, если нужно использовать прокси
+# temu_request = TemuCustomTaskRequest(
+#     websiteUrl="https://www.example.com/bgn_verification.html?verifyCode=",
+#     userAgent="userAgentPlaceholder",
+#     metadata={ "cookie": "..." },
+#     proxyType="http",
+#     proxyAddress="123.45.67.89",
+#     proxyPort=8080,
+#     proxyLogin="proxyUser",
+#     proxyPassword="proxyPass"
+# )
+
+async def solve_captcha():
+    return await cap_monster_client.solve_captcha(temu_request)
+
+responses = asyncio.run(solve_captcha())
+print(responses)
+```
+
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+
+```csharp
+// https://github.com/ZennoLab/capmonstercloud-client-dotnet
+
+using System;
+using System.Threading.Tasks;
+using Zennolab.CapMonsterCloud;
+using Zennolab.CapMonsterCloud.Requests;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        // Ваш API-ключ от CapMonster Cloud
+        var clientOptions = new ClientOptions
+        {
+            ClientKey = "your_api_key" // Ваш API-ключ CapMonster Cloud
+        };
+
+        var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+        // Вариант 1: Temu без прокси
+        var temuRequest = new TemuCustomTaskRequest(
+            cookie: "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab"
+        )
+        {
+            WebsiteUrl = "https://www.example.com/bgn_verification.html?verifyCode=", // URL страницы с капчей
+            UserAgent = "userAgentPlaceholder"
+        };
+
+        // Вариант 2: Temu с прокси
+        // Раскомментируйте, если нужно использовать прокси
+        /*
+        var temuRequest = new TemuCustomTaskRequest(
+            cookie: "...long cookie..."
+        )
+        {
+            WebsiteUrl = "https://www.example.com/bgn_verification.html?verifyCode=",
+            UserAgent = "userAgentPlaceholder",
+            Proxy = new ProxyContainer(
+                "123.45.67.89",
+                8080,
+                ProxyType.Http,
+                "proxyLogin",
+                "proxyPassword"
+            )
+        };
+        */
+
+        var temuResult = await cmCloudClient.SolveAsync(temuRequest);
+
+        Console.WriteLine("Temu Solution: " + temuResult.Solution.Domains);
+    }
+}
+```
+
+  </TabItem>
+
+</Tabs>

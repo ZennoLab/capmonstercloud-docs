@@ -278,88 +278,172 @@ Os trechos de código fornecidos são exemplos básicos para familiarização co
 
 ## Usar biblioteca SDK
 
-	<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-		<TabItem value="js" label="JavaScript" default className="method-panel">
-			```js
-			// https://github.com/ZennoLab/capmonstercloud-client-js
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 
-			import { CapMonsterCloudClientFactory, ClientOptions, ImpervaRequest } from '@zennolab_com/capmonstercloud-client';
+  <TabItem value="js" label="JavaScript" default className="method-panel">
 
-			document.addEventListener('DOMContentLoaded', async () => {
-				const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
-				console.log(await cmcClient.getBalance());
+  ```js
+  // https://github.com/ZennoLab/capmonstercloud-client-js
 
-				const impervaRequest = new ImpervaRequest({
-					websiteURL: 'https://example.com',
-					metadata: {
-						"incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3",
-						"incapsulaCookies": "incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;",
-					},
-				});
+  import { CapMonsterCloudClientFactory, ClientOptions, ImpervaRequest } from '@zennolab_com/capmonstercloud-client';
 
-				console.log(await cmcClient.Solve(impervaRequest));
-			});
-			```
-		</TabItem>
-		
-		<TabItem value="python" label="Python" default className="method-panel">
-			```python
-			# https://github.com/ZennoLab/capmonstercloud-client-python
-	 
-			import asyncio
-			from capmonstercloudclient import CapMonsterClient, ClientOptions
-			from capmonstercloudclient.requests import ImpervaCustomTaskProxylessRequest
-	 
-			client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonster Cloud API key
-			cap_monster_client = CapMonsterClient(options=client_options)
-	 
-			imperva_request = ImpervaCustomTaskProxylessRequest(
-				websiteUrl="https://example.com",  # URL with captcha
-				userAgent="userAgentPlaceholder",
-				metadata={
-					"incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3",
-					"incapsulaCookies": "incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;",
-					"reese84UrlEndpoint": "Built-with-the-For-hopence-Hurleysurfecting-the-"
-				},
-			)
-	 
-			async def solve_captcha():
-				return await cap_monster_client.solve_captcha(imperva_request)
-	 
-			responses = asyncio.run(solve_captcha())
-			print(responses)
-			```
-		</TabItem>
-		
-		<TabItem value="csharp" label="C#" className="method-panel">
-			```csharp
-			// https://github.com/ZennoLab/capmonstercloud-client-dotnet
+  document.addEventListener('DOMContentLoaded', async () => {
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+      new ClientOptions({ clientKey: '<sua chave API do capmonster.cloud>' })
+    );
 
-			using Zennolab.CapMonsterCloud.Requests;
-			using Zennolab.CapMonsterCloud;
+    console.log('Saldo:', await cmcClient.getBalance());
 
-			class Program
-			{
-				static async Task MainImperva(string[] args)
-				{
-					var clientOptions = new ClientOptions
-					{
-						ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
-					};
+    // Opção 1: sem proxy
+    const impervaRequest = new ImpervaRequest({
+      websiteURL: 'https://example.com', // URL da página com captcha
+      metadata: {
+        incapsulaScriptUrl: '_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3',
+        incapsulaCookies: 'incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;',
+      },
+    });
 
-					var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+    // Opção 2: com proxy (descomente se necessário)
+    /*
+    const impervaRequest = new ImpervaRequest({
+      websiteURL: 'https://example.com',
+      metadata: {
+        incapsulaScriptUrl: '_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3',
+        incapsulaCookies: 'incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;',
+      },
+      proxy: {
+        type: 'http',
+        address: '127.0.0.1',     
+        port: 8080,               
+        login: 'usuarioProxy',       
+        password: 'senhaProxy'     
+      }
+    });
+    */
 
-					var impervaRequest = new ImpervaCustomTaskRequest("incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3", "incapsulaCookies": "incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;", reese84UrlEndpoint: "Built-with-the-For-hopence-Hurleysurfecting-the-")
-					{
-						WebsiteUrl = "https://example.com",
-						UserAgent = "userAgentPlaceholder", // Use the current userAgent
-					};
+    const result = await cmcClient.Solve(impervaRequest);
+    console.log('Solução do Captcha:', result);
+  });
+````
 
-					var impervaResult = await cmCloudClient.SolveAsync(impervaRequest);
+  </TabItem>
 
-					Console.WriteLine("Captcha Solution: " + JsonSerializer.Serialize(impervaResult.Solution));
-				}
-			}
-			```
-		</TabItem>
-	</Tabs>
+  <TabItem value="python" label="Python" className="method-panel">
+
+```python
+# https://github.com/ZennoLab/capmonstercloud-client-python
+
+import asyncio
+from capmonstercloudclient import CapMonsterClient, ClientOptions
+from capmonstercloudclient.requests import ImpervaCustomTaskRequest
+
+# Sua chave API do CapMonster Cloud
+client_options = ClientOptions(api_key="sua_chave_api")  # Sua chave API do CapMonster Cloud
+cap_monster_client = CapMonsterClient(options=client_options)
+
+# Opção 1: sem proxy
+imperva_request = ImpervaCustomTaskRequest(
+    websiteUrl="https://example.com",   # URL da página com captcha
+    userAgent="userAgentPlaceholder",   # Use o UserAgent atual
+    metadata={
+        "incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3",
+        "incapsulaCookie": "incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;",
+        "reese84UrlEndpoint": "Built-with-the-For-hopence-Hurleysurfecting-the-"
+    }
+)
+
+# Opção 2: com proxy (descomente se necessário)
+# imperva_request = ImpervaCustomTaskRequest(
+#     websiteUrl="https://example.com", 
+#     userAgent="userAgentPlaceholder",  
+#     metadata={
+#         "incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3",
+#         "incapsulaCookie": "incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;",
+#         "reese84UrlEndpoint": "Built-with-the-For-hopence-Hurleysurfecting-the-"
+#     },
+#     proxyType="http",                    
+#     proxyAddress="127.0.0.1",            
+#     proxyPort=8080,                      
+#     proxyLogin="usuario",                
+#     proxyPassword="senha"             
+# )
+
+async def solve_captcha():
+    return await cap_monster_client.solve_captcha(imperva_request)
+
+responses = asyncio.run(solve_captcha())
+print(responses)
+```
+
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+
+```csharp
+// https://github.com/ZennoLab/capmonstercloud-client-dotnet
+
+using System;
+using System.Text.Json;
+using System.Threading.Tasks;
+using Zennolab.CapMonsterCloud;
+using Zennolab.CapMonsterCloud.Requests;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        // Sua chave API do CapMonster Cloud
+        var clientOptions = new ClientOptions
+        {
+            ClientKey = "sua_chave_api" // Sua chave API do CapMonster Cloud
+        };
+
+        var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+        // Dados do Imperva
+        var incapsulaScriptBase64 = "base64_encoded_js_here";
+        var incapsulaSessionCookie = "incap_sess_*=seu_cookie_aqui";
+        var reese84UrlEndpoint = "seu_endpoint_reese84_aqui";
+
+        // Opção 1: sem proxy
+        var impervaRequest = new ImpervaCustomTaskRequest(
+            incapsulaScriptBase64,
+            incapsulaSessionCookie,
+            reese84UrlEndpoint
+        )
+        {
+            WebsiteUrl = "https://example.com",   // URL da página com captcha
+            UserAgent = "userAgentPlaceholder"    // Use o UserAgent atual
+        };
+
+        // Opção 2: com proxy (descomente se necessário)
+        /*
+        var impervaRequest = new ImpervaCustomTaskRequest(
+            incapsulaScriptBase64,
+            incapsulaSessionCookie,
+            reese84UrlEndpoint
+        )
+        {
+            WebsiteUrl = "https://example.com",
+            UserAgent = "userAgentPlaceholder",
+            Proxy = new ProxyContainer(
+                "123.123.123.123",   
+                8080,                
+                ProxyType.Http,      
+                "usuario_proxy",     
+                "senha_proxy"         
+            )
+        };
+        */
+
+        var impervaResult = await cmCloudClient.SolveAsync(impervaRequest);
+
+        Console.WriteLine("Solução Imperva: " + JsonSerializer.Serialize(impervaResult.Solution));
+    }
+}
+```
+
+  </TabItem>
+
+</Tabs>
+

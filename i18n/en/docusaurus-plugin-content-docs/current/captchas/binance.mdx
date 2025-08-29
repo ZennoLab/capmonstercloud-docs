@@ -238,105 +238,153 @@ Use the method [getTaskResult](../api/methods/get-task-result.md) to obtain the 
 	</MethodDescription>
 </TabItem>
 
-## Use SDK Library
+## Use the SDK library
 
-	<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-		<TabItem value="js" label="JavaScript" default className="method-panel">
-			```js
-			// https://github.com/ZennoLab/capmonstercloud-client-js
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 
-			import { CapMonsterCloudClientFactory, ClientOptions, BinanceRequest /*BinanceRequest*/ } from '@zennolab_com/capmonstercloud-client';
+  <TabItem value="js" label="JavaScript" default className="method-panel">
 
-			document.addEventListener('DOMContentLoaded', async () => {
-				const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
-				console.log(await cmcClient.getBalance());
-				
-				const binanceRequest = new BinanceRequest({
-					websiteURL: 'https://example.com',
-					websiteKey: 'websiteKey',
-					validateId: 'validateId',
-				});
+  ```js
+  // https://github.com/ZennoLab/capmonstercloud-client-js
 
-				// const binanceRequest = new BinanceRequest({
-				//  websiteURL: 'https://example.com',
-				//	websiteKey: 'websiteKey',
-				//	validateId: 'validateId',
-				//	proxyType: 'http',
-				//	proxyAddress: '8.8.8.8',
-				//	proxyPort: 8080,
-				//	proxyLogin: 'proxyLoginHere',
-				//	proxyPassword: 'proxyPasswordHere',
-				// });
+  import { CapMonsterCloudClientFactory, ClientOptions, BinanceRequest } from '@zennolab_com/capmonstercloud-client';
 
-				console.log(await cmcClient.Solve(binanceRequest));
-			});
-			```
-		</TabItem>
-		
-		<TabItem value="python" label="Python" default className="method-panel">
-			```python
-			# https://github.com/ZennoLab/capmonstercloud-client-python
-	 
-			import asyncio
-			from capmonstercloudclient import CapMonsterClient, ClientOptions
-			from capmonstercloudclient.requests import BinanceTaskRequest
-	 
-			client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonster Cloud API key
-			cap_monster_client = CapMonsterClient(options=client_options)
-	 
-			binance_request = BinanceTaskRequest(
-				websiteUrl="https://example.com",  # URL with captcha
-				websiteKey="login",
-				validateId="cb0bfefa598b4c3887661fde54ecd57b",
-				userAgent="userAgentPlaceholder",
-				proxyType="http",
-				proxyAddress="8.8.8.8",
-				proxyPort=8080,
-				proxyLogin="proxyLoginHere",
-				proxyPassword="proxyPasswordHere"
-			)
-	 
-			async def solve_captcha():
-				return await cap_monster_client.solve_captcha(binance_request)
-	 
-			responses = asyncio.run(solve_captcha())
-			print(responses)
-			```
-		</TabItem>
-		
-		<TabItem value="csharp" label="C#" className="method-panel">
-			```csharp
-			// https://github.com/ZennoLab/capmonstercloud-client-dotnet
+  document.addEventListener('DOMContentLoaded', async () => {
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+      new ClientOptions({ clientKey: '<your capmonster.cloud API key>' })
+    );
 
-			// BinanceTaskRequest:
+    console.log(await cmcClient.getBalance());
 
-			using Zennolab.CapMonsterCloud.Requests;
-			using Zennolab.CapMonsterCloud;
+    // Option 1: without proxy
+    const binanceRequest = new BinanceRequest({
+      websiteURL: 'https://example.com', // URL of the page with captcha
+      websiteKey: 'websiteKey',           // Replace with the correct value
+      validateId: 'validateId',
+    });
 
-			class Program
-			{
-				static async Task Main(string[] args)
-				{
-					var clientOptions = new ClientOptions
-					{
-						ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
-					};
+    // Option 2: with proxy
+    /*
+    const binanceRequest = new BinanceRequest({
+      websiteURL: 'https://example.com', 
+      websiteKey: 'websiteKey',          
+      validateId: 'validateId',
+      proxyType: 'http',
+      proxyAddress: '8.8.8.8',
+      proxyPort: 8080,
+      proxyLogin: 'proxyLoginHere',
+      proxyPassword: 'proxyPasswordHere',
+    });
+    */
 
-					var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+    console.log(await cmcClient.Solve(binanceRequest));
+  });
+````
 
-					var binanceRequest = new BinanceTaskRequest
-					{
-						WebsiteUrl = "https://example.com",
-						WebsiteKey = "login",
-						ValidateId = "cb0bfefa598b4c3887661fde54ecd57b",
-						UserAgent = "userAgentPlaceholder" // Use the current userAgent
-					};
+  </TabItem>
 
-					var binanceResult = await cmCloudClient.SolveAsync(binanceRequest);
+  <TabItem value="python" label="Python" default className="method-panel">
 
-					Console.WriteLine("Captcha Solution: " + binanceResult.Solution.Value);
-				}
-			}
-			```
-		</TabItem>
-	</Tabs>
+```python
+# https://github.com/ZennoLab/capmonstercloud-client-python
+
+import asyncio
+from capmonstercloudclient import CapMonsterClient, ClientOptions
+from capmonstercloudclient.requests import BinanceTaskRequest
+
+client_options = ClientOptions(api_key="your_api_key")  # Your CapMonster Cloud API key
+cap_monster_client = CapMonsterClient(options=client_options)
+
+# Option 1: Without proxy
+binance_request = BinanceTaskRequest(
+    websiteUrl="https://example.com",   # URL of the page with captcha
+    websiteKey="login",                 # Replace with the correct value
+    validateId="cb0bfefa598b4c3887661fde54ecd57b", 
+    userAgent="userAgentPlaceholder"    # Use the actual UserAgent
+)
+
+# Option 2: With proxy
+# Uncomment if you need to use a proxy
+
+# binance_request = BinanceTaskRequest(
+#     websiteUrl="https://example.com",
+#     websiteKey="login",
+#     validateId="cb0bfefa598b4c3887661fde54ecd57b",
+#     userAgent="userAgentPlaceholder",
+#     proxyType="http",
+#     proxyAddress="8.8.8.8",
+#     proxyPort=8080,
+#     proxyLogin="proxyLoginHere",
+#     proxyPassword="proxyPasswordHere"
+# )
+
+async def solve_captcha():
+    return await cap_monster_client.solve_captcha(binance_request)
+
+responses = asyncio.run(solve_captcha())
+print(responses)
+```
+
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+
+```csharp
+// https://github.com/ZennoLab/capmonstercloud-client-dotnet
+
+using System;
+using System.Threading.Tasks;
+using Zennolab.CapMonsterCloud;
+using Zennolab.CapMonsterCloud.Requests;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        // Your CapMonster Cloud API key
+        var clientOptions = new ClientOptions
+        {
+            ClientKey = "your_api_key" // Your CapMonster Cloud API key
+        };
+
+        var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+        // Option 1: Without proxy
+        var binanceRequest = new BinanceTaskRequest
+        {
+            WebsiteUrl = "https://example.com",               // URL of the page with captcha
+            WebsiteKey = "login",                             // Replace with the correct value
+            ValidateId = "cb0bfefa598b4c3887661fde54ecd57b",
+            UserAgent = "userAgentPlaceholder"                // Use the actual UserAgent
+        };
+
+        // Option 2: With proxy
+        // Uncomment if you need to use a proxy
+        /*
+        var binanceRequest = new BinanceTaskRequest
+        {
+            WebsiteUrl = "https://example.com",
+            WebsiteKey = "login",
+            ValidateId = "cb0bfefa598b4c3887661fde54ecd57b",
+            UserAgent = "userAgentPlaceholder",
+            Proxy = new ProxyContainer(
+                "123.45.67.89",
+                8080,
+                ProxyType.Http,
+                "proxyLogin",
+                "proxyPassword"
+            )
+        };
+        */
+
+        var binanceResult = await cmCloudClient.SolveAsync(binanceRequest);
+
+        Console.WriteLine("Captcha Solution: " + binanceResult.Solution.Value);
+    }
+}
+```
+
+  </TabItem>
+
+</Tabs>
+

@@ -311,7 +311,7 @@ loadAndEncodeCaptchaToBase64(captchaUrl);
       console.log(await cmcClient.getBalance());
 
       const imageToTextRequest = new ImageToTextRequest({
-        body: 'some base64 body',
+        body: 'some base64 body', // Замените на реальное значение
         CapMonsterModule: CapMonsterModules.YandexWave,
         Case: true,
         numeric: 1,
@@ -333,20 +333,20 @@ loadAndEncodeCaptchaToBase64(captchaUrl);
     from capmonstercloudclient import CapMonsterClient, ClientOptions
     from capmonstercloudclient.requests import ImageToTextRequest
 
-    client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonsterCloud API key
+    client_options = ClientOptions(api_key="your_api_key")  # Ваш API-ключ CapMonster Cloud
     cap_monster_client = CapMonsterClient(options=client_options)
 
-    image_base64 = "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgc…wwzqR4U/yZ//Z"
+    image_base64 = "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgc…wwzqR4U/yZ//Z" # Замените на реальное значение
 
     image_bytes = base64.b64decode(image_base64)
 
     image_to_text_request = ImageToTextRequest(
         image_bytes=image_bytes,
-        module_name=None,  # Optional, can specify a module name if needed
-        threshold=50,      # Optional, set a threshold value between 1 and 100
-        case=True,         # Optional, specify whether case sensitivity is required
-        numeric=0,         # Optional, set numeric flag (0 or 1)
-        math=False         # Optional, specify whether math operations are involved
+        module_name=None,
+        threshold=50,      
+        case=True,         
+        numeric=0,         
+        math=False         
     )
 
     async def solve_captcha():
@@ -370,17 +370,17 @@ loadAndEncodeCaptchaToBase64(captchaUrl);
         {
             var clientOptions = new ClientOptions
             {
-                ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
+                ClientKey = "your_api_key" // Ваш API-ключ CapMonster Cloud
             };
 
             var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
             var imageToTextRequest = new ImageToTextRequest
             {
-                Body = "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMj", // Base64 encoded image
-                CapMonsterModule = "None",  // Optional, can specify a module name if needed
-                RecognizingThreshold = 70, // Optional, set a threshold value between 1 and 100
-                CaseSensitive = true, // Optional, specify whether case sensitivity is required
+                Body = "/9j/4AAQSkZJRgABAQAAAQABA...hMjIyMjIyMjIyMjIyMj", // Замените на реальное значение
+                CapMonsterModule = "None",  
+                RecognizingThreshold = 70, 
+                CaseSensitive = true,
                 Numeric = false, 
                 Math = false
             };

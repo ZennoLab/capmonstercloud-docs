@@ -226,3 +226,154 @@ https://api.capmonster.cloud/getTaskResult
 默认值为 **%24**；若值不同（如 *..\&act=login&...*），请在创建任务时传入。
 
 ![](./images/mtcaptcha/mtcaptcha_act.png)
+
+## 使用 SDK 库
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+
+  ```js
+  // https://github.com/ZennoLab/capmonstercloud-client-js
+
+  import { CapMonsterCloudClientFactory, ClientOptions, MTCaptchaRequest } from '@zennolab_com/capmonstercloud-client';
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+      new ClientOptions({ clientKey: '<你的 capmonster.cloud API key>' })
+    );
+
+    console.log(await cmcClient.getBalance());
+
+    const mtcaptchaRequest = new MTCaptchaRequest({
+      websiteURL: 'https://www.example.com',     // 带验证码页面的 URL 
+      websiteKey: 'MTPublic-abCDEFJAB',          // 替换为正确值
+      isInvisible: false,                         // 如果验证码是隐形的，设置为 "true"
+      pageAction: 'login',
+      /*
+      // 如果需要使用代理:
+      proxy: {
+        type: 'http',
+        address: '127.0.0.1',
+        port: 8000,
+        login: 'user',
+        password: 'password'
+      }
+      */
+    });
+
+    console.log(await cmcClient.Solve(mtcaptchaRequest));
+  });
+````
+
+  </TabItem>
+
+  <TabItem value="python" label="Python" default className="method-panel">
+
+```python
+# https://github.com/ZennoLab/capmonstercloud-client-python
+
+import asyncio
+from capmonstercloudclient import CapMonsterClient, ClientOptions
+from capmonstercloudclient.requests import MTCaptchaRequest
+
+# 你的 CapMonster Cloud API key
+client_options = ClientOptions(api_key="API_KEY")
+cap_monster_client = CapMonsterClient(options=client_options)
+
+# 选项 1：不使用代理
+mtcaptcha_request = MTCaptchaRequest(
+    websiteUrl="https://www.example.com", # 带验证码页面的 URL 
+    websiteKey="MTPublic-abCDEFJAB", # 替换为正确值
+    isInvisible=False,   # 如果验证码是隐形的，设置为 True
+    pageAction="login"
+)
+
+# 选项 2：使用代理
+# 如果需要，请取消注释
+
+# mtcaptcha_request = MTCaptchaRequest(
+#     websiteUrl="https://www.example.com",
+#     websiteKey="MTPublic-abCDEFJAB",
+#     isInvisible=False,
+#     pageAction="login",
+#     proxyType="http",
+#     proxyAddress="123.45.67.89",
+#     proxyPort=8000,
+#     proxyLogin="proxyUser",
+#     proxyPassword="proxyPass"
+# )
+
+async def solve_captcha():
+    return await cap_monster_client.solve_captcha(mtcaptcha_request)
+
+responses = asyncio.run(solve_captcha())
+print(responses)
+```
+
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+
+```csharp
+// https://github.com/ZennoLab/capmonstercloud-client-dotnet
+
+using System;
+using System.Threading.Tasks;
+using Zennolab.CapMonsterCloud;
+using Zennolab.CapMonsterCloud.Requests;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        // 你的 CapMonster Cloud API key
+        var clientOptions = new ClientOptions
+        {
+            ClientKey = "your_api_key"
+        };
+
+        var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+        // 选项 1：MTCaptcha 不使用代理
+        var mtcaptchaRequest = new MTCaptchaTaskRequest
+        {
+            WebsiteUrl = "https://www.example.com", // 带验证码页面的 URL 
+            WebsiteKey = "MTPublic-tqNCRE0GS", // 替换为正确值
+            Invisible = false,  // 如果验证码是隐形的，设置为 True
+            PageAction = "login",
+            UserAgent = "userAgentPlaceholder" // 使用当前 UserAgent
+        };
+
+        // 选项 2：MTCaptcha 使用代理
+        // 如果需要，请取消注释
+        /*
+        var mtcaptchaRequest = new MTCaptchaTaskRequest
+        {
+            WebsiteUrl = "https://www.example.com",
+            WebsiteKey = "MTPublic-tqNCRE0GS",
+            Invisible = false,
+            PageAction = "login",
+            UserAgent = "userAgentPlaceholder",
+
+            Proxy = new ProxyContainer(
+                "123.45.67.89",
+                8080,
+                ProxyType.Http,
+                "proxyLogin",
+                "proxyPassword"
+            )
+        };
+        */
+
+        var mtcaptchaResult = await cmCloudClient.SolveAsync(mtcaptchaRequest);
+
+        Console.WriteLine("MTCaptcha 解决方案: " + mtcaptchaResult.Solution.Value);
+    }
+}
+```
+
+  </TabItem>
+
+</Tabs>
+

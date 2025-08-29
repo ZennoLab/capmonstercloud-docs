@@ -166,3 +166,141 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 		```
 	</MethodDescription>
 </TabItem>
+
+## 使用 SDK 库
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+
+  ```js
+  // https://github.com/ZennoLab/capmonstercloud-client-js
+
+  import { CapMonsterCloudClientFactory, ClientOptions, ProsopoRequest } from '@zennolab_com/capmonstercloud-client';
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+      new ClientOptions({ clientKey: '<你的 capmonster.cloud API key>' })
+    );
+
+    console.log(await cmcClient.getBalance());
+
+    const prosopoRequest = new ProsopoRequest({
+      websiteURL: 'https://www.example.com', // 带验证码页面的 URL 
+      websiteKey: '5EZU3LG31uzq1Mwi8inwqxmfvFDpj7VzwDnZwj4Q3syyxBwV' // 替换为正确值
+      /*
+      // 如果需要使用代理:
+      proxy: {
+        type: 'http',
+        address: '127.0.0.1',
+        port: 8000,
+        login: 'user',
+        password: 'password'
+      }
+      */
+    });
+
+    console.log(await cmcClient.Solve(prosopoRequest));
+  });
+````
+
+  </TabItem>
+
+  <TabItem value="python" label="Python" default className="method-panel">
+
+```python
+# https://github.com/ZennoLab/capmonstercloud-client-python
+
+import asyncio
+from capmonstercloudclient import CapMonsterClient, ClientOptions
+from capmonstercloudclient.requests import ProsopoTaskRequest
+
+# 你的 CapMonster Cloud API key
+client_options = ClientOptions(api_key="API_KEY")
+cap_monster_client = CapMonsterClient(options=client_options)
+
+# 选项 1：不使用代理
+prosopo_request = ProsopoTaskRequest(
+    websiteUrl="https://www.example.com",  # 带验证码页面的 URL 
+    websiteKey="5EZU3LG31uzq1Mwi8inwqxmfvFDpj7VzwDnZwj4Q3syyxBwV"  # 替换为正确值
+)
+
+# 选项 2：使用代理
+# 如果需要，请取消注释
+# prosopo_request = ProsopoTaskRequest(
+#     websiteUrl="https://www.example.com",
+#     websiteKey="5EZU3LG31uzq1Mwi8inwqxmfvFDpj7VzwDnZwj4Q3syyxBwV",
+#     proxyType="http",
+#     proxyAddress="123.45.67.89",
+#     proxyPort=8080,
+#     proxyLogin="proxyUser",
+#     proxyPassword="proxyPass"
+# )
+
+async def solve_captcha():
+    return await cap_monster_client.solve_captcha(prosopo_request)
+
+responses = asyncio.run(solve_captcha())
+print(responses)
+```
+
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+
+```csharp
+// https://github.com/ZennoLab/capmonstercloud-client-dotnet
+
+using System;
+using System.Text.Json;
+using System.Threading.Tasks;
+using Zennolab.CapMonsterCloud;
+using Zennolab.CapMonsterCloud.Requests;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        // 你的 CapMonster Cloud API key
+        var clientOptions = new ClientOptions
+        {
+            ClientKey = "your_api_key" // 你的 CapMonster Cloud API key
+        };
+
+        var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+        // 选项 1：不使用代理
+        var prosopoRequest = new ProsopoTaskRequest
+        {
+            WebsiteUrl = "https://example.com", // 带验证码页面的 URL 
+            WebsiteKey = "5DCKg3w9AvDW92uBzRWrvTiWsu573bTzYmFny8EkXQZxsBib" // 替换为正确值
+        };
+
+        // 选项 2：使用代理
+        // 如果需要，请取消注释
+        /*
+        var prosopoRequest = new ProsopoTaskRequest
+        {
+            WebsiteUrl = "https://www.example.com",
+            WebsiteKey = "5EZU3LG31uzq1Mwi8inwqxmfvFDpj7VzwDnZwj4Q3syyxBwV",
+            Proxy = new ProxyContainer(
+                "123.45.67.89",
+                8080,
+                ProxyType.Http,
+                "proxyLogin",
+                "proxyPassword"
+            )
+        };
+        */
+
+        var prosopoResult = await cmCloudClient.SolveAsync(prosopoRequest);
+
+        Console.WriteLine("Prosopo 解决方案: " + JsonSerializer.Serialize(prosopoResult.Solution.Value));
+    }
+}
+```
+
+  </TabItem>
+
+</Tabs>
+

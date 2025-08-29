@@ -496,7 +496,7 @@ The code snippets provided are basic examples for familiarization with extractin
   </TabItem>
 </Tabs>
 
-## Use SDK Library
+## Use the SDK Library
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">
@@ -506,17 +506,17 @@ The code snippets provided are basic examples for familiarization with extractin
     import { CapMonsterCloudClientFactory, ClientOptions, ComplexImageRecaptchaRequest } from '@zennolab_com/capmonstercloud-client';
 
     document.addEventListener('DOMContentLoaded', async () => {
-      const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+      const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' })); 
       console.log(await cmcClient.getBalance());
 
       const complexImageRecaptchaRequest = new ComplexImageRecaptchaRequest({
-        imageUrls: ['https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg'],
+        imageUrls: ['https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg'], // Replace with correct value
         metaData: {
-          Grid: '3x3',
+          Grid: '3x3', 
           Task: 'Please click each image containing a mountain',
           TaskDefinition: '/m/015qff',
         },
-        websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle',
+        websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle', // Page URL with captcha 
       });
 
       console.log(await cmcClient.Solve(complexImageRecaptchaRequest));
@@ -533,16 +533,16 @@ The code snippets provided are basic examples for familiarization with extractin
     from capmonstercloudclient import CapMonsterClient, ClientOptions
     from capmonstercloudclient.requests import RecaptchaComplexImageTaskRequest
 
-    client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonsterCloud API key
+    client_options = ClientOptions(api_key="your_api_key")  # Your CapMonster Cloud API key
     cap_monster_client = CapMonsterClient(options=client_options)
 
     complex_image_recaptcha_request = RecaptchaComplexImageTaskRequest(
-        imagesUrls=["https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg"],  # Replace with your values
+        imagesUrls=["https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg"],  # Replace with correct value
         metadata={
             "Task": "Click on traffic lights",
             "Grid": "3x3",
             "TaskDefinition": "/m/015qff",
-            "websiteUrl": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle",  # Website with the captcha
+            "websiteUrl": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle",  # Page URL with captcha 
         }
     )
 
@@ -568,19 +568,19 @@ The code snippets provided are basic examples for familiarization with extractin
         {
             var clientOptions = new ClientOptions
             {
-                ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
+                ClientKey = "your_api_key" //  Your CapMonster Cloud API key
             };
 
             var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
             var complexImageRecaptchaRequest = new RecaptchaComplexImageTaskRequest
             {
-                ImageUrls = new[] { "https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg" }, // Replace with your image URL
+                ImageUrls = new[] { "https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg" }, // Replace with correct value
                 Metadata = new RecaptchaComplexImageTaskRequest.RecaptchaMetadata
                 {
-                    Task = "Click on traffic lights", // Task description
-                    Grid = RecaptchaComplexImageTaskRequest.RecaptchaMetadata.GridSize.Grid3x3, // Set the grid size
-                    TaskDefinition = "/m/015qff", // Task definition
+                    Task = "Click on traffic lights",
+                    Grid = RecaptchaComplexImageTaskRequest.RecaptchaMetadata.GridSize.Grid3x3, 
+                    TaskDefinition = "/m/015qff", 
                 }
             };
 

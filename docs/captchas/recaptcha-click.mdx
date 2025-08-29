@@ -506,17 +506,17 @@ import BlogLink from '@theme/BlogLink';
     import { CapMonsterCloudClientFactory, ClientOptions, ComplexImageRecaptchaRequest } from '@zennolab_com/capmonstercloud-client';
 
     document.addEventListener('DOMContentLoaded', async () => {
-      const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+      const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' })); 
       console.log(await cmcClient.getBalance());
 
       const complexImageRecaptchaRequest = new ComplexImageRecaptchaRequest({
-        imageUrls: ['https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg'],
+        imageUrls: ['https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg'], // Замените на реальные значения
         metaData: {
-          Grid: '3x3',
+          Grid: '3x3', 
           Task: 'Please click each image containing a mountain',
           TaskDefinition: '/m/015qff',
         },
-        websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle',
+        websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle', // URL страницы с капчей
       });
 
       console.log(await cmcClient.Solve(complexImageRecaptchaRequest));
@@ -533,16 +533,16 @@ import BlogLink from '@theme/BlogLink';
     from capmonstercloudclient import CapMonsterClient, ClientOptions
     from capmonstercloudclient.requests import RecaptchaComplexImageTaskRequest
 
-    client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonsterCloud API key
+    client_options = ClientOptions(api_key="your_api_key")  # Ваш API-ключ CapMonster Cloud
     cap_monster_client = CapMonsterClient(options=client_options)
 
     complex_image_recaptcha_request = RecaptchaComplexImageTaskRequest(
-        imagesUrls=["https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg"],  # Replace with your values
+        imagesUrls=["https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg"],  # Замените на реальные значения
         metadata={
             "Task": "Click on traffic lights",
             "Grid": "3x3",
             "TaskDefinition": "/m/015qff",
-            "websiteUrl": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle",  # Website with the captcha
+            "websiteUrl": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle",  # URL страницы с капчей
         }
     )
 
@@ -568,19 +568,19 @@ import BlogLink from '@theme/BlogLink';
         {
             var clientOptions = new ClientOptions
             {
-                ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
+                ClientKey = "your_api_key" //  Ваш API-ключ CapMonster Cloud
             };
 
             var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
             var complexImageRecaptchaRequest = new RecaptchaComplexImageTaskRequest
             {
-                ImageUrls = new[] { "https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg" }, // Replace with your image URL
+                ImageUrls = new[] { "https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg" }, // Замените на реальные значения
                 Metadata = new RecaptchaComplexImageTaskRequest.RecaptchaMetadata
                 {
-                    Task = "Click on traffic lights", // Task description
-                    Grid = RecaptchaComplexImageTaskRequest.RecaptchaMetadata.GridSize.Grid3x3, // Set the grid size
-                    TaskDefinition = "/m/015qff", // Task definition
+                    Task = "Click on traffic lights",
+                    Grid = RecaptchaComplexImageTaskRequest.RecaptchaMetadata.GridSize.Grid3x3, 
+                    TaskDefinition = "/m/015qff", 
                 }
             };
 

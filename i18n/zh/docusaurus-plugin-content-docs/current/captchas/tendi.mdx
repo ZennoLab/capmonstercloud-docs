@@ -295,81 +295,147 @@ import BlogLink from '@theme/BlogLink';
 ## 使用 SDK 库
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-	<TabItem value="js" label="JavaScript" default className="method-panel">
-		```js
-		// https://github.com/ZennoLab/capmonstercloud-client-js
 
-		import { CapMonsterCloudClientFactory, ClientOptions, TenDIRequest } from '@zennolab_com/capmonstercloud-client';
+  <TabItem value="js" label="JavaScript" default className="method-panel">
 
-		document.addEventListener('DOMContentLoaded', async () => {
-			const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
-			console.log(await cmcClient.getBalance());
+  ```js
+  // https://github.com/ZennoLab/capmonstercloud-client-js
 
-			const tenDIRequest = new TenDIRequest({
-				websiteURL: 'https://example.com',
-				websiteKey: 'websiteKey',
-			});
+  import { CapMonsterCloudClientFactory, ClientOptions, TenDIRequest } from '@zennolab_com/capmonstercloud-client';
 
-			console.log(await cmcClient.Solve(tenDIRequest));
-		});
-		```
-	</TabItem>
-	
-  <TabItem value="python" label="Python" default className="method-panel">
-    ```python
-    # https://github.com/ZennoLab/capmonstercloud-client-python
+  document.addEventListener('DOMContentLoaded', async () => {
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+      new ClientOptions({ clientKey: '<你的 capmonster.cloud API key>' }) // 你的 CapMonster Cloud API key
+    );
 
-    import asyncio
-    from capmonstercloudclient import CapMonsterClient, ClientOptions
-    from capmonstercloudclient.requests import TenDiCustomTaskProxylessRequest
+    console.log('余额:', await cmcClient.getBalance());
 
-    client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonster Cloud API key
-    cap_monster_client = CapMonsterClient(options=client_options)
+    // 主选项，不使用代理
+    const tenDIRequest = new TenDIRequest({
+      websiteURL: 'https://example.com', // 带验证码的页面 URL
+      websiteKey: 'websiteKey',          // 替换为正确的值
+    });
 
-    ten_di_request = TenDiCustomTaskProxylessRequest(
-        websiteUrl="https://example.com",  # URL with the captcha
-        websiteKey="189956587",  # Replace with the website key for the captcha
-        userAgent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"  # Use the current userAgent
-    )
+    // 使用代理的选项（如有需要可取消注释）
+    /*
+    const tenDIRequest = new TenDIRequest({
+      websiteURL: 'https://example.com',
+      websiteKey: 'websiteKey',         
+      proxy: {
+        proxyType: 'http',               
+        proxyAddress: '123.45.67.89',    
+        proxyPort: 8080,                 
+        proxyLogin: 'username',          
+        proxyPassword: 'password',       
+      },
+    });
+    */
 
-    async def solve_captcha():
-        return await cap_monster_client.solve_captcha(ten_di_request)
+    const result = await cmcClient.Solve(tenDIRequest);
+    console.log('验证码结果:', result);
+  });
+````
 
-    responses = asyncio.run(solve_captcha())
-    print(responses)
-    ```
+  </TabItem>
+
+  <TabItem value="python" label="Python" className="method-panel">
+
+```python
+# https://github.com/ZennoLab/capmonstercloud-client-python
+
+import asyncio
+from capmonstercloudclient import CapMonsterClient, ClientOptions
+from capmonstercloudclient.requests import TenDiCustomTaskRequest
+
+client_options = ClientOptions(api_key="your_api_key")  # 你的 CapMonster Cloud API key
+cap_monster_client = CapMonsterClient(options=client_options)
+
+# 选项 1：不使用代理
+ten_di_request = TenDiCustomTaskRequest(
+    websiteUrl="https://example.com",   # 带验证码的页面 URL
+    websiteKey="189956587",             # 替换为正确的值
+    userAgent="userAgentPlaceholder"    # 使用当前的 UserAgent
+)
+
+# 选项 2：使用代理
+# ten_di_request = TenDiCustomTaskRequest(
+#     websiteUrl="https://example.com",   
+#     websiteKey="189956587",            
+#     userAgent="userAgentPlaceholder",   
+#     proxyType="http",                   
+#     proxyAddress="127.0.0.1",           
+#     proxyPort=8080,                     
+#     proxyLogin="username",              
+#     proxyPassword="password"            
+# )
+
+async def solve_captcha():
+    return await cap_monster_client.solve_captcha(ten_di_request)
+
+responses = asyncio.run(solve_captcha())
+print(responses)
+```
+
   </TabItem>
 
   <TabItem value="csharp" label="C#" className="method-panel">
-    ```csharp
-    // https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
-    using Zennolab.CapMonsterCloud.Requests;
-    using Zennolab.CapMonsterCloud;
+```csharp
+// https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
-    class Program
+using System;
+using System.Threading.Tasks;
+using Zennolab.CapMonsterCloud;
+using Zennolab.CapMonsterCloud.Requests;
+
+class Program
+{
+    static async Task Main(string[] args)
     {
-        static async Task Main(string[] args)
+        // 你的 CapMonster Cloud API key
+        var clientOptions = new ClientOptions
         {
-            var clientOptions = new ClientOptions
-            {
-                ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
-            };
+            ClientKey = "your_api_key" // 你的 CapMonster Cloud API key
+        };
 
-            var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+        var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
-            var tenDiRequest = new TenDiCustomTaskProxylessRequest
-            {
-                WebsiteUrl = "https://example.com", // URL with the captcha
-                WebsiteKey = "189956587", // Replace with the correct website key
-                UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36" // Use the current userAgent
-            };
+        // 选项 1：不使用代理
+        var tenDiRequest = new TenDiCustomTaskRequest
+        {
+            WebsiteUrl = "https://example.com",      // 带验证码的页面 URL
+            WebsiteKey = "189956587",                // 替换为正确的值
+            UserAgent = "userAgentPlaceholder"       // 使用当前的 UserAgent
+        };
 
-            var tenDiRequestResult = await cmCloudClient.SolveAsync(tenDiRequest);
-            Console.WriteLine("Captcha Solution: " + string.Join(", ", tenDiRequestResult.Solution.Data));
-            Console.WriteLine("Captcha Solution: " + string.Join(", ", tenDiRequestResult.Solution.Headers));
-        }
+        // 选项 2：使用代理
+        // 如需使用代理，请取消注释
+        /*
+        var tenDiRequest = new TenDiCustomTaskRequest
+        {
+            WebsiteUrl = "https://example.com",  
+            WebsiteKey = "189956587",                
+            UserAgent = "userAgentPlaceholder",      
+
+            Proxy = new ProxyContainer(
+                "8.8.8.8",           
+                8080,                
+                ProxyType.Http,       
+                "proxyLoginHere",     
+                "proxyPasswordHere"   
+            )
+        };
+        */
+
+        var tenDiRequestResult = await cmCloudClient.SolveAsync(tenDiRequest);
+
+        Console.WriteLine("验证码结果数据: " + string.Join(", ", tenDiRequestResult.Solution.Data));
+        Console.WriteLine("验证码结果头信息: " + string.Join(", ", tenDiRequestResult.Solution.Headers));
     }
-    ```
+}
+```
+
   </TabItem>
+
 </Tabs>
+

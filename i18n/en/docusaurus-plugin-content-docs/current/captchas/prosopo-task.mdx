@@ -170,3 +170,140 @@ Use the method [getTaskResult](../api/methods/get-task-result.md) to obtain the 
 		```
 	</MethodDescription>
 </TabItem>
+
+## Use the SDK library
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+
+  ```js
+  // https://github.com/ZennoLab/capmonstercloud-client-js
+
+  import { CapMonsterCloudClientFactory, ClientOptions, ProsopoRequest } from '@zennolab_com/capmonstercloud-client';
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+      new ClientOptions({ clientKey: '<your capmonster.cloud API key>' })
+    );
+
+    console.log(await cmcClient.getBalance());
+
+    const prosopoRequest = new ProsopoRequest({
+      websiteURL: 'https://www.example.com', // Page URL with captcha 
+      websiteKey: '5EZU3LG31uzq1Mwi8inwqxmfvFDpj7VzwDnZwj4Q3syyxBwV' //Replace with correct value
+      /*
+      // If you need to use a proxy:
+      proxy: {
+        type: 'http',
+        address: '127.0.0.1',
+        port: 8000,
+        login: 'user',
+        password: 'password'
+      }
+      */
+    });
+
+    console.log(await cmcClient.Solve(prosopoRequest));
+  });
+````
+
+  </TabItem>
+
+  <TabItem value="python" label="Python" default className="method-panel">
+
+```python
+# https://github.com/ZennoLab/capmonstercloud-client-python
+
+import asyncio
+from capmonstercloudclient import CapMonsterClient, ClientOptions
+from capmonstercloudclient.requests import ProsopoTaskRequest
+
+# Your CapMonster Cloud API key
+client_options = ClientOptions(api_key="API_KEY")
+cap_monster_client = CapMonsterClient(options=client_options)
+
+# Option 1: without proxy
+prosopo_request = ProsopoTaskRequest(
+    websiteUrl="https://www.example.com",  # Page URL with captcha 
+    websiteKey="5EZU3LG31uzq1Mwi8inwqxmfvFDpj7VzwDnZwj4Q3syyxBwV"  # Replace with correct value
+)
+
+# Option 2: with proxy
+# Uncomment if needed
+# prosopo_request = ProsopoTaskRequest(
+#     websiteUrl="https://www.example.com",
+#     websiteKey="5EZU3LG31uzq1Mwi8inwqxmfvFDpj7VzwDnZwj4Q3syyxBwV",
+#     proxyType="http",
+#     proxyAddress="123.45.67.89",
+#     proxyPort=8080,
+#     proxyLogin="proxyUser",
+#     proxyPassword="proxyPass"
+# )
+
+async def solve_captcha():
+    return await cap_monster_client.solve_captcha(prosopo_request)
+
+responses = asyncio.run(solve_captcha())
+print(responses)
+```
+
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+
+```csharp
+// https://github.com/ZennoLab/capmonstercloud-client-dotnet
+
+using System;
+using System.Text.Json;
+using System.Threading.Tasks;
+using Zennolab.CapMonsterCloud;
+using Zennolab.CapMonsterCloud.Requests;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        // Your CapMonster Cloud API key
+        var clientOptions = new ClientOptions
+        {
+            ClientKey = "your_api_key" // Your CapMonster Cloud API key
+        };
+
+        var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+        // Option 1: Without proxy
+        var prosopoRequest = new ProsopoTaskRequest
+        {
+            WebsiteUrl = "https://example.com", // Page URL with captcha 
+            WebsiteKey = "5DCKg3w9AvDW92uBzRWrvTiWsu573bTzYmFny8EkXQZxsBib" // Replace with correct value
+        };
+
+        // Option 2: With proxy
+        // Uncomment if you need to use a proxy
+        /*
+        var prosopoRequest = new ProsopoTaskRequest
+        {
+            WebsiteUrl = "https://www.example.com",
+            WebsiteKey = "5EZU3LG31uzq1Mwi8inwqxmfvFDpj7VzwDnZwj4Q3syyxBwV",
+            Proxy = new ProxyContainer(
+                "123.45.67.89",
+                8080,
+                ProxyType.Http,
+                "proxyLogin",
+                "proxyPassword"
+            )
+        };
+        */
+
+        var prosopoResult = await cmCloudClient.SolveAsync(prosopoRequest);
+
+        Console.WriteLine("Prosopo Solution: " + JsonSerializer.Serialize(prosopoResult.Solution.Value));
+    }
+}
+```
+
+  </TabItem>
+
+</Tabs>

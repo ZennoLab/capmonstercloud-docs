@@ -513,17 +513,17 @@ import BlogLink from '@theme/BlogLink';
     import { CapMonsterCloudClientFactory, ClientOptions, ComplexImageRecaptchaRequest } from '@zennolab_com/capmonstercloud-client';
 
     document.addEventListener('DOMContentLoaded', async () => {
-      const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
+      const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<你的 capmonster.cloud API key>' })); 
       console.log(await cmcClient.getBalance());
 
       const complexImageRecaptchaRequest = new ComplexImageRecaptchaRequest({
-        imageUrls: ['https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg'],
+        imageUrls: ['https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg'], // 替换为正确的值
         metaData: {
-          Grid: '3x3',
-          Task: 'Please click each image containing a mountain',
+          Grid: '3x3', 
+          Task: '请点击所有包含山的图片',
           TaskDefinition: '/m/015qff',
         },
-        websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle',
+        websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle', // 带验证码的页面 URL
       });
 
       console.log(await cmcClient.Solve(complexImageRecaptchaRequest));
@@ -540,16 +540,16 @@ import BlogLink from '@theme/BlogLink';
     from capmonstercloudclient import CapMonsterClient, ClientOptions
     from capmonstercloudclient.requests import RecaptchaComplexImageTaskRequest
 
-    client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonsterCloud API key
+    client_options = ClientOptions(api_key="your_api_key")  # 你的 CapMonster Cloud API key
     cap_monster_client = CapMonsterClient(options=client_options)
 
     complex_image_recaptcha_request = RecaptchaComplexImageTaskRequest(
-        imagesUrls=["https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg"],  # Replace with your values
+        imagesUrls=["https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg"],  # 替换为正确的值
         metadata={
-            "Task": "Click on traffic lights",
+            "Task": "点击交通信号灯",
             "Grid": "3x3",
             "TaskDefinition": "/m/015qff",
-            "websiteUrl": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle",  # Website with the captcha
+            "websiteUrl": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle",  # 带验证码的页面 URL
         }
     )
 
@@ -575,25 +575,25 @@ import BlogLink from '@theme/BlogLink';
         {
             var clientOptions = new ClientOptions
             {
-                ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
+                ClientKey = "your_api_key" // 你的 CapMonster Cloud API key
             };
 
             var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
             var complexImageRecaptchaRequest = new RecaptchaComplexImageTaskRequest
             {
-                ImageUrls = new[] { "https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg" }, // Replace with your image URL
+                ImageUrls = new[] { "https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg" }, // 替换为正确的值
                 Metadata = new RecaptchaComplexImageTaskRequest.RecaptchaMetadata
                 {
-                    Task = "Click on traffic lights", // Task description
-                    Grid = RecaptchaComplexImageTaskRequest.RecaptchaMetadata.GridSize.Grid3x3, // Set the grid size
-                    TaskDefinition = "/m/015qff", // Task definition
+                    Task = "点击交通信号灯",
+                    Grid = RecaptchaComplexImageTaskRequest.RecaptchaMetadata.GridSize.Grid3x3, 
+                    TaskDefinition = "/m/015qff", 
                 }
             };
 
             var complexImageRecaptchaResult = await cmCloudClient.SolveAsync(complexImageRecaptchaRequest);
 
-            Console.WriteLine("Captcha Solution: " + string.Join(", ", complexImageRecaptchaResult.Solution.Answer));
+            Console.WriteLine("验证码解决方案: " + string.Join(", ", complexImageRecaptchaResult.Solution.Answer));
         }
     }
     ```
