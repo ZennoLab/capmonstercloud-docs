@@ -374,94 +374,172 @@ import BlogLink from '@theme/BlogLink';
 ## 使用 SDK 库
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-	<TabItem value="js" label="JavaScript" default className="method-panel">
-		```js
-		// https://github.com/ZennoLab/capmonstercloud-client-js
 
-		import { CapMonsterCloudClientFactory, ClientOptions, AmazonProxylessRequest } from '@zennolab_com/capmonstercloud-client';
+  <TabItem value="js" label="JavaScript" default className="method-panel">
 
-		document.addEventListener('DOMContentLoaded', async () => {
-			const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
-			console.log(await cmcClient.getBalance());
+  ```js
+  // https://github.com/ZennoLab/capmonstercloud-client-js
 
-			const amazonRequest = new AmazonProxylessRequest({
-				websiteURL: 'https://example.com',
-				websiteKey: 'websiteKey',
-				challengeScript: 'https://41bcdd4fb3cb.610cd090.us-east-1.token.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/challenge.js',
-				captchaScript: 'https://41bcdd4fb3cb.610cd090.us-east-1.captcha.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/captcha.js',
-				context: 'qoJYgnKsc...aormh/dYYK+Y=',
-				iv: 'CgAAXFFFFSAAABVk',
-			});
+  import { CapMonsterCloudClientFactory, ClientOptions, AmazonRequest } from '@zennolab_com/capmonstercloud-client';
 
-			console.log(await cmcClient.Solve(amazonRequest));
-		});
-		```
-	</TabItem>
+  document.addEventListener('DOMContentLoaded', async () => {
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+      new ClientOptions({
+        clientKey: '<你的 capmonster.cloud API key>',
+      })
+    );
 
-  <TabItem value="python" label="Python" default className="method-panel">
-    ```python
-    # https://github.com/ZennoLab/capmonstercloud-client-python
+    console.log(await cmcClient.getBalance());
 
-    import asyncio
-    from capmonstercloudclient import CapMonsterClient, ClientOptions
-    from capmonstercloudclient.requests import AmazonWafProxylessRequest
+    // 选项 1. 不使用代理
+    const amazonRequest = new AmazonRequest({
+      websiteURL: 'https://example.com', // 带验证码的页面 URL
+      websiteKey: 'websiteKey', // 替换为正确的值
+      challengeScript: 'https://41bcdd4fb3cb.610cd090.us-east-1.token.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/challenge.js',
+      captchaScript: 'https://41bcdd4fb3cb.610cd090.us-east-1.captcha.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/captcha.js',
+      context: 'qoJYgnKsc...aormh/dYYK+Y=',
+      iv: 'CgAAXFFFFSAAABVk',
+    });
 
-    client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonster Cloud API key
-    cap_monster_client = CapMonsterClient(options=client_options)
+    /*
+    // 选项 2. 使用代理
+    const amazonRequest = new AmazonRequest({
+      websiteURL: 'https://example.com',
+      websiteKey: 'websiteKey', 
+      challengeScript: 'https://41bcdd4fb3cb.610cd090.us-east-1.token.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/challenge.js',
+      captchaScript: 'https://41bcdd4fb3cb.610cd090.us-east-1.captcha.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/captcha.js',
+      context: 'qoJYgnKsc...aormh/dYYK+Y=',
+      iv: 'CgAAXFFFFSAAABVk',
+      proxyAddress: '8.8.8.8',
+      proxyPort: 8080,
+      proxyLogin: 'proxyLoginHere',
+      proxyPassword: 'proxyPasswordHere',
+    });
+    */
 
-    amazon_waf_request = AmazonWafProxylessRequest(
-        websiteUrl="https://example.com",  # URL с CAPTCHA
-        challengeScript="https://example.com/path/to/challenge.js",
-        captchaScript="https://example.com/path/to/captcha.js",
-        websiteKey="your_website_key",
-        context="your_context_value",
-        iv="your_iv_value",
-        cookieSolution=False
-    )
+    console.log(await cmcClient.Solve(amazonRequest));
+  });
+````
 
-    async def solve_captcha():
-        return await cap_monster_client.solve_captcha(amazon_waf_request)
+  </TabItem>
 
-    responses = asyncio.run(solve_captcha())
-    print(responses)
-    ```
+  <TabItem value="python" label="Python" className="method-panel">
+
+```python
+# https://github.com/ZennoLab/capmonstercloud-client-python
+
+import asyncio
+from capmonstercloudclient import CapMonsterClient, ClientOptions
+from capmonstercloudclient.requests import AmazonWafRequest
+
+# 指定你的 CapMonster Cloud API key
+client_options = ClientOptions(api_key="your_api_key")  # 你的 CapMonster Cloud API key
+cap_monster_client = CapMonsterClient(options=client_options)
+
+# 选项 1. 不使用代理
+amazon_waf_request = AmazonWafRequest(
+    websiteUrl="https://example.com", # 带验证码的页面 URL
+    challengeScript="https://example.com/path/to/challenge.js", # 替换为正确的值  
+    captchaScript="https://example.com/path/to/captcha.js",  
+    websiteKey="your_website_key",                          
+    context="your_context_value",                             
+    iv="your_iv_value",                                       
+    cookieSolution=False
+)
+
+# 选项 2. 使用代理
+# 取消注释下面的代码块并填写代理数据
+
+# amazon_waf_request = AmazonWafRequest(
+#     websiteUrl="https://example.com",
+#     challengeScript="https://example.com/path/to/challenge.js",
+#     captchaScript="https://example.com/path/to/captcha.js",
+#     websiteKey="your_website_key",
+#     context="your_context_value",
+#     iv="your_iv_value",
+#     cookieSolution=False,
+#     proxyType="http",
+#     proxyAddress="127.0.0.1",  
+#     proxyPort=8080,             
+#     proxyLogin="username",      
+#     proxyPassword="password"    
+# )
+
+async def solve_captcha():
+    return await cap_monster_client.solve_captcha(amazon_waf_request)
+
+response = asyncio.run(solve_captcha())
+print(response)
+```
+
   </TabItem>
 
   <TabItem value="csharp" label="C#" className="method-panel">
-    ```csharp
-    // https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
-    using Zennolab.CapMonsterCloud.Requests;
-    using Zennolab.CapMonsterCloud;
+```csharp
+// https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
-    class Program
+using System;
+using System.Threading.Tasks;
+using Zennolab.CapMonsterCloud;
+using Zennolab.CapMonsterCloud.Requests;
+
+class Program
+{
+    static async Task Main(string[] args)
     {
-        static async Task Main(string[] args)
+        // 你的 CapMonster Cloud API key
+        var clientOptions = new ClientOptions
         {
-            var clientOptions = new ClientOptions
-            {
-                ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
-            };
+            ClientKey = "your_api_key" // 你的 CapMonster Cloud API key
+        };
 
-            var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+        var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
-            var amazonWafRequest = new AmazonWafProxylessRequest
-            {
-                WebsiteUrl = "https://example.com", // URL with the captcha
-                ChallengeScript = "URL_of_challenge.js",
-                CaptchaScript = "URL_of_captcha.js",
-                WebsiteKey = "website_key",
-                Context = "context_value",
-                Iv = "iv_value",
-                CookieSolution = false
-            };
+        // 选项 1: 不使用代理
+        var amazonWafRequest = new AmazonWafRequest
+        {
+            WebsiteUrl = "https://example.com",   // 带验证码的页面 URL
+            ChallengeScript = "URL_of_challenge.js",   // 替换为正确的值
+            CaptchaScript = "URL_of_captcha.js",       
+            WebsiteKey = "website_key",                  
+            Context = "context_value",                   
+            Iv = "iv_value",                            
+            CookieSolution = false
+        };
 
-            var solveResult = await cmCloudClient.SolveAsync(amazonWafRequest);
+        // 选项 2: 使用代理
+        // 取消注释下面的代码块并填写代理数据
+        /*
+        var amazonWafRequest = new AmazonWafRequest
+        {
+            WebsiteUrl = "https://example.com",
+            ChallengeScript = "URL_of_challenge.js",
+            CaptchaScript = "URL_of_captcha.js",
+            WebsiteKey = "website_key",
+            Context = "context_value",
+            Iv = "iv_value",
+            CookieSolution = false,
 
-            Console.WriteLine("ExistingToken: " + solveResult.Solution.ExistingToken); // Adjust based on your expected solution format
-            Console.WriteLine("CaptchaVoucher: " + solveResult.Solution.CaptchaVoucher);
-        }
+            Proxy = new ProxyContainer(
+                "8.8.8.8",            
+                8080,                 
+                ProxyType.Http,       
+                "proxyLoginHere",     
+                "proxyPasswordHere"   
+            )
+        };
+        */
+
+        var solveResult = await cmCloudClient.SolveAsync(amazonWafRequest);
+
+        Console.WriteLine("ExistingToken: " + solveResult.Solution.ExistingToken);
+        Console.WriteLine("CaptchaVoucher: " + solveResult.Solution.CaptchaVoucher);
     }
-    ```
+}
+```
+
   </TabItem>
+
 </Tabs>
+

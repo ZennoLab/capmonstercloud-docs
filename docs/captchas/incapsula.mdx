@@ -279,88 +279,172 @@ Error 16 - данная ошибка связана с применением п
 
 ## Используйте библиотеку SDK
 
-	<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-		<TabItem value="js" label="JavaScript" default className="method-panel">
-			```js
-			// https://github.com/ZennoLab/capmonstercloud-client-js
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 
-			import { CapMonsterCloudClientFactory, ClientOptions, ImpervaRequest } from '@zennolab_com/capmonstercloud-client';
+  <TabItem value="js" label="JavaScript" default className="method-panel">
 
-			document.addEventListener('DOMContentLoaded', async () => {
-				const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
-				console.log(await cmcClient.getBalance());
+  ```js
+  // https://github.com/ZennoLab/capmonstercloud-client-js
 
-				const impervaRequest = new ImpervaRequest({
-					websiteURL: 'https://example.com',
-					metadata: {
-						"incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3",
-						"incapsulaCookies": "incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;",
-					},
-				});
+  import { CapMonsterCloudClientFactory, ClientOptions, ImpervaRequest } from '@zennolab_com/capmonstercloud-client';
 
-				console.log(await cmcClient.Solve(impervaRequest));
-			});
-			```
-		</TabItem>
-		
-		<TabItem value="python" label="Python" default className="method-panel">
-			```python
-			# https://github.com/ZennoLab/capmonstercloud-client-python
-	 
-			import asyncio
-			from capmonstercloudclient import CapMonsterClient, ClientOptions
-			from capmonstercloudclient.requests import ImpervaCustomTaskProxylessRequest
-	 
-			client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonster Cloud API key
-			cap_monster_client = CapMonsterClient(options=client_options)
-	 
-			imperva_request = ImpervaCustomTaskProxylessRequest(
-				websiteUrl="https://example.com",  # URL with captcha
-				userAgent="userAgentPlaceholder",
-				metadata={
-					"incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3",
-					"incapsulaCookies": "incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;",
-					"reese84UrlEndpoint": "Built-with-the-For-hopence-Hurleysurfecting-the-"
-				},
-			)
-	 
-			async def solve_captcha():
-				return await cap_monster_client.solve_captcha(imperva_request)
-	 
-			responses = asyncio.run(solve_captcha())
-			print(responses)
-			```
-		</TabItem>
-		
-		<TabItem value="csharp" label="C#" className="method-panel">
-			```csharp
-			// https://github.com/ZennoLab/capmonstercloud-client-dotnet
+  document.addEventListener('DOMContentLoaded', async () => {
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+      new ClientOptions({ clientKey: '<your capmonster.cloud API key>' })
+    );
 
-			using Zennolab.CapMonsterCloud.Requests;
-			using Zennolab.CapMonsterCloud;
+    console.log('Баланс:', await cmcClient.getBalance());
 
-			class Program
-			{
-				static async Task MainImperva(string[] args)
-				{
-					var clientOptions = new ClientOptions
-					{
-						ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
-					};
+    // Вариант 1: без прокси
+    const impervaRequest = new ImpervaRequest({
+      websiteURL: 'https://example.com', // URL страницы с капчей
+      metadata: {
+        incapsulaScriptUrl: '_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3',
+        incapsulaCookies: 'incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;',
+      },
+    });
 
-					var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+    // Вариант 2: с прокси (раскомментируйте при необходимости)
+    /*
+    const impervaRequest = new ImpervaRequest({
+      websiteURL: 'https://example.com',
+      metadata: {
+        incapsulaScriptUrl: '_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3',
+        incapsulaCookies: 'incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;',
+      },
+      proxy: {
+        type: 'http',
+        address: '127.0.0.1',     
+        port: 8080,               
+        login: 'proxyUser',       
+        password: 'proxyPass'     
+      }
+    });
+    */
 
-					var impervaRequest = new ImpervaCustomTaskRequest("incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3", "incapsulaCookies": "incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;", reese84UrlEndpoint: "Built-with-the-For-hopence-Hurleysurfecting-the-")
-					{
-						WebsiteUrl = "https://example.com",
-						UserAgent = "userAgentPlaceholder", // Use the current userAgent
-					};
+    const result = await cmcClient.Solve(impervaRequest);
+    console.log('Решение капчи:', result);
+  });
+````
 
-					var impervaResult = await cmCloudClient.SolveAsync(impervaRequest);
+  </TabItem>
 
-					Console.WriteLine("Captcha Solution: " + JsonSerializer.Serialize(impervaResult.Solution));
-				}
-			}
-			```
-		</TabItem>
-	</Tabs>
+  <TabItem value="python" label="Python" className="method-panel">
+
+```python
+# https://github.com/ZennoLab/capmonstercloud-client-python
+
+import asyncio
+from capmonstercloudclient import CapMonsterClient, ClientOptions
+from capmonstercloudclient.requests import ImpervaCustomTaskRequest
+
+# Ваш API-ключ от CapMonster Cloud
+client_options = ClientOptions(api_key="your_api_key")  # Ваш API-ключ CapMonster Cloud
+cap_monster_client = CapMonsterClient(options=client_options)
+
+# Вариант 1: без прокси
+imperva_request = ImpervaCustomTaskRequest(
+    websiteUrl="https://example.com",   # URL страницы с капчей
+    userAgent="userAgentPlaceholder",   # Используйте актуальный UserAgent
+    metadata={
+        "incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3",
+        "incapsulaCookie": "incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;",
+        "reese84UrlEndpoint": "Built-with-the-For-hopence-Hurleysurfecting-the-"
+    }
+)
+
+# Вариант 2: с прокси (раскомментируйте при необходимости)
+# imperva_request = ImpervaCustomTaskRequest(
+#     websiteUrl="https://example.com", 
+#     userAgent="userAgentPlaceholder",  
+#     metadata={
+#         "incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3",
+#         "incapsulaCookie": "incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;",
+#         "reese84UrlEndpoint": "Built-with-the-For-hopence-Hurleysurfecting-the-"
+#     },
+#     proxyType="http",                    
+#     proxyAddress="127.0.0.1",            
+#     proxyPort=8080,                      
+#     proxyLogin="username",               
+#     proxyPassword="password"             
+# )
+
+async def solve_captcha():
+    return await cap_monster_client.solve_captcha(imperva_request)
+
+responses = asyncio.run(solve_captcha())
+print(responses)
+```
+
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+
+```csharp
+// https://github.com/ZennoLab/capmonstercloud-client-dotnet
+
+using System;
+using System.Text.Json;
+using System.Threading.Tasks;
+using Zennolab.CapMonsterCloud;
+using Zennolab.CapMonsterCloud.Requests;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        // Ваш API-ключ от CapMonster Cloud
+        var clientOptions = new ClientOptions
+        {
+            ClientKey = "your_api_key" // Ваш API-ключ CapMonster Cloud
+        };
+
+        var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+        // Данные Imperva
+        var incapsulaScriptBase64 = "base64_encoded_js_here";
+        var incapsulaSessionCookie = "incap_sess_*=your_cookie_here";
+        var reese84UrlEndpoint = "your_reese84_endpoint_here";
+
+        // Вариант 1: Без прокси
+        var impervaRequest = new ImpervaCustomTaskRequest(
+            incapsulaScriptBase64,
+            incapsulaSessionCookie,
+            reese84UrlEndpoint
+        )
+        {
+            WebsiteUrl = "https://example.com",   // URL страницы с капчей
+            UserAgent = "userAgentPlaceholder"    // Используйте актуальный UserAgent
+        };
+
+        // Вариант 2: С прокси (раскомментируйте при необходимости)
+        /*
+        var impervaRequest = new ImpervaCustomTaskRequest(
+            incapsulaScriptBase64,
+            incapsulaSessionCookie,
+            reese84UrlEndpoint
+        )
+        {
+            WebsiteUrl = "https://example.com",
+            UserAgent = "userAgentPlaceholder",
+            Proxy = new ProxyContainer(
+                "123.123.123.123",   
+                8080,                
+                ProxyType.Http,      
+                "proxy_user",        
+                "proxy_pass"         
+            )
+        };
+        */
+
+        var impervaResult = await cmCloudClient.SolveAsync(impervaRequest);
+
+        Console.WriteLine("Imperva Solution: " + JsonSerializer.Serialize(impervaResult.Solution));
+    }
+}
+```
+
+  </TabItem>
+
+</Tabs>
+

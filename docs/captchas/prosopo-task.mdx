@@ -171,3 +171,140 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 		```
 	</MethodDescription>
 </TabItem>
+
+## Используйте библиотеку SDK
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+
+  ```js
+  // https://github.com/ZennoLab/capmonstercloud-client-js
+
+  import { CapMonsterCloudClientFactory, ClientOptions, ProsopoRequest } from '@zennolab_com/capmonstercloud-client';
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+      new ClientOptions({ clientKey: '<your capmonster.cloud API key>' })
+    );
+
+    console.log(await cmcClient.getBalance());
+
+    const prosopoRequest = new ProsopoRequest({
+      websiteURL: 'https://www.example.com', // URL страницы с капчей
+      websiteKey: '5EZU3LG31uzq1Mwi8inwqxmfvFDpj7VzwDnZwj4Q3syyxBwV' // Замените на корректное значение
+      /*
+      // Если нужно использовать прокси:
+      proxy: {
+        type: 'http',
+        address: '127.0.0.1',
+        port: 8000,
+        login: 'user',
+        password: 'password'
+      }
+      */
+    });
+
+    console.log(await cmcClient.Solve(prosopoRequest));
+  });
+````
+
+  </TabItem>
+
+  <TabItem value="python" label="Python" default className="method-panel">
+
+```python
+# https://github.com/ZennoLab/capmonstercloud-client-python
+
+import asyncio
+from capmonstercloudclient import CapMonsterClient, ClientOptions
+from capmonstercloudclient.requests import ProsopoTaskRequest
+
+# Ваш API-ключ CapMonster Cloud
+client_options = ClientOptions(api_key="API_KEY")
+cap_monster_client = CapMonsterClient(options=client_options)
+
+# Вариант 1: без прокси
+prosopo_request = ProsopoTaskRequest(
+    websiteUrl="https://www.example.com",  # URL страницы с капчей
+    websiteKey="5EZU3LG31uzq1Mwi8inwqxmfvFDpj7VzwDnZwj4Q3syyxBwV"  # Замените на корректное значение
+)
+
+# Вариант 2: с прокси
+# Раскомментируйте при необходимости
+# prosopo_request = ProsopoTaskRequest(
+#     websiteUrl="https://www.example.com",
+#     websiteKey="5EZU3LG31uzq1Mwi8inwqxmfvFDpj7VzwDnZwj4Q3syyxBwV",
+#     proxyType="http",
+#     proxyAddress="123.45.67.89",
+#     proxyPort=8080,
+#     proxyLogin="proxyUser",
+#     proxyPassword="proxyPass"
+# )
+
+async def solve_captcha():
+    return await cap_monster_client.solve_captcha(prosopo_request)
+
+responses = asyncio.run(solve_captcha())
+print(responses)
+```
+
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+
+```csharp
+// https://github.com/ZennoLab/capmonstercloud-client-dotnet
+
+using System;
+using System.Text.Json;
+using System.Threading.Tasks;
+using Zennolab.CapMonsterCloud;
+using Zennolab.CapMonsterCloud.Requests;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        // Ваш API-ключ от CapMonster Cloud
+        var clientOptions = new ClientOptions
+        {
+            ClientKey = "your_api_key" // Ваш API-ключ CapMonster Cloud
+        };
+
+        var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+        // Вариант 1: Без прокси
+        var prosopoRequest = new ProsopoTaskRequest
+        {
+            WebsiteUrl = "https://example.com", // URL страницы с капчей
+            WebsiteKey = "5DCKg3w9AvDW92uBzRWrvTiWsu573bTzYmFny8EkXQZxsBib" // Замените на корректное значение
+        };
+
+        // Вариант 2: С прокси
+        // Раскомментируйте, если нужно использовать прокси
+        /*
+        var prosopoRequest = new ProsopoTaskRequest
+        {
+            WebsiteUrl = "https://www.example.com",
+            WebsiteKey = "5EZU3LG31uzq1Mwi8inwqxmfvFDpj7VzwDnZwj4Q3syyxBwV",
+            Proxy = new ProxyContainer(
+                "123.45.67.89",
+                8080,
+                ProxyType.Http,
+                "proxyLogin",
+                "proxyPassword"
+            )
+        };
+        */
+
+        var prosopoResult = await cmCloudClient.SolveAsync(prosopoRequest);
+
+        Console.WriteLine("Prosopo Solution: " + JsonSerializer.Serialize(prosopoResult.Solution.Value));
+    }
+}
+```
+
+  </TabItem>
+
+</Tabs>
