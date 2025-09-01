@@ -111,18 +111,19 @@ sidebar_label: Расширение для браузера Firefox
 ### Поддерживаемые типы капч и их параметры
 
 
-| Тип капчи                     | Какие параметры отображаются                                                                 |
-|------------------------------|----------------------------------------------------------------------------------------------|
-| **reCAPTCHA V2**             | `class`, `imageUrls`, `Task` (внутри `metadata`), `Grid` (внутри `metadata`), `recognizingThreshold`, `userAgent`, `type` |
+| Тип капчи                   | Какие параметры отображаются                                                                                              |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| **reCAPTCHA V2**            | `class`, `imageUrls`, `Task` (внутри `metadata`), `Grid` (внутри `metadata`), `recognizingThreshold`, `userAgent`, `type` |
 | **reCAPTCHA V2 Invisible**  | `class`, `imageUrls`, `Task` (внутри `metadata`), `Grid` (внутри `metadata`), `recognizingThreshold`, `userAgent`, `type` |
 | **reCAPTCHA V2 Enterprise** | `class`, `imageUrls`, `Task` (внутри `metadata`), `Grid` (внутри `metadata`), `recognizingThreshold`, `userAgent`, `type` |
-| **GeeTest v3**              | `websiteURL`, `gt`, `challenge`, `userAgent`, `type`                                         |
-| **GeeTest v4**              | `websiteURL`, `gt` (`captcha_id`), `userAgent`, `version`, `type`                            |
-| **Cloudflare Turnstile**    | `websiteURL`, `websiteKey`, `userAgent`, `type`                                              |
-| **Cloudflare Challenge**    | `websiteURL`, `websiteKey`, `userAgent`, `pageAction`, `data`, `pageData`, `cloudflareTaskType`, `type` |
-| **ImageToText**             | `body` (в формате `base64`), `type`                                                          |
-| **BLS**                     | `class`, `imagesBase64`, `Task` (внутри `metadata`), `TaskArgument` (внутри `metadata`), `type` |
-| **Binance**                 | `websiteURL`, `websiteKey`, `validateId`, `userAgent`, `type`                                |
+| **reCAPTCHA V3**            | `websiteURL`, `websiteKey`, `pageAction`, `minScore`, `type`                                                              |
+| **GeeTest v3**              | `websiteURL`, `gt`, `challenge`, `userAgent`, `type`                                                                      |
+| **GeeTest v4**              | `websiteURL`, `gt` (`captcha_id`), `userAgent`, `version`, `type`                                                         |
+| **Cloudflare Turnstile**    | `websiteURL`, `websiteKey`, `userAgent`, `type`                                                                           |
+| **Cloudflare Challenge**    | `websiteURL`, `websiteKey`, `userAgent`, `pageAction`, `data`, `pageData`, `cloudflareTaskType`, `type`                   |
+| **ImageToText**             | `body` (в формате `base64`), `type`                                                                                       |
+| **BLS**                     | `class`, `imagesBase64`, `Task` (внутри `metadata`), `TaskArgument` (внутри `metadata`), `type`                           |
+| **Binance**                 | `websiteURL`, `websiteKey`, `validateId`, `userAgent`, `type`                                                             |
 
 Чтобы воспользоваться этой функцией, активируйте расширение, откройте страницу с капчей (убедитесь, что её тип поддерживается и выбран для решения), затем выполните следующие шаги:
 
