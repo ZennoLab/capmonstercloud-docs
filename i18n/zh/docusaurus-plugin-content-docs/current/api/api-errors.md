@@ -8,7 +8,6 @@ description: "CapMonster Cloud 服务在识别验证码 API 时的错误代码�
 # 错误说明
 
 :::info 防止错误的建议：
-<span style={{color: "black"}}>
 - 请确保您需要破解的验证码类型由 CapMonster Cloud 服务支持。如果该验证码类型不受支持，请联系我们——我们将考虑添加支持。
 - 检查文档更新，以便及时了解 API 的最新更改，避免使用过时的方法或参数。
 - 使用高质量的代理。
@@ -20,7 +19,6 @@ description: "CapMonster Cloud 服务在识别验证码 API 时的错误代码�
 - 原始图片/输入
 - 任务的日期/时间
 - 请求正文（如可能）
-</span>
 :::
 
 
