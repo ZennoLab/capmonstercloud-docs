@@ -110,18 +110,19 @@ The **CapMonster Cloud** extension provides a convenient way to view the paramet
 
 ### Supported captcha types and their parameters
 
-| Captcha type                 | Displayed parameters                                                                 |
-|-----------------------------|----------------------------------------------------------------------------------------|
+| Captcha Type                | Displayed Parameters                                                                                                      |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
 | **reCAPTCHA V2**            | `class`, `imageUrls`, `Task` (inside `metadata`), `Grid` (inside `metadata`), `recognizingThreshold`, `userAgent`, `type` |
 | **reCAPTCHA V2 Invisible**  | `class`, `imageUrls`, `Task` (inside `metadata`), `Grid` (inside `metadata`), `recognizingThreshold`, `userAgent`, `type` |
 | **reCAPTCHA V2 Enterprise** | `class`, `imageUrls`, `Task` (inside `metadata`), `Grid` (inside `metadata`), `recognizingThreshold`, `userAgent`, `type` |
-| **GeeTest v3**              | `websiteURL`, `gt`, `challenge`, `userAgent`, `type`                                  |
-| **GeeTest v4**              | `websiteURL`, `gt` (`captcha_id`), `userAgent`, `version`, `type`                     |
-| **Cloudflare Turnstile**    | `websiteURL`, `websiteKey`, `userAgent`, `type`                                       |
-| **Cloudflare Challenge**    | `websiteURL`, `websiteKey`, `userAgent`, `pageAction`, `data`, `pageData`, `cloudflareTaskType`, `type` |
-| **ImageToText**             | `body` (in `base64` format), `type`                                                   |
-| **BLS**                     | `class`, `imagesBase64`, `Task` (inside `metadata`), `TaskArgument` (inside `metadata`), `type` |
-| **Binance**                 | `websiteURL`, `websiteKey`, `validateId`, `userAgent`, `type`                         |
+| **reCAPTCHA V3**            | `websiteURL`, `websiteKey`, `pageAction`, `minScore`, `type`                                                              |
+| **GeeTest v3**              | `websiteURL`, `gt`, `challenge`, `userAgent`, `type`                                                                      |
+| **GeeTest v4**              | `websiteURL`, `gt` (`captcha_id`), `userAgent`, `version`, `type`                                                         |
+| **Cloudflare Turnstile**    | `websiteURL`, `websiteKey`, `userAgent`, `type`                                                                           |
+| **Cloudflare Challenge**    | `websiteURL`, `websiteKey`, `userAgent`, `pageAction`, `data`, `pageData`, `cloudflareTaskType`, `type`                   |
+| **ImageToText**             | `body` (in `base64` format), `type`                                                                                       |
+| **BLS**                     | `class`, `imagesBase64`, `Task` (inside `metadata`), `TaskArgument` (inside `metadata`), `type`                           |
+| **Binance**                 | `websiteURL`, `websiteKey`, `validateId`, `userAgent`, `type`                                                             |
 
 To use this feature, activate the extension, open the captcha page (make sure the captcha type is supported and selected for solving), and then follow these steps:
 

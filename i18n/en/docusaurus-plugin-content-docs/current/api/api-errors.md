@@ -8,17 +8,21 @@ description: "API error codes during captcha recognition, causes, and recommenda
 # Error descriptions
 
 :::info Recommendations for preventing errors:
-- Make sure the captcha type you need to solve is supported by the CapMonster Cloud service. If this captcha type is not supported, please contact us — we will consider adding it.
-- Check documentation updates regularly to stay informed about API changes and avoid using deprecated methods or parameters.
-- Use high-quality proxies.
+<span style={{color: "black"}}>
+
+- Make sure the captcha type you need to solve is supported by the CapMonster Cloud service. If this captcha type is not supported, please contact us — we will consider adding it.  
+- Check documentation updates regularly to stay informed about API changes and avoid using deprecated methods or parameters.  
+- Use high-quality proxies.  
 
 If the error persists and you’re unable to resolve it, please contact support via the [form](https://helpdesk.zennolab.com/conversation/new), our chat available on the [website](https://capmonster.cloud/) and in the [documentation](https://docs.capmonster.cloud/), or the [Telegram channel](https://t.me/capmonstercloud), providing:
 
-- taskId
-- task type (type)
-- original image/input
-- date/time of the task
-- request body (if possible)
+- taskId  
+- task type (type)  
+- original image/input  
+- date/time of the task  
+- request body (if possible)  
+
+</span>
 :::
 
 
