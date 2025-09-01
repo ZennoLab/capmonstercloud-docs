@@ -110,19 +110,19 @@ A extensão **CapMonster Cloud** oferece uma maneira prática de visualizar os p
 
 ### Tipos de captcha suportados e seus parâmetros
 
-| Tipo de captcha              | Parâmetros exibidos                                                                  |
-|-----------------------------|----------------------------------------------------------------------------------------|
+| Tipo de Captcha             | Parâmetros Exibidos                                                                                                             |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | **reCAPTCHA V2**            | `class`, `imageUrls`, `Task` (dentro de `metadata`), `Grid` (dentro de `metadata`), `recognizingThreshold`, `userAgent`, `type` |
 | **reCAPTCHA V2 Invisible**  | `class`, `imageUrls`, `Task` (dentro de `metadata`), `Grid` (dentro de `metadata`), `recognizingThreshold`, `userAgent`, `type` |
 | **reCAPTCHA V2 Enterprise** | `class`, `imageUrls`, `Task` (dentro de `metadata`), `Grid` (dentro de `metadata`), `recognizingThreshold`, `userAgent`, `type` |
-| **GeeTest v3**              | `websiteURL`, `gt`, `challenge`, `userAgent`, `type`                                  |
-| **GeeTest v4**              | `websiteURL`, `gt` (`captcha_id`), `userAgent`, `version`, `type`                     |
-| **Cloudflare Turnstile**    | `websiteURL`, `websiteKey`, `userAgent`, `type`                                       |
-| **Cloudflare Challenge**    | `websiteURL`, `websiteKey`, `userAgent`, `pageAction`, `data`, `pageData`, `cloudflareTaskType`, `type` |
-| **ImageToText**             | `body` (em formato `base64`), `type`                                                  |
-| **BLS**                     | `class`, `imagesBase64`, `Task` (dentro de `metadata`), `TaskArgument` (dentro de `metadata`), `type` |
-| **Binance**                 | `websiteURL`, `websiteKey`, `validateId`, `userAgent`, `type`                         |
-
+| **reCAPTCHA V3**            | `websiteURL`, `websiteKey`, `pageAction`, `minScore`, `type`                                                                    |
+| **GeeTest v3**              | `websiteURL`, `gt`, `challenge`, `userAgent`, `type`                                                                            |
+| **GeeTest v4**              | `websiteURL`, `gt` (`captcha_id`), `userAgent`, `version`, `type`                                                               |
+| **Cloudflare Turnstile**    | `websiteURL`, `websiteKey`, `userAgent`, `type`                                                                                 |
+| **Cloudflare Challenge**    | `websiteURL`, `websiteKey`, `userAgent`, `pageAction`, `data`, `pageData`, `cloudflareTaskType`, `type`                         |
+| **ImageToText**             | `body` (em formato `base64`), `type`                                                                                            |
+| **BLS**                     | `class`, `imagesBase64`, `Task` (dentro de `metadata`), `TaskArgument` (dentro de `metadata`), `type`                           |
+| **Binance**                 | `websiteURL`, `websiteKey`, `validateId`, `userAgent`, `type`                                                                   |
 
 Para utilizar este recurso, ative a extensão, abra a página do captcha (certifique-se de que o tipo é suportado e está selecionado para resolução), e siga os passos abaixo:
 

@@ -121,18 +121,19 @@ sidebar_position: 0
 
 ### 支持的验证码类型及其参数
 
-| 验证码类型                  | 显示的参数                                                                         |
-|-----------------------------|----------------------------------------------------------------------------------------|
-| **reCAPTCHA V2**            | `class`、`imageUrls`、`Task`（在 `metadata` 内）、`Grid`（在 `metadata` 内）、`recognizingThreshold`、`userAgent`、`type` |
-| **reCAPTCHA V2 Invisible**  | `class`、`imageUrls`、`Task`（在 `metadata` 内）、`Grid`（在 `metadata` 内）、`recognizingThreshold`、`userAgent`、`type` |
-| **reCAPTCHA V2 Enterprise** | `class`、`imageUrls`、`Task`（在 `metadata` 内）、`Grid`（在 `metadata` 内）、`recognizingThreshold`、`userAgent`、`type` |
-| **GeeTest v3**              | `websiteURL`、`gt`、`challenge`、`userAgent`、`type`                                   |
-| **GeeTest v4**              | `websiteURL`、`gt`（`captcha_id`）、`userAgent`、`version`、`type`                     |
-| **Cloudflare Turnstile**    | `websiteURL`、`websiteKey`、`userAgent`、`type`                                       |
-| **Cloudflare Challenge**    | `websiteURL`、`websiteKey`、`userAgent`、`pageAction`、`data`、`pageData`、`cloudflareTaskType`、`type` |
-| **ImageToText**             | `body`（Base64 格式）、`type`                                                        |
-| **BLS**                     | `class`、`imagesBase64`、`Task`（在 `metadata` 内）、`TaskArgument`（在 `metadata` 内）、`type` |
-| **Binance**                 | `websiteURL`、`websiteKey`、`validateId`、`userAgent`、`type`                          |
+| 验证码类型                       | 显示的参数                                                                                                       |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| **reCAPTCHA V2**            | `class`，`imageUrls`，`Task`（在 `metadata` 中），`Grid`（在 `metadata` 中），`recognizingThreshold`，`userAgent`，`type` |
+| **reCAPTCHA V2 Invisible**  | `class`，`imageUrls`，`Task`（在 `metadata` 中），`Grid`（在 `metadata` 中），`recognizingThreshold`，`userAgent`，`type` |
+| **reCAPTCHA V2 Enterprise** | `class`，`imageUrls`，`Task`（在 `metadata` 中），`Grid`（在 `metadata` 中），`recognizingThreshold`，`userAgent`，`type` |
+| **reCAPTCHA V3**            | `websiteURL`，`websiteKey`，`pageAction`，`minScore`，`type`                                                    |
+| **GeeTest v3**              | `websiteURL`，`gt`，`challenge`，`userAgent`，`type`                                                            |
+| **GeeTest v4**              | `websiteURL`，`gt`（`captcha_id`），`userAgent`，`version`，`type`                                                |
+| **Cloudflare Turnstile**    | `websiteURL`，`websiteKey`，`userAgent`，`type`                                                                |
+| **Cloudflare Challenge**    | `websiteURL`，`websiteKey`，`userAgent`，`pageAction`，`data`，`pageData`，`cloudflareTaskType`，`type`            |
+| **ImageToText**             | `body`（`base64` 格式），`type`                                                                                  |
+| **BLS**                     | `class`，`imagesBase64`，`Task`（在 `metadata` 中），`TaskArgument`（在 `metadata` 中），`type`                         |
+| **Binance**                 | `websiteURL`，`websiteKey`，`validateId`，`userAgent`，`type`                                                   |
 
 
 使用此功能，请启用扩展程序，打开验证码页面（确保验证码类型受支持并已选中），然后按以下步骤操作：
