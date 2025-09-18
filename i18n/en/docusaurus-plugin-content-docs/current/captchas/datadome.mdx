@@ -1,11 +1,9 @@
 ---
 sidebar_position: 11
 sidebar_label: DataDome
-title: "Automatically recognise and bypass DataDome captchas | API"
-description: "Learn how to bypass the DataDome captcha via the Capmonster Cloud API! Instructions on how to use the DataDome method to set up automatic recognition and solution of DataDome captcha!"
-draft: true
+title: "Automatic Recognition and Bypass of DataDome Captcha | API"
+description: "Learn how to bypass DataDome captcha using the Capmonster Cloud API! This guide will show you how to set up automatic recognition and solving of DataDome captchas."
 ---
-
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ParamItem from '@theme/ParamItem';
@@ -20,87 +18,102 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
   <PriceBlock title="DataDome"  captchaId="datadome"/>
 </PriceBlockWrap>
 
-This type of captcha basically requires the user to solve a puzzle by moving a slider to confirm. 
+This type of captcha usually requires the user to solve a puzzle by moving a slider for verification.
 
 ![](./images/datadome/datadome.png)
 
-:::warning **Attention!**
-This task will be performed using our proxy servers. Use the received cookies in your project to automatically pass the captcha.
+:::warning **Warning!**
+
+* Use **your own proxies** to perform this task.
+* If your proxy uses IP-based authorization, you must whitelist the address **116.203.55.208**.
+* After solving, you will receive **special cookies** that must be added to the browser.
 :::
 
-
 ## Request parameters
-<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (without proxy)" default className="bordered-panel">
+
+<TabItem value="proxyless" label="CustomTask (without proxy)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **CustomTask**
+    
+---
 
-    ---
+<ParamItem title="class" required type="string" />
+**DataDome**
 
-    <ParamItem title="class" required type="string" />
-    **DataDome**
+---
 
-    ---
+<ParamItem title="websiteURL" required type="string" />
+The main page URL where the captcha is solved.
 
-    <ParamItem title="websiteURL" required type="string" />
-    The address of the main page where the captcha is solved.
+---
 
-    ---
+<ParamItem title="captchaUrl (inside metadata)" required="required" type="string" />
+`"captchaUrl"` - link to the captcha. Usually in the format: `"https://geo.captcha-delivery.com/captcha/?initialCid=..."`.
 
-    <ParamItem title="metadata.htmlPageBase64" required="required (if metadata.captchaUrl is not filled)" type="string" />
-    Object that contains additional data about the captcha: `"htmlPageBase64": "..."` - a base64 encoded html page that comes with a 403 code and a Set-Cookie: datadome="..." header in response to a get request to the target site.
+---
 
-    ---
+<ParamItem title="datadomeCookie (inside metadata)" required type="string" />
+Your DataDome cookies. Can be obtained from the page using `document.cookie` (if cookies do not have the *HttpOnly* flag), in the request header Set-Cookie: "datadome=...", or directly from the HTML code `initialCid` ([*see examples on how to find datadomeCookie*](#how-to-find-datadomecookie)).
 
-    <ParamItem title="metadata.captchaUrl" required="required (if metadata.htmlPageBase64 is not filled)" type="string" />
-    `"captchaUrl"` - link to the captcha. Usually it looks like this: `"https://geo.captcha-delivery.com/captcha/?initialCid=..."`.
+---
 
-    ---
+<ParamItem title="proxyType" required type="string" />
+**http** - standard http/https proxy;<br />
+**https** - use this only if "http" does not work (required for some custom proxies);<br />
+**socks4** - socks4 proxy;<br />
+**socks5** - socks5 proxy.
 
-    <ParamItem title="metadata.datadomeCookie" required type="string" />
-    Your cookies from datadome. You can get it on the page using "document.cookie" or in the Set-Cookie request header: "datadome=..." (see example request /createTask)
+---
 
-    ---
+<ParamItem title="proxyAddress" required type="string" />
+<p>
+  IPv4/IPv6 proxy address. Not allowed:
+    - hostnames;
+    - transparent proxies (where the client IP is visible);
+    - proxies on local machines.
+</p>
 
-    <ParamItem title="userAgent" type="string" />
-    Browser User-Agent. <br /> 
-	**Pass only the actual UA. Now this is**: Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/21F90 Safari/604.1
-	
-     ---
+---
 
-    <ParamItem title="proxyType" type="string" />
-    **http** - regular http/https proxy;<br />**https** - try this option only if "http" doesn't work (required for some custom proxies);<br />**socks4** - socks4 proxy;<br />**socks5** - socks5 proxy.
+<ParamItem title="proxyPort" required type="integer" />
+Proxy port.
 
-     ---
+---
 
-    <ParamItem title="proxyAddress" type="string" />
-    <p>
-      IPv4/IPv6 proxy IP address. Not allowed:
-      - using of hostnames;
-      - using transparent proxies (where you can see the client's IP);
-      - using proxies on local machines.
-    </p>
+<ParamItem title="proxyLogin" required type="string" />
+Proxy server login.
 
-     ---
+---
 
-    <ParamItem title="proxyPort" type="integer" />
-    Proxy port.
+<ParamItem title="proxyPassword" required type="string" />
+Proxy server password.
 
-     ---
+---
 
-    <ParamItem title="proxyLogin" type="string" />
-    Proxy-server login.
+<ParamItem title="userAgent" type="string" />
+Browser User-Agent. <br />
+**Only provide a valid UA. Currently recommended**: "userAgentPlaceholder"
 
-     ---
-
-    <ParamItem title="proxyPassword" type="string" />
-    Proxy-server password.
+---
 
 </TabItem>
 
-
 ## Create task method
 
-<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
+:::warning **Important**
+During page loading, DataDome may use one of two scripts: `c.js` or `i.js`.
+If `c.js` is used on the target site, extracted cookies may not work for verification. Before solving, check which script is loaded (**DevTools → Network / HTML**).
+:::
+
+**Option with `c.js`:**
+
+![](./images/datadome/datadome_cjs.png)
+
+**Option with `i.js`:**
+
+![](./images/datadome/datadome_ijs.png)
+
+<TabItem value="proxyless" label="CustomTask (without proxy)" default className="method-panel">
 	<MethodItem>
 		```http
 		https://api.capmonster.cloud/createTask
@@ -108,21 +121,26 @@ This task will be performed using our proxy servers. Use the received cookies in
 	</MethodItem>
 	<MethodDescription>
 		**Request**
-		```json
-		{
-			"clientKey": "API_KEY",
-			"task": {
-				"type": "CustomTask",
-				"class": "DataDome",
-				"websiteURL": "https://example.com",
-				"userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/21F90 Safari/604.1",
-				"metadata": {
-					"htmlPageBase64": "PGh0bWw+PGhlYWQ+PHRpdGxlPmJs...PC9odG1sPg==",
-					"datadomeCookie": "datadome=VYUWrgJ9ap4zmXq8Mgbp...64emvUPeON45z"
-				}
-			}
-		}
-		```
+```json
+{
+  "clientKey": "API_KEY",
+  "task": {
+    "type": "CustomTask",
+    "class": "DataDome",
+    "websiteURL": "https://example.com",
+    "userAgent": "userAgentPlaceholder",
+    "metadata": {
+      "captchaUrl": "https://geo.captcha-delivery.com/interstitial/?initialCid=AHrlqAAAAAMA9UvsL58YLqIAXNLFPg%3D%3D&hash=C0705ACD75EBF650A07FF8291D3528&cid=7sfa5xUfDrR4bQTp1c2mhtiD7jj9TXExcQypjdNAxKVFyIi1S9tE0~_mqLa2EFpOuzxKcZloPllsNHjNnqzD9HmBA4hEv7SsEyPYEidCBvjZEaDyfRyzefFfolv0lAHM&referer=https%3A%2F%2Fwww.example.com.au%2F&s=6522&b=978936&dm=cm",
+      "datadomeCookie": "datadome=VYUWrgJ9ap4zmXq8Mgbp...64emvUPeON45z"
+    },
+    "proxyType": "http",
+    "proxyAddress": "123.45.67.89",
+    "proxyPort": 8080,
+    "proxyLogin": "proxyUsername",
+    "proxyPassword": "proxyPassword"
+  }
+}
+```
 		**Response**
 		```json
 		{
@@ -134,9 +152,10 @@ This task will be performed using our proxy servers. Use the received cookies in
 </TabItem>
 
 ## Get task result method
-Use the [getTaskResult](../api/methods/get-task-result.md) method to get the DataDome solution.
 
-<TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
+Use the [getTaskResult](../api/methods/get-task-result.md) method to get the solved DataDome captcha.
+
+<TabItem value="proxyless" label="CustomTask (without proxy)" default className="method-panel-full">
 	<MethodItem>
 		```http
 		https://api.capmonster.cloud/getTaskResult
@@ -151,26 +170,77 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the Dat
 		}
 		```
 		**Response**
-		```json
-		{
-			"errorId":0,
-			"status":"ready",
-			"solution": {
-				"domains": {
-					"site.com": {
-						"cookies": {
-							"datadome": "t355hfeuUFbsWpoMzXyIWL_ewfwgre25345323rwgregeFEkG5iju9esKVfWMzuLAjcfCIJUIHU7332At1l~HY78g782hidwfeO4K2ZP_CFHYUFEgygfiYGfGYEUfgyefWrXG6_3sy; Max-Age=31536000; Domain=.site.com; Path=/; Secure; SameSite=Lax"
-						}
-					}
-				}
-			}
-		}
-		```
-	</MethodDescription>
+
+```json
+{
+  "errorId": 0,
+  "status": "ready",
+  "solution": {
+    "domains": {
+      "www.example.com": {
+        "cookies": {
+          "datadome": "P1w0VnjFcTFslfps0J4FaPpY_QPbPBW4MeYxj4LW~pztIfJiSSuBPr8oQTUHzdrfgv137FbOBd3kCUOOgny7LhIkhm5e1qdtzYM4s2e46U_qfERK4KiCy22MOSIDsDyh"
+        },
+        "localStorage": null
+      }
+    },
+    "url": null,
+    "fingerprint": null,
+    "headers": null,
+    "data": null
+  }
+}
+```
+</MethodDescription>
+
 </TabItem>
 
+## How to find `datadomeCookie`
 
-## Use SDK Library
+### Using Developer Tools
+
+**Option 1:**
+
+1. Open the DataDome-protected site in a browser (Chrome, Firefox).
+
+2. Press F12 → go to the **Application** tab → **Cookies**.
+
+3. Find the domain of the site (e.g., [www.example.com](http://www.example.com)).
+
+Among the cookies, look for the `datadome` key — this is the required `datadomeCookie`.
+
+![](./images/datadome/datadomeCookie.png)
+
+**Option 2:**
+
+1. Open the site where the DataDome captcha triggers.
+
+2. Go to **DevTools → Network**, reload the page, and find the request loading the page with `initialCid`.
+
+Example URL:
+
+`https://geo.captcha-delivery.com/interstitial/?initialCid=...&hash=...&cid=...`
+
+3. Open the **Response** of this request. In the HTML code, find the object:
+
+`var ddm = { ... };`
+
+4. Inside this object, locate the `cid` parameter. Its value is the current `datadomeCookie`.
+
+![](./images/datadome/datadomeCookie1.png)
+
+**Option 3:**
+
+1. Open the site where the DataDome captcha triggers.
+
+2. Go to **DevTools → Network**, reload the page, and find a request with **403** status.
+
+3. Go to the **Headers → Response Headers** tab. In the headers, find `Set-Cookie:` and copy the value of the `datadome` parameter (`datadome=<value>`).
+
+![](./images/datadome/datadomeCookie2.png)
+
+
+{/* ## Use SDK Library
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">
@@ -258,4 +328,4 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the Dat
 		```
 	</TabItem>
 </Tabs>
-
+ */}
