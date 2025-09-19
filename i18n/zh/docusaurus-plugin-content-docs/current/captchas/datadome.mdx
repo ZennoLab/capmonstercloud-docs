@@ -1,9 +1,9 @@
 ﻿---
 sidebar_position: 11
 sidebar_label: DataDome
-draft: true
+title: "DataDome验证码自动识别与绕过 | API"
+description: "了解如何通过Capmonster Cloud API绕过DataDome验证码！本指南展示了如何配置DataDome验证码的自动识别与解决方案。"
 ---
-
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ParamItem from '@theme/ParamItem';
@@ -18,108 +18,130 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
   <PriceBlock title="DataDome" captchaId="datadome"/>
 </PriceBlockWrap>
 
-这种验证码基本上要求用户通过移动滑块来解决拼图以进行确认。
+这种类型的验证码通常要求用户通过移动滑块来完成拼图以进行验证。
+
 ![](./images/datadome/datadome.png)
 
 :::warning **注意！**
-此任务将使用我们的代理服务器执行。请在您的项目中使用收到的 Cookie 自动通过验证码。
+
+* 执行此任务时，请使用 **您自己的代理**。
+* 如果您的代理使用基于IP的授权，请将地址 **116.203.55.208** 添加到白名单。
+* 完成验证后，您将获得 **特殊的Cookie**，需要添加到浏览器中。
 :::
 
-
 ## 请求参数
-<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (without proxy)" default className="bordered-panel">
+
+<TabItem value="proxyless" label="CustomTask (without proxy)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **CustomTask**
+    
+---
 
-    ---
+<ParamItem title="class" required type="string" />
+**DataDome**
 
-    <ParamItem title="class" required type="string" />
-    **DataDome**
+---
 
-    ---
+<ParamItem title="websiteURL" required type="string" />
+验证码所在的主页面URL。
 
-    <ParamItem title="websiteURL" required type="string" />
-    解决验证码的主页面地址。
+---
 
-    ---
+<ParamItem title="captchaUrl（在metadata中）" required="required" type="string" />
+`"captchaUrl"` - 验证码链接。通常格式为: `"https://geo.captcha-delivery.com/captcha/?initialCid=..."`。
 
-    <ParamItem title="metadata.htmlPageBase64" required="required (if metadata.captchaUrl is not filled)" type="string" />
-    包含验证码附加数据的对象：`"htmlPageBase64": "..."` - 一个 base64 编码的 HTML 页面，在对目标站点的 GET 请求响应中带有 403 状态码和 Set-Cookie: datadome="..." 头。
+---
 
-    ---
+<ParamItem title="datadomeCookie（在metadata中）" required type="string" />
+您的DataDome Cookie。可以通过页面的 `document.cookie` 获取（如果Cookie没有 *HttpOnly* 标志），通过请求头 Set-Cookie: "datadome=..."，或直接从HTML代码中的 `initialCid` 获取 ([*查看如何找到datadomeCookie示例*](#如何找到datadomecookie))。
 
-    <ParamItem title="metadata.captchaUrl" required="required (if metadata.htmlPageBase64 is not filled)" type="string" />
-    `"captchaUrl"` - 验证码链接。通常看起来像这样：`"https://geo.captcha-delivery.com/captcha/?initialCid=..."`。
+---
 
-    ---
+<ParamItem title="proxyType" required type="string" />
+**http** - 常规http/https代理；<br />
+**https** - 仅在http不工作时使用（某些自定义代理需要）；<br />
+**socks4** - socks4代理；<br />
+**socks5** - socks5代理。
 
-    <ParamItem title="metadata.datadomeCookie" required type="string" />
-    您的 datadome Cookie。您可以在页面上使用 "document.cookie" 获取，或在 Set-Cookie 请求头中获取："datadome=..."（参见示例请求 /createTask）
+---
 
-    ---
+<ParamItem title="proxyAddress" required type="string" />
+<p>
+  代理IPv4/IPv6地址。禁止使用：
+    - 主机名；
+    - 透明代理（客户端IP可见）；
+    - 本地机器代理。
+</p>
 
-    <ParamItem title="userAgent" type="string" />
-    User-Agent。<br /> **只通过实际的 UA。现在是**： Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/21F90 Safari/604.1
-	
-     ---
+---
 
-    <ParamItem title="proxyType" type="string" />
-    **http** - 普通的 http/https 代理；<br />**https** - 仅在 "http" 不起作用时尝试（某些自定义代理服务器要求）；<br />**socks4** - socks4 代理；<br />**socks5** - socks5 代理。
+<ParamItem title="proxyPort" required type="integer" />
+代理端口。
 
-     ---
+---
 
-    <ParamItem title="proxyAddress" type="string" />
-    <p>
-	  代理 IP 地址 IPv4/IPv6。不允许：
-		- 使用主机名；
-		- 使用透明代理（其中客户端 IP 可见）；
-		- 使用来自本地网络的代理。
-	</p>
+<ParamItem title="proxyLogin" required type="string" />
+代理服务器登录名。
 
-     ---
+---
 
-    <ParamItem title="proxyPort" type="integer" />
-    代理端口。
+<ParamItem title="proxyPassword" required type="string" />
+代理服务器密码。
 
-     ---
+---
 
-    <ParamItem title="proxyLogin" type="string" />
-    代理登录。
+<ParamItem title="userAgent" type="string" />
+浏览器User-Agent。 <br />
+**请只提供有效UA。目前推荐为**: "userAgentPlaceholder"
 
-     ---
-
-    <ParamItem title="proxyPassword" type="string" />
-    代理密码。
+---
 
 </TabItem>
 
+## 任务创建方法
 
-## 创建任务方法 
+:::warning **重要**
+在页面加载过程中，DataDome可能会使用两种脚本之一：`c.js` 或 `i.js`。
+如果目标网站使用 `c.js`，提取的Cookie可能无法用于验证。在执行解决方案之前，请检查加载了哪个脚本 (**DevTools → Network / HTML**)。
+:::
 
-<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
+**使用 `c.js` 的情况：**
+
+![](./images/datadome/datadome_cjs.png)
+
+**使用 `i.js` 的情况：**
+
+![](./images/datadome/datadome_ijs.png)
+
+<TabItem value="proxyless" label="CustomTask（无代理）" default className="method-panel">
 	<MethodItem>
 		```http
 		https://api.capmonster.cloud/createTask
 		```
 	</MethodItem>
 	<MethodDescription>
-		**要求**
-		```json
-		{
-			"clientKey": "API_KEY",
-			"task": {
-				"type": "CustomTask",
-				"class": "DataDome",
-				"websiteURL": "https://example.com",
-				"userAgent": "MuserAgentPlaceholder",
-				"metadata": {
-					"htmlPageBase64": "PGh0bWw+PGhlYWQ+PHRpdGxlPmJs...PC9odG1sPg==",
-					"datadomeCookie": "datadome=VYUWrgJ9ap4zmXq8Mgbp...64emvUPeON45z"
-				}
-			}
-		}
-		```
-		**回应**
+		**请求**
+```json
+{
+  "clientKey": "API_KEY",
+  "task": {
+    "type": "CustomTask",
+    "class": "DataDome",
+    "websiteURL": "https://example.com",
+    "userAgent": "userAgentPlaceholder",
+    "metadata": {
+      "captchaUrl": "https://geo.captcha-delivery.com/interstitial/?initialCid=AHrlqAAAAAMA9UvsL58YLqIAXNLFPg%3D%3D&hash=C0705ACD75EBF650A07FF8291D3528&cid=7sfa5xUfDrR4bQTp1c2mhtiD7jj9TXExcQypjdNAxKVFyIi1S9tE0~_mqLa2EFpOuzxKcZloPllsNHjNnqzD9HmBA4hEv7SsEyPYEidCBvjZEaDyfRyzefFfolv0lAHM&referer=https%3A%2F%2Fwww.example.com.au%2F&s=6522&b=978936&dm=cm",
+      "datadomeCookie": "datadome=VYUWrgJ9ap4zmXq8Mgbp...64emvUPeON45z"
+    },
+    "proxyType": "http",
+    "proxyAddress": "123.45.67.89",
+    "proxyPort": 8080,
+    "proxyLogin": "proxyUsername",
+    "proxyPassword": "proxyPassword"
+  }
+}
+```
+		**响应**
 		```json
 		{
 		  "errorId":0,
@@ -129,45 +151,99 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 	</MethodDescription>
 </TabItem>
 
+## 获取任务结果的方法
 
-## 获取任务结果方法
-使用 [getTaskResult](../api/methods/get-task-result.md) 方法获取 DataDome 的解决方案。
+使用 [getTaskResult](../api/methods/get-task-result.md) 方法来获取DataDome验证码的解决方案。
 
-<TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
+<TabItem value="proxyless" label="CustomTask（无代理）" default className="method-panel-full">
 	<MethodItem>
 		```http
 		https://api.capmonster.cloud/getTaskResult
 		```
 	</MethodItem>
 	<MethodDescription>
-		**要求**
+		**请求**
 		```json
 		{
 		  "clientKey":"API_KEY",
 		  "taskId": 407533072
 		}
 		```
-		**回应**
-		```json
-		{
-			"errorId":0,
-			"status":"ready",
-			"solution": {
-				"domains": {
-					"site.com": {
-						"cookies": {
-							"datadome": "t355hfeuUFbsWpoMzXyIWL_ewfwgre25345323rwgregeFEkG5iju9esKVfWMzuLAjcfCIJUIHU7332At1l~HY78g782hidwfeO4K2ZP_CFHYUFEgygfiYGfGYEUfgyefWrXG6_3sy; Max-Age=31536000; Domain=.site.com; Path=/; Secure; SameSite=Lax"
-						}
-					}
-				}
-			}
-		}
-		```
-	</MethodDescription>
+		**响应**
+
+```json
+{
+  "errorId": 0,
+  "status": "ready",
+  "solution": {
+    "domains": {
+      "www.example.com": {
+        "cookies": {
+          "datadome": "P1w0VnjFcTFslfps0J4FaPpY_QPbPBW4MeYxj4LW~pztIfJiSSuBPr8oQTUHzdrfgv137FbOBd3kCUOOgny7LhIkhm5e1qdtzYM4s2e46U_qfERK4KiCy22MOSIDsDyh"
+        },
+        "localStorage": null
+      }
+    },
+    "url": null,
+    "fingerprint": null,
+    "headers": null,
+    "data": null
+  }
+}
+```
+</MethodDescription>
 </TabItem>
 
+## 如何找到 `datadomeCookie`
 
-## 使用 SDK 库
+### 使用开发者工具
+
+**方法1：**
+
+1. 在浏览器中打开受DataDome保护的网站（Chrome、Firefox）。
+
+2. 按 F12 → 打开 **Application** 标签 → **Cookies**。
+
+3. 找到网站域名（例如：[www.example.com）。](http://www.example.com）。)
+
+在Cookie中查找键 `datadome` —— 这就是所需的 `datadomeCookie` 参数。
+
+![](./images/datadome/datadomeCookie.png)
+
+**方法2：**
+
+1. 打开触发DataDome验证码的网站。
+
+2. 进入 **DevTools → Network**，刷新页面，找到加载带有 `initialCid` 参数的请求。
+
+示例URL：
+
+`https://geo.captcha-delivery.com/interstitial/?initialCid=...&hash=...&cid=...`
+
+![](./images/datadome/datadomeCookie3.png)
+
+或:
+
+3. 打开该请求的 **Response**，在HTML代码中找到对象：
+
+`var ddm = { ... };`
+
+4. 在该对象中找到参数 `cid`，其值即为当前 `datadomeCookie`。
+
+![](./images/datadome/datadomeCookie1.png)
+
+**方法3：**
+
+1. 打开触发DataDome验证码的网站。
+
+2. 进入 **DevTools → Network**，刷新页面，找到状态为 **403** 的请求。
+
+3. 切换到 **Headers → Response Headers**，在头部找到 `Set-Cookie:` 并复制 `datadome` 参数的值（格式 `datadome=<value>`）。
+
+![](./images/datadome/datadomeCookie2.png)
+
+
+{/* ## 使用 SDK 库
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">
@@ -254,4 +330,4 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 		}
 		```
 	</TabItem>
-</Tabs>
+</Tabs> */}
