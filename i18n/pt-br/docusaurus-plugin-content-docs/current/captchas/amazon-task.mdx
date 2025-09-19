@@ -1,8 +1,8 @@
 ---
-sidebar_position: 12
-sidebar_label: AmazonTask
-title: “Reconhecer e contornar automaticamente o captcha do Amazon AWS WAF por meio da API do Capmonster Cloud”
-description: “Aprenda a ignorar o captcha da Amazon (AWS WAF) usando a API do serviço de solução e reconhecimento automático de captcha do Capmonster Cloud.”
+sidebar_position: 13
+sidebar_label: Amazon (AWS WAF)
+title: "Reconhecimento automático e bypass do captcha do Amazon AWS WAF via Capmonster Cloud API"
+description: Saiba como contornar o captcha da Amazon (AWS WAF) usando a API de reconhecimento e resolução automática de captchas do Capmonster Cloud!
 ---
 
 import Tabs from '@theme/Tabs';
@@ -20,160 +20,506 @@ import BlogLink from '@theme/BlogLink';
   <PriceBlock title="AmazonTask" captchaId="amazonwaf"/>
 </PriceBlockWrap>
 
+### <span style={{fontSize: '1.5rem'}}>Exemplos de tarefas</span>
+
+<Tabs className="full-width-tabs">
+  <TabItem value="waf1" label="Click" default>
+    ![](./images/amazon-task/Waf1.png)
+  </TabItem>
+  <TabItem value="waf2" label="Puzzle">
+    ![](./images/amazon-task/Waf2.png)
+  </TabItem>
+</Tabs>
+
 Resolvendo CAPTCHA e Challenge no AWS WAF
 
 <BlogLink url="https://capmonster.cloud/pt-BR/blog/scraping/amazon-captcha-web-scraping"/>
 
 :::warning **Atenção!**
-Esta tarefa será executada usando nossos servidores proxy.
-:::
+Por padrão, o CapMonster Cloud usa proxies integrados, portanto você não precisa conectar os seus — o custo já está incluído no preço.  
+Use proxies próprios apenas nos casos em que o token não é aceito no site alvo ou o acesso aos serviços integrados é restrito. Você pode entrar em contato com o [suporte](https://helpdesk.zennolab.com/conversation/new) para esclarecer detalhes e verificar como os tokens são aceitos em um site específico.  
 
-### <span style={{fontSize: '1.5rem'}}>Possíveis variantes de captcha</span>
-![](./images/amazon-task/Waf1.png)
-![](./images/amazon-task/Waf2.png)
-![](./images/amazon-task/Waf3.png)
+Se o seu proxy utilizar autorização por IP, é necessário adicionar o endereço **116.203.55.208** à lista de permissões.
+:::
 
 ## Parâmetros da solicitação
 ## Opção 1
-<TabItem value='proxyless' label='AmazonTaskProxyless (sem proxy)' default className='bordered-panel'>
-    <ParamItem title='type' required type='string' />
+<TabItem value="proxyless" label="AmazonTask (sem proxy)" default className="bordered-panel">
+    <ParamItem title="type" required type="string" />
     **AmazonTask**
 
     --- 
 
-    <ParamItem title='websiteURL' required type='string' />
-    O endereço da página principal em que o captcha é resolvido.
+    <ParamItem title="websiteURL" required type="string" />
+    Endereço da página principal onde o captcha é resolvido.
 
     ---
 	
-	<ParamItem title='websiteKey' required type='string' />
-    Pode ser encontrado no campo `apiKey` ao renderizar o captcha
+    <ParamItem title="websiteKey" required type="string" />
+    Pode ser encontrado no campo `apiKey` durante a renderização do captcha.
 
     ---
 
-    <ParamItem title='captchaScript' required type='string' />
-    Link para jsapi.js na página html, com o formato \<Integration URL\>/jsapi.js
+    <ParamItem title="captchaScript" required type="string" />
+    Link para o jsapi.js na página HTML, tem a forma \<Integration URL\>/jsapi.js.
 
     ---
 
-    <ParamItem title='cookieSolution' type='boolean' />
-    Padrão **false**. Se você precisar de um cookie “aws-waf-token”, especifique um valor de **true**. Caso contrário, você receberá “captcha_voucher” e “existing_token” como resposta.
+    <ParamItem title="cookieSolution" type="boolean" />
+    O padrão é **false** — na resposta você receberá "captcha_voucher" e "existing_token".  
+    Se precisar do cookie "aws-waf-token", defina como **true**.
+
+    ---
+
+  <ParamItem title="proxyType" type="string" />
+  **http** - proxy http/https padrão;<br />
+  **https** - use esta opção apenas se "http" não funcionar (necessário para alguns proxies customizados);<br />
+  **socks4** - proxy socks4;<br />
+  **socks5** - proxy socks5.
+
+  ---
+
+  <ParamItem title="proxyAddress" type="string" />
+  <p>
+    Endereço IPv4/IPv6 do proxy. Não é permitido:
+    - uso de nomes de host;
+    - proxies transparentes (onde o IP do cliente pode ser visto);
+    - uso de proxies em máquinas locais.
+  </p>
+
+  ---
+
+  <ParamItem title="proxyPort" type="integer" />
+  Porta do proxy.
+
+  ---
+
+  <ParamItem title="proxyLogin" type="string" />
+  Usuário do servidor proxy.
+
+  ---
+
+  <ParamItem title="proxyPassword" type="string" />
+  Senha do servidor proxy.
+
+  ---
 
 </TabItem>
 
-## Opção 2
+## Opção 2 
 <TabItem value="proxyless" label="AmazonTaskProxyless (sem proxy)" default className="bordered-panel">
-<ParamItem title="type" required type="string" />
-**AmazonTask**
+    <ParamItem title="type" required type="string" />
+    **AmazonTask**
 
----
+    --- 
 
-<ParamItem title="websiteURL" required type="string" />
-O endereço da página principal onde o captcha é resolvido.
+    <ParamItem title="websiteURL" required type="string" />
+    O endereço da página principal onde o captcha é resolvido.
 
----
+    ---
 
-<ParamItem title="challengeScript" required type="string" />
-Link para o challenge.js (veja a descrição abaixo)
+    <ParamItem title="challengeScript" required type="string" />
+    Link para o challenge.js (veja a descrição abaixo).
 
----
+    ---
+
+    <ParamItem title="websiteKey" required type="string" />
+    Uma string que pode ser obtida a partir da página HTML do captcha ou via JavaScript: `window.gokuProps.key`.
+
+    ---
+
+    <ParamItem title="context" required type="string" />
+    Uma string que pode ser obtida a partir da página HTML do captcha ou via JavaScript: `window.gokuProps.context`.
+
+    ---
+
+    <ParamItem title="iv" required type="string" />
+    Uma string que pode ser obtida a partir da página HTML do captcha ou via JavaScript: `window.gokuProps.iv`.
+
+    ---
 
     <ParamItem title="captchaScript" type="string" />
-    Link para captcha.js (talvez esteja faltando se você tiver apenas um challenge)
+    Link para o captcha.js (pode estar ausente se houver apenas um challenge).
+
+    ---
+
+    <ParamItem title="cookieSolution" type="boolean" />
+    O padrão é **false** — na resposta você receberá "captcha_voucher" e "existing_token".  
+    Se precisar do cookie "aws-waf-token", defina como **true**.
+
+    ---
+
+  <ParamItem title="proxyType" type="string" />
+  **http** - proxy http/https padrão;<br />
+  **https** - use esta opção apenas se "http" não funcionar (necessário para alguns proxies customizados);<br />
+  **socks4** - proxy socks4;<br />
+  **socks5** - proxy socks5.
+
+  ---
+
+  <ParamItem title="proxyAddress" type="string" />
+  <p>
+    Endereço IPv4/IPv6 do proxy. Não é permitido:
+    - uso de nomes de host;
+    - proxies transparentes (onde o IP do cliente pode ser visto);
+    - uso de proxies em máquinas locais.
+  </p>
+
+  ---
+
+  <ParamItem title="proxyPort" type="integer" />
+  Porta do proxy.
+
+  ---
+
+  <ParamItem title="proxyLogin" type="string" />
+  Usuário do servidor proxy.
+
+  ---
+
+  <ParamItem title="proxyPassword" type="string" />
+  Senha do servidor proxy.
 
 ---
-
-<ParamItem title="websiteKey" required type="string" />
-Uma string que pode ser obtida de uma página HTML com captcha ou com JavaScript executando `window.gokuProps.key`
-
----
-
-<ParamItem title="context" required type="string" />
-Uma string que pode ser obtida de uma página HTML com captcha ou com JavaScript executando `window.gokuProps.context`
-
----
-
-<ParamItem title="iv" required type="string" />
-Uma string que pode ser obtida de uma página HTML com captcha ou com JavaScript executando `window.gokuProps.iv`
-
----
-
-<ParamItem title="cookieSolution" type="boolean" />
-Por padrão **false**. Se você precisar usar cookies "aws-waf-token", especifique o valor **true**. Caso contrário, você receberá em troca "captcha_voucher" e "existing_token".
 
 </TabItem>
 
-### Como obter os parâmetros websiteKey, context, iv e challengeScript
-Ao acessar um site, você recebe uma resposta 405 e uma página HTML com um captcha. É dessa página que você pode obter todos os parâmetros:
-![](./images/amazon-task/aws1.png) 
-![](./images/amazon-task/aws2.png)
+  ## Opção 3
 
-## Métodos de criação de tarefas
+Se o site usa um captcha invisível e somente `challenge.js` é carregado, use esta opção.  
+Nesse caso, não é necessário enviar todos os parâmetros da opção 2 — eles podem ficar vazios. Envie apenas o valor de `challenge.js`.
+
+<TabItem value="proxyless" label="AmazonTaskProxyless (sem proxy)" default className="bordered-panel">
+    <ParamItem title="type" required type="string" />
+    **AmazonTask**
+
+    --- 
+
+    <ParamItem title="websiteURL" required type="string" />
+    Endereço da página principal onde o captcha é resolvido.
+
+    ---
+
+    <ParamItem title="challengeScript" required type="string" />
+    Link para o challenge.js.
+
+    ---
+
+    <ParamItem title="captchaScript" required type="string" />
+    Link para o captcha.js. Nesta opção, informe qualquer string.
+
+    ---
+
+    <ParamItem title="websiteKey" required type="string" />
+    Informe qualquer string.
+
+    ---
+
+    <ParamItem title="context" required type="string" />
+    Informe qualquer string.
+
+    ---
+
+    <ParamItem title="iv" required type="string" />
+    Informe qualquer string.
+
+    ---
+
+    <ParamItem title="cookieSolution" type="boolean" />
+    Defina como **true** para obter o "aws-waf token". 
+
+    ---
+
+  <ParamItem title="proxyType" type="string" />
+  **http** - proxy http/https padrão;<br />
+  **https** - use esta opção apenas se "http" não funcionar (necessário para alguns proxies customizados);<br />
+  **socks4** - proxy socks4;<br />
+  **socks5** - proxy socks5.
+
+  ---
+
+  <ParamItem title="proxyAddress" type="string" />
+  <p>
+    Endereço IPv4/IPv6 do proxy. Não é permitido:
+    - uso de nomes de host;
+    - proxies transparentes (onde o IP do cliente pode ser visto);
+    - uso de proxies em máquinas locais.
+  </p>
+
+  ---
+
+  <ParamItem title="proxyPort" type="integer" />
+  Porta do proxy.
+
+  ---
+
+  <ParamItem title="proxyLogin" type="string" />
+  Usuário do servidor proxy.
+
+  ---
+
+  <ParamItem title="proxyPassword" type="string" />
+  Senha do servidor proxy.
+
+---
+
+</TabItem>
+
+
+### Como obter os parâmetros `websiteKey`, `context`, `iv` e `challengeScript`
+Ao navegar até o site, você recebe uma resposta **405** e uma página HTML com o captcha. É possível extrair todos os parâmetros dessa página:  
+![](./images/amazon-task/aws1.png)  
+![](./images/amazon-task/aws2.png)  
+
+
+## Métodos de criação de tarefa
 ## Opção 1
-<TabItem value="proxyless" label="AmazonTaskProxyless (sem proxy)" default className="method-panel">
-<MethodItem>
-  ```http
-  https://api.capmonster.cloud/createTask
-  ```
-</MethodItem>
-<MethodDescription>
-**Solicitação**
-```json
-{
-			"clientKey": "API_KEY",
-			"task": {
-				"type": "AmazonTask",
-				"websiteURL": "https://example.com/index.html",
-				"websiteKey": "h15hX7brbaRTR...Za1_1",
-				"userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-				"captchaScript": "https://234324vgvc23.yejk.captcha-sdk.awswaf.com/234324vgvc23/jsapi.js",
-				"cookieSolution": true
-			}
-		}
-		```
-		**Resposta**
-		```json
-		{
-		  "errorId":0,
-		  "taskId":407533072
-		}
-		```
-	</MethodDescription>
-</TabItem>
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="proxyless" label="AmazonTask (sem proxy)" default className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+
+    **Requisição**
+
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "task": {
+        "type": "AmazonTask",
+        "websiteURL": "https://example.com/index.html",
+        "websiteKey": "h15hX7brbaRTR...Za1_1",
+        "userAgent": "userAgentPlaceholder",
+        "captchaScript": "https://234324vgvc23.yejk.captcha-sdk.awswaf.com/234324vgvc23/jsapi.js",
+        "cookieSolution": true
+      }
+    }
+    ```
+
+    **Resposta**
+
+    ```json
+    {
+      "errorId": 0,
+      "taskId": 407533072
+    }
+    ```
+
+    </MethodDescription>
+  </TabItem>
+
+  <TabItem value="proxy" label="AmazonTask (com proxy)" className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+
+    **Requisição**
+
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "task": {
+        "type": "AmazonTask",
+        "websiteURL": "https://example.com/index.html",
+        "websiteKey": "h15hX7brbaRTR...Za1_1",
+        "userAgent": "userAgentPlaceholder",
+        "captchaScript": "https://234324vgvc23.yejk.captcha-sdk.awswaf.com/234324vgvc23/jsapi.js",
+        "cookieSolution": true,
+        "proxyType": "http",
+        "proxyAddress": "8.8.8.8",
+        "proxyPort": 8080,
+        "proxyLogin": "proxyLoginHere",
+        "proxyPassword": "proxyPasswordHere"
+      }
+    }
+    ```
+
+    **Resposta**
+
+    ```json
+    {
+      "errorId": 0,
+      "taskId": 407533072
+    }
+    ```
+
+    </MethodDescription>
+  </TabItem>
+</Tabs>
 
 ## Opção 2
-<TabItem value="proxyless" label="AmazonTaskProxyless (sem proxy)" default className="method-panel">
-	<MethodItem>
-		```http
-		https://api.capmonster.cloud/createTask
-		```
-	</MethodItem>
-	<MethodDescription>
-		**Solicitação**
-		```json
-		{
-			"clientKey": "API_KEY",
-			"task": {
-				"type": "AmazonTask",
-				"websiteURL": "https://example.com",
-				"challengeScript": "https://41bcdd4fb3cb.610cd090.us-east-1.token.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/challenge.js",
-				"captchaScript": "https://41bcdd4fb3cb.610cd090.us-east-1.captcha.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/captcha.js",
-				"websiteKey": "AQIDA...wZwdADFLWk7XOA==",
-				"context": "qoJYgnKsc...aormh/dYYK+Y=",
-				"iv": "CgAAXFFFFSAAABVk",
-				"cookieSolution": true
-			}
-		}
-		```
-		**Resposta**
-		```json
-		{
-		  "errorId":0,
-		  "taskId":407533072
-		}
-		```
-	</MethodDescription>
-</TabItem>
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="proxyless" label="AmazonTask (sem proxy)" default className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+
+    **Requisição**
+
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "task": {
+        "type": "AmazonTask",
+        "websiteURL": "https://example.com",
+        "challengeScript": "https://41bcdd4fb3cb.610cd090.us-east-1.token.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/challenge.js",
+        "captchaScript": "https://41bcdd4fb3cb.610cd090.us-east-1.captcha.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/captcha.js",
+        "websiteKey": "AQIDA...wZwdADFLWk7XOA==",
+        "context": "qoJYgnKsc...aormh/dYYK+Y=",
+        "iv": "CgAAXFFFFSAAABVk",
+        "cookieSolution": true
+      }
+    }
+    ```
+
+    **Resposta**
+
+    ```json
+    {
+      "errorId": 0,
+      "taskId": 407533072
+    }
+    ```
+
+    </MethodDescription>
+  </TabItem>
+
+  <TabItem value="proxy" label="AmazonTask (com proxy)" className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+
+    **Requisição**
+
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "task": {
+        "type": "AmazonTask",
+        "websiteURL": "https://example.com",
+        "challengeScript": "https://41bcdd4fb3cb.610cd090.us-east-1.token.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/challenge.js",
+        "captchaScript": "https://41bcdd4fb3cb.610cd090.us-east-1.captcha.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/captcha.js",
+        "websiteKey": "AQIDA...wZwdADFLWk7XOA==",
+        "context": "qoJYgnKsc...aormh/dYYK+Y=",
+        "iv": "CgAAXFFFFSAAABVk",
+        "cookieSolution": true,
+        "proxyType": "http",
+        "proxyAddress": "8.8.8.8",
+        "proxyPort": 8080,
+        "proxyLogin": "proxyLoginHere",
+        "proxyPassword": "proxyPasswordHere"
+      }
+    }
+    ```
+
+    **Resposta**
+
+    ```json
+    {
+      "errorId": 0,
+      "taskId": 407533072
+    }
+    ```
+
+    </MethodDescription>
+  </TabItem>
+</Tabs>
+
+## Opção 3
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="proxyless" label="AmazonTask (sem proxy)" default className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+
+    **Requisição**
+
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "task": {
+        "type": "AmazonTask",
+        "websiteURL": "https://example.com",
+        "challengeScript": "https://41bcdd4fb3cb.610cd090.us-east-1.token.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/challenge.js",
+        "captchaScript": "",
+        "websiteKey": "",
+        "context": "",
+        "iv": "",
+        "cookieSolution": true
+      }
+    }
+    ```
+
+    **Resposta**
+
+    ```json
+    {
+      "errorId": 0,
+      "taskId": 407533072
+    }
+    ```
+
+    </MethodDescription>
+  </TabItem>
+
+  <TabItem value="proxy" label="AmazonTask (com proxy)" className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+
+    **Requisição**
+
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "task": {
+        "type": "AmazonTask",
+        "websiteURL": "https://example.com",
+        "challengeScript": "https://41bcdd4fb3cb.610cd090.us-east-1.token.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/challenge.js",
+        "captchaScript": "",
+        "websiteKey": "",
+        "context": "",
+        "iv": "",
+        "cookieSolution": true,
+        "proxyType": "http",
+        "proxyAddress": "8.8.8.8",
+        "proxyPort": 8080,
+        "proxyLogin": "proxyLoginHere",
+        "proxyPassword": "proxyPasswordHere"
+      }
+    }
+    ```
+
+    **Resposta**
+
+    ```json
+    {
+      "errorId": 0,
+      "taskId": 407533072
+    }
+    ```
+
+    </MethodDescription>
+  </TabItem>
+</Tabs>
 
 ## Obter o resultado da tarefa
 Use o método [getTaskResult](../api/methods/get-task-result.md) para obter a solução do AmazonTask.
@@ -208,7 +554,7 @@ https://api.capmonster.cloud/getTaskResult
 </MethodDescription>
 </TabItem>
 
-## Como Encontrar Todos os Parâmetros Necessários para a Criação da Tarefa
+## Como encontrar todos os parâmetros necessários para a criação da tarefa
 
 ### Automaticamente
 
