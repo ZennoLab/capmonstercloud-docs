@@ -1,0 +1,323 @@
+---
+sidebar_position: 21
+sidebar_label: AltchaTask
+title: "Altcha 自动识别与绕过 | API"
+description: "了解如何使用 CapMonster Cloud 的自动识别与验证码解决服务 API 绕过 Altcha！" 
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+import PriceBlock from '@theme/PriceBlock';
+import PriceBlockWrap from '@theme/PriceBlockWrap';
+
+# Altcha - Alternative CAPTCHA
+
+<PriceBlockWrap>
+  <PriceBlock title="altcha" captchaId="altcha"/>
+</PriceBlockWrap>
+
+## 任务示例
+
+<Tabs className="full-width-tabs">
+  <TabItem value="pow" label="PoW (工作量证明)" default>
+    ![](./images/altcha/altcha_frictionless.png)
+  </TabItem>
+  <TabItem value="code" label="Code Captcha">
+    ![](./images/altcha/altcha_code.png)
+  </TabItem>
+</Tabs>
+
+*还有一种 **隐形验证码** (**Invisible Captcha**)，在页面上没有可见界面，不需要用户操作 — 验证在后台自动完成。*
+
+:::warning **注意！**
+此任务中，CapMonster Cloud 默认使用内置代理，因此无需提供自己的代理（费用已包含在价格中）。  
+仅当令牌在目标网站不可用或访问内置服务受限时，才需要指定自己的代理。您可以联系 [支持](https://helpdesk.zennolab.com/conversation/new) 获取详细信息，并确认令牌在特定网站上的有效性。
+:::
+
+## 请求参数
+
+<TabItem value="proxyless" label="CustomTask（无代理）" default className="bordered-panel">
+  
+  <ParamItem title="type" required type="string" />
+  **CustomTask**
+
+  ---
+
+  <ParamItem title="class" required type="string" />
+  **altcha**
+
+  ---
+
+  <ParamItem title="websiteURL" required type="string" />
+  Altcha 所在的主页面 URL。
+
+  ---
+
+  <ParamItem title="websiteKey" required type="string" />
+  对于此任务，可以发送空字符串。
+
+  ---
+
+  <ParamItem title="challenge (metadata 内)" required="required" type="string" />
+  从网站获取的任务唯一标识符。
+
+  ---
+
+  <ParamItem title="iterations (metadata 内)" required="required" type="string" />
+  计算迭代次数或最大值。
+
+  ---
+
+  <ParamItem title="salt (metadata 内)" required="required" type="string" />
+  从网站获取的 salt，用于生成哈希。
+
+  ---
+
+  <ParamItem title="signature (metadata 内)" required="required" type="string" />
+  请求的数字签名。
+
+  ---
+
+  <ParamItem title="userAgent" type="string" />
+  浏览器 User-Agent。<br />
+  **请只传递 Windows 的有效 UA，目前为**: `userAgentPlaceholder`
+
+  ---
+
+  <ParamItem title="proxyType" type="string" />
+  **http** - 常规 http/https 代理；<br />
+  **https** - 仅当 "http" 无效时使用（某些自定义代理需要）；<br />
+  **socks4** - socks4 代理；<br />
+  **socks5** - socks5 代理。
+
+  ---
+
+  <ParamItem title="proxyAddress" type="string" />
+  <p>
+    代理 IPv4/IPv6 地址。禁止：
+    - 使用主机名；
+    - 使用透明代理（可看到客户端 IP）；
+    - 使用本地机器代理。
+  </p>
+
+  ---
+
+  <ParamItem title="proxyPort" type="integer" />
+  代理端口。
+
+  ---
+
+  <ParamItem title="proxyLogin" type="string" />
+  代理服务器登录名。
+
+  ---
+
+  <ParamItem title="proxyPassword" type="string" />
+  代理服务器密码。
+
+  ---
+</TabItem>
+
+## 创建任务方法
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="proxyless" label="Altcha CustomTask（无代理）" default className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      **请求**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "CustomTask",
+          "class": "altcha",
+          "websiteURL": "https://example.com",
+          "websiteKey": "",
+          "userAgent": "userAgentPlaceholder",
+          "metadata": {
+            "challenge": "3dd28253be6cc0c54d95f7f98c517e68744597cc6e66109619d1ac975c39181c",
+            "iterations": "5000",
+            "salt": "bf356449d56c719fd904c58f",
+            "signature": "4b1cf0e0be0f4e5247e50b0f9a449830f1fbca44c32ff94bc080146815f31a18"
+          }
+        }
+      }
+      ```
+      **响应**
+      ```json
+      {
+        "errorId": 0,
+        "taskId": 407533072
+      }
+      ```
+    </MethodDescription>
+  </TabItem>
+
+  <TabItem value="proxy" label="Altcha CustomTask（使用代理）" className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      **请求**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "CustomTask",
+          "class": "altcha",
+          "websiteURL": "https://example.com",
+          "websiteKey": "",
+          "userAgent": "userAgentPlaceholder",
+          "metadata": {
+            "challenge": "3dd28253be6cc0c54d95f7f98c517e68744597cc6e66109619d1ac975c39181c",
+            "iterations": "5000",
+            "salt": "bf356449d56c719fd904c58f",
+            "signature": "4b1cf0e0be0f4e5247e50b0f9a449830f1fbca44c32ff94bc080146815f31a18"
+          },
+          "proxyType":"http",
+          "proxyAddress":"8.8.8.8",
+          "proxyPort":8080,
+          "proxyLogin":"proxyLoginHere",
+          "proxyPassword":"proxyPasswordHere"
+        }
+      }
+      ```
+      **响应**
+      ```json
+      {
+        "errorId": 0,
+        "taskId": 407533072
+      }
+      ```
+    </MethodDescription>
+  </TabItem>
+</Tabs>
+
+## 获取任务结果方法
+
+使用 [getTaskResult](../api/methods/get-task-result.md) 方法获取 Altcha 解决方案。
+
+<TabItem value="proxyless" label="Altcha CustomTask（无代理）" default className="method-panel-full">
+  <MethodItem>
+    ```http
+    https://api.capmonster.cloud/getTaskResult
+    ```
+  </MethodItem>
+  <MethodDescription>
+    **请求**
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "taskId": 407533072
+    }
+    ```
+    **响应**
+    ```json
+    {
+      "errorId": 0,
+      "status": "ready",
+      "solution": {
+        "number": 4883
+      }
+    }
+    ```
+  </MethodDescription>
+</TabItem>
+
+## 如何获取创建任务所需的所有参数
+
+以下示例展示了如何提取 Altcha 参数，以便在 CapMonster Cloud 中创建任务。请注意，不同网站的 captcha 实现可能不同，因此获取参数的方法也可能有所变化。
+
+1. 在浏览器中打开 Altcha 页面，启动 **开发者工具**（**F12** 或 **Ctrl+Shift+I**），并切换到 **Network** 标签。
+
+2. 在 **Network 搜索栏** 输入任意参数名称（例如 *"algorithm"*）。
+
+3. 找到包含 JSON 参数的请求。
+
+4. 点击请求，如有需要切换到 **Response** 查看服务器返回的数据。
+
+5. 复制参数 — 这些值将用于创建 CapMonster Cloud 任务。
+
+![](./images/altcha/altcha_parameters.png)
+
+> 一般来说，在页面激活 captcha 后，需要分析网络请求并识别所有相关交互。这些步骤有助于确定参数并理解验证过程。例如，下图显示了名为 `altcha` 的请求，其中包含所有关键参数：
+
+![](./images/altcha/altcha_parameters1.png)
+
+您还可以使用以下代码示例提取所有参数：
+
+<details>
+<summary>GET 请求示例</summary>
+
+对指定 URL 执行 HTTP GET 请求，并将响应输出到控制台。
+
+```javascript
+const url = 'https://example.com'; // Altcha URL
+
+fetch(url, { method: 'GET' })
+  .then(res => res.text())
+  .then(data => console.log('Response:', data))
+  .catch(err => console.error(err));
+````
+
+</details>
+
+<details>
+<summary>参数拦截器</summary>
+
+浏览器脚本，重写 `fetch` 和 `XMLHttpRequest`，以自动监控网络请求并提取关键 Altcha 验证码参数。将此脚本粘贴到验证码页面的浏览器控制台中并激活验证码 — 所需参数将自动输出到控制台。
+
+```javascript
+(function() {
+  const keywords = ['algorithm','challenge','maxnumber','salt','signature'];
+  const foundParams = {};
+
+  const intercept = (url, body, text) => {
+    keywords.forEach(key => {
+      if ((url && url.includes(key)) || (body && body.includes(key)) || (text && text.includes(key))) {
+        foundParams[key] = foundParams[key] || [];
+        if (url?.includes(key)) foundParams[key].push(url);
+        if (body?.includes(key)) foundParams[key].push(body);
+        if (text?.includes(key)) foundParams[key].push(text);
+      }
+    });
+    if (Object.keys(foundParams).length) console.log('Found parameters:', foundParams);
+  };
+
+  const originalFetch = window.fetch;
+  window.fetch = async (...args) => {
+    const [resource, config] = args;
+    const url = typeof resource === 'string' ? resource : resource.url;
+    const body = config?.body;
+    const response = await originalFetch.apply(this, args);
+    try {
+      const text = await response.clone().text();
+      intercept(url, body, text);
+    } catch {}
+    return response;
+  };
+
+  const originalOpen = XMLHttpRequest.prototype.open;
+  const originalSend = XMLHttpRequest.prototype.send;
+
+  XMLHttpRequest.prototype.open = function(method, url, ...rest) {
+    this._url = url;
+    return originalOpen.call(this, method, url, ...rest);
+  };
+
+  XMLHttpRequest.prototype.send = function(body) {
+    this.addEventListener('load', () => intercept(this._url, body, this.responseText));
+    return originalSend.call(this, body);
+  };
+})();
+````
+
+</details>
