@@ -1,0 +1,325 @@
+---
+sidebar_position: 21
+sidebar_label: AltchaTask
+title: "Reconhecimento e Bypass Automático do Altcha | API"
+description: "Aprenda a contornar o Altcha usando a API do serviço de reconhecimento e resolução automática de captchas CapMonster Cloud!" 
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+import PriceBlock from '@theme/PriceBlock';
+import PriceBlockWrap from '@theme/PriceBlockWrap';
+
+# Altcha - Alternative CAPTCHA
+
+<PriceBlockWrap>
+  <PriceBlock title="altcha" captchaId="altcha"/>
+</PriceBlockWrap>
+
+## Exemplos de tarefas
+
+<Tabs className="full-width-tabs">
+  <TabItem value="pow" label="PoW (Proof-of-Work)" default>
+    ![](./images/altcha/altcha_frictionless.png)
+  </TabItem>
+  <TabItem value="code" label="Code Captcha">
+    ![](./images/altcha/altcha_code.png)
+  </TabItem>
+</Tabs>
+
+*Existe também um **captcha invisível** (**Invisible Captcha**), que não possui interface visível na página e não requer qualquer ação do usuário — a verificação ocorre em segundo plano.*
+
+:::warning **Atenção!**
+Para esta tarefa, o CapMonster Cloud utiliza proxies internos por padrão, portanto não é necessário fornecer os seus próprios (o custo já está incluído no preço).  
+Você deve especificar seus próprios proxies apenas se o token não for aceito no site alvo ou se o acesso aos serviços internos estiver restrito. Você pode contatar o [suporte](https://helpdesk.zennolab.com/conversation/new) para mais detalhes e verificar como os tokens são aceitos em um site específico.
+:::
+
+## Parâmetros da solicitação
+
+<TabItem value="proxyless" label="CustomTask (sem proxy)" default className="bordered-panel">
+  
+  <ParamItem title="type" required type="string" />
+  **CustomTask**
+
+  ---
+
+  <ParamItem title="class" required type="string" />
+  **altcha**
+
+  ---
+
+  <ParamItem title="websiteURL" required type="string" />
+  URL da página principal onde o Altcha está localizado.
+
+  ---
+
+  <ParamItem title="websiteKey" required type="string" />
+  Para esta tarefa, é permitido enviar uma string vazia.
+
+  ---
+
+  <ParamItem title="challenge (dentro do metadata)" required="required" type="string" />
+  Identificador único da tarefa obtido no site.
+
+  ---
+
+  <ParamItem title="iterations (dentro do metadata)" required="required" type="string" />
+  Número de iterações ou valor máximo para os cálculos.
+
+  ---
+
+  <ParamItem title="salt (dentro do metadata)" required="required" type="string" />
+  Salt obtido no site, usado para gerar hashes.
+
+  ---
+
+  <ParamItem title="signature (dentro do metadata)" required="required" type="string" />
+  Assinatura digital da requisição.
+
+  ---
+
+  <ParamItem title="userAgent" type="string" />
+  User-Agent do navegador. <br />
+  **Passe apenas um UA válido do Windows. Atualmente é**: `userAgentPlaceholder`
+
+  ---
+
+  <ParamItem title="proxyType" type="string" />
+  **http** - proxy http/https comum;<br />
+  **https** - use esta opção apenas se "http" não funcionar (necessário para alguns proxies personalizados);<br />
+  **socks4** - proxy socks4;<br />
+  **socks5** - proxy socks5.
+
+  ---
+
+  <ParamItem title="proxyAddress" type="string" />
+  <p>
+    Endereço IPv4/IPv6 do proxy. Não permitido:
+    - usar nomes de host;
+    - usar proxies transparentes (onde o IP do cliente é visível);
+    - usar proxies em máquinas locais.
+  </p>
+
+  ---
+
+  <ParamItem title="proxyPort" type="integer" />
+  Porta do proxy.
+
+  ---
+
+  <ParamItem title="proxyLogin" type="string" />
+  Login do servidor proxy.
+
+  ---
+
+  <ParamItem title="proxyPassword" type="string" />
+  Senha do servidor proxy.
+
+  ---
+</TabItem>
+
+## Método de criação da tarefa
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="proxyless" label="Altcha CustomTask (sem proxy)" default className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      **Requisição**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "CustomTask",
+          "class": "altcha",
+          "websiteURL": "https://example.com",
+          "websiteKey": "",
+          "userAgent": "userAgentPlaceholder",
+          "metadata": {
+            "challenge": "3dd28253be6cc0c54d95f7f98c517e68744597cc6e66109619d1ac975c39181c",
+            "iterations": "5000",
+            "salt": "bf356449d56c719fd904c58f",
+            "signature": "4b1cf0e0be0f4e5247e50b0f9a449830f1fbca44c32ff94bc080146815f31a18"
+          }
+        }
+      }
+      ```
+      **Resposta**
+      ```json
+      {
+        "errorId": 0,
+        "taskId": 407533072
+      }
+      ```
+    </MethodDescription>
+  </TabItem>
+
+  <TabItem value="proxy" label="Altcha CustomTask (com proxy)" className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      **Requisição**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "CustomTask",
+          "class": "altcha",
+          "websiteURL": "https://example.com",
+          "websiteKey": "",
+          "userAgent": "userAgentPlaceholder",
+          "metadata": {
+            "challenge": "3dd28253be6cc0c54d95f7f98c517e68744597cc6e66109619d1ac975c39181c",
+            "iterations": "5000",
+            "salt": "bf356449d56c719fd904c58f",
+            "signature": "4b1cf0e0be0f4e5247e50b0f9a449830f1fbca44c32ff94bc080146815f31a18"
+          },
+          "proxyType":"http",
+          "proxyAddress":"8.8.8.8",
+          "proxyPort":8080,
+          "proxyLogin":"proxyLoginHere",
+          "proxyPassword":"proxyPasswordHere"
+        }
+      }
+      ```
+      **Resposta**
+      ```json
+      {
+        "errorId": 0,
+        "taskId": 407533072
+      }
+      ```
+    </MethodDescription>
+  </TabItem>
+</Tabs>
+
+## Método para obter o resultado da tarefa
+
+Use o método [getTaskResult](../api/methods/get-task-result.md) para obter a solução do Altcha.
+
+<TabItem value="proxyless" label="Altcha CustomTask (sem proxy)" default className="method-panel-full">
+  <MethodItem>
+    ```http
+    https://api.capmonster.cloud/getTaskResult
+    ```
+  </MethodItem>
+  <MethodDescription>
+    **Requisição**
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "taskId": 407533072
+    }
+    ```
+    **Resposta**
+    ```json
+    {
+      "errorId": 0,
+      "status": "ready",
+      "solution": {
+        "number": 4883
+      }
+    }
+    ```
+  </MethodDescription>
+</TabItem>
+
+## Como encontrar todos os parâmetros necessários para a criação da tarefa
+
+A seguir estão exemplos de como extrair os parâmetros do Altcha necessários para enviar uma tarefa para solução no CapMonster Cloud. Note que a implementação do captcha pode variar entre sites, então os métodos de obtenção de parâmetros podem diferir.
+
+1. Abra a página do Altcha no navegador, abra o **DevTools** (**F12** ou **Ctrl+Shift+I**) e vá para a aba **Network**.
+
+2. No **campo de pesquisa da Network**, digite qualquer nome de parâmetro (por exemplo, *"algorithm"*).
+
+3. Localize a requisição que contém JSON com os parâmetros.
+
+4. Clique na requisição e, se necessário, vá para a aba **Response** para visualizar os dados retornados pelo servidor.
+
+5. Copie os parâmetros — esses valores devem ser usados para criar a tarefa no CapMonster Cloud.
+
+![](./images/altcha/altcha_parameters.png)
+
+> Em geral, após ativar o captcha na página, você precisa analisar as requisições de rede e identificar todas as interações relacionadas à sua operação. Essas ações são necessárias para determinar os parâmetros e entender o processo de verificação. Por exemplo, a imagem abaixo mostra uma requisição chamada `altcha` contendo todos os parâmetros-chave:
+
+![](./images/altcha/altcha_parameters1.png)
+
+Você também pode usar os seguintes exemplos de código para extrair todos os parâmetros:
+
+<details>
+<summary>Exemplo de Requisição GET</summary>
+
+Realiza uma requisição HTTP GET para o URL especificado e registra a resposta no console.
+
+```javascript
+const url = 'https://example.com'; // URL do Altcha
+
+fetch(url, { method: 'GET' })
+  .then(res => res.text())
+  .then(data => console.log('Response:', data))
+  .catch(err => console.error(err));
+````
+
+</details>
+
+<details>
+<summary>Interceptador de Parâmetros</summary>
+
+Script para navegador que sobrescreve `fetch` e `XMLHttpRequest` para monitorar automaticamente as requisições de rede e extrair os principais parâmetros do captcha Altcha. Cole este script no console do navegador na página do captcha e ative o captcha — os parâmetros necessários serão registrados automaticamente no console.
+
+```javascript
+(function() {
+  const keywords = ['algorithm','challenge','maxnumber','salt','signature'];
+  const foundParams = {};
+
+  const intercept = (url, body, text) => {
+    keywords.forEach(key => {
+      if ((url && url.includes(key)) || (body && body.includes(key)) || (text && text.includes(key))) {
+        foundParams[key] = foundParams[key] || [];
+        if (url?.includes(key)) foundParams[key].push(url);
+        if (body?.includes(key)) foundParams[key].push(body);
+        if (text?.includes(key)) foundParams[key].push(text);
+      }
+    });
+    if (Object.keys(foundParams).length) console.log('Found parameters:', foundParams);
+  };
+
+  const originalFetch = window.fetch;
+  window.fetch = async (...args) => {
+    const [resource, config] = args;
+    const url = typeof resource === 'string' ? resource : resource.url;
+    const body = config?.body;
+    const response = await originalFetch.apply(this, args);
+    try {
+      const text = await response.clone().text();
+      intercept(url, body, text);
+    } catch {}
+    return response;
+  };
+
+  const originalOpen = XMLHttpRequest.prototype.open;
+  const originalSend = XMLHttpRequest.prototype.send;
+
+  XMLHttpRequest.prototype.open = function(method, url, ...rest) {
+    this._url = url;
+    return originalOpen.call(this, method, url, ...rest);
+  };
+
+  XMLHttpRequest.prototype.send = function(body) {
+    this.addEventListener('load', () => intercept(this._url, body, this.responseText));
+    return originalSend.call(this, body);
+  };
+})();
+````
+
+</details>
+
