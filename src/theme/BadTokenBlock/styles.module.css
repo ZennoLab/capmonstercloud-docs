@@ -26,11 +26,6 @@
   cursor: pointer;
 }
 
-@media (max-width: 968px) {
-  .wrapperMain {
-    width: calc(100% - 32px);
-  }
-}
 
 .hiddenBlock {
   display: none !important;
