@@ -47,7 +47,6 @@ export type PriceId =
   | 'complex-rc2e'
   | 'complex-rc2'
   | 'complex-rec_baidu'
-  | 'complex-rec_bills_audio'
   | 'yidun';
 
 export type PriceResponseItem = {
