@@ -19,29 +19,39 @@ import BlogLink from '@theme/BlogLink';
 # ComplexImageTask Recognition
 
 <TaskImageWrapper>
-  <TaskImageBlock link="/zh/docs/captchas/ComplexImageTask-Recognition#oocl_rotate_new">
+  <TaskImageBlock link="/ru/docs/captchas/ComplexImageTask-Recognition#oocl_rotate_new">
     <TaskImage>![](./images/ComplexImageTask-Recognition/oocl_img.png)</TaskImage>
     <TaskImageText title="Oocl_rotate_new" captchaId="complex-rec_oocl_rotate_new" />
   </TaskImageBlock>
-  <TaskImageBlock link="/zh/docs/captchas/ComplexImageTask-Recognition#oocl_rotate_double_new">
+
+  <TaskImageBlock link="/ru/docs/captchas/ComplexImageTask-Recognition#oocl_rotate_double_new">
     <TaskImage>![](./images/ComplexImageTask-Recognition/oocl_rotate_img.png)</TaskImage>
     <TaskImageText title="Oocl_rotate_double_new" captchaId="complex-rec_oocl_rotate_double_new" />
   </TaskImageBlock>
-  <TaskImageBlock link="/zh/docs/captchas/ComplexImageTask-Recognition#betpunch_3x3_rotate">
+
+  <TaskImageBlock link="/ru/docs/captchas/ComplexImageTask-Recognition#betpunch_3x3_rotate">
     <TaskImage>![](./images/ComplexImageTask-Recognition/betpunch_img.png)</TaskImage>
     <TaskImageText title="Betpunch_3x3_rotate request" captchaId="complex-rec_betpunch_3x3_rotate_request" />
   </TaskImageBlock>
-  <TaskImageBlock link="/zh/docs/captchas/ComplexImageTask-Recognition#bls">
+
+  <TaskImageBlock link="/ru/docs/captchas/ComplexImageTask-Recognition#bls">
     <TaskImage>![](./images/ComplexImageTask-Recognition/bls_img.png)</TaskImage>
-    <TaskImageText title="Bls" captchaId="complex-rec_bls" />
+    <TaskImageText  captchaId="complex-rec_bls" />
   </TaskImageBlock>
+
   <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#shein">
     <TaskImage>![](./images/ComplexImageTask-Recognition/shein3.png)</TaskImage>
     <TaskImageText title="shein" captchaId="complex-rec_oocl_rotate_new" />
   </TaskImageBlock>
+
   <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#baidu">
     <TaskImage>![](./images/ComplexImageTask-Recognition/baidu_img.png)</TaskImage>
     <TaskImageText title="baidu" captchaId="complex-rec_baidu" />
+  </TaskImageBlock>
+
+  <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#bills_audio">
+    <TaskImage>![](./images/ComplexImageTask-Recognition/bills_audio.png)</TaskImage>
+    <TaskImageText title="bills_audio" captchaId="complex-rec_bills_audio" />
   </TaskImageBlock>
 </TaskImageWrapper>
 
@@ -621,16 +631,132 @@ import BlogLink from '@theme/BlogLink';
 	</MethodDescription>
 </TabItem>
 
-## 如何查找任务创建所需的所有参数
+---
+
+## bills_audio
+
+### 创建任务 `bills_audio`
+
+<PriceBlockWrap>
+  <PriceBlock title="bills_audio" captchaId="complex-rec_bills_audio" />
+</PriceBlockWrap>
+
+音频验证码 `bills_audio` 是“收据验证码”的声音版本，其中生成的图像或数据模拟收据，例如包含数字、金额和日期。在此类任务中，用户需要听音频文件，并根据听到的信息确认输入的正确性。该格式示例如下：
+
+![](./images/ComplexImageTask-Recognition/bills_audio1.png) ![](./images/ComplexImageTask-Recognition/bills_audio2.png)
+
+<TabItem value="proxyless" label="ComplexImageTask（无代理）" default className="method-panel">
+    <MethodItem>
+    ```http
+    https://api.capmonster.cloud/createTask
+    ```
+    </MethodItem>
+    <MethodDescription>
+    **请求**
+    ```json
+    {
+        "clientKey": "API_KEY",
+        "task": {
+            "type": "ComplexImageTask",
+            "class": "recognition",
+            "imagesBase64": [
+                "UklGRnjuAwBXQVZFZm10...f/2f/9/6z/vf8MAAAA"
+            ],
+            "metadata": {
+                "Task": "bills_audio",
+                "PayloadType": "Audio"
+            }
+        }
+    }
+    ```
+
+    **响应**
+    ```json
+    {
+        "errorId": 0,
+        "taskId": 143998457
+    }
+    ```
+    </MethodDescription>
+</TabItem>
+
+### 获取任务结果 `bills_audio`
+
+<TabItem value="proxyless" label="ComplexImageTask（无代理）" default className="method-panel-full">
+    <MethodItem>
+    ```http
+    https://api.capmonster.cloud/getTaskResult
+    ```
+    </MethodItem>
+    <MethodDescription>
+    **请求**
+    ```json
+    {
+        "clientKey": "API_KEY",
+        "taskId": 143998457
+    }
+    ```
+    **响应**  
+    响应中返回音频中的数字。
+    ```json
+    {
+        "solution": {
+            "answer": [6, 8, 4, 1, 2, 3],
+            "metadata": {"AnswerType": "Text"}
+        },
+        "cost": 0.0008,
+        "status": "ready",
+        "errorId": 0,
+        "errorCode": null,
+        "errorDescription": null
+    }
+    ```
+    </MethodDescription>
+</TabItem>
+
+### 如何从页面获取音频文件并转换为 Base64 格式
+
+1. 打开验证码页面并启动 **开发者工具（DevTools）**，然后切换到 **Network** 标签。  
+2. 点击相应按钮启用验证码的音频模式。  
+3. 在请求列表中找到类似以下格式的 URL：  
+   `blob:https://example.com/3be79ac6-1b3d-43ef-9a8a-7ad8877b3606`  
+4. 复制该 URL 并在浏览器地址栏打开 — 音频验证码文件将以 **.wav** 格式显示。
+
+![](./images/ComplexImageTask-Recognition/bills_audio4.png)
+
+![](./images/ComplexImageTask-Recognition/bills_audio3.png)
+
+5. 保存文件，并将 **.wav** 转换为 **Base64**，可使用你方便的方法，例如 Node.js 代码：
+```JavaScript
+const fs = require("fs");
+
+// 源 .wav 文件路径
+const filePath = "C:\\Users\\User\\Downloads\\file-acbe-4fb3-9f8e-f989ba6c7fde.wav";
+
+const fileBuffer = fs.readFileSync(filePath);
+
+// 转换为 Base64
+const base64 = fileBuffer.toString("base64");
+
+// 将 Base64 字符串保存到文本文件
+fs.writeFileSync("output.txt", base64);
+
+console.log("文件已成功转换为 Base64，并保存为 output.txt");
+```
+
+6. 在 CapMonster Cloud 的任务请求中使用生成的 Base64 字符串。
+
+---
+
+
+## 如何获取 Base64
+
+网页上的图片可以以URL或Base64编码格式直接呈现。要找到所需的值，右键点击图片，选择 **检查**，仔细查看 **元素** 部分或网络请求网格——在那里可以找到URL或编码内容。
 
 ### 手动方式
 
 1. 请在浏览器中访问您的网站，该网站包含验证码功能。
 2. 右键点击验证码元素，选择 **检查（Inspect）**。
-
-#### base64
-
-网页上的图片可以以URL或Base64编码格式直接呈现。要找到所需的值，右键点击图片，选择 **检查**，仔细查看 **元素** 部分或网络请求网格——在那里可以找到URL或编码内容。
 
 ![base64ComplexImage](images/ComplexImageTask-Recognition/base64.png)
 

@@ -25,25 +25,35 @@ import BlogLink from '@theme/BlogLink';
     <TaskImage>![](./images/ComplexImageTask-Recognition/oocl_img.png)</TaskImage>
     <TaskImageText title="Oocl_rotate_new" captchaId="complex-rec_oocl_rotate_new" />
   </TaskImageBlock>
+
   <TaskImageBlock link="/ru/docs/captchas/ComplexImageTask-Recognition#oocl_rotate_double_new">
     <TaskImage>![](./images/ComplexImageTask-Recognition/oocl_rotate_img.png)</TaskImage>
     <TaskImageText title="Oocl_rotate_double_new" captchaId="complex-rec_oocl_rotate_double_new" />
   </TaskImageBlock>
+
   <TaskImageBlock link="/ru/docs/captchas/ComplexImageTask-Recognition#betpunch_3x3_rotate">
     <TaskImage>![](./images/ComplexImageTask-Recognition/betpunch_img.png)</TaskImage>
     <TaskImageText title="Betpunch_3x3_rotate request" captchaId="complex-rec_betpunch_3x3_rotate_request" />
   </TaskImageBlock>
+
   <TaskImageBlock link="/ru/docs/captchas/ComplexImageTask-Recognition#bls">
     <TaskImage>![](./images/ComplexImageTask-Recognition/bls_img.png)</TaskImage>
     <TaskImageText  captchaId="complex-rec_bls" />
   </TaskImageBlock>
+
   <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#shein">
     <TaskImage>![](./images/ComplexImageTask-Recognition/shein3.png)</TaskImage>
     <TaskImageText title="shein" captchaId="complex-rec_oocl_rotate_new" />
   </TaskImageBlock>
+
   <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#baidu">
     <TaskImage>![](./images/ComplexImageTask-Recognition/baidu_img.png)</TaskImage>
     <TaskImageText title="baidu" captchaId="complex-rec_baidu" />
+  </TaskImageBlock>
+
+  <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#bills_audio">
+    <TaskImage>![](./images/ComplexImageTask-Recognition/bills_audio.png)</TaskImage>
+    <TaskImageText title="bills_audio" captchaId="complex-rec_bills_audio" />
   </TaskImageBlock>
 </TaskImageWrapper>
 
@@ -622,17 +632,131 @@ import BlogLink from '@theme/BlogLink';
 		```
 	</MethodDescription>
 </TabItem>
+---
 
-## Как найти все нужные параметры для создания задачи на решение
+## bills_audio
+
+### Создание задачи `bills_audio`
+
+<PriceBlockWrap>
+  <PriceBlock title="bills_audio" captchaId="complex-rec_bills_audio" />
+</PriceBlockWrap>
+
+Аудио-капча `bills_audio` — это звуковая версия «капчи с чеками», где сгенерированные изображения или данные имитируют чеки и содержат, например, цифры, суммы и даты. В этом типе задачи пользователю предлагается прослушать аудиофайл и на основе услышанной информации подтвердить правильность ввода. Такой формат может выглядеть, например, следующим образом:
+
+![](./images/ComplexImageTask-Recognition/bills_audio1.png) ![](./images/ComplexImageTask-Recognition/bills_audio2.png)
+
+<TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel">
+    <MethodItem>
+    ```http
+    https://api.capmonster.cloud/createTask
+    ```
+    </MethodItem>
+    <MethodDescription>
+    **Запрос**
+    ```json
+    {
+        "clientKey": "API_KEY",
+        "task": {
+            "type": "ComplexImageTask",
+            "class": "recognition",
+            "imagesBase64": [
+                "UklGRnjuAwBXQVZFZm10...f/2f/9/6z/vf8MAAAA"
+            ],
+            "metadata": {
+                "Task": "bills_audio",
+                "PayloadType": "Audio"
+            }
+        }
+    }
+    ```
+
+    **Ответ**
+    ```json
+    {
+        "errorId": 0,
+        "taskId": 143998457
+    }
+    ```
+    </MethodDescription>
+</TabItem>
+
+### Получение результата задачи `bills_audio`
+
+<TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel-full">
+    <MethodItem>
+    ```http
+    https://api.capmonster.cloud/getTaskResult
+    ```
+    </MethodItem>
+    <MethodDescription>
+    **Запрос**
+    ```json
+    {
+        "clientKey": "API_KEY",
+        "taskId": 143998457
+    }
+    ```
+    **Ответ**  
+    В ответе возвращаются цифры из аудио.
+    ```json
+    {
+        "solution": {
+            "answer": [6, 8, 4, 1, 2, 3],
+            "metadata": {"AnswerType": "Text"}
+        },
+        "cost": 0.0008,
+        "status": "ready",
+        "errorId": 0,
+        "errorCode": null,
+        "errorDescription": null
+    }
+    ```
+    </MethodDescription>
+</TabItem>
+
+### Как получить аудиофайл со страницы и преобразовать его в формат Base64
+
+1. Откройте страницу с капчей и запустите **DevTools**, затем перейдите во вкладку **Network**.
+2. Активируйте аудио-режим капчи, нажав соответствующую кнопку.
+3. В списке запросов найдите адрес вида:
+   `blob:https://example.com/3be79ac6-1b3d-43ef-9a8a-7ad8877b3606`
+4. Скопируйте этот URL и откройте его в адресной строке браузера — откроется аудиофайл капчи в формате **.wav**.
+
+![](./images/ComplexImageTask-Recognition/bills_audio4.png)
+
+![](./images/ComplexImageTask-Recognition/bills_audio3.png)
+
+5. Сохраните файл и выполните конвертацию из **.wav** в **Base64** удобным для вас способом — например, с помощью кода на Node.js:
+```JavaScript
+const fs = require("fs");
+
+// Путь к исходному .wav файлу
+const filePath = "C:\\Users\\User\\Downloads\\file-acbe-4fb3-9f8e-f989ba6c7fde.wav";
+
+const fileBuffer = fs.readFileSync(filePath);
+
+// Конвертация в Base64
+const base64 = fileBuffer.toString("base64");
+
+// Сохранение Base64-строку в текстовый файл
+fs.writeFileSync("output.txt", base64);
+
+console.log("Файл успешно конвертирован в Base64 и сохранён как output.txt");
+```
+
+6. Используйте полученную строку Base64 в запросе на решение в CapMonster Cloud.
+
+---
+
+## Как найти Base64
+
+Изображения на страницах могут быть представлены либо в виде ссылки (URL), либо сразу закодированы в формате Base64. Чтобы найти нужное значение, кликните правой кнопкой мыши по изображению, выберите **Просмотреть код** (**Inspect**) и внимательно изучите раздел **Элементы** или сетку сетевых запросов – там вы сможете обнаружить ссылку или закодированное содержимое.
 
 ### Вручную
 
 1. Откройте ваш сайт, где отображается капча, в браузере.
 2. Правой кнопкой кликните по элементу капчи и выберите **Inspect**.
-
-#### base64
-
-Изображения на страницах могут быть представлены либо в виде ссылки (URL), либо сразу закодированы в формате Base64. Чтобы найти нужное значение, кликните правой кнопкой мыши по изображению, выберите **Просмотреть код** (**Inspect**) и внимательно изучите раздел **Элементы** или сетку сетевых запросов – там вы сможете обнаружить ссылку или закодированное содержимое.
 
 ![base64ComplexImage](images\ComplexImageTask-Recognition\base64.png)
 
