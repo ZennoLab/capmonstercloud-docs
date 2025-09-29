@@ -68,6 +68,7 @@ You should specify your own proxies only if the token is not accepted on the tar
 
   <ParamItem title="iterations (inside metadata)" required="required" type="string" />
   Number of iterations or the maximum number for calculations.
+  > **Important:** the `iterations` parameter corresponds to the `maxnumber` value!
 
   ---
 
@@ -239,7 +240,7 @@ Below are examples of extracting Altcha parameters needed to submit a solving ta
 
 1. Open the Altcha page in your browser, launch **DevTools** (**F12** or **Ctrl+Shift+I**), and go to the **Network** tab.
 
-2. In the **Network search field**, type any parameter name (e.g., *"algorithm"*).
+2. Click on the captcha checkbox and complete it manually. In the **Network search field**, type any parameter name (e.g., *"algorithm"*).
 
 3. Find the request that contains JSON with the parameters.
 
@@ -253,6 +254,17 @@ Below are examples of extracting Altcha parameters needed to submit a solving ta
 
 ![](./images/altcha/altcha_parameters1.png)
 
+After obtaining the required parameters, you need to pass them into the `metadata` object when creating a task in CapMonster Cloud. Example structure:
+
+```javascript
+metadata: {
+  challenge: "<challenge value>", 
+  iterations: "<maxnumber value>", // must be enclosed in quotes, like all other parameters
+  salt: "<salt value>",             
+  signature: "<signature value>",  
+}
+```
+
 You can also use the following code examples to extract all parameters:
 
 <details>
@@ -261,7 +273,7 @@ You can also use the following code examples to extract all parameters:
 Performs an HTTP GET request to the specified URL and logs the response to the console.
 
 ```javascript
-const url = 'https://example.com'; // Altcha URL
+const url = 'https://example-portal.mysite.rs.gov.br/Altcha/Example'; // API endpoint from which the captcha parameters are extracted
 
 fetch(url, { method: 'GET' })
   .then(res => res.text())
@@ -322,4 +334,198 @@ Browser script that overrides `fetch` and `XMLHttpRequest` to automatically moni
 ```
 
 </details>
+
+## Example of automatic Altcha solving with Node.js and Playwright
+
+In some cases, submitting just the `number` parameter is enough to confirm the solution. However, sometimes the site requires **all parameters**, encoded in `base64`.
+
+For example:
+
+![](./images/altcha/altcha_base64.png)
+
+Decoding this value produces a JSON object containing the data used for captcha validation:
+
+```json
+{
+  "algorithm": "SHA-256",
+  "challenge": "86d178e154a5d04665710897b7bfc269d86407830d3a49dad3a3e027f6a824a6",
+  "number": 92199,
+  "salt": "f8ec36f9d615aa2c67c7ea29e?expires=1759147489",
+  "signature": "29a57a68dd2b1de8cba74b104c38de8fc860f8dd5b5eacd04755dcff7eb7ee8f",
+  "took": 1520
+}
+```
+
+CapMonster Cloud returns `number` separately as well as the full set of parameters encoded in `base64` (including `number`).
+
+In this example, solution confirmation is done using a **token** that contains the full set of parameters.
+If you need to submit only the `number`, you must adjust the confirmation logic accordingly.
+
+<details>
+<summary>Show code example</summary>
+
+```javascript
+const { chromium } = require("playwright");
+
+// Replace the following values with your own:
+// - API_KEY → your CapMonster Cloud key
+// - ALTCHA_PAGE → URL of the page with Altcha
+const API_KEY = "your_capmonster_cloud_api_key";
+const ALTCHA_PAGE = "https://url_with_altcha";
+
+(async () => {
+  const browser = await chromium.launch({ headless: false, devtools: true });
+  const context = await browser.newContext(); 
+  const page = await context.newPage(); 
+
+  await page.route("**/*", (route) => {
+    const url = route.request().url();
+    if (url.includes("api.capmonster.cloud")) return route.abort();
+    return route.continue();
+  });
+
+  let challengeResp = null;
+  page.on("response", async (response) => {
+    try {
+      if (response.url().includes("/Altcha/GerarDesafio")) {
+        challengeResp = await response.json();
+        console.log("Captured /Altcha/GerarDesafio:", challengeResp);
+      }
+    } catch {}
+  });
+
+  await page.goto(ALTCHA_PAGE, { waitUntil: "networkidle" });
+
+  try {
+    await page.waitForSelector("altcha-widget input[type='checkbox']", { timeout: 10000 });
+    await page.click("altcha-widget input[type='checkbox']");
+  } catch {
+    const widgetHandle = await page.$("altcha-widget");
+    if (widgetHandle) await widgetHandle.click();
+  }
+
+  const start = Date.now();
+  while (!challengeResp && Date.now() - start < 30000) {
+    await new Promise((r) => setTimeout(r, 300));
+  }
+  if (!challengeResp) {
+    console.error("Failed to capture /Altcha/GerarDesafio.");
+    await browser.close();
+    return;
+  }
+
+  const { challenge, salt, signature, maxnumbers } = challengeResp;
+
+  const createTaskBody = {
+    clientKey: API_KEY,
+    task: {
+      type: "CustomTask",
+      class: "altcha",
+      websiteURL: ALTCHA_PAGE,
+      websiteKey: "",
+      userAgent:
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
+      metadata: {
+        challenge,
+        iterations: maxnumbers,
+        salt,
+        signature,
+      },
+    },
+  };
+
+  const taskResp = await fetch("https://api.capmonster.cloud/createTask", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(createTaskBody),
+  }).then((r) => r.json());
+
+  console.log("CreateTask response:", taskResp);
+  if (!taskResp || !taskResp.taskId) {
+    console.error("CreateTask failed:", taskResp);
+    await browser.close();
+    return;
+  }
+
+  const taskId = taskResp.taskId;
+
+  let fullSolution = null;
+  const maxPollMs = 120000;
+  const pollStart = Date.now();
+  while (Date.now() - pollStart < maxPollMs) {
+    const res = await fetch("https://api.capmonster.cloud/getTaskResult", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ clientKey: API_KEY, taskId }),
+    }).then((r) => r.json());
+
+    if (res.status === "ready") {
+      fullSolution = res.solution;
+      console.log("Full solution from CapMonster:", fullSolution);
+      break;
+    }
+    await new Promise((r) => setTimeout(r, 3000));
+  }
+
+  if (!fullSolution) {
+    console.error("Solution was not received within the allocated time.");
+    await browser.close();
+    return;
+  }
+
+  const token =
+    (fullSolution && fullSolution.data && fullSolution.data.token) ||
+    fullSolution.token ||
+    (fullSolution && fullSolution.data) ||
+    null;
+
+  if (!token) {
+    console.error("Token not found in CapMonster response:", fullSolution);
+    await browser.close();
+    return;
+  }
+
+  await page.evaluate((tokenValue) => {
+    const cpv = document.querySelector("#captchaParaValidar");
+    if (cpv) {
+      cpv.value = tokenValue;
+    } else {
+      const created = document.createElement("input");
+      created.type = "hidden";
+      created.id = "captchaParaValidar";
+      created.name = "captchaParaValidar";
+      created.value = tokenValue;
+      (document.querySelector("form") || document.body).appendChild(created);
+    }
+
+    let alt = document.querySelector('input[name="altcha"]');
+    if (alt) {
+      alt.value = tokenValue;
+    } else {
+      const created2 = document.createElement("input");
+      created2.type = "hidden";
+      created2.name = "altcha";
+      created2.value = tokenValue;
+      (document.querySelector("form") || document.body).appendChild(created2);
+    }
+
+    const widget = document.querySelector("altcha-widget");
+    if (widget) {
+      widget.setAttribute("data-state", "verified");
+      const checkbox = widget.querySelector("input[type='checkbox']");
+      if (checkbox) {
+        checkbox.checked = true;
+        checkbox.dispatchEvent(new Event("change", { bubbles: true }));
+      }
+      const label = widget.querySelector(".altcha-label");
+      if (label) label.textContent = "Verified";
+    }
+  }, token);
+
+  console.log("Token injected:", token);
+})();
+```
+
+</details>
+
 

@@ -68,6 +68,7 @@ Você deve especificar seus próprios proxies apenas se o token não for aceito 
 
   <ParamItem title="iterations (dentro do metadata)" required="required" type="string" />
   Número de iterações ou valor máximo para os cálculos.
+  > **Importante:** o parâmetro `iterations` corresponde ao valor de `maxnumber`!
 
   ---
 
@@ -239,7 +240,8 @@ A seguir estão exemplos de como extrair os parâmetros do Altcha necessários p
 
 1. Abra a página do Altcha no navegador, abra o **DevTools** (**F12** ou **Ctrl+Shift+I**) e vá para a aba **Network**.
 
-2. No **campo de pesquisa da Network**, digite qualquer nome de parâmetro (por exemplo, *"algorithm"*).
+2. Clique na caixa de seleção do captcha e complete-o manualmente. No **campo de pesquisa** em **Network**, digite qualquer nome de parâmetro (por exemplo, *"algorithm"*).
+
 
 3. Localize a requisição que contém JSON com os parâmetros.
 
@@ -253,6 +255,17 @@ A seguir estão exemplos de como extrair os parâmetros do Altcha necessários p
 
 ![](./images/altcha/altcha_parameters1.png)
 
+Após obter os parâmetros necessários, você precisa passá‑los para o objeto `metadata` ao criar uma tarefa no CapMonster Cloud. Estrutura de exemplo:
+
+```javascript
+metadata: {
+  challenge: "<valor do challenge>", 
+  iterations: "<valor do maxnumber>", // deve estar entre aspas, assim como os demais parâmetros
+  salt: "<valor do salt>",             
+  signature: "<valor do signature>",  
+}
+```
+
 Você também pode usar os seguintes exemplos de código para extrair todos os parâmetros:
 
 <details>
@@ -261,7 +274,7 @@ Você também pode usar os seguintes exemplos de código para extrair todos os p
 Realiza uma requisição HTTP GET para o URL especificado e registra a resposta no console.
 
 ```javascript
-const url = 'https://example.com'; // URL do Altcha
+const url = 'https://example-portal.mysite.rs.gov.br/Altcha/Example'; // Endpoint da API de onde os parâmetros do captcha são extraídos
 
 fetch(url, { method: 'GET' })
   .then(res => res.text())
@@ -319,7 +332,205 @@ Script para navegador que sobrescreve `fetch` e `XMLHttpRequest` para monitorar 
     return originalSend.call(this, body);
   };
 })();
-````
+```
 
+</details>
+
+## Exemplo de resolução automática do Altcha com Node.js e Playwright
+
+Em alguns casos, basta enviar apenas o parâmetro `number` para confirmar a solução. No entanto, às vezes o site exige **todos os parâmetros**, codificados em `base64`.
+
+Por exemplo:
+
+![](./images/altcha/altcha_base64.png)
+
+Decodificando esse valor, obtemos um objeto JSON contendo os dados usados para validação do captcha:
+
+```json
+{
+  "algorithm": "SHA-256",
+  "challenge": "86d178e154a5d04665710897b7bfc269d86407830d3a49dad3a3e027f6a824a6",
+  "number": 92199,
+  "salt": "f8ec36f9d615aa2c67c7ea29e?expires=1759147489",
+  "signature": "29a57a68dd2b1de8cba74b104c38de8fc860f8dd5b5eacd04755dcff7eb7ee8f",
+  "took": 1520
+}
+```
+
+No retorno do CapMonster Cloud, o `number` é fornecido separadamente, assim como o conjunto completo de parâmetros, já codificado em `base64` (incluindo o `number`).
+
+No exemplo abaixo, a confirmação da solução é feita usando um **token** que contém o conjunto completo de parâmetros.
+Se você precisar enviar apenas o `number`, será necessário ajustar a lógica de confirmação da solução.
+
+<details>
+<summary>Mostrar exemplo de código</summary>
+
+```javascript
+const { chromium } = require("playwright");
+
+// Substitua pelos seus valores:
+// - API_KEY → sua chave do CapMonster Cloud
+// - ALTCHA_PAGE → URL da página com Altcha
+const API_KEY = "your_capmonster_cloud_api_key";
+const ALTCHA_PAGE = "https://url_with_altcha";
+
+(async () => {
+  const browser = await chromium.launch({ headless: false, devtools: true });
+  const context = await browser.newContext(); 
+  const page = await context.newPage(); 
+
+  await page.route("**/*", (route) => {
+    const url = route.request().url();
+    if (url.includes("api.capmonster.cloud")) return route.abort();
+    return route.continue();
+  });
+
+  let challengeResp = null; // Variável para armazenar o challenge do Altcha
+  page.on("response", async (response) => {
+    try {
+      if (response.url().includes("/Altcha/GerarDesafio")) {
+        challengeResp = await response.json(); // Obtém o JSON com os parâmetros do challenge
+        console.log("Captured /Altcha/GerarDesafio:", challengeResp);
+      }
+    } catch {}
+  });
+
+  await page.goto(ALTCHA_PAGE, { waitUntil: "networkidle" }); // Acessa a página com Altcha
+
+  try {
+    await page.waitForSelector("altcha-widget input[type='checkbox']", { timeout: 10000 });
+    await page.click("altcha-widget input[type='checkbox']");
+  } catch {
+    const widgetHandle = await page.$("altcha-widget");
+    if (widgetHandle) await widgetHandle.click(); // Caso o seletor padrão não seja encontrado
+  }
+
+  // Espera para receber o challenge
+  const start = Date.now();
+  while (!challengeResp && Date.now() - start < 30000) {
+    await new Promise((r) => setTimeout(r, 300));
+  }
+  if (!challengeResp) {
+    console.error("Falha ao capturar /Altcha/GerarDesafio.");
+    await browser.close();
+    return;
+  }
+
+  const { challenge, salt, signature, maxnumbers } = challengeResp;
+
+  // Monta o corpo da requisição para criar a tarefa no CapMonster Cloud
+  const createTaskBody = {
+    clientKey: API_KEY,
+    task: {
+      type: "CustomTask",
+      class: "altcha",
+      websiteURL: ALTCHA_PAGE,
+      websiteKey: "",
+      userAgent:
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
+      metadata: {
+        challenge,
+        iterations: maxnumbers,
+        salt,
+        signature,
+      },
+    },
+  };
+
+  // Cria a tarefa no CapMonster Cloud
+  const taskResp = await fetch("https://api.capmonster.cloud/createTask", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(createTaskBody),
+  }).then((r) => r.json());
+
+  console.log("CreateTask response:", taskResp);
+  if (!taskResp || !taskResp.taskId) {
+    console.error("Falha ao criar a tarefa:", taskResp);
+    await browser.close();
+    return;
+  }
+
+  const taskId = taskResp.taskId;
+
+  // Aguarda a solução da tarefa
+  let fullSolution = null;
+  const maxPollMs = 120000;
+  const pollStart = Date.now();
+  while (Date.now() - pollStart < maxPollMs) {
+    const res = await fetch("https://api.capmonster.cloud/getTaskResult", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ clientKey: API_KEY, taskId }),
+    }).then((r) => r.json());
+
+    if (res.status === "ready") {
+      fullSolution = res.solution;
+      console.log("Solução completa do CapMonster:", fullSolution);
+      break;
+    }
+    await new Promise((r) => setTimeout(r, 3000));
+  }
+
+  if (!fullSolution) {
+    console.error("Solução não recebida dentro do tempo alocado.");
+    await browser.close();
+    return;
+  }
+
+  // Extrai o token da solução
+  const token =
+    (fullSolution && fullSolution.data && fullSolution.data.token) ||
+    fullSolution.token ||
+    (fullSolution && fullSolution.data) ||
+    null;
+
+  if (!token) {
+    console.error("Token não encontrado na resposta do CapMonster:", fullSolution);
+    await browser.close();
+    return;
+  }
+
+  // Injeta o token na página
+  await page.evaluate((tokenValue) => {
+    const cpv = document.querySelector("#captchaParaValidar");
+    if (cpv) {
+      cpv.value = tokenValue;
+    } else {
+      const created = document.createElement("input");
+      created.type = "hidden";
+      created.id = "captchaParaValidar";
+      created.name = "captchaParaValidar";
+      created.value = tokenValue;
+      (document.querySelector("form") || document.body).appendChild(created);
+    }
+
+    let alt = document.querySelector('input[name="altcha"]');
+    if (alt) {
+      alt.value = tokenValue;
+    } else {
+      const created2 = document.createElement("input");
+      created2.type = "hidden";
+      created2.name = "altcha";
+      created2.value = tokenValue;
+      (document.querySelector("form") || document.body).appendChild(created2);
+    }
+
+    const widget = document.querySelector("altcha-widget");
+    if (widget) {
+      widget.setAttribute("data-state", "verified");
+      const checkbox = widget.querySelector("input[type='checkbox']");
+      if (checkbox) {
+        checkbox.checked = true;
+        checkbox.dispatchEvent(new Event("change", { bubbles: true }));
+      }
+      const label = widget.querySelector(".altcha-label");
+      if (label) label.textContent = "Verified";
+    }
+  }, token);
+
+  console.log("Token injetado:", token);
+})();
+```
 </details>
 
