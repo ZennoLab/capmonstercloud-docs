@@ -68,6 +68,7 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 
   <ParamItem title="iterations (metadata 内)" required="required" type="string" />
   计算迭代次数或最大值。
+  > **重要提示：** 参数 `iterations` 对应 `maxnumber` 的值！
 
   ---
 
@@ -238,7 +239,7 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 
 1. 在浏览器中打开 Altcha 页面，启动 **开发者工具**（**F12** 或 **Ctrl+Shift+I**），并切换到 **Network** 标签。
 
-2. 在 **Network 搜索栏** 输入任意参数名称（例如 *"algorithm"*）。
+2. 点击验证码复选框并手动完成验证。在 **Network 搜索栏** 输入任意参数名称（例如 *"algorithm"*）。
 
 3. 找到包含 JSON 参数的请求。
 
@@ -252,6 +253,17 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 
 ![](./images/altcha/altcha_parameters1.png)
 
+在获取所需参数后，需要将它们传入 `metadata` 对象中，以便在 CapMonster Cloud 创建任务时使用。示例结构：
+
+```javascript
+metadata: {
+  challenge: "<challenge 值>", 
+  iterations: "<maxnumber 值>", // 必须用引号括起来，与其他参数一致
+  salt: "<salt 值>",             
+  signature: "<signature 值>",  
+}
+```
+
 您还可以使用以下代码示例提取所有参数：
 
 <details>
@@ -260,7 +272,7 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 对指定 URL 执行 HTTP GET 请求，并将响应输出到控制台。
 
 ```javascript
-const url = 'https://example.com'; // Altcha URL
+const url = 'https://example-portal.mysite.rs.gov.br/Altcha/Example'; // 用于提取验证码参数的 API 端点
 
 fetch(url, { method: 'GET' })
   .then(res => res.text())
@@ -318,6 +330,203 @@ fetch(url, { method: 'GET' })
     return originalSend.call(this, body);
   };
 })();
-````
+```
+</details>
 
+## Altcha 自动化解决示例 — Node.js 与 Playwright
+
+在某些情况下，仅发送 `number` 参数即可确认解决方案。但有时网站要求 **所有参数**，以 `base64` 格式加密。
+
+例如：
+
+![](./images/altcha/altcha_base64.png)
+
+解码该值后，我们得到一个 JSON 对象，其中包含用于验证验证码的数据：
+
+```json
+{
+  "algorithm": "SHA-256",
+  "challenge": "86d178e154a5d04665710897b7bfc269d86407830d3a49dad3a3e027f6a824a6",
+  "number": 92199,
+  "salt": "f8ec36f9d615aa2c67c7ea29e?expires=1759147489",
+  "signature": "29a57a68dd2b1de8cba74b104c38de8fc860f8dd5b5eacd04755dcff7eb7ee8f",
+  "took": 1520
+}
+```
+
+在 CapMonster Cloud 的响应中，会单独返回 `number`，以及包含 `number` 的完整参数集合，已编码为 `base64`。
+
+在下面的示例中，通过 **token** 确认解决方案，该 token 包含完整的参数集。
+如果您只需要发送 `number`，则需要相应地调整确认逻辑。
+
+<details>
+<summary>显示代码示例</summary>
+
+```javascript
+const { chromium } = require("playwright");
+
+// 替换为你的值：
+// - API_KEY → 你的 CapMonster Cloud 密钥
+// - ALTCHA_PAGE → Altcha 页面地址
+const API_KEY = "your_capmonster_cloud_api_key";
+const ALTCHA_PAGE = "https://url_with_altcha";
+
+(async () => {
+  const browser = await chromium.launch({ headless: false, devtools: true });
+  const context = await browser.newContext(); 
+  const page = await context.newPage(); 
+
+  await page.route("**/*", (route) => {
+    const url = route.request().url();
+    if (url.includes("api.capmonster.cloud")) return route.abort();
+    return route.continue();
+  });
+
+  let challengeResp = null; // 存储 Altcha challenge 的变量
+  page.on("response", async (response) => {
+    try {
+      if (response.url().includes("/Altcha/GerarDesafio")) {
+        challengeResp = await response.json(); // 获取 challenge JSON 参数
+        console.log("Captured /Altcha/GerarDesafio:", challengeResp);
+      }
+    } catch {}
+  });
+
+  await page.goto(ALTCHA_PAGE, { waitUntil: "networkidle" });
+
+  try {
+    await page.waitForSelector("altcha-widget input[type='checkbox']", { timeout: 10000 });
+    await page.click("altcha-widget input[type='checkbox']");
+  } catch {
+    const widgetHandle = await page.$("altcha-widget");
+    if (widgetHandle) await widgetHandle.click(); // 如果标准选择器未找到
+  }
+
+  // 等待 challenge
+  const start = Date.now();
+  while (!challengeResp && Date.now() - start < 30000) {
+    await new Promise((r) => setTimeout(r, 300));
+  }
+  if (!challengeResp) {
+    console.error("无法捕获 /Altcha/GerarDesafio。");
+    await browser.close();
+    return;
+  }
+
+  const { challenge, salt, signature, maxnumbers } = challengeResp;
+
+  // 构建 CapMonster Cloud 创建任务请求体
+  const createTaskBody = {
+    clientKey: API_KEY,
+    task: {
+      type: "CustomTask",
+      class: "altcha",
+      websiteURL: ALTCHA_PAGE,
+      websiteKey: "",
+      userAgent:
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
+      metadata: {
+        challenge,
+        iterations: maxnumbers,
+        salt,
+        signature,
+      },
+    },
+  };
+
+  // 创建任务
+  const taskResp = await fetch("https://api.capmonster.cloud/createTask", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(createTaskBody),
+  }).then((r) => r.json());
+
+  console.log("CreateTask response:", taskResp);
+  if (!taskResp || !taskResp.taskId) {
+    console.error("创建任务失败:", taskResp);
+    await browser.close();
+    return;
+  }
+
+  const taskId = taskResp.taskId;
+
+  // 等待任务解决
+  let fullSolution = null;
+  const maxPollMs = 120000;
+  const pollStart = Date.now();
+  while (Date.now() - pollStart < maxPollMs) {
+    const res = await fetch("https://api.capmonster.cloud/getTaskResult", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ clientKey: API_KEY, taskId }),
+    }).then((r) => r.json());
+
+    if (res.status === "ready") {
+      fullSolution = res.solution;
+      console.log("CapMonster 完整解决方案:", fullSolution);
+      break;
+    }
+    await new Promise((r) => setTimeout(r, 3000));
+  }
+
+  if (!fullSolution) {
+    console.error("在指定时间内未收到解决方案。");
+    await browser.close();
+    return;
+  }
+
+  // 提取 token
+  const token =
+    (fullSolution && fullSolution.data && fullSolution.data.token) ||
+    fullSolution.token ||
+    (fullSolution && fullSolution.data) ||
+    null;
+
+  if (!token) {
+    console.error("CapMonster 响应中未找到 token:", fullSolution);
+    await browser.close();
+    return;
+  }
+
+  // 将 token 注入页面
+  await page.evaluate((tokenValue) => {
+    const cpv = document.querySelector("#captchaParaValidar");
+    if (cpv) {
+      cpv.value = tokenValue;
+    } else {
+      const created = document.createElement("input");
+      created.type = "hidden";
+      created.id = "captchaParaValidar";
+      created.name = "captchaParaValidar";
+      created.value = tokenValue;
+      (document.querySelector("form") || document.body).appendChild(created);
+    }
+
+    let alt = document.querySelector('input[name="altcha"]');
+    if (alt) {
+      alt.value = tokenValue;
+    } else {
+      const created2 = document.createElement("input");
+      created2.type = "hidden";
+      created2.name = "altcha";
+      created2.value = tokenValue;
+      (document.querySelector("form") || document.body).appendChild(created2);
+    }
+
+    const widget = document.querySelector("altcha-widget");
+    if (widget) {
+      widget.setAttribute("data-state", "verified");
+      const checkbox = widget.querySelector("input[type='checkbox']");
+      if (checkbox) {
+        checkbox.checked = true;
+        checkbox.dispatchEvent(new Event("change", { bubbles: true }));
+      }
+      const label = widget.querySelector(".altcha-label");
+      if (label) label.textContent = "Verified";
+    }
+  }, token);
+
+  console.log("Token 已注入:", token);
+})();
+```
 </details>
