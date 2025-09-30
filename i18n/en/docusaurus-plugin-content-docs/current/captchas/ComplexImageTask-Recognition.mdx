@@ -25,25 +25,35 @@ import BlogLink from '@theme/BlogLink';
     <TaskImage>![](./images/ComplexImageTask-Recognition/oocl_img.png)</TaskImage>
     <TaskImageText title="Oocl_rotate_new" captchaId="complex-rec_oocl_rotate_new" />
   </TaskImageBlock>
+
   <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#oocl_rotate_double_new">
     <TaskImage>![](./images/ComplexImageTask-Recognition/oocl_rotate_img.png)</TaskImage>
     <TaskImageText title="Oocl_rotate_double_new" captchaId="complex-rec_oocl_rotate_double_new" />
   </TaskImageBlock>
+
   <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#betpunch_3x3_rotate">
     <TaskImage>![](./images/ComplexImageTask-Recognition/betpunch_img.png)</TaskImage>
     <TaskImageText title="Betpunch_3x3_rotate request" captchaId="complex-rec_betpunch_3x3_rotate_request" />
   </TaskImageBlock>
+
   <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#bls">
     <TaskImage>![](./images/ComplexImageTask-Recognition/bls_img.png)</TaskImage>
     <TaskImageText  captchaId="complex-rec_bls" />
   </TaskImageBlock>
+
   <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#shein">
     <TaskImage>![](./images/ComplexImageTask-Recognition/shein3.png)</TaskImage>
     <TaskImageText title="shein" captchaId="complex-rec_oocl_rotate_new" />
   </TaskImageBlock>
+
   <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#baidu">
     <TaskImage>![](./images/ComplexImageTask-Recognition/baidu_img.png)</TaskImage>
     <TaskImageText title="baidu" captchaId="complex-rec_baidu" />
+  </TaskImageBlock>
+
+  <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#bills_audio">
+    <TaskImage>![](./images/ComplexImageTask-Recognition/bills_audio.png)</TaskImage>
+    <TaskImageText title="bills_audio" captchaId="complex-rec_bills_audio" />
   </TaskImageBlock>
 </TaskImageWrapper>
 
@@ -622,17 +632,131 @@ In the request, we pass one image in base64 format.
 		```
 	</MethodDescription>
 </TabItem>
+---
 
-## How to Find All Required Parameters for Task Creation
+## bills_audio
+
+### Create task `bills_audio`
+
+<PriceBlockWrap>
+  <PriceBlock title="bills_audio" captchaId="complex-rec_bills_audio" />
+</PriceBlockWrap>
+
+The `bills_audio` captcha is an audio version of the "receipt captcha," where generated images or data simulate receipts and contain, for example, numbers, amounts, and dates. In this type of task, the user is asked to listen to an audio file and confirm the correctness of the input based on what they hear. This format may look like the following:
+
+![](./images/ComplexImageTask-Recognition/bills_audio1.png) ![](./images/ComplexImageTask-Recognition/bills_audio2.png)
+
+<TabItem value="proxyless" label="ComplexImageTask (proxyless)" default className="method-panel">
+    <MethodItem>
+    ```http
+    https://api.capmonster.cloud/createTask
+    ```
+    </MethodItem>
+    <MethodDescription>
+    **Request**
+    ```json
+    {
+        "clientKey": "API_KEY",
+        "task": {
+            "type": "ComplexImageTask",
+            "class": "recognition",
+            "imagesBase64": [
+                "UklGRnjuAwBXQVZFZm10...f/2f/9/6z/vf8MAAAA"
+            ],
+            "metadata": {
+                "Task": "bills_audio",
+                "PayloadType": "Audio"
+            }
+        }
+    }
+    ```
+
+    **Response**
+    ```json
+    {
+        "errorId": 0,
+        "taskId": 143998457
+    }
+    ```
+    </MethodDescription>
+</TabItem>
+
+### Get task result `bills_audio`
+
+<TabItem value="proxyless" label="ComplexImageTask (proxyless)" default className="method-panel-full">
+    <MethodItem>
+    ```http
+    https://api.capmonster.cloud/getTaskResult
+    ```
+    </MethodItem>
+    <MethodDescription>
+    **Request**
+    ```json
+    {
+        "clientKey": "API_KEY",
+        "taskId": 143998457
+    }
+    ```
+    **Response**  
+    The response contains the digits extracted from the audio.
+    ```json
+    {
+        "solution": {
+            "answer": [6, 8, 4, 1, 2, 3],
+            "metadata": {"AnswerType": "Text"}
+        },
+        "cost": 0.0008,
+        "status": "ready",
+        "errorId": 0,
+        "errorCode": null,
+        "errorDescription": null
+    }
+    ```
+    </MethodDescription>
+</TabItem>
+
+### How to get the audio file from the page and convert it to Base64
+
+1. Open the captcha page, launch **DevTools**, and go to the **Network** tab.  
+2. Activate the captcha’s audio mode by clicking the corresponding button.  
+3. In the list of requests, find a URL like:  
+   `blob:https://example.com/3be79ac6-1b3d-43ef-9a8a-7ad8877b3606`  
+4. Copy this URL and open it in the browser’s address bar — the captcha audio file in **.wav** format will open.  
+
+![](./images/ComplexImageTask-Recognition/bills_audio4.png)
+
+![](./images/ComplexImageTask-Recognition/bills_audio3.png)
+
+5. Save the file and convert it from **.wav** to **Base64** in any convenient way — for example, using Node.js code:
+```JavaScript
+const fs = require("fs");
+
+// Path to the source .wav file
+const filePath = "C:\\Users\\User\\Downloads\\file-acbe-4fb3-9f8e-f989ba6c7fde.wav";
+
+const fileBuffer = fs.readFileSync(filePath);
+
+// Convert to Base64
+const base64 = fileBuffer.toString("base64");
+
+// Save the Base64 string to a text file
+fs.writeFileSync("output.txt", base64);
+
+console.log("The file has been successfully converted to Base64 and saved as output.txt");
+```
+
+6. Use the resulting Base64 string in the request to CapMonster Cloud.
+
+---
+
+## How to find Base64
+
+Images on web pages can be represented either as a URL or directly encoded in Base64 format. To find the required value, right-click on the image, select **Inspect**, and carefully examine the **Elements** section or the network requests grid—there you can find the URL or the encoded content.
 
 ### Manually
 
 1. Open your website where the captcha appears in the browser.
 2. Right-click on the captcha element and select **Inspect**.
-
-#### base64
-
-Images on web pages can be represented either as a URL or directly encoded in Base64 format. To find the required value, right-click on the image, select **Inspect**, and carefully examine the **Elements** section or the network requests grid—there you can find the URL or the encoded content.
 
 ![base64ComplexImage](images/ComplexImageTask-Recognition/base64.png)
 
