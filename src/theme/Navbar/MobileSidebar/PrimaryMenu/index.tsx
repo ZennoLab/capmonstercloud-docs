@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavbarMobileSidebar } from '@docusaurus/theme-common/internal';
 import NavbarItem from '@theme/NavbarItem';
-import { getMenuItems } from '../../menuItems';
+import { getMenuItems } from '../../menuItems.tsx';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 export default function NavbarMobilePrimaryMenu() {

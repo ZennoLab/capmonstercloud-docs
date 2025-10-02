@@ -509,3 +509,33 @@ a[class*='cardContainer'] {
     transform: rotate(360deg);
   }
 }
+
+/* Locale dropdown flags (emoji-based) */
+.dropdown__link.locale-flag::before,
+.menu__link.locale-flag::before {
+  display: inline-block;
+  margin-right: 8px;
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* English */
+.dropdown__link.locale-en::before,
+.menu__link.locale-en::before {
+  content: '🇺🇸';
+}
+/* Russian */
+.dropdown__link.locale-ru::before,
+.menu__link.locale-ru::before {
+  content: '🇷🇺';
+}
+/* Portuguese (Brazil) */
+.dropdown__link.locale-pt-br::before,
+.menu__link.locale-pt-br::before {
+  content: '🇧🇷';
+}
+/* Chinese */
+.dropdown__link.locale-zh::before,
+.menu__link.locale-zh::before {
+  content: '🇨🇳';
+}

@@ -21,6 +21,12 @@ declare module '@theme/NavbarItem' {
       | { readonly type: 'docSidebar'; sidebarId: string; label: string }
       | { readonly type: 'dropdown'; label: string; items: DefaultNavbarItemProps[] }
       | { readonly type: 'html'; value: string }
+      | {
+          readonly type: 'component';
+          readonly className?: string;
+          readonly component?: (props?: any) => ReactNode;
+          readonly render?: (extra?: { onClick?: () => void }) => ReactNode;
+        }
     );
 
   const NavbarItem: (props: Props) => ReactNode;

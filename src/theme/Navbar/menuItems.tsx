@@ -1,3 +1,5 @@
+import React from 'react';
+import Link from '@docusaurus/Link';
 import { DefaultNavbarItemProps } from '@theme/NavbarItem';
 
 import { localesMappings } from '../../locales';
@@ -44,6 +46,7 @@ export const getMenuItems = (locale: string) => {
       dropdownItemsAfter: [],
       href: '',
       label: '',
+      className: 'localeDropdownWithFlags',
     },
     {
       href: `https://capmonster.cloud/${typedLocales[locale]}/browser-extension-captcha`,
@@ -56,6 +59,16 @@ export const getMenuItems = (locale: string) => {
       position: 'right',
       className: 'lk-link',
     },
+    {
+      type: 'component',
+      className: '',
+      render: ({ onClick }: { onClick?: () => void } = {}) => (
+        <Link className="navbar__link" to="/docs/faq" onClick={onClick}>
+          <img src="/img/18x18_faq_icon.svg" alt="" width={18} height={18} style={{ marginRight: 8 }} />
+          FAQ
+        </Link>
+      ),
+    } as unknown as DefaultNavbarItemProps,
   ];
 
   return { leftItems, rightItems };
