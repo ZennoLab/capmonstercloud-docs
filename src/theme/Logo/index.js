@@ -12,8 +12,11 @@ export default function Logo() {
 
   const isDark = colorMode === 'dark';
 
-  const desktop = isDark ? `/${currentLocale}/img/logo_landing.svg` : `/${currentLocale}/img/logo_landing.svg`;
-  const mobile = isDark ? `/${currentLocale}/img/logoNoText.svg` : `/${currentLocale}/img/logoNoText.svg`;
+  const safeLocale = currentLocale === 'en' ? '' : `/${currentLocale}`;
+
+  // Static assets are not locale-prefixed; always serve from /img
+  const desktop = isDark ? `${safeLocale}/img/logo_landing.svg` : `${safeLocale}/img/logo_landing.svg`;
+  const mobile = isDark ? `${safeLocale}/img/logoNoText.svg` : `${safeLocale}/img/logoNoText.svg`;
 
   const href = currentLocale === defaultLocale ? '/' : `/${currentLocale}/`;
 

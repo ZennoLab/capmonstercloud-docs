@@ -7,3 +7,20 @@
   padding-left: 20px;
   padding-right: 20px;
 }
+
+.pageTitle {
+  margin-left: 12px;
+  font-size: 16px;
+  color: #14193c;
+  line-height: 26px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+@media (min-width: 997px) {
+  .docsMenuBlock {
+    display: none !important;
+  }
+}

@@ -1,3 +1,29 @@
 .darkNavbarColorModeToggle:hover {
   background: var(--ifm-color-gray-800);
 }
+
+.colorModeToggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.colorModeToggle:hover {
+  background: #e6e6ff;
+}
+
+/* Mobile fallback: force solid fill in case SVG gradients are not rendered */
+@media (max-width: 996px) {
+  .colorModeToggle svg {
+    width: 24px;
+    height: 24px;
+    display: block;
+  }
+  .colorModeToggle svg path {
+    fill: #7d6eff !important;
+  }
+}

@@ -1,8 +1,5 @@
-/*
-Hide color mode toggle in small viewports
- */
-@media (max-width: 996px) {
-  .colorModeToggle {
-    display: none;
-  }
+/* Keep color mode toggle visible on mobile */
+.colorModeToggle {
+  display: inline-flex;
+  align-items: center;
 }

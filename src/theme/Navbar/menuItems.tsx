@@ -23,14 +23,7 @@ const getLabel = (locale: string, key: string, fallback: string) => {
   return messageSet?.[key]?.message || fallback;
 };
 
-const leftItems: DefaultNavbarItemProps[] = [
-  {
-    type: 'search',
-    position: 'left',
-    label: '',
-    href: '',
-  },
-];
+const leftItems: DefaultNavbarItemProps[] = [];
 
 export const getMenuItems = (locale: string) => {
   const typedLocales = localesMappings as Record<string, string>;
