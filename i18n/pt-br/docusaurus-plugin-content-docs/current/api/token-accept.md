@@ -9,7 +9,7 @@ Se você encontrar problemas com a aceitação de tokens, entre em contato com n
 
 ## Descrição
 
-Você recebe um token do CapMonster Cloud e o envia para um site, mas o site o rejeita. Às vezes, o site pode aceitar o token, por exemplo, em um caso a cada 10 (a taxa de sucesso no seu caso pode ser diferente). O bloqueio ou a rejeição de tokens pode ocorrer devido a solicitações frequentes de um único endereço IP ou devido à baixa qualidade do captcha (ruído na imagem). Além disso, alguns sites podem usar atualizações dinâmicas de captcha ou adicionar verificações adicionais sem aviso prévio. Nesse caso, o parâmetro `nocache` pode ajudar.
+Às vezes, um site pode rejeitar os tokens obtidos pelo CapMonster Cloud. Isso pode ocorrer de diferentes formas: o site pode aceitar apenas parte dos tokens ou aceitá-los de maneira aleatória. Nesses casos, pode ser útil usar o parâmetro `nocache`, que impede a reutilização de tokens antigos e aumenta a chance de que eles sejam aceitos com sucesso pelo site.
 
 ---
 
@@ -21,7 +21,7 @@ Você recebe um token do CapMonster Cloud e o envia para um site, mas o site o r
 Será aplicado a todos os captchas enviados.
 :::
 
-Nas configurações do software utilizado, adicione o parâmetro nocache, com um duplo sublinhado, no final da chave API:
+Você pode aplicar o parâmetro `nocache` a todas as captchas enviadas, adicionando-o ao final da sua chave de API usando dois sublinhados:
 
 `API_KEY__nocache`
 
@@ -37,7 +37,7 @@ Observe a propriedade *nocache* do objeto *task*
 
   "task": 
   {
-    "type":"NoCaptchaTaskProxyless",
+    "type":"RecaptchaV2Task",
     "websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
     "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
     "nocache": true
@@ -46,12 +46,12 @@ Observe a propriedade *nocache* do objeto *task*
 }
 ```
 
-### Ao criar uma tarefa usando a API RuCaptcha (via parâmetros de URL)
+### Ao criar uma tarefa via API (usando parâmetros na URL)
 
-Adicione `nocache=1` à URL.
+Adicione `nocache=1` diretamente na URL da requisição à API:
 
 :::tip
-No exemplo abaixo, o parâmetro é adicionado ao final.
+O parâmetro `nocache` deve ser adicionado no final da URL.
 :::
 
 `http://api.capmonster.cloud/in.php?key=API_KEY&method=userrecaptcha&googlekey=6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd&pageurl=https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high&nocache=1`

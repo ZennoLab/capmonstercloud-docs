@@ -10,9 +10,9 @@ description: "Creating a custom module allows you to create custom modules that 
 
 ## Description
 
-This feature allows you to create custom modules that will be trained for one specific type of captcha. This will help to recognize non-standard captchas faster and more efficiently and reduce the probability of errors.  
+The custom module creation feature allows you to train the system to recognize a specific type of captcha. This improves the speed and accuracy of recognizing non-standard captchas and reduces the likelihood of errors.
 
-To go to the [module training page](https://capmonster.cloud/UserModules), click the email in the upper-right area of the website and select the relevant option in the menu.
+To go to the [module training page](https://capmonster.cloud/UserModules), click your email in the top-right corner of the site and select the corresponding menu option.
 
 ![](./images/user-module/834ccbf9-f439-4b1b-8cab-42ed3dbc055c.png)
 
@@ -21,15 +21,15 @@ To go to the [module training page](https://capmonster.cloud/UserModules), click
 
 ## How it works
 
-Briefly:
+The process can be summarized as follows:
 
-1. Collect captchas and archive them
-2. Send them to us, specifying the module name
-3. Deposit $10 to the balance (it will remain on your balance)
-4. We create the module
-5. You send requests from your soft, specifying the name of the created module.
+1. Collect captchas and archive them.
+2. Send the archive to us, specifying the module name.
+3. Deposit $10 to your balance (the funds remain on your balance and are not deducted).
+4. We create the module.
+5. Submit tasks for recognition, specifying the name of the created module.
 
-Now let's go into the details of each step.
+Each step is described in more detail below.
 
 ---
 
@@ -37,7 +37,8 @@ Now let's go into the details of each step.
 
 #### How many captchas do you need?
 
-To answer this question, mark the types of symbols that your captcha contains, in the form on the [Module training page](https://capmonster.cloud/UserModules). After that, a hint telling you how many captchas to upload will appear above the button for selecting the archive for uploading:
+On the [Module training page](https://capmonster.cloud/UserModules), mark the types of characters that appear in your captcha. After that, a hint will appear showing how many captchas you need to collect and upload:
+
 
 ![](./images/user-module/module-name.png)
 
@@ -49,15 +50,15 @@ To answer this question, mark the types of symbols that your captcha contains, i
 
 #### How to collect captchas?
 
-Let's look at the example with [ZennoPoster](https://zennolab.atlassian.net/wiki/spaces/EN/pages/924581921/ZennoPoster).
+For example, using [ZennoPoster](https://zennolab.atlassian.net/wiki/spaces/EN/pages/924581921/ZennoPoster).
 
-Imagine you are registering accounts on the website and it has a captcha a module for which you want to create. There are several options:
+Suppose you are registering accounts on a website that uses the captcha for which you want to create a custom module. There are several ways to collect such captchas:
 
-- Most probably, you already have a running project for this website, which means you are already solving this captcha. In the action [Recognize captcha](https://zennolab.atlassian.net/wiki/spaces/EN/pages/924582077/Recognize+captcha), in the *More* tab you can find the [Saving](https://zennolab.atlassian.net/wiki/spaces/EN/pages/924582077/Recognize+captcha#Saving) option, that is created for such cases.
-- You can go an easier way: go to the captcha page. It always has the Refresh button. Send the captcha to the solver or [solve manually](https://zennolab.atlassian.net/wiki/spaces/EN/pages/924484621/Entering+captchas+manually) (previously set in the [Saving](https://zennolab.atlassian.net/wiki/spaces/EN/pages/924582077/Recognize+captcha#Saving) action), refresh the captcha, and send it for solving again. Repeat these steps until you collect enough captchas.
+* You might already have a working project for this website and are already solving this captcha. In this case, in the [Recognize captcha](https://zennolab.atlassian.net/wiki/spaces/EN/pages/924582077/Recognize+captcha) action, under the *More* tab, you will find the [Saving](https://zennolab.atlassian.net/wiki/spaces/EN/pages/924582077/Recognize+captcha#Saving) option, which is designed for such cases.
+* Another option: open the page with the captcha that has a **Refresh** button. Send the captcha to the solver or [solve manually](https://zennolab.atlassian.net/wiki/spaces/EN/pages/924484621/Entering+captchas+manually) (after enabling the [Saving captchas](https://zennolab.atlassian.net/wiki/spaces/EN/pages/924582077/Recognize+captcha#Saving) option in the action). Then refresh the captcha image and repeat the process until you have collected the required number of captchas.
 
-:::warning
-Do not run captcha collection in tens and hundreds of threads! Few websites would like that.
+:::warning Attention
+It is not recommended to collect captchas in tens or hundreds of threads simultaneously, as this may cause issues with the website.
 :::
 
 ---
@@ -68,7 +69,7 @@ Do not run captcha collection in tens and hundreds of threads! Few websites woul
 
 #### 2.1. Name
 
-First, set the module name (Latin characters only).
+First, you need to set the module name. It must contain only Latin characters.
 
 ![](./images/user-module/fed2d879-b494-4b60-a13a-036c693d0951.png)
 
@@ -78,11 +79,10 @@ The module name must not contain the word **captcha**.
 
 #### 2.2. Types of symbols
 
-Mark the types of symbols that your captcha contains.
+Select the types of characters that appear in your captcha.
+The selected options determine the total number of captchas required to train the module.
 
-What you mark here affects the number of captchas you will need to upload to train the module.
-
-You can choose one or several options from the suggested.
+You can mark one or several items from the suggested list.
 
 ![](./images/user-module/3b39f9e1-d981-41af-842a-a51f4a51a4e0.png)
 
@@ -125,7 +125,8 @@ When you specified the module name, selected symbol types, and location of answe
 - After that, you need to deposit $10 per module.
 
 :::note
-The funds allocated to training are not debited but stay on the balance. You can spend them on solving any captchas, anytime.
+The funds for training are not charged; they remain on your balance.
+You can use them to recognize any captchas at any time.
 :::
 
 - After successful deposit, the status of the **first** uploaded module will change to **Paid**.
@@ -141,7 +142,7 @@ The funds allocated to training are not debited but stay on the balance. You can
 You get this status after you send the form (given that you have done everything correctly). 
 
 :::note
-Modules with this status can be deleted. If you uploaded the module but realized that you sent a wrong archive or gave a bad name for the module, you can delete it, make changes, and send it again.
+For modules with this status, deletion is available — if you uploaded the wrong archive or set an incorrect module name, you can delete the module, make the necessary corrections, and submit it again.
 :::
 
 #### Paid
@@ -191,9 +192,9 @@ It usually takes one day.
 <details>
     <summary>I want to train several modules at once, how can I do it correctly?</summary>
 
-The algorithm is simple: you just upload the captcha archive and pay for it. Then, you upload the second archive and pay for it. You do that for all archives.
+Upload the first captcha archive and pay for it, then repeat the process for the second archive, and so on for all modules.
 
-Training takes one day per module.
+The estimated time for one module to be ready is about one business day.
 
 </details>
 
@@ -218,7 +219,7 @@ If you didn't pay for the module and it has the **Validated** status, you can de
 <details>
     <summary>What is the “Manage” column in the table? I have nothing there</summary>
 
-You will see the "Delete" button in this column. But it's only available for the modules with the **Validated** status. 
+In this column, the **Delete** button is displayed only for modules with the **Validated** status.
 
 For modules with other statuses, this column remains empty.
 
@@ -227,7 +228,7 @@ For modules with other statuses, this column remains empty.
 <details>
     <summary>Why were some symbols added to my module name?</summary>
 
-This is done to make the module name unique. Some systems users may choose the same name for their module. To avoid confusion, the system automatically generates and adds random symbols to module names. This way, every user will send captchas to their module—no confusion.
+The module name is automatically modified to ensure uniqueness. Since multiple users may choose the same name, the system adds random characters to avoid confusion. This guarantees that each captcha will be directed specifically to your module.
 
 </details>
 
@@ -241,13 +242,13 @@ No. The trained module is only available in CapMonster.Cloud.
 <details>
     <summary>I am not satisfied with the quality of training. What to do?</summary>
 
-[Contact our support service](https://helpdesk.zennolab.com/).
+Please contact [our support service](https://helpdesk.zennolab.com/).
 
 </details>
 
 <details>
     <summary>I have a question that is not covered here. Where should I contact?</summary>
 
-[Contact our support service](https://helpdesk.zennolab.com/).
+Please contact [our support service](https://helpdesk.zennolab.com/).
 
 </details>

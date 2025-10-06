@@ -1,7 +1,7 @@
 ﻿---
 sidebar_position: 3
 sidebar_label: getBalance
-title: "Метод getBalanse — проверка Баланса для Решения Капч в API Capmonster Cloud"
+title: "Метод getBalance — проверка Баланса для Решения Капч в API Capmonster Cloud"
 description: "Полное описание метода getBalance API Capmonster Cloud. Узнайте, как проверить баланс аккаунта для работы с капчами, используя удобный API в руководстве Capmonster Cloud Docs."
 ---
 
@@ -41,7 +41,7 @@ Type: `String` <br />
 
 ### `balance`
 Type: `Decimal` <br />
-Количество доступных денег
+Количество доступных средств на счёте
 
 ### Пример
 

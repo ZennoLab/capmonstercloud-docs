@@ -10,12 +10,12 @@ A extensão funciona no navegador Google Chrome.
 
 -----
 ## Instalação automática
-**Importante!** Não é possível instalar extensões no modo de navegação anônima e no modo visitante.
+**Importante!** Não é recomendado instalar a extensão no modo anônimo ou no modo de convidado.
 
-1. Abra a [Chrome Web Store](https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=en).
+1. Abra a [Chrome Web Store](https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=pt-br).
 2. Clique em **Instalar**.
 
-Para começar a usar a extensão, clique em seu ícone à direita da barra de endereços. Vá para as [configurações](extension-main.md#configurações).
+Para começar a usar a extensão, clique em seu ícone à direita da barra de endereços. Vá para as [Configurações](extension-main.md#configurações).
 
 *Se por algum motivo não for possível instalar a extensão pela Chrome Web Store, use as instruções para instalação manual.*
 
@@ -27,18 +27,18 @@ Para começar a usar a extensão, clique em seu ícone à direita da barra de en
 2. Descompacte-o para qualquer pasta.
    
    **ATENÇÃO**: a pasta não deve ser excluída, caso contrário, a extensão deixará de funcionar.
-3. No navegador Google Chrome, abra a página “Extensões”. Existem várias maneiras de fazer isso:
-   1. Digite chrome://extensions na barra de endereços do navegador e pressione Enter.
-   2. No menu: clique nos três pontos verticais no canto superior direito (perto da foto do perfil), depois em "Mais Ferramentas", e em seguida "Extensões".
+3. No navegador Google Chrome, abra a página **Extensões**. Existem várias maneiras de fazer isso:
+   1. Digite `chrome://extensions` na barra de endereços do navegador e pressione **Enter**.
+   2. No menu: clique nos três pontos verticais no canto superior direito (perto da foto do perfil), depois em **Mais Ferramentas**, e em seguida **Extensões**.
 
   ![](./images/extension-main-firefox/359d5afb-d644-45c2-a882-e7fc3da759eb.png)
 
-   3. Ou vá para as configurações do Google Chrome e selecione "Extensões" (na parte inferior) no menu à direita.
+   3. Ou vá para as configurações do Google Chrome e selecione **Extensões** (na parte inferior) no menu à direita.
 
   ![](./images/extension-main-firefox/61a9b824-b0d2-4808-8bb8-feac4b25d0b7.png)
 
-4. Ative o “Modo de desenvolvedor”.
-5. Em seguida, clique em “Carregar sem compactação”.
+4. Ative o **Modo de desenvolvedor**.
+5. Em seguida, clique em **Carregar sem compactação**.
 
   ![](./images/extension-main-firefox/load-unpacked.png)
 
@@ -52,7 +52,7 @@ Para começar a usar a extensão, clique em seu ícone à direita da barra de en
 <details>
     <summary>Atualização manual da extensão</summary>
 
-Se você estiver instalando a extensão sobre a versão anterior, ao atualizar os arquivos originais da extensão, também precisará clicar no botão de atualização na página "Extensões" (como abrir esta página está descrito acima na seção "Instalação manual").
+Se você estiver instalando a extensão sobre a versão anterior, ao atualizar os arquivos originais da extensão, também precisará clicar no botão de atualização na página **Extensões** (como abrir esta página está descrito acima na seção **Instalação manual**).
 
 ![](./images/extension-main-firefox/manual-update.png)
 </details>
@@ -91,7 +91,7 @@ Se a primeira tentativa de resolver o captcha falhar, a extensão enviará taref
 
 Aqui você pode especificar o proxy que será enviado junto com a tarefa de reconhecimento.
 
-O "Login" e a "Senha" são opcionais.
+O **Login** e a **Senha** são opcionais.
 ### <a name="id-browserextension-blacklistcontrol"></a>Controle de lista negra
 Usando a lista negra, você pode configurar a extensão para ignorar captchas em sites específicos.
 

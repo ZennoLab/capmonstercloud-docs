@@ -1,6 +1,6 @@
 ﻿---
 sidebar_position: 6
-sidebar_label: TurnstileTask
+sidebar_label: Turnstile/Challenge (Cloudflare)
 ---
 
 import Tabs from '@theme/Tabs';
@@ -19,6 +19,8 @@ import BlogLink from '@theme/BlogLink';
   <PriceBlock title="TurnstileTask" captchaId="cf-turnstile"/>
 </PriceBlockWrap>
 
+![](./images/tunrstile-task/turnstile.png)
+
 所有 Turnstile 子类型都会自动支持：手动、非交互式和隐形。因此，对于常规验证码，无需指定子类型。
 
 <BlogLink url="https://capmonster.cloud/zh/blog/Cloudflare/what-is-cloudflare-captcha"/>
@@ -33,7 +35,10 @@ import BlogLink from '@theme/BlogLink';
 您需要解决一个**标准** Turnstile 验证码，例如 [这里](https://zenno.link/zl-support)。注意，Cloudflare 页面上的验证码可能看起来完全相同。请参阅文章末尾以区分标准 Turnstile 和 Cloudflare Challenge。
 
 :::warning **注意！**
-* 本任务**不需要**使用您自己的代理。
+* CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费用内。仅当网站不接受令牌或对内置服务的访问受限时，才需要指定您自己的代理。您可以联系[支持服务](https://helpdesk.zennolab.com/conversation/new)以确认细节并了解令牌在特定网站上的接受情况。
+
+* 如果代理按 IP 授权，请将地址 **65.21.190.34** 加入白名单。
+
 * 解决后，您将收到一个**token** 来确认验证码完成。
 :::
 
@@ -62,6 +67,36 @@ import BlogLink from '@theme/BlogLink';
   <ParamItem title="data" type="string" />
   从 `cData` 参数中获取的 *data* 字段值。
 
+  ---
+
+  <ParamItem title="proxyType" type="string" />
+    **http** - 普通的 http/https 代理；<br />**https** - 仅在 "http" 不起作用时尝试（某些自定义代理服务器要求）；<br />**socks4** - socks4 代理；<br />**socks5** - socks5 代理。
+
+     ---
+
+    <ParamItem title="proxyAddress" type="string" />
+    <p>
+	  代理 IP 地址 IPv4/IPv6。不允许：
+		- 使用主机名；
+		- 使用透明代理（其中客户端 IP 可见）；
+		- 使用来自本地网络的代理。
+	</p>
+
+     ---
+
+    <ParamItem title="proxyPort" type="integer" />
+    代理端口。
+
+     ---
+
+    <ParamItem title="proxyLogin" type="string" />
+    代理登录。
+
+     ---
+
+    <ParamItem title="proxyPassword" type="string" />
+    代理密码。
+
 </TabItem>
 
 ---
@@ -69,7 +104,10 @@ import BlogLink from '@theme/BlogLink';
 ## 选项 2（Challenge token）
 
 :::warning **注意！**
-* 本任务**不需要**使用您自己的代理。
+* CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费用内。仅当网站不接受令牌或对内置服务的访问受限时，才需要指定您自己的代理。您可以联系[支持服务](https://helpdesk.zennolab.com/conversation/new)以确认细节并了解令牌在特定网站上的接受情况。
+
+* 如果代理按 IP 授权，请将地址 **65.21.190.34** 加入白名单。
+
 * 解决后，您将收到一个**token** 来确认验证码完成。
 :::
 
@@ -102,7 +140,8 @@ import BlogLink from '@theme/BlogLink';
   ---
 
   <ParamItem title="userAgent" required type="string" />
-  浏览器 User-Agent。<br /> **仅提供当前 Windows UA:** userAgentPlaceholder
+  浏览器的 User-Agent。<br />
+**请仅传递当前 Windows 系统下的有效 UA。当前推荐值为**：`userAgentPlaceholder`
 
   ---
 
@@ -118,6 +157,36 @@ import BlogLink from '@theme/BlogLink';
 
   <ParamItem title="apiJsUrl" type="string" />
   包含验证码脚本 URL 的字符串。
+
+  ---
+
+  <ParamItem title="proxyType" type="string" />
+    **http** - 普通的 http/https 代理；<br />**https** - 仅在 "http" 不起作用时尝试（某些自定义代理服务器要求）；<br />**socks4** - socks4 代理；<br />**socks5** - socks5 代理。
+
+     ---
+
+    <ParamItem title="proxyAddress" type="string" />
+    <p>
+	  代理 IP 地址 IPv4/IPv6。不允许：
+		- 使用主机名；
+		- 使用透明代理（其中客户端 IP 可见）；
+		- 使用来自本地网络的代理。
+	</p>
+
+     ---
+
+    <ParamItem title="proxyPort" type="integer" />
+    代理端口。
+
+     ---
+
+    <ParamItem title="proxyLogin" type="string" />
+    代理登录。
+
+     ---
+
+    <ParamItem title="proxyPassword" type="string" />
+    代理密码。
 
 </TabItem>
 
@@ -183,7 +252,7 @@ import BlogLink from '@theme/BlogLink';
 
 ---
 
-  <ParamItem title="cloudflareTaskType" type="string" />
+  <ParamItem title="cloudflareTaskType" required type="string" />
   **cf_clearance**
 
 ---
@@ -276,7 +345,7 @@ import BlogLink from '@theme/BlogLink';
 
 ---
 
-  <ParamItem title="cloudflareTaskType" type="string" />
+  <ParamItem title="cloudflareTaskType" required type="string" />
   **wait_room**
 
 ---
@@ -330,68 +399,150 @@ import BlogLink from '@theme/BlogLink';
 
 ### 选项 1. 标准 Turnstile:
 
-<TabItem value="proxyless" label="TurnstileTask (无需代理)" default className="method-panel">
-	<MethodItem>
-		```http
-		https://api.capmonster.cloud/createTask
-		```
-	</MethodItem>
-	<MethodDescription>
-		**请求**
-		```json
-		{
-			"clientKey":"API_KEY",
-			"task":
-			{
-				"type":"TurnstileTask",
-				"websiteURL":"http://tsmanaged.zlsupport.com",
-				"websiteKey":"0x4AAAAAAABUYP0XeMJF0xoy"
-			}
-		}
-		```
-		**响应**
-		```json
-		{
-		  "errorId":0,
-		  "taskId":407533072
-		}
-		```
-	</MethodDescription>
-</TabItem>
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+
+  <TabItem value="proxyless" label="TurnstileTask (无代理)" default className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      **请求**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "TurnstileTask",
+          "websiteURL": "http://tsmanaged.zlsupport.com",
+          "websiteKey": "0x4AAAAAAABUYP0XeMJF0xoy"
+        }
+      }
+      ```
+
+      **响应**
+      ```json
+      {
+        "errorId": 0,
+        "taskId": 407533072
+      }
+      ```
+    </MethodDescription>
+  </TabItem>
+
+  <TabItem value="proxy" label="TurnstileTask (带代理)" className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      **请求**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "TurnstileTask",
+          "websiteURL": "http://tsmanaged.zlsupport.com",
+          "websiteKey": "0x4AAAAAAABUYP0XeMJF0xoy",
+          "proxyType": "http",
+          "proxyAddress": "8.8.8.8",
+          "proxyPort": 8080,
+          "proxyLogin": "proxyLoginHere",
+          "proxyPassword": "proxyPasswordHere"
+        }
+      }
+      ```
+
+      **响应**
+      ```json
+      {
+        "errorId": 0,
+        "taskId": 407533072
+      }
+      ```
+    </MethodDescription>
+  </TabItem>
+
+</Tabs>
 ---
 ### 选项 2. Challenge (token)
-<TabItem value="proxyless" label="TurnstileTask (无需代理)" default className="method-panel">
-	<MethodItem>
-		```http
-		https://api.capmonster.cloud/createTask
-		```
-	</MethodItem>
-	<MethodDescription>
-		**请求**
-		```json
-		{
-			"clientKey": "API_KEY",
-			"task": {
-				"type": "TurnstileTask",
-				"websiteURL": "https://example.com",
-				"websiteKey": "0x4AAAAAAADnPIDROrmt1Wwj",
-				"cloudflareTaskType": "token",
-				"userAgent":"userAgentPlaceholder",
-				"pageAction": "managed",
-				"pageData": "HUHDWUHuhuwfiweh32..uh2uhuhyugYUG=",
-				"data": "874291f4retD1366"
-			}
-		}
-		```
-		**响应**
-		```json
-		{
-		  "errorId":0,
-		  "taskId":407533072
-		}
-		```
-	</MethodDescription>
-</TabItem>
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+
+  <TabItem value="proxyless" label="TurnstileTask (无代理)" default className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      **请求**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "TurnstileTask",
+          "websiteURL": "https://example.com",
+          "websiteKey": "0x4AAAAAAADnPIDROrmt1Wwj",
+          "cloudflareTaskType": "token",
+          "userAgent": "userAgentPlaceholder",
+          "pageAction": "managed",
+          "pageData": "HUHDWUHuhuwfiweh32..uh2uhuhyugYUG=",
+          "data": "874291f4retD1366"
+        }
+      }
+      ```
+
+      **响应**
+      ```json
+      {
+        "errorId": 0,
+        "taskId": 407533072
+      }
+      ```
+    </MethodDescription>
+  </TabItem>
+
+  <TabItem value="proxy" label="TurnstileTask (带代理)" className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      **请求**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "TurnstileTask",
+          "websiteURL": "https://example.com",
+          "websiteKey": "0x4AAAAAAADnPIDROrmt1Wwj",
+          "cloudflareTaskType": "token",
+          "userAgent": "userAgentPlaceholder",
+          "pageAction": "managed",
+          "pageData": "HUHDWUHuhuwfiweh32..uh2uhuhyugYUG=",
+          "data": "874291f4retD1366",
+          "proxyType": "http",
+          "proxyAddress": "8.8.8.8",
+          "proxyPort": 8080,
+          "proxyLogin": "proxyLoginHere",
+          "proxyPassword": "proxyPasswordHere"
+        }
+      }
+      ```
+
+      **响应**
+      ```json
+      {
+        "errorId": 0,
+        "taskId": 407533072
+      }
+      ```
+    </MethodDescription>
+  </TabItem>
+
+</Tabs>
 ---
 ### 选项 3. Challenge (cookie)
 <TabItem value="proxyless" label="TurnstileTask (无需代理)" default className="method-panel">

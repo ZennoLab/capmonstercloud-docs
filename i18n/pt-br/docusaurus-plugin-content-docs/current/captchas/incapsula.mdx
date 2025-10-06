@@ -18,58 +18,101 @@ import BlogLink from '@theme/BlogLink';
   <PriceBlock title="Imperva" captchaId="imperva"/>
 </PriceBlockWrap>
 
+![](./images/incapsula/imperva.png)
+
 <BlogLink url="https://capmonster.cloud/pt-BR/blog/news/imperva-incapsula-news"/>
 
 :::warning **Atenção!**
-A solução Imperva (Incapsula), disponível no CapMonster Cloud, é fornecida exclusivamente para testar e analisar o desempenho em seus próprios recursos web. O uso dessa solução em sites de terceiros é estritamente proibido e viola a política de uso do serviço.
+* A solução Imperva (Incapsula), disponível no CapMonster Cloud, é fornecida exclusivamente para testar e analisar o desempenho em seus próprios recursos web. O uso dessa solução em sites de terceiros é estritamente proibido e viola a política de uso do serviço.
+
+* O CapMonster Cloud, por padrão, funciona com proxies integrados — já incluídos no custo do serviço. É necessário especificar seus próprios proxies apenas nos casos em que o site não aceita o token ou quando o acesso aos serviços integrados está restrito. Você pode entrar em contato com o [suporte técnico](https://helpdesk.zennolab.com/conversation/new) para esclarecer detalhes e verificar se os tokens estão sendo aceitos corretamente em um site específico.
+
+* Se o proxy utiliza autenticação por IP, é necessário adicionar o endereço **65.21.190.34** à lista de permissões (whitelist).
 :::
 
 
 ## Parâmetros da solicitação
 
 <TabItem value="proxyless" label="CustomTask (without proxy)" default className="bordered-panel">
-    <ParamItem title="type" required type="string" />
-    **CustomTask**
 
-    ---
+<ParamItem title="type" required type="string" />
+**CustomTask**
 
-    <ParamItem title="class" required type="string" />
-    **Imperva**
+---
 
-    ---
+<ParamItem title="class" required type="string" />
+**Imperva**
 
-    <ParamItem title="websiteURL" required type="string" />
-    O endereço da página principal onde o Incapsula está localizado.
+---
 
-    ---
-    <ParamItem title="incapsulaScriptUrl (dentro da metadata)" required="required" type="string" />
-    `"incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3"` - Nome do arquivo JS do Incapsula.
+<ParamItem title="websiteURL" required type="string" />
+O endereço da página principal onde o Incapsula está localizado.
 
-    ---
+---
 
-    <ParamItem title="incapsulaCookie (dentro da metadata)" required type="string" />
-    Seus cookies do Incapsula. Eles podem ser obtidos na página usando document.cookie ou no cabeçalho da requisição Set-Cookie: "incap_sess_*=...; visid_incap_*=..." (veja o exemplo de requisição /createTask). 
-	
-	![](./images/incapsula/incapsula2.png)
-	
-	---
+<ParamItem title="incapsulaScriptUrl (dentro da metadata)" required type="string" />
+`"incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3"` - Nome do arquivo JS do Incapsula.
 
-    <ParamItem title="reese84UrlEndpoint (dentro da metadata)" type="string" />
-    O nome do endpoint para onde a impressão digital reese84 é enviada pode ser encontrado entre as solicitações e termina com ?d=site.com
+---
 
-    ![](./images/incapsula/incapsula3.png)	
+<ParamItem title="incapsulaCookies (dentro da metadata)" required type="string" />
+Seus cookies do Incapsula. Eles podem ser obtidos na página usando `document.cookie` ou no cabeçalho da requisição `Set-Cookie`: `"incap_sess_*=...; visid_incap_*=..."` (veja o exemplo de requisição `/createTask`). 
 
-    ---
+![](./images/incapsula/incapsula2.png)
 
-    <ParamItem title="userAgent" type="string" />
-	User-Agent do navegador. <br />
-	**Passe apenas o UA real. O atual é**: userAgentPlaceholder
+---
+
+<ParamItem title="reese84UrlEndpoint (dentro da metadata)" type="string" />
+O nome do endpoint para onde a impressão digital reese84 é enviada pode ser encontrado entre as solicitações e termina com `?d=site.com`.
+
+![](./images/incapsula/incapsula3.png)
+
+---
+
+<ParamItem title="userAgent" type="string" />
+User-Agent do navegador. <br />
+**Transmita apenas o UA atual do sistema operacional Windows. No momento, o válido é**: `userAgentPlaceholder`
+
+---
+
+<ParamItem title="proxyType" type="string" />
+**http** - proxy http/https comum;<br />
+**https** - tente esta opção apenas se "http" não funcionar (necessário para alguns proxies personalizados);<br />
+**socks4** - proxy socks4;<br />
+**socks5** - proxy socks5.
+
+---
+
+<ParamItem title="proxyAddress" type="string" />
+Endereço IP do proxy IPv4/IPv6. Não é permitido:  
+- uso de nomes de host;  
+- uso de proxies transparentes (que revelem o IP do cliente);  
+- uso de proxies em máquinas locais.
+
+---
+
+<ParamItem title="proxyPort" type="integer" />
+Porta do proxy.
+
+---
+
+<ParamItem title="proxyLogin" type="string" />
+Login do servidor proxy.
+
+---
+
+<ParamItem title="proxyPassword" type="string" />
+Senha do servidor proxy.
+
+---
 </TabItem>
 
 
 ## Criar método de tarefa
 
-<TabItem value="proxyless" label="CustomTask (without proxy)" default className="method-panel">
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+
+<TabItem value="proxyless" label="CustomTask (sem proxy)" default className="method-panel">
 	<MethodItem>
 		```http
 		https://api.capmonster.cloud/createTask
@@ -88,7 +131,7 @@ A solução Imperva (Incapsula), disponível no CapMonster Cloud, é fornecida e
 				"metadata": {
 					"incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3",
 					"incapsulaCookies": "incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;",
-                                "reese84UrlEndpoint":"Built-with-the-For-hopence-Hurleysurfecting-the-"
+                    "reese84UrlEndpoint":"Built-with-the-For-hopence-Hurleysurfecting-the-"
 				}
 			}
 		}
@@ -102,6 +145,48 @@ A solução Imperva (Incapsula), disponível no CapMonster Cloud, é fornecida e
 		```
 	</MethodDescription>
 </TabItem>
+
+<TabItem value="proxy" label="CustomTask (com proxy)" default className="method-panel">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Solicitação**
+		```json
+		{
+			"clientKey": "API_KEY",
+			"task": {
+				"type": "CustomTask",
+				"class": "Imperva",
+				"websiteURL": "https://example.com",
+				"userAgent": "userAgentPlaceholder",
+				"metadata": {
+					"incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3",
+					"incapsulaCookies": "incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;",
+                    "reese84UrlEndpoint":"Built-with-the-For-hopence-Hurleysurfecting-the-"
+				},
+				"proxyType": "http",
+				"proxyAddress": "8.8.8.8",
+				"proxyPort": 8080,
+				"proxyLogin": "proxyLoginHere",
+				"proxyPassword": "proxyPasswordHere"
+			}
+		}
+		```
+		**Resposta**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
+</TabItem>
+
+</Tabs>
+
 
 
 ## Obter resultado da tarefa

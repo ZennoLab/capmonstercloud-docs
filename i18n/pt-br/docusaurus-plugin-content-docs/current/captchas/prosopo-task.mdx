@@ -18,6 +18,14 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
   <PriceBlock title="Prosopo captcha" captchaId="prosopo"/>
 </PriceBlockWrap>
 
+![](./images/prosopo/prosopo.png)
+
+:::warning **Atenção!**
+O CapMonster Cloud, por padrão, funciona com proxies integrados — já incluídos no custo do serviço. É necessário especificar seus próprios proxies apenas nos casos em que o site não aceita o token ou quando o acesso aos serviços integrados está restrito. Você pode entrar em contato com o [suporte técnico](https://helpdesk.zennolab.com/conversation/new) para esclarecer detalhes e verificar se os tokens estão sendo aceitos corretamente em um site específico.
+
+Se o proxy utiliza autenticação por IP, é necessário adicionar o endereço **65.21.190.34** à lista de permissões (whitelist).
+:::
+
 O método automático de resolução de CAPTCHA baseado em tokens Prosopo Procaptcha.
 
 ## Parâmetros da solicitação
@@ -167,6 +175,17 @@ Use o método [getTaskResult](../api/methods/get-task-result.md) para obter a so
 		```
 	</MethodDescription>
 </TabItem>
+
+## Como encontrar o websiteKey
+
+1. Abra o site onde a captcha Prosopo é exibida.
+
+2. Vá para **Ferramentas de Desenvolvedor** (**DevTools**) → **Network**, recarregue a página e localize a requisição que carrega a `image` (por exemplo, a requisição de API `https://example.prosopo.io/v1/prosopo/provider/client/captcha/image`).
+
+3. Em **Request Headers**, encontre o parâmetro `Prosopo-Site-Key`, copie seu valor e use-o ao criar a requisição.
+
+![](./images/prosopo/sitekey-prosopo.png)
+
 
 ## Usar biblioteca SDK
 

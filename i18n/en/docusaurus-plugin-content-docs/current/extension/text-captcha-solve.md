@@ -11,11 +11,11 @@ We've added the ability to recognize text captchas in our browser extension.
 ## How it works
 
 ### Actions in the browser
-1\. Right-click on the captcha and select "Mark image as captcha" from the pop-up menu.
+1\. Right-click on the captcha and select **Mark image as captcha** from the pop-up menu.
 
 ![](./images/text-captcha-solve/mark-as-captcha.png)
 
-2\. Right-click on the field for entering the answer and select "Select an input for the captcha result" in the menu that opens..
+2\. Right-click on the field for entering the answer and select **Select an input for the captcha result** in the menu that opens..
 
 ![](./images/text-captcha-solve/select-input.png)
 
@@ -25,15 +25,15 @@ We've added the ability to recognize text captchas in our browser extension.
  
 ### Recognition automation using software
 To automate the process of recognizing text captchas in the browser (e.g., using *Developer Tool* or *Selenium*)  you need:
-1. Assign the `cm-image-to-text-source="id"` attribute to the element with the image:
+1. Assign the `cm-image-to-text-source=**id**` attribute to the element with the image:
 
 ![](./images/text-captcha-solve/exapmle1.png) 
 
-2. Assign the `cm-image-to-text-input-result="id"` attribute to the element with the input:
+2. Assign the `cm-image-to-text-input-result=**id**` attribute to the element with the input:
 
 ![](./images/text-captcha-solve/exapmle2.png) 
 
-Where "id" is the captcha identifier (arbitrary value).
+Where **id** is the captcha identifier (arbitrary value).
 :::info 
 At the same time captchas and inputs corresponding to each other should have the same id.
 

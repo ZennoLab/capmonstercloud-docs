@@ -20,6 +20,23 @@ import BlogLink from '@theme/BlogLink';
   <PriceBlock title="Temu captcha" captchaId="temu"/>
 </PriceBlockWrap>
 
+## Examples of tasks
+
+<Tabs className="full-width-tabs">  
+  <TabItem value="temu" label="Slider" default>  
+    ![](./images/temu/temu.png)  
+  </TabItem>  
+  <TabItem value="temu1" label="Click">  
+    ![](./images/temu/temu1.png)  
+  </TabItem>  
+</Tabs>  
+
+:::warning **Attention!**
+CapMonster Cloud uses built-in proxies by default — their cost is already included in the service. You only need to specify your own proxies in cases where the website does not accept the token or access to the built-in services is restricted. You can contact [support](https://helpdesk.zennolab.com/conversation/new) to clarify the details and check whether tokens are accepted correctly on a particular website.
+
+If you are using a proxy with IP authorization, make sure to whitelist the address **65.21.190.34**.
+:::
+
 ## Request parameters
 
 <TabItem value="proxyless" label="CustomTask (without proxy)" default className="bordered-panel">
@@ -34,56 +51,134 @@ import BlogLink from '@theme/BlogLink';
     ---
 
     <ParamItem title="websiteURL" required type="string" />
-    The full URL of the page where the CAPTCHA is loaded ( https://www.temu.com/bgn_verification.html?....... )
+    The full URL of the page where the CAPTCHA is loaded ( https://www.example.com/bgn_verification.html?....... )
 
     ---
     <ParamItem title="cookie (inside metadata)" required="required" type="string" />
     Cookies obtained via `document.cookie` on the page where the CAPTCHA is loaded
 
     ---
-
     <ParamItem title="userAgent" type="string" />
-    The User-Agent of the browser. <br /> 
-	**Only pass the current UA. The current one is**: userAgentPlaceholder
-</TabItem>
+Browser User-Agent.  
+  **Pass only a valid UA from Windows OS. Currently it is**: `userAgentPlaceholder`
 
-### How to obtain the cookie (inside metadata) parameter
-The value for the `cookie` parameter can be obtained on the CAPTCHA page via the `document.cookie` property.
-![](./images/temu/temu-cookie.png) 
+---
+
+<ParamItem title="proxyType" type="string" />
+**http** - regular http/https proxy;<br />
+**https** - try this option only if "http" does not work (required for some custom proxies);<br />
+**socks4** - socks4 proxy;<br />
+**socks5** - socks5 proxy.
+
+---
+
+<ParamItem title="proxyAddress" type="string" />
+<p>
+Proxy IPv4/IPv6 IP address. Not allowed:  
+- use of hostnames;  
+- use of transparent proxies (where the client IP is visible);  
+- use of proxies on local machines.
+</p>
+
+---
+
+<ParamItem title="proxyPort" type="integer" />
+Proxy port.
+
+---
+
+<ParamItem title="proxyLogin" type="string" />
+Proxy server login.
+
+---
+
+<ParamItem title="proxyPassword" type="string" />
+Proxy server password.
+
+</TabItem> 
 
 ## Create task method
 
-<TabItem value="proxyless" label="CustomTask (without proxy)" default className="method-panel">
-	<MethodItem>
-		```http
-		https://api.capmonster.cloud/createTask
-		```
-	</MethodItem>
-	<MethodDescription>
-		**Request**
-		```json
-		{
-			"clientKey": "API_KEY",
-			"task": {
-				"type": "CustomTask",
-				"class": "Temu",
-				"websiteURL": "https://www.temu.com/bgn_verification.html?verifyCode=7PRQIzDznoFE67ecZYtRTw394f6185143a4af80&from=https%3A%2F%2Fwww.temu.com%2F&refer_page_name=home&refer_page_id=10005_1743074140645_cwb6un82rq&refer_page_sn=10005&_x_sessn_id=xmp1zuyv7y",
-				"userAgent": "userAgentPlaceholder",
-				"metadata": {
-					"cookie": "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab"
-				}
-			}
-		}
-		```
-		**Response**
-		```json
-		{
-		  "errorId":0,
-		  "taskId":407533072
-		}
-		```
-	</MethodDescription>
-</TabItem>
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="proxyless" label="CustomTask (without proxy)" default className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+
+    **Request**
+
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "task": {
+        "type": "CustomTask",
+        "class": "Temu",
+        "websiteURL": "https://www.example.com/bgn_verification.html?verifyCode=7PRQIzDznoFE67ecZYtRTw394f6185143a4af80&from=https%3A%2F%2Fwww.example.com%2F&refer_page_name=home&refer_page_id=10005_1743074140645_cwb6un82rq&refer_page_sn=10005&_x_sessn_id=xmp1zuyv7y",
+        "userAgent": "userAgentPlaceholder",
+        "metadata": {
+          "cookie": "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab"
+        }
+      }
+    }
+    ```
+
+    **Response**
+
+    ```json
+    {
+      "errorId": 0,
+      "taskId": 407533072
+    }
+    ```
+
+    </MethodDescription>
+  </TabItem>
+
+  <TabItem value="proxy" label="CustomTask (with proxy)" className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+
+    **Request**
+
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "task": {
+        "type": "CustomTask",
+        "class": "Temu",
+        "websiteURL": "https://www.example.com/bgn_verification.html?verifyCode=7PRQIzDznoFE67ecZYtRTw394f6185143a4af80&from=https%3A%2F%2Fwww.example.com%2F&refer_page_name=home&refer_page_id=10005_1743074140645_cwb6un82rq&refer_page_sn=10005&_x_sessn_id=xmp1zuyv7y",
+        "userAgent": "userAgentPlaceholder",
+        "metadata": {
+          "cookie": "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab"
+        },
+        "proxyType": "http",
+        "proxyAddress": "8.8.8.8",
+        "proxyPort": 8080,
+        "proxyLogin": "proxyLoginHere",
+        "proxyPassword": "proxyPasswordHere"
+      }
+    }
+    ```
+
+    **Response**
+
+    ```json
+    {
+      "errorId": 0,
+      "taskId": 407533072
+    }
+    ```
+
+    </MethodDescription>
+  </TabItem>
+</Tabs>
 
 
 ## Get task result method
@@ -112,7 +207,7 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to obtain the 
 			"status": "ready",
 			"solution": {
 				"domains": {
-					"www.temu.com": {
+					"www.example.com": {
 						"cookies": {
 							"privacy_setting_detail": "%7B%22firstPAds%22%3A1%2C%22adj%22%3A1%2C%22fbsAnlys%22%3A1%2C%22fbEvt%22%3A1%2C%22ggAds%22%3A1%2C%22fbAds%22%3A1%2C%22ttAds%22%3A1%2C%22scAds%22%3A1%2C%22ptAds%22%3A1%2C%22bgAds%22%3A1%2C%22tblAds%22%3A1%2C%22obAds%22%3A1%2C%22vgAds%22%3A1%2C%22idAds%22%3A1%2C%22opAds%22%3A1%2C%22stAds%22%3A1%2C%22pmAds%22%3A1%7D",
 							"region": "211",
@@ -133,7 +228,11 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to obtain the 
 	</MethodDescription>
 </TabItem>
 
-## How to Find All Required Parameters for Task Creation
+## How to obtain the cookie (inside metadata) parameter
+The value for the `cookie` parameter can be obtained on the CAPTCHA page via the `document.cookie` property.
+![](./images/temu/temu-cookie.png)
+
+## How to find all required parameters for task creation
 
 ### Automatically
 

@@ -1,6 +1,6 @@
 ---
 sidebar_position: 19
-sidebar_label: YidunTask
+sidebar_label: Yidun
 title: "Automatic Recognition and Bypass of Yidun (NECaptcha) Captcha | API"
 description: "Learn how to bypass Yidun captcha using the Capmonster Cloud API for automated captcha recognition and solving!"
 ---
@@ -46,8 +46,9 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 </Tabs>
 
 :::warning **Attention!**
-By default, CapMonster Cloud uses built-in proxy servers.  
-If access to built-in services is restricted, you can specify your own proxies to ensure stable operation.
+CapMonster Cloud uses built-in proxies by default — their cost is already included in the service. You only need to specify your own proxies in cases where the website does not accept the token or access to the built-in services is restricted. You can contact [support](https://helpdesk.zennolab.com/conversation/new) to clarify the details and check whether tokens are accepted correctly on a particular website.
+
+If you are using a proxy with IP authorization, make sure to whitelist the address **65.21.190.34**.
 :::
 
 ## Request parameters
@@ -70,8 +71,8 @@ If access to built-in services is restricted, you can specify your own proxies t
   ---
 
   <ParamItem title="userAgent" type="string" />
-  Browser User-Agent. <br />
-  **Only pass a current UA for Windows OS. Recommended value:** `userAgentPlaceholder`
+  Browser User-Agent.  
+  **Pass only a valid UA from Windows OS. Currently it is**: `userAgentPlaceholder`
 
   ---
 

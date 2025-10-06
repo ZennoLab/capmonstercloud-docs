@@ -18,19 +18,16 @@ npm install selenium-webdriver
 ```
 ## Etapa 2: Alterando os parâmetros da extensão
 
-Antes de iniciar a automação com a extensão, você precisa adicionar as configurações iniciais. É necessário adicionar `clientKey` ao arquivo `defaultSettings.json`.
+Antes de começar a automatização com a extensão, é necessário adicionar as configurações iniciais da extensão, incluindo obrigatoriamente o `clientKey` no arquivo `defaultSettings.json`.
 
-Para isso, você deve baixar o [arquivo da extensão](extension-main.md).
+Para isso, é preciso baixar o [arquivo da extensão](extension-main.md) e descompactá-lo. Na raiz do arquivo descompactado, encontra-se o arquivo `defaultSettings.json`, onde você pode alterar as configurações (a descrição dos parâmetros está disponível na [página](ext-settings.md)).
 
-Descompacte a extensão e, na raiz do arquivo descompactado, haverá um arquivo `defaultSettings.json` onde você pode alterar as configurações. [Aqui](ext-settings.md) você pode encontrar a descrição dos parâmetros.
-
-Depois que as configurações forem alteradas com sucesso, você precisará compactá-lo novamente em um arquivo .zip.
+Após fazer todas as alterações, salve-as e compacte novamente a extensão no formato ZIP.
 
 ## Etapa 3: Configurando o Selenium WebDriver para funcionar com a extensão
 
-Agora configure o Selenium WebDriver para usar o perfil do navegador criado.
-
-Para fazer isso, crie um arquivo `index.js` com o seguinte conteúdo:
+Agora configure o Selenium WebDriver para usar o perfil de navegador criado.
+Para isso, crie um arquivo `index.js` com o seguinte conteúdo:
 
 ```js
 const { Builder, By, Key, until } = require('selenium-webdriver');
@@ -82,12 +79,12 @@ driver.findElement(By.xpath("//button[@id='my-button']")).click();
 
 ## Etapa 5: Executando o script
 
-Para executar nosso script automático, que abrirá o navegador e realizará as ações mencionadas acima, você precisa escrever no console:
+Para executar o script automatizado que abrirá o navegador e realizará as ações descritas, digite o seguinte comando no terminal:
 
 ```bash
 node index.js
 ```
 
-Para atualizar a extensão sem perda de dados, você precisa copiar todas as configurações e dados da versão antiga, baixar a nova versão da extensão, descompactá-la e substituir a versão antiga pela nova.
+Para atualizar a extensão sem perder as configurações e os dados, copie todos os arquivos necessários da versão antiga, depois faça o download da nova versão da extensão, descompacte-a e substitua a versão antiga pela nova.
 
-Esperamos que este guia tenha sido útil para você. Se tiver alguma dúvida, consulte a documentação oficial do Selenium e a documentação do seu navegador.
+Esperamos que este guia tenha sido útil. Se você tiver dúvidas, recomendamos consultar a documentação oficial do Selenium e a documentação do seu navegador.

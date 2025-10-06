@@ -1,6 +1,6 @@
 ---
 sidebar_position: 21
-sidebar_label: AltchaTask
+sidebar_label: Altcha
 title: "Reconhecimento e Bypass Automático do Altcha | API"
 description: "Aprenda a contornar o Altcha usando a API do serviço de reconhecimento e resolução automática de captchas CapMonster Cloud!" 
 ---
@@ -33,8 +33,9 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 *Existe também um **captcha invisível** (**Invisible Captcha**), que não possui interface visível na página e não requer qualquer ação do usuário — a verificação ocorre em segundo plano.*
 
 :::warning **Atenção!**
-Para esta tarefa, o CapMonster Cloud utiliza proxies internos por padrão, portanto não é necessário fornecer os seus próprios (o custo já está incluído no preço).  
-Você deve especificar seus próprios proxies apenas se o token não for aceito no site alvo ou se o acesso aos serviços internos estiver restrito. Você pode contatar o [suporte](https://helpdesk.zennolab.com/conversation/new) para mais detalhes e verificar como os tokens são aceitos em um site específico.
+O CapMonster Cloud, por padrão, funciona com proxies integrados — já incluídos no custo do serviço. É necessário especificar seus próprios proxies apenas nos casos em que o site não aceita o token ou quando o acesso aos serviços integrados está restrito. Você pode entrar em contato com o [suporte técnico](https://helpdesk.zennolab.com/conversation/new) para esclarecer detalhes e verificar se os tokens estão sendo aceitos corretamente em um site específico.
+
+Se o proxy utiliza autenticação por IP, é necessário adicionar o endereço **65.21.190.34** à lista de permissões (whitelist).
 :::
 
 ## Parâmetros da solicitação
