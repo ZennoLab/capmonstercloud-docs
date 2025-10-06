@@ -1,6 +1,6 @@
 ﻿---
 sidebar_position: 10
-sidebar_label: ImageToTextTask
+sidebar_label: ImageToText
 title: "Автоматическое распознавание и обход простой текстовой капчи — Image-to-Text | API"
 description: "Метод Image-to-Text через API CapMonster.Cloud для автоматического распознавания и обхода простой текстовой капчи. Подробное руководство и примеры для автоматического решения простой капчи — изображения с текстом в документации Capmonster Cloud Docs!"
 ---
@@ -19,9 +19,13 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
   <PriceBlock captchaId="text"/>
 </PriceBlockWrap>
 
+![](./images/image-to-text/text-captcha-2.png)
+
 Это обычная капча, представляющая собой изображение с текстом, который нужно ввести в соответствующую строку. 
 
-![](./images/image-to-text/text-captcha-2.png)
+:::warning **Внимание!**
+Использование прокси-серверов для данной задачи не требуется.
+:::
 
 
 ## Параметры запроса
@@ -32,7 +36,7 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
     ---
 
     <ParamItem title="body" required type="string" />
-    Содержимое файла капчи закодированное в base64*. Убедитесь что шлете его без переносов строки.
+    Содержимое файла капчи закодированное в base64*. Убедитесь, что значение отправляется одной строкой, без переносов.
 
     ---
 
@@ -66,9 +70,9 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 
 <br />
 
-*Base64 - это способ кодирования данных, позволяющий представить бинарные данные в виде текста. Пример получения изображения капчи в формате base64 с помощью консоли в *Инструментах разработчика*:
+*Base64 - это способ кодирования данных, позволяющий представить бинарные данные в виде текста. Пример получения изображения капчи в формате base64 с помощью консоли в **Инструментах разработчика**:
 
-```
+```JavaScript
 const captchaUrl = 'https://example.com/captcha.jpg';
 
 function loadAndEncodeCaptchaToBase64(url) {

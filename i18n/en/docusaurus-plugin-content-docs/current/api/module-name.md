@@ -7,7 +7,9 @@ description: "Passing the module name to recognize a specific captcha can be use
 
 # Passing module name
 
-Passing the module name to recognize a specific captcha can be useful in cases of working with a specific service (e.g. Google, SolveMedia, Whatsapp, etc.).  This will increase the speed and quality of recognition and reduce the probability of errors. 
+In working with automatic captcha recognition, accuracy and processing speed are critical. Different services use their own unique types of captchas, and a universal solution does not always handle them equally effectively. For example, captchas from **Google**, **SolveMedia**, **WhatsApp**, or **Yandex** may have their own specifics, which can cause the standard recognition module to work more slowly or with errors.
+
+To improve efficiency and reduce the likelihood of incorrect recognition, CapMonster Cloud allows you to specify a particular module that will process your captcha. The system will apply a specialized recognition algorithm designed for that specific service instead of using a universal captcha processing method. 
 
 ## How to pass module name to CapMonster Cloud, using ApiKey field only
 

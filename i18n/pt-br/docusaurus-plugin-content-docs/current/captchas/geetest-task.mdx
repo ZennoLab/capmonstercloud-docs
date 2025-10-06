@@ -1,6 +1,6 @@
 ﻿---
 sidebar_position: 4
-sidebar_label: GeeTestTask
+sidebar_label: GeeTest
 ---
 
 import Tabs from '@theme/Tabs';
@@ -18,12 +18,16 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
   <PriceBlock title="GeeTestTask" captchaId="geetest"/>
 </PriceBlockWrap>
 
+![](./images/geetest-task/geetest_1.png) ![](./images/geetest-task/geetest_2.png)
+
 Este tipo de tarefa é para resolver captcha GeeTest usando seus proxies.
 Sua aplicação deve enviar o endereço do site, chave de domínio público (`gt`), chave (`challenge`) e proxy.
 
 O resultado da resolução do problema são três ou cinco tokens para enviar o formulário.
 
 :::warning **Atenção!**
+O CapMonster Cloud, por padrão, funciona com proxies integrados — já incluídos no custo do serviço. É necessário especificar seus próprios proxies apenas nos casos em que o site não aceita o token ou quando o acesso aos serviços integrados está restrito. Você pode entrar em contato com o [suporte técnico](https://helpdesk.zennolab.com/conversation/new) para esclarecer detalhes e verificar se os tokens estão sendo aceitos corretamente em um site específico.
+
 Proxies com autorização de IP ainda não são suportados.
 :::
 
@@ -63,7 +67,7 @@ V4 (captcha_id = gt)
 
 ### <span style={{fontSize: '1.5rem'}}>Parâmetros de solicitação</span>
 
-  <TabItem value="proxy" label="GeeTestTask (usando proxy)" className="bordered-panel">
+  <TabItem value="proxy" label="GeeTestTask (com proxy)" className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **GeeTestTask**
 
@@ -134,7 +138,9 @@ V4 (captcha_id = gt)
     ---
 
     <ParamItem title="userAgent" type="string" />
-    User-Agent do navegador usado para reconhecer o captcha.
+    User-Agent do navegador. <br />
+**Transmita apenas o UA atual do sistema operacional Windows. No momento, o válido é**: `userAgentPlaceholder`
+
   </TabItem>
 
 
@@ -173,7 +179,7 @@ V4 (captcha_id = gt)
 
 </MethodDescription>
 </TabItem>
-<TabItem value="proxy" label="GeeTestTask (usando proxy)" className="method-panel">
+<TabItem value="proxy" label="GeeTestTask (com proxy)" className="method-panel">
 <MethodItem>
 ```http
 https://api.capmonster.cloud/createTask
@@ -667,7 +673,8 @@ Senha do servidor proxy.
 ---
 
 <ParamItem title="userAgent" type="string" />
-User-Agent do navegador usado para reconhecer o captcha.
+User-Agent do navegador. <br />
+**Transmita apenas o UA atual do sistema operacional Windows. No momento, o válido é**: `userAgentPlaceholder`
 </TabItem>
 
 
@@ -709,7 +716,7 @@ https://api.capmonster.cloud/createTask
 
 </MethodDescription>
 </TabItem>
-<TabItem value="proxy" label="GeeTestTask (usando proxy)" className="method-panel">
+<TabItem value="proxy" label="GeeTestTask (com proxy)" className="method-panel">
 <MethodItem>
 ```http
 https://api.capmonster.cloud/createTask

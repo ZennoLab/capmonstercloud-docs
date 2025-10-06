@@ -5,11 +5,17 @@ sidebar_position: 6
 
 # Recebendo eventos da extensão
 
-Receber eventos da extensão permite que seu código fique ciente dos eventos que estão acontecendo (como resolver com sucesso um captcha com um token ou cliques) e reaja de acordo.
+A extensão CapMonster permite que seu código acompanhe momentos-chave do processo de resolução de captchas diretamente na página web. Com os eventos fornecidos, você pode saber quando a resolução de uma captcha começou, quando foi concluída com sucesso ou quando ocorreu um erro, e executar ações apropriadas no seu script.
 
-Ao resolver vários tipos de captchas, a extensão envia eventos para a página atualmente ativa no objeto global `window`.
+Todos os eventos são enviados para o objeto global `window` na página atual. Isso significa que você pode se inscrever neles usando o método padrão `window.addEventListener` e reagir ao que acontece sem recorrer a soluções complexas.
 
-Se necessário, é possível se inscrever nesses eventos por meio do `window.addEventListener`.
+O uso desses eventos é útil se você deseja:
+
+* Acompanhar o progresso da resolução da captcha em tempo real.
+* Executar automaticamente ações após a resolução bem-sucedida da captcha.
+* Tratar erros e reiniciar a resolução da captcha, se necessário.
+
+Nas seções seguintes, você encontrará a lista completa de eventos disponíveis, com uma breve descrição de cada um.
 
 :::info
 Nenhum parâmetro é passado para os eventos.

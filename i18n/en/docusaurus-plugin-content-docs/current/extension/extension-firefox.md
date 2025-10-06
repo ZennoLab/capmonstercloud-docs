@@ -14,7 +14,7 @@ The extension works in the Mozilla Firefox browser.
 ## Automatic installation
 1. Open the [Firefox Add-ons Web Store](https://addons.mozilla.org/en-US/firefox/addon/capmonster-cloud/).
 2. Click **Add to Firefox**.
-3. Confirm adding the extension by clicking the "Add" button in the modal window.
+3. Confirm adding the extension by clicking the **Add** button in the modal window.
    ![](./images/extension-main-firefox/modal.png)
 
 To get started with the extension, click on its icon to the right of the address bar. Go to the [settings](extension-firefox.md#settings).
@@ -29,22 +29,22 @@ To get started with the extension, click on its icon to the right of the address
 2. Open the Firefox browser and go to work with extensions:
    ![](./images/extension-main-firefox/extension-menu.png)
    
-3. Click the gear button, in the drop-down list that opens, select "Install add-on from file..."
+3. Click the gear button, in the drop-down list that opens, select **Install add-on from file...**
    ![](./images/extension-main-firefox/extension-installation.png)
    
 4. Select the downloaded archive with the extension.
 
-5. After downloading the extension, go to "Manage Your Extensions" and click on the installed extension. 
+5. After downloading the extension, go to **Manage Your Extensions** and click on the installed extension. 
    ![](./images/extension-main-firefox/extension1.png)
    
-6. Go to the "Permissions" tab and make sure that all permissions are granted.
+6. Go to the **Permissions** tab and make sure that all permissions are granted.
    ![](./images/extension-main-firefox/extension2.png)
 </details>
 
 <details>
     <summary>Manual update of the extension</summary>
 
-If you are installing the extension over the previous version, then when you update the original extension files, you also need to click the update button on the "Extensions" page (how to open this page is described above in the "Manual installation" section).
+If you are installing the extension over the previous version, then when you update the original extension files, you also need to click the update button on the **Extensions** page (how to open this page is described above in the **Manual installation** section).
 </details>
 
 -----
@@ -60,7 +60,7 @@ After launching the extension you’ll see this window:
 
 ![](./images/extension-main-firefox/ext.screen.enf.png)
 ### <a name="id-browserextension-apikey"></a>API key
-Enter API key in the corresponding field(1), press save button(2). If you entered the correct key, your balance will be displayed below(3).
+Enter API key in the corresponding field(**1**), press **Save** button(**2**). If you entered the correct key, your balance will be displayed below(**3**).
 
 ![](./images/extension-main-firefox/api-key.png)
 ### <a name="id-browserextension-automaticcaptchasolving"></a>Automated captcha solving

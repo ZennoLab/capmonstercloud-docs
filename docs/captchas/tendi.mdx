@@ -21,10 +21,14 @@ import BlogLink from '@theme/BlogLink';
   <PriceBlock title="Tencent captcha" captchaId="tencent"/>
 </PriceBlockWrap>
 
+![](./images/tendi/tendi.png)
+
 <BlogLink url="https://capmonster.cloud/ru/blog/ten-1/what-is-tencent-captcha-and-how-do-i-bypass-it"/>
 
 :::warning **Внимание!**
-Данная задача будет выполняться с использованием наших прокси-серверов.
+CapMonster Cloud по умолчанию работает через встроенные прокси — они уже включены в стоимость. Указывать собственные прокси требуется только в тех случаях, когда сайт не принимает токен или доступ к встроенным сервисам ограничен. Вы можете обратиться в службу поддержки, чтобы уточнить детали и узнать, насколько корректно принимаются токены на конкретном сайте.
+
+Если прокси с авторизацией по IP, то необходимо добавить адрес **65.21.190.34** в белый список.
 :::
 
 ## Параметры запроса
@@ -55,7 +59,8 @@ import BlogLink from '@theme/BlogLink';
     ---
 
     <ParamItem title="userAgent" type="string" />
-    User-Agent браузера. **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является версия**: `userAgentPlaceholder`
+    User-Agent браузера. <br />
+  **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является**: `userAgentPlaceholder`
 	
      ---
 
@@ -93,51 +98,84 @@ import BlogLink from '@theme/BlogLink';
 </TabItem>
 
 
-### Как получить websiteKey (captchaAppId)
-Включите *Инструменты разработчика*, перейдите на вкладку **Network**, активируйте капчу и посмотрите запросы. В некоторых из них будет нужное вам значение параметра. В данном случае `websiteKey=aid`
-
-![](./images/tendi/tendi-devtools.png) 
-
-### Как получить captchaUrl
-Откройте *Инструменты разработчика*, перейдите на вкладку **Network**, активируйте капчу и изучите сетевые запросы. Среди них появится `TCaptcha.js` или `TCaptcha-global.js`, в котором можно найти подобную ссылку: 
-
-![](./images/tendi/tendi_captchaUrl.png)
-
 ## Метод создания задачи
 
-<TabItem value="proxyless" label="CustomTask (без прокси)" default className="method-panel">
-  <MethodItem>
-    ```http
-    https://api.capmonster.cloud/createTask
-    ```
-  </MethodItem>
-  <MethodDescription>
-    **Запрос**
-    ```json
-    {
-      "clientKey": "API_KEY",
-      "task": {
-        "type": "CustomTask",
-        "class": "TenDI",
-        "websiteURL": "https://example.com",
-        "websiteKey": "189123456",
-        "userAgent": "userAgentPlaceholder",
-        "metadata": {
-          "captchaUrl": "https://global.captcha.example.com/TCaptcha-global.js"
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+
+  <TabItem value="proxyless" label="CustomTask (без прокси)" default className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      **Запрос**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "CustomTask",
+          "class": "TenDI",
+          "websiteURL": "https://example.com",
+          "websiteKey": "189123456",
+          "userAgent": "userAgentPlaceholder",
+          "metadata": {
+            "captchaUrl": "https://global.captcha.example.com/TCaptcha-global.js"
+          }
         }
       }
-    }
-    ```
+      ```
 
-    **Ответ**
-    ```json
-    {
-      "errorId": 0,
-      "taskId": 407533072
-    }
-    ```
-  </MethodDescription>
-</TabItem>
+      **Ответ**
+      ```json
+      {
+        "errorId": 0,
+        "taskId": 407533072
+      }
+      ```
+    </MethodDescription>
+  </TabItem>
+
+  <TabItem value="proxy" label="CustomTask (c прокси)" className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      **Запрос**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "CustomTask",
+          "class": "TenDI",
+          "websiteURL": "https://example.com",
+          "websiteKey": "189123456",
+          "userAgent": "userAgentPlaceholder",
+          "metadata": {
+            "captchaUrl": "https://global.captcha.example.com/TCaptcha-global.js"
+          },
+          "proxyType": "http",
+          "proxyAddress": "8.8.8.8",
+          "proxyPort": 8080,
+          "proxyLogin": "proxyLoginHere",
+          "proxyPassword": "proxyPasswordHere"
+        }
+      }
+      ```
+
+      **Ответ**
+      ```json
+      {
+        "errorId": 0,
+        "taskId": 407533072
+      }
+      ```
+    </MethodDescription>
+  </TabItem>
+
+</Tabs>
 
 ## Метод получения результата задачи
 Используйте метод [getTaskResult](../api/methods/get-task-result.md), чтобы получить решение TenDI.
@@ -174,6 +212,17 @@ import BlogLink from '@theme/BlogLink';
 		```
 	</MethodDescription>
 </TabItem>
+
+
+## Как получить websiteKey (captchaAppId)
+Включите *Инструменты разработчика*, перейдите на вкладку **Network**, активируйте капчу и посмотрите запросы. В некоторых из них будет нужное вам значение параметра. В данном случае `websiteKey=aid`
+
+![](./images/tendi/tendi-devtools.png) 
+
+## Как получить captchaUrl
+Откройте *Инструменты разработчика*, перейдите на вкладку **Network**, активируйте капчу и изучите сетевые запросы. Среди них появится `TCaptcha.js` или `TCaptcha-global.js`, в котором можно найти подобную ссылку: 
+
+![](./images/tendi/tendi_captchaUrl.png)
 
 ## Как найти все нужные параметры для создания задачи на решение
 

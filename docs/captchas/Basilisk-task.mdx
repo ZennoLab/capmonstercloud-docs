@@ -1,6 +1,6 @@
 ---
 sidebar_position: 14
-sidebar_label: BasiliskTask
+sidebar_label: Basilisk
 title: "Автоматическое распознавание и обход Basilisk капчи — Basilisk Task | API"
 description: "Узнайте, как обойти капчу Basilisk с помощью API сервиса автоматического рапознавания и решения капч Capmonster Cloud!" 
 ---
@@ -19,8 +19,12 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
   <PriceBlock title="Basilisk" captchaId="faucetpay" />
 </PriceBlockWrap>
 
+![](./images/basilisk/basilisk1.png)
+
 :::warning **Внимание!**
-Данная задача будет выполняться с использованием наших прокси-серверов.
+CapMonster Cloud по умолчанию работает через встроенные прокси — они уже включены в стоимость. Указывать собственные прокси требуется только в тех случаях, когда сайт не принимает токен или доступ к встроенным сервисам ограничен. Вы можете обратиться в службу поддержки, чтобы уточнить детали и узнать, насколько корректно принимаются токены на конкретном сайте.
+
+Если прокси с авторизацией по IP, то необходимо добавить адрес **65.21.190.34** в белый список.
 :::
 
 
@@ -29,60 +33,140 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
     <ParamItem title="type" required type="string" />
     **CustomTask**
 
-    ---
+    --- 
 
     <ParamItem title="class" required type="string" />
     **Basilisk**
 
-    ---
+    --- 
 
     <ParamItem title="websiteURL" required type="string" />
     Адрес основной страницы, на которой решается капча.
 
-    ---
+    --- 
 
     <ParamItem title="websiteKey" required type="string" />
     Можно найти в html коде в атрибуте **data-sitekey** контейнера с капчей или в payload POST-запроса на `https://basiliskcaptcha.com/challenge/check-site` в поле **site_key**
 
-    ---
+    --- 
 
     <ParamItem title="userAgent" type="string" />
-    User-Agent браузера. **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является**: userAgentPlaceholder
+    User-Agent браузера. <br />
+  **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является**: `userAgentPlaceholder`
 
+    ---
+
+    <ParamItem title="proxyType" type="string" />
+    **http** - обычный http/https прокси;<br />
+    **https** - используйте только если http не работает;<br />
+    **socks4** - socks4 прокси;<br />
+    **socks5** - socks5 прокси.
+
+    --- 
+
+    <ParamItem title="proxyAddress" type="string" />
+    <p>
+      IP адрес прокси IPv4/IPv6. Не допускается:
+      - использование имен хостов;
+      - использование прозрачных прокси;
+      - использование прокси на локальных машинах.
+    </p>
+
+    --- 
+
+    <ParamItem title="proxyPort" type="integer" />
+    Порт прокси.
+
+    --- 
+
+    <ParamItem title="proxyLogin" type="string" />
+    Логин прокси-сервера.
+
+    --- 
+
+    <ParamItem title="proxyPassword" type="string" />
+    Пароль прокси-сервера.
+
+    --- 
 </TabItem>
-
 
 ## Метод создания задачи
-<TabItem value="proxyless" label="CustomTask (без прокси)" default className="method-panel">
-	<MethodItem>
-		```http
-		https://api.capmonster.cloud/createTask
-		```
-	</MethodItem>
-	<MethodDescription>
-		**Запрос**
-		```json
-		{
-		   "clientKey": "API_KEY",
-		   "task": {
-			   "type": "CustomTask",
-			   "class": "Basilisk",
-			   "websiteURL": "https://domain.io/account/register",
-			   "websiteKey": "b7890hre5cf2544b2759c19fb2600897",
-			   "userAgent": "userAgentPlaceholder"
-		   }
-		}
-		```
-		**Ответ**
-		```json
-		{
-		  "errorId":0,
-		  "taskId":407533072
-		}
-		```
-	</MethodDescription>
-</TabItem>
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="proxyless" label="CustomTask (без прокси)" default className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
 
+    **Запрос**
+
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "task": {
+        "type": "CustomTask",
+        "class": "Basilisk",
+        "websiteURL": "https://domain.io/account/register",
+        "websiteKey": "b7890hre5cf2544b2759c19fb2600897",
+        "userAgent": "userAgentPlaceholder"
+      }
+    }
+    ```
+
+    **Ответ**
+
+    ```json
+    {
+      "errorId": 0,
+      "taskId": 407533072
+    }
+    ```
+
+    </MethodDescription>
+  </TabItem>
+
+  <TabItem value="proxy" label="CustomTask (с использованием прокси)" className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+
+    **Запрос**
+
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "task": {
+        "type": "CustomTask",
+        "class": "Basilisk",
+        "websiteURL": "https://domain.io/account/register",
+        "websiteKey": "b7890hre5cf2544b2759c19fb2600897",
+        "userAgent": "userAgentPlaceholder",
+        "proxyType": "http",
+        "proxyAddress": "8.8.8.8",
+        "proxyPort": 8080,
+        "proxyLogin": "proxyLoginHere",
+        "proxyPassword": "proxyPasswordHere"
+      }
+    }
+    ```
+
+    **Ответ**
+
+    ```json
+    {
+      "errorId": 0,
+      "taskId": 407533072
+    }
+    ```
+
+    </MethodDescription>
+  </TabItem>
+</Tabs>
 
 ## Метод получения результата задачи
 Используйте метод [getTaskResult](../api/methods/get-task-result.md), чтобы получить решение Basilisk.
@@ -405,4 +489,3 @@ class Program
   </TabItem>
 
 </Tabs>
-

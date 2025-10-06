@@ -17,9 +17,13 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
   <PriceBlock captchaId="text"/>
 </PriceBlockWrap>
 
+![](./images/image-to-text/text-captcha-2.png)
+
 这是常规验证码，即包含文本的图片，需要输入相应的文本。
 
-![](./images/image-to-text/text-captcha-2.png)
+:::warning **注意！**
+此任务无需使用代理服务器。
+:::
 
 
 ## 请求参数
@@ -64,7 +68,7 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 
 Base64 是一种数据编码方法，允许将二进制数据表示为文本。以下是使用*开发者工具*中的控制台获取验证码图像的 base64 格式的示例：
 
-```
+```JavaScript
 const captchaUrl = 'https://example.com/captcha.jpg';
 
 function loadAndEncodeCaptchaToBase64(url) {

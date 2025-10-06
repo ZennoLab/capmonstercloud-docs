@@ -1,6 +1,6 @@
 ﻿---
 sidebar_position: 8
-sidebar_label: ComplexImageTask Recaptcha
+sidebar_label: ComplexImage Recaptcha (click)
 title: "ComplexImageTask reCAPTCHA - automatic recognition and solution of captchas with image clicks | API"
 description: "ComplexImageTask reCAPTCHA - set up automatic recognition and solution of image clickable captchas via Capmonster Cloud API!"
 ---
@@ -21,6 +21,12 @@ import BlogLink from '@theme/BlogLink';
   <PriceBlock title="reCAPTCHA 2 (3x3)" captchaId="complex-rc2_3x3_dynamic"/>
   <PriceBlock title="reCAPTCHA 2 (4x4)" captchaId="complex-rc2_4x4"/>
 </PriceBlockWrap>
+
+---
+
+:::warning **Attention!**
+Using proxy servers is not required for this task.
+:::
 
 The object contains data about the task for solving ReCaptcha2 from Google.
 
@@ -167,7 +173,7 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the cap
 | :- | :- | :- |
 |answer|Array|List with boolean values, "true" means that you need to click on the image corresponding to this position.|
 
-## How to Find All Required Parameters for Task Creation
+## How to find all required parameters for task creation
 
 ### Manually
 

@@ -19,6 +19,23 @@ import BlogLink from '@theme/BlogLink';
   <PriceBlock title="Temu captcha" captchaId="temu"/>
 </PriceBlockWrap>
 
+## Exemplos de tarefas
+
+<Tabs className="full-width-tabs">
+  <TabItem value="temu" label="Slider" default>
+    ![](./images/temu/temu.png)
+  </TabItem>
+  <TabItem value="temu1" label="Clique">
+    ![](./images/temu/temu1.png)
+  </TabItem>
+</Tabs>
+
+:::warning **Atenção!**
+O CapMonster Cloud, por padrão, funciona com proxies integrados — já incluídos no custo do serviço. É necessário especificar seus próprios proxies apenas nos casos em que o site não aceita o token ou quando o acesso aos serviços integrados está restrito. Você pode entrar em contato com o [suporte técnico](https://helpdesk.zennolab.com/conversation/new) para esclarecer detalhes e verificar se os tokens estão sendo aceitos corretamente em um site específico.
+
+Se o proxy utiliza autenticação por IP, é necessário adicionar o endereço **65.21.190.34** à lista de permissões (whitelist).
+:::
+
 ## Parâmetros da solicitação
 
 <TabItem value="proxyless" label="CustomTask (without proxy)" default className="bordered-panel">
@@ -33,7 +50,7 @@ import BlogLink from '@theme/BlogLink';
     ---
 
     <ParamItem title="websiteURL" required type="string" />
-    A URL completa da página onde a CAPTCHA está carregada ( https://www.temu.com/bgn_verification.html?....... )
+    A URL completa da página onde a CAPTCHA está carregada ( https://www.example.com/bgn_verification.html?....... )
 
     ---
     <ParamItem title="cookie (dentro da metadata)" required="required" type="string" />
@@ -42,18 +59,51 @@ import BlogLink from '@theme/BlogLink';
     ---
 
     <ParamItem title="userAgent" type="string" />
-    O User-Agent do navegador. <br /> 
-	**Passe apenas o UA atual. O atual é**: userAgentPlaceholder
-</TabItem>
+    User-Agent do navegador. <br />
+**Transmita apenas o UA atual do sistema operacional Windows. No momento, o válido é**: `userAgentPlaceholder`
 
-### Como obter o parâmetro cookie (dentro da metadata)
-O valor do parâmetro `cookie` pode ser obtido na página da CAPTCHA via a propriedade `document.cookie`.
-![](./images/temu/temu-cookie.png) 
+
+    ---
+
+<ParamItem title="proxyType" type="string" />
+**http** - proxy http/https comum;<br />
+**https** - tente esta opção apenas se "http" não funcionar (necessário para alguns proxies personalizados);<br />
+**socks4** - proxy socks4;<br />
+**socks5** - proxy socks5.
+
+---
+
+<ParamItem title="proxyAddress" type="string" />
+<p>
+Endereço IP do proxy IPv4/IPv6. Não é permitido:
+- uso de nomes de host;
+- uso de proxies transparentes (que revelem o IP do cliente);
+- uso de proxies em máquinas locais.
+</p>
+
+---
+
+<ParamItem title="proxyPort" type="integer" />
+Porta do proxy.
+
+---
+
+<ParamItem title="proxyLogin" type="string" />
+Login do servidor proxy.
+
+---
+
+<ParamItem title="proxyPassword" type="string" />
+Senha do servidor proxy.
+
+</TabItem>
 
 
 ## Método de criação de tarefa
 
-<TabItem value="proxyless" label="CustomTask (without proxy)" default className="method-panel">
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+
+<TabItem value="proxyless" label="CustomTask (sem proxy)" default className="method-panel">
 	<MethodItem>
 		```http
 		https://api.capmonster.cloud/createTask
@@ -67,7 +117,7 @@ O valor do parâmetro `cookie` pode ser obtido na página da CAPTCHA via a propr
 			"task": {
 				"type": "CustomTask",
 				"class": "Temu",
-				"websiteURL": "https://www.temu.com/bgn_verification.html?verifyCode=7PRQIzDznoFE67ecZYtRTw394f6185143a4af80&from=https%3A%2F%2Fwww.temu.com%2F&refer_page_name=home&refer_page_id=10005_1743074140645_cwb6un82rq&refer_page_sn=10005&_x_sessn_id=xmp1zuyv7y",
+				"websiteURL": "https://www.example.com/bgn_verification.html?verifyCode=7PRQIzDznoFE67ecZYtRTw394f6185143a4af80&from=https%3A%2F%2Fwww.example.com%2F&refer_page_name=home&refer_page_id=10005_1743074140645_cwb6un82rq&refer_page_sn=10005&_x_sessn_id=xmp1zuyv7y",
 				"userAgent": "userAgentPlaceholder",
 				"metadata": {
 					"cookie": "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab"
@@ -85,6 +135,44 @@ O valor do parâmetro `cookie` pode ser obtido na página da CAPTCHA via a propr
 	</MethodDescription>
 </TabItem>
 
+<TabItem value="proxy" label="CustomTask (com proxy)" default className="method-panel">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Solicitação**
+		```json
+		{
+			"clientKey": "API_KEY",
+			"task": {
+				"type": "CustomTask",
+				"class": "Temu",
+				"websiteURL": "https://www.example.com/bgn_verification.html?verifyCode=7PRQIzDznoFE67ecZYtRTw394f6185143a4af80&from=https%3A%2F%2Fwww.example.com%2F&refer_page_name=home&refer_page_id=10005_1743074140645_cwb6un82rq&refer_page_sn=10005&_x_sessn_id=xmp1zuyv7y",
+				"userAgent": "userAgentPlaceholder",
+				"metadata": {
+					"cookie": "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab"
+				},
+				"proxyType": "http",
+				"proxyAddress": "8.8.8.8",
+				"proxyPort": 8080,
+				"proxyLogin": "proxyLoginHere",
+				"proxyPassword": "proxyPasswordHere"
+			}
+		}
+		```
+		**Resposta**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
+</TabItem>
+
+</Tabs>
 
 ## Método para obter o resultado da tarefa
 Use o método [getTaskResult](../api/methods/get-task-result.md) para obter a solução Temu.  
@@ -112,7 +200,7 @@ Use o método [getTaskResult](../api/methods/get-task-result.md) para obter a so
 			"status": "ready",
 			"solution": {
 				"domains": {
-					"www.temu.com": {
+					"www.example.com": {
 						"cookies": {
 							"privacy_setting_detail": "%7B%22firstPAds%22%3A1%2C%22adj%22%3A1%2C%22fbsAnlys%22%3A1%2C%22fbEvt%22%3A1%2C%22ggAds%22%3A1%2C%22fbAds%22%3A1%2C%22ttAds%22%3A1%2C%22scAds%22%3A1%2C%22ptAds%22%3A1%2C%22bgAds%22%3A1%2C%22tblAds%22%3A1%2C%22obAds%22%3A1%2C%22vgAds%22%3A1%2C%22idAds%22%3A1%2C%22opAds%22%3A1%2C%22stAds%22%3A1%2C%22pmAds%22%3A1%7D",
 							"region": "211",
@@ -133,7 +221,11 @@ Use o método [getTaskResult](../api/methods/get-task-result.md) para obter a so
 	</MethodDescription>
 </TabItem>
 
-## Como Encontrar Todos os Parâmetros Necessários para a Criação da Tarefa
+### Como obter o parâmetro cookie (dentro da metadata)
+O valor do parâmetro `cookie` pode ser obtido na página da CAPTCHA via a propriedade `document.cookie`.
+![](./images/temu/temu-cookie.png) 
+
+## Como encontrar todos os parâmetros necessários para a criação da tarefa
 
 ### Automaticamente
 

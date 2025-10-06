@@ -12,7 +12,7 @@ sidebar_label: Firefox 浏览器扩展
 
 -----
 ## 自动安装
-1. 打开 [Firefox 插件商店](https://addons.mozilla.org/en-US/firefox/addon/capmonster-cloud/)。
+1. 打开 [Firefox 插件商店](https://addons.mozilla.org/zh/firefox/addon/capmonster-cloud/)。
 2. 点击 **Add to Firefox**。
 3. 在模态窗口中点击 "Add" 按钮确认添加扩展。
    

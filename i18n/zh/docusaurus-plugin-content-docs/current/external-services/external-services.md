@@ -1,5 +1,5 @@
 ﻿# 通过其他服务的API进行验证码识别
-CapMonster Cloud支持API：Anti-Captcha（v1.0，v2.0）、RuCaptcha、RipCaptcha、2Captcha、BypassCaptcha、DeathByCaptcha。因此，即使您的程序未与我们的服务集成，您也可以通过CapMonster.Cloud解决验证码问题。
+CapMonster Cloud支持API：Anti-Captcha（v1.0，v2.0）、RuCaptcha、RipCaptcha、2Captcha、BypassCaptcha、DeathByCaptcha。因此，即使您的程序未与我们的服务集成，您也可以通过CapMonster Cloud解决验证码问题。
 
 您只需安装 ![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.001.png)[**CapMonsterInterceptor**](https://static.zenno.services/ccl/interceptor.msi)（适用于Windows操作系统）
 ![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.002.png) 其他平台的支持正在开发中。
@@ -14,7 +14,7 @@ CapMonster Cloud支持API：Anti-Captcha（v1.0，v2.0）、RuCaptcha、RipCaptc
 
 ![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.005.png)
 
-当CapMonsterInterceptor运行时，发送到*Anti-Captcha（v1.0，v2.0）、RuCaptcha、RipCaptcha、2Captcha、BypassCaptcha、DeathByCaptcha*服务进行识别的所有验证码将被拦截并重定向到CapMonster.Cloud。
+当CapMonsterInterceptor运行时，发送到*Anti-Captcha（v1.0，v2.0）、RuCaptcha、RipCaptcha、2Captcha、BypassCaptcha、DeathByCaptcha*服务进行识别的所有验证码将被拦截并重定向到CapMonster Cloud。
 ## 示例
 只需在您的程序中选择需要输入验证码的识别服务之一。在我们的示例中，将选择 *DeathByCaptcha*。
 

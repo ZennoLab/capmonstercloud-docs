@@ -1,6 +1,6 @@
 ﻿---
 sidebar_position: 14
-sidebar_label: BasiliskTask
+sidebar_label: Basilisk
 ---
 
 import Tabs from '@theme/Tabs';
@@ -17,8 +17,12 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
   <PriceBlock title="Basilisk" captchaId="faucetpay"/>
 </PriceBlockWrap>
 
-:::warning **警告！**
-此任务将使用我们的代理服务器执行。
+![](./images/basilisk/basilisk1.png)
+
+:::warning **注意！**
+CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费用内。仅当网站不接受令牌或对内置服务的访问受限时，才需要指定您自己的代理。您可以联系[支持服务](https://helpdesk.zennolab.com/conversation/new)以确认细节并了解令牌在特定网站上的接受情况。
+
+如果代理按 IP 授权，请将地址 **65.21.190.34** 加入白名单。
 :::
 
 ## 请求参数
@@ -44,41 +48,120 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
     ---
 
     <ParamItem title="userAgent" type="string" />
-	User-Agent 浏览器。**仅传递来自 Windows 操作系统的当前 UA。现在是**： userAgentPlaceholder 
+	浏览器的 User-Agent。<br />
+**请仅传递当前 Windows 系统下的有效 UA。当前推荐值为**：`userAgentPlaceholder`
+   
+   ---
+
+   <ParamItem title="proxyType" type="string" />
+    **http** - 普通的 http/https 代理；<br />**https** - 仅在 "http" 不起作用时尝试（某些自定义代理服务器要求）；<br />**socks4** - socks4 代理；<br />**socks5** - socks5 代理。
+
+     ---
+
+    <ParamItem title="proxyAddress" type="string" />
+    <p>
+	  代理 IP 地址 IPv4/IPv6。不允许：
+		- 使用主机名；
+		- 使用透明代理（其中客户端 IP 可见）；
+		- 使用来自本地网络的代理。
+	</p>
+
+     ---
+
+    <ParamItem title="proxyPort" type="integer" />
+    代理端口。
+
+     ---
+
+    <ParamItem title="proxyLogin" type="string" />
+    代理登录。
+
+     ---
+
+    <ParamItem title="proxyPassword" type="string" />
+    代理密码。
+
 
 </TabItem>
 
 
 ## 创建任务方法
-<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
-	<MethodItem>
-		```http
-		https://api.capmonster.cloud/createTask
-		```
-	</MethodItem>
-	<MethodDescription>
-		**要求**
-		```json
-		{
-		   "clientKey": "API_KEY",
-		   "task": {
-			   "type": "CustomTask",
-			   "class": "Basilisk",
-			   "websiteURL": "https://domain.io/account/register",
-			   "websiteKey": "b7890hre5cf2544b2759c19fb2600897",
-			   "userAgent": "userAgentPlaceholder"
-		   }
-		}
-		```
-		**回应**
-		```json
-		{
-		  "errorId":0,
-		  "taskId":407533072
-		}
-		```
-	</MethodDescription>
-</TabItem>
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="proxyless" label="CustomTask (无代理)" default className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+
+    **请求**
+
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "task": {
+        "type": "CustomTask",
+        "class": "Basilisk",
+        "websiteURL": "https://domain.io/account/register",
+        "websiteKey": "b7890hre5cf2544b2759c19fb2600897",
+        "userAgent": "userAgentPlaceholder"
+      }
+    }
+    ```
+
+    **响应**
+
+    ```json
+    {
+      "errorId": 0,
+      "taskId": 407533072
+    }
+    ```
+
+    </MethodDescription>
+  </TabItem>
+
+  <TabItem value="proxy" label="CustomTask (使用代理)" className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+
+    **请求**
+
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "task": {
+        "type": "CustomTask",
+        "class": "Basilisk",
+        "websiteURL": "https://domain.io/account/register",
+        "websiteKey": "b7890hre5cf2544b2759c19fb2600897",
+        "userAgent": "userAgentPlaceholder",
+        "proxyType": "http",
+        "proxyAddress": "8.8.8.8",
+        "proxyPort": 8080,
+        "proxyLogin": "proxyLoginHere",
+        "proxyPassword": "proxyPasswordHere"
+      }
+    }
+    ```
+
+    **响应**
+
+    ```json
+    {
+      "errorId": 0,
+      "taskId": 407533072
+    }
+    ```
+
+    </MethodDescription>
+  </TabItem>
+</Tabs>
 
 
 ## 获取任务结果方法

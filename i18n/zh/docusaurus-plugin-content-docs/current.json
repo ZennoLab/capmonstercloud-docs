@@ -40,7 +40,7 @@
     "description": "The generated-index page description for category Внешние сервисы in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.Расширение.link.generated-index.description": {
-    "message": "Documentation for working with the extension",
+    "message": "扩展使用文档",
     "description": "The generated-index page description for category Расширение in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.API.link.generated-index.title": {
