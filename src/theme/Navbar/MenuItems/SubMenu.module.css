@@ -1,0 +1,43 @@
+.subMenu {
+  position: relative;
+  padding-left: 8px;
+  font-size: 18px;
+  color: #14193c;
+}
+
+.mobileBorder {
+  border-bottom: 1px solid #dce1eb;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  cursor: pointer;
+  outline-color: #7d6eff;
+  gap: 5px;
+  color: #14193c;
+  background: transparent;
+  border: none;
+}
+
+.desktopButton {
+  font-size: 16px;
+  transition: color 0.2s ease;
+}
+
+.desktopButton:hover {
+  color: #505578;
+}
+
+.mobileButton {
+  font-size: 18px;
+  height: 54px;
+}
+
+.arrow {
+  width: 10px;
+  height: 5px;
+  /* fill: currentColor; */
+}

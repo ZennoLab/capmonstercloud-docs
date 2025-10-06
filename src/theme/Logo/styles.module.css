@@ -1,0 +1,19 @@
+.logoLink {
+  /* display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none; */
+  width: auto;
+}
+
+.logoImg {
+  /* width: 28px; подгони под свой размер */
+  /* height: 28px; */
+  display: block;
+}
+
+.logoText {
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--ifm-navbar-link-color);
+}

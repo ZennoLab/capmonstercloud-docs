@@ -1,0 +1,26 @@
+.headerLink {
+  color: #14193c;
+  text-decoration: none;
+  outline-color: #7d6eff;
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.headerLink:hover {
+  color: #505578;
+}
+
+.inner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text {
+  font-size: 16px;
+  line-height: 1.4;
+  white-space: nowrap;
+}

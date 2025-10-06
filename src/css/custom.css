@@ -62,9 +62,48 @@
 }
 
 .DocSearch-Button {
+  width: 240px;
   border-radius: 5px !important;
-  /* background: #3264EB !important; */
+  background: white !important;
+  border: 1px solid #d2dce6 !important;
   /* color: white !important; */
+}
+
+@media (max-width: 1200px) {
+  .DocSearch-Button {
+    width: 38px;
+  }
+  .DocSearch-Button-Keys {
+    display: none !important;
+  }
+  .DocSearch-Button-Placeholder {
+    display: none;
+  }
+}
+
+[data-theme='dark'] .DocSearch-Button {
+  background: #090a11 !important;
+  border: 1px solid #090a11 !important;
+}
+
+.DocSearch-Button:hover,
+.DocSearch-Button:active {
+  box-shadow: none !important;
+  border: 1px solid #7d6eff !important;
+}
+
+.DocSearch-Button-Key {
+  background: #eceef2 !important;
+  box-shadow: none !important;
+}
+
+[data-theme='dark'] .DocSearch-Button-Key {
+  background: #565872 !important;
+}
+
+.DocSearch-Button .DocSearch-Search-Icon {
+  width: 16px;
+  color: #828ca0 !important;
 }
 
 /* .DocSearch-Button .DocSearch-Search-Icon {
@@ -539,3 +578,24 @@ a[class*='cardContainer'] {
 .menu__link.locale-zh::before {
   content: '🇨🇳';
 }
+
+.dropdown > .navbar__link:after {
+  display: none;
+}
+
+.navbar__item:not(.lk-link) {
+  padding: 0;
+}
+.navbar__item:not(.lk-link):not(.dropdown) {
+  margin-right: 40px;
+}
+.lk-link {
+  margin-right: 12px;
+}
+.navbar__item.dropdown {
+  margin-right: 12px;
+}
+
+/* .navbar__items--right {
+  gap: 40px;
+} */
