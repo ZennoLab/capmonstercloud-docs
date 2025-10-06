@@ -1,6 +1,6 @@
 ---
 sidebar_position: 14
-sidebar_label: BasiliskTask
+sidebar_label: Basilisk
 title: "Automatically recognise and bypass Basilisk captcha - Basilisk Task | API"
 description: "Learn how to bypass Basilisk captcha using Capmonster Cloud API! Detailed description of features and examples."
 ---
@@ -19,69 +19,157 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
   <PriceBlock title="Basilisk" captchaId="faucetpay"/>
 </PriceBlockWrap>
 
-:::warning **Warning!**
-This task will be performed using our proxy servers.
+![](./images/basilisk/basilisk1.png)
+
+:::warning **Attention!**
+CapMonster Cloud uses built-in proxies by default — their cost is already included in the service. You only need to specify your own proxies in cases where the website does not accept the token or access to the built-in services is restricted. You can contact [support](https://helpdesk.zennolab.com/conversation/new) to clarify the details and check whether tokens are accepted correctly on a particular website.
+
+If you are using a proxy with IP authorization, make sure to whitelist the address **65.21.190.34**.
 :::
 
 
 ## Request parameters
 <TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (without proxy)" default className="bordered-panel">
-    <ParamItem title="type" required type="string" />
-    **CustomTask**
 
-    ---
+  <ParamItem title="type" required type="string" />  
+  **CustomTask**
 
-    <ParamItem title="class" required type="string" />
-    **Basilisk**
+  ---
 
-    ---
+  <ParamItem title="class" required type="string" />  
+  **Basilisk**
 
-    <ParamItem title="websiteURL" required type="string" />
-    The address of the main page where the captcha is solved.
+  ---
 
-    ---
+  <ParamItem title="websiteURL" required type="string" />  
+  The address of the main page where the captcha is solved.
 
-    <ParamItem title="websiteKey" required type="string" />
-    Can be found in the html code in the attribute **data-sitekey** of the captcha container or in the payload of a POST request to the `https://basiliskcaptcha.com/challenge/check-site` in the field **site_key**
+  ---
 
-    ---
+  <ParamItem title="websiteKey" required type="string" />  
+  Can be found in the HTML code in the attribute **data-sitekey** of the captcha container  
+  or in the payload of a POST request to  
+  `https://basiliskcaptcha.com/challenge/check-site` in the field **site_key**.
 
-   <ParamItem title="userAgent" type="string" />
-   User-Agent browser. **Pass only the current UA from the Windows operating system. Now this is**: userAgentPlaceholder 
+  ---
+
+  <ParamItem title="userAgent" type="string" />  
+  Browser User-Agent.  
+  **Pass only a valid UA from Windows OS. Currently it is**: `userAgentPlaceholder`
+
+  ---
+
+  <ParamItem title="proxyType" type="string" />  
+  - **http** — standard http/https proxy  
+  - **https** — try this if "http" doesn't work (needed for some custom proxies)  
+  - **socks4** — socks4 proxy  
+  - **socks5** — socks5 proxy
+
+  ---
+
+  <ParamItem title="proxyAddress" type="string" />  
+  IP address of the proxy (IPv4/IPv6). Not allowed:  
+  - hostnames  
+  - transparent proxies (those exposing the client IP)  
+  - local machine proxies
+
+  ---
+
+  <ParamItem title="proxyPort" type="integer" />  
+  Proxy port.
+
+  ---
+
+  <ParamItem title="proxyLogin" type="string" />  
+  Proxy login.
+
+  ---
+
+  <ParamItem title="proxyPassword" type="string" />  
+  Proxy password.
+
+  ---
 
 </TabItem>
 
 
 ## Create task method
-<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
-	<MethodItem>
-		```http
-		https://api.capmonster.cloud/createTask
-		```
-	</MethodItem>
-	<MethodDescription>
-		**Request**
-		```json
-		{
-		   "clientKey": "API_KEY",
-		   "task": {
-			   "type": "CustomTask",
-			   "class": "Basilisk",
-			   "websiteURL": "https://domain.io/account/register",
-			   "websiteKey": "b7890hre5cf2544b2759c19fb2600897",
-			   "userAgent": "userAgentPlaceholder"
-		   }
-		}
-		```
-		**Response**
-		```json
-		{
-		  "errorId":0,
-		  "taskId":407533072
-		}
-		```
-	</MethodDescription>
-</TabItem>
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="proxyless" label="CustomTask (without proxy)" default className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+
+    **Request**
+
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "task": {
+        "type": "CustomTask",
+        "class": "Basilisk",
+        "websiteURL": "https://domain.io/account/register",
+        "websiteKey": "b7890hre5cf2544b2759c19fb2600897",
+        "userAgent": "userAgentPlaceholder"
+      }
+    }
+    ```
+
+    **Response**
+
+    ```json
+    {
+      "errorId": 0,
+      "taskId": 407533072
+    }
+    ```
+
+    </MethodDescription>
+  </TabItem>
+
+  <TabItem value="proxy" label="CustomTask (with proxy)" className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+
+    **Request**
+
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "task": {
+        "type": "CustomTask",
+        "class": "Basilisk",
+        "websiteURL": "https://domain.io/account/register",
+        "websiteKey": "b7890hre5cf2544b2759c19fb2600897",
+        "userAgent": "userAgentPlaceholder",
+        "proxyType": "http",
+        "proxyAddress": "8.8.8.8",
+        "proxyPort": 8080,
+        "proxyLogin": "proxyLoginHere",
+        "proxyPassword": "proxyPasswordHere"
+      }
+    }
+    ```
+
+    **Response**
+
+    ```json
+    {
+      "errorId": 0,
+      "taskId": 407533072
+    }
+    ```
+
+    </MethodDescription>
+  </TabItem>
+</Tabs>
 
 
 ## Get task result method
@@ -119,7 +207,7 @@ Use the method [getTaskResult](../api/methods/get-task-result.md), to get the Ba
 	</MethodDescription>
 </TabItem>
 
-## How to Find All Required Parameters for Task Creation
+## How to find all required parameters for task creation
 
 ### Manually
 

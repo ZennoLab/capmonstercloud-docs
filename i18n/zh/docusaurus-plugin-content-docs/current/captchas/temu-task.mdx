@@ -19,6 +19,23 @@ import BlogLink from '@theme/BlogLink';
   <PriceBlock title="Temu captcha" captchaId="temu"/>
 </PriceBlockWrap>
 
+## 示例任务
+
+<Tabs className="full-width-tabs">
+  <TabItem value="temu" label="滑动验证码 (Slider)" default>
+    ![](./images/temu/temu.png)
+  </TabItem>
+  <TabItem value="temu1" label="点击验证码 (Click)">
+    ![](./images/temu/temu1.png)
+  </TabItem>
+</Tabs>
+
+:::warning **注意！**
+CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费用内。仅当网站不接受令牌或对内置服务的访问受限时，才需要指定您自己的代理。您可以联系[支持服务](https://helpdesk.zennolab.com/conversation/new)以确认细节并了解令牌在特定网站上的接受情况。
+
+如果代理按 IP 授权，请将地址 **65.21.190.34** 加入白名单。
+:::
+
 ## 请求参数
 
 <TabItem value="proxyless" label="CustomTask (without proxy)" default className="bordered-panel">
@@ -33,7 +50,7 @@ import BlogLink from '@theme/BlogLink';
     ---
 
     <ParamItem title="websiteURL" required type="string" />
-    加载验证码的页面的完整URL ( https://www.temu.com/bgn_verification.html?....... )
+    加载验证码的页面的完整URL ( https://www.example.com/bgn_verification.html?....... )
 
     ---
     <ParamItem title="cookie（在 metadata 中）" required="required" type="string" />
@@ -42,48 +59,123 @@ import BlogLink from '@theme/BlogLink';
     ---
 
     <ParamItem title="userAgent" type="string" />
-    浏览器的 User-Agent <br /> 
-	**只传递当前的 UA。当前的 UA 是**: userAgentPlaceholder
-</TabItem>
+    浏览器的 User-Agent。<br />
+**请仅传递当前 Windows 系统下的有效 UA。当前推荐值为**：`userAgentPlaceholder`
 
-### 如何获取 cookie（在 metadata 中） 参数
-可以通过 `document.cookie` 属性在验证码页面上获取 `cookie` 参数的值。
-![](./images/temu/temu-cookie.png) 
+    ---
+    <ParamItem title="proxyType" type="string" />
+    **http** - 普通的 http/https 代理；<br />**https** - 仅在 "http" 不起作用时尝试（某些自定义代理服务器要求）；<br />**socks4** - socks4 代理；<br />**socks5** - socks5 代理。
+
+     ---
+
+    <ParamItem title="proxyAddress" type="string" />
+    <p>
+	  代理 IP 地址 IPv4/IPv6。不允许：
+		- 使用主机名；
+		- 使用透明代理（其中客户端 IP 可见）；
+		- 使用来自本地网络的代理。
+	</p>
+
+     ---
+
+    <ParamItem title="proxyPort" type="integer" />
+    代理端口。
+
+     ---
+
+    <ParamItem title="proxyLogin" type="string" />
+    代理登录。
+
+     ---
+
+    <ParamItem title="proxyPassword" type="string" />
+    代理密码。
+
+</TabItem>
 
 
 ## 创建任务方法
 
-<TabItem value="proxyless" label="CustomTask (without proxy)" default className="method-panel">
-	<MethodItem>
-		```http
-		https://api.capmonster.cloud/createTask
-		```
-	</MethodItem>
-	<MethodDescription>
-		**要求**
-		```json
-		{
-			"clientKey": "API_KEY",
-			"task": {
-				"type": "CustomTask",
-				"class": "Temu",
-				"websiteURL": "https://www.temu.com/bgn_verification.html?verifyCode=7PRQIzDznoFE67ecZYtRTw394f6185143a4af80&from=https%3A%2F%2Fwww.temu.com%2F&refer_page_name=home&refer_page_id=10005_1743074140645_cwb6un82rq&refer_page_sn=10005&_x_sessn_id=xmp1zuyv7y",
-				"userAgent": "userAgentPlaceholder",
-				"metadata": {
-					"cookie": "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab"
-				}
-			}
-		}
-		```
-		**回应**
-		```json
-		{
-		  "errorId":0,
-		  "taskId":407533072
-		}
-		```
-	</MethodDescription>
-</TabItem>
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="proxyless" label="CustomTask (无代理)" default className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+
+    **请求**
+
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "task": {
+        "type": "CustomTask",
+        "class": "Temu",
+        "websiteURL": "https://www.example.com/bgn_verification.html?verifyCode=7PRQIzDznoFE67ecZYtRTw394f6185143a4af80&from=https%3A%2F%2Fwww.example.com%2F&refer_page_name=home&refer_page_id=10005_1743074140645_cwb6un82rq&refer_page_sn=10005&_x_sessn_id=xmp1zuyv7y",
+        "userAgent": "userAgentPlaceholder",
+        "metadata": {
+          "cookie": "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab"
+        }
+      }
+    }
+    ```
+
+    **响应**
+
+    ```json
+    {
+      "errorId": 0,
+      "taskId": 407533072
+    }
+    ```
+
+    </MethodDescription>
+  </TabItem>
+
+  <TabItem value="proxy" label="CustomTask (使用代理)" className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+
+    **请求**
+
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "task": {
+        "type": "CustomTask",
+        "class": "Temu",
+        "websiteURL": "https://www.example.com/bgn_verification.html?verifyCode=7PRQIzDznoFE67ecZYtRTw394f6185143a4af80&from=https%3A%2F%2Fwww.example.com%2F&refer_page_name=home&refer_page_id=10005_1743074140645_cwb6un82rq&refer_page_sn=10005&_x_sessn_id=xmp1zuyv7y",
+        "userAgent": "userAgentPlaceholder",
+        "metadata": {
+          "cookie": "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab"
+        },
+        "proxyType": "http",
+        "proxyAddress": "8.8.8.8",
+        "proxyPort": 8080,
+        "proxyLogin": "proxyLoginHere",
+        "proxyPassword": "proxyPasswordHere"
+      }
+    }
+    ```
+
+    **响应**
+
+    ```json
+    {
+      "errorId": 0,
+      "taskId": 407533072
+    }
+    ```
+
+    </MethodDescription>
+  </TabItem>
+</Tabs>
 
 
 ## 获取任务结果方法
@@ -112,7 +204,7 @@ import BlogLink from '@theme/BlogLink';
 			"status": "ready",
 			"solution": {
 				"domains": {
-					"www.temu.com": {
+					"www.example.com": {
 						"cookies": {
 							"privacy_setting_detail": "%7B%22firstPAds%22%3A1%2C%22adj%22%3A1%2C%22fbsAnlys%22%3A1%2C%22fbEvt%22%3A1%2C%22ggAds%22%3A1%2C%22fbAds%22%3A1%2C%22ttAds%22%3A1%2C%22scAds%22%3A1%2C%22ptAds%22%3A1%2C%22bgAds%22%3A1%2C%22tblAds%22%3A1%2C%22obAds%22%3A1%2C%22vgAds%22%3A1%2C%22idAds%22%3A1%2C%22opAds%22%3A1%2C%22stAds%22%3A1%2C%22pmAds%22%3A1%7D",
 							"region": "211",
@@ -132,6 +224,10 @@ import BlogLink from '@theme/BlogLink';
 		```
 	</MethodDescription>
 </TabItem>
+
+## 如何获取 cookie（在 metadata 中） 参数
+可以通过 `document.cookie` 属性在验证码页面上获取 `cookie` 参数的值。
+![](./images/temu/temu-cookie.png) 
 
 ## 如何查找任务创建所需的所有参数
 

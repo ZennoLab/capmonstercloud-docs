@@ -5,11 +5,17 @@ sidebar_position: 6
 
 # Receiving events from the extension
 
-Receiving events from the extension helps your code to be aware of events that are happening (such as successfully solving a captcha with a token or clicks) and react accordingly.
+The CapMonster extension allows your code to track key moments in the captcha solving process directly on the webpage. Using events, you can know when a captcha solving attempt starts, when it successfully completes, or if an error occurs, and perform the corresponding actions in your script.
 
-When solving various types of captchas, the extension sends events to the currently active page in the global window object.
+All events are sent to the global `window` object on the current page. This means you can subscribe to them using the standard `window.addEventListener` method and respond to events without complex workarounds.
 
-If necessary, it is possible to subscribe to these events via `window.addEventListener`
+Using these events is convenient if you want to:
+
+* Track the progress of captcha solving in real time.
+* Automatically trigger actions after a captcha is successfully solved.
+* Handle errors and re-initiate captcha solving if necessary.
+
+The following sections provide a complete list of available events with a brief description of each.
 
 :::info
 No parameters are passed to events

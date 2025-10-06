@@ -1,6 +1,6 @@
 ---
 sidebar_position: 20
-sidebar_label: MTCaptchaTask
+sidebar_label: MTCaptcha
 title: "Automatic Recognition and Bypass of MTCaptcha | API"
 description: "Learn how to bypass MTCaptcha using the API of the automatic recognition and captcha solving service Capmonster Cloud!"
 ---
@@ -22,8 +22,9 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 ![](./images/mtcaptcha/mtcaptcha.png)
 
 :::warning **Attention!**
-By default, CapMonster Cloud uses built-in proxy servers.
-If access to built-in services is restricted, you can specify your own proxies to ensure stable operation.
+CapMonster Cloud uses built-in proxies by default — their cost is already included in the service. You only need to specify your own proxies in cases where the website does not accept the token or access to the built-in services is restricted. You can contact [support](https://helpdesk.zennolab.com/conversation/new) to clarify the details and check whether tokens are accepted correctly on a particular website.
+
+If you are using a proxy with IP authorization, make sure to whitelist the address **65.21.190.34**.
 :::
 
 ## Request parameters
@@ -67,8 +68,8 @@ var mtcaptchaConfig = {
 ---
 
 <ParamItem title="userAgent" type="string" />
-Browser User-Agent. <br />  
-**Pass only a current UA from Windows OS. Currently it is:** userAgentPlaceholder
+Browser User-Agent.  
+  **Pass only a valid UA from Windows OS. Currently it is**: `userAgentPlaceholder`
 
 ---
 
@@ -105,7 +106,8 @@ Proxy server password.
 
 </TabItem>
 
-## Task creation method
+## Create task method
+
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 <TabItem value="proxyless" label="MTCaptchaTask (without proxy)" default className="method-panel">
 <MethodItem>
@@ -139,7 +141,7 @@ https://api.capmonster.cloud/createTask
 </MethodDescription>
 </TabItem>
 
-<TabItem value="proxy" label="MTCaptchaTask (using proxy)" default className="method-panel">
+<TabItem value="proxy" label="MTCaptchaTask (with proxy)" default className="method-panel">
 <MethodItem>
 ```http
 https://api.capmonster.cloud/createTask
@@ -176,7 +178,7 @@ https://api.capmonster.cloud/createTask
 </TabItem>
 </Tabs>
 
-## Task result retrieval method
+## Get task result method
 
 Use the [getTaskResult](../api/methods/get-task-result.md) method to get the solution for the MTCaptcha captcha.
 

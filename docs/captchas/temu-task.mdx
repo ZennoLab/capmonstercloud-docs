@@ -20,6 +20,23 @@ import BlogLink from '@theme/BlogLink';
   <PriceBlock title="Temu captcha" captchaId="temu"/>
 </PriceBlockWrap>
 
+## Примеры заданий
+
+<Tabs className="full-width-tabs">
+  <TabItem value="temu" label="Slider" default>
+    ![](./images/temu/temu.png)
+  </TabItem>
+  <TabItem value="temu1" label="Click">
+    ![](./images/temu/temu1.png)
+  </TabItem>
+</Tabs>
+
+:::warning **Внимание!**
+CapMonster Cloud по умолчанию работает через встроенные прокси — они уже включены в стоимость. Указывать собственные прокси требуется только в тех случаях, когда сайт не принимает токен или доступ к встроенным сервисам ограничен. Вы можете обратиться в службу поддержки, чтобы уточнить детали и узнать, насколько корректно принимаются токены на конкретном сайте.
+
+Если прокси с авторизацией по IP, то необходимо добавить адрес **65.21.190.34** в белый список.
+:::
+
 ## Параметры запроса
 
 <TabItem value="proxyless" label="CustomTask (без прокси)" default className="bordered-panel">
@@ -34,58 +51,138 @@ import BlogLink from '@theme/BlogLink';
     ---
 
     <ParamItem title="websiteURL" required type="string" />
-    Полный адрес страницы, на которой прогружена капча ( https://www.temu.com/bgn_verification.html?....... )
+    Полный адрес страницы, на которой прогружена капча (например: https://www.example.com/bgn_verification.html?.......)
 
     ---
+
     <ParamItem title="cookie (внутри metadata)" required="required" type="string" />
     Куки, полученные через `document.cookie` на прогруженной странице капчи
 
     ---
 
     <ParamItem title="userAgent" type="string" />
-    User-Agent браузера. <br /> 
-	**Передавайте только актуальный UA от ОС Windows. Сейчас таковым является**: userAgentPlaceholder
-</TabItem>
+    User-Agent браузера. <br />
+  **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является**: `userAgentPlaceholder`
 
-### Как получить параметр cookie (внутри metadata)
-Значение для параметра `cookie` можно получить на странице с капчей через свойство `document.cookie`.
-![](./images/temu/temu-cookie.png) 
+    ---
+
+    <ParamItem title="proxyType" type="string" />
+    **http** - обычный http/https прокси;<br />
+    **https** - используйте только если http не работает;<br />
+    **socks4** - socks4 прокси;<br />
+    **socks5** - socks5 прокси.
+
+    --- 
+
+    <ParamItem title="proxyAddress" type="string" />
+    <p>
+      IP адрес прокси IPv4/IPv6. Не допускается:
+      - использование имен хостов;
+      - использование прозрачных прокси;
+      - использование прокси на локальных машинах.
+    </p>
+
+    --- 
+
+    <ParamItem title="proxyPort" type="integer" />
+    Порт прокси.
+
+    --- 
+
+    <ParamItem title="proxyLogin" type="string" />
+    Логин прокси-сервера.
+
+    --- 
+
+    <ParamItem title="proxyPassword" type="string" />
+    Пароль прокси-сервера.
+
+    --- 
+</TabItem>
 
 
 ## Метод создания задачи
 
-<TabItem value="proxyless" label="CustomTask (без прокси)" default className="method-panel">
-	<MethodItem>
-		```http
-		https://api.capmonster.cloud/createTask
-		```
-	</MethodItem>
-	<MethodDescription>
-		**Запрос**
-		```json
-		{
-			"clientKey": "API_KEY",
-			"task": {
-				"type": "CustomTask",
-				"class": "Temu",
-				"websiteURL": "https://www.temu.com/bgn_verification.html?verifyCode=7PRQIzDznoFE67ecZYtRTw394f6185143a4af80&from=https%3A%2F%2Fwww.temu.com%2F&refer_page_name=home&refer_page_id=10005_1743074140645_cwb6un82rq&refer_page_sn=10005&_x_sessn_id=xmp1zuyv7y",
-				"userAgent": "userAgentPlaceholder",
-				"metadata": {
-					"cookie": "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab"
-				}
-			}
-		}
-		```
-		**Ответ**
-		```json
-		{
-		  "errorId":0,
-		  "taskId":407533072
-		}
-		```
-	</MethodDescription>
-</TabItem>
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="proxyless" label="CustomTask (без прокси)" default className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
 
+    **Запрос**
+
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "task": {
+        "type": "CustomTask",
+        "class": "Temu",
+        "websiteURL": "https://www.example.com/bgn_verification.html?verifyCode=7PRQIzDznoFE67ecZYtRTw394f6185143a4af80&from=https%3A%2F%2Fwww.example.com%2F&refer_page_name=home&refer_page_id=10005_1743074140645_cwb6un82rq&refer_page_sn=10005&_x_sessn_id=xmp1zuyv7y",
+        "userAgent": "userAgentPlaceholder",
+        "metadata": {
+          "cookie": "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab"
+        }
+      }
+    }
+    ```
+
+    **Ответ**
+
+    ```json
+    {
+      "errorId": 0,
+      "taskId": 407533072
+    }
+    ```
+
+    </MethodDescription>
+  </TabItem>
+
+  <TabItem value="proxy" label="CustomTask (с использованием прокси)" className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+
+    **Запрос**
+
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "task": {
+        "type": "CustomTask",
+        "class": "Temu",
+        "websiteURL": "https://www.example.com/bgn_verification.html?verifyCode=7PRQIzDznoFE67ecZYtRTw394f6185143a4af80&from=https%3A%2F%2Fwww.example.com%2F&refer_page_name=home&refer_page_id=10005_1743074140645_cwb6un82rq&refer_page_sn=10005&_x_sessn_id=xmp1zuyv7y",
+        "userAgent": "userAgentPlaceholder",
+        "metadata": {
+          "cookie": "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab"
+        },
+        "proxyType": "http",
+        "proxyAddress": "8.8.8.8",
+        "proxyPort": 8080,
+        "proxyLogin": "proxyLoginHere",
+        "proxyPassword": "proxyPasswordHere"
+      }
+    }
+    ```
+
+    **Ответ**
+
+    ```json
+    {
+      "errorId": 0,
+      "taskId": 407533072
+    }
+    ```
+
+    </MethodDescription>
+  </TabItem>
+</Tabs>
 
 ## Метод получения результата задачи
 Используйте метод [getTaskResult](../api/methods/get-task-result.md), чтобы получить решение Temu.
@@ -113,7 +210,7 @@ import BlogLink from '@theme/BlogLink';
 			"status": "ready",
 			"solution": {
 				"domains": {
-					"www.temu.com": {
+					"www.example.com": {
 						"cookies": {
 							"privacy_setting_detail": "%7B%22firstPAds%22%3A1%2C%22adj%22%3A1%2C%22fbsAnlys%22%3A1%2C%22fbEvt%22%3A1%2C%22ggAds%22%3A1%2C%22fbAds%22%3A1%2C%22ttAds%22%3A1%2C%22scAds%22%3A1%2C%22ptAds%22%3A1%2C%22bgAds%22%3A1%2C%22tblAds%22%3A1%2C%22obAds%22%3A1%2C%22vgAds%22%3A1%2C%22idAds%22%3A1%2C%22opAds%22%3A1%2C%22stAds%22%3A1%2C%22pmAds%22%3A1%7D",
 							"region": "211",
@@ -133,6 +230,10 @@ import BlogLink from '@theme/BlogLink';
 		```
 	</MethodDescription>
 </TabItem>
+
+### Как получить параметр cookie (внутри metadata)
+Значение для параметра `cookie` можно получить на странице с капчей через свойство `document.cookie`.
+![](./images/temu/temu-cookie.png) 
 
 ## Как найти все нужные параметры для создания задачи на решение
 

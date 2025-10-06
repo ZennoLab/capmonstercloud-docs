@@ -1,6 +1,6 @@
 ﻿---
 sidebar_position: 1
-sidebar_label: Firefox browser extension
+sidebar_label: Extensão do navegador Firefox
 ---
 
 # Extensão do navegador Firefox
@@ -12,9 +12,9 @@ A extensão funciona no navegador Mozilla Firefox.
 
 -----
 ## Instalação automática
-1. Abra a [Loja de Add-ons do Firefox](https://addons.mozilla.org/en-US/firefox/addon/capmonster-cloud/).
+1. Abra a [Loja de Add-ons do Firefox](https://addons.mozilla.org/pt-br/firefox/addon/capmonster-cloud/).
 2. Clique em **Adicionar ao Firefox**.
-3. Confirme a adição da extensão clicando no botão "Adicionar" na janela modal.
+3. Confirme a adição da extensão clicando no botão **Adicionar** na janela modal.
    ![](./images/extension-main-firefox/modal.png)
 
 Para começar a usar a extensão, clique em seu ícone à direita da barra de endereços. Vá para as [configurações](extension-firefox.md#configurações).
@@ -29,22 +29,22 @@ Para começar a usar a extensão, clique em seu ícone à direita da barra de en
 2. Abra o navegador Firefox e vá trabalhar com as extensões:
    ![](./images/extension-main-firefox/extension-menu.png)
    
-3. Clique no botão de engrenagem e, na lista suspensa que se abre, selecione "Instalar add-on a partir do arquivo..."
+3. Clique no botão de engrenagem e, na lista suspensa que se abre, selecione **Instalar add-on a partir do arquivo...**
    ![](./images/extension-main-firefox/extension-installation.png)
    
 4. Selecione o arquivo baixado com a extensão.
 
-5. Após baixar a extensão, vá para "Gerenciar suas Extensões" e clique na extensão instalada.
+5. Após baixar a extensão, vá para **Gerenciar suas Extensões** e clique na extensão instalada.
    ![](./images/extension-main-firefox/extension1.png)
    
-6. Vá para a aba "Permissões" e certifique-se de que todas as permissões estão concedidas.
+6. Vá para a aba **Permissões** e certifique-se de que todas as permissões estão concedidas.
    ![](./images/extension-main-firefox/extension2.png)
 </details>
 
 <details>
     <summary>Atualização manual da extensão</summary>
 
-Se você estiver instalando a extensão sobre a versão anterior, ao atualizar os arquivos originais da extensão, também precisará clicar no botão de atualização na página "Extensões" (como abrir esta página está descrito acima na seção "Instalação manual").
+Se você estiver instalando a extensão sobre a versão anterior, ao atualizar os arquivos originais da extensão, também precisará clicar no botão de atualização na página **Extensões** (como abrir esta página está descrito acima na seção **Instalação manual**).
 </details>
 
 -----
@@ -72,7 +72,6 @@ Aqui você pode selecionar os tipos de captchas que a extensão reconhecerá aut
 
 Pode ser necessário recarregar a página com captcha para que as alterações tenham efeito!
 
-:::
 ### <a name="id-browserextension-repeatcaptchasolvingincaseofanerror"></a>Repetir solução de captcha em caso de erro
 Se a primeira tentativa de resolver o captcha falhar, a extensão enviará tarefas repetidas até que o captcha seja resolvido ou até que o limite especificado nesta configuração seja atingido.
 ### <a name="id-browserextension-proxy"></a>Proxy
@@ -85,6 +84,7 @@ O "Login" e a "Senha" são opcionais.
 Usando a lista negra, você pode configurar a extensão para ignorar captchas em sites específicos.
 
 Após ativar esta opção, aparecerá um campo para inserir os sites:
+
 
 ![](./images/extension-main-firefox/blacklist-control.png)
 

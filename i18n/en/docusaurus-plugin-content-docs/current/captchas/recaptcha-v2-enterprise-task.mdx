@@ -1,6 +1,6 @@
 ﻿---
 sidebar_position: 2
-sidebar_label: ReCaptchaV2EnterpriseTask
+sidebar_label: ReCaptchaV2 Enterprise
 title: "Recognise and solve reCAPTCHA v2 Enterprise - reCAPTCHA v2 Enterprise Task | API"
 description: "reCAPTCHA v2 Enterprise Task to automatically recognise and resolve (bypass) reCAPTCHA v2 Enterprise via Capmonster Cloud API. Detailed description of the method in the Capmonster Cloud Docs documentation."
 ---
@@ -21,6 +21,12 @@ import BlogLink from '@theme/BlogLink';
   <PriceBlock  captchaId="rc2e-spotify-yahoo"/>
 </PriceBlockWrap>
 
+:::warning **Attention!**
+CapMonster Cloud uses built-in proxies by default — their cost is already included in the service. You only need to specify your own proxies in cases where the website does not accept the token or access to the built-in services is restricted. You can contact [support](https://helpdesk.zennolab.com/conversation/new) to clarify the details and check whether tokens are accepted correctly on a particular website.
+
+If you are using a proxy with IP authorization, make sure to whitelist the address **65.21.190.34**.
+:::
+
 The object contains data for Google reCAPTCHA Enterprise solving task. To provide solid universality for solving this type of task we have reproduce every piece of environment used for an automation task you plan to complete. Including, proxy access, browser's user-agent, cookies (optionally). 
 
 This type of captcha has no visual differences from ReCaptcha v2. You can see the difference by examining the captcha code, for example, in the developer tools under the **Network** tab in the requests:
@@ -30,15 +36,9 @@ This type of captcha has no visual differences from ReCaptcha v2. You can see th
 This type of captcha might be solved a bit longer than usual image captcha, but this issue is compensated by the fact that `g-recaptcha-response` value we send to you is valid for the next 60 seconds after we solves your ReCaptcha2.
 
 <BlogLink url="https://capmonster.cloud/en/blog/re-1/recaptcha-enterprise-how-to-solve-complete-guide"/>
-
-:::warning **Attention!**
-If the proxy is authorized by IP, then be sure to add 116.203.55.208 to the white list.
-:::
-
-
 ## Request parameters
 
-  <TabItem value="proxy" label="RecaptchaV2EnterpriseTask (using proxy)" className="bordered-panel">
+  <TabItem value="proxy" label="RecaptchaV2EnterpriseTask (with proxy)" className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **RecaptchaV2EnterpriseTask**
 
@@ -191,7 +191,7 @@ Object.defineProperty(window, 'grecaptcha', {
 		</MethodDescription>
 	</TabItem>
   
-	<TabItem value="proxy" label="RecaptchaV2EnterpriseTask (using proxy)" className="method-panel">
+	<TabItem value="proxy" label="RecaptchaV2EnterpriseTask (with proxy)" className="method-panel">
 		<MethodItem>
 			```http
 			https://api.capmonster.cloud/createTask
@@ -267,7 +267,7 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to request ans
 | :- | :- | :- |
 |gRecaptchaResponse|String|Hash which should be inserted into Recaptcha2 submit form in `<textarea id="g-recaptcha-response" ..></textarea>`. It has a length of 500 to 2190 bytes.|
 
-## How to Find All Required Parameters for Task Creation
+## How to find all required parameters for task creation
 
 ### Manually
 

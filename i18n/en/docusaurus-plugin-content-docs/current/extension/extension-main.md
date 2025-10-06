@@ -10,12 +10,12 @@ The extension works in the Google Chrome browser.
 
 -----
 ## Automatic installation
-**Important!** You cannot install extensions in incognito mode and guest mode.
+**Important!** It is not recommended to install extensions in incognito mode or guest mode.
 
 1. Open the [Chrome Web Store](https://chrome.google.com/webstore/detail/capmonster-cloud-%E2%80%94-automa/pabjfbciaedomjjfelfafejkppknjleh?hl=en).
 2. Click **Install**.
 
-To get started with the extension, click on its icon to the right of the address bar. Go to the [settings](extension-main.md#settings).
+To get started with the extension, click on its icon to the right of the address bar. Go to the [Settings](extension-main.md#settings).
 
 *If for some reason it was not possible to install the extension from the Chrome Web Store, use the instructions for manual installation.*
 
@@ -28,17 +28,17 @@ To get started with the extension, click on its icon to the right of the address
    
    **WARNING**: the folder shouldn’t be deleted, otherwise the extension stop working.
 3. In the Google Chrome browser open the “Extension” page. There are several ways to do this:
-   1. Type chrome://extensions in the address bar of a browser and press Enter.
-   2. From the menu: click the three vertical dots in the upper right corner (near the profile picture), then "More Tools", then "Extensions".
+   1. Type `chrome://extensions` in the address bar of a browser and press **Enter**.
+   2. From the menu: click the three vertical dots in the upper right corner (near the profile picture), then **More Tools** -> **Extensions**.
 
   ![](./images/extension-main-firefox/359d5afb-d644-45c2-a882-e7fc3da759eb.png)
 
-   3. Or go to the Google Chrome settings and select "Extensions" (at the very bottom) in the right menu.
+   3. Or go to the Google Chrome settings and select **Extensions** (at the very bottom) in the right menu.
 
   ![](./images/extension-main-firefox/61a9b824-b0d2-4808-8bb8-feac4b25d0b7.png)
 
-4. Enable “Developer Mode”.
-5. Then click on “Load unpacked”.
+4. Enable **Developer Mode**.
+5. Then click on **Load unpacked**.
 
   ![](./images/extension-main-firefox/load-unpacked.png)
 
@@ -52,7 +52,7 @@ To get started with the extension, click on its icon to the right of the address
 <details>
     <summary>Manual update of the extension</summary>
 
-If you are installing the extension over the previous version, then when you update the original extension files, you also need to click the update button on the "Extensions" page (how to open this page is described above in the "Manual installation" section).
+If you are installing the extension over the previous version, then when you update the original extension files, you also need to click the update button on the **Extensions** page (how to open this page is described above in the **Manual installation** section).
 
 ![](./images/extension-main-firefox/manual-update.png)
 </details>
@@ -62,7 +62,7 @@ If you are installing the extension over the previous version, then when you upd
 <details>
     <summary>How to pin the extension</summary>
 
-By default the installed extension is hidden. To pin it you have to click on the “Pin” button:
+By default the installed extension is hidden. To pin it you have to click on the **Pin** button:
 
 ![](./images/extension-main-firefox/pin1.png)
 </details>
@@ -71,7 +71,7 @@ After launching the extension you’ll see this window:
 
 ![](./images/extension-main-firefox/ext.screen.en.png)
 ### <a name="id-browserextension-apikey"></a>API key
-Enter API key in the corresponding field(1), press save button(2). If you entered the correct key, your balance will be displayed below(3).
+Enter API key in the corresponding field(**1**), press **Save** button(**2**). If you entered the correct key, your balance will be displayed below(**3**).
 
 ![](./images/extension-main-firefox/api-key.png)
 ### <a name="id-browserextension-automaticcaptchasolving"></a>Automated captcha solving

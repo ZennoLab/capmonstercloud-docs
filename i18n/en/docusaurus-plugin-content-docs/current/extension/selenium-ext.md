@@ -5,7 +5,7 @@ sidebar_position: 7
 
 # Integrating the extension into Selenium using Node.js
 
-In this tutorial, we will show you how to integrate the browser extension using the Selenium WebDriver library and perform automated tasks on a specific website.
+In this guide, we will take a detailed look at how to connect a browser extension to Selenium WebDriver using Node.js and use it to perform automated actions on websites.
 
 ## Step 1: Installation
 

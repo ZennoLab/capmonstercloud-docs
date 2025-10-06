@@ -3,9 +3,9 @@
 
 ## Descrição
 
-Esse recurso permite que você crie módulos personalizados que serão treinados para um tipo específico de captcha. Isso ajudará a reconhecer captchas não padronizados de forma mais rápida e eficiente, reduzindo a probabilidade de erros.
+A função de criação de módulo personalizado permite treinar o sistema para reconhecer um tipo específico de captcha. Isso aumenta a velocidade e a precisão no reconhecimento de captchas não padrão e reduz a probabilidade de erros.
 
-Para acessar a [página de treinamento de módulos](https://capmonster.cloud/UserModules), clique no e-mail no canto superior direito do site e selecione a opção relevante no menu.
+Para acessar a [página de treinamento do módulo](https://capmonster.cloud/UserModules), clique no seu e-mail no canto superior direito do site e selecione a opção correspondente no menu.
 
 ![](./images/user-module/834ccbf9-f439-4b1b-8cab-42ed3dbc055c.png)
 
@@ -14,15 +14,15 @@ Para acessar a [página de treinamento de módulos](https://capmonster.cloud/Use
 
 ## Como funciona
 
-Em resumo:
+O processo resumido é o seguinte:
 
-1. Coletar captchas e arquivá-los
-2. Enviá-los para nós, especificando o nome do módulo
-3. Depositar $10 no saldo (ele permanecerá em seu saldo)
-4. Criamos o módulo
-5. Você envia solicitações do seu software, especificando o nome do módulo criado.
+1. Você coleta os captchas e os compacta em um arquivo.
+2. Envia o arquivo para nós, indicando o nome do módulo.
+3. Realiza um depósito de US$10 no saldo (os fundos permanecem na conta e não são debitados).
+4. Nós criamos o módulo.
+5. Você envia tarefas de reconhecimento, especificando o nome do módulo criado.
 
-Agora vamos detalhar cada etapa.
+Abaixo, cada etapa é descrita com mais detalhes.
 
 ---
 
@@ -30,8 +30,7 @@ Agora vamos detalhar cada etapa.
 
 #### Quantos captchas você precisa?
 
-Para responder a essa pergunta, marque os tipos de símbolos que seu captcha contém, no formulário da [página de treinamento de módulos](https://capmonster.cloud/UserModules). Depois disso, uma dica informando quantos captchas você deve fazer upload aparecerá acima do botão para selecionar o arquivo para upload:
-
+Na página de [Treinamento de Módulos](https://capmonster.cloud/UserModules), marque os tipos de caracteres que aparecem no seu captcha. Em seguida, será exibida uma indicação de quantos captchas você precisa coletar e enviar:
 ![](./images/user-module/module-name.png)
 
 #### Formatos de imagem suportados
@@ -234,13 +233,13 @@ Não. O módulo treinado está disponível apenas no CapMonster.Cloud.
 <details>
     <summary>Não estou satisfeito com a qualidade do treinamento. O que fazer?</summary>
 
-[Entre em contato com nosso serviço de suporte](https://helpdesk.zennolab.com/).
+Por favor, [entre em contato com nosso serviço de suporte](https://helpdesk.zennolab.com/).
 
 </details>
 
 <details>
     <summary>Tenho uma pergunta que não está coberta aqui. Onde devo entrar em contato?</summary>
 
-[Entre em contato com nosso serviço de suporte](https://helpdesk.zennolab.com/).
+Por favor, [entre em contato com nosso serviço de suporte](https://helpdesk.zennolab.com/).
 
 </details>

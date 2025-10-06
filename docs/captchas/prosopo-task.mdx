@@ -20,6 +20,14 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
   <PriceBlock title="Prosopo captcha" captchaId="prosopo"/>
 </PriceBlockWrap>
 
+![](./images/prosopo/prosopo.png)
+
+:::warning **Внимание!**
+CapMonster Cloud по умолчанию работает через встроенные прокси — они уже включены в стоимость. Указывать собственные прокси требуется только в тех случаях, когда сайт не принимает токен или доступ к встроенным сервисам ограничен. Вы можете обратиться в службу поддержки, чтобы уточнить детали и узнать, насколько корректно принимаются токены на конкретном сайте.
+
+Если прокси с авторизацией по IP, то необходимо добавить адрес **65.21.190.34** в белый список.
+:::
+
 Основанный на токенах метод автоматического решения капчи Prosopo Procaptcha.
 
 ## Параметры запроса
@@ -171,6 +179,16 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 		```
 	</MethodDescription>
 </TabItem>
+
+## Как найти websiteKey
+
+1. Откройте сайт, где срабатывает Prosopo-капча.
+
+2. Перейдите в **Инструменты разработчика** (**DevTools**) → **Network**, перезагрузите страницу и найдите запрос, в котором загружается `image`(например, API-запрос `https://example.prosopo.io/v1/prosopo/provider/client/captcha/image`).
+
+3. В **Request Headers** найдите параметр `Prosopo-Site-Key`, скопируйте его значение и используйте при создании запроса.
+
+![](./images/prosopo/sitekey-prosopo.png)
 
 ## Используйте библиотеку SDK
 

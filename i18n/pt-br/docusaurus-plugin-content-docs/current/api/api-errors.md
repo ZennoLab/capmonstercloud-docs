@@ -8,9 +8,10 @@ description: "Códigos de erro da API ao reconhecer captchas, causas e recomenda
 # Descrição dos erros
 
 :::info Recomendações para evitar erros:
-- Certifique-se de que o tipo de captcha que você precisa resolver é suportado pelo serviço CapMonster Cloud. Se esse tipo de captcha não for suportado, por favor, escreva para nós — consideraremos a possibilidade de adicioná-lo.
-- Verifique regularmente as atualizações da documentação para estar ciente das últimas mudanças na API e evitar o uso de métodos ou parâmetros obsoletos.
-- Use proxies de alta qualidade.
+<div style={{color: "#000"}}>
+* Certifique-se de que o tipo de captcha que você precisa resolver é suportado pelo serviço CapMonster Cloud. Se esse tipo de captcha não for suportado, por favor, escreva para nós — consideraremos a possibilidade de adicioná-lo.
+* Verifique regularmente as atualizações da documentação para estar ciente das últimas mudanças na API e evitar o uso de métodos ou parâmetros obsoletos.
+* Use proxies de alta qualidade.
 
 Se o erro persistir e você não conseguir resolvê-lo por conta própria, entre em contato com o suporte através do [formulário](https://helpdesk.zennolab.com/conversation/new), do nosso chat [no site](https://capmonster.cloud/) e na [documentação](https://docs.capmonster.cloud/) ou no [canal do Telegram](https://t.me/capmonstercloud), fornecendo:
 
@@ -19,6 +20,7 @@ Se o erro persistir e você não conseguir resolvê-lo por conta própria, entre
 - imagem/entrada original
 - data/hora da tarefa
 - corpo da requisição (se possível)
+</div>
 :::
 
 

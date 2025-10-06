@@ -1,6 +1,6 @@
 ﻿---
 sidebar_position: 6
-sidebar_label: TurnstileTask
+sidebar_label: Turnstile/Challenge (Cloudflare)
 title: "Recognise and resolve Cloudflare Turnstile | TurnstileTask | Cloudflare Challenge | API"
 description: "Turnstile Task method to automatically recognise and solve Cloudflare Turnstile captchas via Capmonster Cloud API. Full tutorial and examples in the Capmonster Cloud Docs documentation."
 ---
@@ -20,7 +20,9 @@ import BlogLink from '@theme/BlogLink';
   <PriceBlock title="TurnstileTask" captchaId="cf-turnstile"/>
 </PriceBlockWrap>
 
-All Turnstile subtypes are automatically supported: manual, non-interactive, and invisible. Therefore, you do not need to specify a subtype for a standard captcha.
+![](./images/tunrstile-task/turnstile.png)
+
+All Turnstile subtypes are automatically supported: **manual**, **non-interactive**, and **invisible**. Therefore, you do not need to specify a subtype for a standard captcha.
 
 <BlogLink url="https://capmonster.cloud/en/blog/Cloudflare/what-is-cloudflare-captcha"/>
 <BlogLink url="https://capmonster.cloud/en/blog/Cloudflare/how-cloudflare-bot-challenge-and-turnstile-protect-web-traffic"/>
@@ -31,10 +33,14 @@ Before getting started, review all three captcha solving options and choose the 
 
 ## Option 1 (Turnstile)
 
-You need to solve a **standard** Turnstile captcha, like [here](https://zenno.link/zl-support). Note that captchas on Cloudflare pages may look identical. See the end of the article to distinguish a standard Turnstile from a Cloudflare Challenge.
+You are required to solve a **regular** Turnstile captcha, like [this one](https://zenno.link/zl-support). Please note that captchas on Cloudflare pages may look identical. See [how to distinguish a regular Turnstile from a Cloudflare Challenge](#how-to-distinguish-a-standard-turnstile-from-cloudflare-challenge).
+
 
 :::warning **Attention!**
-* You **do not need** to use your own proxies for this task.
+* CapMonster Cloud uses built-in proxies by default — their cost is already included in the service. You only need to specify your own proxies in cases where the website does not accept the token or access to the built-in services is restricted. You can contact [support](https://helpdesk.zennolab.com/conversation/new) to clarify the details and check whether tokens are accepted correctly on a particular website.
+
+* If you are using a proxy with IP authorization, make sure to whitelist the address **65.21.190.34**.
+
 * After solving, you will receive a **token** to confirm captcha completion.
 :::
 
@@ -63,6 +69,39 @@ You need to solve a **standard** Turnstile captcha, like [here](https://zenno.li
   <ParamItem title="data" type="string" />
   The value of the *data* field, taken from the `cData` parameter.
 
+  ---
+
+  <ParamItem title="proxyType" type="string" />
+  **http** - standard http/https proxy;<br />
+  **https** - try this if "http" doesn't work (needed for some custom proxies);<br />
+  **socks4** - socks4 proxy;<br />
+  **socks5** - socks5 proxy.
+
+  ---
+
+  <ParamItem title="proxyAddress" type="string" />
+  <p>
+    IP address of the proxy (IPv4/IPv6). Not allowed:
+    - using hostnames;
+    - using transparent proxies (those exposing the client IP);
+    - using local machine proxies.
+  </p>
+
+  ---
+
+  <ParamItem title="proxyPort" type="integer" />
+  Proxy port.
+
+  ---
+
+  <ParamItem title="proxyLogin" type="string" />
+  Proxy login.
+
+  ---
+
+  <ParamItem title="proxyPassword" type="string" />
+  Proxy password.
+
 </TabItem>
 
 ---
@@ -70,7 +109,10 @@ You need to solve a **standard** Turnstile captcha, like [here](https://zenno.li
 ## Option 2 (Challenge token)
 
 :::warning **Attention!**
-* You **do not need** to use your own proxies for this task.
+* CapMonster Cloud uses built-in proxies by default — their cost is already included in the service. You only need to specify your own proxies in cases where the website does not accept the token or access to the built-in services is restricted. You can contact [support](https://helpdesk.zennolab.com/conversation/new) to clarify the details and check whether tokens are accepted correctly on a particular website.
+
+* If you are using a proxy with IP authorization, make sure to whitelist the address **65.21.190.34**.
+
 * After solving, you will receive a **token** to confirm captcha completion.
 :::
 
@@ -102,7 +144,8 @@ You need to solve a **standard** Turnstile captcha, like [here](https://zenno.li
   ---
 
   <ParamItem title="userAgent" required type="string" />
-  Browser User-Agent.<br /> **Provide only the current Windows UA:** userAgentPlaceholder
+  Browser User-Agent.  
+  **Pass only a valid UA from Windows OS. Currently it is**: `userAgentPlaceholder`
 
   ---
 
@@ -118,6 +161,39 @@ You need to solve a **standard** Turnstile captcha, like [here](https://zenno.li
 
   <ParamItem title="apiJsUrl" type="string" />
   String containing the captcha script URL.
+
+  ---
+
+  <ParamItem title="proxyType" type="string" />
+  **http** - standard http/https proxy;<br />
+  **https** - try this if "http" doesn't work (needed for some custom proxies);<br />
+  **socks4** - socks4 proxy;<br />
+  **socks5** - socks5 proxy.
+
+  ---
+
+  <ParamItem title="proxyAddress" type="string" />
+  <p>
+    IP address of the proxy (IPv4/IPv6). Not allowed:
+    - using hostnames;
+    - using transparent proxies (those exposing the client IP);
+    - using local machine proxies.
+  </p>
+
+  ---
+
+  <ParamItem title="proxyPort" type="integer" />
+  Proxy port.
+
+  ---
+
+  <ParamItem title="proxyLogin" type="string" />
+  Proxy login.
+
+  ---
+
+  <ParamItem title="proxyPassword" type="string" />
+  Proxy password.
 
 </TabItem>
 
@@ -165,7 +241,7 @@ When `window.turnstile.render(el, paramsObj)` is called, the captcha loads on th
 * After solving, you will receive **special cookies** to add to your browser.
 :::
 
-#### Request Parameters
+### Request Parameters
 
 <TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (without proxy)" default className="bordered-panel">
   <ParamItem title="type" required type="string" />
@@ -183,7 +259,7 @@ When `window.turnstile.render(el, paramsObj)` is called, the captcha loads on th
 
 ---
 
-  <ParamItem title="cloudflareTaskType" type="string" />
+  <ParamItem title="cloudflareTaskType" required type="string" />
   **cf_clearance**
 
 ---
@@ -258,7 +334,7 @@ You can also identify this Cloudflare type via the page header:
 
 ---
 
-#### Request Parameters
+#### Request parameters
 
 <TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (without proxy)" default className="bordered-panel">
   <ParamItem title="type" required type="string" />
@@ -276,7 +352,7 @@ You can also identify this Cloudflare type via the page header:
 
 ---
 
-  <ParamItem title="cloudflareTaskType" type="string" />
+  <ParamItem title="cloudflareTaskType" required type="string" />
   **wait_room**
 
 ---
@@ -326,70 +402,156 @@ You can also identify this Cloudflare type via the page header:
 </TabItem>
 ---
 
-## Request Examples
+## Request examples
+
 ### Option 1. Standard Turnstile:
-<TabItem value="proxyless" label="TurnstileTask (without proxy)" default className="method-panel">
-	<MethodItem>
-		```http
-		https://api.capmonster.cloud/createTask
-		```
-	</MethodItem>
-	<MethodDescription>
-		**Request**
-		```json
-		{
-			"clientKey":"API_KEY",
-			"task":
-			{
-				"type":"TurnstileTask",
-				"websiteURL":"http://tsmanaged.zlsupport.com",
-				"websiteKey":"0x4AAAAAAABUYP0XeMJF0xoy"
-			}
-		}
-		```
-		**Response**
-		```json
-		{
-		  "errorId":0,
-		  "taskId":407533072
-		}
-		```
-	</MethodDescription>
-</TabItem>
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+
+  <TabItem value="proxyless" label="TurnstileTask (without proxy)" default className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      **Request**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "TurnstileTask",
+          "websiteURL": "http://tsmanaged.zlsupport.com",
+          "websiteKey": "0x4AAAAAAABUYP0XeMJF0xoy"
+        }
+      }
+      ```
+
+      **Response**
+      ```json
+      {
+        "errorId": 0,
+        "taskId": 407533072
+      }
+      ```
+    </MethodDescription>
+  </TabItem>
+
+  <TabItem value="proxy" label="TurnstileTask (with proxy)" className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      **Request**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "TurnstileTask",
+          "websiteURL": "http://tsmanaged.zlsupport.com",
+          "websiteKey": "0x4AAAAAAABUYP0XeMJF0xoy",
+          "proxyType": "http",
+          "proxyAddress": "8.8.8.8",
+          "proxyPort": 8080,
+          "proxyLogin": "proxyLoginHere",
+          "proxyPassword": "proxyPasswordHere"
+        }
+      }
+      ```
+
+      **Response**
+      ```json
+      {
+        "errorId": 0,
+        "taskId": 407533072
+      }
+      ```
+    </MethodDescription>
+  </TabItem>
+
+</Tabs>
+
 ---
 ### Option 2. Challenge (token)
-<TabItem value="proxyless" label="TurnstileTask (without proxy)" default className="method-panel">
-	<MethodItem>
-		```http
-		https://api.capmonster.cloud/createTask
-		```
-	</MethodItem>
-	<MethodDescription>
-		**Request**
-		```json
-		{
-			"clientKey": "API_KEY",
-			"task": {
-				"type": "TurnstileTask",
-				"websiteURL": "https://example.com",
-				"websiteKey": "0x4AAAAAAADnPIDROrmt1Wwj",
-				"cloudflareTaskType": "token",
-				"userAgent":"userAgentPlaceholder",
-				"pageAction": "managed",
-				"pageData": "HUHDWUHuhuwfiweh32..uh2uhuhyugYUG=",
-				"data": "874291f4retD1366"
-			}
-		}
-		```
-		**Response**
-		```json
-		{
-		  "errorId":0,
-		  "taskId":407533072
-		}
-		```
-	</MethodDescription>
-</TabItem>
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+
+  <TabItem value="proxyless" label="TurnstileTask (without proxy)" default className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      **Request**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "TurnstileTask",
+          "websiteURL": "https://example.com",
+          "websiteKey": "0x4AAAAAAADnPIDROrmt1Wwj",
+          "cloudflareTaskType": "token",
+          "userAgent": "userAgentPlaceholder",
+          "pageAction": "managed",
+          "pageData": "HUHDWUHuhuwfiweh32..uh2uhuhyugYUG=",
+          "data": "874291f4retD1366"
+        }
+      }
+      ```
+
+      **Response**
+      ```json
+      {
+        "errorId": 0,
+        "taskId": 407533072
+      }
+      ```
+    </MethodDescription>
+  </TabItem>
+
+  <TabItem value="proxy" label="TurnstileTask (with proxy)" className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      **Request**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "TurnstileTask",
+          "websiteURL": "https://example.com",
+          "websiteKey": "0x4AAAAAAADnPIDROrmt1Wwj",
+          "cloudflareTaskType": "token",
+          "userAgent": "userAgentPlaceholder",
+          "pageAction": "managed",
+          "pageData": "HUHDWUHuhuwfiweh32..uh2uhuhyugYUG=",
+          "data": "874291f4retD1366",
+          "proxyType": "http",
+          "proxyAddress": "8.8.8.8",
+          "proxyPort": 8080,
+          "proxyLogin": "proxyLoginHere",
+          "proxyPassword": "proxyPasswordHere"
+        }
+      }
+      ```
+
+      **Response**
+      ```json
+      {
+        "errorId": 0,
+        "taskId": 407533072
+      }
+      ```
+    </MethodDescription>
+  </TabItem>
+
+</Tabs>
+
 ---
 ### Option 3. Challenge (cookie)
 <TabItem value="proxyless" label="TurnstileTask (without proxy)" default className="method-panel">
@@ -625,7 +787,7 @@ const chrome = require('selenium-webdriver/chrome');
 ````
 </details>
 
-## How to Find All Required Parameters for Task Creation
+## How to find all required parameters for task creation
 
 ### Manually
 

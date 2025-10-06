@@ -1,14 +1,14 @@
 ﻿---
 sidebar_position: 1
-sidebar_label: How to connect CapMonster.cloud to a program?
+sidebar_label: How to connect CapMonster Cloud to a program?
 title: "Integration of external programmes with CapMonster Cloud"
-description: "Detailed guide on how to integrate external programs with CapMonster.Cloud service for automatic captcha recognition and solving."
+description: "Detailed guide on how to integrate external programs with CapMonster Cloud service for automatic captcha recognition and solving."
 ---
 
-# How to connect CapMonster.cloud to a program?
-CapMonster.cloud is compatible with all captcha solvers. To connect CapMonster.clod to your program, follow the guide below.
+# How to connect CapMonster Cloud to a program?
+CapMonster Cloud is compatible with all captcha solvers. To connect CapMonster Cloud to your program, follow the guide below.
 
-## Connecting to programs supporting CapMonster.Cloud
+## Connecting to programs supporting CapMonster Cloud
 <details>
     <summary>ZennoPoster</summary>
 
@@ -18,7 +18,7 @@ CapMonster.cloud is compatible with all captcha solvers. To connect CapMonster.c
 <details>
     <summary>KeyCollector</summary>
 
-Select “Use CapMonster.cloud” and enter your personal API key.
+Select **Use CapMonster Cloud** and enter your personal API key.
 
 ![](./images/external-program/Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.003.png)
 </details>
@@ -26,11 +26,11 @@ Select “Use CapMonster.cloud” and enter your personal API key.
 <details>
     <summary>A-Parser</summary>
 
-To solve a reCAPTCHA, select Util::ReCaptcha2 and specify the key for the Provider field.
+To solve a `reCAPTCHA`, select **Util::ReCaptcha2** and specify the key for the Provider field.
 
 ![](./images/external-program/aparser.png) 
 
-To solve standard captchas, select “Util::Antigate“ and specify “api.capmonster.cloud“ as the value for “Antigate domain“. In the "key" field, specify your personal API key.
+To solve standard captchas, select **Util::Antigate** and specify **api.CapMonster Cloud** as the value for **Antigate domain**. In the "key" field, specify your personal API key.
 
 ![](./images/external-program/aparser2.png)
 </details>
@@ -42,7 +42,7 @@ To solve standard captchas, select “Util::Antigate“ and specify “api.capmo
 </details>
 
 ## Connecting to programs where you can specify a domain
-Copy the domain [api.capmonster.cloud](https://api.capmonster.cloud) and key for CapMonster.cloud.
+Copy the domain [api.capmonster.cloud](https://api.capmonster.cloud) and key for CapMonster Cloud.
 
 This method works for:
 
@@ -57,7 +57,7 @@ This method works for:
    `Anti-Captcha (v1.0, v2.0), RuCaptcha, RipCaptcha, 2Captcha, BypassCaptcha, DeathByCaptcha`.
 1. Then specify your personal API key for CapMonsterCloud in the relevant field in your program from which you will send captchas.
    1. **note for DeathByCaptcha:** to identify a user, DeathByCaptcha API employs a username and password, not an API key. In this case, specify the API key for CapMonsterCloud in the password field. Enter any value in the username field.
-1. Last step: match our IP with another service so CapMonster.Cloud can get captchas from the aforementioned services. For that, select your operating system, hit the spoiler, and follow the instruction.
+1. Last step: match our IP with another service so CapMonster Cloud can get captchas from the aforementioned services. For that, select your operating system, hit the spoiler, and follow the instruction.
 
 <details>
     <summary>I have Windows</summary>
@@ -65,7 +65,7 @@ This method works for:
 Go here: C:\Windows\System32\drivers\etc\ and find the file **hosts**. Open it with Notepad and add the following lines to the document end:
 
 ```
-# capmonster.cloud begin
+# CapMonster Cloud begin
 
 65.21.216.235 rucaptcha.com
 
@@ -107,7 +107,7 @@ Go here: C:\Windows\System32\drivers\etc\ and find the file **hosts**. Open it w
 
 65.21.216.235 api.dbc.me
 
-# capmonster.cloud end
+# CapMonster Cloud end
 ```
 Save.
 :::info
@@ -148,7 +148,7 @@ Neither mouse nor trackpad work here. You can only use the keyboard.
 Add the following lines to the end of the document:
 
 ```
-# capmonster.cloud begin
+# CapMonster Cloud begin
 
 65.21.216.235 rucaptcha.com
 
@@ -190,7 +190,7 @@ Add the following lines to the end of the document:
 
 65.21.216.235 api.dbc.me
 
-# capmonster.cloud end
+# CapMonster Cloud end
 ```
 
 After changes are made, click Ctrl+O to apply them. After that, click Ctrl+X and Enter to leave the editor.
@@ -209,7 +209,7 @@ After you enter the command, click Enter. Now you are in Nano text editor.
 
 Add the following lines to the end of the document:
 ```
-# capmonster.cloud begin
+# CapMonster Cloud begin
 
 65.21.216.235 rucaptcha.com
 
@@ -251,7 +251,7 @@ Add the following lines to the end of the document:
 
 65.21.216.235 api.dbc.me
 
-# capmonster.cloud end
+# CapMonster Cloud end
 ```
 
 After changes are made, click Ctrl+X and then Y to apply them.  
@@ -321,18 +321,18 @@ This method works for many apps, including the following:
 
 :::info !
 
-If you couldn't connect CapMonster.Cloud to your app, contact [support](https://helpdesk.zennolab.com/conversation/new), we will help you with all configurations.
+If you couldn't connect CapMonster Cloud to your app, contact [support](https://helpdesk.zennolab.com/conversation/new), we will help you with all configurations.
 
 :::
 
 ## Frequent connection errors. How to avoid them?
 
-**Network problems**: If you are having trouble connecting to CapMonster.Cloud, check your internet connection. An unstable network or routing issues can cause malfunctions with the service.
+**Network problems**: If you are having trouble connecting to CapMonster Cloud, check your internet connection. An unstable network or routing issues can cause malfunctions with the service.
 
-**Program configuration error**: Incorrect program configuration may cause errors when using CapMonster.Cloud. Check the settings of your software and make sure that all parameters are correctly configured to work with the service.
+**Program configuration error**: Incorrect program configuration may cause errors when using CapMonster Cloud. Check the settings of your software and make sure that all parameters are correctly configured to work with the service.
 
-**Exceeded limits**: You may have exceeded the limits for using the CapMonster.Cloud service. Check your account for active limits and make sure they are not exhausted.
+**Exceeded limits**: You may have exceeded the limits for using the CapMonster Cloud service. Check your account for active limits and make sure they are not exhausted.
 
 **Authentication issues**: Make sure your API key is properly copied and pasted into your software settings.
 
-**Errors in proxy settings**: If you use a proxy server to connect to the Internet, make sure that the proxy settings are specified correctly in your software and do not block access to CapMonster.Cloud.
+**Errors in proxy settings**: If you use a proxy server to connect to the Internet, make sure that the proxy settings are specified correctly in your software and do not block access to CapMonster Cloud.

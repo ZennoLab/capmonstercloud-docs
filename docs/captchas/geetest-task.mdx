@@ -1,6 +1,6 @@
 ﻿---
 sidebar_position: 5
-sidebar_label: GeeTestTask
+sidebar_label: GeeTest
 title: "Распознавание и решение GeeTest — GeeTest Task | API"
 description: "Смотрите в документации Capmonster Cloud Docs, как настроить автоматическое распознавание и решить (обойти) капчи GeeTest через API с помощью типа задач GeeTest Task с использованием ваших прокси."
 ---
@@ -19,14 +19,17 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
   <PriceBlock title="GeeTestTask" captchaId="geetest"/>
 </PriceBlockWrap>
 
-Этот тип задач используется для решения капчи GeeTest с использованием ваших прокси.
-Ваше приложение должно прислать адрес сайта, публичный ключ домена (`gt`), ключ (`challenge`) и прокси.
-
-Результатом решения задачи является три или пять токенов для сабмита формы.
+![](./images/geetest-task/geetest_1.png) ![](./images/geetest-task/geetest_2.png)
 
 :::warning **Внимание!**
+CapMonster Cloud по умолчанию работает через встроенные прокси — они уже включены в стоимость. Указывать собственные прокси требуется только в тех случаях, когда сайт не принимает токен или доступ к встроенным сервисам ограничен. Вы можете обратиться в [службу поддержки](https://helpdesk.zennolab.com/conversation/new), чтобы уточнить детали и узнать, насколько корректно принимаются токены на конкретном сайте.
+
 Прокси с авторизацией по IP пока не поддерживаются.
 :::
+
+Ваше приложение должно прислать адрес сайта, публичный ключ домена (`gt`) и ключ (`challenge`).
+
+Результатом решения задачи является три или пять токенов для сабмита формы.
 
 :::info
 - Параметры `gt`, `challenge` и `geetestApiServerSubdomain` чаще всего находятся внутри JavaScript функции `initGeetest`.
@@ -137,7 +140,8 @@ V4 (captcha_id = gt)
     ---
 
     <ParamItem title="userAgent" type="string" />
-    User-Agent браузера, используемый для решения капчи.
+    User-Agent браузера. <br />
+  **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является**: `userAgentPlaceholder`
   </TabItem>
   
 

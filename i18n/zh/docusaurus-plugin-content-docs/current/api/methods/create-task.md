@@ -1,52 +1,54 @@
 ﻿---
 sidebar_position: 0
 sidebar_label: createTask
+title: "createTask：如何创建验证码任务"
+description: "createTask：该方法用于创建指定类型验证码的任务。参数中包含客户端认证信息、任务类型化数据以及其他可选参数。"
 ---
 
 # createTask：创建任务
-## 描述
-此方法用于创建解决所选验证码类型的任务。在参数中，您需要传递客户端授权数据、任务数据和其他可选参数。
+
+## **说明**
+
+该方法用于创建所选类型验证码的任务。参数中需要提供客户端认证信息、任务类型化数据，以及在必要时的额外参数。
 
 :::info 方法地址
-``` http
+
+```http
 https://api.capmonster.cloud/createTask
 ```
 
 请求格式：`JSON POST`
 :::
 
-<!-- 方法地址： <https://api.capmonster.cloud/createTask>
-` `请求格式：JSON POST -->
+---
 
------
 ## 请求参数
-<!--
-
-|**参数** |**类型**|**必填**|**值**|
-| :-: | :-: | :-: | :-: |
-|clientKey|字符串|是|您的唯一账户密钥，API密钥（您可以在[这里](https://capmonster.cloud/Dashboard)找到）。|
-|task|任务对象|是|任务数据数组。查看可用对象描述的列表[这里](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/589856)。|
-|callbackUrl|字符串|否|用于接收验证码任务结果的网址。数据通过POST请求发送。<br />内容与 [getTaskResult](file:///C:/wiki/spaces/APIS/pages/557078) 方法的响应相同。<br />响应内容不进行检查，服务器必须在2秒内接受请求，然后关闭连接。|-->
 
 ### `clientKey`
-类型：`字符串` <br />
-必填：`是`<br />
-您的唯一账户密钥，API密钥（您可以在[这里](https://capmonster.cloud/Dashboard)找到）
-### `task`
-类型：`任务对象` <br />
-必填：`是`<br />
-任务数据数组。查看可用对象描述的列表[这里](../../captchas)。
-### `callbackUrl`
-类型：`字符串` <br />
-必填：`否`<br />
-用于接收验证码任务结果的网址。数据通过POST请求发送。<br />内容与 [getTaskResult](./get-task-result) 方法的响应相同。<br />响应内容不进行检查，服务器必须在2秒内接受请求，然后关闭连接。
 
-以下是使用 `callbackUrl` 函数的示例：
-``` json
+类型: `String` <br />
+必填: `是`<br />
+您账户的唯一密钥，即 API 密钥（可在[此处](https://capmonster.cloud/Dashboard)获取）
+
+### `task`
+
+类型: `任务对象` <br />
+必填: `是`<br />
+任务数据对象。验证码任务类型列表见[这里](../../captchas)。
+
+### `callbackUrl`
+
+类型: `String` <br />
+必填: `否`<br />
+用于接收验证码任务结果的 Web 地址，结果通过 POST 请求发送。<br />内容与 [getTaskResult](./get-task-result.md) 方法的响应相同。<br />响应内容不会被验证，服务器需在 2 秒内接收请求，然后关闭连接。
+
+`callbackUrl` 使用示例：
+
+```json
 {
   "clientKey": "API_KEY",
   "task": {
-    "type": "NoCaptchaTaskProxyless",
+    "type": "RecaptchaV2Task",
     "websiteURL": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
     "websiteKey": "6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"
   },
@@ -54,114 +56,95 @@ https://api.capmonster.cloud/createTask
 }
 ```
 
------
+---
+
 ### 请求示例
-<!-- ```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import CodeBlock from '@theme/CodeBlock';
-~~~
 
-```mdx-code-block
-  <Tabs>
-    <TabItem value="apple" label="解决带图像的普通验证码">
-    <CodeBlock className="language-json">{JSON.stringify({
-      "clientKey":"API_KEY",
-      "task": {
-        "type":"ImageToTextTask",
-        "body":"BASE64\_BODY\_HERE!"
-      }
-    }, null, 2)}</CodeBlock>
-    </TabItem>
-    <TabItem value="orange" label="解决 ReCaptcha2"><CodeBlock className="language-json">{JSON.stringify({
-      "clientKey":"API_KEY",
-      "task": {
-        "type":"NoCaptchaTaskProxyless","websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2\_simple.php?level=high",
-        "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI\_iqRyTwd"
-      }
-    }
-, null, 2)}</CodeBlock></TabItem>
-  </Tabs>
-``` -->
-
-
-  <details>
-    <summary>解决带图像的普通验证码</summary>
+<details>
+  <summary>
+    图像验证码任务示例
+  </summary>
 
 ```json
-    {
-      "clientKey":"API_KEY",
-      "task": 
-      {
-        "type":"ImageToTextTask",
-        "body":"BASE64_BODY_HERE!"
-      }
-    }
+{
+  "clientKey":"API_KEY",
+  "task": 
+  {
+    "type":"ImageToTextTask",
+    "body":"BASE64_BODY_HERE!"
+  }
+}
 ```
 
 </details>
 
 <details>
-<summary>解决 ReCaptcha2</summary>
+  <summary>
+    ReCaptcha2 任务示例
+  </summary>
 
 ```json
 {
-      "clientKey":"API_KEY",
-      "task": 
-      {
-        "type":"RecaptchaV2Task",
-        "websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
-        "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"
-      }
-    }
+  "clientKey":"API_KEY",
+  "task": 
+  {
+    "type":"RecaptchaV2Task",
+    "websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
+    "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"
+  }
+}
 ```
 
 </details>
 
------
+---
+
 ## 响应结构
-<!-- |**参数**|**类型**|**值**|
-\| :-: | :-: | :-: |
-|errorId|整数|错误标识符。<br />**0** - 没有错误，任务已成功创建，任务ID位于 *taskId*<br />**1** - 发生错误，有关错误的信息在 *errorCode* 属性中|
-|errorCode|字符串|错误代码。查看[错误列表](https://capmonster.atlassian.net/wiki/spaces/APIS/pages/295310)。|
-|taskId|整数|任务ID，用于后续在 [getTaskResult](https://zennolab.atlassian.net/wiki/spaces/APIS/pages/557078/getTaskResult) 方法中使用。| -->
+
 ### `errorId`
-类型：`整数` <br />
-必填：`是`<br />
-错误标识符。<br />**0** - 没有错误，任务已成功创建，任务ID位于 *taskId* 属性中<br />**1** - 发生错误，有关错误的信息在 *errorCode* 属性中
+
+类型: `Integer` <br />
+必填: `是`<br />
+错误标识。<br />**0** - 无错误，任务成功创建，任务 ID 在 *taskId* 参数中<br />**1** - 出现错误，错误信息在 *errorCode* 属性中
+
 ### `errorCode`
-类型：`字符串` <br />
-必填：`否`<br />
-错误代码。查看[错误列表](../api-errors)。
+
+类型: `String` <br />
+必填: `否`<br />
+错误代码。详见[错误词汇表](../api-errors.md)。
+
 ### `taskId`
-类型：`整数` <br />
-必填：`是`<br />
-T任务ID，用于后续在 [getTaskResult](./get-task-result) 方法中使用。
 
------
+类型: `Integer` <br />
+必填: `是`<br />
+任务 ID，用于后续调用 [getTaskResult](./get-task-result.md) 方法获取结果。
+
+---
+
 ### 响应示例
-<details>
-<summary>无任何错误的响应</summary>
 
-``` json
+<details>
+  <summary>无错误响应</summary>
+
+```json
 {
-      "errorId": 0,
-      "taskId": 7654321
-    }
+  "errorId": 0,
+  "taskId": 7654321
+}
 ```
 
 </details>
 
 <details>
-<summary>有错误的响应</summary>
+  <summary>包含错误的响应</summary>
 
-``` json
+```json
 {
-        "errorId": 1,
-        "errorCode": "ERROR_KEY_DOES_NOT_EXIST",
-        "errorDescription": "系统中找不到账户授权密钥，或其格式不正确",
-        "taskId": 0
-    }
+  "errorId": 1,
+  "errorCode": "ERROR_KEY_DOES_NOT_EXIST",
+  "errorDescription": "Account authorization key not found in the system or has incorrect format",
+  "taskId": 0
+}
 ```
 
 </details>

@@ -1,6 +1,6 @@
 ---
 sidebar_position: 19
-sidebar_label: YidunTask
+sidebar_label: Yidun
 title: "Автоматическое распознавание и обход Yidun (NECaptcha) капчи | API"
 description: "Узнайте, как обойти капчу Yidun с помощью API сервиса автоматического рапознавания и решения капч Capmonster Cloud!" 
 ---
@@ -47,8 +47,9 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 </Tabs>
 
 :::warning **Внимание!**
-По умолчанию CapMonster Cloud использует встроенные прокси-серверы.
-Если доступ к встроенным сервисам будет ограничен, вы можете задать собственные прокси для обеспечения стабильной работы.
+CapMonster Cloud по умолчанию работает через встроенные прокси — они уже включены в стоимость. Указывать собственные прокси требуется только в тех случаях, когда сайт не принимает токен или доступ к встроенным сервисам ограничен. Вы можете обратиться в службу поддержки, чтобы уточнить детали и узнать, насколько корректно принимаются токены на конкретном сайте.
+
+Если прокси с авторизацией по IP, то необходимо добавить адрес **65.21.190.34** в белый список.
 :::
 
 ## Параметры запроса
@@ -147,68 +148,70 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 ## Метод создания задачи
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="proxyless" label="YidunTask (без прокси)" default className="method-panel">
-	<MethodItem>
-		```http
-		https://api.capmonster.cloud/createTask
-		```
-	</MethodItem>
-	<MethodDescription>
-		**Запрос**
-		```json
-		{
-			"clientKey": "API_KEY",
-			"task": 
-			{
-				"type": "YidunTask",
-				"websiteURL": "https://www.example.com",
-				"websiteKey": "6cw0f0485d5d46auacf9b735d20218a5",
-				"userAgent": "userAgentPlaceholder"
-			}
-		}
-		```
-		**Ответ**
-		```json
-		{
-			"errorId":0,
-			"taskId":407533077
-		}
-		```
-	</MethodDescription>
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      
+      **Запрос**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "YidunTask",
+          "websiteURL": "https://www.example.com",
+          "websiteKey": "6cw0f0485d5d46auacf9b735d20218a5",
+          "userAgent": "userAgentPlaceholder"
+        }
+      }
+      ```
+
+      **Ответ**
+      ```json
+      {
+        "errorId": 0,
+        "taskId": 407533077
+      }
+      ```
+    </MethodDescription>
   </TabItem>
-  
-  <TabItem value="proxy" label="YidunTask (при использовании прокси)" default className="method-panel">
-	<MethodItem>
-		```http
-		https://api.capmonster.cloud/createTask
-		```
-	</MethodItem>
-	<MethodDescription>
-		**Запрос**
-		```json
-		{
-			"clientKey": "API_KEY",
-			"task": 
-			{
-				"type": "YidunTask",
-				"websiteURL": "https://www.example.com",
-				"websiteKey": "6cw0f0485d5d46auacf9b735d20218a5",
-				"userAgent": "userAgentPlaceholder",
-				"proxyType":"http",
-				"proxyAddress":"8.8.8.8",
-				"proxyPort":8080,
-				"proxyLogin":"proxyLoginHere",
-				"proxyPassword":"proxyPasswordHere"
-			}
-		}
-		```
-		**Ответ**
-		```json
-		{
-			"errorId":0,
-			"taskId":407533077
-		}
-		```
-	</MethodDescription>
+
+  <TabItem value="proxy" label="YidunTask (с прокси)" className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      
+      **Запрос**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "YidunTask",
+          "websiteURL": "https://www.example.com",
+          "websiteKey": "6cw0f0485d5d46auacf9b735d20218a5",
+          "userAgent": "userAgentPlaceholder",
+          "proxyType": "http",
+          "proxyAddress": "8.8.8.8",
+          "proxyPort": 8080,
+          "proxyLogin": "proxyLoginHere",
+          "proxyPassword": "proxyPasswordHere"
+        }
+      }
+      ```
+
+      **Ответ**
+      ```json
+      {
+        "errorId": 0,
+        "taskId": 407533077
+      }
+      ```
+    </MethodDescription>
   </TabItem>
 </Tabs>
 

@@ -2,11 +2,11 @@
 sidebar_position: 2
 sidebar_label: Captcha recognition via API of other services
 title: "Captcha recognition via API of other services"
-description: "Learn how to use external services with CapMonster.Cloud. A complete guide on how to integrate and automate when recognising and bypassing captchas."
+description: "Learn how to use external services with CapMonster Cloud. A complete guide on how to integrate and automate when recognising and bypassing captchas."
 ---
 
 # Captcha recognition via API of other services
-CapMonster Cloud supports API: Anti-Captcha (v1.0, v2.0), RuCaptcha, RipCaptcha, 2Captcha, BypassCaptcha, DeathByCaptcha. Thus, you can solve captcha through CapMonster.Cloud, even if your program doesn't have integration with our service.
+CapMonster Cloud supports API: Anti-Captcha (v1.0, v2.0), RuCaptcha, RipCaptcha, 2Captcha, BypassCaptcha, DeathByCaptcha. Thus, you can solve captcha through CapMonster Cloud, even if your program doesn't have integration with our service.
 
 You just need to install ![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.001.png) [**CapMonsterInterceptor**](https://static.zenno.services/ccl/interceptor.msi) (OC Windows)
 ![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.002.png) Other platforms support are in development.
@@ -21,7 +21,7 @@ When completed, a CapMonsterInterceptor shortcut will be created on the desktop.
 
 ![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.005.png) 
 
-When CapMonsterInterceptor is running, all captchas sent for recognition to *Anti-Captcha (v1.0, v2.0), RuCaptcha, RipCaptcha, 2Captcha, BypassCaptcha, DeathByCaptcha* services will be intercepted and redirected to CapMonster.Cloud.
+When CapMonsterInterceptor is running, all captchas sent for recognition to *Anti-Captcha (v1.0, v2.0), RuCaptcha, RipCaptcha, 2Captcha, BypassCaptcha, DeathByCaptcha* services will be intercepted and redirected to CapMonster Cloud.
 
 ## Example
 Just select one of the recognition services in your program where you need to enter a captcha. In our example, it will be *DeathByCaptcha*.
@@ -43,7 +43,7 @@ By double-clicking on the CapMonsterInterceptor icon in the tray, you can see th
 <details>
     <summary>How to change the API-key specified when installing CapMonsterInterceptor?</summary>
 
-Double click on the CapMonsterInterceptor tray icon. In the program window, find the «Settings» block, change the key and click «Save».
+Double click on the CapMonsterInterceptor tray icon. In the program window, find the **Settings** block, change the key and click **Save**.
 
 ![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.009.png) 
 </details>
@@ -69,7 +69,7 @@ The ***-a*** key indicates that we are interested in all active connections, ***
 The PID of the process will be displayed in the right column, as in the screenshot. 
 Remember it or write it down.
 
-Open the task manager, go to the «Details» tab, find the process with the necessary ID and end the task.
+Open the task manager, go to the **Details** tab, find the process with the necessary ID and end the task.
 
 ![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.012.png)
 

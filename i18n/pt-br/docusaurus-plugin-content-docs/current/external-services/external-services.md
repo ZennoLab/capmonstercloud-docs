@@ -1,5 +1,5 @@
 ﻿# Reconhecimento de Captcha via API de outros serviços
-O CapMonster Cloud suporta API: Anti-Captcha (v1.0, v2.0), RuCaptcha, RipCaptcha, 2Captcha, BypassCaptcha, DeathByCaptcha. Assim, você pode resolver captchas através do CapMonster.Cloud, mesmo que seu programa não tenha integração com nosso serviço.
+O CapMonster Cloud suporta API: Anti-Captcha (v1.0, v2.0), RuCaptcha, RipCaptcha, 2Captcha, BypassCaptcha, DeathByCaptcha. Assim, você pode resolver captchas através do CapMonster Cloud, mesmo que seu programa não tenha integração com nosso serviço.
 
 Você só precisa instalar ![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.001.png) [**CapMonsterInterceptor**](https://static.zenno.services/ccl/interceptor.msi) (OC Windows)
 ![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.002.png) Suporte para outras plataformas está em desenvolvimento.
@@ -14,7 +14,7 @@ Quando a instalação for concluída, um atalho do CapMonsterInterceptor será c
 
 ![](./images/external-services/Aspose.Words.99efaca6-356f-455c-b8b5-a03b46d29ad6.005.png)
 
-Quando o CapMonsterInterceptor estiver em execução, todos os captchas enviados para reconhecimento aos serviços *Anti-Captcha (v1.0, v2.0), RuCaptcha, RipCaptcha, 2Captcha, BypassCaptcha, DeathByCaptcha* serão interceptados e redirecionados para o CapMonster.Cloud.
+Quando o CapMonsterInterceptor estiver em execução, todos os captchas enviados para reconhecimento aos serviços *Anti-Captcha (v1.0, v2.0), RuCaptcha, RipCaptcha, 2Captcha, BypassCaptcha, DeathByCaptcha* serão interceptados e redirecionados para o CapMonster Cloud.
 ## Exemplo
 Basta selecionar um dos serviços de reconhecimento no seu programa onde você precisa inserir um captcha. No nosso exemplo, será *DeathByCaptcha*.
 

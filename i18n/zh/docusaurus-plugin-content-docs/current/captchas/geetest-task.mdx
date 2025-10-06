@@ -1,6 +1,6 @@
 ﻿---
 sidebar_position: 5
-sidebar_label: GeeTestTask
+sidebar_label: GeeTest
 ---
 
 import Tabs from '@theme/Tabs';
@@ -17,13 +17,17 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
   <PriceBlock title="GeeTestTask" captchaId="geetest"/>
 </PriceBlockWrap>
 
+![](./images/geetest-task/geetest_1.png) ![](./images/geetest-task/geetest_2.png)
+
 这种类型的任务是通过您的代理解决 GeeTest 验证码的问题。
 您的应用程序应发送站点地址、公共域键 (`gt`)、键 (`challenge`) 和代理。
 
 解决问题的结果是用于提交表单的三个或五个令牌。
 
 :::warning **注意！**
-暂不支持带有 IP 授权的代理。
+* CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费用内。仅当网站不接受令牌或对内置服务的访问受限时，才需要指定您自己的代理。您可以联系[支持服务](https://helpdesk.zennolab.com/conversation/new)以确认细节并了解令牌在特定网站上的接受情况。
+
+* 暂不支持带有 IP 授权的代理。
 :::
 
 ## 对象结构
@@ -127,7 +131,9 @@ V4 (captcha_id = gt)
     ---
 
     <ParamItem title="userAgent" type="string" />
-    用于识别验证码的浏览器 User-Agent。
+    浏览器的 User-Agent。<br />
+**请仅传递当前 Windows 系统下的有效 UA。当前推荐值为**：`userAgentPlaceholder`
+
   </TabItem>
 
 

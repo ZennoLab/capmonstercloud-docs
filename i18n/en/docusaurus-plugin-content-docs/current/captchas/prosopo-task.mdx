@@ -20,11 +20,19 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
   <PriceBlock title="Prosopo captcha" captchaId="prosopo"/>
 </PriceBlockWrap>
 
+![](./images/prosopo/prosopo.png)
+
+:::warning **Attention!**
+CapMonster Cloud uses built-in proxies by default — their cost is already included in the service. You only need to specify your own proxies in cases where the website does not accept the token or access to the built-in services is restricted. You can contact [support](https://helpdesk.zennolab.com/conversation/new) to clarify the details and check whether tokens are accepted correctly on a particular website.
+
+If you are using a proxy with IP authorization, make sure to whitelist the address **65.21.190.34**.
+:::
+
 The token-based automatic CAPTCHA solving method Prosopo Procaptcha.
 
 ## Request parameters
 
-  <TabItem value="proxy" label="ProsopoTask (using proxy)" default className="bordered-panel">
+  <TabItem value="proxy" label="ProsopoTask (with proxy)" default className="bordered-panel">
 
     <ParamItem title="type" required type="string" />
     **ProsopoTask**
@@ -104,7 +112,7 @@ The token-based automatic CAPTCHA solving method Prosopo Procaptcha.
 	</MethodDescription>
   </TabItem>
   
-  <TabItem value="proxy" label="ProsopoTask (using proxy)" default className="method-panel">
+  <TabItem value="proxy" label="ProsopoTask (with proxy)" default className="method-panel">
 	<MethodItem>
 		```http
 		https://api.capmonster.cloud/createTask
@@ -170,6 +178,17 @@ Use the method [getTaskResult](../api/methods/get-task-result.md) to obtain the 
 		```
 	</MethodDescription>
 </TabItem>
+
+## How to find the websiteKey
+
+1. Open the site where the Prosopo captcha is triggered.
+
+2. Go to **Developer Tools** (**DevTools**) → **Network**, reload the page, and look for a request that loads an `image` (for example, an API request like `https://example.prosopo.io/v1/prosopo/provider/client/captcha/image`).
+
+3. In **Request Headers**, find the `Prosopo-Site-Key` parameter, copy its value, and use it when creating the request.
+
+![](./images/prosopo/sitekey-prosopo.png)
+
 
 ## Use the SDK library
 

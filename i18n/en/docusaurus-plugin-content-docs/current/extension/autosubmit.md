@@ -4,16 +4,19 @@ sidebar_label: Autosubmit in the Extension
 ---
 
 # Autosubmit in the Extension
-There is often a need to perform a specific target action (such as pressing a button) after solving a CAPTCHA.
+Often, there is a need to perform a specific action (for example, clicking a button) immediately after solving a captcha. This can be useful to confirm that the captcha has been successfully completed and to continue interacting with the website.
+
 The CapMonster Cloud extension allows you to select an element for automatic clicking after the CAPTCHA is solved.
 
 ## Instructions for Selecting an Element for Autosubmit
 1. Go to the site with the CAPTCHA.
 2. Right-click on the button (or other element) that should be clicked after solving the CAPTCHA.
-3. In the menu that appears, select "CapMonster Cloud - automated captcha solver" -> "Select element for submit".   
+3. In the opened menu, select **CapMonster Cloud - automated captcha solver** → **Select element for submit**.
+  
 ![](./images/autosubmit/submit1.png) 
 
-4. After that, an informational message will appear on the form saying "Element for auto submit" along with a "Remove" button, which allows you to remove the element for autosubmit.       
+4. After that, an informational message **Element for auto submit** will appear on the form, along with a **Remove** button that allows you to remove the element for auto-submission.
+     
 ![](./images/autosubmit/submit2.png) 
 
 5. For subsequent CAPTCHA solutions on this page, after the CAPTCHA is successfully solved, the selected submission element will be automatically clicked by the extension.
