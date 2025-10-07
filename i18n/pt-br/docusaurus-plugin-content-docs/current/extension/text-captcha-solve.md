@@ -9,11 +9,11 @@ Adicionamos a capacidade de reconhecer captchas de texto em nossa extensão de n
 ![](./images/text-captcha-solve/captcha-solving.png)
 ## Como funciona
 ### Ações no navegador
-1. Clique com o botão direito na captcha e selecione "Marcar imagem como captcha" no menu que aparecer.
+1. Clique com o botão direito na captcha e selecione **Marcar imagem como captcha** no menu que aparecer.
 
 ![](./images/text-captcha-solve/mark-as-captcha.png)
 
-2. Clique com o botão direito no campo de entrada da resposta e selecione "Selecionar um campo para o resultado da captcha" no menu que abrir.
+2. Clique com o botão direito no campo de entrada da resposta e selecione **Selecionar um campo para o resultado da captcha** no menu que abrir.
 
 ![](./images/text-captcha-solve/select-input.png)
 
@@ -22,15 +22,15 @@ Adicionamos a capacidade de reconhecer captchas de texto em nossa extensão de n
 ![](./images/text-captcha-solve/Aspose.Words.f6d390ba-8e92-4611-b5a2-167a5168d8f1.004.png)
 ### Automação de reconhecimento usando software
 Para automatizar o processo de reconhecimento de captchas de texto no navegador (por exemplo, usando *Developer Tool* ou *Selenium*), você precisa:
-1. Atribuir o atributo `cm-image-to-text-source="id"` ao elemento com a imagem:
+1. Atribuir o atributo `cm-image-to-text-source=**id**` ao elemento com a imagem:
 
 ![](./images/text-captcha-solve/exapmle1.png)
 
-2. Atribuir o atributo `cm-image-to-text-input-result="id"` ao elemento com o campo de entrada:
+2. Atribuir o atributo `cm-image-to-text-input-result=**id**` ao elemento com o campo de entrada:
 
 ![](./images/text-captcha-solve/exapmle2.png)
 
-Onde "id" é o identificador da captcha (valor arbitrário).
+Onde **id** é o identificador da captcha (valor arbitrário).
 :::info
 Ao mesmo tempo, captchas e campos de entrada correspondentes devem ter o mesmo id.
 

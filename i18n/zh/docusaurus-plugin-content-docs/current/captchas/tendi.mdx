@@ -19,10 +19,14 @@ import BlogLink from '@theme/BlogLink';
   <PriceBlock title="Tencent captcha" captchaId="tencent"/>
 </PriceBlockWrap>
 
+![](./images/tendi/tendi.png)
+
 <BlogLink url="https://capmonster.cloud/zh/blog/ten-1/what-is-tencent-captcha-and-how-do-i-bypass-it"/>
 
 :::warning **注意！**
-此任务将使用我们的代理服务器执行。
+CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费用内。仅当网站不接受令牌或对内置服务的访问受限时，才需要指定您自己的代理。您可以联系[支持服务](https://helpdesk.zennolab.com/conversation/new)以确认细节并了解令牌在特定网站上的接受情况。
+
+如果代理按 IP 授权，请将地址 **65.21.190.34** 加入白名单。
 :::
 
 
@@ -54,7 +58,8 @@ import BlogLink from '@theme/BlogLink';
     ---
 
     <ParamItem title="userAgent" type="string" />
-    浏览器用户代理。**只传递 Windows 操作系统的实际 UA。现在是版本**： `userAgentPlaceholder`
+    浏览器的 User-Agent。<br />
+**请仅传递当前 Windows 系统下的有效 UA。当前推荐值为**：`userAgentPlaceholder`
 	
      ---
 
@@ -88,51 +93,84 @@ import BlogLink from '@theme/BlogLink';
 
 </TabItem>
 
-
-### 如何获取网站密钥（captchaAppId）
-打开开发者工具，转到网络标签，激活验证码并查看请求。其中一些将包含您需要的参数值。在这种情况下，`websiteKey=aid`
-![](./images/tendi/tendi-devtools.png)
-
-### 如何获取 captchaUrl
-打开 *开发者工具*，切换到 **Network** 选项卡，激活验证码并检查网络请求。在其中会出现 `TCaptcha.js` 或 `TCaptcha-global.js`，您可以在其中找到类似这样的链接：
-
-![](./images/tendi/tendi_captchaUrl.png)
-
 ## 创建任务方法 
 
-<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (without proxy)" default className="method-panel">
-  <MethodItem>
-    ```http
-    https://api.capmonster.cloud/createTask
-    ```
-  </MethodItem>
-  <MethodDescription>
-    **要求**
-    ```json
-    {
-      "clientKey": "API_KEY",
-      "task": {
-        "type": "CustomTask",
-        "class": "TenDI",
-        "websiteURL": "https://example.com",
-        "websiteKey": "189123456",
-        "userAgent": "userAgentPlaceholder",
-        "metadata": {
-          "captchaUrl": "https://global.captcha.example.com/TCaptcha-global.js"
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+
+  <TabItem value="proxyless" label="CustomTask (无代理)" default className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      **请求**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "CustomTask",
+          "class": "TenDI",
+          "websiteURL": "https://example.com",
+          "websiteKey": "189123456",
+          "userAgent": "userAgentPlaceholder",
+          "metadata": {
+            "captchaUrl": "https://global.captcha.example.com/TCaptcha-global.js"
+          }
         }
       }
-    }
-    ```
+      ```
 
-    **回应**
-    ```json
-    {
-      "errorId": 0,
-      "taskId": 407533072
-    }
-    ```
-  </MethodDescription>
-</TabItem>
+      **响应**
+      ```json
+      {
+        "errorId": 0,
+        "taskId": 407533072
+      }
+      ```
+    </MethodDescription>
+  </TabItem>
+
+  <TabItem value="proxy" label="CustomTask (带代理)" className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      **请求**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "CustomTask",
+          "class": "TenDI",
+          "websiteURL": "https://example.com",
+          "websiteKey": "189123456",
+          "userAgent": "userAgentPlaceholder",
+          "metadata": {
+            "captchaUrl": "https://global.captcha.example.com/TCaptcha-global.js"
+          },
+          "proxyType": "http",
+          "proxyAddress": "8.8.8.8",
+          "proxyPort": 8080,
+          "proxyLogin": "proxyLoginHere",
+          "proxyPassword": "proxyPasswordHere"
+        }
+      }
+      ```
+
+      **响应**
+      ```json
+      {
+        "errorId": 0,
+        "taskId": 407533072
+      }
+      ```
+    </MethodDescription>
+  </TabItem>
+
+</Tabs>
 
 ## 获取任务结果方法
 使用[getTaskResult](../api/methods/get-task-result.md)方法获取TenDI的解决方案。
@@ -169,6 +207,15 @@ import BlogLink from '@theme/BlogLink';
 		```
 	</MethodDescription>
 </TabItem>
+
+## 如何获取网站密钥（captchaAppId）
+打开开发者工具，转到网络标签，激活验证码并查看请求。其中一些将包含您需要的参数值。在这种情况下，`websiteKey=aid`
+![](./images/tendi/tendi-devtools.png)
+
+## 如何获取 captchaUrl
+打开 *开发者工具*，切换到 **Network** 选项卡，激活验证码并检查网络请求。在其中会出现 `TCaptcha.js` 或 `TCaptcha-global.js`，您可以在其中找到类似这样的链接：
+
+![](./images/tendi/tendi_captchaUrl.png)
 
 ## 如何查找任务创建所需的所有参数
 

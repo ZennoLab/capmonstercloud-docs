@@ -1,8 +1,8 @@
 ﻿---
-sidebar_position: 0
+sidebar_position: 1
 ---
 
-# Primeiros Passos
+# Primeiros passos
 
 Esta seção contém instruções para começar a usar o serviço, bem como descreve os principais métodos para enviar captchas e obter suas soluções.
 
@@ -18,7 +18,7 @@ O serviço suporta vários métodos de recarga.
 
 ![](./images/payment.png)
 
-Agora você pode resolver captchas automaticamente usando a [extensão](https://docs.capmonster.cloud/docs/extension) ou criando tarefas via API.
+Agora você pode resolver captchas automaticamente usando a [extensão](../docs/extension) ou criando tarefas via API.
 
 ## Métodos para enviar solicitações e obter resultados
 
@@ -33,7 +33,7 @@ A resposta é sempre no formato `JSON`.
 **Para resolver um captcha, você deve:**
 
 1. Criar uma tarefa de captcha usando o método [createTask](api/methods/create-task.md).  
-2. Esperar um pouco. Dependendo da carga do sistema, a resposta pode levar entre 300 ms e 6 segundos.  
+2. Esperar um pouco. Dependendo da carga do sistema, a resposta pode levar entre **300** ms e **6** segundos.  
 3. Solicitar o resultado da tarefa com o método [getTaskResult](api/methods/get-task-result.md). Se o captcha ainda não foi resolvido, volte ao passo 2.
 
 Método adicional:
@@ -42,7 +42,7 @@ Método adicional:
 
 ### Exemplos de código
 
-Para sua conveniência, fornecemos bibliotecas prontas para rápida integração da API do CapMonster.Cloud em seu código. Resolva vários tipos de captchas com os preços mais baixos do mercado!
+Para sua conveniência, fornecemos bibliotecas prontas para rápida integração da API do CapMonster Cloud em seu código. Resolva vários tipos de captchas com os preços mais baixos do mercado!
 
 |**Linguagem**|**Link para o repositório**|
 | :- | :- | 
@@ -72,11 +72,7 @@ Este é o método básico para resolver captchas, que consiste em:
 
 ### 2. Via cliques
 
-Este método simula ações do usuário (movimento do mouse, cliques, seleção de imagens). É usado através da extensão oficial do navegador e não requer:
-
-- Buscar manualmente o `sitekey` ou outros parâmetros;  
-- Analisar o HTML ou JavaScript;  
-- Implementar mecanismo de autosubmit.
+Método que imita as ações do usuário (movimento do mouse, cliques, seleção de imagens). É utilizado através de uma extensão de navegador e de uma API. Com este método é possível resolver reCAPTCHA e CAPTCHAs visuais complexos com imagens.
 
 Este método é útil se:
 
@@ -95,13 +91,15 @@ Também há uma ótima opção para usar o método de cliques no [ZennoPoster](h
 
 ## Exemplos de envio de tokens no ZennoPoster
 
-Usando ações:
+Existem várias formas de transmitir o token do captcha para o ZennoPoster: por exemplo, através das **ações prontas do ProjectMaker** ou por meio de **requisições HTTP**.
 
-1. Integre o CapMonster Cloud no ProjectMaker (“Configurações” → “Captcha” → escolha o módulo CapMonster Cloud, insira sua chave API);
+### Através das ações do ProjectMaker
 
-2. Adicione as ações “Limpar cookies” → “Ir para página” (exemplo para reCaptcha v.2 — [https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high](https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high)) → “Reconhecer ReCaptcha”;
+1. Integre o CapMonster Cloud no ProjectMaker (**Configurações** → **Captcha** → escolha o módulo CapMonster Cloud, insira sua chave API);
 
-3. Nas propriedades da ação “Reconhecer ReCaptcha”, selecione o módulo CapMonsterCloud.dll, defina o tipo do captcha (reCaptcha v.2) e o modo de resolução (**Na aba** ou **Por sitekey**):
+2. Adicione as ações **Limpar cookies** → **Ir para página** (exemplo para reCaptcha v.2 — [https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high](https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high)) → **Reconhecer ReCaptcha**;
+
+3. Nas propriedades da ação **Reconhecer ReCaptcha**, selecione o módulo CapMonsterCloud.dll, defina o tipo do captcha (reCaptcha v.2) e o modo de resolução (**Na aba** ou **Por sitekey**):
 
 ![](./images/getting-started-1.png)
 
@@ -111,15 +109,15 @@ Usando ações:
 
 ### reCaptcha v.3
 
-1. Adicione as ações “Limpar cookies” → “Ir para página” (exemplo: [https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta](https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta)) → “Reconhecer ReCaptcha”;
+1. Adicione as ações **Limpar cookies** → **Ir para página** (exemplo: [https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta](https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta)) → **Reconhecer ReCaptcha**;
 
-2. Nas propriedades da ação “Reconhecer ReCaptcha”, selecione o módulo CapMonsterCloud.dll, defina o tipo (reCaptcha v.3), o modo (na aba ou por sitekey), e informe `Action` e `minScore`:
+2. Nas propriedades da ação **Reconhecer ReCaptcha**, selecione o módulo CapMonsterCloud.dll, defina o tipo (reCaptcha v.3), o modo (na aba ou por sitekey), e informe `Action` e `minScore`:
 
 ![](./images/getting-started-3.png)
 
 <!-- ### hCaptcha
 
-1. Adicione a ação “Reconhecer hCaptcha” no projeto, após navegar para a página com captcha;
+1. Adicione a ação **Reconhecer hCaptcha** no projeto, após navegar para a página com captcha;
 
 2. Nas propriedades da ação, selecione o modo (na aba ou por sitekey). Para o modo por sitekey, informe o sitekey e a URL onde o captcha está localizado:
 
@@ -129,19 +127,19 @@ Usando ações:
 
 Para alguns tipos de captchas não há ações prontas no ProjectMaker, então é necessário usar a extensão ou montar as requisições manualmente.
 
-1. Adicione a ação “Processar variáveis” (Adicionar ação → Dados → Processar variáveis), selecione “Definir valor” e insira sua chave API do CapMonster Cloud:
+1. Adicione a ação **Processar variáveis** (Adicionar ação → Dados → Processar variáveis), selecione **Definir valor** e insira sua chave API do CapMonster Cloud:
 
 ![](./images/getting-started-5.png)
 
-2. Adicione a ação “HTTP” → “Requisição POST” (adicione dados de proxy se necessário):
+2. Adicione a ação **HTTP** → **Requisição POST** (adicione dados de proxy se necessário):
 
 ![](./images/getting-started-6.png)
 
-3. Adicione a ação “Processar JSON/XML” (Adicionar ação → Dados → Processar JSON/XML), escolha “Parse”, tipo “JSON”, e para o texto a ser processado, defina “Definir valor a partir da variável”:
+3. Adicione a ação **Processar JSON/XML** (Adicionar ação → Dados → Processar JSON/XML), escolha **Parse**, tipo **JSON**, e para o texto a ser processado, defina **Definir valor a partir da variável**:
 
 ![](./images/getting-started-7.png)
 
-4. Adicione ação “Processar variáveis” e defina o valor `{-Json.taskId-}`:
+4. Adicione ação **Processar variáveis** e defina o valor `{-Json.taskId-}`:
 
 ![](./images/getting-started-8.png)
 
@@ -149,11 +147,10 @@ Para alguns tipos de captchas não há ações prontas no ProjectMaker, então �
 
 ![](./images/getting-started-9.png)
 
-6. Adicione “Parse” na ação “Processar JSON/XML”:
+6. Adicione **Parse** na ação **Processar JSON/XML**:
 
 ![](./images/getting-started-10.png)
 
-7. Insira o token obtido no formulário da página (analisando o código fonte) usando a ação “Definir valor”:
+7. Insira o token obtido no formulário da página (analisando o código fonte) usando a ação **Definir valor**:
 
 ![](./images/getting-started-11.png)
-

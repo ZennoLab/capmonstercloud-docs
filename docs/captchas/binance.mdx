@@ -20,8 +20,12 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
   <PriceBlock title="Binance captcha" captchaId="binance"/>
 </PriceBlockWrap>
 
+![](./images/binance/binance.png)
+
 :::warning **Внимание!**
-* Данная задача будет выполняться с использованием наших прокси-серверов.
+* CapMonster Cloud по умолчанию работает через встроенные прокси — они уже включены в стоимость. Указывать собственные прокси требуется только в тех случаях, когда сайт не принимает токен или доступ к встроенным сервисам ограничен. Вы можете обратиться в службу поддержки, чтобы уточнить детали и узнать, насколько корректно принимаются токены на конкретном сайте.
+
+* Если прокси с авторизацией по IP, то необходимо добавить адрес **65.21.190.34** в белый список.
 * Используйте только для входа в систему с помощью своей учетной записи.
 :::
 
@@ -49,7 +53,8 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
     ---
 
     <ParamItem title="userAgent" type="string" />
-    User-Agent браузера. **Можно передать свой или указать последний UA от ОС Windows**: `userAgentPlaceholder`
+    User-Agent браузера. <br />
+  **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является**: `userAgentPlaceholder`
 	
 	 ---
 
@@ -85,57 +90,6 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
     Пароль прокси-сервера.
 
   </TabItem>
-
-
-### Как получить `websiteKey` и `validateId`
-Включите инструменты разработчика, перейдите на вкладку Network, активируйте капчу и посмотрите запросы. В некоторых из них будет нужное вам значение параметров. 
-Например, параметры:
-
-bizCode: "CMC_register",
-securityId: "09295759baca4d4fbeae80d9ffeaefd8"
-
-![](./images/binance/binance1.png) 
-
-или 
-
-bizId: "CMC_register", 
-securityCheckResponseValidateId: "09295759baca4d4fbeae80d9ffeaefd8"
-
-![](./images/binance/binance2.png) 
-
-или 
-
-bizType: "login",
-validateId: "ff965ea6216b46f3825fa827ecaf297f"
-
-![](./images/binance/binance3.png) 
-
-или
-
-bizId: "login",
-securityCheckResponseValidateId: "ff965ea6216b46f3825fa827ecaf297f"
-
-![](./images/binance/binance4.png)
-
-Необходимые для решения капчи параметры можно получить, выполнив JavaScript: 
-	```json
-		let originalBCaptcha = window.BCaptcha;
-		let BCaptchaData;
-		Object.defineProperty(window, 'BCaptcha', {
-			get: function() {
-				return function(args) {
-					const BCaptcha = new originalBCaptcha(args);
-					let BCaptchaShow = BCaptcha.__proto__.show
-					BCaptcha.__proto__.show = function(args) {
-						BCaptchaData = args;
-						return 1;
-					};
-					return BCaptcha;
-				}
-			}
-		});
-	```
-Затем можно получить параметры, например так `BCaptchaData.securityCheckResponseValidateId`.
 
 
 ## Метод создания задачи
@@ -240,6 +194,60 @@ securityCheckResponseValidateId: "ff965ea6216b46f3825fa827ecaf297f"
 		```
 	</MethodDescription>
 </TabItem>
+
+## Как получить `websiteKey` и `validateId`
+Включите инструменты разработчика, перейдите на вкладку Network, активируйте капчу и посмотрите запросы. В некоторых из них будет нужное вам значение параметров. 
+Например, параметры:
+
+bizCode: "CMC_register",
+securityId: "09295759baca4d4fbeae80d9ffeaefd8"
+
+![](./images/binance/binance1.png) 
+
+или 
+
+bizId: "CMC_register", 
+securityCheckResponseValidateId: "09295759baca4d4fbeae80d9ffeaefd8"
+
+![](./images/binance/binance2.png) 
+
+или 
+
+bizType: "login",
+validateId: "ff965ea6216b46f3825fa827ecaf297f"
+
+![](./images/binance/binance3.png) 
+
+или
+
+bizId: "login",
+securityCheckResponseValidateId: "ff965ea6216b46f3825fa827ecaf297f"
+
+![](./images/binance/binance4.png)
+
+Необходимые для решения капчи параметры можно получить, выполнив JavaScript: 
+
+```javascript
+let originalBCaptcha = window.BCaptcha;
+let BCaptchaData;
+
+Object.defineProperty(window, 'BCaptcha', {
+  get: function() {
+    return function(args) {
+      const BCaptcha = new originalBCaptcha(args);
+      let BCaptchaShow = BCaptcha.__proto__.show;
+      
+      BCaptcha.__proto__.show = function(args) {
+        BCaptchaData = args;
+        return 1;
+      };
+      
+      return BCaptcha;
+    };
+  }
+});
+```
+Затем можно получить параметры, например, так: `BCaptchaData.securityCheckResponseValidateId`.
 
 ## Используйте библиотеку SDK
 
@@ -390,4 +398,3 @@ class Program
   </TabItem>
 
 </Tabs>
-

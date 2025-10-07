@@ -1,6 +1,6 @@
 ﻿---
 sidebar_position: 5
-sidebar_label: GeeTestTask
+sidebar_label: GeeTest
 title: "Recognise and resolve GeeTest - GeeTest Task | API"
 description: "Learn how to set up automatic recognition and solve (bypass) GeeTest captchas via API using GeeTest Task type, see Capmonster Cloud Docs."
 ---
@@ -19,12 +19,15 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
   <PriceBlock title="GeeTestTask" captchaId="geetest"/>
 </PriceBlockWrap>
 
-This type of task is for solving GeeTest captcha using your proxies.
-Your application should send the site address, public domain key (`gt`), key (`challenge`) and proxy.
+![](./images/geetest-task/geetest_1.png) ![](./images/geetest-task/geetest_2.png)
 
-The result of solving the problem is three or five tokens for submitting the form.
+Your application should send the site address, public domain key (`gt`) and key (`challenge`).
+
+The result of solving the task is three or five tokens for form submission.
 
 :::warning **Attention!**
+CapMonster Cloud uses built-in proxies by default — their cost is already included in the service. You only need to specify your own proxies in cases where the website does not accept the token or access to the built-in services is restricted. You can contact [support](https://helpdesk.zennolab.com/conversation/new) to clarify the details and check whether tokens are accepted correctly on a particular website.
+
 Proxies with IP authorization are not yet supported.
 :::
 
@@ -64,7 +67,7 @@ V4 (captcha_id = gt)
 
 ### <span style={{fontSize: '1.5rem'}}>Request parameters</span>
 
-  <TabItem value="proxy" label="GeeTestTask (using proxy)" className="bordered-panel">
+  <TabItem value="proxy" label="GeeTestTask (with proxy)" className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **GeeTestTask**
 
@@ -135,11 +138,12 @@ V4 (captcha_id = gt)
     ---
 
     <ParamItem title="userAgent" type="string" />
-    Browser User-Agent used to recognize captcha.
+    Browser User-Agent.  
+  **Pass only a valid UA from Windows OS. Currently it is**: `userAgentPlaceholder`
   </TabItem>
 
 
-### <span style={{fontSize: '1.5rem'}}>Create task</span>
+### <span style={{fontSize: '1.5rem'}}>Create task method</span>
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 	<TabItem value="proxyless" label="GeeTestTask (without proxy)" default className="method-panel">
@@ -174,7 +178,7 @@ V4 (captcha_id = gt)
 		</MethodDescription>
 	</TabItem>
 
-	<TabItem value="proxy" label="GeeTestTask (using proxy)" className="method-panel">
+	<TabItem value="proxy" label="GeeTestTask (with proxy)" className="method-panel">
 		<MethodItem>
 			```http
 			https://api.capmonster.cloud/createTask
@@ -215,7 +219,7 @@ V4 (captcha_id = gt)
 
 Use the [getTaskResult](../api/methods/get-task-result.md) method to get the result of GeeTest recognition. Depending on the system load, you will receive a response after a time in the range from 10 s to 30 s.
 
-### <span style={{fontSize: '1.5rem'}}>Get task result</span>
+### <span style={{fontSize: '1.5rem'}}>Get task result method</span>
 
 	<TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
 		<MethodItem>
@@ -256,7 +260,7 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the res
 <tr><td>seccode</td><td>String</td></tr>
 </table>
 
-## How to Find All Required Parameters for Task Creation
+## How to find all required parameters for task creation
 
 ### Manually
 
@@ -600,7 +604,7 @@ The code snippets provided are basic examples for familiarization with extractin
 
 ### <span style={{fontSize: '1.5rem'}}>Request parameters</span>
 
-  <TabItem value="proxy" label="GeeTestTask (using proxy)" className="bordered-panel">
+  <TabItem value="proxy" label="GeeTestTask (with proxy)" className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **GeeTestTask**
 
@@ -709,7 +713,7 @@ The code snippets provided are basic examples for familiarization with extractin
 		</MethodDescription>
 	</TabItem>
 
-	<TabItem value="proxy" label="GeeTestTask (using proxy)" className="method-panel">
+	<TabItem value="proxy" label="GeeTestTask (with proxy)" className="method-panel">
 		<MethodItem>
 			```http
 			https://api.capmonster.cloud/createTask
@@ -801,7 +805,7 @@ Use the [getTaskResult](../api/methods/get-task-result.md) to get the result of 
 <tr><td>captcha_output</td><td>String</td></tr>
 </table>
 
-## How to Find All Required Parameters for Task Creation
+## How to find all required parameters for task creation
 
 ### Manually
 

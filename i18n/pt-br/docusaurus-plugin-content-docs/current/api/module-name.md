@@ -4,7 +4,9 @@ sidebar_position: 5
 
 # Nome do Módulo
 
-Passar o nome do módulo para reconhecer um captcha específico pode ser útil em casos de trabalho com um serviço específico (por exemplo, Google, SolveMedia, Whatsapp, etc.). Isso aumentará a velocidade e a qualidade do reconhecimento e reduzirá a probabilidade de erros.
+No trabalho com o reconhecimento automático de captchas, a precisão e a velocidade de processamento são fundamentais. Diferentes serviços utilizam tipos únicos de captchas, e uma solução universal nem sempre consegue lidar com todos de forma igualmente eficaz. Por exemplo, captchas do **Google**, **SolveMedia**, **WhatsApp** ou **Yandex** podem ter características específicas que fazem com que o módulo padrão de reconhecimento funcione mais lentamente ou com erros.
+
+Para aumentar a eficiência e reduzir a probabilidade de reconhecimento incorreto, o CapMonster Cloud permite selecionar um módulo específico para processar seu captcha. O sistema aplicará um algoritmo especializado desenvolvido para o serviço específico, em vez de usar um método universal de processamento de captchas.
 
 ## Como passar o nome do módulo para CapMonster Cloud, usando apenas o campo ApiKey
 

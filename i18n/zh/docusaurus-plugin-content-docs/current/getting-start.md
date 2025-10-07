@@ -1,5 +1,5 @@
 ---
-sidebar_position: 0
+sidebar_position: 1
 ---
 
 # 入门指南
@@ -19,7 +19,7 @@ sidebar_position: 0
 
 ![](./images/payment.png)
 
-现在，您可以通过 [浏览器扩展](https://docs.capmonster.cloud/docs/extension) 或使用 API 自动解决验证码。
+现在，您可以通过 [浏览器扩展](../docs/extension) 或使用 API 自动解决验证码。
 
 ## 发送任务与获取结果的方法
 
@@ -43,7 +43,7 @@ https://api.capmonster.cloud
 
 ### 代码示例
 
-为了方便快速集成 CapMonster.Cloud API，我们提供了多种语言的客户端库。  
+为了方便快速集成 CapMonster Cloud API，我们提供了多种语言的客户端库。  
 以市场上最低的价格识别各种验证码类型！
 
 |**语言**|**链接至存储库**|
@@ -75,19 +75,14 @@ https://api.capmonster.cloud
 
 ### 2. 通过点击模拟
 
-该方法模拟用户行为（鼠标移动、点击、图像选择），通过官方浏览器扩展实现，无需：
+一种模拟用户操作的方法（鼠标移动、点击、选择图片）。通过浏览器扩展和 API 使用。借助此方法可以破解 reCAPTCHA 以及复杂的图像验证码。
 
-- 手动查找 `sitekey` 或其他参数；  
-- 分析 HTML 或 JavaScript；  
-- 编写 autosubmit 提交逻辑。
+该方法在以下情况下特别有用：
 
-该方法适用于以下场景：
+* 网站使用非标准的验证码实现；
+* 参数被加密或动态注入；
+* 提交（submit）函数深藏在脚本中。
 
-- 网站使用了非标准验证码实现；  
-- 参数被加密或动态加载；  
-- 提交逻辑被深度隐藏在脚本中。
-
-> 适合复杂站点和无编程经验的用户。
 
 ---
 
@@ -100,27 +95,38 @@ https://api.capmonster.cloud
 
 ## ZennoPoster 中的 Token 提交示例
 
-使用操作模块实现：
+有几种方法可以将验证码令牌传递到 ZennoPoster：例如，通过现成的 **ProjectMaker 操作（Actions）** 或使用 **HTTP 请求**。
 
-1. 在 ProjectMaker 中集成 CapMonster Cloud（“设置” → “验证码” → 选择 CapMonster Cloud 模块，输入 API 密钥）；
+### 通过 ProjectMaker 操作
 
-2. 添加操作：“清除 Cookie” → “打开页面”（例如 reCaptcha v.2 示例：[https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high](https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high)）→ “识别 ReCaptcha”；
+1. 在 ProjectMaker 中集成 CapMonster Cloud（**设置** → **验证码** → 选择模块 `CapMonster Cloud`，并输入您的 API 密钥）；
 
-3. 在“识别 ReCaptcha”的属性中选择 CapMonsterCloud.dll，设置验证码类型（reCaptcha v.2）和识别方式（**在标签页中** 或 **通过 sitekey**）：
+2. 添加操作 **清除 Cookie** → **转到页面**（例如，对于 reCaptcha v.2 — [https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high](https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high)）→ **识别 ReCaptcha**；
+
+3. 在 **识别 ReCaptcha** 操作的属性中选择模块 `CapMonsterCloud.dll`，指定验证码类型（reCAPTCHA v.2）以及解题方式（**在选项卡中** 或 **通过 sitekey**）：
 
 ![](./images/getting-started-1.png)
 
-4. 若选择 **通过 sitekey**，则填写验证码参数 (`sitekey`) 和页面 URL：
+4. 如果选择 **通过 sitekey** 方式，请填写验证码参数（`sitekey`）和 URL（需要在其页面上解决验证码的页面地址）：
+
+> *关于如何为 reCAPTCHA v.2 查找所需参数，您可以在这里查看。*
+
+---
 
 ![](./images/getting-started-2.png)
 
-### reCaptcha v.3
+**reCAPTCHA v.3**
 
-1. 添加操作：“清除 Cookie” → “打开页面” → “识别 ReCaptcha”（如：[https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta](https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta)）；
+1. 添加操作 **清除 Cookie** → **转到页面**（例如，[https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta](https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta)）→ **识别 ReCaptcha**；
 
-2. 在属性中选择 CapMonsterCloud.dll，设置验证码类型为 reCaptcha v.3，识别方式（在标签页中或通过 sitekey），并填写 `Action` 与 `minScore`：
+2. 在 **识别 ReCaptcha** 操作的属性中选择模块 `CapMonsterCloud.dll`，指定验证码类型（reCAPTCHA v.3），解题方式（**在选项卡中** 或 **通过 Sitekey**），并填写 `Action` 和 `minScore`。
+
+> *关于如何为 reCAPTCHA v.3 查找所需参数，您可以在这里查看。*
+
+---
 
 ![](./images/getting-started-3.png)
+
 
 <!--
 ### hCaptcha
@@ -134,32 +140,26 @@ https://api.capmonster.cloud
 
 ### 通过 HTTP 请求方式
 
-部分验证码类型在 ProjectMaker 中没有预设操作，您可以使用扩展或手动构造请求实现：
+对于某些类型的验证码，ProjectMaker 中没有现成的操作，因此需要使用扩展或手动构造请求来解决验证码。
 
-1. 添加“变量处理”操作（添加操作 → 数据 → 变量处理），设置值为您的 CapMonster API 密钥：
+1. 添加操作 **处理变量**（**添加操作** → **数据** → **处理变量**），选择 **设置值**，并填写您的 CapMonster Cloud API 密钥：
+   ![](./images/getting-started-5.png)
 
-![](./images/getting-started-5.png)
+2. 添加操作 **HTTP** → **POST 请求**（如有需要，填写代理参数）：
+   ![](./images/getting-started-6.png)
 
-2. 添加“HTTP” → “POST 请求”操作（如有需要可添加代理）：
+3. 添加操作 **处理 JSON/XML**（**添加操作** → **数据** → **处理 JSON/XML**），选择 **解析**，类型选择 JSON，并在要解析的文本处选择 **从变量设置值**：
+   ![](./images/getting-started-7.png)
 
-![](./images/getting-started-6.png)
-
-3. 添加“JSON/XML 处理”操作（添加 → 数据 → JSON/XML 处理），选择“解析”，类型为 JSON，并从变量设置解析文本：
-
-![](./images/getting-started-7.png)
-
-4. 添加“变量处理”操作，设置值为 `{-Json.taskId-}`：
-
-![](./images/getting-started-8.png)
+4. 添加操作 **处理变量**，将值设置为 `{-Json.taskId-}`：
+   ![](./images/getting-started-8.png)
 
 5. 构造新的 POST 请求以获取结果：
+   ![](./images/getting-started-9.png)
 
-![](./images/getting-started-9.png)
+6. 在 **处理 JSON/XML** 中添加 **解析** 操作以提取结果：
+   ![](./images/getting-started-10.png)
 
-6. 添加 JSON/XML 处理中的“解析”：
+7. 将获取到的令牌（token）替换到目标验证码表单中（需先查看页面代码确定位置），使用 **设置值** 操作完成赋值：
+   ![](./images/getting-started-11.png)
 
-![](./images/getting-started-10.png)
-
-7. 使用“设置值”操作将 token 插入目标表单中（需根据页面代码调整）：
-
-![](./images/getting-started-11.png)

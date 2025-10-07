@@ -1,6 +1,6 @@
 ---
 sidebar_position: 6
-sidebar_label: TurnstileTask
+sidebar_label: Turnstile/Challenge (Cloudflare)
 title: "Распознавание и решение Cloudflare Turnstile | TurnstileTask | Cloudflare Challenge"
 description: "Задачи Turnstile Task и Cloudflare Challenge для автоматического распознавания и решения Cloudflare Turnstile капч через API Capmonster Cloud. Поддерживаются все подтипы Turnstile - manual, non-interactive и invisible." 
 ---
@@ -20,21 +20,26 @@ import BlogLink from '@theme/BlogLink';
   <PriceBlock title="TurnstileTask" captchaId="cf-turnstile"/>
 </PriceBlockWrap>
 
-Автоматически поддерживаются все подтипы Turnstile: manual, non-interactive и invisible. Поэтому нет необходимости указывать подтип для обычной капчи.
+![](./images/tunrstile-task/turnstile.png)
+
+Автоматически поддерживаются все подтипы Turnstile: *manual*, *non-interactive* и *invisible*. Поэтому нет необходимости указывать подтип для обычной капчи.
 
 <BlogLink url="https://capmonster.cloud/ru/blog/Cloudflare/what-is-cloudflare-captcha"/>
 <BlogLink url="https://capmonster.cloud/ru/blog/Cloudflare/how-cloudflare-bot-challenge-and-turnstile-protect-web-traffic"/>
 
 :::info Важно:
-Перед началом работы изучите все три варианта распознавания капчи и выберите тот, который лучше всего соответствует вашим потребностям.
+Перед началом работы изучите все три варианта распознавания капчи и выберите тот, который больше всего соответствует вашим потребностям.
 :::
 
 ## Вариант 1 (Turnstile)
 
-Вам требуется решить **обычную** turstile капчу, как [здесь](https://zenno.link/zl-support). Обратите внимание, что капча на страницах CloudFlare может выглядеть идентично. Посмотрите в конце статьи как отличить обычный Turnstile от Cloudflare Challenge. 
+Вам требуется решить **обычную** turstile капчу, как [здесь](https://zenno.link/zl-support). Обратите внимание, что капча на страницах CloudFlare может выглядеть идентично. Посмотрите, [как отличить обычный Turnstile от Challenge](#как-отличить-обычный-turnstile-от-cloudflare-challenge). 
 
 :::warning **Внимание!**
-* Для выполнения данной задачи использование ваших прокси **не требуется**.
+* CapMonster Cloud по умолчанию работает через встроенные прокси — они уже включены в стоимость. Указывать собственные прокси требуется только в тех случаях, когда сайт не принимает токен или доступ к встроенным сервисам ограничен. Вы можете обратиться в службу поддержки, чтобы уточнить детали и узнать, насколько корректно принимаются токены на конкретном сайте.
+
+* Если прокси с авторизацией по IP, то необходимо добавить адрес **65.21.190.34** в белый список.
+
 * После решения вы получите **токен** для подтверждения прохождения проверки.
 :::
 
@@ -63,13 +68,49 @@ import BlogLink from '@theme/BlogLink';
   <ParamItem title="data" type="string" />
   Значение поля *data* можно взять из параметра `cData`.
 
+  ---
+
+    <ParamItem title="proxyType" type="string" />
+    **http** - обычный http/https прокси;<br />
+	**https** - попробуйте эту опцию только если "http" не работает (требуется для некоторых кастомных прокси);<br />
+	**socks4** - socks4 прокси;<br />
+	**socks5** - socks5 прокси.
+
+     ---
+
+    <ParamItem title="proxyAddress" type="string" />
+    <p>
+      IP адрес прокси IPv4/IPv6. Не допускается:
+		- использование имен хостов;
+		- использование прозрачных прокси (там где можно видеть IP клиента);
+		- использование прокси на локальных машинах.
+    </p>
+
+     ---
+
+    <ParamItem title="proxyPort" type="integer" />
+    Порт прокси.
+
+     ---
+
+    <ParamItem title="proxyLogin" type="string" />
+    Логин прокси-сервера.
+
+     ---
+
+    <ParamItem title="proxyPassword" type="string" />
+    Пароль прокси-сервера.
+
 </TabItem>
 
 ---
 ## Вариант 2 (Challenge)
 
 :::warning **Внимание!**
-* Для выполнения данной задачи использование ваших прокси **не требуется**.
+* CapMonster Cloud по умолчанию работает через встроенные прокси — они уже включены в стоимость. Указывать собственные прокси требуется только в тех случаях, когда сайт не принимает токен или доступ к встроенным сервисам ограничен. Вы можете обратиться в службу поддержки, чтобы уточнить детали и узнать, насколько корректно принимаются токены на конкретном сайте.
+
+* Если прокси с авторизацией по IP, то необходимо добавить адрес **65.21.190.34** в белый список.
+
 * После решения вы получите **токен** для подтверждения прохождения проверки.
 :::
 
@@ -101,7 +142,8 @@ import BlogLink from '@theme/BlogLink';
   ---
 
   <ParamItem title="userAgent" required type="string" />
-  User-Agent браузера.<br /> **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является**: userAgentPlaceholder
+  User-Agent браузера. <br />
+  **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является**: `userAgentPlaceholder`
 
   ---
 
@@ -117,6 +159,40 @@ import BlogLink from '@theme/BlogLink';
   
   <ParamItem title="apiJsUrl" type="string" />
   Строка, которая содержит ссылку на скрипт капчи.
+
+  ---
+
+    <ParamItem title="proxyType" type="string" />
+    **http** - обычный http/https прокси;<br />
+	**https** - попробуйте эту опцию только если "http" не работает (требуется для некоторых кастомных прокси);<br />
+	**socks4** - socks4 прокси;<br />
+	**socks5** - socks5 прокси.
+
+     ---
+
+    <ParamItem title="proxyAddress" type="string" />
+    <p>
+      IP адрес прокси IPv4/IPv6. Не допускается:
+		- использование имен хостов;
+		- использование прозрачных прокси (там где можно видеть IP клиента);
+		- использование прокси на локальных машинах.
+    </p>
+
+     ---
+
+    <ParamItem title="proxyPort" type="integer" />
+    Порт прокси.
+
+     ---
+
+    <ParamItem title="proxyLogin" type="string" />
+    Логин прокси-сервера.
+
+     ---
+
+    <ParamItem title="proxyPassword" type="string" />
+    Пароль прокси-сервера.
+  
 
 </TabItem>
 
@@ -267,7 +343,7 @@ import BlogLink from '@theme/BlogLink';
 
   ---
 
-  <ParamItem title="cloudflareTaskType" type="string" />
+  <ParamItem title="cloudflareTaskType" required type="string" />
   **wait_room**
 
   ---
@@ -317,69 +393,155 @@ import BlogLink from '@theme/BlogLink';
 </TabItem>
 ---
 ## Примеры запросов
+
 ### Вариант 1. Обычный Turnstile:
-<TabItem value="proxyless" label="TurnstileTask (без прокси)" default className="method-panel">
-	<MethodItem>
-		```http
-		https://api.capmonster.cloud/createTask
-		```
-	</MethodItem>
-	<MethodDescription>
-		**Запрос**
-		```json
-		{
-			"clientKey":"API_KEY",
-			"task":
-			{
-				"type":"TurnstileTask",
-				"websiteURL":"http://tsmanaged.zlsupport.com",
-				"websiteKey":"0x4AAAAAAABUYP0XeMJF0xoy"
-			}
-		}
-		```
-		**Ответ**
-		```json
-		{
-		  "errorId":0,
-		  "taskId":407533072
-		}
-		```
-	</MethodDescription>
-</TabItem>
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+
+  <TabItem value="proxyless" label="TurnstileTask (без прокси)" default className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      **Запрос**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "TurnstileTask",
+          "websiteURL": "http://tsmanaged.zlsupport.com",
+          "websiteKey": "0x4AAAAAAABUYP0XeMJF0xoy"
+        }
+      }
+      ```
+
+      **Ответ**
+      ```json
+      {
+        "errorId": 0,
+        "taskId": 407533072
+      }
+      ```
+    </MethodDescription>
+  </TabItem>
+
+  <TabItem value="proxy" label="TurnstileTask (c прокси)" className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      **Запрос**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "TurnstileTask",
+          "websiteURL": "http://tsmanaged.zlsupport.com",
+          "websiteKey": "0x4AAAAAAABUYP0XeMJF0xoy",
+          "proxyType": "http",
+          "proxyAddress": "8.8.8.8",
+          "proxyPort": 8080,
+          "proxyLogin": "proxyLoginHere",
+          "proxyPassword": "proxyPasswordHere"
+        }
+      }
+      ```
+
+      **Ответ**
+      ```json
+      {
+        "errorId": 0,
+        "taskId": 407533072
+      }
+      ```
+    </MethodDescription>
+  </TabItem>
+
+</Tabs>
+
 ---
 ### Вариант 2. Challenge (token)
-<TabItem value="proxyless" label="TurnstileTask (без прокси)" default className="method-panel">
-	<MethodItem>
-		```http
-		https://api.capmonster.cloud/createTask
-		```
-	</MethodItem>
-	<MethodDescription>
-		**Запрос**
-		```json
-		{
-			"clientKey": "API_KEY",
-			"task": {
-				"type": "TurnstileTask",
-				"websiteURL": "https://example.com",
-				"websiteKey": "0x4AAAAAAADnPIDROrmt1Wwj",
-				"cloudflareTaskType": "token",
-				"userAgent":"userAgentPlaceholder",
-				"pageAction": "managed",
-				"pageData": "HUHDWUHuhuwfiweh32..uh2uhuhyugYUG=",
-				"data": "874291f4retD1366"
-			}
-		}
-		```
-		**Ответ**
-		```json
-		{
-		  "errorId":0,
-		  "taskId":407533072
-		}
-		```
-	</MethodDescription>
-</TabItem>
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+
+  <TabItem value="proxyless" label="TurnstileTask (без прокси)" default className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      **Запрос**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "TurnstileTask",
+          "websiteURL": "https://example.com",
+          "websiteKey": "0x4AAAAAAADnPIDROrmt1Wwj",
+          "cloudflareTaskType": "token",
+          "userAgent": "userAgentPlaceholder",
+          "pageAction": "managed",
+          "pageData": "HUHDWUHuhuwfiweh32..uh2uhuhyugYUG=",
+          "data": "874291f4retD1366"
+        }
+      }
+      ```
+
+      **Ответ**
+      ```json
+      {
+        "errorId": 0,
+        "taskId": 407533072
+      }
+      ```
+    </MethodDescription>
+  </TabItem>
+
+  <TabItem value="proxy" label="TurnstileTask (c прокси)" className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      **Запрос**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "TurnstileTask",
+          "websiteURL": "https://example.com",
+          "websiteKey": "0x4AAAAAAADnPIDROrmt1Wwj",
+          "cloudflareTaskType": "token",
+          "userAgent": "userAgentPlaceholder",
+          "pageAction": "managed",
+          "pageData": "HUHDWUHuhuwfiweh32..uh2uhuhyugYUG=",
+          "data": "874291f4retD1366",
+          "proxyType": "http",
+          "proxyAddress": "8.8.8.8",
+          "proxyPort": 8080,
+          "proxyLogin": "proxyLoginHere",
+          "proxyPassword": "proxyPasswordHere"
+        }
+      }
+      ```
+
+      **Ответ**
+      ```json
+      {
+        "errorId": 0,
+        "taskId": 407533072
+      }
+      ```
+    </MethodDescription>
+  </TabItem>
+
+</Tabs>
+
 ---
 ### Вариант 3. Challenge (cookie)
 <TabItem value="proxyless" label="TurnstileTask (без прокси)" default className="method-panel">

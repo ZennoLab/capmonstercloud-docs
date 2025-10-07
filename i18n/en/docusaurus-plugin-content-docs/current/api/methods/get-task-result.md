@@ -7,7 +7,7 @@ description: "Learn how to use the getTaskResult method in the Capmonster Cloud 
 
 # getTaskResult : request task result
 ## Description
-After you have created a task, you need to get its response by periodically checking the solving status.
+After creating a task, its status needs to be checked periodically in order to obtain the final result.
 
 :::info Method address
 ```http

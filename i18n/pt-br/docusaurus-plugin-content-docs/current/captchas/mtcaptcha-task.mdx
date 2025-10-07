@@ -22,8 +22,9 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 ![](./images/mtcaptcha/mtcaptcha.png)
 
 :::warning **Atenção!**
-Por padrão, o CapMonster Cloud utiliza servidores proxy integrados.  
-Se o acesso aos serviços internos estiver restrito, você pode especificar seus próprios proxies para garantir o funcionamento estável.
+O CapMonster Cloud, por padrão, funciona com proxies integrados — já incluídos no custo do serviço. É necessário especificar seus próprios proxies apenas nos casos em que o site não aceita o token ou quando o acesso aos serviços integrados está restrito. Você pode entrar em contato com o [suporte técnico](https://helpdesk.zennolab.com/conversation/new) para esclarecer detalhes e verificar se os tokens estão sendo aceitos corretamente em um site específico.
+
+Se o proxy utiliza autenticação por IP, é necessário adicionar o endereço **65.21.190.34** à lista de permissões (whitelist).
 :::
 
 ## Parâmetros da solicitação
@@ -66,8 +67,8 @@ var mtcaptchaConfig = {
 ---
 
 <ParamItem title="userAgent" type="string" />
-User-Agent do navegador. <br />  
-**Informe apenas um UA atual do Windows. Atualmente válido:** userAgentPlaceholder
+User-Agent do navegador. <br />
+**Transmita apenas o UA atual do sistema operacional Windows. No momento, o válido é**: `userAgentPlaceholder`
 
 ---
 

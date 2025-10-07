@@ -1,14 +1,25 @@
 ---
 sidebar_position: 5
+sidebar_label: 模块名称传递
+title: "为验证码识别传递模块名称"
+description: "在处理特定服务（如 Google、SolveMedia、Whatsapp 等）的验证码时，传递模块名称可提高识别速度和准确性，并降低错误发生率。"
 ---
-# 传递模块名称
-在处理特定服务（例如 Google、SolveMedia、Whatsapp 等）时，将模块名称传递给识别特定验证码可能会很有用。这将提高识别速度和质量，并减少错误的可能性。
-## 如何仅使用 ApiKey 字段将模块名称传递给 CapMonster Cloud
-为了向 CapMonsterCloud 发送有关将识别验证码的模块的信息，只使用指定 ApiKey 的字段，您可以按以下格式将模块名称添加到密钥中： `{apikey}__moduleName`
 
-例如，“00f87cb0f01330d33709ce3339ad0c8c\_\_solvemedia”（**重要**，用**双下划线**分隔 API 密钥和模块名称）
+# 模块名称传递
 
-可用模块名称列表：
+在自动验证码识别中，处理精度和速度至关重要。不同服务使用各自的验证码类型，通用方案并不总能同样高效地处理。例如，来自 **Google**、**SolveMedia**、**Whatsapp** 或 **Yandex** 的验证码可能具有特殊特性，导致标准识别模块运行较慢或出现错误。
+
+为了提高效率并降低识别错误率，CapMonster Cloud 允许指定专用模块处理您的验证码。系统将使用针对特定服务优化的识别算法，而不是通用方法。
+
+## 如何在仅使用 ApiKey 字段的情况下传递模块名称
+
+要在 CapMonster Cloud 中指定识别模块，可在 API 密钥后附加模块名称，格式如下：`{apikey}__模块名称`
+
+例如：`00f87cb0f01330d33709ce3339ad0c8c__solvemedia`
+(**重要**：API 密钥和模块名称需用 **双下划线** 分隔)
+
+可用模块名称列表如下：
+
 <table>
     <tbody>
         <tr>
@@ -99,12 +110,12 @@ sidebar_position: 5
             <td align="center">![](images\module-name\captcha_math.png)</td>
         </tr>
         <tr>
-            <td align="center">universal (所有其他文本验证码)</td>
+            <td align="center">universal（其他所有文本验证码）</td>
             <td align="center">![](images\module-name\universal.png)</td>
         </tr>
     </tbody>
 </table>
 
 :::info 提示
-如果您无法将验证码发送到特定模块，请联系我们的[支持团队](https://helpdesk.zennolab.com/conversation/new)，我们会帮助您！
+如果无法将验证码发送到特定模块，请通过 [客服支持](https://helpdesk.zennolab.com/conversation/new) 联系我们，我们将协助您完成设置！
 :::

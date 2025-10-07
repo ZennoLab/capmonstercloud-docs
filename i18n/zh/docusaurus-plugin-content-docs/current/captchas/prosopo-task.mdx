@@ -18,6 +18,14 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
   <PriceBlock title="Prosopo captcha" captchaId="prosopo"/>
 </PriceBlockWrap>
 
+![](./images/prosopo/prosopo.png)
+
+:::warning **注意！**
+CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费用内。仅当网站不接受令牌或对内置服务的访问受限时，才需要指定您自己的代理。您可以联系[支持服务](https://helpdesk.zennolab.com/conversation/new)以确认细节并了解令牌在特定网站上的接受情况。
+
+如果代理按 IP 授权，请将地址 **65.21.190.34** 加入白名单。
+:::
+
 基于令牌的自动解决验证码方法 Prosopo Procaptcha。
 
 ## 请求参数
@@ -166,6 +174,17 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 		```
 	</MethodDescription>
 </TabItem>
+
+## 如何获取 websiteKey
+
+1. 打开触发 Prosopo 验证码的网站。
+
+2. 进入 **开发者工具（DevTools）** → **Network**，刷新页面，找到加载验证码 `image` 的请求（例如 API 请求：`https://example.prosopo.io/v1/prosopo/provider/client/captcha/image`）。
+
+3. 在 **Request Headers** 中找到参数 `Prosopo-Site-Key`，复制其值，并在创建请求时使用。
+
+![](./images/prosopo/sitekey-prosopo.png)
+
 
 ## 使用 SDK 库
 

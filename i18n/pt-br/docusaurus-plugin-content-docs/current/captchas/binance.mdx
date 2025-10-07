@@ -18,8 +18,13 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
   <PriceBlock title="Binance captcha" captchaId="binance"/>
 </PriceBlockWrap>
 
+![](./images/binance/binance.png)
+
 :::warning **Atenção!**
-* Esta tarefa será realizada utilizando nossos servidores proxy.
+* O CapMonster Cloud, por padrão, funciona com proxies integrados — já incluídos no custo do serviço. É necessário especificar seus próprios proxies apenas nos casos em que o site não aceita o token ou quando o acesso aos serviços integrados está restrito. Você pode entrar em contato com o [suporte técnico](https://helpdesk.zennolab.com/conversation/new) para esclarecer detalhes e verificar se os tokens estão sendo aceitos corretamente em um site específico.
+
+* Se o proxy utiliza autenticação por IP, é necessário adicionar o endereço **65.21.190.34** à lista de permissões (whitelist).
+
 * Use apenas para fazer login com sua conta.
 :::
 
@@ -48,7 +53,8 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
     ---
 
     <ParamItem title="userAgent" type="string" />
-    User-Agent do navegador. **Você pode fornecer o seu próprio ou especificar o último UA do sistema operacional Windows.**: `userAgentPlaceholder`
+    User-Agent do navegador. <br />
+**Transmita apenas o UA atual do sistema operacional Windows. No momento, o válido é**: `userAgentPlaceholder`
 	
 	---
 
@@ -81,57 +87,6 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 	Senha do servidor proxy.
 
   </TabItem>
-
-
-### Como obter `websiteKey` e `validateId`
-Habilite as ferramentas de desenvolvedor, vá para a aba "Network", ative o CAPTCHA e observe as requisições. Algumas delas conterão os valores dos parâmetros necessários.
-Por exemplo, os parâmetros:
-
-bizCode: "CMC_register",
-securityId: "09295759baca4d4fbeae80d9ffeaefd8"
-
-![](./images/binance/binance1.png) 
-
-or 
-
-bizId: "CMC_register", 
-securityCheckResponseValidateId: "09295759baca4d4fbeae80d9ffeaefd8"
-
-![](./images/binance/binance2.png) 
-
-or 
-
-bizType: "login",
-validateId: "ff965ea6216b46f3825fa827ecaf297f"
-
-![](./images/binance/binance3.png) 
-
-or
-
-bizId: "login", 
-securityCheckResponseValidateId: "ff965ea6216b46f3825fa827ecaf297f"
-
-![](./images/binance/binance4.png) 
-
-Os parâmetros necessários para resolver o captcha podem ser obtidos executando JavaScript: 
-	```json
-		let originalBCaptcha = window.BCaptcha;
-		let BCaptchaData;
-		Object.defineProperty(window, 'BCaptcha', {
-			get: function() {
-				return function(args) {
-					const BCaptcha = new originalBCaptcha(args);
-					let BCaptchaShow = BCaptcha.__proto__.show
-					BCaptcha.__proto__.show = function(args) {
-						BCaptchaData = args;
-						return 1;
-					};
-					return BCaptcha;
-				}
-			}
-		});
-	```
-Em seguida, você pode recuperar os parâmetros, por exemplo, da seguinte forma `BCaptchaData.securityCheckResponseValidateId`.
 
 
 ## Criar método de tarefa
@@ -236,6 +191,59 @@ Use o método [getTaskResult](../api/methods/get-task-result.md) para obter a so
 		```
 	</MethodDescription>
 </TabItem>
+
+### Como obter `websiteKey` e `validateId`
+Habilite as ferramentas de desenvolvedor, vá para a aba "Network", ative o CAPTCHA e observe as requisições. Algumas delas conterão os valores dos parâmetros necessários.
+Por exemplo, os parâmetros:
+
+bizCode: "CMC_register",
+securityId: "09295759baca4d4fbeae80d9ffeaefd8"
+
+![](./images/binance/binance1.png) 
+
+or 
+
+bizId: "CMC_register", 
+securityCheckResponseValidateId: "09295759baca4d4fbeae80d9ffeaefd8"
+
+![](./images/binance/binance2.png) 
+
+or 
+
+bizType: "login",
+validateId: "ff965ea6216b46f3825fa827ecaf297f"
+
+![](./images/binance/binance3.png) 
+
+or
+
+bizId: "login", 
+securityCheckResponseValidateId: "ff965ea6216b46f3825fa827ecaf297f"
+
+![](./images/binance/binance4.png) 
+
+Os parâmetros necessários para resolver o captcha podem ser obtidos executando JavaScript: 
+```javascript
+let originalBCaptcha = window.BCaptcha;
+let BCaptchaData;
+
+Object.defineProperty(window, 'BCaptcha', {
+  get: function() {
+    return function(args) {
+      const BCaptcha = new originalBCaptcha(args);
+      let BCaptchaShow = BCaptcha.__proto__.show;
+      
+      BCaptcha.__proto__.show = function(args) {
+        BCaptchaData = args;
+        return 1;
+      };
+      
+      return BCaptcha;
+    };
+  }
+});
+```
+Em seguida, você pode recuperar os parâmetros, por exemplo, da seguinte forma `BCaptchaData.securityCheckResponseValidateId`.
 
 ## Usar biblioteca SDK
 

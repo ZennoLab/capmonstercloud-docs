@@ -154,15 +154,15 @@
 
 .theme-doc-sidebar-item-link-level-1:nth-child(1n) .menu__link::before {
   content: '';
-  background: url('/img/18x18_start.svg');
+  background: url('/img/18x18_info.svg');
   width: 18px;
   height: 18px;
   margin-right: 12px;
 }
 
-.theme-doc-sidebar-item-category-level-1:nth-child(2) > .menu__list-item-collapsible .menu__link::before {
+.theme-doc-sidebar-item-link-level-1:nth-child(2) .menu__link::before {
   content: '';
-  background: url('/img/18x18_api.svg');
+  background: url('/img/18x18_start.svg');
   width: 18px;
   height: 18px;
   margin-right: 12px;
@@ -170,7 +170,7 @@
 
 .theme-doc-sidebar-item-category-level-1:nth-child(3) > .menu__list-item-collapsible .menu__link::before {
   content: '';
-  background: url('/img/18x18_captcha.svg');
+  background: url('/img/18x18_api.svg');
   width: 18px;
   height: 18px;
   margin-right: 12px;
@@ -178,7 +178,7 @@
 
 .theme-doc-sidebar-item-category-level-1:nth-child(4) > .menu__list-item-collapsible .menu__link::before {
   content: '';
-  background: url('/img/18x18_external.svg');
+  background: url('/img/18x18_captcha.svg');
   width: 18px;
   height: 18px;
   margin-right: 12px;
@@ -186,13 +186,21 @@
 
 .theme-doc-sidebar-item-category-level-1:nth-child(5) > .menu__list-item-collapsible .menu__link::before {
   content: '';
+  background: url('/img/18x18_external.svg');
+  width: 18px;
+  height: 18px;
+  margin-right: 12px;
+}
+
+.theme-doc-sidebar-item-category-level-1:nth-child(6) > .menu__list-item-collapsible .menu__link::before {
+  content: '';
   background: url('/img/18x18_extension.svg');
   width: 18px;
   height: 18px;
   margin-right: 12px;
 }
 
-.theme-doc-sidebar-item-link-level-1:nth-child(6) > .menu__link::before {
+.theme-doc-sidebar-item-link-level-1:nth-child(7) > .menu__link::before {
   content: '';
   background: url('/img/18x18_faq_icon.svg');
   width: 18px;
@@ -200,7 +208,7 @@
   margin-right: 12px;
 }
 
-.theme-doc-sidebar-item-link-level-1:nth-child(7) > .menu__link::before {
+.theme-doc-sidebar-item-link-level-1:nth-child(8) > .menu__link::before {
   content: '';
   background: url('/img/18x18_news.svg');
   width: 18px;

@@ -1,46 +1,54 @@
 ﻿---
 sidebar_position: 0
 sidebar_label: createTask
+title: "createTask: como criar uma tarefa para resolver captcha"
+description: "createTask: este método cria uma tarefa para resolver um tipo específico de captcha. Os parâmetros incluem dados de autenticação do cliente, informações tipadas da tarefa e outros parâmetros adicionais."
 ---
 
-# createTask : criando uma tarefa
+# createTask : criação de tarefa
 
-## Descrição
-Este método cria uma tarefa para resolver o tipo de captcha selecionado. Nos parâmetros, é necessário passar os dados de autorização do cliente, os dados da tarefa e outros parâmetros opcionais.
+## **Descrição**
+
+O método cria uma tarefa para resolver o tipo de captcha selecionado. Os parâmetros incluem dados de autenticação do cliente, informações tipadas da tarefa e, se necessário, parâmetros adicionais.
 
 :::info Endereço do método
+
 ```http
 https://api.capmonster.cloud/createTask
 ```
 
-Formato da solicitação: `JSON POST`
+Formato da requisição: `JSON POST`
 :::
 
------
-## Parâmetros da solicitação
+---
+
+## Parâmetros da requisição
 
 ### `clientKey`
-Tipo: `String` <br />
+
+Type: `String` <br />
 Obrigatório: `Sim`<br />
-Sua chave de conta única, chave da API (Você pode encontrá-la [aqui](https://capmonster.cloud/Dashboard))
+Chave única da sua conta, chave de API (pode ser encontrada [aqui](https://capmonster.cloud/Dashboard))
 
 ### `task`
-Tipo: `Objeto Tarefa` <br />
+
+Type: `Objeto da tarefa` <br />
 Obrigatório: `Sim`<br />
-Array de dados da tarefa. Veja a lista de descrições de objetos disponíveis [aqui](../../captchas).
+Array de dados da tarefa. Lista de tipos de tarefas de captcha [aqui](../../captchas).
 
 ### `callbackUrl`
-Tipo: `String` <br />
-Obrigatório: `Não`<br />
-Endereço web para o envio do resultado da tarefa do captcha. Os dados são enviados por solicitação POST.<br />O conteúdo é idêntico à resposta do método [getTaskResult](./get-task-result.md).<br />O conteúdo da resposta não é verificado, e o servidor deve aceitar a solicitação em 2 segundos; após isso, a conexão será encerrada.
 
-Exemplo de uso da função `callbackUrl`:
+Type: `String` <br />
+Obrigatório: `Não`<br />
+Endereço web para envio do resultado da tarefa de captcha. Os dados são enviados via POST.<br />O conteúdo é idêntico à resposta do método [getTaskResult](./get-task-result.md).<br />O conteúdo da resposta não é verificado e o servidor deve aceitar a requisição em até 2 segundos, depois a conexão é encerrada.
+
+Exemplo de uso do parâmetro `callbackUrl`:
 
 ```json
 {
   "clientKey": "API_KEY",
   "task": {
-    "type": "NoCaptchaTaskProxyless",
+    "type": "RecaptchaV2Task",
     "websiteURL": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
     "websiteKey": "6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"
   },
@@ -48,83 +56,94 @@ Exemplo de uso da função `callbackUrl`:
 }
 ```
 
---- 
+---
 
-### Exemplos de solicitação
+### Exemplos de requisições
 
 <details>
-  <summary>Resolvendo captcha normal com uma imagem</summary>
+  <summary>
+    Tarefa para resolver captcha de imagem simples
+  </summary>
 
 ```json
-    {
-      "clientKey":"API_KEY",
-      "task": 
-      {
-        "type":"ImageToTextTask",
-        "body":"BASE64_BODY_HERE!"
-      }
-    }
+{
+  "clientKey":"API_KEY",
+  "task": 
+  {
+    "type":"ImageToTextTask",
+    "body":"BASE64_BODY_HERE!"
+  }
+}
 ```
+
 </details>
 
 <details>
-  <summary>Resolvendo ReCaptcha2</summary>
+  <summary>
+    Tarefa para resolver ReCaptcha2
+  </summary>
 
 ```json
-    {
-      "clientKey":"API_KEY",
-      "task": 
-      {
-        "type":"RecaptchaV2Task",
-        "websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
-        "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"
-      }
-    }
+{
+  "clientKey":"API_KEY",
+  "task": 
+  {
+    "type":"RecaptchaV2Task",
+    "websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
+    "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"
+  }
+}
 ```
+
 </details>
 
------
+---
+
 ## Estrutura da resposta
 
 ### `errorId`
-Tipo: `Integer` <br />
+
+Type: `Integer` <br />
 Obrigatório: `Sim`<br />
-Identificador de erro.<br />**0** - sem erros, a tarefa foi criada com sucesso, o ID da tarefa está localizado na propriedade *taskId*<br />**1** - erro, as informações sobre ele estão na propriedade *errorCode*
+Identificador de erro.<br />**0** - sem erros, tarefa criada com sucesso, o identificador da tarefa está no parâmetro *taskId*<br />**1** - erro, informações detalhadas estão na propriedade *errorCode*
 
 ### `errorCode`
-Tipo: `String` <br />
+
+Type: `String` <br />
 Obrigatório: `Não`<br />
-Código de erro. Verifique a [lista de erros](../api-errors.md).
+Código do erro. Veja o [glossário de erros](../api-errors.md).
 
 ### `taskId`
-Tipo: `Integer` <br />
+
+Type: `Integer` <br />
 Obrigatório: `Sim`<br />
-ID da tarefa para uso posterior no método [getTaskResult](./get-task-result.md).
+Identificador da tarefa para uso posterior no método [getTaskResult](./get-task-result.md).
 
 ---
 
 ### Exemplo de resposta
 
 <details>
-    <summary>Resposta SEM erro</summary>
+  <summary>Resposta SEM erro</summary>
 
 ```json
-    {
-      "errorId": 0,
-      "taskId": 7654321
-    }
+{
+  "errorId": 0,
+  "taskId": 7654321
+}
 ```
+
 </details>
 
 <details>
-    <summary>Resposta COM erro</summary>
+  <summary>Resposta COM erro</summary>
 
 ```json
-    {
-        "errorId": 1,
-        "errorCode": "ERROR_KEY_DOES_NOT_EXIST",
-        "errorDescription": "Chave de autorização da conta não encontrada no sistema ou com formato incorreto",
-        "taskId": 0
-    }
+{
+  "errorId": 1,
+  "errorCode": "ERROR_KEY_DOES_NOT_EXIST",
+  "errorDescription": "Account authorization key not found in the system or has incorrect format",
+  "taskId": 0
+}
 ```
 </details>

@@ -8,7 +8,7 @@ description: "API error codes during captcha recognition, causes, and recommenda
 # Error descriptions
 
 :::info Recommendations for preventing errors:
-
+<div style={{color: "#000"}}>
 - Make sure the captcha type you need to solve is supported by the CapMonster Cloud service. If this captcha type is not supported, please contact us — we will consider adding it.  
 - Check documentation updates regularly to stay informed about API changes and avoid using deprecated methods or parameters.  
 - Use high-quality proxies.  
@@ -20,6 +20,7 @@ If the error persists and you’re unable to resolve it, please contact support 
 - original image/input  
 - date/time of the task  
 - request body (if possible)  
+</div>
 :::
 
 

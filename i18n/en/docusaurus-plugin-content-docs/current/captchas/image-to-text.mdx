@@ -1,6 +1,6 @@
 ﻿---
 sidebar_position: 10
-sidebar_label: ImageToTextTask
+sidebar_label: ImageToText
 title: "Automatically recognise and bypass simple image-to-text captcha - Image-to-Text | API"
 description: "Image-to-Text method via CapMonster.Cloud API to automatically recognise and bypass captcha with text on images. Detailed tutorial and examples for automatically solving simple captcha with text in Capmonster Cloud Docs!"
 ---
@@ -19,9 +19,14 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
   <PriceBlock  captchaId="text"/>
 </PriceBlockWrap>
 
+![](./images/image-to-text/text-captcha-2.png)
+---
+
 This is a regular captcha, which is an image with text to be entered into the corresponding line. 
 
-![](./images/image-to-text/text-captcha-2.png)
+:::warning **Attention!**
+Using proxy servers is not required for this task.
+:::
 
 
 ## Request parameters
@@ -64,9 +69,9 @@ This is a regular captcha, which is an image with text to be entered into the co
 
 <br />
 
-*Base64 is a data encoding method that allows you to represent binary data as text. Here is an example of obtaining a captcha image in base64 format using the console in the *Developer Tools*:
+*Base64 is a data encoding method that allows you to represent binary data as text. Here is an example of obtaining a captcha image in base64 format using the console in the **Developer Tools**:
 
-```
+```JavaScript
 const captchaUrl = 'https://example.com/captcha.jpg';
 
 function loadAndEncodeCaptchaToBase64(url) {
@@ -157,7 +162,7 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to get the cap
 | :-: | :-: | :-: |
 |text|String|Captcha answer|
 
-## How to Find All Required Parameters for Task Creation
+## How to find all required parameters for task creation
 
 ### Manually
 

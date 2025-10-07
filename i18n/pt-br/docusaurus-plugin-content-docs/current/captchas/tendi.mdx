@@ -20,10 +20,14 @@ import BlogLink from '@theme/BlogLink';
   <PriceBlock title="Tencent captcha" captchaId="tencent"/>
 </PriceBlockWrap>
 
+![](./images/tendi/tendi.png)
+
 <BlogLink url="https://capmonster.cloud/pt-BR/blog/ten-1/what-is-tencent-captcha-and-how-do-i-bypass-it"/>
 
 :::warning **Atenção!**
-Essa tarefa será realizada usando nossos servidores proxy.
+O CapMonster Cloud, por padrão, funciona com proxies integrados — já incluídos no custo do serviço. É necessário especificar seus próprios proxies apenas nos casos em que o site não aceita o token ou quando o acesso aos serviços integrados está restrito. Você pode entrar em contato com o [suporte técnico](https://helpdesk.zennolab.com/conversation/new) para esclarecer detalhes e verificar se os tokens estão sendo aceitos corretamente em um site específico.
+
+Se o proxy utiliza autenticação por IP, é necessário adicionar o endereço **65.21.190.34** à lista de permissões (whitelist).
 :::
 
 ## Parâmetros da solicitação
@@ -55,7 +59,8 @@ Essa tarefa será realizada usando nossos servidores proxy.
     ---
 
     <ParamItem title="userAgent" type="string" />
-    O User-Agent do navegador. **Passe apenas o UA real de um sistema operacional Windows. Atualmente, a versão é**: `userAgentPlaceholder`
+    User-Agent do navegador. <br />
+**Transmita apenas o UA atual do sistema operacional Windows. No momento, o válido é**: `userAgentPlaceholder`
 	
 ---
 
@@ -89,18 +94,11 @@ Senha do servidor proxy.
 
 </TabItem>
 
-### Como obter websiteKey (captchaAppId)
-Ative as *Ferramentas de Desenvolvedor*, vá para a aba **Network**, ative o captcha e veja as solicitações. Algumas delas conterão o valor do parâmetro que você precisa. Nesse caso, `websiteKey=aid`  
-![](./images/tendi/tendi-devtools.png) 
-
-### Como obter captchaUrl
-Abra *Ferramentas de Desenvolvedor*, vá para a aba **Network**, ative o captcha e examine as requisições de rede. Entre elas aparecerá `TCaptcha.js` ou `TCaptcha-global.js`, no qual você pode encontrar um link semelhante a este:
-
-![](./images/tendi/tendi_captchaUrl.png)
-
 ## Método de criação da tarefa
 
-<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (sem proxy)" default className="method-panel">
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+
+<TabItem value="proxyless" label="Custom task (sem proxy)" default className="method-panel">
   <MethodItem>
     ```http
     https://api.capmonster.cloud/createTask
@@ -133,6 +131,47 @@ Abra *Ferramentas de Desenvolvedor*, vá para a aba **Network**, ative o captcha
     ```
   </MethodDescription>
 </TabItem>
+
+<TabItem value="proxy" label="Custom task (com proxy)" default className="method-panel">
+  <MethodItem>
+    ```http
+    https://api.capmonster.cloud/createTask
+    ```
+  </MethodItem>
+  <MethodDescription>
+    **Solicitação**
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "task": {
+        "type": "CustomTask",
+        "class": "TenDI",
+        "websiteURL": "https://example.com",
+        "websiteKey": "189123456",
+        "userAgent": "userAgentPlaceholder",
+        "metadata": {
+          "captchaUrl": "https://global.captcha.example.com/TCaptcha-global.js"
+        },
+        "proxyType": "http",
+        "proxyAddress": "8.8.8.8",
+        "proxyPort": 8080,
+        "proxyLogin": "proxyLoginHere",
+        "proxyPassword": "proxyPasswordHere"
+      }
+    }
+    ```
+
+    **Resposta**
+    ```json
+    {
+      "errorId": 0,
+      "taskId": 407533072
+    }
+    ```
+  </MethodDescription>
+</TabItem>
+
+</Tabs>
 
 ## Método de obter resultado da tarefa
 Use o método [getTaskResult](../api/methods/get-task-result.md) para obter a solução do TenDI.
@@ -169,6 +208,15 @@ https://api.capmonster.cloud/getTaskResult
 ```
   </MethodDescription>
   </TabItem>
+
+## Como obter websiteKey (captchaAppId)
+Ative as *Ferramentas de Desenvolvedor*, vá para a aba **Network**, ative o captcha e veja as solicitações. Algumas delas conterão o valor do parâmetro que você precisa. Nesse caso, `websiteKey=aid`  
+![](./images/tendi/tendi-devtools.png) 
+
+## Como obter captchaUrl
+Abra *Ferramentas de Desenvolvedor*, vá para a aba **Network**, ative o captcha e examine as requisições de rede. Entre elas aparecerá `TCaptcha.js` ou `TCaptcha-global.js`, no qual você pode encontrar um link semelhante a este:
+
+![](./images/tendi/tendi_captchaUrl.png)
 
 ## Como Encontrar Todos os Parâmetros Necessários para a Criação da Tarefa
 

@@ -1,6 +1,6 @@
-﻿# 如何将 CapMonster.cloud 连接到程序？
-CapMonster.cloud 兼容所有验证码解决方案。要将 CapMonster.cloud 连接到您的程序，请按照以下指南操作。
-## 连接到支持 CapMonster.Cloud 的程序
+﻿# 如何将 CapMonster Cloud 连接到程序？
+CapMonster Cloud 兼容所有验证码解决方案。要将 CapMonster Cloud 连接到您的程序，请按照以下指南操作。
+## 连接到支持 CapMonster Cloud 的程序
 <details>
 <summary>ZennoPoster</summary>
 
@@ -10,7 +10,7 @@ CapMonster.cloud 兼容所有验证码解决方案。要将 CapMonster.cloud 连
 <details>
 <summary>KeyCollector</summary>
 
-选择“使用 CapMonster.cloud”并输入您的个人 API 密钥。
+选择“使用 CapMonster Cloud”并输入您的个人 API 密钥。
 
 ![](./images/external-program/Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.003.png)
 </details>
@@ -33,7 +33,7 @@ CapMonster.cloud 兼容所有验证码解决方案。要将 CapMonster.cloud 连
 ![](./images/external-program/Aspose.Words.65ffb1d6-0a55-415c-84ac-f87a8022a7cc.006.png)
 </details>
 ## 连接到可以指定域名的程序
-复制域名 [api.capmonster.cloud](https://api.capmonster.cloud) 和 CapMonster.cloud 的密钥。
+复制域名 [api.capmonster.cloud](https://api.capmonster.cloud) 和 CapMonster Cloud 的密钥。
 
 此方法适用于以下程序：
 
@@ -45,9 +45,9 @@ CapMonster.cloud 兼容所有验证码解决方案。要将 CapMonster.cloud 连
 ## 连接到其他程序的三个步骤
 1. 在您的程序中，选择我们支持的一个验证码解决方案：
    ` Anti-Captcha（v1.0, v2.0）, RuCaptcha, RipCaptcha, 2Captcha, BypassCaptcha, DeathByCaptcha`。
-1. 然后在您的程序中的相应字段中指定您的 CapMonsterCloud 个人 API 密钥，用于发送验证码。
-   1. **对于 DeathByCaptcha 的注意事项：** DeathByCaptcha API 使用用户名和密码而不是 API 密钥来识别用户。在这种情况下，请在密码字段中指定 CapMonsterCloud 的 API 密钥。在用户名字段中输入任何值。
-1. 最后一步：将我们的 IP 地址与另一个服务匹配，以便 CapMonster.Cloud 可以从上述服务获取验证码。为此，请选择您的操作系统，点击下拉箭头，并按照说明操作。
+1. 然后在您的程序中的相应字段中指定您的 CapMonster Cloud 个人 API 密钥，用于发送验证码。
+   1. **对于 DeathByCaptcha 的注意事项：** DeathByCaptcha API 使用用户名和密码而不是 API 密钥来识别用户。在这种情况下，请在密码字段中指定 CapMonster Cloud 的 API 密钥。在用户名字段中输入任何值。
+1. 最后一步：将我们的 IP 地址与另一个服务匹配，以便 CapMonster Cloud 可以从上述服务获取验证码。为此，请选择您的操作系统，点击下拉箭头，并按照说明操作。
 
 <details>
 <summary>我使用 Windows</summary>
@@ -311,17 +311,17 @@ CapMonster.cloud 兼容所有验证码解决方案。要将 CapMonster.cloud 连
 
 :::info 信息！
 
-如果您无法将 CapMonster.Cloud 连接到您的应用程序，请联系[support](https://helpdesk.zennolab.com/conversation/new)，我们将帮助您完成所有配置。
+如果您无法将 CapMonster Cloud 连接到您的应用程序，请联系[support](https://helpdesk.zennolab.com/conversation/new)，我们将帮助您完成所有配置。
 
 :::
 
 ## 频繁连接错误。如何避免？
-**网络问题**：如果您无法连接到 CapMonster.Cloud，请检查您的互联网连接。不稳定的网络或路由问题可能导致服务出现故障。
+**网络问题**：如果您无法连接到 CapMonster Cloud，请检查您的互联网连接。不稳定的网络或路由问题可能导致服务出现故障。
 
-**程序配置错误**：不正确的程序配置可能导致使用 CapMonster.Cloud 时出现错误。检查您软件的设置，确保所有参数都正确配置以与服务配合工作。
+**程序配置错误**：不正确的程序配置可能导致使用 CapMonster Cloud 时出现错误。检查您软件的设置，确保所有参数都正确配置以与服务配合工作。
 
-**超出限制**：您可能已超出使用 CapMonster.Cloud 服务的限制。检查您的帐户以查看活动限制，并确保它们未被耗尽。
+**超出限制**：您可能已超出使用 CapMonster Cloud 服务的限制。检查您的帐户以查看活动限制，并确保它们未被耗尽。
 
 **认证问题**：确保您的 API 密钥已正确复制并粘贴到软件设置中。
 
-**代理设置错误**：如果您使用代理服务器连接到互联网，请确保代理设置在软件中正确指定，并且不会阻止访问 CapMonster.Cloud。
+**代理设置错误**：如果您使用代理服务器连接到互联网，请确保代理设置在软件中正确指定，并且不会阻止访问 CapMonster Cloud。

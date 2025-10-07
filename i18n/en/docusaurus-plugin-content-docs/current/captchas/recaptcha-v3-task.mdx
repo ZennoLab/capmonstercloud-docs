@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-sidebar_label: RecaptchaV3TaskProxyless
+sidebar_label: ReCaptchaV3 Proxyless
 title: "Recognise and resolve reCAPTCHA v3 - reCAPTCHA v3 Task | API"
 description: "A detailed description of solving the reCAPTCHA v3 Task using a proxy server for automated recognition and solving (bypass) reCAPTCHA v3 in the documentation in Capmonster Cloud Docs."
 ---
@@ -19,6 +19,12 @@ import BlogLink from '@theme/BlogLink';
 <PriceBlockWrap>
   <PriceBlock title="RecaptchaV3TaskProxyless" captchaId="recaptcha3"/>
 </PriceBlockWrap>
+
+![](./images/recaptcha-v3/recaptchaV3.png)
+
+:::warning **Attention!**
+The task is executed through our own proxy servers. There are no additional costs for proxies — their usage is already included in the service price.
+:::
 
 The object contains data for Google ReCaptcha3 solving task. This task will be executed by our service using our own proxy servers.
 
@@ -142,7 +148,7 @@ Use the [getTaskResult](../api/methods/get-task-result.md) to request answer for
 | :- | :- | :- |
 |gRecaptchaResponse|String|Hash which should be inserted into Recaptcha3 submit form in `<textarea id="g-recaptcha-response" ></textarea>`. It has a length of 500 to 2190 bytes.|
 
-## How to Find All Required Parameters for Task Creation
+## How to find all required parameters for task creation
 
 ### Manually
 

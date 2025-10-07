@@ -8,7 +8,7 @@ description: "createTask: The method creates a task to solve captcha of a certai
 # createTask : creating a task
 
 ## Description
-This method creates a task for solving selected captcha type. In the parameters you need to pass the client authorization data, typed task data and other optional parameters.
+The method creates a task for solving the selected captcha type. The parameters include client authentication data, typed task information, and, if necessary, additional parameters.
 
 :::info Method address
 ```http
@@ -43,7 +43,7 @@ Example of using the `callbackUrl` function:
 {
   "clientKey": "API_KEY",
   "task": {
-    "type": "NoCaptchaTaskProxyless",
+    "type": "RecaptchaV2Task",
     "websiteURL": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
     "websiteKey": "6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"
   },

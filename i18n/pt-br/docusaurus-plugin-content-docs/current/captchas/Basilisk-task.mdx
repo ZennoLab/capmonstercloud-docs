@@ -1,6 +1,6 @@
 ---
 sidebar_position: 13
-sidebar_label: BasiliskTask
+sidebar_label: Basilisk
 ---
 
 
@@ -19,10 +19,13 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
   <PriceBlock title="Basilisk" captchaId="tencent"/>
 </PriceBlockWrap>
 
-:::warning **Atenção!**
-Esta tarefa será executada usando nossos servidores proxy.
-:::
+![](./images/basilisk/basilisk1.png)
 
+:::warning **Atenção!**
+O CapMonster Cloud, por padrão, funciona com proxies integrados — já incluídos no custo do serviço. É necessário especificar seus próprios proxies apenas nos casos em que o site não aceita o token ou quando o acesso aos serviços integrados está restrito. Você pode entrar em contato com o [suporte técnico](https://helpdesk.zennolab.com/conversation/new) para esclarecer detalhes e verificar se os tokens estão sendo aceitos corretamente em um site específico.
+
+Se o proxy utiliza autenticação por IP, é necessário adicionar o endereço **65.21.190.34** à lista de permissões (whitelist).
+:::
 ## Parâmetros da solicitação
 <TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (sem proxy)" default className="bordered-panel">
 <ParamItem title="type" required type="string" />
@@ -46,18 +49,54 @@ Pode ser encontrado no código HTML no atributo **data-sitekey** do contêiner d
 ---
 
 <ParamItem title="userAgent" type="string" />
-User-Agent do navegador. **Passe apenas o UA atual do sistema operacional Windows. Agora este é**: userAgentPlaceholder 
+User-Agent do navegador. <br />
+**Transmita apenas o UA atual do sistema operacional Windows. No momento, o válido é**: `userAgentPlaceholder`
+
+---
+
+<ParamItem title="proxyType" type="string" />
+**http** - proxy http/https comum;<br />
+**https** - tente esta opção apenas se "http" não funcionar (necessário para alguns proxies personalizados);<br />
+**socks4** - proxy socks4;<br />
+**socks5** - proxy socks5.
+
+---
+
+<ParamItem title="proxyAddress" type="string" />
+<p>
+Endereço IP do proxy IPv4/IPv6. Não é permitido:
+- uso de nomes de host;
+- uso de proxies transparentes (que revelem o IP do cliente);
+- uso de proxies em máquinas locais.
+</p>
+
+---
+
+<ParamItem title="proxyPort" type="integer" />
+Porta do proxy.
+
+---
+
+<ParamItem title="proxyLogin" type="string" />
+Login do servidor proxy.
+
+---
+
+<ParamItem title="proxyPassword" type="string" />
+Senha do servidor proxy.
 
 </TabItem>
 
 ## Criar tarefa
 
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 
-<TabItem value="proxyless" label="RecaptchaV2TaskProxyless (sem proxy)" default className="method-panel">
+<TabItem value="proxyless" label="Custom task (sem proxy)" default className="method-panel">
 <MethodItem>
 ```http
 https://api.capmonster.cloud/createTask
-```
+````
+
 </MethodItem>
 <MethodDescription>
 **Solicitação**
@@ -80,9 +119,46 @@ https://api.capmonster.cloud/createTask
   "taskId":407533072
 }
 ```
-
 </MethodDescription>
 </TabItem>
+
+<TabItem value="proxy" label="Custom task (com proxy)" default className="method-panel">
+<MethodItem>
+```http
+https://api.capmonster.cloud/createTask
+```
+</MethodItem>
+<MethodDescription>
+**Solicitação**
+```json
+{
+   "clientKey": "API_KEY",
+   "task": {
+       "type": "CustomTask",
+       "class": "Basilisk",
+       "websiteURL": "https://domain.io/account/register",
+       "websiteKey": "b7890hre5cf2544b2759c19fb2600897",
+       "userAgent": "userAgentPlaceholder",
+       "proxyType": "http",
+       "proxyAddress": "8.8.8.8",
+       "proxyPort": 8080,
+       "proxyLogin": "proxyLoginHere",
+       "proxyPassword": "proxyPasswordHere"
+   }
+}
+```
+**Resposta**
+```json
+{
+  "errorId":0,
+  "taskId":407533072
+}
+```
+</MethodDescription>
+</TabItem>
+
+</Tabs>
+
 
 ## Obter o resultado da tarefa
 Use o método [getTaskResult](../api/methods/get-task-result.md) para obter a solução do Basilisk.

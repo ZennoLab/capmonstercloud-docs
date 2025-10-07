@@ -1,41 +1,47 @@
 ﻿---
 sidebar_position: 1
 sidebar_label: getTaskResult
+title: "getTaskResult: como obter o resultado de uma tarefa de resolução de captcha"
+description: "Saiba como usar o método getTaskResult na API CapMonster Cloud para obter o resultado de uma tarefa. Descrição detalhada dos parâmetros, respostas e exemplos de requisição. Solução rápida e prática de captchas online!"
 ---
 
-# getTaskResult : solicitar resultado da tarefa
-## Descrição
-Depois de criar uma tarefa, você precisa obter a resposta verificando periodicamente o status da solução.
+# getTaskResult : obter o resultado da tarefa
+
+## **Descrição**
+
+Após criar uma tarefa, é necessário verificar periodicamente seu status para obter o resultado final.
 
 :::info Endereço do método
+
 ```http
 https://api.capmonster.cloud/getTaskResult
 ```
-Formato da solicitação: `JSON POST`
-:::
 
+Formato da requisição: `JSON POST`
+:::
 
 :::caution
 Limite: 120 solicitações por tarefa. Se o limite for excedido, a conta do usuário poderá ser bloqueada temporariamente.
 :::
-
 ---
 
-## Parâmetros da solicitação:
+## Parâmetros da requisição:
 
 ### `clientKey`
-Tipo: `String` <br />
+
+Type: `String` <br />
 Obrigatório: `Sim`<br />
-Chave única da sua conta.
+Chave única da sua conta
 
 ### `taskId`
-Tipo: `Integer` <br />
+
+Type: `Integer` <br />
 Obrigatório: `Sim`<br />
-ID obtido no método [createTask](./create-task.md).
+Identificador da tarefa obtido através do método [createTask](./create-task.md)
 
 ---
 
-### Exemplo de solicitação
+### Exemplo de requisição
 
 ```json
 {
@@ -43,29 +49,36 @@ ID obtido no método [createTask](./create-task.md).
   "taskId": 7654321
 }
 ```
+
 ---
+
 ## Estrutura da resposta
 
 ### `errorId`
-Tipo: `Integer` <br />
-Identificador de erro.<br />**0** - sem erros, a propriedade *errorCode* não está presente;<br />**1** - erro, as informações estão na propriedade *errorCode*.
+
+Type: `Integer` <br />
+Identificador de erro.<br />**0** - sem erros, a propriedade *errorCode* não existe<br />**1** - erro, informações disponíveis na propriedade *errorCode*
 
 ### `errorCode`
-Tipo: `String` <br />
-Código de erro. Verifique a [lista de erros](../api-errors.md).
+
+Type: `String` <br />
+Código do erro. Consulte o [glossário de erros](../api-errors.md).
 
 ### `status`
-Tipo: `String` <br />
-**processing** - tarefa ainda não está pronta;<br />**ready** - tarefa concluída, o objeto de solução pode ser encontrado na propriedade *solution*.
+
+Type: `String` <br />
+**processing** - tarefa em andamento<br />**ready** - tarefa concluída, solução disponível na propriedade *solution*
 
 ### `solution`
-Tipo: `Objeto` <br />
-Dados do resultado da tarefa. Diferente para cada tipo de tarefa.
+
+Type: `Object` <br />
+Informações sobre a solução da tarefa. Cada tipo de tarefa possui um formato diferente.
 
 ---
-### Exemplo de resposta
 
-Resposta em processo
+### Exemplo de resposta:
+
+Tarefa em processamento
 
 ```json
 {
@@ -75,7 +88,6 @@ Resposta em processo
   "status": "processing"
 }
 ```
-
 
 Resposta bem-sucedida
 

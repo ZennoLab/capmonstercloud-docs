@@ -5,15 +5,15 @@ sidebar_label: Configuração do limite de confiança para reconhecimento de CAP
 
 # Configuração do limite de confiança para reconhecimento de CAPTCHA de texto
 
-## Como definir o limite de confiança na resposta abaixo do qual o dinheiro não será cobrado
+## Como definir o limiar de confiança
 
-Na *CapMonster.Cloud*, a aceitação de captchas depende de sua complexidade. Os clientes pagam apenas por captchas resolvidos corretamente.
+No nosso serviço, a probabilidade de reconhecimento bem-sucedido de uma captcha depende da sua complexidade. Os valores do saldo são debitados apenas por captchas corretamente reconhecidas. Se a confiança do sistema na resposta for inferior ao limiar definido pelo usuário, nenhum valor será debitado.
 
 :::warning **NAtenção!**
 O parâmetro **recognizingThreshold** aplica-se somente a **ImageToTextTask** (captchas de texto). Para outros tipos de captchas (ReCaptcha, Turnstile, etc.), esse parâmetro não é usado e não afeta o resultado.
 :::
 
-Para que o CapMonster.Cloud retorne um resultado garantido correto, você pode passar, juntamente com a solicitação de reconhecimento do captcha, um parâmetro **recognizingThreshold** com um valor entre 0 e 100. Esse parâmetro permite que você defina o limite de confiança do sistema na resposta correta para o captcha e determina o valor mínimo abaixo do qual o dinheiro não será descontado do saldo.
+Para garantir que o CapMonster Cloud retorne um resultado correto, você pode enviar junto com a solicitação de reconhecimento de captcha o parâmetro **recognizingThreshold** com um valor de **0** a **100**. Esse parâmetro permite definir o nível mínimo de confiança do sistema na resposta correta da captcha, determinando o valor mínimo abaixo do qual nenhum débito será realizado no saldo.
 
 ---
 
@@ -37,7 +37,7 @@ https://api.capmonster.cloud/createTask
 }
 ```
 ---
-Nesse caso, se o parâmetro for igual a 70, apenas respostas em que nosso sistema tem mais de 70% de certeza serão retornadas; caso contrário, será retornado o erro: “**ERROR_CAPTCHA_UNSOLVABLE**”.
+Nesse caso, se o parâmetro for igual a **70**, apenas respostas em que nosso sistema tem mais de 70% de certeza serão retornadas; caso contrário, será retornado o erro: “**ERROR_CAPTCHA_UNSOLVABLE**”.
 
 :::info
 O limite de confiança é uma métrica interna usada pelo sistema para avaliar a probabilidade de que o texto reconhecido esteja correto. Quanto maior o limite, mais precisas são as respostas, mas também aumenta a frequência com que as tarefas podem ser consideradas insolúveis (ERROR_CAPTCHA_UNSOLVABLE).
