@@ -8,7 +8,6 @@
   background: #24262a;
 }
 
-/* === Десктоп (>=457px) === */
 .subMenuWrap.desktop {
   position: absolute;
   left: 0;
@@ -47,7 +46,6 @@
   }
 }
 
-/* === Колонки === */
 .singleColumn {
   display: flex;
   flex-direction: column;

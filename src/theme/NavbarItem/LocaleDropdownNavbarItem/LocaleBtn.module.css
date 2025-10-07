@@ -6,10 +6,6 @@
   outline: none;
 }
 
-.outlined {
-  /* outline: 1px solid #7d6eff; */
-}
-
 .focused {
   outline: none;
 }
@@ -19,7 +15,6 @@
   background-color: #e6e6ff;
 }
 
-/* === BUTTON === */
 .button {
   display: flex;
   align-items: center;
@@ -40,7 +35,6 @@
   background-color: #e6e6ff;
 }
 
-/* Desktop breakpoint (примерно 768px) */
 @media (min-width: 768px) {
   .button {
     width: 40px;
@@ -51,14 +45,12 @@
   }
 }
 
-/* === INNER === */
 .buttonInner {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-/* === TEXT === */
 .localeTitle {
   font-size: 18px;
 }

@@ -9,7 +9,6 @@
 .docsMenuToggleBelow {
   display: flex;
   justify-content: flex-end;
-  /* padding: 0 1rem 0.5rem; */
 }
 
 .docsMenuToggleBelow:empty {

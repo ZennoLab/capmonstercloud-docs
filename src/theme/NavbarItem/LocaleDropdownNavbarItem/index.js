@@ -26,7 +26,6 @@ export default function LocaleDropdownNavbarItem({
       locale,
       fullyQualified: false,
     })}`;
-    // preserve ?search#hash suffix on locale switches
     const to = `${baseTo}${search}${hash}${queryString}`;
     const activeClass =
       // eslint-disable-next-line no-nested-ternary
@@ -40,12 +39,11 @@ export default function LocaleDropdownNavbarItem({
       to,
       target: '_self',
       autoAddBaseUrl: false,
-      // Keep existing active class behavior, just add flag classes
       className: [activeClass, 'locale-flag', flagClass].filter(Boolean).join(' '),
     };
   });
   const items = [...dropdownItemsBefore, ...localeItems, ...dropdownItemsAfter];
-  // Mobile is handled a bit differently
+
   const dropdownLabel = mobile
     ? translate({
         message: 'Languages',
@@ -59,9 +57,6 @@ export default function LocaleDropdownNavbarItem({
       mobile={mobile}
       label={
         <>
-          {/* <IconLanguage className={styles.iconLanguage} />
-          {dropdownLabel} */}
-
           {mobile ? (
             <div className="mobile-flags-wrap">
               <ChangeLocaleIcon width={20} height={20} />

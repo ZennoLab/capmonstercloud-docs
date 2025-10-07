@@ -16,7 +16,6 @@ const SubMenu = ({ link, handleClick }: SubMenuProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Определяем, мобильный ли экран (≤456px)
   useEffect(() => {
     const checkScreen = () => setIsMobile(window.innerWidth <= 996);
     checkScreen();

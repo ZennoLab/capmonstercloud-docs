@@ -14,7 +14,6 @@ export default function Logo() {
 
   const safeLocale = currentLocale === 'en' ? '' : `/${currentLocale}`;
 
-  // Static assets are not locale-prefixed; always serve from /img
   const desktop = isDark ? `${safeLocale}/img/logo_landing.svg` : `${safeLocale}/img/logo_landing.svg`;
   const mobile = isDark ? `${safeLocale}/img/logoNoText.svg` : `${safeLocale}/img/logoNoText.svg`;
 

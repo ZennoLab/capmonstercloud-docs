@@ -16,7 +16,6 @@
   background: #e6e6ff;
 }
 
-/* Mobile fallback: force solid fill in case SVG gradients are not rendered */
 @media (max-width: 996px) {
   .colorModeToggle svg {
     width: 24px;

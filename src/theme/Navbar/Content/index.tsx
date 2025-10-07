@@ -34,17 +34,12 @@ export default function NavbarContent() {
         <div className="navbar__items">
           <NavbarLogo />
           <NavbarItems items={leftItems} />
-          {/* Search on desktop stays on the left */}
           {!isMobile && <NavbarItem type="search" position="left" />}
         </div>
         <div className="navbar__items navbar__items--right navbar-mobile__items">
-          {/* Other right items first */}
           <NavbarItems items={rightItems} />
-          {/* Search only on mobile shows on the right */}
           {isMobile && <NavbarItem type="search" position="right" />}
-          {/* Theme toggle between search and burger */}
           <NavbarColorModeToggle className={styles.colorModeToggle} />
-          {/* Burger at the end */}
           {!mobileSidebar.disabled && <NavbarMobileSidebarToggle />}
         </div>
       </div>
