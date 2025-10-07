@@ -43,7 +43,7 @@ export const getMenuItems = (locale: string) => {
       type: 'component',
       className: '',
       render: ({ onClick }: { onClick?: () => void } = {}) => (
-        <HeaderLink href={`https://capmonster.cloud/${typedLocales[locale]}#new-plans`}>
+        <HeaderLink onClick={onClick} href={`https://capmonster.cloud/${typedLocales[locale]}#new-plans`}>
           {getLabel(locale, 'item.label.HeaderPrice', 'Price')}
         </HeaderLink>
       ),
@@ -52,7 +52,7 @@ export const getMenuItems = (locale: string) => {
       type: 'component',
       className: '',
       render: ({ onClick }: { onClick?: () => void } = {}) => (
-        <HeaderLink href={`https://capmonster.cloud/${typedLocales[locale]}/blog`}>
+        <HeaderLink onClick={onClick} href={`https://capmonster.cloud/${typedLocales[locale]}/blog`}>
           {getLabel(locale, 'item.label.HeaderBlog', 'Blog')}
         </HeaderLink>
       ),
@@ -61,7 +61,9 @@ export const getMenuItems = (locale: string) => {
       type: 'component',
       className: '',
       render: ({ onClick }: { onClick?: () => void } = {}) => (
-        <HeaderLink href={'/docs/getting-start'}>{getLabel(locale, 'item.label.Документация', 'Docs')}</HeaderLink>
+        <HeaderLink onClick={onClick} href={'/docs/getting-start'}>
+          {getLabel(locale, 'item.label.Документация', 'Docs')}
+        </HeaderLink>
       ),
     } as unknown as DefaultNavbarItemProps,
     {
