@@ -14,15 +14,6 @@ export default function Home() {
   const { currentLocale } = i18n;
   const { metaTitle, metaDescription } = getLocaleStrings(currentLocale);
 
-  const hideThemeToggle = () => {
-    try {
-      const toggle = document.querySelector('button.clean-btn:not(.navbar__toggle)');
-      if (toggle && toggle.parentElement) {
-        toggle.parentElement.style.display = 'none';
-      }
-    } catch (e) {}
-  };
-
   const scrollToHash = () => {
     if (window.location.hash === '#price') {
       const priceElement = document.getElementById('price');
@@ -33,7 +24,6 @@ export default function Home() {
   };
 
   useEffect(() => {
-    hideThemeToggle();
     scrollToHash();
   }, []);
 
