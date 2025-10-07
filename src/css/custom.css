@@ -93,7 +93,7 @@
 
 .theme-doc-sidebar-item-link-level-1:nth-child(1n) .menu__link::before {
   content: '';
-  background: url('/img/18x18_news.svg');
+  background: url('/img/18x18_info.svg');
   width: 18px;
   height: 18px;
   margin-right: 12px;
