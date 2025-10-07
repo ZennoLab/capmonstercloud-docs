@@ -699,3 +699,13 @@ a[class*='cardContainer'] {
 [data-theme='dark'] .localeDropdownWithFlags span {
   color: #e1e6f0 !important;
 }
+
+#__docusaurus {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-wrapper {
+  flex: 1;
+}
