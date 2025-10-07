@@ -1,31 +1,30 @@
-'use client';
-
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import SubMenu from './SubMenu';
-import { HeaderMenuItem, HeaderMenuSingleItem } from './types';
-import DashboardIcon from '@site/static/img/24x24_dashboard.svg';
-import ExtensionIcon from '@site/static/img/24x24_extension.svg';
-
-const ProductsSubMenu = ({ handleClick, locale }: { handleClick?: () => void; locale: string }) => {
+type ProductsSubMenuProps = {
+  getLabel: (locale: string, key: string, fallback: string) => string;
+  handleClick?: () => void;
+  locale: string;
+};
+const ProductsSubMenu = ({ handleClick, locale, getLabel }: ProductsSubMenuProps) => {
   const link = {
-    title: 'Products',
+    title: getLabel(locale, 'item.label.HeaderProducts', 'Products'),
     subItems: [
       {
-        icon: <DashboardIcon width={24} height={24} />,
-        title: 'API',
-        url: `/${''}/captcha-api`,
+        icon: <img src="/img/24x24_dashboard.svg" />,
+        title: getLabel(locale, 'item.label.CloudAPI', 'CapMonster Cloud API'),
+        url: `https://capmonster.cloud/${locale}/captcha-api`,
         gtmId: 'header-products-cap-monster-cloud-api-btn',
       },
       {
-        icon: <ExtensionIcon width={24} height={24} />,
-        title: 'Extensiopn',
-        url: `/${''}/browser-extension-captcha`,
+        icon: <img src="/img/24x24_extension.svg" />,
+        title: getLabel(locale, 'item.label.Extension', 'Extension for browsers'),
+        url: `https://capmonster.cloud/${locale}/browser-extension-captcha`,
         gtmId: 'browser-extension-btn',
       },
     ],
   };
 
-  return <SubMenu link={link} isMobile={false} handleClick={handleClick} />;
+  return <SubMenu link={link} handleClick={handleClick} />;
 };
 
 export default ProductsSubMenu;

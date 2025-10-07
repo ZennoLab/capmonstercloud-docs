@@ -5,10 +5,6 @@
   color: #14193c;
 }
 
-.mobileBorder {
-  border-bottom: 1px solid #dce1eb;
-}
-
 .button {
   display: flex;
   align-items: center;
@@ -20,24 +16,52 @@
   color: #14193c;
   background: transparent;
   border: none;
-}
-
-.desktopButton {
-  font-size: 16px;
   transition: color 0.2s ease;
 }
 
-.desktopButton:hover {
-  color: #505578;
+[data-theme='dark'] .button {
+  color: #e1e6f0;
+}
+[data-theme='dark'] .subMenu {
+  color: #e1e6f0;
 }
 
-.mobileButton {
-  font-size: 18px;
-  height: 54px;
+@media (min-width: 996px) {
+  .button {
+    font-size: 16px;
+  }
+
+  .button:hover {
+    color: #505578;
+  }
 }
 
 .arrow {
   width: 10px;
-  height: 5px;
-  /* fill: currentColor; */
+  height: auto;
+  flex-shrink: 0;
+}
+
+[data-theme='dark'] .arrow path {
+  stroke: #e1e6f0;
+}
+
+[data-theme='dark'] .button:hover {
+  color: #e1e6f0 !important;
+}
+
+@media (max-width: 996px) {
+  .subMenu {
+    border-bottom: 1px solid #dce1eb;
+    padding-left: 0;
+  }
+
+  .arrow {
+    width: 15px;
+  }
+
+  .button {
+    font-size: 18px;
+    height: 54px;
+  }
 }

@@ -59,8 +59,6 @@ export default function DocsMenuToggle() {
 
   if (!shouldShow) return null;
 
-  console.log(pageTitle);
-
   return (
     <div className={styles.docsMenuBlock}>
       <button

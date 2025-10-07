@@ -4,7 +4,12 @@
   z-index: 10;
 }
 
-.desktop {
+[data-theme='dark'] .subMenuWrap {
+  background: #24262a;
+}
+
+/* === Десктоп (>=457px) === */
+.subMenuWrap.desktop {
   position: absolute;
   left: 0;
   top: 30px;
@@ -14,31 +19,35 @@
   transition:
     opacity 0.3s ease-in-out,
     visibility 0.3s ease-in-out;
-}
-
-.visible.desktop {
-  opacity: 1;
-  visibility: visible;
-}
-
-.hidden.desktop {
   opacity: 0;
   visibility: hidden;
 }
 
-.mobile {
-  width: 100%;
-  padding-bottom: 10px;
+.subMenuWrap.desktop.visible {
+  opacity: 1;
+  visibility: visible;
 }
 
-.visible.mobile {
-  display: block;
+@media (max-width: 996px) {
+  .subMenuWrap {
+    width: 100% !important;
+    padding-bottom: 10px !important;
+    position: static !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .subMenuWrap.hidden {
+    display: none;
+  }
+
+  .subMenuWrap.visible {
+    display: block;
+  }
 }
 
-.hidden.mobile {
-  display: none;
-}
-
+/* === Колонки === */
 .singleColumn {
   display: flex;
   flex-direction: column;
@@ -50,7 +59,7 @@
   column-gap: 12px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 996px) {
   .twoColumn {
     column-count: 2;
   }

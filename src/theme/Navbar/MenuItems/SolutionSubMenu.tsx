@@ -10,14 +10,16 @@ const SolutionSubMenu = ({
   isMobile,
   handleClick,
   locale,
+  title,
 }: {
   isMobile?: boolean;
   handleClick?: () => void;
   locale: string;
+  title: string;
 }) => {
   const { prices, loading: isPricesLoading } = useFetchPrices(false);
   const link = {
-    title: 'Solutions',
+    title,
     isTwoColumn: true,
     isSolutionItem: true,
   };
@@ -37,7 +39,7 @@ const SolutionSubMenu = ({
   const fetchSolutionItems = async () => {
     const captchas = [
       {
-        icon: <RecaptchaIcon width={24} height={24} />,
+        icon: <img src="/img/24x24_rc.svg" />,
         title: 'reCAPTCHA',
         url: `https://capmonster.cloud/${locale}/recaptcha`,
         gtmId: `header-solutions-recaptcha-btn`,
@@ -65,7 +67,7 @@ const SolutionSubMenu = ({
     fetchSolutionItems();
   }, [locale, prices, isPricesLoading]);
 
-  return <SubMenu link={{ ...link, subItems }} isMobile={isMobile} handleClick={handleClick} />;
+  return <SubMenu link={{ ...link, subItems }} handleClick={handleClick} />;
 };
 
 export default SolutionSubMenu;

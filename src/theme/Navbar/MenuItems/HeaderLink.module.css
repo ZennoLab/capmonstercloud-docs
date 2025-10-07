@@ -6,12 +6,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  height: auto;
 }
 
 .headerLink:hover {
   color: #505578;
 }
 
+[data-theme='dark'] .headerLink {
+  color: #e1e6f0;
+}
+
+[data-theme='dark'] .headerLink:hover {
+  color: #e1e6f0 !important;
+}
+/* ===== Контейнер внутри ссылки ===== */
 .inner {
   width: 100%;
   display: flex;
@@ -19,8 +28,27 @@
   justify-content: center;
 }
 
+/* ===== Текст по умолчанию (десктоп) ===== */
 .text {
   font-size: 16px;
   line-height: 1.4;
   white-space: nowrap;
+}
+
+/* ===== Мобильная версия (до 456px) ===== */
+@media (max-width: 996px) {
+  .headerLink {
+    height: 54px;
+    border-bottom: 1px solid #dce1eb;
+    justify-content: space-between;
+    padding-left: 8px;
+  }
+
+  .text {
+    font-size: 18px;
+  }
+
+  .inner {
+    justify-content: space-between;
+  }
 }

@@ -31,12 +31,14 @@ export const getMenuItems = (locale: string) => {
     {
       type: 'component',
       className: '',
-      render: ({ onClick }: { onClick?: () => void } = {}) => <ProductsSubMenu locale={locale} />,
+      render: ({ onClick }: { onClick?: () => void } = {}) => <ProductsSubMenu locale={locale} getLabel={getLabel} />,
     } as unknown as DefaultNavbarItemProps,
     {
       type: 'component',
       className: '',
-      render: ({ onClick }: { onClick?: () => void } = {}) => <SolutionSubMenu locale={locale} />,
+      render: ({ onClick }: { onClick?: () => void } = {}) => (
+        <SolutionSubMenu locale={locale} title={getLabel(locale, 'item.label.HeaderSolutions', 'Solutions')} />
+      ),
     } as unknown as DefaultNavbarItemProps,
 
     {

@@ -7,6 +7,8 @@ import DropdownNavbarItem from '@theme/NavbarItem/DropdownNavbarItem';
 import IconLanguage from '@theme/Icon/Language';
 import styles from './styles.module.css';
 import LocaleBtn from './LocaleBtn';
+import ChangeLocaleIcon from '@site/static/img/changeLocale.svg';
+
 export default function LocaleDropdownNavbarItem({
   mobile,
   dropdownItemsBefore,
@@ -60,7 +62,14 @@ export default function LocaleDropdownNavbarItem({
           {/* <IconLanguage className={styles.iconLanguage} />
           {dropdownLabel} */}
 
-          {mobile ? localeConfigs[currentLocale].label : <LocaleBtn />}
+          {mobile ? (
+            <div className="mobile-flags-wrap">
+              <ChangeLocaleIcon width={20} height={20} />
+              <span>{localeConfigs[currentLocale].label}</span>
+            </div>
+          ) : (
+            <LocaleBtn />
+          )}
         </>
       }
       items={items}

@@ -19,6 +19,10 @@
   flex: 1;
 }
 
+[data-theme='dark'] .pageTitle {
+  color: #e1e6f0;
+}
+
 @media (min-width: 997px) {
   .docsMenuBlock {
     display: none !important;

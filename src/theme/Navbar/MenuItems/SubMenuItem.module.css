@@ -17,8 +17,16 @@
     color 0.2s ease;
 }
 
+[data-theme='dark'] .subMenuItem {
+  color: #e1e6f0;
+}
+
 .subMenuItem:hover {
   background-color: #f0f0ff;
+}
+
+[data-theme='dark'] .subMenuItem:hover {
+  background-color: #606060;
 }
 
 .icon {
