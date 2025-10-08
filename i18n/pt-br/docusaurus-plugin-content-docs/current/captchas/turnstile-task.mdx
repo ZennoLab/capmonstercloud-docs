@@ -29,7 +29,7 @@ Todos os subtipos Turnstile são suportados automaticamente: **manual**, **não 
 Antes de começar, revise todas as três opções de resolução de captcha e escolha a que melhor atende às suas necessidades.
 :::
 
-## Opção 1 (Turnstile)
+## Opção 1. Turnstile (token)
 
 Você precisa resolver um captcha **Turnstile padrão**, como [aqui](https://zenno.link/zl-support). Note que os captchas nas páginas da Cloudflare podem parecer idênticos. Veja no final do artigo como distinguir um Turnstile padrão de um Cloudflare Challenge.
 
@@ -103,10 +103,12 @@ Senha do servidor proxy.
 
 ---
 
-## Opção 2 (Challenge)
+## Opção 2. Challenge (token)
 
 :::warning **Atenção!**
-* Você **não precisa** usar seus próprios proxies para esta tarefa.
+* O CapMonster Cloud, por padrão, funciona com proxies integrados — já incluídos no custo do serviço. É necessário especificar seus próprios proxies apenas nos casos em que o site não aceita o token ou quando o acesso aos serviços integrados está restrito. Você pode entrar em contato com o [suporte técnico](https://helpdesk.zennolab.com/conversation/new) para esclarecer detalhes e verificar se os tokens estão sendo aceitos corretamente em um site específico.
+
+* Se o proxy utiliza autenticação por IP, é necessário adicionar o endereço **65.21.190.34** à lista de permissões (whitelist).
 * Após resolver, você receberá um **token** para confirmar a conclusão do captcha.
 :::
 
@@ -228,11 +230,12 @@ Quando `window.turnstile.render(el, paramsObj)` é chamado, o captcha é carrega
 
 ---
 
-## Opção 3 (Challenge)
+## Opção 3. Challenge (cookie)
 
 :::warning **Atenção!**
 
 * Use **seus próprios proxies** para esta tarefa.
+
 * Após resolver, você receberá **cookies especiais** para adicionar ao navegador.
 :::
 
@@ -311,11 +314,12 @@ Quando `window.turnstile.render(el, paramsObj)` é chamado, o captcha é carrega
 
 ---
 
-## Opção 4 (Waiting Room)
+## Opção 4. Waiting Room (cookie)
 
 :::warning **Atenção!**
 
 * Use **seus próprios proxies** para esta tarefa.
+
 * Após resolver, você receberá **cookies especiais** para adicionar ao navegador.
 :::
 
@@ -399,7 +403,7 @@ Você também pode identificar este tipo de Cloudflare pelo cabeçalho da págin
 
 ## Exemplos de requisição
 
-### Opção 1. Turnstile padrão:
+### Opção 1. Turnstile (token)
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 
@@ -635,7 +639,7 @@ Use o método [getTaskResult](../api/methods/get-task-result.md) para obter a so
 
 ## Como distinguir um Turnstile padrão de um Cloudflare Challenge
 
-Os desafios da Cloudflare podem aparecer de maneira diferente.
+Os tipos de verificação da Cloudflare podem aparecer de formas diferentes.
 
 **Turnstile padrão:**
 
@@ -647,7 +651,7 @@ Os desafios da Cloudflare podem aparecer de maneira diferente.
 
 ![](./images/tunrstile-task/turnstile-stylized.png)
 
-<figcaption>O desafio é integrado de forma contínua ao site</figcaption>
+<figcaption>O Challenge está integrado de forma orgânica no próprio site.</figcaption>
 
 </figure>
 
@@ -655,11 +659,11 @@ Os desafios da Cloudflare podem aparecer de maneira diferente.
 
 ![](./images/tunrstile-task/turnstile-stylized-2.png)
 
-<figcaption>Parece um Turnstile normal, mas na verdade é um desafio da Cloudflare</figcaption>
+<figcaption>Parece um Turnstile comum, mas na verdade é um Challenge.</figcaption>
 
 </figure>
 
-Para confirmar a presença da Cloudflare, abra as ferramentas de desenvolvedor, inspecione o tráfego de rede e verifique o código-fonte da página para sinais típicos:
+Para ter certeza absoluta da presença de um Challenge, você pode abrir as ferramentas de desenvolvedor, analisar o tráfego, estudar o código da página e observar os sinais característicos:
 
 * A primeira requisição ao site retorna status 403:
 
@@ -833,7 +837,7 @@ Os trechos de código fornecidos são exemplos básicos para familiarização co
 <Tabs className="full-width-tabs filled-tabs request-tabs">
   <TabItem value="js" label="JavaScript" default className="method-panel">
     <details>
-      <summary>Opção 1 (No Navegador)</summary>
+      <summary>Para a Opção 1: Turnstile (token) – no navegador</summary>
 
       ```js
       // Função para verificar a presença de window.onloadTurnstileCallback
@@ -882,7 +886,7 @@ Os trechos de código fornecidos são exemplos básicos para familiarização co
     </details>
 
     <details>
-      <summary>Opção 2 (Node.js)</summary>
+      <summary>Para a Opção 2: Challenge (token) – Node.js</summary>
 
       ```js
       import { chromium } from "playwright";
@@ -939,7 +943,7 @@ Os trechos de código fornecidos são exemplos básicos para familiarização co
     </details>
 
     <details>
-      <summary>Opção 3 (Node.js)</summary>
+      <summary>Para a Opção 3: Challenge (cookie `cf_clearance`) – Node.js</summary>
 
       ```js
       import { chromium } from "playwright";
@@ -997,7 +1001,7 @@ Os trechos de código fornecidos são exemplos básicos para familiarização co
 
   <TabItem value="python" label="Python" className="method-panel">
     <details>
-      <summary>Opção 1</summary>
+      <summary>Para a Opção 1: Turnstile (token)</summary>
 
       ```python
       import asyncio
@@ -1049,7 +1053,7 @@ Os trechos de código fornecidos são exemplos básicos para familiarização co
     </details>
 
     <details>
-      <summary>Opção 2</summary>
+      <summary>Para a Opção 2: Challenge (token)</summary>
 
       ```python
       import asyncio
@@ -1103,7 +1107,7 @@ Os trechos de código fornecidos são exemplos básicos para familiarização co
     </details>
 
     <details>
-      <summary>Opção 3</summary>
+      <summary>Para a Opção 3: Challenge (cookie cf_clearance)</summary>
 
       ```python
       import asyncio
@@ -1164,7 +1168,7 @@ Os trechos de código fornecidos são exemplos básicos para familiarização co
 
   <TabItem value="csharp" label="C#" className="method-panel">
     <details>
-      <summary>Opção 1</summary>
+      <summary>Para a Opção 1: Turnstile (token)</summary>
 
       ```csharp
       using System;
@@ -1234,7 +1238,7 @@ Os trechos de código fornecidos são exemplos básicos para familiarização co
     </details>
 
     <details>
-      <summary>Opção 2</summary>
+      <summary>Para a Opção 2: Challenge (token)</summary>
 
       ```csharp
       using Microsoft.Playwright;
@@ -1299,7 +1303,7 @@ Os trechos de código fornecidos são exemplos básicos para familiarização co
     </details>
 
     <details>
-      <summary>Opção 3</summary>
+      <summary>Para a Opção 3: Challenge (cookie cf_clearance)</summary>
 
       ```csharp
       using System;
@@ -1367,7 +1371,7 @@ Os trechos de código fornecidos são exemplos básicos para familiarização co
   <TabItem value="js" label="JavaScript" default className="method-panel">
 
 <details>
-<summary> Cloudflare Turnstile </summary>
+<summary>Opção 1: Turnstile (token)</summary>
 
 ```js
 // https://github.com/ZennoLab/capmonstercloud-client-js
@@ -1406,7 +1410,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 </details>
 
 <details>
-<summary> Cloudflare Challenge (token)</summary>
+<summary>Opção 2: Challenge (token)</summary>
 
 ```js
 // Cloudflare Challenge token
@@ -1456,7 +1460,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 </details>
 
 <details>
-<summary> Cloudflare Challenge (cookie cf_clearance)</summary>
+<summary>Opção 3: Challenge (cookie `cf_clearance`)</summary>
 
 ```js
 // Cloudflare Challenge cf_clearance
@@ -1493,7 +1497,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   <TabItem value="python" label="Python" className="method-panel">
 
 <details>
-<summary> Cloudflare Turnstile</summary>
+<summary> Opção 1: Turnstile (token)</summary>
 
 ```python
 # https://github.com/ZennoLab/capmonstercloud-client-python
@@ -1532,7 +1536,7 @@ print(responses)
 </details>
 
 <details>
-<summary> Cloudflare Challenge (token)</summary>
+<summary> Opção 2: Challenge (token)</summary>
 
 ```python
 # Cloudflare Challenge (token)
@@ -1582,7 +1586,7 @@ print(responses)
 </details>
 
 <details>
-<summary> Cloudflare Challenge (cookie cf_clearance)</summary>
+<summary> Opção 3: Challenge (cookie `cf_clearance`)</summary>
 
 ```python
 # Cloudflare Challenge (cookie cf_clearance) - resolvido com seu proxy
@@ -1620,7 +1624,7 @@ print(responses)
   <TabItem value="csharp" label="C#" className="method-panel">
 
 <details>
-<summary> Cloudflare Turnstile </summary>
+<summary> Opção 1: Turnstile (token)</summary>
 
 ```csharp
 // https://github.com/ZennoLab/capmonstercloud-client-dotnet
@@ -1674,7 +1678,7 @@ class Program
 </details>
 
 <details>
-<summary> Cloudflare Challenge (token)</summary>
+<summary>Opção 2: Challenge (token)</summary>
 
 ```csharp
 // Cloudflare Challenge (token)
@@ -1738,7 +1742,7 @@ static async Task Main(string[] args)
 </details>
 
 <details>
-<summary> Cloudflare Challenge (cookie cf_clearance)</summary>
+<summary> Opção 3: Challenge (cookie `cf_clearance`)</summary>
 
 ```csharp
 // Cloudflare Challenge (cookie cf_clearance) - resolvido com seu proxy
