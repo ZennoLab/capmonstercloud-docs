@@ -31,7 +31,7 @@ All Turnstile subtypes are automatically supported: **manual**, **non-interactiv
 Before getting started, review all three captcha solving options and choose the one that best fits your needs.
 :::
 
-## Option 1 (Turnstile)
+## Option 1. Turnstile (token)
 
 You are required to solve a **regular** Turnstile captcha, like [this one](https://zenno.link/zl-support). Please note that captchas on Cloudflare pages may look identical. See [how to distinguish a regular Turnstile from a Cloudflare Challenge](#how-to-distinguish-a-standard-turnstile-from-cloudflare-challenge).
 
@@ -44,7 +44,7 @@ You are required to solve a **regular** Turnstile captcha, like [this one](https
 * After solving, you will receive a **token** to confirm captcha completion.
 :::
 
-#### Request Parameters
+#### Request parameters
 <TabItem value="proxyless" label="TurnstileTask (without proxy)" default className="bordered-panel">
   <ParamItem title="type" required type="string" />
   **TurnstileTask**
@@ -106,7 +106,7 @@ You are required to solve a **regular** Turnstile captcha, like [this one](https
 
 ---
 
-## Option 2 (Challenge token)
+## Option 2. Challenge (token)
 
 :::warning **Attention!**
 * CapMonster Cloud uses built-in proxies by default — their cost is already included in the service. You only need to specify your own proxies in cases where the website does not accept the token or access to the built-in services is restricted. You can contact [support](https://helpdesk.zennolab.com/conversation/new) to clarify the details and check whether tokens are accepted correctly on a particular website.
@@ -116,7 +116,7 @@ You are required to solve a **regular** Turnstile captcha, like [this one](https
 * After solving, you will receive a **token** to confirm captcha completion.
 :::
 
-#### Request Parameters
+#### Request parameters
 <TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (without proxy)" default className="bordered-panel">
   <ParamItem title="type" required type="string" />
   **TurnstileTask**
@@ -233,15 +233,16 @@ When `window.turnstile.render(el, paramsObj)` is called, the captcha loads on th
 
 ---
 
-## Option 3 (Challenge cf_clearance)
+## Option 3. Challenge (cookie)
 
 :::warning **Attention!**
 
 * Use **your own proxies** for this task.
+
 * After solving, you will receive **special cookies** to add to your browser.
 :::
 
-### Request Parameters
+#### Request parameters
 
 <TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (without proxy)" default className="bordered-panel">
   <ParamItem title="type" required type="string" />
@@ -316,11 +317,12 @@ When `window.turnstile.render(el, paramsObj)` is called, the captcha loads on th
 
 ---
 
-## Option 4 (Waiting Room)
+## Option 4. Waiting Room (cookie)
 
 :::warning **Attention!**
 
 * Use **your own proxies** for this task.
+
 * After solving, you will receive **special cookies** to add to your browser.
 :::
 
@@ -404,7 +406,7 @@ You can also identify this Cloudflare type via the page header:
 
 ## Request examples
 
-### Option 1. Standard Turnstile:
+### Option 1. Turnstile (token)
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 
   <TabItem value="proxyless" label="TurnstileTask (without proxy)" default className="method-panel">
@@ -627,7 +629,7 @@ You can also identify this Cloudflare type via the page header:
 	</MethodDescription>
 </TabItem>
 ---
-## Method to Get Task Result
+## Get task result method
 Use the [getTaskResult](../api/methods/get-task-result.md) method to retrieve the Turnstile solution. Depending on system load, the response can take between 5 and 20 seconds.
 
 |**Property**|**Type**|**Description**|
@@ -636,7 +638,7 @@ Use the [getTaskResult](../api/methods/get-task-result.md) method to retrieve th
 |token|String|Use this token when calling the callback function|
 ---
 ## How to distinguish a standard Turnstile from Cloudflare Challenge
-Cloudflare challenges can appear differently.
+Cloudflare verification types can appear in different ways.
 
 **Standard Turnstile:**
 
@@ -658,7 +660,7 @@ Cloudflare challenges can appear differently.
 
 </figure>
 
-To confirm Cloudflare presence, open developer tools, inspect network traffic, and check the page source for typical signs:
+To confirm Challenge presence, open developer tools, inspect network traffic, and check the page source for typical signs:
 
 - The first request to the site returns a 403 status code:
 
@@ -831,7 +833,7 @@ The code snippets provided are basic examples for familiarization with extractin
 <Tabs className="full-width-tabs filled-tabs request-tabs">
   <TabItem value="js" label="JavaScript" default className="method-panel">
     <details>
-      <summary>Option 1 (In Browser)</summary>
+      <summary>For Option 1: Turnstile (token) – in the browser</summary>
 
       ```js
       // Function to check for the presence of window.onloadTurnstileCallback
@@ -880,7 +882,7 @@ The code snippets provided are basic examples for familiarization with extractin
     </details>
 
     <details>
-      <summary>Option 2 (Node.js)</summary>
+      <summary>For Option 2: Challenge (token) – Node.js</summary>
 
       ```js
       import { chromium } from "playwright";
@@ -937,7 +939,7 @@ The code snippets provided are basic examples for familiarization with extractin
     </details>
 
     <details>
-      <summary>Option 3 (Node.js)</summary>
+      <summary>For Option 3: Challenge (cookie `cf_clearance`) – Node.js</summary>
 
       ```js
       import { chromium } from "playwright";
@@ -995,7 +997,7 @@ The code snippets provided are basic examples for familiarization with extractin
 
   <TabItem value="python" label="Python" className="method-panel">
     <details>
-      <summary>Option 1</summary>
+      <summary>For Option 1: Turnstile (token)</summary>
 
       ```python
       import asyncio
@@ -1047,7 +1049,7 @@ The code snippets provided are basic examples for familiarization with extractin
     </details>
 
     <details>
-      <summary>Option 2</summary>
+      <summary>For Option 2: Challenge (token)</summary>
 
       ```python
       import asyncio
@@ -1101,7 +1103,7 @@ The code snippets provided are basic examples for familiarization with extractin
     </details>
 
     <details>
-      <summary>Option 3</summary>
+      <summary>For Option 3: Challenge (cookie `cf_clearance`)</summary>
 
       ```python
       import asyncio
@@ -1162,7 +1164,7 @@ The code snippets provided are basic examples for familiarization with extractin
 
   <TabItem value="csharp" label="C#" className="method-panel">
     <details>
-      <summary>Option 1</summary>
+      <summary>For Option 1: Turnstile (token)</summary>
 
       ```csharp
       using System;
@@ -1232,7 +1234,7 @@ The code snippets provided are basic examples for familiarization with extractin
     </details>
 
     <details>
-      <summary>Option 2</summary>
+      <summary>For Option 2: Challenge (token)</summary>
 
       ```csharp
       using Microsoft.Playwright;
@@ -1297,7 +1299,7 @@ The code snippets provided are basic examples for familiarization with extractin
     </details>
 
     <details>
-      <summary>Option 3</summary>
+      <summary>For Option 3: Challenge (cookie `cf_clearance`)</summary>
 
       ```csharp
       using System;
@@ -1365,7 +1367,7 @@ The code snippets provided are basic examples for familiarization with extractin
   <TabItem value="js" label="JavaScript" default className="method-panel">
 
 <details>
-<summary> Cloudflare Turnstile </summary>
+<summary> Option 1. Turnstile (token)</summary>
 
 ```js
 // https://github.com/ZennoLab/capmonstercloud-client-js
@@ -1404,7 +1406,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 </details>
 
 <details>
-<summary> Cloudflare Challenge (token)</summary>
+<summary>Option 2. Challenge (token)</summary>
 
 ```js
 // Cloudflare Challenge token
@@ -1454,7 +1456,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 </details>
 
 <details>
-<summary> Cloudflare Challenge (cookie cf_clearance)</summary>
+<summary>Option 3. Challenge (cookie `cf_clearance`)</summary>
 
 ```js
 // Cloudflare Challenge cf_clearance
@@ -1491,7 +1493,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   <TabItem value="python" label="Python" className="method-panel">
 
 <details>
-<summary> Cloudflare Turnstile</summary>
+<summary>Option 1. Turnstile (token)</summary>
 
 ```python
 # https://github.com/ZennoLab/capmonstercloud-client-python
@@ -1530,7 +1532,7 @@ print(responses)
 </details>
 
 <details>
-<summary> Cloudflare Challenge (token)</summary>
+<summary>Option 2. Challenge (token)</summary>
 
 ```python
 # Cloudflare Challenge (token)
@@ -1580,7 +1582,7 @@ print(responses)
 </details>
 
 <details>
-<summary> Cloudflare Challenge (cookie cf_clearance)</summary>
+<summary>Option 3. Challenge (cookie `cf_clearance`)</summary>
 
 ```python
 # Cloudflare Challenge (cookie cf_clearance) - solved with your proxy
@@ -1618,7 +1620,7 @@ print(responses)
   <TabItem value="csharp" label="C#" className="method-panel">
 
 <details>
-<summary> Cloudflare Turnstile </summary>
+<summary>Option 1. Turnstile (token) </summary>
 
 ```csharp
 // https://github.com/ZennoLab/capmonstercloud-client-dotnet
@@ -1672,7 +1674,7 @@ class Program
 </details>
 
 <details>
-<summary> Cloudflare Challenge (token)</summary>
+<summary>Option 2. Challenge (token)</summary>
 
 ```csharp
 // Cloudflare Challenge (token)
@@ -1736,7 +1738,7 @@ static async Task Main(string[] args)
 </details>
 
 <details>
-<summary> Cloudflare Challenge (cookie cf_clearance)</summary>
+<summary>Option 3. Challenge (cookie `cf_clearance`)</summary>
 
 ```csharp
 // Cloudflare Challenge (cookie cf_clearance) - solved with your proxy
