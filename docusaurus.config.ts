@@ -42,9 +42,14 @@ const config: Config = {
           // Remove this to remove the "edit this page" links.
           editUrl: (params: { versionDocsDirPath: string; docPath: string; locale: string }) => {
             const { versionDocsDirPath, docPath, locale } = params;
-            return locale === 'ru'
-              ? `https://github.com/ZennoLab/capmonstercloud-docs/tree/dev/${versionDocsDirPath}/${docPath}`
-              : `https://github.com/ZennoLab/capmonstercloud-docs/tree/dev/i18n/en/docusaurus-plugin-content-docs/current/${docPath}`;
+
+            const baseUrl = 'https://github.com/ZennoLab/capmonstercloud-docs/tree/dev';
+
+            if (locale === 'ru') {
+              return `${baseUrl}/${versionDocsDirPath}/${docPath}`;
+            }
+
+            return `${baseUrl}/i18n/${locale}/docusaurus-plugin-content-docs/current/${docPath}`;
           },
         },
         blog: false,
