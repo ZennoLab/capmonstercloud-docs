@@ -38,17 +38,27 @@ export const getMenuItems = (locale: string) => {
       href: '',
     },
     {
+      href: `https://capmonster.cloud/${typedLocales[locale]}/blog`,
+      label: getLabel(locale, 'item.label.Блог', locale === 'ru' ? 'Блог' : locale === 'zh' ? '博客' : 'Blog'),
+      position: 'right',
+    },
+    {
+      href: `https://capmonster.cloud/${typedLocales[locale]}`,
+      label: getLabel(locale, 'item.label.Сайт', locale === 'ru' ? 'Сайт' : 'Website'),
+      position: 'right',
+    },
+    {
+      href: `https://capmonster.cloud/${typedLocales[locale]}/browser-extension-captcha`,
+      label: getLabel(locale, 'item.label.Расширение', 'Extension'),
+      position: 'right',
+    },
+    {
       type: 'localeDropdown',
       position: 'right',
       dropdownItemsBefore: [],
       dropdownItemsAfter: [],
       href: '',
       label: '',
-    },
-    {
-      href: `https://capmonster.cloud/${typedLocales[locale]}/browser-extension-captcha`,
-      label: getLabel(locale, 'item.label.Расширение', 'Extension'),
-      position: 'right',
     },
     {
       href: `https://dash.capmonster.cloud?culture=${typedLocales[locale]}`,
