@@ -30,7 +30,14 @@ This type of captcha might be solved a bit longer than usual image captcha, but 
 <BlogLink url="https://capmonster.cloud/en/blog/re-captcha/how-to-bypass-recaptcha-v2-using-capmonster-cloud"/>
 
 :::warning **Attention!**
-CapMonster Cloud uses built-in proxies by default — their cost is already included in the service. You only need to specify your own proxies in cases where the website does not accept the token or access to the built-in services is restricted. You can contact [support](https://helpdesk.zennolab.com/conversation/new) to clarify the details and check whether tokens are accepted correctly on a particular website.
+CapMonster Cloud uses built-in proxies by default, which are suitable for most sites.
+**If the token is rejected by the server**, you should retry using your own proxies — this increases the chance of successful verification.
+
+Recommended procedure:
+
+- First, solve the captcha without proxies.
+
+- If the token is rejected by the target site, retry using your own proxies.
 
 If you are using a proxy with IP authorization, make sure to whitelist the address **65.21.190.34**.
 :::
