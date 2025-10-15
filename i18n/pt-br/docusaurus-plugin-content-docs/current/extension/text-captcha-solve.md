@@ -36,3 +36,21 @@ Ao mesmo tempo, captchas e campos de entrada correspondentes devem ter o mesmo i
 
 Você pode resolver várias captchas na página em paralelo, o importante é que o id dentro de um conjunto seja único e o id da captcha e do campo de entrada sejam correspondentes.
 :::
+
+## O que fazer se o CAPTCHA de texto for resolvido incorretamente
+
+![](./images/text-captcha-solve/incorrect-captcha.png)
+
+Se o CAPTCHA de texto estiver sendo resolvido incorretamente pela extensão, siga estas etapas:
+
+1. Selecione o módulo apropriado na lista disponível (veja [Nome do Módulo](/docs/api/module-name)).
+2. Se o módulo necessário não estiver disponível, crie o seu próprio (veja [Criando um módulo de usuário](/docs/api/user-module)) e aguarde até que esteja pronto.
+3. Na extensão, abra **Text captcha** → **Settings** (botão roxo com uma seta).
+
+![](./images/text-captcha-solve/open-settings.png)
+
+4. Insira o nome do módulo e clique em **+ Add Module**.
+
+![](./images/text-captcha-solve/settings.png)
+
+Assim, o CAPTCHA será resolvido corretamente usando o módulo selecionado ou personalizado.
