@@ -36,3 +36,22 @@ sidebar_position: 2
 
 您可以同时在页面上解决多个验证码，关键是在同一组内 id 是唯一的，并且验证码和输入字段的 id 相互匹配。
 :::
+
+## 如果文字验证码识别不正确该怎么办
+
+![](./images/text-captcha-solve/incorrect-captcha.png)
+
+如果文字验证码通过扩展程序识别错误，请按照以下步骤操作：
+
+1. 从可用列表中选择合适的模块（参见 [模块名称传递](/docs/api/module-name)）。
+2. 如果没有所需的模块，请创建自己的模块（参见 [创建用户模块](/docs/api/user-module)），并等待其准备就绪。
+3. 在扩展程序中打开 **Text captcha** → **Settings**（紫色带箭头的按钮）。
+
+![](./images/text-captcha-solve/open-settings.png)
+
+4. 输入模块名称并点击 **+ Add Module**。
+
+![](./images/text-captcha-solve/settings.png)
+
+这样验证码将通过所选或自定义模块正确识别。
+

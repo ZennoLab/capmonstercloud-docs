@@ -28,7 +28,14 @@ Esse tipo de captcha pode ser resolvido um pouco mais lentamente do que um captc
 <BlogLink url="https://capmonster.cloud/pt-BR/blog/re-1/how-to-bypass-recaptcha-v2-using-capmonster-cloud"/>
 
 :::warning **Atenção!**
-O CapMonster Cloud, por padrão, funciona com proxies integrados — já incluídos no custo do serviço. É necessário especificar seus próprios proxies apenas nos casos em que o site não aceita o token ou quando o acesso aos serviços integrados está restrito. Você pode entrar em contato com o [suporte técnico](https://helpdesk.zennolab.com/conversation/new) para esclarecer detalhes e verificar se os tokens estão sendo aceitos corretamente em um site específico.
+O CapMonster Cloud usa proxies integrados por padrão, que são adequados para a maioria dos sites.
+**Se o token for rejeitado pelo servidor**, você deve tentar novamente usando seus próprios proxies — isso aumenta a chance de verificação bem-sucedida.
+
+Procedimento recomendado:
+
+* Primeiro, resolva o captcha sem proxies.
+
+* Se o token for rejeitado pelo site de destino, tente novamente usando seus próprios proxies.
 
 Se o proxy utiliza autenticação por IP, é necessário adicionar o endereço **65.21.190.34** à lista de permissões (whitelist).
 :::
