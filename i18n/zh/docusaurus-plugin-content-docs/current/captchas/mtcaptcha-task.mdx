@@ -22,7 +22,7 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 ![](./images/mtcaptcha/mtcaptcha.png)
 
 :::warning **注意！**
-CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费用内。仅当网站不接受令牌或对内置服务的访问受限时，才需要指定您自己的代理。您可以联系[支持服务](https://helpdesk.zennolab.com/conversation/new)以确认细节并了解令牌在特定网站上的接受情况。
+CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费用内。仅当网站不接受令牌或对内置服务的访问受限时，才需要指定您自己的代理。
 
 如果代理按 IP 授权，请将地址 **65.21.190.34** 加入白名单。
 :::
@@ -84,7 +84,6 @@ var mtcaptchaConfig = {
 <ParamItem title="proxyAddress" type="string" />
 <p>
 代理的 IPv4/IPv6 地址。禁止以下使用方式：
-- 使用主机名；
 - 使用透明代理（可暴露客户端 IP）；
 - 使用本地机器上的代理。
 </p>

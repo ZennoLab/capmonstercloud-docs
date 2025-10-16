@@ -25,7 +25,7 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 解决问题的结果是用于提交表单的三个或五个令牌。
 
 :::warning **注意！**
-* CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费用内。仅当网站不接受令牌或对内置服务的访问受限时，才需要指定您自己的代理。您可以联系[支持服务](https://helpdesk.zennolab.com/conversation/new)以确认细节并了解令牌在特定网站上的接受情况。
+* CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费用内。仅当网站不接受令牌或对内置服务的访问受限时，才需要指定您自己的代理。
 
 * 暂不支持带有 IP 授权的代理。
 :::
@@ -111,7 +111,13 @@ V4 (captcha_id = gt)
     ---
 
     <ParamItem title="proxyAddress" type="string" />
-    <p>IPv4/IPv6 代理 IP 地址。不允许使用：</p><p>- 使用主机名；</p><p>- 使用透明代理（可以看到客户端 IP）；</p><p>- 使用本地机器上的代理。</p>
+<p>
+  代理IPv4/IPv6地址。禁止使用：
+    - 透明代理（客户端IP可见）；
+    - 本地机器代理。
+</p>
+
+---
 
     ---
 
