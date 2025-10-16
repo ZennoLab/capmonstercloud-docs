@@ -1,0 +1,84 @@
+﻿---
+sidebar_position: 6
+---
+
+import { ArticleHead } from '../../src/theme/ArticleHead';
+
+<ArticleHead slug="extension/extension-events" />
+
+# Получение событий из расширения
+
+Расширение CapMonster позволяет вашему коду отслеживать ключевые моменты процесса работы с капчами напрямую на веб-странице. С помощью событий вы можете узнавать, когда начинается решение капчи, когда оно успешно завершено или произошла ошибка, и выполнять соответствующие действия в своём скрипте.
+
+Все события отправляются в глобальный объект `window` на текущей странице. Это значит, что вы можете подписаться на них с помощью стандартного метода `window.addEventListener` и реагировать на происходящее без сложных обходных приёмов.
+
+Использование этих событий удобно, если вы хотите:
+
+* Отслеживать прогресс решения капчи в реальном времени.
+* Автоматически запускать действия после успешного прохождения капчи.
+* Обрабатывать ошибки и повторно инициировать решение капчи при необходимости.
+
+В следующих разделах приведён полный список доступных событий с кратким описанием каждого.
+
+:::info
+Никакие параметры в события не передаются
+:::
+
+### Пример
+```js
+window.addEventListener("onCMExtensionReady", () => {
+  // DO SOMETHING
+})
+```
+
+## Доступные события
+
+### Глобальные
+|**Событие**|**Описание**|
+| :-: | :-: |
+|`onCMExtensionReady`|Расширение полностью загрузилось и готово к работе|
+
+<!-- ### HCaptcha
+|**Событие**|**Описание**|
+| :-: | :-: |
+|`onHCaptchaClickStart`|Начало решения hCaptcha кликами|
+|`onHCaptchaClickBackendError`|Ошибка сервера при запросе результатов решения hCaptcha кликами|
+|`onHCaptchaClickIncorrect`|Некорректное решение hCaptcha кликами|
+|`onHCaptchaClickSuccess`|Успешное решение hCaptcha кликами|
+|`onHCaptchaClick`|Нажатие на чекбокс hCaptcha при решении кликами|
+|`onHCaptchaTokenStart`|Начало решения hCaptcha токеном|
+|`onHCaptchaTokenSuccess`|Успешное решение hCaptcha токеном|
+|`onHCaptchaTokenError`|Ошибка решения hCaptcha токеном| -->
+
+### ReCaptcha
+|**Событие**|**Описание**|
+| :-: | :-: |
+|`onReCaptchaClickStart`|Событие нажатия по изображению при решении ReCaptcha кликами|
+|`onReCaptchaClick`|Событие нажатия кнопки submit или next при решении ReCaptcha кликами|
+|`onReCaptchaClickIncorrect`|Некорректное решение ReCaptcha кликами|
+|`onReCaptchaClickBackendError`|Ошибка решения ReCaptcha кликами|
+|`onReCaptchaClickSuccess`|Успешное решение ReCaptcha кликами|
+|`onRecaptchaTokenStart`|Начало решения ReCaptcha токеном|
+|`onRecaptchaTokenSuccess`|Успешное решение ReCaptcha токеном|
+|`onRecaptchaTokenError`|Ошибка решения ReCaptcha токеном|
+
+### GeeTest
+|**Событие**|**Описание**|
+| :-: | :-: |
+|`onGeeTestTokenStart`|Начало решения GeeTest токеном|
+|`onGeeTestTokenSuccess`|Успешное решение GeeTest токеном|
+|`onGeeTestTokenError`|Ошибка решения GeeTest токеном|
+
+### Turnstile
+|**Событие**|**Описание**|
+| :-: | :-: |
+|`onTurnstileTokenStart`|Начало решения Turnstile токеном|
+|`onTurnstileTokenSuccess`|Успешное решение Turnstile токеном|
+|`onTurnstileTokenError`|Ошибка решения Turnstile токеном|
+
+### Image captcha
+|**Событие**|**Описание**|
+| :-: | :-: |
+|`onImageTokenStart`|Начало решения Image капчи токеном|
+|`onImageTokenSuccess`|Успешное решение Image капчи токеном|
+|`onImageTokenError`|Ошибка решения Image капчи токеном|
