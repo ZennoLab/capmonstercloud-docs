@@ -108,6 +108,10 @@ description: "Передача имени модуля для распознав
             <td align="center">![](images\module-name\captcha_math.png)</td>
         </tr>
         <tr>
+            <td align="center">sat</td>
+            <td align="center">![](images\module-name\sat.png)</td>
+        </tr>
+        <tr>
             <td align="center">universal (все остальные текстовые капчи)</td>
             <td align="center">![](images\module-name\universal.png)</td>
         </tr>

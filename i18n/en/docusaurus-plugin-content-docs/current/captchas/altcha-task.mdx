@@ -33,7 +33,7 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
 *There is also an **invisible captcha** (**Invisible Captcha**), which has no visible interface on the page and does not require any user actions — verification occurs in the background.*
 
 :::warning **Attention!**
-CapMonster Cloud uses built-in proxies by default — their cost is already included in the service. You only need to specify your own proxies in cases where the website does not accept the token or access to the built-in services is restricted. You can contact [support](https://helpdesk.zennolab.com/conversation/new) to clarify the details and check whether tokens are accepted correctly on a particular website.
+CapMonster Cloud uses built-in proxies by default — their cost is already included in the service. You only need to specify your own proxies in cases where the website does not accept the token or access to the built-in services is restricted.
 
 If you are using a proxy with IP authorization, make sure to whitelist the address **65.21.190.34**.
 :::
@@ -100,7 +100,6 @@ If you are using a proxy with IP authorization, make sure to whitelist the addre
   <ParamItem title="proxyAddress" type="string" />
   <p>
     IPv4/IPv6 proxy address. Not allowed:
-    - using hostnames;
     - using transparent proxies (where the client IP is visible);
     - using proxies on local machines.
   </p>
