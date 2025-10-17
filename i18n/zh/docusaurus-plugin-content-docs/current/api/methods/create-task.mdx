@@ -44,7 +44,7 @@ https://api.capmonster.cloud/createTask
 
 类型: `String` <br />
 必填: `否`<br />
-用于接收验证码任务结果的 Web 地址，结果通过 POST 请求发送。<br />内容与 [getTaskResult](./get-task-result.md) 方法的响应相同。<br />响应内容不会被验证，服务器需在 2 秒内接收请求，然后关闭连接。
+用于接收验证码任务结果的 Web 地址，结果通过 POST 请求发送。<br />内容与 [getTaskResult](./get-task-result.mdx) 方法的响应相同。<br />响应内容不会被验证，服务器需在 2 秒内接收请求，然后关闭连接。
 
 `callbackUrl` 使用示例：
 
@@ -115,13 +115,13 @@ https://api.capmonster.cloud/createTask
 
 类型: `String` <br />
 必填: `否`<br />
-错误代码。详见[错误词汇表](../api-errors.md)。
+错误代码。详见[错误词汇表](../api-errors.mdx)。
 
 ### `taskId`
 
 类型: `Integer` <br />
 必填: `是`<br />
-任务 ID，用于后续调用 [getTaskResult](./get-task-result.md) 方法获取结果。
+任务 ID，用于后续调用 [getTaskResult](./get-task-result.mdx) 方法获取结果。
 
 ---
 

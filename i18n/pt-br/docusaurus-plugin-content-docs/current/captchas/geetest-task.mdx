@@ -87,7 +87,7 @@ V4 (captcha_id = gt)
 
     <ParamItem title="challenge" required="required apenas para V3" type="string" />
     <p>
-    Uma chave dinâmica.<br />Cada vez que nossa API é chamada, precisamos obter um novo valor de chave. Se o captcha for carregado na página, o valor `challenge` não será mais válido e você receberá o [erro](../api/api-errors.md) `ERROR_TOKEN_EXPIRED`. <br />
+    Uma chave dinâmica.<br />Cada vez que nossa API é chamada, precisamos obter um novo valor de chave. Se o captcha for carregado na página, o valor `challenge` não será mais válido e você receberá o [erro](../api/api-errors.mdx) `ERROR_TOKEN_EXPIRED`. <br />
     Você será cobrado por tarefas com erro `ERROR_TOKEN_EXPIRED`.
     É necessário examinar as solicitações e encontrar aquela em que este valor é retornado e, antes de cada criação da tarefa de reconhecimento, executar esta solicitação e analisar o desafio a partir dela.
     </p>
@@ -219,7 +219,7 @@ https://api.capmonster.cloud/createTask
 </Tabs>
 
 
-Use o método [getTaskResult](../api/methods/get-task-result.md) para obter o resultado do reconhecimento do GeeTest. Dependendo da carga do sistema, você receberá uma resposta em um intervalo de 10 s a 30 s.
+Use o método [getTaskResult](../api/methods/get-task-result.mdx) para obter o resultado do reconhecimento do GeeTest. Dependendo da carga do sistema, você receberá uma resposta em um intervalo de 10 s a 30 s.
 
 ### <span style={{fontSize: '1.5rem'}}>Obter resultado da tarefa</span>
 
@@ -758,7 +758,7 @@ https://api.capmonster.cloud/createTask
 
 </Tabs>
 
-Use o [getTaskResult](../api/methods/get-task-result.md) para obter o resultado do reconhecimento GeeTest. Dependendo da carga do sistema, você receberá uma resposta em um intervalo de 10 s a 30 s.
+Use o [getTaskResult](../api/methods/get-task-result.mdx) para obter o resultado do reconhecimento GeeTest. Dependendo da carga do sistema, você receberá uma resposta em um intervalo de 10 s a 30 s.
 
 ### <span style={{fontSize: '1.5rem'}}>Método de obtenção do resultado da tarefa</span>
 

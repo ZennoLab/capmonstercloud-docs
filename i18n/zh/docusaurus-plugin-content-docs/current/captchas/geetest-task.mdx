@@ -89,7 +89,7 @@ V4 (captcha_id = gt)
     ---
 
     <ParamItem title="challenge" required="required only for V3" type="string" />
-    <p> 一个动态密钥。<br />每次调用我们的 API 时，我们需要获取一个新的密钥值。如果验证码已经加载在页面上，则 `challenge` 值不再有效，您将收到 [错误](../api/api-errors.md) `ERROR_TOKEN_EXPIRED`。<br /> 对于带有 `ERROR_TOKEN_EXPIRED` 错误的任务，将会收取费用。 需要检查请求并找到返回此值的请求，并在每次创建识别任务之前执行该请求并解析出挑战值。 </p>
+    <p> 一个动态密钥。<br />每次调用我们的 API 时，我们需要获取一个新的密钥值。如果验证码已经加载在页面上，则 `challenge` 值不再有效，您将收到 [错误](../api/api-errors.mdx) `ERROR_TOKEN_EXPIRED`。<br /> 对于带有 `ERROR_TOKEN_EXPIRED` 错误的任务，将会收取费用。 需要检查请求并找到返回此值的请求，并在每次创建识别任务之前执行该请求并解析出挑战值。 </p>
 
     ---
 
@@ -220,7 +220,7 @@ V4 (captcha_id = gt)
 </Tabs>
 
 
-使用 [getTaskResult](../api/methods/get-task-result.md) 方法获取 GeeTest 识别结果。根据系统负载，您将在 10 到 30 秒内收到响应。
+使用 [getTaskResult](../api/methods/get-task-result.mdx) 方法获取 GeeTest 识别结果。根据系统负载，您将在 10 到 30 秒内收到响应。
 
 ### <span style={{fontSize: '1.5rem'}}>Get task result</span>
 
@@ -754,7 +754,7 @@ V4 (captcha_id = gt)
 </Tabs>
 
 
-使用 [getTaskResult](../api/methods/get-task-result.md) 方法获取 GeeTest 识别结果。根据系统负载，您将在 10 到 30 秒内收到响应。
+使用 [getTaskResult](../api/methods/get-task-result.mdx) 方法获取 GeeTest 识别结果。根据系统负载，您将在 10 到 30 秒内收到响应。
 
 ### <span style={{fontSize: '1.5rem'}}>获取任务结果方法</span>
 

@@ -88,7 +88,7 @@ V4 (captcha_id = gt)
 
     <ParamItem title="challenge" required="required only for V3" type="string" />
     <p>
-    A dynamic key.<br />Each time our API is called, we need to get a new key value. If the captcha is loaded on the page, then the `challenge` value is no longer valid and you will get the [error](../api/api-errors.md) `ERROR_TOKEN_EXPIRED`. <br />
+    A dynamic key.<br />Each time our API is called, we need to get a new key value. If the captcha is loaded on the page, then the `challenge` value is no longer valid and you will get the [error](../api/api-errors.mdx) `ERROR_TOKEN_EXPIRED`. <br />
     You will be charged for tasks with `ERROR_TOKEN_EXPIRED` error.
     It is necessary to examine the requests and find the one in which this value is returned and, before each creation of the recognition task, execute this request and parse the challenge from it.
     </p>
@@ -219,7 +219,7 @@ V4 (captcha_id = gt)
 </Tabs>
 
 
-Use the [getTaskResult](../api/methods/get-task-result.md) method to get the result of GeeTest recognition. Depending on the system load, you will receive a response after a time in the range from 10 s to 30 s.
+Use the [getTaskResult](../api/methods/get-task-result.mdx) method to get the result of GeeTest recognition. Depending on the system load, you will receive a response after a time in the range from 10 s to 30 s.
 
 ### <span style={{fontSize: '1.5rem'}}>Get task result method</span>
 
@@ -756,7 +756,7 @@ The code snippets provided are basic examples for familiarization with extractin
   
 </Tabs>
 
-Use the [getTaskResult](../api/methods/get-task-result.md) to get the result of GeeTest recognition. Depending on the system load, you will receive a response after a time in the range from 10 s to 30 s.
+Use the [getTaskResult](../api/methods/get-task-result.mdx) to get the result of GeeTest recognition. Depending on the system load, you will receive a response after a time in the range from 10 s to 30 s.
 
 ### <span style={{fontSize: '1.5rem'}}>Get task result method</span>
 
