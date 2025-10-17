@@ -27,9 +27,10 @@ export default function LocaleDropdownNavbarItem({
       fullyQualified: false,
     })}`;
     const to = `${baseTo}${search}${hash}${queryString}`;
-    const activeClass =
-      // eslint-disable-next-line no-nested-ternary
-      locale === currentLocale ? (mobile ? 'menu__link--active' : 'dropdown__link--active') : '';
+    let activeClass = '';
+    if (locale === currentLocale) {
+      activeClass = mobile ? 'menu__link--active' : 'dropdown__link--active';
+    }
 
     const flagClass = `locale-${locale.toLowerCase()}`;
 

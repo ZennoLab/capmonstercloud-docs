@@ -579,6 +579,14 @@ a[class*='cardContainer'] {
   }
 }
 
+.locale-flag {
+  display: flex;
+  align-items: center;
+}
+
+.locale-flag::before {
+  border-radius: 3px;
+}
 /* Locale dropdown flags (emoji-based) */
 .dropdown__link.locale-flag::before,
 .menu__link.locale-flag::before {
@@ -591,22 +599,34 @@ a[class*='cardContainer'] {
 /* English */
 .dropdown__link.locale-en::before,
 .menu__link.locale-en::before {
-  content: '🇺🇸';
+  background: url('/img/flags/en.svg');
+  width: 24px;
+  height: 16px;
+  content: '';
 }
 /* Russian */
 .dropdown__link.locale-ru::before,
 .menu__link.locale-ru::before {
-  content: '🇷🇺';
+  background: url('/img/flags/ru.svg');
+  width: 24px;
+  height: 16px;
+  content: '';
 }
 /* Portuguese (Brazil) */
 .dropdown__link.locale-pt-br::before,
 .menu__link.locale-pt-br::before {
-  content: '🇧🇷';
+  background: url('/img/flags/pt-br.svg');
+  width: 24px;
+  height: 16px;
+  content: '';
 }
 /* Chinese */
 .dropdown__link.locale-zh::before,
 .menu__link.locale-zh::before {
-  content: '🇨🇳';
+  background: url('/img/flags/zh.svg');
+  width: 24px;
+  height: 16px;
+  content: '';
 }
 
 .dropdown > .navbar__link:after {

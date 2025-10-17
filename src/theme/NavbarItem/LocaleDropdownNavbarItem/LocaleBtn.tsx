@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import ChangeLocaleIcon from '@site/static/img/changeLocale.svg'; // или обычный <img /> если без docusaurus image plugin
+import ChangeLocaleIcon from '@site/static/img/changeLocale.svg';
 import styles from './LocaleBtn.module.css';
 
 type LocaleDropdownProps = {
@@ -17,7 +17,6 @@ const LocaleBtn = ({ isShow }: LocaleDropdownProps) => {
       <div className={styles.button}>
         <span className={styles.buttonInner}>
           <ChangeLocaleIcon width={20} height={20} />
-          {/* <span className={styles.localeTitle}>{currentLocales[currentLocale]?.title}</span> */}
         </span>
       </div>
     </div>

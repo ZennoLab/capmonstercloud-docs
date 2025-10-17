@@ -1,5 +1,6 @@
 import React from 'react';
 import SubMenu from './SubMenu';
+import { getMainLocale } from './utils/getMainLocale';
 type ProductsSubMenuProps = {
   getLabel: (locale: string, key: string, fallback: string) => string;
   handleClick?: () => void;
@@ -12,13 +13,13 @@ const ProductsSubMenu = ({ handleClick, locale, getLabel }: ProductsSubMenuProps
       {
         icon: <img src="/img/24x24_dashboard.svg" />,
         title: getLabel(locale, 'item.label.CloudAPI', 'CapMonster Cloud API'),
-        url: `https://capmonster.cloud/${locale}/captcha-api`,
+        url: `https://capmonster.cloud/${getMainLocale(locale)}/captcha-api`,
         gtmId: 'header-products-cap-monster-cloud-api-btn',
       },
       {
         icon: <img src="/img/24x24_extension.svg" />,
         title: getLabel(locale, 'item.label.Extension', 'Extension for browsers'),
-        url: `https://capmonster.cloud/${locale}/browser-extension-captcha`,
+        url: `https://capmonster.cloud/${getMainLocale(locale)}/browser-extension-captcha`,
         gtmId: 'browser-extension-btn',
       },
     ],

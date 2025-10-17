@@ -5,6 +5,7 @@ import RecaptchaIcon from '@site/static/img/24x24_rc.svg';
 import { uniqBy } from './utils/uniqBy';
 import { useFetchPrices } from '../../../hooks/useFetchPrices';
 import { getCaptchaLink } from './utils/getCaptchaLink';
+import { getMainLocale } from './utils/getMainLocale';
 
 const SolutionSubMenu = ({
   isMobile,
@@ -41,7 +42,7 @@ const SolutionSubMenu = ({
       {
         icon: <img src="/img/24x24_rc.svg" />,
         title: 'reCAPTCHA',
-        url: `https://capmonster.cloud/${locale}/recaptcha`,
+        url: `https://capmonster.cloud/${getMainLocale(locale)}/recaptcha`,
         gtmId: `header-solutions-recaptcha-btn`,
       },
       ...uniqBy(normalizePrices(prices), 'Name')?.map(priceItem => {
