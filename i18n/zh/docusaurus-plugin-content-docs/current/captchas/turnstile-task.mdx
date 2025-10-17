@@ -30,12 +30,13 @@ import BlogLink from '@theme/BlogLink';
 在开始之前，请先查看所有三种验证码解决方案，并选择最适合您的方式。
 :::
 
-## 选项 1（标准 Turnstile）
+## 选项 1：Turnstile（token）
+
 
 您需要解决一个**标准** Turnstile 验证码，例如 [这里](https://zenno.link/zl-support)。注意，Cloudflare 页面上的验证码可能看起来完全相同。请参阅文章末尾以区分标准 Turnstile 和 Cloudflare Challenge。
 
 :::warning **注意！**
-* CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费用内。仅当网站不接受令牌或对内置服务的访问受限时，才需要指定您自己的代理。您可以联系[支持服务](https://helpdesk.zennolab.com/conversation/new)以确认细节并了解令牌在特定网站上的接受情况。
+* CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费用内。仅当网站不接受令牌或对内置服务的访问受限时，才需要指定您自己的代理。
 
 * 如果代理按 IP 授权，请将地址 **65.21.190.34** 加入白名单。
 
@@ -77,7 +78,6 @@ import BlogLink from '@theme/BlogLink';
     <ParamItem title="proxyAddress" type="string" />
     <p>
 	  代理 IP 地址 IPv4/IPv6。不允许：
-		- 使用主机名；
 		- 使用透明代理（其中客户端 IP 可见）；
 		- 使用来自本地网络的代理。
 	</p>
@@ -101,10 +101,10 @@ import BlogLink from '@theme/BlogLink';
 
 ---
 
-## 选项 2（Challenge token）
+## 选项 2：Challenge (token)
 
 :::warning **注意！**
-* CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费用内。仅当网站不接受令牌或对内置服务的访问受限时，才需要指定您自己的代理。您可以联系[支持服务](https://helpdesk.zennolab.com/conversation/new)以确认细节并了解令牌在特定网站上的接受情况。
+* CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费用内。仅当网站不接受令牌或对内置服务的访问受限时，才需要指定您自己的代理。
 
 * 如果代理按 IP 授权，请将地址 **65.21.190.34** 加入白名单。
 
@@ -168,7 +168,6 @@ import BlogLink from '@theme/BlogLink';
     <ParamItem title="proxyAddress" type="string" />
     <p>
 	  代理 IP 地址 IPv4/IPv6。不允许：
-		- 使用主机名；
 		- 使用透明代理（其中客户端 IP 可见）；
 		- 使用来自本地网络的代理。
 	</p>
@@ -226,11 +225,12 @@ import BlogLink from '@theme/BlogLink';
 
 ---
 
-## 选项 3 (Challenge cf_clearance)
+## 选项 3： Challenge (cookie)
 
 :::warning **注意！**
 
 * 本任务需要**使用您自己的代理**。
+
 * 解决后，您将收到**特殊 cookies** 以添加到浏览器。
 :::
 
@@ -285,7 +285,6 @@ import BlogLink from '@theme/BlogLink';
   <ParamItem title="proxyAddress" required type="string" />
   <p>
     代理 IP 地址 (IPv4/IPv6)。不允许：
-    - 主机名
     - 透明代理
     - 本地机器代理
   </p>
@@ -309,11 +308,12 @@ import BlogLink from '@theme/BlogLink';
 
 ---
 
-## 选项 4（Waiting Room）
+## 选项 4. Waiting Room (cookie)
 
 :::warning **注意！**
 
 * 本任务需要**使用您自己的代理**。
+
 * 解决后，您将收到**特殊 cookies** 以添加到浏览器。
 :::
 
@@ -372,7 +372,6 @@ import BlogLink from '@theme/BlogLink';
   <ParamItem title="proxyAddress" required type="string" />
   <p>
     代理 IP 地址 (IPv4/IPv6)。不允许：
-    - 主机名
     - 透明代理
     - 本地机器代理
   </p>
@@ -397,7 +396,7 @@ import BlogLink from '@theme/BlogLink';
 
 ## 请求示例
 
-### 选项 1. 标准 Turnstile:
+### 选项 1. Turnstile (token)
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 
@@ -628,7 +627,7 @@ import BlogLink from '@theme/BlogLink';
 |token|String|在调用 callback 函数时使用该 token|
 ---
 ## 如何区分标准 Turnstile 与 Cloudflare Challenge
-Cloudflare 挑战可能会以不同的形式出现。
+Cloudflare 的验证类型可能会有不同的表现形式。
 
 **标准 Turnstile：**
 
@@ -639,18 +638,18 @@ Cloudflare 挑战可能会以不同的形式出现。
 <figure>
 
 ![](./images/tunrstile-task/turnstile-stylized.png)
-<figcaption>挑战无缝集成在网站中</figcaption>
+<figcaption>Challenge 被有机地集成在网站本身中。</figcaption>
 
 </figure>
 
 <figure>
 
 ![](./images/tunrstile-task/turnstile-stylized-2.png) 
-<figcaption>看起来像普通的 Turnstile 验证码，但实际上是 Cloudflare 挑战</figcaption>
+<figcaption>看起来像普通的 Turnstile 验证码，但实际上这是一个 Challenge。</figcaption>
 
 </figure>
 
-要确认是否存在 Cloudflare，可以打开开发者工具，检查网络流量，并在页面源码中寻找典型标志：
+要最终确认是否存在 Challenge，可以打开开发者工具，查看网络流量，分析页面代码，并观察其典型特征：
 
 - 对网站的第一个请求返回 **403 状态码**：
 
@@ -826,7 +825,7 @@ const chrome = require('selenium-webdriver/chrome');
 <Tabs className="full-width-tabs filled-tabs request-tabs">
   <TabItem value="js" label="JavaScript" default className="method-panel">
     <details>
-      <summary>方法一 (浏览器内)</summary>
+      <summary>对于选项 1：Turnstile（token）——在浏览器中</summary>
 
       ```js
       // 检查window.onloadTurnstileCallback是否存在的函数
@@ -875,7 +874,7 @@ const chrome = require('selenium-webdriver/chrome');
     </details>
 
     <details>
-      <summary>方法二 (Node.js)</summary>
+      <summary>对于选项 2：Challenge（token）——在 Node.js 中</summary>
 
       ```js
       import { chromium } from "playwright";
@@ -932,7 +931,7 @@ const chrome = require('selenium-webdriver/chrome');
     </details>
 
     <details>
-      <summary>方法三 (Node.js)</summary>
+      <summary>对于选项 3：Challenge（cookie `cf_clearance`）——在 Node.js 中</summary>
 
       ```js
       import { chromium } from "playwright";
@@ -990,7 +989,7 @@ const chrome = require('selenium-webdriver/chrome');
 
   <TabItem value="python" label="Python" className="method-panel">
     <details>
-      <summary>方法一</summary>
+      <summary>对于选项 1：Turnstile（token）</summary>
 
       ```python
       import asyncio
@@ -1042,7 +1041,7 @@ const chrome = require('selenium-webdriver/chrome');
     </details>
 
     <details>
-      <summary>方法二</summary>
+      <summary>对于选项 2：Challenge（token）</summary>
 
       ```python
       import asyncio
@@ -1096,7 +1095,7 @@ const chrome = require('selenium-webdriver/chrome');
     </details>
 
     <details>
-      <summary>方法三</summary>
+      <summary>对于选项 3：Challenge（cookie `cf_clearance`）</summary>
 
       ```python
       import asyncio
@@ -1157,7 +1156,7 @@ const chrome = require('selenium-webdriver/chrome');
 
   <TabItem value="csharp" label="C#" className="method-panel">
     <details>
-      <summary>方法一</summary>
+      <summary>对于选项 1：Turnstile（token）</summary>
 
       ```csharp
       using System;
@@ -1227,7 +1226,7 @@ const chrome = require('selenium-webdriver/chrome');
     </details>
 
     <details>
-      <summary>方法二</summary>
+      <summary>对于选项 2：Challenge（token）</summary>
 
       ```csharp
       using Microsoft.Playwright;
@@ -1292,7 +1291,7 @@ const chrome = require('selenium-webdriver/chrome');
     </details>
 
     <details>
-      <summary>方法三</summary>
+      <summary>对于选项 3：Challenge（cookie `cf_clearance`）</summary>
 
       ```csharp
       using System;
@@ -1360,7 +1359,7 @@ const chrome = require('selenium-webdriver/chrome');
   <TabItem value="js" label="JavaScript" default className="method-panel">
 
 <details>
-<summary> Cloudflare Turnstile </summary>
+<summary> 选项 1：Turnstile（token） </summary>
 
 ```js
 // https://github.com/ZennoLab/capmonstercloud-client-js
@@ -1399,7 +1398,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 </details>
 
 <details>
-<summary> Cloudflare Challenge (token)</summary>
+<summary> 选项 2：Challenge (token)</summary>
 
 ```js
 // Cloudflare Challenge token
@@ -1449,7 +1448,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 </details>
 
 <details>
-<summary> Cloudflare Challenge (cookie cf_clearance)</summary>
+<summary>选项 3： Challenge (cookie `cf_clearance`)</summary>
 
 ```js
 // Cloudflare Challenge cf_clearance
@@ -1486,7 +1485,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   <TabItem value="python" label="Python" className="method-panel">
 
 <details>
-<summary> Cloudflare Turnstile</summary>
+<summary>选项 1：Turnstile（token）</summary>
 
 ```python
 # https://github.com/ZennoLab/capmonstercloud-client-python
@@ -1525,7 +1524,7 @@ print(responses)
 </details>
 
 <details>
-<summary> Cloudflare Challenge (token)</summary>
+<summary>选项 2：Challenge (token)</summary>
 
 ```python
 # Cloudflare Challenge (token)
@@ -1575,7 +1574,7 @@ print(responses)
 </details>
 
 <details>
-<summary> Cloudflare Challenge (cookie cf_clearance)</summary>
+<summary>选项 3： Challenge (cookie `cf_clearance`)</summary>
 
 ```python
 # Cloudflare Challenge (cookie cf_clearance) - 使用你的代理解决
@@ -1613,7 +1612,7 @@ print(responses)
   <TabItem value="csharp" label="C#" className="method-panel">
 
 <details>
-<summary> Cloudflare Turnstile </summary>
+<summary> 选项 1：Turnstile（token） </summary>
 
 ```csharp
 // https://github.com/ZennoLab/capmonstercloud-client-dotnet
@@ -1667,7 +1666,7 @@ class Program
 </details>
 
 <details>
-<summary> Cloudflare Challenge (token)</summary>
+<summary> 选项 2：Challenge (token)</summary>
 
 ```csharp
 // Cloudflare Challenge (token)
@@ -1731,7 +1730,7 @@ static async Task Main(string[] args)
 </details>
 
 <details>
-<summary> Cloudflare Challenge (cookie cf_clearance)</summary>
+<summary> 选项 3： Challenge (cookie `cf_clearance`)</summary>
 
 ```csharp
 // Cloudflare Challenge (cookie cf_clearance) - 使用你的代理解决

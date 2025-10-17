@@ -110,6 +110,10 @@ description: "在处理特定服务（如 Google、SolveMedia、Whatsapp 等）�
             <td align="center">![](images\module-name\captcha_math.png)</td>
         </tr>
         <tr>
+            <td align="center">sat</td>
+            <td align="center">![](images\module-name\sat.png)</td>
+        </tr>
+        <tr>
             <td align="center">universal（其他所有文本验证码）</td>
             <td align="center">![](images\module-name\universal.png)</td>
         </tr>

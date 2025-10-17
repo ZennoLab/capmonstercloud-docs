@@ -39,3 +39,21 @@ At the same time captchas and inputs corresponding to each other should have the
 
 You can solve several captchas on the page in parallel, the main thing is that the id within one set is unique and the id of the captcha and input match each other.
 :::
+
+## What to do if the Text CAPTCHA is solved incorrectly
+
+![](./images/text-captcha-solve/incorrect-captcha.png)
+
+If the text captcha is being solved incorrectly through the extension, follow these steps:
+
+1. Select the appropriate module from the available list (see [Passing module name](/docs/api/module-name)).
+2. If the required module is not available, create your own (see [Creating a user module](/docs/api/user-module)) and wait until it is ready.
+3. In the extension, open **Text captcha** → **Settings** (purple button with an arrow).
+
+![](./images/text-captcha-solve/open-settings.png)
+
+4. Enter the module name and click **+ Add Module**.
+
+![](./images/text-captcha-solve/settings.png)
+
+This ensures the CAPTCHA is solved correctly using the selected or custom module.

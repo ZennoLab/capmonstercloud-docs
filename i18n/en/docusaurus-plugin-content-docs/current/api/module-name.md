@@ -108,6 +108,10 @@ The list of available module names:
             <td align="center">![](images\module-name\captcha_math.png)</td>
         </tr>
         <tr>
+            <td align="center">sat</td>
+            <td align="center">![](images\module-name\sat.png)</td>
+        </tr>
+        <tr>
             <td align="center">universal (all other text captchas)</td>
             <td align="center">![](images\module-name\universal.png)</td>
         </tr>

@@ -31,12 +31,12 @@ import BlogLink from '@theme/BlogLink';
 Перед началом работы изучите все три варианта распознавания капчи и выберите тот, который больше всего соответствует вашим потребностям.
 :::
 
-## Вариант 1 (Turnstile)
+## Вариант 1. Turnstile (token)
 
 Вам требуется решить **обычную** turstile капчу, как [здесь](https://zenno.link/zl-support). Обратите внимание, что капча на страницах CloudFlare может выглядеть идентично. Посмотрите, [как отличить обычный Turnstile от Challenge](#как-отличить-обычный-turnstile-от-cloudflare-challenge). 
 
 :::warning **Внимание!**
-* CapMonster Cloud по умолчанию работает через встроенные прокси — они уже включены в стоимость. Указывать собственные прокси требуется только в тех случаях, когда сайт не принимает токен или доступ к встроенным сервисам ограничен. Вы можете обратиться в службу поддержки, чтобы уточнить детали и узнать, насколько корректно принимаются токены на конкретном сайте.
+* CapMonster Cloud по умолчанию работает через встроенные прокси — они уже включены в стоимость. Указывать собственные прокси требуется только в тех случаях, когда сайт не принимает токен или доступ к встроенным сервисам ограничен.
 
 * Если прокси с авторизацией по IP, то необходимо добавить адрес **65.21.190.34** в белый список.
 
@@ -81,7 +81,6 @@ import BlogLink from '@theme/BlogLink';
     <ParamItem title="proxyAddress" type="string" />
     <p>
       IP адрес прокси IPv4/IPv6. Не допускается:
-		- использование имен хостов;
 		- использование прозрачных прокси (там где можно видеть IP клиента);
 		- использование прокси на локальных машинах.
     </p>
@@ -104,10 +103,10 @@ import BlogLink from '@theme/BlogLink';
 </TabItem>
 
 ---
-## Вариант 2 (Challenge)
+## Вариант 2. Challenge (token)
 
 :::warning **Внимание!**
-* CapMonster Cloud по умолчанию работает через встроенные прокси — они уже включены в стоимость. Указывать собственные прокси требуется только в тех случаях, когда сайт не принимает токен или доступ к встроенным сервисам ограничен. Вы можете обратиться в службу поддержки, чтобы уточнить детали и узнать, насколько корректно принимаются токены на конкретном сайте.
+* CapMonster Cloud по умолчанию работает через встроенные прокси — они уже включены в стоимость. Указывать собственные прокси требуется только в тех случаях, когда сайт не принимает токен или доступ к встроенным сервисам ограничен.
 
 * Если прокси с авторизацией по IP, то необходимо добавить адрес **65.21.190.34** в белый список.
 
@@ -173,7 +172,6 @@ import BlogLink from '@theme/BlogLink';
     <ParamItem title="proxyAddress" type="string" />
     <p>
       IP адрес прокси IPv4/IPv6. Не допускается:
-		- использование имен хостов;
 		- использование прозрачных прокси (там где можно видеть IP клиента);
 		- использование прокси на локальных машинах.
     </p>
@@ -234,10 +232,11 @@ import BlogLink from '@theme/BlogLink';
 `callback` – функция обратного вызова после успешного прохождения капчи.
 
 ---
-## Вариант 3 (Challenge)
+## Вариант 3. Challenge (cookie)
 
 :::warning **Внимание!**
 * Для выполнения данной задачи используйте **ваши собственные прокси**.
+
 * После решения вы получите **специальные cookie**, которые необходимо добавить в браузер.
 :::
 
@@ -258,7 +257,7 @@ import BlogLink from '@theme/BlogLink';
 
   ---
 
-  <ParamItem title="cloudflareTaskType" type="string" />
+  <ParamItem title="cloudflareTaskType" required type="string" />
   **cf_clearance**
 
   ---
@@ -289,7 +288,6 @@ import BlogLink from '@theme/BlogLink';
   <ParamItem title="proxyAddress" required type="string" />
   <p>
 	IP адрес прокси IPv4/IPv6. Не допускается:
-	- использование имен хостов;
 	- использование прозрачных прокси (там, где можно видеть IP клиента);
 	- использование прокси на локальных машинах.
   </p>
@@ -311,10 +309,11 @@ import BlogLink from '@theme/BlogLink';
 
 </TabItem>
 ---
-## Вариант 4 (Waiting Room)
+## Вариант 4. Waiting Room (cookie)
 
 :::warning **Внимание!**
 * Для выполнения данной задачи используйте **ваши собственные прокси**.
+
 * После решения вы получите **специальные cookie**, которые необходимо добавить в браузер.
 :::
 
@@ -370,7 +369,6 @@ import BlogLink from '@theme/BlogLink';
   <ParamItem title="proxyAddress" required type="string" />
   <p>
 	IP адрес прокси IPv4/IPv6. Не допускается:
-	- использование имен хостов;
 	- использование прозрачных прокси (там, где можно видеть IP клиента);
 	- использование прокси на локальных машинах.
   </p>
@@ -394,7 +392,7 @@ import BlogLink from '@theme/BlogLink';
 ---
 ## Примеры запросов
 
-### Вариант 1. Обычный Turnstile:
+### Вариант 1. Turnstile (token)
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 
   <TabItem value="proxyless" label="TurnstileTask (без прокси)" default className="method-panel">
@@ -626,7 +624,7 @@ import BlogLink from '@theme/BlogLink';
 |token|String|Используйте токен при вызове callback функции|
 ---
 ## Как отличить обычный Turnstile от Cloudflare Challenge.
-Cloudflare challenge может выглядеть по-разному. 
+Типы проверок от Cloudflare могут выглядеть по-разному. 
 
 **Обычный вариант:**
 
@@ -637,18 +635,18 @@ Cloudflare challenge может выглядеть по-разному.
 <figure>
 
 ![](./images/tunrstile-task/turnstile-stylized.png)
-<figcaption>Челлендж органично встроен в сам сайт</figcaption>
+<figcaption>Challenge органично встроен в сам сайт</figcaption>
 
 </figure>
 
 <figure>
 
 ![](./images/tunrstile-task/turnstile-stylized-2.png) 
-<figcaption>Выглядит как обычная капча turnstile, но на самом деле это challenge</figcaption>
+<figcaption>Выглядит как обычная капча Turnstile, но на самом деле это Challenge</figcaption>
 
 </figure>
 
-Чтобы окончательно убедиться в наличии Cloudflare, можно открыть инструменты разработчика, посмотреть трафик, изучить код страницы и увидеть характерные признаки:
+Чтобы окончательно убедиться в наличии Challenge, можно открыть инструменты разработчика, посмотреть трафик, изучить код страницы и увидеть характерные признаки:
 
 - Первый запрос к сайту возвращает код 403:
 
@@ -825,7 +823,7 @@ const chrome = require('selenium-webdriver/chrome');
 <Tabs className="full-width-tabs filled-tabs request-tabs">
   <TabItem value="js" label="JavaScript" default className="method-panel">
     <details>
-      <summary>Вариант 1 (в браузере)</summary>
+      <summary>Для варианта 1. Turnstile (token) - в браузере</summary>
 
       ```js
       // Функция для проверки наличия window.onloadTurnstileCallback
@@ -872,7 +870,7 @@ const chrome = require('selenium-webdriver/chrome');
     </details>
 
     <details>
-      <summary>Вариант 2 (Node.js)</summary>
+      <summary>Для варианта 2. Challenge (token) - Node.js</summary>
 
       ```js
       import { chromium } from "playwright";
@@ -929,7 +927,7 @@ const chrome = require('selenium-webdriver/chrome');
     </details>
 
     <details>
-      <summary>Вариант 3 (Node.js)</summary>
+      <summary>Для варианта 3. Challenge (cookie `cf_clearance`) - Node.js</summary>
 
       ```js
       import { chromium } from "playwright";
@@ -987,7 +985,7 @@ const chrome = require('selenium-webdriver/chrome');
 
   <TabItem value="python" label="Python" className="method-panel">
     <details>
-      <summary>Вариант 1</summary>
+      <summary>Для варианта 1. Turnstile (token)</summary>
 
       ```python
       import asyncio
@@ -1038,7 +1036,7 @@ const chrome = require('selenium-webdriver/chrome');
     </details>
 
     <details>
-      <summary>Вариант 2</summary>
+      <summary>Для варианта 2. Challenge (token)</summary>
 
       ```python
       import asyncio
@@ -1092,7 +1090,7 @@ const chrome = require('selenium-webdriver/chrome');
     </details>
 
     <details>
-      <summary>Вариант 3</summary>
+      <summary>Для варианта 3. Challenge (cookie `cf_clearance`)</summary>
 
       ```python
       import asyncio
@@ -1153,7 +1151,7 @@ const chrome = require('selenium-webdriver/chrome');
 
   <TabItem value="csharp" label="C#" className="method-panel">
     <details>
-      <summary>Вариант 1</summary>
+      <summary>Для варианта 1. Turnstile (token)</summary>
 
       ```csharp
       using System;
@@ -1223,7 +1221,7 @@ const chrome = require('selenium-webdriver/chrome');
     </details>
 
     <details>
-      <summary>Вариант 2</summary>
+      <summary>Для варианта 2. Challenge (token)</summary>
 
       ```csharp
       using Microsoft.Playwright;
@@ -1288,7 +1286,7 @@ const chrome = require('selenium-webdriver/chrome');
     </details>
 
     <details>
-      <summary>Вариант 3</summary>
+      <summary>Для варианта 3. Challenge (cookie `cf_clearance`)</summary>
 
       ```csharp
       using System;
@@ -1357,7 +1355,7 @@ const chrome = require('selenium-webdriver/chrome');
   <TabItem value="js" label="JavaScript" default className="method-panel">
 
 <details>
-<summary> Turnstile 1 (без прокси / с прокси)</summary>
+<summary> Вариант 1. Turnstile (token)</summary>
 
 ```js
 // https://github.com/ZennoLab/capmonstercloud-client-js
@@ -1395,7 +1393,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 </details>
 
 <details>
-<summary> Cloudflare Challenge (token)</summary>
+<summary>Вариант 2. Challenge (token)</summary>
 
 ```js
 // Cloudflare Challenge token
@@ -1445,7 +1443,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 </details>
 
 <details>
-<summary> Cloudflare Challenge (cf_clearance)</summary>
+<summary>Вариант 3. Challenge (cookie `cf_clearance`)</summary>
 
 ```js
 // Cloudflare Challenge cf_clearance
@@ -1482,7 +1480,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   <TabItem value="python" label="Python" className="method-panel">
 
 <details>
-<summary> Cloudflare Turnstile</summary>
+<summary>Вариант 1. Turnstile (token)</summary>
 
 ```python
 # https://github.com/ZennoLab/capmonstercloud-client-python
@@ -1521,7 +1519,7 @@ print(responses)
 </details>
 
 <details>
-<summary> Cloudflare Challenge (token)</summary>
+<summary> Вариант 2. Challenge (token)</summary>
 
 ```python
 # Cloudflare Challenge (token)
@@ -1573,7 +1571,7 @@ print(responses)
 </details>
 
 <details>
-<summary> Cloudflare Challenge (cookie cf_clearance)</summary>
+<summary> Вариант 3. Challenge (cookie `cf_clearance`)</summary>
 
 ```python
 # Cloudflare Challenge (cookie cf_clearance) - решается с вашими прокси
@@ -1612,7 +1610,7 @@ print(responses)
   <TabItem value="csharp" label="C#" className="method-panel">
 
 <details>
-<summary> Turnstile (без прокси / с прокси)</summary>
+<summary> Вариант 1. Turnstile (token)</summary>
 
 ```csharp
 // https://github.com/ZennoLab/capmonstercloud-client-dotnet
@@ -1666,7 +1664,7 @@ class Program
 </details>
 
 <details>
-<summary> Cloudflare Challenge (token)</summary>
+<summary> Вариант 2. Challenge (token)</summary>
 
 ```csharp
 // Cloudflare Challenge (token)
@@ -1730,7 +1728,7 @@ static async Task Main(string[] args)
 </details>
 
 <details>
-<summary> Cloudflare Challenge (cookie cf_clearance)</summary>
+<summary> Вариант 3. Challenge (cookie `cf_clearance`)</summary>
 
 ```csharp
 // Cloudflare Challenge (cookie cf_clearance) - решается с вашими прокси
