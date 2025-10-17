@@ -5,6 +5,10 @@ title: "为验证码识别传递模块名称"
 description: "在处理特定服务（如 Google、SolveMedia、Whatsapp 等）的验证码时，传递模块名称可提高识别速度和准确性，并降低错误发生率。"
 ---
 
+import { ArticleHead } from '../../../../../src/theme/ArticleHead';
+
+<ArticleHead slug="api/module-name" />
+
 # 模块名称传递
 
 在自动验证码识别中，处理精度和速度至关重要。不同服务使用各自的验证码类型，通用方案并不总能同样高效地处理。例如，来自 **Google**、**SolveMedia**、**Whatsapp** 或 **Yandex** 的验证码可能具有特殊特性，导致标准识别模块运行较慢或出现错误。
