@@ -18,5 +18,29 @@
   "item.label.Личный кабинет": {
     "message": "仪表板",
     "description": "Navbar item with label Личный кабинет"
+  },
+  "item.label.HeaderProducts": {
+    "message": "产品",
+    "description": "Navbar item with label 产品"
+  },
+  "item.label.HeaderSolutions": {
+    "message": "解决方案",
+    "description": "Navbar item with label 解决方案"
+  },
+  "item.label.HeaderPrice": {
+    "message": "价格",
+    "description": "Navbar item with label 价格"
+  },
+  "item.label.HeaderBlog": {
+    "message": "博客",
+    "description": "Navbar item with label 博客"
+  },
+  "item.label.CloudAPI": {
+    "message": "CapMonster Cloud API",
+    "description": "Navbar item with label CapMonster Cloud API"
+  },
+  "item.label.Extension": {
+    "message": "适用于浏览器的扩展程序",
+    "description": "Navbar item with label 适用于浏览器的扩展程序"
   }
 }
