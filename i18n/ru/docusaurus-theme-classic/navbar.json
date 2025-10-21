@@ -18,5 +18,29 @@
   "item.label.Личный кабинет": {
     "message": "Личный кабинет",
     "description": "Navbar item with label Личный кабинет"
+  },
+  "item.label.HeaderProducts": {
+    "message": "Продукты",
+    "description": "Navbar item with label Продукты"
+  },
+  "item.label.HeaderSolutions": {
+    "message": "Решения",
+    "description": "Navbar item with label Решения"
+  },
+  "item.label.HeaderPrice": {
+    "message": "Цены",
+    "description": "Navbar item with label Цены"
+  },
+  "item.label.HeaderBlog": {
+    "message": "Блог",
+    "description": "Navbar item with label Блог"
+  },
+  "item.label.CloudAPI": {
+    "message": "CapMonster Cloud API",
+    "description": "Navbar item with label CapMonster Cloud API"
+  },
+  "item.label.Extension": {
+    "message": "Расширение для браузеров",
+    "description": "Navbar item with label Расширение для браузеров"
   }
 }

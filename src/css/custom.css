@@ -62,9 +62,70 @@
 }
 
 .DocSearch-Button {
+  width: 240px;
   border-radius: 5px !important;
-  /* background: #3264EB !important; */
+  background: white !important;
+  border: 1px solid #d2dce6 !important;
   /* color: white !important; */
+}
+
+@media (max-width: 1200px) {
+  .DocSearch-Button {
+    width: 38px;
+  }
+  .DocSearch-Button-Keys {
+    display: none !important;
+  }
+  .DocSearch-Button-Placeholder {
+    display: none;
+  }
+}
+
+@media (max-width: 996px) {
+  .navbarSearchContainer_src-theme-Navbar-Search-styles-module {
+    position: static !important;
+  }
+}
+
+[data-theme='dark'] .DocSearch-Button {
+  background: #24262a !important;
+  border: 1px solid #3c414b !important;
+}
+
+.DocSearch-Button:hover,
+.DocSearch-Button:active {
+  box-shadow: none !important;
+  border: 1px solid #7d6eff !important;
+}
+
+.DocSearch-Button-Key {
+  background: #eceef2 !important;
+  box-shadow: none !important;
+}
+
+[data-theme='dark'] .DocSearch-Button-Key {
+  background: #565872 !important;
+}
+
+.DocSearch-Button .DocSearch-Search-Icon {
+  width: 16px;
+  color: #828ca0 !important;
+}
+
+@media (max-width: 996px) {
+  .navbarSearchContainer_src-theme-Navbar-Search-styles-module {
+    position: static !important;
+  }
+  .DocSearch-Button .DocSearch-Search-Icon {
+    color: #6355ff !important;
+  }
+  .DocSearch-Button {
+    border: 1px solid transparent !important;
+  }
+  .DocSearch-Button:hover {
+    background: #e6e6ff !important;
+    border: 1px solid transparent !important;
+  }
 }
 
 /* .DocSearch-Button .DocSearch-Search-Icon {
@@ -516,6 +577,147 @@ a[class*='cardContainer'] {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.locale-flag {
+  display: flex;
+  align-items: center;
+}
+
+.locale-flag::before {
+  border-radius: 3px;
+}
+/* Locale dropdown flags (emoji-based) */
+.dropdown__link.locale-flag::before,
+.menu__link.locale-flag::before {
+  display: inline-block;
+  margin-right: 8px;
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* English */
+.dropdown__link.locale-en::before,
+.menu__link.locale-en::before {
+  background: url('/img/flags/en.svg');
+  width: 24px;
+  height: 16px;
+  content: '';
+}
+/* Russian */
+.dropdown__link.locale-ru::before,
+.menu__link.locale-ru::before {
+  background: url('/img/flags/ru.svg');
+  width: 24px;
+  height: 16px;
+  content: '';
+}
+/* Portuguese (Brazil) */
+.dropdown__link.locale-pt-br::before,
+.menu__link.locale-pt-br::before {
+  background: url('/img/flags/pt-br.svg');
+  width: 24px;
+  height: 16px;
+  content: '';
+}
+/* Chinese */
+.dropdown__link.locale-zh::before,
+.menu__link.locale-zh::before {
+  background: url('/img/flags/zh.svg');
+  width: 24px;
+  height: 16px;
+  content: '';
+}
+
+.dropdown > .navbar__link:after {
+  display: none;
+}
+
+.navbar__item:not(.lk-link) {
+  padding: 0;
+}
+.navbar__item:not(.lk-link):not(.dropdown) {
+  margin-right: 40px;
+}
+.lk-link {
+  margin-right: 12px;
+}
+.navbar__item.dropdown {
+  margin-right: 12px;
+}
+
+/* .navbar__items--right {
+  gap: 40px;
+} */
+
+@media (max-width: 996px) {
+  .navbar-mobile__items {
+    gap: 8px;
+  }
+  .navbar__toggle {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    justify-items: center !important;
+    align-items: center;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+
+.burgerIcon {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.docs_navbar_toggle {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 996px) {
+  .localeDropdownWithFlags svg path {
+    fill: #7d6eff;
+  }
+  .mobile-flags-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .localeDropdownWithFlags span {
+    color: #14193c;
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .menu__list > .menu__list-item:has(.lk-link) {
+    order: -1; /* поднимаем в самый верх */
+    margin-bottom: 8px; /* чуть отделим от остальных */
+  }
+
+  .menu__list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .lk-link {
+    height: 54px;
+    line-height: 54px;
+    width: calc(100% - 10px);
+    font-size: 18px;
+    font-weight: 500;
+    padding: 0;
+    text-align: center;
+  }
+  .navbar-sidebar__item {
+    padding-top: 20px;
+  }
+}
+
+[data-theme='dark'] .localeDropdownWithFlags span {
+  color: #e1e6f0 !important;
 }
 
 #__docusaurus {

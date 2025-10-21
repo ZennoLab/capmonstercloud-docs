@@ -1,0 +1,13 @@
+.logoLink {
+  width: auto;
+}
+
+.logoImg {
+  display: block;
+}
+
+.logoText {
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--ifm-navbar-link-color);
+}
