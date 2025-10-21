@@ -16,11 +16,6 @@ export default function Home() {
 
   const { isLoading, metadata } = useFetchMetadata({ slug: '/' });
 
-  const hideThemeToggle = () => {
-    const toggle = document.querySelector('button.clean-btn:not(.navbar__toggle)');
-    if (toggle?.parentElement) toggle.parentElement.style.display = 'none';
-  };
-
   const scrollToHash = () => {
     if (window.location.hash === '#price') {
       const priceElement = document.getElementById('price');
@@ -29,7 +24,6 @@ export default function Home() {
   };
 
   useEffect(() => {
-    hideThemeToggle();
     scrollToHash();
   }, []);
 

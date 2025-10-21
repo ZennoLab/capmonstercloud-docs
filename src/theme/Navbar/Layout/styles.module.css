@@ -5,3 +5,18 @@
 .navbarHidden {
   transform: translate3d(0, calc(-100% - 2px), 0);
 }
+
+.docsMenuToggleBelow {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.docsMenuToggleBelow:empty {
+  display: none;
+}
+
+@media (min-width: 997px) {
+  .docsMenuToggleBelow {
+    display: none;
+  }
+}
