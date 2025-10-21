@@ -10,6 +10,9 @@ import MethodItem from '@theme/MethodItem';
 import MethodDescription from '@theme/MethodDescription'
 import PriceBlock from '../../../../../src/theme/PriceBlock';
 import PriceBlockWrap from '@theme/PriceBlockWrap';
+import { ArticleHead } from '../../../../../src/theme/ArticleHead';
+
+<ArticleHead slug="captchas/image-to-text" />
 
 # ImageToTextTask
 
@@ -39,13 +42,13 @@ import PriceBlockWrap from '@theme/PriceBlockWrap';
     ---
 
     <ParamItem title="capMonsterModule" type="string" />
-    识别模块的名称，例如“yandex”。可以通过[这里](../api/module-name.md)找到模块名称及所有可用模块的列表。 <br />
+    识别模块的名称，例如“yandex”。可以通过[这里](../api/module-name.mdx)找到模块名称及所有可用模块的列表。 <br />
     示例: yandex, special 及其他
 
     ---
 
     <ParamItem title="recognizingThreshold" type="integer" />
-    验证码识别阈值，可取值范围为0到100。例如，如果将 recognizingThreshold 设置为90，并且任务以80的置信度解决，则不会收费。在这种情况下，用户会收到 ERROR_CAPTCHA_UNSOLVABLE 的响应。 种设置扣款阈值的替代方法在 [该文章](../api/threshold.md) 中有描述。
+    验证码识别阈值，可取值范围为0到100。例如，如果将 recognizingThreshold 设置为90，并且任务以80的置信度解决，则不会收费。在这种情况下，用户会收到 ERROR_CAPTCHA_UNSOLVABLE 的响应。 种设置扣款阈值的替代方法在 [该文章](../api/threshold.mdx) 中有描述。
 
     ---
 
@@ -125,7 +128,7 @@ loadAndEncodeCaptchaToBase64(captchaUrl);
 
 
 ## 获取任务结果方法
-使用[getTaskResult](../api/methods/get-task-result.md)方法获取验证码的解决方案。根据系统负载，您将在300毫秒到6秒的时间范围内收到答案。
+使用[getTaskResult](../api/methods/get-task-result.mdx)方法获取验证码的解决方案。根据系统负载，您将在300毫秒到6秒的时间范围内收到答案。
 
 <TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
 	<MethodItem>

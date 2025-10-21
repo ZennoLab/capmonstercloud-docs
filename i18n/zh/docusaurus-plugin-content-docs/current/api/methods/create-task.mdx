@@ -1,0 +1,154 @@
+﻿---
+sidebar_position: 0
+sidebar_label: createTask
+title: "createTask：如何创建验证码任务"
+description: "createTask：该方法用于创建指定类型验证码的任务。参数中包含客户端认证信息、任务类型化数据以及其他可选参数。"
+---
+
+import { ArticleHead } from '../../../../../../src/theme/ArticleHead';
+
+<ArticleHead slug="api/methods/create-task" />
+
+# createTask：创建任务
+
+## **说明**
+
+该方法用于创建所选类型验证码的任务。参数中需要提供客户端认证信息、任务类型化数据，以及在必要时的额外参数。
+
+:::info 方法地址
+
+```http
+https://api.capmonster.cloud/createTask
+```
+
+请求格式：`JSON POST`
+:::
+
+---
+
+## 请求参数
+
+### `clientKey`
+
+类型: `String` <br />
+必填: `是`<br />
+您账户的唯一密钥，即 API 密钥（可在[此处](https://capmonster.cloud/Dashboard)获取）
+
+### `task`
+
+类型: `任务对象` <br />
+必填: `是`<br />
+任务数据对象。验证码任务类型列表见[这里](../../captchas)。
+
+### `callbackUrl`
+
+类型: `String` <br />
+必填: `否`<br />
+用于接收验证码任务结果的 Web 地址，结果通过 POST 请求发送。<br />内容与 [getTaskResult](./get-task-result.mdx) 方法的响应相同。<br />响应内容不会被验证，服务器需在 2 秒内接收请求，然后关闭连接。
+
+`callbackUrl` 使用示例：
+
+```json
+{
+  "clientKey": "API_KEY",
+  "task": {
+    "type": "RecaptchaV2Task",
+    "websiteURL": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
+    "websiteKey": "6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"
+  },
+  "callbackUrl": "https://yourwebsite.com/callback"
+}
+```
+
+---
+
+### 请求示例
+
+<details>
+  <summary>
+    图像验证码任务示例
+  </summary>
+
+```json
+{
+  "clientKey":"API_KEY",
+  "task": 
+  {
+    "type":"ImageToTextTask",
+    "body":"BASE64_BODY_HERE!"
+  }
+}
+```
+
+</details>
+
+<details>
+  <summary>
+    ReCaptcha2 任务示例
+  </summary>
+
+```json
+{
+  "clientKey":"API_KEY",
+  "task": 
+  {
+    "type":"RecaptchaV2Task",
+    "websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
+    "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"
+  }
+}
+```
+
+</details>
+
+---
+
+## 响应结构
+
+### `errorId`
+
+类型: `Integer` <br />
+必填: `是`<br />
+错误标识。<br />**0** - 无错误，任务成功创建，任务 ID 在 *taskId* 参数中<br />**1** - 出现错误，错误信息在 *errorCode* 属性中
+
+### `errorCode`
+
+类型: `String` <br />
+必填: `否`<br />
+错误代码。详见[错误词汇表](../api-errors.mdx)。
+
+### `taskId`
+
+类型: `Integer` <br />
+必填: `是`<br />
+任务 ID，用于后续调用 [getTaskResult](./get-task-result.mdx) 方法获取结果。
+
+---
+
+### 响应示例
+
+<details>
+  <summary>无错误响应</summary>
+
+```json
+{
+  "errorId": 0,
+  "taskId": 7654321
+}
+```
+
+</details>
+
+<details>
+  <summary>包含错误的响应</summary>
+
+```json
+{
+  "errorId": 1,
+  "errorCode": "ERROR_KEY_DOES_NOT_EXIST",
+  "errorDescription": "Account authorization key not found in the system or has incorrect format",
+  "taskId": 0
+}
+```
+
+</details>

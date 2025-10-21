@@ -1,0 +1,113 @@
+---
+sidebar_position: 0
+id: overview
+title: 什么是 CapMonster Cloud
+sidebar_label: 什么是 CapMonster Cloud
+---
+
+import { ArticleHead } from '../../../../src/theme/ArticleHead';
+
+<ArticleHead slug="overview" />
+
+# 什么是 CapMonster Cloud
+
+**欢迎阅读 CapMonster Cloud 文档！**
+在本章节中，您将了解 CapMonster Cloud 的核心功能、优势以及如何快速开始使用该服务。
+
+CapMonster Cloud 是一个自动识别各种类型验证码的云服务：从最常见的验证码到较为罕见的类型。与需要手动操作的解决方案不同，该服务采用人工智能算法，能够以极高的准确率在几秒钟内完成验证码识别，并将错误风险降到最低。
+
+CapMonster Cloud 帮助您更快速、高效地与网站交互。服务自动处理验证码相关的重复性任务，让您能够专注于项目开发和业务流程。
+
+## 服务优势
+
+---
+
+**高速——大多数验证码在 1–5 秒内解决**
+
+CapMonster Cloud 针对任务处理速度进行了优化。平均而言，验证码识别仅需几秒钟即可完成，保证了自动化流程的稳定运行，即使在高负载情况下，服务也会将任务分配到不同服务器，以确保等待时间最小化。
+
+**广泛覆盖——支持常见与少见验证码类型**
+
+CapMonster Cloud 可以处理各种验证码：从常见的 [reCAPTCHA v2](./captchas/no-captcha-task)、[reCAPTCHA v3](./captchas/recaptcha-v3-task)、[reCAPTCHA v2 Enterprise](./captchas/recaptcha-v2-enterprise-task) 和 [Cloudflare Turnstile](./captchas/turnstile-task)，到较为少见的如 [Yidun](./captchas/yidun-task) 或 [GeeTest CAPTCHA](./captchas/geetest-task)。您无需为每个网站寻找单独的解决方案——一个服务即可覆盖几乎所有任务，从而节省时间并简化自动化工作。
+
+**云端服务——无需安装软件**
+
+只需访问互联网并拥有 API 密钥即可使用。意味着您可以快速将服务集成到项目中，从任何设备启动任务，专注于自动化，而无需浪费时间安装和配置本地软件。
+
+**低成本且仅为成功识别付费**
+
+使用 CapMonster Cloud，您只需为成功识别的验证码付费。无隐藏费用，也不为失败尝试付费——只需为实际结果买单。
+
+**内置代理**
+
+无需担心购买代理服务器或额外配置！您可以直接开始使用服务——内置工具确保验证码稳定解决。如果需要使用自有代理，CapMonster Cloud API 也支持轻松接入。例如，当您的代理对于通过 [DataDome](./captchas/datadome) 或 Cloudflare Challenge（获取 [cf_clearance](./captchas/turnstile-task#选项-3-challenge-cf_clearance)）必不可少时，或者内置代理不适合某些网站或出现故障时，这非常实用。
+
+**简单 API——JSON 请求和响应，轻松集成到任何语言/框架**
+
+CapMonster Cloud 的 API 结构简洁明了：所有请求和响应均为 JSON 格式。服务可轻松与任意编程语言或框架集成——无论是 Node.js、Python、C# 还是其他语言。简单的请求结构让您快速创建任务、获取结果并处理错误，无需额外复杂操作。
+
+**浏览器扩展——验证码解决与参数映射**
+
+为方便与网页交互，CapMonster Cloud 提供浏览器扩展（支持 Chrome 与 Firefox）。扩展可自动识别验证码并收集必要参数，如 `websitekey`、`action` 等，同时可直接在浏览器中测试服务功能。
+
+**官方 SDK 库——最大化使用便利**
+
+CapMonster Cloud 提供官方 SDK，覆盖流行编程语言。SDK 内置创建任务、获取结果和处理错误的功能，减少了编写代码的时间与工作量。
+
+**可靠性——24/7 全天候分布式服务器运行**
+
+CapMonster Cloud 运行在分布式基础设施上，全天候可用。即使在高负载下，也能稳定可靠地处理大量验证码任务，无停机或延迟。
+
+## 适用对象
+
+---
+
+**自动化开发者**
+
+在需要与网页表单、登录和注册交互的场景中实现流程自动化，节省团队时间与资源。
+
+**QA 工程师（用于测试各种服务和自己的网站）**
+
+加快对自有或第三方网站的测试，自动处理验证码，降低手动操作负担。
+
+**进行合法信息采集的人群**
+
+以合法、合规的方式从网站收集所需数据，通过自动化方式绕过验证码。
+
+**帮助手动识别验证码有困难的人群**
+
+CapMonster Cloud 可帮助视觉或操作能力受限的人群自动识别验证码，让他们无需手动操作即可正常使用网站。
+
+**企业——需要大规模处理网站任务的公司**
+
+优化批量网站操作流程：快速处理任务，降低时间和资源成本，同时获得可靠的验证码解决方案，无延迟和错误。
+
+## 使用 API 的工作原理
+
+---
+
+1. 创建任务（task）并发送到 CapMonster Cloud API。在任务中指定验证码类型、网页 URL、`websitekey` 及其他必要参数。
+
+2. 服务自动选择最优解决策略：包括内置代理、识别算法等。
+
+3. 解决完成后，API 返回结果——通常是一个令牌（token），可用于表单字段、请求发送，或返回浏览器所需的 cookies。
+
+4. 在目标网站中使用获得的令牌（插入到表单、数据字段、XHR 等）。
+
+您也可以查询任务状态及账户余额信息。
+
+## 相关链接
+
+---
+
+快速入门及参考：
+
+[*支持的验证码列表*](https://docs.capmonster.cloud/zh/docs/captchas)
+
+[*如何注册并获取 API 密钥*](https://docs.capmonster.cloud/zh/docs/getting-start)
+
+[*API 使用指南*](https://docs.capmonster.cloud/zh/docs/category/api)
+
+[*如何安装并使用浏览器扩展*](https://docs.capmonster.cloud/zh/docs/extension)
+
+[*代码集成示例库*](https://docs.capmonster.cloud/zh/docs/getting-start)

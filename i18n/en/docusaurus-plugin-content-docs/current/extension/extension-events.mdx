@@ -1,0 +1,85 @@
+---
+sidebar_position: 6
+---
+
+
+import { ArticleHead } from '../../../../../src/theme/ArticleHead';
+
+<ArticleHead slug="extension/extension-events" />
+
+# Receiving events from the extension
+
+The CapMonster extension allows your code to track key moments in the captcha solving process directly on the webpage. Using events, you can know when a captcha solving attempt starts, when it successfully completes, or if an error occurs, and perform the corresponding actions in your script.
+
+All events are sent to the global `window` object on the current page. This means you can subscribe to them using the standard `window.addEventListener` method and respond to events without complex workarounds.
+
+Using these events is convenient if you want to:
+
+* Track the progress of captcha solving in real time.
+* Automatically trigger actions after a captcha is successfully solved.
+* Handle errors and re-initiate captcha solving if necessary.
+
+The following sections provide a complete list of available events with a brief description of each.
+
+:::info
+No parameters are passed to events
+:::
+
+### Example
+```js
+window.addEventListener("onCMExtensionReady", () => {
+  // DO SOMETHING
+})
+```
+
+## Available events
+
+### Global
+|**Event**|**Description**|
+| :-: | :-: |
+|`onCMExtensionReady`|The extension is fully loaded and ready to work|
+
+<!-- ### HCaptcha
+|**Event**|**Description**|
+| :-: | :-: |
+|`onHCaptchaClickStart`|Start solving hCaptcha by clicks|
+|`onHCaptchaClickBackendError`|Server error when requesting hCaptcha solution results by clicks|
+|`onHCaptchaClickIncorrect`|Incorrect hCaptcha solving by clicks|
+|`onHCaptchaClickSuccess`|Successful hCaptcha solving by clicks|
+|`onHCaptchaClick`|Clicking on the hCaptcha checkbox when solving by clicks|
+|`onHCaptchaTokenStart`|Start solving hCaptcha by token|
+|`onHCaptchaTokenSuccess`|Successful hCaptcha solving by token|
+|`onHCaptchaTokenError`|Error when solving hCaptcha by token| -->
+
+### ReCaptcha
+|**Event**|**Description**|
+| :-: | :-: |
+|`onReCaptchaClickStart`|Image click event when solving ReCaptcha by clicks|
+|`onReCaptchaClick`|Submit or next button click event when solving ReCaptcha by clicks|
+|`onReCaptchaClickIncorrect`|Incorrect ReCaptcha solving by clicks|
+|`onReCaptchaClickBackendError`|Error when solving ReCaptcha by clicks|
+|`onReCaptchaClickSuccess`|Successful solving ReCaptcha by clicks|
+|`onRecaptchaTokenStart`|Start solving ReCaptcha by token|
+|`onRecaptchaTokenSuccess`|Successful ReCaptcha solving by token|
+|`onRecaptchaTokenError`|Error when solving ReCaptcha by token|
+
+### GeeTest
+|**Event**|**Description**|
+| :-: | :-: |
+|`onGeeTestTokenStart`|Start of the GeeTest solving by token|
+|`onGeeTestTokenSuccess`|Successful solution of GeeTest by token|
+|`onGeeTestTokenError`|Error when solving GeeTest by token|
+
+### Turnstile
+|**Event**|**Description**|
+| :-: | :-: |
+|`onTurnstileTokenStart`|Start of the Turnstile solving by token|
+|`onTurnstileTokenSuccess`|Successful solution of Turnstile by token|
+|`onTurnstileTokenError`|Error when solving Turnstile by token|
+
+### Image captcha
+|**Event**|**Description**|
+| :-: | :-: |
+|`onImageTokenStart`|Start of the Image captcha solving by token|
+|`onImageTokenSuccess`|Successful solving Image captcha by token|
+|`onImageTokenError`|Error when solving Image captcha by token|

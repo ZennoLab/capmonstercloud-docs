@@ -1,0 +1,104 @@
+﻿---
+
+sidebar_position: 1
+sidebar_label: getTaskResult
+title: "getTaskResult：如何获取验证码任务结果"
+description: "了解如何使用 CapMonster Cloud API 的 getTaskResult 方法获取任务结果。详细说明参数、响应及请求示例，快速便捷地在线解决验证码。"
+---
+
+import { ArticleHead } from '../../../../../../src/theme/ArticleHead';
+
+<ArticleHead slug="api/methods/get-task-result" />
+
+# getTaskResult：获取任务结果
+
+## **说明**
+
+创建任务后，需要定期检查其状态，以获取最终结果。
+
+:::info 方法地址
+
+```http
+https://api.capmonster.cloud/getTaskResult
+```
+
+请求格式：`JSON POST`
+:::
+
+---
+
+## 请求参数
+
+### `clientKey`
+
+类型: `String` <br />
+必填: `是`<br />
+您账户的唯一密钥
+
+### `taskId`
+
+类型: `Integer` <br />
+必填: `是`<br />
+任务 ID，从 [createTask](./create-task.mdx) 方法获得
+
+---
+
+### 请求示例
+
+```json
+{
+  "clientKey":"API_KEY",
+  "taskId": 7654321
+}
+```
+
+---
+
+## 响应结构
+
+### `errorId`
+
+类型: `Integer` <br />
+错误标识。<br />**0** - 无错误，*errorCode* 属性不存在<br />**1** - 出现错误，错误信息在 *errorCode* 属性中
+
+### `errorCode`
+
+类型: `String` <br />
+错误代码。详见[错误词汇表](../api-errors.mdx)。
+
+### `status`
+
+类型: `String` <br />
+**processing** - 任务正在处理中<br />**ready** - 任务完成，解决方案在 *solution* 属性中
+
+### `solution`
+
+类型: `Object` <br />
+任务解决方案信息。不同任务类型格式不同。
+
+---
+
+### 响应示例
+
+任务处理中
+
+```json
+{
+  "errorCode": null,
+  "errorDescription": null,
+  "errorId": 0,
+  "status": "processing"
+}
+```
+
+任务成功完成
+
+```json
+{
+  "errorId":0,
+  "status":"ready",
+  "solution": {
+    "text":"answer"
+  }
+}
+```

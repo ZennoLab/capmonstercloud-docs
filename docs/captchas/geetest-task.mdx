@@ -12,6 +12,9 @@ import MethodItem from '@theme/MethodItem';
 import MethodDescription from '@theme/MethodDescription'
 import PriceBlock from '../../src/theme/PriceBlock';
 import PriceBlockWrap from '@theme/PriceBlockWrap';
+import { ArticleHead } from '../../src/theme/ArticleHead';
+
+<ArticleHead slug="captchas/geetest-task" />
 
 # GeeTestTask
 
@@ -84,7 +87,7 @@ V4 (captcha_id = gt)
     ---
 
     <ParamItem title="challenge" required="required only for V3" type="string" />
-    <p>Меняющийся ключ.<br />При каждом обращении к нашему API нужно получать новое значение ключа. Если капча загружена на странице, то значение `challenge` уже недействительно и вы получите в ответ [error](../api/api-errors.md) `ERROR_TOKEN_EXPIRED`. <br />За задачи с ошибкой `ERROR_TOKEN_EXPIRED` плата взимается как за успешно решённые задачи.<br />Нужно изучить запросы и найти тот, в котором возвращается это значение и перед каждым созданием задачи на распознавания выполнять этот запрос и парсить `challenge` из него.</p>
+    <p>Меняющийся ключ.<br />При каждом обращении к нашему API нужно получать новое значение ключа. Если капча загружена на странице, то значение `challenge` уже недействительно и вы получите в ответ [error](../api/api-errors.mdx) `ERROR_TOKEN_EXPIRED`. <br />За задачи с ошибкой `ERROR_TOKEN_EXPIRED` плата взимается как за успешно решённые задачи.<br />Нужно изучить запросы и найти тот, в котором возвращается это значение и перед каждым созданием задачи на распознавания выполнять этот запрос и парсить `challenge` из него.</p>
 
     ---
 
@@ -217,7 +220,7 @@ V4 (captcha_id = gt)
 	</TabItem>  
 </Tabs>
 
-Используйте метод [getTaskResult](../api/methods/get-task-result.md), чтобы получить решение GeeTest. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 10 с до 30 с.
+Используйте метод [getTaskResult](../api/methods/get-task-result.mdx), чтобы получить решение GeeTest. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 10 с до 30 с.
 
 ### <span style={{fontSize: '1.5rem'}}>Метод получения результата задачи</span>
 
@@ -757,7 +760,7 @@ V4 (captcha_id = gt)
 	</TabItem>  
 </Tabs>
 
-Используйте метод [getTaskResult](../api/methods/get-task-result.md), чтобы получить решение GeeTest. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 10 с до 30 с.
+Используйте метод [getTaskResult](../api/methods/get-task-result.mdx), чтобы получить решение GeeTest. В зависимости от загрузки системы вы получите ответ через время в диапазоне от 10 с до 30 с.
 
 ### <span style={{fontSize: '1.5rem'}}>Метод получения результата задачи</span>
 

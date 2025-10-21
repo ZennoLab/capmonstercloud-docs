@@ -11,6 +11,9 @@ import MethodDescription from '@theme/MethodDescription'
 import PriceBlock from '../../../../../src/theme/PriceBlock';
 import PriceBlockWrap from '@theme/PriceBlockWrap';
 import BlogLink from '@theme/BlogLink';
+import { ArticleHead } from '../../../../../src/theme/ArticleHead';
+
+<ArticleHead slug="captchas/no-captcha-task" />
 
 
 # RecaptchaV2Task
@@ -180,7 +183,7 @@ CapMonster Cloud 默认使用内置代理，适用于大多数网站。
 在某些网站上，确保 UserAgent 与解决验证码时使用的 UserAgent 相匹配非常重要。因此，如果 CapMonster Cloud 在返回令牌的同时提供了 UserAgent，**请始终**在提交表单或在目标页面确认解决方案时使用该 UserAgent。
 :::
 
-使用[getTaskResult](../api/methods/get-task-result.md)方法请求 ReCaptcha2 的答案。根据服务工作负载，您将在 100 毫秒内收到响应。
+使用[getTaskResult](../api/methods/get-task-result.mdx)方法请求 ReCaptcha2 的答案。根据服务工作负载，您将在 100 毫秒内收到响应。
 
 <TabItem value="proxyless" label="RecaptchaV2Task (without proxy)" default className="method-panel-full">
     <MethodItem>

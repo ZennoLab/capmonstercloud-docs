@@ -8,3 +8,9 @@ declare module '@docusaurus/useDocusaurusContext' {
   function useDocusaurusContext(): DocusaurusContext;
   export default useDocusaurusContext;
 }
+
+declare module '@docusaurus/Head' {
+  import type { ComponentType, PropsWithChildren } from 'react';
+  const Head: ComponentType<PropsWithChildren<Record<string, unknown>>>;
+  export default Head;
+}
