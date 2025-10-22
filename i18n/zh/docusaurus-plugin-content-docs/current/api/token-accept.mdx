@@ -1,0 +1,62 @@
+﻿---
+
+sidebar_position: 7
+sidebar_label: 令牌接受问题
+title: "Token Accept 方法 — 通过 API 检查验证码令牌"
+description: "了解如何使用 CapMonster Cloud API 的 Token Accept 方法检查验证码令牌的有效性。包含参数说明及示例。"
+---
+
+
+import { ArticleHead } from '../../../../../src/theme/ArticleHead';
+
+<ArticleHead slug="api/token-accept" />
+
+# 令牌接受问题
+
+如果您在使用令牌时遇到问题，请联系客户支持。我们会及时采取措施解决该问题。
+
+## 当网站只接受部分 CapMonster Cloud 令牌时怎么办？
+
+## 说明
+
+有时网站可能会拒绝来自 CapMonster Cloud 的令牌。这种情况可能表现为：网站只接受部分令牌，或者随机接受令牌。在这种情况下，可以使用 `nocache` 参数，它可以防止重复使用旧令牌，从而提高令牌被网站成功接受的几率。
+
+---
+
+## 如何传递参数？
+
+### 通过 API 密钥
+
+您可以通过在 API 密钥末尾添加双下划线附加 `nocache` 参数：
+
+`API_KEY__nocache`
+
+### 在 createTask 请求中
+
+```json
+{
+  "clientKey":"API_KEY",
+  "task": 
+  {
+    "type":"RecaptchaV2Task",
+    "websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
+    "websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
+    "nocache": true
+  }
+}
+```
+
+### 通过 API 创建任务时（使用 URL 参数）
+
+在 API 请求的 URL 中直接添加 `nocache=1`：
+
+`http://api.capmonster.cloud/in.php?key=API_KEY&method=userrecaptcha&googlekey=6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd&pageurl=https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high&nocache=1`
+
+---
+
+## 适用验证码类型
+
+* [ReCaptchaV2](../captchas/no-captcha-task.mdx)
+* [ReCaptchaV3](../captchas/recaptcha-v3-task.mdx)
+
+<!-- - HCaptcha -->

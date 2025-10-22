@@ -1,22 +1,23 @@
 ---
 sidebar_position: 21
 sidebar_label: Altcha
-title: "Automatic Recognition and Bypass of Altcha | API"
-description: "Learn how to bypass Altcha using the API of the CapMonster Cloud automatic captcha recognition and solving service!" 
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ParamItem from '@theme/ParamItem';
 import MethodItem from '@theme/MethodItem';
-import MethodDescription from '@theme/MethodDescription'
+import MethodDescription from '@theme/MethodDescription';
 import PriceBlock from '@theme/PriceBlock';
 import PriceBlockWrap from '@theme/PriceBlockWrap';
+import { ArticleHead } from '../../../../../src/theme/ArticleHead';
+
+<ArticleHead slug="captchas/altcha-task" />
 
 # Altcha - Alternative CAPTCHA
 
 <PriceBlockWrap>
-  <PriceBlock title="altcha" captchaId="altcha"/>
+  <PriceBlock title="altcha" captchaId="altcha" />
 </PriceBlockWrap>
 
 ## Examples of tasks
@@ -75,6 +76,12 @@ If you are using a proxy with IP authorization, make sure to whitelist the addre
 
   <ParamItem title="salt (inside metadata)" required="required" type="string" />
   Salt obtained from the site, used for hash generation.
+  > **Important:** Always send the full value of the `salt` field!
+> If the site returns something like this:
+
+`"salt":"46d5b1c8871e5152d902ee3f?edk=1493462145de1ce33a52fb569b27a364&codeChallenge=464Cjs7PbiJJhJZ_ReJ-y9UGGDndcpsnP6vS8x1nEJyTkhjQkJyL2jcnYEuMKcrG&expires=1761048664"`
+
+— copy and include it in your request exactly as it is, with all characters and parameters (*edk*, *codeChallenge*, etc.).
 
   ---
 
@@ -145,7 +152,7 @@ If you are using a proxy with IP authorization, make sure to whitelist the addre
           "metadata": {
             "challenge": "3dd28253be6cc0c54d95f7f98c517e68744597cc6e66109619d1ac975c39181c",
             "iterations": "5000",
-            "salt": "bf356449d56c719fd904c58f",
+            "salt": "46d5b1c8871e5152d902ee3f?edk=1493462145de1ce33a52fb569b27a364&codeChallenge=464Cjs7PbiJJhJZ_ReJ-y9UGGDndcpsnP6vS8x1nEJyTkhjQkJyL2jcnYEuMKcrG&expires=1761048664",
             "signature": "4b1cf0e0be0f4e5247e50b0f9a449830f1fbca44c32ff94bc080146815f31a18"
           }
         }
@@ -181,7 +188,7 @@ If you are using a proxy with IP authorization, make sure to whitelist the addre
           "metadata": {
             "challenge": "3dd28253be6cc0c54d95f7f98c517e68744597cc6e66109619d1ac975c39181c",
             "iterations": "5000",
-            "salt": "bf356449d56c719fd904c58f",
+            "salt": "46d5b1c8871e5152d902ee3f?edk=1493462145de1ce33a52fb569b27a364&codeChallenge=464Cjs7PbiJJhJZ_ReJ-y9UGGDndcpsnP6vS8x1nEJyTkhjQkJyL2jcnYEuMKcrG&expires=1761048664",
             "signature": "4b1cf0e0be0f4e5247e50b0f9a449830f1fbca44c32ff94bc080146815f31a18"
           },
           "proxyType":"http",
@@ -205,7 +212,7 @@ If you are using a proxy with IP authorization, make sure to whitelist the addre
 
 ## Get task result method
 
-Use the [getTaskResult](../api/methods/get-task-result.md) method to obtain the Altcha solution.
+Use the [getTaskResult](../api/methods/get-task-result.mdx) method to obtain the Altcha solution.
 
 <TabItem value="proxyless" label="Altcha CustomTask (without proxy)" default className="method-panel-full">
   <MethodItem>
@@ -424,7 +431,7 @@ const ALTCHA_PAGE = "https://url_with_altcha";
       websiteURL: ALTCHA_PAGE,
       websiteKey: "",
       userAgent:
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
+        "userAgentPlaceholder",
       metadata: {
         challenge,
         iterations: maxnumbers,
