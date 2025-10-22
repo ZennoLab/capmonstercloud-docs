@@ -76,6 +76,12 @@ CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费
 
   <ParamItem title="salt (metadata 内)" required="required" type="string" />
   从网站获取的 salt，用于生成哈希。
+  > **重要提示：** 请务必完整发送 `salt` 字段的值！
+> 如果网站返回如下内容：
+
+`"salt":"46d5b1c8871e5152d902ee3f?edk=1493462145de1ce33a52fb569b27a364&codeChallenge=464Cjs7PbiJJhJZ_ReJ-y9UGGDndcpsnP6vS8x1nEJyTkhjQkJyL2jcnYEuMKcrG&expires=1761048664"`
+
+— 请原样复制并在请求中完整发送，包含所有字符和参数（如 *edk*、*codeChallenge* 等）。
 
   ---
 
@@ -145,7 +151,7 @@ CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费
           "metadata": {
             "challenge": "3dd28253be6cc0c54d95f7f98c517e68744597cc6e66109619d1ac975c39181c",
             "iterations": "5000",
-            "salt": "bf356449d56c719fd904c58f",
+            "salt": "46d5b1c8871e5152d902ee3f?edk=1493462145de1ce33a52fb569b27a364&codeChallenge=464Cjs7PbiJJhJZ_ReJ-y9UGGDndcpsnP6vS8x1nEJyTkhjQkJyL2jcnYEuMKcrG&expires=1761048664",
             "signature": "4b1cf0e0be0f4e5247e50b0f9a449830f1fbca44c32ff94bc080146815f31a18"
           }
         }
@@ -181,7 +187,7 @@ CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费
           "metadata": {
             "challenge": "3dd28253be6cc0c54d95f7f98c517e68744597cc6e66109619d1ac975c39181c",
             "iterations": "5000",
-            "salt": "bf356449d56c719fd904c58f",
+            "salt": "46d5b1c8871e5152d902ee3f?edk=1493462145de1ce33a52fb569b27a364&codeChallenge=464Cjs7PbiJJhJZ_ReJ-y9UGGDndcpsnP6vS8x1nEJyTkhjQkJyL2jcnYEuMKcrG&expires=1761048664",
             "signature": "4b1cf0e0be0f4e5247e50b0f9a449830f1fbca44c32ff94bc080146815f31a18"
           },
           "proxyType":"http",
@@ -425,7 +431,7 @@ const ALTCHA_PAGE = "https://url_with_altcha";
       websiteURL: ALTCHA_PAGE,
       websiteKey: "",
       userAgent:
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
+        "userAgentPlaceholder",
       metadata: {
         challenge,
         iterations: maxnumbers,

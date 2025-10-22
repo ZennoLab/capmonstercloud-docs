@@ -78,6 +78,12 @@ Se o proxy utiliza autenticação por IP, é necessário adicionar o endereço *
 
   <ParamItem title="salt (dentro do metadata)" required="required" type="string" />
   Salt obtido no site, usado para gerar hashes.
+  > **Importante:** sempre envie o valor completo do campo `salt`!
+> Se o site retornar algo como:
+
+`"salt":"46d5b1c8871e5152d902ee3f?edk=1493462145de1ce33a52fb569b27a364&codeChallenge=464Cjs7PbiJJhJZ_ReJ-y9UGGDndcpsnP6vS8x1nEJyTkhjQkJyL2jcnYEuMKcrG&expires=1761048664"`
+
+— copie e envie no seu pedido exatamente como está, incluindo todos os caracteres e parâmetros (*edk*, *codeChallenge*, etc.).
 
   ---
 
@@ -148,7 +154,7 @@ Se o proxy utiliza autenticação por IP, é necessário adicionar o endereço *
           "metadata": {
             "challenge": "3dd28253be6cc0c54d95f7f98c517e68744597cc6e66109619d1ac975c39181c",
             "iterations": "5000",
-            "salt": "bf356449d56c719fd904c58f",
+            "salt": "46d5b1c8871e5152d902ee3f?edk=1493462145de1ce33a52fb569b27a364&codeChallenge=464Cjs7PbiJJhJZ_ReJ-y9UGGDndcpsnP6vS8x1nEJyTkhjQkJyL2jcnYEuMKcrG&expires=1761048664",
             "signature": "4b1cf0e0be0f4e5247e50b0f9a449830f1fbca44c32ff94bc080146815f31a18"
           }
         }
@@ -184,7 +190,7 @@ Se o proxy utiliza autenticação por IP, é necessário adicionar o endereço *
           "metadata": {
             "challenge": "3dd28253be6cc0c54d95f7f98c517e68744597cc6e66109619d1ac975c39181c",
             "iterations": "5000",
-            "salt": "bf356449d56c719fd904c58f",
+            "salt": "46d5b1c8871e5152d902ee3f?edk=1493462145de1ce33a52fb569b27a364&codeChallenge=464Cjs7PbiJJhJZ_ReJ-y9UGGDndcpsnP6vS8x1nEJyTkhjQkJyL2jcnYEuMKcrG&expires=1761048664",
             "signature": "4b1cf0e0be0f4e5247e50b0f9a449830f1fbca44c32ff94bc080146815f31a18"
           },
           "proxyType":"http",
@@ -430,7 +436,7 @@ const ALTCHA_PAGE = "https://url_with_altcha";
       websiteURL: ALTCHA_PAGE,
       websiteKey: "",
       userAgent:
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
+        "userAgentPlaceholder",
       metadata: {
         challenge,
         iterations: maxnumbers,
