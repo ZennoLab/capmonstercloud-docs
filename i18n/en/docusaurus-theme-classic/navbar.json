@@ -42,5 +42,9 @@
   "item.label.Extension": {
     "message": "Extension for browsers",
     "description": "Navbar item with label Extension for browsers"
+  },
+  "item.label.MainSite": {
+    "message": "Site",
+    "description": "Navbar item with label Blog"
   }
 }

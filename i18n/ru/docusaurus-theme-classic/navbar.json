@@ -42,5 +42,9 @@
   "item.label.Extension": {
     "message": "Расширение для браузеров",
     "description": "Navbar item with label Расширение для браузеров"
+  },
+  "item.label.MainSite": {
+    "message": "Сайт",
+    "description": "Navbar item with label Blog"
   }
 }
