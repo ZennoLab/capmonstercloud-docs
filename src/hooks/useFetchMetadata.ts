@@ -10,14 +10,15 @@ export const useFetchMetadata = ({ slug }: Props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [metadata, setMetadata] = useState<DocDataItem | null>(null);
+  const { siteConfig } = useDocusaurusContext();
+  const publicationState = siteConfig.customFields?.APP_ENV === 'DEV' ? 'preview' : 'live';
 
   const {
     i18n: { currentLocale },
   } = useDocusaurusContext();
-
   const queryParams = {
     locale: localeMappings[currentLocale] || currentLocale,
-    publicationState: process.env.NODE_ENV === 'production' ? 'live' : 'preview',
+    publicationState,
     populate: {
       seo: { populate: '*' },
     },

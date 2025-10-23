@@ -30,6 +30,9 @@ const config: Config = {
     defaultLocale: 'en',
     locales: ['en', 'ru', 'zh', 'pt-br'],
   },
+  customFields: {
+    APP_ENV: process.env.APP_ENV,
+  },
   presets: [
     [
       'classic',
