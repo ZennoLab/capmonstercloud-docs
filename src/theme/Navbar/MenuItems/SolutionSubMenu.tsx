@@ -40,7 +40,7 @@ const SolutionSubMenu = ({
   const fetchSolutionItems = async () => {
     const captchas = [
       {
-        icon: <img src="/img/24x24_rc.svg" />,
+        icon: <img src="/img/24x24_rc.svg" alt="rc" />,
         title: 'reCAPTCHA',
         url: `https://capmonster.cloud/${getMainLocale(locale)}/recaptcha`,
         gtmId: `header-solutions-recaptcha-btn`,
@@ -55,7 +55,8 @@ const SolutionSubMenu = ({
               alt={priceItem?.Name}
             />
           ),
-          title: priceItem?.Name,
+          // как появится отдельная страница для Turnstile, поменять имя в базе
+          title: priceItem?.Name === 'Cloudflare Turnstile' ? 'Cloudflare' : priceItem.Name,
           url: getCaptchaLink(locale, priceItem.LinkKey, priceItem.Id),
           gtmId: `header-solutions-${priceItem.Id}-docs-btn`,
         };

@@ -2,7 +2,7 @@ import { getMainLocale } from './getMainLocale';
 
 export const CAPTCHA_ID_TO_PAGES: Readonly<Partial<Record<string, string>>> = {
   amazonwaf: 'aws-waf-captcha',
-  'cf-turnstile': 'turnstile',
+  'cf-turnstile': 'cloudflare',
   text: 'textcaptcha',
 } as const;
 
