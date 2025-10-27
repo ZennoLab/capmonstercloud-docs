@@ -13,6 +13,7 @@ import DocBreadcrumbs from '@theme/DocBreadcrumbs';
 import ContentVisibility from '@theme/ContentVisibility';
 import Feedback from '@theme/Feedback';
 import styles from './styles.module.css';
+import Banners from '@theme/Banners';
 
 /**
  * Decide if the toc should be rendered, on mobile or desktop viewports
@@ -59,6 +60,7 @@ export default function DocItemLayout({ children }: any): ReactNode {
         <div className="col col--3">
           {docTOC.desktop}
           <Feedback />
+          <Banners />
         </div>
       )}
     </div>

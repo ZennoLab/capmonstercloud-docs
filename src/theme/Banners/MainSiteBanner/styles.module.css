@@ -1,0 +1,31 @@
+.wrapper {
+  background: #6946ff;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  display: block;
+}
+.wrapper:hover,
+.wrapper:focus,
+.wrapper:active {
+  text-decoration: none;
+}
+
+.title {
+  font-size: 36px;
+  line-height: 40px;
+  font-weight: 700;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.logo {
+  max-width: 100%;
+}
