@@ -1,0 +1,29 @@
+.wrap {
+  padding-left: 21px;
+  margin-top: 24px;
+}
+
+.iconsWrap {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.iconsWrap svg:hover,
+.iconsWrap svg:focus,
+.iconsWrap svg:active {
+  cursor: pointer;
+}
+.iconsWrap svg:hover path,
+.iconsWrap svg:focus path,
+.iconsWrap svg:active path {
+  fill: #735fff;
+}
+
+.header {
+  font-weight: 600;
+  color: #14193c;
+  font-size: 16px;
+  line-height: 20px;
+  margin-bottom: 12px;
+}

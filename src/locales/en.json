@@ -23,5 +23,11 @@
   "fullPriceText": "View full price",
   "dynamicHundredImages": "1000 dynamic images",
   "complexImageAnswers": "1000 answers",
-  "moreBlogInfo": "More on the topic in our blog"
+  "moreBlogInfo": "More on the topic in our blog",
+  "feedbackModalTitle": "Share your thoughts about the article",
+  "feedbackModalPlaceholder": "Your comment",
+  "cancel": "Cancel",
+  "send": "Send",
+  "close": "Close",
+  "articleHelpfulQuestion": "Was this article helpful?"
 }

@@ -22,5 +22,12 @@
   "hundredImages": "1000 imagens",
   "fullPriceText": "Ver preço completo",
   "dynamicHundredImages": "1000 imagens dinâmicas",
-  "complexImageAnswers": "1000 respostas"
+  "complexImageAnswers": "1000 respostas",
+  "moreBlogInfo": "Mais sobre o tema em nosso blog",
+  "feedbackModalTitle": "Compartilhe sua opinião sobre o artigo",
+  "feedbackModalPlaceholder": "Seu comentário",
+  "cancel": "Cancelar",
+  "send": "Enviar",
+  "close": "Fechar",
+  "articleHelpfulQuestion": "O artigo foi útil?"
 }
