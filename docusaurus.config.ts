@@ -6,9 +6,8 @@ const darkCodeTheme = require('prism-react-renderer').themes.dracula;
 require('dotenv').config();
 const config: Config = {
   title: 'Capmonster Cloud Docs',
-  // tagline: 'Dinosaurs are cool',
   favicon: 'img/favicon.ico',
-
+  trailingSlash: true,
   // Set the production url of your site here
   url: 'https://docs.capmonster.cloud',
   // Set the /<baseUrl>/ pathname under which your site is served
