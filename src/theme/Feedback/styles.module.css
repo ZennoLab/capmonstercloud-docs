@@ -1,6 +1,7 @@
 .wrap {
   padding-left: 21px;
   margin-top: 24px;
+  position: sticky;
 }
 
 .iconsWrap {

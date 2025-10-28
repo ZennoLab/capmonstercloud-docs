@@ -20,9 +20,20 @@ export default function RightWidget() {
   const { i18n } = useDocusaurusContext();
   const t = getLocaleStrings(i18n?.currentLocale);
 
+  const [topOffset, setTopOffset] = React.useState(0);
+
+  const calculateOffset = () => {
+    const toc = document.querySelector('[class^="tableOfContents_"]');
+    const tocStyle = toc ? getComputedStyle(toc) : { top: '0' };
+    const stickyTopPx = parseFloat(tocStyle.top) || 0;
+    const height = (toc as HTMLElement)?.offsetHeight;
+    setTopOffset(height + stickyTopPx + 24); // 24 - marginTop
+  };
+
   React.useEffect(() => {
     if (typeof window !== 'undefined') {
       setPageUrl(window.location.href);
+      calculateOffset();
     }
   }, []);
 
@@ -115,7 +126,7 @@ export default function RightWidget() {
   };
 
   return (
-    <div className={styles.wrap}>
+    <div className={styles.wrap} style={{ top: topOffset }}>
       <div className={styles.header}>{t.articleHelpfulQuestion}</div>
       <div className={styles.iconsWrap}>
         <svg
