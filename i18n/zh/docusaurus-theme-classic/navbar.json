@@ -42,5 +42,9 @@
   "item.label.Extension": {
     "message": "适用于浏览器的扩展程序",
     "description": "Navbar item with label 适用于浏览器的扩展程序"
+  },
+  "item.label.MainSite": {
+    "message": "网站",
+    "description": "Navbar item with label Blog"
   }
 }

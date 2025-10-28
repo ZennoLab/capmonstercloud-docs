@@ -63,6 +63,15 @@ export const getMenuItems = (locale: string) => {
       type: 'component',
       className: '',
       render: ({ onClick }: { onClick?: () => void } = {}) => (
+        <HeaderLink onClick={onClick} href={`https://capmonster.cloud/${typedLocales[locale]}/`}>
+          {getLabel(locale, 'item.label.MainSite', 'Site')}
+        </HeaderLink>
+      ),
+    } as unknown as DefaultNavbarItemProps,
+    {
+      type: 'component',
+      className: '',
+      render: ({ onClick }: { onClick?: () => void } = {}) => (
         <HeaderLink onClick={onClick} href={'/docs/getting-start'}>
           {getLabel(locale, 'item.label.Документация', 'Docs')}
         </HeaderLink>
