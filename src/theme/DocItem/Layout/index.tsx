@@ -56,13 +56,7 @@ export default function DocItemLayout({ children }: any): ReactNode {
         </div>
       </div>
 
-      {docTOC.desktop && (
-        <div className="col col--3">
-          {docTOC.desktop}
-          <Feedback />
-          <Banners />
-        </div>
-      )}
+      {docTOC.desktop && <div className="col col--3">{docTOC.desktop}</div>}
     </div>
   );
 }
