@@ -4,6 +4,8 @@
   padding-right: 20px;
   padding-top: 20px;
   display: block;
+  border-radius: 12px;
+  max-width: 250px;
 }
 .wrapper:hover,
 .wrapper:focus,
@@ -12,11 +14,11 @@
 }
 
 .title {
-  font-size: 2.3rem;
-  line-height: 2.4rem;
-  font-weight: 700;
-  margin-top: 10px;
-  margin-bottom: 20px;
+  font-size: 20px;
+  line-height: 22px;
+  font-weight: 600;
+  margin-top: 5px;
+  margin-bottom: 12px;
   color: white;
 }
 
