@@ -1,17 +1,19 @@
 ﻿---
 sidebar_position: 5
 sidebar_label: GeeTest
-title: "Recognise and resolve GeeTest - GeeTest Task | API"
-description: "Learn how to set up automatic recognition and solve (bypass) GeeTest captchas via API using GeeTest Task type, see Capmonster Cloud Docs."
+title: 'Recognise and resolve GeeTest - GeeTest Task | API'
+description: 'Learn how to set up automatic recognition and solve (bypass) GeeTest captchas via API using GeeTest Task type, see Capmonster Cloud Docs.'
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ParamItem from '@theme/ParamItem';
 import MethodItem from '@theme/MethodItem';
-import MethodDescription from '@theme/MethodDescription'
+import MethodDescription from '@theme/MethodDescription';
 import PriceBlock from '../../../../../src/theme/PriceBlock';
 import PriceBlockWrap from '@theme/PriceBlockWrap';
+import ImagesLayout from '@theme/ImagesLayout';
+import ImageWrap from '@theme/ImageWrap';
 import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 
 <ArticleHead slug="captchas/geetest-task" />
@@ -19,10 +21,13 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 # GeeTestTask
 
 <PriceBlockWrap>
-  <PriceBlock title="GeeTestTask" captchaId="geetest"/>
+  <PriceBlock title="GeeTestTask" captchaId="geetest" />
 </PriceBlockWrap>
 
-![](./images/geetest-task/geetest_1.png) ![](./images/geetest-task/geetest_2.png)
+<ImagesLayout gap="16px" columns={3}>
+  <ImageWrap title="GeeTestCaptcha Example">![](./images/geetest-task/geetest_1.png)</ImageWrap>
+  <ImageWrap title="GeeTestCaptcha Example">![](./images/geetest-task/geetest_2.png)</ImageWrap>
+</ImagesLayout>
 
 Your application should send the site address, public domain key (`gt`) and key (`challenge`).
 
@@ -35,9 +40,10 @@ Proxies with IP authorization are not yet supported.
 :::
 
 :::info
+
 - The `gt`, `challenge` and `geetestApiServerSubdomain` parameters are most often found inside the `initGeetest` JavaScript function.
 - Also you can see in the HTML code of the page. You can find it in the `<sсript>` block, which appears after the page is fully loaded in the browser.
-  
+
 V3
 
 ![](./images/geetest-task/Aspose.Words.09e28b99-ec8b-4638-848b-cdd6fefc7ac8.001.png)
@@ -140,10 +146,11 @@ V4 (captcha_id = gt)
     ---
 
     <ParamItem title="userAgent" type="string" />
-    Browser User-Agent.  
-  **Pass only a valid UA from Windows OS. Currently it is**: `userAgentPlaceholder`
-  </TabItem>
+    Browser User-Agent.
 
+**Pass only a valid UA from Windows OS. Currently it is**: `userAgentPlaceholder`
+
+  </TabItem>
 
 ### <span style={{fontSize: '1.5rem'}}>Create task method</span>
 
@@ -167,99 +174,117 @@ V4 (captcha_id = gt)
 					"challenge":"7f044f48bc951ecfbfc03842b5e1fe59",
 					"geetestApiServerSubdomain":"api-na.geetest.com"
 
-				}
-			}
-			```
-			**Response**
-			```json
-			{
-			  "errorId":0,
-			  "taskId":407533072
-			}
-			```
-		</MethodDescription>
-	</TabItem>
+    			}
+    		}
+    		```
+    		**Response**
+    		```json
+    		{
+    		  "errorId":0,
+    		  "taskId":407533072
+    		}
+    		```
+    	</MethodDescription>
+    </TabItem>
 
-	<TabItem value="proxy" label="GeeTestTask (with proxy)" className="method-panel">
-		<MethodItem>
-			```http
-			https://api.capmonster.cloud/createTask
-			```
-		</MethodItem>
-		<MethodDescription>
-			**Request**
-			```json 
-			  {
-				"clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
-				"task": {
-				  "type":"GeeTestTask",
-				  "websiteURL":"https://www.geetest.com/en/demo",
-				  "gt":"022397c99c9f646f6477822485f30404",
-				  "challenge":"7f044f48bc951ecfbfc03842b5e1fe59",
-				  "geetestApiServerSubdomain":"api-na.geetest.com",
-				  "proxyType":"http",
-				  "proxyAddress":"8.8.8.8",
-				  "proxyPort":8080,
-				  "proxyLogin":"proxyLoginHere",
-				  "proxyPassword":"proxyPasswordHere",
-				  "userAgent":"userAgentPlaceholder"
-				}
-			  }
-			```
-			**Response**
-			```json
-			{
-			  "errorId":0,
-			  "taskId":407533072
-			}
-			```
-		</MethodDescription>
-	</TabItem>
-  
+    <TabItem value="proxy" label="GeeTestTask (with proxy)" className="method-panel">
+    	<MethodItem>
+    		```http
+    		https://api.capmonster.cloud/createTask
+    		```
+    	</MethodItem>
+    	<MethodDescription>
+    		**Request**
+    		```json
+    		  {
+    			"clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
+    			"task": {
+    			  "type":"GeeTestTask",
+    			  "websiteURL":"https://www.geetest.com/en/demo",
+    			  "gt":"022397c99c9f646f6477822485f30404",
+    			  "challenge":"7f044f48bc951ecfbfc03842b5e1fe59",
+    			  "geetestApiServerSubdomain":"api-na.geetest.com",
+    			  "proxyType":"http",
+    			  "proxyAddress":"8.8.8.8",
+    			  "proxyPort":8080,
+    			  "proxyLogin":"proxyLoginHere",
+    			  "proxyPassword":"proxyPasswordHere",
+    			  "userAgent":"userAgentPlaceholder"
+    			}
+    		  }
+    		```
+    		**Response**
+    		```json
+    		{
+    		  "errorId":0,
+    		  "taskId":407533072
+    		}
+    		```
+    	</MethodDescription>
+    </TabItem>
+
 </Tabs>
-
 
 Use the [getTaskResult](../api/methods/get-task-result.mdx) method to get the result of GeeTest recognition. Depending on the system load, you will receive a response after a time in the range from 10 s to 30 s.
 
 ### <span style={{fontSize: '1.5rem'}}>Get task result method</span>
 
-	<TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
-		<MethodItem>
-			```http
-			https://api.capmonster.cloud/getTaskResult
-			```
-		</MethodItem>
-		<MethodDescription>
-			**Request**
-			```json
-			{
-			  "clientKey":"API_KEY",
-			  "taskId": 407533072
-			}
-			```
-			**Response**
-			```json
-			{
-			  "errorId":0,
-			  "status":"ready",
-			  "solution": {
-				"challenge":"0f759dd1ea6c4wc76cedc2991039ca4f23",
-				"validate":"6275e26419211d1f526e674d97110e15",
-				"seccode":"510cd9735583edcb158601067195a5eb|jordan"
-			  }
-			}
-			```
-		</MethodDescription>
-	</TabItem>
+    <TabItem value="proxyless" label="GeeTestTaskProxyless (without proxy)" default className="method-panel-full">
+    	<MethodItem>
+    		```http
+    		https://api.capmonster.cloud/getTaskResult
+    		```
+    	</MethodItem>
+    	<MethodDescription>
+    		**Request**
+    		```json
+    		{
+    		  "clientKey":"API_KEY",
+    		  "taskId": 407533072
+    		}
+    		```
+    		**Response**
+    		```json
+    		{
+    		  "errorId":0,
+    		  "status":"ready",
+    		  "solution": {
+    			"challenge":"0f759dd1ea6c4wc76cedc2991039ca4f23",
+    			"validate":"6275e26419211d1f526e674d97110e15",
+    			"seccode":"510cd9735583edcb158601067195a5eb|jordan"
+    		  }
+    		}
+    		```
+    	</MethodDescription>
+    </TabItem>
 
 <br />
 
-<table><tr>
-<th><b>Property</b></th><th><b>Type</b></th><th><b>Description</b></th>
-</tr>
-<tr><td>challenge</td><td>String</td><td rowspan="3">All three parameters are required when submitting the form on the target site.</td></tr>
-<tr><td>validate</td><td>String</td></tr>
-<tr><td>seccode</td><td>String</td></tr>
+<table>
+  <tr>
+    <th>
+      <b>Property</b>
+    </th>
+    <th>
+      <b>Type</b>
+    </th>
+    <th>
+      <b>Description</b>
+    </th>
+  </tr>
+  <tr>
+    <td>challenge</td>
+    <td>String</td>
+    <td rowspan="3">All three parameters are required when submitting the form on the target site.</td>
+  </tr>
+  <tr>
+    <td>validate</td>
+    <td>String</td>
+  </tr>
+  <tr>
+    <td>seccode</td>
+    <td>String</td>
+  </tr>
 </table>
 
 ## How to find all required parameters for task creation
@@ -269,7 +294,7 @@ Use the [getTaskResult](../api/methods/get-task-result.mdx) method to get the re
 1. Open your website where the captcha appears in the browser.
 2. Right-click on the captcha element and select **Inspect**.
 
-All parameters can be found in *init-params* among the requests:
+All parameters can be found in _init-params_ among the requests:
 
 ![paramsv3](images\geetest-task\init-params.png)
 
@@ -350,6 +375,7 @@ The code snippets provided are basic examples for familiarization with extractin
       detectGeeTestV3();
       ```
     </details>
+
   </TabItem>
 
   <TabItem value="python" label="Python" className="method-panel">
@@ -369,7 +395,7 @@ The code snippets provided are basic examples for familiarization with extractin
 
         t = int(time.time() * 1000)
         response = requests.get(f'https://example.com/api/v1/captcha/gee-test/init-params?t={t}')
-        
+
         if response.status_code == 200:
             data = response.json()
             challenge = data.get('challenge')
@@ -387,6 +413,7 @@ The code snippets provided are basic examples for familiarization with extractin
       asyncio.run(detect_gee_test_v3())
       ```
     </details>
+
   </TabItem>
 
   <TabItem value="csharp" label="C#" className="method-panel">
@@ -451,6 +478,7 @@ The code snippets provided are basic examples for familiarization with extractin
       }
       ```
     </details>
+
   </TabItem>
 </Tabs>
 
@@ -474,25 +502,26 @@ The code snippets provided are basic examples for familiarization with extractin
       const geetestV3Request = new GeeTestRequest({
         websiteURL: 'https://example.com/geetest.php', // URL of the page with captcha
         gt: '81dc9bdb52d04dc20036dbd8313ed055',       // Replace with actual value
-        challenge: 'd93591bdf7860e1e4ee2fca799911215' 
+        challenge: 'd93591bdf7860e1e4ee2fca799911215'
       });
 
       // Option 2: With proxy (uncomment to use)
       // const geetestV3Request = new GeeTestRequest({
       //   websiteURL: 'https://example.com/geetest.php',
-      //   gt: '81dc9bdb52d04dc20036dbd8313ed055', 
+      //   gt: '81dc9bdb52d04dc20036dbd8313ed055',
       //   challenge: 'd93591bdf7860e1e4ee2fca799911215',
       //   userAgent: 'userAgentPlaceholder',
       //   proxyType: 'https',
       //   proxyAddress: '8.8.8.8',
       //   proxyPort: 6045,
-      //   proxyLogin: 'login', 
+      //   proxyLogin: 'login',
       //   proxyPassword: 'password'
       // });
 
       console.log(await cmcClient.Solve(geetestV3Request));
     });
     ```
+
   </TabItem>
 
   <TabItem value="python" label="Python" className="method-panel">
@@ -521,11 +550,11 @@ The code snippets provided are basic examples for familiarization with extractin
     #     websiteUrl="https://example.com",
     #     gt="81dc9bdb52d04dc20036dbd8313ed055",
     #     challenge="d93591bdf7860e1e4ee2fca799911215",
-    #     proxy_type="http",      
-    #     proxy_address="8.8.8.8",  
-    #     proxy_port=8080,          
-    #     proxy_login="proxyLogin", 
-    #     proxy_password="proxyPass"  
+    #     proxy_type="http",
+    #     proxy_address="8.8.8.8",
+    #     proxy_port=8080,
+    #     proxy_login="proxyLogin",
+    #     proxy_password="proxyPass"
     # )
 
     async def solve_captcha():
@@ -534,6 +563,7 @@ The code snippets provided are basic examples for familiarization with extractin
     responses = asyncio.run(solve_captcha())
     print(responses)
     ```
+
   </TabItem>
 
   <TabItem value="csharp" label="C#" className="method-panel">
@@ -560,7 +590,7 @@ The code snippets provided are basic examples for familiarization with extractin
             var geetestRequest = new GeeTestRequest
             {
                 WebsiteUrl = "https://example.com/demo/geetest", // URL of the page with captcha
-                Gt = "your_gt_value",       // Replace with actual value                     
+                Gt = "your_gt_value",       // Replace with actual value
                 Challenge = "your_challenge_value"
             };
 
@@ -569,15 +599,15 @@ The code snippets provided are basic examples for familiarization with extractin
             /*
             var geetestRequest = new GeeTestRequest
             {
-                WebsiteUrl = "https://example.com/demo/geetest", 
-                Gt = "your_gt_value",  
+                WebsiteUrl = "https://example.com/demo/geetest",
+                Gt = "your_gt_value",
                 Challenge = "your_challenge_value",
-                
+
                 Proxy = new ProxyContainer(
-                    "8.8.8.8",     
-                    8080,          
-                    ProxyType.Http, 
-                    "proxyLoginHere", 
+                    "8.8.8.8",
+                    8080,
+                    ProxyType.Http,
+                    "proxyLoginHere",
                     "proxyPasswordHere"
                 )
             };
@@ -592,6 +622,7 @@ The code snippets provided are basic examples for familiarization with extractin
         }
     }
     ```
+
   </TabItem>  
 </Tabs>
 
@@ -602,7 +633,6 @@ The code snippets provided are basic examples for familiarization with extractin
 ### <span style={{fontSize: '1.5rem'}}>Possible captcha variant</span>
 
 ![](./images/geetest-task/geetest4.png)
-
 
 ### <span style={{fontSize: '1.5rem'}}>Request parameters</span>
 
@@ -673,11 +703,10 @@ The code snippets provided are basic examples for familiarization with extractin
 
     <ParamItem title="userAgent" type="string" />
     Browser User-Agent used to recognize captcha.
+
   </TabItem>
 
-
 ### <span style={{fontSize: '1.5rem'}}>Create task method</span>
-
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 	<TabItem value="proxyless" label="GeeTestTask (without proxy)" default className="method-panel">
@@ -700,60 +729,60 @@ The code snippets provided are basic examples for familiarization with extractin
 					"initParameters": {
 					  "riskType": "slide"
 
-					}
-				}
-			}
-			```
-			**Response**
-			```json
-			{
-			  "errorId":0,
-			  "taskId":407533072
-			}
-			```
-		</MethodDescription>
-	</TabItem>
+    				}
+    			}
+    		}
+    		```
+    		**Response**
+    		```json
+    		{
+    		  "errorId":0,
+    		  "taskId":407533072
+    		}
+    		```
+    	</MethodDescription>
+    </TabItem>
 
-	<TabItem value="proxy" label="GeeTestTask (with proxy)" className="method-panel">
-		<MethodItem>
-			```http
-			https://api.capmonster.cloud/createTask
-			```
-		</MethodItem>
-		<MethodDescription>
-			**Request**
-			```json
-			{
-			  "clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
-			  "task": {
-				"type":"GeeTestTask",
-				"websiteURL":"https://gt4.geetest.com/",
-				"gt":"54088bb07d2df3c46b79f80300b0abbe",
-				"version": 4,
-				"initParameters": {
-				  "riskType": "slide"
-				},
-				"proxyType":"http",
-				"proxyAddress":"8.8.8.8",
-				"proxyPort":8080,
-				"proxyLogin":"proxyLoginHere",
-				"proxyPassword":"proxyPasswordHere",
-				"userAgent":"userAgentPlaceholder"
+    <TabItem value="proxy" label="GeeTestTask (with proxy)" className="method-panel">
+    	<MethodItem>
+    		```http
+    		https://api.capmonster.cloud/createTask
+    		```
+    	</MethodItem>
+    	<MethodDescription>
+    		**Request**
+    		```json
+    		{
+    		  "clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
+    		  "task": {
+    			"type":"GeeTestTask",
+    			"websiteURL":"https://gt4.geetest.com/",
+    			"gt":"54088bb07d2df3c46b79f80300b0abbe",
+    			"version": 4,
+    			"initParameters": {
+    			  "riskType": "slide"
+    			},
+    			"proxyType":"http",
+    			"proxyAddress":"8.8.8.8",
+    			"proxyPort":8080,
+    			"proxyLogin":"proxyLoginHere",
+    			"proxyPassword":"proxyPasswordHere",
+    			"userAgent":"userAgentPlaceholder"
 
-			  }
-			}
-			```
+    		  }
+    		}
+    		```
 
-			**Response**
-			```json
-			{
-			  "errorId":0,
-			  "taskId":407533072
-			}
-			```
-		</MethodDescription>
-	</TabItem>
-  
+    		**Response**
+    		```json
+    		{
+    		  "errorId":0,
+    		  "taskId":407533072
+    		}
+    		```
+    	</MethodDescription>
+    </TabItem>
+
 </Tabs>
 
 Use the [getTaskResult](../api/methods/get-task-result.mdx) to get the result of GeeTest recognition. Depending on the system load, you will receive a response after a time in the range from 10 s to 30 s.
@@ -794,16 +823,50 @@ Use the [getTaskResult](../api/methods/get-task-result.mdx) to get the result of
 <br />
 
 <table>
-<tr>
-<th><b>Property</b></th><th><b>Type</b></th><th><b>Description</b></th>
-</tr>
-<tr>
-<td>captcha_id</td><td>String</td><td rowspan="5">All five parameters are required when submitting the form on the target site.<br />input[name=captcha_id]<br />input[name=lot_number]<br />input[name=pass_token]<br />input[name=gen_time]<br />input[name=captcha_output]</td>
-</tr>
-<tr><td>lot_number</td><td>String</td></tr>
-<tr><td>pass_token</td><td>String</td></tr>
-<tr><td>gen_time</td><td>String</td></tr>
-<tr><td>captcha_output</td><td>String</td></tr>
+  <tr>
+    <th>
+      <b>Property</b>
+    </th>
+    <th>
+      <b>Type</b>
+    </th>
+    <th>
+      <b>Description</b>
+    </th>
+  </tr>
+  <tr>
+    <td>captcha_id</td>
+    <td>String</td>
+    <td rowspan="5">
+      All five parameters are required when submitting the form on the target site.
+      <br />
+      input[name=captcha_id]
+      <br />
+      input[name=lot_number]
+      <br />
+      input[name=pass_token]
+      <br />
+      input[name=gen_time]
+      <br />
+      input[name=captcha_output]
+    </td>
+  </tr>
+  <tr>
+    <td>lot_number</td>
+    <td>String</td>
+  </tr>
+  <tr>
+    <td>pass_token</td>
+    <td>String</td>
+  </tr>
+  <tr>
+    <td>gen_time</td>
+    <td>String</td>
+  </tr>
+  <tr>
+    <td>captcha_output</td>
+    <td>String</td>
+  </tr>
 </table>
 
 ## How to find all required parameters for task creation
@@ -813,7 +876,7 @@ Use the [getTaskResult](../api/methods/get-task-result.mdx) to get the result of
 1. Open your website where the captcha appears in the browser.
 2. Right-click on the captcha element and select **Inspect**.
 
-Parameters may load in *load?callback*:
+Parameters may load in _load?callback_:
 
 ![paramsv4](images\geetest-task\load-callback.png)
 
@@ -910,6 +973,7 @@ The code snippets provided are basic examples for familiarization with extractin
       });
       ```
     </details>
+
   </TabItem>
 
   <TabItem value="python" label="Python" className="method-panel">
@@ -961,6 +1025,7 @@ The code snippets provided are basic examples for familiarization with extractin
       asyncio.run(detect_geetest_v4("https://www.example.com"))
       ```
     </details>
+
   </TabItem>
 
   <TabItem value="csharp" label="C#" className="method-panel">
@@ -1031,6 +1096,7 @@ The code snippets provided are basic examples for familiarization with extractin
       }
       ```
     </details>
+
   </TabItem>
 </Tabs>
 
@@ -1054,10 +1120,10 @@ The code snippets provided are basic examples for familiarization with extractin
       const geetestV4Request = new GeeTestRequest({
         websiteURL: 'https://example.com/geetest.php', // URL of the page with captcha
         gt: '81dc9bdb52d04dc20036dbd8313ed055',      // Replace with actual value
-        challenge: 'd93591bdf7860e1e4ee2fca799911215', 
-        version: '4',                                  
+        challenge: 'd93591bdf7860e1e4ee2fca799911215',
+        version: '4',
         initParameters: {
-          riskType: 'slide'                            
+          riskType: 'slide'
         },
       });
 
@@ -1071,18 +1137,19 @@ The code snippets provided are basic examples for familiarization with extractin
         initParameters: {
           riskType: 'slide',
         },
-        userAgent: 'userAgentPlaceholder',    
-        proxyType: 'https',                   
+        userAgent: 'userAgentPlaceholder',
+        proxyType: 'https',
         proxyAddress: '8.8.8.8',
-        proxyPort: 6045,                        
-        proxyLogin: 'login',                   
-        proxyPassword: 'p@ssword'              
+        proxyPort: 6045,
+        proxyLogin: 'login',
+        proxyPassword: 'p@ssword'
       })
       */
 
       console.log(await cmcClient.Solve(geetestV4Request));
     });
     ```
+
   </TabItem>
   
   <TabItem value="python" label="Python" className="method-panel">
@@ -1103,7 +1170,7 @@ The code snippets provided are basic examples for familiarization with extractin
         gt="54088bb07d2df3c46b79f80300b0abbe", # Replace with actual value
         version=4,
         initParameters={
-            "riskType": "slide" 
+            "riskType": "slide"
         }
     )
 
@@ -1117,11 +1184,11 @@ The code snippets provided are basic examples for familiarization with extractin
     #     initParameters={
     #         "riskType": "slide"
     #     },
-    #     proxyType="http",          
-    #     proxyAddress="8.8.8.8",    
-    #     proxyPort=8080,             
-    #     proxyLogin="proxyLoginHere",    
-    #     proxyPassword="proxyPasswordHere",  
+    #     proxyType="http",
+    #     proxyAddress="8.8.8.8",
+    #     proxyPort=8080,
+    #     proxyLogin="proxyLoginHere",
+    #     proxyPassword="proxyPasswordHere",
     #     user_agent="userAgentPlaceholder"
     # )
 
@@ -1131,6 +1198,7 @@ The code snippets provided are basic examples for familiarization with extractin
     responses = asyncio.run(solve_captcha())
     print(responses)
     ```
+
   </TabItem>
   
   <TabItem value="csharp" label="C#" className="method-panel">
@@ -1159,7 +1227,7 @@ The code snippets provided are basic examples for familiarization with extractin
             {
                 WebsiteUrl = "https://example.com/", // URL of the page with captcha
                 Gt = "54088bb07d2df3c46b79f80300b0abbe", // Replace with actual value
-                Version = 4,                             
+                Version = 4,
                 InitParameters = new Dictionary<string, string> { { "riskType", "slide" } }
             };
 
@@ -1169,14 +1237,14 @@ The code snippets provided are basic examples for familiarization with extractin
             var geetestRequest = new GeeTestRequest
             {
                 WebsiteUrl = "https://example.com/",
-                Gt = "54088bb07d2df3c46b79f80300b0abbe", 
+                Gt = "54088bb07d2df3c46b79f80300b0abbe",
                 Version = 4,
                 InitParameters = new Dictionary<string, string> { { "riskType", "slide" } },
 
                 Proxy = new ProxyContainer(
-                    "8.8.8.8",    
-                    8080,            
-                    ProxyType.Http, 
+                    "8.8.8.8",
+                    8080,
+                    ProxyType.Http,
                     "proxyLoginHere",
                     "proxyPasswordHere"
                 )
@@ -1194,19 +1262,20 @@ The code snippets provided are basic examples for familiarization with extractin
         }
     }
     ```
+
   </TabItem>
 </Tabs>
 
-## Features of the GeeTest  solution on app.gal\*\*.com
+## Features of the GeeTest solution on app.gal\*\*.com
 
 :::warning **Attention!**
-This section is relevant **only for the GeeTest captcha on the `app.gal**.com` site**. These values should not be used for other sites.
+This section is relevant **only for the GeeTest captcha on the `app.gal**.com` site\*\*. These values should not be used for other sites.
 :::
 
 <details>
   <summary>When to use the <code>challenge</code> field?</summary>
 
-For the **`app.gal**.com`** site, you need to specify the value of the `challenge` field depending on the action being performed. If this field is not specified, the default value **`AddTypedCredentialItems`** is used, but this does not suit all scenarios.
+For the **`app.gal**.com`** site, you need to specify the value of the `challenge` field depending on the action being performed. If this field is not specified, the default value **`AddTypedCredentialItems`\*\* is used, but this does not suit all scenarios.
 
 List of possible `challenge` values:
 
