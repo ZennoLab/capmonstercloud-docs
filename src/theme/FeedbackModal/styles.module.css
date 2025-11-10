@@ -1,0 +1,118 @@
+/* Overlay */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Modal */
+.modal {
+  background: #fff;
+  width: 520px;
+  max-width: calc(100% - 32px);
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+  padding: 32px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.title {
+  font-weight: 600;
+  color: #191e28;
+  font-size: 20px;
+  line-height: 30px;
+}
+
+.closeBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #6b7280;
+  font-size: 22px;
+  line-height: 1;
+  padding: 4px 6px;
+  border-radius: 6px;
+}
+.closeBtn:hover {
+  background: #f3f4f6;
+}
+
+.body {
+  margin-top: 16px;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 200px;
+  resize: none;
+  padding: 8px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #14193c;
+  outline: none;
+  font: var(--ifm-font-size-base) / var(--ifm-line-height-base) var(--ifm-font-family-base);
+}
+.textarea::placeholder {
+  color: #9ca3af;
+}
+.textarea:focus {
+  border-color: #c7c9d1;
+  box-shadow: 0 0 0 2px rgba(115, 95, 255, 0.12);
+}
+
+.footer {
+  margin-top: 48px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.cancelBtn {
+  background: #ffffff;
+  color: #735fff;
+  border: 1px solid #d7dce6;
+  padding-left: 32px;
+  padding-right: 32px;
+  height: 54px;
+  line-height: 50px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.cancelBtn:hover {
+  background: #f7f7fb;
+}
+
+.submitBtn {
+  background: #735fff;
+  color: #ffffff;
+  border: 1px solid #735fff;
+  padding-left: 32px;
+  padding-right: 32px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  height: 54px;
+  line-height: 50px;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.submitBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
