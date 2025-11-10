@@ -23,5 +23,12 @@
   "fullPriceText": "Посмотреть полный прайс",
   "dynamicHundredImages": "1000 дин. картинок",
   "complexImageAnswers": "1000 ответов",
-  "moreBlogInfo": "Ещё больше по теме в нашем блоге"
+  "moreBlogInfo": "Ещё больше по теме в нашем блоге",
+  "feedbackModalTitle": "Поделиться мнением о статье",
+  "feedbackModalPlaceholder": "Ваш комментарий",
+  "cancel": "Отменить",
+  "send": "Отправить",
+  "close": "Закрыть",
+  "articleHelpfulQuestion": "Статья была полезной?",
+  "mainSiteBannerTitle": "Узнайте стоимость AI решения КАПЧ"
 }

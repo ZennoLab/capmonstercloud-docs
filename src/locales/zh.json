@@ -23,5 +23,12 @@
   "fullPriceText": "查看全部价格",
   "dynamicHundredImages": "1000张动态图片",
   "complexImageAnswers": "1000个回答",
-  "moreBlogInfo": "更多相关内容，请访问我们的博客"
+  "moreBlogInfo": "更多相关内容，请访问我们的博客",
+  "feedbackModalTitle": "分享您对文章的看法",
+  "feedbackModalPlaceholder": "您的评论",
+  "cancel": "取消",
+  "send": "发送",
+  "close": "关闭",
+  "articleHelpfulQuestion": "这篇文章有帮助吗？",
+  "mainSiteBannerTitle": "查看 AI CAPTCHA 求解器的价格"
 }
