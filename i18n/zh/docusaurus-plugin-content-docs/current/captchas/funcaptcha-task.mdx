@@ -1,0 +1,264 @@
+---
+sidebar_position: 22
+sidebar_label: FunCaptcha
+title: "FunCaptcha 自动识别与绕过 | API"
+description: "了解如何使用 CapMonster Cloud 自动验证码识别 API 绕过 FunCaptcha（Arkose Labs 验证码）！" 
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+import PriceBlock from '@theme/PriceBlock';
+import PriceBlockWrap from '@theme/PriceBlockWrap';
+import { ArticleHead } from '../../../../../src/theme/ArticleHead';
+
+<ArticleHead slug="captchas/funcaptcha-task" />
+
+# FunCaptcha
+
+<PriceBlockWrap>
+  <PriceBlock title="FunCaptcha" captchaId="funcaptcha"/>
+</PriceBlockWrap>
+
+![](./images/funcaptcha/funcaptcha.png)
+
+:::warning **注意！**
+CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费用内。仅当网站不接受令牌或对内置服务的访问受限时，才需要指定您自己的代理。
+
+如果代理按 IP 授权，请将地址 **65.21.190.34** 加入白名单。
+:::
+
+## 请求参数
+
+<TabItem value="proxy" label="FunCaptchaTask" className="bordered-panel">
+<ParamItem title="type" required type="string" />
+**FunCaptchaTask**
+
+---
+
+<ParamItem title="websiteURL" required type="string" />
+验证码所在页面的 URL。
+
+---
+
+<ParamItem title="websitePublicKey" required type="string" />
+FunCaptcha 密钥（值为 *public key* 或 *pk*）。
+
+---
+
+<ParamItem title="data" type="string" />
+附加参数。如果网站使用 *data[blob]* 则必填。<br />
+**重要提示：** 不要加载 captcha iframe 来提取 `blob`。一旦加载验证码，该值即失效。
+
+---
+
+<ParamItem title="funcaptchaApiJSSubdomain" type="string" />
+Arkose Labs 子域名（值为 *surl*）。只有在不同于默认值时才需要指定：`client-api.arkoselabs.com`。
+
+---
+
+<ParamItem title="userAgent" type="string" />
+浏览器 User-Agent。<br />
+**仅传递当前 Windows 系统的 UA 示例:** `userAgentPlaceholder`。
+
+---
+
+<ParamItem title="cookies" type="string" />
+以如下格式传递额外 Cookie：
+
+```
+
+cookieName1=value1; cookieName2=value2
+
+````
+
+---
+
+<ParamItem title="proxyType" type="string" />
+**http** - 常规 http/https 代理；<br />
+**https** - 仅当 "http" 无效时使用（某些自定义代理需要）；<br />
+**socks4** - socks4 代理；<br />
+**socks5** - socks5 代理。
+
+---
+
+<ParamItem title="proxyAddress" type="string" />
+<p>
+代理的 IPv4/IPv6 地址。禁止以下使用方式：
+- 使用透明代理（可暴露客户端 IP）；
+- 使用本地机器上的代理。
+</p>
+
+---
+
+<ParamItem title="proxyPort" type="integer" />
+代理端口。
+
+---
+
+<ParamItem title="proxyLogin" type="string" />
+代理服务器登录用户名。
+
+---
+
+<ParamItem title="proxyPassword" type="string" />
+代理服务器登录密码。
+
+</TabItem>
+
+## 创建任务的方法
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+<TabItem value="proxyless" label="FunCaptchaTask（无代理）" default className="method-panel">
+<MethodItem>
+```http
+https://api.capmonster.cloud/createTask
+````
+
+</MethodItem>
+<MethodDescription>
+**请求**
+```json
+{
+  "clientKey": "API_KEY",
+  "task": {
+    "type": "FunCaptchaTask",
+    "websiteURL": "https://www.example.com",
+    "websitePublicKey": "EX72CCFB-26EX-40E5-91E6-85EX70BE98ED",
+    "funcaptchaApiJSSubdomain": "example-api.arkoselabs.com",
+    "data": "{\"blob\":\"nj9UbL+yio7goOlTQ/b64t.ayrrBnP6kPgzlKYCP/kv491lKS...Wot/7gjpyIxs7VYb0+QuRcfQ/t6bzh5pXDkOFSskA/V/ITSVZSAlglIplLcdreZ4PE8skfMU6k1Q\"}",
+    "userAgent": "userAgentPlaceholder"
+  }
+}
+```
+**响应**
+```json
+{
+  "errorId":0,
+  "taskId":407533077
+}
+```
+</MethodDescription>
+</TabItem>
+
+<TabItem value="proxy" label="FunCaptchaTask（使用代理）" default className="method-panel">
+<MethodItem>
+```http
+https://api.capmonster.cloud/createTask
+```
+</MethodItem>
+<MethodDescription>
+**请求**
+```json
+{
+  "clientKey": "API_KEY",
+  "task": {
+    "type": "FunCaptchaTask",
+    "websiteURL": "https://www.example.com",
+    "websitePublicKey": "EX72CCFB-26EX-40E5-91E6-85EX70BE98ED",
+    "funcaptchaApiJSSubdomain": "example-api.arkoselabs.com",
+    "data": "{\"blob\":\"nj9UbL+yio7goOlTQ/b64t.ayrrBnP6kPgzlKYCP/kv491lKS...Wot/7gjpyIxs7VYb0+QuRcfQ/t6bzh5pXDkOFSskA/V/ITSVZSAlglIplLcdreZ4PE8skfMU6k1Q\"}",
+    "userAgent": "userAgentPlaceholder",
+    "proxyType": "http",
+    "proxyAddress": "8.8.8.8",
+    "proxyPort": 8080,
+    "proxyLogin": "proxyLoginHere",
+    "proxyPassword": "proxyPasswordHere"
+  }
+}
+```
+**响应**
+```json
+{
+  "errorId":0,
+  "taskId":407533077
+}
+```
+</MethodDescription>
+</TabItem>
+</Tabs>
+
+## 获取任务结果的方法
+
+使用 [getTaskResult](../api/methods/get-task-result.mdx) 获取 FunCaptcha 解决方案。
+
+<TabItem value="proxyless" label="FunCaptchaTask（无代理）" default className="method-panel-full">
+<MethodItem>
+```http
+https://api.capmonster.cloud/getTaskResult
+```
+</MethodItem>
+<MethodDescription>
+**请求**
+```json
+{
+  "clientKey": "API_KEY",
+  "taskId": 407533077
+}
+```
+
+**响应**
+
+```json
+{
+  "errorId": 0,
+  "errorCode": null,
+  "errorDescription": null,
+  "solution": {
+    "token": "337187b9f57678923.5060184402|r=us-west-2|lang=en|pk=EX72CCFB-26EX-40E5-91E6-85EX70BE98ED|at=40|ag=101|cdn_url=https%3A%2F%2Fclient-api.arkoselabs.com%2Fcdn%2Ffc|surl=https%3A%2F%2Fclient-api.arkoselabs.com|smurl=https%3A%2F%2Fclient-api.arkoselabs.com%2Fcdn%2Ffc%2Fassets%2Fstyle-manager",
+    "userAgent": "userAgentPlaceholder"
+  },
+  "status": "ready"
+}
+```
+
+</MethodDescription>
+</TabItem>
+
+## 获取 FunCaptcha 参数
+
+### `websitePublicKey` 和 `funcaptchaApiJSSubdomain`
+
+打开 DevTools → **Elements**，找到隐藏输入框 ID 为 `verification-token` 或 `FunCaptcha-Token` 的元素。其中包含 `pk` (*websitePublicKey*) 和 `surl` (*funcaptchaApiJSSubdomain*) 值。
+
+通过控制台获取参数：
+
+```js
+const v = document.querySelector("#verification-token, #FunCaptcha-Token").value;
+const p = Object.fromEntries(v.split("|").map(x => x.split("=")));
+console.log("pk:", p.pk);
+console.log("surl:", decodeURIComponent(p.surl));
+```
+
+### `data`
+
+如果网站使用额外的 `blob` 参数，可以按以下方式获取：
+
+#### 1. 确定数据来源
+
+`blob` 参数可能存在于：
+
+* **HTML 属性**：例如 `data-blob` 或其他 `data-*` 属性。
+
+![](./images/funcaptcha/blob_html.png)
+
+* **JSON API 响应**：用户操作（如点击或请求验证码）后返回。
+
+* **JSON 中 URL 的查询参数**：有时 `blob` 作为 URL 的一部分传递。
+
+#### 2. 执行请求
+
+* **GET 请求**到显示验证码的页面，
+  或
+* **POST 请求**到返回验证码数据的 API。
+
+> **重要提示：** 不要加载 captcha iframe 来提取 `blob`。一旦验证码加载，参数即失效。
+
+#### 3. 提取参数
+
+* 如果响应是 **HTML** — 使用正则或 HTML 解析工具定位属性。
+* 如果响应是 **JSON** — 获取对应键的值（例如 `data.blob`）。
+* 如果 `blob` 在 **URL** 中 — 解析 query 参数以获取值。
+
