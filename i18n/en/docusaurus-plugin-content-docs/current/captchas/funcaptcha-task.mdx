@@ -1,0 +1,261 @@
+---
+sidebar_position: 22
+sidebar_label: FunCaptcha
+title: "Automatic FunCaptcha Recognition and Bypass | API"
+description: "Learn how to bypass FunCaptcha (Arkose Labs captcha) using the CapMonster Cloud automatic captcha solving API!" 
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+import PriceBlock from '@theme/PriceBlock';
+import PriceBlockWrap from '@theme/PriceBlockWrap';
+import { ArticleHead } from '../../../../../src/theme/ArticleHead';
+
+<ArticleHead slug="captchas/funcaptcha-task" />
+
+# FunCaptcha
+
+<PriceBlockWrap>
+  <PriceBlock title="FunCaptcha" captchaId="funcaptcha"/>
+</PriceBlockWrap>
+
+![](./images/funcaptcha/funcaptcha.png)
+
+:::warning **Attention!**
+CapMonster Cloud uses built-in proxies by default — their cost is already included in the service. You only need to specify your own proxies in cases where the website does not accept the token or access to the built-in services is restricted.
+
+If you are using a proxy with IP authorization, make sure to whitelist the address **65.21.190.34**.
+:::
+
+## Request parameters
+
+<TabItem value="proxy" label="FunCaptchaTask" className="bordered-panel">
+<ParamItem title="type" required type="string" />
+**FunCaptchaTask**
+
+---
+
+<ParamItem title="websiteURL" required type="string" />
+The URL of the page where the captcha is located.
+
+---
+
+<ParamItem title="websitePublicKey" required type="string" />
+FunCaptcha key (value *public key* or *pk*).
+
+---
+
+<ParamItem title="data" type="string" />
+Additional parameter. Required if the site uses *data[blob]*. <br />
+**Important:** Do not load the captcha iframe to extract `blob`. Once the captcha is loaded, the value becomes invalid.
+
+---
+
+<ParamItem title="funcaptchaApiJSSubdomain" type="string" />
+Arkose Labs subdomain (value *surl*). Specify only if it differs from the default: `https://client-api.arkoselabs.com`.
+
+---
+
+<ParamItem title="userAgent" type="string" />
+Browser User-Agent. <br />
+**Pass only a current Windows OS UA. Current example:** `userAgentPlaceholder`.
+
+---
+
+<ParamItem title="cookies" type="string" />
+Pass additional cookies in the format:
+
+```
+
+cookieName1=value1; cookieName2=value2
+
+````
+
+---
+
+<ParamItem title="proxyType" type="string" />
+    **http** - regular http/https proxy;<br />**https** - try this option only if "http" doesn't work (required for some custom proxies);<br />**socks4** - socks4 proxy;<br />**socks5** - socks5 proxy.
+	
+	---
+
+    <ParamItem title="proxyAddress" type="string" />
+    <p>
+      IPv4/IPv6 proxy IP address. Not allowed:
+      - using transparent proxies (where you can see the client's IP);
+      - using proxies on local machines.
+    </p>
+
+    ---
+
+    <ParamItem title="proxyPort" type="integer" />
+    Proxy port.
+
+    ---
+
+    <ParamItem title="proxyLogin" type="string" />
+    Proxy-server login.
+
+    ---
+
+    <ParamItem title="proxyPassword" type="string" />
+    Proxy-server password.
+
+  </TabItem>
+
+## Create task method
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+<TabItem value="proxyless" label="FunCaptchaTask (proxyless)" default className="method-panel">
+<MethodItem>
+```http
+https://api.capmonster.cloud/createTask
+````
+
+</MethodItem>
+<MethodDescription>
+**Request**
+```json
+{
+  "clientKey": "API_KEY",
+  "task": {
+    "type": "FunCaptchaTask",
+    "websiteURL": "https://www.example.com",
+    "websitePublicKey": "EX72CCFB-26EX-40E5-91E6-85EX70BE98ED",
+    "funcaptchaApiJSSubdomain": "example-api.arkoselabs.com",
+    "data": "{\"blob\":\"nj9UbL+yio7goOlTQ/b64t.ayrrBnP6kPgzlKYCP/kv491lKS...Wot/7gjpyIxs7VYb0+QuRcfQ/t6bzh5pXDkOFSskA/V/ITSVZSAlglIplLcdreZ4PE8skfMU6k1Q\"}",
+    "userAgent": "userAgentPlaceholder"
+  }
+}
+```
+**Response**
+```json
+{
+  "errorId":0,
+  "taskId":407533077
+}
+```
+</MethodDescription>
+</TabItem>
+
+<TabItem value="proxy" label="FunCaptchaTask (with proxy)" default className="method-panel">
+<MethodItem>
+```http
+https://api.capmonster.cloud/createTask
+```
+</MethodItem>
+<MethodDescription>
+**Request**
+```json
+{
+  "clientKey": "API_KEY",
+  "task": {
+    "type": "FunCaptchaTask",
+    "websiteURL": "https://www.example.com",
+    "websitePublicKey": "EX72CCFB-26EX-40E5-91E6-85EX70BE98ED",
+    "funcaptchaApiJSSubdomain": "example-api.arkoselabs.com",
+    "data": "{\"blob\":\"nj9UbL+yio7goOlTQ/b64t.ayrrBnP6kPgzlKYCP/kv491lKS...Wot/7gjpyIxs7VYb0+QuRcfQ/t6bzh5pXDkOFSskA/V/ITSVZSAlglIplLcdreZ4PE8skfMU6k1Q\"}",
+    "userAgent": "userAgentPlaceholder",
+    "proxyType": "http",
+    "proxyAddress": "8.8.8.8",
+    "proxyPort": 8080,
+    "proxyLogin": "proxyLoginHere",
+    "proxyPassword": "proxyPasswordHere"
+  }
+}
+```
+**Response**
+```json
+{
+  "errorId":0,
+  "taskId":407533077
+}
+```
+</MethodDescription>
+</TabItem>
+</Tabs>
+
+## Get task result method
+
+Use [getTaskResult](../api/methods/get-task-result.mdx) to get the FunCaptcha solution.
+
+<TabItem value="proxyless" label="FunCaptchaTask (proxyless)" default className="method-panel-full">
+<MethodItem>
+```http
+https://api.capmonster.cloud/getTaskResult
+```
+</MethodItem>
+<MethodDescription>
+**Request**
+```json
+{
+  "clientKey": "API_KEY",
+  "taskId": 407533077
+}
+```
+
+**Response**
+
+```json
+{
+  "errorId": 0,
+  "errorCode": null,
+  "errorDescription": null,
+  "solution": {
+    "token": "337187b9f57678923.5060184402|r=us-west-2|lang=en|pk=EX72CCFB-26EX-40E5-91E6-85EX70BE98ED|at=40|ag=101|cdn_url=https%3A%2F%2Fclient-api.arkoselabs.com%2Fcdn%2Ffc|surl=https%3A%2F%2Fclient-api.arkoselabs.com|smurl=https%3A%2F%2Fclient-api.arkoselabs.com%2Fcdn%2Ffc%2Fassets%2Fstyle-manager",
+    "userAgent": "userAgentPlaceholder"
+  },
+  "status": "ready"
+}
+```
+
+</MethodDescription>
+</TabItem>
+
+## Finding FunCaptcha parameters
+
+### `websitePublicKey` and `funcaptchaApiJSSubdomain`
+
+Open DevTools → **Elements** and find the hidden input with ID `verification-token` or `FunCaptcha-Token`. These contain the `pk` (*websitePublicKey*) and `surl` (*funcaptchaApiJSSubdomain*) values.
+
+Get parameters via console:
+
+```js
+const v = document.querySelector("#verification-token, #FunCaptcha-Token").value;
+const p = Object.fromEntries(v.split("|").map(x => x.split("=")));
+console.log("pk:", p.pk);
+console.log("surl:", decodeURIComponent(p.surl));
+```
+
+### `data`
+
+If the site uses an additional `blob` parameter, you can obtain it as follows:
+
+#### 1. Identify the data source
+
+The `blob` parameter can be located in:
+
+* **HTML attributes**: e.g., `data-blob` or other `data-*` attributes.
+
+![](./images/funcaptcha/blob_html.png)
+
+* **JSON API response**: returned after a user action (e.g., click or captcha request).
+
+* **Query parameter in URL within JSON**: sometimes `blob` is passed as part of the URL.
+
+#### 2. Perform the request
+
+* **GET request** to the page where the captcha is displayed,
+  or
+* **POST request** to the API returning captcha data.
+
+> **Important:** Do not load the captcha iframe to extract `blob`. Once the captcha is loaded, the parameter becomes invalid.
+
+#### 3. Extract the parameter
+
+* If the response is **HTML** — use regex or an HTML parsing tool to locate the attribute.
+* If the response is **JSON** — get the value of the corresponding key (e.g., `data.blob`).
+* If the `blob` is in a **URL** — parse the query parameters to extract the value.
+
