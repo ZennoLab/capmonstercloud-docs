@@ -26,11 +26,12 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 <BlogLink url="https://capmonster.cloud/zh/blog/news/imperva-incapsula-news"/>
 
 :::warning **注意！**
-* CapMonster Cloud 提供的 Imperva (Incapsula) 解决方案仅用于测试和分析您自己网络资源的性能。严禁在第三方网站上使用此解决方案，这违反了服务的使用政策。
 
-* CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费用内。仅当网站不接受令牌或对内置服务的访问受限时，才需要指定您自己的代理。
+* 执行此任务时，请使用 **您自己的代理**。
 
 * 如果代理按 IP 授权，请将地址 **65.21.190.34** 加入白名单。
+
+* 完成验证后，您将获得 **特殊的Cookie**，需要添加到浏览器中。
 :::
 
 
@@ -60,8 +61,37 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
     你从 Incapsula 获取的 cookies。可以通过在页面中使用 document.cookie 获取，或者在请求头中通过 Set-Cookie: "incap_sess_*=...; visid_incap_*=..." 获取（参见 /createTask 请求示例）。
 	
 	![](./images/incapsula/incapsula2.png)
-	
-	---
+
+  ---
+
+  <ParamItem title="proxyType" required type="string" />
+    **http** - 普通的 http/https 代理；<br />**https** - 仅在 "http" 不起作用时尝试（某些自定义代理服务器要求）；<br />**socks4** - socks4 代理；<br />**socks5** - socks5 代理。
+
+     ---
+
+    <ParamItem title="proxyAddress" required type="string" />
+    <p>
+	  代理 IP 地址 IPv4/IPv6。不允许：
+		- 使用透明代理（其中客户端 IP 可见）；
+		- 使用来自本地网络的代理。
+	</p>
+
+     ---
+
+    <ParamItem title="proxyPort" required type="integer" />
+    代理端口。
+
+     ---
+
+    <ParamItem title="proxyLogin" required type="string" />
+    代理登录。
+
+     ---
+
+    <ParamItem title="proxyPassword" required type="string" />
+    代理密码。
+
+    ---
 
     <ParamItem title="reese84UrlEndpoint（在 metadata 中）" type="string" />
 	reese84 指纹发送的端点名称可以在请求中找到，并以 ?d=site.com 结尾。
@@ -74,82 +104,13 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 	浏览器的 User-Agent。<br />
 **请仅传递当前 Windows 系统下的有效 UA。当前推荐值为**：`userAgentPlaceholder`
 
-  ---
-
-  <ParamItem title="proxyType" type="string" />
-    **http** - 普通的 http/https 代理；<br />**https** - 仅在 "http" 不起作用时尝试（某些自定义代理服务器要求）；<br />**socks4** - socks4 代理；<br />**socks5** - socks5 代理。
-
-     ---
-
-    <ParamItem title="proxyAddress" type="string" />
-    <p>
-	  代理 IP 地址 IPv4/IPv6。不允许：
-		- 使用透明代理（其中客户端 IP 可见）；
-		- 使用来自本地网络的代理。
-	</p>
-
-     ---
-
-    <ParamItem title="proxyPort" type="integer" />
-    代理端口。
-
-     ---
-
-    <ParamItem title="proxyLogin" type="string" />
-    代理登录。
-
-     ---
-
-    <ParamItem title="proxyPassword" type="string" />
-    代理密码。
-
 </TabItem>
 
 
 ## 创建任务方法
 
-<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-  <TabItem value="proxyless" label="CustomTask (无代理)" default className="method-panel">
-    <MethodItem>
-      ```http
-      https://api.capmonster.cloud/createTask
-      ```
-    </MethodItem>
-    <MethodDescription>
-
-    **请求**
-
-    ```json
-    {
-      "clientKey": "API_KEY",
-      "task": {
-        "type": "CustomTask",
-        "class": "Imperva",
-        "websiteURL": "https://example.com",
-        "userAgent": "userAgentPlaceholder",
-        "metadata": {
-          "incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3",
-          "incapsulaCookies": "incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;",
-          "reese84UrlEndpoint": "Built-with-the-For-hopence-Hurleysurfecting-the-"
-        }
-      }
-    }
-    ```
-
-    **响应**
-
-    ```json
-    {
-      "errorId": 0,
-      "taskId": 407533072
-    }
-    ```
-
-    </MethodDescription>
-  </TabItem>
-
-  <TabItem value="proxy" label="CustomTask (使用代理)" className="method-panel">
-    <MethodItem>
+<TabItem value="proxyless" label="CustomTask（无代理）" default className="method-panel">
+	<MethodItem>
       ```http
       https://api.capmonster.cloud/createTask
       ```
@@ -191,7 +152,6 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 
     </MethodDescription>
   </TabItem>
-</Tabs>
 
 
 ## 获取任务结果方法
@@ -375,45 +335,42 @@ Error 16 - 此错误与使用不符合要求地理位置的代理服务器有关
   ```js
   // https://github.com/ZennoLab/capmonstercloud-client-js
 
-  import { CapMonsterCloudClientFactory, ClientOptions, ImpervaRequest } from '@zennolab_com/capmonstercloud-client';
+import { CapMonsterCloudClientFactory, ClientOptions, ImpervaRequest } from '@zennolab_com/capmonstercloud-client';
 
-  document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', async () => {
+
     const cmcClient = CapMonsterCloudClientFactory.Create(
-      new ClientOptions({ clientKey: '<你的 capmonster.cloud API key>' })
+        new ClientOptions({ clientKey: 'YOUR_API_KEY' }) // 指定您的 CapMonster Cloud API 密钥
     );
 
-    console.log('余额:', await cmcClient.getBalance());
+    // 如有需要，可以检查余额
+    const balance = await cmcClient.getBalance();
+    console.log('Balance:', balance);
 
-    // 选项 1：不使用代理
-    const impervaRequest = new ImpervaRequest({
-      websiteURL: 'https://example.com', // 带验证码的页面 URL
-      metadata: {
-        incapsulaScriptUrl: '_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3',
-        incapsulaCookies: 'incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;',
-      },
-    });
+    // 配置您的自定义代理
+    const proxy = {
+        proxyType: "http",
+        proxyAddress: '123.123.123.123',
+        proxyPort: 8080,
+        proxyLogin: 'username',
+        proxyPassword: 'password'
+    };
 
-    // 选项 2：使用代理（如有必要，取消注释）
-    /*
+    // 配置任务
     const impervaRequest = new ImpervaRequest({
-      websiteURL: 'https://example.com',
-      metadata: {
-        incapsulaScriptUrl: '_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3',
-        incapsulaCookies: 'incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;',
-      },
-      proxy: {
-        type: 'http',
-        address: '127.0.0.1',     
-        port: 8080,               
-        login: 'proxyUser',       
-        password: 'proxyPass'     
-      }
+        websiteURL: 'https://example.com/', // 受 Imperva 保护的页面 URL
+        metadata: {
+            incapsulaScriptUrl: '_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3',
+            incapsulaCookies:
+                'incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; ' +
+                'visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;',
+        },
+        proxy,
     });
-    */
 
     const result = await cmcClient.Solve(impervaRequest);
-    console.log('验证码解决方案:', result);
-  });
+    console.log('Solution:', result.solution);
+});
 ````
 
   </TabItem>
@@ -426,111 +383,43 @@ Error 16 - 此错误与使用不符合要求地理位置的代理服务器有关
 import asyncio
 from capmonstercloudclient import CapMonsterClient, ClientOptions
 from capmonstercloudclient.requests import ImpervaCustomTaskRequest
+from capmonstercloudclient.requests.baseRequestWithProxy import ProxyInfo
 
-# 你的 CapMonster Cloud API key
-client_options = ClientOptions(api_key="your_api_key")  # 你的 CapMonster Cloud API key
-cap_monster_client = CapMonsterClient(options=client_options)
+API_KEY = "YOUR_API_KEY"  # 指定您的 CapMonster Cloud API 密钥
 
-# 选项 1：不使用代理
-imperva_request = ImpervaCustomTaskRequest(
-    websiteUrl="https://example.com",   # 带验证码的页面 URL
-    userAgent="userAgentPlaceholder",   # 使用当前 UserAgent
-    metadata={
-        "incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3",
-        "incapsulaCookie": "incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;",
-        "reese84UrlEndpoint": "Built-with-the-For-hopence-Hurleysurfecting-the-"
-    }
-)
+async def solve_imperva_captcha():
+    client_options = ClientOptions(api_key=API_KEY)
+    cap_monster_client = CapMonsterClient(options=client_options)
 
-# 选项 2：使用代理（如有必要，取消注释）
-# imperva_request = ImpervaCustomTaskRequest(
-#     websiteUrl="https://example.com", 
-#     userAgent="userAgentPlaceholder",  
-#     metadata={
-#         "incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3",
-#         "incapsulaCookie": "incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;",
-#         "reese84UrlEndpoint": "Built-with-the-For-hopence-Hurleysurfecting-the-"
-#     },
-#     proxyType="http",                    
-#     proxyAddress="127.0.0.1",            
-#     proxyPort=8080,                      
-#     proxyLogin="username",               
-#     proxyPassword="password"             
-# )
+    # 配置您的自定义代理
+    proxy = ProxyInfo(
+        proxyType="http",
+        proxyAddress="123.123.123.123",
+        proxyPort=8080,
+        proxyLogin="username",
+        proxyPassword="password"
+    )
 
-async def solve_captcha():
-    return await cap_monster_client.solve_captcha(imperva_request)
+    # 配置任务
+    imperva_request = ImpervaCustomTaskRequest(
+        websiteUrl="https://example.com",  # 受 Imperva 保护的页面 URL
+        metadata={
+            "incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3",
+            "incapsulaCookie": "incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; "
+                               "visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;",
+            "reese84UrlEndpoint": "Built-with-the-For-hopence-Hurleysurfecting-the-"
+        },
+        proxy=proxy
+    )
 
-responses = asyncio.run(solve_captcha())
-print(responses)
-```
+    # 如有需要，可以检查余额
+    balance = await cap_monster_client.get_balance()
+    print("Balance:", balance)
 
-  </TabItem>
+    result = await cap_monster_client.solve_captcha(imperva_request)
+    print("Solution:", result)
 
-  <TabItem value="csharp" label="C#" className="method-panel">
-
-```csharp
-// https://github.com/ZennoLab/capmonstercloud-client-dotnet
-
-using System;
-using System.Text.Json;
-using System.Threading.Tasks;
-using Zennolab.CapMonsterCloud;
-using Zennolab.CapMonsterCloud.Requests;
-
-class Program
-{
-    static async Task Main(string[] args)
-    {
-        // 你的 CapMonster Cloud API key
-        var clientOptions = new ClientOptions
-        {
-            ClientKey = "your_api_key" // 你的 CapMonster Cloud API key
-        };
-
-        var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
-
-        // Imperva 数据
-        var incapsulaScriptBase64 = "base64_encoded_js_here";
-        var incapsulaSessionCookie = "incap_sess_*=your_cookie_here";
-        var reese84UrlEndpoint = "your_reese84_endpoint_here";
-
-        // 选项 1：不使用代理
-        var impervaRequest = new ImpervaCustomTaskRequest(
-            incapsulaScriptBase64,
-            incapsulaSessionCookie,
-            reese84UrlEndpoint
-        )
-        {
-            WebsiteUrl = "https://example.com",   // 带验证码的页面 URL
-            UserAgent = "userAgentPlaceholder"    // 使用当前 UserAgent
-        };
-
-        // 选项 2：使用代理（如有必要，取消注释）
-        /*
-        var impervaRequest = new ImpervaCustomTaskRequest(
-            incapsulaScriptBase64,
-            incapsulaSessionCookie,
-            reese84UrlEndpoint
-        )
-        {
-            WebsiteUrl = "https://example.com",
-            UserAgent = "userAgentPlaceholder",
-            Proxy = new ProxyContainer(
-                "123.123.123.123",   
-                8080,                
-                ProxyType.Http,      
-                "proxy_user",        
-                "proxy_pass"         
-            )
-        };
-        */
-
-        var impervaResult = await cmCloudClient.SolveAsync(impervaRequest);
-
-        Console.WriteLine("Imperva 解决方案: " + JsonSerializer.Serialize(impervaResult.Solution));
-    }
-}
+asyncio.run(solve_imperva_captcha())
 ```
 
   </TabItem>
