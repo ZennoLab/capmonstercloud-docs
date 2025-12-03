@@ -27,13 +27,13 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 
 <BlogLink url="https://capmonster.cloud/en/blog/news/imperva-incapsula-news"/>
 
-:::warning **Attention!**
-* The Imperva (Incapsula) solution, available in CapMonster Cloud, is provided exclusively for testing and analyzing performance on your own web resources. The use of this solution on third-party sites is strictly prohibited and violates the service's usage policy.
+:::warning **Warning!**
 
-* CapMonster Cloud uses built-in proxies by default — their cost is already included in the service. You only need to specify your own proxies in cases where the website does not accept the token or access to the built-in services is restricted.
+* Use **your own proxies** to perform this task.
 
-* If you are using a proxy with IP authorization, make sure to whitelist the address **65.21.190.34**.
+* If your proxy uses IP-based authorization, you must whitelist the address **65.21.190.34**.
 
+* After solving, you will receive **special cookies** that must be added to the browser.
 :::
 
 
@@ -63,8 +63,37 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
     Your cookies from Incapsula. They can be obtained on the page using document.cookie or in the request header Set-Cookie: "incap_sess_*=...; visid_incap_*=..." (see the /createTask request example).
 	
 	![](./images/incapsula/incapsula2.png)
-	
-	---
+
+    ---
+
+    <ParamItem title="proxyType" required type="string" />
+    **http** - regular http/https proxy;<br />**https** - try this option only if "http" doesn't work (required for some custom proxies);<br />**socks4** - socks4 proxy;<br />**socks5** - socks5 proxy.
+
+     ---
+
+    <ParamItem title="proxyAddress" required type="string" />
+    <p>
+      IPv4/IPv6 proxy IP address. Not allowed:
+      - using transparent proxies (where you can see the client's IP);
+      - using proxies on local machines.
+    </p>
+
+     ---
+
+    <ParamItem title="proxyPort" required type="integer" />
+    Proxy port.
+
+     ---
+
+    <ParamItem title="proxyLogin" required type="string" />
+    Proxy-server login.
+
+     ---
+
+    <ParamItem title="proxyPassword" required type="string" />
+    Proxy-server password.
+
+    ---
 
     <ParamItem title="reese84UrlEndpoint (inside metadata)" type="string" />
     The name of the endpoint where the reese84 fingerprint is sent can be found among the requests and ends with ?d=site.com
@@ -77,82 +106,13 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
     Browser User-Agent.  
   **Pass only a valid UA from Windows OS. Currently it is**: `userAgentPlaceholder`
 
-    ---
-
-    <ParamItem title="proxyType" type="string" />
-    **http** - regular http/https proxy;<br />**https** - try this option only if "http" doesn't work (required for some custom proxies);<br />**socks4** - socks4 proxy;<br />**socks5** - socks5 proxy.
-
-     ---
-
-    <ParamItem title="proxyAddress" type="string" />
-    <p>
-      IPv4/IPv6 proxy IP address. Not allowed:
-      - using transparent proxies (where you can see the client's IP);
-      - using proxies on local machines.
-    </p>
-
-     ---
-
-    <ParamItem title="proxyPort" type="integer" />
-    Proxy port.
-
-     ---
-
-    <ParamItem title="proxyLogin" type="string" />
-    Proxy-server login.
-
-     ---
-
-    <ParamItem title="proxyPassword" type="string" />
-    Proxy-server password.
-
   </TabItem>
 
 
 ## Create task method
 
-<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-  <TabItem value="proxyless" label="CustomTask (without proxy)" default className="method-panel">
-    <MethodItem>
-      ```http
-      https://api.capmonster.cloud/createTask
-      ```
-    </MethodItem>
-    <MethodDescription>
-
-    **Request**
-
-    ```json
-    {
-      "clientKey": "API_KEY",
-      "task": {
-        "type": "CustomTask",
-        "class": "Imperva",
-        "websiteURL": "https://example.com",
-        "userAgent": "userAgentPlaceholder",
-        "metadata": {
-          "incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3",
-          "incapsulaCookies": "incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;",
-          "reese84UrlEndpoint": "Built-with-the-For-hopence-Hurleysurfecting-the-"
-        }
-      }
-    }
-    ```
-
-    **Response**
-
-    ```json
-    {
-      "errorId": 0,
-      "taskId": 407533072
-    }
-    ```
-
-    </MethodDescription>
-  </TabItem>
-
-  <TabItem value="proxy" label="CustomTask (with proxy)" className="method-panel">
-    <MethodItem>
+<TabItem value="proxyless" label="CustomTask (without proxy)" default className="method-panel">
+	<MethodItem>
       ```http
       https://api.capmonster.cloud/createTask
       ```
@@ -194,8 +154,6 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 
     </MethodDescription>
   </TabItem>
-</Tabs>
-
 
 ## Get task result method
 Use the method [getTaskResult](../api/methods/get-task-result.mdx) to obtain the Imperva solution.
@@ -381,41 +339,39 @@ The code snippets provided are basic examples for familiarization with extractin
   import { CapMonsterCloudClientFactory, ClientOptions, ImpervaRequest } from '@zennolab_com/capmonstercloud-client';
 
   document.addEventListener('DOMContentLoaded', async () => {
-    const cmcClient = CapMonsterCloudClientFactory.Create(
-      new ClientOptions({ clientKey: '<your capmonster.cloud API key>' })
-    );
 
-    console.log('Balance:', await cmcClient.getBalance());
+      const cmcClient = CapMonsterCloudClientFactory.Create(
+          new ClientOptions({ clientKey: 'YOUR_API_KEY' }) // Specify your CapMonster Cloud API key
+      );
 
-    // Option 1: without proxy
-    const impervaRequest = new ImpervaRequest({
-      websiteURL: 'https://example.com', // Page URL with captcha
-      metadata: {
-        incapsulaScriptUrl: '_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3',
-        incapsulaCookies: 'incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;',
-      },
-    });
+      // You can check your balance if needed
+      const balance = await cmcClient.getBalance();
+      console.log('Balance:', balance);
 
-    // Option 2: with proxy (uncomment if necessary)
-    /*
-    const impervaRequest = new ImpervaRequest({
-      websiteURL: 'https://example.com',
-      metadata: {
-        incapsulaScriptUrl: '_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3',
-        incapsulaCookies: 'incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;',
-      },
-      proxy: {
-        type: 'http',
-        address: '127.0.0.1',     
-        port: 8080,               
-        login: 'proxyUser',       
-        password: 'proxyPass'     
-      }
-    });
-    */
+      // Configuring your custom proxy
+      const proxy = {
+          proxyType: "http",
+          proxyAddress: '123.123.123.123',
+          proxyPort: 8080,
+          proxyLogin: 'username',
+          proxyPassword: 'password'
+      };
 
-    const result = await cmcClient.Solve(impervaRequest);
-    console.log('Captcha Solution:', result);
+      // Task configuration
+      const impervaRequest = new ImpervaRequest({
+          websiteURL: 'https://example.com/', // URL of the page protected by Imperva
+          metadata: {
+              incapsulaScriptUrl: '_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3',
+              incapsulaCookies:
+                  'incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; ' +
+                  'visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;',
+          },
+          proxy,
+      });
+
+      const result = await cmcClient.Solve(impervaRequest);
+      console.log('Solution:', result.solution);
+
   });
 ````
 
@@ -429,111 +385,45 @@ The code snippets provided are basic examples for familiarization with extractin
 import asyncio
 from capmonstercloudclient import CapMonsterClient, ClientOptions
 from capmonstercloudclient.requests import ImpervaCustomTaskRequest
+from capmonstercloudclient.requests.baseRequestWithProxy import ProxyInfo
 
-# Your CapMonster Cloud API key
-client_options = ClientOptions(api_key="your_api_key")  # Your CapMonster Cloud API key
-cap_monster_client = CapMonsterClient(options=client_options)
+API_KEY = "YOUR_API_KEY"  # Specify your CapMonster Cloud API key
 
-# Option 1: without proxy
-imperva_request = ImpervaCustomTaskRequest(
-    websiteUrl="https://example.com",   # Page URL with captcha
-    userAgent="userAgentPlaceholder",   # Use the current UserAgent
-    metadata={
-        "incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3",
-        "incapsulaCookie": "incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;",
-        "reese84UrlEndpoint": "Built-with-the-For-hopence-Hurleysurfecting-the-"
-    }
-)
+async def solve_imperva_captcha():
+    client_options = ClientOptions(api_key=API_KEY)
+    cap_monster_client = CapMonsterClient(options=client_options)
 
-# Option 2: with proxy (uncomment if necessary)
-# imperva_request = ImpervaCustomTaskRequest(
-#     websiteUrl="https://example.com", 
-#     userAgent="userAgentPlaceholder",  
-#     metadata={
-#         "incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3",
-#         "incapsulaCookie": "incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;",
-#         "reese84UrlEndpoint": "Built-with-the-For-hopence-Hurleysurfecting-the-"
-#     },
-#     proxyType="http",                    
-#     proxyAddress="127.0.0.1",            
-#     proxyPort=8080,                      
-#     proxyLogin="username",               
-#     proxyPassword="password"             
-# )
+    # Configuring your custom proxy
+    proxy = ProxyInfo(
+        proxyType="http",
+        proxyAddress="123.123.123.123",
+        proxyPort=8080,
+        proxyLogin="username",
+        proxyPassword="password"
+    )
 
-async def solve_captcha():
-    return await cap_monster_client.solve_captcha(imperva_request)
+    # Task configuration
+    imperva_request = ImpervaCustomTaskRequest(
+        websiteUrl="https://example.com",  # URL of the page protected by Imperva
+        metadata={
+            "incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3",
+            "incapsulaCookie": (
+                "incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; "
+                "visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;"
+            ),
+            "reese84UrlEndpoint": "Built-with-the-For-hopence-Hurleysurfecting-the-"
+        },
+        proxy=proxy
+    )
 
-responses = asyncio.run(solve_captcha())
-print(responses)
-```
+    # You can check your balance if needed
+    balance = await cap_monster_client.get_balance()
+    print("Balance:", balance)
 
-  </TabItem>
+    result = await cap_monster_client.solve_captcha(imperva_request)
+    print("Solution:", result)
 
-  <TabItem value="csharp" label="C#" className="method-panel">
-
-```csharp
-// https://github.com/ZennoLab/capmonstercloud-client-dotnet
-
-using System;
-using System.Text.Json;
-using System.Threading.Tasks;
-using Zennolab.CapMonsterCloud;
-using Zennolab.CapMonsterCloud.Requests;
-
-class Program
-{
-    static async Task Main(string[] args)
-    {
-        // Your CapMonster Cloud API key
-        var clientOptions = new ClientOptions
-        {
-            ClientKey = "your_api_key" // Your CapMonster Cloud API key
-        };
-
-        var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
-
-        // Imperva data
-        var incapsulaScriptBase64 = "base64_encoded_js_here";
-        var incapsulaSessionCookie = "incap_sess_*=your_cookie_here";
-        var reese84UrlEndpoint = "your_reese84_endpoint_here";
-
-        // Option 1: without proxy
-        var impervaRequest = new ImpervaCustomTaskRequest(
-            incapsulaScriptBase64,
-            incapsulaSessionCookie,
-            reese84UrlEndpoint
-        )
-        {
-            WebsiteUrl = "https://example.com",   // Page URL with captcha
-            UserAgent = "userAgentPlaceholder"    // Use the current UserAgent
-        };
-
-        // Option 2: with proxy (uncomment if necessary)
-        /*
-        var impervaRequest = new ImpervaCustomTaskRequest(
-            incapsulaScriptBase64,
-            incapsulaSessionCookie,
-            reese84UrlEndpoint
-        )
-        {
-            WebsiteUrl = "https://example.com",
-            UserAgent = "userAgentPlaceholder",
-            Proxy = new ProxyContainer(
-                "123.123.123.123",   
-                8080,                
-                ProxyType.Http,      
-                "proxy_user",        
-                "proxy_pass"         
-            )
-        };
-        */
-
-        var impervaResult = await cmCloudClient.SolveAsync(impervaRequest);
-
-        Console.WriteLine("Imperva Solution: " + JsonSerializer.Serialize(impervaResult.Solution));
-    }
-}
+asyncio.run(solve_imperva_captcha())
 ```
 
   </TabItem>
