@@ -32,16 +32,14 @@ This type of captcha might be solved a bit longer than usual image captcha, but 
 <BlogLink url="https://capmonster.cloud/en/blog/re-captcha/how-to-bypass-recaptcha-v2-using-capmonster-cloud"/>
 
 :::warning **Attention!**
-CapMonster Cloud uses built-in proxies by default, which are suitable for most sites.
-**If the token is rejected by the server**, you should retry using your own proxies — this increases the chance of successful verification.
 
-Recommended procedure:
+By default, CapMonster Cloud uses built-in proxies suitable for most websites.  
+However, if the token is not accepted by the target site, try again with [your own proxies](#create-task-method) (*RecaptchaV2Task with proxy*). Make sure to use the **same proxies** when solving the captcha and submitting the token to the site.
 
-- First, solve the captcha without proxies.
+* If IP-based authorization is used, add **65.21.190.34** to the whitelist.
 
-- If the token is rejected by the target site, retry using your own proxies.
+* If the reCAPTCHA v2 token is still not accepted — contact [technical support](https://helpdesk.zennolab.com/conversation/new).
 
-If you are using a proxy with IP authorization, make sure to whitelist the address **65.21.190.34**.
 :::
 
 ## Request parameters
@@ -209,7 +207,7 @@ Use the [getTaskResult](../api/methods/get-task-result.mdx) method to request an
 		  }
 		}
 		```
-   For some websites, the response may look like this (use the returned UserAgent when confirming the solution):
+   For some websites, the response may be something like this (use the obtained UserAgent when submitting the solution, even if it differs from the current one):
  
 		```json
 		{
