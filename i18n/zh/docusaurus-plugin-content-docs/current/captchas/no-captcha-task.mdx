@@ -31,16 +31,14 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 <BlogLink url="https://capmonster.cloud/zh/blog/re-1/how-to-bypass-recaptcha-v2-using-capmonster-cloud"/>
 
 :::warning **注意！**
-CapMonster Cloud 默认使用内置代理，适用于大多数网站。
-**如果服务器拒绝令牌**，则应使用您自己的代理重新尝试——这将提高验证成功的几率。
 
-推荐操作顺序：
+默认情况下，CapMonster Cloud 使用内置代理，适用于大多数网站。  
+但是，如果目标网站不接受令牌，请尝试使用[自定义代理](#创建任务方法)（*使用代理的 RecaptchaV2Task*）。在解决验证码和提交令牌到网站时，请确保使用**相同的代理**。
 
-* 首先，在不使用代理的情况下完成验证码。
+* 如果使用基于 IP 的授权，请将 **65.21.190.34** 添加到白名单。
 
-* 如果目标网站拒绝令牌，请使用您自己的代理重新尝试。
+* 如果 reCAPTCHA v2 令牌仍无法被接受，请联系[技术支持](https://helpdesk.zennolab.com/ru/conversation/new)。
 
-如果代理按 IP 授权，请将地址 **65.21.190.34** 加入白名单。
 :::
 
 
@@ -209,7 +207,7 @@ CapMonster Cloud 默认使用内置代理，适用于大多数网站。
 		  }
 		}
 		```
-    对于某些网站，响应可能如下所示（在确认解决方案时使用返回的 UserAgent）：
+    对于某些网站，响应可能如下（在提交验证码解决方案时请使用获取的 UserAgent，即使它与当前的不同）：
  
 		```json
 		{
