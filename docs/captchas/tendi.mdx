@@ -353,89 +353,176 @@ CapMonster Cloud по умолчанию работает через встро�
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 
   <TabItem value="js" label="JavaScript" default className="method-panel">
+  <details>
+      <summary>Показать код (для браузера)</summary>
 
   ```js
   // https://github.com/ZennoLab/capmonstercloud-client-js
 
-  import { CapMonsterCloudClientFactory, ClientOptions, TenDIRequest } from '@zennolab_com/capmonstercloud-client';
+  import {
+    CapMonsterCloudClientFactory,
+    ClientOptions,
+    TenDIRequest
+  } from '@zennolab_com/capmonstercloud-client';
 
-  document.addEventListener('DOMContentLoaded', async () => {
-    const cmcClient = CapMonsterCloudClientFactory.Create(
-      new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }) // Ваш API-ключ CapMonster Cloud
+  const API_KEY = "YOUR_API_KEY"; // Укажите ваш API-ключ CapMonster Cloud
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    const client = CapMonsterCloudClientFactory.Create(
+      new ClientOptions({ clientKey: API_KEY })
     );
 
-    console.log('Баланс:', await cmcClient.getBalance());
-
-    // Основной вариант без прокси
-    const tenDIRequest = new TenDIRequest({
-      websiteURL: 'https://example.com', // URL страницы с капчей
-      websiteKey: 'websiteKey',          // Замените на корректное значение
+    // Базовый пример без прокси
+    // CapMonster Cloud автоматически использует свои прокси
+    let tenDIRequest = new TenDIRequest({
+      websiteURL: "https://example.com", // URL страницы с Tencent (TenDI) капчей
+      websiteKey: "183268248"            // appid TencentCaptcha (замените на актуальный)
     });
 
-    // Вариант с прокси (раскомментируйте при необходимости)
+    // Пример использования вашего собственного прокси
+    // Раскомментируйте данный блок, если вы хотите использовать собственный прокси
     /*
-    const tenDIRequest = new TenDIRequest({
-      websiteURL: 'https://example.com',
-      websiteKey: 'websiteKey',         
-      proxy: {
-        proxyType: 'http',               
-        proxyAddress: '123.45.67.89',    
-        proxyPort: 8080,                 
-        proxyLogin: 'username',          
-        proxyPassword: 'password',       
-      },
+    const proxy = {
+      proxyType: "http",
+      proxyAddress: "123.45.67.89",
+      proxyPort: 8080,
+      proxyLogin: "username",
+      proxyPassword: "password"
+    };
+
+    tenDIRequest = new TenDIRequest({
+      websiteURL: "https://example.com",
+      websiteKey: "183268248",
+      userAgent: "userAgentPlaceholder",
+      proxy
     });
     */
 
-    const result = await cmcClient.Solve(tenDIRequest);
-    console.log('Решение капчи:', result);
+    // При необходимости можно проверить баланс
+    const balance = await client.getBalance();
+    console.log("Balance:", balance);
+
+    const result = await client.Solve(tenDIRequest);
+    console.log("Solution:", result);
   });
 ````
+</details>
+
+<details>
+      <summary>Показать код (Node.js)</summary>
+      ```JavaScript
+      // https://github.com/ZennoLab/capmonstercloud-client-js
+
+      import { CapMonsterCloudClientFactory, ClientOptions, TenDIRequest } from '@zennolab_com/capmonstercloud-client';
+
+      const API_KEY = "YOUR_API_KEY";  // Укажите ваш API-ключ CapMonster Cloud
+
+      async function solveTenDI() {
+          const client = CapMonsterCloudClientFactory.Create(
+              new ClientOptions({ clientKey: API_KEY })
+          );
+
+          // Базовый пример без прокси
+          // CapMonster Cloud автоматически использует свои прокси
+          let tenDIRequest = new TenDIRequest({
+              websiteURL: "https://example.com",  // URL страницы с капчей
+              websiteKey: "183268248",           // Замените на корректное значение
+          });
+
+          // Пример использования вашего собственного прокси
+          // Раскомментируйте данный блок, если вы хотите использовать собственный прокси
+
+          /*
+          const proxy = {
+              proxyType: "http",
+              proxyAddress: "123.45.67.89",
+              proxyPort: 8080,
+              proxyLogin: "username",
+              proxyPassword: "password"
+          };
+
+          tenDIRequest = new TenDIRequest({
+              websiteURL: "https://example.com",
+              websiteKey: "websiteKey",
+              proxy,
+              userAgent: "userAgentPlaceholder"
+          });
+          */
+
+          // При необходимости можно проверить баланс 
+          const balance = await client.getBalance();
+          console.log("Balance:", balance);
+
+          const result = await client.Solve(tenDIRequest);
+          console.log("Solution:", result);
+      }
+
+      solveTenDI().catch(console.error);
+```
+</details>
 
   </TabItem>
 
   <TabItem value="python" label="Python" className="method-panel">
-
+  
+  <details>
+      <summary>Показать код</summary>
 ```python
 # https://github.com/ZennoLab/capmonstercloud-client-python
 
 import asyncio
 from capmonstercloudclient import CapMonsterClient, ClientOptions
 from capmonstercloudclient.requests import TenDiCustomTaskRequest
+# from capmonstercloudclient.requests.baseRequestWithProxy import ProxyInfo  # Раскомментируйте, если планируете использовать прокси
 
-client_options = ClientOptions(api_key="your_api_key")  # Ваш API-ключ CapMonster Cloud
-cap_monster_client = CapMonsterClient(options=client_options)
+API_KEY = "YOUR_API_KEY"  # Укажите ваш API-ключ CapMonster Cloud
 
-# Вариант 1: без прокси
-ten_di_request = TenDiCustomTaskRequest(
-    websiteUrl="https://example.com",   # URL страницы с капчей
-    websiteKey="189956587",             # Замените на корректное значение
-    userAgent="userAgentPlaceholder"    # Используйте актуальный UserAgent
-)
+async def solve_tendi_custom():
+    client_options = ClientOptions(api_key=API_KEY)
+    cap_monster_client = CapMonsterClient(options=client_options)
 
-# Вариант 2: с прокси
-# ten_di_request = TenDiCustomTaskRequest(
-#     websiteUrl="https://example.com",   
-#     websiteKey="189956587",            
-#     userAgent="userAgentPlaceholder",   
-#     proxyType="http",                   
-#     proxyAddress="127.0.0.1",           
-#     proxyPort=8080,                     
-#     proxyLogin="username",              
-#     proxyPassword="password"            
-# )
+    # Базовый пример без прокси
+    # CapMonster Cloud автоматически использует свои прокси
+    tendi_request = TenDiCustomTaskRequest(
+        websiteUrl="https://example.com", # URL страницы с Tencent (TenDI) капчей
+        websiteKey="189956587", # TencentCaptcha appid
+        userAgent="userAgentPlaceholder"
+    )
 
-async def solve_captcha():
-    return await cap_monster_client.solve_captcha(ten_di_request)
+    # Пример использования вашего собственного прокси
+    # Раскомментируйте данный блок, если хотите использовать прокси
+    #
+    # proxy = ProxyInfo(
+    #     proxyType="http",
+    #     proxyAddress="123.45.67.89",
+    #     proxyPort=8080,
+    #     proxyLogin="username",
+    #     proxyPassword="password"
+    # )
+    #
+    # tendi_request = TenDiCustomTaskRequest(
+    #     websiteUrl="https://example.com",
+    #     websiteKey="189956587",
+    #     userAgent="userAgentPlaceholder",
+    #     proxy=proxy
+    # )
 
-responses = asyncio.run(solve_captcha())
-print(responses)
+    # При необходимости можно проверить баланс
+    balance = await cap_monster_client.get_balance()
+    print("Balance:", balance)
+
+    result = await cap_monster_client.solve_captcha(tendi_request)
+    print("Solution:", result)
+
+asyncio.run(solve_tendi_custom())
 ```
+</details>
 
   </TabItem>
 
   <TabItem value="csharp" label="C#" className="method-panel">
-
+<details>
+      <summary>Показать код</summary>
 ```csharp
 // https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
@@ -448,49 +535,54 @@ class Program
 {
     static async Task Main(string[] args)
     {
-        // Ваш API-ключ от CapMonster Cloud
+        // Укажите ваш API-ключ CapMonster Cloud
         var clientOptions = new ClientOptions
         {
-            ClientKey = "your_api_key" // Ваш API-ключ CapMonster Cloud
+            ClientKey = "YOUR_API_KEY"
         };
 
         var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
-        // Вариант 1: Без прокси
+        // При необходимости можно проверить баланс 
+        var balance = await cmCloudClient.GetBalanceAsync();
+        Console.WriteLine("Balance: " + balance);
+
+        // Базовый пример без прокси
+        // CapMonster Cloud автоматически использует свои прокси
         var tenDiRequest = new TenDiCustomTaskRequest
         {
-            WebsiteUrl = "https://example.com",      // URL страницы с капчей
-            WebsiteKey = "189956587",                // Замените на корректное значение
-            UserAgent = "userAgentPlaceholder"       // Используйте актуальный UserAgent
+            WebsiteUrl = "https://example.com",   // URL страницы с капчей
+            WebsiteKey = "189956587",             // TencentCaptcha appid
+            UserAgent = "userAgentPlaceholder"
         };
 
-        // Вариант 2: С прокси
-        // Раскомментируйте, если нужно использовать прокси
+        // Пример использования вашего собственного прокси
+        // Раскомментируйте данный блок, если вы хотите использовать собственный прокси
         /*
         var tenDiRequest = new TenDiCustomTaskRequest
         {
-            WebsiteUrl = "https://example.com",  
-            WebsiteKey = "189956587",                
-            UserAgent = "userAgentPlaceholder",      
+            WebsiteUrl = "https://example.com",
+            WebsiteKey = "189956587",
+            UserAgent = "userAgentPlaceholder",
 
             Proxy = new ProxyContainer(
-                "8.8.8.8",           
-                8080,                
-                ProxyType.Http,       
-                "proxyLoginHere",     
-                "proxyPasswordHere"   
+                "123.45.67.89",
+                8080,        
+                ProxyType.Http,    
+                "username",
+                "password"  
             )
         };
         */
 
-        var tenDiRequestResult = await cmCloudClient.SolveAsync(tenDiRequest);
+        var tenDiResult = await cmCloudClient.SolveAsync(tenDiRequest);
 
-        Console.WriteLine("Captcha Solution Data: " + string.Join(", ", tenDiRequestResult.Solution.Data));
-        Console.WriteLine("Captcha Solution Headers: " + string.Join(", ", tenDiRequestResult.Solution.Headers));
+        Console.WriteLine("Solution Data: " + string.Join(", ", tenDiResult.Solution.Data));
+        Console.WriteLine("Solution Headers: " + string.Join(", ", tenDiResult.Solution.Headers));
     }
 }
 ```
-
+</details>
   </TabItem>
 
 </Tabs>

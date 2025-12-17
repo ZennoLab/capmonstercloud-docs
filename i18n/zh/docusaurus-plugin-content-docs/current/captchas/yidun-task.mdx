@@ -264,7 +264,7 @@ CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费
   "type": "YidunTask",
   "websiteURL": "https://id7.cloud.example.com/IframeLogin.html",
   "websiteKey": "0f123r2a6am56431yg17n8rz6grz0ym6",
-  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+  "userAgent": "userAgentPlaceholder",
   "yidunGetLib": "https://example.com/captcha/b/v3//static/load.min.js",
   "yidunApiServerSubdomain": "csc-captcha-example.com",
   "challenge": "abc55382321547556267884cc3ba57c3d8a7c14f541fd9c6a7f1ce3173d3b9a1",
@@ -318,85 +318,172 @@ CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 
   <TabItem value="js" label="JavaScript" default className="method-panel">
+<details>
+      <summary>显示代码（用于浏览器）</summary>
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
 
-  ```js
-  // https://github.com/ZennoLab/capmonstercloud-client-js
+import { CapMonsterCloudClientFactory, ClientOptions, YidunRequest } from '@zennolab_com/capmonstercloud-client';
 
-  import { CapMonsterCloudClientFactory, ClientOptions, YidunRequest } from '@zennolab_com/capmonstercloud-client';
+const API_KEY = "YOUR_API_KEY"; // 输入您的 CapMonster Cloud API 密钥
 
-  document.addEventListener('DOMContentLoaded', async () => {
-    const cmcClient = CapMonsterCloudClientFactory.Create(
-      new ClientOptions({ clientKey: '<你的 capmonster.cloud API key>' })
+document.addEventListener("DOMContentLoaded", async () => {
+    const client = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
     );
 
-    console.log(await cmcClient.getBalance());
-
-    const yidunRequest = new YidunRequest({
-      websiteURL: 'https://www.example.com', // 带验证码页面的 URL 
-      websiteKey: '6cw0f0485d5d46auacf9b735d20218a5', // 替换为正确值
-      userAgent: 'userAgentPlaceholder', // 使用当前 UserAgent
-      /*
-      // 如果需要使用代理:
-      proxy: {
-        type: 'http',
-        address: '127.0.0.1',
-        port: 8000,
-        login: 'user',
-        password: 'password'
-      }
-      */
+    // 基本示例，无需代理
+    // CapMonster Cloud 会自动使用它们的代理
+    let yidunRequest = new YidunRequest({
+        websiteURL: "https://www.example.com",     // 含有验证码的页面 URL
+        websiteKey: "6cw0f0485d5d46auacf9b735d20218a5",
+        userAgent: "userAgentPlaceholder"
     });
 
-    console.log(await cmcClient.Solve(yidunRequest));
-  });
-````
+    // 使用您自己的代理的示例
+    // 如果想使用自己的代理，请取消注释以下代码块
+    /*
+    const proxy = {
+        proxyType: "http",
+        proxyAddress: "123.45.67.89",
+        proxyPort: 8080,
+        proxyLogin: "username",
+        proxyPassword: "password"
+    };
+
+    yidunRequest = new YidunRequest({
+        websiteURL: "https://www.example.com",                 
+        websiteKey: "6cw0f0485d5d46auacf9b735d20218a5",
+        userAgent: "userAgentPlaceholder",
+        proxy
+    });
+    */
+
+    // 如有必要，可以检查余额
+    const balance = await client.getBalance();
+    console.log("Balance:", balance);
+
+    const result = await client.Solve(yidunRequest);
+    console.log("Solution:", result);
+});
+```
+</details>
+
+<details>
+      <summary>显示代码 (Node.js)</summary>
+```javascript
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, YidunRequest } from '@zennolab_com/capmonstercloud-client';
+
+const API_KEY = "YOUR_API_KEY"; // 输入您的 CapMonster Cloud API 密钥
+
+async function solveYidun() {
+    const client = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
+    );
+
+    // 基本示例，无需代理
+    // CapMonster Cloud 会自动使用它们的代理
+    let yidunRequest = new YidunRequest({
+        websiteURL: "https://www.example.com",    // 含有验证码的页面 URL
+        websiteKey: "6cw0f0485d5d46auacf9b735d20218a5",
+        userAgent: "userAgentPlaceholder"
+    });
+
+    // 使用您自己的代理的示例
+    // 如果想使用自己的代理，请取消注释以下代码块
+
+    /*
+    const proxy = {
+        proxyType: "http",
+        proxyAddress: "123.45.67.89",
+        proxyPort: 8080,
+        proxyLogin: "username",
+        proxyPassword: "password"
+    };
+
+    yidunRequest = new YidunRequest({
+        websiteURL: "https://www.example.com",  // 含有验证码的页面 URL
+        websiteKey: "6cw0f0485d5d46auacf9b735d20218a5",
+        userAgent: "userAgentPlaceholder",
+        proxy
+    });
+    */
+
+    // 如有必要，可以检查余额
+    const balance = await client.getBalance();
+    console.log("Balance:", balance);
+
+    const result = await client.Solve(yidunRequest);
+    console.log("Solution:", result);
+}
+
+solveYidun().catch(err => console.error("错误:", err));
+```
+</details>
+
 
   </TabItem>
 
   <TabItem value="python" label="Python" default className="method-panel">
-
+<details>
+      <summary>显示代码</summary>
 ```python
 # https://github.com/ZennoLab/capmonstercloud-client-python
 
 import asyncio
 from capmonstercloudclient import CapMonsterClient, ClientOptions
 from capmonstercloudclient.requests import YidunRequest
+# from capmonstercloudclient.requests.baseRequestWithProxy import ProxyInfo  # 如果计划使用代理，请取消注释
 
-# 你的 CapMonster Cloud API key
-client_options = ClientOptions(api_key="API_KEY")
-cap_monster_client = CapMonsterClient(options=client_options)
+API_KEY = "YOUR_API_KEY"  # 输入您的 CapMonster Cloud API 密钥
 
-# 选项 1：不使用代理
-yidun_request = YidunRequest(
-    websiteUrl="https://www.example.com", # 带验证码页面的 URL 
-    websiteKey="6cw0f0485d5d46auacf9b735d20218a5", # 替换为正确值
-    userAgent="userAgentPlaceholder" # 使用当前 UserAgent
-)
+async def solve_yidun_captcha():
+    client_options = ClientOptions(api_key=API_KEY)
+    cap_monster_client = CapMonsterClient(options=client_options)
 
-# 选项 2：使用代理
-# 如果需要，请取消注释
-# yidun_request = YidunRequest(
-#     websiteUrl="https://www.example.com",
-#     websiteKey="6cw0f0485d5d46auacf9b735d20218a5",
-#     userAgent="userAgentPlaceholder",
-#     proxyType="http",
-#     proxyAddress="123.45.67.89",
-#     proxyPort=8080,
-#     proxyLogin="proxyUser",
-#     proxyPassword="proxyPass"
-# )
+    # 基本示例，无需代理
+    # CapMonster Cloud 会自动使用它们的代理
+    yidun_request = YidunRequest(
+        websiteUrl="https://www.example.com",  # 含有验证码的页面 URL
+        websiteKey="6cw0f0485d5d46auacf9b735d20218a5",
+        userAgent="userAgentPlaceholder"  # 请使用真实且 актуальный 的 UserAgent
+    )
 
-async def solve_captcha():
-    return await cap_monster_client.solve_captcha(yidun_request)
+    # 使用您自己的代理的示例
+    # 如果想使用自己的代理，请取消注释以下代码块
 
-responses = asyncio.run(solve_captcha())
-print(responses)
+    # proxy = ProxyInfo(
+    #     proxyType="http",
+    #     proxyAddress="123.45.67.89",
+    #     proxyPort=8080,
+    #     proxyLogin="username",
+    #     proxyPassword="password"
+    # )
+    #
+    # yidun_request = YidunRequest(
+    #     websiteUrl="https://www.example.com",
+    #     websiteKey="6cw0f0485d5d46auacf9b735d20218a5",
+    #     userAgent="userAgentPlaceholder",
+    #     proxy=proxy
+    # )
+
+    # 如有必要，可以检查余额
+    balance = await cap_monster_client.get_balance()
+    print("Balance:", balance)
+
+    result = await cap_monster_client.solve_captcha(yidun_request)
+    print("Solution:", result)
+
+asyncio.run(solve_yidun_captcha())
 ```
-
+</details>
   </TabItem>
 
   <TabItem value="csharp" label="C#" className="method-panel">
-
+<details>
+      <summary>显示代码</summary>
 ```csharp
 // https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
@@ -409,24 +496,26 @@ class Program
 {
     static async Task Main(string[] args)
     {
-        // 你的 CapMonster Cloud API key
+        // 输入您的 CapMonster Cloud API 密钥
         var clientOptions = new ClientOptions
         {
-            ClientKey = "your_api_key" // 你的 CapMonster Cloud API key
+            ClientKey = "YOUR_API_KEY"
         };
 
         var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
-        // 选项 1：Yidun 不使用代理
+        // 基本示例，无需代理
+        // CapMonster Cloud 会自动使用它们的代理
         var yidunRequest = new YidunTaskRequest
         {
-            WebsiteUrl = "https://example.com", // 带验证码页面的 URL 
-            WebsiteKey = "7ce0f0475b5d46acacf9b732a29218d9", // 替换为正确值
-            UserAgent = "userAgentPlaceholder" // 使用当前 UserAgent
+            WebsiteUrl = "https://example.com",   // 含有验证码的页面 URL
+            WebsiteKey = "7ce0f0475b5d46acacf9b732a29218d9",
+            UserAgent = "userAgentPlaceholder"
         };
 
-        // 选项 2：Yidun 使用代理
-        // 如果需要，请取消注释
+        // 使用您自己的代理的示例
+        // 如果想使用自己的代理，请取消注释以下代码块
+
         /*
         var yidunRequest = new YidunTaskRequest
         {
@@ -435,22 +524,26 @@ class Program
             UserAgent = "userAgentPlaceholder",
 
             Proxy = new ProxyContainer(
-                "123.45.67.89",
-                8080,
-                ProxyType.Http,
-                "proxyLogin",
-                "proxyPassword"
+                "123.45.67.89",  
+                8080,              
+                ProxyType.Http,    
+                "username",       
+                "password"     
             )
         };
         */
 
+        // 如有必要，可以检查余额
+        var balance = await cmCloudClient.GetBalanceAsync();
+        Console.WriteLine("Balance: " + balance);
+
         var yidunResult = await cmCloudClient.SolveAsync(yidunRequest);
 
-        Console.WriteLine("Yidun 解决方案: " + yidunResult.Solution.Value);
+        Console.WriteLine("Solution: " + yidunResult.Solution.Value);
     }
 }
 ```
-
+</details>
   </TabItem>
 
 </Tabs>
