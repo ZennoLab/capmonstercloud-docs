@@ -264,7 +264,7 @@ Se na aba **Network** dos desenvolvedores você encontrar os parâmetros `challe
   "type": "YidunTask",
   "websiteURL": "https://id7.cloud.example.com/IframeLogin.html",
   "websiteKey": "0f123r2a6am56431yg17n8rz6grz0ym6",
-  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+  "userAgent": "userAgentPlaceholder",
   "yidunGetLib": "https://example.com/captcha/b/v3//static/load.min.js",
   "yidunApiServerSubdomain": "csc-captcha-example.com",
   "challenge": "abc55382321547556267884cc3ba57c3d8a7c14f541fd9c6a7f1ce3173d3b9a1",
@@ -319,85 +319,171 @@ Todos esses parâmetros podem ser encontrados nas requisições de rede. A requi
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 
   <TabItem value="js" label="JavaScript" default className="method-panel">
+<details>
+      <summary>Mostrar Código (para navegador)</summary>
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
 
-  ```js
-  // https://github.com/ZennoLab/capmonstercloud-client-js
+import { CapMonsterCloudClientFactory, ClientOptions, YidunRequest } from '@zennolab_com/capmonstercloud-client';
 
-  import { CapMonsterCloudClientFactory, ClientOptions, YidunRequest } from '@zennolab_com/capmonstercloud-client';
+const API_KEY = "YOUR_API_KEY";  // Insira sua chave de API do CapMonster Cloud
 
-  document.addEventListener('DOMContentLoaded', async () => {
-    const cmcClient = CapMonsterCloudClientFactory.Create(
-      new ClientOptions({ clientKey: '<sua chave API do capmonster.cloud>' })
+document.addEventListener("DOMContentLoaded", async () => {
+    const client = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
     );
 
-    console.log(await cmcClient.getBalance());
-
-    const yidunRequest = new YidunRequest({
-      websiteURL: 'https://www.example.com', // URL da página com captcha 
-      websiteKey: '6cw0f0485d5d46auacf9b735d20218a5', // Substitua pelo valor correto
-      userAgent: 'userAgentPlaceholder', // Use o UserAgent atual
-      /*
-      // Se precisar usar um proxy:
-      proxy: {
-        type: 'http',
-        address: '127.0.0.1',
-        port: 8000,
-        login: 'usuario',
-        password: 'senha'
-      }
-      */
+    // Exemplo básico sem proxy
+    // O CapMonster Cloud usa automaticamente seus próprios proxies
+    let yidunRequest = new YidunRequest({
+        websiteURL: "https://www.example.com",                 // URL da página com a captcha
+        websiteKey: "6cw0f0485d5d46auacf9b735d20218a5",
+        userAgent: "userAgentPlaceholder"
     });
 
-    console.log(await cmcClient.Solve(yidunRequest));
-  });
-````
+    // Exemplo de uso do seu próprio proxy
+    // Descomente este bloco se quiser usar um proxy personalizado
+    /*
+    const proxy = {
+        proxyType: "http",
+        proxyAddress: "123.45.67.89",
+        proxyPort: 8080,
+        proxyLogin: "username",
+        proxyPassword: "password"
+    };
+
+    yidunRequest = new YidunRequest({
+        websiteURL: "https://www.example.com",                 
+        websiteKey: "6cw0f0485d5d46auacf9b735d20218a5",
+        userAgent: "userAgentPlaceholder",
+        proxy
+    });
+    */
+
+    // Se necessário, você pode verificar o saldo
+    const balance = await client.getBalance();
+    console.log("Balance:", balance);
+
+    const result = await client.Solve(yidunRequest);
+    console.log("Solution:", result);
+});
+```
+</details>
+
+<details>
+      <summary>Mostrar Código (Node.js)</summary>
+```javascript
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, YidunRequest } from '@zennolab_com/capmonstercloud-client';
+
+const API_KEY = "YOUR_API_KEY";  // Insira sua chave de API do CapMonster Cloud
+
+async function solveYidun() {
+    const client = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
+    );
+
+    // Exemplo básico sem proxy
+    // O CapMonster Cloud usa automaticamente seus próprios proxies
+    let yidunRequest = new YidunRequest({
+        websiteURL: "https://www.example.com",                 // URL da página com a captcha
+        websiteKey: "6cw0f0485d5d46auacf9b735d20218a5",
+        userAgent: "userAgentPlaceholder"
+    });
+
+    // Exemplo de uso do seu próprio proxy
+    // Descomente este bloco se quiser usar um proxy personalizado
+
+    /*
+    const proxy = {
+        proxyType: "http",
+        proxyAddress: "123.45.67.89",
+        proxyPort: 8080,
+        proxyLogin: "username",
+        proxyPassword: "password"
+    };
+
+    yidunRequest = new YidunRequest({
+        websiteURL: "https://www.example.com",                 // URL da página com a captcha
+        websiteKey: "6cw0f0485d5d46auacf9b735d20218a5",
+        userAgent: "userAgentPlaceholder",
+        proxy
+    });
+    */
+
+    // Se necessário, você pode verificar o saldo
+    const balance = await client.getBalance();
+    console.log("Balance:", balance);
+
+    const result = await client.Solve(yidunRequest);
+    console.log("Solution:", result);
+}
+
+solveYidun().catch(err => console.error("Erro:", err));
+```
+</details>
 
   </TabItem>
 
   <TabItem value="python" label="Python" default className="method-panel">
-
+<details>
+      <summary>Mostrar Código</summary>
 ```python
 # https://github.com/ZennoLab/capmonstercloud-client-python
 
 import asyncio
 from capmonstercloudclient import CapMonsterClient, ClientOptions
 from capmonstercloudclient.requests import YidunRequest
+# from capmonstercloudclient.requests.baseRequestWithProxy import ProxyInfo  # Descomente se você planeja usar um proxy
 
-# Sua chave API do CapMonster Cloud
-client_options = ClientOptions(api_key="API_KEY")
-cap_monster_client = CapMonsterClient(options=client_options)
+API_KEY = "YOUR_API_KEY"  # Insira sua chave de API do CapMonster Cloud
 
-# Opção 1: Sem proxy
-yidun_request = YidunRequest(
-    websiteUrl="https://www.example.com", # URL da página com captcha 
-    websiteKey="6cw0f0485d5d46auacf9b735d20218a5", # Substitua pelo valor correto
-    userAgent="userAgentPlaceholder" # Use o UserAgent atual
-)
+async def solve_yidun_captcha():
+    client_options = ClientOptions(api_key=API_KEY)
+    cap_monster_client = CapMonsterClient(options=client_options)
 
-# Opção 2: Com proxy
-# Descomente se precisar usar um proxy
-# yidun_request = YidunRequest(
-#     websiteUrl="https://www.example.com",
-#     websiteKey="6cw0f0485d5d46auacf9b735d20218a5",
-#     userAgent="userAgentPlaceholder",
-#     proxyType="http",
-#     proxyAddress="123.45.67.89",
-#     proxyPort=8080,
-#     proxyLogin="usuarioProxy",
-#     proxyPassword="senhaProxy"
-# )
+    # Exemplo básico sem proxy
+    # O CapMonster Cloud usa automaticamente seus próprios proxies
+    yidun_request = YidunRequest(
+        websiteUrl="https://www.example.com",  # URL da página com a captcha
+        websiteKey="6cw0f0485d5d46auacf9b735d20218a5",
+        userAgent="userAgentPlaceholder"  # Use um UserAgent atual
+    )
 
-async def solve_captcha():
-    return await cap_monster_client.solve_captcha(yidun_request)
+    # Exemplo de uso do seu próprio proxy
+    # Descomente este bloco se quiser usar um proxy personalizado
 
-responses = asyncio.run(solve_captcha())
-print(responses)
+    # proxy = ProxyInfo(
+    #     proxyType="http",
+    #     proxyAddress="123.45.67.89",
+    #     proxyPort=8080,
+    #     proxyLogin="username",
+    #     proxyPassword="password"
+    # )
+    #
+    # yidun_request = YidunRequest(
+    #     websiteUrl="https://www.example.com",
+    #     websiteKey="6cw0f0485d5d46auacf9b735d20218a5",
+    #     userAgent="userAgentPlaceholder",
+    #     proxy=proxy
+    # )
+
+    # Se necessário, você pode verificar o saldo
+    balance = await cap_monster_client.get_balance()
+    print("Balance:", balance)
+
+    result = await cap_monster_client.solve_captcha(yidun_request)
+    print("Solution:", result)
+
+asyncio.run(solve_yidun_captcha())
 ```
-
+</details>
   </TabItem>
 
   <TabItem value="csharp" label="C#" className="method-panel">
-
+<details>
+      <summary>Mostrar Código</summary>
 ```csharp
 // https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
@@ -410,24 +496,26 @@ class Program
 {
     static async Task Main(string[] args)
     {
-        // Sua chave API do CapMonster Cloud
+        // Insira sua chave de API do CapMonster Cloud
         var clientOptions = new ClientOptions
         {
-            ClientKey = "sua_chave_api" // Sua chave API do CapMonster Cloud
+            ClientKey = "YOUR_API_KEY"
         };
 
         var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
-        // Opção 1: Yidun sem proxy
+        // Exemplo básico sem proxy
+        // O CapMonster Cloud usa automaticamente seus próprios proxies
         var yidunRequest = new YidunTaskRequest
         {
-            WebsiteUrl = "https://example.com", // URL da página com captcha 
-            WebsiteKey = "7ce0f0475b5d46acacf9b732a29218d9", // Substitua pelo valor correto
-            UserAgent = "userAgentPlaceholder" // Use o UserAgent atual
+            WebsiteUrl = "https://example.com",                  // URL da página com a captcha
+            WebsiteKey = "7ce0f0475b5d46acacf9b732a29218d9",
+            UserAgent = "userAgentPlaceholder"
         };
 
-        // Opção 2: Yidun com proxy
-        // Descomente se precisar usar um proxy
+        // Exemplo de uso do seu próprio proxy
+        // Descomente este bloco se quiser usar um proxy personalizado
+
         /*
         var yidunRequest = new YidunTaskRequest
         {
@@ -436,22 +524,26 @@ class Program
             UserAgent = "userAgentPlaceholder",
 
             Proxy = new ProxyContainer(
-                "123.45.67.89",
-                8080,
-                ProxyType.Http,
-                "usuarioProxy",
-                "senhaProxy"
+                "123.45.67.89",  
+                8080,              
+                ProxyType.Http,    
+                "username",       
+                "password"     
             )
         };
         */
 
+        // Se necessário, você pode verificar o saldo
+        var balance = await cmCloudClient.GetBalanceAsync();
+        Console.WriteLine("Balance: " + balance);
+
         var yidunResult = await cmCloudClient.SolveAsync(yidunRequest);
 
-        Console.WriteLine("Solução Yidun: " + yidunResult.Solution.Value);
+        Console.WriteLine("Solution: " + yidunResult.Solution.Value);
     }
 }
 ```
-
+</details>
   </TabItem>
 
 </Tabs>

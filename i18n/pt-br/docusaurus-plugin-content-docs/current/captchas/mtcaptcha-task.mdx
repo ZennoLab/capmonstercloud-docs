@@ -235,89 +235,178 @@ Por padrão é **%24**; se for diferente (por exemplo, *..\&act=login&...*), esp
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 
   <TabItem value="js" label="JavaScript" default className="method-panel">
+<details>
+      <summary>Mostrar Código (para navegador)</summary>
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
 
-  ```js
-  // https://github.com/ZennoLab/capmonstercloud-client-js
+import { CapMonsterCloudClientFactory, ClientOptions, MTCaptchaRequest } from '@zennolab_com/capmonstercloud-client';
 
-  import { CapMonsterCloudClientFactory, ClientOptions, MTCaptchaRequest } from '@zennolab_com/capmonstercloud-client';
+const API_KEY = "YOUR_API_KEY";  // Insira sua chave de API do CapMonster Cloud
 
-  document.addEventListener('DOMContentLoaded', async () => {
-    const cmcClient = CapMonsterCloudClientFactory.Create(
-      new ClientOptions({ clientKey: '<sua chave API do capmonster.cloud>' })
+document.addEventListener("DOMContentLoaded", async () => {
+    const client = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
     );
 
-    console.log(await cmcClient.getBalance());
-
-    const mtcaptchaRequest = new MTCaptchaRequest({
-      websiteURL: 'https://www.example.com',     // URL da página com captcha 
-      websiteKey: 'MTPublic-abCDEFJAB',          // Substitua pelo valor correto
-      isInvisible: false,                         // "true" se o captcha for invisível
-      pageAction: 'login',
-      /*
-      // Se precisar usar um proxy:
-      proxy: {
-        type: 'http',
-        address: '127.0.0.1',
-        port: 8000,
-        login: 'usuario',
-        password: 'senha'
-      }
-      */
+    // Exemplo básico sem proxy
+    // O CapMonster Cloud usa automaticamente seus próprios proxies
+    let mtcaptchaRequest = new MTCaptchaRequest({
+        websiteURL: "https://www.example.com",       // URL da página com MTCaptcha
+        websiteKey: "MTPublic-abCDEFJAB",
+        isInvisible: false,                          // true -- se for usado o MTCaptcha Invisível
+        pageAction: "login"
     });
 
-    console.log(await cmcClient.Solve(mtcaptchaRequest));
-  });
-````
+    // Exemplo de uso do seu próprio proxy
+    // Descomente este bloco se quiser usar um proxy personalizado
+    /*
+    const proxy = {
+        proxyType: "http",
+        proxyAddress: "123.45.67.89",
+        proxyPort: 8080,
+        proxyLogin: "username",
+        proxyPassword: "password"
+    };
 
+    mtcaptchaRequest = new MTCaptchaRequest({
+        websiteURL: "https://www.example.com",
+        websiteKey: "MTPublic-abCDEFJAB",
+        isInvisible: false,
+        pageAction: "login",
+        proxy,
+        userAgent: "userAgentPlaceholder"
+    });
+    */
+
+    // Se necessário, você pode verificar o saldo
+    const balance = await client.getBalance();
+    console.log("Balance:", balance);
+
+    const result = await client.Solve(mtcaptchaRequest);
+    console.log("Solution:", result);
+});
+```
+</details>
+
+<details>
+      <summary>Mostrar Código (Node.js)</summary>
+```javascript
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, MTCaptchaRequest } from '@zennolab_com/capmonstercloud-client';
+
+const API_KEY = "YOUR_API_KEY";  // Insira sua chave de API do CapMonster Cloud
+
+async function solveMTCaptcha() {
+    const client = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
+    );
+
+    // Exemplo básico sem proxy
+    // O CapMonster Cloud usa automaticamente seus próprios proxies
+    let mtcaptchaRequest = new MTCaptchaRequest({
+        websiteURL: "https://www.example.com",       // URL da página com MTCaptcha
+        websiteKey: "MTPublic-abCDEFJAB",
+        isInvisible: false,                          // true -- se for usado o MTCaptcha Invisível
+        pageAction: "login"
+    });
+
+    // Exemplo de uso do seu próprio proxy
+    // Descomente este bloco se quiser usar um proxy personalizado
+
+    /*
+    const proxy = {
+        proxyType: "http",
+        proxyAddress: "123.45.67.89",
+        proxyPort: 8080,
+        proxyLogin: "username",
+        proxyPassword: "password"
+    };
+
+    mtcaptchaRequest = new MTCaptchaRequest({
+        websiteURL: "https://www.example.com",
+        websiteKey: "MTPublic-abCDEFJAB",
+        isInvisible: false,
+        pageAction: "login",
+        proxy,
+        userAgent: "userAgentPlaceholder"
+    });
+    */
+
+    // Se necessário, você pode verificar o saldo
+    const balance = await client.getBalance();
+    console.log("Balance:", balance);
+
+    const result = await client.Solve(mtcaptchaRequest);
+    console.log("Solution:", result);
+}
+
+solveMTCaptcha().catch(console.error);
+```
+</details>
   </TabItem>
 
   <TabItem value="python" label="Python" default className="method-panel">
-
+<details>
+      <summary>Mostrar Código</summary>
 ```python
 # https://github.com/ZennoLab/capmonstercloud-client-python
 
 import asyncio
 from capmonstercloudclient import CapMonsterClient, ClientOptions
 from capmonstercloudclient.requests import MTCaptchaRequest
+# from capmonstercloudclient.requests.baseRequestWithProxy import ProxyInfo  # Descomente se planeja usar proxy
 
-# Sua chave API do CapMonster Cloud
-client_options = ClientOptions(api_key="API_KEY")
-cap_monster_client = CapMonsterClient(options=client_options)
+API_KEY = "YOUR_API_KEY"  # Insira sua chave de API do CapMonster Cloud
 
-# Opção 1: Sem proxy
-mtcaptcha_request = MTCaptchaRequest(
-    websiteUrl="https://www.example.com", # URL da página com captcha 
-    websiteKey="MTPublic-abCDEFJAB", # Substitua pelo valor correto
-    isInvisible=False,   # "true" se o captcha for invisível
-    pageAction="login"
-)
+async def solve_mt_captcha():
+    client_options = ClientOptions(api_key=API_KEY)
+    cap_monster_client = CapMonsterClient(options=client_options)
 
-# Opção 2: Com proxy
-# Descomente se precisar usar um proxy
+    # Exemplo básico sem proxy
+    # O CapMonster Cloud usa automaticamente seus próprios proxies
+    mtcaptcha_request = MTCaptchaRequest(
+        websiteUrl="https://www.example.com",  # URL da página com MTCaptcha
+        websiteKey="MTPublic-abCDEFJAB",
+        isInvisible=False,                      # True, se for MTCaptcha invisível
+        pageAction="login"
+    )
 
-# mtcaptcha_request = MTCaptchaRequest(
-#     websiteUrl="https://www.example.com",
-#     websiteKey="MTPublic-abCDEFJAB",
-#     isInvisible=False,
-#     pageAction="login",
-#     proxyType="http",
-#     proxyAddress="123.45.67.89",
-#     proxyPort=8000,
-#     proxyLogin="usuarioProxy",
-#     proxyPassword="senhaProxy"
-# )
+    # Exemplo de uso do seu próprio proxy
+    # Descomente este bloco se quiser usar um proxy personalizado
 
-async def solve_captcha():
-    return await cap_monster_client.solve_captcha(mtcaptcha_request)
+    # proxy = ProxyInfo(
+    #     proxyType="http",
+    #     proxyAddress="123.45.67.89",
+    #     proxyPort=8080,
+    #     proxyLogin="username",
+    #     proxyPassword="password"
+    # )
+    #
+    # mtcaptcha_request = MTCaptchaRequest(
+    #     websiteUrl="https://www.example.com",
+    #     websiteKey="MTPublic-abCDEFJAB",
+    #     isInvisible=False,
+    #     pageAction="login",
+    #     proxy=proxy
+    # )
 
-responses = asyncio.run(solve_captcha())
-print(responses)
+    # Se necessário, você pode verificar o saldo
+    balance = await cap_monster_client.get_balance()
+    print("Balance:", balance)
+  
+    result = await cap_monster_client.solve_captcha(mtcaptcha_request)
+    print("Solution:", result)
+
+asyncio.run(solve_mt_captcha())
 ```
-
+</details>
   </TabItem>
 
   <TabItem value="csharp" label="C#" className="method-panel">
-
+<details>
+      <summary>Mostrar Código</summary>
 ```csharp
 // https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
@@ -330,52 +419,58 @@ class Program
 {
     static async Task Main(string[] args)
     {
-        // Sua chave API do CapMonster Cloud
+        // Insira sua chave de API do CapMonster Cloud
         var clientOptions = new ClientOptions
         {
-            ClientKey = "sua_chave_api"
+            ClientKey = "YOUR_API_KEY"
         };
 
         var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
-        // Opção 1: MTCaptcha sem proxy
+        // Exemplo básico sem proxy
+        // O CapMonster Cloud usa automaticamente seus próprios proxies
         var mtcaptchaRequest = new MTCaptchaTaskRequest
         {
-            WebsiteUrl = "https://www.example.com", // URL da página com captcha 
-            WebsiteKey = "MTPublic-tqNCRE0GS", // Substitua pelo valor correto
-            Invisible = false,  // "true" se o captcha for invisível
+            WebsiteUrl = "https://www.example.com",     // URL da página com MTCaptcha
+            WebsiteKey = "MTPublic-tqNCRE0GS",
+            Invisible = false,                          // true -- se for MTCaptcha invisível
             PageAction = "login",
-            UserAgent = "userAgentPlaceholder" // Use o UserAgent atual
+            UserAgent = "userAgentPlaceholder"
         };
 
-        // Opção 2: MTCaptcha com proxy
-        // Descomente se precisar usar um proxy
+        // Exemplo de uso do seu próprio proxy
+        // Descomente este bloco se quiser usar um proxy personalizado
+        
         /*
-        var mtcaptchaRequest = new MTCaptchaTaskRequest
+        mtcaptchaRequest = new MTCaptchaTaskRequest
         {
             WebsiteUrl = "https://www.example.com",
             WebsiteKey = "MTPublic-tqNCRE0GS",
             Invisible = false,
             PageAction = "login",
-            UserAgent = "userAgentPlaceholder",
+            UserAgent = "userAgentPlaceholder,
 
             Proxy = new ProxyContainer(
                 "123.45.67.89",
-                8080,
-                ProxyType.Http,
-                "usuarioProxy",
-                "senhaProxy"
+                8080,  
+                ProxyType.Http,  
+                "username",    
+                "password"  
             )
         };
         */
 
+        // Se necessário, você pode verificar o saldo
+        var balance = await cmCloudClient.GetBalanceAsync();
+        Console.WriteLine("Balance: " + balance);
+
         var mtcaptchaResult = await cmCloudClient.SolveAsync(mtcaptchaRequest);
 
-        Console.WriteLine("Solução MTCaptcha: " + mtcaptchaResult.Solution.Value);
+        Console.WriteLine("MTCaptcha Solution: " + mtcaptchaResult.Solution.Value);
     }
 }
 ```
-
+</details>
   </TabItem>
 
 </Tabs>

@@ -1224,6 +1224,8 @@ run();
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 
   <TabItem value="js" label="JavaScript" default className="method-panel">
+  <details>
+      <summary>Показать код (для браузера)</summary>
 
   ```js
   // https://github.com/ZennoLab/capmonstercloud-client-js
@@ -1231,23 +1233,61 @@ run();
   import { CapMonsterCloudClientFactory, ClientOptions, ComplexImageTaskRecognitionRequest } from '@zennolab_com/capmonstercloud-client';
 
   document.addEventListener('DOMContentLoaded', async () => {
-    const cmcClient = CapMonsterCloudClientFactory.Create(
-      new ClientOptions({ clientKey: '<your capmonster.cloud API key>' })
-    );
-    console.log(await cmcClient.getBalance());
+      const cmcClient = CapMonsterCloudClientFactory.Create(
+          new ClientOptions({ clientKey: 'YOUR_API_KEY' }) // Укажите ваш API-ключ CapMonster Cloud
+      );
 
-    const citRecognitionRequest = new ComplexImageTaskRecognitionRequest({
-      imagesBase64: ['/9xwee/'], // Изображение в формате base64
-      metaData: { Task: 'oocl_rotate' },
-    });
+      // При необходимости можно проверить баланс
+      const balance = await cmcClient.getBalance();
+      console.log("Balance:", balance);
 
-    console.log(await cmcClient.Solve(citRecognitionRequest));
+      const citRecognitionRequest = new ComplexImageTaskRecognitionRequest({
+          imagesBase64: ['/9xwee/'], // Изображение в формате base64
+          metaData: { Task: 'oocl_rotate' }
+      });
+
+      const result = await cmcClient.Solve(citRecognitionRequest);
+      console.log("Solution:", result);
   });
-````
+```
+</details>
+
+<details>
+      <summary>Показать код (Node.js)</summary>
+      ```javascript
+      // https://github.com/ZennoLab/capmonstercloud-client-js
+
+      import { CapMonsterCloudClientFactory, ClientOptions, ComplexImageTaskRecognitionRequest } from '@zennolab_com/capmonstercloud-client';
+
+      const API_KEY = "YOUR_API_KEY"; // Укажите ваш API-ключ CapMonster Cloud
+
+      async function solveComplexImageTask() {
+          const cmcClient = CapMonsterCloudClientFactory.Create(
+              new ClientOptions({ clientKey: API_KEY })
+          );
+
+          // При необходимости можно проверить баланс
+          const balance = await cmcClient.getBalance();
+          console.log("Balance:", balance);
+
+          const citRecognitionRequest = new ComplexImageTaskRecognitionRequest({
+              imagesBase64: ['/9xwee/'], // Изображение в формате base64
+              metaData: { Task: 'oocl_rotate' }
+          });
+
+          const result = await cmcClient.Solve(citRecognitionRequest);
+          console.log("Solution:", result);
+      }
+
+      solveComplexImageTask().catch(console.error);
+      ```
+</details>
 
   </TabItem>
 
   <TabItem value="python" label="Python" className="method-panel">
+  <details>
+      <summary>Показать код</summary>
 
 ```python
 # https://github.com/ZennoLab/capmonstercloud-client-python
@@ -1256,8 +1296,8 @@ import asyncio
 from capmonstercloudclient import CapMonsterClient, ClientOptions
 from capmonstercloudclient.requests import RecognitionComplexImageTaskRequest
 
-# Ваш API-ключ CapMonster Cloud
-client_options = ClientOptions(api_key="your_api_key")  # Ваш API-ключ CapMonster Cloud
+# Укажите ваш API-ключ CapMonster Cloud
+client_options = ClientOptions(api_key="YOUR_API_KEY")
 cap_monster_client = CapMonsterClient(options=client_options)
 
 complexImage_request = RecognitionComplexImageTaskRequest(
@@ -1268,40 +1308,54 @@ complexImage_request = RecognitionComplexImageTaskRequest(
 )
 
 async def solve_captcha():
+    # При необходимости можно проверить баланс
+    balance = await cap_monster_client.get_balance()
+    print("Balance:", balance)
+
     solution = await cap_monster_client.solve_captcha(complexImage_request)
     return solution
 
 responses = asyncio.run(solve_captcha())
-print(responses)
+print("Solution:", responses)
 ```
+</details>
 
   <BlogLink url="https://capmonster.cloud/ru/blog/re-1/python-recaptcha-v2"/>
   </TabItem>
 
   <TabItem value="csharp" label="C#" className="method-panel">
+  <details>
+      <summary>Показать код</summary>
 
 ```csharp
 // https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Zennolab.CapMonsterCloud.Requests;
 using Zennolab.CapMonsterCloud;
 
 class Program
 {
-    static async Task MainComplexImageTaskRecognition(string[] args)
+    static async Task Main(string[] args)
     {
         var clientOptions = new ClientOptions
         {
-            ClientKey = "your_api_key" // Ваш API-ключ CapMonster Cloud 
+            ClientKey = "YOUR_API_KEY" // Укажите ваш API-ключ CapMonster Cloud 
         };
 
         var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+        // При необходимости можно проверить баланс 
+        var balance = await cmCloudClient.GetBalanceAsync();
+        Console.WriteLine("Balance: " + balance);
 
         var recognitionCITRequest = new RecognitionComplexImageTaskRequest
         {
             ImagesBase64 = new List<string>
             {
-                "/9j/4AAQSkZJRgABAQEAAAAAAAD…" // Изображение в формате base64
+                "/9j/4AAQSkZJRgABAQEAAAAAAAD" // Изображение в формате base64
             },
             Metadata = new RecognitionComplexImageTaskRequest.RecognitionMetadata
             {
@@ -1311,14 +1365,14 @@ class Program
 
         var recognitionCITResult = await cmCloudClient.SolveAsync(recognitionCITRequest);
 
-        if(recognitionCITResult.Solution.Answer.IsGrid)
+        if (recognitionCITResult.Solution.Answer.IsGrid)
             Console.WriteLine("Captcha Solution: " + recognitionCITResult.Solution.Answer.GridAnswer);
         else if (recognitionCITResult.Solution.Answer.IsNumeric)
             Console.WriteLine("Captcha Solution: " + recognitionCITResult.Solution.Answer.NumericAnswer);
     }
 }
 ```
-
+</details>
   </TabItem>
 
 </Tabs>

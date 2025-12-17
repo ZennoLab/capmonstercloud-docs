@@ -356,90 +356,170 @@ The code snippets provided are basic examples for familiarization with extractin
   </TabItem>
 </Tabs>
 
-## Use the SDK Library
+## Use the SDK library
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 
   <TabItem value="js" label="JavaScript" default className="method-panel">
+<details>
+      <summary>Show code (for browser)</summary>
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
 
-  ```js
-  // https://github.com/ZennoLab/capmonstercloud-client-js
+import { CapMonsterCloudClientFactory, ClientOptions, BasiliskRequest } from '@zennolab_com/capmonstercloud-client';
 
-  import { CapMonsterCloudClientFactory, ClientOptions, BasiliskRequest } from '@zennolab_com/capmonstercloud-client';
+const API_KEY = "YOUR_API_KEY"; // Specify your CapMonster Cloud API key
 
-  document.addEventListener('DOMContentLoaded', async () => {
-    const cmcClient = CapMonsterCloudClientFactory.Create(
-      new ClientOptions({ clientKey: '<your capmonster.cloud API key>' })
+document.addEventListener("DOMContentLoaded", async () => {
+    const client = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
     );
 
-    console.log(await cmcClient.getBalance());
-
-    // Option without proxy
-    const basiliskRequest = new BasiliskRequest({
-      websiteURL: 'https://example.com', // Page URL with captcha
-      websiteKey: 'websiteKey',          // Replace with the correct value
+    // Basic example without proxy
+    // CapMonster Cloud automatically uses its own proxies
+    let basiliskRequest = new BasiliskRequest({
+        websiteURL: "https://example.com",       // URL of the page with Basilisk
+        websiteKey: "websiteKey"                 // Replace with the correct value
     });
 
-    // Option with proxy
+    // Example of using your own proxy
+    // Uncomment this block if you want to use a custom proxy
     /*
-    const basiliskRequest = new BasiliskRequest({
-      websiteURL: 'https://example.com', 
-      websiteKey: 'websiteKey',          
-      proxyAddress: '8.8.8.8',
-      proxyPort: 8080,
-      proxyLogin: 'proxyLoginHere',
-      proxyPassword: 'proxyPasswordHere',
+    const proxy = {
+        proxyType: "http",
+        proxyAddress: "123.45.67.89",
+        proxyPort: 8080,
+        proxyLogin: "username",
+        proxyPassword: "password"
+    };
+
+    basiliskRequest = new BasiliskRequest({
+        websiteURL: "https://example.com",
+        websiteKey: "b3760bfe5cf4254b2759c19fg2698og",
+        proxy,
+        userAgent: "userAgentPlaceholder"
     });
     */
 
-    console.log(await cmcClient.Solve(basiliskRequest));
-  });
-````
+    // Optionally, you can check the balance
+    const balance = await client.getBalance();
+    console.log("Balance:", balance);
 
+    const result = await client.Solve(basiliskRequest);
+    console.log("Solution:", result);
+});
+```
+</details>
+
+<details>
+      <summary>Show code (Node.js)</summary>
+```javascript
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, BasiliskRequest } from '@zennolab_com/capmonstercloud-client';
+
+const API_KEY = "YOUR_API_KEY"; // Specify your CapMonster Cloud API key
+
+async function solveBasilisk() {
+    const client = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
+    );
+
+    // Basic example without proxy
+    // CapMonster Cloud automatically uses its own proxies
+    let basiliskRequest = new BasiliskRequest({
+        websiteURL: "https://example.com",       // URL of the page with Basilisk
+        websiteKey: "b3760bfe5cf4254b2759c19fg2698og" // Replace with the correct value
+    });
+
+    // Example of using your own proxy
+    // Uncomment this block if you want to use a custom proxy
+    /*
+    const proxy = {
+        proxyType: "http",
+        proxyAddress: "123.45.67.89",
+        proxyPort: 8080,
+        proxyLogin: "username",
+        proxyPassword: "password"
+    };
+
+    basiliskRequest = new BasiliskRequest({
+        websiteURL: "https://example.com",
+        websiteKey: "b3760bfe5cf4254b2759c19fg2698og",
+        proxy,
+        userAgent: "userAgentPlaceholder"
+    });
+    */
+
+    // Optionally, you can check the balance
+    const balance = await client.getBalance();
+    console.log("Balance:", balance);
+
+    const result = await client.Solve(basiliskRequest);
+    console.log("Solution:", result);
+}
+
+solveBasilisk().catch(console.error);
+```
+</details>
   </TabItem>
 
   <TabItem value="python" label="Python" className="method-panel">
-
+<details>
+      <summary>Show code</summary>
 ```python
 # https://github.com/ZennoLab/capmonstercloud-client-python
 
 import asyncio
 from capmonstercloudclient import CapMonsterClient, ClientOptions
 from capmonstercloudclient.requests import BasiliskCustomTaskRequest
+# from capmonstercloudclient.requests.baseRequestWithProxy import ProxyInfo  # Uncomment if you plan to use a proxy
 
-# Your CapMonster Cloud API key
-client_options = ClientOptions(api_key="your_api_key")  # Your CapMonster Cloud API key
-cap_monster_client = CapMonsterClient(options=client_options)
+API_KEY = "YOUR_API_KEY"  # Specify your CapMonster Cloud API key
 
-# Option without proxy
-basilisk_request = BasiliskCustomTaskRequest(
-    websiteUrl="https://example.com",                  # Page URL with captcha
-    websiteKey="b3760bfe5cf4254b2759c19fg2698og"       # Replace with the correct value
-)
+async def solve_basilisk():
+    client_options = ClientOptions(api_key=API_KEY)
+    cap_monster_client = CapMonsterClient(options=client_options)
 
-# Option with proxy
-# Uncomment the block below and specify the proxy data
-# basilisk_request = BasiliskCustomTaskRequest(
-#     websiteUrl="https://example.com",                
-#     websiteKey="b3760bfe5cf4254b2759c19fg2698og",     
-#     proxyType="http",           
-#     proxyAddress="127.0.0.1",   
-#     proxyPort=8080,             
-#     proxyLogin="username",      
-#     proxyPassword="password"    
-# )
+    # Basic example without proxy
+    # CapMonster Cloud automatically uses its own proxies
+    basilisk_request = BasiliskCustomTaskRequest(
+        websiteUrl="https://example.com",                  # URL of the page with Basilisk
+        websiteKey="b3760bfe5cf4254b2759c19fg2698og"      # Replace with the correct value
+    )
 
-async def solve_captcha():
-    return await cap_monster_client.solve_captcha(basilisk_request)
+    # Example of using your own proxy
+    # Uncomment this block if you want to use a custom proxy
 
-responses = asyncio.run(solve_captcha())
-print(responses)
+    # proxy = ProxyInfo(
+    #     proxyType="http",
+    #     proxyAddress="123.45.67.89",
+    #     proxyPort=8080,
+    #     proxyLogin="username",
+    #     proxyPassword="password"
+    # )
+    #
+    # basilisk_request = BasiliskCustomTaskRequest(
+    #     websiteUrl="https://example.com",
+    #     websiteKey="b3760bfe5cf4254b2759c19fg2698og",
+    #     proxy=proxy
+    # )
+
+    # Optionally, you can check the balance
+    balance = await cap_monster_client.get_balance()
+    print("Balance:", balance)
+
+    result = await cap_monster_client.solve_captcha(basilisk_request)
+    print("Solution:", result)
+
+asyncio.run(solve_basilisk())
 ```
-
+</details>
   </TabItem>
 
   <TabItem value="csharp" label="C#" className="method-panel">
-
+<details>
+      <summary>Show code</summary>
 ```csharp
 // https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
@@ -452,46 +532,53 @@ class Program
 {
     static async Task Main(string[] args)
     {
-        // Your CapMonster Cloud API key
+        // Specify your CapMonster Cloud API key
         var clientOptions = new ClientOptions
         {
-            ClientKey = "your_api_key" // Your CapMonster Cloud API key
+            ClientKey = "YOUR_API_KEY"
         };
 
         var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
-        // Option without proxy
+        // Basic example without proxy
+        // CapMonster Cloud automatically uses its own proxies
         var basiliskRequest = new BasiliskCustomTaskRequest
         {
-            WebsiteUrl = "https://example.com",                 // Page URL with captcha
+            WebsiteUrl = "https://example.com",                  // URL of the page with Basilisk
             WebsiteKey = "b3760bfe5cf4254b2759c19fg2698og"      // Replace with the correct value
         };
 
-        // Option with proxy
-        // Uncomment the block below and specify the proxy data
+        // Example of using your own proxy
+        // Uncomment this block if you want to use a custom proxy
+
         /*
-        var basiliskRequest = new BasiliskCustomTaskRequest
+        basiliskRequest = new BasiliskCustomTaskRequest
         {
-            WebsiteUrl = "https://example.com",                         
-            WebsiteKey = "b3760bfe5cf4254b2759c19fg2698og",     
+            WebsiteUrl = "https://example.com",
+            WebsiteKey = "b3760bfe5cf4254b2759c19fg2698og",
             Proxy = new ProxyContainer(
-                "8.8.8.8",            
-                8080,                 
-                ProxyType.Http,       
-                "proxyLoginHere",     
-                "proxyPasswordHere"   
-            )
+                "123.45.67.89",   
+                8080,            
+                ProxyType.Http, 
+                "username",      
+                "password" 
+            ),
+            UserAgent = "userAgentPlaceholder"
         };
         */
 
+        // Optionally, you can check the balance
+        var balance = await cmCloudClient.GetBalanceAsync();
+        Console.WriteLine("Balance: " + balance);
+
         var basiliskResult = await cmCloudClient.SolveAsync(basiliskRequest);
 
-        Console.WriteLine("Captcha Solution Data: " + string.Join(", ", basiliskResult.Solution.Data));
-        Console.WriteLine("Captcha Solution Headers: " + string.Join(", ", basiliskResult.Solution.Headers));
+        Console.WriteLine("Basilisk Solution Data: " + string.Join(", ", basiliskResult.Solution.Data));
+        Console.WriteLine("Basilisk Solution Headers: " + string.Join(", ", basiliskResult.Solution.Headers));
     }
 }
 ```
-
+</details>
   </TabItem>
 
 </Tabs>

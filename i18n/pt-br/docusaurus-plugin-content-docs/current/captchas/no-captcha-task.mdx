@@ -428,143 +428,234 @@ Os trechos de código fornecidos são exemplos básicos para familiarização co
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">
-    ```js
-    // https://github.com/ZennoLab/capmonstercloud-client-js
+  <details>
+      <summary>Mostrar Código (para navegador)</summary>
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
 
-    import { CapMonsterCloudClientFactory, ClientOptions, RecaptchaV2Request } 
-      from '@zennolab_com/capmonstercloud-client';
+import { CapMonsterCloudClientFactory, ClientOptions, RecaptchaV2Request } 
+  from '@zennolab_com/capmonstercloud-client';
 
-    document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', async () => {
 
-      const cmcClient = CapMonsterCloudClientFactory.Create(
-        new ClientOptions({ clientKey: '<sua chave API do capmonster.cloud>' })
-      );
+  const API_KEY = "YOUR_API_KEY";  // Insira sua chave de API do CapMonster Cloud
 
-      console.log(await cmcClient.getBalance());
+  const cmcClient = CapMonsterCloudClientFactory.Create(
+    new ClientOptions({ clientKey: API_KEY })
+  );
 
-      const recaptchaV2Request = new RecaptchaV2Request({
-        websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high', // URL da página com o captcha
-        websiteKey: '6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd', // Substitua pelo valor correto
-      });
+  // Se necessário, você pode verificar o saldo
+  const balance = await cmcClient.getBalance();
+  console.log("Balance:", balance);
 
-      // Opção com proxy (se necessário)
-      // Descomente o bloco abaixo e preencha os detalhes do proxy
+  // Exemplo básico sem proxy
+  // O CapMonster Cloud usa automaticamente seus próprios proxies
+  let recaptchaV2Request = new RecaptchaV2Request({
+    websiteURL: "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
+    websiteKey: "6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"
+  });
 
-      /*
-      const recaptchaV2Request = new RecaptchaV2Request({
-        websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high',
-        websiteKey: '6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd',
-        proxyType: 'http',           // Tipo de proxy: http, https, socks4, socks5
-        proxyAddress: '8.8.8.8',     
-        proxyPort: 8080,             
-        proxyLogin: 'proxyLoginAqui',
-        proxyPassword: 'proxyPasswordAqui',
-        userAgent: 'userAgentPlaceholder',
-      });
-      */
+  // Exemplo de uso do seu próprio proxy
+  // Descomente este bloco se quiser usar um proxy personalizado
 
-      console.log(await cmcClient.Solve(recaptchaV2Request));
+  /*
+  const proxy = {
+      proxyType: "http",
+      proxyAddress: "123.45.67.89",
+      proxyPort: 8080,
+      proxyLogin: "username",
+      proxyPassword: "password"
+  };
+
+  recaptchaV2Request = new RecaptchaV2Request({
+      websiteURL: "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
+      websiteKey: "6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
+      proxy,
+      userAgent: "userAgentPlaceholder"
+  });
+  */
+
+  const result = await cmcClient.Solve(recaptchaV2Request);
+  console.log("Solution:", result);
+});
+```
+  </details>
+
+  <details>
+      <summary>Mostrar Código (Node.js)</summary>
+```javascript
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, RecaptchaV2Request } from '@zennolab_com/capmonstercloud-client';
+
+const API_KEY = "YOUR_API_KEY";  // Insira sua chave de API do CapMonster Cloud
+
+async function solveRecaptchaV2() {
+    const client = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
+    );
+
+    // Exemplo básico sem proxy
+    // O CapMonster Cloud usa automaticamente seus próprios proxies
+    let recaptcha2Request = new RecaptchaV2Request({
+        websiteURL: "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
+        websiteKey: "6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"
     });
-    ```
+
+    // Exemplo de uso do seu próprio proxy
+    // Descomente este bloco se quiser usar um proxy personalizado
+
+    /*
+    const proxy = {
+        proxyType: "http",
+        proxyAddress: "123.45.67.89",
+        proxyPort: 8080,
+        proxyLogin: "username",
+        proxyPassword: "password"
+    };
+
+    recaptcha2Request = new RecaptchaV2Request({
+        websiteURL: "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
+        websiteKey: "6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
+        proxy,
+        userAgent: "userAgentPlaceholder"
+    });
+    */
+
+    // Se necessário, você pode verificar o saldo
+    const balance = await client.getBalance();
+    console.log("Balance:", balance);
+
+    const result = await client.Solve(recaptcha2Request);
+    console.log("Solution:", result);
+}
+
+solveRecaptchaV2().catch(console.error);
+```
+</details>
+
     <BlogLink url="https://capmonster.cloud/pt-BR/blog/re-1/javascript-recaptcha-v2"/>
   </TabItem>
 
   <TabItem value="python" label="Python" className="method-panel">
-    ```python
-    # https://github.com/ZennoLab/capmonstercloud-client-python
+  <details>
+      <summary>Mostrar Código</summary>
+```python
+# https://github.com/ZennoLab/capmonstercloud-client-python
 
-    import asyncio
-    from capmonstercloudclient import CapMonsterClient, ClientOptions
-    from capmonstercloudclient.requests import RecaptchaV2Request
+import asyncio
+from capmonstercloudclient import CapMonsterClient, ClientOptions
+from capmonstercloudclient.requests import RecaptchaV2Request
+# from capmonstercloudclient.requests.baseRequestWithProxy import ProxyInfo  # Descomente se planeja usar um proxy
 
-    # Insira sua chave API do CapMonster Cloud
-    client_options = ClientOptions(api_key="sua_chave_api")  
+API_KEY = "YOUR_API_KEY"  # Insira sua chave de API do CapMonster Cloud
+
+async def solve_recaptcha_v2():
+    client_options = ClientOptions(api_key=API_KEY)
     cap_monster_client = CapMonsterClient(options=client_options)
 
-    # Opção 1: Sem proxy
-
+    # Exemplo básico sem proxy
+    # O CapMonster Cloud usa automaticamente seus próprios proxies
     recaptcha2_request = RecaptchaV2Request(
-        websiteUrl="https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",  # URL da página com o captcha
-        websiteKey="6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"  # Substitua pelo valor correto
+        websiteUrl="https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
+        websiteKey="6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"
     )
 
-    # Opção 2: Com proxy
-    # Descomente se precisar usar um proxy
+    # Exemplo de uso do seu próprio proxy
+    # Descomente este bloco se quiser usar um proxy personalizado
+
+    # proxy = ProxyInfo(
+    #     proxyType="http",
+    #     proxyAddress="123.45.67.89",
+    #     proxyPort=8080,
+    #     proxyLogin="username",
+    #     proxyPassword="password"
+    # )
 
     # recaptcha2_request = RecaptchaV2Request(
     #     websiteUrl="https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
     #     websiteKey="6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
-    #     proxyType="http",                
-    #     proxyAddress="8.8.8.8",         
-    #     proxyPort=8080,                 
-    #     proxyLogin="proxyLoginAqui",     
-    #     proxyPassword="proxyPasswordAqui", 
+    #     proxy=proxy,
     #     userAgent="userAgentPlaceholder"
     # )
 
-    async def solve_captcha():
-        return await cap_monster_client.solve_captcha(recaptcha2_request)
+    # Se necessário, você pode verificar o saldo
+    balance = await cap_monster_client.get_balance()
+    print("Balance:", balance)
 
-    # Executar
-    response = asyncio.run(solve_captcha())
-    print(response)
+    result = await cap_monster_client.solve_captcha(recaptcha2_request)
+    print("Solution:", result)
+
+asyncio.run(solve_recaptcha_v2())
     ```
+    </details>
+
     <BlogLink url="https://capmonster.cloud/pt-BR/blog/re-1/python-recaptcha-v2"/>
   </TabItem>
 
   <TabItem value="csharp" label="C#" className="method-panel">
-    ```csharp
-    // https://github.com/ZennoLab/capmonstercloud-client-dotnet
+  
+<details>
+      <summary>Mostrar Código</summary>
+```csharp
+// https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
-    using System;
-    using System.Threading.Tasks;
-    using Zennolab.CapMonsterCloud;
-    using Zennolab.CapMonsterCloud.Requests;
+using System;
+using System.Threading.Tasks;
+using Zennolab.CapMonsterCloud;
+using Zennolab.CapMonsterCloud.Requests;
 
-    class Program
+class Program
+{
+    static async Task Main(string[] args)
     {
-        static async Task Main(string[] args)
+        // Insira sua chave de API do CapMonster Cloud
+        var clientOptions = new ClientOptions
         {
-            // Sua chave API do CapMonster Cloud
-            var clientOptions = new ClientOptions
-            {
-                ClientKey = "sua_chave_api"
-            };
+            ClientKey = "YOUR_API_KEY"
+        };
 
-            var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+        var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
-            // Opção 1: Sem proxy
+        // Exemplo básico sem proxy
+        // O CapMonster Cloud usa automaticamente seus próprios proxies
 
-            var recaptchaV2Request = new RecaptchaV2Request
-            {
-                WebsiteUrl = "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high", // URL da página com o captcha
-                WebsiteKey = "6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"  // Substitua pelo valor correto
-            };
+        var recaptchaV2Request = new RecaptchaV2Request
+        {
+            WebsiteUrl = "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high", // URL da página com a captcha
+            WebsiteKey = "6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"  // Substitua por um valor válido
+        };
 
-            // Opção 2: Com proxy
-            // Descomente se precisar usar um proxy
-            /*
-            var recaptchaV2Request = new RecaptchaV2Request
-            {
-                WebsiteUrl = "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
-                WebsiteKey = "6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
+        // Exemplo de uso do seu próprio proxy
+        // Descomente este bloco se quiser usar um proxy personalizado
 
-                Proxy = new ProxyContainer(
-                    "8.8.8.8",        
-                    8080,              
-                    ProxyType.Http,    
-                    "proxyLoginAqui", 
-                    "proxyPasswordAqui"
-                )
-            };
-            */
+        /*
+        var recaptchaV2Request = new RecaptchaV2Request
+        {
+            WebsiteUrl = "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
+            WebsiteKey = "6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
 
-            var recaptchaV2Result = await cmCloudClient.SolveAsync(recaptchaV2Request);
+            Proxy = new ProxyContainer(
+                "123.45.67.89",        
+                8080,              
+                ProxyType.Http,   
+                "username", 
+                "password"
+            )
+        };
+        */
 
-            Console.WriteLine("Solução do captcha: " + recaptchaV2Result.Solution.Value);
-        }
+        // Se necessário, você pode verificar o saldo
+        var balance = await cmCloudClient.GetBalanceAsync();
+        Console.WriteLine("Balance: " + balance);
+
+        var recaptchaV2Result = await cmCloudClient.SolveAsync(recaptchaV2Request);
+
+        Console.WriteLine("Solution: " + recaptchaV2Result.Solution.Value);
     }
-    ```
+}
+```
+</details>
     <BlogLink url="https://capmonster.cloud/pt-BR/blog/re-1/c-recaptcha-v2"/>
   </TabItem>
 </Tabs>

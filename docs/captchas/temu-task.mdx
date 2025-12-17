@@ -343,89 +343,188 @@ CapMonster Cloud по умолчанию работает через встро�
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 
   <TabItem value="js" label="JavaScript" default className="method-panel">
-
+<details>
+      <summary>Показать код (для браузера)</summary>
   ```js
   // https://github.com/ZennoLab/capmonstercloud-client-js
 
   import { CapMonsterCloudClientFactory, ClientOptions, TemuRequest } from '@zennolab_com/capmonstercloud-client';
 
-  document.addEventListener('DOMContentLoaded', async () => {
-    const cmcClient = CapMonsterCloudClientFactory.Create(
-      new ClientOptions({ clientKey: '<your capmonster.cloud API key>' })
-    );
+  const API_KEY = "YOUR_API_KEY";  // Укажите ваш API-ключ CapMonster Cloud
 
-    console.log(await cmcClient.getBalance());
+  document.addEventListener("DOMContentLoaded", async () => {
+      const client = CapMonsterCloudClientFactory.Create(
+          new ClientOptions({ clientKey: API_KEY })
+      );
 
-    const temuRequest = new TemuRequest({
-      class: 'Temu',
-      websiteURL: 'https://www.example.com/bgn_verification.html?verifyCode=', // URL страницы с капчей
-      userAgent: 'userAgentPlaceholder', // Используйте актуальный UserAgent
-      metadata: {
-        cookie: 'region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab'
-      },
+      // Базовый пример без прокси
+      // CapMonster Cloud автоматически использует свои прокси
+      let temuRequest = new TemuRequest({
+          class: "Temu",
+          websiteURL: "https://www.example.com/bgn_verification.html?verifyCode=",  // URL страницы с Temu
+          userAgent: "userAgentPlaceholder",    // Используйте актуальный UserAgent
+          metadata: {
+              cookie: "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab"
+          }
+      });
+
+      // Пример использования вашего собственного прокси
+      // Раскомментируйте данный блок, если вы хотите использовать собственный прокси
       /*
-      // Если нужно использовать прокси:
-      proxy: {
-        type: 'http',
-        address: '127.0.0.1',
-        port: 8000,
-        login: 'user',
-        password: 'password'
-      }
-      */
-    });
+      const proxy = {
+          proxyType: "http",
+          proxyAddress: "123.45.67.89",
+          proxyPort: 8080,
+          proxyLogin: "user",
+          proxyPassword: "password"
+      };
 
-    console.log(await cmcClient.Solve(temuRequest));
+      temuRequest = new TemuRequest({
+          class: "Temu",
+          websiteURL: "https://www.example.com/bgn_verification.html?verifyCode=",
+          userAgent: "userAgentPlaceholder",
+          metadata: {
+              cookie: "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow"
+          },
+          proxy
+      });
+      */
+
+      // При необходимости можно проверить баланс
+      const balance = await client.getBalance();
+      console.log("Balance:", balance);
+
+      const result = await client.Solve(temuRequest);
+      console.log("Solution:", result);
   });
 ````
+</details>
+
+
+<details>
+      <summary>Показать код (Node.js)</summary>
+      ```JavaScript
+      // https://github.com/ZennoLab/capmonstercloud-client-js
+
+      import { CapMonsterCloudClientFactory, ClientOptions, TemuRequest } from '@zennolab_com/capmonstercloud-client';
+
+      const API_KEY = "YOUR_API_KEY"; // Укажите ваш API-ключ CapMonster Cloud
+
+      async function solveTemuCaptcha() {
+          const client = CapMonsterCloudClientFactory.Create(
+              new ClientOptions({ clientKey: API_KEY })
+          );
+
+          // Базовый пример без прокси
+          // CapMonster Cloud автоматически использует свои прокси
+          let temuRequest = new TemuRequest({
+              class: "Temu",
+              websiteURL: "https://www.example.com/bgn_verification.html?verifyCode=",  // URL страницы с Temu
+              userAgent: "userAgentPlaceholder",   // Используйте актуальный UserAgent
+              metadata: {
+                  cookie: "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab"
+              }
+          });
+
+          // Пример использования вашего собственного прокси
+          // Раскомментируйте данный блок, если вы хотите использовать собственный прокси
+          /*
+          const proxy = {
+              proxyType: "http",
+              proxyAddress: "123.45.67.89",
+              proxyPort: 8080,
+              proxyLogin: "user",
+              proxyPassword: "password"
+          };
+
+          temuRequest = new TemuRequest({
+              class: "Temu",
+              websiteURL: "https://www.example.com/bgn_verification.html?verifyCode=",
+              userAgent: "userAgentPlaceholder",
+              metadata: {
+                  cookie: "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow"
+              },
+              proxy
+          });
+          */
+
+          // При необходимости можно проверить баланс
+          const balance = await client.getBalance();
+          console.log("Balance:", balance);
+
+          const result = await client.Solve(temuRequest);
+          console.log("Solution:", result);
+      }
+
+      solveTemuCaptcha().catch(console.error);
+```
+
+</details>
 
   </TabItem>
 
   <TabItem value="python" label="Python" default className="method-panel">
 
+<details>
+      <summary>Показать код</summary>
 ```python
 # https://github.com/ZennoLab/capmonstercloud-client-python
 
 import asyncio
 from capmonstercloudclient import CapMonsterClient, ClientOptions
 from capmonstercloudclient.requests import TemuCustomTaskRequest
+# from capmonstercloudclient.requests.baseRequestWithProxy import ProxyInfo  # Раскомментируйте, если планируете использовать прокси
 
-client_options = ClientOptions(api_key="API_KEY")  # Ваш API-ключ CapMonster Cloud
-cap_monster_client = CapMonsterClient(options=client_options)
+API_KEY = "YOUR_API_KEY"  # Укажите ваш API-ключ CapMonster Cloud
 
-# Вариант 1: Без прокси
-temu_request = TemuCustomTaskRequest(
-    websiteUrl="https://www.example.com/bgn_verification.html?verifyCode=",
-    userAgent="userAgentPlaceholder",  # Используйте актуальный UserAgent
-    metadata={
-        "cookie": "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab"
-    }
-)
+async def solve_temu_captcha():
+    client_options = ClientOptions(api_key=API_KEY)
+    cap_monster_client = CapMonsterClient(options=client_options)
 
-# Вариант 2: С прокси
-# Раскомментируйте, если нужно использовать прокси
-# temu_request = TemuCustomTaskRequest(
-#     websiteUrl="https://www.example.com/bgn_verification.html?verifyCode=",
-#     userAgent="userAgentPlaceholder",
-#     metadata={ "cookie": "..." },
-#     proxyType="http",
-#     proxyAddress="123.45.67.89",
-#     proxyPort=8080,
-#     proxyLogin="proxyUser",
-#     proxyPassword="proxyPass"
-# )
+    # Базовый пример без прокси
+    # CapMonster Cloud автоматически использует свои прокси
+    temu_request = TemuCustomTaskRequest(
+        websiteUrl="https://www.example.com/bgn_verification.html?verifyCode=",  # URL страницы с Temu
+        userAgent="userAgentPlaceholder",                                        # Используйте актуальный UserAgent
+        metadata={
+            "cookie": "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab"
+        }
+    )
 
-async def solve_captcha():
-    return await cap_monster_client.solve_captcha(temu_request)
+    # Пример использования вашего собственного прокси
+    # Раскомментируйте данный блок, если вы хотите использовать собственный прокси
 
-responses = asyncio.run(solve_captcha())
-print(responses)
+    # proxy = ProxyInfo(
+    #     proxyType="http",
+    #     proxyAddress="123.45.67.89",
+    #     proxyPort=8080,
+    #     proxyLogin="username",
+    #     proxyPassword="password"
+    # )
+    #
+    # temu_request = TemuCustomTaskRequest(
+    #     websiteUrl="https://www.example.com/bgn_verification.html?verifyCode=",
+    #     userAgent="userAgentPlaceholder",
+    #     metadata={ "cookie": "..." },
+    #     proxy=proxy
+    # )
+
+    # При необходимости можно проверить баланс
+    balance = await cap_monster_client.get_balance()
+    print("Balance:", balance)
+
+    result = await cap_monster_client.solve_captcha(temu_request)
+    print("Solution:", result)
+
+asyncio.run(solve_temu_captcha())
 ```
-
+</details>
   </TabItem>
 
   <TabItem value="csharp" label="C#" className="method-panel">
 
+<details>
+      <summary>Показать код</summary>
 ```csharp
 // https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
@@ -438,29 +537,28 @@ class Program
 {
     static async Task Main(string[] args)
     {
-        // Ваш API-ключ от CapMonster Cloud
+        // Укажите ваш API-ключ CapMonster Cloud
         var clientOptions = new ClientOptions
         {
-            ClientKey = "your_api_key" // Ваш API-ключ CapMonster Cloud
+            ClientKey = "YOUR_API_KEY"
         };
 
         var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
-        // Вариант 1: Temu без прокси
+        // Базовый пример без прокси
+        // CapMonster Cloud автоматически использует свои прокси
         var temuRequest = new TemuCustomTaskRequest(
-            cookie: "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab"
+            "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab"
         )
         {
-            WebsiteUrl = "https://www.example.com/bgn_verification.html?verifyCode=", // URL страницы с капчей
-            UserAgent = "userAgentPlaceholder"
+            WebsiteUrl = "https://www.example.com/bgn_verification.html?verifyCode=", // URL страницы с Temu
+            UserAgent = "userAgentPlaceholder"                                       // Используйте актуальный UserAgent
         };
 
-        // Вариант 2: Temu с прокси
-        // Раскомментируйте, если нужно использовать прокси
+        // Пример использования вашего собственного прокси
+        // Раскомментируйте данный блок, если вы хотите использовать собственный прокси
         /*
-        var temuRequest = new TemuCustomTaskRequest(
-            cookie: "...long cookie..."
-        )
+        temuRequest = new TemuCustomTaskRequest("...long cookie...")
         {
             WebsiteUrl = "https://www.example.com/bgn_verification.html?verifyCode=",
             UserAgent = "userAgentPlaceholder",
@@ -474,13 +572,17 @@ class Program
         };
         */
 
+        // При необходимости можно проверить баланс
+        var balance = await cmCloudClient.GetBalanceAsync();
+        Console.WriteLine("Balance: " + balance);
+
         var temuResult = await cmCloudClient.SolveAsync(temuRequest);
 
-        Console.WriteLine("Temu Solution: " + temuResult.Solution.Domains);
+        Console.WriteLine("Solution Temu: " + temuResult.Solution.Domains);
     }
 }
 ```
-
+</details>
   </TabItem>
 
 </Tabs>

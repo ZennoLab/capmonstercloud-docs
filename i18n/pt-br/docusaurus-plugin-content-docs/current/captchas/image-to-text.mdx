@@ -305,66 +305,123 @@ Os trechos de código fornecidos são exemplos básicos para familiarização co
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">
-    ```js
-    // https://github.com/ZennoLab/capmonstercloud-client-js
+  <details>
+      <summary>Mostrar Código (para navegador)</summary>
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
 
-    import { CapMonsterCloudClientFactory, ClientOptions, ImageToTextRequest } from '@zennolab_com/capmonstercloud-client';
+import { CapMonsterCloudClientFactory, ClientOptions, ImageToTextRequest, CapMonsterModules } from '@zennolab_com/capmonstercloud-client';
 
-    document.addEventListener('DOMContentLoaded', async () => {
-      const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<sua chave API do capmonster.cloud>' }));
-      console.log(await cmcClient.getBalance());
+document.addEventListener('DOMContentLoaded', async () => {
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: 'YOUR_API_KEY' }) // Insira sua chave de API do CapMonster Cloud
+    );
 
-      const imageToTextRequest = new ImageToTextRequest({
-        body: 'algum corpo em base64', // Substitua pelo valor correto
+    // Se necessário, você pode verificar o saldo
+    const balance = await cmcClient.getBalance();
+    console.log("Balance:", balance);
+
+    const imageToTextRequest = new ImageToTextRequest({
+        body: 'some base64 body', // Substitua pelo valor real
         CapMonsterModule: CapMonsterModules.YandexWave,
         Case: true,
         numeric: 1,
         recognizingThreshold: 65,
-        math: false,
-      });
-
-      console.log(await cmcClient.Solve(imageToTextRequest));
+        math: false
     });
-    ```
+
+    const result = await cmcClient.Solve(imageToTextRequest);
+    console.log("Solution:", result);
+});
+```
+</details>
+
+<details>
+      <summary>Mostrar Código (Node.js)</summary>
+```javascript
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, ImageToTextRequest, CapMonsterModules } from '@zennolab_com/capmonstercloud-client';
+
+const API_KEY = "YOUR_API_KEY"; // Insira sua chave de API do CapMonster Cloud
+
+async function solveImageToText() {
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
+    );
+
+    // Se necessário, você pode verificar o saldo
+    const balance = await cmcClient.getBalance();
+    console.log("Balance:", balance);
+
+    const imageToTextRequest = new ImageToTextRequest({
+        body: 'some base64 body', // Substitua pelo valor real
+        CapMonsterModule: CapMonsterModules.YandexWave,
+        Case: true,
+        numeric: 1,
+        recognizingThreshold: 65,
+        math: false
+    });
+
+    const result = await cmcClient.Solve(imageToTextRequest);
+    console.log("Solution:", result);
+}
+
+solveImageToText().catch(console.error);
+```
+</details>
   </TabItem>
 
   <TabItem value="python" label="Python" className="method-panel">
-    ```python
-    # https://github.com/ZennoLab/capmonstercloud-client-python
+  <details>
+      <summary>Mostrar Código</summary>
+```python
+# https://github.com/ZennoLab/capmonstercloud-client-python
 
-    import asyncio
-    import base64
-    from capmonstercloudclient import CapMonsterClient, ClientOptions
-    from capmonstercloudclient.requests import ImageToTextRequest
+import asyncio
+import base64
+from capmonstercloudclient import CapMonsterClient, ClientOptions
+from capmonstercloudclient.requests import ImageToTextRequest
 
-    client_options = ClientOptions(api_key="sua_chave_api")  # Sua chave API do CapMonster Cloud
-    cap_monster_client = CapMonsterClient(options=client_options)
+# Insira sua chave de API do CapMonster Cloud
+client_options = ClientOptions(api_key="YOUR_API_KEY")
+cap_monster_client = CapMonsterClient(options=client_options)
 
-    image_base64 = "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgc…wwzqR4U/yZ//Z" # Substitua pelo valor correto
+# Imagem em formato base64
+image_base64 = "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgc...wwzqR4U/yZ//Z"  # Substitua pelo valor real
+image_bytes = base64.b64decode(image_base64)
 
-    image_bytes = base64.b64decode(image_base64)
+image_to_text_request = ImageToTextRequest(
+    image_bytes=image_bytes,
+    module_name=None,     # Você pode escolher um módulo, por exemplo YandexWave
+    threshold=50,     
+    case=True,     
+    numeric=0,    
+    math=False         
+)
 
-    image_to_text_request = ImageToTextRequest(
-        image_bytes=image_bytes,
-        module_name=None,
-        threshold=50,      
-        case=True,         
-        numeric=0,         
-        math=False         
-    )
+async def solve_captcha():
+    # Se necessário, você pode verificar o saldo
+    balance = await cap_monster_client.get_balance()
+    print("Balance:", balance)
 
-    async def solve_captcha():
-        return await cap_monster_client.solve_captcha(image_to_text_request)
+    solution = await cap_monster_client.solve_captcha(image_to_text_request)
+    return solution
 
-    responses = asyncio.run(solve_captcha())
-    print(responses)
-    ```
+responses = asyncio.run(solve_captcha())
+print("Solution:", responses)
+```
+</details>
   </TabItem>
 
   <TabItem value="csharp" label="C#" className="method-panel">
+  <details>
+      <summary>Mostrar Código</summary>
     ```csharp
     // https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
+    using System;
+    using System.Threading.Tasks;
     using Zennolab.CapMonsterCloud.Requests;
     using Zennolab.CapMonsterCloud;
 
@@ -374,14 +431,18 @@ Os trechos de código fornecidos são exemplos básicos para familiarização co
         {
             var clientOptions = new ClientOptions
             {
-                ClientKey = "sua_chave_api" // Sua chave API do CapMonster Cloud
+                ClientKey = "YOUR_API_KEY" // Insira sua chave de API do CapMonster Cloud
             };
 
             var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
+            // Se necessário, você pode verificar o saldo
+            var balance = await cmCloudClient.GetBalanceAsync();
+            Console.WriteLine("Balance: " + balance);
+
             var imageToTextRequest = new ImageToTextRequest
             {
-                Body = "/9j/4AAQSkZJRgABAQAAAQABA...hMjIyMjIyMjIyMjIyMj", // Substitua pelo valor correto
+                Body = "/9j/4AAQSkZJRgABAQAAAQABA...wwzqR4U/yZ//Z", // Substitua pelo valor real
                 CapMonsterModule = "None",  
                 RecognizingThreshold = 70, 
                 CaseSensitive = true,
@@ -391,9 +452,10 @@ Os trechos de código fornecidos são exemplos básicos para familiarização co
 
             var imageToTextResult = await cmCloudClient.SolveAsync(imageToTextRequest);
 
-            Console.WriteLine("Captcha Resolvido: " + imageToTextResult.Solution.Value);
+            Console.WriteLine("Captcha Solved: " + imageToTextResult.Solution.Value);
         }
     }
     ```
+    </details>
   </TabItem>
 </Tabs>
