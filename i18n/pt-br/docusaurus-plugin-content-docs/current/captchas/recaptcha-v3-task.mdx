@@ -128,7 +128,7 @@ https://api.capmonster.cloud/getTaskResult
   }
 }
 ```
-    Para alguns sites, a resposta pode ser assim (use o UserAgent retornado ao confirmar a solução):
+    Para alguns sites, a resposta pode ser algo assim (use o UserAgent obtido ao enviar a solução, mesmo que seja diferente do atual):
  
 		```json
 		{
@@ -431,40 +431,81 @@ Os trechos de código fornecidos são exemplos básicos para familiarização co
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">
-  
+<details>
+      <summary>Mostrar Código (para navegador)</summary> 
 ```js
 // https://github.com/ZennoLab/capmonstercloud-client-js
 
-import { 
-  CapMonsterCloudClientFactory, 
-  ClientOptions, 
-  RecaptchaV3ProxylessRequest 
+import {
+  CapMonsterCloudClientFactory,
+  ClientOptions,
+  RecaptchaV3ProxylessRequest
 } from '@zennolab_com/capmonstercloud-client';
 
 document.addEventListener('DOMContentLoaded', async () => {
+
   const cmcClient = CapMonsterCloudClientFactory.Create(
-    new ClientOptions({ clientKey: '<sua chave API do capmonster.cloud>' }) // Sua chave API do CapMonster Cloud
+    new ClientOptions({ clientKey: 'YOUR_API_KEY' }) // Insira sua chave de API do CapMonster Cloud
   );
 
-  console.log(await cmcClient.getBalance());
+  // Se necessário, você pode verificar o saldo
+  const balance = await cmcClient.getBalance();
+  console.log('Balance:', balance);
 
   const recaptchaV3Request = new RecaptchaV3ProxylessRequest({
-    websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high', // URL da página com captcha
-    websiteKey: '6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd', // Substitua pelo valor correto
-    minScore: 0.6, 
-    pageAction: 'some-action', 
+    websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta', // URL da sua página com a captcha
+    websiteKey: '6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob',
+    minScore: 0.6,  
+    pageAction: 'myverify',
   });
 
-  console.log(await cmcClient.Solve(recaptchaV3Request));
+  const solution = await cmcClient.Solve(recaptchaV3Request);
+  console.log('Solution:', solution);
+
 });
-````
+```
+</details>
+
+<details>
+      <summary>Mostrar Código (Node.js)</summary>
+```javascript
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, RecaptchaV3ProxylessRequest } from '@zennolab_com/capmonstercloud-client';
+
+const API_KEY = "YOUR_API_KEY"; // Insira sua chave de API do CapMonster Cloud
+
+async function solveRecaptchaV3() {
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
+    );
+
+    // Se necessário, você pode verificar o saldo
+    const balance = await cmcClient.getBalance();
+    console.log("Balance:", balance);
+
+    const recaptchaV3Request = new RecaptchaV3ProxylessRequest({
+        websiteURL: "https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta", // URL da sua página com a captcha
+        websiteKey: "6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",
+        minScore: 0.6,
+        pageAction: "myverify",
+    });
+
+    const solution = await cmcClient.Solve(recaptchaV3Request);
+    console.log("Solution:", solution);
+}
+
+solveRecaptchaV3().catch(console.error);
+```
+</details>
 
 <BlogLink url="https://capmonster.cloud/pt-BR/blog/re-1/javascript-recaptcha-v3"/>
 
   </TabItem>
 
   <TabItem value="python" label="Python" className="method-panel">
-
+<details>
+      <summary>Mostrar Código</summary>
 ```python
 # https://github.com/Zennolab/capmonstercloud-client-python
 
@@ -472,14 +513,18 @@ import asyncio
 from capmonstercloudclient import CapMonsterClient, ClientOptions
 from capmonstercloudclient.requests import RecaptchaV3ProxylessRequest
 
-client_options = ClientOptions(api_key="sua_chave_api")  # Sua chave API do CapMonster Cloud
+client_options = ClientOptions(api_key="YOUR_API_KEY")  # Insira sua chave de API do CapMonster Cloud
 cap_monster_client = CapMonsterClient(options=client_options)
 
+# Se necessário, você pode verificar o saldo
+balance = asyncio.run(cap_monster_client.get_balance())
+print("Balance:", balance)
+
 recaptcha_v3_request = RecaptchaV3ProxylessRequest(
-    websiteUrl="https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta",  # URL da página com captcha
-    websiteKey="6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",  # Substitua pelo valor correto
-    minScore=0.6,  
-    pageAction="myverify"  
+    websiteUrl="https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta",  # URL da sua página com captcha
+    websiteKey="6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",
+    minScore=0.6,
+    pageAction="myverify"
 )
 
 async def solve_captcha():
@@ -488,13 +533,15 @@ async def solve_captcha():
 responses = asyncio.run(solve_captcha())
 print(responses)
 ```
+</details>
 
 <BlogLink url="https://capmonster.cloud/pt-BR/blog/re-1/python-recaptcha-v3"/>
 
   </TabItem>
 
   <TabItem value="csharp" label="C#" className="method-panel">
-
+<details>
+      <summary>Mostrar Código</summary>
 ```csharp
 // https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
@@ -507,25 +554,30 @@ class Program
     {
         var clientOptions = new ClientOptions
         {
-            ClientKey = "sua_chave_api"  // Sua chave API do CapMonster Cloud
+            ClientKey = "YOUR_API_KEY"  // Insira sua chave de API do CapMonster Cloud
         };
 
         var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
+        // Se necessário, você pode verificar o saldo
+        var balance = await cmCloudClient.GetBalanceAsync();
+        Console.WriteLine("Balance: " + balance);
+
         var recaptchaV3Request = new RecaptchaV3ProxylessRequest
         {
-            WebsiteUrl = "https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta",  // URL da página com captcha
-            WebsiteKey = "6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",  // Substitua pelo valor correto
-            MinScore = 0.6, 
+            WebsiteUrl = "https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta",  // URL da sua página com captcha
+            WebsiteKey = "6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",
+            MinScore = 0.6,
             PageAction = "myverify"
         };
 
         var recaptchaV3Result = await cmCloudClient.SolveAsync(recaptchaV3Request);
 
-        Console.WriteLine("Solução do captcha: " + recaptchaV3Result.Solution.Value);
+        Console.WriteLine("Solution: " + recaptchaV3Result.Solution.Value);
     }
 }
 ```
+</details>
 
 <BlogLink url="https://capmonster.cloud/pt-BR/blog/re-1/c-recaptcha-v3"/>
 

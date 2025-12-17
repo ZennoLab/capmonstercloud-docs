@@ -714,106 +714,196 @@ Os trechos de código fornecidos são exemplos básicos para familiarização co
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 
   <TabItem value="js" label="JavaScript" default className="method-panel">
+<details>
+      <summary>Mostrar Código (para navegador)</summary>
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
 
-  ```js
-  // https://github.com/ZennoLab/capmonstercloud-client-js
+import { CapMonsterCloudClientFactory, ClientOptions, AmazonRequest } from '@zennolab_com/capmonstercloud-client';
 
-  import { CapMonsterCloudClientFactory, ClientOptions, AmazonRequest } from '@zennolab_com/capmonstercloud-client';
+const API_KEY = "YOUR_API_KEY";  // Insira sua chave de API do CapMonster Cloud
 
-  document.addEventListener('DOMContentLoaded', async () => {
-    const cmcClient = CapMonsterCloudClientFactory.Create(
-      new ClientOptions({
-        clientKey: '<sua chave API do capmonster.cloud>',
-      })
+document.addEventListener("DOMContentLoaded", async () => {
+    const client = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
     );
 
-    console.log(await cmcClient.getBalance());
-
-    // Opção 1. Sem proxy
-    const amazonRequest = new AmazonRequest({
-      websiteURL: 'https://example.com', // URL da página com captcha
-      websiteKey: 'websiteKey', // Substitua pelo valor correto
-      challengeScript: 'https://41bcdd4fb3cb.610cd090.us-east-1.token.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/challenge.js',
-      captchaScript: 'https://41bcdd4fb3cb.610cd090.us-east-1.captcha.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/captcha.js',
-      context: 'qoJYgnKsc...aormh/dYYK+Y=',
-      iv: 'CgAAXFFFFSAAABVk',
+    // Exemplo básico sem proxy
+    // O CapMonster Cloud usa automaticamente seus próprios proxies
+    let amazonRequest = new AmazonRequest({
+        websiteURL: "https://example.com", // URL da página protegida pelo AWS WAF
+        websiteKey: "websiteKey",
+        challengeScript: "https://41bcdd4fb3cb.610cd090.us-east-1.token.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/challenge.js",
+        captchaScript: "https://41bcdd4fb3cb.610cd090.us-east-1.captcha.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/captcha.js",
+        context: "qoJYgnKsc...aormh/dYYK+Y=",
+        iv: "CgAAXFFFFSAAABVk",
+        cookieSolution: false
     });
 
+    // Exemplo de uso do seu próprio proxy
+    // Descomente este bloco se quiser usar um proxy personalizado
     /*
-    // Opção 2. Com proxy
-    const amazonRequest = new AmazonRequest({
-      websiteURL: 'https://example.com',
-      websiteKey: 'websiteKey', 
-      challengeScript: 'https://41bcdd4fb3cb.610cd090.us-east-1.token.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/challenge.js',
-      captchaScript: 'https://41bcdd4fb3cb.610cd090.us-east-1.captcha.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/captcha.js',
-      context: 'qoJYgnKsc...aormh/dYYK+Y=',
-      iv: 'CgAAXFFFFSAAABVk',
-      proxyAddress: '8.8.8.8',
-      proxyPort: 8080,
-      proxyLogin: 'proxyLoginHere',
-      proxyPassword: 'proxyPasswordHere',
+    const proxy = {
+        proxyType: "http",
+        proxyAddress: "123.45.67.89",
+        proxyPort: 8080,
+        proxyLogin: "username",
+        proxyPassword: "password"
+    };
+
+    amazonRequest = new AmazonRequest({
+        websiteURL: "https://example.com",
+        websiteKey: "websiteKey",
+        challengeScript: "https://41bcdd4fb3cb.610cd090.us-east-1.token.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/challenge.js",
+        captchaScript: "https://41bcdd4fb3cb.610cd090.us-east-1.captcha.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/captcha.js",
+        context: "qoJYgnKsc...aormh/dYYK+Y=",
+        iv: "CgAAXFFFFSAAABVk",
+        proxy,
+        userAgent: "userAgentPlaceholder",
+        cookieSolution: false
     });
     */
 
-    console.log(await cmcClient.Solve(amazonRequest));
-  });
-````
+    // Se necessário, você pode verificar o saldo
+    const balance = await client.getBalance();
+    console.log("Balance:", balance);
+
+    const result = await client.Solve(amazonRequest);
+    console.log("Solution:", result);
+});
+```
+</details>
+
+<details>
+      <summary>Mostrar Código (Node.js)</summary>
+```javascript
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, AmazonRequest } from '@zennolab_com/capmonstercloud-client';
+
+const API_KEY = "YOUR_API_KEY";  // Insira sua chave de API do CapMonster Cloud
+
+async function solveAwsWaf() {
+    const client = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
+    );
+
+    // Exemplo básico sem proxy
+    // O CapMonster Cloud usa automaticamente seus próprios proxies
+    let amazonRequest = new AmazonRequest({
+        websiteURL: "https://example.com",               // URL da página protegida pelo AWS WAF
+        websiteKey: "websiteKey",
+        challengeScript: "https://41bcdd4fb3cb.610cd090.us-east-1.token.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/challenge.js",
+        captchaScript: "https://41bcdd4fb3cb.610cd090.us-east-1.captcha.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/captcha.js",
+        context: "qoJYgnKsc...aormh/dYYK+Y=",
+        iv: "CgAAXFFFFSAAABVk",
+        cookieSolution: false
+    });
+
+    // Exemplo de uso do seu próprio proxy
+    // Descomente este bloco se quiser usar um proxy personalizado
+
+    /*
+    const proxy = {
+        proxyType: "http",
+        proxyAddress: "123.45.67.89",
+        proxyPort: 8080,
+        proxyLogin: "username",
+        proxyPassword: "password"
+    };
+
+    amazonRequest = new AmazonRequest({
+        websiteURL: "https://example.com", // URL da página protegida pelo AWS WAF
+        websiteKey: "websiteKey",
+        challengeScript: "https://41bcdd4fb3cb.610cd090.us-east-1.token.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/challenge.js",
+        captchaScript: "https://41bcdd4fb3cb.610cd090.us-east-1.captcha.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/captcha.js",
+        context: "qoJYgnKsc...aormh/dYYK+Y=",
+        iv: "CgAAXFFFFSAAABVk",
+        proxy,
+        userAgent: "userAgentPlaceholder",
+        cookieSolution: false
+    });
+    */
+
+    // Se necessário, você pode verificar o saldo
+    const balance = await client.getBalance();
+    console.log("Balance:", balance);
+
+    const result = await client.Solve(amazonRequest);
+    console.log("Solution:", result);
+}
+
+solveAwsWaf().catch(console.error);
+```
+</details>
 
   </TabItem>
 
   <TabItem value="python" label="Python" className="method-panel">
-
+<details>
+      <summary>Mostrar Código</summary>
 ```python
 # https://github.com/ZennoLab/capmonstercloud-client-python
 
 import asyncio
 from capmonstercloudclient import CapMonsterClient, ClientOptions
 from capmonstercloudclient.requests import AmazonWafRequest
+# from capmonstercloudclient.requests.baseRequestWithProxy import ProxyInfo  # Descomente se você planeja usar um proxy
 
-# Especifique sua chave API do CapMonster Cloud
-client_options = ClientOptions(api_key="sua_chave_api")  # Sua chave API do CapMonster Cloud
-cap_monster_client = CapMonsterClient(options=client_options)
+API_KEY = "YOUR_API_KEY"  # Insira sua chave de API do CapMonster Cloud
 
-# Opção 1. Sem proxy
-amazon_waf_request = AmazonWafRequest(
-    websiteUrl="https://example.com", # URL da página com captcha
-    challengeScript="https://example.com/path/to/challenge.js", # Substitua pelo valor correto  
-    captchaScript="https://example.com/path/to/captcha.js",  
-    websiteKey="sua_chave_site",                          
-    context="valor_contexto",                             
-    iv="valor_iv",                                       
-    cookieSolution=False
-)
+async def solve_amazon_waf_captcha():
+    client_options = ClientOptions(api_key=API_KEY)
+    cap_monster_client = CapMonsterClient(options=client_options)
 
-# Opção 2. Com proxy
-# Descomente o bloco abaixo e especifique os dados do proxy
+    # Exemplo básico sem proxy
+    # O CapMonster Cloud usa automaticamente seus próprios proxies
+    amazon_waf_request = AmazonWafRequest(
+        websiteUrl="https://example.com",  # URL da página protegida pelo AWS WAF
+        challengeScript="https://example.com/path/to/challenge.js",  # Substitua pelo valor correto
+        captchaScript="https://example.com/path/to/captcha.js",
+        websiteKey="your_website_key",
+        context="your_context_value",
+        iv="your_iv_value",
+        cookieSolution=False
+    )
 
-# amazon_waf_request = AmazonWafRequest(
-#     websiteUrl="https://example.com",
-#     challengeScript="https://example.com/path/to/challenge.js",
-#     captchaScript="https://example.com/path/to/captcha.js",
-#     websiteKey="sua_chave_site",
-#     context="valor_contexto",
-#     iv="valor_iv",
-#     cookieSolution=False,
-#     proxyType="http",
-#     proxyAddress="127.0.0.1",  
-#     proxyPort=8080,             
-#     proxyLogin="usuario",      
-#     proxyPassword="senha"    
-# )
+    # Exemplo de uso do seu próprio proxy
+    # Descomente este bloco se quiser usar um proxy personalizado
+    # proxy = ProxyInfo(
+    #     proxyType="http",
+    #     proxyAddress="123.45.67.89",
+    #     proxyPort=8080,
+    #     proxyLogin="username",
+    #     proxyPassword="password"
+    # )
+    #
+    # amazon_waf_request = AmazonWafRequest(
+    #     websiteUrl="https://example.com", 
+    #     challengeScript="https://example.com/path/to/challenge.js",
+    #     captchaScript="https://example.com/path/to/captcha.js",
+    #     websiteKey="your_website_key",
+    #     context="your_context_value",
+    #     iv="your_iv_value",
+    #     cookieSolution=False,
+    #     proxy=proxy
+    # )
 
-async def solve_captcha():
-    return await cap_monster_client.solve_captcha(amazon_waf_request)
+    # Se necessário, você pode verificar o saldo antes de resolver
+    balance = await cap_monster_client.get_balance()
+    print("Balance:", balance)
 
-response = asyncio.run(solve_captcha())
-print(response)
+    result = await cap_monster_client.solve_captcha(amazon_waf_request)
+    print("Solution:", result)
+
+asyncio.run(solve_amazon_waf_captcha())
 ```
-
+</details>
   </TabItem>
 
   <TabItem value="csharp" label="C#" className="method-panel">
-
+<details>
+      <summary>Mostrar Código</summary>
 ```csharp
 // https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
@@ -826,57 +916,64 @@ class Program
 {
     static async Task Main(string[] args)
     {
-        // Sua chave API do CapMonster Cloud
+        // Insira sua chave de API do CapMonster Cloud
         var clientOptions = new ClientOptions
         {
-            ClientKey = "sua_chave_api" // Sua chave API do CapMonster Cloud
+            ClientKey = "YOUR_API_KEY"
         };
 
         var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
-        // Opção 1: Sem proxy
+        // Exemplo básico sem proxy
+        // O CapMonster Cloud usa automaticamente seus próprios proxies
+
         var amazonWafRequest = new AmazonWafRequest
         {
-            WebsiteUrl = "https://example.com",   // URL da página com captcha
-            ChallengeScript = "URL_do_challenge.js",   // Substitua pelo valor correto
-            CaptchaScript = "URL_do_captcha.js",       
-            WebsiteKey = "chave_site",                  
-            Context = "valor_contexto",                   
-            Iv = "valor_iv",                            
+            WebsiteUrl = "https://example.com", 
+            WebsiteKey = "website_key", 
+            ChallengeScript = "URL_of_challenge.js",       
+            CaptchaScript = "URL_of_captcha.js",
+            Context = "context_value",    
+            Iv = "iv_value",                                   
             CookieSolution = false
         };
 
-        // Opção 2: Com proxy
-        // Descomente o bloco abaixo e especifique os dados do proxy
+        // Exemplo de uso do seu próprio proxy
+        // Descomente este bloco se quiser usar um proxy personalizado
+
         /*
         var amazonWafRequest = new AmazonWafRequest
         {
             WebsiteUrl = "https://example.com",
-            ChallengeScript = "URL_do_challenge.js",
-            CaptchaScript = "URL_do_captcha.js",
-            WebsiteKey = "chave_site",
-            Context = "valor_contexto",
-            Iv = "valor_iv",
+            WebsiteKey = "website_key",
+            ChallengeScript = "URL_of_challenge.js",
+            CaptchaScript = "URL_of_captcha.js",
+            Context = "context_value",
+            Iv = "iv_value",
             CookieSolution = false,
 
             Proxy = new ProxyContainer(
-                "8.8.8.8",            
-                8080,                 
-                ProxyType.Http,       
-                "loginProxyAqui",     
-                "senhaProxyAqui"   
+                "123.45.67.89", 
+                8080,    
+                ProxyType.Http,
+                "username", 
+                "password"    
             )
         };
         */
 
-        var solveResult = await cmCloudClient.SolveAsync(amazonWafRequest);
+        // Se necessário, você pode verificar o saldo
+        var balance = await cmCloudClient.GetBalanceAsync();
+        Console.WriteLine("Balance: " + balance);
 
-        Console.WriteLine("ExistingToken: " + solveResult.Solution.ExistingToken);
-        Console.WriteLine("CaptchaVoucher: " + solveResult.Solution.CaptchaVoucher);
+        var amazonWafResult = await cmCloudClient.SolveAsync(amazonWafRequest);
+
+        Console.WriteLine("ExistingToken: " + amazonWafResult.Solution.ExistingToken);
+        Console.WriteLine("CaptchaVoucher: " + amazonWafResult.Solution.CaptchaVoucher);
     }
 }
 ```
-
+</details>
   </TabItem>
 
 </Tabs>

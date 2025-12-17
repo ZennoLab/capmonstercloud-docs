@@ -338,88 +338,185 @@ CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费
 
   <TabItem value="js" label="JavaScript" default className="method-panel">
 
-  ```js
-  // https://github.com/ZennoLab/capmonstercloud-client-js
+<details>
+      <summary>显示代码</summary>
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
 
-  import { CapMonsterCloudClientFactory, ClientOptions, TemuRequest } from '@zennolab_com/capmonstercloud-client';
+import { CapMonsterCloudClientFactory, ClientOptions, TemuRequest } from '@zennolab_com/capmonstercloud-client';
 
-  document.addEventListener('DOMContentLoaded', async () => {
-    const cmcClient = CapMonsterCloudClientFactory.Create(
-      new ClientOptions({ clientKey: '<你的 capmonster.cloud API key>' })
+const API_KEY = "YOUR_API_KEY";  // 输入您的 CapMonster Cloud API 密钥
+
+document.addEventListener("DOMContentLoaded", async () => {
+    const client = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
     );
 
-    console.log(await cmcClient.getBalance());
-
-    const temuRequest = new TemuRequest({
-      class: 'Temu',
-      websiteURL: 'https://www.example.com/bgn_verification.html?verifyCode=', // 带验证码页面的 URL 
-      userAgent: 'userAgentPlaceholder', // 使用当前 UserAgent
-      metadata: {
-        cookie: 'region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab'
-      },
-      /*
-      // 如果需要使用代理:
-      proxy: {
-        type: 'http',
-        address: '127.0.0.1',
-        port: 8000,
-        login: 'user',
-        password: 'password'
-      }
-      */
+    // 基本示例，无需代理
+    // CapMonster Cloud 会自动使用它们的代理
+    let temuRequest = new TemuRequest({
+        class: "Temu",
+        websiteURL: "https://www.example.com/bgn_verification.html?verifyCode=",  // Temu 页面 URL
+        userAgent: "userAgentPlaceholder",                                       // 使用当前 UserAgent
+        metadata: {
+            cookie: "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab"
+        }
     });
 
-    console.log(await cmcClient.Solve(temuRequest));
-  });
-````
+    // 使用您自己的代理的示例
+    // 如果想使用自己的代理，请取消注释以下代码块
+    /*
+    const proxy = {
+        proxyType: "http",
+        proxyAddress: "123.45.67.89",
+        proxyPort: 8080,
+        proxyLogin: "user",
+        proxyPassword: "password"
+    };
+
+    temuRequest = new TemuRequest({
+        class: "Temu",
+        websiteURL: "https://www.example.com/bgn_verification.html?verifyCode=",
+        userAgent: "userAgentPlaceholder",
+        metadata: {
+            cookie: "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow"
+        },
+        proxy
+    });
+    */
+
+    // 如有必要，可以检查余额
+    const balance = await client.getBalance();
+    console.log("Balance:", balance);
+
+    const result = await client.Solve(temuRequest);
+    console.log("Solution:", result);
+});
+```
+</details>
+
+<details>
+      <summary>显示代码 (Node.js)</summary>
+```javascript
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, TemuRequest } from '@zennolab_com/capmonstercloud-client';
+
+const API_KEY = "YOUR_API_KEY"; // 输入您的 CapMonster Cloud API 密钥
+
+async function solveTemuCaptcha() {
+    const client = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
+    );
+
+    // 基本示例，无需代理
+    // CapMonster Cloud 会自动使用它们的代理
+    let temuRequest = new TemuRequest({
+        class: "Temu",
+        websiteURL: "https://www.example.com/bgn_verification.html?verifyCode=",  // Temu 页面 URL
+        userAgent: "userAgentPlaceholder",                                        // 使用当前 UserAgent
+        metadata: {
+            cookie: "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab"
+        }
+    });
+
+    // 使用您自己的代理的示例
+    // 如果想使用自己的代理，请取消注释以下代码块
+    /*
+    const proxy = {
+        proxyType: "http",
+        proxyAddress: "123.45.67.89",
+        proxyPort: 8080,
+        proxyLogin: "user",
+        proxyPassword: "password"
+    };
+
+    temuRequest = new TemuRequest({
+        class: "Temu",
+        websiteURL: "https://www.example.com/bgn_verification.html?verifyCode=",
+        userAgent: "userAgentPlaceholder",
+        metadata: {
+            cookie: "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow"
+        },
+        proxy
+    });
+    */
+
+    // 如有必要，可以检查余额
+    const balance = await client.getBalance();
+    console.log("Balance:", balance);
+
+    const result = await client.Solve(temuRequest);
+    console.log("Solution:", result);
+}
+
+solveTemuCaptcha().catch(console.error);
+```
+</details>
 
   </TabItem>
 
   <TabItem value="python" label="Python" default className="method-panel">
 
+<details>
+      <summary>显示代码</summary>
 ```python
 # https://github.com/ZennoLab/capmonstercloud-client-python
 
 import asyncio
 from capmonstercloudclient import CapMonsterClient, ClientOptions
 from capmonstercloudclient.requests import TemuCustomTaskRequest
+# from capmonstercloudclient.requests.baseRequestWithProxy import ProxyInfo  # 如果计划使用代理，请取消注释
 
-client_options = ClientOptions(api_key="API_KEY")  # 你的 CapMonster Cloud API key
-cap_monster_client = CapMonsterClient(options=client_options)
+API_KEY = "YOUR_API_KEY"  # 输入您的 CapMonster Cloud API 密钥
 
-# 选项 1：不使用代理
-temu_request = TemuCustomTaskRequest(
-    websiteUrl="https://www.example.com/bgn_verification.html?verifyCode=", # 带验证码页面的 URL 
-    userAgent="userAgentPlaceholder",  # 使用当前 UserAgent
-    metadata={
-        "cookie": "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab"
-    }
-)
+async def solve_temu_captcha():
+    client_options = ClientOptions(api_key=API_KEY)
+    cap_monster_client = CapMonsterClient(options=client_options)
 
-# 选项 2：使用代理
-# 如果需要，请取消注释
-# temu_request = TemuCustomTaskRequest(
-#     websiteUrl="https://www.example.com/bgn_verification.html?verifyCode=",
-#     userAgent="userAgentPlaceholder",
-#     metadata={ "cookie": "..." },
-#     proxyType="http",
-#     proxyAddress="123.45.67.89",
-#     proxyPort=8080,
-#     proxyLogin="proxyUser",
-#     proxyPassword="proxyPass"
-# )
+    # 基本示例，无需代理
+    # CapMonster Cloud 会自动使用它们的代理
+    temu_request = TemuCustomTaskRequest(
+        websiteUrl="https://www.example.com/bgn_verification.html?verifyCode=",  # Temu 页面 URL
+        userAgent="userAgentPlaceholder",                                        # 使用当前 UserAgent
+        metadata={
+            "cookie": "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab"
+        }
+    )
 
-async def solve_captcha():
-    return await cap_monster_client.solve_captcha(temu_request)
+    # 使用您自己的代理的示例
+    # 如果想使用自己的代理，请取消注释以下代码块
 
-responses = asyncio.run(solve_captcha())
-print(responses)
+    # proxy = ProxyInfo(
+    #     proxyType="http",
+    #     proxyAddress="123.45.67.89",
+    #     proxyPort=8080,
+    #     proxyLogin="username",
+    #     proxyPassword="password"
+    # )
+    #
+    # temu_request = TemuCustomTaskRequest(
+    #     websiteUrl="https://www.example.com/bgn_verification.html?verifyCode=",
+    #     userAgent="userAgentPlaceholder",
+    #     metadata={ "cookie": "..." },
+    #     proxy=proxy
+    # )
+
+    # 如有必要，可以检查余额
+    balance = await cap_monster_client.get_balance()
+    print("Balance:", balance)
+
+    result = await cap_monster_client.solve_captcha(temu_request)
+    print("Solution:", result)
+
+asyncio.run(solve_temu_captcha())
 ```
-
+</details>
   </TabItem>
 
   <TabItem value="csharp" label="C#" className="method-panel">
-
+<details>
+      <summary>显示代码</summary>
 ```csharp
 // https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
@@ -432,29 +529,28 @@ class Program
 {
     static async Task Main(string[] args)
     {
-        // 你的 CapMonster Cloud API key
+        // 输入您的 CapMonster Cloud API 密钥
         var clientOptions = new ClientOptions
         {
-            ClientKey = "your_api_key" // 你的 CapMonster Cloud API key
+            ClientKey = "YOUR_API_KEY"
         };
 
         var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
-        // 选项 1：Temu 不使用代理
+        // 基本示例，无需代理
+        // CapMonster Cloud 会自动使用它们的代理
         var temuRequest = new TemuCustomTaskRequest(
-            cookie: "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab"
+            "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab"
         )
         {
-            WebsiteUrl = "https://www.example.com/bgn_verification.html?verifyCode=", // 带验证码页面的 URL 
-            UserAgent = "userAgentPlaceholder" // 使用当前 UserAgent
+            WebsiteUrl = "https://www.example.com/bgn_verification.html?verifyCode=", // Temu 页面 URL
+            UserAgent = "userAgentPlaceholder"                                       // 使用当前 UserAgent
         };
 
-        // 选项 2：Temu 使用代理
-        // 如果需要，请取消注释
+        // 使用您自己的代理的示例
+        // 如果想使用自己的代理，请取消注释以下代码块
         /*
-        var temuRequest = new TemuCustomTaskRequest(
-            cookie: "...长 cookie..."
-        )
+        temuRequest = new TemuCustomTaskRequest("...long cookie...")
         {
             WebsiteUrl = "https://www.example.com/bgn_verification.html?verifyCode=",
             UserAgent = "userAgentPlaceholder",
@@ -468,13 +564,17 @@ class Program
         };
         */
 
+        // 如有必要，可以检查余额
+        var balance = await cmCloudClient.GetBalanceAsync();
+        Console.WriteLine("Balance: " + balance);
+
         var temuResult = await cmCloudClient.SolveAsync(temuRequest);
 
-        Console.WriteLine("Temu 解决方案: " + temuResult.Solution.Domains);
+        Console.WriteLine("Solution Temu: " + temuResult.Solution.Domains);
     }
 }
 ```
-
+</details>
   </TabItem>
 
 </Tabs>

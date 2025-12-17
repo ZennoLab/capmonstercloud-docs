@@ -308,30 +308,77 @@ loadAndEncodeCaptchaToBase64(captchaUrl);
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">
+  <details>
+      <summary>Показать код (для браузера)</summary>
     ```js
     // https://github.com/ZennoLab/capmonstercloud-client-js
 
-    import { CapMonsterCloudClientFactory, ClientOptions, ImageToTextRequest } from '@zennolab_com/capmonstercloud-client';
+    import { CapMonsterCloudClientFactory, ClientOptions, ImageToTextRequest, CapMonsterModules } from '@zennolab_com/capmonstercloud-client';
 
     document.addEventListener('DOMContentLoaded', async () => {
-      const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
-      console.log(await cmcClient.getBalance());
+        const cmcClient = CapMonsterCloudClientFactory.Create(
+            new ClientOptions({ clientKey: 'YOUR_API_KEY' }) // Укажите ваш API-ключ CapMonster Cloud
+        );
 
-      const imageToTextRequest = new ImageToTextRequest({
+        // При необходимости можно проверить баланс
+        const balance = await cmcClient.getBalance();
+        console.log("Balance:", balance);
+
+        const imageToTextRequest = new ImageToTextRequest({
+            body: 'some base64 body', // Замените на реальное значение
+            CapMonsterModule: CapMonsterModules.YandexWave,
+            Case: true,
+            numeric: 1,
+            recognizingThreshold: 65,
+            math: false
+        });
+
+        const result = await cmcClient.Solve(imageToTextRequest);
+        console.log("Solution:", result);
+    });
+    ```
+    </details>
+
+    <details>
+      <summary>Показать код (Node.js)</summary>
+```javascript
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, ImageToTextRequest, CapMonsterModules } from '@zennolab_com/capmonstercloud-client';
+
+const API_KEY = "YOUR_API_KEY"; // Укажите ваш API-ключ CapMonster Cloud
+
+async function solveImageToText() {
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
+    );
+
+    // При необходимости можно проверить баланс
+    const balance = await cmcClient.getBalance();
+    console.log("Balance:", balance);
+
+    const imageToTextRequest = new ImageToTextRequest({
         body: 'some base64 body', // Замените на реальное значение
         CapMonsterModule: CapMonsterModules.YandexWave,
         Case: true,
         numeric: 1,
         recognizingThreshold: 65,
-        math: false,
-      });
-
-      console.log(await cmcClient.Solve(imageToTextRequest));
+        math: false
     });
-    ```
+
+    const result = await cmcClient.Solve(imageToTextRequest);
+    console.log("Solution:", result);
+}
+
+solveImageToText().catch(console.error);
+```
+</details>
+
   </TabItem>
 
   <TabItem value="python" label="Python" className="method-panel">
+  <details>
+      <summary>Показать код</summary>
     ```python
     # https://github.com/ZennoLab/capmonstercloud-client-python
 
@@ -340,34 +387,45 @@ loadAndEncodeCaptchaToBase64(captchaUrl);
     from capmonstercloudclient import CapMonsterClient, ClientOptions
     from capmonstercloudclient.requests import ImageToTextRequest
 
-    client_options = ClientOptions(api_key="your_api_key")  # Ваш API-ключ CapMonster Cloud
+    # Укажите ваш API-ключ CapMonster Cloud
+    client_options = ClientOptions(api_key="YOUR_API_KEY")
     cap_monster_client = CapMonsterClient(options=client_options)
 
-    image_base64 = "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgc…wwzqR4U/yZ//Z" # Замените на реальное значение
-
+    # Изображение в формате base64
+    image_base64 = "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgc...wwzqR4U/yZ//Z"  # Замените на реальное значение
     image_bytes = base64.b64decode(image_base64)
 
     image_to_text_request = ImageToTextRequest(
         image_bytes=image_bytes,
-        module_name=None,
-        threshold=50,      
-        case=True,         
-        numeric=0,         
+        module_name=None,     # Можно выбрать модуль, например YandexWave
+        threshold=50,     
+        case=True,     
+        numeric=0,    
         math=False         
     )
 
     async def solve_captcha():
-        return await cap_monster_client.solve_captcha(image_to_text_request)
+        # При необходимости можно проверить баланс
+        balance = await cap_monster_client.get_balance()
+        print("Balance:", balance)
+
+        solution = await cap_monster_client.solve_captcha(image_to_text_request)
+        return solution
 
     responses = asyncio.run(solve_captcha())
-    print(responses)
+    print("Solution:", responses)
     ```
+    </details>
   </TabItem>
 
   <TabItem value="csharp" label="C#" className="method-panel">
+  <details>
+      <summary>Показать код</summary>
     ```csharp
     // https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
+    using System;
+    using System.Threading.Tasks;
     using Zennolab.CapMonsterCloud.Requests;
     using Zennolab.CapMonsterCloud;
 
@@ -377,10 +435,14 @@ loadAndEncodeCaptchaToBase64(captchaUrl);
         {
             var clientOptions = new ClientOptions
             {
-                ClientKey = "your_api_key" // Ваш API-ключ CapMonster Cloud
+                ClientKey = "YOUR_API_KEY" // Ваш API-ключ CapMonster Cloud
             };
 
             var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+            // При необходимости можно проверить баланс 
+            var balance = await cmCloudClient.GetBalanceAsync();
+            Console.WriteLine("Balance: " + balance);
 
             var imageToTextRequest = new ImageToTextRequest
             {
@@ -398,5 +460,6 @@ loadAndEncodeCaptchaToBase64(captchaUrl);
         }
     }
     ```
+    </details>
   </TabItem>
 </Tabs>

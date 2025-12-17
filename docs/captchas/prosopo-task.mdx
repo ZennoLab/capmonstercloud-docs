@@ -196,41 +196,112 @@ CapMonster Cloud по умолчанию работает через встро�
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 
   <TabItem value="js" label="JavaScript" default className="method-panel">
-
+<details>
+      <summary>Показать код (для браузера)</summary>
   ```js
   // https://github.com/ZennoLab/capmonstercloud-client-js
 
   import { CapMonsterCloudClientFactory, ClientOptions, ProsopoRequest } from '@zennolab_com/capmonstercloud-client';
 
-  document.addEventListener('DOMContentLoaded', async () => {
-    const cmcClient = CapMonsterCloudClientFactory.Create(
-      new ClientOptions({ clientKey: '<your capmonster.cloud API key>' })
-    );
+  const API_KEY = "YOUR_API_KEY"; // Укажите ваш API-ключ CapMonster Cloud
 
-    console.log(await cmcClient.getBalance());
+  document.addEventListener("DOMContentLoaded", async () => {
+      const client = CapMonsterCloudClientFactory.Create(
+          new ClientOptions({ clientKey: API_KEY })
+      );
 
-    const prosopoRequest = new ProsopoRequest({
-      websiteURL: 'https://www.example.com', // URL страницы с капчей
-      websiteKey: '5EZU3LG31uzq1Mwi8inwqxmfvFDpj7VzwDnZwj4Q3syyxBwV' // Замените на корректное значение
+      // Базовый пример без прокси
+      // CapMonster Cloud автоматически использует свои прокси
+      let prosopoRequest = new ProsopoRequest({
+          websiteURL: "https://www.example.com",       // URL страницы с ProCaptcha
+          websiteKey: "5EZU3LG31uzq1Mwi8inwqxmfvFDpj7VzwDnZwj4Q3syyxBwV" // Ваш ProCaptcha sitekey
+      });
+
+      // Пример использования вашего собственного прокси
+      // Раскомментируйте данный блок, если вы хотите использовать собственный прокси
       /*
-      // Если нужно использовать прокси:
-      proxy: {
-        type: 'http',
-        address: '127.0.0.1',
-        port: 8000,
-        login: 'user',
-        password: 'password'
-      }
-      */
-    });
+      const proxy = {
+          proxyType: "http",
+          proxyAddress: "123.45.67.89",
+          proxyPort: 8000,
+          proxyLogin: "username",
+          proxyPassword: "password"
+      };
 
-    console.log(await cmcClient.Solve(prosopoRequest));
+      prosopoRequest = new ProsopoRequest({
+          websiteURL: "https://www.example.com",      
+          websiteKey: "5EZU3LG31uzq1Mwi8inwqxmfvFDpj7VzwDnZwj4Q3syyxBwV",
+          proxy,
+          userAgent: "userAgentPlaceholder"
+      });
+      */
+
+      // При необходимости можно проверить баланс
+      const balance = await client.getBalance();
+      console.log("Balance:", balance);
+
+      const result = await client.Solve(prosopoRequest);
+      console.log("Solution:", result);
   });
 ````
+</details>
 
+<details>
+      <summary>Показать код (Node.js)</summary>
+      ```JavaScript
+      // https://github.com/ZennoLab/capmonstercloud-client-js
+
+      import { CapMonsterCloudClientFactory, ClientOptions, ProsopoRequest } from '@zennolab_com/capmonstercloud-client';
+
+      const API_KEY = "YOUR_API_KEY"; // Укажите ваш API-ключ CapMonster Cloud
+
+      async function solveProCaptcha() {
+          const client = CapMonsterCloudClientFactory.Create(
+              new ClientOptions({ clientKey: API_KEY })
+          );
+
+          // Базовый пример без прокси
+          // CapMonster Cloud автоматически использует свои прокси
+          let prosopoRequest = new ProsopoRequest({
+              websiteURL: "https://www.example.com",       // URL страницы с ProCaptcha
+              websiteKey: "5EZU3LG31uzq1Mwi8inwqxmfvFDpj7VzwDnZwj4Q3syyxBwV" // Ваш ProCaptcha sitekey
+          });
+
+          // Пример использования вашего собственного прокси
+          // Раскомментируйте данный блок, если вы хотите использовать собственный прокси
+          /*
+          const proxy = {
+              proxyType: "http",
+              proxyAddress: "123.45.67.89",
+              proxyPort: 8000,
+              proxyLogin: "username",
+              proxyPassword: "password"
+          };
+
+          prosopoRequest = new ProsopoRequest({
+              websiteURL: "https://www.example.com",      
+              websiteKey: "5EZU3LG31uzq1Mwi8inwqxmfvFDpj7VzwDnZwj4Q3syyxBwV",
+              proxy,
+              userAgent: "userAgentPlaceholder"
+          });
+          */
+
+          // При необходимости можно проверить баланс
+          const balance = await client.getBalance();
+          console.log("Balance:", balance);
+
+          const result = await client.Solve(prosopoRequest);
+          console.log("Solution:", result);
+      }
+
+      solveProCaptcha().catch(console.error);
+```
+</details>
   </TabItem>
 
   <TabItem value="python" label="Python" default className="method-panel">
+<details>
+      <summary>Показать код</summary>
 
 ```python
 # https://github.com/ZennoLab/capmonstercloud-client-python
@@ -238,45 +309,57 @@ CapMonster Cloud по умолчанию работает через встро�
 import asyncio
 from capmonstercloudclient import CapMonsterClient, ClientOptions
 from capmonstercloudclient.requests import ProsopoTaskRequest
+# from capmonstercloudclient.requests.baseRequestWithProxy import ProxyInfo  # Раскомментируйте, если планируете использовать прокси
 
-# Ваш API-ключ CapMonster Cloud
-client_options = ClientOptions(api_key="API_KEY")
-cap_monster_client = CapMonsterClient(options=client_options)
+API_KEY = "YOUR_API_KEY"  # Укажите ваш API-ключ CapMonster Cloud
 
-# Вариант 1: без прокси
-prosopo_request = ProsopoTaskRequest(
-    websiteUrl="https://www.example.com",  # URL страницы с капчей
-    websiteKey="5EZU3LG31uzq1Mwi8inwqxmfvFDpj7VzwDnZwj4Q3syyxBwV"  # Замените на корректное значение
-)
+async def solve_prosopo_captcha():
+    client_options = ClientOptions(api_key=API_KEY)
+    cap_monster_client = CapMonsterClient(options=client_options)
 
-# Вариант 2: с прокси
-# Раскомментируйте при необходимости
-# prosopo_request = ProsopoTaskRequest(
-#     websiteUrl="https://www.example.com",
-#     websiteKey="5EZU3LG31uzq1Mwi8inwqxmfvFDpj7VzwDnZwj4Q3syyxBwV",
-#     proxyType="http",
-#     proxyAddress="123.45.67.89",
-#     proxyPort=8080,
-#     proxyLogin="proxyUser",
-#     proxyPassword="proxyPass"
-# )
+    # Базовый пример без прокси
+    # CapMonster Cloud автоматически использует свои прокси
+    prosopo_request = ProsopoTaskRequest(
+        websiteUrl="https://www.example.com",  
+        websiteKey="5EZU3LG31uzq1Mwi8inwqxmfvFDpj7VzwDnZwj4Q3syyxBwV"
+    )
 
-async def solve_captcha():
-    return await cap_monster_client.solve_captcha(prosopo_request)
+    # Пример использования вашего собственного прокси
+    # Раскомментируйте данный блок, если вы хотите использовать собственный прокси
+    # proxy = ProxyInfo(
+    #     proxyType="http",
+    #     proxyAddress="123.45.67.89",
+    #     proxyPort=8080,
+    #     proxyLogin="username",
+    #     proxyPassword="password”
+    # )
+    #
+    # prosopo_request = ProsopoTaskRequest(
+    #     websiteUrl="https://www.example.com",
+    #     websiteKey="5EZU3LG31uzq1Mwi8inwqxmfvFDpj7VzwDnZwj4Q3syyxBwV",
+    #     proxy=proxy
+    # )
 
-responses = asyncio.run(solve_captcha())
-print(responses)
+    # При необходимости можно проверить баланс
+    balance = await cap_monster_client.get_balance()
+    print("Balance:", balance)
+
+    result = await cap_monster_client.solve_captcha(prosopo_request)
+    print("Solution:", result)
+
+asyncio.run(solve_prosopo_captcha())
 ```
-
+</details>
   </TabItem>
 
   <TabItem value="csharp" label="C#" className="method-panel">
+<details>
+      <summary>Показать код</summary>
 
 ```csharp
 // https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Zennolab.CapMonsterCloud;
 using Zennolab.CapMonsterCloud.Requests;
@@ -288,42 +371,51 @@ class Program
         // Ваш API-ключ от CapMonster Cloud
         var clientOptions = new ClientOptions
         {
-            ClientKey = "your_api_key" // Ваш API-ключ CapMonster Cloud
+            ClientKey = "YOUR_API_KEY"
         };
 
         var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
-        // Вариант 1: Без прокси
+        // Базовый пример без прокси
+        // CapMonster Cloud автоматически использует свои прокси
         var prosopoRequest = new ProsopoTaskRequest
         {
-            WebsiteUrl = "https://example.com", // URL страницы с капчей
-            WebsiteKey = "5DCKg3w9AvDW92uBzRWrvTiWsu573bTzYmFny8EkXQZxsBib" // Замените на корректное значение
+            WebsiteUrl = "https://www.example.com",      // URL страницы с ProCaptcha
+            WebsiteKey = "5DCKg3w9AvDW92uBzRWrvTiWsu573bTzYmFny8EkXQZxsBib", // Ваш ProCaptcha sitekey
+
+            UserAgent = "userAgentPlaceholder"
         };
 
-        // Вариант 2: С прокси
-        // Раскомментируйте, если нужно использовать прокси
+        // Пример использования вашего собственного прокси
+        // Раскомментируйте данный блок, если вы хотите использовать собственный прокси
         /*
-        var prosopoRequest = new ProsopoTaskRequest
+        prosopoRequest = new ProsopoTaskRequest
         {
             WebsiteUrl = "https://www.example.com",
-            WebsiteKey = "5EZU3LG31uzq1Mwi8inwqxmfvFDpj7VzwDnZwj4Q3syyxBwV",
+            WebsiteKey = "5DCKg3w9AvDW92uBzRWrvTiWsu573bTzYmFny8EkXQZxsBib",
+            UserAgent = "userAgentPlaceholder",
+
             Proxy = new ProxyContainer(
-                "123.45.67.89",
-                8080,
-                ProxyType.Http,
-                "proxyLogin",
-                "proxyPassword"
+                "123.45.67.89",   
+                8080,             
+                ProxyType.Http,  
+                "username", 
+                "password"
             )
         };
         */
 
+        // При необходимости можно проверить баланс
+        var balance = await cmCloudClient.GetBalanceAsync();
+        Console.WriteLine("Balance: " + balance);
+
         var prosopoResult = await cmCloudClient.SolveAsync(prosopoRequest);
 
-        Console.WriteLine("Prosopo Solution: " + JsonSerializer.Serialize(prosopoResult.Solution.Value));
+        Console.WriteLine("ProCaptcha Solution: " + prosopoResult.Solution.Value);
     }
 }
 ```
-
+</details>
   </TabItem>
 
 </Tabs>

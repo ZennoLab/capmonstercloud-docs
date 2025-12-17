@@ -342,89 +342,184 @@ The code snippets provided are basic examples for familiarization with extractin
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 
   <TabItem value="js" label="JavaScript" default className="method-panel">
-
+<details>
+      <summary>Show code (for browser)</summary>
   ```js
   // https://github.com/ZennoLab/capmonstercloud-client-js
 
   import { CapMonsterCloudClientFactory, ClientOptions, TemuRequest } from '@zennolab_com/capmonstercloud-client';
 
-  document.addEventListener('DOMContentLoaded', async () => {
-    const cmcClient = CapMonsterCloudClientFactory.Create(
-      new ClientOptions({ clientKey: '<your capmonster.cloud API key>' })
+  const API_KEY = "YOUR_API_KEY";  // Specify your CapMonster Cloud API key
+
+  document.addEventListener("DOMContentLoaded", async () => {
+      const client = CapMonsterCloudClientFactory.Create(
+          new ClientOptions({ clientKey: API_KEY })
+      );
+
+      // Basic example without proxy
+      // CapMonster Cloud automatically uses its own proxies
+      let temuRequest = new TemuRequest({
+          class: "Temu",
+          websiteURL: "https://www.example.com/bgn_verification.html?verifyCode=",  // URL of the page with Temu
+          userAgent: "userAgentPlaceholder",                                       // Use a valid UserAgent
+          metadata: {
+              cookie: "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab"
+          }
+      });
+
+      // Example of using your own proxy
+      // Uncomment this block if you want to use your own proxy
+      /*
+      const proxy = {
+          proxyType: "http",
+          proxyAddress: "123.45.67.89",
+          proxyPort: 8080,
+          proxyLogin: "user",
+          proxyPassword: "password"
+      };
+
+      temuRequest = new TemuRequest({
+          class: "Temu",
+          websiteURL: "https://www.example.com/bgn_verification.html?verifyCode=",
+          userAgent: "userAgentPlaceholder",
+          metadata: {
+              cookie: "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow"
+          },
+          proxy
+      });
+      */
+
+      // Optionally, you can check the balance
+      const balance = await client.getBalance();
+      console.log("Balance:", balance);
+
+      const result = await client.Solve(temuRequest);
+      console.log("Solution:", result);
+  });
+```
+</details>
+
+<details>
+      <summary>Show code (Node.js)</summary>
+```javascript
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, TemuRequest } from '@zennolab_com/capmonstercloud-client';
+
+const API_KEY = "YOUR_API_KEY"; // Specify your CapMonster Cloud API key
+
+async function solveTemuCaptcha() {
+    const client = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
     );
 
-    console.log(await cmcClient.getBalance());
-
-    const temuRequest = new TemuRequest({
-      class: 'Temu',
-      websiteURL: 'https://www.example.com/bgn_verification.html?verifyCode=', // Page URL with captcha 
-      userAgent: 'userAgentPlaceholder', // Use the current UserAgent
-      metadata: {
-        cookie: 'region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab'
-      },
-      /*
-      // If you need to use a proxy:
-      proxy: {
-        type: 'http',
-        address: '127.0.0.1',
-        port: 8000,
-        login: 'user',
-        password: 'password'
-      }
-      */
+    // Basic example without proxy
+    // CapMonster Cloud automatically uses its own proxies
+    let temuRequest = new TemuRequest({
+        class: "Temu",
+        websiteURL: "https://www.example.com/bgn_verification.html?verifyCode=",  // URL of the page with Temu
+        userAgent: "userAgentPlaceholder",                                        // Use a valid UserAgent
+        metadata: {
+            cookie: "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab"
+        }
     });
 
-    console.log(await cmcClient.Solve(temuRequest));
-  });
-````
+    // Example of using your own proxy
+    // Uncomment this block if you want to use your own proxy
+    /*
+    const proxy = {
+        proxyType: "http",
+        proxyAddress: "123.45.67.89",
+        proxyPort: 8080,
+        proxyLogin: "user",
+        proxyPassword: "password"
+    };
+
+    temuRequest = new TemuRequest({
+        class: "Temu",
+        websiteURL: "https://www.example.com/bgn_verification.html?verifyCode=",
+        userAgent: "userAgentPlaceholder",
+        metadata: {
+            cookie: "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow"
+        },
+        proxy
+    });
+    */
+
+    // Optionally, you can check the balance
+    const balance = await client.getBalance();
+    console.log("Balance:", balance);
+
+    const result = await client.Solve(temuRequest);
+    console.log("Solution:", result);
+}
+
+solveTemuCaptcha().catch(console.error);
+```
+</details>
 
   </TabItem>
 
   <TabItem value="python" label="Python" default className="method-panel">
-
+<details>
+      <summary>Show code</summary>
 ```python
 # https://github.com/ZennoLab/capmonstercloud-client-python
 
 import asyncio
 from capmonstercloudclient import CapMonsterClient, ClientOptions
 from capmonstercloudclient.requests import TemuCustomTaskRequest
+# from capmonstercloudclient.requests.baseRequestWithProxy import ProxyInfo  # Uncomment if you plan to use a proxy
 
-client_options = ClientOptions(api_key="API_KEY")  # Your CapMonster Cloud API key
-cap_monster_client = CapMonsterClient(options=client_options)
+API_KEY = "YOUR_API_KEY"  # Specify your CapMonster Cloud API key
 
-# Option 1: Without proxy
-temu_request = TemuCustomTaskRequest(
-    websiteUrl="https://www.example.com/bgn_verification.html?verifyCode=", # Page URL with captcha 
-    userAgent="userAgentPlaceholder",  # Use the current UserAgent
-    metadata={
-        "cookie": "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab"
-    }
-)
+async def solve_temu_captcha():
+    client_options = ClientOptions(api_key=API_KEY)
+    cap_monster_client = CapMonsterClient(options=client_options)
 
-# Option 2: With proxy
-# Uncomment if you need to use a proxy
-# temu_request = TemuCustomTaskRequest(
-#     websiteUrl="https://www.example.com/bgn_verification.html?verifyCode=",
-#     userAgent="userAgentPlaceholder",
-#     metadata={ "cookie": "..." },
-#     proxyType="http",
-#     proxyAddress="123.45.67.89",
-#     proxyPort=8080,
-#     proxyLogin="proxyUser",
-#     proxyPassword="proxyPass"
-# )
+    # Basic example without proxy
+    # CapMonster Cloud automatically uses its own proxies
+    temu_request = TemuCustomTaskRequest(
+        websiteUrl="https://www.example.com/bgn_verification.html?verifyCode=",  # URL of the page with Temu
+        userAgent="userAgentPlaceholder",                                        # Use a valid UserAgent
+        metadata={
+            "cookie": "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab"
+        }
+    )
 
-async def solve_captcha():
-    return await cap_monster_client.solve_captcha(temu_request)
+    # Example of using your own proxy
+    # Uncomment this block if you want to use your own proxy
 
-responses = asyncio.run(solve_captcha())
-print(responses)
+    # proxy = ProxyInfo(
+    #     proxyType="http",
+    #     proxyAddress="123.45.67.89",
+    #     proxyPort=8080,
+    #     proxyLogin="username",
+    #     proxyPassword="password"
+    # )
+    #
+    # temu_request = TemuCustomTaskRequest(
+    #     websiteUrl="https://www.example.com/bgn_verification.html?verifyCode=",
+    #     userAgent="userAgentPlaceholder",
+    #     metadata={ "cookie": "..." },
+    #     proxy=proxy
+    # )
+
+    # Optionally, you can check the balance
+    balance = await cap_monster_client.get_balance()
+    print("Balance:", balance)
+
+    result = await cap_monster_client.solve_captcha(temu_request)
+    print("Solution:", result)
+
+asyncio.run(solve_temu_captcha())
 ```
-
+</details>
   </TabItem>
 
   <TabItem value="csharp" label="C#" className="method-panel">
-
+<details>
+      <summary>Show code</summary>
 ```csharp
 // https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
@@ -437,29 +532,28 @@ class Program
 {
     static async Task Main(string[] args)
     {
-        // Your CapMonster Cloud API key
+        // Specify your CapMonster Cloud API key
         var clientOptions = new ClientOptions
         {
-            ClientKey = "your_api_key" // Your CapMonster Cloud API key
+            ClientKey = "YOUR_API_KEY"
         };
 
         var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
-        // Option 1: Temu without proxy
+        // Basic example without proxy
+        // CapMonster Cloud automatically uses its own proxies
         var temuRequest = new TemuCustomTaskRequest(
-            cookie: "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab"
+            "region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2BogBITHVYAg==; timezone=Europe%2FMoscow; _nano_fp=XpmYXqmJnqX8npXblT_T6~7rkpA2LDnz2BPFuT5m; privacy_setting_detail=%7B%22firstPAds%22%3A0%2C%22adj%22%3A0%2C%22fbsAnlys%22%3A0%2C%22fbEvt%22%3A0%2C%22ggAds%22%3A0%2C%22fbAds%22%3A0%2C%22ttAds%22%3A0%2C%22scAds%22%3A0%2C%22ptAds%22%3A0%2C%22bgAds%22%3A0%2C%22tblAds%22%3A0%2C%22obAds%22%3A0%2C%22vgAds%22%3A0%2C%22idAds%22%3A0%2C%22opAds%22%3A0%2C%22stAds%22%3A0%2C%22pmAds%22%3A0%7D; webp=1; _bee=pgoBlKp038lBhEyoQ4yXnuNrw1X5va2U; verifyAuthToken=QkZmx2TJFbSuuRVD_MKJmA0b84fe3df183da8ab"
         )
         {
-            WebsiteUrl = "https://www.example.com/bgn_verification.html?verifyCode=", // Page URL with captcha 
-            UserAgent = "userAgentPlaceholder" // Use the current UserAgent
+            WebsiteUrl = "https://www.example.com/bgn_verification.html?verifyCode=", // URL of the page with Temu
+            UserAgent = "userAgentPlaceholder"                                       // Use a valid UserAgent
         };
 
-        // Option 2: Temu with proxy
-        // Uncomment if you need to use a proxy
+        // Example of using your own proxy
+        // Uncomment this block if you want to use your own proxy
         /*
-        var temuRequest = new TemuCustomTaskRequest(
-            cookie: "...long cookie..."
-        )
+        temuRequest = new TemuCustomTaskRequest("...long cookie...")
         {
             WebsiteUrl = "https://www.example.com/bgn_verification.html?verifyCode=",
             UserAgent = "userAgentPlaceholder",
@@ -473,13 +567,17 @@ class Program
         };
         */
 
+        // Optionally, you can check the balance
+        var balance = await cmCloudClient.GetBalanceAsync();
+        Console.WriteLine("Balance: " + balance);
+
         var temuResult = await cmCloudClient.SolveAsync(temuRequest);
 
-        Console.WriteLine("Temu Solution: " + temuResult.Solution.Domains);
+        Console.WriteLine("Solution Temu: " + temuResult.Solution.Domains);
     }
 }
 ```
-
+</details>
   </TabItem>
 
 </Tabs>

@@ -353,44 +353,112 @@ CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 
   <TabItem value="js" label="JavaScript" default className="method-panel">
+<details>
+      <summary>显示代码（用于浏览器）</summary>
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
 
-  ```js
-  // https://github.com/ZennoLab/capmonstercloud-client-js
+import { CapMonsterCloudClientFactory, ClientOptions, BasiliskRequest } from '@zennolab_com/capmonstercloud-client';
 
-  import { CapMonsterCloudClientFactory, ClientOptions, BasiliskRequest } from '@zennolab_com/capmonstercloud-client';
+const API_KEY = "YOUR_API_KEY"; // 输入您的 CapMonster Cloud API 密钥
 
-  document.addEventListener('DOMContentLoaded', async () => {
-    const cmcClient = CapMonsterCloudClientFactory.Create(
-      new ClientOptions({ clientKey: '<你的 capmonster.cloud API key>' })
+document.addEventListener("DOMContentLoaded", async () => {
+    const client = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
     );
 
-    console.log(await cmcClient.getBalance());
-
-    // 不使用代理选项
-    const basiliskRequest = new BasiliskRequest({
-      websiteURL: 'https://example.com', // 带验证码的页面 URL
-      websiteKey: 'websiteKey',          // 替换为正确的值
+    // 基本示例，无需代理
+    // CapMonster Cloud 会自动使用它们的代理
+    let basiliskRequest = new BasiliskRequest({
+        websiteURL: "https://example.com",       // Basilisk 页面 URL
+        websiteKey: "b3760bfe5cf4254b2759c19fg2698og""  // 替换为正确的值
     });
 
-    // 使用代理选项
+    // 使用您自己的代理的示例
+    // 如果想使用自己的代理，请取消注释以下代码块
     /*
-    const basiliskRequest = new BasiliskRequest({
-      websiteURL: 'https://example.com', 
-      websiteKey: 'websiteKey',          
-      proxyAddress: '8.8.8.8',
-      proxyPort: 8080,
-      proxyLogin: 'proxyLoginHere',
-      proxyPassword: 'proxyPasswordHere',
+    const proxy = {
+        proxyType: "http",
+        proxyAddress: "123.45.67.89",
+        proxyPort: 8080,
+        proxyLogin: "username",
+        proxyPassword: "password"
+    };
+
+    basiliskRequest = new BasiliskRequest({
+        websiteURL: "https://example.com",
+        websiteKey: "b3760bfe5cf4254b2759c19fg2698og",
+        proxy,
+        userAgent: "userAgentPlaceholder"
     });
     */
 
-    console.log(await cmcClient.Solve(basiliskRequest));
-  });
-````
+    // 如有必要，可以检查余额
+    const balance = await client.getBalance();
+    console.log("Balance:", balance);
 
+    const result = await client.Solve(basiliskRequest);
+    console.log("Solution:", result);
+});
+```
+</details>
+
+<details>
+      <summary>显示代码 (Node.js)</summary>
+```javascript
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, BasiliskRequest } from '@zennolab_com/capmonstercloud-client';
+
+const API_KEY = "YOUR_API_KEY"; // 输入您的 CapMonster Cloud API 密钥
+
+async function solveBasilisk() {
+    const client = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
+    );
+
+    // 基本示例，无需代理
+    // CapMonster Cloud 会自动使用它们的代理
+    let basiliskRequest = new BasiliskRequest({
+        websiteURL: "https://example.com",       // Basilisk 页面 URL
+        websiteKey: "b3760bfe5cf4254b2759c19fg2698og" // 替换为正确的值
+    });
+
+    // 使用您自己的代理的示例
+    // 如果想使用自己的代理，请取消注释以下代码块
+    /*
+    const proxy = {
+        proxyType: "http",
+        proxyAddress: "123.45.67.89",
+        proxyPort: 8080,
+        proxyLogin: "username",
+        proxyPassword: "password"
+    };
+
+    basiliskRequest = new BasiliskRequest({
+        websiteURL: "https://example.com",
+        websiteKey: "b3760bfe5cf4254b2759c19fg2698og",
+        proxy,
+        userAgent: "userAgentPlaceholder"
+    });
+    */
+
+    // 如有必要，可以检查余额
+    const balance = await client.getBalance();
+    console.log("Balance:", balance);
+
+    const result = await client.Solve(basiliskRequest);
+    console.log("Solution:", result);
+}
+
+solveBasilisk().catch(console.error);
+```
+</details>
   </TabItem>
 
   <TabItem value="python" label="Python" className="method-panel">
+<details>
+      <summary>显示代码</summary>
 
 ```python
 # https://github.com/ZennoLab/capmonstercloud-client-python
@@ -398,40 +466,53 @@ CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费
 import asyncio
 from capmonstercloudclient import CapMonsterClient, ClientOptions
 from capmonstercloudclient.requests import BasiliskCustomTaskRequest
+# from capmonstercloudclient.requests.baseRequestWithProxy import ProxyInfo  # 如果计划使用代理，请取消注释
 
-# 你的 CapMonster Cloud API key
-client_options = ClientOptions(api_key="your_api_key")  # 你的 CapMonster Cloud API key
-cap_monster_client = CapMonsterClient(options=client_options)
+API_KEY = "YOUR_API_KEY"  # 输入您的 CapMonster Cloud API 密钥
 
-# 不使用代理选项
-basilisk_request = BasiliskCustomTaskRequest(
-    websiteUrl="https://example.com",                  # 带验证码的页面 URL
-    websiteKey="b3760bfe5cf4254b2759c19fg2698og"       # 替换为正确的值
-)
+async def solve_basilisk():
+    client_options = ClientOptions(api_key=API_KEY)
+    cap_monster_client = CapMonsterClient(options=client_options)
 
-# 使用代理选项
-# 取消注释下面的代码块并填写代理数据
-# basilisk_request = BasiliskCustomTaskRequest(
-#     websiteUrl="https://example.com",                
-#     websiteKey="b3760bfe5cf4254b2759c19fg2698og",     
-#     proxyType="http",           
-#     proxyAddress="127.0.0.1",   
-#     proxyPort=8080,             
-#     proxyLogin="username",      
-#     proxyPassword="password"    
-# )
+    # 基本示例，无需代理
+    # CapMonster Cloud 会自动使用它们的代理
+    basilisk_request = BasiliskCustomTaskRequest(
+        websiteUrl="https://example.com",                  # Basilisk 页面 URL
+        websiteKey="b3760bfe5cf4254b2759c19fg2698og"      # 替换为正确的值
+    )
 
-async def solve_captcha():
-    return await cap_monster_client.solve_captcha(basilisk_request)
+    # 使用您自己的代理的示例
+    # 如果想使用自己的代理，请取消注释以下代码块
 
-responses = asyncio.run(solve_captcha())
-print(responses)
+    # proxy = ProxyInfo(
+    #     proxyType="http",
+    #     proxyAddress="123.45.67.89",
+    #     proxyPort=8080,
+    #     proxyLogin="username",
+    #     proxyPassword="password"
+    # )
+    #
+    # basilisk_request = BasiliskCustomTaskRequest(
+    #     websiteUrl="https://example.com",
+    #     websiteKey="b3760bfe5cf4254b2759c19fg2698og",
+    #     proxy=proxy
+    # )
+
+    # 如有必要，可以检查余额
+    balance = await cap_monster_client.get_balance()
+    print("Balance:", balance)
+
+    result = await cap_monster_client.solve_captcha(basilisk_request)
+    print("Solution:", result)
+
+asyncio.run(solve_basilisk())
 ```
-
+</details>
   </TabItem>
 
   <TabItem value="csharp" label="C#" className="method-panel">
-
+<details>
+      <summary>显示代码</summary>
 ```csharp
 // https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
@@ -444,46 +525,53 @@ class Program
 {
     static async Task Main(string[] args)
     {
-        // 你的 CapMonster Cloud API key
+        // 输入您的 CapMonster Cloud API 密钥
         var clientOptions = new ClientOptions
         {
-            ClientKey = "your_api_key" // 你的 CapMonster Cloud API key
+            ClientKey = "YOUR_API_KEY"
         };
 
         var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
-        // 不使用代理选项
+        // 基本示例，无需代理
+        // CapMonster Cloud 会自动使用它们的代理
         var basiliskRequest = new BasiliskCustomTaskRequest
         {
-            WebsiteUrl = "https://example.com",                 // 带验证码的页面 URL
+            WebsiteUrl = "https://example.com",                  // Basilisk 页面 URL
             WebsiteKey = "b3760bfe5cf4254b2759c19fg2698og"      // 替换为正确的值
         };
 
-        // 使用代理选项
-        // 取消注释下面的代码块并填写代理数据
+        // 使用您自己的代理的示例
+        // 如果想使用自己的代理，请取消注释以下代码块
+
         /*
-        var basiliskRequest = new BasiliskCustomTaskRequest
+        basiliskRequest = new BasiliskCustomTaskRequest
         {
-            WebsiteUrl = "https://example.com",                         
-            WebsiteKey = "b3760bfe5cf4254b2759c19fg2698og",     
+            WebsiteUrl = "https://example.com",
+            WebsiteKey = "b3760bfe5cf4254b2759c19fg2698og",
             Proxy = new ProxyContainer(
-                "8.8.8.8",            
-                8080,                 
-                ProxyType.Http,       
-                "proxyLoginHere",     
-                "proxyPasswordHere"   
-            )
+                "123.45.67.89",   
+                8080,            
+                ProxyType.Http, 
+                "username",      
+                "password" 
+            ),
+            UserAgent = "userAgentPlaceholder"
         };
         */
 
+        // 如有必要，可以检查余额
+        var balance = await cmCloudClient.GetBalanceAsync();
+        Console.WriteLine("Balance: " + balance);
+
         var basiliskResult = await cmCloudClient.SolveAsync(basiliskRequest);
 
-        Console.WriteLine("验证码解决数据: " + string.Join(", ", basiliskResult.Solution.Data));
-        Console.WriteLine("验证码解决头信息: " + string.Join(", ", basiliskResult.Solution.Headers));
+        Console.WriteLine("Basilisk Solution Data: " + string.Join(", ", basiliskResult.Solution.Data));
+        Console.WriteLine("Basilisk Solution Headers: " + string.Join(", ", basiliskResult.Solution.Headers));
     }
 }
 ```
-
+</details>
   </TabItem>
 
 </Tabs>

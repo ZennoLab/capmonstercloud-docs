@@ -335,52 +335,94 @@ Os trechos de código fornecidos são exemplos básicos para familiarização co
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 
   <TabItem value="js" label="JavaScript" default className="method-panel">
-
+<details>
+      <summary>Mostrar Código (para navegador)</summary>
   ```js
   // https://github.com/ZennoLab/capmonstercloud-client-js
 
-  import { CapMonsterCloudClientFactory, ClientOptions, ImpervaRequest } from '@zennolab_com/capmonstercloud-client';
+import { CapMonsterCloudClientFactory, ClientOptions, ImpervaRequest } from '@zennolab_com/capmonstercloud-client';
 
-  document.addEventListener('DOMContentLoaded', async () => {
+const API_KEY = "YOUR_API_KEY"; // Insira sua chave de API do CapMonster Cloud
 
-      const cmcClient = CapMonsterCloudClientFactory.Create(
-          new ClientOptions({ clientKey: 'YOUR_API_KEY' }) // Especifique sua chave de API do CapMonster Cloud
-      );
+document.addEventListener("DOMContentLoaded", async () => {
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
+    );
 
-      // Você pode verificar seu saldo se necessário
-      const balance = await cmcClient.getBalance();
-      console.log('Balance:', balance);
+    // Se necessário, você pode verificar o saldo
+    const balance = await cmcClient.getBalance();
+    console.log("Balance:", balance);
 
-      // Configurando seu proxy personalizado
-      const proxy = {
-          proxyType: "http",
-          proxyAddress: '123.123.123.123',
-          proxyPort: 8080,
-          proxyLogin: 'username',
-          proxyPassword: 'password'
-      };
+    const proxy = {
+        proxyType: "http",
+        proxyAddress: "123.45.67.89",
+        proxyPort: 8080,
+        proxyLogin: "username",
+        proxyPassword: "password"
+    };
 
-      // Configuração da tarefa
-      const impervaRequest = new ImpervaRequest({
-          websiteURL: 'https://example.com/', // URL da página protegida pelo Imperva
-          metadata: {
-              incapsulaScriptUrl: '_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3',
-              incapsulaCookies:
-                  'incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; ' +
-                  'visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;',
-          },
-          proxy,
-      });
+    // Configuração da tarefa Imperva (Incapsula)
+    const impervaRequest = new ImpervaRequest({
+        websiteURL: "https://example.com/", // URL da sua página protegida pelo Imperva
+        metadata: {
+            incapsulaScriptUrl: "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3",
+            incapsulaCookies: "incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;"
+        },
+        proxy
+    });
 
-      const result = await cmcClient.Solve(impervaRequest);
-      console.log('Solution:', result.solution);
-  });
-````
+    const result = await cmcClient.Solve(impervaRequest);
+    console.log("Solution:", result.solution);
+});
+```
+</details>
 
+<details>
+      <summary>Mostrar Código (Node.js)</summary>
+```javascript
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, ImpervaRequest } from '@zennolab_com/capmonstercloud-client';
+
+async function main() {
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: 'YOUR_API_KEY' }) // Insira sua chave de API do CapMonster Cloud
+    );
+
+    // Se necessário, você pode verificar o saldo
+    const balance = await cmcClient.getBalance();
+    console.log('Balance:', balance);
+
+    const proxy = {
+        proxyType: "http",
+        proxyAddress: '123.45.67.89',
+        proxyPort: 8080,
+        proxyLogin: 'username',
+        proxyPassword: 'password'
+    };
+
+    // Configuração da tarefa Imperva (Incapsula)
+    const impervaRequest = new ImpervaRequest({
+        websiteURL: 'https://example.com/', // URL da sua página protegida pelo Imperva
+        metadata: {
+            incapsulaScriptUrl: '_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3',
+            incapsulaCookies: 'incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;',
+        },
+        proxy,
+    });
+
+    const result = await cmcClient.Solve(impervaRequest);
+    console.log('Solution:', result.solution);
+}
+
+main().catch(console.error);
+```
+</details>
   </TabItem>
 
   <TabItem value="python" label="Python" className="method-panel">
-
+<details>
+      <summary>Mostrar Código</summary>
 ```python
 # https://github.com/ZennoLab/capmonstercloud-client-python
 
@@ -389,34 +431,33 @@ from capmonstercloudclient import CapMonsterClient, ClientOptions
 from capmonstercloudclient.requests import ImpervaCustomTaskRequest
 from capmonstercloudclient.requests.baseRequestWithProxy import ProxyInfo
 
-API_KEY = "YOUR_API_KEY"  # Especifique sua chave de API do CapMonster Cloud
+API_KEY = "YOUR_API_KEY"  # Insira sua chave de API do CapMonster Cloud
 
 async def solve_imperva_captcha():
     client_options = ClientOptions(api_key=API_KEY)
     cap_monster_client = CapMonsterClient(options=client_options)
 
-    # Configurando seu proxy personalizado
+    # Configuração do seu próprio proxy
     proxy = ProxyInfo(
         proxyType="http",
-        proxyAddress="123.123.123.123",
+        proxyAddress="123.45.67.89",
         proxyPort=8080,
         proxyLogin="username",
         proxyPassword="password"
     )
 
-    # Configuração da tarefa
+    # Configuração da tarefa Imperva (Incapsula)
     imperva_request = ImpervaCustomTaskRequest(
-        websiteUrl="https://example.com",  # URL da página protegida pelo Imperva
+        websiteUrl="https://example.com",
         metadata={
             "incapsulaScriptUrl": "_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3",
-            "incapsulaCookie": "incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; "
-                               "visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;",
+            "incapsulaCookie": "incap_ses_1166_2930313=br7iX33ZNCtf3HlpEXcuEDzz72cAAAAA0suDnBGrq/iA0J4oERYzjQ==; visid_incap_2930313=P3hgPVm9S8Oond1L0sXhZqfK72cAAAAAQUIPAAAAAABoMSY9xZ34RvRseJRiY6s+;",
             "reese84UrlEndpoint": "Built-with-the-For-hopence-Hurleysurfecting-the-"
         },
         proxy=proxy
     )
 
-    # Você pode verificar seu saldo se necessário
+    # Se necessário, você pode verificar o saldo
     balance = await cap_monster_client.get_balance()
     print("Balance:", balance)
 
@@ -425,7 +466,7 @@ async def solve_imperva_captcha():
 
 asyncio.run(solve_imperva_captcha())
 ```
-
+</details>
   </TabItem>
 
 </Tabs>

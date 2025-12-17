@@ -1366,122 +1366,336 @@ const chrome = require('selenium-webdriver/chrome');
 ```js
 // https://github.com/ZennoLab/capmonstercloud-client-js
 
-// Turnstile 1 无代理
-import { CapMonsterCloudClientFactory, ClientOptions, TurnstileRequest } from '@zennolab_com/capmonstercloud-client';
+import { 
+    CapMonsterCloudClientFactory, 
+    ClientOptions, 
+    TurnstileRequest 
+} from '@zennolab_com/capmonstercloud-client';
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const cmcClient = CapMonsterCloudClientFactory.Create(
-    new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }) // 你的 CapMonster Cloud API key
-  );
-  console.log(await cmcClient.getBalance());
+const API_KEY = "YOUR_API_KEY"; // 输入您的 CapMonster Cloud API 密钥
 
-  const turnstileRequest = new TurnstileRequest({
-    websiteURL: 'http://tsmanaged.zlsupport.com', // 含验证码的页面 URL
-    websiteKey: '0x4AAAAAAABUYP0XeMJF0xoy',       // 替换为正确的值
-  });
+document.addEventListener("DOMContentLoaded", async () => {
+    const client = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
+    );
 
-  // Turnstile 1 使用代理
-  /*
-  const turnstileRequest = new TurnstileRequest({
-    websiteURL: 'http://tsmanaged.zlsupport.com', 
-    websiteKey: '0x4AAAAAAABUYP0XeMJF0xoy',
-    proxyType: 'https',
-    proxyAddress: '8.8.8.8',
-    proxyPort: 8080,
-    proxyLogin: 'proxyLogin',
-    proxyPassword: 'proxyPassword',
-  })
-  */
+    // 基本示例，无需代理
+    // CapMonster Cloud 会自动使用它们的代理
+    let turnstileRequest = new TurnstileRequest({
+        websiteURL: "http://tsmanaged.zlsupport.com", // CAPTCHA 页面 URL
+        websiteKey: "0x4AAAAAAABUYP0XeMJF0xoy"        // 替换为正确的值
+    });
 
-  console.log(await cmcClient.Solve(turnstileRequest));
+    // 使用您自己的代理的示例
+    // 如果想使用自己的代理，请取消注释以下代码块
+
+    /*
+    const proxy = {
+        proxyType: "https",
+        proxyAddress: "123.45.67.89",
+        proxyPort: 8080,
+        proxyLogin: "username",
+        proxyPassword: "password"
+    };
+
+    turnstileRequest = new TurnstileRequest({
+        websiteURL: "http://tsmanaged.zlsupport.com",
+        websiteKey: "0x4AAAAAAABUYP0XeMJF0xoy",
+        proxy,
+        userAgent: "userAgentPlaceholder"
+    });
+    */
+
+    // 如有必要，可以检查余额
+    const balance = await client.getBalance();
+    console.log("Balance:", balance);
+
+    const result = await client.Solve(turnstileRequest);
+    console.log("Solution:", result);
 });
-````
-
+```
 </details>
 
 <details>
 <summary> 选项 2：Challenge (token)</summary>
 
 ```js
-// Cloudflare Challenge token
+// https://github.com/ZennoLab/capmonstercloud-client-js
 
-import { CapMonsterCloudClientFactory, ClientOptions, TurnstileRequest } from '@zennolab_com/capmonstercloud-client';
+import { 
+    CapMonsterCloudClientFactory, 
+    ClientOptions, 
+    TurnstileRequest 
+} from '@zennolab_com/capmonstercloud-client';
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const cmcClient = CapMonsterCloudClientFactory.Create(
-    new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }) 
-  );
-  console.log(await cmcClient.getBalance());
+const API_KEY = "YOUR_API_KEY"; // 输入您的 CapMonster Cloud API 密钥
 
-  const turnstileRequest = new TurnstileRequest({
-    websiteURL: 'https://example.com', // 含验证码的页面 URL
-    websiteKey: '0x4AAAAAAABUYP0XeMJF0xoy', // 替换为正确的值
-    data: 'YOUR_DATA_HERE',
-    pageAction: 'managed',
-    cloudflareTaskType: 'token',
-    pageData: 'YOUR_PAGE_DATA_HERE',
-    userAgent: 'userAgentPlaceholder',
-  });
+document.addEventListener("DOMContentLoaded", async () => {
+    const client = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
+    );
 
-  // 使用代理的示例（如需请取消注释）
-  /*
-  const turnstileRequest = new TurnstileRequest({
-    websiteURL: 'https://example.com',
-    websiteKey: '0x4AAAAAAABUYP0XeMJF0xoy',
-    data: 'YOUR_DATA_HERE',
-    pageAction: 'managed',
-    cloudflareTaskType: 'token',
-    pageData: 'YOUR_PAGE_DATA_HERE',
-    userAgent: 'userAgentPlaceholder',
+    // 基本示例，无需代理
+    // CapMonster Cloud 会自动使用它们的代理
+    let turnstileRequest = new TurnstileRequest({
+        websiteURL: "https://example.com", // 验证码页面的 URL
+        websiteKey: "0x4AAAAAAABUYP0XeMJF0xoy", // 替换为正确的值
+        data: "YOUR_DATA_HERE",
+        pageAction: "managed",
+        cloudflareTaskType: "token",
+        pageData: "YOUR_PAGE_DATA_HERE",
+        userAgent: "userAgentPlaceholder"
+    });
 
-    // 代理设置
-    proxyType: 'http',              
-    proxyAddress: '123.45.67.89',   
-    proxyPort: 8080,                
-    proxyLogin: 'username',         
-    proxyPassword: 'password'       
-  });
-  */
+    // 使用您自己的代理的示例
+    // 如果想使用自己的代理，请取消注释以下代码块
 
-  console.log(await cmcClient.Solve(turnstileRequest));
+    /*
+    const proxy = {
+        proxyType: "http",
+        proxyAddress: "123.45.67.89",
+        proxyPort: 8080,
+        proxyLogin: "username",
+        proxyPassword: "password"
+    };
+
+    turnstileRequest = new TurnstileRequest({
+        websiteURL: "https://example.com",
+        websiteKey: "0x4AAAAAAABUYP0XeMJF0xoy",
+        proxy,
+        data: "YOUR_DATA_HERE",
+        pageAction: "managed",
+        cloudflareTaskType: "token",
+        pageData: "YOUR_PAGE_DATA_HERE",
+        userAgent: "userAgentPlaceholder"
+    });
+    */
+
+    // 如有必要，可以检查余额 
+    const balance = await client.getBalance();
+    console.log("Balance:", balance);
+
+    const result = await client.Solve(turnstileRequest);
+    console.log("Solution:", result);
 });
 ```
-
 </details>
 
 <details>
 <summary>选项 3： Challenge (cookie `cf_clearance`)</summary>
 
 ```js
-// Cloudflare Challenge cf_clearance
+// https://github.com/ZennoLab/capmonstercloud-client-js
 
-import { CapMonsterCloudClientFactory, ClientOptions, TurnstileRequest } from '@zennolab_com/capmonstercloud-client';
+import { 
+    CapMonsterCloudClientFactory, 
+    ClientOptions, 
+    TurnstileRequest 
+} from '@zennolab_com/capmonstercloud-client';
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const cmcClient = CapMonsterCloudClientFactory.Create(
-    new ClientOptions({ clientKey: '<your capmonster.cloud API key>' })
-  );
+document.addEventListener("DOMContentLoaded", async () => {
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: 'YOUR_API_KEY' }) // 输入您的 CapMonster Cloud API 密钥
+    );
 
-  console.log(await cmcClient.getBalance());
+    // 如有必要，可以检查余额
+    const balance = await cmcClient.getBalance();
+    console.log('Balance:', balance);
 
-  const turnstileRequest = new TurnstileRequest({
-    websiteURL: 'https://tsinvisble.zlsupport.com', // 含验证码的页面 URL
-    websiteKey: '0x4AAAAAAABUY0VLtOUMAHxE', // 替换为正确的值
-    cloudflareTaskType: 'cf_clearance',
-    proxyType: 'http',           
-    proxyAddress: '8.8.8.8',      
-    proxyPort: 8080,       
-    proxyLogin: 'proxyLoginHere', 
-    proxyPassword: 'proxyPasswordHere',                  
-    htmlPageBase64: 'htmlPageBase64Here', 
-    userAgent: 'userAgentPlaceholder'
-  });
+    const proxy = {
+        proxyType: "http",
+        proxyAddress: '123.45.67.89',
+        proxyPort: 8080,
+        proxyLogin: 'username',
+        proxyPassword: 'password'
+    };
 
-  console.log(await cmcClient.Solve(turnstileRequest));
+    // Cloudflare cf_clearance 只能使用您的代理解决
+    const turnstileRequest = new TurnstileRequest({
+        websiteURL: 'https://example.com/',
+        websiteKey: '0x4AAAAAAABUY0VLtOUMAHxE',
+        cloudflareTaskType: 'cf_clearance',
+        proxy,
+        htmlPageBase64: 'PGh0bW...h0bWw+',
+        userAgent: 'userAgentPlaceholder'
+    });
+
+    // 发送验证码解决任务
+    const result = await cmcClient.Solve(turnstileRequest);
+    console.log('Solution:', result.solution);
 });
 ```
 
 </details>
+</TabItem>
+<TabItem value="nodejs" label="Node.js" className="method-panel">
+
+<details>
+<summary>选项 1：Turnstile  (token)</summary>
+
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, TurnstileRequest } from '@zennolab_com/capmonstercloud-client';
+
+const API_KEY = "YOUR_API_KEY"; // 输入您的 CapMonster Cloud API 密钥
+
+async function solveTurnstile() {
+    const client = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
+    );
+
+    // 基本示例，无需代理
+    // CapMonster Cloud 会自动使用它们的代理
+    let turnstileRequest = new TurnstileRequest({
+        websiteURL: "http://tsmanaged.zlsupport.com", // CAPTCHA 页面 URL
+        websiteKey: "0x4AAAAAAABUYP0XeMJF0xoy"        // 替换为正确的值
+    });
+
+    // 使用您自己的代理的示例
+    // 如果想使用自己的代理，请取消注释以下代码块
+
+    /*
+    const proxy = {
+        proxyType: "https",
+        proxyAddress: "123.45.67.89",
+        proxyPort: 8080,
+        proxyLogin: "username",
+        proxyPassword: "password"
+    };
+
+    turnstileRequest = new TurnstileRequest({
+        websiteURL: "http://tsmanaged.zlsupport.com",
+        websiteKey: "0x4AAAAAAABUYP0XeMJF0xoy",
+        proxy,
+        userAgent: "userAgentPlaceholder"
+    });
+    */
+
+    // 如有必要，可以检查余额
+    const balance = await client.getBalance();
+    console.log("Balance:", balance);
+
+    const result = await client.Solve(turnstileRequest);
+    console.log("Solution:", result);
+}
+
+solveTurnstile().catch(err => console.error("错误:", err));
+```
+
+</details>
+
+<details>
+<summary>选项 2：Challenge (token)</summary>
+
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { 
+    CapMonsterCloudClientFactory, 
+    ClientOptions, 
+    TurnstileRequest 
+} from '@zennolab_com/capmonstercloud-client';
+
+const API_KEY = "YOUR_API_KEY"; // 输入您的 CapMonster Cloud API 密钥
+
+(async () => {
+    const client = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
+    );
+
+    // 基本示例，无需代理
+    // CapMonster Cloud 会自动使用它们的代理
+    let turnstileRequest = new TurnstileRequest({
+        websiteURL: "https://example.com", // 验证码页面的 URL
+        websiteKey: "0x4AAAAAAABUYP0XeMJF0xoy", // 替换为正确的值
+        data: "YOUR_DATA_HERE",
+        pageAction: "managed",
+        cloudflareTaskType: "token",
+        pageData: "YOUR_PAGE_DATA_HERE",
+        userAgent: "userAgentPlaceholder"
+    });
+
+    // 使用您自己的代理的示例
+    // 如果想使用自己的代理，请取消注释以下代码块
+
+    /*
+    const proxy = {
+        proxyType: "http",
+        proxyAddress: "123.45.67.89",
+        proxyPort: 8080,
+        proxyLogin: "username",
+        proxyPassword: "password"
+    };
+
+    turnstileRequest = new TurnstileRequest({
+        websiteURL: "https://example.com",
+        websiteKey: "0x4AAAAAAABUYP0XeMJF0xoy",
+        proxy,
+        data: "YOUR_DATA_HERE",
+        pageAction: "managed",
+        cloudflareTaskType: "token",
+        pageData: "YOUR_PAGE_DATA_HERE",
+        userAgent: "userAgentPlaceholder"
+    });
+    */
+
+    // 如有必要，可以检查余额 
+    const balance = await client.getBalance();
+    console.log("Balance:", balance);
+
+    const result = await client.Solve(turnstileRequest);
+    console.log("Solution:", result);
+})();
+```
+
+</details>
+
+<details>
+<summary>选项 3： Challenge (cookie <code>cf_clearance</code>)</summary>
+
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, TurnstileRequest } from '@zennolab_com/capmonstercloud-client';
+
+async function main() {
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: 'YOUR_API_KEY' }) // 输入您的 CapMonster Cloud API 密钥
+    );
+
+    // 如有必要，可以检查余额
+    const balance = await cmcClient.getBalance();
+    console.log('Balance:', balance);
+
+    const proxy = {
+        proxyType: "http",
+        proxyAddress: '123.45.67.89',
+        proxyPort: 8080,
+        proxyLogin: 'username',
+        proxyPassword: 'password'
+    };
+
+    // Cloudflare cf_clearance 只能使用您的代理解决
+    const turnstileRequest = new TurnstileRequest({
+        websiteURL: 'https://example.com/',
+        websiteKey: '0x4AAAAAAABUY0VLtOUMAHxE',
+        cloudflareTaskType: 'cf_clearance',
+        proxy,
+        htmlPageBase64: 'PGh0bW...h0bWw+',
+        userAgent: 'userAgentPlaceholder'
+    });
+
+    // 发送验证码解决任务
+    const result = await cmcClient.Solve(turnstileRequest);
+    console.log('Solution:', result.solution);
+}
+
+main().catch(console.error);
+```
+
+</details>
+
   </TabItem>
 
   <TabItem value="python" label="Python" className="method-panel">
@@ -1495,32 +1709,46 @@ document.addEventListener('DOMContentLoaded', async () => {
 import asyncio
 from capmonstercloudclient import CapMonsterClient, ClientOptions
 from capmonstercloudclient.requests import TurnstileRequest
+# from capmonstercloudclient.requests.baseRequestWithProxy import ProxyInfo  # 如果计划使用代理，请取消注释
 
-client_options = ClientOptions(api_key="your_api_key")  # 你的 CapMonster Cloud API key
-cap_monster_client = CapMonsterClient(options=client_options)
+API_KEY = "YOUR_API_KEY"  # 输入您的 CapMonster Cloud API 密钥
 
-# 选项1：无代理
-turnstile_request = TurnstileRequest(
-    websiteURL="http://tsmanaged.zlsupport.com", # 含验证码的页面 URL
-    websiteKey="0x4AAAAAAABUYP0XeMJF0xoy" # 替换为正确的值
-)
+async def solve_turnstile_token():
+    client_options = ClientOptions(api_key=API_KEY)
+    cap_monster_client = CapMonsterClient(options=client_options)
 
-# 选项2：使用代理
-# turnstile_request = TurnstileRequest(
-#     websiteURL="http://tsmanaged.zlsupport.com",
-#     websiteKey="0x4AAAAAAABUYP0XeMJF0xoy",
-#     proxyType="http",     
-#     proxyAddress="123.45.67.89", 
-#     proxyPort=8080,             
-#     proxyLogin="username",      
-#     proxyPassword="password"    
-# )
+    # 基本示例，无需代理
+    # CapMonster Cloud 会自动使用它们的代理
+    turnstile_request = TurnstileRequest(
+        websiteURL="http://tsmanaged.zlsupport.com",
+        websiteKey="0x4AAAAAAABUYP0XeMJF0xoy",
+    )
 
-async def solve_captcha():
-    return await cap_monster_client.solve_captcha(turnstile_request)
+    # 使用您自己的代理的示例
+    # 如果想使用自己的代理，请取消注释以下代码块
+    #
+    # proxy = ProxyInfo(
+    #     proxyType="http",
+    #     proxyAddress="123.45.67.89",
+    #     proxyPort=8080,
+    #     proxyLogin="username",
+    #     proxyPassword="password"
+    # )
+    #
+    # turnstile_request = TurnstileRequest(
+    #     websiteURL="http://tsmanaged.zlsupport.com",
+    #     websiteKey="0x4AAAAAAABUYP0XeMJF0xoy",
+    #     proxy=proxy
+    # )
 
-responses = asyncio.run(solve_captcha())
-print(responses)
+    # 如有必要，可以检查余额
+    balance = await cap_monster_client.get_balance()
+    print("Balance:", balance)
+
+    result = await cap_monster_client.solve_captcha(turnstile_request)
+    print("Solution:", result)
+
+asyncio.run(solve_turnstile_token())
 ```
 
 </details>
@@ -1529,48 +1757,61 @@ print(responses)
 <summary>选项 2：Challenge (token)</summary>
 
 ```python
-# Cloudflare Challenge (token)
+# https://github.com/ZennoLab/capmonstercloud-client-python
 
 import asyncio
 from capmonstercloudclient import CapMonsterClient, ClientOptions
 from capmonstercloudclient.requests import TurnstileRequest
+# from capmonstercloudclient.requests.baseRequestWithProxy import ProxyInfo  # 如果计划使用代理，请取消注释
 
-client_options = ClientOptions(api_key="your_api_key") # 你的 CapMonster Cloud API key
-cap_monster_client = CapMonsterClient(options=client_options)
+API_KEY = "YOUR_API_KEY"  # 输入您的 CapMonster Cloud API 密钥
 
-turnstile_request = TurnstileRequest(
-    websiteURL="http://tsmanaged.zlsupport.com", # 含验证码的页面 URL
-    websiteKey="0x4AAAAAAABUYP0XeMJF0xoy",  # 替换为正确的值
-    data="YOUR_DATA_HERE",                
-    pageAction="managed",                  
-    cloudflareTaskType="token",            
-    pageData="YOUR_PAGE_DATA_HERE",        
-    userAgent="userAgentPlaceholder"        
-)
+async def solve_turnstile_token():
+    client_options = ClientOptions(api_key=API_KEY)
+    cap_monster_client = CapMonsterClient(options=client_options)
 
-# 使用代理的示例（如需请取消注释）
-# turnstile_request = TurnstileRequest(
-#     websiteURL="http://tsmanaged.zlsupport.com",
-#     websiteKey="0x4AAAAAAABUYP0XeMJF0xoy",
-#     data="YOUR_DATA_HERE",
-#     pageAction="managed",
-#     cloudflareTaskType="token",
-#     pageData="YOUR_PAGE_DATA_HERE",
-#     userAgent="userAgentPlaceholder",
-#     proxyType="http",               
-#     proxyAddress="123.45.67.89",    
-#     proxyPort=8080,                 
-#     proxyLogin="username",          
-#     proxyPassword="password"        
-# )
+    # 基本示例，无需代理
+    # CapMonster Cloud 会自动使用它们的代理
+    turnstile_request = TurnstileRequest(
+        websiteURL="http://example.com",  # 验证码页面的 URL
+        websiteKey="0x4AAAAAAABUYP0XeMJF0xoy",        # 替换为正确的值
+        data="YOUR_DATA_HERE",
+        pageAction="managed",
+        cloudflareTaskType="token",
+        pageData="YOUR_PAGE_DATA_HERE",
+        userAgent="userAgentPlaceholder"
+    )
 
-async def solve_captcha():
+    # 使用您自己的代理的示例
+    # 如果想使用自己的代理，请取消注释以下代码块
+    #
+    # proxy = ProxyInfo(
+    #     proxyType="http",               
+    #     proxyAddress="123.45.67.89",    
+    #     proxyPort=8080,                 
+    #     proxyLogin="username",          
+    #     proxyPassword="password"        
+    # )
+    #
+    # turnstile_request = TurnstileRequest(
+    #     websiteURL="http://tsmanaged.zlsupport.com",
+    #     websiteKey="0x4AAAAAAABUYP0XeMJF0xoy",
+    #     proxy=proxy,
+    #     data="YOUR_DATA_HERE",
+    #     pageAction="managed",
+    #     cloudflareTaskType="token",
+    #     pageData="YOUR_PAGE_DATA_HERE",
+    #     userAgent="userAgentPlaceholder"
+    # )
+
+    # 如有必要，可以检查余额 
     balance = await cap_monster_client.get_balance()
     print("Balance:", balance)
-    return await cap_monster_client.solve_captcha(turnstile_request)
 
-responses = asyncio.run(solve_captcha())
-print(responses)
+    result = await cap_monster_client.solve_captcha(turnstile_request)
+    print("Solution:", result)
+
+asyncio.run(solve_turnstile_token())
 ```
 
 </details>
@@ -1579,33 +1820,47 @@ print(responses)
 <summary>选项 3： Challenge (cookie `cf_clearance`)</summary>
 
 ```python
-# Cloudflare Challenge (cookie cf_clearance) - 使用你的代理解决
+# https://github.com/ZennoLab/capmonstercloud-client-python
 
 import asyncio
 from capmonstercloudclient import CapMonsterClient, ClientOptions
 from capmonstercloudclient.requests import TurnstileRequest
+from capmonstercloudclient.requests.baseRequestWithProxy import ProxyInfo  # 使用 ProxyInfo
 
-client_options = ClientOptions(api_key="your_api_key") # 你的 CapMonster Cloud API key
-cap_monster_client = CapMonsterClient(options=client_options)
+API_KEY = "YOUR_API_KEY"  # 输入您的 CapMonster Cloud API 密钥
 
-turnstile_request = TurnstileRequest(
-    websiteURL="https://example.com",  # 含验证码的页面 URL
-    websiteKey="0x4AAAAAAABUYP0XeMJF0xoy", # 替换为正确的值
-    cloudflareTaskType="cf_clearance",
-    userAgent="userAgentPlaceholder", # 使用当前的 UserAgent
-    htmlPageBase64="htmlPageBase64Here",
-    proxyType="http",  
-    proxyAddress="8.8.8.8",
-    proxyPort=8000,
-    proxyLogin="proxyLoginHere",
-    proxyPassword="proxyPasswordHere"
-)
+async def solve_cf_clearance():
+    client_options = ClientOptions(api_key=API_KEY)
+    cap_monster_client = CapMonsterClient(options=client_options)
 
-async def solve_captcha():
-    return await cap_monster_client.solve_captcha(turnstile_request)
+    # 代理设置示例
+    proxy = ProxyInfo(
+        proxyType="http",
+        proxyAddress="123.45.67.89",
+        proxyPort=8080,
+        proxyLogin="username",
+        proxyPassword="password"
+    )
 
-responses = asyncio.run(solve_captcha())
-print(responses)
+    # Cloudflare cf_clearance 只能使用您的代理解决
+    turnstile_request = TurnstileRequest(
+        websiteURL="https://example.com",
+        websiteKey="0x4AAAAAAABUYP0XeMJF0xoy",
+        cloudflareTaskType="cf_clearance",
+        htmlPageBase64="BASE64_HTML_PAGE_HERE",
+        userAgent="userAgentPlaceholder",
+        proxy=proxy
+    )
+
+    # 如有必要，可以检查余额
+    balance = await cap_monster_client.get_balance()
+    print("Balance:", balance)
+
+    # 发送验证码解决任务
+    result = await cap_monster_client.solve_captcha(turnstile_request)
+    print("Solution:", result)
+
+asyncio.run(solve_cf_clearance())
 ```
 
 </details>
@@ -1628,20 +1883,25 @@ class Program
 {
     static async Task Main(string[] args)
     {
+        // 输入您的 CapMonster Cloud API 密钥
         var clientOptions = new ClientOptions
         {
-            ClientKey = "your_api_key" // 你的 CapMonster Cloud API key
+            ClientKey = "YOUR_API_KEY"
         };
 
         var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
+        // 基本示例，无需代理
+        // CapMonster Cloud 会自动使用它们的代理
         var turnstileRequest = new TurnstileRequest
         {
-            WebsiteUrl = "http://tsmanaged.zlsupport.com", // 含验证码的页面 URL
-            WebsiteKey = "0x4AAAAAAABUYP0XeMJF0xoy"    // 替换为正确的值
+            WebsiteUrl = "http://tsmanaged.zlsupport.com", // 验证码页面的 URL
+            WebsiteKey = "0x4AAAAAAABUYP0XeMJF0xoy"       // 替换为正确的值
         };
 
-        // 使用代理
+        // 使用您自己的代理的示例
+        // 如果想使用自己的代理，请取消注释以下代码块
+
         /*
         var turnstileRequest = new TurnstileRequest
         {
@@ -1649,18 +1909,22 @@ class Program
             WebsiteKey = "0x4AAAAAAABUYP0XeMJF0xoy",
 
             Proxy = new ProxyContainer(
-                "8.8.8.8",           
-                8080,                
-                ProxyType.Http,      
-                "proxyLoginHere",    
-                "proxyPasswordHere"  
+                "123.45.67.89", 
+                8080,
+                ProxyType.Http, 
+                "username",
+                "password"
             )
         };
         */
 
+        // 如有必要，可以检查余额
+        var balance = await cmCloudClient.GetBalanceAsync();
+        Console.WriteLine("Balance: " + balance);
+
         var turnstileResult = await cmCloudClient.SolveAsync(turnstileRequest);
 
-        Console.WriteLine("Turnstile solution: " + turnstileResult.Solution.Value);
+        Console.WriteLine("Solution: " + turnstileResult.Solution.Value);
     }
 }
 ```
@@ -1671,7 +1935,7 @@ class Program
 <summary> 选项 2：Challenge (token)</summary>
 
 ```csharp
-// Cloudflare Challenge (token)
+// https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
 using System;
 using System.Threading.Tasks;
@@ -1680,52 +1944,61 @@ using Zennolab.CapMonsterCloud.Requests;
 
 class Program
 {
-static async Task Main(string[] args)
-{
-    var clientOptions = new ClientOptions
+    static async Task Main(string[] args)
     {
-        ClientKey = "your_api_key" // 你的 CapMonster Cloud API key
-    };
+        // 您的 CapMonster Cloud API 密钥
+        var clientOptions = new ClientOptions
+        {
+            ClientKey = "YOUR_API_KEY"
+        };
 
-    var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+        var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
-    var turnstileRequest = new TurnstileRequest
-    {
-        WebsiteUrl = "https://example.com",   // 含验证码的页面 URL    
-        WebsiteKey = "0x4AAAAAAABUYP0XeMJF0xoy",  // 替换为正确的值   
-        Data = "data_here",                               
-        PageAction = "managed",                           
-        CloudflareTaskType = "token",                     
-        PageData = "pagedata_here",                       
-        UserAgent = "userAgentPlaceholder"  // 使用当前的 UserAgent   
-    };
+        // 基本示例，无需代理
+        // CapMonster Cloud 会自动使用它们的代理
+        var turnstileRequest = new TurnstileRequest
+        {
+            WebsiteUrl = "https://example.com",        // 验证码页面的 URL
+            WebsiteKey = "0x4AAAAAAABUYP0XeMJF0xoy",    // 替换为正确的值
+            Data = "data_here",
+            PageAction = "managed",
+            CloudflareTaskType = "token",
+            PageData = "pagedata_here",
+            UserAgent = "userAgentPlaceholder"
+        };
 
-    // 使用代理
-    /*
-    var turnstileRequest = new TurnstileRequest
-    {
-        WebsiteUrl = "https://example.com",
-        WebsiteKey = "0x4AAAAAAABUYP0XeMJF0xoy",
-        Data = "data_here",
-        PageAction = "managed",
-        CloudflareTaskType = "token",
-        PageData = "pagedata_here",
-        UserAgent = "userAgentPlaceholder",
+        // 使用您自己的代理的示例
+        // 如果想使用自己的代理，请取消注释以下代码块
 
-        Proxy = new ProxyContainer(
-            "8.8.8.8",           
-            8080,                
-            ProxyType.Http,      
-            "proxyLoginHere",    
-            "proxyPasswordHere"  
-        )
-    };
-    */
+        /*
+        var turnstileRequest = new TurnstileRequest
+        {
+            WebsiteUrl = "https://example.com",
+            WebsiteKey = "0x4AAAAAAABUYP0XeMJF0xoy",
+            Data = "data_here",
+            PageAction = "managed",
+            CloudflareTaskType = "token",
+            PageData = "pagedata_here",
+            UserAgent = "userAgentPlaceholder",
 
-    var turnstileResult = await cmCloudClient.SolveAsync(turnstileRequest);
+            Proxy = new ProxyContainer(
+                "123.45.67.89",      
+                8080,              
+                ProxyType.Http,   
+                "username", 
+                "password"  
+            )
+        };
+        */
 
-    Console.WriteLine("Turnstile solution: " + turnstileResult.Solution.Value);
-}
+        // 如有必要，可以检查余额 
+        var balance = await cmCloudClient.GetBalanceAsync();
+        Console.WriteLine("Balance: " + balance);
+
+        var turnstileResult = await cmCloudClient.SolveAsync(turnstileRequest);
+
+        Console.WriteLine("Solution: " + turnstileResult.Solution.Value);
+    }
 }
 ```
 
@@ -1735,7 +2008,7 @@ static async Task Main(string[] args)
 <summary> 选项 3： Challenge (cookie `cf_clearance`)</summary>
 
 ```csharp
-// Cloudflare Challenge (cookie cf_clearance) - 使用你的代理解决
+// https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
 using Zennolab.CapMonsterCloud;
 using Zennolab.CapMonsterCloud.Requests;
@@ -1746,31 +2019,32 @@ class Program
     {
         var clientOptions = new ClientOptions
         {
-            ClientKey = "your_api_key" // 你的 CapMonster Cloud API key
+            ClientKey = "YOUR_API_KEY" // 输入您的 CapMonster Cloud API 密钥
         };
 
         var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
-
+        
+        // Cloudflare cf_clearance 只能使用您的代理解决
         var turnstileRequest = new TurnstileRequest
         {
-            WebsiteUrl = "https://example.com",  // 含验证码的页面 URL       
-            WebsiteKey = "0x4AAAAAAADnPIDROrmt1Wwj", // 替换为正确的值 
-            CloudflareTaskType = "cf_clearance",                                     
+            WebsiteUrl = "https://example.com",     // 验证码页面的 URL        
+            WebsiteKey = "0x4AAAAAAADnPIDROrmt1Wwj",  // 替换为正确的值     
+            CloudflareTaskType = "cf_clearance",                                    
             HtmlPageBase64 = "htmlPageBase64Here",        
-            UserAgent = "userAgentPlaceholder", // 使用当前的 UserAgent
+            UserAgent = "userAgentPlaceholder", 
 
             Proxy = new ProxyContainer(
-                "8.8.8.8",       
-                8000,            
-                ProxyType.Http,  
-                "proxyLoginHere", 
-                "proxyPasswordHere" 
+                "123.45.67.89",       // 代理地址
+                8080,                 // 代理端口
+                ProxyType.Http,       // 代理类型
+                "username",           // 代理用户名
+                "password"            // 代理密码
             )
         };
 
         var turnstileResult = await cmCloudClient.SolveAsync(turnstileRequest);
 
-        Console.WriteLine("Captcha solved. cf_clearance cookie: " + turnstileResult.Solution.Clearance);
+        Console.WriteLine("Solution: " + turnstileResult.Solution.Clearance);
     }
 }
 ```

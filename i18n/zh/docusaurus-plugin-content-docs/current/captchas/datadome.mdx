@@ -247,63 +247,151 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 ![](./images/datadome/datadomeCookie2.png)
 
 
-{/* ## 使用 SDK 库
+## 使用 SDK 库
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">
-    ```js
-    // https://github.com/ZennoLab/capmonstercloud-client-js
+  <details>
+      <summary>显示代码（用于浏览器）</summary>
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
 
-    import { CapMonsterCloudClientFactory, ClientOptions, DataDomeRequest } from '@zennolab_com/capmonstercloud-client';
+import { CapMonsterCloudClientFactory, ClientOptions, DataDomeRequest } from '@zennolab_com/capmonstercloud-client';
 
-    document.addEventListener('DOMContentLoaded', async () => {
-      const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
-      console.log(await cmcClient.getBalance());
+const API_KEY = "YOUR_API_KEY"; // 输入您的 CapMonster Cloud API 密钥
 
-      const dataDomeRequest = new DataDomeRequest({
-        websiteURL: 'https://example.com',
-        userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/21F90 Safari/604.1',
+document.addEventListener("DOMContentLoaded", async () => {
+    const client = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
+    );
+
+    // 如有必要，可以检查余额 
+    const balance = await client.getBalance();
+    console.log("Balance:", balance);
+
+    // DataDome 只能使用您的代理解决
+    const proxy = {
+        proxyType: "http",
+        proxyAddress: "123.45.67.89",
+        proxyPort: 8080,
+        proxyLogin: "username",
+        proxyPassword: "password"
+    };
+
+    const datadomeRequest = new DataDomeRequest({
+        _class: 'DataDome',
+        websiteURL: "https://example.com/", // 验证码页面的 URL
+        userAgent: "userAgentPlaceholder",
+        proxy,
         metadata: {
-          captchaUrl: 'https://geo.captcha-delivery.com/captcha/?initialCid=12434324',
-          datadomeCookie: '',
-        },
-      });
-
-      console.log(await cmcClient.Solve(dataDomeRequest));
+            captchaUrl: "https://geo.captcha-delivery.com/interstitial/?initialCid=AHrlqAAAAAMA9UvsL58YLqIAXNLFPg%3D%3D&hash=C0705ACD75EBF650A07FF8291D3528&cid=7sfa5xUfDrR4bQTp1c2mhtiD7jj9TXExcQypjdNAxKVFyIi1S9tE0~_mqLa2EFpOuzxKcZloPllsNHjNnqzD9HmBA4hEv7SsEyPYEidCBvjZEaDyfRyzefFfolv0lAHM&referer=https%3A%2F%2Fwww.example.com.au%2F&s=6522&b=978936&dm=cm",
+            datadomeCookie: "datadome=VYUWrgJ9ap4zmXq8Mgbp...64emvUPeON45z"
+        }
     });
-    ```
+
+    const result = await client.Solve(datadomeRequest);
+    console.log("Solution:", result);
+});
+```
+</details>
+
+<details>
+      <summary>显示代码 (Node.js)</summary>
+```javascript
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, DataDomeRequest } from '@zennolab_com/capmonstercloud-client';
+
+const API_KEY = "YOUR_API_KEY"; // 输入您的 CapMonster Cloud API 密钥
+
+async function solveDataDome() {
+    const client = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
+    );
+
+    // 如有必要，可以检查余额 
+    const balance = await client.getBalance();
+    console.log("Balance:", balance);
+
+    // DataDome 只能使用您的代理解决
+    const proxy = {
+        proxyType: "http",
+        proxyAddress: "123.45.67.89",
+        proxyPort: 8080,
+        proxyLogin: "username",
+        proxyPassword: "password"
+    };
+
+    const datadomeRequest = new DataDomeRequest({
+        _class: 'DataDome',
+        websiteURL: "https://example.com/", // 验证码页面的 URL
+        userAgent: "userAgentPlaceholder",
+        proxy,
+        metadata: {
+            captchaUrl: "https://geo.captcha-delivery.com/interstitial/?initialCid=AHrlqAAAAAMA9UvsL58YLqIAXNLFPg%3D%3D&hash=C0705ACD75EBF650A07FF8291D3528&cid=7sfa5xUfDrR4bQTp1c2mhtiD7jj9TXExcQypjdNAxKVFyIi1S9tE0~_mqLa2EFpOuzxKcZloPllsNHjNnqzD9HmBA4hEv7SsEyPYEidCBvjZEaDyfRyzefFfolv0lAHM&referer=https%3A%2F%2Fwww.example.com.au%2F&s=6522&b=978936&dm=cm",
+            datadomeCookie: "datadome=VYUWrgJ9ap4zmXq8Mgbp...64emvUPeON45z"
+        }
+    });
+
+    const result = await client.Solve(datadomeRequest);
+    console.log("Solution:", result);
+}
+
+solveDataDome().catch(console.error);
+```
+</details>
   </TabItem>
 
   <TabItem value="python" label="Python" className="method-panel">
+  <details>
+      <summary>显示代码</summary>
     ```python
     # https://github.com/ZennoLab/capmonstercloud-client-python
 
     import asyncio
     from capmonstercloudclient import CapMonsterClient, ClientOptions
-    from capmonstercloudclient.requests import DataDomeCustomTaskProxylessRequest
+    from capmonstercloudclient.requests import DataDomeCustomTaskRequest
+    from capmonstercloudclient.requests.baseRequestWithProxy import ProxyInfo
 
-    client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonster Cloud API key
-    cap_monster_client = CapMonsterClient(options=client_options)
+    API_KEY = "YOUR_API_KEY"  # 输入您的 CapMonster Cloud API 密钥
 
-    data_dome_request = DataDomeCustomTaskProxylessRequest(
-        websiteUrl="https://example.com",  # URL with the captcha
+    async def solve_datadome_captcha():
+        client_options = ClientOptions(api_key=API_KEY)
+        cap_monster_client = CapMonsterClient(options=client_options)
 
-        userAgent="Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/21F90 Safari/604.1",  # Use the current userAgent
-        metadata={
-            "htmlPageBase64": "PGh0bWw+PGhlYWQ+PHRpdGxlPn...+48L2h0bWw+",  # Replace with your HTML base64 or use captchaUrl
-            "datadomeCookie": "datadome=oZJnhpo...1PuyGg"  # Replace with your DataDome cookie
-        }
-    )
+        # DataDome 只能使用您的代理解决
+        proxy = ProxyInfo(
+            proxyType="http",
+            proxyAddress="123.45.67.89",
+            proxyPort=8080,
+            proxyLogin="username",
+            proxyPassword="password"
+        )
 
-    async def solve_captcha():
-        return await cap_monster_client.solve_captcha(data_dome_request)
+        # 创建 DataDome 任务
+        datadome_request = DataDomeCustomTaskRequest(
+            websiteUrl="https://example.com",  # 验证码页面的 URL
+            metadata={
+                "datadomeCookie": "datadome=VYUWrgJ9ap4zmXq8Mgbp...64emvUPeON45z", 
+                "captchaUrl": "https://geo.captcha-delivery.com/interstitial/?initialCid=AHrlqAAAAAMA9UvsL58YLqIAXNLFPg%3D%3D&hash=C0705ACD75EBF650A07FF8291D3528&cid=7sfa5xUfDrR4bQTp1c2mhtiD7jj9TXExcQypjdNAxKVFyIi1S9tE0~_mqLa2EFpOuzxKcZloPllsNHjNnqzD9HmBA4hEv7SsEyPYEidCBvjZEaDyfRyzefFfolv0lAHM&referer=https%3A%2F%2Fwww.example.com.au%2F&s=6522&b=978936&dm=cm"
+            },
+            proxy=proxy,
+            userAgent="userAgentPlaceholder"
+        )
 
-    responses = asyncio.run(solve_captcha())
-    print(responses)
+        # 如有必要，可以检查余额 
+        balance = await cap_monster_client.get_balance()
+        print("Balance:", balance)
+
+        result = await cap_monster_client.solve_captcha(datadome_request)
+        print("Solution:", result)
+
+    asyncio.run(solve_datadome_captcha())
     ```
+    </details>
   </TabItem>
   
-	<TabItem value="csharp" label="C#" className="method-panel">
+	{/* <TabItem value="csharp" label="C#" className="method-panel">
 		```csharp
 		// https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
@@ -333,5 +421,5 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 			}
 		}
 		```
-	</TabItem>
-</Tabs> */}
+	</TabItem> */}
+</Tabs>
