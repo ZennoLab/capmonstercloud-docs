@@ -1,0 +1,314 @@
+---
+sidebar_position: 2
+sidebar_label: reCAPTCHA v3 Enterprise 
+title: "Reconhecer e resolver reCAPTCHA v3 Enterprise — Tarefa reCAPTCHA v3 Enterprise | API"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+import PriceBlock from '../../../../../src/theme/PriceBlock';
+import PriceBlockWrap from '@theme/PriceBlockWrap';
+import BlogLink from '@theme/BlogLink';
+import { ArticleHead } from '../../../../../src/theme/ArticleHead';
+
+<ArticleHead slug="captchas/recaptcha-v3-enterprise-task" />
+
+# reCAPTCHA v3 Enterprise
+
+<PriceBlockWrap>
+  <PriceBlock title="RecaptchaV3Enterprise" captchaId="rc3e"/>
+</PriceBlockWrap>
+
+![](./images/recaptcha-v3/recaptchaV3.png)
+
+:::warning **Atenção!**
+A tarefa é executada através dos nossos próprios servidores proxy. Não há custos adicionais com proxies — o uso deles já está incluído no preço.
+:::
+
+Esta seção contém uma descrição da tarefa para resolver a reCAPTCHA v3 Enterprise do Google.
+
+A reCAPTCHA v3 Enterprise funciona totalmente em segundo plano e não exige que o usuário execute nenhuma ação. O sistema analisa sinais comportamentais e técnicos do visitante da página e gera uma avaliação de risco para cada solicitação. Com base nessas informações, o site decide se a ação é permitida, usando uma pontuação de confiança que geralmente varia de **0,1** a **0,9**.
+
+## Parâmetros da solicitação
+
+<TabItem value="proxyless" label="RecaptchaV3EnterpriseTaskProxyless (sem proxy)" default className="bordered-panel">
+    <ParamItem title="type" required type="string" />
+    **RecaptchaV3EnterpriseTask**
+
+    ---
+
+    <ParamItem title="websiteURL" required type="string" />
+    O endereço da página onde o captcha será resolvido
+
+    ---
+
+    <ParamItem title="websiteKey" required type="string" />
+    A chave identificadora do ReCaptcha v3 na página de destino.
+    <br/>https://www.google.com/recaptcha/enterprise.js?render=THIS_ONE
+
+    ---
+
+    <ParamItem title="minScore" type="double" />
+    Pode ter um valor de **0,1** a **0,9**
+
+    ---
+
+    <ParamItem title="pageAction" type="string" />
+    <p>O valor do parâmetro `action` que é enviado pelo widget ReCaptcha para o Google e que, durante a verificação no servidor, é visível para o proprietário do site. Valor padrão: *verify*</p>
+    <p>Exemplo em HTML:
+    <br/>*`grecaptcha.execute('site_key', {action:'login_test'})`*.</p>
+</TabItem>
+
+## Método de criar tarefa
+
+<TabItem value="proxyless" label="RecaptchaV3EnterpriseTaskProxyless (sem proxy)" default className="method-panel">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Solicitação**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "task": {
+			"type":"RecaptchaV3EnterpriseTask",
+			"websiteURL":"https://example.com",
+			"websiteKey":"6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d4TuRTE",
+			"minScore": 0.7
+		  }
+		}
+		```
+		**Resposta**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
+</TabItem>
+
+## Método de obter resultado da tarefa
+
+:::warning **Aviso!**
+Em alguns sites, é importante que o UserAgent corresponda ao usado ao resolver o captcha. Portanto, se o CapMonster Cloud retornar um UserAgent junto com o token, **sempre** aplique-o ao enviar o formulário ou confirmar a solução na página de destino.
+:::
+
+Use o método [getTaskResult](../api/methods/get-task-result.mdx) para solicitar a resposta do ReCaptcha3. Você receberá a resposta dentro de um período de 10 a 30 segundos, dependendo da carga de trabalho do serviço.
+
+<TabItem value="proxyless" label="GeeTestTaskProxyless (sem proxy)" default className="method-panel-full">
+    <MethodItem>
+```http
+https://api.capmonster.cloud/getTaskResult
+```
+    </MethodItem>
+    <MethodDescription>
+**Solicitação**
+```json
+{
+  "clientKey":"API_KEY",
+  "taskId": 407533072
+}
+```
+**Resposta**
+```json
+{
+  "errorId":0,
+  "status":"ready",
+  "solution": {
+    "gRecaptchaResponse":"3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
+  }
+}
+```
+Para alguns sites, a resposta pode ser semelhante ao exemplo a seguir. Ao confirmar a solução, é necessário usar o UserAgent fornecido na resposta, mesmo que seja diferente do UserAgent atual do navegador:
+
+        ```json
+		{
+		  "errorId":0,
+		  "status":"ready",
+		  "solution": {
+			"gRecaptchaResponse":"3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3",
+			"userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+		  }
+		}
+		```
+	</MethodDescription>
+</TabItem>
+
+<br />
+
+|**Propriedade**|**Tipo**|**Descrição**|
+| :- | :- | :- |
+|gRecaptchaResponse|String|Hash que deve ser inserido no formulário de envio do Recaptcha3 em `<textarea id="g-recaptcha-response" ></textarea>`. Tem um comprimento de 500 a 2190 bytes.|
+
+
+## Diferenças entre **reCAPTCHA v3 Enterprise** e o **reCAPTCHA v3** padrão
+
+| Característica            | reCAPTCHA v3                                              | reCAPTCHA v3 Enterprise                                                                                    |
+| ------------------------- | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| **URL do script**         | `https://www.google.com/recaptcha/api.js?render=site_key` | `https://www.google.com/recaptcha/enterprise.js?render=site_key`                                           |
+| **Identificação no site** | iframe e script usam URLs padrão da v3                    | iframe e script incluem `enterprise` na URL (`/enterprise.js`, `/enterprise/anchor`, `/enterprise/reload`) |
+
+**Modo prático de identificação:**
+
+1. Abra a página com a captcha e ative o **DevTools → Network**.
+2. Localize os scripts do reCAPTCHA:
+
+   * Se o URL contém `/enterprise.js` → é **v3 Enterprise**.
+   * Se o URL contém `/api.js` → é a **v3** padrão.
+3. Também é possível inspecionar o iframe do reCAPTCHA: no Enterprise, o URL do iframe contém `/enterprise/anchor`, enquanto na v3 padrão contém `/anchor`.
+
+## Como encontrar o valor de `websiteKey` para criar uma tarefa
+
+### Manualmente
+
+1. Abra a página do seu site onde o captcha é exibido.
+2. Abra as **Ferramentas de Desenvolvedor** no navegador e vá para a aba **Network**.
+3. Recarregue a página e observe os requests, por exemplo:
+
+   * `https://www.google.com/recaptcha/enterprise/anchor?ar=1&k=`
+   * `https://www.google.com/recaptcha/enterprise.js?render=`
+   * `https://www.google.com/recaptcha/enterprise/reload?k=`
+   * `https://www.google.com/recaptcha/enterprise/clr?k=`
+4. O parâmetro **k** nesses URLs corresponde ao **websiteKey**.
+
+![](./images/recaptcha-v3-enterprise/sitekey.png)
+
+### Automaticamente
+
+Para automatizar a extração dos parâmetros, eles podem ser obtidos via **navegador** (normal ou headless, por exemplo, usando **Playwright**) ou diretamente a partir de **requisições HTTP**. Como os valores dos parâmetros dinâmicos têm curta duração, recomenda-se utilizá-los imediatamente após a extração.
+
+:::warning **Importante!**
+Os trechos de código fornecidos são exemplos básicos para aprendizado sobre como extrair os parâmetros necessários. A implementação exata dependerá do seu site com captcha, sua estrutura e os elementos HTML e seletores utilizados.
+:::
+
+<Tabs className="full-width-tabs filled-tabs request-tabs">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+    <details>
+      <summary>Mostrar código (para console do navegador)</summary>
+
+      ```js
+      const iframe = document.querySelector('iframe[src*="recaptcha"]');
+
+      if (iframe) {
+        const src = iframe.src;
+        const k = new URL(src).searchParams.get('k');
+        console.log('Site key:', k);
+      } else {
+        console.log('iframe reCAPTCHA não encontrado');
+      }
+      ```
+    </details>
+
+    <details>
+      <summary>Mostrar código (Node.js)</summary>
+
+```js
+// Neste exemplo usamos Playwright
+
+const { chromium } = require("playwright");
+
+(async () => {
+  const browser = await chromium.launch({ headless: false });
+  const page = await browser.newPage();
+
+  // Substitua pelo URL desejado
+  await page.goto("https://example.com/", {
+    waitUntil: "load",
+  });
+
+  await page.waitForSelector('iframe[src*="recaptcha"]', { timeout: 10000 });
+
+  const k = await page.evaluate(() => {
+    const iframe = document.querySelector('iframe[src*="recaptcha"]');
+    if (!iframe) return null;
+    return new URL(iframe.src).searchParams.get("k");
+  });
+
+  console.log("Site key:", k);
+
+  await browser.close();
+})();
+```
+</details>
+
+  </TabItem>
+
+  <TabItem value="python" label="Python" className="method-panel">
+    <details>
+      <summary>Mostrar código</summary>
+
+```python
+# Neste exemplo usamos Playwright
+
+from playwright.sync_api import sync_playwright
+
+with sync_playwright() as p:
+    browser = p.chromium.launch(headless=False)
+    page = browser.new_page()
+
+    # Substitua pelo URL desejado
+    page.goto("https://www.example.com/", wait_until="load")
+
+    page.wait_for_selector('iframe[src*="recaptcha"]', timeout=10000)
+
+    k = page.evaluate("""
+    () => {
+        const iframe = document.querySelector('iframe[src*="recaptcha"]');
+        if (!iframe) return None
+        return new URL(iframe.src).searchParams.get("k");
+    }
+    """)
+
+    print("Site key:", k)
+    browser.close()
+```
+</details>
+
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    <details>
+      <summary>Mostrar código</summary>
+
+```csharp
+// Neste exemplo usamos Playwright
+
+using Microsoft.Playwright;
+using System;
+using System.Threading.Tasks;
+
+class Program
+{
+    public static async Task Main()
+    {
+        using var playwright = await Playwright.CreateAsync();
+        await using var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = false });
+        var page = await browser.NewPageAsync();
+
+        // Substitua pelo URL desejado
+        await page.GotoAsync("https://example.com/", new PageGotoOptions { WaitUntil = WaitUntilState.Load });
+
+        await page.WaitForSelectorAsync("iframe[src*='recaptcha']", new PageWaitForSelectorOptions { Timeout = 10000 });
+
+        var k = await page.EvaluateAsync<string>(@"() => {
+            const iframe = document.querySelector('iframe[src*=""recaptcha""]');
+            if (!iframe) return null;
+            return new URL(iframe.src).searchParams.get('k');
+        }");
+
+        Console.WriteLine("Site key: " + k);
+        await browser.CloseAsync();
+    }
+}
+```
+</details>
+
+  </TabItem>
+</Tabs>
+

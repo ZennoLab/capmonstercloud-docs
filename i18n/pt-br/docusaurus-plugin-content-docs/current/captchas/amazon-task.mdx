@@ -1,5 +1,5 @@
 ---
-sidebar_position: 13
+sidebar_position: 12
 sidebar_label: Amazon (AWS WAF)
 title: "Reconhecimento automático e bypass do captcha do Amazon AWS WAF via Capmonster Cloud API"
 description: Saiba como contornar o captcha da Amazon (AWS WAF) usando a API de reconhecimento e resolução automática de captchas do Capmonster Cloud!
@@ -17,10 +17,10 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 
 <ArticleHead slug="captchas/amazon-task" />
 
-# AmazonTask | AWS WAF Captcha e Challenge
+# Amazon | AWS WAF Captcha e Challenge
 
 <PriceBlockWrap>
-  <PriceBlock title="AmazonTask" captchaId="amazonwaf"/>
+  <PriceBlock title="Amazon" captchaId="amazonwaf"/>
 </PriceBlockWrap>
 
 ### <span style={{fontSize: '1.5rem'}}>Exemplos de tarefas</span>
@@ -563,12 +563,10 @@ https://api.capmonster.cloud/getTaskResult
 
 ### Automaticamente
 
-Uma forma conveniente de automatizar a busca por todos os parâmetros necessários.  
-Alguns parâmetros são regenerados a cada carregamento da página, então você precisará extraí-los através de um navegador — seja normal ou headless (por exemplo, usando **Playwright**).  
-Como os valores dos parâmetros dinâmicos são de curta duração, o captcha deve ser resolvido imediatamente após a captura deles.
+Para automatizar a extração dos parâmetros, eles podem ser obtidos via **navegador** (normal ou headless, por exemplo, usando **Playwright**) ou diretamente a partir de **requisições HTTP**. Como os valores dos parâmetros dinâmicos têm curta duração, recomenda-se utilizá-los imediatamente após a extração.
 
-:::warning **Importante!**  
-Os trechos de código fornecidos são exemplos básicos para familiarização com a extração dos parâmetros necessários. A implementação exata dependerá da sua página de captcha, sua estrutura e dos elementos/seletores HTML que ela utiliza.  
+:::warning **Importante!**
+Os trechos de código fornecidos são exemplos básicos para aprendizado sobre como extrair os parâmetros necessários. A implementação exata dependerá do seu site com captcha, sua estrutura e os elementos HTML e seletores utilizados.
 :::
 
 <Tabs className="full-width-tabs filled-tabs request-tabs">

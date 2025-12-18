@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-sidebar_label: ReCaptchaV3 Proxyless
+sidebar_label: reCAPTCHA v3
 title: "Recognise and resolve reCAPTCHA v3 - reCAPTCHA v3 Task | API"
 description: "A detailed description of solving the reCAPTCHA v3 Task using a proxy server for automated recognition and solving (bypass) reCAPTCHA v3 in the documentation in Capmonster Cloud Docs."
 ---
@@ -17,10 +17,10 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 
 <ArticleHead slug="captchas/recaptcha-v3-task" />
 
-# RecaptchaV3TaskProxyless
+# reCAPTCHA v3
 
 <PriceBlockWrap>
-  <PriceBlock title="RecaptchaV3TaskProxyless" captchaId="recaptcha3"/>
+  <PriceBlock title="reCAPTCHA v3" captchaId="recaptcha3"/>
 </PriceBlockWrap>
 
 ![](./images/recaptcha-v3/recaptchaV3.png)
@@ -29,11 +29,11 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 The task is executed through our own proxy servers. There are no additional costs for proxies — their usage is already included in the service price.
 :::
 
-The object contains data for Google ReCaptcha3 solving task. This task will be executed by our service using our own proxy servers.
+This section describes the task for solving Google reCAPTCHA v3.
 
-ReCaptcha3, unlike ReCaptcha2, does not require any action from the site visitor, it works invisibly in the background of the page, collecting and analyzing data about the user to determine whether he is a human or a bot. Based on this analytics, the site receives a trust rating (from 0.1 to 0.9).
+reCAPTCHA v3 operates entirely in the background and does not require any user interaction. The system analyzes behavioral and technical signals of the page visitor and generates a risk score for each request. Based on this data, the website decides whether to allow the action using a trust score, which typically ranges from **0.1** to **0.9**.
 
-When creating a task, you should additionally pass two parameters - pageAction and minScore.
+When creating a task, it is recommended to provide two parameters: `pageAction` and `minScore`.
 
 ## Request parameters
 
@@ -81,7 +81,7 @@ When creating a task, you should additionally pass two parameters - pageAction a
 			"type":"RecaptchaV3TaskProxyless",
 			"websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta",
 			"websiteKey":"6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",
-			"minScore": 0.3,
+			"minScore": 0.7,
 			"pageAction": "myverify"
 		  }
 		}
@@ -178,12 +178,10 @@ The action name passed to *grecaptcha.execute().* For example:​
 
 ### Automatically
 
-A convenient way to automate the search for all necessary parameters.
-Some parameters are regenerated every time the page loads, so you'll need to extract them through a browser — either regular or headless (e.g., using **Playwright**).
-Since the values of dynamic parameters are short-lived, the captcha must be solved immediately after retrieving them.
+To automate parameter extraction, you can retrieve them via a **browser** (regular or headless, e.g., using **Playwright**) or directly from **HTTP requests**. Since dynamic parameter values are short-lived, it is recommended to use them immediately after retrieval.
 
 :::warning **Important!**
-The code snippets provided are basic examples for familiarization with extracting the required parameters. The exact implementation will depend on your captcha page, its structure, and the HTML elements/selectors it uses.
+The provided code snippets are basic examples for learning how to extract the required parameters. The exact implementation will depend on your captcha page, its structure, and the HTML elements and selectors used.
 :::
 
 <Tabs className="full-width-tabs filled-tabs request-tabs">

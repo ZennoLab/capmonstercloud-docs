@@ -1,0 +1,325 @@
+---
+sidebar_position: 2
+sidebar_label: reCAPTCHA v3 Enterprise
+title: "识别并解决 reCAPTCHA v3 Enterprise —— reCAPTCHA v3 Enterprise 任务 | API"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+import PriceBlock from '../../../../../src/theme/PriceBlock';
+import PriceBlockWrap from '@theme/PriceBlockWrap';
+import BlogLink from '@theme/BlogLink';
+import { ArticleHead } from '../../../../../src/theme/ArticleHead';
+
+<ArticleHead slug="captchas/recaptcha-v3-enterprise-task" />
+
+
+# reCAPTCHA v3 Enterprise
+
+<PriceBlockWrap>
+  <PriceBlock title="RecaptchaV3Enterprise" captchaId="rc3e"/>
+</PriceBlockWrap>
+
+![](./images/recaptcha-v3/recaptchaV3.png)
+
+:::warning **注意！**
+任务通过我们的自有代理服务器执行。您无需为代理支付额外费用 —— 它们的使用已包含在价格中。
+:::
+
+本节介绍了用于解决 Google reCAPTCHA v3 Enterprise 的任务说明。
+
+reCAPTCHA v3 Enterprise 完全在后台运行，不需要用户执行任何操作。系统会分析页面访问者的行为和技术信号，并为每个请求生成一个风险评分。网站会根据这些数据，使用信任评分来决定是否允许该操作，该评分通常位于 **0.1** 到 **0.9** 的范围内。
+
+## 请求参数
+
+<TabItem value="proxyless" label="RecaptchaV3EnterpriseTaskProxyless（无代理）" default className="bordered-panel">
+    <ParamItem title="type" required type="string" />
+    **RecaptchaV3EnterpriseTask**
+
+    ---
+
+    <ParamItem title="websiteURL" required type="string" />
+    进行验证码验证的页面地址
+
+    ---
+
+    <ParamItem title="websiteKey" required type="string" />
+    目标页面上的 ReCaptcha v3 标识密钥。  
+    <br/>https://www.google.com/recaptcha/enterprise.js?render=THIS_ONE
+
+    ---
+
+    <ParamItem title="minScore" type="double" />
+    可取值范围为 **0.1** 到 **0.9**
+
+    ---
+
+    <ParamItem title="pageAction" type="string" />
+    <p>
+      通过 ReCaptcha 小组件传递给 Google 的 `action` 参数值，
+      在服务器端进行后续验证时，该值对网站所有者可见。
+      默认值：*verify*
+    </p>
+    <p>
+      HTML 示例：
+      <br/>*`grecaptcha.execute('site_key', {action:'login_test'})`*
+    </p>
+</TabItem>
+
+## 创建任务方法 
+
+<TabItem value="proxyless" label="RecaptchaV3EnterpriseTaskProxyless（无代理）" default className="method-panel">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**请求**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "task": {
+			"type":"RecaptchaV3EnterpriseTask",
+			"websiteURL":"https://example.com",
+			"websiteKey":"6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d4TuRTE",
+			"minScore": 0.7
+		  }
+		}
+		```
+		**响应**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
+</TabItem>
+
+:::warning **警告！**
+在某些网站上，确保 UserAgent 与解决验证码时使用的 UserAgent 相匹配非常重要。因此，如果 CapMonster Cloud 在返回令牌的同时提供了 UserAgent，**请始终**在提交表单或在目标页面确认解决方案时使用该 UserAgent。
+:::
+
+使用 [getTaskResult](../api/methods/get-task-result.mdx) 请求获取 ReCaptcha3 的答案。根据服务负载情况，您将在 10 到 30 秒内收到响应。
+
+<TabItem value="proxyless" label="RecaptchaV3EnterpriseTaskProxyless（无代理）" default className="method-panel-full">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**要求**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**回应**
+		```json
+		{
+		  "errorId":0,
+		  "status":"ready",
+		  "solution": {
+			"gRecaptchaResponse":"3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
+		  }
+		}
+		```
+
+    对于某些网站，响应可能如下所示。在确认解决方案时，必须使用响应中返回的 **UserAgent**，即使它与当前浏览器的 UserAgent 不一致：
+
+		```json
+		{
+		  "errorId":0,
+		  "status":"ready",
+		  "solution": {
+			"gRecaptchaResponse":"3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3",
+			"userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+		  }
+		}
+		```
+	</MethodDescription>
+</TabItem>
+<br />
+
+|**属性**|**类型**|**描述**|
+| :- | :- | :- |
+|gRecaptchaResponse|String|应插入到 Recaptcha3 提交表单中的哈希值 `<textarea id="g-recaptcha-response"></textarea>`。长度为 500 到 2190 字节。|
+
+## **reCAPTCHA v3 Enterprise** 与普通 **reCAPTCHA v3** 的区别
+
+| 特性         | reCAPTCHA v3                                              | reCAPTCHA v3 Enterprise                                                                      |
+| ---------- | --------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| **脚本 URL** | `https://www.google.com/recaptcha/api.js?render=site_key` | `https://www.google.com/recaptcha/enterprise.js?render=site_key`                             |
+| **网站识别方式** | iframe 和脚本使用标准的 v3 URL                                    | iframe 和脚本的 URL 中包含 `enterprise`（`/enterprise.js`、`/enterprise/anchor`、`/enterprise/reload`） |
+
+**实用的识别方法：**
+
+1. 打开包含验证码的页面，并进入 **DevTools > Network**。
+2. 查找 reCAPTCHA 相关脚本：
+
+   * 如果 URL 包含 `/enterprise.js` → 这是 **v3 Enterprise**
+   * 如果 URL 包含 `/api.js` → 这是普通 **v3**
+3. 也可以查看 reCAPTCHA 的 `iframe`：
+   在 Enterprise 版本中，iframe 的 URL 包含 `/enterprise/anchor`，而普通 v3 使用 `/anchor`。
+
+
+## 如何获取用于创建解题任务的 `websiteKey`
+
+### 手动方式
+
+1. 打开显示验证码的目标页面。
+
+2. 在浏览器中打开 **开发者工具**，切换到 **Network（网络）** 选项卡。
+
+3. 刷新页面，关注以下类型的请求，例如：
+
+   * `https://www.google.com/recaptcha/enterprise/anchor?ar=1&k=`
+   * `https://www.google.com/recaptcha/enterprise.js?render=`
+   * `https://www.google.com/recaptcha/enterprise/reload?k=`
+   * `https://www.google.com/recaptcha/enterprise/clr?k=`
+
+4. 这些 URL 中的 **k** 参数即为所需的 **websiteKey**。
+
+![](./images/recaptcha-v3-enterprise/sitekey.png)
+
+### 自动方式
+
+为了自动化获取所需参数，可以通过 **浏览器**（普通模式或 headless 模式，例如使用 **Playwright**）进行提取，或直接从 **HTTP 请求**中获取。由于动态参数的有效时间较短，建议在获取后尽快使用。
+
+:::warning **重要**
+所提供的代码片段仅作为获取必要参数的基础示例。具体实现方式取决于包含验证码的网站、本身的页面结构，以及所使用的 HTML 元素和选择器。
+:::
+
+<Tabs className="full-width-tabs filled-tabs request-tabs">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+    <details>
+      <summary>显示代码（用于浏览器控制台）</summary>
+
+      ```js
+      const iframe = document.querySelector('iframe[src*="recaptcha"]');
+
+      if (iframe) {
+        const src = iframe.src;
+        const k = new URL(src).searchParams.get('k');
+        console.log('Site key:', k);
+      } else {
+        console.log('未找到 reCAPTCHA iframe');
+      }
+      ```
+    </details>
+
+    <details>
+      <summary>显示代码（Node.js）</summary>
+
+```js
+// 本示例中使用 Playwright
+
+const { chromium } = require("playwright");
+
+(async () => {
+  const browser = await chromium.launch({ headless: false });
+  const page = await browser.newPage();
+
+  // 请替换为目标 URL
+  await page.goto("https://example.com/", {
+    waitUntil: "load",
+  });
+
+  await page.waitForSelector('iframe[src*="recaptcha"]', { timeout: 10000 });
+
+  const k = await page.evaluate(() => {
+    const iframe = document.querySelector('iframe[src*="recaptcha"]');
+    if (!iframe) return null;
+    return new URL(iframe.src).searchParams.get("k");
+  });
+
+  console.log("Site key:", k);
+
+  await browser.close();
+})();
+````
+
+</details>
+
+
+  </TabItem>
+
+  <TabItem value="python" label="Python" className="method-panel">
+    <details>
+      <summary>显示代码</summary>
+
+```python
+# 本示例中使用 Playwright
+
+from playwright.sync_api import sync_playwright
+
+with sync_playwright() as p:
+    browser = p.chromium.launch(headless=False)
+    page = browser.new_page()
+
+    # 请替换为目标 URL
+    page.goto("https://www.example.com/", wait_until="load")
+
+    page.wait_for_selector('iframe[src*="recaptcha"]', timeout=10000)
+
+    k = page.evaluate("""
+    () => {
+        const iframe = document.querySelector('iframe[src*="recaptcha"]');
+        if (!iframe) return null;
+        return new URL(iframe.src).searchParams.get("k");
+    }
+    """)
+
+    print("Site key:", k)
+    browser.close()
+    ```
+    </details>
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+    <details>
+      <summary>显示代码</summary>
+
+```csharp
+// 本示例中使用 Playwright
+
+using Microsoft.Playwright;
+using System;
+using System.Threading.Tasks;
+
+class Program
+{
+    public static async Task Main()
+    {
+        using var playwright = await Playwright.CreateAsync();
+        await using var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = false });
+        var page = await browser.NewPageAsync();
+
+        // 请替换为目标 URL
+        await page.GotoAsync("https://example.com/", new PageGotoOptions { WaitUntil = WaitUntilState.Load });
+
+        await page.WaitForSelectorAsync("iframe[src*='recaptcha']", new PageWaitForSelectorOptions { Timeout = 10000 });
+
+        var k = await page.EvaluateAsync<string>(@"() => {
+            const iframe = document.querySelector('iframe[src*=""recaptcha""]');
+            if (!iframe) return null;
+            return new URL(iframe.src).searchParams.get('k');
+        }");
+
+        Console.WriteLine("Site key: " + k);
+        await browser.CloseAsync();
+    }
+}
+```
+</details>
+
+
+  </TabItem>
+</Tabs>
+

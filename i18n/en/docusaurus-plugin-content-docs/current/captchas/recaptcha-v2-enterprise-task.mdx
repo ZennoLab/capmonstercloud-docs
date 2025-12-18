@@ -1,6 +1,6 @@
 ﻿---
-sidebar_position: 2
-sidebar_label: ReCaptchaV2 Enterprise
+sidebar_position: 3
+sidebar_label: reCAPTCHA v2 Enterprise
 title: "Recognise and solve reCAPTCHA v2 Enterprise - reCAPTCHA v2 Enterprise Task | API"
 description: "reCAPTCHA v2 Enterprise Task to automatically recognise and resolve (bypass) reCAPTCHA v2 Enterprise via Capmonster Cloud API. Detailed description of the method in the Capmonster Cloud Docs documentation."
 ---
@@ -17,7 +17,7 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 
 <ArticleHead slug="captchas/recaptcha-v2-enterprise-task" />
 
-# RecaptchaV2EnterpriseTask
+# reCAPTCHA v2 Enterprise
 
 <PriceBlockWrap>
   <PriceBlock  captchaId="rc2e"/>
@@ -296,12 +296,10 @@ Or in **Network** requests:
 
 ### Automatically
 
-A convenient way to automate the search for all necessary parameters.
-Some parameters are regenerated every time the page loads, so you'll need to extract them through a browser — either regular or headless (e.g., using **Playwright**).
-Since the values of dynamic parameters are short-lived, the captcha must be solved immediately after retrieving them.
+To automate parameter extraction, you can retrieve them via a **browser** (regular or headless, e.g., using **Playwright**) or directly from **HTTP requests**. Since dynamic parameter values are short-lived, it is recommended to use them immediately after retrieval.
 
 :::warning **Important!**
-The code snippets provided are basic examples for familiarization with extracting the required parameters. The exact implementation will depend on your captcha page, its structure, and the HTML elements/selectors it uses.
+The provided code snippets are basic examples for learning how to extract the required parameters. The exact implementation will depend on your captcha page, its structure, and the HTML elements and selectors used.
 :::
 
 <Tabs className="full-width-tabs filled-tabs request-tabs">

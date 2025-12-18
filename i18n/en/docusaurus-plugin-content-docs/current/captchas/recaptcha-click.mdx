@@ -1,6 +1,6 @@
 ﻿---
 sidebar_position: 8
-sidebar_label: ComplexImage Recaptcha (click)
+sidebar_label: reCAPTCHA (click)
 title: "ComplexImageTask reCAPTCHA - automatic recognition and solution of captchas with image clicks | API"
 description: "ComplexImageTask reCAPTCHA - set up automatic recognition and solution of image clickable captchas via Capmonster Cloud API!"
 ---
@@ -204,12 +204,10 @@ Task description. Right-click on the task text and in **Developer Tools**, find 
 
 ### Automatically
 
-A convenient way to automate the search for all necessary parameters.
-Some parameters are regenerated every time the page loads, so you'll need to extract them through a browser — either regular or headless (e.g., using **Playwright**).
-Since the values of dynamic parameters are short-lived, the captcha must be solved immediately after retrieving them.
+To automate parameter extraction, you can retrieve them via a **browser** (regular or headless, e.g., using **Playwright**) or directly from **HTTP requests**. Since dynamic parameter values are short-lived, it is recommended to use them immediately after retrieval.
 
 :::warning **Important!**
-The code snippets provided are basic examples for familiarization with extracting the required parameters. The exact implementation will depend on your captcha page, its structure, and the HTML elements/selectors it uses.
+The provided code snippets are basic examples for learning how to extract the required parameters. The exact implementation will depend on your captcha page, its structure, and the HTML elements and selectors used.
 :::
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="recaptcha-click">

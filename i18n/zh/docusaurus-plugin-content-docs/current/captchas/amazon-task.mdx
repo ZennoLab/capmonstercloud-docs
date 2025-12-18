@@ -1,5 +1,5 @@
 ﻿---
-sidebar_position: 13
+sidebar_position: 12
 sidebar_label: Amazon (AWS WAF)
 title: "通过 Capmonster Cloud API 自动识别和绕过 Amazon AWS WAF 验证码"
 description: 学习如何使用 Capmonster Cloud 验证码识别和解决 API 绕过 Amazon (AWS WAF) 验证码！
@@ -17,10 +17,10 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 
 <ArticleHead slug="captchas/amazon-task" />
 
-# AmazonTask | AWS WAF 验证码与挑战
+# Amazon | AWS WAF 验证码与挑战
 
 <PriceBlockWrap>
-  <PriceBlock title="AmazonTask" captchaId="amazonwaf"/>
+  <PriceBlock title="Amazon" captchaId="amazonwaf"/>
 </PriceBlockWrap>
 
 ### <span style={{fontSize: '1.5rem'}}>任务示例</span>
@@ -563,12 +563,10 @@ CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费
 
 ### 自动方法
 
-一种方便的自动化获取所有必要参数的方式。
-某些参数每次页面加载时都会重新生成，因此需要通过浏览器（普通或无头模式，如使用**Playwright**）提取它们。
-由于动态参数值的有效期很短，获取后必须立即解决验证码。
+为了自动化获取所需参数，可以通过 **浏览器**（普通模式或 headless 模式，例如使用 **Playwright**）进行提取，或直接从 **HTTP 请求**中获取。由于动态参数的有效时间较短，建议在获取后尽快使用。
 
-:::warning **重要提示！**
-提供的代码片段是用于熟悉参数提取的基本示例。具体实现将取决于验证码页面、其结构及使用的HTML元素/选择器。
+:::warning **重要**
+所提供的代码片段仅作为获取必要参数的基础示例。具体实现方式取决于包含验证码的网站、本身的页面结构，以及所使用的 HTML 元素和选择器。
 :::
 
 <Tabs className="full-width-tabs filled-tabs request-tabs">

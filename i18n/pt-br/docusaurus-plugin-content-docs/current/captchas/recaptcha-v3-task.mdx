@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-sidebar_label: RecaptchaV3 Proxyless
+sidebar_label: reCAPTCHA v3
 ---
 
 import Tabs from '@theme/Tabs';
@@ -15,7 +15,7 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 
 <ArticleHead slug="captchas/recaptcha-v3-task" />
 
-# RecaptchaV3TaskProxyless
+# reCAPTCHA v3
 
 <PriceBlockWrap>
   <PriceBlock title="RecaptchaV3TaskProxyless" captchaId="recaptcha3"/>
@@ -27,11 +27,11 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 A tarefa é executada através dos nossos próprios servidores proxy. Não há custos adicionais com proxies — o uso deles já está incluído no preço.
 :::
 
-O objeto contém dados para a tarefa de resolução do Google ReCaptcha3. Esta tarefa será executada pelo nosso serviço usando nossos próprios servidores proxy.
+Esta seção descreve a tarefa para resolver o Google reCAPTCHA v3.
 
-ReCaptcha3, ao contrário do ReCaptcha2, não requer qualquer ação do visitante do site. Ele funciona invisivelmente em segundo plano na página, coletando e analisando dados sobre o usuário para determinar se ele é humano ou um robô. Com base nessa análise, o site recebe uma pontuação de confiança (de 0,1 a 0,9).
+O reCAPTCHA v3 funciona totalmente em segundo plano e não exige que o usuário realize qualquer ação. O sistema analisa sinais comportamentais e técnicos do visitante da página e gera uma pontuação de risco para cada solicitação. Com base nesses dados, o site decide se a ação é permitida, utilizando uma pontuação de confiança que normalmente varia de **0.1** a **0.9**.
 
-Ao criar uma tarefa, você deve passar dois parâmetros adicionais - **pageAction** e **minScore**.
+Ao criar uma tarefa, é recomendável fornecer dois parâmetros: `pageAction` e `minScore`.
 
 ## Parâmetros da solicitação
 
@@ -80,7 +80,7 @@ Ao criar uma tarefa, você deve passar dois parâmetros adicionais - **pageActio
     "type":"RecaptchaV3TaskProxyless",
     "websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta",
     "websiteKey":"6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",
-    "minScore": 0.3,
+    "minScore": 0.7,
     "pageAction": "myverify"
   }
 }
@@ -177,12 +177,10 @@ O nome da ação passada para *grecaptcha.execute()*. Por exemplo:
 
 ### Automaticamente
 
-Uma forma conveniente de automatizar a busca por todos os parâmetros necessários.  
-Alguns parâmetros são regenerados a cada carregamento da página, então você precisará extraí-los através de um navegador — seja normal ou headless (por exemplo, usando **Playwright**).  
-Como os valores dos parâmetros dinâmicos são de curta duração, o captcha deve ser resolvido imediatamente após a captura deles.
+Para automatizar a extração dos parâmetros, eles podem ser obtidos via **navegador** (normal ou headless, por exemplo, usando **Playwright**) ou diretamente a partir de **requisições HTTP**. Como os valores dos parâmetros dinâmicos têm curta duração, recomenda-se utilizá-los imediatamente após a extração.
 
-:::warning **Importante!**  
-Os trechos de código fornecidos são exemplos básicos para familiarização com a extração dos parâmetros necessários. A implementação exata dependerá da sua página de captcha, sua estrutura e dos elementos/seletores HTML que ela utiliza.  
+:::warning **Importante!**
+Os trechos de código fornecidos são exemplos básicos para aprendizado sobre como extrair os parâmetros necessários. A implementação exata dependerá do seu site com captcha, sua estrutura e os elementos HTML e seletores utilizados.
 :::
 
 <Tabs className="full-width-tabs filled-tabs request-tabs">
