@@ -1,6 +1,6 @@
 ﻿---
 sidebar_position: 0
-sidebar_label: RecaptchaV2
+sidebar_label: reCAPTCHA v2
 title: "Recognise and solve reCAPTCHA v2 — reCAPTCHAV2Task | API"
 description: "Learn how to set up automatic recognition via API and solve (bypass) NoCaptcha (reCAPTCHA v2) using the NoCaptchaTask method in Capmonster Cloud."
 ---
@@ -17,15 +17,15 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 
 <ArticleHead slug="captchas/no-captcha-task" />
 
-# RecaptchaV2Task
+# reCAPTCHA v2
 
 <PriceBlockWrap>
-  <PriceBlock title="RecaptchaV2Task" captchaId="rc2"/>
+  <PriceBlock title="RecaptchaV2" captchaId="rc2"/>
 </PriceBlockWrap>
 
 ![](./images/no-captcha/recaptchaV2.png) ![](./images/no-captcha/recaptchaV2_1.png) ![](./images/no-captcha/recaptchaV2_2.png)
 
-The object contains data for Google ReCaptcha2 solving task. To ensure the universality of the solution to this type of captcha, you need to use all the data used when automating the filling of the form on the target site, including proxies, browser UserAgent and cookies. This will help to avoid any problems when Google changes the code of its captcha.
+The object contains data for Google reCAPTCHA v2 solving task. To ensure the universality of the solution to this type of captcha, you need to use all the data used when automating the filling of the form on the target site, including proxies, browser UserAgent and cookies. This will help to avoid any problems when Google changes the code of its captcha.
 
 This type of captcha might be solved a bit longer than usual image captcha, but this issue is compensated by the fact that  `g-recaptcha-response` value we send to you is valid for the next 60 seconds after we solves your ReCaptcha2.
 
@@ -263,12 +263,10 @@ If the page contains a *data-s* attribute, find it in the HTML:
 
 ### Automatically
 
-A convenient way to automate the search for all necessary parameters.
-Some parameters are regenerated every time the page loads, so you'll need to extract them through a browser — either regular or headless (e.g., using **Playwright**).
-Since the values of dynamic parameters are short-lived, the captcha must be solved immediately after retrieving them.
+To automate parameter extraction, you can retrieve them via a **browser** (regular or headless, e.g., using **Playwright**) or directly from **HTTP requests**. Since dynamic parameter values are short-lived, it is recommended to use them immediately after retrieval.
 
 :::warning **Important!**
-The code snippets provided are basic examples for familiarization with extracting the required parameters. The exact implementation will depend on your captcha page, its structure, and the HTML elements/selectors it uses.
+The provided code snippets are basic examples for learning how to extract the required parameters. The exact implementation will depend on your captcha page, its structure, and the HTML elements and selectors used.
 :::
 
 <Tabs className="full-width-tabs filled-tabs request-tabs">
