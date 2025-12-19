@@ -132,19 +132,21 @@ reCAPTCHA v3 работает полностью в фоновом режиме 
 		}
 		```
 
-    Для некоторых сайтов ответ может быть примерно такой (применяйте полученный UserAgent при подтверждении решения, даже если он отличается от актуального):
+    Для некоторых сайтов ответ может выглядеть следующим образом. При отправке решения необходимо использовать UserAgent, указанный в ответе, даже если он отличается от текущего, используемого вашим браузером или скриптом.
  
-		```json
-		{
-		  "errorId":0,
-		  "status":"ready",
-		  "solution": {
-			"userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36", 
-                "gRecaptchaResponse": "0cAFcWeA5Y3...hF8UWA", 
-                "cookies": {"nocookies": "true"}}"
-		  }
-		}
-		```
+```json
+{
+  "errorId": 0,
+  "status": "ready",
+  "solution": {
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "gRecaptchaResponse": "0cAFcWeA5Y3...hF8UWA",
+    "cookies": {
+      "nocookies": "true"
+    }
+  }
+}
+```
 	</MethodDescription>
 </TabItem>
 
