@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-sidebar_label: RecaptchaV3 Proxyless
+sidebar_label: reCAPTCHA v3
 ---
 
 import Tabs from '@theme/Tabs';
@@ -16,7 +16,7 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 <ArticleHead slug="captchas/recaptcha-v3-task" />
 
 
-# RecaptchaV3TaskProxyless
+# reCAPTCHA v3
 
 <PriceBlockWrap>
   <PriceBlock title="RecaptchaV3TaskProxyless" captchaId="recaptcha3"/>
@@ -29,11 +29,11 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 :::
 
 
-该对象包含用于解决 Google ReCaptcha3 任务的数据。此任务将通过我们的服务使用我们自己的代理服务器执行。
+本节介绍了用于解决 Google reCAPTCHA v3 的任务说明。
 
-与 ReCaptcha2 不同，ReCaptcha3 不需要站点访问者执行任何操作，它在页面背景中隐式工作，收集和分析用户数据，以确定其是否为人类或机器人。基于这些分析，网站会得到一个信任评级（从 0.1 到 0.9）。
+reCAPTCHA v3 完全在后台运行，不需要用户执行任何操作。系统会分析页面访问者的行为和技术信号，并为每个请求生成风险评分。网站会根据这些数据，通过信任评分来决定是否允许该操作，该评分通常位于 **0.1** 到 **0.9** 的范围内。
 
-创建任务时，您还应额外传递两个参数 - pageAction 和 minScore。
+在创建任务时，建议传递两个参数：`pageAction` 和 `minScore`。
 
 
 ## 请求参数
@@ -178,12 +178,10 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 
 ### 自动方法
 
-一种方便的自动化获取所有必要参数的方式。
-某些参数每次页面加载时都会重新生成，因此需要通过浏览器（普通或无头模式，如使用**Playwright**）提取它们。
-由于动态参数值的有效期很短，获取后必须立即解决验证码。
+为了自动化获取所需参数，可以通过 **浏览器**（普通模式或 headless 模式，例如使用 **Playwright**）进行提取，或直接从 **HTTP 请求**中获取。由于动态参数的有效时间较短，建议在获取后尽快使用。
 
-:::warning **重要提示！**
-提供的代码片段是用于熟悉参数提取的基本示例。具体实现将取决于验证码页面、其结构及使用的HTML元素/选择器。
+:::warning **重要**
+所提供的代码片段仅作为获取必要参数的基础示例。具体实现方式取决于包含验证码的网站、本身的页面结构，以及所使用的 HTML 元素和选择器。
 :::
 
 <Tabs className="full-width-tabs filled-tabs request-tabs">

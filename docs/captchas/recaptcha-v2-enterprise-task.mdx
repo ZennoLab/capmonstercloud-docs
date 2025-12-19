@@ -1,6 +1,6 @@
 ---
 sidebar_position: 2
-sidebar_label: ReCaptchaV2 Enterprise
+sidebar_label: reCAPTCHA v2 Enterprise
 title: "Распознавание и решение reCAPTCHA v2 Enterprise — reCAPTCHA v2 Enterprise Task | API"
 description: "reCAPTCHA v2 Enterprise Task для автоматического распознавания и решения (обхода) reCAPTCHA v2 Enterprise через API Capmonster Cloud. Подробное описание метода в документации Capmonster Cloud Docs"
 ---
@@ -18,7 +18,7 @@ import { ArticleHead } from '../../src/theme/ArticleHead';
 <ArticleHead slug="captchas/recaptcha-v2-enterprise-task" />
 
 
-# RecaptchaV2EnterpriseTask
+# reCAPTCHA v2 Enterprise
 
 <PriceBlockWrap>
   <PriceBlock  captchaId="rc2e"/>
@@ -305,9 +305,7 @@ Object.defineProperty(window, 'grecaptcha', {
 
 ### Автоматически
 
-Удобный способ автоматизировать поиск всех необходимых параметров.
-Некоторые параметры генерируются заново при каждой загрузке страницы, поэтому для их извлечения потребуется работать через браузер – обычный или в режиме headless (например, с помощью **Playwright**).
-Так как значения динамических параметров хранятся недолго, капчу нужно решать сразу после их получения.
+Для автоматизации поиска параметров их можно извлекать через **браузер** (обычный или headless, например, с **Playwright**) или напрямую из **HTTP-запросов**. Поскольку значения динамических параметров действуют недолго, их рекомендуется использовать сразу после получения.
 
 :::warning **Важно!**
 Приведённые фрагменты кода являются базовыми примерами для ознакомления в извлечении необходимых параметров. Точная реализация будет зависеть от вашего сайта с капчей, его структуры и используемых HTML-элементов и селекторов.

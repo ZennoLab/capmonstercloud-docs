@@ -17,10 +17,12 @@ import { ArticleHead } from '../../src/theme/ArticleHead';
 
 <ArticleHead slug="captchas/turnstile-task" />
 
-# Cloudflare TurnstileTask | Challenge | Waiting Room
+# Cloudflare Turnstile | Challenge | Waiting Room
 
 <PriceBlockWrap>
-  <PriceBlock title="TurnstileTask" captchaId="cf-turnstile"/>
+  <PriceBlock title="Turnstile" captchaId="cf-turnstile"/>
+  <PriceBlock title="Challenge" captchaId="cf-turnstile"/>
+  <PriceBlock title="WaitingRoom" captchaId="cf-turnstile"/>
 </PriceBlockWrap>
 
 ![](./images/tunrstile-task/turnstile.png)
@@ -815,9 +817,7 @@ const chrome = require('selenium-webdriver/chrome');
 
 ### Автоматически
 
-Удобный способ автоматизировать поиск всех необходимых параметров.
-Некоторые параметры генерируются заново при каждой загрузке страницы, поэтому для их извлечения потребуется работать через браузер – обычный или в режиме headless (например, с помощью **Playwright**).
-Так как значения динамических параметров хранятся недолго, капчу нужно решать сразу после их получения.
+Для автоматизации поиска параметров их можно извлекать через **браузер** (обычный или headless, например, с **Playwright**) или напрямую из **HTTP-запросов**. Поскольку значения динамических параметров действуют недолго, их рекомендуется использовать сразу после получения.
 
 :::warning **Важно!**
 Приведённые фрагменты кода являются базовыми примерами для ознакомления в извлечении необходимых параметров. Точная реализация будет зависеть от вашего сайта с капчей, его структуры и используемых HTML-элементов и селекторов.
