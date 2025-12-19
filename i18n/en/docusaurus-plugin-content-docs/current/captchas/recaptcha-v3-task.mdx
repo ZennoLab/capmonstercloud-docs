@@ -129,19 +129,21 @@ Use the [getTaskResult](../api/methods/get-task-result.mdx) to request answer fo
 		  }
 		}
 		```
-    For some websites, the response may be something like this (use the obtained UserAgent when submitting the solution, even if it differs from the current one):
- 
-		```json
-		{
-		  "errorId":0,
-		  "status":"ready",
-		  "solution": {
-			"userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36", 
-                "gRecaptchaResponse": "0cAFcWeA5Y3...hF8UWA", 
-                "cookies": {"nocookies": "true"}}"
-		  }
-		}
-		```
+    For some websites, the response may look like the following. When submitting the solution, make sure to use the UserAgent provided in the response, even if it differs from the one currently used by your browser or script.
+
+```json
+{
+  "errorId": 0,
+  "status": "ready",
+  "solution": {
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "gRecaptchaResponse": "0cAFcWeA5Y3...hF8UWA",
+    "cookies": {
+      "nocookies": "true"
+    }
+  }
+}
+```
 	</MethodDescription>
 </TabItem>
 

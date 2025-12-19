@@ -129,19 +129,21 @@ reCAPTCHA v3 完全在后台运行，不需要用户执行任何操作。系统�
 		  }
 		}
 		```
-    对于某些网站，响应可能如下（在提交验证码解决方案时请使用获取的 UserAgent，即使它与当前的不同）：
+    对于某些网站，响应可能如下所示。提交解决方案时，请确保使用响应中提供的 UserAgent，即使它与您当前使用的浏览器或脚本不同。
  
-		```json
-		{
-		  "errorId":0,
-		  "status":"ready",
-		  "solution": {
-			"userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36", 
-                "gRecaptchaResponse": "0cAFcWeA5Y3...hF8UWA", 
-                "cookies": {"nocookies": "true"}}"
-		  }
-		}
-		```
+```json
+{
+  "errorId": 0,
+  "status": "ready",
+  "solution": {
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "gRecaptchaResponse": "0cAFcWeA5Y3...hF8UWA",
+    "cookies": {
+      "nocookies": "true"
+    }
+  }
+}
+```
 	</MethodDescription>
 </TabItem>
 
