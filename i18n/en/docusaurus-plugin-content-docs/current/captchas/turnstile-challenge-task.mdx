@@ -1,0 +1,1445 @@
+---
+sidebar_position: 8
+sidebar_label: Cloudflare Challenge 
+title: "Recognise and resolve Cloudflare Challenge | API"
+description: "Turnstile Task method to automatically recognise and solve Cloudflare Challenge captchas via Capmonster Cloud API. Full tutorial and examples in the Capmonster Cloud Docs documentation."
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+import PriceBlock from '../../../../../src/theme/PriceBlock'
+import PriceBlockWrap from '@theme/PriceBlockWrap';
+import BlogLink from '@theme/BlogLink';
+import { ArticleHead } from '../../../../../src/theme/ArticleHead';
+
+<ArticleHead slug="captchas/turnstile-challenge-task" />
+
+# Cloudflare Challenge
+
+<PriceBlockWrap>
+  <PriceBlock title="Cloudflare Challenge" captchaId="cf-turnstile"/>
+</PriceBlockWrap>
+
+![](./images/tunrstile-task/challenge.png)
+
+
+<BlogLink url="https://capmonster.cloud/en/blog/Cloudflare/what-is-cloudflare-captcha"/>
+<BlogLink url="https://capmonster.cloud/en/blog/Cloudflare/how-cloudflare-bot-challenge-and-turnstile-protect-web-traffic"/>
+
+:::info Important:
+CapMonster Cloud can return the solution result as either a **token** or a **cf_clearance cookie**. Before getting started, review both options and choose the one that best fits your use case.
+:::
+
+## Request parameters
+
+### Option 1. Challenge (token)
+
+:::warning **Attention!**
+* CapMonster Cloud uses built-in proxies by default — their cost is already included in the service. You only need to specify your own proxies in cases where the website does not accept the token or access to the built-in services is restricted.
+
+* If you are using a proxy with IP authorization, make sure to whitelist the address **65.21.190.34**.
+
+* After solving, you will receive a **token** to confirm captcha completion.
+:::
+
+<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (without proxy)" default className="bordered-panel">
+  <ParamItem title="type" required type="string" />
+  **TurnstileTask**
+
+  ---
+
+  <ParamItem title="websiteURL" required type="string" />
+  The URL of the page where the captcha is solved
+
+  ---
+
+  <ParamItem title="websiteKey" required type="string" />
+  Turnstile site key
+
+  ---
+
+  <ParamItem title="cloudflareTaskType" required type="string" />
+  **token**
+
+  ---
+
+  <ParamItem title="pageAction" required type="string" />
+  The `action` field found in the callback function. If using *cloudflareTaskType*, `action` is usually “managed” or “non-interactive”.
+
+  ---
+
+  <ParamItem title="userAgent" required type="string" />
+  Browser User-Agent.  
+  **Pass only a valid UA from Windows OS. Currently it is**: `userAgentPlaceholder`
+
+  ---
+
+  <ParamItem title="data" required type="string" />
+  The value of the *data* field, taken from `cData`.
+
+  ---
+
+  <ParamItem title="pageData" required type="string" />
+  The value of *pageData*, taken from `chlPageData`.
+
+  ---
+
+  <ParamItem title="apiJsUrl" type="string" />
+  String containing the captcha script URL.
+
+  ---
+
+  <ParamItem title="proxyType" type="string" />
+  **http** - standard http/https proxy;<br />
+  **https** - try this if "http" doesn't work (needed for some custom proxies);<br />
+  **socks4** - socks4 proxy;<br />
+  **socks5** - socks5 proxy.
+
+  ---
+
+  <ParamItem title="proxyAddress" type="string" />
+  <p>
+    IP address of the proxy (IPv4/IPv6). Not allowed:
+    - using transparent proxies (those exposing the client IP);
+    - using local machine proxies.
+  </p>
+
+  ---
+
+  <ParamItem title="proxyPort" type="integer" />
+  Proxy port.
+
+  ---
+
+  <ParamItem title="proxyLogin" type="string" />
+  Proxy login.
+
+  ---
+
+  <ParamItem title="proxyPassword" type="string" />
+  Proxy password.
+
+</TabItem>
+
+<br />
+
+These parameters are in the object passed to `window.turnstile.render(el, paramsObj)` when creating the captcha. You can retrieve them, for example, by executing JavaScript before loading other scripts:
+
+```js
+(function () {
+  const obj = {
+    render: function () {
+      const { action, cData, chlPageData } = arguments[1];
+        const params = [
+          ["action", action],
+          ["data", cData],
+          ["pageData", chlPageData],
+        ];
+        console.table(params)
+    }
+  };
+
+  Object.defineProperty(window, "turnstile", {
+    get: () => {
+      return obj;
+    },
+  });
+})();
+````
+
+When `window.turnstile.render(el, paramsObj)` is called, the captcha loads on the page, and upon successful solving, the `callback` function passes the solution information.
+
+`window.turnstile.render(el, paramsObj):`
+
+* `el`: DOM element to insert the captcha.
+* `paramsObj`: Object containing captcha information and solving instructions. Usually includes *sitekey*, *action*, *cData*, *chlPageData*, *callback*.
+* `callback`: Function called after captcha is successfully solved.
+
+---
+
+## Option 2. Challenge (cookie)
+
+:::warning **Attention!**
+
+* Use **your own proxies** for this task.
+
+* After solving, you will receive **special cookies** to add to your browser.
+:::
+
+<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (without proxy)" default className="bordered-panel">
+  <ParamItem title="type" required type="string" />
+  **TurnstileTask**
+
+---
+
+  <ParamItem title="websiteURL" required type="string" />
+  The URL of the page where the captcha is solved
+
+---
+
+  <ParamItem title="websiteKey" required type="string" />
+  Turnstile site key (any string is acceptable)
+
+---
+
+  <ParamItem title="cloudflareTaskType" required type="string" />
+  **cf_clearance**
+
+---
+
+  <ParamItem title="htmlPageBase64" required type="string" />
+  Base64-encoded HTML page of "Just a moment" shown with 403 response.<br/>
+  Example to get `htmlPageBase64`:
+  ```js
+  var htmlContent = document.documentElement.outerHTML;
+  var htmlBase64 = btoa(unescape(encodeURIComponent(htmlContent)));
+  console.log(htmlBase64);
+  ```
+
+---
+
+  <ParamItem title="userAgent" required type="string" />
+  Browser User-Agent.<br />
+  **Provide only the current Windows UA:** userAgentPlaceholder
+
+---
+
+  <ParamItem title="proxyType" required type="string" />
+  **http** - regular HTTP/HTTPS proxy;<br />
+  **https** - use if http doesn’t work (required for some custom proxies);<br />
+  **socks4** - SOCKS4 proxy;<br />
+  **socks5** - SOCKS5 proxy.
+
+---
+
+  <ParamItem title="proxyAddress" required type="string" />
+  <p>
+    Proxy IP address (IPv4/IPv6). Not allowed:
+    - Transparent proxies
+    - Local machine proxies
+  </p>
+
+---
+
+  <ParamItem title="proxyPort" required type="integer" />
+  Proxy port.
+
+---
+
+  <ParamItem title="proxyLogin" required type="string" />
+  Proxy login.
+
+---
+
+  <ParamItem title="proxyPassword" required type="string" />
+  Proxy password.
+
+</TabItem>
+
+---
+
+## Create task method
+
+### Option 1. Challenge (token)
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+
+  <TabItem value="proxyless" label="TurnstileTask (without proxy)" default className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      **Request**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "TurnstileTask",
+          "websiteURL": "https://example.com",
+          "websiteKey": "0x4AAAAAAADnPIDROrmt1Wwj",
+          "cloudflareTaskType": "token",
+          "userAgent": "userAgentPlaceholder",
+          "pageAction": "managed",
+          "pageData": "HUHDWUHuhuwfiweh32..uh2uhuhyugYUG=",
+          "data": "874291f4retD1366"
+        }
+      }
+      ```
+
+      **Response**
+      ```json
+      {
+        "errorId": 0,
+        "taskId": 407533072
+      }
+      ```
+    </MethodDescription>
+  </TabItem>
+
+  <TabItem value="proxy" label="TurnstileTask (with proxy)" className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      **Request**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "TurnstileTask",
+          "websiteURL": "https://example.com",
+          "websiteKey": "0x4AAAAAAADnPIDROrmt1Wwj",
+          "cloudflareTaskType": "token",
+          "userAgent": "userAgentPlaceholder",
+          "pageAction": "managed",
+          "pageData": "HUHDWUHuhuwfiweh32..uh2uhuhyugYUG=",
+          "data": "874291f4retD1366",
+          "proxyType": "http",
+          "proxyAddress": "8.8.8.8",
+          "proxyPort": 8080,
+          "proxyLogin": "proxyLoginHere",
+          "proxyPassword": "proxyPasswordHere"
+        }
+      }
+      ```
+
+      **Response**
+      ```json
+      {
+        "errorId": 0,
+        "taskId": 407533072
+      }
+      ```
+    </MethodDescription>
+  </TabItem>
+
+</Tabs>
+
+---
+### Option 2. Challenge (cookie)
+<TabItem value="proxyless" label="TurnstileTask (without proxy)" default className="method-panel">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json 
+		{
+		  "clientKey":"API_KEY",
+		  "task": {
+			"type":"TurnstileTask",
+			"websiteURL":"https://example.com",
+			"websiteKey":"xxxxxxxxxx",
+			"cloudflareTaskType": "cf_clearance",
+			"htmlPageBase64": "PCFET0NUWVBFIGh0...vYm9keT48L2h0bWw+",
+			"userAgent": "userAgentPlaceholder",
+			"proxyType":"http",
+			"proxyAddress":"8.8.8.8",
+			"proxyPort":8080,
+			"proxyLogin":"proxyLoginHere",
+			"proxyPassword":"proxyPasswordHere"
+		  }
+		}
+		```
+		**Response**
+		```json
+		{
+		  "errorId":0,
+		  "taskId":407533072
+		}
+		```
+	</MethodDescription>
+</TabItem>
+---
+
+## Get task result method
+
+### Option 1. Challenge (token)
+
+<TabItem value="proxyless" label="TurnstileTask (proxyless)" default className="method-panel-full">
+  <MethodItem>
+    ```http
+    https://api.capmonster.cloud/getTaskResult
+    ```
+  </MethodItem>
+  <MethodDescription>
+    **Request**
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "taskId": 407533072
+    }
+    ```
+
+    **Response**
+    ```json
+    {
+      "errorId": 0,
+      "status": "ready",
+      "solution": {
+        "userAgent": "userAgentPlaceholder",
+        "token": "0.iGX3xsyFCkbGePM3jP4P4khLo6TrLukt8ZzBvwuQOvbC...f61f3082"
+      }
+    }
+    ```
+  </MethodDescription>
+</TabItem>
+
+Use the [getTaskResult](../api/methods/get-task-result) method to retrieve the Challenge solution. Depending on system load, the response can take between 5 and 20 seconds.
+
+|**Property**|**Type**|**Description**|
+| :- | :- | :- |
+|token|String|Use this token when calling the callback function|
+
+### Option 2. Challenge (cookie)
+
+<TabItem value="proxyless" label="TurnstileTask (без прокси)" default className="method-panel-full">
+  <MethodItem>
+    ```http
+    https://api.capmonster.cloud/getTaskResult
+    ```
+  </MethodItem>
+  <MethodDescription>
+    **Request**
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "taskId": 407533072
+    }
+    ```
+
+    **Response**
+    ```json
+    {
+      "errorId": 0,
+      "status": "ready",
+      "solution": {
+        "cf_clearance": "1tarGvbY2_ZhQdYxpSBloao.FoOn9VtcJtmb_IQ_hCE-1761217338-1.2.1.1-vyVPoLYIGX0VCJomVuLjF7n0kdM0PXaPjpDsRcohxGr7hb2CE7WfcHpmQZ70goqEjdWxPsDhSVaKNTz9opxWguiNdWEEq_.SceWXIqfP7tnEb69f3bP0mixNqcWy_5P_9INpoAEqr1k7aYU0r45PT4gPr5pwHxedVySyLRdoBXIJasdTE52YOQ3NPdGWTwQ_3h2n_wYqqIvf0kCSAvimRrmsgZxomlyejwqPI6ZHi.w"
+      }
+    }
+    ```
+  </MethodDescription>
+</TabItem>
+
+|**Property**|**Type**|**Description**|
+| :- | :- | :- |
+|cf_clearance|String|Special Cloudflare cookies that you can set in your browser|
+---
+
+## How to differentiate Challenge from Turnstile
+
+<details>
+  <summary>Differences between Challenge and Turnstile</summary>
+
+Cloudflare verification types can appear in different ways.
+
+**Standard Turnstile:**
+
+![](./images/tunrstile-task/turnstile-simple.png) 
+
+**Stylized variants:**
+
+<figure>
+
+![](./images/tunrstile-task/turnstile-stylized.png)
+<figcaption>The challenge is seamlessly integrated into the website</figcaption>
+
+</figure>
+
+<figure>
+
+![](./images/tunrstile-task/turnstile-stylized-2.png) 
+<figcaption>Looks like a normal Turnstile captcha, but it is actually a Cloudflare challenge</figcaption>
+
+</figure>
+
+To confirm Challenge presence, open developer tools, inspect network traffic, and check the page source for typical signs:
+
+- The first request to the site returns a 403 status code:
+
+![](./images/tunrstile-task/b61dae70-f056-4257-ab72-05beacb27a0d.png)
+
+- The form with id **challenge-form** has an **action** attribute (not to be confused with Turnstile captcha action) containing the parameter `__cf_chl_f_tk=`:
+
+![](./images/tunrstile-task/1e4dc39f-0a4a-4c29-a48d-abc7a2ec6380.png)
+
+- The page contains two similar `<script>` tags that create new values in the `window` object:
+
+![](./images/tunrstile-task/gif.gif) 
+
+</details>
+
+---
+
+## How to find all required parameters for task creation
+
+### Automatically
+
+To automate parameter extraction, you can retrieve them via a **browser** (regular or headless, e.g., using **Playwright**) or directly from **HTTP requests**. Since dynamic parameter values are short-lived, it is recommended to use them immediately after retrieval.
+
+:::warning **Important!**
+The provided code snippets are basic examples for learning how to extract the required parameters. The exact implementation will depend on your captcha page, its structure, and the HTML elements and selectors used.
+:::
+
+<Tabs className="full-width-tabs filled-tabs request-tabs">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+
+    <details>
+      <summary>For Option 1: Challenge (token) – Node.js</summary>
+
+      ```js
+      import { chromium } from "playwright";
+
+      (async () => {
+        const browser = await chromium.launch({ headless: false });
+        const page = await browser.newPage();
+
+        let params = null;
+
+        try {
+          while (!params) {
+            await page.goto("https://example.com");
+
+            await page.evaluate(() => {
+              window.turnstile = new Proxy(window.turnstile, {
+                get(target, prop) {
+                  if (prop === "render") {
+                    return function (a, b) {
+                      const p = {
+                        websiteKey: b.sitekey,
+                        websiteURL: window.location.href,
+                        data: b.cData,
+                        pagedata: b.chlPageData,
+                        action: b.action,
+                        userAgent: navigator.userAgent,
+                      };
+                      window.params = p;
+                      return target.render.apply(this, arguments);
+                    };
+                  }
+                  return target[prop];
+                },
+              });
+            });
+
+            params = await page.evaluate(() => {
+              return new Promise((resolve) => {
+                setTimeout(() => resolve(window.params || null), 5000);
+              });
+            });
+
+            if (!params) {
+              await page.waitForTimeout(3000);
+            }
+          }
+
+          console.log("Turnstile Params:", params);
+        } finally {
+          await browser.close();
+        }
+      })();
+      ```
+    </details>
+
+    <details>
+      <summary>For Option 2: Challenge (cookie `cf_clearance`) – Node.js</summary>
+
+      ```js
+      import { chromium } from "playwright";
+      import { Buffer } from "buffer";
+
+      (async () => {
+        const browser = await chromium.launch({ headless: false });
+        const page = await browser.newPage();
+
+        let websiteKey = null;
+
+        while (!websiteKey) {
+          await page.goto("https://example.com");
+
+          await page.evaluate(() => {
+            window.turnstile = new Proxy(window.turnstile, {
+              get(target, prop) {
+                if (prop === "render") {
+                  return function (a, b) {
+                    window.websiteKey = b.sitekey;
+                    return target.render.apply(this, arguments);
+                  };
+                }
+                return target[prop];
+              },
+            });
+          });
+
+          websiteKey = await page.evaluate(() => {
+            return new Promise((resolve) => {
+              setTimeout(() => resolve(window.websiteKey || null), 5000);
+            });
+          });
+
+          if (!websiteKey) {
+            await page.waitForTimeout(3000);
+          }
+        }
+
+        const html = await page.content();
+        const htmlPageBase64 = Buffer.from(html).toString("base64");
+
+        const result = {
+          websiteKey,
+          htmlPageBase64,
+        };
+
+        console.log(result);
+
+        await browser.close();
+      })();
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="python" label="Python" className="method-panel">
+
+    <details>
+      <summary>For Option 1: Challenge (token)</summary>
+
+      ```python
+      import asyncio
+      from playwright.async_api import async_playwright
+
+      async def extract_turnstile_params():
+          async with async_playwright() as p:
+              browser = await p.chromium.launch(headless=False)
+              page = await browser.new_page()
+
+              params = None
+
+              while not params:
+                  await page.goto("https://example.com")
+
+                  await page.evaluate("""
+                      window.turnstile = new Proxy(window.turnstile, {
+                        get(target, prop) {
+                          if (prop === "render") {
+                            return function(a, b) {
+                              const p = {
+                                websiteKey: b.sitekey,
+                                websiteURL: window.location.href,
+                                data: b.cData,
+                                pagedata: b.chlPageData,
+                                action: b.action,
+                                userAgent: navigator.userAgent
+                              };
+                              window.params = p;
+                              return target.render.apply(this, arguments);
+                            };
+                          }
+                          return target[prop];
+                        }
+                      });
+                  """)
+
+                  await page.wait_for_timeout(5000)
+
+                  params = await page.evaluate("window.params || null")
+
+                  if not params:
+                      await page.wait_for_timeout(3000)
+
+              print("Turnstile Params:", params)
+
+              await browser.close()
+
+      asyncio.run(extract_turnstile_params())
+      ```
+    </details>
+
+    <details>
+      <summary>For Option 2: Challenge (cookie `cf_clearance`)</summary>
+
+      ```python
+      import asyncio
+      import base64
+      from playwright.async_api import async_playwright
+
+      async def main():
+          async with async_playwright() as p:
+              browser = await p.chromium.launch(headless=False)
+              page = await browser.new_page()
+
+              website_key = None
+
+              while not website_key:
+                  await page.goto("https://example.com")
+
+                  await page.evaluate("""
+                      () => {
+                          window.turnstile = new Proxy(window.turnstile, {
+                              get(target, prop) {
+                                  if (prop === 'render') {
+                                      return function(a, b) {
+                                          window.websiteKey = b.sitekey;
+                                          return target.render.apply(this, arguments);
+                                      };
+                                  }
+                                  return target[prop];
+                              }
+                          });
+                      }
+                  """)
+
+                  website_key = await page.evaluate("""
+                      () => new Promise(resolve => {
+                          setTimeout(() => resolve(window.websiteKey || null), 5000);
+                      })
+                  """)
+
+                  if not website_key:
+                      await page.wait_for_timeout(3000)
+
+              html = await page.content()
+              html_base64 = base64.b64encode(html.encode("utf-8")).decode("utf-8")
+
+              result = {
+                  "websiteKey": website_key,
+                  "htmlPageBase64": html_base64
+              }
+
+              print(result)
+
+              await browser.close()
+
+      asyncio.run(main())
+      ```
+    </details>
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+
+    <details>
+      <summary>For Option 1: Challenge (token)</summary>
+
+      ```csharp
+      using Microsoft.Playwright;
+      using System.Text.Json;
+
+      class Program
+      {
+          public static async Task Main()
+          {
+              using var playwright = await Playwright.CreateAsync();
+              var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+              {
+                  Headless = false
+              });
+
+              var page = await browser.NewPageAsync();
+              object? parameters = null;
+
+              while (parameters == null)
+              {
+                  await page.GotoAsync("https://example.com");
+
+                  await page.EvaluateAsync(@"() => {
+                      window.turnstile = new Proxy(window.turnstile, {
+                          get(target, prop) {
+                              if (prop === 'render') {
+                                  return function(a, b) {
+                                      const p = {
+                                          websiteKey: b.sitekey,
+                                          websiteURL: window.location.href,
+                                          data: b.cData,
+                                          pagedata: b.chlPageData,
+                                          action: b.action,
+                                          userAgent: navigator.userAgent
+                                      };
+                                      window.params = p;
+                                      return target.render.apply(this, arguments);
+                                  };
+                              }
+                              return target[prop];
+                          }
+                      });
+                  }");
+
+                  parameters = await page.EvaluateAsync(@"() => new Promise(resolve => {
+                      setTimeout(() => resolve(window.params || null), 5000);
+                  })");
+
+                  if (parameters == null)
+                  {
+                      await page.WaitForTimeoutAsync(3000);
+                  }
+              }
+
+              Console.WriteLine("Turnstile Params:");
+              Console.WriteLine(JsonSerializer.Serialize(parameters, new JsonSerializerOptions { WriteIndented = true }));
+
+              await browser.CloseAsync();
+          }
+      }
+      ```
+    </details>
+
+    <details>
+      <summary>For Option 2: Challenge (cookie `cf_clearance`)</summary>
+
+      ```csharp
+      using System;
+      using System.Text;
+      using System.Threading.Tasks;
+      using Microsoft.Playwright;
+
+      class Program
+      {
+          public static async Task Main()
+          {
+              using var playwright = await Playwright.CreateAsync();
+              var browser = await playwright.Chromium.LaunchAsync(
+                new BrowserTypeLaunchOptions { Headless = false });
+              var page = await browser.NewPageAsync();
+
+              string websiteKey = null;
+
+              while (websiteKey == null)
+              {
+                  await page.GotoAsync("https://example.com");
+
+                  await page.EvaluateAsync(@"() => {
+                      window.turnstile = new Proxy(window.turnstile, {
+                          get(target, prop) {
+                              if (prop === 'render') {
+                                  return function(a, b) {
+                                      window.websiteKey = b.sitekey;
+                                      return target.render.apply(this, arguments);
+                                  };
+                              }
+                              return target[prop];
+                          }
+                      });
+                  }");
+
+                  websiteKey = await page.EvaluateAsync<string>(@"() => 
+                  new Promise(resolve => {
+                      setTimeout(() => resolve(window.websiteKey || null), 5000);
+                  })");
+
+                  if (websiteKey == null)
+                  {
+                      await page.WaitForTimeoutAsync(3000);
+                  }
+              }
+
+              var html = await page.ContentAsync();
+              var htmlBase64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(html));
+
+              Console.WriteLine($"websiteKey: {websiteKey}");
+              Console.WriteLine($"htmlPageBase64: {htmlBase64}");
+
+              await browser.CloseAsync();
+          }
+      }
+      ```
+    </details>
+  </TabItem>
+</Tabs>
+
+## Example of a solution implementation using Selenium in Node.js
+
+<details>
+  <summary>Show code</summary>
+
+```js
+
+const { Builder } = require('selenium-webdriver');
+const chrome = require('selenium-webdriver/chrome');
+
+(async function example() {
+  const options = new chrome.Options();
+  options.addArguments('--auto-open-devtools-for-tabs')
+
+  const driver = new Builder()
+    .forBrowser('chrome')
+    .setChromeOptions(options)
+    .build();
+
+  try {
+    driver.executeScript(`
+    window.turnstile = new Proxy(window.turnstile, {
+      get(target, prop) {
+        if (prop === 'render') {
+          return function(a, b) {
+            let p = {
+              type: "TurnstileTask",
+              websiteKey: b.sitekey,
+              websiteURL: window.location.href,
+              data: b.cData,
+              pagedata: b.chlPageData,
+              action: b.action,
+              userAgent: navigator.userAgent
+          }
+          
+          console.log(JSON.stringify(p))
+          window.params = p;
+          window.turnstileCallback = b.callback;
+            return target.render.apply(this, arguments);
+          }
+        }
+        return target[prop];
+      }
+    });
+    `)
+
+    driver.get('SITE WITH CAPTCHA');
+    
+
+    const params = await driver.executeScript(`
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve(window.params)
+        }, 2000)
+      })
+    `);
+
+    if (params) {
+      const data = {
+        clientKey: 'API KEY',
+        task: {
+          type: 'TurnstileTask',
+          websiteURL: params.websiteURL,
+          websiteKey: params.websiteKey,
+          data: params.data,
+          action: params.action
+        }
+      }
+
+      const createResult = await fetch('https://api.capmonster.cloud/createTask', {
+        method: 'post',
+        body: JSON.stringify(data)
+      });
+
+      const createTaskResult = await createResult.json()
+
+      if (createTaskResult.taskId) {
+        const asyncDelay = (timeout) =>
+          new Promise(resolve => {
+              setTimeout(() => {
+                  resolve();
+              }, timeout);
+          });
+        
+        const getTaskResult = async (taskId) => {
+          const taskResult = await fetch('https://api.capmonster.cloud/getTaskResult', {
+            method: 'post',
+            body: JSON.stringify({
+              "clientKey":"API KEY",
+              "taskId": createTaskResult.taskId
+            })
+          });
+          const taskResponse = await taskResult.json();
+          if (taskResponse.status === 'processing') {
+            await asyncDelay(5000);
+            return await getTaskResult(taskId)
+          }
+          return taskResponse;
+        }
+       
+        const taskRes = await getTaskResult(createTaskResult.taskId)
+
+        if (taskRes.solution) {
+          await driver.executeScript(`
+            window.turnstileCallback(${taskRes.solution.token});
+          `);
+        }
+      }
+      
+    }
+
+    //DO SOMETHING
+  } finally {
+    await driver.quit();
+  }
+})();
+
+```
+</details>
+
+## Use the SDK Library
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+
+<details>
+<summary>Option 1. Challenge (token)</summary>
+
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { 
+    CapMonsterCloudClientFactory, 
+    ClientOptions, 
+    TurnstileRequest 
+} from '@zennolab_com/capmonstercloud-client';
+
+const API_KEY = "YOUR_API_KEY"; // Specify your CapMonster Cloud API key
+
+document.addEventListener("DOMContentLoaded", async () => {
+    const client = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
+    );
+
+    // Basic example without proxy
+    // CapMonster Cloud automatically uses its own proxies
+    let turnstileRequest = new TurnstileRequest({
+        websiteURL: "https://example.com", // URL of the captcha page
+        websiteKey: "0x4AAAAAAABUYP0XeMJF0xoy", // Replace with the correct value
+        data: "YOUR_DATA_HERE",
+        pageAction: "managed",
+        cloudflareTaskType: "token",
+        pageData: "YOUR_PAGE_DATA_HERE",
+        userAgent: "userAgentPlaceholder"
+    });
+
+    // Example of using your own proxy
+    // Uncomment this block if you want to use your own proxy
+
+    /*
+    const proxy = {
+        proxyType: "http",
+        proxyAddress: "123.45.67.89",
+        proxyPort: 8080,
+        proxyLogin: "username",
+        proxyPassword: "password"
+    };
+
+    turnstileRequest = new TurnstileRequest({
+        websiteURL: "https://example.com",
+        websiteKey: "0x4AAAAAAABUYP0XeMJF0xoy",
+        proxy,
+        data: "YOUR_DATA_HERE",
+        pageAction: "managed",
+        cloudflareTaskType: "token",
+        pageData: "YOUR_PAGE_DATA_HERE",
+        userAgent: "userAgentPlaceholder"
+    });
+    */
+
+    // Optionally, you can check the balance 
+    const balance = await client.getBalance();
+    console.log("Balance:", balance);
+
+    const result = await client.Solve(turnstileRequest);
+    console.log("Solution:", result);
+});
+```
+
+</details>
+
+<details>
+<summary>Option 2. Challenge (cookie `cf_clearance`)</summary>
+
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { 
+    CapMonsterCloudClientFactory, 
+    ClientOptions, 
+    TurnstileRequest 
+} from '@zennolab_com/capmonstercloud-client';
+
+document.addEventListener("DOMContentLoaded", async () => {
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: 'YOUR_API_KEY' }) // Specify your CapMonster Cloud API key
+    );
+
+    // Optionally, you can check the balance
+    const balance = await cmcClient.getBalance();
+    console.log('Balance:', balance);
+
+    const proxy = {
+        proxyType: "http",
+        proxyAddress: '123.45.67.89',
+        proxyPort: 8080,
+        proxyLogin: 'username',
+        proxyPassword: 'password'
+    };
+
+    // Cloudflare cf_clearance can only be solved with your own proxy
+    const turnstileRequest = new TurnstileRequest({
+        websiteURL: 'https://example.com/',
+        websiteKey: '0x4AAAAAAABUY0VLtOUMAHxE',
+        cloudflareTaskType: 'cf_clearance',
+        proxy,
+        htmlPageBase64: 'PGh0bW...h0bWw+',
+        userAgent: 'userAgentPlaceholder'
+    });
+
+    const result = await cmcClient.Solve(turnstileRequest);
+    console.log('Solution:', result.solution);
+});
+```
+
+</details>
+  </TabItem>
+
+  <TabItem value="nodejs" label="Node.js" className="method-panel">
+
+<details>
+<summary>Option 1. Challenge (token)</summary>
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { 
+    CapMonsterCloudClientFactory, 
+    ClientOptions, 
+    TurnstileRequest 
+} from '@zennolab_com/capmonstercloud-client';
+
+const API_KEY = "YOUR_API_KEY"; // Specify your CapMonster Cloud API key
+
+(async () => {
+    const client = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
+    );
+
+    // Basic example without proxy
+    // CapMonster Cloud automatically uses its own proxies
+    let turnstileRequest = new TurnstileRequest({
+        websiteURL: "https://example.com", // URL of the captcha page
+        websiteKey: "0x4AAAAAAABUYP0XeMJF0xoy", // Replace with the correct value
+        data: "YOUR_DATA_HERE",
+        pageAction: "managed",
+        cloudflareTaskType: "token",
+        pageData: "YOUR_PAGE_DATA_HERE",
+        userAgent: "userAgentPlaceholder"
+    });
+
+    // Example of using your own proxy
+    // Uncomment this block if you want to use your own proxy
+
+    /*
+    const proxy = {
+        proxyType: "http",
+        proxyAddress: "123.45.67.89",
+        proxyPort: 8080,
+        proxyLogin: "username",
+        proxyPassword: "password"
+    };
+
+    turnstileRequest = new TurnstileRequest({
+        websiteURL: "https://example.com",
+        websiteKey: "0x4AAAAAAABUYP0XeMJF0xoy",
+        proxy,
+        data: "YOUR_DATA_HERE",
+        pageAction: "managed",
+        cloudflareTaskType: "token",
+        pageData: "YOUR_PAGE_DATA_HERE",
+        userAgent: "userAgentPlaceholder"
+    });
+    */
+
+    // Optionally, you can check the balance 
+    const balance = await client.getBalance();
+    console.log("Balance:", balance);
+
+    const result = await client.Solve(turnstileRequest);
+    console.log("Solution:", result);
+})();
+```
+
+</details>
+
+<details>
+<summary>Option 2. Challenge (cookie <code>cf_clearance</code>)</summary>
+
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, TurnstileRequest } from '@zennolab_com/capmonstercloud-client';
+
+async function main() {
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: 'YOUR_API_KEY' }) // Specify your CapMonster Cloud API key
+    );
+
+    // Optionally, you can check the balance
+    const balance = await cmcClient.getBalance();
+    console.log('Balance:', balance);
+
+    const proxy = {
+        proxyType: "http",
+        proxyAddress: '123.45.67.89',
+        proxyPort: 8080,
+        proxyLogin: 'username',
+        proxyPassword: 'password'
+    };
+
+    // Cloudflare cf_clearance can only be solved with your own proxy
+    const turnstileRequest = new TurnstileRequest({
+        websiteURL: 'https://example.com/',
+        websiteKey: '0x4AAAAAAABUY0VLtOUMAHxE',
+        cloudflareTaskType: 'cf_clearance',
+        proxy,
+        htmlPageBase64: 'PGh0bW...h0bWw+',
+        userAgent: 'userAgentPlaceholder'
+    });
+
+    // Sending the task for solving
+    const result = await cmcClient.Solve(turnstileRequest);
+    console.log('Solution:', result.solution);
+}
+
+main().catch(console.error);
+```
+
+</details>
+
+</TabItem>
+
+  <TabItem value="python" label="Python" className="method-panel">
+
+<details>
+<summary>Option 1. Challenge (token)</summary>
+
+```python
+# https://github.com/ZennoLab/capmonstercloud-client-python
+
+import asyncio
+from capmonstercloudclient import CapMonsterClient, ClientOptions
+from capmonstercloudclient.requests import TurnstileRequest
+# from capmonstercloudclient.requests.baseRequestWithProxy import ProxyInfo  # Uncomment if you plan to use a proxy
+
+API_KEY = "YOUR_API_KEY"  # Specify your CapMonster Cloud API key
+
+async def solve_turnstile_token():
+    client_options = ClientOptions(api_key=API_KEY)
+    cap_monster_client = CapMonsterClient(options=client_options)
+
+    # Basic example without proxy
+    # CapMonster Cloud automatically uses its own proxies
+    turnstile_request = TurnstileRequest(
+        websiteURL="http://example.com",  # URL of the captcha page
+        websiteKey="0x4AAAAAAABUYP0XeMJF0xoy",        # Replace with the correct value
+        data="YOUR_DATA_HERE",
+        pageAction="managed",
+        cloudflareTaskType="token",
+        pageData="YOUR_PAGE_DATA_HERE",
+        userAgent="userAgentPlaceholder"
+    )
+
+    # Example of using your own proxy
+    # Uncomment this block if you want to use your own proxy
+    #
+    # proxy = ProxyInfo(
+    #     proxyType="http",               
+    #     proxyAddress="123.45.67.89",    
+    #     proxyPort=8080,                 
+    #     proxyLogin="username",          
+    #     proxyPassword="password"        
+    # )
+    #
+    # turnstile_request = TurnstileRequest(
+    #     websiteURL="http://tsmanaged.zlsupport.com",
+    #     websiteKey="0x4AAAAAAABUYP0XeMJF0xoy",
+    #     proxy=proxy,
+    #     data="YOUR_DATA_HERE",
+    #     pageAction="managed",
+    #     cloudflareTaskType="token",
+    #     pageData="YOUR_PAGE_DATA_HERE",
+    #     userAgent="userAgentPlaceholder"
+    # )
+
+    # Optionally, you can check the balance 
+    balance = await cap_monster_client.get_balance()
+    print("Balance:", balance)
+
+    result = await cap_monster_client.solve_captcha(turnstile_request)
+    print("Solution:", result)
+
+asyncio.run(solve_turnstile_token())
+```
+
+</details>
+
+<details>
+<summary>Option 2. Challenge (cookie `cf_clearance`)</summary>
+
+```python
+# https://github.com/ZennoLab/capmonstercloud-client-python
+
+import asyncio
+from capmonstercloudclient import CapMonsterClient, ClientOptions
+from capmonstercloudclient.requests import TurnstileRequest
+from capmonstercloudclient.requests.baseRequestWithProxy import ProxyInfo  # Using ProxyInfo
+
+API_KEY = "YOUR_API_KEY"  # Specify your CapMonster Cloud API key
+
+async def solve_cf_clearance():
+    client_options = ClientOptions(api_key=API_KEY)
+    cap_monster_client = CapMonsterClient(options=client_options)
+
+    # Example of setting up a proxy
+    proxy = ProxyInfo(
+        proxyType="http",
+        proxyAddress="123.45.67.89",
+        proxyPort=8080,
+        proxyLogin="username",
+        proxyPassword="password"
+    )
+
+    # Cloudflare cf_clearance can only be solved with your own proxy
+    turnstile_request = TurnstileRequest(
+        websiteURL="https://example.com",
+        websiteKey="0x4AAAAAAABUYP0XeMJF0xoy",
+        cloudflareTaskType="cf_clearance",
+        htmlPageBase64="BASE64_HTML_PAGE_HERE",
+        userAgent="userAgentPlaceholder",
+        proxy=proxy
+    )
+
+    # Optionally, you can check the balance
+    balance = await cap_monster_client.get_balance()
+    print("Balance:", balance)
+
+    result = await cap_monster_client.solve_captcha(turnstile_request)
+    print("Solution:", result)
+
+asyncio.run(solve_cf_clearance())
+```
+
+</details>
+  </TabItem>
+
+  <TabItem value="csharp" label="C#" className="method-panel">
+
+<details>
+<summary>Option 1. Challenge (token)</summary>
+
+```csharp
+// https://github.com/ZennoLab/capmonstercloud-client-dotnet
+
+using System;
+using System.Threading.Tasks;
+using Zennolab.CapMonsterCloud;
+using Zennolab.CapMonsterCloud.Requests;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        // Specify your CapMonster Cloud API key
+        var clientOptions = new ClientOptions
+        {
+            ClientKey = "YOUR_API_KEY"
+        };
+
+        var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+        // Basic example without proxy
+        // CapMonster Cloud automatically uses its own proxies
+        var turnstileRequest = new TurnstileRequest
+        {
+            WebsiteUrl = "https://example.com",                 // URL of the captcha page
+            WebsiteKey = "0x4AAAAAAABUYP0XeMJF0xoy",           // Replace with the correct value
+            Data = "data_here",
+            PageAction = "managed",
+            CloudflareTaskType = "token",
+            PageData = "pagedata_here",
+            UserAgent = "userAgentPlaceholder"
+        };
+
+        // Example of using your own proxy
+        // Uncomment this block if you want to use your own proxy
+
+        /*
+        var turnstileRequest = new TurnstileRequest
+        {
+            WebsiteUrl = "https://example.com",
+            WebsiteKey = "0x4AAAAAAABUYP0XeMJF0xoy",
+            Data = "data_here",
+            PageAction = "managed",
+            CloudflareTaskType = "token",
+            PageData = "pagedata_here",
+            UserAgent = "userAgentPlaceholder",
+
+            Proxy = new ProxyContainer(
+                "123.45.67.89",      
+                8080,              
+                ProxyType.Http,   
+                "username", 
+                "password"  
+            )
+        };
+        */
+
+        // Optionally, you can check the balance 
+        var balance = await cmCloudClient.GetBalanceAsync();
+        Console.WriteLine("Balance: " + balance);
+
+        var turnstileResult = await cmCloudClient.SolveAsync(turnstileRequest);
+
+        Console.WriteLine("Solution: " + turnstileResult.Solution.Value);
+    }
+}
+```
+
+</details>
+
+<details>
+<summary>Option 2. Challenge (cookie `cf_clearance`)</summary>
+
+```csharp
+// https://github.com/ZennoLab/capmonstercloud-client-dotnet
+
+using Zennolab.CapMonsterCloud;
+using Zennolab.CapMonsterCloud.Requests;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        var clientOptions = new ClientOptions
+        {
+            ClientKey = "YOUR_API_KEY" // Specify your CapMonster Cloud API key
+        };
+
+        var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+        
+        // Cloudflare cf_clearance can only be solved with your own proxy
+        var turnstileRequest = new TurnstileRequest
+        {
+            WebsiteUrl = "https://example.com",     // URL of the captcha page        
+            WebsiteKey = "0x4AAAAAAADnPIDROrmt1Wwj",  // Replace with the correct value     
+            CloudflareTaskType = "cf_clearance",                                  
+            HtmlPageBase64 = "htmlPageBase64Here",        
+            UserAgent = "userAgentPlaceholder", 
+
+            Proxy = new ProxyContainer(
+                "123.45.67.89",  
+                8080,                     
+                ProxyType.Http,     
+                "username",       
+                "password"        
+            )
+        };
+
+        var turnstileResult = await cmCloudClient.SolveAsync(turnstileRequest);
+
+        Console.WriteLine("Solution: " + turnstileResult.Solution.Clearance);
+    }
+}
+```
+
+</details>
+  </TabItem>
+</Tabs>
+
