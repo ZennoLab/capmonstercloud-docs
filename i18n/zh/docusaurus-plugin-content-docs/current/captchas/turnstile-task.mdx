@@ -1,6 +1,8 @@
 ﻿---
-sidebar_position: 6
-sidebar_label: Turnstile/Challenge (Cloudflare)
+sidebar_position: 7
+sidebar_label: Cloudflare Turnstile
+title: "识别并解决 Cloudflare Turnstile | API"
+description: "使用 CapMonster Cloud API 的 Turnstile Task 方法，自动识别并解决 Cloudflare Turnstile 验证码。CapMonster Cloud 文档中提供完整教程和示例。"
 ---
 
 import Tabs from '@theme/Tabs';
@@ -8,403 +10,103 @@ import TabItem from '@theme/TabItem';
 import ParamItem from '@theme/ParamItem';
 import MethodItem from '@theme/MethodItem';
 import MethodDescription from '@theme/MethodDescription'
-import PriceBlock from '../../../../../src/theme/PriceBlock';
+import PriceBlock from '../../../../../src/theme/PriceBlock'
 import PriceBlockWrap from '@theme/PriceBlockWrap';
 import BlogLink from '@theme/BlogLink';
 import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 
 <ArticleHead slug="captchas/turnstile-task" />
 
-# Cloudflare Turnstile | Challenge | Waiting Room
+# Cloudflare Turnstile
 
 <PriceBlockWrap>
-  <PriceBlock title="Turnstile" captchaId="cf-turnstile"/>
-  <PriceBlock title="Challenge" captchaId="cf-turnstile"/>
-  <PriceBlock title="WaitingRoom" captchaId="cf-turnstile"/>
+  <PriceBlock title="Cloudflare Turnstile" captchaId="cf-turnstile"/>
 </PriceBlockWrap>
 
 ![](./images/tunrstile-task/turnstile.png)
 
-所有 Turnstile 子类型都会自动支持：手动、非交互式和隐形。因此，对于常规验证码，无需指定子类型。
+在成功解决 CAPTCHA 之后，您将收到一个 **token**，需要将其插入到页面中指定的字段里。
+Turnstile 的所有子类型都会被自动支持：**手动（manual）**、**非交互式（non-interactive）** 和 **不可见（invisible）**。因此，对于标准验证码，您无需指定子类型。
 
 <BlogLink url="https://capmonster.cloud/zh/blog/Cloudflare/what-is-cloudflare-captcha"/>
 <BlogLink url="https://capmonster.cloud/zh/blog/Cloudflare/how-cloudflare-bot-challenge-and-turnstile-protect-web-traffic"/>
 
-:::info 重要提示:
-在开始之前，请先查看所有三种验证码解决方案，并选择最适合您的方式。
-:::
+## 请求参数
 
-## 选项 1：Turnstile（token）
-
-
-您需要解决一个**标准** Turnstile 验证码，例如 [这里](https://zenno.link/zl-support)。注意，Cloudflare 页面上的验证码可能看起来完全相同。请参阅文章末尾以区分标准 Turnstile 和 Cloudflare Challenge。
+您需要解决一个**标准（regular）**的 Turnstile 验证码，例如 [这个示例](https://zenno.link/zl-support)。请注意，Cloudflare 页面上的验证码在外观上可能完全相同。请参阅[如何区分标准 Turnstile 与 Cloudflare Challenge](#如何区分-cloudflare-turnstile-与-cloudflare-challenge)。
 
 :::warning **注意！**
-* CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费用内。仅当网站不接受令牌或对内置服务的访问受限时，才需要指定您自己的代理。
 
-* 如果代理按 IP 授权，请将地址 **65.21.190.34** 加入白名单。
+* CapMonster Cloud 默认使用内置代理 —— 其费用已包含在服务价格中。只有在网站不接受返回的 token，或限制访问内置服务时，才需要指定您自己的代理。
 
-* 解决后，您将收到一个**token** 来确认验证码完成。
-:::
+* 如果您使用的是 **IP 授权** 的代理，请务必将 **65.21.190.34** 加入白名单。
 
-#### 请求参数
-<TabItem value="proxyless" label="TurnstileTask (无需代理)" default className="bordered-panel">
+* 验证成功后，您将获得一个 **token**，用于确认验证码已完成。
+  :::
+
+<TabItem value="proxyless" label="TurnstileTask（无代理）" default className="bordered-panel">
   <ParamItem title="type" required type="string" />
   **TurnstileTask**
 
-  ---
+---
 
   <ParamItem title="websiteURL" required type="string" />
-  验证码所在页面的 URL
+  进行验证码验证的页面 URL
 
-  ---
+---
 
   <ParamItem title="websiteKey" required type="string" />
-  Turnstile site key
+  Turnstile 的 site key
 
-  ---
+---
 
   <ParamItem title="pageAction" type="string" />
   验证码加载时，在回调函数中找到的 `action` 字段
 
-  ---
+---
 
   <ParamItem title="data" type="string" />
-  从 `cData` 参数中获取的 *data* 字段值。
+  *data* 字段的值，来自 `cData` 参数
 
-  ---
+---
 
   <ParamItem title="proxyType" type="string" />
-    **http** - 普通的 http/https 代理；<br />**https** - 仅在 "http" 不起作用时尝试（某些自定义代理服务器要求）；<br />**socks4** - socks4 代理；<br />**socks5** - socks5 代理。
-
-     ---
-
-    <ParamItem title="proxyAddress" type="string" />
-    <p>
-	  代理 IP 地址 IPv4/IPv6。不允许：
-		- 使用透明代理（其中客户端 IP 可见）；
-		- 使用来自本地网络的代理。
-	</p>
-
-     ---
-
-    <ParamItem title="proxyPort" type="integer" />
-    代理端口。
-
-     ---
-
-    <ParamItem title="proxyLogin" type="string" />
-    代理登录。
-
-     ---
-
-    <ParamItem title="proxyPassword" type="string" />
-    代理密码。
-
-</TabItem>
+  **http** — 标准 http/https 代理；<br />
+  **https** — 如果 `http` 不可用可尝试（某些自定义代理需要）；<br />
+  **socks4** — socks4 代理；<br />
+  **socks5** — socks5 代理。
 
 ---
 
-## 选项 2：Challenge (token)
-
-:::warning **注意！**
-* CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费用内。仅当网站不接受令牌或对内置服务的访问受限时，才需要指定您自己的代理。
-
-* 如果代理按 IP 授权，请将地址 **65.21.190.34** 加入白名单。
-
-* 解决后，您将收到一个**token** 来确认验证码完成。
-:::
-
-#### 请求参数
-<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (无需代理)" default className="bordered-panel">
-  <ParamItem title="type" required type="string" />
-  **TurnstileTask**
-
-  ---
-
-  <ParamItem title="websiteURL" required type="string" />
-  验证码所在页面的 URL
-
-  ---
-
-  <ParamItem title="websiteKey" required type="string" />
-  Turnstile site key
-
-  ---
-
-  <ParamItem title="cloudflareTaskType" required type="string" />
-  **token**
-
-  ---
-
-  <ParamItem title="pageAction" required type="string" />
-  在回调函数中找到的 `action` 字段。  
-  如果使用 *cloudflareTaskType*，`action` 通常是 “managed” 或 “non-interactive”。
-
-  ---
-
-  <ParamItem title="userAgent" required type="string" />
-  浏览器的 User-Agent。<br />
-**请仅传递当前 Windows 系统下的有效 UA。当前推荐值为**：`userAgentPlaceholder`
-
-  ---
-
-  <ParamItem title="data" required type="string" />
-  从 `cData` 中获取的 *data* 值。
-
-  ---
-
-  <ParamItem title="pageData" required type="string" />
-  从 `chlPageData` 中获取的 *pageData* 值。
-
-  ---
-
-  <ParamItem title="apiJsUrl" type="string" />
-  包含验证码脚本 URL 的字符串。
-
-  ---
-
-  <ParamItem title="proxyType" type="string" />
-    **http** - 普通的 http/https 代理；<br />**https** - 仅在 "http" 不起作用时尝试（某些自定义代理服务器要求）；<br />**socks4** - socks4 代理；<br />**socks5** - socks5 代理。
-
-     ---
-
-    <ParamItem title="proxyAddress" type="string" />
-    <p>
-	  代理 IP 地址 IPv4/IPv6。不允许：
-		- 使用透明代理（其中客户端 IP 可见）；
-		- 使用来自本地网络的代理。
-	</p>
-
-     ---
-
-    <ParamItem title="proxyPort" type="integer" />
-    代理端口。
-
-     ---
-
-    <ParamItem title="proxyLogin" type="string" />
-    代理登录。
-
-     ---
-
-    <ParamItem title="proxyPassword" type="string" />
-    代理密码。
-
-</TabItem>
-
-<br />
-
-这些参数位于 `window.turnstile.render(el, paramsObj)` 传递的对象中。您可以在加载其他脚本之前执行以下 JavaScript 来获取它们：
-
-```js
-(function () {
-  const obj = {
-    render: function () {
-      const { action, cData, chlPageData } = arguments[1];
-        const params = [
-          ["action", action],
-          ["data", cData],
-          ["pageData", chlPageData],
-        ];
-        console.table(params)
-    }
-  };
-
-  Object.defineProperty(window, "turnstile", {
-    get: () => {
-      return obj;
-    },
-  });
-})();
-````
-
-当调用 `window.turnstile.render(el, paramsObj)` 时，验证码会加载到页面上，并在成功解决后调用 `callback` 函数传递解决信息。
-
-`window.turnstile.render(el, paramsObj):`
-
-* `el`: 插入验证码的 DOM 元素。
-* `paramsObj`: 包含验证码信息和解决说明的对象。通常包括 *sitekey*、*action*、*cData*、*chlPageData*、*callback*。
-* `callback`: 验证码成功解决后调用的函数。
-
----
-
-## 选项 3： Challenge (cookie)
-
-:::warning **注意！**
-
-* 本任务需要**使用您自己的代理**。
-
-* 解决后，您将收到**特殊 cookies** 以添加到浏览器。
-:::
-
-#### 请求参数
-
-<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (无需代理)" default className="bordered-panel">
-  <ParamItem title="type" required type="string" />
-  **TurnstileTask**
-
----
-
-  <ParamItem title="websiteURL" required type="string" />
-  验证码所在页面的 URL
-
----
-
-  <ParamItem title="websiteKey" required type="string" />
-  Turnstile site key（任意字符串均可）
-
----
-
-  <ParamItem title="cloudflareTaskType" required type="string" />
-  **cf_clearance**
-
----
-
-  <ParamItem title="htmlPageBase64" required type="string" />
-  “Just a moment” 页面（403 响应）的 Base64 编码 HTML。<br/>
-  示例获取 `htmlPageBase64`:
-  ```js
-  var htmlContent = document.documentElement.outerHTML;
-  var htmlBase64 = btoa(unescape(encodeURIComponent(htmlContent)));
-  console.log(htmlBase64);
-  ```
-
----
-
-  <ParamItem title="userAgent" required type="string" />
-  浏览器 User-Agent。<br />
-  **仅提供当前 Windows UA:** userAgentPlaceholder
-
----
-
-  <ParamItem title="proxyType" required type="string" />
-  **http** - 常规 HTTP/HTTPS 代理;<br />
-  **https** - 如果 http 不工作则使用（某些代理需要）;<br />
-  **socks4** - SOCKS4 代理;<br />
-  **socks5** - SOCKS5 代理。
-
----
-
-  <ParamItem title="proxyAddress" required type="string" />
+  <ParamItem title="proxyAddress" type="string" />
   <p>
-    代理 IP 地址 (IPv4/IPv6)。不允许：
-    - 透明代理
-    - 本地机器代理
+    代理的 IP 地址（IPv4/IPv6）。不允许：
+    - 使用透明代理（会暴露客户端真实 IP）；
+    - 使用本地机器上的代理。
   </p>
 
 ---
 
-  <ParamItem title="proxyPort" required type="integer" />
+  <ParamItem title="proxyPort" type="integer" />
   代理端口。
 
 ---
 
-  <ParamItem title="proxyLogin" required type="string" />
-  代理登录名。
+  <ParamItem title="proxyLogin" type="string" />
+  代理用户名。
 
 ---
 
-  <ParamItem title="proxyPassword" required type="string" />
-  代理密码。
-
-</TabItem>
-
----
-
-## 选项 4. Waiting Room (cookie)
-
-:::warning **注意！**
-
-* 本任务需要**使用您自己的代理**。
-
-* 解决后，您将收到**特殊 cookies** 以添加到浏览器。
-:::
-
-这是 Cloudflare 的一种新保护机制：用户必须平均等待 \~3 分钟才能访问资源：
-
-![](./images/tunrstile-task/wait-room1-en.png)
-
-您还可以通过页面头部识别此 Cloudflare 类型：
-
-![](./images/tunrstile-task/wait-room2.png)
-
----
-
-#### 请求参数
-
-<TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (无需代理)" default className="bordered-panel">
-  <ParamItem title="type" required type="string" />
-  **TurnstileTask**
-
----
-
-  <ParamItem title="websiteURL" required type="string" />
-  包含检查的页面 URL
-
----
-
-  <ParamItem title="websiteKey" required type="string" />
-  Cloudflare site key
-
----
-
-  <ParamItem title="cloudflareTaskType" required type="string" />
-  **wait_room**
-
----
-
-  <ParamItem title="htmlPageBase64" required type="string" />
-  Base64 编码的 HTML 页面，包含 `<title>Waiting Room powered by Cloudflare</title>`
-
----
-
-  <ParamItem title="userAgent" required type="string" />
-  浏览器 User-Agent。<br />
-  **仅提供当前 Windows UA:** userAgentPlaceholder
-
----
-
-  <ParamItem title="proxyType" required type="string" />
-  **http** - 常规 HTTP/HTTPS 代理;<br />
-  **https** - 如果 http 不工作则使用（某些代理需要）;<br />
-  **socks4** - SOCKS4 代理;<br />
-  **socks5** - SOCKS5 代理。
-
----
-
-  <ParamItem title="proxyAddress" required type="string" />
-  <p>
-    代理 IP 地址 (IPv4/IPv6)。不允许：
-    - 透明代理
-    - 本地机器代理
-  </p>
-
----
-
-  <ParamItem title="proxyPort" required type="integer" />
-  代理端口。
-
----
-
-  <ParamItem title="proxyLogin" required type="string" />
-  代理登录名。
-
----
-
-  <ParamItem title="proxyPassword" required type="string" />
+  <ParamItem title="proxyPassword" type="string" />
   代理密码。
 
 </TabItem>
 ---
-
-## 请求示例
-
-### 选项 1. Turnstile (token)
+## 创建任务方法
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 
-  <TabItem value="proxyless" label="TurnstileTask (无代理)" default className="method-panel">
+  <TabItem value="proxyless" label="TurnstileTask（无代理）" default className="method-panel">
     <MethodItem>
       ```http
       https://api.capmonster.cloud/createTask
@@ -423,17 +125,18 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
       }
       ```
 
-      **响应**
-      ```json
-      {
-        "errorId": 0,
-        "taskId": 407533072
-      }
-      ```
-    </MethodDescription>
+  **响应**
+  ```json
+  {
+    "errorId": 0,
+    "taskId": 407533072
+  }
+  ```
+</MethodDescription>
+
   </TabItem>
 
-  <TabItem value="proxy" label="TurnstileTask (带代理)" className="method-panel">
+  <TabItem value="proxy" label="TurnstileTask（使用代理）" className="method-panel">
     <MethodItem>
       ```http
       https://api.capmonster.cloud/createTask
@@ -457,364 +160,127 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
       }
       ```
 
-      **响应**
-      ```json
-      {
-        "errorId": 0,
-        "taskId": 407533072
-      }
-      ```
-    </MethodDescription>
+  **响应**
+  ```json
+  {
+    "errorId": 0,
+    "taskId": 407533072
+  }
+  ```
+</MethodDescription>
   </TabItem>
 
 </Tabs>
+
 ---
-### 选项 2. Challenge (token)
-<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 
-  <TabItem value="proxyless" label="TurnstileTask (无代理)" default className="method-panel">
-    <MethodItem>
-      ```http
-      https://api.capmonster.cloud/createTask
-      ```
-    </MethodItem>
-    <MethodDescription>
-      **请求**
-      ```json
-      {
-        "clientKey": "API_KEY",
-        "task": {
-          "type": "TurnstileTask",
-          "websiteURL": "https://example.com",
-          "websiteKey": "0x4AAAAAAADnPIDROrmt1Wwj",
-          "cloudflareTaskType": "token",
-          "userAgent": "userAgentPlaceholder",
-          "pageAction": "managed",
-          "pageData": "HUHDWUHuhuwfiweh32..uh2uhuhyugYUG=",
-          "data": "874291f4retD1366"
-        }
-      }
-      ```
+## 获取任务结果方法
 
-      **响应**
-      ```json
-      {
-        "errorId": 0,
-        "taskId": 407533072
-      }
-      ```
-    </MethodDescription>
-  </TabItem>
+使用 [getTaskResult](../api/methods/get-task-result.mdx) 方法来获取 Turnstile 的解决结果。根据系统负载情况，响应时间可能在 **5 到 20 秒**之间。
 
-  <TabItem value="proxy" label="TurnstileTask (带代理)" className="method-panel">
-    <MethodItem>
-      ```http
-      https://api.capmonster.cloud/createTask
-      ```
-    </MethodItem>
-    <MethodDescription>
-      **请求**
-      ```json
-      {
-        "clientKey": "API_KEY",
-        "task": {
-          "type": "TurnstileTask",
-          "websiteURL": "https://example.com",
-          "websiteKey": "0x4AAAAAAADnPIDROrmt1Wwj",
-          "cloudflareTaskType": "token",
-          "userAgent": "userAgentPlaceholder",
-          "pageAction": "managed",
-          "pageData": "HUHDWUHuhuwfiweh32..uh2uhuhyugYUG=",
-          "data": "874291f4retD1366",
-          "proxyType": "http",
-          "proxyAddress": "8.8.8.8",
-          "proxyPort": 8080,
-          "proxyLogin": "proxyLoginHere",
-          "proxyPassword": "proxyPasswordHere"
-        }
-      }
-      ```
+<TabItem value="proxyless" label="TurnstileTask（无代理）" default className="method-panel-full">
+  <MethodItem>
+    ```http
+    https://api.capmonster.cloud/getTaskResult
+    ```
+  </MethodItem>
+  <MethodDescription>
+    **请求**
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "taskId": 407533072
+    }
+    ```
 
-      **响应**
-      ```json
-      {
-        "errorId": 0,
-        "taskId": 407533072
-      }
-      ```
-    </MethodDescription>
-  </TabItem>
+**响应**
+```json
+{
+  "errorId": 0,
+  "status": "ready",
+  "solution": {
+    "userAgent": "userAgentPlaceholder",
+    "token": "0.iGX3xsyFCkbGePM3jP4P4khLo6TrLukt8ZzBvwuQOvbC...f61f3082"
+  }
+}
+```
 
-</Tabs>
----
-### 选项 3. Challenge (cookie)
-<TabItem value="proxyless" label="TurnstileTask (无需代理)" default className="method-panel">
-	<MethodItem>
-		```http
-		https://api.capmonster.cloud/createTask
-		```
-	</MethodItem>
-	<MethodDescription>
-		**请求**
-		```json 
-		{
-		  "clientKey":"API_KEY",
-		  "task": {
-			"type":"TurnstileTask",
-			"websiteURL":"https://example.com",
-			"websiteKey":"xxxxxxxxxx",
-			"cloudflareTaskType": "cf_clearance",
-			"htmlPageBase64": "PCFET0NUWVBFIGh0...vYm9keT48L2h0bWw+",
-			"userAgent": "userAgentPlaceholder",
-			"proxyType":"http",
-			"proxyAddress":"8.8.8.8",
-			"proxyPort":8080,
-			"proxyLogin":"proxyLoginHere",
-			"proxyPassword":"proxyPasswordHere"
-		  }
-		}
-		```
-		**响应**
-		```json
-		{
-		  "errorId":0,
-		  "taskId":407533072
-		}
-		```
-	</MethodDescription>
+  </MethodDescription>
 </TabItem>
----
-### 选项 4. Waiting Room (cookie)
-<TabItem value="proxyless" label="TurnstileTask (无需代理)" default className="method-panel">
-	<MethodItem>
-		```http
-		https://api.capmonster.cloud/createTask
-		```
-	</MethodItem>
-	<MethodDescription>
-		**请求**
-		```json 
-		{
-		  "clientKey":"API_KEY",
-		  "task": {
-			"type":"TurnstileTask",
-			"websiteURL":"https://example.com",
-			"websiteKey":"xxxxxxxxxx",
-			"cloudflareTaskType": "wait_room",
-			"htmlPageBase64": "PCFET0NUWVBFIGh0...vYm9keT48L2h0bWw+",
-			"userAgent": "userAgentPlaceholder",
-			"proxyType":"http",
-			"proxyAddress":"8.8.8.8",
-			"proxyPort":8080,
-			"proxyLogin":"proxyLoginHere",
-			"proxyPassword":"proxyPasswordHere"
-		  }
-		}
-		```
-		**响应**
-		```json
-		{
-		  "errorId":0,
-		  "taskId":407533072
-		}
-		```
-	</MethodDescription>
-</TabItem>
+
+| **参数** | **类型** | **说明**                      |
+| :----- | :----- | :-------------------------- |
+| token  | String | 在输入字段中使用该 token，或在调用回调函数时使用 |
+
 ---
 
-## 获取任务结果的方法
-使用 [getTaskResult](../api/methods/get-task-result.mdx) 方法来获取 Turnstile 的解答。根据系统负载情况，响应可能需要 **5 到 20 秒**。
+## 如何区分 Cloudflare Turnstile 与 Cloudflare Challenge
 
-|**属性**|**类型**|**描述**|
-| :- | :- | :- |
-|cf_clearance|String|特殊的 Cloudflare cookies，可在浏览器中设置|
-|token|String|在调用 callback 函数时使用该 token|
----
-## 如何区分标准 Turnstile 与 Cloudflare Challenge
-Cloudflare 的验证类型可能会有不同的表现形式。
+<details>
+  <summary>Turnstile 与 Challenge 的区别</summary>
+
+Cloudflare 的验证类型可能以不同形式呈现。
 
 **标准 Turnstile：**
 
-![](./images/tunrstile-task/turnstile-simple.png) 
+![](./images/tunrstile-task/turnstile-simple.png)
 
 **样式化变体：**
 
 <figure>
 
 ![](./images/tunrstile-task/turnstile-stylized.png)
-<figcaption>Challenge 被有机地集成在网站本身中。</figcaption>
+
+<figcaption>验证流程被无缝集成到网站中</figcaption>
 
 </figure>
 
 <figure>
 
-![](./images/tunrstile-task/turnstile-stylized-2.png) 
-<figcaption>看起来像普通的 Turnstile 验证码，但实际上这是一个 Challenge。</figcaption>
+![](./images/tunrstile-task/turnstile-stylized-2.png)
+
+<figcaption>看起来像普通的 Turnstile 验证，但实际上是 Cloudflare Challenge</figcaption>
 
 </figure>
 
-要最终确认是否存在 Challenge，可以打开开发者工具，查看网络流量，分析页面代码，并观察其典型特征：
+要确认是否存在 Challenge，请打开开发者工具，检查网络请求，并查看页面源码中是否包含以下典型特征：
 
-- 对网站的第一个请求返回 **403 状态码**：
+* 对网站的第一个请求返回 **403** 状态码：
 
 ![](./images/tunrstile-task/b61dae70-f056-4257-ab72-05beacb27a0d.png)
 
-- 带有 id **challenge-form** 的表单，其 **action** 属性包含参数 `__cf_chl_f_tk=`（不要与 Turnstile 验证码的 action 混淆）：
+* ID 为 **challenge-form** 的表单，其 **action** 属性中（不要与 Turnstile 的 action 参数混淆）包含参数 `__cf_chl_f_tk=`：
 
 ![](./images/tunrstile-task/1e4dc39f-0a4a-4c29-a48d-abc7a2ec6380.png)
 
-- 页面中包含两个类似的 `<script>` 标签，它们会在 `window` 对象中创建新的值：
+* 页面中包含两个相似的 `<script>` 标签，这些脚本会在 `window` 对象中创建新的值：
 
-![](./images/tunrstile-task/gif.gif) 
-
-<details>
-        <summary>使用 Node.js 中的 Selenium 的示例实现</summary>
-
-```js
-const { Builder } = require('selenium-webdriver');
-const chrome = require('selenium-webdriver/chrome');
-
-(async function example() {
-  const options = new chrome.Options();
-  options.addArguments('--auto-open-devtools-for-tabs')
-
-  const driver = new Builder()
-    .forBrowser('chrome')
-    .setChromeOptions(options)
-    .build();
-
-  try {
-    driver.executeScript(`
-    window.turnstile = new Proxy(window.turnstile, {
-      get(target, prop) {
-        if (prop === 'render') {
-          return function(a, b) {
-            let p = {
-              type: "TurnstileTask",
-              websiteKey: b.sitekey,
-              websiteURL: window.location.href,
-              data: b.cData,
-              pagedata: b.chlPageData,
-              action: b.action,
-              userAgent: navigator.userAgent
-          }
-          
-          console.log(JSON.stringify(p))
-          window.params = p;
-          window.turnstileCallback = b.callback;
-            return target.render.apply(this, arguments);
-          }
-        }
-        return target[prop];
-      }
-    });
-    `)
-
-    driver.get('带有验证码的网站');
-    
-    const params = await driver.executeScript(`
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve(window.params)
-        }, 2000)
-      })
-    `);
-
-    if (params) {
-      const data = {
-        clientKey: 'API KEY',
-        task: {
-          type: 'TurnstileTask',
-          websiteURL: params.websiteURL,
-          websiteKey: params.websiteKey,
-          data: params.data,
-          action: params.action
-        }
-      }
-
-      const createResult = await fetch('https://api.capmonster.cloud/createTask', {
-        method: 'post',
-        body: JSON.stringify(data)
-      });
-
-      const createTaskResult = await createResult.json()
-
-      if (createTaskResult.taskId) {
-        const asyncDelay = (timeout) =>
-          new Promise(resolve => {
-              setTimeout(() => {
-                  resolve();
-              }, timeout);
-          });
-        
-        const getTaskResult = async (taskId) => {
-          const taskResult = await fetch('https://api.capmonster.cloud/getTaskResult', {
-            method: 'post',
-            body: JSON.stringify({
-              "clientKey":"API KEY",
-              "taskId": createTaskResult.taskId
-            })
-          });
-          const taskResponse = await taskResult.json();
-          if (taskResponse.status === 'processing') {
-            await asyncDelay(5000);
-            return await getTaskResult(taskId)
-          }
-          return taskResponse;
-        }
-       
-        const taskRes = await getTaskResult(createTaskResult.taskId)
-
-        if (taskRes.solution) {
-          await driver.executeScript(`
-            window.turnstileCallback(${taskRes.solution.token});
-          `);
-        }
-      }
-      
-    }
-
-    //DO SOMETHING
-  } finally {
-    await driver.quit();
-  }
-})();
-````
+![](./images/tunrstile-task/gif.gif)
 
 </details>
 
-
-
-## 如何查找任务创建所需的所有参数
+## 如何查找创建任务所需的所有参数
 
 ### 手动方式
 
-1. 请在浏览器中访问您的网站，该网站包含验证码功能。
-2. 右键点击验证码元素，选择 **检查（Inspect）**。
+1. 在浏览器中打开出现验证码的网站页面。
+2. 在验证码元素上点击右键，选择 **检查（Inspect）**。
 
-#### 方法一
+#### websiteKey
 
-#### websiteKey(网站密钥)
-
-可以在 **元素(Elements)** 标签页中找到：
+可以在 **Elements（元素）** 面板中找到：
 
 ![sitekeyTurnstile](images/tunrstile-task/sitekey-turnstile.png)
 
 ![sitekeyTurnstile1](images/tunrstile-task/sitekey-turnstile1.png)
 
-也可以通过控制台命令获取（在验证码URL的独立标签页中打开，URL通常以`https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/g...`开头）：
+#### pageAction
 
-`console.log(window._cf_chl_opt.chlApiSitekey);`
-
-*chlApiSitekey* 就是 sitekey
-
-#### pageAction(页面动作)
-
-*Action* 和 *sitekey* 也可以在 *callback* 回调函数中找到：
+*action* 和 *sitekey* 也可以在 *callback* 回调函数中找到：
 
 ![callbackTurnstile](images/tunrstile-task/turnstile-callback.png)
 
-对于 **方法二** 和 **方法三**，建议使用自动化方式提取参数：
+---
 
 ### 自动方法
 
@@ -824,535 +290,184 @@ const chrome = require('selenium-webdriver/chrome');
 所提供的代码片段仅作为获取必要参数的基础示例。具体实现方式取决于包含验证码的网站、本身的页面结构，以及所使用的 HTML 元素和选择器。
 :::
 
-
 <Tabs className="full-width-tabs filled-tabs request-tabs">
   <TabItem value="js" label="JavaScript" default className="method-panel">
     <details>
-      <summary>对于选项 1：Turnstile（token）——在浏览器中</summary>
+      <summary>显示代码（浏览器用）</summary>
 
-      ```js
-      // 检查window.onloadTurnstileCallback是否存在的函数
-      const checkTurnstileCallback = () => {
-        return new Promise((resolve, reject) => {
-          const timeout = setTimeout(() => reject('回调超时'), 30000);
+  ```js
+  // 检查 window.onloadTurnstileCallback 是否存在的函数
+  const checkTurnstileCallback = () => {
+    return new Promise((resolve, reject) => {
+      const timeout = setTimeout(() => reject('Callback timeout'), 30000);
 
-          const interval = setInterval(() => {
-            if (window.onloadTurnstileCallback !== undefined) {
-              clearInterval(interval);
-              clearTimeout(timeout);
+      const interval = setInterval(() => {
+        if (window.onloadTurnstileCallback !== undefined) {
+          clearInterval(interval);
+          clearTimeout(timeout);
 
-              const callbackDetails = window.onloadTurnstileCallback.toString();
-              const sitekeyMatch = callbackDetails.match(/sitekey: ['"]([^'"]+)['"]/);
-              const actionMatch = callbackDetails.match(/action: ['"]([^'"]+)['"]/);
+          const callbackDetails = window.onloadTurnstileCallback.toString();
+          const sitekeyMatch = callbackDetails.match(/sitekey: ['"]([^'"]+)['"]/);
+          const actionMatch = callbackDetails.match(/action: ['"]([^'"]+)['"]/);
 
-              resolve({
-                sitekey: sitekeyMatch ? sitekeyMatch[1] : null,
-                action: actionMatch ? actionMatch[1] : null,
-              });
-            }
-          }, 500);
-        });
-      };
-
-      // 尝试查找带有data-sitekey属性的元素
-      const turnstileElement = document.querySelector('[data-sitekey]');
-
-      if (turnstileElement) {
-        // 提取data-sitekey属性值
-        const sitekey = turnstileElement.getAttribute("data-sitekey");
-        console.log("Turnstile Sitekey (从元素获取):", sitekey);
-      } else {
-        console.log("未找到Turnstile元素，正在通过回调检查...");
-
-        // 如果找不到元素，通过window.onloadTurnstileCallback检查
-        checkTurnstileCallback()
-          .then((data) => {
-            console.log("Turnstile参数 (从回调获取):", data);
-          })
-          .catch((error) => {
-            console.error(error);
+          resolve({
+            sitekey: sitekeyMatch ? sitekeyMatch[1] : null,
+            action: actionMatch ? actionMatch[1] : null,
           });
-      }
-      ```
-    </details>
-
-    <details>
-      <summary>对于选项 2：Challenge（token）——在 Node.js 中</summary>
-
-      ```js
-      import { chromium } from "playwright";
-
-      (async () => {
-        const browser = await chromium.launch({ headless: false });
-        const page = await browser.newPage();
-
-        let params = null;
-
-        try {
-          while (!params) {
-            await page.goto("https://example.com");
-
-            await page.evaluate(() => {
-              window.turnstile = new Proxy(window.turnstile, {
-                get(target, prop) {
-                  if (prop === "render") {
-                    return function (a, b) {
-                      const p = {
-                        websiteKey: b.sitekey,
-                        websiteURL: window.location.href,
-                        data: b.cData,
-                        pagedata: b.chlPageData,
-                        action: b.action,
-                        userAgent: navigator.userAgent,
-                      };
-                      window.params = p;
-                      return target.render.apply(this, arguments);
-                    };
-                  }
-                  return target[prop];
-                },
-              });
-            });
-
-            params = await page.evaluate(() => {
-              return new Promise((resolve) => {
-                setTimeout(() => resolve(window.params || null), 5000);
-              });
-            });
-
-            if (!params) {
-              await page.waitForTimeout(3000);
-            }
-          }
-
-          console.log("Turnstile参数:", params);
-        } finally {
-          await browser.close();
         }
-      })();
-      ```
-    </details>
+      }, 500);
+    });
+  };
 
-    <details>
-      <summary>对于选项 3：Challenge（cookie `cf_clearance`）——在 Node.js 中</summary>
+  // 尝试查找带有 data-sitekey 的元素
+  const turnstileElement = document.querySelector('[data-sitekey]');
 
-      ```js
-      import { chromium } from "playwright";
-      import { Buffer } from "buffer";
+  if (turnstileElement) {
+    // 提取 data-sitekey 属性值
+    const sitekey = turnstileElement.getAttribute("data-sitekey");
+    console.log("Turnstile Sitekey (从元素获取):", sitekey);
+  } else {
+    console.log("未找到 Turnstile 元素，通过回调检查...");
 
-      (async () => {
-        const browser = await chromium.launch({ headless: false });
-        const page = await browser.newPage();
+    // 如果未找到元素，通过 window.onloadTurnstileCallback 检查
+    checkTurnstileCallback()
+      .then((data) => {
+        console.log("Turnstile 参数（从回调获取）:", data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+  ```
+</details>
 
-        let websiteKey = null;
-
-        while (!websiteKey) {
-          await page.goto("https://example.com");
-
-          await page.evaluate(() => {
-            window.turnstile = new Proxy(window.turnstile, {
-              get(target, prop) {
-                if (prop === "render") {
-                  return function (a, b) {
-                    window.websiteKey = b.sitekey;
-                    return target.render.apply(this, arguments);
-                  };
-                }
-                return target[prop];
-              },
-            });
-          });
-
-          websiteKey = await page.evaluate(() => {
-            return new Promise((resolve) => {
-              setTimeout(() => resolve(window.websiteKey || null), 5000);
-            });
-          });
-
-          if (!websiteKey) {
-            await page.waitForTimeout(3000);
-          }
-        }
-
-        const html = await page.content();
-        const htmlPageBase64 = Buffer.from(html).toString("base64");
-
-        const result = {
-          websiteKey,
-          htmlPageBase64,
-        };
-
-        console.log(result);
-
-        await browser.close();
-      })();
-      ```
-    </details>
-  </TabItem>
+</TabItem>
 
   <TabItem value="python" label="Python" className="method-panel">
     <details>
-      <summary>对于选项 1：Turnstile（token）</summary>
+      <summary>显示代码</summary>
 
-      ```python
-      import asyncio
-      from playwright.async_api import async_playwright
+  ```python
+  import asyncio
+  from playwright.async_api import async_playwright
 
-      async def run():
-          async with async_playwright() as p:
-              browser = await p.chromium.launch(headless=False)
-              context = await browser.new_context()
-              page = await context.new_page()
+  async def run():
+      async with async_playwright() as p:
+          browser = await p.chromium.launch(headless=False)
+          context = await browser.new_context()
+          page = await context.new_page()
 
-              await page.goto("https://example.com")  # 替换为您的网站
+          await page.goto("https://example.com")  # 替换为您的网站
 
-              # 尝试查找带有data-sitekey属性的元素
-              element = await page.query_selector('[data-sitekey]')
-              if element:
-                  sitekey = await element.get_attribute("data-sitekey")
-                  print("Turnstile Sitekey (从元素获取):", sitekey)
-              else:
-                  print("未找到Turnstile元素，正在通过回调检查...")
+          # 尝试查找带有 data-sitekey 的元素
+          element = await page.query_selector('[data-sitekey]')
+          if element:
+              sitekey = await element.get_attribute("data-sitekey")
+              print("Turnstile Sitekey（从元素获取）:", sitekey)
+          else:
+              print("未找到 Turnstile 元素，通过回调检查...")
 
-                  try:
-                      result = await page.evaluate('''() => {
-                          return new Promise((resolve, reject) => {
-                              const timeout = setTimeout(() => reject('回调超时'), 30000);
-                              const interval = setInterval(() => {
-                                  if (window.onloadTurnstileCallback !== undefined) {
-                                      clearInterval(interval);
-                                      clearTimeout(timeout);
-                                      const cbStr = window.onloadTurnstileCallback.toString();
-                                      const sitekeyMatch = cbStr.match(/sitekey: ['"]([^'"]+)['"]/);
-                                      const actionMatch = cbStr.match(/action: ['"]([^'"]+)['"]/);
-                                      resolve({
-                                          sitekey: sitekeyMatch ? sitekeyMatch[1] : null,
-                                          action: actionMatch ? actionMatch[1] : null,
-                                      });
-                                  }
-                              }, 500);
-                          });
-                      }''')
-                      print("Turnstile参数 (从回调获取):", result)
-                  except Exception as e:
-                      print("错误:", e)
-
-              await browser.close()
-
-      asyncio.run(run())
-      ```
-    </details>
-
-    <details>
-      <summary>对于选项 2：Challenge（token）</summary>
-
-      ```python
-      import asyncio
-      from playwright.async_api import async_playwright
-
-      async def extract_turnstile_params():
-          async with async_playwright() as p:
-              browser = await p.chromium.launch(headless=False)
-              page = await browser.new_page()
-
-              params = None
-
-              while not params:
-                  await page.goto("https://example.com")
-
-                  await page.evaluate("""
-                      window.turnstile = new Proxy(window.turnstile, {
-                        get(target, prop) {
-                          if (prop === "render") {
-                            return function(a, b) {
-                              const p = {
-                                websiteKey: b.sitekey,
-                                websiteURL: window.location.href,
-                                data: b.cData,
-                                pagedata: b.chlPageData,
-                                action: b.action,
-                                userAgent: navigator.userAgent
-                              };
-                              window.params = p;
-                              return target.render.apply(this, arguments);
-                            };
-                          }
-                          return target[prop];
-                        }
-                      });
-                  """)
-
-                  await page.wait_for_timeout(5000)
-
-                  params = await page.evaluate("window.params || null")
-
-                  if not params:
-                      await page.wait_for_timeout(3000)
-
-              print("Turnstile参数:", params)
-
-              await browser.close()
-
-      asyncio.run(extract_turnstile_params())
-      ```
-    </details>
-
-    <details>
-      <summary>对于选项 3：Challenge（cookie `cf_clearance`）</summary>
-
-      ```python
-      import asyncio
-      import base64
-      from playwright.async_api import async_playwright
-
-      async def main():
-          async with async_playwright() as p:
-              browser = await p.chromium.launch(headless=False)
-              page = await browser.new_page()
-
-              website_key = None
-
-              while not website_key:
-                  await page.goto("https://example.com")
-
-                  await page.evaluate("""
-                      () => {
-                          window.turnstile = new Proxy(window.turnstile, {
-                              get(target, prop) {
-                                  if (prop === 'render') {
-                                      return function(a, b) {
-                                          window.websiteKey = b.sitekey;
-                                          return target.render.apply(this, arguments);
-                                      };
-                                  }
-                                  return target[prop];
+              try:
+                  result = await page.evaluate('''() => {
+                      return new Promise((resolve, reject) => {
+                          const timeout = setTimeout(() => reject('Callback timeout'), 30000);
+                          const interval = setInterval(() => {
+                              if (window.onloadTurnstileCallback !== undefined) {
+                                  clearInterval(interval);
+                                  clearTimeout(timeout);
+                                  const cbStr = window.onloadTurnstileCallback.toString();
+                                  const sitekeyMatch = cbStr.match(/sitekey: ['"]([^'"]+)['"]/);
+                                  const actionMatch = cbStr.match(/action: ['"]([^'"]+)['"]/);
+                                  resolve({
+                                      sitekey: sitekeyMatch ? sitekeyMatch[1] : None,
+                                      action: actionMatch ? actionMatch[1] : None,
+                                  });
                               }
-                          });
-                      }
-                  """)
+                          }, 500);
+                      });
+                  }''')
+                  print("Turnstile 参数（从回调获取）:", result)
+              except Exception as e:
+                  print("错误:", e)
 
-                  website_key = await page.evaluate("""
-                      () => new Promise(resolve => {
-                          setTimeout(() => resolve(window.websiteKey || null), 5000);
-                      })
-                  """)
+          await browser.close()
 
-                  if not website_key:
-                      await page.wait_for_timeout(3000)
+  asyncio.run(run())
+  ```
+</details>
 
-              html = await page.content()
-              html_base64 = base64.b64encode(html.encode("utf-8")).decode("utf-8")
-
-              result = {
-                  "websiteKey": website_key,
-                  "htmlPageBase64": html_base64
-              }
-
-              print(result)
-
-              await browser.close()
-
-      asyncio.run(main())
-      ```
-    </details>
   </TabItem>
 
-  <TabItem value="csharp" label="C#" className="method-panel">
+<TabItem value="csharp" label="C#" className="method-panel">
     <details>
-      <summary>对于选项 1：Turnstile（token）</summary>
+      <summary>显示代码</summary>
 
-      ```csharp
-      using System;
-      using System.Text.RegularExpressions;
-      using System.Threading.Tasks;
-      using Microsoft.Playwright;
+  ```csharp
+  using System;
+  using System.Text.RegularExpressions;
+  using System.Threading.Tasks;
+  using Microsoft.Playwright;
 
-      class Program
+  class Program
+  {
+      public static async Task Main()
       {
-          public static async Task Main()
+          using var playwright = await Playwright.CreateAsync();
+          var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
           {
-              using var playwright = await Playwright.CreateAsync();
-              var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
-              {
-                  Headless = false
-              });
+              Headless = false
+          });
 
-              var context = await browser.NewContextAsync();
-              var page = await context.NewPageAsync();
+          var context = await browser.NewContextAsync();
+          var page = await context.NewPageAsync();
 
-              await page.GotoAsync("https://example.com"); // 替换为目标URL
+          await page.GotoAsync("https://example.com"); // 替换为目标网址
 
-              var element = await page.QuerySelectorAsync("[data-sitekey]");
+          var element = await page.QuerySelectorAsync("[data-sitekey]");
 
-              if (element != null)
-              {
-                  var sitekey = await element.GetAttributeAsync("data-sitekey");
-                  Console.WriteLine($"Turnstile Sitekey (从元素获取): {sitekey}");
-              }
-              else
-              {
-                  Console.WriteLine("未找到Turnstile元素，正在通过回调检查...");
-
-                  try
-                  {
-                      var result = await page.EvaluateAsync(@"() => {
-                          return new Promise((resolve, reject) => {
-                              const timeout = setTimeout(() => reject('回调超时'), 30000);
-                              const interval = setInterval(() => {
-                                  if (window.onloadTurnstileCallback !== undefined) {
-                                      clearInterval(interval);
-                                      clearTimeout(timeout);
-                                      const cbStr = window.onloadTurnstileCallback.toString();
-                                      const sitekeyMatch = cbStr.match(/sitekey: ['""]([^'""]+)['""]/);
-                                      const actionMatch = cbStr.match(/action: ['""]([^'""]+)['""]/);
-                                      resolve({
-                                          sitekey: sitekeyMatch ? sitekeyMatch[1] : null,
-                                          action: actionMatch ? actionMatch[1] : null
-                                      });
-                                  }
-                              }, 500);
-                          });
-                      }");
-
-                      Console.WriteLine("Turnstile参数 (从回调获取): " + result?.ToString());
-                  }
-                  catch (Exception ex)
-                  {
-                      Console.WriteLine("错误: " + ex.Message);
-                  }
-              }
-
-              await browser.CloseAsync();
+          if (element != null)
+          {
+              var sitekey = await element.GetAttributeAsync("data-sitekey");
+              Console.WriteLine($"Turnstile Sitekey（从元素获取）: {sitekey}");
           }
-      }
-      ```
-    </details>
-
-    <details>
-      <summary>对于选项 2：Challenge（token）</summary>
-
-      ```csharp
-      using Microsoft.Playwright;
-      using System.Text.Json;
-
-      class Program
-      {
-          public static async Task Main()
+          else
           {
-              using var playwright = await Playwright.CreateAsync();
-              var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+              Console.WriteLine("未找到 Turnstile 元素，通过回调检查...");
+
+              try
               {
-                  Headless = false
-              });
-
-              var page = await browser.NewPageAsync();
-              object? parameters = null;
-
-              while (parameters == null)
-              {
-                  await page.GotoAsync("https://example.com");
-
-                  await page.EvaluateAsync(@"() => {
-                      window.turnstile = new Proxy(window.turnstile, {
-                          get(target, prop) {
-                              if (prop === 'render') {
-                                  return function(a, b) {
-                                      const p = {
-                                          websiteKey: b.sitekey,
-                                          websiteURL: window.location.href,
-                                          data: b.cData,
-                                          pagedata: b.chlPageData,
-                                          action: b.action,
-                                          userAgent: navigator.userAgent
-                                      };
-                                      window.params = p;
-                                      return target.render.apply(this, arguments);
-                                  };
+                  var result = await page.EvaluateAsync(@"() => {
+                      return new Promise((resolve, reject) => {
+                          const timeout = setTimeout(() => reject('Callback timeout'), 30000);
+                          const interval = setInterval(() => {
+                              if (window.onloadTurnstileCallback !== undefined) {
+                                  clearInterval(interval);
+                                  clearTimeout(timeout);
+                                  const cbStr = window.onloadTurnstileCallback.toString();
+                                  const sitekeyMatch = cbStr.match(/sitekey: ['""]([^'""]+)['""]/);
+                                  const actionMatch = cbStr.match(/action: ['""]([^'""]+)['""]/);
+                                  resolve({
+                                      sitekey: sitekeyMatch ? sitekeyMatch[1] : null,
+                                      action: actionMatch ? actionMatch[1] : null
+                                  });
                               }
-                              return target[prop];
-                          }
+                          }, 500);
                       });
                   }");
 
-                  parameters = await page.EvaluateAsync(@"() => new Promise(resolve => {
-                      setTimeout(() => resolve(window.params || null), 5000);
-                  })");
-
-                  if (parameters == null)
-                  {
-                      await page.WaitForTimeoutAsync(3000);
-                  }
+                  Console.WriteLine("Turnstile 参数（从回调获取）: " + result?.ToString());
               }
-
-              Console.WriteLine("Turnstile参数:");
-              Console.WriteLine(JsonSerializer.Serialize(parameters, new JsonSerializerOptions { WriteIndented = true }));
-
-              await browser.CloseAsync();
-          }
-      }
-      ```
-    </details>
-
-    <details>
-      <summary>对于选项 3：Challenge（cookie `cf_clearance`）</summary>
-
-      ```csharp
-      using System;
-      using System.Text;
-      using System.Threading.Tasks;
-      using Microsoft.Playwright;
-
-      class Program
-      {
-          public static async Task Main()
-          {
-              using var playwright = await Playwright.CreateAsync();
-              var browser = await playwright.Chromium.LaunchAsync(
-                new BrowserTypeLaunchOptions { Headless = false });
-              var page = await browser.NewPageAsync();
-
-              string websiteKey = null;
-
-              while (websiteKey == null)
+              catch (Exception ex)
               {
-                  await page.GotoAsync("https://example.com");
-
-                  await page.EvaluateAsync(@"() => {
-                      window.turnstile = new Proxy(window.turnstile, {
-                          get(target, prop) {
-                              if (prop === 'render') {
-                                  return function(a, b) {
-                                      window.websiteKey = b.sitekey;
-                                      return target.render.apply(this, arguments);
-                                  };
-                              }
-                              return target[prop];
-                          }
-                      });
-                  }");
-
-                  websiteKey = await page.EvaluateAsync<string>(@"() => 
-                  new Promise(resolve => {
-                      setTimeout(() => resolve(window.websiteKey || null), 5000);
-                  })");
-
-                  if (websiteKey == null)
-                  {
-                      await page.WaitForTimeoutAsync(3000);
-                  }
+                  Console.WriteLine("错误: " + ex.Message);
               }
-
-              var html = await page.ContentAsync();
-              var htmlBase64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(html));
-
-              Console.WriteLine($"websiteKey: {websiteKey}");
-              Console.WriteLine($"htmlPageBase64: {htmlBase64}");
-
-              await browser.CloseAsync();
           }
+
+          await browser.CloseAsync();
       }
-      ```
-    </details>
+  }
+  ```
+</details>
   </TabItem>
 </Tabs>
 
@@ -1362,7 +477,7 @@ const chrome = require('selenium-webdriver/chrome');
   <TabItem value="js" label="JavaScript" default className="method-panel">
 
 <details>
-<summary> 选项 1：Turnstile（token） </summary>
+<summary>显示代码（浏览器用）</summary>
 
 ```js
 // https://github.com/ZennoLab/capmonstercloud-client-js
@@ -1415,124 +530,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.log("Solution:", result);
 });
 ```
+
 </details>
 
 <details>
-<summary> 选项 2：Challenge (token)</summary>
-
-```js
-// https://github.com/ZennoLab/capmonstercloud-client-js
-
-import { 
-    CapMonsterCloudClientFactory, 
-    ClientOptions, 
-    TurnstileRequest 
-} from '@zennolab_com/capmonstercloud-client';
-
-const API_KEY = "YOUR_API_KEY"; // 输入您的 CapMonster Cloud API 密钥
-
-document.addEventListener("DOMContentLoaded", async () => {
-    const client = CapMonsterCloudClientFactory.Create(
-        new ClientOptions({ clientKey: API_KEY })
-    );
-
-    // 基本示例，无需代理
-    // CapMonster Cloud 会自动使用它们的代理
-    let turnstileRequest = new TurnstileRequest({
-        websiteURL: "https://example.com", // 验证码页面的 URL
-        websiteKey: "0x4AAAAAAABUYP0XeMJF0xoy", // 替换为正确的值
-        data: "YOUR_DATA_HERE",
-        pageAction: "managed",
-        cloudflareTaskType: "token",
-        pageData: "YOUR_PAGE_DATA_HERE",
-        userAgent: "userAgentPlaceholder"
-    });
-
-    // 使用您自己的代理的示例
-    // 如果想使用自己的代理，请取消注释以下代码块
-
-    /*
-    const proxy = {
-        proxyType: "http",
-        proxyAddress: "123.45.67.89",
-        proxyPort: 8080,
-        proxyLogin: "username",
-        proxyPassword: "password"
-    };
-
-    turnstileRequest = new TurnstileRequest({
-        websiteURL: "https://example.com",
-        websiteKey: "0x4AAAAAAABUYP0XeMJF0xoy",
-        proxy,
-        data: "YOUR_DATA_HERE",
-        pageAction: "managed",
-        cloudflareTaskType: "token",
-        pageData: "YOUR_PAGE_DATA_HERE",
-        userAgent: "userAgentPlaceholder"
-    });
-    */
-
-    // 如有必要，可以检查余额 
-    const balance = await client.getBalance();
-    console.log("Balance:", balance);
-
-    const result = await client.Solve(turnstileRequest);
-    console.log("Solution:", result);
-});
-```
-</details>
-
-<details>
-<summary>选项 3： Challenge (cookie `cf_clearance`)</summary>
-
-```js
-// https://github.com/ZennoLab/capmonstercloud-client-js
-
-import { 
-    CapMonsterCloudClientFactory, 
-    ClientOptions, 
-    TurnstileRequest 
-} from '@zennolab_com/capmonstercloud-client';
-
-document.addEventListener("DOMContentLoaded", async () => {
-    const cmcClient = CapMonsterCloudClientFactory.Create(
-        new ClientOptions({ clientKey: 'YOUR_API_KEY' }) // 输入您的 CapMonster Cloud API 密钥
-    );
-
-    // 如有必要，可以检查余额
-    const balance = await cmcClient.getBalance();
-    console.log('Balance:', balance);
-
-    const proxy = {
-        proxyType: "http",
-        proxyAddress: '123.45.67.89',
-        proxyPort: 8080,
-        proxyLogin: 'username',
-        proxyPassword: 'password'
-    };
-
-    // Cloudflare cf_clearance 只能使用您的代理解决
-    const turnstileRequest = new TurnstileRequest({
-        websiteURL: 'https://example.com/',
-        websiteKey: '0x4AAAAAAABUY0VLtOUMAHxE',
-        cloudflareTaskType: 'cf_clearance',
-        proxy,
-        htmlPageBase64: 'PGh0bW...h0bWw+',
-        userAgent: 'userAgentPlaceholder'
-    });
-
-    // 发送验证码解决任务
-    const result = await cmcClient.Solve(turnstileRequest);
-    console.log('Solution:', result.solution);
-});
-```
-
-</details>
-</TabItem>
-<TabItem value="nodejs" label="Node.js" className="method-panel">
-
-<details>
-<summary>选项 1：Turnstile  (token)</summary>
+      <summary>显示代码（Node.js）</summary>
 
 ```js
 // https://github.com/ZennoLab/capmonstercloud-client-js
@@ -1585,124 +587,12 @@ solveTurnstile().catch(err => console.error("错误:", err));
 ```
 
 </details>
-
-<details>
-<summary>选项 2：Challenge (token)</summary>
-
-```js
-// https://github.com/ZennoLab/capmonstercloud-client-js
-
-import { 
-    CapMonsterCloudClientFactory, 
-    ClientOptions, 
-    TurnstileRequest 
-} from '@zennolab_com/capmonstercloud-client';
-
-const API_KEY = "YOUR_API_KEY"; // 输入您的 CapMonster Cloud API 密钥
-
-(async () => {
-    const client = CapMonsterCloudClientFactory.Create(
-        new ClientOptions({ clientKey: API_KEY })
-    );
-
-    // 基本示例，无需代理
-    // CapMonster Cloud 会自动使用它们的代理
-    let turnstileRequest = new TurnstileRequest({
-        websiteURL: "https://example.com", // 验证码页面的 URL
-        websiteKey: "0x4AAAAAAABUYP0XeMJF0xoy", // 替换为正确的值
-        data: "YOUR_DATA_HERE",
-        pageAction: "managed",
-        cloudflareTaskType: "token",
-        pageData: "YOUR_PAGE_DATA_HERE",
-        userAgent: "userAgentPlaceholder"
-    });
-
-    // 使用您自己的代理的示例
-    // 如果想使用自己的代理，请取消注释以下代码块
-
-    /*
-    const proxy = {
-        proxyType: "http",
-        proxyAddress: "123.45.67.89",
-        proxyPort: 8080,
-        proxyLogin: "username",
-        proxyPassword: "password"
-    };
-
-    turnstileRequest = new TurnstileRequest({
-        websiteURL: "https://example.com",
-        websiteKey: "0x4AAAAAAABUYP0XeMJF0xoy",
-        proxy,
-        data: "YOUR_DATA_HERE",
-        pageAction: "managed",
-        cloudflareTaskType: "token",
-        pageData: "YOUR_PAGE_DATA_HERE",
-        userAgent: "userAgentPlaceholder"
-    });
-    */
-
-    // 如有必要，可以检查余额 
-    const balance = await client.getBalance();
-    console.log("Balance:", balance);
-
-    const result = await client.Solve(turnstileRequest);
-    console.log("Solution:", result);
-})();
-```
-
-</details>
-
-<details>
-<summary>选项 3： Challenge (cookie <code>cf_clearance</code>)</summary>
-
-```js
-// https://github.com/ZennoLab/capmonstercloud-client-js
-
-import { CapMonsterCloudClientFactory, ClientOptions, TurnstileRequest } from '@zennolab_com/capmonstercloud-client';
-
-async function main() {
-    const cmcClient = CapMonsterCloudClientFactory.Create(
-        new ClientOptions({ clientKey: 'YOUR_API_KEY' }) // 输入您的 CapMonster Cloud API 密钥
-    );
-
-    // 如有必要，可以检查余额
-    const balance = await cmcClient.getBalance();
-    console.log('Balance:', balance);
-
-    const proxy = {
-        proxyType: "http",
-        proxyAddress: '123.45.67.89',
-        proxyPort: 8080,
-        proxyLogin: 'username',
-        proxyPassword: 'password'
-    };
-
-    // Cloudflare cf_clearance 只能使用您的代理解决
-    const turnstileRequest = new TurnstileRequest({
-        websiteURL: 'https://example.com/',
-        websiteKey: '0x4AAAAAAABUY0VLtOUMAHxE',
-        cloudflareTaskType: 'cf_clearance',
-        proxy,
-        htmlPageBase64: 'PGh0bW...h0bWw+',
-        userAgent: 'userAgentPlaceholder'
-    });
-
-    // 发送验证码解决任务
-    const result = await cmcClient.Solve(turnstileRequest);
-    console.log('Solution:', result.solution);
-}
-
-main().catch(console.error);
-```
-
-</details>
-
   </TabItem>
 
   <TabItem value="python" label="Python" className="method-panel">
 
 <details>
-<summary>选项 1：Turnstile（token）</summary>
+<summary>显示代码</summary>
 
 ```python
 # https://github.com/ZennoLab/capmonstercloud-client-python
@@ -1753,124 +643,12 @@ asyncio.run(solve_turnstile_token())
 ```
 
 </details>
-
-<details>
-<summary>选项 2：Challenge (token)</summary>
-
-```python
-# https://github.com/ZennoLab/capmonstercloud-client-python
-
-import asyncio
-from capmonstercloudclient import CapMonsterClient, ClientOptions
-from capmonstercloudclient.requests import TurnstileRequest
-# from capmonstercloudclient.requests.baseRequestWithProxy import ProxyInfo  # 如果计划使用代理，请取消注释
-
-API_KEY = "YOUR_API_KEY"  # 输入您的 CapMonster Cloud API 密钥
-
-async def solve_turnstile_token():
-    client_options = ClientOptions(api_key=API_KEY)
-    cap_monster_client = CapMonsterClient(options=client_options)
-
-    # 基本示例，无需代理
-    # CapMonster Cloud 会自动使用它们的代理
-    turnstile_request = TurnstileRequest(
-        websiteURL="http://example.com",  # 验证码页面的 URL
-        websiteKey="0x4AAAAAAABUYP0XeMJF0xoy",        # 替换为正确的值
-        data="YOUR_DATA_HERE",
-        pageAction="managed",
-        cloudflareTaskType="token",
-        pageData="YOUR_PAGE_DATA_HERE",
-        userAgent="userAgentPlaceholder"
-    )
-
-    # 使用您自己的代理的示例
-    # 如果想使用自己的代理，请取消注释以下代码块
-    #
-    # proxy = ProxyInfo(
-    #     proxyType="http",               
-    #     proxyAddress="123.45.67.89",    
-    #     proxyPort=8080,                 
-    #     proxyLogin="username",          
-    #     proxyPassword="password"        
-    # )
-    #
-    # turnstile_request = TurnstileRequest(
-    #     websiteURL="http://tsmanaged.zlsupport.com",
-    #     websiteKey="0x4AAAAAAABUYP0XeMJF0xoy",
-    #     proxy=proxy,
-    #     data="YOUR_DATA_HERE",
-    #     pageAction="managed",
-    #     cloudflareTaskType="token",
-    #     pageData="YOUR_PAGE_DATA_HERE",
-    #     userAgent="userAgentPlaceholder"
-    # )
-
-    # 如有必要，可以检查余额 
-    balance = await cap_monster_client.get_balance()
-    print("Balance:", balance)
-
-    result = await cap_monster_client.solve_captcha(turnstile_request)
-    print("Solution:", result)
-
-asyncio.run(solve_turnstile_token())
-```
-
-</details>
-
-<details>
-<summary>选项 3： Challenge (cookie `cf_clearance`)</summary>
-
-```python
-# https://github.com/ZennoLab/capmonstercloud-client-python
-
-import asyncio
-from capmonstercloudclient import CapMonsterClient, ClientOptions
-from capmonstercloudclient.requests import TurnstileRequest
-from capmonstercloudclient.requests.baseRequestWithProxy import ProxyInfo  # 使用 ProxyInfo
-
-API_KEY = "YOUR_API_KEY"  # 输入您的 CapMonster Cloud API 密钥
-
-async def solve_cf_clearance():
-    client_options = ClientOptions(api_key=API_KEY)
-    cap_monster_client = CapMonsterClient(options=client_options)
-
-    # 代理设置示例
-    proxy = ProxyInfo(
-        proxyType="http",
-        proxyAddress="123.45.67.89",
-        proxyPort=8080,
-        proxyLogin="username",
-        proxyPassword="password"
-    )
-
-    # Cloudflare cf_clearance 只能使用您的代理解决
-    turnstile_request = TurnstileRequest(
-        websiteURL="https://example.com",
-        websiteKey="0x4AAAAAAABUYP0XeMJF0xoy",
-        cloudflareTaskType="cf_clearance",
-        htmlPageBase64="BASE64_HTML_PAGE_HERE",
-        userAgent="userAgentPlaceholder",
-        proxy=proxy
-    )
-
-    # 如有必要，可以检查余额
-    balance = await cap_monster_client.get_balance()
-    print("Balance:", balance)
-
-    # 发送验证码解决任务
-    result = await cap_monster_client.solve_captcha(turnstile_request)
-    print("Solution:", result)
-
-asyncio.run(solve_cf_clearance())
-```
-
-</details>
   </TabItem>
 
-  <TabItem value="csharp" label="C#" className="method-panel">
+<TabItem value="csharp" label="C#" className="method-panel">
 
 <details>
-<summary> 选项 1：Turnstile（token） </summary>
+<summary>显示代码</summary>
 
 ```csharp
 // https://github.com/ZennoLab/capmonstercloud-client-dotnet
@@ -1931,126 +709,5 @@ class Program
 ```
 
 </details>
-
-<details>
-<summary> 选项 2：Challenge (token)</summary>
-
-```csharp
-// https://github.com/ZennoLab/capmonstercloud-client-dotnet
-
-using System;
-using System.Threading.Tasks;
-using Zennolab.CapMonsterCloud;
-using Zennolab.CapMonsterCloud.Requests;
-
-class Program
-{
-    static async Task Main(string[] args)
-    {
-        // 您的 CapMonster Cloud API 密钥
-        var clientOptions = new ClientOptions
-        {
-            ClientKey = "YOUR_API_KEY"
-        };
-
-        var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
-
-        // 基本示例，无需代理
-        // CapMonster Cloud 会自动使用它们的代理
-        var turnstileRequest = new TurnstileRequest
-        {
-            WebsiteUrl = "https://example.com",        // 验证码页面的 URL
-            WebsiteKey = "0x4AAAAAAABUYP0XeMJF0xoy",    // 替换为正确的值
-            Data = "data_here",
-            PageAction = "managed",
-            CloudflareTaskType = "token",
-            PageData = "pagedata_here",
-            UserAgent = "userAgentPlaceholder"
-        };
-
-        // 使用您自己的代理的示例
-        // 如果想使用自己的代理，请取消注释以下代码块
-
-        /*
-        var turnstileRequest = new TurnstileRequest
-        {
-            WebsiteUrl = "https://example.com",
-            WebsiteKey = "0x4AAAAAAABUYP0XeMJF0xoy",
-            Data = "data_here",
-            PageAction = "managed",
-            CloudflareTaskType = "token",
-            PageData = "pagedata_here",
-            UserAgent = "userAgentPlaceholder",
-
-            Proxy = new ProxyContainer(
-                "123.45.67.89",      
-                8080,              
-                ProxyType.Http,   
-                "username", 
-                "password"  
-            )
-        };
-        */
-
-        // 如有必要，可以检查余额 
-        var balance = await cmCloudClient.GetBalanceAsync();
-        Console.WriteLine("Balance: " + balance);
-
-        var turnstileResult = await cmCloudClient.SolveAsync(turnstileRequest);
-
-        Console.WriteLine("Solution: " + turnstileResult.Solution.Value);
-    }
-}
-```
-
-</details>
-
-<details>
-<summary> 选项 3： Challenge (cookie `cf_clearance`)</summary>
-
-```csharp
-// https://github.com/ZennoLab/capmonstercloud-client-dotnet
-
-using Zennolab.CapMonsterCloud;
-using Zennolab.CapMonsterCloud.Requests;
-
-class Program
-{
-    static async Task Main(string[] args)
-    {
-        var clientOptions = new ClientOptions
-        {
-            ClientKey = "YOUR_API_KEY" // 输入您的 CapMonster Cloud API 密钥
-        };
-
-        var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
-        
-        // Cloudflare cf_clearance 只能使用您的代理解决
-        var turnstileRequest = new TurnstileRequest
-        {
-            WebsiteUrl = "https://example.com",     // 验证码页面的 URL        
-            WebsiteKey = "0x4AAAAAAADnPIDROrmt1Wwj",  // 替换为正确的值     
-            CloudflareTaskType = "cf_clearance",                                    
-            HtmlPageBase64 = "htmlPageBase64Here",        
-            UserAgent = "userAgentPlaceholder", 
-
-            Proxy = new ProxyContainer(
-                "123.45.67.89",       // 代理地址
-                8080,                 // 代理端口
-                ProxyType.Http,       // 代理类型
-                "username",           // 代理用户名
-                "password"            // 代理密码
-            )
-        };
-
-        var turnstileResult = await cmCloudClient.SolveAsync(turnstileRequest);
-
-        Console.WriteLine("Solution: " + turnstileResult.Solution.Clearance);
-    }
-}
-```
-
-</details>
   </TabItem>
 </Tabs>
-
