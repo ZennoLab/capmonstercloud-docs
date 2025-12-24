@@ -59,6 +59,11 @@ import { ArticleHead } from '../../src/theme/ArticleHead';
     <TaskImage>![](./images/ComplexImageTask-Recognition/bills_audio.png)</TaskImage>
     <TaskImageText title="bills_audio" captchaId="complex-rec_bills_audio" />
   </TaskImageBlock>
+
+  <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#dli_ensemble">
+    <TaskImage>![](./images/ComplexImageTask-Recognition/dli_ensemble.png)</TaskImage>
+    <TaskImageText title="dli_ensemble" captchaId="complex-rec_oocl_rotate_new" />
+  </TaskImageBlock>
 </TaskImageWrapper>
 
 ---
@@ -109,23 +114,23 @@ import { ArticleHead } from '../../src/theme/ArticleHead';
 		```
 	</MethodItem>
 	<MethodDescription>
-		**Запрос**
-		```json
-		{
-			"clientKey": "API_KEY",
-			"task": {
-				"type": "ComplexImageTask",
-				"class": "recognition",
-				"imagesBase64": [
-					"{background_base64}",
-					"{circle_base64}"
-				],
-				"metadata": {
-					"Task": "oocl_rotate_new"
-				}
-			}
-		}
-		```
+  **Запрос**
+  ```json
+  {
+    "clientKey": "API_KEY",
+    "task": {
+      "type": "ComplexImageTask",
+      "class": "recognition",
+      "imagesBase64": [
+        "{background_base64}",
+        "{circle_base64}"
+      ],
+      "metadata": {
+        "Task": "oocl_rotate_new"
+      }
+    }
+  }
+  ```
 
     	Пример фона (*background_base64*):
 
@@ -162,21 +167,20 @@ import { ArticleHead } from '../../src/theme/ArticleHead';
 		  "taskId": 407533072
 		}
 		```
-		**Ответ**
-		Градусы, на которые необходимо повернуть круг по часовой стрелке.
-		```json
-		{
-		  "errorId":0,
-		  "status":"ready",
-		  "errorCode":null,
-		  "errorDescription":null,
-		  "solution": 
-		  {
-			  "answer":[130.90909],
-			  "metadata":{"AnswerType":"NumericArray"}
-		  }		   
-		}
-		```
+		**Ответ:** градусы, на которые необходимо повернуть круг по часовой стрелке.
+      ```json
+      {
+        "errorId":0,
+        "status":"ready",
+        "errorCode":null,
+        "errorDescription":null,
+        "solution": 
+        {
+          "answer":[130.90909],
+          "metadata":{"AnswerType":"NumericArray"}
+        }		   
+      }
+      ```
 	</MethodDescription>
 </TabItem>
 
@@ -197,24 +201,24 @@ import { ArticleHead } from '../../src/theme/ArticleHead';
 		```
 	</MethodItem>
 	<MethodDescription>
-		**Запрос**
-		```json
-		{ 
-			"clientKey": "API_KEY",
-			"task": {
-				"type": "ComplexImageTask",
-				"class": "recognition",
-				"imagesBase64": [
-					"{background_base64}",
-					"{ring_base64}",
-					"{circle_base64}"
-				],
-				"metadata": {
-					"Task": "oocl_rotate_double_new"
-				}
-			}
-		}
-		```
+  **Запрос**
+  ```json
+  { 
+    "clientKey": "API_KEY",
+    "task": {
+      "type": "ComplexImageTask",
+      "class": "recognition",
+      "imagesBase64": [
+        "{background_base64}",
+        "{ring_base64}",
+        "{circle_base64}"
+      ],
+      "metadata": {
+        "Task": "oocl_rotate_double_new"
+      }
+    }
+  }
+  ```
 
     	Фон (*background_base64*):
 
@@ -255,21 +259,20 @@ import { ArticleHead } from '../../src/theme/ArticleHead';
 		  "taskId": 407533072
 		}
 		```
-		**Ответ**
-		Градусы, на которые необходимо повернуть кольцо против часовой и круг по часовой.
-		```json
-		{
-		  "errorId":0,
-		  "status":"ready",
-		  "errorCode":null,
-		  "errorDescription":null,
-		  "solution": 
-		  {
-			  "answer":[130.90909],
-			  "metadata":{"AnswerType":"NumericArray"}
-		  }		   
-		}
-		```
+		**Ответ:** градусы, на которые необходимо повернуть кольцо против часовой и круг по часовой.
+      ```json
+      {
+        "errorId":0,
+        "status":"ready",
+        "errorCode":null,
+        "errorDescription":null,
+        "solution": 
+        {
+          "answer":[130.90909],
+          "metadata":{"AnswerType":"NumericArray"}
+        }		   
+      }
+      ```
 	</MethodDescription>
 </TabItem>
 
@@ -291,30 +294,30 @@ import { ArticleHead } from '../../src/theme/ArticleHead';
 		```
 	</MethodItem>
 	<MethodDescription>
-		**Запрос**
-		```json
-		{ 
-			"clientKey": "API_KEY",
-			"task": {
-				"type": "ComplexImageTask",
-				"class": "recognition",
-				"imagesBase64": [
-					"{image_1_Base64}",
-					"{image_2_Base64}",
-					"{image_3_Base64}",
-					"{image_4_Base64}",
-					"{image_5_Base64}",
-					"{image_6_Base64}",
-					"{image_7_Base64}",
-					"{image_8_Base64}",
-					"{image_9_Base64}",
-				],
-				"metadata": {
-					"Task": "betpunch_3x3_rotate"
-				}
-			}
-		}
-		```
+      **Запрос**
+      ```json
+      { 
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "ComplexImageTask",
+          "class": "recognition",
+          "imagesBase64": [
+            "{image_1_Base64}",
+            "{image_2_Base64}",
+            "{image_3_Base64}",
+            "{image_4_Base64}",
+            "{image_5_Base64}",
+            "{image_6_Base64}",
+            "{image_7_Base64}",
+            "{image_8_Base64}",
+            "{image_9_Base64}",
+          ],
+          "metadata": {
+            "Task": "betpunch_3x3_rotate"
+          }
+        }
+      }
+      ```
 
     	**Ответ**
     	```json
@@ -343,21 +346,21 @@ import { ArticleHead } from '../../src/theme/ArticleHead';
 		  "taskId": 407533072
 		}
 		```
-		**Ответ**
-		"answer":[X,X,X,X,X,X,X,X,X], где X - целочисленное значение от 1 до 4 для каждого изображения. 4 - означает, что картинку не нужно поворачивать; 1-3 - количество поворотов картинки против часовой стрелки.
-		```json
-		{
-			"errorId":0,
-			"status":"ready",
-			"errorCode":null,
-			"errorDescription":null,
-			"solution":
-			{
-				"answer":[4,4,4,4,4,3,1,2,2],
-				"metadata":{"AnswerType":"NumericArray"}
-			}
-		}
-		```
+      **Ответ**
+      "answer":[X,X,X,X,X,X,X,X,X], где X - целочисленное значение от 1 до 4 для каждого изображения. 4 - означает, что картинку не нужно поворачивать; 1-3 - количество поворотов картинки против часовой стрелки.
+      ```json
+      {
+        "errorId":0,
+        "status":"ready",
+        "errorCode":null,
+        "errorDescription":null,
+        "solution":
+        {
+          "answer":[4,4,4,4,4,3,1,2,2],
+          "metadata":{"AnswerType":"NumericArray"}
+        }
+      }
+      ```
 	</MethodDescription>
 </TabItem>
 
@@ -381,32 +384,32 @@ import { ArticleHead } from '../../src/theme/ArticleHead';
 		```
 	</MethodItem>
 	<MethodDescription>
-		**Запрос**
-		```json
-		{
-			"clientKey":{{API_key}},
-			"task": 
-			{
-				"type": "ComplexImageTask",
-				"class": "recognition",
-				"imagesBase64": [
-					"image1_to_base64",
-					"image2_to_base64",
-					"image3_to_base64",
-					"image4_to_base64",
-					"image5_to_base64",
-					"image6_to_base64",
-					"image7_to_base64",
-					"image8_to_base64",
-					"image9_to_base64"
-				],
-				"metadata": {
-					"Task": "bls_3x3",
-					"TaskArgument": "123"
-				}
-			}
-		}
-		```
+      **Запрос**
+      ```json
+      {
+        "clientKey":{{API_key}},
+        "task": 
+        {
+          "type": "ComplexImageTask",
+          "class": "recognition",
+          "imagesBase64": [
+            "image1_to_base64",
+            "image2_to_base64",
+            "image3_to_base64",
+            "image4_to_base64",
+            "image5_to_base64",
+            "image6_to_base64",
+            "image7_to_base64",
+            "image8_to_base64",
+            "image9_to_base64"
+          ],
+          "metadata": {
+            "Task": "bls_3x3",
+            "TaskArgument": "123"
+          }
+        }
+      }
+      ```
 
     	Пример задания:
 
@@ -453,20 +456,20 @@ import { ArticleHead } from '../../src/theme/ArticleHead';
 		  "taskId": 143998457
 		}
 		```
-		**Ответ**
-		Массив значений с элементами true или false, в зависимости от того является ли число на картинке искомым аргументом или нет.  
-		```json
-		{
-		  "errorId":0,
-		  "status":"ready",
-		  "errorCode":null,
-		  "errorDescription":null,
-		  "solution": 
-		  {
-			"answer":[true,true,false,false,true,false,false,true,true],
-			"metadata":{"AnswerType":"Grid"}
-		  }
-		}
+		**Ответ:**
+		массив значений с элементами true или false, в зависимости от того является ли число на картинке искомым аргументом или нет.  
+      ```json
+      {
+        "errorId":0,
+        "status":"ready",
+        "errorCode":null,
+        "errorDescription":null,
+        "solution": 
+        {
+        "answer":[true,true,false,false,true,false,false,true,true],
+        "metadata":{"AnswerType":"Grid"}
+        }
+      }
 		```
 	</MethodDescription>
 </TabItem>
@@ -488,22 +491,22 @@ import { ArticleHead } from '../../src/theme/ArticleHead';
 		```
 	</MethodItem>
 	<MethodDescription>
-		**Запрос**
-		```json
-{
-		    "clientKey": "API_KEY",
-		    "task": {
-			"type": "ComplexImageTask",
-			"class": "recognition",
-			"imagesBase64": [
-			   "base64"
-			],
-			"metadata": {
-			    "Task": "shein"
-		        }
-	        }
-}
-		```
+      **Запрос**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "ComplexImageTask",
+          "class": "recognition",
+          "imagesBase64": [
+            "base64"
+          ],
+          "metadata": {
+            "Task": "shein"
+          }
+        }
+      }
+      ```
 
     	Примеры задания:
 
@@ -537,22 +540,26 @@ import { ArticleHead } from '../../src/theme/ArticleHead';
 		  "taskId": 143998457
 		}
 		```
-		**Ответ**
-		Координаты на которые необходимо кликнуть в определенном порядке.
-		```json
-{
-    "solution":
-	{
-	    "answer":[{"X":68.99999964,"Y":201.954889},{"X":127.99999783999999,"Y":281.54887104},{"X":181.00000776,"Y":49.894734680000006}],
-		"metadata":{"AnswerType":"Coordinate"}
-	},
-		"cost":0.0003,
-		"status":"ready",
-		"errorId":0,
-		"errorCode":null,
-		"errorDescription":null
-}
-		```
+		**Ответ:**: координаты, на которые необходимо кликнуть в определенном порядке.
+      ```json
+      {
+        "solution": {
+          "answer": [
+            { "X": 69.0, "Y": 201.954889 },
+            { "X": 128.0, "Y": 281.54887104 },
+            { "X": 181.00000776, "Y": 49.89473468 }
+          ],
+          "metadata": {
+            "AnswerType": "Coordinate"
+          }
+        },
+        "cost": 0.0003,
+        "status": "ready",
+        "errorId": 0,
+        "errorCode": null,
+        "errorDescription": null
+      }
+      ```
 	</MethodDescription>
 </TabItem>
 
@@ -577,33 +584,33 @@ import { ArticleHead } from '../../src/theme/ArticleHead';
 		```
 	</MethodItem>
 	<MethodDescription>
-		**Запрос**
-		```json
-		{
-			"clientKey": "API_KEY",
-			"task": 
-			{
-				"type": "ComplexImageTask",
-				"class": "recognition",
-				"imagesBase64": ["base64"],
-				"metadata": {
-					"Task": "baidu"
-				}
-			}
-		}
-		```
+      **Запрос**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": 
+        {
+          "type": "ComplexImageTask",
+          "class": "recognition",
+          "imagesBase64": ["base64"],
+          "metadata": {
+            "Task": "baidu"
+          }
+        }
+      }
+      ```
 
     	Примеры задания:
 
     	![](./images/ComplexImageTask-Recognition/baidu.png)
 
-    	**Ответ**
-    	```json
-    	{
-    		"errorId":0,
-    		"taskId":143998457
-    	}
-    	```
+        **Ответ**
+        ```json
+        {
+          "errorId":0,
+          "taskId":143998457
+        }
+        ```
     </MethodDescription>
 
 </TabItem>
@@ -617,29 +624,28 @@ import { ArticleHead } from '../../src/theme/ArticleHead';
 		```
 	</MethodItem>
 	<MethodDescription>
-		**Запрос**
-		```json
-		{
-			"clientKey":"API_KEY",
-			"taskId": 143998457
-		}
-		```
-		**Ответ**
-		Градусы, на которые необходимо повернуть картинку по часовой стрелке.
-		```json
-		{
-			"solution":
-			{
-				"answer":[297],
-				"metadata":{"AnswerType":"NumericArray"}
-			},
-			"cost":0.0005,
-			"status":"ready",
-			"errorId":0,
-			"errorCode":null,
-			"errorDescription":null
-		}
-		```
+      **Запрос**
+      ```json
+      {
+        "clientKey":"API_KEY",
+        "taskId": 143998457
+      }
+      ```
+		**Ответ:** градусы, на которые необходимо повернуть картинку по часовой стрелке.
+      ```json
+      {
+        "solution":
+        {
+          "answer":[297],
+          "metadata":{"AnswerType":"NumericArray"}
+        },
+        "cost":0.0005,
+        "status":"ready",
+        "errorId":0,
+        "errorCode":null,
+        "errorDescription":null
+      }
+      ```
 	</MethodDescription>
 </TabItem>
 ---
@@ -663,23 +669,23 @@ import { ArticleHead } from '../../src/theme/ArticleHead';
     ```
     </MethodItem>
     <MethodDescription>
-    **Запрос**
-    ```json
-    {
-        "clientKey": "API_KEY",
-        "task": {
-            "type": "ComplexImageTask",
-            "class": "recognition",
-            "imagesBase64": [
-                "UklGRnjuAwBXQVZFZm10...f/2f/9/6z/vf8MAAAA"
-            ],
-            "metadata": {
-                "Task": "bills_audio",
-                "PayloadType": "Audio"
-            }
-        }
-    }
-    ```
+      **Запрос**
+      ```json
+      {
+          "clientKey": "API_KEY",
+          "task": {
+              "type": "ComplexImageTask",
+              "class": "recognition",
+              "imagesBase64": [
+                  "UklGRnjuAwBXQVZFZm10...f/2f/9/6z/vf8MAAAA"
+              ],
+              "metadata": {
+                  "Task": "bills_audio",
+                  "PayloadType": "Audio"
+              }
+          }
+      }
+      ```
 
     **Ответ**
     ```json
@@ -707,19 +713,18 @@ import { ArticleHead } from '../../src/theme/ArticleHead';
         "taskId": 143998457
     }
     ```
-    **Ответ**  
-    В ответе возвращаются цифры из аудио.
+    **Ответ:**  в ответе возвращаются цифры из аудио.
     ```json
     {
-        "solution": {
-            "answer": [6, 8, 4, 1, 2, 3],
-            "metadata": {"AnswerType": "Text"}
-        },
-        "cost": 0.0008,
-        "status": "ready",
-        "errorId": 0,
-        "errorCode": null,
-        "errorDescription": null
+      "solution": {
+          "answer": [6, 8, 4, 1, 2, 3],
+          "metadata": {"AnswerType": "Text"}
+      },
+      "cost": 0.0008,
+      "status": "ready",
+      "errorId": 0,
+      "errorCode": null,
+      "errorDescription": null
     }
     ```
     </MethodDescription>
@@ -756,6 +761,95 @@ console.log("Файл успешно конвертирован в Base64 и с�
 ```
 
 6. Используйте полученную строку Base64 в запросе на решение в CapMonster Cloud.
+
+---
+
+## dli_ensemble
+
+### Создание задачи `dli_ensemble`
+
+В запросе нужно передать одно изображение (вместе с текстом) в формате base64.
+
+<PriceBlockWrap>
+  <PriceBlock title="dli_ensemble" captchaId="complex-rec_oocl_rotate_new" />
+</PriceBlockWrap>
+
+<TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/createTask
+		```
+    </MethodItem>
+    <MethodDescription>
+      **Запрос**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "ComplexImageTask",
+          "class": "recognition",
+          "imagesBase64": [
+            "base64"
+          ],
+          "metadata": {
+            "Task": "dli"
+          }
+        }
+      }
+      ```
+
+    	**Примеры задания:**
+
+    	![](./images/ComplexImageTask-Recognition/dli_1.png)
+    	![](./images/ComplexImageTask-Recognition/dli_2.png)
+
+    	**Ответ**
+    	```json
+    	{
+    	  "errorId":0,
+    	  "taskId":143998457
+    	}
+    	```
+    </MethodDescription>
+
+</TabItem>
+
+### Получение результата задачи `dli_ensemble`
+
+<TabItem value="proxyless" label="ComplexImageTask (без прокси)" default className="method-panel-full">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Запрос**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 143998457
+		}
+		```
+		**Ответ:**
+		результат вычисления (числовое значение), переданный как строка:
+      ```json
+      {
+          "solution":
+        {
+          "answer": "1",
+          "metadata": {
+              "AnswerType": "Text"
+          }
+        },
+          "cost": 0.0003,
+          "status": "ready",
+          "errorId": 0,
+          "errorCode": null,
+          "errorDescription": null
+      }
+      ```
+	</MethodDescription>
+</TabItem>
 
 ---
 
