@@ -56,6 +56,12 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
     <TaskImage>![](./images/ComplexImageTask-Recognition/bills_audio.png)</TaskImage>
     <TaskImageText title="bills_audio" captchaId="complex-rec_bills_audio" />
   </TaskImageBlock>
+
+  <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#dli_ensemble">
+    <TaskImage>![](./images/ComplexImageTask-Recognition/dli_ensemble.png)</TaskImage>
+    <TaskImageText title="dli_ensemble" captchaId="complex-rec_oocl_rotate_new" />
+  </TaskImageBlock>
+
 </TaskImageWrapper>
 
 :::warning **Atenção!**
@@ -105,23 +111,23 @@ Na solicitação, passamos duas imagens: fundo e círculo.
   ```
 </MethodItem>
 <MethodDescription>
-**Solicitação**
-```json
-{
-    "clientKey": "API_KEY",
-    "task": {
+    **Solicitação**
+    ```json
+      {
+      "clientKey": "API_KEY",
+      "task": {
         "type": "ComplexImageTask",
         "class": "recognition",
         "imagesBase64": [
-			"{background_base64}",
-			"{circle_base64}"
-		],
+          "{background_base64}",
+          "{circle_base64}"
+        ],
         "metadata": {
-            "Task": "oocl_rotate_new"
+          "Task": "oocl_rotate_new"
         }
+      }
     }
-}
-```
+    ```
 
 Exemplo de fundo (_background_base64_):
 
@@ -133,12 +139,12 @@ Exemplo de círculo (_circle_base64_):
 
 **Resposta**
 
-```json
-{
-  "errorId": 0,
-  "taskId": 407533072
-}
-```
+  ```json
+  {
+    "errorId": 0,
+    "taskId": 407533072
+  }
+  ```
 
 </MethodDescription>
 </TabItem>
@@ -159,21 +165,20 @@ https://api.capmonster.cloud/getTaskResult
 		  "taskId": 407533072
 		}
 		```
-		**Resposta**
-		Graus pelos quais o círculo deve ser girado no sentido horário.
-		```json
-		{
-		  "errorId":0,
-		  "status":"ready",
-		  "errorCode":null,
-		  "errorDescription":null,
-		  "solution": 
-		  {
-			  "answer":[130.90909],
-			  "metadata":{"AnswerType":"NumericArray"}
-		  }		   
-		}
-		```
+		**Resposta:** graus pelos quais o círculo deve ser girado no sentido horário.
+      ```json
+      {
+        "errorId":0,
+        "status":"ready",
+        "errorCode":null,
+        "errorDescription":null,
+        "solution": 
+        {
+          "answer":[130.90909],
+          "metadata":{"AnswerType":"NumericArray"}
+        }		   
+      }
+      ```
   </MethodDescription>
   </TabItem>
 
@@ -195,23 +200,23 @@ Na solicitação, passamos três imagens: fundo, anel, círculo.
 </MethodItem>
 <MethodDescription>
 **Solicitação**
-```json
-{ 
+  ```json
+  { 
     "clientKey": "API_KEY",
     "task": {
-        "type": "ComplexImageTask",
-        "class": "recognition",
-        "imagesBase64": [
-			"{background_base64}",
-			"{ring_base64}",
-			"{circle_base64}"
-		],
-        "metadata": {
-            "Task": "oocl_rotate_double_new"
-        }
+      "type": "ComplexImageTask",
+      "class": "recognition",
+      "imagesBase64": [
+        "{background_base64}",
+        "{ring_base64}",
+        "{circle_base64}"
+      ],
+      "metadata": {
+        "Task": "oocl_rotate_double_new"
+      }
     }
-}
-```
+  }
+  ```
 
 Fundo (_background_base64_):
 
@@ -253,21 +258,20 @@ https://api.capmonster.cloud/getTaskResult
 		  "taskId": 407533072
 		}
 		```
-		**Resposta**
-		Graus pelos quais o anel deve ser girado no sentido anti-horário e o círculo no sentido horário.
-		```json
-		{
-		  "errorId":0,
-		  "status":"ready",
-		  "errorCode":null,
-		  "errorDescription":null,
-		  "solution": 
-		  {
-			  "answer":[130.90909],
-			  "metadata":{"AnswerType":"NumericArray"}
-		  }		   
-		}
-		```
+		**Resposta:** graus pelos quais o anel deve ser girado no sentido anti-horário e o círculo no sentido horário.
+      ```json
+      {
+        "errorId":0,
+        "status":"ready",
+        "errorCode":null,
+        "errorDescription":null,
+        "solution": 
+        {
+          "answer":[130.90909],
+          "metadata":{"AnswerType":"NumericArray"}
+        }		   
+      }
+      ```
   </MethodDescription>
   </TabItem>
 
@@ -290,29 +294,29 @@ Na solicitação, passamos nove imagens. As imagens devem ser passadas na seguin
 </MethodItem>
 <MethodDescription>
 **Solicitação**
-```json
-{ 
-    "clientKey": "API_KEY",
-    "task": {
-        "type": "ComplexImageTask",
-        "class": "recognition",
-        "imagesBase64": [
-			"{image_1_Base64}",
-			"{image_2_Base64}",
-			"{image_3_Base64}",
-			"{image_4_Base64}",
-			"{image_5_Base64}",
-			"{image_6_Base64}",
-			"{image_7_Base64}",
-			"{image_8_Base64}",
-			"{image_9_Base64}",
-		],
-        "metadata": {
+      ```json
+      { 
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "ComplexImageTask",
+          "class": "recognition",
+          "imagesBase64": [
+            "{image_1_Base64}",
+            "{image_2_Base64}",
+            "{image_3_Base64}",
+            "{image_4_Base64}",
+            "{image_5_Base64}",
+            "{image_6_Base64}",
+            "{image_7_Base64}",
+            "{image_8_Base64}",
+            "{image_9_Base64}",
+          ],
+          "metadata": {
             "Task": "betpunch_3x3_rotate"
+          }
         }
-    }
-}
-```
+      }
+      ```
 
 **Resposta**
 
@@ -342,21 +346,22 @@ https://api.capmonster.cloud/getTaskResult
 		  "taskId": 407533072
 		}
 		```
-		**Resposta**
-		"answer":[X,X,X,X,X,X,X,X,X], onde X é um valor inteiro de 1 a 4 para cada imagem. 4 - significa que a imagem não precisa ser girada; 1-3 - o número de rotações no sentido anti-horário da imagem.
-		```json
-		{
-			"errorId":0,
-			"status":"ready",
-			"errorCode":null,
-			"errorDescription":null,
-			"solution":
-			{
-				"answer":[4,4,4,4,4,3,1,2,2],
-				"metadata":{"AnswerType":"NumericArray"}
-			}
-		}
-		```
+		**Resposta:** "answer": [X, X, X, X, X, X, X, X, X], onde X é um valor inteiro de 1 a 4 para cada imagem.  
+4 significa que a imagem não precisa ser girada;  
+1–3 indicam o número de rotações da imagem no sentido anti-horário.
+      ```json
+      {
+        "errorId":0,
+        "status":"ready",
+        "errorCode":null,
+        "errorDescription":null,
+        "solution":
+        {
+          "answer":[4,4,4,4,4,3,1,2,2],
+          "metadata":{"AnswerType":"NumericArray"}
+        }
+      }
+      ```
   </MethodDescription>
   </TabItem>
   
@@ -380,31 +385,31 @@ Também passamos o valor buscado TaskArgument nos metadata.
 	</MethodItem>
 	<MethodDescription>
 		**Solicitação**
-		```json
-		{
-			"clientKey":{{API_key}},
-			"task": 
-			{
-				"type": "ComplexImageTask",
-				"class": "recognition",
-				"imagesBase64": [
-					"image1_to_base64",
-					"image2_to_base64",
-					"image3_to_base64",
-					"image4_to_base64",
-					"image5_to_base64",
-					"image6_to_base64",
-					"image7_to_base64",
-					"image8_to_base64",
-					"image9_to_base64"
-				],
-				"metadata": {
-					"Task": "bls_3x3",
-					"TaskArgument": "123"
-				}
-			}
-		}
-		```
+      ```json
+      {
+        "clientKey":{{API_key}},
+        "task": 
+        {
+          "type": "ComplexImageTask",
+          "class": "recognition",
+          "imagesBase64": [
+            "image1_to_base64",
+            "image2_to_base64",
+            "image3_to_base64",
+            "image4_to_base64",
+            "image5_to_base64",
+            "image6_to_base64",
+            "image7_to_base64",
+            "image8_to_base64",
+            "image9_to_base64"
+          ],
+          "metadata": {
+            "Task": "bls_3x3",
+            "TaskArgument": "123"
+          }
+        }
+      }
+      ```
 
     	Exemplo de tarefa:
 
@@ -451,21 +456,20 @@ Também passamos o valor buscado TaskArgument nos metadata.
 		  "taskId": 143998457
 		}
 		```
-		**Resposta**
-		Um array de valores com elementos true ou false, dependendo se o número na imagem é o argumento buscado ou não. 
-		```json
-		{
-		  "errorId":0,
-		  "status":"ready",
-		  "errorCode":null,
-		  "errorDescription":null,
-		  "solution": 
-		  {
-			"answer":[true,true,false,false,true,false,false,true,true],
-			"metadata":{"AnswerType":"Grid"}
-		  }
-		}
-		```
+		**Resposta:** um array de valores com elementos true ou false, dependendo se o número na imagem é o argumento buscado ou não. 
+      ```json
+      {
+        "errorId":0,
+        "status":"ready",
+        "errorCode":null,
+        "errorDescription":null,
+        "solution": 
+        {
+        "answer":[true,true,false,false,true,false,false,true,true],
+        "metadata":{"AnswerType":"Grid"}
+        }
+      }
+      ```
 	</MethodDescription>
 </TabItem>
 
@@ -487,21 +491,21 @@ Na solicitação, passamos uma imagem no formato base64.
 	</MethodItem>
 	<MethodDescription>
 		**Solicitação**
-		```json
-{
-		    "clientKey": "API_KEY",
-		    "task": {
-			"type": "ComplexImageTask",
-			"class": "recognition",
-			"imagesBase64": [
-			   "base64"
-			],
-			"metadata": {
-			    "Task": "shein"
-		        }
-	        }
-}
-		```
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "ComplexImageTask",
+          "class": "recognition",
+          "imagesBase64": [
+            "base64"
+          ],
+          "metadata": {
+            "Task": "shein"
+          }
+        }
+      }
+      ```
 
     	Exemplo de tarefa:
 
@@ -535,21 +539,20 @@ Na solicitação, passamos uma imagem no formato base64.
 		  "taskId": 143998457
 		}
 		```
-		**Resposta**
-		Coordenadas a serem clicadas em uma ordem específica.  
+		**Resposta:** coordenadas a serem clicadas em uma ordem específica.  
 		```json
-{
-    "solution":
-	{
-	    "answer":[{"X":68.99999964,"Y":201.954889},{"X":127.99999783999999,"Y":281.54887104},{"X":181.00000776,"Y":49.894734680000006}],
-		"metadata":{"AnswerType":"Coordinate"}
-	},
-		"cost":0.0003,
-		"status":"ready",
-		"errorId":0,
-		"errorCode":null,
-		"errorDescription":null
-}
+      {
+          "solution":
+        {
+          "answer":[{"X":68.99999964,"Y":201.954889},{"X":127.99999783999999,"Y":281.54887104},{"X":181.00000776,"Y":49.894734680000006}],
+          "metadata":{"AnswerType":"Coordinate"}
+        },
+          "cost":0.0003,
+          "status":"ready",
+          "errorId":0,
+          "errorCode":null,
+          "errorDescription":null
+      }
 		```
 	</MethodDescription>
 </TabItem>
@@ -575,21 +578,21 @@ Na solicitação, passamos uma imagem no formato base64.
 		```
 	</MethodItem>
 	<MethodDescription>
-		**Solicitação**
-		```json
-		{
-			"clientKey": "API_KEY",
-			"task": 
-			{
-				"type": "ComplexImageTask",
-				"class": "recognition",
-				"imagesBase64": ["base64"],
-				"metadata": {
-					"Task": "baidu"
-				}
-			}
-		}
-		```
+    **Solicitação**
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "task": 
+      {
+        "type": "ComplexImageTask",
+        "class": "recognition",
+        "imagesBase64": ["base64"],
+        "metadata": {
+          "Task": "baidu"
+        }
+      }
+    }
+    ```
 
     	Exemplo de tarefa:
 
@@ -597,11 +600,11 @@ Na solicitação, passamos uma imagem no formato base64.
 
     	**Resposta**
     	```json
-    	{
-    		"errorId":0,
-    		"taskId":143998457
-    	}
-    	```
+        {
+          "errorId":0,
+          "taskId":143998457
+        }
+        ```
     </MethodDescription>
 
 </TabItem>
@@ -616,28 +619,27 @@ Na solicitação, passamos uma imagem no formato base64.
 	</MethodItem>
 	<MethodDescription>
 		**Solicitação**
-		```json
-		{
-			"clientKey":"API_KEY",
-			"taskId": 143998457
-		}
-		```
-		**Resposta**
-		Os graus pelos quais a imagem precisa ser rotacionada no sentido horário.  
-		```json
-		{
-			"solution":
-			{
-				"answer":[297],
-				"metadata":{"AnswerType":"NumericArray"}
-			},
-			"cost":0.0005,
-			"status":"ready",
-			"errorId":0,
-			"errorCode":null,
-			"errorDescription":null
-		}
-		```
+    ```json
+    {
+      "clientKey":"API_KEY",
+      "taskId": 143998457
+    }
+    ```
+		**Resposta:** os graus pelos quais a imagem precisa ser rotacionada no sentido horário.  
+      ```json
+      {
+        "solution":
+        {
+          "answer":[297],
+          "metadata":{"AnswerType":"NumericArray"}
+        },
+        "cost":0.0005,
+        "status":"ready",
+        "errorId":0,
+        "errorCode":null,
+        "errorDescription":null
+      }
+      ```
 	</MethodDescription>
 </TabItem>
 
@@ -665,26 +667,26 @@ O captcha de áudio `bills_audio` é uma versão sonora do "captcha de recibos",
     **Requisição**
     ```json
     {
-        "clientKey": "API_KEY",
-        "task": {
-            "type": "ComplexImageTask",
-            "class": "recognition",
-            "imagesBase64": [
-                "UklGRnjuAwBXQVZFZm10...f/2f/9/6z/vf8MAAAA"
-            ],
-            "metadata": {
-                "Task": "bills_audio",
-                "PayloadType": "Audio"
-            }
-        }
+      "clientKey": "API_KEY",
+      "task": {
+          "type": "ComplexImageTask",
+          "class": "recognition",
+          "imagesBase64": [
+              "UklGRnjuAwBXQVZFZm10...f/2f/9/6z/vf8MAAAA"
+          ],
+          "metadata": {
+              "Task": "bills_audio",
+              "PayloadType": "Audio"
+          }
+      }
     }
     ```
 
     **Resposta**
     ```json
     {
-        "errorId": 0,
-        "taskId": 143998457
+      "errorId": 0,
+      "taskId": 143998457
     }
     ```
     </MethodDescription>
@@ -702,23 +704,22 @@ O captcha de áudio `bills_audio` é uma versão sonora do "captcha de recibos",
     **Requisição**
     ```json
     {
-        "clientKey": "API_KEY",
-        "taskId": 143998457
+      "clientKey": "API_KEY",
+      "taskId": 143998457
     }
     ```
-    **Resposta**  
-    A resposta retorna os números extraídos do áudio.
+    **Resposta:**  a resposta retorna os números extraídos do áudio.
     ```json
     {
-        "solution": {
-            "answer": [6, 8, 4, 1, 2, 3],
-            "metadata": {"AnswerType": "Text"}
-        },
-        "cost": 0.0008,
-        "status": "ready",
-        "errorId": 0,
-        "errorCode": null,
-        "errorDescription": null
+      "solution": {
+          "answer": [6, 8, 4, 1, 2, 3],
+          "metadata": {"AnswerType": "Text"}
+      },
+      "cost": 0.0008,
+      "status": "ready",
+      "errorId": 0,
+      "errorCode": null,
+      "errorDescription": null
     }
     ```
     </MethodDescription>
@@ -756,6 +757,94 @@ console.log("O arquivo foi convertido com sucesso para Base64 e salvo como outpu
 ```
 
 6. Use a string Base64 obtida na requisição para resolver o captcha no CapMonster Cloud.
+
+---
+
+## dli_ensemble
+
+### Criar tarefa `dli_ensemble`
+
+Na requisição, é necessário enviar **uma única imagem** (junto com o texto) no formato **base64**.
+
+<PriceBlockWrap>
+  <PriceBlock title="dli_ensemble" captchaId="complex-rec_oocl_rotate_new" />
+</PriceBlockWrap>
+
+<TabItem value="proxyless" label="ComplexImageTask (sem proxy)" default className="method-panel">
+  <MethodItem>
+    ```http
+    https://api.capmonster.cloud/createTask
+    ```
+  </MethodItem>
+  <MethodDescription>
+    **Requisição**
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "task": {
+        "type": "ComplexImageTask",
+        "class": "recognition",
+        "imagesBase64": [
+          "base64"
+        ],
+        "metadata": {
+          "Task": "dli"
+        }
+      }
+    }
+    ```
+
+    **Exemplos de tarefa:**
+
+    ![](./images/ComplexImageTask-Recognition/dli_1.png)
+    ![](./images/ComplexImageTask-Recognition/dli_2.png)
+
+    **Resposta**
+    ```json
+    {
+      "errorId": 0,
+      "taskId": 143998457
+    }
+    ```
+  </MethodDescription>
+</TabItem>
+
+### Obter resultado da tarefa `dli_ensemble`
+
+<TabItem value="proxyless" label="ComplexImageTask (sem proxy)" default className="method-panel-full">
+  <MethodItem>
+    ```http
+    https://api.capmonster.cloud/getTaskResult
+    ```
+  </MethodItem>
+  <MethodDescription>
+    **Requisição**
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "taskId": 143998457
+    }
+    ```
+
+    **Resposta:**  
+    resultado do cálculo (**valor numérico**), retornado como **string**:
+    ```json
+    {
+      "solution": {
+        "answer": "1",
+        "metadata": {
+          "AnswerType": "Text"
+        }
+      },
+      "cost": 0.0003,
+      "status": "ready",
+      "errorId": 0,
+      "errorCode": null,
+      "errorDescription": null
+    }
+    ```
+  </MethodDescription>
+</TabItem>
 
 ---
 
