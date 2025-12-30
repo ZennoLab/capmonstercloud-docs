@@ -62,6 +62,14 @@ import { ArticleHead } from '../../src/theme/ArticleHead';
     Ваши куки от datadome. Можно получить на странице с помощью `document.cookie` (если куки не имеют флага *HttpOnly*), в заголовке запроса Set-Cookie: "datadome=...", либо напрямую из HTML-кода страницы `initialCid` ([*см. примеры, как найти datadomeCookie*](#как-найти-datadomecookie))
 
     ---
+   
+   <ParamItem title="datadomeVersion (внутри metadata)" type="string" />
+    Версия метода решения DataDome. <br />
+При значении "new" используется обновлённый метод с поддержкой обоих скриптов **i.js** и **c.js** (*более подробно см. ниже*).
+Если параметр не указан, применяется прежний метод решения, поддерживающий только **i.js**.
+
+    ---
+    
 
     <ParamItem title="proxyType" required type="string" />
     **http** - обычный http/https прокси;<br />
@@ -92,13 +100,6 @@ import { ArticleHead } from '../../src/theme/ArticleHead';
 
     <ParamItem title="proxyPassword" required type="string" />
     Пароль прокси-сервера.
-
-	 ---
-   
-   <ParamItem title="datadomeVersion (внутри metadata)" type="string" />
-    Версия метода решения DataDome. <br />
-При значении "new" используется обновлённый метод с поддержкой обоих скриптов **i.js** и **c.js** (*более подробно см. ниже*).
-Если параметр не указан, применяется прежний метод решения, поддерживающий только **i.js**.
 	  
     ---
 

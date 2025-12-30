@@ -62,6 +62,14 @@ Seus cookies do DataDome. Podem ser obtidos na página usando `document.cookie` 
 
 ---
 
+   
+<ParamItem title="datadomeVersion (dentro de metadata)" type="string" />
+Versão do método de resolução do DataDome.
+Quando definido como "new", é utilizado o método de resolução atualizado, com suporte para os scripts **i.js** e **c.js** (veja mais detalhes abaixo).
+Se o parâmetro não for especificado, será utilizado o método antigo, que oferece suporte apenas ao **i.js**.
+	  
+---
+
 <ParamItem title="proxyType" required type="string" />
 **http** - proxy http/https padrão;<br />
 **https** - use apenas se "http" não funcionar (necessário para alguns proxies customizados);<br />
@@ -92,13 +100,6 @@ Login do servidor proxy.
 <ParamItem title="proxyPassword" required type="string" />
 Senha do servidor proxy.
 
----
-   
-<ParamItem title="datadomeVersion (dentro de metadata)" type="string" />
-Versão do método de resolução do DataDome.
-Quando definido como "new", é utilizado o método de resolução atualizado, com suporte para os scripts **i.js** e **c.js** (veja mais detalhes abaixo).
-Se o parâmetro não for especificado, será utilizado o método antigo, que oferece suporte apenas ao **i.js**.
-	  
 ---
 
 

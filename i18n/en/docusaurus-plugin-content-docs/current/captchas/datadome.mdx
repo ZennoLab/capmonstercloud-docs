@@ -60,7 +60,16 @@ The main page URL where the captcha is solved.
 <ParamItem title="datadomeCookie (inside metadata)" required type="string" />
 Your DataDome cookies. Can be obtained from the page using `document.cookie` (if cookies do not have the *HttpOnly* flag), in the request header Set-Cookie: "datadome=...", or directly from the HTML code `initialCid` ([*see examples on how to find datadomeCookie*](#how-to-find-datadomecookie)).
 
+
 ---
+   
+<ParamItem title="datadomeVersion (inside metadata)" type="string" />
+DataDome solving method version.
+If set to "new", the updated solving method is used with support for both **i.js** and **c.js** scripts (*see details below*).
+If the parameter is not specified, the legacy solving method is applied, which supports only **i.js**.
+
+---
+
 
 <ParamItem title="proxyType" required type="string" />
 **http** - standard http/https proxy;<br />
@@ -92,12 +101,6 @@ Proxy server login.
 <ParamItem title="proxyPassword" required type="string" />
 Proxy server password.
 
----
-   
-<ParamItem title="datadomeVersion (inside metadata)" type="string" />
-DataDome solving method version.
-If set to "new", the updated solving method is used with support for both **i.js** and **c.js** scripts (*see details below*).
-If the parameter is not specified, the legacy solving method is applied, which supports only **i.js**.
 	  
 ---
 

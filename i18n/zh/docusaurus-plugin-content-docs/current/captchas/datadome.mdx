@@ -61,6 +61,14 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 您的DataDome Cookie。可以通过页面的 `document.cookie` 获取（如果Cookie没有 *HttpOnly* 标志），通过请求头 Set-Cookie: "datadome=..."，或直接从HTML代码中的 `initialCid` 获取 ([*查看如何找到datadomeCookie示例*](#如何找到datadomecookie))。
 
 ---
+   
+<ParamItem title="datadomeVersion (在metadata中)" type="string" />
+DataDome 解决方法版本。
+当参数设置为 "new" 时，将使用更新后的解决方案，支持 **i.js** 和 **c.js** 两种脚本（详见下文）。
+如果未指定该参数，则使用旧版解决方案，仅支持 **i.js**。
+
+---
+
 
 <ParamItem title="proxyType" required type="string" />
 **http** - 常规http/https代理；<br />
@@ -91,13 +99,6 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 
 <ParamItem title="proxyPassword" required type="string" />
 代理服务器密码。
-
----
-   
-<ParamItem title="datadomeVersion (在metadata中)" type="string" />
-DataDome 解决方法版本。
-当参数设置为 "new" 时，将使用更新后的解决方案，支持 **i.js** 和 **c.js** 两种脚本（详见下文）。
-如果未指定该参数，则使用旧版解决方案，仅支持 **i.js**。
 	  
 ---
 
