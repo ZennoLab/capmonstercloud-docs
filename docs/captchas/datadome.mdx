@@ -94,7 +94,14 @@ import { ArticleHead } from '../../src/theme/ArticleHead';
     Пароль прокси-сервера.
 
 	 ---
-	 
+   
+   <ParamItem title="datadomeVersion (внутри metadata)" type="string" />
+    Версия метода решения DataDome. <br />
+При значении "new" используется обновлённый метод с поддержкой обоих скриптов **i.js** и **c.js** (*более подробно см. ниже*).
+Если параметр не указан, применяется прежний метод решения, поддерживающий только **i.js**.
+	  
+    ---
+
     <ParamItem title="userAgent" type="string" />
     User-Agent браузера. <br />
   **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является**: `userAgentPlaceholder`
@@ -105,10 +112,8 @@ import { ArticleHead } from '../../src/theme/ArticleHead';
 
 ## Метод создания задачи
 
-:::warning **Важно**
 В процессе загрузки на странице DataDome может использовать один из двух скриптов: `c.js` или `i.js`.
-Если на целевом сайте используется `c.js`, извлечённые куки могут не сработать при подтверждении решения. Перед решением рекомендуется проверить, какой скрипт загружается (**DevTools → Network / HTML**).
-:::
+Перед решением рекомендуется проверить, какой скрипт загружается (**DevTools → Network / HTML**).
 
 **Вариант с `c.js`:**
 
@@ -136,7 +141,8 @@ import { ArticleHead } from '../../src/theme/ArticleHead';
     "userAgent": "userAgentPlaceholder",
     "metadata": {
       "captchaUrl": "https://geo.captcha-delivery.com/interstitial/?initialCid=AHrlqAAAAAMA9UvsL58YLqIAXNLFPg%3D%3D&hash=C0705ACD75EBF650A07FF8291D3528&cid=7sfa5xUfDrR4bQTp1c2mhtiD7jj9TXExcQypjdNAxKVFyIi1S9tE0~_mqLa2EFpOuzxKcZloPllsNHjNnqzD9HmBA4hEv7SsEyPYEidCBvjZEaDyfRyzefFfolv0lAHM&referer=https%3A%2F%2Fwww.example.com.au%2F&s=6522&b=978936&dm=cm",
-      "datadomeCookie": "datadome=VYUWrgJ9ap4zmXq8Mgbp...64emvUPeON45z"
+      "datadomeCookie": "datadome=VYUWrgJ9ap4zmXq8Mgbp...64emvUPeON45z",
+      "datadomeVersion": "new"
     },
     "proxyType": "http",
     "proxyAddress": "123.45.67.89",

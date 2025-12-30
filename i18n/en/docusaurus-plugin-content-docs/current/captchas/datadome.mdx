@@ -93,6 +93,14 @@ Proxy server login.
 Proxy server password.
 
 ---
+   
+<ParamItem title="datadomeVersion (inside metadata)" type="string" />
+DataDome solving method version.
+If set to "new", the updated solving method is used with support for both **i.js** and **c.js** scripts (*see details below*).
+If the parameter is not specified, the legacy solving method is applied, which supports only **i.js**.
+	  
+---
+
 
 <ParamItem title="userAgent" type="string" />
 Browser User-Agent.  
@@ -104,10 +112,8 @@ Browser User-Agent.
 
 ## Create task method
 
-:::warning **Important**
 During page loading, DataDome may use one of two scripts: `c.js` or `i.js`.
-If `c.js` is used on the target site, extracted cookies may not work for verification. Before solving, check which script is loaded (**DevTools → Network / HTML**).
-:::
+Before solving, check which script is loaded (**DevTools → Network / HTML**).
 
 **Option with `c.js`:**
 
@@ -135,7 +141,8 @@ If `c.js` is used on the target site, extracted cookies may not work for verific
     "userAgent": "userAgentPlaceholder",
     "metadata": {
       "captchaUrl": "https://geo.captcha-delivery.com/interstitial/?initialCid=AHrlqAAAAAMA9UvsL58YLqIAXNLFPg%3D%3D&hash=C0705ACD75EBF650A07FF8291D3528&cid=7sfa5xUfDrR4bQTp1c2mhtiD7jj9TXExcQypjdNAxKVFyIi1S9tE0~_mqLa2EFpOuzxKcZloPllsNHjNnqzD9HmBA4hEv7SsEyPYEidCBvjZEaDyfRyzefFfolv0lAHM&referer=https%3A%2F%2Fwww.example.com.au%2F&s=6522&b=978936&dm=cm",
-      "datadomeCookie": "datadome=VYUWrgJ9ap4zmXq8Mgbp...64emvUPeON45z"
+      "datadomeCookie": "datadome=VYUWrgJ9ap4zmXq8Mgbp...64emvUPeON45z",
+      "datadomeVersion": "new"
     },
     "proxyType": "http",
     "proxyAddress": "123.45.67.89",

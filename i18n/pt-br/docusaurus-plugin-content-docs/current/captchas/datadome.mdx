@@ -93,6 +93,14 @@ Login do servidor proxy.
 Senha do servidor proxy.
 
 ---
+   
+<ParamItem title="datadomeVersion (dentro de metadata)" type="string" />
+Versão do método de resolução do DataDome.
+Quando definido como "new", é utilizado o método de resolução atualizado, com suporte para os scripts **i.js** e **c.js** (veja mais detalhes abaixo).
+Se o parâmetro não for especificado, será utilizado o método antigo, que oferece suporte apenas ao **i.js**.
+	  
+---
+
 
 <ParamItem title="userAgent" type="string" />
 User-Agent do navegador. <br />
@@ -106,7 +114,7 @@ User-Agent do navegador. <br />
 
 :::warning **Importante**
 Durante o carregamento da página, o DataDome pode usar um de dois scripts: `c.js` ou `i.js`.
-Se `c.js` for usado no site alvo, os cookies extraídos podem não funcionar na verificação. Antes de resolver, verifique qual script está carregado (**DevTools → Network / HTML**).
+Antes de resolver, verifique qual script está carregado (**DevTools → Network / HTML**).
 :::
 
 **Opção com `c.js`:**
@@ -135,7 +143,8 @@ Se `c.js` for usado no site alvo, os cookies extraídos podem não funcionar na 
     "userAgent": "userAgentPlaceholder",
     "metadata": {
       "captchaUrl": "https://geo.captcha-delivery.com/interstitial/?initialCid=AHrlqAAAAAMA9UvsL58YLqIAXNLFPg%3D%3D&hash=C0705ACD75EBF650A07FF8291D3528&cid=7sfa5xUfDrR4bQTp1c2mhtiD7jj9TXExcQypjdNAxKVFyIi1S9tE0~_mqLa2EFpOuzxKcZloPllsNHjNnqzD9HmBA4hEv7SsEyPYEidCBvjZEaDyfRyzefFfolv0lAHM&referer=https%3A%2F%2Fwww.example.com.au%2F&s=6522&b=978936&dm=cm",
-      "datadomeCookie": "datadome=VYUWrgJ9ap4zmXq8Mgbp...64emvUPeON45z"
+      "datadomeCookie": "datadome=VYUWrgJ9ap4zmXq8Mgbp...64emvUPeON45z",
+      "datadomeVersion": "new"
     },
     "proxyType": "http",
     "proxyAddress": "123.45.67.89",
