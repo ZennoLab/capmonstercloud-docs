@@ -61,6 +61,14 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 您的DataDome Cookie。可以通过页面的 `document.cookie` 获取（如果Cookie没有 *HttpOnly* 标志），通过请求头 Set-Cookie: "datadome=..."，或直接从HTML代码中的 `initialCid` 获取 ([*查看如何找到datadomeCookie示例*](#如何找到datadomecookie))。
 
 ---
+   
+<ParamItem title="datadomeVersion (在metadata中)" type="string" />
+DataDome 解决方法版本。
+当参数设置为 "new" 时，将使用更新后的解决方案，支持 **i.js** 和 **c.js** 两种脚本（详见下文）。
+如果未指定该参数，则使用旧版解决方案，仅支持 **i.js**。
+
+---
+
 
 <ParamItem title="proxyType" required type="string" />
 **http** - 常规http/https代理；<br />
@@ -91,7 +99,7 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 
 <ParamItem title="proxyPassword" required type="string" />
 代理服务器密码。
-
+	  
 ---
 
 <ParamItem title="userAgent" type="string" />
@@ -106,7 +114,7 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 
 :::warning **重要**
 在页面加载过程中，DataDome可能会使用两种脚本之一：`c.js` 或 `i.js`。
-如果目标网站使用 `c.js`，提取的Cookie可能无法用于验证。在执行解决方案之前，请检查加载了哪个脚本 (**DevTools → Network / HTML**)。
+在执行解决方案之前，请检查加载了哪个脚本 (**DevTools → Network / HTML**)。
 :::
 
 **使用 `c.js` 的情况：**
@@ -135,7 +143,8 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
     "userAgent": "userAgentPlaceholder",
     "metadata": {
       "captchaUrl": "https://geo.captcha-delivery.com/interstitial/?initialCid=AHrlqAAAAAMA9UvsL58YLqIAXNLFPg%3D%3D&hash=C0705ACD75EBF650A07FF8291D3528&cid=7sfa5xUfDrR4bQTp1c2mhtiD7jj9TXExcQypjdNAxKVFyIi1S9tE0~_mqLa2EFpOuzxKcZloPllsNHjNnqzD9HmBA4hEv7SsEyPYEidCBvjZEaDyfRyzefFfolv0lAHM&referer=https%3A%2F%2Fwww.example.com.au%2F&s=6522&b=978936&dm=cm",
-      "datadomeCookie": "datadome=VYUWrgJ9ap4zmXq8Mgbp...64emvUPeON45z"
+      "datadomeCookie": "datadome=VYUWrgJ9ap4zmXq8Mgbp...64emvUPeON45z",
+      "datadomeVersion": "new"
     },
     "proxyType": "http",
     "proxyAddress": "123.45.67.89",
