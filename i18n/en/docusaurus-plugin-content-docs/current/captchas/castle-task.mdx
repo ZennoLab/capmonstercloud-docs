@@ -1,0 +1,289 @@
+---
+sidebar_position: 24
+sidebar_label: Castle
+title: "Automatic detection and bypass of Castle | API"
+description: "Learn how to detect Castle using the API of the automatic captcha recognition and solving service CapMonster Cloud!" 
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+import PriceBlock from '@theme/PriceBlock';
+import PriceBlockWrap from '@theme/PriceBlockWrap';
+import { ArticleHead } from '../../../../../src/theme/ArticleHead';
+
+<ArticleHead slug="captchas/castle-task" />
+
+# Castle
+
+<PriceBlockWrap>
+  <PriceBlock title="Castle" captchaId="castle"/>
+</PriceBlockWrap>
+
+![](./images/castle/castle.png)
+
+:::warning **Attention!**
+CapMonster Cloud uses built-in proxies by default — their cost is already included in the service. You only need to specify your own proxies in cases where the website does not accept the token or access to the built-in services is restricted.
+
+If you are using a proxy with IP authorization, make sure to whitelist the address **65.21.190.34**.
+:::
+
+## Request parameters
+
+<TabItem value="proxy" label="CastleTask" className="bordered-panel">
+<ParamItem title="type" required type="string" />
+**CustomTask**
+
+---
+
+<ParamItem title="class" required type="string" />
+**Castle**
+
+---
+
+<ParamItem title="websiteURL" required type="string" />
+The URL of the page where Castle is located.
+
+---
+
+<ParamItem title="websiteKey" required type="string" />
+**Publishable Key**, the Castle identifier. It can be found on the page/in the site scripts.  
+Example: ```pk_1Tk5Yzr1WFzxrJCh7WzMZzY1rHpaOtdK```
+
+---
+
+<ParamItem title="wUrl (inside metadata)" required type="string" />
+Link to `cw.js`, for example: ```https://s.rsg.sc/auth/js/20251234bgef/build/cw.js```
+
+---
+
+<ParamItem title="swUrl (inside metadata)" required type="string" />
+Link to `csw.js`, for example: ```https://s.rsg.sc/auth/js/20251234bgef/build/cw.js```
+
+---
+
+<ParamItem title="count (inside metadata)" type="intenger" />
+Number of tokens — default is 1 (generation of 1 to 49 Castle tokens bound to the same browser session, i.e. with the same `__cuid` identifier).  
+If a value greater than 49 is specified, the maximum allowed number of tokens — 49 — will be returned, and the cost will be calculated based on this amount.
+
+---
+
+<ParamItem title="userAgent" type="string" />
+Browser User-Agent.  
+  **Pass only a valid UA from Windows OS. Currently it is**: `userAgentPlaceholder`
+
+---
+
+<ParamItem title="proxyType" type="string" />
+**http** - regular http/https proxy;<br />
+**https** - try this option only if "http" does not work (required for some custom proxies);<br />
+**socks4** - socks4 proxy;<br />
+**socks5** - socks5 proxy.
+
+---
+
+<ParamItem title="proxyAddress" type="string" />
+<p>
+Proxy IPv4/IPv6 IP address. Not allowed:   
+- use of transparent proxies (where the client IP is visible);  
+- use of proxies on local machines.
+</p>
+
+---
+
+<ParamItem title="proxyPort" type="integer" />
+Proxy port.
+
+---
+
+<ParamItem title="proxyLogin" type="string" />
+Proxy server login.
+
+---
+
+<ParamItem title="proxyPassword" type="string" />
+Proxy server password.
+
+</TabItem>
+
+## Create task method
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+
+  <TabItem value="proxyless" label="CustomTask (without proxy)" default className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      **Request**
+      ```json
+      {
+		"type": "CustomTask",
+		"Class": "Castle",
+		"websiteURL": "https://www.example.com/",
+		"websiteKey": "pk_1Tk5Yzr1WFzxrJCh7WzMZzY1rHpaOtdK",
+		"userAgent": "userAgentPlaceholder",
+		"metadata": {
+			"wUrl": "https://s.rsg.sc/auth/js/20251234bgef/build/cw.js",
+			"swUrl": "https://s.rsg.sc/auth/js/20251234bgef/build/csw.js",
+			"count":1
+		}
+}
+        ```
+        **Response**
+        ```json
+        {
+            "errorId": 0,
+            "taskId": 123456789
+        }
+        ```
+        </MethodDescription>
+    </TabItem>
+
+ <TabItem value="proxy" label="CustomTask (with proxy)" className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      **Request**
+      ```json
+      {
+		"type": "CustomTask",
+		"Class": "Castle",
+		"websiteURL": "https://www.example.com/",
+		"websiteKey": "pk_1Tk5Yzr1WFzxrJCh7WzMZzY1rHpaOtdK",
+		"userAgent": "userAgentPlaceholder",
+		"metadata": {
+			"wUrl": "https://s.rsg.sc/auth/js/20251234bgef/build/cw.js",
+			"swUrl": "https://s.rsg.sc/auth/js/20251234bgef/build/csw.js",
+			"count":1
+		}
+          "proxyType": "http",
+          "proxyAddress": "8.8.8.8",
+          "proxyPort": 8080,
+          "proxyLogin": "proxyLoginHere",
+          "proxyPassword": "proxyPasswordHere"
+        }
+      }
+      ```
+
+      **Response**
+      ```json
+      {
+        "errorId": 0,
+        "taskId": 407533072
+      }
+      ```
+    </MethodDescription>
+  </TabItem>
+
+</Tabs>
+
+## Get task result method
+
+Use the [getTaskResult](../api/methods/get-task-result.mdx) method to get the TenDI solution.
+
+<TabItem value="proxyless" label="CustomTask (without proxy)" default className="method-panel-full">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**Response**
+		```json
+        {
+            "errorId":0,
+            "status":"ready",
+            "solution":  {
+                "token": "Q05ApqxnT30x5d9Ue9obFbNcrDqhP4aFMMWCczlzeIT15F-cVmMUcNzvlMA7c8loVIYm7rSDZNOrqCI9ADF7woJmvRl1sfcgm1HXsHQrW1dfIVskGHjA0X892ZKVZpggl1G4ddQXBef4vHh3qTeagLU1QEzYpF7fO9ratvUFf6eE26fW1eyewAG9Gk7kuIrs5lXRvsBcD98ySlcFdOoaCzm5Tj7zQFwgAb43eYw-CtOE8qPCx4AUUVJQ6ZXMCB6b9AIHhCTAbIsYfir6XuO_63yA0SaVCqjBSW-f6aGYH4ZgwFSc0sp8vKVDgv2Do1HVfpxN8OCaXm3-YW7QgWiOD0SLMvO5q0G40Z52eAN7zTxmHdZewReqquJ8hhytS5t8t9sAJz2N7igJa4vrXaI7PU0w48PZvPo_u6aTJIOIY9ySvimRPjxPE2CiJiqo3DvrKtPHLMYetlQIQJOAYG1XdsuKtGs8IpP463xuVB011T6FY2KXlUKP-47fyEL1wF_8xRfCS66ccIrGobEKO6w0gcSrdpwgXbgCs0DTarZgAL_qhN6-rWVW2ia2FI-i06LzuwvrUoRTtReQZtq81e6zR5O14g0a3bn6zRpIAnKaug6a-dBZTtc_C3izEd4CRlHpyfx4KMAX4w9cDL3AKDhH0tVz4oy3XjYml3EQL1jtFiRDI_DbcaSa96YerBwX5nzDSkzm5TRCfNApf9l0UIhnuL-so1ZPc20i7lChWYEmhO9WBvPWMRsNKkom5FTCUviVJEqFzmbZCju97mzCKRPl4_N6Mr41yyvqqjo6ckXhVZNc5_yxqKwMhZ4Nw-KRsXGl0ntLaJDqZ4hSWD4Skb4TxRoa065nFpVEsM7Kpl9TdgU-OkOoIYo4H6bku77g79auzSR9-H1QOXXUbmXh0o9fyrQcl40iCTezOzXXGguAXMhiyYDYADKedEtgrKO1Bjmuykn1-vUUPm4J9LYAd3hnTfSi1l2w9ipL4G2wtf6J7PcWIc23CsHR591uJzoThNVxEoTgd-STGfud5dukWY-ZNr2fxcX8EBQjWvMpbcRcne4KgSQab2qpcE130Kv_dl8Wcve4gEET4GDigO2NS6RZnFUa36VkQEwNPdTnahSRO9sMvHqDU4Q3Zjdxmc3h00fPsgBKwO7tHBdUWjrUGc8U_fcTTgI2T8WDz1sjNxvvdVVgn-PJ-Rn5OrzsG7UAZKvz1Y83uhi-x1JzLeQZXclpfWT0vL7KMEDg-FtNXkJ75JYcHkCGfSQ-VUrUxKDdnfPx15_M2gyVu_LnR28qd3OdPh17kOfTwV9y8kEXhra83m2Vj2C3jJ-ICZoWUBVfImTl1RL0nM98uJ4-7B7OStfBjNzFEImHxh8Px3Hk23y_1lX24s67ZK6-XI1odp4999Ios7VVx4tCSSkxpvcrJfi0Q-9zwz-lj53lVCnJu5lln0XOLvuEjAC0djBCqvLp6FsQZZI4JjPGJO_pNNR46kyNqGzOBjvhsnFGQQj_Upb_vzxfzLwFeb9TjTCrgxF-sXgzJ9RwwGsClxef7jSkpeCLoUDBkcZlR8kzz-zKJUw-Vm4hc2WJJf1LWnd8oT7mXEAuyqi54OsbBVQ49Bx0TInjrYnf5bbGpOyf40W8Cazq1c7ZcRg8mv27gRVQ8IXQS3zMCH-iHbRViAnpyXmLp5Z3PkHDxCKTvvKPA7M0LGpuiFCVUkUNj6TMx_5NSK9NZHgCbw6RQ0FbVbrK_Ng5kTKaiO8BSsGDKH4Oa_M73YQGdwUOPaLiNuIS4Rh7soO1VMMTzzMt3pFwOLHuOsL5CatOcNxIk4jI7GpV2kQLwNCEfY0pGH3pm-ydRExUJZLV-n84f5C21B_TREl34BEGjn5BqoVN9TZzHVdnNbHye01vDlPQqFW3OxLyShbUE_8uX4dwT-BOwnFz1zqHHHXXT_CQ6uQ0TRqq0T-p8Kw2Pvr3gC6BUHINywzzEnVj9VD8TyIflzvKPMJd4cFcniHdRgCOE3UY8ltd1b1wY3yapH1bwP4X5KgXAM926EJMkUhw23-OaQS2ast8Sgb3g0rwk8G8QFYF-dxdQawBqIxxuLyQN_WfGCGbcZQiPIqENGpn0wXA2tBOgE3aKQLhgBi9gznbBVqgTiaIXVUCqgp1ImMrYOu5Yg34Gj8vFlmww6qm0UDtU_2q4BRkLoZjX-GmJ0A_8zusBfqlGOZqMdzfDtU-nzEiGPaB9cZBkE0xYW-59C_5AzhNI3iwKUuq-jcxG9v4eUYgG-hvAEUxk3q1EpiU2Y6H7nYn",
+                "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+                "domains": {
+                    "www.example.com": {
+                        "cookies": {
+                            "__cuid": "6883480a9ab7442d9f97da7307d6ea9c"
+                        }
+                    }
+                }
+            }
+        }
+        ```
+or 
+		```json
+		{
+            "errorId":0,
+            "status":"ready",
+            "solution":  {
+                "data": ["Q05ApqxnT30x5d9Ue9obFbNcrDqhP4aFMMWCczlzeIT15F-cVmMUcNzvlMA7c8loVIYm7rSDZNOrqCI9ADF7woJmvRl1sfcgm1HXsHQrW1dfIVskGHjA0X892ZKVZpggl1G4ddQXBef4vHh3qTeagLU1QEzYpF7fO9ratvUFf6eE26fW1eyewAG9Gk7kuIrs5lXRvsBcD98ySlcFdOoaCzm5Tj7zQFwgAb43eYw-CtOE8qPCx4AUUVJQ6ZXMCB6b9AIHhCTAbIsYfir6XuO_63yA0SaVCqjBSW-f6aGYH4ZgwFSc0sp8vKVDgv2Do1HVfpxN8OCaXm3-YW7QgWiOD0SLMvO5q0G40Z52eAN7zTxmHdZewReqquJ8hhytS5t8t9sAJz2N7igJa4vrXaI7PU0w48PZvPo_u6aTJIOIY9ySvimRPjxPE2CiJiqo3DvrKtPHLMYetlQIQJOAYG1XdsuKtGs8IpP463xuVB011T6FY2KXlUKP-47fyEL1wF_8xRfCS66ccIrGobEKO6w0gcSrdpwgXbgCs0DTarZgAL_qhN6-rWVW2ia2FI-i06LzuwvrUoRTtReQZtq81e6zR5O14g0a3bn6zRpIAnKaug6a-dBZTtc_C3izEd4CRlHpyfx4KMAX4w9cDL3AKDhH0tVz4oy3XjYml3EQL1jtFiRDI_DbcaSa96YerBwX5nzDSkzm5TRCfNApf9l0UIhnuL-so1ZPc20i7lChWYEmhO9WBvPWMRsNKkom5FTCUviVJEqFzmbZCju97mzCKRPl4_N6Mr41yyvqqjo6ckXhVZNc5_yxqKwMhZ4Nw-KRsXGl0ntLaJDqZ4hSWD4Skb4TxRoa065nFpVEsM7Kpl9TdgU-OkOoIYo4H6bku77g79auzSR9-H1QOXXUbmXh0o9fyrQcl40iCTezOzXXGguAXMhiyYDYADKedEtgrKO1Bjmuykn1-vUUPm4J9LYAd3hnTfSi1l2w9ipL4G2wtf6J7PcWIc23CsHR591uJzoThNVxEoTgd-STGfud5dukWY-ZNr2fxcX8EBQjWvMpbcRcne4KgSQab2qpcE130Kv_dl8Wcve4gEET4GDigO2NS6RZnFUa36VkQEwNPdTnahSRO9sMvHqDU4Q3Zjdxmc3h00fPsgBKwO7tHBdUWjrUGc8U_fcTTgI2T8WDz1sjNxvvdVVgn-PJ-Rn5OrzsG7UAZKvz1Y83uhi-x1JzLeQZXclpfWT0vL7KMEDg-FtNXkJ75JYcHkCGfSQ-VUrUxKDdnfPx15_M2gyVu_LnR28qd3OdPh17kOfTwV9y8kEXhra83m2Vj2C3jJ-ICZoWUBVfImTl1RL0nM98uJ4-7B7OStfBjNzFEImHxh8Px3Hk23y_1lX24s67ZK6-XI1odp4999Ios7VVx4tCSSkxpvcrJfi0Q-9zwz-lj53lVCnJu5lln0XOLvuEjAC0djBCqvLp6FsQZZI4JjPGJO_pNNR46kyNqGzOBjvhsnFGQQj_Upb_vzxfzLwFeb9TjTCrgxF-sXgzJ9RwwGsClxef7jSkpeCLoUDBkcZlR8kzz-zKJUw-Vm4hc2WJJf1LWnd8oT7mXEAuyqi54OsbBVQ49Bx0TInjrYnf5bbGpOyf40W8Cazq1c7ZcRg8mv27gRVQ8IXQS3zMCH-iHbRViAnpyXmLp5Z3PkHDxCKTvvKPA7M0LGpuiFCVUkUNj6TMx_5NSK9NZHgCbw6RQ0FbVbrK_Ng5kTKaiO8BSsGDKH4Oa_M73YQGdwUOPaLiNuIS4Rh7soO1VMMTzzMt3pFwOLHuOsL5CatOcNxIk4jI7GpV2kQLwNCEfY0pGH3pm-ydRExUJZLV-n84f5C21B_TREl34BEGjn5BqoVN9TZzHVdnNbHye01vDlPQqFW3OxLyShbUE_8uX4dwT-BOwnFz1zqHHHXXT_CQ6uQ0TRqq0T-p8Kw2Pvr3gC6BUHINywzzEnVj9VD8TyIflzvKPMJd4cFcniHdRgCOE3UY8ltd1b1wY3yapH1bwP4X5KgXAM926EJMkUhw23-OaQS2ast8Sgb3g0rwk8G8QFYF-dxdQawBqIxxuLyQN_WfGCGbcZQiPIqENGpn0wXA2tBOgE3aKQLhgBi9gznbBVqgTiaIXVUCqgp1ImMrYOu5Yg34Gj8vFlmww6qm0UDtU_2q4BRkLoZjX-GmJ0A_8zusBfqlGOZqMdzfDtU-nzEiGPaB9cZBkE0xYW-59C_5AzhNI3iwKUuq-jcxG9v4eUYgG-hvAEUxk3q1EpiU2Y6H7nYn"],
+                "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+                "domains": {
+                    "www.site.com": {
+                        "cookies": {
+                            "__cuid": "6883480a9ab7442d9f97da7307d6ea9c"
+                        }
+                    }
+                }
+            }
+		}
+		```
+	</MethodDescription>
+</TabItem>
+
+## How to get Castle parameters
+
+### `pk (websiteKey)`
+
+**Option 1:**
+
+1. Open the page with Castle, launch **Developer Tools**, go to the **Elements** tab.
+2. Open search (Ctrl + F) and enter the keywords **pk** or **publishableKey**.
+3. Find the `Publishable Key` parameter among the page elements or in the connected scripts.
+
+![](./images/castle/pk.png)
+
+**Option 2:**
+
+If the site uses the ```window._env``` object: 
+
+![](./images/castle/pk2.png)
+
+Copy the `pk` value or enter the following command in the browser console: ```window._env.pk```
+
+![](./images/castle/pk1.png)
+
+**Option 3:**
+
+If `pk` is contained in `data-config`:
+
+![](./images/castle/pk3.png)
+
+Copy the `pk` value or use the following code in the browser console:
+
+```javascript
+const script = document.querySelector('script[data-config]');
+const config = JSON.parse(script.dataset.config);
+config.castle.publishableKey;
+````
+
+---
+
+### `cw.js` and `csw.js`
+
+In **Developer Tools**, go to the **Network** tab, activate Castle and inspect network requests. Find requests to the `cw.js` and `csw.js` files and copy their URLs.
+
+![](./images/castle/devtools.png)
+
+
