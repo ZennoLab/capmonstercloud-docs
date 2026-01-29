@@ -206,38 +206,22 @@ Castle 所在页面的 URL。
 		**响应**
 		```json
         {
-            "errorId":0,
-            "status":"ready",
-            "solution":  {
-                "token": "...",
-                "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
-                "domains": {
-                    "www.example.com": {
-                        "cookies": {
-                            "__cuid": "6883480a9ab7442d9f97da7307d6ea9c"
-                        }
-                    }
-                }
-            }
-        }
-        ```
-或
-		```json
-		{
-            "errorId":0,
-            "status":"ready",
-            "solution":  {
-                "data": ["..."],
-                "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
-                "domains": {
-                    "www.site.com": {
-                        "cookies": {
-                            "__cuid": "6883480a9ab7442d9f97da7307d6ea9c"
-                        }
-                    }
-                }
-            }
-		}
+          "errorId":0,
+          "status":"ready",
+          "solution":  {
+              "data":
+          {
+            "tokens":["Q05Ap...H7nYn", "cn9xW...aFl_4", ...]
+          },
+              "domains": {
+                  "www.example.com": {
+                      "cookies": {
+                          "__cuid": "6883480a9ab7442d9f97da7307d6ea9c"
+                      }
+                  }
+              }
+          }
+      }
 		```
 	</MethodDescription>
 </TabItem>
