@@ -59,6 +59,13 @@ reCAPTCHA v3 完全在后台运行，不需要用户执行任何操作。系统�
 
     ---
 
+    <ParamItem title="isEnterprise" type="boolean" />
+reCAPTCHA 版本。支持的值：<code>true</code> / <code>false</code>（也可使用 <code>1</code> / <code>0</code>，整数类型）。
+
+如果希望以 Enterprise 方式解决 reCAPTCHA，请设置 <code>true</code>；在这种情况下，任务将以与 <a href="https://docs.capmonster.cloud/zh/docs/captchas/recaptcha-v3-enterprise-task/" target="_blank">RecaptchaV3EnterpriseTask</a> 相同的方式处理。
+
+    --- 
+    
     <ParamItem title="pageAction" type="string" />
     <p>小部件操作值。网站所有者通过此参数定义用户在页面上的活动。默认值: *verify*</p><p>示例:<br/>*`grecaptcha.execute('site_key', {action:'login_test'})`*。</p>
 </TabItem>

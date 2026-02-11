@@ -59,6 +59,13 @@ When creating a task, it is recommended to provide two parameters: `pageAction` 
 
     ---
 
+    <ParamItem title="isEnterprise" type="boolean" />
+    Version of reCAPTCHA. Supported values: <code>true</code> / <code>false</code> (also <code>1</code> / <code>0</code>, integer type).
+
+    Set <code>true</code> if you want to solve the reCAPTCHA as Enterprise; in this case, the task will be processed the same way as <a href="https://docs.capmonster.cloud/docs/captchas/recaptcha-v3-enterprise-task/" target="_blank">RecaptchaV3EnterpriseTask</a>.
+
+    ---
+
     <ParamItem title="pageAction" type="string" />
     <p>Widget action value. Website owner defines what user is doing on the page through this parameter. Default value: *verify*</p><p>Example:<br/>*`grecaptcha.execute('site_key', {action:'login_test'})`*.</p>
 </TabItem>

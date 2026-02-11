@@ -57,6 +57,13 @@ Ao criar uma tarefa, é recomendável fornecer dois parâmetros: `pageAction` e 
 
     ---
 
+    <ParamItem title="isEnterprise" type="boolean" />
+Versão do reCAPTCHA. Valores suportados: <code>true</code> / <code>false</code> (também <code>1</code> / <code>0</code>, tipo inteiro).
+
+Defina <code>true</code> se desejar resolver o reCAPTCHA como Enterprise; nesse caso, a tarefa será processada da mesma forma que <a href="https://docs.capmonster.cloud/pt-br/docs/captchas/recaptcha-v3-enterprise-task/" target="_blank">RecaptchaV3EnterpriseTask</a>.
+ 
+    ---
+
     <ParamItem title="pageAction" type="string" />
     <p>Valor de ação do widget. O proprietário do site define o que o usuário está fazendo na página através deste parâmetro. Valor padrão: *verify*</p><p>Exemplo:<br/>*`grecaptcha.execute('site_key', {action:'login_test'})`*.</p>
 </TabItem>
