@@ -81,19 +81,19 @@ When creating a task, it is recommended to provide two parameters: `pageAction` 
 	</MethodItem>
 	<MethodDescription>
 		**Request**
-		```json
-		{
-		  "clientKey":"API_KEY",
-		  "task": {
-			"type":"RecaptchaV3TaskProxyless",
-			"websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta",
-			"websiteKey":"6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",
-      "isEnterprise": false,
-			"minScore": 0.7,
-			"pageAction": "myverify"
-		  }
-		}
-		```
+        ```json
+        {
+          "clientKey": "API_KEY",
+          "task": {
+            "type": "RecaptchaV3TaskProxyless",
+            "websiteURL": "https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta",
+            "websiteKey": "6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",
+            "isEnterprise": false,
+            "minScore": 0.7,
+            "pageAction": "myverify"
+          }
+        }
+      ```
 		**Response**
 		```json
 		{
