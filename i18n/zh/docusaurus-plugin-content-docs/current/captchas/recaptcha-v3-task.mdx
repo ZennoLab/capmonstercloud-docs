@@ -54,17 +54,17 @@ reCAPTCHA v3 完全在后台运行，不需要用户执行任何操作。系统�
 
 	---
 
-	<ParamItem title="minScore" type="double" />
-    从 0.1 到 0.9 的值。
-
-    ---
-
-    <ParamItem title="isEnterprise" type="boolean" />
+  <ParamItem title="isEnterprise" type="boolean" />
     reCAPTCHA 版本。 支持的值：`true` / `false`（也可使用 `1` / `0`，整数类型）。
     
     如果需要以 Enterprise 方式解决 reCAPTCHA，请设置 `true` —— 在这种情况下，任务将按照与 [RecaptchaV3EnterpriseTask](https://docs.capmonster.cloud/ru/docs/captchas/recaptcha-v3-enterprise-task/) 相同的方式处理。
 
     --- 
+
+	<ParamItem title="minScore" type="double" />
+    从 0.1 到 0.9 的值。
+
+    ---
     
     <ParamItem title="pageAction" type="string" />
     <p>小部件操作值。网站所有者通过此参数定义用户在页面上的活动。默认值: *verify*</p><p>示例:<br/>*`grecaptcha.execute('site_key', {action:'login_test'})`*。</p>
@@ -88,6 +88,7 @@ reCAPTCHA v3 完全在后台运行，不需要用户执行任何操作。系统�
 			"type":"RecaptchaV3TaskProxyless",
 			"websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta",
 			"websiteKey":"6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",
+      "isEnterprise": false,
 			"minScore": 0.3,
 			"pageAction": "myverify"
 		  }

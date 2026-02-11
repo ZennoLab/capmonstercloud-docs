@@ -55,17 +55,17 @@ reCAPTCHA v3 работает полностью в фоновом режиме 
 
    ---
 
-   <ParamItem title="minScore" type="double" />
-    Может иметь значение от 0.1 до 0.9
-
-   ---
-
    <ParamItem title="isEnterprise" type="boolean" />
    Версия reCAPTCHA. Поддерживаемые значения: `true` / `false` (также допускается `1` / `0`, тип integer).
    
    Укажите `true`, если необходимо решить reCAPTCHA в версии Enterprise — в этом случае задача будет обрабатываться так же, как [RecaptchaV3EnterpriseTask](https://docs.capmonster.cloud/ru/docs/captchas/recaptcha-v3-enterprise-task/).
 
     ---
+
+   <ParamItem title="minScore" type="double" />
+    Может иметь значение от 0.1 до 0.9
+
+   ---
 
     <ParamItem title="pageAction" type="string" />
     <p>Значение параметра action, которое передаётся виджетом ReCaptcha в Google и который при последующей верификации на сервере виден владельцу сайта. Указывайте этот параметр, если его значение отличается от значения по умолчанию: *verify*</p>
@@ -90,6 +90,7 @@ reCAPTCHA v3 работает полностью в фоновом режиме 
 			"type":"RecaptchaV3TaskProxyless",
 			"websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta",
 			"websiteKey":"6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",
+      "isEnterprise": false,
 			"minScore": 0.7, 
 			"pageAction": "myverify"
 		  }
