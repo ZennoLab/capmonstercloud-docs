@@ -52,6 +52,13 @@ Ao criar uma tarefa, é recomendável fornecer dois parâmetros: `pageAction` e 
 
    ---
 
+   <ParamItem title="isEnterprise" type="boolean" />
+    Versão do reCAPTCHA. Valores suportados: `true` / `false` (também `1` / `0`, tipo inteiro).
+    
+    Defina `true` se precisar resolver o reCAPTCHA como Enterprise — nesse caso, a tarefa será processada da mesma forma que [RecaptchaV3EnterpriseTask](../recaptcha-v3-enterprise-task/).
+
+    ---
+
    <ParamItem title="minScore" type="double" />
     Valor de 0,1 a 0,9
 
@@ -80,6 +87,7 @@ Ao criar uma tarefa, é recomendável fornecer dois parâmetros: `pageAction` e 
     "type":"RecaptchaV3TaskProxyless",
     "websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta",
     "websiteKey":"6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",
+    "isEnterprise": false,
     "minScore": 0.7,
     "pageAction": "myverify"
   }
