@@ -23,18 +23,22 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 </PriceBlockWrap>
 
 
-O objeto contém dados para a tarefa de resolver o hCaptcha. Para fornecer uma universalidade sólida na resolução desse tipo de tarefa, reproduzimos cada parte do ambiente utilizado para a tarefa de automação que você planeja concluir. Isso inclui: acesso ao proxy, user-agent do navegador, cookies (opcionalmente). Essa abordagem eliminará todos os possíveis obstáculos que possam surgir no futuro.
+Esta seção contém informações sobre a tarefa de resolução do hCaptcha. Para fornecer uma universalidade sólida na resolução desse tipo de tarefa, reproduzimos cada parte do ambiente utilizado para a tarefa de automação que você planeja concluir. Isso inclui: acesso ao proxy, user-agent do navegador, cookies (opcionalmente). Essa abordagem eliminará todos os possíveis obstáculos que possam surgir no futuro.
 
-Esse tipo de captcha pode demorar um pouco mais para ser resolvido do que um captcha de imagem comum, mas essa questão é compensada pelo fato de que o valor de g-captcha-response que enviamos a você é válido pelos próximos 60 segundos após resolvermos seu Captcha.
+Esse tipo de captcha pode demorar um pouco mais para ser resolvido do que um captcha de imagem comum, mas essa questão é compensada pelo fato de que o valor de `g-captcha-response` que enviamos a você é válido pelos próximos 60 segundos após resolvermos seu Captcha.
 
-**Importante!** Se você estiver enfrentando problemas com a aceitação do token hcaptcha, entre em contato com o suporte da CapMonster Cloud com a URL e sitekey fornecidos. Tentaremos resolver esse problema o mais rápido possível.
+:::warning **Atenção!**
+O CapMonster Cloud, por padrão, funciona com proxies integrados — já incluídos no custo do serviço. É necessário especificar seus próprios proxies apenas nos casos em que o site não aceita o token ou quando o acesso aos serviços integrados está restrito.
+
+Se o proxy utiliza autenticação por IP, é necessário adicionar o endereço **65.21.190.34** à lista de permissões (whitelist).
+:::
 
 ## Parâmetros da solicitação
 
 <Tabs className="full-width-tabs filled-tabs" groupId="captcha-type">
-<TabItem value="proxyless" label="HCaptchaTaskProxyless (sem proxy)" default className="bordered-panel">
+<TabItem value="proxyless" label="HCaptchaTask (sem proxy)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
-    **HCaptchaTaskProxyless**
+    **HCaptchaTask**
 
     ---
 
@@ -145,20 +149,19 @@ Esse tipo de captcha pode demorar um pouco mais para ser resolvido do que um cap
   
 </Tabs>
 
-**Tipos Suportados**<br/>
-Os tipos de imagem suportados são os seguintes:
+## Tipos de tarefas suportados
 
-|![](./images/hcaptcha-task/Aspose.Words.fa5d4495-c9e9-41f5-8cb9-c4b900b4bbcf.001.png)|![](./images/hcaptcha-task/Aspose.Words.fa5d4495-c9e9-41f5-8cb9-c4b900b4bbcf.002.png)|
-| :- | :- |
-|![](./images/hcaptcha-task/Aspose.Words.fa5d4495-c9e9-41f5-8cb9-c4b900b4bbcf.003.png)|![](./images/hcaptcha-task/Aspose.Words.fa5d4495-c9e9-41f5-8cb9-c4b900b4bbcf.004.png)|
-|![](./images/hcaptcha-task/Aspose.Words.fa5d4495-c9e9-41f5-8cb9-c4b900b4bbcf.005.png)|![](./images/hcaptcha-task/Aspose.Words.fa5d4495-c9e9-41f5-8cb9-c4b900b4bbcf.006.png)|
-|![](./images/hcaptcha-task/25940532.png)|
+Todos os principais tipos de tarefas são suportados, por exemplo:
+
+* **DragAndDrop** – arrastar elementos para as posições corretas
+* **Click** – clicar em um elemento
+* **3x3 / YesNo** – selecionar imagens de acordo com a condição fornecida
 
 
 ## Método Create task
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
-<TabItem value="proxyless" label="HCaptchaTaskProxyless (sem proxy)" default className="method-panel">
+<TabItem value="proxyless" label="HCaptchaTask (sem proxy)" default className="method-panel">
     <MethodItem>
       ```http
       https://api.capmonster.cloud/createTask
@@ -171,7 +174,7 @@ Os tipos de imagem suportados são os seguintes:
     "clientKey":"API_KEY",
     "task":
     {
-        "type":"HCaptchaTaskProxyless",
+        "type":"HCaptchaTask",
         "websiteURL":"https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",
         "websiteKey":"472fc7af-86a4-4382-9a49-ca9090474471",
         "userAgent": "userAgentPlaceholder",
@@ -231,7 +234,7 @@ Os tipos de imagem suportados são os seguintes:
 ## Método Get task result
 Use o método [getTaskResult](../api/methods/get-task-result.mdx) para solicitar a resposta do hCaptcha. Você receberá uma resposta no período de 10 a 80 segundos, dependendo da carga de trabalho do serviço.
 
-<TabItem value="proxyless" label="GeeTestTaskProxyless (sem proxy)" default className="method-panel-full">
+<TabItem value="proxyless" label="HCaptchaTask (sem proxy)" default className="method-panel-full">
     <MethodItem>
 ```http
 https://api.capmonster.cloud/getTaskResult
@@ -268,159 +271,420 @@ https://api.capmonster.cloud/getTaskResult
 |userAgent|String|Durante o envio, você deve usar o mesmo *User Agent* com o qual o hCaptcha foi resolvido.|
 |respKey|String|O resultado da função "window.hcaptcha.getRespKey()" quando disponível. Alguns sites usam esse valor para verificação adicional.|
 
+---
+
+# Obtendo os parâmetros do hCaptcha
+
+Para resolver o hCaptcha com sucesso via API, você deve obter os parâmetros obrigatórios da página: `websiteKey` e, para a versão Invisible — também `data` (`rqdata`).
+
+Abaixo estão os principais métodos para localizá-los.
+
+---
+
+## 1. Parâmetro `websiteKey`
+
+### Método 1: Usando a aba Network
+
+1. Abra as **Ferramentas do Desenvolvedor (DevTools)**.
+2. Vá para a aba **Network**.
+3. Recarregue a página com o hCaptcha.
+4. Na lista de requisições, encontre uma URL que comece com:
+
+```
+
+checksiteconfig?v=
+
+```
+
+5. Para uma busca rápida, pressione:
+
+   * **Ctrl + F** (Windows)
+   * **Command + F** (macOS)
+
+   e digite a palavra-chave:
+
+```
+
+key
+
+```
+
+O parâmetro `sitekey` aparecerá nas requisições correspondentes — este é o valor de `websiteKey`.
+
+---
+
+### Método 2: Usando a aba Elements
+
+1. Abra a aba **Elements**.
+2. Procure na página por:
+
+   * `data-sitekey`
+   * `sitekey`
+
+Na maioria dos casos, o parâmetro aparece assim:
+
+```html
+<div class="h-captcha" data-sitekey="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"></div>
+```
+
+O valor do atributo `data-sitekey` é o seu `websiteKey`.
+
+---
+
+## 2. Parâmetro `data` (rqdata) — para HCaptcha Invisible
+
+Em alguns sites (especialmente ao usar a versão Invisible), o parâmetro adicional `rqdata` é obrigatório.
+
+### Importante
+
+O valor `rqdata`:
+
+* é **de uso único**;
+* é regenerado cada vez que a página é atualizada;
+* não pode ser reutilizado — usar um valor antigo resultará em erro.
+
+---
+
+### Método 1: Procurando no código-fonte da página
+
+Às vezes, o parâmetro pode ser encontrado diretamente no código JavaScript, por exemplo:
+
+```js
+hcaptcha.setData({ rqdata: "value" })
+```
+
+Nesse caso, `"value"` é o parâmetro `data` necessário.
+
+---
+
+### Método 2: Usando a aba Network
+
+1. Abra **DevTools → Network**.
+2. Recarregue a página com a captcha.
+3. Pressione **Ctrl + F** (ou Command + F no macOS).
+4. No campo de busca, digite:
+
+```
+data
+```
+
+Na maioria das vezes, o parâmetro aparece em requisições relacionadas a:
+
+* autorização (`login`)
+* registro (`signup`)
+* confirmações de ação
+
+Revise essas requisições e localize o campo `rqdata`.
+
+---
+
+## 3. Procurando parâmetros na requisição `refreshcaptcha`
+
+Em alguns sites, os parâmetros do hCaptcha são enviados por meio de uma requisição especial:
+
+```
+refreshcaptcha
+```
+
+### Etapas:
+
+1. Abra **DevTools → Network**.
+2. Recarregue a página.
+3. Encontre a requisição `refreshcaptcha`.
+4. Vá para a aba **Response**.
+
+Para o serviço CapMonster Cloud, os seguintes parâmetros são necessários neste caso:
+
+* `gid`
+* `sitekey`
+
+### Importante
+
+O valor `gid` corresponde ao parâmetro `data`.
+
+Ao criar a requisição de resolução:
+
+* `sitekey` → use como `websiteKey`
+* `gid` → use como `data`
+
+---
+
+## 4. Procurando parâmetros nas requisições da API do site
+
+Às vezes, os parâmetros do hCaptcha não estão visíveis diretamente, mas estão incluídos em requisições internas da API do site.
+
+Essas requisições geralmente ocorrem:
+
+* durante a autorização,
+* durante o registro,
+* ao enviar um formulário.
+
+Por exemplo:
+
+```
+https://authenticate.example.com/api/v1/login
+```
+
+Abra a requisição correspondente na aba **Network** e verifique:
+
+* o corpo da requisição (Request Payload),
+* a resposta do servidor (Response).
+
+Parâmetros como `sitekey`, `rqdata` e `gid` podem estar incluídos nesses dados.
+
+---
+
+## Recomendações
+
+* Sempre atualize a página antes de copiar o `rqdata`.
+* Certifique-se de que os parâmetros não são gerados dinamicamente.
+* Se o parâmetro não estiver presente no HTML, verifique as requisições na aba Network.
+
+---
 
 ## Usar biblioteca SDK
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">
-    ```js
-    // https://github.com/ZennoLab/capmonstercloud-client-js
+<details>
+      <summary>Mostrar Código (para navegador)</summary>
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
 
-    import { CapMonsterCloudClientFactory, ClientOptions, HCaptchaRequest } from '@zennolab_com/capmonstercloud-client';
+import { CapMonsterCloudClientFactory, ClientOptions, HCaptchaRequest } from '@zennolab_com/capmonstercloud-client';
 
-    document.addEventListener('DOMContentLoaded', async () => {
-      const cmcClient = CapMonsterCloudClientFactory.Create(new ClientOptions({ clientKey: '<your capmonster.cloud API key>' }));
-      console.log(await cmcClient.getBalance());
+const API_KEY = "YOUR_API_KEY";  // Insira sua chave de API do CapMonster Cloud
 
-      const hCaptchaRequest = new HCaptchaRequest({
-        websiteURL: 'https://lessons.zennolab.com/captchas/hcaptcha/?level=easy',
-        websiteKey: '472fc7af-86a4-4382-9a49-ca9090474471',
-        isInvisible: true,
-        data: 'some data',
-        proxyType: 'https',
-        proxyAddress: 'https://proxy.com',
-        proxyPort: 6045,
-        proxyLogin: 'login',
-        proxyPassword: 'password',
-      });
+document.addEventListener("DOMContentLoaded", async () => {
+    const client = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
+    );
 
-      console.log(await cmcClient.Solve(hCaptchaRequest));
+    // Exemplo básico sem proxy
+    // O CapMonster Cloud usa automaticamente seus próprios proxies
+    let hcaptchaRequest = new HCaptchaRequest({
+        websiteURL: "https://lessons.zennolab.com/captchas/hcaptcha/?level=easy", // URL da página com hCaptcha
+        websiteKey: "472fc7af-86a4-4382-9a49-ca9090474471",
+        isInvisible: false,                         // true -- se for usado o hCaptcha Invisível
+        data: "rqdata_value_if_required"            // Obrigatório para algumas implementações do Invisible
     });
-    ```
-  </TabItem>
 
-  <TabItem value="python" label="Python" className="method-panel">
-    ```python
-    # https://github.com/ZennoLab/capmonstercloud-client-python
+    // Exemplo de uso do seu próprio proxy
+    // Descomente este bloco se quiser usar um proxy personalizado
+    /*
+    const proxy = {
+        proxyType: "http",
+        proxyAddress: "123.45.67.89",
+        proxyPort: 8080,
+        proxyLogin: "username",
+        proxyPassword: "password"
+    };
 
-    # HCaptchaProxyless
+    hcaptchaRequest = new HCaptchaRequest({
+        websiteURL: "https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",
+        websiteKey: "472fc7af-86a4-4382-9a49-ca9090474471",
+        isInvisible: false,
+        data: "rqdata_value_if_required",
+        proxy,
+        userAgent: "userAgentPlaceholder"
+    });
+    */
 
-    import asyncio
-    from capmonstercloudclient import CapMonsterClient, ClientOptions
-    from capmonstercloudclient.requests import HcaptchaProxylessRequest
+    // Se necessário, você pode verificar o saldo
+    const balance = await client.getBalance();
+    console.log("Balance:", balance);
 
-    client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonster Cloud API key
+    const result = await client.Solve(hcaptchaRequest);
+    console.log("Solution:", result);
+});
+```
+
+</details>
+
+<details>
+      <summary>Mostrar Código (Node.js)</summary>
+```javascript
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, HCaptchaRequest } from '@zennolab_com/capmonstercloud-client';
+
+const API_KEY = "YOUR_API_KEY";  // Insira sua chave de API do CapMonster Cloud
+
+async function solveHCaptcha() {
+    const client = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
+    );
+
+    // Exemplo básico sem proxy
+    // O CapMonster Cloud usa automaticamente seus próprios proxies
+    let hcaptchaRequest = new HCaptchaRequest({
+        websiteURL: "https://lessons.zennolab.com/captchas/hcaptcha/?level=easy", // URL da página com hCaptcha
+        websiteKey: "472fc7af-86a4-4382-9a49-ca9090474471",
+        isInvisible: false,                         // true -- se for usado o hCaptcha Invisível
+        data: "rqdata_value_if_required"            // Obrigatório para algumas implementações do Invisible
+    });
+
+    // Exemplo de uso do seu próprio proxy
+    // Descomente este bloco se quiser usar um proxy personalizado
+
+    /*
+    const proxy = {
+        proxyType: "http",
+        proxyAddress: "123.45.67.89",
+        proxyPort: 8080,
+        proxyLogin: "username",
+        proxyPassword: "password"
+    };
+
+    hcaptchaRequest = new HCaptchaRequest({
+        websiteURL: "https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",
+        websiteKey: "472fc7af-86a4-4382-9a49-ca9090474471",
+        isInvisible: false,
+        data: "rqdata_value_if_required",
+        proxy,
+        userAgent: "userAgentPlaceholder"
+    });
+    */
+
+    // Se necessário, você pode verificar o saldo
+    const balance = await client.getBalance();
+    console.log("Balance:", balance);
+
+    const result = await client.Solve(hcaptchaRequest);
+    console.log("Solution:", result);
+}
+
+solveHCaptcha().catch(console.error);
+```
+
+</details>
+
+
+</TabItem>
+
+ <TabItem value="python" label="Python" default className="method-panel">
+<details>
+      <summary>Mostrar Código</summary>
+```python
+# https://github.com/ZennoLab/capmonstercloud-client-python
+
+import asyncio
+from capmonstercloudclient import CapMonsterClient, ClientOptions
+from capmonstercloudclient.requests import HcaptchaRequest
+# from capmonstercloudclient.requests.baseRequestWithProxy import ProxyInfo  # Descomente se planeja usar proxy
+
+API_KEY = "YOUR_API_KEY"  # Insira sua chave de API do CapMonster Cloud
+
+async def solve_hcaptcha():
+    client_options = ClientOptions(api_key=API_KEY)
     cap_monster_client = CapMonsterClient(options=client_options)
 
-    hcaptcha_request = HcaptchaProxylessRequest(
-        websiteUrl="https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",  # Website with the captcha
-        websiteKey="472fc7af-86a4-4382-9a49-ca9090474471",  # Replace with your websiteKey
-        userAgent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",  # Use the current userAgent
-        fallbackToActualUA=True
-    )
-
-    async def solve_captcha():
-        return await cap_monster_client.solve_captcha(hcaptcha_request)
-
-    responses = asyncio.run(solve_captcha())
-    print(responses)
-    ```
-
-    ```python
-    # HCaptcha
-
-    import asyncio
-    from capmonstercloudclient import CapMonsterClient, ClientOptions
-    from capmonstercloudclient.requests import HcaptchaRequest
-
-    client_options = ClientOptions(api_key="your_api_key")  # Replace with your CapMonster Cloud API key
-    cap_monster_client = CapMonsterClient(options=client_options)
-
+    # Exemplo básico sem proxy
+    # O CapMonster Cloud usa automaticamente seus próprios proxies
     hcaptcha_request = HcaptchaRequest(
-        websiteUrl="https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",  # Website with the captcha
-        websiteKey="472fc7af-86a4-4382-9a49-ca9090474471",  # Replace with your websiteKey
-        userAgent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",  # Use the current userAgent
-        proxyType="http",  # Type of proxy (http, https, socks4, socks5)
-        proxyAddress="8.8.8.8",
-        proxyPort=8080,
-        proxyLogin="proxyLoginHere",
-        proxyPassword="proxyPasswordHere",
+        websiteUrl="https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",  # URL da página com hCaptcha
+        websiteKey="472fc7af-86a4-4382-9a49-ca9090474471",
+        isInvisible=False,                      # True, se for hCaptcha invisível
+        userAgent="userAgentPlaceholder",
         fallbackToActualUA=True
     )
 
-    async def solve_captcha():
-        return await cap_monster_client.solve_captcha(hcaptcha_request)
+    # Exemplo de uso do seu próprio proxy
+    # Descomente este bloco se quiser usar um proxy personalizado
 
-    responses = asyncio.run(solve_captcha())
-    print(responses)
-    ```
+    # proxy = ProxyInfo(
+    #     proxyType="http",
+    #     proxyAddress="123.45.67.89",
+    #     proxyPort=8080,
+    #     proxyLogin="username",
+    #     proxyPassword="password"
+    # )
+    #
+    # hcaptcha_request = HcaptchaRequest(
+    #     websiteUrl="https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",
+    #     websiteKey="472fc7af-86a4-4382-9a49-ca9090474471",
+    #     isInvisible=False,
+    #     userAgent="userAgentPlaceholder",
+    #     fallbackToActualUA=True,
+    #     proxy=proxy
+    # )
+
+    # Se necessário, você pode verificar o saldo
+    balance = await cap_monster_client.get_balance()
+    print("Balance:", balance)
+
+    result = await cap_monster_client.solve_captcha(hcaptcha_request)
+    print("Solution:", result)
+
+asyncio.run(solve_hcaptcha())    
+```
+</details>
   </TabItem>
 
   <TabItem value="csharp" label="C#" className="method-panel">
-    ```csharp
-    // https://github.com/ZennoLab/capmonstercloud-client-dotnet
+<details>
+      <summary>Mostrar Código</summary>
+```csharp
+// https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
-    // HCaptchaProxyless:
+using System;
+using System.Threading.Tasks;
+using Zennolab.CapMonsterCloud;
+using Zennolab.CapMonsterCloud.Requests;
 
-    using Zennolab.CapMonsterCloud.Requests;
-    using Zennolab.CapMonsterCloud;
-
-    class Program
+class Program
+{
+    static async Task Main(string[] args)
     {
-        static async Task Main(string[] args)
+        // Insira sua chave de API do CapMonster Cloud
+        var clientOptions = new ClientOptions
         {
-            var clientOptions = new ClientOptions
-            {
-                ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
-            };
+            ClientKey = "YOUR_API_KEY"
+        };
 
-            var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+        var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
-            var hcaptchaRequest = new HCaptchaProxylessRequest
-            {
-                WebsiteUrl = "https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",
-                WebsiteKey = "472fc7af-86a4-4382-9a49-ca9090474471",
-            };
-            var hcaptchaResult = await cmCloudClient.SolveAsync(hcaptchaRequest);
-
-            Console.WriteLine("Captcha Solution: " + hcaptchaResult.Solution.Value);
-        }
-    }
-    ```
-
-    ```csharp
-    // HCaptcha:
-
-    using Zennolab.CapMonsterCloud.Requests;
-    using Zennolab.CapMonsterCloud;
-
-    class Program
-    {
-        static async Task Main(string[] args)
+        // Exemplo básico sem proxy
+        // O CapMonster Cloud usa automaticamente seus próprios proxies
+        var hcaptchaRequest = new HCaptchaRequest
         {
-            var clientOptions = new ClientOptions
-            {
-                ClientKey = "your_api_key" // Replace with your CapMonster Cloud API key
-            };
+            WebsiteUrl = "https://lessons.zennolab.com/captchas/hcaptcha/?level=easy", // URL da página com hCaptcha
+            WebsiteKey = "472fc7af-86a4-4382-9a49-ca9090474471",
+            Invisible = false,                          // true -- se for hCaptcha invisível
+            UserAgent = "userAgentPlaceholder"
+        };
 
-            var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+        // Exemplo de uso do seu próprio proxy
+        // Descomente este bloco se quiser usar um proxy personalizado
 
-            var hcaptchaRequest = new HCaptchaRequest
-            {
-                WebsiteUrl = "https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",
-                WebsiteKey = "472fc7af-86a4-4382-9a49-ca9090474471",
-                ProxyType = ProxyType.Http,
-                ProxyAddress = "8.8.8.8",
-                ProxyPort = 8080,
-                ProxyLogin = "proxyLoginHere",
-                ProxyPassword = "proxyPasswordHere"
-            };
+        /*
+        hcaptchaRequest = new HCaptchaRequest
+        {
+            WebsiteUrl = "https://lessons.zennolab.com/captchas/hcaptcha/?level=easy",
+            WebsiteKey = "472fc7af-86a4-4382-9a49-ca9090474471",
+            Invisible = false,
+            UserAgent = "userAgentPlaceholder",
 
-            var hcaptchaResult = await cmCloudClient.SolveAsync(hcaptchaRequest);
+            Proxy = new ProxyContainer(
+                "123.45.67.89",
+                8080,
+                ProxyType.Http,
+                "username",
+                "password"
+            )
+        };
+        */
 
-            Console.WriteLine("Captcha Solution: " + hcaptchaResult.Solution.Value);
-        }
+        // Se necessário, você pode verificar o saldo
+        var balance = await cmCloudClient.GetBalanceAsync();
+        Console.WriteLine("Balance: " + balance);
+
+        var hcaptchaResult = await cmCloudClient.SolveAsync(hcaptchaRequest);
+
+        Console.WriteLine("HCaptcha Solution: " + hcaptchaResult.Solution.Value);
     }
-    ```
+}
+```
+</details>
   </TabItem>  
 </Tabs>
