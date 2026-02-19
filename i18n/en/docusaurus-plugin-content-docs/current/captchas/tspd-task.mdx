@@ -49,13 +49,13 @@ The URL of the page where the TSPD challenge is located.
 
 <ParamItem title="tspdCookie (inside metadata)" required type="string" />
 Cookies obtained on the TSPD challenge page: 
-"tspdCookie": "TS386a400d029=082670627aab2800722d179e73a60b575d00c96728a9f8dedd8be27a40f6a1aa5df467cebf7da7315a4e16675f010245; ....; ....;"
+`"tspdCookie": "TS386a400d029=082670627aab2800722d179e73a60b575d00c96728a9f8dedd8be27a40f6a1aa5df467cebf7da7315a4e16675f010245; ....; ....;"`
 
 ---
 
 <ParamItem title="htmlPageBase64 (inside metadata)" required type="string" />
 The entire TSPD page encoded in **base64**, for example:  
-"htmlPageBase64": "PCFET0NUWVBFIGh0bWw+DQo8aHRtbD48aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IlByYWdtYSIgY29udGVudD0ibm8tY2FjaGUiLz4NCjxtZXRhIGh0dHAtZXF1aXY9IkV4cGlyZXMiIGNvbnRlbnQ9Ii0xIi8+DQo8bWV0YSBodHRwLWVxdWl2PSJDYWNoZUNvbnRyb2.....L2JvZHk+PC9odG1sPg=="
+`"htmlPageBase64": "PCFET0NUWVBFIGh0bWw+DQo8aHRtbD48aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IlByYWdtYSIgY29udGVudD0ibm8tY2FjaGUiLz4NCjxtZXRhIGh0dHAtZXF1aXY9IkV4cGlyZXMiIGNvbnRlbnQ9Ii0xIi8+DQo8bWV0YSBodHRwLWVxdWl2PSJDYWNoZUNvbnRyb2.....L2JvZHk+PC9odG1sPg=="`
 
 ---
 
@@ -177,9 +177,9 @@ Use the [getTaskResult](../api/methods/get-task-result.mdx) method to get the so
 	</MethodDescription>
 </TabItem>
 
-## Working with a Page Containing TSPD
+## Working with a page containing TSPD
 
-### Example of an HTML Page with a TSPD Challenge
+### Example of an HTML page with a TSPD challenge
 
 When sending a GET request to a page with a **TSPD challenge**, you will receive HTML that must be encoded in **Base64** and passed in the `htmlPageBase64` parameter.  
 
