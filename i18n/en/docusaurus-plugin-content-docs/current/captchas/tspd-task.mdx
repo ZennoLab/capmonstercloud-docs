@@ -1,0 +1,530 @@
+---
+sidebar_position: 25
+sidebar_label: TSPD
+title: "Automatic TSPD detection and bypass | API"
+description: "Learn how to detect TSPD using the API of the CapMonster Cloud automatic captcha recognition and solving service!"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+import PriceBlock from '@theme/PriceBlock';
+import PriceBlockWrap from '@theme/PriceBlockWrap';
+import { ArticleHead } from '../../../../../src/theme/ArticleHead';
+
+<ArticleHead slug="captchas/tspd-task" />
+
+# TSPD
+
+<PriceBlockWrap>
+  <PriceBlock title="TSPD" captchaId="tspd"/>
+</PriceBlockWrap>
+
+:::warning **Attention!**
+
+* Use **your own proxies** for this task.
+
+* After solving, you will receive **special cookies** to add to your browser.
+:::
+
+## Request parameters
+
+<TabItem value="proxy" label="CastleTask" className="bordered-panel">
+<ParamItem title="type" required type="string" />
+**CustomTask**
+
+---
+
+<ParamItem title="class" required type="string" />
+**tspd**
+
+---
+
+<ParamItem title="websiteURL" required type="string" />
+The URL of the page where the TSPD challenge is located.
+
+---
+
+<ParamItem title="tspdCookie (inside metadata)" required type="string" />
+Cookies obtained on the TSPD challenge page: 
+"tspdCookie": "TS386a400d029=082670627aab2800722d179e73a60b575d00c96728a9f8dedd8be27a40f6a1aa5df467cebf7da7315a4e16675f010245; ....; ....;"
+
+---
+
+<ParamItem title="htmlPageBase64 (inside metadata)" required type="string" />
+The entire TSPD page encoded in **base64**, for example:  
+"htmlPageBase64": "PCFET0NUWVBFIGh0bWw+DQo8aHRtbD48aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IlByYWdtYSIgY29udGVudD0ibm8tY2FjaGUiLz4NCjxtZXRhIGh0dHAtZXF1aXY9IkV4cGlyZXMiIGNvbnRlbnQ9Ii0xIi8+DQo8bWV0YSBodHRwLWVxdWl2PSJDYWNoZUNvbnRyb2.....L2JvZHk+PC9odG1sPg=="
+
+---
+
+<ParamItem title="userAgent" required type="string" />
+Browser User-Agent.<br />
+**Provide only the current Windows UA:** userAgentPlaceholder
+
+---
+
+  <ParamItem title="proxyType" required type="string" />
+  **http** - regular HTTP/HTTPS proxy;<br />
+  **https** - use if http doesn’t work (required for some custom proxies);<br />
+  **socks4** - SOCKS4 proxy;<br />
+  **socks5** - SOCKS5 proxy.
+
+---
+
+  <ParamItem title="proxyAddress" required type="string" />
+  <p>
+    Proxy IP address (IPv4/IPv6). Not allowed:
+    - Transparent proxies
+    - Local machine proxies
+  </p>
+
+---
+
+  <ParamItem title="proxyPort" required type="integer" />
+  Proxy port.
+
+---
+
+  <ParamItem title="proxyLogin" required type="string" />
+  Proxy login.
+
+---
+
+  <ParamItem title="proxyPassword" required type="string" />
+  Proxy password.
+
+</TabItem>
+
+## Create task method
+
+<TabItem value="proxy" label="CustomTask (with proxy)" className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      **Request**
+      ```json
+      {
+        "type": "CustomTask",
+        "class": "tspd",
+        "websiteUrl": "https://example.com",        
+        "metadata": {
+            "tspdCookie": "TS386a400d029=08...010245; TS386a400d029=08...01a06e; TS386a400d078=08...dbb3b0c; TSd2153684027=08...1944",
+            "htmlPageBase64": "PCFET0NU...k+PC9odG1sPg=="
+        },
+        "userAgent": "userAgentPlaceholder",
+        "proxyType": "http",
+        "proxyAddress": "8.8.8.8",
+        "proxyPort": 8080,
+        "proxyLogin": "proxyLoginHere",
+        "proxyPassword": "proxyPasswordHere"
+      }
+      ```
+
+      **Response**
+      ```json
+      {
+        "errorId": 0,
+        "taskId": 407533072
+      }
+      ```
+    </MethodDescription>
+</TabItem>
+
+## Get task result method
+
+Use the [getTaskResult](../api/methods/get-task-result.mdx) method to get the solution for the TSPD.
+
+<TabItem value="proxyless" label="CustomTask (without proxy)" default className="method-panel-full">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**Response**
+		```json
+     {
+          "errorId":0,
+          "status":"ready",
+          "solution":  {
+                "Domains": {
+                    "example.com": {
+                        "Cookies": {
+                            "TS386a400d029": "08267...01a06e",
+                            "TS386a400d078": "08267...bb3b0c",
+                            "TSd2153684027": "08267...11944",
+                            "TS00000000076": "08267...b70fc2",
+                            "TSPD_101_DID": "08267...1d53f",
+                            "TS386a400d075": "0402b...1000"
+                        }
+                    }
+                }
+            }
+      }
+		```
+	</MethodDescription>
+</TabItem>
+
+## Working with a Page Containing TSPD
+
+### Example of an HTML Page with a TSPD Challenge
+
+When sending a GET request to a page with a **TSPD challenge**, you will receive HTML that must be encoded in **Base64** and passed in the `htmlPageBase64` parameter.  
+
+During the first request, the server will also issue special cookies (for example, `TS386a...400d029`). These cookies must be included in the `tspdCookie` parameter, as they are required for proper TSPD solving and for receiving a valid response from the API.
+
+<details>
+      <summary>GET request to a page with TSPD challenge</summary>
+
+```http
+GET https://example.com/login?client_id=example.client.id&authorization_id=example_auth_id
+
+sec-ch-ua: "ExampleBrowser";v="1", "ExampleEngine";v="1"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "ExampleOS"
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (Example OS 1.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) ExampleBrowser/1.0 Safari/537.36
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+sec-fetch-site: none
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+sec-fetch-dest: document
+accept-encoding: gzip, deflate, br
+accept-language: en-US
+priority: u=0,i
+Upgrade-Insecure-Requests: 1
+```
+</details>
+
+<details>
+      <summary>Page with TSPD-challenge (example)</summary>
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="-1"/>
+    <meta http-equiv="CacheControl" content="no-cache"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="icon" href="data:;base64,iVBOw0KGgo="/>
+
+    <!-- TSPD Script / ThreatMetrix Fingerprinting -->
+    <script type="text/javascript">
+        (function() {
+            // TSPD indicator: bobcmn variable contains encrypted fingerprinting / session data
+            window["bobcmn"] = "101110111110102000000042000000052000000062000000012386a400d200000096200000000200000002300000000300000000300000006/TSPD/300000008TSPD_10130000000cTSPD_101_DID300000005https3000000b0082670627aab200065e4de40b46b945b49688c1d7f2da4f189123687c7515bd58ed223d60435730b086f24771b0a2800da70f3141fd5255393c12c8c87a64a83b8168f256387790c28dd3abb533560e42a9a0970df08ebd7300000002TS200000000200000000";
+            
+            // TSPD indicator: failureConfig for detecting an "incorrect" attempt or error on the page
+            window["failureConfig"] = "524f6f70732e2e2e2e736f6d657468696e672077656e742077726f6e672e2e2e2e20796f757220737570706f72742069642069733a2025444f534c372e6368616c6c656e67652e737570706f72745f6964252e1338353931363039373735373932323232353437062f545350442f171801";
+
+            window.AtT = !!window.AtT;
+
+            // Main TSPD JS
+            try {
+                (function(){
+                    var z = {
+                        decrypt: function(z){
+                            try {
+                                return JSON.parse(
+                                    function(z){
+                                        z = z.split("l");
+                                        var s = "";
+                                        for (var _=0; _<z.length; ++_) s += String.fromCharCode(z[_]);
+                                        return s;
+                                    }(z)
+                                );
+                            } catch(_) {}
+                        }
+                    };
+                    return z = { configuration: z.decrypt("123l34l97l99l116l105l118l101l34l58l34l110l111l34l44l34l100l101l98l117l103l103l105l110l34l58l34l110l111l34l44l34l109l111l100l117l108l11149l34l58l34l101l110l97l98l108l101l100l34l44l34l109l111l100l117l108l101l50l34l58l34l101l110l97l98l108l101l100l34l44l34l109l111l100l117l108l101l51l34l58l34l101l110l97l98l108l101l100l34l44l34l109l111l100l117l108l101l52l34l58l34l101l110l97l98l108l101l100l34l125")};
+                })();
+
+                var sz = 15;
+                // Browser environment check, IE9/IE9RGB indicators
+                zs(window[Zs[J(1086839, sz)]] === Zs);
+                zs(typeof ie9rgb4 !== J(1242178186184, sz));
+
+            })();
+        })();
+    </script>
+
+    <!-- TSPD / ThreatMetrix fingerprinting script, type 8 -->
+    <script type="text/javascript" src="/TSPD/082670627aab2000b8cb2cd11a623629ab3f79c29c36f891be5a445796e6258af0d27cef4a5db1d4?type=8"></script>
+
+    <script type="text/javascript">
+        // Another TSPD indicator: blobfp and slobfp - unique device fingerprints
+        (function(){
+            window["blobfp"] = "01010101b00400000100e803000000000d4200353665636365626565343132626436353030363938386138663833326530623934356538333435633861363438623036643666386238363263333064396466633465210068747470733a2f2f72652e73656375726974792e66356161732e636f6d2f72652f0700545350445f3734";
+            window["slobfp"] = "0827420c940b100087cabc9b010dfd3b94ac7988b1dcbba0";
+        })();
+    </script>
+
+    <!-- TSPD / ThreatMetrix fingerprinting script, type 12 -->
+    <script type="text/javascript" src="/TSPD/082670627aab2000b8cb2cd11a623629ab3f79c29c36f891be5a445796e6258af0d27cef4a5db1d4?type=12"></script>
+
+    <noscript>
+        Please enable JavaScript to view the page content.<br/>
+        Your support ID is: 8591609775792222547.
+        <link rel="stylesheet" href="/TSPD/?type=25" />
+    </noscript>
+</head>
+<body>
+</body>
+</html>
+```
+</details>
+
+### Example of successful cookie acceptance (TSPD does not appear on repeat request)
+
+When making a repeat request to the target page with cookies obtained from CapMonster Cloud, the server will return a regular HTML response with status 200 and without any signs of TSPD. This means the cookies were accepted and you can continue working with your website.
+
+<details>
+      <summary>GET request to the page</summary>
+
+```http
+GET https://example.com/login?client_id=example.client.id&authorization_id=example_auth_id
+
+sec-ch-ua: "ExampleBrowser";v="1", "ExampleEngine";v="1"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "ExampleOS"
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (Example OS 1.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) ExampleBrowser/1.0 Safari/537.36
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+sec-fetch-site: none
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+sec-fetch-dest: document
+accept-encoding: gzip, deflate, br
+accept-language: en-US
+
+# Use the cookies obtained as a result of solving the task via CapMonster Cloud
+# Replace the example values below with the actual cookies from the API response
+# Format: cookie: name1=value1; name2=value2; ...
+
+cookie: TS386a400d029=08267...01a06e; TS386a400d078=0826...dbb3b0c; TSd2153684027=082670...811944; TS00000000076=082670...b70fc2; TSPD_101_DID=08267...1d53f; TS386a400d075=0402b1...701000
+
+priority: u=0,i
+Upgrade-Insecure-Requests: 1
+```
+</details>
+
+<details>
+      <summary>HTML page (example)</summary>
+
+```html
+<!DOCTYPE html>
+<html lang="demo">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/sandbox.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Sample Portal</title>
+
+    <!-- Demo Font -->
+    <link rel="stylesheet" href="https://demo-cdn.com/fonts/demo-font.css" />
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://assets-sandbox.com/icons/demo-icons.css"/>
+
+    <link rel="stylesheet" href="/static/sandbox.css">
+    <script type="module" crossorigin src="/scripts/demo-app.js"></script>
+    <link rel="stylesheet" crossorigin href="/styles/sample-theme.css">
+  </head>
+  <body>
+    <noscript>Please enable scripts to continue.</noscript> 
+    <div id="sandbox-root"></div>
+  </body>
+</html>
+```
+
+</details>
+
+## How to get cookies
+
+The example code below sends a GET request to the authorization page *example.com/login* with browser headers, prints the response status, the full HTML of the page, and the received cookies (including those that start with TS).
+
+<details>
+      <summary>Node.js example</summary>
+
+```javascript
+const url =
+  "https://example.com/login?client_id=example.client&authorization_id=example123";
+
+// === Headers ===
+const headers = {
+  "sec-ch-ua":
+    '"Not(A:Brand";v="8", "Chromium";v="144", "Google Chrome";v="144"',
+  "sec-ch-ua-mobile": "?0",
+  "sec-ch-ua-platform": '"Windows"',
+  "Upgrade-Insecure-Requests": "1",
+  "user-agent":
+    "userAgentPlaceholder",
+  accept:
+    "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+  "sec-fetch-site": "same-site",
+  "sec-fetch-mode": "navigate",
+  "sec-fetch-user": "?1",
+  "sec-fetch-dest": "document",
+  "accept-language": "en-US",
+  priority: "u=0,i",
+  referer: "https://example.com/",
+};
+
+async function main() {
+  const response = await fetch(url, {
+    method: "GET",
+    headers,
+    redirect: "follow",
+  });
+
+  console.log("Status:", response.status);
+  console.log("Final URL:", response.url);
+
+  // === Get HTML ===
+  const html = await response.text();
+
+  console.log("\n===== FULL HTML RESPONSE =====\n");
+  console.log(html);
+
+  // === Get cookies ===
+  const rawHeaders = response.headers;
+
+  let setCookies = [];
+
+  if (typeof rawHeaders.getSetCookie === "function") {
+    setCookies = rawHeaders.getSetCookie();
+  }
+  // fallback (if available)
+  else if (rawHeaders.raw) {
+    setCookies = rawHeaders.raw()["set-cookie"] || [];
+  }
+
+  console.log("\n===== COOKIES FROM RESPONSE =====\n");
+
+  setCookies.forEach((c) => {
+    const cookiePair = c.split(";")[0];
+    console.log(cookiePair);
+  });
+
+  // === Only TS cookies ===
+  const tspdCookies = setCookies
+    .map((c) => c.split(";")[0])
+    .filter((c) => c.startsWith("TS"));
+
+  console.log("\n===== TSPD COOKIES =====\n");
+  console.log(tspdCookies);
+}
+
+main().catch(console.error);
+```
+
+</details>
+
+**Important:**
+
+If the server returns cookies in the following format:
+
+```
+TS386a400d029=082670...87599c;
+TS386a400d029=082670...40a8ea3;
+TS386a400d078=082670...b4cbe2c;
+TSd2153684027=082670...4415a6
+```
+
+**This means the request was processed by a protection mechanism and a blocking page (TSPD challenge) was issued**. In this case, you need to:
+
+* Pass the received set of cookies to CapMonster Cloud.
+* Wait for the solving result.
+* Use the updated cookies for subsequent requests.
+
+---
+
+If cookies are not returned or are returned in one of the following formats:
+
+```
+TS386a400d029=08777...83ff9,
+TS386a400d029=08777...fb459e,
+TSd2153684027=08777...f0ad368
+```
+
+or:
+
+```
+TS014d0691=01fef...1244b,
+TS01fe94e8=01fef...9ed38,
+TSafd868f7027=082670...a7ea7c
+```
+
+**This means that access to the resource is allowed**. In this case, you can:
+
+* Continue making requests to the website.
+* Use the received cookies within the current session.
+
+## How to Get the Page in Base64
+
+After you have obtained the HTML of the page with the TSPD challenge, it must be encoded in Base64. This can be done using various tools or programming libraries. Below is a Node.js example that performs this task:
+
+<details>
+      <summary>Node.js example</summary>
+
+```javascript
+const url =
+  "https://example.com/login";
+
+// === Set the required headers ===
+const headers = {
+  "sec-ch-ua":
+    '"Not(A:Brand";v="8", "Chromium";v="144", "Google Chrome";v="144"',
+  "sec-ch-ua-mobile": "?0",
+  "sec-ch-ua-platform": '"Windows"',
+  "Upgrade-Insecure-Requests": "1",
+  "user-agent":
+    "userAgentPlaceholder",
+  accept:
+    "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+  "sec-fetch-site": "same-site",
+  "sec-fetch-mode": "navigate",
+  "sec-fetch-user": "?1",
+  "sec-fetch-dest": "document",
+  "accept-language": "en-US",
+  priority: "u=0,i"
+};
+
+async function main() {
+  const response = await fetch(url, {
+    method: "GET",
+    headers,
+    redirect: "follow",
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error: ${response.status}`);
+  }
+
+  // Get full HTML
+  const html = await response.text();
+
+  // Encode to Base64
+  const base64 = Buffer.from(html, "utf-8").toString("base64");
+
+  console.log("===== BASE64 RESULT =====\n");
+  console.log(base64);
+}
+
+main().catch(console.error);
+```
+
+</details>
