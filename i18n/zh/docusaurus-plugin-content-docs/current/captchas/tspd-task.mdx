@@ -1,0 +1,535 @@
+---
+sidebar_position: 25
+sidebar_label: TSPD
+title: "TSPD 自动识别与绕过 | API"
+description: "了解如何使用 CapMonster Cloud 自动识别与验证码解决服务的 API 来识别 TSPD！" 
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+import PriceBlock from '@theme/PriceBlock';
+import PriceBlockWrap from '@theme/PriceBlockWrap';
+import { ArticleHead } from '../../../../../src/theme/ArticleHead';
+
+<ArticleHead slug="captchas/tspd-task" />
+
+# TSPD
+
+<PriceBlockWrap>
+  <PriceBlock title="TSPD" captchaId="tspd"/>
+</PriceBlockWrap>
+
+:::warning **注意！**
+
+* 对此任务请使用 **自定义代理**。
+
+* 解决后，你将收到 **特殊 cookies**，需添加到浏览器。
+:::
+
+## 请求参数
+
+<TabItem value="proxy" label="CastleTask" className="bordered-panel">
+<ParamItem title="type" required type="string" />
+**CustomTask**
+
+---
+
+<ParamItem title="class" required type="string" />
+**tspd**
+
+---
+
+<ParamItem title="websiteURL" required type="string" />
+包含 TSPD 的页面地址。
+
+---
+
+<ParamItem title="tspdCookie (внутри metadata)" required type="string" />
+在 TSPD-challenge 页面上获取的 cookies：`"tspdCookie": "TS386a400d029=082670627aab2800722d179e73a60b575d00c96728a9f8dedd8be27a40f6a1aa5df467cebf7da7315a4e16675f010245; ....; ....;"`
+
+---
+
+<ParamItem title="htmlPageBase64 (внутри metadata)" required type="string" />
+完整的 TSPD 页面内容（**base64** 格式），例如：`"htmlPageBase64": "PCFET0NUWVBFIGh0bWw+DQo8aHRtbD48aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IlByYWdtYSIgY29udGVudD0ibm8tY2FjaGUiLz4NCjxtZXRhIGh0dHAtZXF1aXY9IkV4cGlyZXMiIGNvbnRlbnQ9Ii0xIi8+DQo8bWV0YSBodHRwLWVxdWl2PSJDYWNoZUNvbnRyb2.....L2JvZHk+PC9odG1sPg=="`
+ 
+---
+
+<ParamItem title="userAgent" required type="string" />
+  浏览器 User-Agent。<br />
+  **仅提供当前 Windows UA:** userAgentPlaceholder
+
+---
+
+<ParamItem title="proxyType" required type="string" />
+**http** - 常规 HTTP/HTTPS 代理；<br />
+**https** - 当 http 不可用时使用（某些自定义代理必填）；<br />
+**socks4** - SOCKS4 代理；<br />
+**socks5** - SOCKS5 代理。
+
+---
+
+<ParamItem title="proxyAddress" required type="string" />
+<p>
+代理 IP 地址（IPv4/IPv6）。禁止使用：
+- 透明代理
+- 本地机器代理
+</p>
+
+---
+
+<ParamItem title="proxyPort" required type="integer" />
+代理端口
+
+---
+
+<ParamItem title="proxyLogin" required type="string" />
+代理登录名
+
+---
+
+<ParamItem title="proxyPassword" required type="string" />
+代理密码
+
+</TabItem>
+
+## 创建任务方法
+
+<TabItem value="proxy" label="CustomTask（使用代理）" className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      **请求**
+      ```json
+      {
+        "type": "CustomTask",
+        "class": "tspd",
+        "websiteUrl": "https://example.com",        
+        "metadata": {
+            "tspdCookie": "TS386a400d029=08...010245; TS386a400d029=08...01a06e; TS386a400d078=08...dbb3b0c; TSd2153684027=08...1944",
+            "htmlPageBase64": "PCFET0NU...k+PC9odG1sPg=="
+        },
+        "userAgent": "userAgentPlaceholder",
+        "proxyType": "http",
+        "proxyAddress": "8.8.8.8",
+        "proxyPort": 8080,
+        "proxyLogin": "proxyLoginHere",
+        "proxyPassword": "proxyPasswordHere"
+}
+      ```
+
+      **响应**
+      ```json
+      {
+        "errorId": 0,
+        "taskId": 407533072
+    }
+      ```
+    </MethodDescription>
+  </TabItem>
+
+## 获取任务结果方法
+
+使用方法 [getTaskResult](../api/methods/get-task-result.mdx) 获取 TSPD 解决结果。
+
+<TabItem value="proxyless" label="CustomTask（无代理）" default className="method-panel-full">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**请求**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**响应**
+		```json
+     {
+          "errorId":0,
+          "status":"ready",
+          "solution":  {
+                "Domains": {
+                    "example.com": {
+                        "Cookies": {
+                            "TS386a400d029": "08267...01a06e",
+                            "TS386a400d078": "08267...bb3b0c",
+                            "TSd2153684027": "08267...11944",
+                            "TS00000000076": "08267...b70fc2",
+                            "TSPD_101_DID": "08267...1d53f",
+                            "TS386a400d075": "0402b...1000"
+                        }
+                    }
+                }
+            }
+      }
+		```
+	</MethodDescription>
+</TabItem>
+
+## 与 TSPD 页面交互
+
+### TSPD-challenge HTML 页面示例
+
+当向包含 **TSPD-challenge** 的页面发送 GET 请求时，您将收到 HTML 内容，需要将其编码为 **Base64**，并通过参数 `htmlPageBase64` 进行传递。同时，在第一次请求时，服务器会返回特殊的 cookies（例如 `TS386a...400d029`）——必须将其传递到 `tspdCookie`，因为它们是正确解决 TSPD 并从 API 获取响应所必需的。
+
+<details>
+      <summary>向包含 TSPD-challenge 的页面发送 GET 请求</summary>
+
+```http
+GET https://example.com/login?client_id=example.client.id&authorization_id=example_auth_id
+
+sec-ch-ua: "ExampleBrowser";v="1", "ExampleEngine";v="1"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "ExampleOS"
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (Example OS 1.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) ExampleBrowser/1.0 Safari/537.36
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+sec-fetch-site: none
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+sec-fetch-dest: document
+accept-encoding: gzip, deflate, br
+accept-language: en-US
+priority: u=0,i
+Upgrade-Insecure-Requests: 1
+```
+
+</details>
+
+<details>
+      <summary>包含 TSPD-challenge 的页面（示例）</summary>
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="-1"/>
+    <meta http-equiv="CacheControl" content="no-cache"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="icon" href="data:;base64,iVBOw0KGgo="/>
+
+    <!-- TSPD / ThreatMetrix 指纹识别脚本 -->
+    <script type="text/javascript">
+        (function() {
+            // TSPD 特征：变量 bobcmn 包含加密的指纹 / 会话数据
+            window["bobcmn"] = "101110111110102000000042000000052000000062000000012386a400d200000096200000000200000002300000000300000000300000006/TSPD/300000008TSPD_10130000000cTSPD_101_DID300000005https3000000b0082670627aab200065e4de40b46b945b49688c1d7f2da4f189123687c7515bd58ed223d60435730b086f24771b0a2800da70f3141fd5255393c12c8c87a64a83b8168f256387790c28dd3abb533560e42a9a0970df08ebd7300000002TS200000000200000000";
+            
+            // TSPD 特征：failureConfig 用于判断“错误”尝试或页面错误
+            window["failureConfig"] = "524f6f70732e2e2e2e736f6d657468696e672077656e742077726f6e672e2e2e2e20796f757220737570706f72742069642069733a2025444f534c372e6368616c6c656e67652e737570706f72745f6964252e1338353931363039373735373932323232353437062f545350442f171801";
+
+            window.AtT = !!window.AtT;
+
+            // TSPD 主 JS
+            try {
+                (function(){
+                    var z = {
+                        decrypt: function(z){
+                            try {
+                                return JSON.parse(
+                                    function(z){
+                                        z = z.split("l");
+                                        var s = "";
+                                        for (var _=0; _<z.length; ++_) s += String.fromCharCode(z[_]);
+                                        return s;
+                                    }(z)
+                                );
+                            } catch(_) {}
+                        }
+                    };
+                    return z = { configuration: z.decrypt("123l34l97l99l116l105l118l101l34l58l34l110l111l34l44l34l100l101l98l117l103l103l105l110l34l58l34l110l111l34l44l34l109l111l100l117l108l11149l34l58l34l101l110l97l98l108l101l100l34l44l34l109l111l100l117l108l101l50l34l58l34l101l110l97l98l108l101l100l34l44l34l109l111l100l117l108l101l51l34l58l34l101l110l97l98l108l101l100l34l44l34l109l111l100l117l108l101l52l34l58l34l101l110l97l98l108l101l100l34l125")};
+                })();
+
+                var sz = 15;
+                // 浏览器环境检测，IE9 / IE9RGB 特征
+                zs(window[Zs[J(1086839, sz)]] === Zs);
+                zs(typeof ie9rgb4 !== J(1242178186184, sz));
+
+            })();
+        })();
+    </script>
+
+    <!-- TSPD / ThreatMetrix 指纹识别脚本，类型 8 -->
+    <script type="text/javascript" src="/TSPD/082670627aab2000b8cb2cd11a623629ab3f79c29c36f891be5a445796e6258af0d27cef4a5db1d4?type=8"></script>
+
+    <script type="text/javascript">
+        // 另一个 TSPD 特征：blobfp 和 slobfp —— 设备唯一指纹
+        (function(){
+            window["blobfp"] = "01010101b00400000100e803000000000d4200353665636365626565343132626436353030363938386138663833326530623934356538333435633861363438623036643666386238363263333064396466633465210068747470733a2f2f72652e73656375726974792e66356161732e636f6d2f72652f0700545350445f3734";
+            window["slobfp"] = "0827420c940b100087cabc9b010dfd3b94ac7988b1dcbba0";
+        })();
+    </script>
+
+    <!-- TSPD / ThreatMetrix 指纹识别脚本，类型 12 -->
+    <script type="text/javascript" src="/TSPD/082670627aab2000b8cb2cd11a623629ab3f79c29c36f891be5a445796e6258af0d27cef4a5db1d4?type=12"></script>
+
+    <noscript>
+        Please enable JavaScript to view the page content.<br/>
+        Your support ID is: 8591609775792222547.
+        <link rel="stylesheet" href="/TSPD/?type=25" />
+    </noscript>
+</head>
+<body>
+</body>
+</html>
+```
+
+</details>
+
+### 成功接受 Cookie 示例（再次请求时不再出现 TSPD）
+
+当使用来自 CapMonster Cloud 的 cookies 再次请求目标页面时，服务器将返回状态码 200 的正常 HTML 页面，并且不再包含 TSPD 特征。这表示 cookies 已被成功接受，您可以继续对网站进行操作。
+
+<details>
+      <summary>向页面发送 GET 请求</summary>
+
+```http
+GET https://example.com/login?client_id=example.client.id&authorization_id=example_auth_id
+
+sec-ch-ua: "ExampleBrowser";v="1", "ExampleEngine";v="1"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "ExampleOS"
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (Example OS 1.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) ExampleBrowser/1.0 Safari/537.36
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+sec-fetch-site: none
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+sec-fetch-dest: document
+accept-encoding: gzip, deflate, br
+accept-language: en-US
+
+# 使用通过 CapMonster Cloud 解决任务后获得的 cookies
+# 请将下面的示例值替换为 API 响应中的真实 cookies
+# 格式：cookie: 名称1=值1; 名称2=值2; ...
+
+cookie: TS386a400d029=08267...01a06e; TS386a400d078=0826...dbb3b0c; TSd2153684027=082670...811944; TS00000000076=082670...b70fc2; TSPD_101_DID=08267...1d53f; TS386a400d075=0402b1...701000
+
+priority: u=0,i
+Upgrade-Insecure-Requests: 1
+```
+
+</details>
+
+<details>
+      <summary>页面 HTML 示例</summary>
+```html
+<!DOCTYPE html>
+<html lang="demo">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/sandbox.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>示例门户</title>
+
+    <!-- 演示字体 -->
+    <link rel="stylesheet" href="https://demo-cdn.com/fonts/demo-font.css" />
+
+    <!-- 图标 -->
+    <link rel="stylesheet" href="https://assets-sandbox.com/icons/demo-icons.css"/>
+
+    <link rel="stylesheet" href="/static/sandbox.css">
+    <script type="module" crossorigin src="/scripts/demo-app.js"></script>
+    <link rel="stylesheet" crossorigin href="/styles/sample-theme.css">
+  </head>
+  <body>
+    <noscript>请启用脚本以继续。</noscript> 
+    <div id="sandbox-root"></div>
+  </body>
+</html>
+```
+
+</details>
+
+## 如何获取 cookies
+
+下面的示例代码向 *example.com/login* 授权页面发送 GET 请求，使用浏览器头部信息，输出响应状态、完整 HTML 页面以及获取的 cookies（包括以 TS 开头的 cookies）。
+
+<details>
+      <summary>Node.js 示例</summary>
+```javascript
+const url =
+  "https://example.com/login?client_id=example.client&authorization_id=example123";
+
+// === 请求头 ===
+const headers = {
+  "sec-ch-ua":
+    '"Not(A:Brand";v="8", "Chromium";v="144", "Google Chrome";v="144"',
+  "sec-ch-ua-mobile": "?0",
+  "sec-ch-ua-platform": '"Windows"',
+  "Upgrade-Insecure-Requests": "1",
+  "user-agent":
+    "userAgentPlaceholder",
+  accept:
+    "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+  "sec-fetch-site": "same-site",
+  "sec-fetch-mode": "navigate",
+  "sec-fetch-user": "?1",
+  "sec-fetch-dest": "document",
+  "accept-language": "en-US",
+  priority: "u=0,i",
+  referer: "https://example.com/",
+};
+
+async function main() {
+  const response = await fetch(url, {
+    method: "GET",
+    headers,
+    redirect: "follow",
+  });
+
+  console.log("状态:", response.status);
+  console.log("最终 URL:", response.url);
+
+  // === 获取 HTML ===
+  const html = await response.text();
+
+  console.log("\n===== 完整 HTML 响应 =====\n");
+  console.log(html);
+
+  // === 获取 cookies ===
+  const rawHeaders = response.headers;
+
+  let setCookies = [];
+
+  if (typeof rawHeaders.getSetCookie === "function") {
+    setCookies = rawHeaders.getSetCookie();
+  }
+  // 回退方法（如果可用）
+  else if (rawHeaders.raw) {
+    setCookies = rawHeaders.raw()["set-cookie"] || [];
+  }
+
+  console.log("\n===== 响应中的 COOKIES =====\n");
+
+  setCookies.forEach((c) => {
+    const cookiePair = c.split(";")[0];
+    console.log(cookiePair);
+  });
+
+  // === 仅获取 TS cookies ===
+  const tspdCookies = setCookies
+    .map((c) => c.split(";")[0])
+    .filter((c) => c.startsWith("TS"));
+
+  console.log("\n===== TSPD COOKIES =====\n");
+  console.log(tspdCookies);
+}
+
+main().catch(console.error);
+```
+
+</details>
+
+
+**重要：**
+
+如果服务器返回的 cookies 格式如下：
+
+```
+
+TS386a400d029=082670...87599c;
+TS386a400d029=082670...40a8ea3;
+TS386a400d078=082670...b4cbe2c;
+TSd2153684027=082670...4415a6
+
+```
+
+**这表示请求已被防护机制处理，并返回了拦截页面（TSPD challenge）**。在这种情况下，需要：
+
+* 将获取到的 cookies 集合发送至 CapMonster Cloud。
+* 等待解题结果。
+* 在后续请求中使用更新后的 cookies。
+
+---
+
+如果 cookies 未返回，或返回格式为以下之一：
+
+```
+
+TS386a400d029=08777...83ff9,
+TS386a400d029=08777...fb459e,
+TSd2153684027=08777...f0ad368
+
+```
+
+或：
+
+```
+
+TS014d0691=01fef...1244b,
+TS01fe94e8=01fef...9ed38,
+TSafd868f7027=082670...a7ea7c
+
+```
+
+**这表示资源访问已被允许**。在这种情况下，可以：
+
+* 继续向网站发送请求。
+* 在当前会话中使用已获取的 cookies。
+
+
+## 如何获取页面的 Base64
+
+在获取包含 TSPD-challenge 的 HTML 页面后，需要将其编码为 Base64。可以使用各种工具或编程库来完成此操作。下面是一个使用 Node.js 实现该功能的示例：
+
+<details>
+      <summary>Node.js 示例</summary>
+```javascript
+const url =
+  "https://example.com/login";
+
+// === 设置所需的请求头 ===
+const headers = {
+  "sec-ch-ua":
+    '"Not(A:Brand";v="8", "Chromium";v="144", "Google Chrome";v="144"',
+  "sec-ch-ua-mobile": "?0",
+  "sec-ch-ua-platform": '"Windows"',
+  "Upgrade-Insecure-Requests": "1",
+  "user-agent":
+    "userAgentPlaceholder",
+  accept:
+    "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+  "sec-fetch-site": "same-site",
+  "sec-fetch-mode": "navigate",
+  "sec-fetch-user": "?1",
+  "sec-fetch-dest": "document",
+  "accept-language": "en-US",
+  priority: "u=0,i"
+};
+
+async function main() {
+  const response = await fetch(url, {
+    method: "GET",
+    headers,
+    redirect: "follow",
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error: ${response.status}`);
+  }
+
+  // 获取完整 HTML
+  const html = await response.text();
+
+  // 编码为 Base64
+  const base64 = Buffer.from(html, "utf-8").toString("base64");
+
+  console.log("===== BASE64 结果 =====\n");
+  console.log(base64);
+}
+
+main().catch(console.error);
+```
+</details>
+
