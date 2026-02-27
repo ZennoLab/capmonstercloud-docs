@@ -194,11 +194,13 @@ Quando `window.turnstile.render(el, paramsObj)` é chamado, o captcha é carrega
   <ParamItem title="htmlPageBase64" required type="string" />
   Página HTML codificada em Base64 do "Just a moment" exibido com resposta 403.<br/>
   Exemplo para obter `htmlPageBase64`:
-  ```js
-  var htmlContent = document.documentElement.outerHTML;
-  var htmlBase64 = btoa(unescape(encodeURIComponent(htmlContent)));
-  console.log(htmlBase64);
-  ```
+```js
+var serializer = new XMLSerializer();
+var fullHtml = serializer.serializeToString(document);
+
+var htmlBase64 = btoa(unescape(encodeURIComponent(fullHtml)));
+console.log(htmlBase64);
+```
 
 ---
 

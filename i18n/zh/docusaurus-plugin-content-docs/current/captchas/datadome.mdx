@@ -256,6 +256,988 @@ DataDome 解决方法版本。
 ![](./images/datadome/datadomeCookie2.png)
 
 
+## DataDome 自动化解决示例
+
+:::warning **注意！**
+下面的示例仅用于了解和演示总体逻辑。
+
+由于各网站的防护机制、请求结构和参数各不相同，解决方案可能需要针对具体网站进行额外的适配和测试。
+:::
+
+<Tabs className="full-width-tabs filled-tabs request-tabs">
+  <TabItem value="js" label="Node.js" default className="method-panel">
+
+<details>
+      <summary>显示代码</summary>
+```js
+// npm install axios cheerio https-proxy-agent
+
+import axios from "axios";
+import * as cheerio from "cheerio";
+import { URL } from "url";
+import { HttpsProxyAgent } from "https-proxy-agent";
+
+// ======================================================
+// 配置
+// ======================================================
+
+// 启用/禁用详细日志输出
+// 仅用于开发和排错
+const DEBUG = true; 
+
+const CAPMONSTER_API_KEY = "YOUR_API_KEY"; // 填写您的 CapMonster Cloud API 密钥
+const PAGE_URL = "https://www.example.com/"; // 填写触发 DataDome 的页面 URL
+
+const USER_AGENT =
+  "userAgentPlaceholder";
+
+const PROXY_URL = "http://login:pass@address:port";
+
+const CREATE_TASK = "https://api.capmonster.cloud/createTask";
+const GET_RESULT = "https://api.capmonster.cloud/getTaskResult";
+
+const MAX_WAIT = 120000;
+
+// ======================================================
+// 调试日志记录器
+// ======================================================
+
+function log(title, data = null) {
+  if (!DEBUG) return;
+
+  console.log(`\n${"=".repeat(25)} ${title} ${"=".repeat(25)}`);
+
+  if (typeof data === "object") console.log(JSON.stringify(data, null, 2));
+  else if (data) console.log(data);
+
+  console.log("=".repeat(70));
+}
+
+// ======================================================
+// 提取 DD 对象
+// ======================================================
+
+function extractDD(html) {
+  const $ = cheerio.load(html);
+  const scripts = $("script").toArray();
+
+  for (const s of scripts) {
+    const text = $(s).html();
+    if (text && text.includes("var dd=")) {
+      try {
+        const raw = text.split("var dd=")[1].split(";")[0].replace(/'/g, '"');
+        return JSON.parse(raw);
+      } catch (e) {
+        return null;
+      }
+    }
+  }
+
+  return null;
+}
+
+// ======================================================
+// 构建 CAPTCHA URL
+// ======================================================
+
+function buildCaptchaUrl(dd) {
+  const base = `https://${dd.host}/captcha/`;
+
+  const params = new URLSearchParams({
+    initialCid: dd.cid,
+    hash: dd.hsh,
+    cid: dd.cookie,
+    t: dd.t,
+    referer: PAGE_URL,
+    s: dd.s,
+    dm: "cd",
+  });
+
+  if (dd.e) params.append("e", dd.e);
+
+  return base + "?" + params.toString();
+}
+
+// ======================================================
+// 使用 CAPMONSTER CLOUD
+// ======================================================
+
+async function createTask(payload) {
+  log("CREATE TASK REQUEST", payload);
+
+  const { data } = await axios.post(CREATE_TASK, payload);
+
+  log("CREATE TASK RESPONSE", data);
+
+  return data.taskId;
+}
+
+async function waitResult(taskId) {
+  const start = Date.now();
+
+  while (true) {
+    if (Date.now() - start > MAX_WAIT) throw new Error("CapMonster 超时");
+
+    await new Promise((r) => setTimeout(r, 3000));
+
+    const { data } = await axios.post(GET_RESULT, {
+      clientKey: CAPMONSTER_API_KEY,
+      taskId,
+    });
+
+    if (data.status === "processing") {
+      console.log("... 正在解决");
+      continue;
+    }
+
+    if (data.status === "ready") return data.solution;
+
+    if (data.errorId) throw new Error(JSON.stringify(data));
+  }
+}
+
+// ======================================================
+// 主 SOLVER
+// ======================================================
+
+async function solveDataDome() {
+  console.log("\nDataDome → CapMonster solver 已启动（HTTP 模式）\n");
+
+  let agent = null;
+  let parsedProxy = null;
+
+  if (PROXY_URL) {
+    parsedProxy = new URL(PROXY_URL);
+    agent = new HttpsProxyAgent(PROXY_URL);
+  }
+
+  // 1. 第一次请求
+  console.log("正在打开页面...");
+
+  const response = await axios.get(PAGE_URL, {
+    headers: {
+      "User-Agent": USER_AGENT,
+      Accept:
+        "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+      "Accept-Language": "en-US,en;q=0.9",
+      "Cache-Control": "no-cache",
+      Pragma: "no-cache",
+      "Upgrade-Insecure-Requests": "1",
+    },
+    httpsAgent: agent,
+    proxy: false, // 使用 httpsAgent 时很重要
+    validateStatus: () => true,
+  });
+
+  const html = response.data;
+
+  log("STATUS", response.status);
+
+  const dd = extractDD(html);
+
+  if (!dd) {
+    console.log("未检测到 DataDome。");
+    return;
+  }
+
+  log("DD OBJECT", dd);
+
+  if (dd.t === "bv") {
+    console.log("代理已被封禁。请更换代理。");
+    return;
+  }
+
+  // 2. 构建 captcha URL
+  const captchaUrl = buildCaptchaUrl(dd);
+  log("CAPTCHA URL", captchaUrl);
+
+  //  3. 在 CapMonster Cloud 中创建任务
+  const task = {
+    type: "CustomTask",
+    class: "DataDome",
+    websiteURL: PAGE_URL,
+    userAgent: USER_AGENT,
+    metadata: {
+      captchaUrl,
+      datadomeCookie: `datadome=${dd.cookie}`,
+      datadomeVersion: "new",
+    },
+  };
+
+  if (PROXY_URL) {
+    task.proxyType = "http";
+    task.proxyAddress = parsedProxy.hostname;
+    task.proxyPort = parseInt(parsedProxy.port);
+    task.proxyLogin = parsedProxy.username;
+    task.proxyPassword = parsedProxy.password;
+  }
+
+  const payload = {
+    clientKey: CAPMONSTER_API_KEY,
+    task,
+  };
+
+  const taskId = await createTask(payload);
+
+  if (!taskId) {
+    console.log("创建任务失败。");
+    return;
+  }
+
+  const solution = await waitResult(taskId);
+
+  log("SOLUTION", solution);
+
+  console.log("\nDataDome 已成功解决。\n");
+}
+
+solveDataDome().catch(console.error);
+```
+
+  </details>
+
+  <details>
+      <summary>显示代码 (Node.js + Playwright)</summary>
+```js
+// npm install axios cheerio playwright
+
+import axios from "axios";
+import * as cheerio from "cheerio";
+import { chromium } from "playwright";
+import { URL } from "url";
+
+// ======================================================
+// 配置
+// ======================================================
+
+// 启用/禁用详细日志输出
+// 仅用于开发和排错
+const DEBUG = true;
+
+const CAPMONSTER_API_KEY = "YOUR_API_KEY"  // 填写您的 CapMonster Cloud API 密钥
+const PAGE_URL = "https://www.example.com/" // 填写触发 DataDome 的页面 URL
+
+const USER_AGENT =
+  "userAgentPlaceholder";
+
+const PROXY_URL = "http://login:pass@address:port" // 填写您的代理
+
+const CREATE_TASK = "https://api.capmonster.cloud/createTask";
+const GET_RESULT = "https://api.capmonster.cloud/getTaskResult";
+
+const MAX_WAIT = 120000;
+
+// ======================================================
+// 调试日志记录器
+// ======================================================
+
+function log(title, data = null) {
+  if (!DEBUG) return;
+
+  console.log(`\n${"=".repeat(25)} ${title} ${"=".repeat(25)}`);
+
+  if (typeof data === "object") console.log(JSON.stringify(data, null, 2));
+  else if (data) console.log(data);
+
+  console.log("=".repeat(70));
+}
+
+// ======================================================
+// 提取 DD 对象
+// ======================================================
+
+function extractDD(html) {
+  const $ = cheerio.load(html);
+  const scripts = $("script").toArray();
+
+  for (const s of scripts) {
+    const text = $(s).html();
+    if (text && text.includes("var dd=")) {
+      try {
+        const raw = text.split("var dd=")[1].split(";")[0].replace(/'/g, '"');
+        return JSON.parse(raw);
+      } catch (e) {
+        return null;
+      }
+    }
+  }
+
+  return null;
+}
+
+// ======================================================
+// 构建 CAPTCHA URL
+// ======================================================
+
+function buildCaptchaUrl(dd) {
+  const base = `https://${dd.host}/captcha/`;
+
+  const params = new URLSearchParams({
+    initialCid: dd.cid,
+    hash: dd.hsh,
+    cid: dd.cookie,
+    t: dd.t,
+    referer: PAGE_URL,
+    s: dd.s,
+    dm: "cd",
+  });
+
+  if (dd.e) params.append("e", dd.e);
+
+  return base + "?" + params.toString();
+}
+
+// ======================================================
+// 使用 CAPMONSTER CLOUD
+// ======================================================
+
+async function createTask(payload) {
+  log("CREATE TASK REQUEST", payload);
+
+  const { data } = await axios.post(CREATE_TASK, payload);
+
+  log("CREATE TASK RESPONSE", data);
+
+  return data.taskId;
+}
+
+async function waitResult(taskId) {
+  const start = Date.now();
+
+  while (true) {
+    if (Date.now() - start > MAX_WAIT) throw new Error("CapMonster 超时");
+
+    await new Promise((r) => setTimeout(r, 3000));
+
+    const { data } = await axios.post(GET_RESULT, {
+      clientKey: CAPMONSTER_API_KEY,
+      taskId,
+    });
+
+    if (data.status === "processing") {
+      console.log("... 正在解决");
+      continue;
+    }
+
+    if (data.status === "ready") return data.solution;
+
+    if (data.errorId) throw new Error(JSON.stringify(data));
+  }
+}
+
+// ======================================================
+// 主 SOLVER（PLAYWRIGHT）
+// ======================================================
+
+async function solveDataDome() {
+  console.log("\nDataDome → CapMonster solver 已启动\n");
+
+  let proxyConfig = null;
+  let parsedProxy = null;
+
+  if (PROXY_URL) {
+    parsedProxy = new URL(PROXY_URL);
+
+    proxyConfig = {
+      server: `http://${parsedProxy.hostname}:${parsedProxy.port}`,
+      username: parsedProxy.username,
+      password: parsedProxy.password,
+    };
+  }
+
+  const browser = await chromium.launch({
+    headless: false,
+    proxy: proxyConfig,
+  });
+
+  const context = await browser.newContext({
+    userAgent: USER_AGENT,
+  });
+
+  const page = await context.newPage();
+
+  console.log("正在打开页面...");
+  await page.goto(PAGE_URL, { waitUntil: "domcontentloaded" });
+
+  const html = await page.content();
+  const dd = extractDD(html);
+
+  if (!dd) {
+    console.log("未检测到 DataDome。");
+    await browser.close();
+    return;
+  }
+
+  log("DD OBJECT", dd);
+
+  if (dd.t === "bv") {
+    console.log("代理已被封禁。请更换代理。");
+    await browser.close();
+    return;
+  }
+
+  const captchaUrl = buildCaptchaUrl(dd);
+  log("CAPTCHA URL", captchaUrl);
+
+  const task = {
+    type: "CustomTask",
+    class: "DataDome",
+    websiteURL: PAGE_URL,
+    userAgent: USER_AGENT,
+    metadata: {
+      captchaUrl,
+      datadomeCookie: `datadome=${dd.cookie}`,
+      datadomeVersion: "new",
+    },
+  };
+
+  if (PROXY_URL) {
+    task.proxyType = "http";
+    task.proxyAddress = parsedProxy.hostname;
+    task.proxyPort = parseInt(parsedProxy.port);
+    task.proxyLogin = parsedProxy.username;
+    task.proxyPassword = parsedProxy.password;
+  }
+
+  const payload = {
+    clientKey: CAPMONSTER_API_KEY,
+    task,
+  };
+
+  const taskId = await createTask(payload);
+
+  if (!taskId) {
+    console.log("创建任务失败。");
+    await browser.close();
+    return;
+  }
+
+  const solution = await waitResult(taskId);
+  log("SOLUTION", solution);
+
+  await browser.close();
+}
+
+solveDataDome().catch(console.error);
+```
+</details>
+  </TabItem>
+
+<TabItem value="python" label="Python" className="method-panel">
+<details>
+      <summary>显示代码</summary>
+```python
+# pip install requests beautifulsoup4
+
+import time
+import json
+import requests
+import urllib.parse   # 用于解析和编码 URL（代理、captcha 参数）
+from bs4 import BeautifulSoup  # 用于解析 HTML 并提取 DataDome 对象（var dd）
+from urllib.parse import urlparse
+
+
+# ======================================================
+# 配置
+# ======================================================
+
+# 启用/禁用详细日志输出
+# 仅用于开发和排错
+DEBUG = True   
+
+CAPMONSTER_API_KEY = "YOUR_API_KEY"  # 填写您的 CapMonster Cloud API 密钥
+
+PAGE_URL = "https://www.example.com/" # 填写触发 DataDome 的页面 URL
+
+USER_AGENT = (
+    "userAgentPlaceholder"
+)
+
+PROXY_URL = "http://login:pass@address:port" # 填写您的代理 
+
+CREATE_TASK = "https://api.capmonster.cloud/createTask"
+GET_RESULT = "https://api.capmonster.cloud/getTaskResult"
+
+MAX_WAIT = 120
+
+
+# ======================================================
+# 调试日志记录器
+# ======================================================
+
+def log(title, data=None):
+    if not DEBUG:
+        return
+
+    print(f"\n{'='*25} {title} {'='*25}")
+
+    if isinstance(data, (dict, list)):
+        print(json.dumps(data, indent=2, ensure_ascii=False))
+    elif data:
+        print(data)
+
+    print("=" * 70)
+
+
+# ======================================================
+# 请求头（您可以自定义）
+# ======================================================
+
+def build_headers(first_request=True):
+    return {
+        "User-Agent": USER_AGENT,
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Connection": "keep-alive",
+        "Upgrade-Insecure-Requests": "1",
+        "Cache-Control": "max-age=0",
+        "DNT": "1",
+        "Sec-Fetch-Dest": "document",
+        "Sec-Fetch-Mode": "navigate",
+        "Sec-Fetch-Site": "none" if first_request else "same-origin",
+        "Sec-Fetch-User": "?1",
+    }
+
+
+# ======================================================
+# 代理
+# ======================================================
+
+def build_proxy(proxy_url):
+    if not proxy_url:
+        return None, None
+
+    parsed = urlparse(proxy_url)
+
+    proxy_dict = {
+        "http": proxy_url,
+        "https": proxy_url
+    }
+
+    proxy_data = {
+        "proxyType": "http",
+        "proxyAddress": parsed.hostname,
+        "proxyPort": parsed.port,
+        "proxyLogin": parsed.username or "",
+        "proxyPassword": parsed.password or ""
+    }
+
+    return proxy_dict, proxy_data
+
+
+# ======================================================
+# 提取 DD 对象
+# ======================================================
+
+def extract_dd(html):
+    soup = BeautifulSoup(html, "html.parser")
+
+    script = soup.find("script", string=lambda t: t and "var dd=" in t)
+    if not script:
+        return None
+
+    raw = script.text.split("var dd=")[1].split(";")[0]
+    raw = raw.replace("'", '"')
+
+    return json.loads(raw)
+
+
+# ======================================================
+# 构建 CAPTCHA URL
+# ======================================================
+
+def build_captcha_url(dd):
+    base = f"https://{dd['host']}/captcha/"
+
+    parts = [
+        ("initialCid", dd["cid"]),
+        ("hash", dd["hsh"]),
+        ("cid", dd["cookie"]),
+        ("t", dd["t"]),
+        ("referer", PAGE_URL),
+        ("s", dd["s"]),
+    ]
+
+    if dd.get("e"):
+        parts.append(("e", dd["e"]))
+
+    parts.append(("dm", "cd"))
+
+    query = "&".join(
+        f"{k}={urllib.parse.quote(str(v), safe='')}"
+        for k, v in parts
+    )
+
+    return base + "?" + query
+
+
+# ======================================================
+# 通过 CAPMONSTER CLOUD 进行解决
+# ======================================================
+
+def create_task(payload):
+    log("CREATE TASK REQUEST", payload)
+
+    r = requests.post(CREATE_TASK, json=payload)
+    resp = r.json()
+
+    log("CREATE TASK RESPONSE", resp)
+
+    return resp.get("taskId")
+
+
+def wait_result(task_id):
+    start = time.time()
+
+    while True:
+        if time.time() - start > MAX_WAIT:
+            raise TimeoutError("CapMonster 超时")
+
+        time.sleep(2)
+
+        r = requests.post(GET_RESULT, json={
+            "clientKey": CAPMONSTER_API_KEY,
+            "taskId": task_id
+        })
+
+        resp = r.json()
+
+        if resp.get("status") == "processing":
+            print("... 正在解决")
+            continue
+
+        if resp.get("status") == "ready":
+            return resp["solution"]
+
+        if resp.get("errorId"):
+            raise Exception(resp)
+
+
+# ======================================================
+# 主 SOLVER
+# ======================================================
+
+def solve_datadome():
+
+    print("\n DataDome → CapMonster solver 已启动\n")
+
+    proxy_dict, proxy_data = build_proxy(PROXY_URL)
+
+    session = requests.Session()
+
+    session.headers.update(build_headers(first_request=True))
+
+    if proxy_dict:
+        session.proxies.update(proxy_dict)
+
+    # --------------------------------------------------
+    # 1. 第一次请求
+    # --------------------------------------------------
+
+    print("正在打开页面...")
+
+    r = session.get(PAGE_URL)
+
+    log("FIRST STATUS", r.status_code)
+
+    dd = extract_dd(r.text)
+
+    if not dd:
+        print("未检测到 DataDome")
+        return
+
+    log("DD OBJECT", dd)
+
+    if dd.get("t") == "bv":
+        print("代理被封禁 (t=bv)。请更换代理或请求头。")
+        return
+
+    # --------------------------------------------------
+    # 2. 构建 captcha URL
+    # --------------------------------------------------
+
+    captcha_url = build_captcha_url(dd)
+
+    log("CAPTCHA URL", captcha_url)
+
+    # --------------------------------------------------
+    # 3. 在 CapMonster Cloud 中创建任务
+    # --------------------------------------------------
+
+    task = {
+        "type": "CustomTask",
+        "class": "DataDome",
+        "websiteURL": PAGE_URL,
+        "userAgent": USER_AGENT,
+        "metadata": {
+            "captchaUrl": captcha_url,
+            "datadomeCookie": f"datadome={dd['cookie']}",
+            "datadomeVersion": "new"
+        }
+    }
+
+    if proxy_data:
+        task.update(proxy_data)
+
+    payload = {
+        "clientKey": CAPMONSTER_API_KEY,
+        "task": task
+    }
+
+    task_id = create_task(payload)
+
+    if not task_id:
+        print("创建任务失败")
+        return
+
+    # --------------------------------------------------
+    # 4. 等待解决结果
+    # --------------------------------------------------
+
+    solution = wait_result(task_id)
+
+    log("SOLUTION", solution)
+
+if __name__ == "__main__":
+    solve_datadome()
+```
+</details>
+
+<details>
+      <summary>显示代码 (Python + Playwright)</summary>
+```python
+# pip install requests beautifulsoup4 playwright
+
+import time
+import json
+import requests
+import urllib.parse  # 用于编码 URL 参数（captcha URL）
+from bs4 import BeautifulSoup  # 用于解析 HTML 并提取 var dd 对象
+from urllib.parse import urlparse
+from playwright.sync_api import sync_playwright  # 用于启动浏览器并通过 Playwright 操作页面
+
+
+# ======================================================
+# 配置
+# ======================================================
+
+# 启用/禁用详细日志输出
+# 仅用于开发和排错
+DEBUG = True
+
+CAPMONSTER_API_KEY = "YOUR_API_KEY"  # 填写您的 CapMonster Cloud API 密钥
+
+PAGE_URL = "https://www.example.com/" # 填写触发 DataDome 的页面 URL
+
+USER_AGENT = (
+    "userAgentPlaceholder"
+)
+
+PROXY_URL = "http://login:pass@address:port" # 填写您的代理
+
+CREATE_TASK = "https://api.capmonster.cloud/createTask"
+GET_RESULT = "https://api.capmonster.cloud/getTaskResult"
+
+MAX_WAIT = 120
+
+
+# ======================================================
+# 调试日志记录器
+# ======================================================
+
+def log(title, data=None):
+    if not DEBUG:
+        return
+
+    print(f"\n{'='*25} {title} {'='*25}")
+
+    if isinstance(data, (dict, list)):
+        print(json.dumps(data, indent=2, ensure_ascii=False))
+    elif data:
+        print(data)
+
+    print("=" * 70)
+
+
+# ======================================================
+# 提取 DD 对象
+# ======================================================
+
+def extract_dd(html):
+    soup = BeautifulSoup(html, "html.parser")
+
+    script = soup.find("script", string=lambda t: t and "var dd=" in t)
+    if not script:
+        return None
+
+    raw = script.text.split("var dd=")[1].split(";")[0]
+    raw = raw.replace("'", '"')
+
+    return json.loads(raw)
+
+
+# ======================================================
+# 构建 CAPTCHA URL
+# ======================================================
+
+def build_captcha_url(dd):
+    base = f"https://{dd['host']}/captcha/"
+
+    parts = [
+        ("initialCid", dd["cid"]),
+        ("hash", dd["hsh"]),
+        ("cid", dd["cookie"]),
+        ("t", dd["t"]),
+        ("referer", PAGE_URL),
+        ("s", dd["s"]),
+    ]
+
+    if dd.get("e"):
+        parts.append(("e", dd["e"]))
+
+    parts.append(("dm", "cd"))
+
+    query = "&".join(
+        f"{k}={urllib.parse.quote(str(v), safe='')}"
+        for k, v in parts
+    )
+
+    return base + "?" + query
+
+
+# ======================================================
+# 使用 CAPMONSTER CLOUD
+# ======================================================
+
+def create_task(payload):
+    log("CREATE TASK REQUEST", payload)
+    r = requests.post(CREATE_TASK, json=payload)
+    resp = r.json()
+    log("CREATE TASK RESPONSE", resp)
+    return resp.get("taskId")
+
+
+def wait_result(task_id):
+    start = time.time()
+
+    while True:
+        if time.time() - start > MAX_WAIT:
+            raise TimeoutError("CapMonster 超时")
+
+        time.sleep(2)
+
+        r = requests.post(GET_RESULT, json={
+            "clientKey": CAPMONSTER_API_KEY,
+            "taskId": task_id
+        })
+
+        resp = r.json()
+
+        if resp.get("status") == "processing":
+            print("... 正在解决")
+            continue
+
+        if resp.get("status") == "ready":
+            return resp["solution"]
+
+        if resp.get("errorId"):
+            raise Exception(resp)
+
+
+# ======================================================
+# 主 SOLVER（PLAYWRIGHT）
+# ======================================================
+
+def solve_datadome():
+
+    print("\n DataDome → CapMonster solver (Playwright) 已启动\n")
+
+    proxy = None
+    if PROXY_URL:
+        parsed = urlparse(PROXY_URL)
+        proxy = {
+            "server": f"http://{parsed.hostname}:{parsed.port}",
+            "username": parsed.username,
+            "password": parsed.password
+        }
+
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=False, proxy=proxy)
+        context = browser.new_context(user_agent=USER_AGENT)
+        page = context.new_page()
+
+        print("正在真实浏览器中打开页面...")
+        page.goto(PAGE_URL, wait_until="domcontentloaded")
+
+        html = page.content()
+
+        log("FIRST PAGE LOADED")
+
+        dd = extract_dd(html)
+
+        if not dd:
+            print("未检测到 DataDome")
+            browser.close()
+            return
+
+        log("DD OBJECT", dd)
+
+        if dd.get("t") == "bv":
+            print("代理被封禁 (t=bv)。请更换代理。")
+            browser.close()
+            return
+
+        captcha_url = build_captcha_url(dd)
+        log("CAPTCHA URL", captcha_url)
+
+        task = {
+            "type": "CustomTask",
+            "class": "DataDome",
+            "websiteURL": PAGE_URL,
+            "userAgent": USER_AGENT,
+            "metadata": {
+                "captchaUrl": captcha_url,
+                "datadomeCookie": f"datadome={dd['cookie']}",
+                "datadomeVersion": "new"
+            }
+        }
+
+        if PROXY_URL:
+            task.update({
+                "proxyType": "http",
+                "proxyAddress": parsed.hostname,
+                "proxyPort": parsed.port,
+                "proxyLogin": parsed.username,
+                "proxyPassword": parsed.password
+            })
+
+        payload = {
+            "clientKey": CAPMONSTER_API_KEY,
+            "task": task
+        }
+
+        task_id = create_task(payload)
+
+        if not task_id:
+            print("创建任务失败")
+            browser.close()
+            return
+
+        solution = wait_result(task_id)
+        log("SOLUTION", solution)
+
+        browser.close()
+
+if __name__ == "__main__":
+    solve_datadome()
+```
+
+</details>
+</TabItem>
+</Tabs>
+---
+
 ## 使用 SDK 库
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
