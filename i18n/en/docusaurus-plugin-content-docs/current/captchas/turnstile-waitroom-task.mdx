@@ -65,7 +65,15 @@ You can also identify this Cloudflare type via the page header:
 ---
 
   <ParamItem title="htmlPageBase64" required type="string" />
-  Base64-encoded HTML page containing `<title>Waiting Room powered by Cloudflare</title>`
+  Base64-encoded HTML page containing `<title>Waiting Room powered by Cloudflare</title>`<br/>
+  Example to get `htmlPageBase64`:
+```js
+var serializer = new XMLSerializer();
+var fullHtml = serializer.serializeToString(document);
+
+var htmlBase64 = btoa(unescape(encodeURIComponent(fullHtml)));
+console.log(htmlBase64);
+```
 
 ---
 

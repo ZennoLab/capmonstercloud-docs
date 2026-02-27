@@ -65,7 +65,15 @@ import { ArticleHead } from '../../src/theme/ArticleHead';
   ---
 
   <ParamItem title="htmlPageBase64" required type="string" />
-  HTML-страница в **формате base64**, на которой присутствует заголовок `<title>Waiting Room powered by Cloudflare</title>`
+  HTML-страница в **формате base64**, на которой присутствует заголовок `<title>Waiting Room powered by Cloudflare</title>`<br/> 
+  Пример получения строки htmlPageBase64: <br/> 
+```js
+var serializer = new XMLSerializer();
+var fullHtml = serializer.serializeToString(document);
+
+var htmlBase64 = btoa(unescape(encodeURIComponent(fullHtml)));
+console.log(htmlBase64);
+```
 
   ---
 

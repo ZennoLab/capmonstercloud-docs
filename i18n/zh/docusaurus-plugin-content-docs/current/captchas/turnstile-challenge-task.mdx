@@ -192,11 +192,13 @@ CapMonster Cloud 可以返回解决方案结果为 **token** 或 **cf_clearance 
   <ParamItem title="htmlPageBase64" required type="string" />
   Base64 编码的 HTML 页面，显示 403 响应时的 “Just a moment” 页面。<br/>
   获取 `htmlPageBase64` 示例：
-  ```js
-  var htmlContent = document.documentElement.outerHTML;
-  var htmlBase64 = btoa(unescape(encodeURIComponent(htmlContent)));
-  console.log(htmlBase64);
-  ```
+```js
+var serializer = new XMLSerializer();
+var fullHtml = serializer.serializeToString(document);
+
+var htmlBase64 = btoa(unescape(encodeURIComponent(fullHtml)));
+console.log(htmlBase64);
+```
 
 ---
 
