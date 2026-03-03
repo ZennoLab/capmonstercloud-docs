@@ -1,5 +1,5 @@
 ---
-sidebar_position: 7
+sidebar_position: 10
 sidebar_label: ComplexImage
 ---
 
@@ -19,7 +19,7 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 
 <ArticleHead slug="captchas/ComplexImageTask-Recognition" />
 
-# ComplexImageTask Recognition
+# ComplexImage Recognition
 
 <TaskImageWrapper>
   <TaskImageBlock link="/zh/docs/captchas/ComplexImageTask-Recognition#oocl_rotate_new">
@@ -56,6 +56,12 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
     <TaskImage>![](./images/ComplexImageTask-Recognition/bills_audio.png)</TaskImage>
     <TaskImageText title="bills_audio" captchaId="complex-rec_bills_audio" />
   </TaskImageBlock>
+
+  <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#dli_ensemble">
+    <TaskImage>![](./images/ComplexImageTask-Recognition/dli_ensemble.png)</TaskImage>
+    <TaskImageText title="dli_ensemble" captchaId="complex-rec_oocl_rotate_new" />
+  </TaskImageBlock>
+  
 </TaskImageWrapper>
 
 :::warning **注意！**
@@ -104,22 +110,22 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 	</MethodItem>
 	<MethodDescription>
 		**要求**
-		```json
-		{
-			"clientKey": "API_KEY",
-			"task": {
-				"type": "ComplexImageTask",
-				"class": "recognition",
-				"imagesBase64": [
-					"{background_base64}",
-					"{circle_base64}"
-				],
-				"metadata": {
-					"Task": "oocl_rotate_new"
-				}
-			}
-		}
-		```
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "ComplexImageTask",
+          "class": "recognition",
+          "imagesBase64": [
+            "{background_base64}",
+            "{circle_base64}"
+          ],
+          "metadata": {
+            "Task": "oocl_rotate_new"
+          }
+        }
+      }
+      ```
 
     	背景图像 (*background_base64*):
 
@@ -158,19 +164,19 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 		```
 		**回应**
 		圆形需要顺时针旋转的度数。
-		```json
-		{
-		  "errorId":0,
-		  "status":"ready",
-		  "errorCode":null,
-		  "errorDescription":null,
-		  "solution": 
-		  {
-			  "answer":[130.90909],
-			  "metadata":{"AnswerType":"NumericArray"}
-		  }		   
-		}
-		```
+      ```json
+      {
+        "errorId":0,
+        "status":"ready",
+        "errorCode":null,
+        "errorDescription":null,
+        "solution": 
+        {
+          "answer":[130.90909],
+          "metadata":{"AnswerType":"NumericArray"}
+        }		   
+      }
+      ```
 	</MethodDescription>
 </TabItem>
 
@@ -192,23 +198,23 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 	</MethodItem>
 	<MethodDescription>
 		**要求**
-		```json
-		{ 
-			"clientKey": "API_KEY",
-			"task": {
-				"type": "ComplexImageTask",
-				"class": "recognition",
-				"imagesBase64": [
-					"{background_base64}",
-					"{ring_base64}",
-					"{circle_base64}"
-				],
-				"metadata": {
-					"Task": "oocl_rotate_double_new"
-				}
-			}
-		}
-		```
+      ```json
+      { 
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "ComplexImageTask",
+          "class": "recognition",
+          "imagesBase64": [
+            "{background_base64}",
+            "{ring_base64}",
+            "{circle_base64}"
+          ],
+          "metadata": {
+            "Task": "oocl_rotate_double_new"
+          }
+        }
+      }
+      ```
 
     	背景图像 (*background_base64*):
 
@@ -251,18 +257,18 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 		```
 		**回应**
 		环形需要逆时针旋转的度数，圆形需要顺时针旋转的度数。
-		```json
-		{
-		  "errorId":0,
-		  "status":"ready",
-		  "errorCode":null,
-		  "errorDescription":null,
-		  "solution": 
-		  {
-			  "answer":[130.90909],
-			  "metadata":{"AnswerType":"NumericArray"}
-		  }		   
-		}
+      ```json
+      {
+        "errorId":0,
+        "status":"ready",
+        "errorCode":null,
+        "errorDescription":null,
+        "solution": 
+        {
+          "answer":[130.90909],
+          "metadata":{"AnswerType":"NumericArray"}
+        }		   
+      }
 		```
 	</MethodDescription>
 </TabItem>
@@ -287,29 +293,29 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 	</MethodItem>
 	<MethodDescription>
 		**要求**
-		```json
-		{ 
-			"clientKey": "API_KEY",
-			"task": {
-				"type": "ComplexImageTask",
-				"class": "recognition",
-				"imagesBase64": [
-					"{image_1_Base64}",
-					"{image_2_Base64}",
-					"{image_3_Base64}",
-					"{image_4_Base64}",
-					"{image_5_Base64}",
-					"{image_6_Base64}",
-					"{image_7_Base64}",
-					"{image_8_Base64}",
-					"{image_9_Base64}",
-				],
-				"metadata": {
-					"Task": "betpunch_3x3_rotate"
-				}
-			}
-		}
-		```
+      ```json
+      { 
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "ComplexImageTask",
+          "class": "recognition",
+          "imagesBase64": [
+            "{image_1_Base64}",
+            "{image_2_Base64}",
+            "{image_3_Base64}",
+            "{image_4_Base64}",
+            "{image_5_Base64}",
+            "{image_6_Base64}",
+            "{image_7_Base64}",
+            "{image_8_Base64}",
+            "{image_9_Base64}",
+          ],
+          "metadata": {
+            "Task": "betpunch_3x3_rotate"
+          }
+        }
+      }
+      ```
 
     	**回应**
     	```json
@@ -340,19 +346,19 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 		```
 		**回应**
 		"answer":[X,X,X,X,X,X,X,X,X], 其中 X 是每张图片的整数值，范围为 1 到 4。4 表示图像不需要旋转；1-3 表示图像逆时针旋转的次数。
-		```json
-		{
-			"errorId":0,
-			"status":"ready",
-			"errorCode":null,
-			"errorDescription":null,
-			"solution":
-			{
-				"answer":[4,4,4,4,4,3,1,2,2],
-				"metadata":{"AnswerType":"NumericArray"}
-			}
-		}
-		```
+      ```json
+      {
+        "errorId":0,
+        "status":"ready",
+        "errorCode":null,
+        "errorDescription":null,
+        "solution":
+        {
+          "answer":[4,4,4,4,4,3,1,2,2],
+          "metadata":{"AnswerType":"NumericArray"}
+        }
+      }
+      ```
 	</MethodDescription>
 </TabItem>
 
@@ -377,31 +383,31 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 	</MethodItem>
 	<MethodDescription>
 		**要求**
-		```json
-		{
-			"clientKey":{{API_key}},
-			"task": 
-			{
-				"type": "ComplexImageTask",
-				"class": "recognition",
-				"imagesBase64": [
-					"image1_to_base64",
-					"image2_to_base64",
-					"image3_to_base64",
-					"image4_to_base64",
-					"image5_to_base64",
-					"image6_to_base64",
-					"image7_to_base64",
-					"image8_to_base64",
-					"image9_to_base64"
-				],
-				"metadata": {
-					"Task": "bls_3x3",
-					"TaskArgument": "123"
-				}
-			}
-		}
-		```
+      ```json
+      {
+        "clientKey":{{API_key}},
+        "task": 
+        {
+          "type": "ComplexImageTask",
+          "class": "recognition",
+          "imagesBase64": [
+            "image1_to_base64",
+            "image2_to_base64",
+            "image3_to_base64",
+            "image4_to_base64",
+            "image5_to_base64",
+            "image6_to_base64",
+            "image7_to_base64",
+            "image8_to_base64",
+            "image9_to_base64"
+          ],
+          "metadata": {
+            "Task": "bls_3x3",
+            "TaskArgument": "123"
+          }
+        }
+      }
+      ```
 
     	示例任务：
 
@@ -450,19 +456,19 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 		```
 		**回应**
 		一个值的数组，元素为 true 或 false，取决于图片中的数字是否为所需的参数。 
-		```json
-		{
-		  "errorId":0,
-		  "status":"ready",
-		  "errorCode":null,
-		  "errorDescription":null,
-		  "solution": 
-		  {
-			"answer":[true,true,false,false,true,false,false,true,true],
-			"metadata":{"AnswerType":"Grid"}
-		  }
-		}
-		```
+      ```json
+      {
+        "errorId":0,
+        "status":"ready",
+        "errorCode":null,
+        "errorDescription":null,
+        "solution": 
+          {
+          "answer":[true,true,false,false,true,false,false,true,true],
+          "metadata":{"AnswerType":"Grid"}
+          }
+      }
+      ```
 	</MethodDescription>
 </TabItem>
 
@@ -483,22 +489,22 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 		```
 	</MethodItem>
 	<MethodDescription>
-		**要求**
-		```json
-{
-		    "clientKey": "API_KEY",
-		    "task": {
-			"type": "ComplexImageTask",
-			"class": "recognition",
-			"imagesBase64": [
-			   "base64"
-			],
-			"metadata": {
-			    "Task": "shein"
-		        }
-	        }
-}
-		```
+  **要求**
+    ```json
+      {
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "ComplexImageTask",
+          "class": "recognition",
+          "imagesBase64": [
+            "base64"
+          ],
+          "metadata": {
+            "Task": "shein"
+          }
+        }
+      }
+      ```
 
     	示例任务：
 
@@ -535,19 +541,19 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 		**回应**
 		按特定顺序点击的坐标。
 		```json
-{
-    "solution":
-	{
-	    "answer":[{"X":68.99999964,"Y":201.954889},{"X":127.99999783999999,"Y":281.54887104},{"X":181.00000776,"Y":49.894734680000006}],
-		"metadata":{"AnswerType":"Coordinate"}
-	},
-		"cost":0.0003,
-		"status":"ready",
-		"errorId":0,
-		"errorCode":null,
-		"errorDescription":null
-}
-		```
+      {
+          "solution":
+        {
+          "answer":[{"X":68.99999964,"Y":201.954889},{"X":127.99999783999999,"Y":281.54887104},{"X":181.00000776,"Y":49.894734680000006}],
+          "metadata":{"AnswerType":"Coordinate"}
+        },
+          "cost":0.0003,
+          "status":"ready",
+          "errorId":0,
+          "errorCode":null,
+          "errorDescription":null
+      }
+    ```
 	</MethodDescription>
 </TabItem>
 
@@ -575,19 +581,19 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 	<MethodDescription>
 		**要求**
 		```json
-		{
-			"clientKey": "API_KEY",
-			"task": 
-			{
-				"type": "ComplexImageTask",
-				"class": "recognition",
-				"imagesBase64": ["base64"],
-				"metadata": {
-					"Task": "baidu"
-				}
-			}
-		}
-		```
+        {
+          "clientKey": "API_KEY",
+          "task": 
+          {
+            "type": "ComplexImageTask",
+            "class": "recognition",
+            "imagesBase64": ["base64"],
+            "metadata": {
+              "Task": "baidu"
+            }
+          }
+        }
+		  ```
 
     	示例任务：
 
@@ -595,10 +601,10 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 
     	**回应**
     	```json
-    	{
-    		"errorId":0,
-    		"taskId":143998457
-    	}
+        {
+          "errorId":0,
+          "taskId":143998457
+        }
     	```
     </MethodDescription>
 
@@ -613,29 +619,29 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 		```
 	</MethodItem>
 	<MethodDescription>
-		**要求**
-		```json
-		{
-			"clientKey":"API_KEY",
-			"taskId": 143998457
-		}
-		```
+      **要求**
+      ```json
+      {
+        "clientKey":"API_KEY",
+        "taskId": 143998457
+      }
+      ```
 		**回应**
 		顺时针旋转图像所需的角度。
-		```json
-		{
-			"solution":
-			{
-				"answer":[297],
-				"metadata":{"AnswerType":"NumericArray"}
-			},
-			"cost":0.0005,
-			"status":"ready",
-			"errorId":0,
-			"errorCode":null,
-			"errorDescription":null
-		}
-		```
+      ```json
+      {
+        "solution":
+        {
+          "answer":[297],
+          "metadata":{"AnswerType":"NumericArray"}
+        },
+        "cost":0.0005,
+        "status":"ready",
+        "errorId":0,
+        "errorCode":null,
+        "errorDescription":null
+      }
+      ```
 	</MethodDescription>
 </TabItem>
 
@@ -663,16 +669,16 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
     **请求**
     ```json
     {
-        "clientKey": "API_KEY",
-        "task": {
-            "type": "ComplexImageTask",
-            "class": "recognition",
-            "imagesBase64": [
-                "UklGRnjuAwBXQVZFZm10...f/2f/9/6z/vf8MAAAA"
-            ],
-            "metadata": {
-                "Task": "bills_audio",
-                "PayloadType": "Audio"
+      "clientKey": "API_KEY",
+      "task": {
+          "type": "ComplexImageTask",
+          "class": "recognition",
+          "imagesBase64": [
+              "UklGRnjuAwBXQVZFZm10...f/2f/9/6z/vf8MAAAA"
+          ],
+          "metadata": {
+              "Task": "bills_audio",
+              "PayloadType": "Audio"
             }
         }
     }
@@ -681,8 +687,8 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
     **响应**
     ```json
     {
-        "errorId": 0,
-        "taskId": 143998457
+      "errorId": 0,
+      "taskId": 143998457
     }
     ```
     </MethodDescription>
@@ -700,14 +706,14 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
     **请求**
     ```json
     {
-        "clientKey": "API_KEY",
-        "taskId": 143998457
+      "clientKey": "API_KEY",
+      "taskId": 143998457
     }
     ```
     **响应**  
     响应中返回音频中的数字。
-    ```json
-    {
+      ```json
+      {
         "solution": {
             "answer": [6, 8, 4, 1, 2, 3],
             "metadata": {"AnswerType": "Text"}
@@ -717,8 +723,8 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
         "errorId": 0,
         "errorCode": null,
         "errorDescription": null
-    }
-    ```
+      }
+      ```
     </MethodDescription>
 </TabItem>
 
@@ -756,6 +762,93 @@ console.log("文件已成功转换为 Base64，并保存为 output.txt");
 
 ---
 
+## dli_ensemble
+
+### 创建任务 `dli_ensemble` 
+
+在请求中，需要以 **base64** 格式传递 **一张图片**（包含文本）。
+
+<PriceBlockWrap>
+  <PriceBlock title="dli_ensemble" captchaId="complex-rec_oocl_rotate_new" />
+</PriceBlockWrap>
+
+<TabItem value="proxyless" label="ComplexImageTask（无代理）" default className="method-panel">
+  <MethodItem>
+    ```http
+    https://api.capmonster.cloud/createTask
+    ```
+  </MethodItem>
+  <MethodDescription>
+    **请求**
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "task": {
+        "type": "ComplexImageTask",
+        "class": "recognition",
+        "imagesBase64": [
+          "base64"
+        ],
+        "metadata": {
+          "Task": "dli"
+        }
+      }
+    }
+    ```
+
+    **任务示例：**
+
+    ![](./images/ComplexImageTask-Recognition/dli_1.png)
+    ![](./images/ComplexImageTask-Recognition/dli_2.png)
+
+    **响应**
+    ```json
+    {
+      "errorId": 0,
+      "taskId": 143998457
+    }
+    ```
+  </MethodDescription>
+</TabItem>
+
+### 获取任务结果 `dli_ensemble`
+
+<TabItem value="proxyless" label="ComplexImageTask（无代理）" default className="method-panel-full">
+  <MethodItem>
+    ```http
+    https://api.capmonster.cloud/getTaskResult
+    ```
+  </MethodItem>
+  <MethodDescription>
+    **请求**
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "taskId": 143998457
+    }
+    ```
+
+    **响应：**  
+    计算结果（**数值**），以**字符串**形式返回：
+    ```json
+    {
+      "solution": {
+        "answer": "1",
+        "metadata": {
+          "AnswerType": "Text"
+        }
+      },
+      "cost": 0.0003,
+      "status": "ready",
+      "errorId": 0,
+      "errorCode": null,
+      "errorDescription": null
+    }
+    ```
+  </MethodDescription>
+</TabItem>
+
+---
 
 ## 如何获取 Base64
 
@@ -770,12 +863,10 @@ console.log("文件已成功转换为 Base64，并保存为 output.txt");
 
 ### 自动方法
 
-一种方便的自动化获取所有必要参数的方式。
-某些参数每次页面加载时都会重新生成，因此需要通过浏览器（普通或无头模式，如使用**Playwright**）提取它们。
-由于动态参数值的有效期很短，获取后必须立即解决验证码。
+为了自动化获取所需参数，可以通过 **浏览器**（普通模式或 headless 模式，例如使用 **Playwright**）进行提取，或直接从 **HTTP 请求**中获取。由于动态参数的有效时间较短，建议在获取后尽快使用。
 
-:::warning **重要提示！**
-提供的代码片段是用于熟悉参数提取的基本示例。具体实现将取决于验证码页面、其结构及使用的HTML元素/选择器。
+:::warning **重要**
+所提供的代码片段仅作为获取必要参数的基础示例。具体实现方式取决于包含验证码的网站、本身的页面结构，以及所使用的 HTML 元素和选择器。
 :::
 
 <Tabs className="full-width-tabs filled-tabs request-tabs">
@@ -1221,31 +1312,68 @@ run();
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 
   <TabItem value="js" label="JavaScript" default className="method-panel">
-
+<details>
+      <summary>显示代码（用于浏览器）</summary>
 ```js
 // https://github.com/ZennoLab/capmonstercloud-client-js
 
 import { CapMonsterCloudClientFactory, ClientOptions, ComplexImageTaskRecognitionRequest } from '@zennolab_com/capmonstercloud-client';
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const cmcClient = CapMonsterCloudClientFactory.Create(
-    new ClientOptions({ clientKey: '<你的 capmonster.cloud API key>' })
-  );
-  console.log(await cmcClient.getBalance());
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: 'YOUR_API_KEY' }) // 输入您的 CapMonster Cloud API 密钥
+    );
 
-  const citRecognitionRequest = new ComplexImageTaskRecognitionRequest({
-    imagesBase64: ['/9xwee/'], // 图像的 base64 格式
-    metaData: { Task: 'oocl_rotate' },
-  });
+    // 如有必要，可以检查余额
+    const balance = await cmcClient.getBalance();
+    console.log("Balance:", balance);
 
-  console.log(await cmcClient.Solve(citRecognitionRequest));
+    const citRecognitionRequest = new ComplexImageTaskRecognitionRequest({
+        imagesBase64: ['/9xwee/'], // base64 格式的图片
+        metaData: { Task: 'oocl_rotate' }
+    });
+
+    const result = await cmcClient.Solve(citRecognitionRequest);
+    console.log("Solution:", result);
 });
-````
+```
+</details>
 
+<details>
+      <summary>显示代码 (Node.js)</summary>
+```javascript
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, ComplexImageTaskRecognitionRequest } from '@zennolab_com/capmonstercloud-client';
+
+const API_KEY = "YOUR_API_KEY"; // 输入您的 CapMonster Cloud API 密钥
+
+async function solveComplexImageTask() {
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
+    );
+
+    // 如有必要，可以检查余额
+    const balance = await cmcClient.getBalance();
+    console.log("Balance:", balance);
+
+    const citRecognitionRequest = new ComplexImageTaskRecognitionRequest({
+        imagesBase64: ['/9xwee/'], // base64 格式的图片
+        metaData: { Task: 'oocl_rotate' }
+    });
+
+    const result = await cmcClient.Solve(citRecognitionRequest);
+    console.log("Solution:", result);
+}
+
+solveComplexImageTask().catch(console.error);
+```
+</details>
   </TabItem>
 
   <TabItem value="python" label="Python" className="method-panel">
-
+<details>
+      <summary>显示代码</summary>
 ```python
 # https://github.com/ZennoLab/capmonstercloud-client-python
 
@@ -1253,52 +1381,64 @@ import asyncio
 from capmonstercloudclient import CapMonsterClient, ClientOptions
 from capmonstercloudclient.requests import RecognitionComplexImageTaskRequest
 
-# 你的 CapMonster Cloud API key
-client_options = ClientOptions(api_key="your_api_key")
+# 您的 CapMonster Cloud API 密钥
+client_options = ClientOptions(api_key="YOUR_API_KEY")
 cap_monster_client = CapMonsterClient(options=client_options)
 
 complexImage_request = RecognitionComplexImageTaskRequest(
     imagesBase64=[
-        "/9xwee/"  # 图像的 base64 格式
+        "/9xwee/"  # base64 格式的图片
     ],
     metadata={"Task": "oocl_rotate"}
 )
 
 async def solve_captcha():
+    # 如有必要，可以检查余额
+    balance = await cap_monster_client.get_balance()
+    print("Balance:", balance)
+
     solution = await cap_monster_client.solve_captcha(complexImage_request)
     return solution
 
 responses = asyncio.run(solve_captcha())
-print(responses)
+print("Solution:", responses)
 ```
-
+</details>
   <BlogLink url="https://capmonster.cloud/ru/blog/re-1/python-recaptcha-v2"/>
   </TabItem>
 
   <TabItem value="csharp" label="C#" className="method-panel">
-
+<details>
+      <summary>显示代码</summary>
 ```csharp
 // https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Zennolab.CapMonsterCloud.Requests;
 using Zennolab.CapMonsterCloud;
 
 class Program
 {
-    static async Task MainComplexImageTaskRecognition(string[] args)
+    static async Task Main(string[] args)
     {
         var clientOptions = new ClientOptions
         {
-            ClientKey = "your_api_key" // 你的 CapMonster Cloud API key 
+            ClientKey = "YOUR_API_KEY" // 您的 CapMonster Cloud API 密钥
         };
 
         var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+        // 如有必要，可以检查余额
+        var balance = await cmCloudClient.GetBalanceAsync();
+        Console.WriteLine("Balance: " + balance);
 
         var recognitionCITRequest = new RecognitionComplexImageTaskRequest
         {
             ImagesBase64 = new List<string>
             {
-                "/9j/4AAQSkZJRgABAQEAAAAAAAD…" // 图像的 base64 格式
+                "/9j/4AAQSkZJRgABAQEAAAAAAAD" // base64 格式的图片
             },
             Metadata = new RecognitionComplexImageTaskRequest.RecognitionMetadata
             {
@@ -1308,14 +1448,14 @@ class Program
 
         var recognitionCITResult = await cmCloudClient.SolveAsync(recognitionCITRequest);
 
-        if(recognitionCITResult.Solution.Answer.IsGrid)
-            Console.WriteLine("验证码解决方案: " + recognitionCITResult.Solution.Answer.GridAnswer);
+        if (recognitionCITResult.Solution.Answer.IsGrid)
+            Console.WriteLine("Captcha Solution: " + recognitionCITResult.Solution.Answer.GridAnswer);
         else if (recognitionCITResult.Solution.Answer.IsNumeric)
-            Console.WriteLine("验证码解决方案: " + recognitionCITResult.Solution.Answer.NumericAnswer);
+            Console.WriteLine("Captcha Solution: " + recognitionCITResult.Solution.Answer.NumericAnswer);
     }
 }
 ```
-
+</details>
   </TabItem>
 
 </Tabs>

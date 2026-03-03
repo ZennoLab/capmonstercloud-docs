@@ -1,0 +1,275 @@
+---
+sidebar_position: 24
+sidebar_label: Castle
+title: "Automatic detection and bypass of Castle | API"
+description: "Learn how to detect Castle using the API of the automatic captcha recognition and solving service CapMonster Cloud!" 
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+import PriceBlock from '@theme/PriceBlock';
+import PriceBlockWrap from '@theme/PriceBlockWrap';
+import { ArticleHead } from '../../../../../src/theme/ArticleHead';
+
+<ArticleHead slug="captchas/castle-task" />
+
+# Castle
+
+<PriceBlockWrap>
+  <PriceBlock title="Castle" captchaId="castle"/>
+</PriceBlockWrap>
+
+Castle is a website protection system that blocks automated attacks and suspicious activity. It monitors user behavior and requests in real time, remaining almost invisible to regular visitors and only becoming noticeable during unusual or high-volume traffic.
+
+![](./images/castle/castle.png)
+
+:::warning **Attention!**
+CapMonster Cloud uses built-in proxies by default — their cost is already included in the service. You only need to specify your own proxies in cases where the website does not accept the token or access to the built-in services is restricted.
+
+If you are using a proxy with IP authorization, make sure to whitelist the address **65.21.190.34**.
+:::
+
+## Request parameters
+
+<TabItem value="proxy" label="CastleTask" className="bordered-panel">
+<ParamItem title="type" required type="string" />
+**CustomTask**
+
+---
+
+<ParamItem title="class" required type="string" />
+**Castle**
+
+---
+
+<ParamItem title="websiteURL" required type="string" />
+The URL of the page where Castle is located.
+
+---
+
+<ParamItem title="websiteKey" required type="string" />
+**Publishable Key**, the Castle identifier. It can be found on the page/in the site scripts.  
+Example: ```pk_1Tk5Yzr1WFzxrJCh7WzMZzY1rHpaOtdK```
+
+---
+
+<ParamItem title="wUrl (inside metadata)" required type="string" />
+Link to `cw.js`, for example: ```https://s.rsg.sc/auth/js/20251234bgef/build/cw.js```
+
+---
+
+<ParamItem title="swUrl (inside metadata)" required type="string" />
+Link to `csw.js`, for example: ```https://s.rsg.sc/auth/js/20251234bgef/build/cw.js```
+
+---
+
+<ParamItem title="count (inside metadata)" type="intenger" />
+Number of tokens — default is 1 (generation of 1 to 49 Castle tokens bound to the same browser session, i.e. with the same `__cuid` identifier).  
+If a value greater than 49 is specified, the maximum allowed number of tokens — 49 — will be returned, and the cost will be calculated based on this amount.
+
+---
+
+<ParamItem title="userAgent" type="string" />
+Browser User-Agent.  
+  **Pass only a valid UA from Windows OS. Currently it is**: `userAgentPlaceholder`
+
+---
+
+<ParamItem title="proxyType" type="string" />
+**http** - regular http/https proxy;<br />
+**https** - try this option only if "http" does not work (required for some custom proxies);<br />
+**socks4** - socks4 proxy;<br />
+**socks5** - socks5 proxy.
+
+---
+
+<ParamItem title="proxyAddress" type="string" />
+<p>
+Proxy IPv4/IPv6 IP address. Not allowed:   
+- use of transparent proxies (where the client IP is visible);  
+- use of proxies on local machines.
+</p>
+
+---
+
+<ParamItem title="proxyPort" type="integer" />
+Proxy port.
+
+---
+
+<ParamItem title="proxyLogin" type="string" />
+Proxy server login.
+
+---
+
+<ParamItem title="proxyPassword" type="string" />
+Proxy server password.
+
+</TabItem>
+
+## Create task method
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+
+  <TabItem value="proxyless" label="CustomTask (without proxy)" default className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      **Request**
+      ```json
+      {
+		"type": "CustomTask",
+		"Class": "Castle",
+		"websiteURL": "https://www.example.com/",
+		"websiteKey": "pk_1Tk5Yzr1WFzxrJCh7WzMZzY1rHpaOtdK",
+		"userAgent": "userAgentPlaceholder",
+		"metadata": {
+			"wUrl": "https://s.rsg.sc/auth/js/20251234bgef/build/cw.js",
+			"swUrl": "https://s.rsg.sc/auth/js/20251234bgef/build/csw.js",
+			"count":1
+		}
+}
+        ```
+        **Response**
+        ```json
+        {
+            "errorId": 0,
+            "taskId": 123456789
+        }
+        ```
+        </MethodDescription>
+    </TabItem>
+
+ <TabItem value="proxy" label="CustomTask (with proxy)" className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      **Request**
+      ```json
+      {
+		"type": "CustomTask",
+		"Class": "Castle",
+		"websiteURL": "https://www.example.com/",
+		"websiteKey": "pk_1Tk5Yzr1WFzxrJCh7WzMZzY1rHpaOtdK",
+		"userAgent": "userAgentPlaceholder",
+		"metadata": {
+			"wUrl": "https://s.rsg.sc/auth/js/20251234bgef/build/cw.js",
+			"swUrl": "https://s.rsg.sc/auth/js/20251234bgef/build/csw.js",
+			"count":1
+		}
+          "proxyType": "http",
+          "proxyAddress": "8.8.8.8",
+          "proxyPort": 8080,
+          "proxyLogin": "proxyLoginHere",
+          "proxyPassword": "proxyPasswordHere"
+        }
+      }
+      ```
+
+      **Response**
+      ```json
+      {
+        "errorId": 0,
+        "taskId": 407533072
+      }
+      ```
+    </MethodDescription>
+  </TabItem>
+
+</Tabs>
+
+## Get task result method
+
+Use the [getTaskResult](../api/methods/get-task-result.mdx) method to get the TenDI solution.
+
+<TabItem value="proxyless" label="CustomTask (without proxy)" default className="method-panel-full">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**Response**
+		```json
+        {
+          "errorId":0,
+          "status":"ready",
+          "solution":  {
+              "data":
+          {
+            "tokens":["Q05Ap...H7nYn", "cn9xW...aFl_4", ...]
+          },
+              "domains": {
+                  "www.example.com": {
+                      "cookies": {
+                          "__cuid": "6883480a9ab7442d9f97da7307d6ea9c"
+                      }
+                  }
+              }
+          }
+      }
+		```
+	</MethodDescription>
+</TabItem>
+
+## How to get Castle parameters
+
+### `pk (websiteKey)`
+
+**Option 1:**
+
+1. Open the page with Castle, launch **Developer Tools**, go to the **Elements** tab.
+2. Open search (Ctrl + F) and enter the keywords **pk** or **publishableKey**.
+3. Find the `Publishable Key` parameter among the page elements or in the connected scripts.
+
+![](./images/castle/pk.png)
+
+**Option 2:**
+
+If the site uses the ```window._env``` object: 
+
+![](./images/castle/pk2.png)
+
+Copy the `pk` value or enter the following command in the browser console: ```window._env.pk```
+
+![](./images/castle/pk1.png)
+
+**Option 3:**
+
+If `pk` is contained in `data-config`:
+
+![](./images/castle/pk3.png)
+
+Copy the `pk` value or use the following code in the browser console:
+
+```javascript
+const script = document.querySelector('script[data-config]');
+const config = JSON.parse(script.dataset.config);
+config.castle.publishableKey;
+````
+
+---
+
+### `cw.js` and `csw.js`
+
+In **Developer Tools**, go to the **Network** tab, activate Castle and inspect network requests. Find requests to the `cw.js` and `csw.js` files and copy their URLs.
+
+![](./images/castle/devtools.png)
+
+

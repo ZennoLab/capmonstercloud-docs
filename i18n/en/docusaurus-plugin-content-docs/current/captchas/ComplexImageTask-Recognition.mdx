@@ -1,5 +1,5 @@
 ---
-sidebar_position: 7
+sidebar_position: 10
 sidebar_label: ComplexImage
 title: 'Recognise and solve captchas with complex images - ComplexImageTask | API'
 description: 'Use the ComplexImageTask method to automatically recognise and solve (bypass) complex captchas via the Capmonster Cloud API.'
@@ -21,7 +21,7 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 
 <ArticleHead slug="captchas/ComplexImageTask-Recognition" />
 
-# ComplexImageTask Recognition
+# ComplexImage Recognition
 
 <TaskImageWrapper>
   <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#oocl_rotate_new">
@@ -57,6 +57,11 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
   <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#bills_audio">
     <TaskImage>![](./images/ComplexImageTask-Recognition/bills_audio.png)</TaskImage>
     <TaskImageText title="bills_audio" captchaId="complex-rec_bills_audio" />
+  </TaskImageBlock>
+
+  <TaskImageBlock link="/docs/captchas/ComplexImageTask-Recognition#dli_ensemble">
+    <TaskImage>![](./images/ComplexImageTask-Recognition/dli_ensemble.png)</TaskImage>
+    <TaskImageText title="dli_ensemble" captchaId="complex-rec_oocl_rotate_new" />
   </TaskImageBlock>
 </TaskImageWrapper>
 
@@ -108,23 +113,23 @@ In the request we pass two images: background and circle.
 		```
 	</MethodItem>
 	<MethodDescription>
-		**Request**
-		```json
-		{
-			"clientKey": "API_KEY",
-			"task": {
-				"type": "ComplexImageTask",
-				"class": "recognition",
-				"imagesBase64": [
-					"{background_base64}",
-					"{circle_base64}"
-				],
-				"metadata": {
-					"Task": "oocl_rotate_new"
-				}
-			}
-		}
-		```
+      **Request**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "ComplexImageTask",
+          "class": "recognition",
+          "imagesBase64": [
+            "{background_base64}",
+            "{circle_base64}"
+          ],
+          "metadata": {
+            "Task": "oocl_rotate_new"
+          }
+        }
+      }
+      ```
 
     	Background example (*background_base64*):
 
@@ -161,21 +166,20 @@ In the request we pass two images: background and circle.
 		  "taskId": 407533072
 		}
 		```
-		**Response**
-		Degrees by which the circle should be rotated clockwise.
-		```json
-		{
-		  "errorId":0,
-		  "status":"ready",
-		  "errorCode":null,
-		  "errorDescription":null,
-		  "solution": 
-		  {
-			  "answer":[130.90909],
-			  "metadata":{"AnswerType":"NumericArray"}
-		  }		   
-		}
-		```
+		**Response:** degrees by which the circle should be rotated clockwise.
+      ```json
+      {
+        "errorId":0,
+        "status":"ready",
+        "errorCode":null,
+        "errorDescription":null,
+        "solution": 
+        {
+          "answer":[130.90909],
+          "metadata":{"AnswerType":"NumericArray"}
+        }		   
+      }
+      ```
 	</MethodDescription>
 </TabItem>
 
@@ -197,23 +201,23 @@ In the request we pass three images: background, ring, circle.
 	</MethodItem>
 	<MethodDescription>
 		**Request**
-		```json
-		{ 
-			"clientKey": "API_KEY",
-			"task": {
-				"type": "ComplexImageTask",
-				"class": "recognition",
-				"imagesBase64": [
-					"{background_base64}",
-					"{ring_base64}",
-					"{circle_base64}"
-				],
-				"metadata": {
-					"Task": "oocl_rotate_double_new"
-				}
-			}
-		}
-		```
+      ```json
+      { 
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "ComplexImageTask",
+          "class": "recognition",
+          "imagesBase64": [
+            "{background_base64}",
+            "{ring_base64}",
+            "{circle_base64}"
+          ],
+          "metadata": {
+            "Task": "oocl_rotate_double_new"
+          }
+        }
+      }
+      ```
 
     	Background (*background_base64*):
 
@@ -254,21 +258,20 @@ In the request we pass three images: background, ring, circle.
 		  "taskId": 407533072
 		}
 		```
-		**Response**
-		Degrees by which the ring should be turned counterclockwise and the circle clockwise.
-		```json
-		{
-		  "errorId":0,
-		  "status":"ready",
-		  "errorCode":null,
-		  "errorDescription":null,
-		  "solution": 
-		  {
-			  "answer":[130.90909],
-			  "metadata":{"AnswerType":"NumericArray"}
-		  }		   
-		}
-		```
+		**Response:** degrees by which the ring should be turned counterclockwise and the circle clockwise.
+      ```json
+      {
+        "errorId":0,
+        "status":"ready",
+        "errorCode":null,
+        "errorDescription":null,
+        "solution": 
+        {
+          "answer":[130.90909],
+          "metadata":{"AnswerType":"NumericArray"}
+        }		   
+      }
+      ```
 	</MethodDescription>
 </TabItem>
 
@@ -291,29 +294,29 @@ In the request we pass nine images. The images must be passed in the following o
 	</MethodItem>
 	<MethodDescription>
 		**Request**
-		```json
-		{ 
-			"clientKey": "API_KEY",
-			"task": {
-				"type": "ComplexImageTask",
-				"class": "recognition",
-				"imagesBase64": [
-					"{image_1_Base64}",
-					"{image_2_Base64}",
-					"{image_3_Base64}",
-					"{image_4_Base64}",
-					"{image_5_Base64}",
-					"{image_6_Base64}",
-					"{image_7_Base64}",
-					"{image_8_Base64}",
-					"{image_9_Base64}",
-				],
-				"metadata": {
-					"Task": "betpunch_3x3_rotate"
-				}
-			}
-		}
-		```
+      ```json
+      { 
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "ComplexImageTask",
+          "class": "recognition",
+          "imagesBase64": [
+            "{image_1_Base64}",
+            "{image_2_Base64}",
+            "{image_3_Base64}",
+            "{image_4_Base64}",
+            "{image_5_Base64}",
+            "{image_6_Base64}",
+            "{image_7_Base64}",
+            "{image_8_Base64}",
+            "{image_9_Base64}",
+          ],
+          "metadata": {
+            "Task": "betpunch_3x3_rotate"
+          }
+        }
+      }
+      ```
 
     	**Response**
     	```json
@@ -342,21 +345,21 @@ In the request we pass nine images. The images must be passed in the following o
 		  "taskId": 407533072
 		}
 		```
-		**Response**
-		"answer":[X,X,X,X,X,X,X,X,X], where X is an integer value from 1 to 4 for each image. 4 - means that the image does not need to be rotated; 1-3 - the number of counterclockwise rotations of the image.
-		```json
-		{
-			"errorId":0,
-			"status":"ready",
-			"errorCode":null,
-			"errorDescription":null,
-			"solution":
-			{
-				"answer":[4,4,4,4,4,3,1,2,2],
-				"metadata":{"AnswerType":"NumericArray"}
-			}
-		}
-		```
+      **Response:**
+      "answer":[X,X,X,X,X,X,X,X,X], where X is an integer value from 1 to 4 for each image. 4 - means that the image does not need to be rotated; 1-3 - the number of counterclockwise rotations of the image.
+      ```json
+      {
+        "errorId":0,
+        "status":"ready",
+        "errorCode":null,
+        "errorDescription":null,
+        "solution":
+        {
+          "answer":[4,4,4,4,4,3,1,2,2],
+          "metadata":{"AnswerType":"NumericArray"}
+        }
+      }
+      ```
 	</MethodDescription>
 </TabItem>
 
@@ -381,31 +384,31 @@ We also pass the sought value TaskArgument in the metadata.
 	</MethodItem>
 	<MethodDescription>
 		**Request**
-		```json
-		{
-			"clientKey":{{API_key}},
-			"task": 
-			{
-				"type": "ComplexImageTask",
-				"class": "recognition",
-				"imagesBase64": [
-					"image1_to_base64",
-					"image2_to_base64",
-					"image3_to_base64",
-					"image4_to_base64",
-					"image5_to_base64",
-					"image6_to_base64",
-					"image7_to_base64",
-					"image8_to_base64",
-					"image9_to_base64"
-				],
-				"metadata": {
-					"Task": "bls_3x3",
-					"TaskArgument": "123"
-				}
-			}
-		}
-		```
+      ```json
+      {
+        "clientKey":{{API_key}},
+        "task": 
+        {
+          "type": "ComplexImageTask",
+          "class": "recognition",
+          "imagesBase64": [
+            "image1_to_base64",
+            "image2_to_base64",
+            "image3_to_base64",
+            "image4_to_base64",
+            "image5_to_base64",
+            "image6_to_base64",
+            "image7_to_base64",
+            "image8_to_base64",
+            "image9_to_base64"
+          ],
+          "metadata": {
+            "Task": "bls_3x3",
+            "TaskArgument": "123"
+          }
+        }
+      }
+      ```
 
     	Example task:
 
@@ -452,20 +455,19 @@ We also pass the sought value TaskArgument in the metadata.
 		  "taskId": 143998457
 		}
 		```
-		**Response**
-		An array of values with elements true or false, depending on whether the number in the image is the sought argument or not.  
-		```json
-		{
-		  "errorId":0,
-		  "status":"ready",
-		  "errorCode":null,
-		  "errorDescription":null,
-		  "solution": 
-		  {
-			"answer":[true,true,false,false,true,false,false,true,true],
-			"metadata":{"AnswerType":"Grid"}
-		  }
-		}
+		**Response:** an array of values with elements true or false, depending on whether the number in the image is the sought argument or not.  
+      ```json
+      {
+        "errorId":0,
+        "status":"ready",
+        "errorCode":null,
+        "errorDescription":null,
+        "solution": 
+        {
+        "answer":[true,true,false,false,true,false,false,true,true],
+        "metadata":{"AnswerType":"Grid"}
+        }
+      }
 		```
 	</MethodDescription>
 </TabItem>
@@ -488,21 +490,21 @@ In the request, we pass one image in base64 format.
 	</MethodItem>
 	<MethodDescription>
 		**Request**
-		```json
-{
-		    "clientKey": "API_KEY",
-		    "task": {
-			"type": "ComplexImageTask",
-			"class": "recognition",
-			"imagesBase64": [
-			   "base64"
-			],
-			"metadata": {
-			    "Task": "shein"
-		        }
-	        }
-}
-		```
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "task": {
+        "type": "ComplexImageTask",
+        "class": "recognition",
+        "imagesBase64": [
+          "base64"
+        ],
+        "metadata": {
+          "Task": "shein"
+        }
+      }
+    }
+    ```
 
     	Example task:
 
@@ -536,22 +538,25 @@ In the request, we pass one image in base64 format.
 		  "taskId": 143998457
 		}
 		```
-		**Response**
-		Coordinates to be clicked on in a specific order.  
-		```json
-{
-    "solution":
-	{
-	    "answer":[{"X":68.99999964,"Y":201.954889},{"X":127.99999783999999,"Y":281.54887104},{"X":181.00000776,"Y":49.894734680000006}],
-		"metadata":{"AnswerType":"Coordinate"}
-	},
-		"cost":0.0003,
-		"status":"ready",
-		"errorId":0,
-		"errorCode":null,
-		"errorDescription":null
-}
-		```
+		**Response:** coordinates to be clicked on in a specific order.  
+    ```json
+    {
+      "solution": {
+        "answer": [
+          { "X": 68.99999964, "Y": 201.954889 },
+          { "X": 127.99999783999999, "Y": 281.54887104 },
+          { "X": 181.00000776, "Y": 49.894734680000006 }
+        ],
+        "metadata": { "AnswerType": "Coordinate" }
+      },
+      "cost": 0.0003,
+      "status": "ready",
+      "errorId": 0,
+      "errorCode": null,
+      "errorDescription": null
+    }
+
+    ```
 	</MethodDescription>
 </TabItem>
 
@@ -576,33 +581,33 @@ In the request, we pass one image in base64 format.
 		```
 	</MethodItem>
 	<MethodDescription>
-		**Request**
-		```json
-		{
-			"clientKey": "API_KEY",
-			"task":
-			{
-				"type": "ComplexImageTask",
-				"class": "recognition",
-				"imagesBase64": ["base64"],
-				"metadata": {
-					"Task": "baidu"
-				}
-			}
-		}
-		```
+      **Request**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task":
+        {
+          "type": "ComplexImageTask",
+          "class": "recognition",
+          "imagesBase64": ["base64"],
+          "metadata": {
+            "Task": "baidu"
+          }
+        }
+      }
+      ```
 
     	Example task:
 
     	![](./images/ComplexImageTask-Recognition/baidu.png)
 
-    	**Response**
-    	```json
-    	{
-    		"errorId":0,
-    		"taskId":143998457
-    	}
-    	```
+      **Response**
+        ```json
+        {
+          "errorId":0,
+          "taskId":143998457
+        }
+        ```
     </MethodDescription>
 
 </TabItem>
@@ -617,28 +622,27 @@ In the request, we pass one image in base64 format.
 	</MethodItem>
 	<MethodDescription>
 		**Request**
-		```json
-		{
-			"clientKey":"API_KEY",
-			"taskId": 143998457
-		}
-		```
-		**Response**
-		The degrees by which the image needs to be rotated clockwise.
-		```json
-		{
-			"solution":
-			{
-				"answer":[297],
-				"metadata":{"AnswerType":"NumericArray"}
-			},
-			"cost":0.0005,
-			"status":"ready",
-			"errorId":0,
-			"errorCode":null,
-			"errorDescription":null
-		}
-		```
+      ```json
+      {
+        "clientKey":"API_KEY",
+        "taskId": 143998457
+      }
+      ```
+		**Response:** the degrees by which the image needs to be rotated clockwise.
+      ```json
+      {
+        "solution":
+        {
+          "answer":[297],
+          "metadata":{"AnswerType":"NumericArray"}
+        },
+        "cost":0.0005,
+        "status":"ready",
+        "errorId":0,
+        "errorCode":null,
+        "errorDescription":null
+      }
+      ```
 	</MethodDescription>
 </TabItem>
 ---
@@ -663,28 +667,28 @@ The `bills_audio` captcha is an audio version of the "receipt captcha," where ge
     </MethodItem>
     <MethodDescription>
     **Request**
-    ```json
-    {
-        "clientKey": "API_KEY",
-        "task": {
-            "type": "ComplexImageTask",
-            "class": "recognition",
-            "imagesBase64": [
-                "UklGRnjuAwBXQVZFZm10...f/2f/9/6z/vf8MAAAA"
-            ],
-            "metadata": {
-                "Task": "bills_audio",
-                "PayloadType": "Audio"
-            }
-        }
-    }
-    ```
+      ```json
+      {
+          "clientKey": "API_KEY",
+          "task": {
+              "type": "ComplexImageTask",
+              "class": "recognition",
+              "imagesBase64": [
+                  "UklGRnjuAwBXQVZFZm10...f/2f/9/6z/vf8MAAAA"
+              ],
+              "metadata": {
+                  "Task": "bills_audio",
+                  "PayloadType": "Audio"
+              }
+          }
+      }
+      ```
 
     **Response**
     ```json
     {
-        "errorId": 0,
-        "taskId": 143998457
+      "errorId": 0,
+      "taskId": 143998457
     }
     ```
     </MethodDescription>
@@ -702,12 +706,11 @@ The `bills_audio` captcha is an audio version of the "receipt captcha," where ge
     **Request**
     ```json
     {
-        "clientKey": "API_KEY",
-        "taskId": 143998457
+      "clientKey": "API_KEY",
+      "taskId": 143998457
     }
     ```
-    **Response**  
-    The response contains the digits extracted from the audio.
+    **Response:** the response contains the digits extracted from the audio.
     ```json
     {
         "solution": {
@@ -758,6 +761,94 @@ console.log("The file has been successfully converted to Base64 and saved as out
 
 ---
 
+## dli_ensemble
+
+### Create task `dli_ensemble`
+
+In the request, you need to send **one image** (together with the text) in **base64** format.
+
+<PriceBlockWrap>
+  <PriceBlock title="dli_ensemble" captchaId="complex-rec_oocl_rotate_new" />
+</PriceBlockWrap>
+
+<TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="method-panel">
+  <MethodItem>
+    ```http
+    https://api.capmonster.cloud/createTask
+    ```
+  </MethodItem>
+  <MethodDescription>
+    **Request**
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "task": {
+        "type": "ComplexImageTask",
+        "class": "recognition",
+        "imagesBase64": [
+          "base64"
+        ],
+        "metadata": {
+          "Task": "dli"
+        }
+      }
+    }
+    ```
+
+    **Task examples:**
+
+    ![](./images/ComplexImageTask-Recognition/dli_1.png)
+    ![](./images/ComplexImageTask-Recognition/dli_2.png)
+
+    **Response**
+    ```json
+    {
+      "errorId": 0,
+      "taskId": 143998457
+    }
+    ```
+  </MethodDescription>
+</TabItem>
+
+### Get task result `dli_ensemble`
+
+<TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="method-panel-full">
+  <MethodItem>
+    ```http
+    https://api.capmonster.cloud/getTaskResult
+    ```
+  </MethodItem>
+  <MethodDescription>
+    **Request**
+    ```json
+    {
+      "clientKey": "API_KEY",
+      "taskId": 143998457
+    }
+    ```
+
+    **Response:**  
+    calculation result (**numeric value**), returned as a string:
+    ```json
+    {
+      "solution": {
+        "answer": "1",
+        "metadata": {
+          "AnswerType": "Text"
+        }
+      },
+      "cost": 0.0003,
+      "status": "ready",
+      "errorId": 0,
+      "errorCode": null,
+      "errorDescription": null
+    }
+    ```
+  </MethodDescription>
+</TabItem>
+
+---
+
 ## How to find Base64
 
 Images on web pages can be represented either as a URL or directly encoded in Base64 format. To find the required value, right-click on the image, select **Inspect**, and carefully examine the **Elements** section or the network requests grid—there you can find the URL or the encoded content.
@@ -771,19 +862,17 @@ Images on web pages can be represented either as a URL or directly encoded in Ba
 
 ### Automatically
 
-A convenient way to automate the search for all necessary parameters.
-Some parameters are regenerated every time the page loads, so you'll need to extract them through a browser — either regular or headless (e.g., using **Playwright**).
-Since the values of dynamic parameters are short-lived, the captcha must be solved immediately after retrieving them.
+To automate parameter extraction, you can retrieve them via a **browser** (regular or headless, e.g., using **Playwright**) or directly from **HTTP requests**. Since dynamic parameter values are short-lived, it is recommended to use them immediately after retrieval.
 
 :::warning **Important!**
-The code snippets provided are basic examples for familiarization with extracting the required parameters. The exact implementation will depend on your captcha page, its structure, and the HTML elements/selectors it uses.
+The provided code snippets are basic examples for learning how to extract the required parameters. The exact implementation will depend on your captcha page, its structure, and the HTML elements and selectors used.
 :::
 
 <Tabs className="full-width-tabs filled-tabs request-tabs">
 
   <TabItem value="js" label="JavaScript" default className="method-panel">
     <details>
-      <summary>Show Code (Node.js)</summary>
+      <summary>Show code (Node.js)</summary>
 
       ```js
       import { chromium } from 'playwright';
@@ -893,7 +982,7 @@ The code snippets provided are basic examples for familiarization with extractin
 
   <TabItem value="python" label="Python" className="method-panel">
     <details>
-      <summary>Show Code</summary>
+      <summary>Show code</summary>
 
       ```python
       import base64
@@ -991,7 +1080,7 @@ The code snippets provided are basic examples for familiarization with extractin
 
   <TabItem value="csharp" label="C#" className="method-panel">
     <details>
-      <summary>Show Code</summary>
+      <summary>Show code</summary>
 
       ```csharp
       using System;
@@ -1217,36 +1306,74 @@ run();
 ```
 </details>
 
-## Use the SDK Library
+## Use the SDK library
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 
   <TabItem value="js" label="JavaScript" default className="method-panel">
-
+<details>
+      <summary>Show code (for browser)</summary>
 ```js
 // https://github.com/ZennoLab/capmonstercloud-client-js
 
 import { CapMonsterCloudClientFactory, ClientOptions, ComplexImageTaskRecognitionRequest } from '@zennolab_com/capmonstercloud-client';
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const cmcClient = CapMonsterCloudClientFactory.Create(
-    new ClientOptions({ clientKey: '<your capmonster.cloud API key>' })
-  );
-  console.log(await cmcClient.getBalance());
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: 'YOUR_API_KEY' }) // Specify your CapMonster Cloud API key
+    );
 
-  const citRecognitionRequest = new ComplexImageTaskRecognitionRequest({
-    imagesBase64: ['/9xwee/'], // Image in base64 format
-    metaData: { Task: 'oocl_rotate' },
-  });
+    // Optionally, you can check the balance
+    const balance = await cmcClient.getBalance();
+    console.log("Balance:", balance);
 
-  console.log(await cmcClient.Solve(citRecognitionRequest));
+    const citRecognitionRequest = new ComplexImageTaskRecognitionRequest({
+        imagesBase64: ['/9xwee/'], // Image in base64 format
+        metaData: { Task: 'oocl_rotate' }
+    });
+
+    const result = await cmcClient.Solve(citRecognitionRequest);
+    console.log("Solution:", result);
 });
 ```
+</details>
 
+
+<details>
+      <summary>Show code (Node.js)</summary>
+```javascript
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, ComplexImageTaskRecognitionRequest } from '@zennolab_com/capmonstercloud-client';
+
+const API_KEY = "YOUR_API_KEY"; // Specify your CapMonster Cloud API key
+
+async function solveComplexImageTask() {
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
+    );
+
+    // Optionally, you can check the balance
+    const balance = await cmcClient.getBalance();
+    console.log("Balance:", balance);
+
+    const citRecognitionRequest = new ComplexImageTaskRecognitionRequest({
+        imagesBase64: ['/9xwee/'], // Image in base64 format
+        metaData: { Task: 'oocl_rotate' }
+    });
+
+    const result = await cmcClient.Solve(citRecognitionRequest);
+    console.log("Solution:", result);
+}
+
+solveComplexImageTask().catch(console.error);
+```
+</details>
   </TabItem>
 
   <TabItem value="python" label="Python" className="method-panel">
-
+<details>
+      <summary>Show code</summary>
 ```python
 # https://github.com/ZennoLab/capmonstercloud-client-python
 
@@ -1255,7 +1382,7 @@ from capmonstercloudclient import CapMonsterClient, ClientOptions
 from capmonstercloudclient.requests import RecognitionComplexImageTaskRequest
 
 # Your CapMonster Cloud API key
-client_options = ClientOptions(api_key="your_api_key")
+client_options = ClientOptions(api_key="YOUR_API_KEY")
 cap_monster_client = CapMonsterClient(options=client_options)
 
 complexImage_request = RecognitionComplexImageTaskRequest(
@@ -1266,40 +1393,54 @@ complexImage_request = RecognitionComplexImageTaskRequest(
 )
 
 async def solve_captcha():
+    # Optionally, you can check the balance
+    balance = await cap_monster_client.get_balance()
+    print("Balance:", balance)
+
     solution = await cap_monster_client.solve_captcha(complexImage_request)
     return solution
 
 responses = asyncio.run(solve_captcha())
-print(responses)
+print("Solution:", responses)
 ```
+</details>
 
   <BlogLink url="https://capmonster.cloud/ru/blog/re-1/python-recaptcha-v2"/>
   </TabItem>
 
   <TabItem value="csharp" label="C#" className="method-panel">
+<details>
+      <summary>Show code</summary>
 
 ```csharp
 // https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Zennolab.CapMonsterCloud.Requests;
 using Zennolab.CapMonsterCloud;
 
 class Program
 {
-    static async Task MainComplexImageTaskRecognition(string[] args)
+    static async Task Main(string[] args)
     {
         var clientOptions = new ClientOptions
         {
-            ClientKey = "your_api_key" // Your CapMonster Cloud API key 
+            ClientKey = "YOUR_API_KEY" // Your CapMonster Cloud API key
         };
 
         var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
+
+        // Optionally, you can check the balance
+        var balance = await cmCloudClient.GetBalanceAsync();
+        Console.WriteLine("Balance: " + balance);
 
         var recognitionCITRequest = new RecognitionComplexImageTaskRequest
         {
             ImagesBase64 = new List<string>
             {
-                "/9j/4AAQSkZJRgABAQEAAAAAAAD…" // Image in base64 format
+                "/9j/4AAQSkZJRgABAQEAAAAAAAD" // Image in base64 format
             },
             Metadata = new RecognitionComplexImageTaskRequest.RecognitionMetadata
             {
@@ -1309,14 +1450,14 @@ class Program
 
         var recognitionCITResult = await cmCloudClient.SolveAsync(recognitionCITRequest);
 
-        if(recognitionCITResult.Solution.Answer.IsGrid)
+        if (recognitionCITResult.Solution.Answer.IsGrid)
             Console.WriteLine("Captcha Solution: " + recognitionCITResult.Solution.Answer.GridAnswer);
         else if (recognitionCITResult.Solution.Answer.IsNumeric)
             Console.WriteLine("Captcha Solution: " + recognitionCITResult.Solution.Answer.NumericAnswer);
     }
 }
 ```
-
+</details>
   </TabItem>
 
 </Tabs>

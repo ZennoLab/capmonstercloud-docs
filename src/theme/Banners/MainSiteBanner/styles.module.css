@@ -1,0 +1,40 @@
+.wrapper {
+  background: #6946ff;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  display: block;
+  border-radius: 12px;
+  max-width: 250px;
+}
+.wrapper:hover,
+.wrapper:focus,
+.wrapper:active {
+  text-decoration: none;
+}
+
+.title {
+  font-size: 20px;
+  line-height: 22px;
+  font-weight: 600;
+  margin-top: 5px;
+  margin-bottom: 12px;
+  color: white;
+}
+
+@media (max-width: 1400px) {
+  .title {
+    font-size: 1.5rem;
+    line-height: 1.7rem;
+  }
+}
+
+.image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.logo {
+  max-width: 100%;
+}

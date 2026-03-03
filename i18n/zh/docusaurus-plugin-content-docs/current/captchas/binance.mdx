@@ -248,91 +248,171 @@ securityCheckResponseValidateId: "ff965ea6216b46f3825fa827ecaf297f"
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 
   <TabItem value="js" label="JavaScript" default className="method-panel">
+<details>
+      <summary>显示代码（用于浏览器）</summary>
+```js
+// https://github.com/ZennoLab/capmonstercloud-client-js
 
-  ```js
-  // https://github.com/ZennoLab/capmonstercloud-client-js
+import { CapMonsterCloudClientFactory, ClientOptions, BinanceRequest } from '@zennolab_com/capmonstercloud-client';
 
-  import { CapMonsterCloudClientFactory, ClientOptions, BinanceRequest } from '@zennolab_com/capmonstercloud-client';
+const API_KEY = "YOUR_API_KEY";  // 输入您的 CapMonster Cloud API 密钥
 
-  document.addEventListener('DOMContentLoaded', async () => {
-    const cmcClient = CapMonsterCloudClientFactory.Create(
-      new ClientOptions({ clientKey: '<你的 capmonster.cloud API key>' })
+document.addEventListener("DOMContentLoaded", async () => {
+    const client = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
     );
 
-    console.log(await cmcClient.getBalance());
-
-    // 选项 1：不使用代理
-    const binanceRequest = new BinanceRequest({
-      websiteURL: 'https://example.com', // 带验证码页面的 URL
-      websiteKey: 'websiteKey',           // 替换为正确值
-      validateId: 'validateId',
+    // 基本示例，无需代理
+    // CapMonster Cloud 会自动使用它们的代理
+    let binanceRequest = new BinanceRequest({
+        websiteURL: 'https://example.com', // Binance 验证码页面 URL
+        websiteKey: 'login',               // 替换为正确的值
+        validateId: 'cb0bfefa598b4c3887661fde54ecd57b'
     });
 
-    // 选项 2：使用代理
+    // 使用您自己的代理的示例
+    // 如果想使用自己的代理，请取消注释以下代码块
     /*
-    const binanceRequest = new BinanceRequest({
-      websiteURL: 'https://example.com', 
-      websiteKey: 'websiteKey',          
-      validateId: 'validateId',
-      proxyType: 'http',
-      proxyAddress: '8.8.8.8',
-      proxyPort: 8080,
-      proxyLogin: 'proxyLoginHere',
-      proxyPassword: 'proxyPasswordHere',
+    const proxy = {
+        proxyType: "http",
+        proxyAddress: "123.45.67.89",
+        proxyPort: 8080,
+        proxyLogin: "username",
+        proxyPassword: "password"
+    };
+
+    binanceRequest = new BinanceRequest({
+        websiteURL: 'https://example.com',
+        websiteKey: 'login',
+        validateId: 'cb0bfefa598b4c3887661fde54ecd57b',
+        proxy
     });
     */
 
-    console.log(await cmcClient.Solve(binanceRequest));
-  });
-````
+    // 如有必要，可以检查余额
+    const balance = await client.getBalance();
+    console.log("Balance:", balance);
 
+    const result = await client.Solve(binanceRequest);
+    console.log("Solution:", result);
+});
+```
+</details>
+
+<details>
+      <summary>显示代码 (Node.js)</summary>
+```javascript
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, BinanceRequest } from '@zennolab_com/capmonstercloud-client';
+
+const API_KEY = "YOUR_API_KEY";  // 输入您的 CapMonster Cloud API 密钥
+
+async function solveBinanceCaptcha() {
+    const client = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
+    );
+
+    // 基本示例，无需代理
+    // CapMonster Cloud 会自动使用它们的代理
+    let binanceRequest = new BinanceRequest({
+        websiteURL: 'https://example.com', // Binance 验证码页面 URL
+        websiteKey: 'login',               // 替换为正确的值
+        validateId: 'cb0bfefa598b4c3887661fde54ecd57b'
+    });
+
+    // 使用您自己的代理的示例
+    // 如果想使用自己的代理，请取消注释以下代码块
+    /*
+    const proxy = {
+        proxyType: "http",
+        proxyAddress: "123.45.67.89",
+        proxyPort: 8080,
+        proxyLogin: "username",
+        proxyPassword: "password"
+    };
+
+    binanceRequest = new BinanceRequest({
+        websiteURL: 'https://example.com',
+        websiteKey: 'login',
+        validateId: 'cb0bfefa598b4c3887661fde54ecd57b',
+        proxy
+    });
+    */
+
+    // 如有必要，可以检查余额
+    const balance = await client.getBalance();
+    console.log("Balance:", balance);
+
+    const result = await client.Solve(binanceRequest);
+    console.log("Solution:", result);
+}
+
+solveBinanceCaptcha().catch(console.error);
+```
+</details>
   </TabItem>
 
   <TabItem value="python" label="Python" default className="method-panel">
-
+<details>
+      <summary>显示代码</summary>
 ```python
 # https://github.com/ZennoLab/capmonstercloud-client-python
 
 import asyncio
 from capmonstercloudclient import CapMonsterClient, ClientOptions
 from capmonstercloudclient.requests import BinanceTaskRequest
+# from capmonstercloudclient.requests.baseRequestWithProxy import ProxyInfo  # 如果计划使用代理，请取消注释
 
-client_options = ClientOptions(api_key="your_api_key")  # 你的 CapMonster Cloud API key
-cap_monster_client = CapMonsterClient(options=client_options)
+API_KEY = "YOUR_API_KEY"  # 输入您的 CapMonster Cloud API 密钥
 
-# 选项 1：不使用代理
-binance_request = BinanceTaskRequest(
-    websiteUrl="https://example.com",   # 带验证码页面的 URL
-    websiteKey="login",                 # 替换为正确值
-    validateId="cb0bfefa598b4c3887661fde54ecd57b", 
-    userAgent="userAgentPlaceholder"    # 使用实际 UserAgent
-)
+async def solve_binance():
+    client_options = ClientOptions(api_key=API_KEY)
+    cap_monster_client = CapMonsterClient(options=client_options)
 
-# 选项 2：使用代理
-# 如果需要使用代理，请取消注释
+    # 基本示例，无需代理
+    # CapMonster Cloud 会自动使用它们的代理
+    binance_request = BinanceTaskRequest(
+        websiteUrl="https://example.com",    # Binance 验证码页面 URL
+        websiteKey="login",               # 替换为正确的值
+        validateId="cb0bfefa598b4c3887661fde54ecd57b",    # 替换为实际的 validateId
+        userAgent="userAgentPlaceholder"         # 使用实际的 UserAgent
+    )
 
-# binance_request = BinanceTaskRequest(
-#     websiteUrl="https://example.com",
-#     websiteKey="login",
-#     validateId="cb0bfefa598b4c3887661fde54ecd57b",
-#     userAgent="userAgentPlaceholder",
-#     proxyType="http",
-#     proxyAddress="8.8.8.8",
-#     proxyPort=8080,
-#     proxyLogin="proxyLoginHere",
-#     proxyPassword="proxyPasswordHere"
-# )
+    # 使用您自己的代理的示例
+    # 如果想使用代理，请取消注释以下代码块
+    #
+    # proxy = ProxyInfo(
+    #     proxyType="http",
+    #     proxyAddress="123.45.67.89",
+    #     proxyPort=8080,
+    #     proxyLogin="username",
+    #     proxyPassword="password"
+    # )
+    #
+    # binance_request = BinanceTaskRequest(
+    #     websiteUrl="https://example.com",
+    #     websiteKey="login",
+    #     validateId="cb0bfefa598b4c3887661fde54ecd57b",
+    #     userAgent="userAgentPlaceholder",
+    #     proxy=proxy
+    # )
 
-async def solve_captcha():
-    return await cap_monster_client.solve_captcha(binance_request)
+    # 如有必要，可以检查余额
+    balance = await cap_monster_client.get_balance()
+    print("Balance:", balance)
 
-responses = asyncio.run(solve_captcha())
-print(responses)
+    result = await cap_monster_client.solve_captcha(binance_request)
+    print("Solution:", result)
+
+asyncio.run(solve_binance())
 ```
-
+</details>
   </TabItem>
 
   <TabItem value="csharp" label="C#" className="method-panel">
+<details>
+      <summary>显示代码</summary>
 
 ```csharp
 // https://github.com/ZennoLab/capmonstercloud-client-dotnet
@@ -346,49 +426,54 @@ class Program
 {
     static async Task Main(string[] args)
     {
-        // 你的 CapMonster Cloud API key
+        // 输入您的 CapMonster Cloud API 密钥
         var clientOptions = new ClientOptions
         {
-            ClientKey = "your_api_key" // 你的 CapMonster Cloud API key
+            ClientKey = "YOUR_API_KEY"
         };
 
         var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
-        // 选项 1：不使用代理
+        // 基本示例，无需代理
+        // CapMonster Cloud 会自动使用它们的代理
         var binanceRequest = new BinanceTaskRequest
         {
-            WebsiteUrl = "https://example.com",               // 带验证码页面的 URL
-            WebsiteKey = "login",                             // 替换为正确值
+            WebsiteUrl = "https://example.com",      // Binance 验证码页面 URL
+            WebsiteKey = "login",                    // 替换为正确的值
             ValidateId = "cb0bfefa598b4c3887661fde54ecd57b",
-            UserAgent = "userAgentPlaceholder"                // 使用实际 UserAgent
+            UserAgent = "userAgentPlaceholder"    // 使用实际的 UserAgent
         };
 
-        // 选项 2：使用代理
-        // 如果需要使用代理，请取消注释
+        // 使用您自己的代理的示例
+        // 如果想使用代理，请取消注释以下代码块
         /*
-        var binanceRequest = new BinanceTaskRequest
+        binanceRequest = new BinanceTaskRequest
         {
             WebsiteUrl = "https://example.com",
             WebsiteKey = "login",
             ValidateId = "cb0bfefa598b4c3887661fde54ecd57b",
             UserAgent = "userAgentPlaceholder",
             Proxy = new ProxyContainer(
-                "123.45.67.89",
-                8080,
-                ProxyType.Http,
-                "proxyLogin",
-                "proxyPassword"
+                "123.45.67.89",  
+                8080,   
+                ProxyType.Http,   
+                "username", 
+                "password"   
             )
         };
         */
 
+        // 如有必要，可以检查余额
+        var balance = await cmCloudClient.GetBalanceAsync();
+        Console.WriteLine("Balance: " + balance);
+
         var binanceResult = await cmCloudClient.SolveAsync(binanceRequest);
 
-        Console.WriteLine("验证码解决方案: " + binanceResult.Solution.Value);
+        Console.WriteLine("Binance Solution: " + binanceResult.Solution.Value);
     }
 }
 ```
-
+</details>
   </TabItem>
 
 </Tabs>

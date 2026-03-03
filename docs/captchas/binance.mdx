@@ -256,92 +256,171 @@ Object.defineProperty(window, 'BCaptcha', {
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 
   <TabItem value="js" label="JavaScript" default className="method-panel">
-
+<details>
+      <summary>Показать код (для браузера)</summary>
   ```js
   // https://github.com/ZennoLab/capmonstercloud-client-js
 
   import { CapMonsterCloudClientFactory, ClientOptions, BinanceRequest } from '@zennolab_com/capmonstercloud-client';
 
-  document.addEventListener('DOMContentLoaded', async () => {
-    const cmcClient = CapMonsterCloudClientFactory.Create(
-      new ClientOptions({ clientKey: '<your capmonster.cloud API key>' })
-    );
+  const API_KEY = "YOUR_API_KEY";  // Укажите ваш API-ключ CapMonster Cloud
 
-    console.log(await cmcClient.getBalance());
+  document.addEventListener("DOMContentLoaded", async () => {
+      const client = CapMonsterCloudClientFactory.Create(
+          new ClientOptions({ clientKey: API_KEY })
+      );
 
-    // Вариант 1: без прокси
-    const binanceRequest = new BinanceRequest({
-      websiteURL: 'https://example.com', // URL страницы с капчей
-      websiteKey: 'websiteKey',           // Замените на корректное значение
-      validateId: 'validateId',
-    });
+      // Базовый пример без прокси
+      // CapMonster Cloud автоматически использует свои прокси
+      let binanceRequest = new BinanceRequest({
+          websiteURL: 'https://example.com', // URL страницы с Binance капчей
+          websiteKey: 'login',           // Замените на корректное значение
+          validateId: 'cb0bfefa598b4c3887661fde54ecd57b'
+      });
 
-    // Вариант 2: с прокси
-    /*
-    const binanceRequest = new BinanceRequest({
-      websiteURL: 'https://example.com', 
-      websiteKey: 'websiteKey',          
-      validateId: 'validateId',
-      proxyType: 'http',
-      proxyAddress: '8.8.8.8',
-      proxyPort: 8080,
-      proxyLogin: 'proxyLoginHere',
-      proxyPassword: 'proxyPasswordHere',
-    });
-    */
+      // Пример использования вашего собственного прокси
+      // Раскомментируйте данный блок, если вы хотите использовать собственный прокси
+      /*
+      const proxy = {
+          proxyType: "http",
+          proxyAddress: "123.45.67.89",
+          proxyPort: 8080,
+          proxyLogin: "username",
+          proxyPassword: "password"
+      };
 
-    console.log(await cmcClient.Solve(binanceRequest));
+      binanceRequest = new BinanceRequest({
+          websiteURL: 'https://example.com',
+          websiteKey: 'login',
+          validateId: 'cb0bfefa598b4c3887661fde54ecd57b',
+          proxy
+      });
+      */
+
+      // При необходимости можно проверить баланс
+      const balance = await client.getBalance();
+      console.log("Balance:", balance);
+
+      const result = await client.Solve(binanceRequest);
+      console.log("Solution:", result);
   });
 ````
+</details>
 
+<details>
+      <summary>Показать код (Node.js)</summary>
+      ```javascript
+      // https://github.com/ZennoLab/capmonstercloud-client-js
+
+      import { CapMonsterCloudClientFactory, ClientOptions, BinanceRequest } from '@zennolab_com/capmonstercloud-client';
+
+      const API_KEY = "YOUR_API_KEY";  // Укажите ваш API-ключ CapMonster Cloud
+
+      async function solveBinanceCaptcha() {
+          const client = CapMonsterCloudClientFactory.Create(
+              new ClientOptions({ clientKey: API_KEY })
+          );
+
+          // Базовый пример без прокси
+          // CapMonster Cloud автоматически использует свои прокси
+          let binanceRequest = new BinanceRequest({
+              websiteURL: 'https://example.com', // URL страницы с Binance капчей
+              websiteKey: 'login',           // Замените на корректное значение
+              validateId: 'cb0bfefa598b4c3887661fde54ecd57b'
+          });
+
+          // Пример использования вашего собственного прокси
+          // Раскомментируйте данный блок, если вы хотите использовать собственный прокси
+          /*
+          const proxy = {
+              proxyType: "http",
+              proxyAddress: "123.45.67.89",
+              proxyPort: 8080,
+              proxyLogin: "username",
+              proxyPassword: "password"
+          };
+
+          binanceRequest = new BinanceRequest({
+              websiteURL: 'https://example.com',
+              websiteKey: 'login',
+              validateId: 'cb0bfefa598b4c3887661fde54ecd57b',
+              proxy
+          });
+          */
+
+          // При необходимости можно проверить баланс
+          const balance = await client.getBalance();
+          console.log("Balance:", balance);
+
+          const result = await client.Solve(binanceRequest);
+          console.log("Solution:", result);
+      }
+
+      solveBinanceCaptcha().catch(console.error);
+```
+</details>
   </TabItem>
 
   <TabItem value="python" label="Python" default className="method-panel">
-
+<details>
+      <summary>Показать код</summary>
 ```python
 # https://github.com/ZennoLab/capmonstercloud-client-python
 
 import asyncio
 from capmonstercloudclient import CapMonsterClient, ClientOptions
 from capmonstercloudclient.requests import BinanceTaskRequest
+# from capmonstercloudclient.requests.baseRequestWithProxy import ProxyInfo  # Раскомментируйте, если планируете использовать прокси
 
-client_options = ClientOptions(api_key="your_api_key")  # Ваш API-ключ CapMonster Cloud
-cap_monster_client = CapMonsterClient(options=client_options)
+API_KEY = "YOUR_API_KEY"  # Укажите ваш API-ключ CapMonster Cloud
 
-# Вариант 1: Без прокси
-binance_request = BinanceTaskRequest(
-    websiteUrl="https://example.com",   # URL страницы с капчей
-    websiteKey="login",                 # Замените на корректное значение
-    validateId="cb0bfefa598b4c3887661fde54ecd57b", 
-    userAgent="userAgentPlaceholder"    # Используйте актуальный UserAgent
-)
+async def solve_binance():
+    client_options = ClientOptions(api_key=API_KEY)
+    cap_monster_client = CapMonsterClient(options=client_options)
 
-# Вариант 2: С прокси
-# Раскомментируйте, если нужно использовать прокси
+    # Базовый пример без прокси
+    # CapMonster Cloud автоматически использует свои прокси
+    binance_request = BinanceTaskRequest(
+        websiteUrl="https://example.com",                  # URL страницы с Binance капчей
+        websiteKey="login",                                # Замените на корректное значение
+        validateId="cb0bfefa598b4c3887661fde54ecd57b",    # Замените на актуальный validateId
+        userAgent="userAgentPlaceholder"                   # Используйте актуальный UserAgent
+    )
 
-# binance_request = BinanceTaskRequest(
-#     websiteUrl="https://example.com",
-#     websiteKey="login",
-#     validateId="cb0bfefa598b4c3887661fde54ecd57b",
-#     userAgent="userAgentPlaceholder",
-#     proxyType="http",
-#     proxyAddress="8.8.8.8",
-#     proxyPort=8080,
-#     proxyLogin="proxyLoginHere",
-#     proxyPassword="proxyPasswordHere"
-# )
+    # Пример использования вашего собственного прокси
+    # Раскомментируйте данный блок, если хотите использовать прокси
+    #
+    # proxy = ProxyInfo(
+    #     proxyType="http",
+    #     proxyAddress="123.45.67.89",
+    #     proxyPort=8080,
+    #     proxyLogin="username",
+    #     proxyPassword="password"
+    # )
+    #
+    # binance_request = BinanceTaskRequest(
+    #     websiteUrl="https://example.com",
+    #     websiteKey="login",
+    #     validateId="cb0bfefa598b4c3887661fde54ecd57b",
+    #     userAgent="userAgentPlaceholder",
+    #     proxy=proxy
+    # )
 
-async def solve_captcha():
-    return await cap_monster_client.solve_captcha(binance_request)
+    # При необходимости можно проверить баланс
+    balance = await cap_monster_client.get_balance()
+    print("Balance:", balance)
 
-responses = asyncio.run(solve_captcha())
-print(responses)
+    result = await cap_monster_client.solve_captcha(binance_request)
+    print("Solution:", result)
+
+asyncio.run(solve_binance())
 ```
-
+</details>
   </TabItem>
 
   <TabItem value="csharp" label="C#" className="method-panel">
-
+<details>
+      <summary>Показать код</summary>
 ```csharp
 // https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
@@ -354,49 +433,54 @@ class Program
 {
     static async Task Main(string[] args)
     {
-        // Ваш API-ключ от CapMonster Cloud
+        // Укажите ваш API-ключ CapMonster Cloud
         var clientOptions = new ClientOptions
         {
-            ClientKey = "your_api_key" // Ваш API-ключ CapMonster Cloud
+            ClientKey = "YOUR_API_KEY"
         };
 
         var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
-        // Вариант 1: Без прокси
+        // Базовый пример без прокси
+        // CapMonster Cloud автоматически использует свои прокси
         var binanceRequest = new BinanceTaskRequest
         {
-            WebsiteUrl = "https://example.com",               // URL страницы с капчей
+            WebsiteUrl = "https://example.com",               // URL страницы с Binance капчей
             WebsiteKey = "login",                             // Замените на корректное значение
             ValidateId = "cb0bfefa598b4c3887661fde54ecd57b",
             UserAgent = "userAgentPlaceholder"                // Используйте актуальный UserAgent
         };
 
-        // Вариант 2: С прокси
-        // Раскомментируйте, если нужно использовать прокси
+        // Пример использования вашего собственного прокси
+        // Раскомментируйте данный блок, если хотите использовать прокси
         /*
-        var binanceRequest = new BinanceTaskRequest
+        binanceRequest = new BinanceTaskRequest
         {
             WebsiteUrl = "https://example.com",
             WebsiteKey = "login",
             ValidateId = "cb0bfefa598b4c3887661fde54ecd57b",
             UserAgent = "userAgentPlaceholder",
             Proxy = new ProxyContainer(
-                "123.45.67.89",
-                8080,
-                ProxyType.Http,
-                "proxyLogin",
-                "proxyPassword"
+                "123.45.67.89",  
+                8080,   
+                ProxyType.Http,   
+                "username", 
+                "password"   
             )
         };
         */
 
+        // При необходимости можно проверить баланс
+        var balance = await cmCloudClient.GetBalanceAsync();
+        Console.WriteLine("Balance: " + balance);
+
         var binanceResult = await cmCloudClient.SolveAsync(binanceRequest);
 
-        Console.WriteLine("Captcha Solution: " + binanceResult.Solution.Value);
+        Console.WriteLine("Binance Solution: " + binanceResult.Solution.Value);
     }
 }
 ```
-
+</details>
   </TabItem>
 
 </Tabs>

@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-sidebar_label: RecaptchaV3 Proxyless
+sidebar_label: reCAPTCHA v3
 ---
 
 import Tabs from '@theme/Tabs';
@@ -16,7 +16,7 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 <ArticleHead slug="captchas/recaptcha-v3-task" />
 
 
-# RecaptchaV3TaskProxyless
+# reCAPTCHA v3
 
 <PriceBlockWrap>
   <PriceBlock title="RecaptchaV3TaskProxyless" captchaId="recaptcha3"/>
@@ -29,11 +29,11 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 :::
 
 
-该对象包含用于解决 Google ReCaptcha3 任务的数据。此任务将通过我们的服务使用我们自己的代理服务器执行。
+本节介绍了用于解决 Google reCAPTCHA v3 的任务说明。
 
-与 ReCaptcha2 不同，ReCaptcha3 不需要站点访问者执行任何操作，它在页面背景中隐式工作，收集和分析用户数据，以确定其是否为人类或机器人。基于这些分析，网站会得到一个信任评级（从 0.1 到 0.9）。
+reCAPTCHA v3 完全在后台运行，不需要用户执行任何操作。系统会分析页面访问者的行为和技术信号，并为每个请求生成风险评分。网站会根据这些数据，通过信任评分来决定是否允许该操作，该评分通常位于 **0.1** 到 **0.9** 的范围内。
 
-创建任务时，您还应额外传递两个参数 - pageAction 和 minScore。
+在创建任务时，建议传递两个参数：`pageAction` 和 `minScore`。
 
 
 ## 请求参数
@@ -54,11 +54,18 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 
 	---
 
+  <ParamItem title="isEnterprise" type="boolean" />
+    reCAPTCHA 版本。 支持的值：`true` / `false`（也可使用 `1` / `0`，整数类型）。
+    
+    如果需要以 Enterprise 方式解决 reCAPTCHA，请设置 `true` —— 在这种情况下，任务将按照与 [RecaptchaV3EnterpriseTask](../recaptcha-v3-enterprise-task/) 相同的方式处理。
+
+    --- 
+
 	<ParamItem title="minScore" type="double" />
     从 0.1 到 0.9 的值。
 
     ---
-
+    
     <ParamItem title="pageAction" type="string" />
     <p>小部件操作值。网站所有者通过此参数定义用户在页面上的活动。默认值: *verify*</p><p>示例:<br/>*`grecaptcha.execute('site_key', {action:'login_test'})`*。</p>
 </TabItem>
@@ -73,19 +80,20 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 		```
 	</MethodItem>
 	<MethodDescription>
-		**要求**
-		```json
-		{
-		  "clientKey":"API_KEY",
-		  "task": {
-			"type":"RecaptchaV3TaskProxyless",
-			"websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta",
-			"websiteKey":"6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",
-			"minScore": 0.3,
-			"pageAction": "myverify"
-		  }
-		}
-		```
+**要求**
+```json
+{
+  "clientKey":"API_KEY",
+  "task": {
+    "type":"RecaptchaV3TaskProxyless",
+    "websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta",
+    "websiteKey":"6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",
+    "isEnterprise": false,
+    "minScore": 0.7,
+    "pageAction": "myverify"
+  }
+}
+```
 		**回应**
 		```json
 		{
@@ -129,19 +137,21 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 		  }
 		}
 		```
-    对于某些网站，响应可能如下所示（在确认解决方案时使用返回的 UserAgent）：
+    对于某些网站，响应可能如下所示。提交解决方案时，请确保使用响应中提供的 UserAgent，即使它与您当前使用的浏览器或脚本不同。
  
-		```json
-		{
-		  "errorId":0,
-		  "status":"ready",
-		  "solution": {
-			"userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36", 
-                "gRecaptchaResponse": "0cAFcWeA5Y3...hF8UWA", 
-                "cookies": {"nocookies": "true"}}"
-		  }
-		}
-		```
+```json
+{
+  "errorId": 0,
+  "status": "ready",
+  "solution": {
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "gRecaptchaResponse": "0cAFcWeA5Y3...hF8UWA",
+    "cookies": {
+      "nocookies": "true"
+    }
+  }
+}
+```
 	</MethodDescription>
 </TabItem>
 
@@ -178,12 +188,10 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 
 ### 自动方法
 
-一种方便的自动化获取所有必要参数的方式。
-某些参数每次页面加载时都会重新生成，因此需要通过浏览器（普通或无头模式，如使用**Playwright**）提取它们。
-由于动态参数值的有效期很短，获取后必须立即解决验证码。
+为了自动化获取所需参数，可以通过 **浏览器**（普通模式或 headless 模式，例如使用 **Playwright**）进行提取，或直接从 **HTTP 请求**中获取。由于动态参数的有效时间较短，建议在获取后尽快使用。
 
-:::warning **重要提示！**
-提供的代码片段是用于熟悉参数提取的基本示例。具体实现将取决于验证码页面、其结构及使用的HTML元素/选择器。
+:::warning **重要**
+所提供的代码片段仅作为获取必要参数的基础示例。具体实现方式取决于包含验证码的网站、本身的页面结构，以及所使用的 HTML 元素和选择器。
 :::
 
 <Tabs className="full-width-tabs filled-tabs request-tabs">
@@ -432,40 +440,85 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">
-  
+<details>
+      <summary>显示代码（用于浏览器）</summary>  
 ```js
 // https://github.com/ZennoLab/capmonstercloud-client-js
 
-import { 
-  CapMonsterCloudClientFactory, 
-  ClientOptions, 
-  RecaptchaV3ProxylessRequest 
+import {
+  CapMonsterCloudClientFactory,
+  ClientOptions,
+  RecaptchaV3ProxylessRequest
 } from '@zennolab_com/capmonstercloud-client';
 
 document.addEventListener('DOMContentLoaded', async () => {
+
   const cmcClient = CapMonsterCloudClientFactory.Create(
-    new ClientOptions({ clientKey: '<你的 capmonster.cloud API 密钥>' }) // 你的 CapMonster Cloud API 密钥
+    new ClientOptions({ clientKey: 'YOUR_API_KEY' }) // 输入您的 CapMonster Cloud API 密钥
   );
 
-  console.log(await cmcClient.getBalance());
+  // 如有必要，可以检查余额
+  const balance = await cmcClient.getBalance();
+  console.log('Balance:', balance);
 
+  // 基本示例，无需代理
+  // CapMonster Cloud 会自动使用它们的代理
   const recaptchaV3Request = new RecaptchaV3ProxylessRequest({
-    websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high', // 带验证码页面的 URL
-    websiteKey: '6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd', // 替换为正确的值
-    minScore: 0.6, 
-    pageAction: 'some-action', 
+    websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta', // 您的验证码页面 URL
+    websiteKey: '6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob',
+    minScore: 0.6,  
+    pageAction: 'myverify',
   });
 
-  console.log(await cmcClient.Solve(recaptchaV3Request));
+  const solution = await cmcClient.Solve(recaptchaV3Request);
+  console.log('Solution:', solution);
+
 });
-````
+```
+</details>
+
+<details>
+      <summary>显示代码 (Node.js)</summary>
+```javascript
+// https://github.com/ZennoLab/capmonstercloud-client-js
+
+import { CapMonsterCloudClientFactory, ClientOptions, RecaptchaV3ProxylessRequest } from '@zennolab_com/capmonstercloud-client';
+
+const API_KEY = "YOUR_API_KEY"; // 输入您的 CapMonster Cloud API 密钥
+
+async function solveRecaptchaV3() {
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+        new ClientOptions({ clientKey: API_KEY })
+    );
+
+    // 如有必要，可以检查余额
+    const balance = await cmcClient.getBalance();
+    console.log("Balance:", balance);
+
+    // 基本示例，无需代理
+    // CapMonster Cloud 会自动使用它们的代理
+    const recaptchaV3Request = new RecaptchaV3ProxylessRequest({
+        websiteURL: "https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta", // 您的验证码页面 URL
+        websiteKey: "6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",
+        minScore: 0.6,
+        pageAction: "myverify",
+    });
+
+    const solution = await cmcClient.Solve(recaptchaV3Request);
+    console.log("Solution:", solution);
+}
+
+solveRecaptchaV3().catch(console.error);
+```
+</details>
 
 <BlogLink url="https://capmonster.cloud/zh/blog/re-1/javascript-recaptcha-v3"/>
 
   </TabItem>
 
   <TabItem value="python" label="Python" className="method-panel">
-
+<details>
+      <summary>显示代码</summary>
 ```python
 # https://github.com/Zennolab/capmonstercloud-client-python
 
@@ -473,12 +526,16 @@ import asyncio
 from capmonstercloudclient import CapMonsterClient, ClientOptions
 from capmonstercloudclient.requests import RecaptchaV3ProxylessRequest
 
-client_options = ClientOptions(api_key="your_api_key")  # 你的 CapMonster Cloud API 密钥
+client_options = ClientOptions(api_key="YOUR_API_KEY")  # 输入您的 CapMonster Cloud API 密钥
 cap_monster_client = CapMonsterClient(options=client_options)
 
+# 如有必要，可以检查余额
+balance = asyncio.run(cap_monster_client.get_balance())
+print("Balance:", balance)
+
 recaptcha_v3_request = RecaptchaV3ProxylessRequest(
-    websiteUrl="https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta",  # 带验证码页面的 URL
-    websiteKey="6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",  # 替换为正确的值
+    websiteUrl="https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta",  # 您的验证码页面 URL
+    websiteKey="6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",
     minScore=0.6,  
     pageAction="myverify"  
 )
@@ -489,13 +546,15 @@ async def solve_captcha():
 responses = asyncio.run(solve_captcha())
 print(responses)
 ```
+</details>
 
 <BlogLink url="https://capmonster.cloud/zh/blog/re-1/python-recaptcha-v3"/>
 
   </TabItem>
 
   <TabItem value="csharp" label="C#" className="method-panel">
-
+<details>
+      <summary>显示代码</summary>
 ```csharp
 // https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
@@ -508,25 +567,30 @@ class Program
     {
         var clientOptions = new ClientOptions
         {
-            ClientKey = "your_api_key"  // 你的 CapMonster Cloud API 密钥
+            ClientKey = "YOUR_API_KEY"  // 输入您的 CapMonster Cloud API 密钥
         };
 
         var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
+        // 如有必要，可以检查余额
+        var balance = await cmCloudClient.GetBalanceAsync();
+        Console.WriteLine("Balance: " + balance);
+
         var recaptchaV3Request = new RecaptchaV3ProxylessRequest
         {
-            WebsiteUrl = "https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta",  // 带验证码页面的 URL
-            WebsiteKey = "6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",  // 替换为正确的值
-            MinScore = 0.6, 
+            WebsiteUrl = "https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta",  // 您的验证码页面 URL
+            WebsiteKey = "6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",
+            MinScore = 0.6,
             PageAction = "myverify"
         };
 
         var recaptchaV3Result = await cmCloudClient.SolveAsync(recaptchaV3Request);
 
-        Console.WriteLine("验证码结果: " + recaptchaV3Result.Solution.Value);
+        Console.WriteLine("Solution: " + recaptchaV3Result.Solution.Value);
     }
 }
 ```
+</details>
 
 <BlogLink url="https://capmonster.cloud/zh/blog/re-1/c-recaptcha-v3"/>
 

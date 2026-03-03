@@ -1,6 +1,6 @@
 ﻿---
 sidebar_position: 0
-sidebar_label: RecaptchaV2
+sidebar_label: reCAPTCHA v2
 title: "Recognise and solve reCAPTCHA v2 — reCAPTCHAV2Task | API"
 description: "Learn how to set up automatic recognition via API and solve (bypass) NoCaptcha (reCAPTCHA v2) using the NoCaptchaTask method in Capmonster Cloud."
 ---
@@ -17,31 +17,29 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 
 <ArticleHead slug="captchas/no-captcha-task" />
 
-# RecaptchaV2Task
+# reCAPTCHA v2
 
 <PriceBlockWrap>
-  <PriceBlock title="RecaptchaV2Task" captchaId="rc2"/>
+  <PriceBlock title="RecaptchaV2" captchaId="rc2"/>
 </PriceBlockWrap>
 
 ![](./images/no-captcha/recaptchaV2.png) ![](./images/no-captcha/recaptchaV2_1.png) ![](./images/no-captcha/recaptchaV2_2.png)
 
-The object contains data for Google ReCaptcha2 solving task. To ensure the universality of the solution to this type of captcha, you need to use all the data used when automating the filling of the form on the target site, including proxies, browser UserAgent and cookies. This will help to avoid any problems when Google changes the code of its captcha.
+The object contains data for Google reCAPTCHA v2 solving task. To ensure the universality of the solution to this type of captcha, you need to use all the data used when automating the filling of the form on the target site, including proxies, browser UserAgent and cookies. This will help to avoid any problems when Google changes the code of its captcha.
 
 This type of captcha might be solved a bit longer than usual image captcha, but this issue is compensated by the fact that  `g-recaptcha-response` value we send to you is valid for the next 60 seconds after we solves your ReCaptcha2.
 
 <BlogLink url="https://capmonster.cloud/en/blog/re-captcha/how-to-bypass-recaptcha-v2-using-capmonster-cloud"/>
 
 :::warning **Attention!**
-CapMonster Cloud uses built-in proxies by default, which are suitable for most sites.
-**If the token is rejected by the server**, you should retry using your own proxies — this increases the chance of successful verification.
 
-Recommended procedure:
+By default, CapMonster Cloud uses built-in proxies suitable for most websites.  
+However, if the token is not accepted by the target site, try again with [your own proxies](#create-task-method) (*RecaptchaV2Task with proxy*). Make sure to use the **same proxies** when solving the captcha and submitting the token to the site.
 
-- First, solve the captcha without proxies.
+* If IP-based authorization is used, add **65.21.190.34** to the whitelist.
 
-- If the token is rejected by the target site, retry using your own proxies.
+* If the reCAPTCHA v2 token is still not accepted — contact [technical support](https://helpdesk.zennolab.com/conversation/new).
 
-If you are using a proxy with IP authorization, make sure to whitelist the address **65.21.190.34**.
 :::
 
 ## Request parameters
@@ -209,19 +207,21 @@ Use the [getTaskResult](../api/methods/get-task-result.mdx) method to request an
 		  }
 		}
 		```
-   For some websites, the response may look like this (use the returned UserAgent when confirming the solution):
- 
-		```json
-		{
-		  "errorId":0,
-		  "status":"ready",
-		  "solution": {
-			"userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36", 
-                "gRecaptchaResponse": "0cAFcWeA5Y3...hF8UWA", 
-                "cookies": {"nocookies": "true"}}"
-		  }
-		}
-		```
+   For some websites, the response may look like the following. When submitting the solution, make sure to use the UserAgent provided in the response, even if it differs from the one currently used by your browser or script.
+
+```json
+{
+  "errorId": 0,
+  "status": "ready",
+  "solution": {
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "gRecaptchaResponse": "0cAFcWeA5Y3...hF8UWA",
+    "cookies": {
+      "nocookies": "true"
+    }
+  }
+}
+```
 
 	</MethodDescription>
 </TabItem>
@@ -265,18 +265,16 @@ If the page contains a *data-s* attribute, find it in the HTML:
 
 ### Automatically
 
-A convenient way to automate the search for all necessary parameters.
-Some parameters are regenerated every time the page loads, so you'll need to extract them through a browser — either regular or headless (e.g., using **Playwright**).
-Since the values of dynamic parameters are short-lived, the captcha must be solved immediately after retrieving them.
+To automate parameter extraction, you can retrieve them via a **browser** (regular or headless, e.g., using **Playwright**) or directly from **HTTP requests**. Since dynamic parameter values are short-lived, it is recommended to use them immediately after retrieval.
 
 :::warning **Important!**
-The code snippets provided are basic examples for familiarization with extracting the required parameters. The exact implementation will depend on your captcha page, its structure, and the HTML elements/selectors it uses.
+The provided code snippets are basic examples for learning how to extract the required parameters. The exact implementation will depend on your captcha page, its structure, and the HTML elements and selectors used.
 :::
 
 <Tabs className="full-width-tabs filled-tabs request-tabs">
   <TabItem value="js" label="JavaScript" default className="method-panel">
     <details>
-      <summary>Show Code (for browser)</summary>
+      <summary>Show code (for browser)</summary>
 
       ```js
       (() => {
@@ -306,7 +304,7 @@ The code snippets provided are basic examples for familiarization with extractin
     </details>
 
     <details>
-      <summary>Show Code (Node.js)</summary>
+      <summary>Show code (Node.js)</summary>
 
       ```js
       import { chromium } from "playwright";
@@ -352,7 +350,7 @@ The code snippets provided are basic examples for familiarization with extractin
 
   <TabItem value="python" label="Python" className="method-panel">
     <details>
-      <summary>Show Code</summary>
+      <summary>Show code</summary>
 
       ```python
       import asyncio
@@ -385,7 +383,7 @@ The code snippets provided are basic examples for familiarization with extractin
 
   <TabItem value="csharp" label="C#" className="method-panel">
     <details>
-      <summary>Show Code</summary>
+      <summary>Show code</summary>
 
       ```csharp
       using Microsoft.Playwright;
@@ -425,10 +423,12 @@ The code snippets provided are basic examples for familiarization with extractin
   </TabItem>
 </Tabs>
 
-## Use the SDK Library
+## Use the SDK library
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="js" label="JavaScript" default className="method-panel">
+  <details>
+      <summary>Show code (for browser)</summary>
     ```js
     // https://github.com/ZennoLab/capmonstercloud-client-js
 
@@ -437,83 +437,163 @@ The code snippets provided are basic examples for familiarization with extractin
 
     document.addEventListener('DOMContentLoaded', async () => {
 
+      const API_KEY = "YOUR_API_KEY";  // Specify your CapMonster Cloud API key
+
       const cmcClient = CapMonsterCloudClientFactory.Create(
-        new ClientOptions({ clientKey: '<your capmonster.cloud API key>' })
+        new ClientOptions({ clientKey: API_KEY })
       );
 
-      console.log(await cmcClient.getBalance());
+      // Optionally, you can check the balance
+      const balance = await cmcClient.getBalance();
+      console.log("Balance:", balance);
 
-      const recaptchaV2Request = new RecaptchaV2Request({
-        websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high', // URL of the page with the captcha
-        websiteKey: '6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd', // Replace with the correct value
+      // Basic example without proxy
+      // CapMonster Cloud automatically uses its own proxies
+      let recaptchaV2Request = new RecaptchaV2Request({
+        websiteURL: "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
+        websiteKey: "6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"
       });
 
-      // Option with proxy (if required)
-      // Uncomment the block below and fill in the proxy details
+      // Example of using your own proxy
+      // Uncomment this block if you want to use your own proxy
 
       /*
-      const recaptchaV2Request = new RecaptchaV2Request({
-        websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high',
-        websiteKey: '6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd',
-        proxyType: 'http',           // Proxy type: http, https, socks4, socks5
-        proxyAddress: '8.8.8.8',     
-        proxyPort: 8080,             
-        proxyLogin: 'proxyLoginHere',
-        proxyPassword: 'proxyPasswordHere',
-        userAgent: 'userAgentPlaceholder',
+      const proxy = {
+          proxyType: "http",
+          proxyAddress: "123.45.67.89",
+          proxyPort: 8080,
+          proxyLogin: "username",
+          proxyPassword: "password"
+      };
+
+      recaptchaV2Request = new RecaptchaV2Request({
+          websiteURL: "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
+          websiteKey: "6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
+          proxy,
+          userAgent: "userAgentPlaceholder"
       });
       */
 
-      console.log(await cmcClient.Solve(recaptchaV2Request));
+      const result = await cmcClient.Solve(recaptchaV2Request);
+      console.log("Solution:", result);
     });
     ```
+    </details>
+
+    <details>
+      <summary>Show code (Node.js)</summary>
+      ```javascript
+      // https://github.com/ZennoLab/capmonstercloud-client-js
+
+      import { CapMonsterCloudClientFactory, ClientOptions, RecaptchaV2Request } from '@zennolab_com/capmonstercloud-client';
+
+      const API_KEY = "YOUR_API_KEY";  // Specify your CapMonster Cloud API key
+
+      async function solveRecaptchaV2() {
+          const client = CapMonsterCloudClientFactory.Create(
+              new ClientOptions({ clientKey: API_KEY })
+          );
+
+          // Basic example without proxy
+          // CapMonster Cloud automatically uses its own proxies
+          let recaptcha2Request = new RecaptchaV2Request({
+              websiteURL: "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
+              websiteKey: "6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"
+          });
+
+          // Example of using your own proxy
+          // Uncomment this block if you want to use your own proxy
+
+          /*
+          const proxy = {
+              proxyType: "http",
+              proxyAddress: "123.45.67.89",
+              proxyPort: 8080,
+              proxyLogin: "username",
+              proxyPassword: "password"
+          };
+
+          recaptcha2Request = new RecaptchaV2Request({
+              websiteURL: "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
+              websiteKey: "6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
+              proxy,
+              userAgent: "userAgentPlaceholder"
+          });
+          */
+
+          // Optionally, you can check the balance
+          const balance = await client.getBalance();
+          console.log("Balance:", balance);
+
+          const result = await client.Solve(recaptcha2Request);
+          console.log("Solution:", result);
+      }
+
+      solveRecaptchaV2().catch(console.error);
+```
+</details>
     <BlogLink url="https://capmonster.cloud/en/blog/re-1/javascript-recaptcha-v2"/>
+    
   </TabItem>
 
   <TabItem value="python" label="Python" className="method-panel">
+  <details>
+      <summary>Show code</summary>
     ```python
     # https://github.com/ZennoLab/capmonstercloud-client-python
 
     import asyncio
     from capmonstercloudclient import CapMonsterClient, ClientOptions
     from capmonstercloudclient.requests import RecaptchaV2Request
+    # from capmonstercloudclient.requests.baseRequestWithProxy import ProxyInfo  # Uncomment if you plan to use a proxy
 
-    # Enter your CapMonster Cloud API key
-    client_options = ClientOptions(api_key="your_api_key")  
-    cap_monster_client = CapMonsterClient(options=client_options)
+    API_KEY = "YOUR_API_KEY"  # Specify your CapMonster Cloud API key
 
-    # Option 1: Without proxy
+    async def solve_recaptcha_v2():
+        client_options = ClientOptions(api_key=API_KEY)
+        cap_monster_client = CapMonsterClient(options=client_options)
 
-    recaptcha2_request = RecaptchaV2Request(
-        websiteUrl="https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",  # URL of the page with the captcha
-        websiteKey="6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"  # Replace with the correct value
-    )
+        # Basic example without proxy
+        # CapMonster Cloud automatically uses its own proxies
+        recaptcha2_request = RecaptchaV2Request(
+            websiteUrl="https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
+            websiteKey="6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"
+        )
 
-    # Option 2: With proxy
-    # Uncomment if you need to use a proxy
+        # Example of using your own proxy
+        # Uncomment this block if you want to use your own proxy
 
-    # recaptcha2_request = RecaptchaV2Request(
-    #     websiteUrl="https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
-    #     websiteKey="6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
-    #     proxyType="http",                
-    #     proxyAddress="8.8.8.8",         
-    #     proxyPort=8080,                 
-    #     proxyLogin="proxyLoginHere",     
-    #     proxyPassword="proxyPasswordHere", 
-    #     userAgent="userAgentPlaceholder"
-    # )
+        # proxy = ProxyInfo(
+        #     proxyType="http",
+        #     proxyAddress="123.45.67.89",
+        #     proxyPort=8080,
+        #     proxyLogin="username",
+        #     proxyPassword="password"
+        # )
 
-    async def solve_captcha():
-        return await cap_monster_client.solve_captcha(recaptcha2_request)
+        # recaptcha2_request = RecaptchaV2Request(
+        #     websiteUrl="https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
+        #     websiteKey="6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
+        #     proxy=proxy,
+        #     userAgent="userAgentPlaceholder"
+        # )
 
-    # Run
-    response = asyncio.run(solve_captcha())
-    print(response)
+        # Optionally, you can check the balance
+        balance = await cap_monster_client.get_balance()
+        print("Balance:", balance)
+
+        result = await cap_monster_client.solve_captcha(recaptcha2_request)
+        print("Solution:", result)
+
+    asyncio.run(solve_recaptcha_v2())
     ```
+    </details>
     <BlogLink url="https://capmonster.cloud/en/blog/re-1/python-recaptcha-v2"/>
   </TabItem>
 
   <TabItem value="csharp" label="C#" className="method-panel">
+  <details>
+      <summary>Show code</summary>
     ```csharp
     // https://github.com/ZennoLab/capmonstercloud-client-dotnet
 
@@ -529,12 +609,13 @@ The code snippets provided are basic examples for familiarization with extractin
             // Your CapMonster Cloud API key
             var clientOptions = new ClientOptions
             {
-                ClientKey = "your_api_key"
+                ClientKey = "YOUR_API_KEY"
             };
 
             var cmCloudClient = CapMonsterCloudClientFactory.Create(clientOptions);
 
-            // Option 1: Without proxy
+            // Basic example without proxy
+            // CapMonster Cloud automatically uses its own proxies
 
             var recaptchaV2Request = new RecaptchaV2Request
             {
@@ -542,8 +623,9 @@ The code snippets provided are basic examples for familiarization with extractin
                 WebsiteKey = "6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"  // Replace with the correct value
             };
 
-            // Option 2: With proxy
-            // Uncomment if you need to use a proxy
+            // Example of using your own proxy
+            // Uncomment this block if you want to use your own proxy
+
             /*
             var recaptchaV2Request = new RecaptchaV2Request
             {
@@ -551,21 +633,26 @@ The code snippets provided are basic examples for familiarization with extractin
                 WebsiteKey = "6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
 
                 Proxy = new ProxyContainer(
-                    "8.8.8.8",        
+                    "123.45.67.89",        
                     8080,              
-                    ProxyType.Http,    
-                    "proxyLoginHere", 
-                    "proxyPasswordHere"
+                    ProxyType.Http,   
+                    "username", 
+                    "password"
                 )
             };
             */
 
+            // Optionally, you can check the balance
+            var balance = await cmCloudClient.GetBalanceAsync();
+            Console.WriteLine("Balance: " + balance);
+
             var recaptchaV2Result = await cmCloudClient.SolveAsync(recaptchaV2Request);
 
-            Console.WriteLine("Captcha solution: " + recaptchaV2Result.Solution.Value);
+            Console.WriteLine("Solution: " + recaptchaV2Result.Solution.Value);
         }
     }
     ```
+    </details>
     <BlogLink url="https://capmonster.cloud/en/blog/re-1/c-recaptcha-v2"/>
   </TabItem>
 </Tabs>
