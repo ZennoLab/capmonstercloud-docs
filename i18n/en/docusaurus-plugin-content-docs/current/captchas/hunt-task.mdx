@@ -1,0 +1,411 @@
+---
+sidebar_position: 26
+sidebar_label: Hunt
+title: "Automatic Detection and Bypass of Hunt CAPTCHA | API"
+description: "Learn how to detect Hunt using the automatic CAPTCHA solving API service CapMonster Cloud!"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+import PriceBlock from '@theme/PriceBlock';
+import PriceBlockWrap from '@theme/PriceBlockWrap';
+import { ArticleHead } from '../../../../../src/theme/ArticleHead';
+
+<ArticleHead slug="captchas/hunt-task" />
+
+# Hunt
+
+<PriceBlockWrap>
+  <PriceBlock title="Hunt" captchaId="hunt"/>
+</PriceBlockWrap>
+
+![](./images/hunt-task/hunt-captcha.png)
+
+
+Hunt CAPTCHA is an anti-bot system used on betting platforms to detect automated activity. It monitors user behavior and, if suspicious actions are detected, triggers an interactive verification.
+
+:::warning **Attention!**
+
+* For this task, use **your own proxies**.
+
+* Our solving system has two operating modes: **X-HD generation (fingerprint)** and **CAPTCHA solving**. If you only want to generate X-HD, do not pass the `data` parameter. If you need to solve the CAPTCHA, pass the token that the target site provides during certain actions (for example, when requesting an SMS).
+  :::
+
+## Request parameters
+
+<TabItem value="proxy" label="HuntTask" className="bordered-panel">
+<ParamItem title="type" required type="string" />
+**CustomTask**
+
+---
+
+<ParamItem title="class" required type="string" />
+**HUNT**
+
+---
+
+<ParamItem title="websiteURL" required type="string" />
+The URL of the page where the Hunt CAPTCHA is located.
+
+---
+
+<ParamItem title="apiGetLib (inside metadata)" required type="string" />
+
+The full link to the `api.js` file.
+
+Example:  
+`https://www.example.com/hd-api/external/apps/<hash>/api.js`
+
+Pass it in the following format:  
+`"apiGetLib":"https://example.com/hd-api/external/apps/a2157wab1045d68672a63557e0n2a77edbfd15ea/api.js"`
+
+You can find this link in DevTools (the **Network** or **Elements** tabs) on the page with the Hunt CAPTCHA.  
+Use keyword search such as: `hd-api` or `api.js`.
+
+---
+
+<ParamItem title="data" type="string" />
+The `data` parameter must be specified when using CAPTCHA solving mode (see details below).
+
+---
+
+<ParamItem title="userAgent" type="string" />
+Browser User-Agent.<br />
+**Provide only the current Windows UA:** userAgentPlaceholder
+
+---
+
+  <ParamItem title="proxyType" required type="string" />
+  **http** - regular HTTP/HTTPS proxy;<br />
+  **https** - use if http doesn’t work (required for some custom proxies);<br />
+  **socks4** - SOCKS4 proxy;<br />
+  **socks5** - SOCKS5 proxy.
+
+---
+
+  <ParamItem title="proxyAddress" required type="string" />
+  <p>
+    Proxy IP address (IPv4/IPv6). Not allowed:
+    - Transparent proxies
+    - Local machine proxies
+  </p>
+
+---
+
+  <ParamItem title="proxyPort" required type="integer" />
+  Proxy port.
+
+---
+
+  <ParamItem title="proxyLogin" required type="string" />
+  Proxy login.
+
+---
+
+  <ParamItem title="proxyPassword" required type="string" />
+  Proxy password.
+
+</TabItem>
+--- 
+
+**The solution supports two operating modes:**
+
+1. **X-HD (fingerprint) generation**
+
+   * In this mode, you do not pass the `data` parameter.
+   * After creating the task, you will receive an **X-HD** — a unique fingerprint tied to your IP address, which can be used for subsequent requests to the website.
+
+2. **CAPTCHA solving**
+
+   * In this mode, you must pass a **token** (the value of `meta.token`) in the `data` parameter. This token is issued by the website during specific actions (for example, when requesting an SMS).
+   * After creating the task, you will receive the **CAPTCHA solution** as a token ready to be used on the website.
+
+---
+
+**When to use each mode:**
+
+| Situation                      | Is `data` required? |
+| ------------------------------ | ------------------- |
+| Initial initialization         | No                  |
+| Need to obtain X-HD            | No                  |
+| Website returned Captcha error | Yes                 |
+| `meta.token` received          | Yes                 |
+
+---
+
+**Example of a complete workflow:**
+
+1. Create a task **without `data`**
+2. Receive X-HD from our service
+3. Send a request to the website using X-HD
+4. Receive `meta.token`
+5. Create a task **with `data = meta.token`**
+6. Receive the solution
+7. Submit the solution to the website
+
+:::warning Important
+If you change the proxy, you must obtain a new X-HD.
+:::
+
+## Mode 1. X-HD Generation
+
+Used to obtain an X-HD token bound to the IP address.
+
+### Create task method for X-HD generation
+
+<TabItem value="proxy" label="CustomTask (with proxy)" className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      **Request**
+```json
+{
+  "type": "CustomTask",
+  "class": "HUNT",
+  "websiteURL": "https://example.com",
+  "metadata": {
+    "apiGetLib": "https://example.com/hd-api/external/apps/a2157wab1045d68672a63557e0n2a77edbfd15ea/api.js"
+  },
+  "userAgent": "userAgentPlaceholder",
+  "proxyType": "http",
+  "proxyAddress": "8.8.8.8",
+  "proxyPort": 8080,
+  "proxyLogin": "proxyLoginHere",
+  "proxyPassword": "proxyPasswordHere"
+}
+```
+  **Response**
+
+
+```json
+{
+  "errorId": 0,
+  "taskId": 407533072
+}
+```
+</MethodDescription>
+</TabItem>
+
+
+## Mode 2. CAPTCHA solving
+
+Used after the website returns a captcha error and provides `meta.token`.
+
+### How to obtain `meta.token`
+
+1. Send a request to the website (for example, an SMS request).
+2. Receive X-HD.
+
+![](./images/hunt-task/x-hd(data).png)
+![](./images/hunt-task/x-hd(data)-1.png)
+
+3. The website responds with:
+
+```json
+{
+  "errors": [{"code": "113", "title": "Captcha error"}],
+  "meta": {
+    "token": "SITE_META_TOKEN"
+  }
+}
+```
+![](./images/hunt-task/token(data).png)
+
+
+### Create task method for CAPTCHA solving
+
+The value of `meta.token` must be passed in the `data` parameter.
+
+<TabItem value="proxy" label="CustomTask (with proxy)" className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      **Request**
+```json
+{
+  "type": "CustomTask",
+  "class": "HUNT",
+  "websiteUrl": "https://example.com",
+  "metadata": {
+    "apiGetLib": "https://example.com/hd-api/external/apps/a2157wab1045d68672a63557e0n2a77edbfd15ea/api.js"
+  },
+  "data": "kufyHK/s/jTNU...AfwIW", // META_TOKEN value
+  "userAgent": "userAgentPlaceholder",
+  "proxyType": "http",
+  "proxyAddress": "8.8.8.8",
+  "proxyPort": 8080,
+  "proxyLogin": "proxyLoginHere",
+  "proxyPassword": "proxyPasswordHere"
+}
+```
+
+  **Response**
+
+```json
+{
+  "errorId": 0,
+  "taskId": 407533072
+}
+```
+</MethodDescription>
+</TabItem>
+
+## Get task result method
+
+Use the [getTaskResult](../api/methods/get-task-result.mdx) method to obtain the X-HD fingerprint or the Hunt CAPTCHA solution.
+
+:::warning **Attention!**
+The value of `solution.token`:
+
+* In X-HD generation mode — this is the X-HD token that must be used in requests to the target website.
+
+* In CAPTCHA solving mode — `solution.token` is the solution token that must be sent back to the website to confirm the action.
+  :::
+
+<TabItem value="proxyless" label="CustomTask (without proxy)" default className="method-panel-full">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Request**
+		```json
+		{
+		  "clientKey": "API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**Response**
+```json
+{
+  "errorId": 0,
+  "status": "ready",
+  "solution": {
+    "token": "6IyDCCpDdSK...YGs1Wug/z/kLNSpjewI="
+  }
+}
+```
+	</MethodDescription>
+</TabItem>
+
+## Hunt CAPTCHA solving example
+
+Below is a **Node.js** example demonstrating how to create a Hunt CAPTCHA task in CapMonster Cloud, wait for the solution, and obtain the X-HD token. The code shows:
+
+* How to create a HUNT task with the target website and proxy
+* How to wait for the solution using the CapMonster API
+* How to retrieve the result and extract the token for further use on the website
+
+> **Important:** Make sure to replace `API_KEY`, `proxyLogin`, `proxyPassword`, and other parameters with your real values before running the script. We recommend storing all sensitive data in a `.env` file.
+
+---
+
+<details>
+      <summary>Show code (Node.js)</summary>
+
+```js
+const API_KEY = "YOUR_API_KEY"; // Replace with your CapMonster Cloud API key
+const CREATE_TASK_URL = "https://api.capmonster.cloud/createTask";
+const GET_RESULT_URL = "https://api.capmonster.cloud/getTaskResult";
+
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+async function createHuntTask({ data = null } = {}) {
+  const payload = {
+    clientKey: API_KEY,
+    task: {
+      type: "CustomTask",
+      class: "HUNT",
+      websiteURL: "https://example.com/",
+      userAgent: "userAgentPlaceholder",
+      metadata: {
+        apiGetLib:
+          "https://example.com/hd-api/external/apps/a2157wab1045d68672a63557e0n2a77edbfd15ea/api.js",
+      },
+      proxyType: "http",
+      proxyAddress: "123.45.67.89",
+      proxyPort: 8080,
+      proxyLogin: "proxyLogin",
+      proxyPassword: "proxyPassword",
+    },
+  };
+
+  if (data) {
+    payload.task.data = data;
+  }
+
+  const response = await fetch(CREATE_TASK_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  const result = await response.json();
+  return result.taskId;
+}
+
+async function waitForResult(taskId) {
+  while (true) {
+    await sleep(3000);
+
+    const response = await fetch(GET_RESULT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        clientKey: API_KEY,
+        taskId: taskId,
+      }),
+    });
+
+    const result = await response.json();
+
+    if (result.errorId !== 0) {
+      throw new Error(result.errorDescription);
+    }
+
+    if (result.status === "processing") {
+      console.log("Task processing...");
+      continue;
+    }
+
+    if (result.status === "ready") {
+      console.log("RESPONSE:\n", JSON.stringify(result, null, 2));
+      return result.solution;
+    }
+  }
+}
+
+async function main() {
+  try {
+    console.log("Creating HUNT task (X-HD mode)...");
+
+    const taskId = await createHuntTask();
+    console.log("Task ID:", taskId);
+
+    const xhdToken = await waitForResult(taskId);
+    console.log("X-HD received:\n", xhdToken);
+
+    // ===== 2. CAPTCHA solving, if needed =====
+    // const siteMetaToken = "SITE_META_TOKEN";
+    // const solveTaskId = await createHuntTask({ data: siteMetaToken });
+    // const finalSolution = await waitForResult(solveTaskId);
+    // console.log("Final captcha solution:\n", finalSolution);
+  } catch (error) {
+    console.error("Error:", error.message);
+  }
+}
+
+main();
+```
+
+</details>
