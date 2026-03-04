@@ -1,0 +1,408 @@
+---
+sidebar_position: 26
+sidebar_label: Hunt
+title: "Автоматическое распознавание и обход Hunt CAPTCHA | API"
+description: "Узнайте, как распознать Hunt с помощью API сервиса автоматического рапознавания и решения капч CapMonster Cloud!" 
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import MethodDescription from '@theme/MethodDescription'
+import PriceBlock from '@theme/PriceBlock';
+import PriceBlockWrap from '@theme/PriceBlockWrap';
+import { ArticleHead } from '../../src/theme/ArticleHead';
+
+<ArticleHead slug="captchas/hunt-task" />
+
+# Hunt
+
+<PriceBlockWrap>
+  <PriceBlock title="Hunt" captchaId="hunt"/>
+</PriceBlockWrap>
+
+![](./images/hunt-task/hunt-captcha.png)
+
+Hunt-капча — это антибот-система, используемая на букмекерских платформах для выявления автоматизированной активности. Она отслеживает поведение пользователя и при обнаружении подозрительных действий инициирует интерактивную проверку.
+
+:::warning **Внимание!**
+* Для выполнения данной задачи используйте **ваши собственные прокси**.
+
+* Наша система решения имеет два режима работы: **генерация X-HD (fingerprint)** и **решение капчи**. Если вы хотите только сгенерировать X-HD, не передавайте параметр `data`. Если вам нужно решить капчу, передайте в `data` токен, который целевой сайт выдаёт при определённых действиях (например, при запросе SMS).
+:::
+
+## Параметры запроса
+
+<TabItem value="proxy" label="HuntTask" className="bordered-panel">
+<ParamItem title="type" required type="string" />
+**CustomTask**
+
+---
+
+<ParamItem title="class" required type="string" />
+**HUNT**
+
+---
+
+<ParamItem title="websiteURL" required type="string" />
+Адрес страницы, на которой находится капча Hunt.
+
+---
+
+<ParamItem title="apiGetLib (внутри metadata)" required type="string" />
+
+Полная ссылка на файл `api.js`.
+
+Пример:
+`https://www.example.com/hd-api/external/apps/<hash>/api.js`
+
+Передавайте в формате:
+`"apiGetLib":"https://example.com/hd-api/external/apps/a2157wab1045d68672a63557e0n2a77edbfd15ea/api.js"`
+
+Найти ссылку можно в DevTools (вкладки **Network** или **Elements**) на странице с Hunt-капчей.  
+Используйте поиск по ключевым словам: `hd-api` или `api.js`.
+
+---
+
+<ParamItem title="data" type="string" />
+Указание `data` необходимо при выборе режима решения капчи (см. подробнее ниже)
+
+---
+
+<ParamItem title="userAgent" type="string" />
+User-Agent браузера. <br />
+**Передавайте только актуальный UA от ОС Windows. Сейчас таковым является**: `userAgentPlaceholder`
+
+---
+
+<ParamItem title="proxyType" required type="string" />
+**http** - обычный http/https прокси;<br />
+**https** - попробуйте эту опцию только если "http" не работает (требуется для некоторых кастомных прокси);<br />
+**socks4** - socks4 прокси;<br />
+**socks5** - socks5 прокси.
+
+---
+
+<ParamItem title="proxyAddress" required type="string" />
+<p>
+    IP адрес прокси IPv4/IPv6. Не допускается:
+    - использование прозрачных прокси (там где можно видеть IP клиента);
+    - использование прокси на локальных машинах.
+</p>
+
+---
+
+<ParamItem title="proxyPort" required type="integer" />
+Порт прокси.
+
+---
+
+<ParamItem title="proxyLogin" required type="string" />
+Логин прокси-сервера.
+
+---
+
+<ParamItem title="proxyPassword" required type="string" />
+Пароль прокси-сервера.
+
+</TabItem>
+--- 
+
+**Решение поддерживает два режима работы:**
+
+1. **Генерация X-HD (fingerprint)**
+
+   * В этом режиме вы не передаёте `data`.
+   * После создания задачи вы получите **X-HD** — уникальный отпечаток, привязанный к вашему IP, который можно использовать для последующих запросов к сайту.
+
+2. **Решение капчи**
+
+   * В этом режиме в параметре `data` вы передаёте **токен** (значение `meta.token`), который сайт выдаёт при определённых действиях (например, при запросе SMS).
+   * После создания задачи вы получите **решение капчи** в виде токена, готового для использования на сайте.
+
+---
+
+**Когда использовать каждый режим:**
+
+| Ситуация                  | Нужно ли передавать `data`? |
+| ------------------------- | ------------- |
+| Первичная инициализация   | Нет            |
+| Нужно получить X-HD            | Нет             |
+| Сайт вернул Captcha error | Да             |
+| Получен `meta.token`      | Да             |
+
+---
+
+**Пример полного сценария работы:**
+
+1. Создать задачу **без `data`**
+2. Получить от нашего сервиса X-HD
+3. Отправить запрос на сайт с X-HD
+4. Получить `meta.token`
+5. Создать задачу **с `data = meta.token`**
+6. Получить решение
+7. Передать решение на сайт
+
+:::warning Важно
+При смене прокси необходимо повторно получать X-HD.
+:::
+
+## Режим 1. Генерация X-HD.
+
+Используется для получения X-HD токена, привязанного к IP.
+
+### Метод создания задачи для генерации X-HD
+
+<TabItem value="proxy" label="CustomTask (c прокси)" className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      **Запрос**
+```json
+{
+    "type": "CustomTask",
+    "class": "HUNT",
+    "websiteURL": "https://example.com",
+    "metadata": {
+      "apiGetLib": "https://example.com/hd-api/external/apps/a2157wab1045d68672a63557e0n2a77edbfd15ea/api.js"
+    },
+    "userAgent": "userAgentPlaceholder",
+    "proxyType": "http",
+    "proxyAddress": "8.8.8.8",
+    "proxyPort": 8080,
+    "proxyLogin": "proxyLoginHere",
+    "proxyPassword": "proxyPasswordHere"
+  }
+}
+      ```
+
+      **Ответ**
+      ```json
+      {
+        "errorId": 0,
+        "taskId": 407533072
+    }
+      ```
+    </MethodDescription>
+  </TabItem>
+
+## Режим 2. Решение капчи. 
+
+Используется после того, как сайт вернул ошибку captcha и выдал `meta.token`.
+
+### Как получить `meta.token`
+
+1. Делаете запрос к сайту (например, запрос SMS)
+2. Получаете X-HD
+
+![](./images/hunt-task/x-hd(data).png)
+![](./images/hunt-task/x-hd(data)-1.png)
+
+3. Сайт возвращает:
+
+```json
+{
+  "errors":[{"code":"113","title":"Captcha error"}],
+  "meta":{
+    "token":"SITE_META_TOKEN"
+  }
+}
+```
+
+![](./images/hunt-task/token(data).png)
+
+### Метод создания задачи для решения капчи
+
+Значение `meta.token` нужно передать в `data`.
+
+<TabItem value="proxy" label="CustomTask (c прокси)" className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      **Запрос**
+      ```json
+      {
+        "type": "CustomTask",
+        "class": "HUNT",
+        "websiteUrl": "https://example.com",        
+        "metadata": {
+            "apiGetLib": "https://example.com/hd-api/external/apps/a2157wab1045d68672a63557e0n2a77edbfd15ea/api.js"
+        },
+        "data": "kufyHK/s/jTNU...AfwIW", // значение META_TOKEN
+        "userAgent": "userAgentPlaceholder",
+        "proxyType": "http",
+        "proxyAddress": "8.8.8.8",
+        "proxyPort": 8080,
+        "proxyLogin": "proxyLoginHere",
+        "proxyPassword": "proxyPasswordHere"
+}
+      ```
+
+      **Ответ**
+      ```json
+      {
+        "errorId": 0,
+        "taskId": 407533072
+    }
+      ```
+    </MethodDescription>
+  </TabItem>
+
+## Метод получения результата задачи
+
+Используйте метод [getTaskResult](../api/methods/get-task-result.mdx), чтобы получить fingerprint X-HD или решение Hunt капчи.
+
+:::warning **Внимание!**
+Значение `solution.token`:
+* В режиме генерации X-HD — это X-HD токен, который нужно использовать в запросах к целевому сайту. 
+
+* В режиме решения капчи `solution.token` — это токен решения, который необходимо передать обратно на сайт для подтверждения действия.
+:::
+
+<TabItem value="proxyless" label="CustomTask (без прокси)" default className="method-panel-full">
+	<MethodItem>
+		```http
+		https://api.capmonster.cloud/getTaskResult
+		```
+	</MethodItem>
+	<MethodDescription>
+		**Запрос**
+		```json
+		{
+		  "clientKey":"API_KEY",
+		  "taskId": 407533072
+		}
+		```
+		**Ответ**
+```json
+{
+  "errorId": 0,
+  "status": "ready",
+  "solution": {
+    "data": {
+      "token": "6IyDCCpDdSK...YGs1Wug/z/kLNSpjewI="
+    }
+  }
+}
+```
+	</MethodDescription>
+</TabItem>
+
+
+## Пример решения Hunt CAPTCHA
+
+Ниже приведён пример на **Node.js**, который демонстрирует, как создать задачу Hunt CAPTCHA в CapMonster Cloud, дождаться её решения и получить X-HD токен. В коде показано:
+
+* Как создать HUNT‑задачу с указанием сайта и прокси
+* Как ждать готовности решения через API CapMonster
+* Как получить результат и извлечь токен для дальнейшего использования на сайте
+
+>**Важно:** Не забудьте заменить `API_KEY`, `proxyLogin`, `proxyPassword` и другие параметры на свои реальные значения перед запуском. Рекомендуем хранить все чувствительные данные в файле `.env`.
+
+---
+
+<details>
+      <summary>Показать код (Node.js)</summary>
+```js
+const API_KEY = "YOUR_API_KEY"; // Замените на ваш API-ключ CapMonster Cloud
+const CREATE_TASK_URL = "https://api.capmonster.cloud/createTask";
+const GET_RESULT_URL = "https://api.capmonster.cloud/getTaskResult";
+
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+async function createHuntTask({ data = null } = {}) {
+  const payload = {
+    clientKey: API_KEY,
+    task: {
+      type: "CustomTask",
+      class: "HUNT",
+      websiteURL: "https://example.com/",
+      userAgent:
+        "userAgentPlaceholder",
+      metadata: {
+        apiGetLib:
+          "https://example.com/hd-api/external/apps/a2157wab1045d68672a63557e0n2a77edbfd15ea/api.js",
+      },
+      proxyType: "http",
+      proxyAddress: "123.45.67.89",
+      proxyPort: 8080,
+      proxyLogin: "proxyLogin",
+      proxyPassword: "proxyPassword",
+    },
+  };
+
+  if (data) {
+    payload.task.data = data;
+  }
+
+  const response = await fetch(CREATE_TASK_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  const result = await response.json();
+  return result.taskId;
+}
+
+async function waitForResult(taskId) {
+  while (true) {
+    await sleep(3000);
+
+    const response = await fetch(GET_RESULT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        clientKey: API_KEY,
+        taskId: taskId,
+      }),
+    });
+
+    const result = await response.json();
+
+    if (result.errorId !== 0) {
+      throw new Error(result.errorDescription);
+    }
+
+    if (result.status === "processing") {
+      console.log("Task processing...");
+      continue;
+    }
+
+    if (result.status === "ready") {
+      console.log("RESPONSE:\n", JSON.stringify(result, null, 2));
+      return result.solution;
+    }
+  }
+}
+
+async function main() {
+  try {
+    console.log("Creating HUNT task (X-HD mode)...");
+
+    const taskId = await createHuntTask();
+    console.log("Task ID:", taskId);
+
+    const xhdToken = await waitForResult(taskId);
+    console.log("X-HD received:\n", xhdToken);
+
+    // ===== 2. Решение капчи, если нужно =====
+    // const siteMetaToken = "SITE_META_TOKEN";
+    // const solveTaskId = await createHuntTask({ data: siteMetaToken });
+    // const finalSolution = await waitForResult(solveTaskId);
+    // console.log("Final captcha solution:\n", finalSolution);
+  } catch (error) {
+    console.error("Error:", error.message);
+  }
+}
+
+main();
+```
+</details>
