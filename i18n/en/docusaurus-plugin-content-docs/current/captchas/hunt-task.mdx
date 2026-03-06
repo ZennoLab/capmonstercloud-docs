@@ -67,7 +67,7 @@ Use keyword search such as: `hd-api` or `api.js`.
 
 ---
 
-<ParamItem title="data" type="string" />
+<ParamItem title="data (inside metadata)" type="string" />
 The `data` parameter must be specified when using CAPTCHA solving mode (see details below).
 
 ---
@@ -236,9 +236,9 @@ The value of `meta.token` must be passed in the `data` parameter.
   "class": "HUNT",
   "websiteUrl": "https://example.com",
   "metadata": {
-    "apiGetLib": "https://example.com/hd-api/external/apps/a2157wab1045d68672a63557e0n2a77edbfd15ea/api.js"
+    "apiGetLib": "https://example.com/hd-api/external/apps/a2157wab1045d68672a63557e0n2a77edbfd15ea/api.js",
+	  "data": "kufyHK/s/jTNU...AfwIW", // META_TOKEN value
   },
-  "data": "kufyHK/s/jTNU...AfwIW", // META_TOKEN value
   "userAgent": "userAgentPlaceholder",
   "proxyType": "http",
   "proxyAddress": "8.8.8.8",
@@ -343,7 +343,7 @@ async function createHuntTask({ data = null } = {}) {
   };
 
   if (data) {
-    payload.task.data = data;
+    payload.task.metadata.data = data;
   }
 
   const response = await fetch(CREATE_TASK_URL, {
