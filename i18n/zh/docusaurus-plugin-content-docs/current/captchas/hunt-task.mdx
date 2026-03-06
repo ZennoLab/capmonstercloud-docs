@@ -67,7 +67,7 @@ Hunt 验证码是一种用于博彩平台的反机器人系统，用于检测自
 
 ---
 
-<ParamItem title="data" type="string" />
+<ParamItem title="data (在 metadata 内)" type="string" />
 当选择验证码求解模式时，需要传递 `data`（详见下文说明）。
 
 ---
@@ -238,9 +238,9 @@ Hunt 验证码是一种用于博彩平台的反机器人系统，用于检测自
   "class": "HUNT",
   "websiteUrl": "https://example.com",        
   "metadata": {
-      "apiGetLib": "https://example.com/hd-api/external/apps/a2157wab1045d68672a63557e0n2a77edbfd15ea/api.js"
+      "apiGetLib": "https://example.com/hd-api/external/apps/a2157wab1045d68672a63557e0n2a77edbfd15ea/api.js",
+	  "data": "kufyHK/s/jTNU...AfwIW", // META_TOKEN 的值
   },
-  "data": "kufyHK/s/jTNU...AfwIW", // META_TOKEN 的值
   "userAgent": "userAgentPlaceholder",
   "proxyType": "http",
   "proxyAddress": "8.8.8.8",
@@ -349,7 +349,7 @@ async function createHuntTask({ data = null } = {}) {
   };
 
   if (data) {
-    payload.task.data = data;
+    payload.task.metadata.data = data;
   }
 
   const response = await fetch(CREATE_TASK_URL, {
