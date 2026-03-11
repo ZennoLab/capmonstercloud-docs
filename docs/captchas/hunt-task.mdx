@@ -163,7 +163,7 @@ User-Agent браузера. <br />
     <MethodDescription>
       **Запрос**
 ```json
-{
+  {
     "type": "CustomTask",
     "class": "HUNT",
     "websiteURL": "https://example.com",
@@ -227,23 +227,23 @@ User-Agent браузера. <br />
     </MethodItem>
     <MethodDescription>
       **Запрос**
-      ```json
-      {
-        "type": "CustomTask",
-        "class": "HUNT",
-        "websiteUrl": "https://example.com",        
-        "metadata": {
-            "apiGetLib": "https://example.com/hd-api/external/apps/a2157wab1045d68672a63557e0n2a77edbfd15ea/api.js",
-			      "data": "kufyHK/s/jTNU...AfwIW", // значение META_TOKEN
-        },
-        "userAgent": "userAgentPlaceholder",
-        "proxyType": "http",
-        "proxyAddress": "8.8.8.8",
-        "proxyPort": 8080,
-        "proxyLogin": "proxyLoginHere",
-        "proxyPassword": "proxyPasswordHere"
+```json
+{
+  "type": "CustomTask",
+  "class": "HUNT",
+  "websiteUrl": "https://example.com",        
+  "metadata": {
+      "apiGetLib": "https://example.com/hd-api/external/apps/a2157wab1045d68672a63557e0n2a77edbfd15ea/api.js",
+      "data": "kufyHK/s/jTNU...AfwIW", // значение META_TOKEN
+  },
+  "userAgent": "userAgentPlaceholder",
+  "proxyType": "http",
+  "proxyAddress": "8.8.8.8",
+  "proxyPort": 8080,
+  "proxyLogin": "proxyLoginHere",
+  "proxyPassword": "proxyPasswordHere"
 }
-      ```
+```
 
       **Ответ**
       ```json
