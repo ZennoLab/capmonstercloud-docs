@@ -260,10 +260,10 @@ User-Agent браузера. <br />
 Используйте метод [getTaskResult](../api/methods/get-task-result.mdx), чтобы получить fingerprint X-HD или решение Hunt капчи.
 
 :::warning **Внимание!**
-Значение `solution.token`:
-* В режиме генерации X-HD — это X-HD токен, который нужно использовать в запросах к целевому сайту. 
+Значение `solution.data.token`:
+* В режиме **генерации X-HD** — это X-HD токен, который нужно использовать в запросах к целевому сайту. 
 
-* В режиме решения капчи `solution.token` — это токен решения, который необходимо передать обратно на сайт для подтверждения действия.
+* В режиме **решения капчи** `solution.data.token` — это токен решения, который необходимо передать обратно на сайт для подтверждения действия.
 :::
 
 <TabItem value="proxyless" label="CustomTask (без прокси)" default className="method-panel-full">
@@ -296,113 +296,560 @@ User-Agent браузера. <br />
 </TabItem>
 
 
+## Работа с cookies
+
+:::warning **Внимание!**
+Целевой сайт может использовать специальные **cookies** для управления сессией. Если они отсутствуют или не передаются с запросами, сервер может отклонить запрос или потребовать повторную проверку.
+:::
+
+**Пример cookies, полученных от сайта:**
+
+```text
+platform_type=desktop; typeBetNames=full; _glhf=1234567890; coefview=0; visit=1-123abc012345d1be726746568edc62d9; fast_coupon=true;
+v3fr=1; lng=en; flaglng=en; SESSION=12a3aea8cdcfdbb9e7df8ee99b526a84; auid=ab0dW2mqlz1Tjo2AAwplAg==; ggru=195; che_g=12abcede-691f-c7b2-d1e8-8488bc557d98
+```
+
+
+**Общий принцип работы с cookies:**
+
+1. Сначала необходимо открыть страницу сайта или выполнить GET‑запрос к нужной странице. Это позволяет серверу инициализировать пользовательскую сессию и установить необходимые cookies.
+
+2. В ответе сервер отправляет cookies через заголовок `Set-Cookie`. Эти cookies могут содержать идентификатор сессии, параметры безопасности и данные антибот-защиты.
+
+3. Полученные cookies нужно сохранить, так как они используются для идентификации клиента при дальнейших запросах.
+
+4. При отправке последующих запросов к API cookies должны передаваться обратно серверу в заголовке `Cookie`, чтобы сервер понимал, что запрос относится к той же сессии.
+
+5. Все запросы должны выполняться в рамках одной сессии с тем же IP (или прокси) и User-Agent. В противном случае сервер может считать запрос подозрительным и потребовать повторную проверку.
+
+6. Иногда часть cookies создаётся на стороне клиента (например, JavaScript на странице). При автоматизации или тестировании иногда необходимо извлекать cookies из браузера или генерировать их аналогичным образом.
+
+
 ## Пример решения Hunt CAPTCHA
 
-Ниже приведён пример на **Node.js**, который демонстрирует, как создать задачу Hunt CAPTCHA в CapMonster Cloud, дождаться её решения и получить X-HD токен. В коде показано:
+Приведённые ниже примеры демонстрируют работу типичного процесса взаимодействия с сайтом, использующим Hunt капчу. В коде показано, как:
 
-* Как создать HUNT‑задачу с указанием сайта и прокси
-* Как ждать готовности решения через API CapMonster
-* Как получить результат и извлечь токен для дальнейшего использования на сайте
+* получить начальные cookies при открытии страницы сайта;
+* сгенерировать дополнительные cookies, которые могут создаваться на стороне клиента;
+* через CapMonster Cloud создать **fingerprint (X-HD)**, используемый сайтом для проверки запросов;
+* отправить запрос к API сайта для инициирования действия (например, отправки SMS);
+* передать полученные данные в сервис решения капчи;
+* после получения решения выполнить финальный запрос к API с необходимыми параметрами.
 
->**Важно:** Не забудьте заменить `API_KEY`, `proxyLogin`, `proxyPassword` и другие параметры на свои реальные значения перед запуском. Рекомендуем хранить все чувствительные данные в файле `.env`.
+Также важно использовать **актуальные HTTP‑заголовки и [корректный `User-Agent`](https://capmonster.cloud/api/useragent/actual)**.
 
----
 
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+
+  <TabItem value="js" label="JavaScript" default className="method-panel">
 <details>
       <summary>Показать код (Node.js)</summary>
 ```js
-const API_KEY = "YOUR_API_KEY"; // Замените на ваш API-ключ CapMonster Cloud
-const CREATE_TASK_URL = "https://api.capmonster.cloud/createTask";
-const GET_RESULT_URL = "https://api.capmonster.cloud/getTaskResult";
+import { gotScraping } from "got-scraping";
+import crypto from "crypto";
 
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+/* ================= CONFIG (рекомендуем сохранять в .env) ================= */
+// Настройки API CapMonster Cloud, сайта и пользовательские данные
 
-async function createHuntTask({ data = null } = {}) {
-  const payload = {
-    clientKey: API_KEY,
-    task: {
-      type: "CustomTask",
-      class: "HUNT",
-      websiteURL: "https://example.com/",
-      userAgent:
-        "userAgentPlaceholder",
-      metadata: {
-        apiGetLib:
-          "https://example.com/hd-api/external/apps/a2157wab1045d68672a63557e0n2a77edbfd15ea/api.js",
-      },
-      proxyType: "http",
-      proxyAddress: "123.45.67.89",
-      proxyPort: 8080,
-      proxyLogin: "proxyLogin",
-      proxyPassword: "proxyPassword",
-    },
-  };
+const API_KEY = "YOUR_API_KEY"; // Ваш API ключ CapMonster Cloud
+const SOLVER_URL = "https://api.capmonster.cloud";
 
-  if (data) {
-    payload.task.metadata.data = data;
+const BASE_URL = "https://example.com"; // Базовый URL сайта
+const API_GET_LIB =
+  "https://example.com/hd-api/external/apps/a1047eab1035d58682a53557e0b2a75edbfd15fd/api.js"; // api.js сайта
+
+const PHONE = "91123456789"; // Телефон для регистрации (без кода страны)
+const COUNTRY_CODE = "54"; // Код страны
+
+const UA = "userAgentPlaceholder"; // User-Agent для запросов
+
+/* ================= Настройки прокси ================= */
+
+const PROXY_HOST = "proxyAddress";
+const PROXY_PORT = 8080;
+const PROXY_USER = "proxyLogin";
+const PROXY_PASS = "proxyPassword";
+
+const PROXY = `http://${PROXY_USER}:${PROXY_PASS}@${PROXY_HOST}:${PROXY_PORT}`;
+
+/* ================= HEADERS ================= */
+// Заголовки для HTTP-запросов
+// htmlHeaders — для GET страниц
+// apiHeaders — для API сайта
+
+const htmlHeaders = {
+  accept:
+    "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+  "accept-encoding": "gzip, deflate, br, zstd",
+  "accept-language": "en-US,en;q=0.9,ru;q=0.8",
+  "cache-control": "no-cache",
+  pragma: "no-cache",
+  priority: "u=0, i",
+  "sec-ch-ua": `"Not:A-Brand";v="99", "Google Chrome";v="145", "Chromium";v="145"`,
+  "sec-ch-ua-mobile": "?0",
+  "sec-ch-ua-platform": `"Windows"`,
+  "sec-fetch-dest": "document",
+  "sec-fetch-mode": "navigate",
+  "sec-fetch-site": "none",
+  "sec-fetch-user": "?1",
+  "upgrade-insecure-requests": "1",
+  "user-agent": UA,
+};
+
+const apiHeaders = {
+  accept: "application/vnd.api+json",
+  "accept-encoding": "gzip, deflate, br, zstd",
+  "accept-language": "en-US,en;q=0.9,ru;q=0.8",
+  "cache-control": "no-cache",
+  pragma: "no-cache",
+  priority: "u=1, i",
+  "content-type": "application/vnd.api+json",
+  origin: BASE_URL,
+  referer: BASE_URL + "/", // Актуальный referer с сайта
+  "sec-ch-ua": `"Not:A-Brand";v="99", "Google Chrome";v="145", "Chromium";v="145"`,
+  "sec-ch-ua-mobile": "?0",
+  "sec-ch-ua-platform": `"Windows"`,
+  "sec-fetch-dest": "empty",
+  "sec-fetch-mode": "cors",
+  "sec-fetch-site": "same-origin",
+  "user-agent": UA,
+  "x-requested-with": "XMLHttpRequest",
+};
+
+/* ================= UTILS ================= */
+// Вспомогательные функции
+
+const delay = (ms) => new Promise((r) => setTimeout(r, ms));
+
+function randomString(len = 20) {
+  const chars =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let result = "";
+  for (let i = 0; i < len; i++) {
+    result += chars[Math.floor(Math.random() * chars.length)];
   }
+  return result;
+}
 
-  const response = await fetch(CREATE_TASK_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
+/* ================= CAPMONSTER CLOUD ================= */
+// Создание задачи и ожидание решения капчи
+
+async function createTask(task) {
+  const { body } = await gotScraping.post(`${SOLVER_URL}/createTask`, {
+    json: { clientKey: API_KEY, task },
+    responseType: "json",
   });
 
-  const result = await response.json();
-  return result.taskId;
+  if (body.errorId !== 0)
+    throw new Error("createTask error: " + JSON.stringify(body));
+
+  return body.taskId;
 }
 
-async function waitForResult(taskId) {
+async function waitResult(taskId) {
   while (true) {
-    await sleep(3000);
-
-    const response = await fetch(GET_RESULT_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        clientKey: API_KEY,
-        taskId: taskId,
-      }),
+    const { body } = await gotScraping.post(`${SOLVER_URL}/getTaskResult`, {
+      json: { clientKey: API_KEY, taskId },
+      responseType: "json",
     });
 
-    const result = await response.json();
+    if (body.status === "ready")
+      return body.solution?.token || body.solution?.data?.token;
 
-    if (result.errorId !== 0) {
-      throw new Error(result.errorDescription);
-    }
-
-    if (result.status === "processing") {
-      console.log("Task processing...");
-      continue;
-    }
-
-    if (result.status === "ready") {
-      console.log("RESPONSE:\n", JSON.stringify(result, null, 2));
-      return result.solution;
-    }
+    await delay(3000);
   }
 }
 
-async function main() {
+/* ================= MAIN FLOW ================= */
+// Основной процесс автоматической регистрации с капчей
+
+(async () => {
   try {
-    console.log("Creating HUNT task (X-HD mode)...");
+    // ---------------- STEP 1: Получаем cookies ----------------
+    console.log("STEP 1 — Getting cookies...");
 
-    const taskId = await createHuntTask();
-    console.log("Task ID:", taskId);
+    const base = await gotScraping.get(
+      BASE_URL + "/registration?type=phone_reg", // Замените на актуальную страницу регистрации с сайта
+      {
+        headers: htmlHeaders,
+        proxyUrl: PROXY,
+      },
+    );
 
-    const xhdToken = await waitForResult(taskId);
-    console.log("X-HD received:\n", xhdToken);
+    // Сохраняем cookies, полученные от сервера
+    let cookies = (base.headers["set-cookie"] || [])
+      .map((c) => c.split(";")[0])
+      .join("; ");
 
-    // ===== 2. Решение капчи, если нужно =====
-    // const siteMetaToken = "SITE_META_TOKEN";
-    // const solveTaskId = await createHuntTask({ data: siteMetaToken });
-    // const finalSolution = await waitForResult(solveTaskId);
-    // console.log("Final captcha solution:\n", finalSolution);
-  } catch (error) {
-    console.error("Error:", error.message);
+    // Генерируем дополнительные cookies, которые создаются на стороне клиента
+    const che_g = crypto.randomUUID();
+    const ggru = randomString();
+
+    cookies += `; che_g=${che_g}`;
+    cookies += `; ggru=${ggru}`;
+
+    console.log("Cookies:", cookies);
+
+    // ---------------- STEP 2: Создаем fingerprint ----------------
+    console.log("\nSTEP 2 — Creating fingerprint...");
+
+    const fingerprintTaskId = await createTask({
+      type: "CustomTask",
+      class: "HUNT",
+      websiteURL: BASE_URL + "/",
+      userAgent: UA,
+      metadata: { apiGetLib: API_GET_LIB },
+      proxyType: "http",
+      proxyAddress: PROXY_HOST,
+      proxyPort: PROXY_PORT,
+      proxyLogin: PROXY_USER,
+      proxyPassword: PROXY_PASS,
+    });
+
+    const xhd = await waitResult(fingerprintTaskId);
+    console.log("X-HD:", xhd);
+
+    // ---------------- STEP 3: Отправляем запрос на SMS ----------------
+    console.log("\nSTEP 3 — Trigger SMS...");
+
+    const smsResp = await gotScraping.post(
+      BASE_URL + "/web-api/api/web/registration/v2/sms", // Замените на актуальный API endpoint с сайта
+      {
+        headers: { ...apiHeaders, cookie: cookies, "x-hd": xhd },
+        json: {
+          data: { attributes: { phone: PHONE, country_code: COUNTRY_CODE } },
+        },
+        proxyUrl: PROXY,
+        responseType: "json",
+      },
+    );
+
+    const metaToken = smsResp.body?.meta?.token;
+    if (!metaToken) {
+      console.log("SMS response:", smsResp.body);
+      throw new Error("meta.token not received");
+    }
+
+    console.log("meta.token:", metaToken);
+
+    // ---------------- STEP 4: Решаем капчу ----------------
+    console.log("\nSTEP 4 — Solving Hunt captcha...");
+
+    const solveTaskId = await createTask({
+      type: "CustomTask",
+      class: "HUNT",
+      websiteURL: BASE_URL + "/",
+      userAgent: UA,
+      metadata: { apiGetLib: API_GET_LIB, data: metaToken },
+      proxyType: "http",
+      proxyAddress: PROXY_HOST,
+      proxyPort: PROXY_PORT,
+      proxyLogin: PROXY_USER,
+      proxyPassword: PROXY_PASS,
+    });
+
+    const captchaToken = await waitResult(solveTaskId);
+    console.log("Captcha token:", captchaToken);
+
+    // ---------------- STEP 5: Финальный запрос ----------------
+    console.log("\nSTEP 5 — Sending final request...");
+
+    const finalResp = await gotScraping.post(
+      BASE_URL + "/api/web/registration/v2/sms", // Замените на актуальный API endpoint с сайта
+      {
+        headers: { ...apiHeaders, cookie: cookies, "x-hd": xhd },
+        body: JSON.stringify({
+          data: {
+            attributes: {
+              phone: PHONE,
+              country_code: parseInt(COUNTRY_CODE),
+              captcha: captchaToken,
+            },
+          },
+        }),
+        proxyUrl: PROXY,
+      },
+    );
+
+    console.log("\nFINAL RESPONSE HEADERS:", finalResp.headers);
+    console.log("\nFINAL RESPONSE BODY:", finalResp.body);
+  } catch (err) {
+    console.error("\nFATAL ERROR:");
+    console.error(err);
   }
-}
-
-main();
+})();
 ```
 </details>
+</TabItem>
+
+  <TabItem value="python" label="Python" default className="method-panel">
+<details>
+      <summary>Показать код</summary>
+```python
+import requests
+import uuid
+import random
+import string
+import time
+
+# ================= CONFIG (рекомендуем сохранять в .env) =================
+# Настройки API CapMonster Cloud, сайта и пользовательские данные
+
+API_KEY = "YOUR_CAPMONSTER_API_KEY"  # Замените на ваш API-ключ CapMonster Cloud
+SOLVER_URL = "https://api.capmonster.cloud"
+
+BASE_URL = "https://example.com"  # Базовый URL сайта
+API_GET_LIB = "https://example.com/hd-api/external/apps/c1e24d5857463de4393e3f1489b00ebd4495da64/api.js"  # Замените на актуальную ссылку к api.js с сайта
+
+PHONE = "9102345678"  # Телефон для регистрации (без кода страны)
+COUNTRY_CODE = "7"  # Код страны
+
+UA = "userAgentPlaceholder"  # User-Agent
+
+# ================= Настройки прокси =================
+
+PROXY_HOST = "proxyAdress" 
+PROXY_PORT = 8080
+PROXY_LOGIN = "proxyLogin"
+PROXY_PASSWORD = "proxyPassword"
+
+PROXY = f"http://{PROXY_LOGIN}:{PROXY_PASSWORD}@{PROXY_HOST}:{PROXY_PORT}"
+
+proxies = {
+    "http": PROXY,
+    "https": PROXY
+}
+
+# ================= HEADERS =================
+# Заголовки для HTTP-запросов
+# html_headers — для обычных GET-запросов страниц
+# api_headers — для запросов к API сайта
+
+html_headers = {
+    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+    "accept-encoding": "gzip, deflate, br, zstd",
+    "accept-language": "en-US,en;q=0.9,ru;q=0.8",
+    "cache-control": "no-cache",
+    "pragma": "no-cache",
+    "priority": "u=0, i",
+    "sec-ch-ua": '"Not:A-Brand";v="99", "Google Chrome";v="145", "Chromium";v="145"',
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": '"Windows"',
+    "sec-fetch-dest": "document",
+    "sec-fetch-mode": "navigate",
+    "sec-fetch-site": "none",
+    "sec-fetch-user": "?1",
+    "upgrade-insecure-requests": "1",
+    "user-agent": UA
+}
+
+api_headers = {
+    "accept": "application/vnd.api+json",
+    "accept-encoding": "gzip, deflate, br, zstd",
+    "accept-language": "en-US,en;q=0.9,ru;q=0.8",
+    "cache-control": "no-cache",
+    "pragma": "no-cache",
+    "priority": "u=1, i",
+    "content-type": "application/vnd.api+json",
+    "origin": BASE_URL,
+    "referer": BASE_URL + "/en", # Замените на актуальный referer с сайта
+    "sec-ch-ua": '"Not:A-Brand";v="99", "Google Chrome";v="145", "Chromium";v="145"',
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": '"Windows"',
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "user-agent": UA,
+    "x-requested-with": "XMLHttpRequest"
+}
+
+# ================= UTILS =================
+# Вспомогательные функции
+
+def delay(ms):
+    """Пауза в миллисекундах"""
+    time.sleep(ms / 1000)
+
+def random_string(length=20):
+    """Генерация случайной строки (буквы + цифры)"""
+    chars = string.ascii_letters + string.digits
+    return ''.join(random.choice(chars) for _ in range(length))
+
+# ================= CAPMONSTER CLOUD =================
+# Функции для работы с CapMonster Cloud (создание задачи и ожидание решения капчи)
+
+def create_task(task):
+    """Создание задачи на CapMonster Cloud"""
+    r = requests.post(
+        SOLVER_URL + "/createTask",
+        json={
+            "clientKey": API_KEY,
+            "task": task
+        }
+    )
+
+    data = r.json()
+
+    if data["errorId"] != 0:
+        raise Exception("createTask error: " + str(data))
+
+    return data["taskId"]
+
+def wait_result(task_id):
+    """Ожидание решения задачи"""
+    while True:
+        r = requests.post(
+            SOLVER_URL + "/getTaskResult",
+            json={
+                "clientKey": API_KEY,
+                "taskId": task_id
+            }
+        )
+        data = r.json()
+
+        if data["status"] == "ready":
+            solution = data.get("solution", {})
+            return solution.get("token") or solution.get("data", {}).get("token")
+
+        delay(3000)
+
+# ================= SESSION =================
+# Создаем сессию requests для сохранения cookies между запросами
+
+session = requests.Session()
+
+# ================= MAIN =================
+# Основной процесс автоматической регистрации с капчей
+
+try:
+
+    # ---------------- STEP 1: Получаем cookies ----------------
+    print("STEP 1 — Getting cookies")
+
+    r = session.get(
+        BASE_URL + "/en/registration?type=phone", # Замените на актуальную страницу регистрации с сайта
+        headers=html_headers,
+        proxies=proxies
+    )
+
+    # Сохраняем cookies, полученные от сервера
+    cookies = "; ".join([f"{c.name}={c.value}" for c in session.cookies])
+
+    # Генерируем дополнительные cookies, которые создаются на стороне клиента
+    che_g = str(uuid.uuid4())
+    ggru = random_string()
+    cookies += f"; che_g={che_g}"
+    cookies += f"; ggru={ggru}"
+
+    print("Cookies:", cookies)
+
+    # ---------------- STEP 2: Создаем fingerprint ----------------
+    print("\nSTEP 2 — Creating fingerprint")
+
+    fingerprint_task = create_task({
+        "type": "CustomTask",
+        "class": "HUNT",
+        "websiteURL": BASE_URL + "/en/",
+        "userAgent": UA,
+        "metadata": {
+            "apiGetLib": API_GET_LIB
+        },
+        "proxyType": "http",
+        "proxyAddress": PROXY_HOST,
+        "proxyPort": PROXY_PORT,
+        "proxyLogin": PROXY_LOGIN,
+        "proxyPassword": PROXY_PASSWORD
+    })
+
+    # Получаем результат (X-HD), который нужен для API сайта
+    xhd = wait_result(fingerprint_task)
+    print("X-HD:", xhd)
+
+    # ---------------- STEP 3: Отправляем запрос на SMS ----------------
+    print("\nSTEP 3 — Trigger SMS")
+
+    sms_resp = session.post(
+        BASE_URL + "/web-api/api/web/registration/v2/sms", # Замените на актуальный API endpoint с сайта
+        headers={**api_headers, "cookie": cookies, "x-hd": xhd},
+        json={
+            "data": {
+                "attributes": {
+                    "phone": PHONE,
+                    "country_code": COUNTRY_CODE
+                }
+            }
+        },
+        proxies=proxies
+    )
+
+    print("Status:", sms_resp.status_code)
+
+    try:
+        sms_data = sms_resp.json()
+    except:
+        print("Server returned non JSON:")
+        print(sms_resp.text)
+        raise Exception("Invalid JSON response")
+
+    meta_token = sms_data.get("meta", {}).get("token")
+    if not meta_token:
+        print("SMS response:", sms_data)
+        raise Exception("meta.token not received")
+
+    print("meta.token:", meta_token)
+
+    # ---------------- STEP 4: Решаем капчу ----------------
+    print("\nSTEP 4 — Solving captcha")
+
+    solve_task = create_task({
+        "type": "CustomTask",
+        "class": "HUNT",
+        "websiteURL": BASE_URL + "/en/",
+        "userAgent": UA,
+        "metadata": {
+            "apiGetLib": API_GET_LIB,
+            "data": meta_token
+        },
+        "proxyType": "http",
+        "proxyAddress": PROXY_HOST,
+        "proxyPort": PROXY_PORT,
+        "proxyLogin": PROXY_LOGIN,
+        "proxyPassword": PROXY_PASSWORD
+    })
+
+    captcha_token = wait_result(solve_task)
+    print("Captcha token:", captcha_token)
+
+    # ---------------- STEP 5: Финальный запрос ----------------
+    print("\nSTEP 5 — Final request")
+
+    final = session.post(
+        BASE_URL + "/web-api/api/web/registration/v2/sms", # Замените на актуальный API endpoint с сайта
+        headers={**api_headers, "cookie": cookies, "x-hd": xhd},
+        json={
+            "data": {
+                "attributes": {
+                    "phone": PHONE,
+                    "country_code": int(COUNTRY_CODE),
+                    "captcha": captcha_token
+                }
+            }
+        },
+        proxies=proxies
+    )
+
+    print("\nFINAL STATUS:", final.status_code)
+
+    try:
+        print(final.json())
+    except:
+        print(final.text)
+
+except Exception as e:
+    print("\nFATAL ERROR")
+    print(e)
+```
+</details>
+  </TabItem>
+
+</Tabs>
