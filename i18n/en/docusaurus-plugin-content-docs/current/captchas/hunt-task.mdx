@@ -303,7 +303,7 @@ The value of `solution.data.token`:
 ## Working with cookies
 
 :::warning **Attention!**
-When working with the target website, keep in mind that it may use special **cookies** to manage user sessions, perform anti‑bot checks, and coordinate requests. If the required cookies are missing or not sent with API requests, the server may reject the request, return an error, or require the verification process again.
+The target site may use special **cookies** to manage the session. If they are missing or not sent with requests, the server may reject the request or require re-verification.
 :::
 
 **Example of cookies received from the website:**
@@ -339,7 +339,7 @@ The examples below demonstrate a typical interaction flow with a website that us
 * pass the received data to the captcha solving service;
 * after receiving the solution, send a **final request** to the API with the required parameters.
 
-It is also important to use **up‑to‑date HTTP headers and a correct `User-Agent`**.
+It is also important to use **up‑to‑date HTTP headers and a [correct `User-Agent`](https://capmonster.cloud/api/useragent/actual)**.
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 

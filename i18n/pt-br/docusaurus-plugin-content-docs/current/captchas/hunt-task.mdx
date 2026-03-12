@@ -305,7 +305,7 @@ Valor de `solution.data.token`:
 ## Trabalhando com cookies
 
 :::warning **Atenção!**
-Ao trabalhar com o site de destino, tenha em mente que ele pode utilizar **cookies** especiais para gerenciar sessões de usuário, realizar verificações anti‑bot e coordenar requisições. Se os cookies necessários estiverem ausentes ou não forem enviados junto com as requisições da API, o servidor pode rejeitar a requisição, retornar um erro ou exigir a verificação novamente.
+O site pode usar **cookies** especiais para gerenciar a sessão. Se estiverem ausentes ou não forem enviados com as requisições, o servidor pode rejeitar a solicitação ou exigir uma nova verificação.
 :::
 
 **Exemplo de cookies recebidos do site:**
@@ -341,7 +341,7 @@ Os exemplos abaixo demonstram um fluxo típico de interação com um site que ut
 * enviar os dados recebidos para o serviço de resolução de captcha;
 * após receber a solução, enviar uma **requisição final** para a API com os parâmetros necessários.
 
-Também é importante utilizar **cabeçalhos HTTP atualizados e um `User-Agent` correto**.
+Também é importante utilizar **cabeçalhos HTTP atualizados e um [`User-Agent` correto](https://capmonster.cloud/api/useragent/actual)**.
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 

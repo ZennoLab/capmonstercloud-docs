@@ -306,7 +306,7 @@ Hunt 验证码是一种用于博彩平台的反机器人系统，用于检测自
 ## Cookies 的使用
 
 :::warning **注意！**
-在与目标网站交互时，请注意该网站可能会使用特殊的 **cookies** 来管理用户会话、执行反机器人检查以及协调请求。如果所需的 cookies 缺失或未随 API 请求一起发送，服务器可能会拒绝请求、返回错误，或要求重新进行验证。
+目标网站可能使用特殊的 cookies 来管理会话。如果这些 **cookies** 缺失或未随请求发送，服务器可能会拒绝请求或要求重新验证。
 :::
 
 **从网站获取的 cookies 示例：**
@@ -342,7 +342,7 @@ v3fr=1; lng=en; flaglng=en; SESSION=12a3aea8cdcfdbb9e7df8ee99b526a84; auid=ab0dW
 * 将获取的数据传递给验证码识别服务；
 * 在获得验证码解决结果后，向 API 发送 **最终请求** 并附带所需参数。
 
-同时，还需要使用 **最新的 HTTP 请求头以及正确的 `User-Agent`**。
+同时，还需要使用 **最新的 HTTP 请求头以及正确的 [`User-Agent`](https://capmonster.cloud/api/useragent/actual)**。
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 
