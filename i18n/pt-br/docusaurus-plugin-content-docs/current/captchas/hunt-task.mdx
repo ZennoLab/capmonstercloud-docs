@@ -265,11 +265,11 @@ O valor de `meta.token` deve ser enviado no parâmetro `data`.
 Use o método [getTaskResult](../api/methods/get-task-result.mdx) para obter o fingerprint X-HD ou a solução da CAPTCHA Hunt.
 
 :::warning **Atenção!**
-Valor de `solution.token`:
+Valor de `solution.data.token`:
 
 * No modo de geração de X-HD — este é o token X-HD que deve ser utilizado nas requisições ao site de destino.
 
-* No modo de resolução da CAPTCHA — `solution.token` é o token de solução que deve ser enviado de volta ao site para confirmar a ação.
+* No modo de resolução da CAPTCHA — `solution.data.token` é o token de solução que deve ser enviado de volta ao site para confirmar a ação.
   :::
 
 <TabItem value="proxyless" label="CustomTask (sem proxy)" default className="method-panel-full">
@@ -301,114 +301,559 @@ Valor de `solution.token`:
 	</MethodDescription>
 </TabItem>
 
+
+## Trabalhando com cookies
+
+:::warning **Atenção!**
+O site pode usar **cookies** especiais para gerenciar a sessão. Se estiverem ausentes ou não forem enviados com as requisições, o servidor pode rejeitar a solicitação ou exigir uma nova verificação.
+:::
+
+**Exemplo de cookies recebidos do site:**
+
+```text
+platform_type=desktop; typeBetNames=full; _glhf=1234567890; coefview=0; visit=1-123abc012345d1be726746568edc62d9; fast_coupon=true;
+v3fr=1; lng=en; flaglng=en; SESSION=12a3aea8cdcfdbb9e7df8ee99b526a84; auid=ab0dW2mqlz1Tjo2AAwplAg==; ggru=195; che_g=12abcede-691f-c7b2-d1e8-8488bc557d98
+```
+
+**Princípio geral de funcionamento dos cookies:**
+
+1. Primeiro, é necessário abrir uma página do site ou enviar uma **requisição GET** para a página desejada. Isso permite que o servidor inicialize uma sessão de usuário e defina os cookies necessários.
+
+2. Na resposta, o servidor envia cookies através do cabeçalho `Set-Cookie`. Esses cookies podem conter um identificador de sessão, parâmetros de segurança e dados relacionados à proteção anti‑bot.
+
+3. Os cookies recebidos devem ser armazenados, pois são usados para identificar o cliente nas requisições seguintes.
+
+4. Ao enviar requisições posteriores para a API do site, os cookies devem ser enviados de volta ao servidor no cabeçalho `Cookie`, para que o servidor entenda que a requisição pertence à mesma sessão.
+
+5. Todas as requisições devem ser feitas dentro da mesma sessão usando o mesmo **endereço IP (ou proxy)** e **User-Agent**. Caso contrário, o servidor pode considerar a requisição suspeita e exigir uma nova verificação.
+
+6. Em alguns casos, parte dos cookies é criada no lado do cliente (por exemplo, por JavaScript na página). Durante automação ou testes, pode ser necessário extrair cookies diretamente do navegador ou gerá‑los de forma semelhante.
+
+
 ## Exemplo de resolução do Hunt CAPTCHA
 
-A seguir está um exemplo em **Node.js**, que demonstra como criar uma tarefa Hunt CAPTCHA no CapMonster Cloud, aguardar sua resolução e obter o token X-HD. No código é mostrado:
+Os exemplos abaixo demonstram um fluxo típico de interação com um site que utiliza **Hunt CAPTCHA**. O código mostra como:
 
-* Como criar uma tarefa HUNT indicando o site e o proxy
-* Como aguardar a conclusão da tarefa via API do CapMonster
-* Como obter o resultado e extrair o token para uso posterior no site
+* obter cookies iniciais ao abrir uma página do site;
+* gerar cookies adicionais que normalmente podem ser criados no lado do cliente;
+* criar um **fingerprint (X‑HD)** através do CapMonster Cloud usado pelo site para verificar requisições;
+* enviar uma requisição à API do site para iniciar uma ação (por exemplo, envio de SMS);
+* enviar os dados recebidos para o serviço de resolução de captcha;
+* após receber a solução, enviar uma **requisição final** para a API com os parâmetros necessários.
 
-> **Importante:** Não se esqueça de substituir `API_KEY`, `proxyLogin`, `proxyPassword` e outros parâmetros pelos seus valores reais antes de executar. Recomendamos armazenar todos os dados sensíveis em um arquivo `.env`.
+Também é importante utilizar **cabeçalhos HTTP atualizados e um [`User-Agent` correto](https://capmonster.cloud/api/useragent/actual)**.
 
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 
+  <TabItem value="js" label="JavaScript" default className="method-panel">
 <details>
-<summary>Mostrar código (Node.js)</summary>
-
+      <summary>Mostrar código (Node.js)</summary>
 ```js
-const API_KEY = "YOUR_API_KEY"; // Substitua pela sua chave de API do CapMonster Cloud
-const CREATE_TASK_URL = "https://api.capmonster.cloud/createTask";
-const GET_RESULT_URL = "https://api.capmonster.cloud/getTaskResult";
+import { gotScraping } from "got-scraping";
+import crypto from "crypto";
 
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+/* ================= CONFIG (recomendado armazenar em .env) ================= */
+// Configurações da API do CapMonster Cloud, do site e dados do usuário
 
-async function createHuntTask({ data = null } = {}) {
-  const payload = {
-    clientKey: API_KEY,
-    task: {
-      type: "CustomTask",
-      class: "HUNT",
-      websiteURL: "https://example.com/",
-      userAgent:
-        "userAgentPlaceholder",
-      metadata: {
-        apiGetLib:
-          "https://example.com/hd-api/external/apps/a2157wab1045d68672a63557e0n2a77edbfd15ea/api.js",
-      },
-      proxyType: "http",
-      proxyAddress: "123.45.67.89",
-      proxyPort: 8080,
-      proxyLogin: "proxyLogin",
-      proxyPassword: "proxyPassword",
-    },
-  };
+const API_KEY = "YOUR_API_KEY"; // Sua chave de API do CapMonster Cloud
+const SOLVER_URL = "https://api.capmonster.cloud";
 
-  if (data) {
-    payload.task.metadata.data = data;
+const BASE_URL = "https://example.com"; // URL base do site
+const API_GET_LIB =
+  "https://example.com/hd-api/external/apps/a1047eab1035d58682a53557e0b2a75edbfd15fd/api.js"; // api.js do site
+
+const PHONE = "91123456789"; // Telefone para registro (sem código do país)
+const COUNTRY_CODE = "54"; // Código do país
+
+const UA = "userAgentPlaceholder"; // User-Agent para as requisições
+
+/* ================= Configurações de proxy ================= */
+
+const PROXY_HOST = "proxyAddress";
+const PROXY_PORT = 8080;
+const PROXY_USER = "proxyLogin";
+const PROXY_PASS = "proxyPassword";
+
+const PROXY = `http://${PROXY_USER}:${PROXY_PASS}@${PROXY_HOST}:${PROXY_PORT}`;
+
+/* ================= HEADERS ================= */
+// Cabeçalhos para requisições HTTP
+// htmlHeaders — para requisições GET de páginas
+// apiHeaders — para requisições da API do site
+
+const htmlHeaders = {
+  accept:
+    "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+  "accept-encoding": "gzip, deflate, br, zstd",
+  "accept-language": "en-US,en;q=0.9,ru;q=0.8",
+  "cache-control": "no-cache",
+  pragma: "no-cache",
+  priority: "u=0, i",
+  "sec-ch-ua": `"Not:A-Brand";v="99", "Google Chrome";v="145", "Chromium";v="145"`,
+  "sec-ch-ua-mobile": "?0",
+  "sec-ch-ua-platform": `"Windows"`,
+  "sec-fetch-dest": "document",
+  "sec-fetch-mode": "navigate",
+  "sec-fetch-site": "none",
+  "sec-fetch-user": "?1",
+  "upgrade-insecure-requests": "1",
+  "user-agent": UA,
+};
+
+const apiHeaders = {
+  accept: "application/vnd.api+json",
+  "accept-encoding": "gzip, deflate, br, zstd",
+  "accept-language": "en-US,en;q=0.9,ru;q=0.8",
+  "cache-control": "no-cache",
+  pragma: "no-cache",
+  priority: "u=1, i",
+  "content-type": "application/vnd.api+json",
+  origin: BASE_URL,
+  referer: BASE_URL + "/", // Referer atual do site
+  "sec-ch-ua": `"Not:A-Brand";v="99", "Google Chrome";v="145", "Chromium";v="145"`,
+  "sec-ch-ua-mobile": "?0",
+  "sec-ch-ua-platform": `"Windows"`,
+  "sec-fetch-dest": "empty",
+  "sec-fetch-mode": "cors",
+  "sec-fetch-site": "same-origin",
+  "user-agent": UA,
+  "x-requested-with": "XMLHttpRequest",
+};
+
+/* ================= UTILS ================= */
+// Funções auxiliares
+
+const delay = (ms) => new Promise((r) => setTimeout(r, ms));
+
+function randomString(len = 20) {
+  const chars =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let result = "";
+  for (let i = 0; i < len; i++) {
+    result += chars[Math.floor(Math.random() * chars.length)];
   }
+  return result;
+}
 
-  const response = await fetch(CREATE_TASK_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
+/* ================= CAPMONSTER CLOUD ================= */
+// Criação da tarefa e espera pela solução da captcha
+
+async function createTask(task) {
+  const { body } = await gotScraping.post(`${SOLVER_URL}/createTask`, {
+    json: { clientKey: API_KEY, task },
+    responseType: "json",
   });
 
-  const result = await response.json();
-  return result.taskId;
+  if (body.errorId !== 0)
+    throw new Error("createTask error: " + JSON.stringify(body));
+
+  return body.taskId;
 }
 
-async function waitForResult(taskId) {
+async function waitResult(taskId) {
   while (true) {
-    await sleep(3000);
-
-    const response = await fetch(GET_RESULT_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        clientKey: API_KEY,
-        taskId: taskId,
-      }),
+    const { body } = await gotScraping.post(`${SOLVER_URL}/getTaskResult`, {
+      json: { clientKey: API_KEY, taskId },
+      responseType: "json",
     });
 
-    const result = await response.json();
+    if (body.status === "ready")
+      return body.solution?.token || body.solution?.data?.token;
 
-    if (result.errorId !== 0) {
-      throw new Error(result.errorDescription);
-    }
-
-    if (result.status === "processing") {
-      console.log("Tarefa em processamento...");
-      continue;
-    }
-
-    if (result.status === "ready") {
-      console.log("RESPOSTA:\n", JSON.stringify(result, null, 2));
-      return result.solution;
-    }
+    await delay(3000);
   }
 }
 
-async function main() {
+/* ================= MAIN FLOW ================= */
+// Processo principal de registro automático com captcha
+
+(async () => {
   try {
-    console.log("Criando tarefa HUNT (modo X-HD)...");
+    // ---------------- STEP 1: Obter cookies ----------------
+    console.log("STEP 1 — Getting cookies...");
 
-    const taskId = await createHuntTask();
-    console.log("ID da tarefa:", taskId);
+    const base = await gotScraping.get(
+      BASE_URL + "/registration?type=phone_reg", // Substitua pela página de registro atual do site
+      {
+        headers: htmlHeaders,
+        proxyUrl: PROXY,
+      },
+    );
 
-    const xhdToken = await waitForResult(taskId);
-    console.log("X-HD recebido:\n", xhdToken);
+    // Salvamos os cookies recebidos do servidor
+    let cookies = (base.headers["set-cookie"] || [])
+      .map((c) => c.split(";")[0])
+      .join("; ");
 
-    // ===== 2. Resolver a captcha, se necessário =====
-    // const siteMetaToken = "SITE_META_TOKEN";
-    // const solveTaskId = await createHuntTask({ data: siteMetaToken });
-    // const finalSolution = await waitForResult(solveTaskId);
-    // console.log("Solução final da captcha:\n", finalSolution);
-  } catch (error) {
-    console.error("Erro:", error.message);
+    // Geramos cookies adicionais criados no lado do cliente
+    const che_g = crypto.randomUUID();
+    const ggru = randomString();
+
+    cookies += `; che_g=${che_g}`;
+    cookies += `; ggru=${ggru}`;
+
+    console.log("Cookies:", cookies);
+
+    // ---------------- STEP 2: Criar fingerprint ----------------
+    console.log("\nSTEP 2 — Creating fingerprint...");
+
+    const fingerprintTaskId = await createTask({
+      type: "CustomTask",
+      class: "HUNT",
+      websiteURL: BASE_URL + "/",
+      userAgent: UA,
+      metadata: { apiGetLib: API_GET_LIB },
+      proxyType: "http",
+      proxyAddress: PROXY_HOST,
+      proxyPort: PROXY_PORT,
+      proxyLogin: PROXY_USER,
+      proxyPassword: PROXY_PASS,
+    });
+
+    const xhd = await waitResult(fingerprintTaskId);
+    console.log("X-HD:", xhd);
+
+    // ---------------- STEP 3: Enviar requisição para SMS ----------------
+    console.log("\nSTEP 3 — Trigger SMS...");
+
+    const smsResp = await gotScraping.post(
+      BASE_URL + "/web-api/api/web/registration/v2/sms", // Substitua pelo endpoint atual da API do site
+      {
+        headers: { ...apiHeaders, cookie: cookies, "x-hd": xhd },
+        json: {
+          data: { attributes: { phone: PHONE, country_code: COUNTRY_CODE } },
+        },
+        proxyUrl: PROXY,
+        responseType: "json",
+      },
+    );
+
+    const metaToken = smsResp.body?.meta?.token;
+    if (!metaToken) {
+      console.log("SMS response:", smsResp.body);
+      throw new Error("meta.token not received");
+    }
+
+    console.log("meta.token:", metaToken);
+
+    // ---------------- STEP 4: Resolver captcha ----------------
+    console.log("\nSTEP 4 — Solving Hunt captcha...");
+
+    const solveTaskId = await createTask({
+      type: "CustomTask",
+      class: "HUNT",
+      websiteURL: BASE_URL + "/",
+      userAgent: UA,
+      metadata: { apiGetLib: API_GET_LIB, data: metaToken },
+      proxyType: "http",
+      proxyAddress: PROXY_HOST,
+      proxyPort: PROXY_PORT,
+      proxyLogin: PROXY_USER,
+      proxyPassword: PROXY_PASS,
+    });
+
+    const captchaToken = await waitResult(solveTaskId);
+    console.log("Captcha token:", captchaToken);
+
+    // ---------------- STEP 5: Requisição final ----------------
+    console.log("\nSTEP 5 — Sending final request...");
+
+    const finalResp = await gotScraping.post(
+      BASE_URL + "/api/web/registration/v2/sms", // Substitua pelo endpoint atual da API do site
+      {
+        headers: { ...apiHeaders, cookie: cookies, "x-hd": xhd },
+        body: JSON.stringify({
+          data: {
+            attributes: {
+              phone: PHONE,
+              country_code: parseInt(COUNTRY_CODE),
+              captcha: captchaToken,
+            },
+          },
+        }),
+        proxyUrl: PROXY,
+      },
+    );
+
+    console.log("\nFINAL RESPONSE HEADERS:", finalResp.headers);
+    console.log("\nFINAL RESPONSE BODY:", finalResp.body);
+  } catch (err) {
+    console.error("\nFATAL ERROR:");
+    console.error(err);
   }
+})();
+```
+</details>
+</TabItem>
+
+  <TabItem value="python" label="Python" default className="method-panel">
+<details>
+      <summary>Mostrar código</summary>
+```python
+import requests
+import uuid
+import random
+import string
+import time
+
+# ================= CONFIG (recomendado armazenar em .env) =================
+# Configurações da API do CapMonster Cloud, do site e dados do usuário
+
+API_KEY = "YOUR_CAPMONSTER_API_KEY"  # Substitua pela sua chave de API do CapMonster Cloud
+SOLVER_URL = "https://api.capmonster.cloud"
+
+BASE_URL = "https://example.com"  # URL base do site
+API_GET_LIB = "https://example.com/hd-api/external/apps/c1e24d5857463de4393e3f1489b00ebd4495da64/api.js"  # Substitua pelo link atual do api.js do site
+
+PHONE = "9102345678"  # Telefone para registro (sem o código do país)
+COUNTRY_CODE = "7"  # Código do país
+
+UA = "userAgentPlaceholder"  # User-Agent
+
+# ================= Configurações de proxy =================
+
+PROXY_HOST = "proxyAdress" 
+PROXY_PORT = 8080
+PROXY_LOGIN = "proxyLogin"
+PROXY_PASSWORD = "proxyPassword"
+
+PROXY = f"http://{PROXY_LOGIN}:{PROXY_PASSWORD}@{PROXY_HOST}:{PROXY_PORT}"
+
+proxies = {
+    "http": PROXY,
+    "https": PROXY
 }
 
-main();
-```
-</details>  
+# ================= HEADERS =================
+# Cabeçalhos para requisições HTTP
+# html_headers — para requisições GET normais de páginas
+# api_headers — para requisições à API do site
 
+html_headers = {
+    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+    "accept-encoding": "gzip, deflate, br, zstd",
+    "accept-language": "en-US,en;q=0.9,ru;q=0.8",
+    "cache-control": "no-cache",
+    "pragma": "no-cache",
+    "priority": "u=0, i",
+    "sec-ch-ua": '"Not:A-Brand";v="99", "Google Chrome";v="145", "Chromium";v="145"',
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": '"Windows"',
+    "sec-fetch-dest": "document",
+    "sec-fetch-mode": "navigate",
+    "sec-fetch-site": "none",
+    "sec-fetch-user": "?1",
+    "upgrade-insecure-requests": "1",
+    "user-agent": UA
+}
+
+api_headers = {
+    "accept": "application/vnd.api+json",
+    "accept-encoding": "gzip, deflate, br, zstd",
+    "accept-language": "en-US,en;q=0.9,ru;q=0.8",
+    "cache-control": "no-cache",
+    "pragma": "no-cache",
+    "priority": "u=1, i",
+    "content-type": "application/vnd.api+json",
+    "origin": BASE_URL,
+    "referer": BASE_URL + "/en", # Substitua pelo referer atual do site
+    "sec-ch-ua": '"Not:A-Brand";v="99", "Google Chrome";v="145", "Chromium";v="145"',
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": '"Windows"',
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "user-agent": UA,
+    "x-requested-with": "XMLHttpRequest"
+}
+
+# ================= UTILS =================
+# Funções auxiliares
+
+def delay(ms):
+    """Pausa em milissegundos"""
+    time.sleep(ms / 1000)
+
+def random_string(length=20):
+    """Geração de uma string aleatória (letras + números)"""
+    chars = string.ascii_letters + string.digits
+    return ''.join(random.choice(chars) for _ in range(length))
+
+# ================= CAPMONSTER CLOUD =================
+# Funções para trabalhar com o CapMonster Cloud (criar tarefa e aguardar a solução da captcha)
+
+def create_task(task):
+    """Criação de uma tarefa no CapMonster Cloud"""
+    r = requests.post(
+        SOLVER_URL + "/createTask",
+        json={
+            "clientKey": API_KEY,
+            "task": task
+        }
+    )
+
+    data = r.json()
+
+    if data["errorId"] != 0:
+        raise Exception("createTask error: " + str(data))
+
+    return data["taskId"]
+
+def wait_result(task_id):
+    """Aguardar a solução da tarefa"""
+    while True:
+        r = requests.post(
+            SOLVER_URL + "/getTaskResult",
+            json={
+                "clientKey": API_KEY,
+                "taskId": task_id
+            }
+        )
+        data = r.json()
+
+        if data["status"] == "ready":
+            solution = data.get("solution", {})
+            return solution.get("token") or solution.get("data", {}).get("token")
+
+        delay(3000)
+
+# ================= SESSION =================
+# Criamos uma sessão requests para armazenar cookies entre as requisições
+
+session = requests.Session()
+
+# ================= MAIN =================
+# Processo principal de registro automático com captcha
+
+try:
+
+    # ---------------- STEP 1: Obter cookies ----------------
+    print("STEP 1 — Getting cookies")
+
+    r = session.get(
+        BASE_URL + "/en/registration?type=phone", # Substitua pela página de registro atual do site
+        headers=html_headers,
+        proxies=proxies
+    )
+
+    # Salvamos os cookies recebidos do servidor
+    cookies = "; ".join([f"{c.name}={c.value}" for c in session.cookies])
+
+    # Geramos cookies adicionais criados no lado do cliente
+    che_g = str(uuid.uuid4())
+    ggru = random_string()
+    cookies += f"; che_g={che_g}"
+    cookies += f"; ggru={ggru}"
+
+    print("Cookies:", cookies)
+
+    # ---------------- STEP 2: Criar fingerprint ----------------
+    print("\nSTEP 2 — Creating fingerprint")
+
+    fingerprint_task = create_task({
+        "type": "CustomTask",
+        "class": "HUNT",
+        "websiteURL": BASE_URL + "/en/",
+        "userAgent": UA,
+        "metadata": {
+            "apiGetLib": API_GET_LIB
+        },
+        "proxyType": "http",
+        "proxyAddress": PROXY_HOST,
+        "proxyPort": PROXY_PORT,
+        "proxyLogin": PROXY_LOGIN,
+        "proxyPassword": PROXY_PASSWORD
+    })
+
+    # Obtemos o resultado (X-HD), necessário para a API do site
+    xhd = wait_result(fingerprint_task)
+    print("X-HD:", xhd)
+
+    # ---------------- STEP 3: Enviar requisição para SMS ----------------
+    print("\nSTEP 3 — Trigger SMS")
+
+    sms_resp = session.post(
+        BASE_URL + "/web-api/api/web/registration/v2/sms", # Substitua pelo endpoint atual da API do site
+        headers={**api_headers, "cookie": cookies, "x-hd": xhd},
+        json={
+            "data": {
+                "attributes": {
+                    "phone": PHONE,
+                    "country_code": COUNTRY_CODE
+                }
+            }
+        },
+        proxies=proxies
+    )
+
+    print("Status:", sms_resp.status_code)
+
+    try:
+        sms_data = sms_resp.json()
+    except:
+        print("Server returned non JSON:")
+        print(sms_resp.text)
+        raise Exception("Invalid JSON response")
+
+    meta_token = sms_data.get("meta", {}).get("token")
+    if not meta_token:
+        print("SMS response:", sms_data)
+        raise Exception("meta.token not received")
+
+    print("meta.token:", meta_token)
+
+    # ---------------- STEP 4: Resolver captcha ----------------
+    print("\nSTEP 4 — Solving captcha")
+
+    solve_task = create_task({
+        "type": "CustomTask",
+        "class": "HUNT",
+        "websiteURL": BASE_URL + "/en/",
+        "userAgent": UA,
+        "metadata": {
+            "apiGetLib": API_GET_LIB,
+            "data": meta_token
+        },
+        "proxyType": "http",
+        "proxyAddress": PROXY_HOST,
+        "proxyPort": PROXY_PORT,
+        "proxyLogin": PROXY_LOGIN,
+        "proxyPassword": PROXY_PASSWORD
+    })
+
+    captcha_token = wait_result(solve_task)
+    print("Captcha token:", captcha_token)
+
+    # ---------------- STEP 5: Requisição final ----------------
+    print("\nSTEP 5 — Final request")
+
+    final = session.post(
+        BASE_URL + "/web-api/api/web/registration/v2/sms", # Substitua pelo endpoint atual da API do site
+        headers={**api_headers, "cookie": cookies, "x-hd": xhd},
+        json={
+            "data": {
+                "attributes": {
+                    "phone": PHONE,
+                    "country_code": int(COUNTRY_CODE),
+                    "captcha": captcha_token
+                }
+            }
+        },
+        proxies=proxies
+    )
+
+    print("\nFINAL STATUS:", final.status_code)
+
+    try:
+        print(final.json())
+    except:
+        print(final.text)
+
+except Exception as e:
+    print("\nFATAL ERROR")
+    print(e)
+```
+</details>
+  </TabItem>
+
+</Tabs>
