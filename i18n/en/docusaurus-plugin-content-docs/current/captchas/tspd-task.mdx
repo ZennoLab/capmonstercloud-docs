@@ -193,12 +193,11 @@ During the first request, the server will also issue special cookies (for exampl
 ```http
 GET https://example.com/login?client_id=example.client.id&authorization_id=example_auth_id
 
-sec-ch-ua: "ExampleBrowser";v="1", "ExampleEngine";v="1"
+sec-ch-ua: "Not:A-Brand";v="99", "Google Chrome";v="145", "Chromium";v="145"
 sec-ch-ua-mobile: ?0
-sec-ch-ua-platform: "ExampleOS"
+sec-ch-ua-platform: "Windows"
 upgrade-insecure-requests: 1
-user-agent: Mozilla/5.0 (Example OS 1.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) ExampleBrowser/1.0 Safari/537.36
-accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+user-agent: userAgentPlaceholder
 sec-fetch-site: none
 sec-fetch-mode: navigate
 sec-fetch-user: ?1
@@ -298,11 +297,11 @@ When making a repeat request to the target page with cookies obtained from CapMo
 ```http
 GET https://example.com/login?client_id=example.client.id&authorization_id=example_auth_id
 
-sec-ch-ua: "ExampleBrowser";v="1", "ExampleEngine";v="1"
+sec-ch-ua: "Not:A-Brand";v="99", "Google Chrome";v="145", "Chromium";v="145"
 sec-ch-ua-mobile: ?0
-sec-ch-ua-platform: "ExampleOS"
+sec-ch-ua-platform: "Windows"
 upgrade-insecure-requests: 1
-user-agent: Mozilla/5.0 (Example OS 1.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) ExampleBrowser/1.0 Safari/537.36
+user-agent: userAgentPlaceholder
 accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
 sec-fetch-site: none
 sec-fetch-mode: navigate
@@ -368,7 +367,7 @@ const url =
 // === Headers ===
 const headers = {
   "sec-ch-ua":
-    '"Not(A:Brand";v="8", "Chromium";v="144", "Google Chrome";v="144"',
+    '"Not(A:Brand";v="8", "Chromium";v="145", "Google Chrome";v="145"',
   "sec-ch-ua-mobile": "?0",
   "sec-ch-ua-platform": '"Windows"',
   "Upgrade-Insecure-Requests": "1",
@@ -437,7 +436,7 @@ main().catch(console.error);
 
 **Important:**
 
-If the server returns cookies in the following format:
+If the server returns cookies in the following format (four lines):
 
 ```
 TS386a400d029=082670...87599c;
@@ -454,7 +453,7 @@ TSd2153684027=082670...4415a6
 
 ---
 
-If cookies are not returned or are returned in one of the following formats:
+If cookies are not returned or are returned in one of the following formats (usually three lines):
 
 ```
 TS386a400d029=08777...83ff9,
@@ -489,7 +488,7 @@ const url =
 // === Set the required headers ===
 const headers = {
   "sec-ch-ua":
-    '"Not(A:Brand";v="8", "Chromium";v="144", "Google Chrome";v="144"',
+    '"Not(A:Brand";v="8", "Chromium";v="145", "Google Chrome";v="145"',
   "sec-ch-ua-mobile": "?0",
   "sec-ch-ua-platform": '"Windows"',
   "Upgrade-Insecure-Requests": "1",
@@ -530,3 +529,527 @@ main().catch(console.error);
 ```
 
 </details>
+
+## Example of automatic TSPD solving
+
+:::warning Important
+The examples are for demonstration purposes and show the general logic of working with websites that use TSPD protection. In real projects, the code may require adaptation to a specific website, its requests, and headers.
+
+Important data (API keys, proxy settings, etc.) should be stored in `.env` files or environment variables.
+:::
+
+<h3 style={{ fontSize: "1.2em" }}>
+  How the algorithm works:
+</h3>
+
+1. **First request.** The script sends an HTTP request to the page through a proxy with browser headers.
+
+2. **Getting cookies.** Protection cookies are extracted from the response. If the cookie `TSPD_101_DID` is returned (which means the protection has already been passed) or the format is incorrect — execution stops.
+
+3. **Creating a task.** The script sends a task of type CustomTask (*class: tspd*) to CapMonster Cloud with the following data:
+
+   * Page URL
+
+   * Protection cookies
+
+   * Page HTML (Base64)
+
+   * User-Agent
+
+   * Proxy
+
+4. **Getting the solution.** The script waits for the result via the API (*getTaskResult*) and receives valid cookies.
+
+5. **Final request.** The request is repeated with the received cookies, after which a normal HTML page is returned.
+
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+
+  <TabItem value="js" label="JavaScript" default className="method-panel">
+<details>
+      <summary>Show code (Node.js)</summary>
+```js
+import { gotScraping } from "got-scraping";
+import fs from "fs";
+
+const API_KEY = "YOUR_API_KEY"; // Replace with your CapMonster API key
+const CAPMONSTER_URL = "https://api.capmonster.cloud";
+
+// Replace with the target URL
+const url =
+  "https://example.com";
+
+// Replace with your proxy
+const proxy = {
+  host: "proxyAddress",
+  port: 8080,
+  login: "proxyLogin",
+  password: "proxyPassword",
+  type: "http",
+};
+
+const proxyUrl = `${proxy.type}://${proxy.login}:${proxy.password}@${proxy.host}:${proxy.port}`;
+
+// Use a valid User-Agent
+const userAgent =
+  "userAgentPlaceholder";
+
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function extractValidTspdCookies(setCookies) {
+  const cookies = setCookies.map((c) => c.split(";")[0].trim());
+
+  console.log("\nRaw cookies:");
+  console.log(cookies);
+
+  // Check that TSPD_101_DID is absent
+  const hasDid = cookies.some((c) => c.startsWith("TSPD_101_DID="));
+
+  if (hasDid) {
+    console.log("TSPD_101_DID detected. Request was blocked.");
+    return null;
+  }
+
+  // Extract only TS cookies
+  const tsCookies = cookies.filter((c) => c.startsWith("TS"));
+
+  // There must be exactly 4 TS cookies
+  if (tsCookies.length !== 4) {
+    console.log("Invalid TS cookie count:", tsCookies.length);
+    return null;
+  }
+
+  const validFormat = tsCookies.every((c) => /^[^=]+=[^=]+$/.test(c));
+
+  if (!validFormat) {
+    console.log("Invalid TS cookie format.");
+    return null;
+  }
+
+  console.log("Valid TSPD cookie set detected.");
+
+  return tsCookies.join("; ");
+}
+
+function solutionToCookieHeader(solution) {
+  const domain = Object.keys(solution.domains)[0];
+  const cookies = solution.domains[domain].cookies || {};
+
+  const result = [];
+
+  for (const [name, value] of Object.entries(cookies)) {
+    result.push(`${name}=${value}`);
+  }
+
+  return result.join("; ");
+}
+
+async function createTask(task) {
+  const response = await gotScraping
+    .post(`${CAPMONSTER_URL}/createTask`, {
+      json: {
+        clientKey: API_KEY,
+        task,
+      },
+    })
+    .json();
+
+  if (response.errorId !== 0) {
+    throw new Error(response.errorDescription);
+  }
+
+  return response.taskId;
+}
+
+async function getTaskResult(taskId) {
+  while (true) {
+    await delay(3000);
+
+    const response = await gotScraping
+      .post(`${CAPMONSTER_URL}/getTaskResult`, {
+        json: {
+          clientKey: API_KEY,
+          taskId,
+        },
+      })
+      .json();
+
+    if (response.errorId !== 0) {
+      throw new Error(response.errorDescription);
+    }
+
+    if (response.status === "ready") {
+      return response.solution;
+    }
+
+    console.log("Waiting for solution...");
+  }
+}
+
+async function main() {
+  try {
+    console.log("Sending initial request...");
+
+    const response = await gotScraping(url, {
+      proxyUrl,
+      headers: {
+        "sec-ch-ua":
+          '"Not:A-Brand";v="99", "Google Chrome";v="145", "Chromium";v="145"',
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": '"Windows"',
+        "upgrade-insecure-requests": "1",
+        "user-agent": userAgent,
+
+        accept:
+          "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+
+        "sec-fetch-site": "same-site",
+        "sec-fetch-mode": "navigate",
+        "sec-fetch-user": "?1",
+        "sec-fetch-dest": "document",
+
+        "accept-language": "en-US,en;q=0.9",
+
+        referer: "https://example.com/", // Replace with the actual referer
+      },
+    });
+
+    let html = response.body;
+
+    const htmlBase64 = Buffer.from(html).toString("base64");
+
+    const setCookies = response.headers["set-cookie"] || [];
+
+    const tspdCookies = extractValidTspdCookies(setCookies);
+
+    if (!tspdCookies) {
+      console.log(
+        "Stopping script. No valid TSPD cookies detected. Continuing normal site interaction.",
+      );
+      return;
+    }
+
+    const task = {
+      type: "CustomTask",
+      class: "tspd",
+      websiteUrl: url,
+      metadata: {
+        tspdCookie: tspdCookies,
+        htmlPageBase64: htmlBase64,
+      },
+      userAgent,
+      proxyType: proxy.type,
+      proxyAddress: proxy.host,
+      proxyPort: proxy.port,
+      proxyLogin: proxy.login,
+      proxyPassword: proxy.password,
+    };
+
+    console.log("\nCreating CapMonster Cloud task...");
+
+    const taskId = await createTask(task);
+
+    console.log("Task ID:", taskId);
+
+    const solution = await getTaskResult(taskId);
+
+    console.log("\nSolution received:");
+    console.log(JSON.stringify(solution, null, 2));
+
+    const cookieHeader = solutionToCookieHeader(solution);
+
+    console.log("\nFinal Cookie header:");
+    console.log(cookieHeader);
+
+    const finalHeaders = {
+      "sec-ch-ua":
+        '"Not:A-Brand";v="99", "Google Chrome";v="145", "Chromium";v="145"',
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": '"Windows"',
+      "upgrade-insecure-requests": "1",
+      "user-agent": userAgent,
+
+      accept:
+        "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+
+      "sec-fetch-site": "same-site",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-user": "?1",
+      "sec-fetch-dest": "document",
+
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "accept-language": "en-US,en;q=0.9",
+
+      cookie: cookieHeader,
+
+      priority: "u=0,i",
+
+      referer: "https://example.com/", // Replace with the actual referer
+    };
+
+    console.log("\nFinal request headers:");
+    console.log(JSON.stringify(finalHeaders, null, 2));
+
+    const finalResponse = await gotScraping(url, {
+      proxyUrl,
+      headers: finalHeaders,
+      followRedirect: true,
+    });
+
+    console.log("\nFinal page length:", finalResponse.body.length);
+
+    fs.writeFileSync("final_page.html", finalResponse.body);
+
+    console.log("Page saved to final_page.html");
+  } catch (err) {
+    console.error("Error:", err.message);
+  }
+}
+
+main();
+```
+</details>
+</TabItem>
+
+  <TabItem value="python" label="Python" default className="method-panel">
+<details>
+      <summary>Show code</summary>
+```python
+import httpx
+import base64
+import time
+import json
+import re
+
+API_KEY = "YOUR_API_KEY"  # Replace with your CapMonster Cloud API key
+CAPMONSTER_URL = "https://api.capmonster.cloud"
+
+# Replace with the target URL
+url = "https://example.com"
+
+#  Replace with your proxy
+proxy = {
+    "host": "proxyAddress",
+    "port": 8080,
+    "login": "proxyLogin",
+    "password": "proxyPassword",
+    "type": "http"
+}
+
+proxy_url = f'{proxy["type"]}://{proxy["login"]}:{proxy["password"]}@{proxy["host"]}:{proxy["port"]}'
+
+# Use a valid User-Agent
+user_agent = "userAgentPlaceholder"
+
+
+def delay(ms):
+    time.sleep(ms / 1000)
+
+
+def extract_valid_tspd_cookies(set_cookies):
+
+    cookies = [c.split(";")[0].strip() for c in set_cookies]
+
+    print("\nRaw cookies:")
+    print(cookies)
+
+    # Check that TSPD_101_DID is absent
+    has_did = any(c.startswith("TSPD_101_DID=") for c in cookies)
+
+    if has_did:
+        print("TSPD_101_DID detected. Request was blocked.")
+        return None
+
+    # Extract only TS cookies
+    ts_cookies = [c for c in cookies if c.startswith("TS")]
+
+    # There must be exactly 4 TS cookies
+    if len(ts_cookies) != 4:
+        print("Invalid TS cookie count:", len(ts_cookies))
+        return None
+
+    valid_format = all(re.match(r"^[^=]+=[^=]+$", c) for c in ts_cookies)
+
+    if not valid_format:
+        print("Invalid TS cookie format.")
+        return None
+
+    print("Valid TSPD cookie set detected.")
+
+    return "; ".join(ts_cookies)
+
+
+def solution_to_cookie_dict(solution):
+
+    domain = list(solution["domains"].keys())[0]
+    cookies = solution["domains"][domain].get("cookies", {})
+
+    return cookies
+
+
+def create_task(task):
+
+    response = httpx.post(
+        f"{CAPMONSTER_URL}/createTask",
+        json={
+            "clientKey": API_KEY,
+            "task": task
+        }
+    ).json()
+
+    if response["errorId"] != 0:
+        raise Exception(response["errorDescription"])
+
+    return response["taskId"]
+
+
+def get_task_result(task_id):
+
+    while True:
+
+        delay(3000)
+
+        response = httpx.post(
+            f"{CAPMONSTER_URL}/getTaskResult",
+            json={
+                "clientKey": API_KEY,
+                "taskId": task_id
+            }
+        ).json()
+
+        if response["errorId"] != 0:
+            raise Exception(response["errorDescription"])
+
+        if response["status"] == "ready":
+            return response["solution"]
+
+        print("Waiting for solution...")
+
+
+def main():
+
+    try:
+
+        print("Sending initial request...")
+
+        headers = {
+            "sec-ch-ua": '"Not:A-Brand";v="99", "Google Chrome";v="145", "Chromium";v="145"',
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": '"Windows"',
+            "upgrade-insecure-requests": "1",
+            "user-agent": user_agent,
+
+            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "navigate",
+            "sec-fetch-user": "?1",
+            "sec-fetch-dest": "document",
+
+            "accept-language": "en-US,en;q=0.9",
+
+            "referer": "https://example.com/",  # Replace with the actual referer
+        }
+
+        with httpx.Client(proxy=proxy_url, follow_redirects=True) as client:
+
+            response = client.get(url, headers=headers)
+
+            html = response.text
+
+            html_base64 = base64.b64encode(html.encode()).decode()
+
+            set_cookies = response.headers.get_list("set-cookie")
+
+            tspd_cookies = extract_valid_tspd_cookies(set_cookies)
+
+            if not tspd_cookies:
+
+                print(
+                    "Stopping script. No valid TSPD cookies detected. Continuing normal site interaction."
+                )
+
+                return
+
+            task = {
+                "type": "CustomTask",
+                "class": "tspd",
+                "websiteUrl": url,
+                "metadata": {
+                    "tspdCookie": tspd_cookies,
+                    "htmlPageBase64": html_base64
+                },
+                "userAgent": user_agent,
+                "proxyType": proxy["type"],
+                "proxyAddress": proxy["host"],
+                "proxyPort": proxy["port"],
+                "proxyLogin": proxy["login"],
+                "proxyPassword": proxy["password"]
+            }
+
+            print("\nCreating CapMonster Cloud task...")
+
+            task_id = create_task(task)
+
+            print("Task ID:", task_id)
+
+            solution = get_task_result(task_id)
+
+            print("\nSolution received:")
+            print(json.dumps(solution, indent=2))
+
+            cookie_dict = solution_to_cookie_dict(solution)
+
+        print("\nFinal cookies:")
+        print(cookie_dict)
+
+        final_headers = {
+            "sec-ch-ua": '"Not:A-Brand";v="99", "Google Chrome";v="145", "Chromium";v="145"',
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": '"Windows"',
+            "upgrade-insecure-requests": "1",
+            "user-agent": user_agent,
+
+            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "navigate",
+            "sec-fetch-user": "?1",
+            "sec-fetch-dest": "document",
+
+            "accept-encoding": "gzip, deflate, br, zstd",
+            "accept-language": "en-US,en;q=0.9",
+
+            "priority": "u=0,i",
+
+            "referer": "https://example.com/",  # Replace with the actual referer
+        }
+
+        print("\nSending final request...")
+
+        with httpx.Client(
+            proxy=proxy_url,
+            follow_redirects=True,
+            cookies=cookie_dict
+        ) as final_client:
+
+            final_response = final_client.get(url, headers=final_headers)
+
+            print("\nFinal page length:", len(final_response.text))
+
+            with open("final_page.html", "w", encoding="utf-8") as f:
+                f.write(final_response.text)
+
+        print("Page saved to final_page.html")
+
+    except Exception as err:
+        print("Error:", str(err))
+
+
+main()
+```
+</details>
+  </TabItem>
+
+</Tabs>
