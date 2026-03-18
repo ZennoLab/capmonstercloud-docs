@@ -34,7 +34,7 @@ O CapMonster Cloud pode retornar o resultado da solução como um **token** ou c
 
 ## Parâmetros da solicitação
 
-## Opção 1. Challenge (token)
+### Opção 1. Challenge (token)
 
 :::warning **Atenção!**
 * O CapMonster Cloud, por padrão, funciona com proxies integrados — já incluídos no custo do serviço. É necessário especificar seus próprios proxies apenas nos casos em que o site não aceita o token ou quando o acesso aos serviços integrados está restrito.
@@ -159,7 +159,7 @@ Quando `window.turnstile.render(el, paramsObj)` é chamado, o captcha é carrega
 
 ---
 
-## Opção 2. Challenge (cookie)
+### Opção 2. Challenge (cookie)
 
 :::warning **Atenção!**
 
@@ -334,24 +334,24 @@ console.log(htmlBase64);
 	</MethodItem>
 	<MethodDescription>
 		**Requisição**
-		```json 
-		{
-		  "clientKey":"API_KEY",
-		  "task": {
-			"type":"TurnstileTask",
-			"websiteURL":"https://example.com",
-			"websiteKey":"xxxxxxxxxx",
-			"cloudflareTaskType": "cf_clearance",
-			"htmlPageBase64": "PCFET0NUWVBFIGh0...vYm9keT48L2h0bWw+",
-			"userAgent": "userAgentPlaceholder",
-			"proxyType":"http",
-			"proxyAddress":"8.8.8.8",
-			"proxyPort":8080,
-			"proxyLogin":"proxyLoginHere",
-			"proxyPassword":"proxyPasswordHere"
-		  }
-		}
-		```
+```json 
+{
+  "clientKey": "API_KEY",
+  "task": {
+    "type": "TurnstileTask",
+    "websiteURL": "https://example.com",
+    "websiteKey": "xxxxxxxxxx",
+    "cloudflareTaskType": "cf_clearance",
+    "htmlPageBase64": "PCFET0NUWVBFIGh0...vYm9keT48L2h0bWw+",
+    "userAgent": "userAgentPlaceholder",
+    "proxyType": "http",
+    "proxyAddress": "8.8.8.8",
+    "proxyPort": 8080,
+    "proxyLogin": "proxyLoginHere",
+    "proxyPassword": "proxyPasswordHere"
+  }
+}
+```
 		**Resposta**
 		```json
 		{

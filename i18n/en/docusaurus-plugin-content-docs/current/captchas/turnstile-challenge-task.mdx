@@ -160,7 +160,7 @@ When `window.turnstile.render(el, paramsObj)` is called, the captcha loads on th
 
 ---
 
-## Option 2. Challenge (cookie)
+### Option 2. Challenge (cookie)
 
 :::warning **Attention!**
 
@@ -334,24 +334,24 @@ console.log(htmlBase64);
 	</MethodItem>
 	<MethodDescription>
 		**Request**
-		```json 
-		{
-		  "clientKey":"API_KEY",
-		  "task": {
-			"type":"TurnstileTask",
-			"websiteURL":"https://example.com",
-			"websiteKey":"xxxxxxxxxx",
-			"cloudflareTaskType": "cf_clearance",
-			"htmlPageBase64": "PCFET0NUWVBFIGh0...vYm9keT48L2h0bWw+",
-			"userAgent": "userAgentPlaceholder",
-			"proxyType":"http",
-			"proxyAddress":"8.8.8.8",
-			"proxyPort":8080,
-			"proxyLogin":"proxyLoginHere",
-			"proxyPassword":"proxyPasswordHere"
-		  }
-		}
-		```
+```json 
+{
+  "clientKey": "API_KEY",
+  "task": {
+    "type": "TurnstileTask",
+    "websiteURL": "https://example.com",
+    "websiteKey": "xxxxxxxxxx",
+    "cloudflareTaskType": "cf_clearance",
+    "htmlPageBase64": "PCFET0NUWVBFIGh0...vYm9keT48L2h0bWw+",
+    "userAgent": "userAgentPlaceholder",
+    "proxyType": "http",
+    "proxyAddress": "8.8.8.8",
+    "proxyPort": 8080,
+    "proxyLogin": "proxyLoginHere",
+    "proxyPassword": "proxyPasswordHere"
+  }
+}
+```
 		**Response**
 		```json
 		{

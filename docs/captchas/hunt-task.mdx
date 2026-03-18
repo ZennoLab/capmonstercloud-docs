@@ -163,30 +163,29 @@ User-Agent браузера. <br />
     <MethodDescription>
       **Запрос**
 ```json
-  {
-    "type": "CustomTask",
-    "class": "HUNT",
-    "websiteURL": "https://example.com",
-    "metadata": {
-      "apiGetLib": "https://example.com/hd-api/external/apps/a2157wab1045d68672a63557e0n2a77edbfd15ea/api.js"
-    },
-    "userAgent": "userAgentPlaceholder",
-    "proxyType": "http",
-    "proxyAddress": "8.8.8.8",
-    "proxyPort": 8080,
-    "proxyLogin": "proxyLoginHere",
-    "proxyPassword": "proxyPasswordHere"
-  }
+{
+  "type": "CustomTask",
+  "class": "HUNT",
+  "websiteURL": "https://example.com",
+  "metadata": {
+    "apiGetLib": "https://example.com/hd-api/external/apps/a2157wab1045d68672a63557e0n2a77edbfd15ea/api.js"
+  },
+  "userAgent": "userAgentPlaceholder",
+  "proxyType": "http",
+  "proxyAddress": "8.8.8.8",
+  "proxyPort": 8080,
+  "proxyLogin": "proxyLoginHere",
+  "proxyPassword": "proxyPasswordHere"
 }
-      ```
+```
 
       **Ответ**
-      ```json
-      {
-        "errorId": 0,
-        "taskId": 407533072
-    }
-      ```
+```json
+{
+  "errorId": 0,
+  "taskId": 407533072
+}
+```
     </MethodDescription>
   </TabItem>
 
@@ -336,7 +335,7 @@ v3fr=1; lng=en; flaglng=en; SESSION=12a3aea8cdcfdbb9e7df8ee99b526a84; auid=ab0dW
 * передать полученные данные в сервис решения капчи;
 * после получения решения выполнить финальный запрос к API с необходимыми параметрами.
 
-Также важно использовать **актуальные HTTP‑заголовки и [корректный `User-Agent`](https://capmonster.cloud/api/useragent/actual)**.
+**Важно:** Используйте **актуальные HTTP‑заголовки и [корректный `User-Agent`](https://capmonster.cloud/api/useragent/actual)**.
 
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">

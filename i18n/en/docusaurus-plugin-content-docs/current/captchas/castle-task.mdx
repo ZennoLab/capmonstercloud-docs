@@ -62,7 +62,7 @@ Link to `cw.js`, for example: ```https://s.rsg.sc/auth/js/20251234bgef/build/cw.
 ---
 
 <ParamItem title="swUrl (inside metadata)" required type="string" />
-Link to `csw.js`, for example: ```https://s.rsg.sc/auth/js/20251234bgef/build/cw.js```
+Link to `csw.js`, for example: ```https://s.rsg.sc/auth/js/20251213bgef/build/csw.js```
 
 ---
 
@@ -122,20 +122,20 @@ Proxy server password.
     </MethodItem>
     <MethodDescription>
       **Request**
-      ```json
-      {
-		"type": "CustomTask",
-		"Class": "Castle",
-		"websiteURL": "https://www.example.com/",
-		"websiteKey": "pk_1Tk5Yzr1WFzxrJCh7WzMZzY1rHpaOtdK",
-		"userAgent": "userAgentPlaceholder",
-		"metadata": {
-			"wUrl": "https://s.rsg.sc/auth/js/20251234bgef/build/cw.js",
-			"swUrl": "https://s.rsg.sc/auth/js/20251234bgef/build/csw.js",
-			"count":1
-		}
+```json
+{
+  "type": "CustomTask",
+  "Class": "Castle",
+  "websiteURL": "https://www.example.com/",
+  "websiteKey": "pk_1Tk5Yzr1WFzxrJCh7WzMZzY1rHpaOtdK",
+  "userAgent": "userAgentPlaceholder",
+  "metadata": {
+    "wUrl": "https://s.rsg.sc/auth/js/20251234bgef/build/cw.js",
+    "swUrl": "https://s.rsg.sc/auth/js/20251234bgef/build/csw.js",
+    "count": 1
+  }
 }
-        ```
+```
         **Response**
         ```json
         {
@@ -154,26 +154,25 @@ Proxy server password.
     </MethodItem>
     <MethodDescription>
       **Request**
-      ```json
-      {
-		"type": "CustomTask",
-		"Class": "Castle",
-		"websiteURL": "https://www.example.com/",
-		"websiteKey": "pk_1Tk5Yzr1WFzxrJCh7WzMZzY1rHpaOtdK",
-		"userAgent": "userAgentPlaceholder",
-		"metadata": {
-			"wUrl": "https://s.rsg.sc/auth/js/20251234bgef/build/cw.js",
-			"swUrl": "https://s.rsg.sc/auth/js/20251234bgef/build/csw.js",
-			"count":1
-		}
-          "proxyType": "http",
-          "proxyAddress": "8.8.8.8",
-          "proxyPort": 8080,
-          "proxyLogin": "proxyLoginHere",
-          "proxyPassword": "proxyPasswordHere"
-        }
-      }
-      ```
+```json
+{
+  "type": "CustomTask",
+  "Class": "Castle",
+  "websiteURL": "https://www.example.com/",
+  "websiteKey": "pk_1Tk5Yzr1WFzxrJCh7WzMZzY1rHpaOtdK",
+  "userAgent": "userAgentPlaceholder",
+  "metadata": {
+    "wUrl": "https://s.rsg.sc/auth/js/20251234bgef/build/cw.js",
+    "swUrl": "https://s.rsg.sc/auth/js/20251234bgef/build/csw.js",
+    "count": 1
+  },
+  "proxyType": "http",
+  "proxyAddress": "8.8.8.8",
+  "proxyPort": 8080,
+  "proxyLogin": "proxyLoginHere",
+  "proxyPassword": "proxyPasswordHere"
+}      
+```
 
       **Response**
       ```json
@@ -206,25 +205,28 @@ Use the [getTaskResult](../api/methods/get-task-result.mdx) method to get the Te
 		}
 		```
 		**Response**
-		```json
-        {
-          "errorId":0,
-          "status":"ready",
-          "solution":  {
-              "data":
-          {
-            "tokens":["Q05Ap...H7nYn", "cn9xW...aFl_4", ...]
-          },
-              "domains": {
-                  "www.example.com": {
-                      "cookies": {
-                          "__cuid": "6883480a9ab7442d9f97da7307d6ea9c"
-                      }
-                  }
-              }
-          }
+```json
+{
+  "errorId": 0,
+  "status": "ready",
+  "solution": {
+    "data": {
+      "tokens": [
+        "Q05Ap...H7nYn",
+        "cn9xW...aFl_4",
+        "..."
+      ]
+    },
+    "domains": {
+      "www.example.com": {
+        "cookies": {
+          "__cuid": "6883480a9ab7442d9f97da7307d6ea9c"
+        }
       }
-		```
+    }
+  }
+}   
+```
 	</MethodDescription>
 </TabItem>
 

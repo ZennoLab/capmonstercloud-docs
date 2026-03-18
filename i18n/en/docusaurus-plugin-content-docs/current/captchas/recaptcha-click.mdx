@@ -111,23 +111,25 @@ The object contains data about the task for solving ReCaptcha2 from Google.
 	</MethodItem>
 	<MethodDescription>
 		**Request**
-		```json
-		{
-		  "clientKey":"API_KEY",
-		  "task": {
-			"type": "ComplexImageTask",
-			"class": "recaptcha",
-			"imageUrls":[ "https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg" ],
-			"metadata": {
-			  "Task": "Click on traffic lights",
-			  "Grid": "3x3",
-			  "TaskDefinition": "/m/015qff"
-			},
-			"userAgent": "userAgentPlaceholder",
-			"websiteUrl": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle"
-		  }
-		}
-		```
+```json
+{
+  "clientKey": "API_KEY",
+  "task": {
+    "type": "ComplexImageTask",
+    "class": "recaptcha",
+    "imageUrls": [
+      "https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg"
+    ],
+    "metadata": {
+      "Task": "Click on traffic lights",
+      "Grid": "3x3",
+      "TaskDefinition": "/m/015qff"
+    },
+    "userAgent": "userAgentPlaceholder",
+    "websiteUrl": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle"
+  }
+}
+```
 		**Response**
 		```json
 		{
@@ -157,15 +159,15 @@ Use the [getTaskResult](../api/methods/get-task-result.mdx) method to get the ca
 		}
 		```
 		**Response**
-		```json
-		{
-		  "errorId":0,
-		  "status":"ready",
-		  "solution": {
-			"answer": [ false, false, false, false, true, false, false, false, false ]
-		  }
-		}
-		```
+```json
+{
+  "errorId": 0,
+  "status": "ready",
+  "solution": {
+    "answer": [false, false, false, false, true, false, false, false, false]
+  }
+}		
+```
 	</MethodDescription>
 </TabItem>
 

@@ -163,20 +163,19 @@ V4 (captcha_id = gt)
 		</MethodItem>
 		<MethodDescription>
 			**Request**
-			```json
-			{
-				"clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
-				"task":
-				{
-					"type":"GeeTestTask",
-					"websiteURL":"https://www.geetest.com/en/demo",
-					"gt":"022397c99c9f646f6477822485f30404",
-					"challenge":"7f044f48bc951ecfbfc03842b5e1fe59",
-					"geetestApiServerSubdomain":"api-na.geetest.com"
+```json
+{
+  "clientKey": "YOUR_CAPMONSTER_CLOUD_API_KEY",
+  "task": {
+    "type": "GeeTestTask",
+    "websiteURL": "https://www.geetest.com/en/demo",
+    "gt": "022397c99c9f646f6477822485f30404",
+    "challenge": "7f044f48bc951ecfbfc03842b5e1fe59",
+    "geetestApiServerSubdomain": "api-na.geetest.com"
 
-    			}
-    		}
-    		```
+  }
+}
+```
     		**Response**
     		```json
     		{
@@ -195,24 +194,24 @@ V4 (captcha_id = gt)
     	</MethodItem>
     	<MethodDescription>
     		**Request**
-    		```json
-    		  {
-    			"clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
-    			"task": {
-    			  "type":"GeeTestTask",
-    			  "websiteURL":"https://www.geetest.com/en/demo",
-    			  "gt":"022397c99c9f646f6477822485f30404",
-    			  "challenge":"7f044f48bc951ecfbfc03842b5e1fe59",
-    			  "geetestApiServerSubdomain":"api-na.geetest.com",
-    			  "proxyType":"http",
-    			  "proxyAddress":"8.8.8.8",
-    			  "proxyPort":8080,
-    			  "proxyLogin":"proxyLoginHere",
-    			  "proxyPassword":"proxyPasswordHere",
-    			  "userAgent":"userAgentPlaceholder"
-    			}
-    		  }
-    		```
+```json 
+{
+  "clientKey": "YOUR_CAPMONSTER_CLOUD_API_KEY",
+  "task": {
+    "type": "GeeTestTask",
+    "websiteURL": "https://www.geetest.com/en/demo",
+    "gt": "022397c99c9f646f6477822485f30404",
+    "challenge": "7f044f48bc951ecfbfc03842b5e1fe59",
+    "geetestApiServerSubdomain": "api-na.geetest.com",
+    "proxyType": "http",
+    "proxyAddress": "8.8.8.8",
+    "proxyPort": 8080,
+    "proxyLogin": "proxyLoginHere",
+    "proxyPassword": "proxyPasswordHere",
+    "userAgent": "userAgentPlaceholder"
+  }
+}
+```
     		**Response**
     		```json
     		{
@@ -244,17 +243,17 @@ Use the [getTaskResult](../api/methods/get-task-result.mdx) method to get the re
     		}
     		```
     		**Response**
-    		```json
-    		{
-    		  "errorId":0,
-    		  "status":"ready",
-    		  "solution": {
-    			"challenge":"0f759dd1ea6c4wc76cedc2991039ca4f23",
-    			"validate":"6275e26419211d1f526e674d97110e15",
-    			"seccode":"510cd9735583edcb158601067195a5eb|jordan"
-    		  }
-    		}
-    		```
+```json
+{
+  "errorId": 0,
+  "status": "ready",
+  "solution": {
+    "challenge": "0f759dd1ea6c4wc76cedc2991039ca4f23",
+    "validate": "6275e26419211d1f526e674d97110e15",
+    "seccode": "510cd9735583edcb158601067195a5eb|jordan"
+  }
+}
+```
     	</MethodDescription>
     </TabItem>
 
@@ -813,22 +812,20 @@ solveGeeTest().catch(console.error);
 		</MethodItem>
 		<MethodDescription>
 			**Request**
-			```json
-			{
-				"clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
-				"task":
-				{
-					"type":"GeeTestTask",
-					"websiteURL":"https://gt4.geetest.com/",
-					"gt":"54088bb07d2df3c46b79f80300b0abbe",
-					"version": 4,
-					"initParameters": {
-					  "riskType": "slide"
-
-    				}
-    			}
-    		}
-    		```
+```json
+{
+  "clientKey": "YOUR_CAPMONSTER_CLOUD_API_KEY",
+  "task": {
+    "type": "GeeTestTask",
+    "websiteURL": "https://gt4.geetest.com/",
+    "gt": "54088bb07d2df3c46b79f80300b0abbe",
+    "version": 4,
+    "initParameters": {
+      "riskType": "slide"
+    }
+  }
+}
+```
     		**Response**
     		```json
     		{
@@ -847,27 +844,26 @@ solveGeeTest().catch(console.error);
     	</MethodItem>
     	<MethodDescription>
     		**Request**
-    		```json
-    		{
-    		  "clientKey":"YOUR_CAPMONSTER_CLOUD_API_KEY",
-    		  "task": {
-    			"type":"GeeTestTask",
-    			"websiteURL":"https://gt4.geetest.com/",
-    			"gt":"54088bb07d2df3c46b79f80300b0abbe",
-    			"version": 4,
-    			"initParameters": {
-    			  "riskType": "slide"
-    			},
-    			"proxyType":"http",
-    			"proxyAddress":"8.8.8.8",
-    			"proxyPort":8080,
-    			"proxyLogin":"proxyLoginHere",
-    			"proxyPassword":"proxyPasswordHere",
-    			"userAgent":"userAgentPlaceholder"
-
-    		  }
-    		}
-    		```
+  ```json
+  {
+    "clientKey": "YOUR_CAPMONSTER_CLOUD_API_KEY",
+    "task": {
+      "type": "GeeTestTask",
+      "websiteURL": "https://gt4.geetest.com/",
+      "gt": "54088bb07d2df3c46b79f80300b0abbe",
+      "version": 4,
+      "initParameters": {
+        "riskType": "slide"
+      },
+      "proxyType": "http",
+      "proxyAddress": "8.8.8.8",
+      "proxyPort": 8080,
+      "proxyLogin": "proxyLoginHere",
+      "proxyPassword": "proxyPasswordHere",
+      "userAgent": "userAgentPlaceholder"
+    }
+  }
+  ```
 
     		**Response**
     		```json
@@ -900,19 +896,19 @@ Use the [getTaskResult](../api/methods/get-task-result.mdx) to get the result of
 		}
 		```
 		**Response**
-		```json
-		{
-		  "errorId":0,
-		  "status":"ready",
-		  "solution": {
-			"captcha_id":"f5c2ad5a8a3cf37192d8b9c039950f79",
-			"lot_number":"bcb2c6ce2f8e4e9da74f2c1fa63bd713",
-			"pass_token":"edc7a17716535a5ae624ef4707cb6e7e478dc557608b068d202682c8297695cf",
-			"gen_time":"1683794919",
-			"captcha_output":"XwmTZEJCJEnRIJBlvtEAZ662T...[cut]...SQ3fX-MyoYOVDMDXWSRQig56"
-		  }
-		}
-		```
+```json
+{
+  "errorId": 0,
+  "status": "ready",
+  "solution": {
+    "captcha_id": "f5c2ad5a8a3cf37192d8b9c039950f79",
+    "lot_number": "bcb2c6ce2f8e4e9da74f2c1fa63bd713",
+    "pass_token": "edc7a17716535a5ae624ef4707cb6e7e478dc557608b068d202682c8297695cf",
+    "gen_time": "1683794919",
+    "captcha_output": "XwmTZEJCJEnRIJBlvtEAZ662T...[cut]...SQ3fX-MyoYOVDMDXWSRQig56"
+  }
+}
+```
 	</MethodDescription>
 </TabItem>
 

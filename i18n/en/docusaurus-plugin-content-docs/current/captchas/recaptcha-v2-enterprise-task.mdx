@@ -178,19 +178,19 @@ Object.defineProperty(window, 'grecaptcha', {
 		</MethodItem>
 		<MethodDescription>
 			**Request**
-			```json
-			{
-			  "clientKey":"API_KEY",
-			  "task": {
-				"type":"RecaptchaV2EnterpriseTask",
-				"websiteURL":"https://mydomain.com/page-with-recaptcha-enterprise",
-				"websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
-				"enterprisePayload": {
-				  "s": "SOME_ADDITIONAL_TOKEN"
-				}
-			  }
-			}
-			```
+```json
+{
+  "clientKey": "API_KEY",
+  "task": {
+    "type": "RecaptchaV2EnterpriseTask",
+    "websiteURL": "https://mydomain.com/page-with-recaptcha-enterprise",
+    "websiteKey": "6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
+    "enterprisePayload": {
+      "s": "SOME_ADDITIONAL_TOKEN"
+    }
+  }
+}
+```
 			**Response**
 			```json
 			{
@@ -209,32 +209,32 @@ Object.defineProperty(window, 'grecaptcha', {
 		</MethodItem>
 		<MethodDescription>
 			**Request**
-			```json
-			{
-			  "clientKey":"API_KEY",
-			  "task": {
-				"type":"RecaptchaV2EnterpriseTask",
-				"websiteURL":"https://mydomain.com/page-with-recaptcha-enterprise",
-				"websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
-				"enterprisePayload": {
-				  "s": "SOME_ADDITIONAL_TOKEN"
-				},
-				"proxyType":"http",
-				"proxyAddress":"8.8.8.8",
-				"proxyPort":8080,
-				"proxyLogin":"proxyLoginHere",
-				"proxyPassword":"proxyPasswordHere",
-				"userAgent":"userAgentPlaceholder"
-			  }
-			}
-			```
+```json
+{
+  "clientKey": "API_KEY",
+  "task": {
+    "type": "RecaptchaV2EnterpriseTask",
+    "websiteURL": "https://mydomain.com/page-with-recaptcha-enterprise",
+    "websiteKey": "6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
+    "enterprisePayload": {
+      "s": "SOME_ADDITIONAL_TOKEN"
+    },
+    "proxyType": "http",
+    "proxyAddress": "8.8.8.8",
+    "proxyPort": 8080,
+    "proxyLogin": "proxyLoginHere",
+    "proxyPassword": "proxyPasswordHere",
+    "userAgent": "userAgentPlaceholder"
+  }
+}
+```
 			**Response**
-			```json
-			{
-			  "errorId":0,
-			  "taskId":407533072
-			}
-			```
+```json
+{
+  "errorId":0,
+  "taskId":407533072
+}
+```
 		</MethodDescription>
 	</TabItem>
   
@@ -252,22 +252,22 @@ Use the [getTaskResult](../api/methods/get-task-result.mdx) method to request an
 	</MethodItem>
 	<MethodDescription>
 		**Request**
-		```json
-		{
-		  "clientKey":"API_KEY",
-		  "taskId": 407533072
-		}
-		```
+```json
+{
+  "clientKey":"API_KEY",
+  "taskId": 407533072
+}
+```
 		**Response**
-		```json
-		{
-		  "errorId":0,
-		  "status":"ready",
-		  "solution": {
-			"gRecaptchaResponse":"3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
-		  }
-		}
-		```
+```json
+{
+  "errorId": 0,
+  "status": "ready",
+  "solution": {
+    "gRecaptchaResponse": "3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
+  }
+}
+```
 	</MethodDescription>
 </TabItem>
 
