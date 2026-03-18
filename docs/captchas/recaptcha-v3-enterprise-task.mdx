@@ -79,17 +79,17 @@ reCAPTCHA v3 Enterprise работает полностью в фоновом р
 	</MethodItem>
 	<MethodDescription>
 		**Запрос**
-		```json
-		{
-		  "clientKey":"API_KEY",
-		  "task": {
-			"type":"RecaptchaV3EnterpriseTask",
-			"websiteURL":"https://example.com",
-			"websiteKey":"6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d4TuRTE",
-			"minScore": 0.7
-		  }
-		}
-		```
+```json
+{
+  "clientKey": "API_KEY",
+  "task": {
+    "type": "RecaptchaV3EnterpriseTask",
+    "websiteURL": "https://example.com",
+    "websiteKey": "6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d4TuRTE",
+    "minScore": 0.7
+  }
+}
+```
 		**Ответ**
 		```json
 		{
@@ -117,35 +117,35 @@ reCAPTCHA v3 Enterprise работает полностью в фоновом р
 	</MethodItem>
 	<MethodDescription>
 		**Запрос**
-		```json
-		{
-		  "clientKey":"API_KEY",
-		  "taskId": 407533072
-		}
-		```
+```json
+{
+  "clientKey":"API_KEY",
+  "taskId": 407533072
+}
+```
 		**Ответ**
-		```json
-		{
-		  "errorId":0,
-		  "status":"ready",
-		  "solution": {
-			"gRecaptchaResponse":"3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
-		  }
-		}
-		```
+```json
+{
+  "errorId": 0,
+  "status": "ready",
+  "solution": {
+    "gRecaptchaResponse": "3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
+  }
+}
+```
 
     Для некоторых сайтов ответ может выглядеть примерно следующим образом. При подтверждении решения необходимо использовать UserAgent, полученный в ответе, даже если он отличается от текущего UserAgent браузера:
  
-		```json
-		{
-		  "errorId":0,
-		  "status":"ready",
-		  "solution": {
-			"gRecaptchaResponse":"3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3",
-			"userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
-		  }
-		}
-		```
+```json
+{
+  "errorId": 0,
+  "status": "ready",
+  "solution": {
+    "gRecaptchaResponse": "3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+  }
+}
+```
 	</MethodDescription>
 </TabItem>
 

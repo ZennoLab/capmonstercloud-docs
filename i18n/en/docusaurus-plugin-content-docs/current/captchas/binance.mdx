@@ -100,26 +100,25 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 	</MethodItem>
 	<MethodDescription>
 		**Request**
-		```json
-		{
-			"clientKey": "API_KEY",
-			"task": 
-			{
-				"type": "BinanceTask",
-				"websiteURL": "https://example.com",
-				"websiteKey": "login",
-				"validateId": "cb0bfefa598b4c3887661fde54ecd57b",
-				"userAgent": "userAgentPlaceholder"
-			}
-		}
-		```
+```json
+{
+  "clientKey": "API_KEY",
+  "task": {
+    "type": "BinanceTask",
+    "websiteURL": "https://example.com",
+    "websiteKey": "login",
+    "validateId": "cb0bfefa598b4c3887661fde54ecd57b",
+    "userAgent": "userAgentPlaceholder"
+  }
+}
+```
 		**Response**
-		```json
-		{
-			"errorId":0,
-			"taskId":407533072
-		}
-		```
+```json
+{
+  "errorId":0,
+  "taskId":407533072
+}
+```
 	</MethodDescription>
   </TabItem>
 
@@ -131,31 +130,30 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 	</MethodItem>
 	<MethodDescription>
 		**Request**
-		```json
-		{
-			"clientKey": "API_KEY",
-			"task": 
-			{
-				"type": "BinanceTask",
-				"websiteURL": "https://example.com",
-				"websiteKey": "login",
-				"validateId": "cb0bfefa598b4c3887661fde54ecd57b",
-				"userAgent": "userAgentPlaceholder",
-				"proxyType":"http",
-				"proxyAddress":"8.8.8.8",
-				"proxyPort":8080,
-				"proxyLogin":"proxyLoginHere",
-				"proxyPassword":"proxyPasswordHere"
-			}
-		}
-		```
+```json
+{
+  "clientKey": "API_KEY",
+  "task": {
+    "type": "BinanceTask",
+    "websiteURL": "https://example.com",
+    "websiteKey": "login",
+    "validateId": "cb0bfefa598b4c3887661fde54ecd57b",
+    "userAgent": "userAgentPlaceholder",
+    "proxyType":"http",
+    "proxyAddress":"8.8.8.8",
+    "proxyPort":8080,
+    "proxyLogin":"proxyLoginHere",
+    "proxyPassword":"proxyPasswordHere"
+  }
+}
+```
 		**Response**
-		```json
-		{
-			"errorId":0,
-			"taskId":407533072
-		}
-		```
+```json
+{
+  "errorId":0,
+  "taskId":407533072
+}
+```
 	</MethodDescription>
   </TabItem>
 </Tabs>
@@ -172,24 +170,23 @@ Use the method [getTaskResult](../api/methods/get-task-result.mdx) to obtain the
 	</MethodItem>
 	<MethodDescription>
 		**Request**
-		```json
-		{
-			"clientKey":"API_KEY",
-			"taskId": 407533072
-		}
-		```
+```json
+{
+  "clientKey":"API_KEY",
+  "taskId": 407533072
+}
+```
 		**Response**
-		```json
-		{
-			"errorId":0,
-			"status":"ready",
-			"solution": 
-			{
-				"token":"captcha#09ba4905a79f44f2a99e44f234439644-ioVA7neog7eRHCDAsC0MixpZvt5kc99maS943qIsquNP9D77",
-				"userAgent":"userAgentPlaceholder"
-			}
-		}
-		```
+```json
+{
+  "errorId": 0,
+  "status": "ready",
+  "solution": {
+    "token": "captcha#09ba4905a79f44f2a99e44f234439644-ioVA7neog7eRHCDAsC0MixpZvt5kc99maS943qIsquNP9D77",
+    "userAgent": "userAgentPlaceholder"
+  }
+}
+```
 	</MethodDescription>
 </TabItem>
 

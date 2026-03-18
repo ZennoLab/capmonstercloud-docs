@@ -76,17 +76,17 @@ Você também pode resolver o reCAPTCHA v3 Enterprise usando o tipo de tarefa re
 	</MethodItem>
 	<MethodDescription>
 		**Solicitação**
-		```json
-		{
-		  "clientKey":"API_KEY",
-		  "task": {
-			"type":"RecaptchaV3EnterpriseTask",
-			"websiteURL":"https://example.com",
-			"websiteKey":"6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d4TuRTE",
-			"minScore": 0.7
-		  }
-		}
-		```
+```json
+{
+  "clientKey": "API_KEY",
+  "task": {
+    "type": "RecaptchaV3EnterpriseTask",
+    "websiteURL": "https://example.com",
+    "websiteKey": "6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d4TuRTE",
+    "minScore": 0.7
+  }
+}
+```
 		**Resposta**
 		```json
 		{
@@ -131,16 +131,16 @@ https://api.capmonster.cloud/getTaskResult
 ```
 Para alguns sites, a resposta pode ser semelhante ao exemplo a seguir. Ao confirmar a solução, é necessário usar o UserAgent fornecido na resposta, mesmo que seja diferente do UserAgent atual do navegador:
 
-        ```json
-		{
-		  "errorId":0,
-		  "status":"ready",
-		  "solution": {
-			"gRecaptchaResponse":"3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3",
-			"userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
-		  }
-		}
-		```
+```json
+{
+  "errorId": 0,
+  "status": "ready",
+  "solution": {
+    "gRecaptchaResponse": "3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+  }
+}
+```
 	</MethodDescription>
 </TabItem>
 

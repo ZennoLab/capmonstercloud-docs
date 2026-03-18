@@ -87,24 +87,23 @@ CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费
 	</MethodItem>
 	<MethodDescription>
 		**要求**
-		```json
-		{
-			"clientKey": "API_KEY",
-			"task": 
-			{
-				"type": "ProsopoTask",
-				"websiteURL": "https://www.example.com",
-				"websiteKey": "5EZU3LG31uzq1Mwi8inwqxmfvFDpj7VzwDnZwj4Q3syyxBwV"
-			}
-		}
-		```
+```json
+{
+  "clientKey": "API_KEY",
+  "task": {
+    "type": "ProsopoTask",
+    "websiteURL": "https://www.example.com",
+    "websiteKey": "5EZU3LG31uzq1Mwi8inwqxmfvFDpj7VzwDnZwj4Q3syyxBwV"
+  }
+}
+```
 		**回应**
-		```json
-		{
-			"errorId":0,
-			"taskId":407533077
-		}
-		```
+```json
+{
+  "errorId":0,
+  "taskId":407533077
+}
+```
 	</MethodDescription>
   </TabItem>
 
@@ -116,29 +115,28 @@ CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费
 	</MethodItem>
 	<MethodDescription>
 		**要求**
-		```json
-		{
-			"clientKey": "API_KEY",
-			"task": 
-			{
-				"type": "ProsopoTask",
-				"websiteURL": "https://www.example.com",
-				"websiteKey": "5EZU3LG31uzq1Mwi8inwqxmfvFDpj7VzwDnZwj4Q3syyxBwV",
-				"proxyType":"http",
-				"proxyAddress":"8.8.8.8",
-				"proxyPort":8080,
-				"proxyLogin":"proxyLoginHere",
-				"proxyPassword":"proxyPasswordHere"
-			}
-		}
-		```
+```json
+{
+  "clientKey": "API_KEY",
+  "task": {
+    "type": "ProsopoTask",
+    "websiteURL": "https://www.example.com",
+    "websiteKey": "5EZU3LG31uzq1Mwi8inwqxmfvFDpj7VzwDnZwj4Q3syyxBwV",
+    "proxyType": "http",
+    "proxyAddress": "8.8.8.8",
+    "proxyPort": 8080,
+    "proxyLogin": "proxyLoginHere",
+    "proxyPassword": "proxyPasswordHere"
+  }
+}
+```
 		**回应**
-		```json
-		{
-			"errorId":0,
-			"taskId":407533077
-		}
-		```
+```json
+{
+  "errorId":0,
+  "taskId":407533077
+}
+```
 	</MethodDescription>
   </TabItem>
 </Tabs>
@@ -155,23 +153,23 @@ CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费
 	</MethodItem>
 	<MethodDescription>
 		**要求**
-		```json
-		{
-			"clientKey":"API_KEY",
-			"taskId": 407533077
-		}
-		```
+```json
+{
+  "clientKey":"API_KEY",
+  "taskId": 407533077
+}
+```
 		**回应**
-		```json
-		{
-			"errorId":0,
-			"status":"ready",
-			"solution": 
-			{
-				"token": "0x00016c68747470733a2f2f70726f6e6f6465332e70726f736f706f2e696fc0354550516f4d5a454463354c704e376774784d4d7a5950547a4136..."
-			}
-		}
-		```
+```json
+{
+  "errorId":0,
+  "status":"ready",
+  "solution": 
+  {
+    "token": "0x00016c68747470733a2f2f70726f6e6f6465332e70726f736f706f2e696fc0354550516f4d5a454463354c704e376774784d4d7a5950547a4136..."
+  }
+}
+```
 	</MethodDescription>
 </TabItem>
 

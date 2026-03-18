@@ -63,7 +63,7 @@ Castle 所在页面的 URL。
 ---
 
 <ParamItem title="swUrl (inside metadata)" required type="string" />
-`csw.js` 的链接，例如：```https://s.rsg.sc/auth/js/20251234bgef/build/cw.js```
+`csw.js` 的链接，例如：```https://s.rsg.sc/auth/js/20251213bgef/build/csw.js```
 
 ---
 
@@ -123,20 +123,20 @@ Castle 所在页面的 URL。
     </MethodItem>
     <MethodDescription>
       **请求**
-      ```json
-      {
-		"type": "CustomTask",
-		"Class": "Castle",
-		"websiteURL": "https://www.example.com/",
-		"websiteKey": "pk_1Tk5Yzr1WFzxrJCh7WzMZzY1rHpaOtdK",
-		"userAgent": "userAgentPlaceholder",
-		"metadata": {
-			"wUrl": "https://s.rsg.sc/auth/js/20251234bgef/build/cw.js",
-			"swUrl": "https://s.rsg.sc/auth/js/20251234bgef/build/csw.js",
-			"count":1
-		}
+```json
+{
+  "type": "CustomTask",
+  "Class": "Castle",
+  "websiteURL": "https://www.example.com/",
+  "websiteKey": "pk_1Tk5Yzr1WFzxrJCh7WzMZzY1rHpaOtdK",
+  "userAgent": "userAgentPlaceholder",
+  "metadata": {
+    "wUrl": "https://s.rsg.sc/auth/js/20251234bgef/build/cw.js",
+    "swUrl": "https://s.rsg.sc/auth/js/20251234bgef/build/csw.js",
+    "count": 1
+  }
 }
-        ```
+```
         **响应**
         ```json
         {
@@ -155,26 +155,25 @@ Castle 所在页面的 URL。
     </MethodItem>
     <MethodDescription>
       **请求**
-      ```json
-      {
-		"type": "CustomTask",
-		"Class": "Castle",
-		"websiteURL": "https://www.example.com/",
-		"websiteKey": "pk_1Tk5Yzr1WFzxrJCh7WzMZzY1rHpaOtdK",
-		"userAgent": "userAgentPlaceholder",
-		"metadata": {
-			"wUrl": "https://s.rsg.sc/auth/js/20251234bgef/build/cw.js",
-			"swUrl": "https://s.rsg.sc/auth/js/20251234bgef/build/csw.js",
-			"count":1
-		}
-          "proxyType": "http",
-          "proxyAddress": "8.8.8.8",
-          "proxyPort": 8080,
-          "proxyLogin": "proxyLoginHere",
-          "proxyPassword": "proxyPasswordHere"
-        }
-      }
-      ```
+```json
+{
+  "type": "CustomTask",
+  "Class": "Castle",
+  "websiteURL": "https://www.example.com/",
+  "websiteKey": "pk_1Tk5Yzr1WFzxrJCh7WzMZzY1rHpaOtdK",
+  "userAgent": "userAgentPlaceholder",
+  "metadata": {
+    "wUrl": "https://s.rsg.sc/auth/js/20251234bgef/build/cw.js",
+    "swUrl": "https://s.rsg.sc/auth/js/20251234bgef/build/csw.js",
+    "count": 1
+  },
+  "proxyType": "http",
+  "proxyAddress": "8.8.8.8",
+  "proxyPort": 8080,
+  "proxyLogin": "proxyLoginHere",
+  "proxyPassword": "proxyPasswordHere"
+}      
+```
 
       **响应**
       ```json
@@ -206,25 +205,28 @@ Castle 所在页面的 URL。
 		}
 		```
 		**响应**
-		```json
-        {
-          "errorId":0,
-          "status":"ready",
-          "solution":  {
-              "data":
-          {
-            "tokens":["Q05Ap...H7nYn", "cn9xW...aFl_4", ...]
-          },
-              "domains": {
-                  "www.example.com": {
-                      "cookies": {
-                          "__cuid": "6883480a9ab7442d9f97da7307d6ea9c"
-                      }
-                  }
-              }
-          }
+```json
+{
+  "errorId": 0,
+  "status": "ready",
+  "solution": {
+    "data": {
+      "tokens": [
+        "Q05Ap...H7nYn",
+        "cn9xW...aFl_4",
+        "..."
+      ]
+    },
+    "domains": {
+      "www.example.com": {
+        "cookies": {
+          "__cuid": "6883480a9ab7442d9f97da7307d6ea9c"
+        }
       }
-		```
+    }
+  }
+}   
+```
 	</MethodDescription>
 </TabItem>
 

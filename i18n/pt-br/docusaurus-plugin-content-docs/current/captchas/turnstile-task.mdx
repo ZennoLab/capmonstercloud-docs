@@ -31,18 +31,18 @@ Todos os subtipos do Turnstile são suportados automaticamente: **manual**, **n�
 <BlogLink url="https://capmonster.cloud/pt-BR/blog/Cloudflare/what-is-cloudflare-captcha"/>
 <BlogLink url="https://capmonster.cloud/pt-BR/blog/Cloudflare/how-cloudflare-bot-challenge-and-turnstile-protect-web-traffic"/>
 
-## Parâmetros da solicitação
-
-Você deve resolver um captcha Turnstile **padrão**, como o mostrado [aqui](https://zenno.link/zl-support).
-Observe que os captchas em páginas protegidas pelo Cloudflare podem parecer visualmente idênticos. Consulte [esta seção](#como-diferenciar-o-cloudflare-turnstile-do-cloudflare-challenge) para saber como diferenciar um captcha Turnstile padrão de um Cloudflare Challenge.
-
-
 :::warning **Atenção!**
 * O CapMonster Cloud, por padrão, funciona com proxies integrados — já incluídos no custo do serviço. É necessário especificar seus próprios proxies apenas nos casos em que o site não aceita o token ou quando o acesso aos serviços integrados está restrito. 
 
 * Se o proxy utiliza autenticação por IP, é necessário adicionar o endereço **65.21.190.34** à lista de permissões (whitelist).
 * Após resolver, você receberá um **token** para confirmar a conclusão do captcha.
 :::
+
+## Parâmetros da solicitação
+
+Você deve resolver um captcha Turnstile **padrão**, como o mostrado [aqui](https://zenno.link/zl-support).
+Observe que os captchas em páginas protegidas pelo Cloudflare podem parecer visualmente idênticos. Consulte [esta seção](#como-diferenciar-o-cloudflare-turnstile-do-cloudflare-challenge) para saber como diferenciar um captcha Turnstile padrão de um Cloudflare Challenge.
+
 
 <TabItem value="proxyless" label="TurnstileTask (sem proxy)" default className="bordered-panel">
   <ParamItem title="type" required type="string" />

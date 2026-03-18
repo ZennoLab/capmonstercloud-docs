@@ -83,19 +83,19 @@ reCAPTCHA v3 работает полностью в фоновом режиме 
 	</MethodItem>
 	<MethodDescription>
 		**Запрос**
-        ```json
-          {
-            "clientKey": "API_KEY",
-            "task": {
-              "type": "RecaptchaV3TaskProxyless",
-              "websiteURL": "https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta",
-              "websiteKey": "6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",
-              "isEnterprise": false,
-              "minScore": 0.7,
-              "pageAction": "myverify"
-            }
-          }
-      ```
+```json
+{
+  "clientKey": "API_KEY",
+  "task": {
+    "type": "RecaptchaV3TaskProxyless",
+    "websiteURL": "https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta",
+    "websiteKey": "6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",
+    "isEnterprise": false,
+    "minScore": 0.7,
+    "pageAction": "myverify"
+  }
+}
+```
 
 		**Ответ**
 		```json
@@ -124,22 +124,22 @@ reCAPTCHA v3 работает полностью в фоновом режиме 
 	</MethodItem>
 	<MethodDescription>
 		**Запрос**
-		```json
-		{
-		  "clientKey":"API_KEY",
-		  "taskId": 407533072
-		}
-		```
+```json
+{
+  "clientKey":"API_KEY",
+  "taskId": 407533072
+}
+```
 		**Ответ**
-		```json
-		{
-		  "errorId":0,
-		  "status":"ready",
-		  "solution": {
-			"gRecaptchaResponse":"3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
-		  }
-		}
-		```
+```json
+{
+  "errorId": 0,
+  "status": "ready",
+  "solution": {
+    "gRecaptchaResponse": "3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
+  }
+}
+```
 
     Для некоторых сайтов ответ может выглядеть следующим образом. При отправке решения необходимо использовать UserAgent, указанный в ответе, даже если он отличается от текущего, используемого вашим браузером или скриптом.
  

@@ -45,7 +45,7 @@ Se o proxy utiliza autenticação por IP, é necessário adicionar o endereço *
 :::
 
 ## Parâmetros da solicitação
-## Opção 1
+### Opção 1
 <TabItem value="proxyless" label="AmazonTask (sem proxy)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **AmazonTask**
@@ -113,7 +113,7 @@ Se o proxy utiliza autenticação por IP, é necessário adicionar o endereço *
 
 </TabItem>
 
-## Opção 2 
+### Opção 2 
 <TabItem value="proxyless" label="AmazonTaskProxyless (sem proxy)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **AmazonTask**
@@ -190,7 +190,7 @@ Se o proxy utiliza autenticação por IP, é necessário adicionar o endereço *
 
 </TabItem>
 
-  ## Opção 3
+### Opção 3
 
 Se o site usa um captcha invisível e somente `challenge.js` é carregado, use esta opção.  
 Nesse caso, não é necessário enviar todos os parâmetros da opção 2 — eles podem ficar vazios. Envie apenas o valor de `challenge.js`.
@@ -278,7 +278,7 @@ Ao navegar até o site, você recebe uma resposta **405** e uma página HTML com
 
 
 ## Métodos de criação de tarefa
-## Opção 1
+### Opção 1
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="proxyless" label="AmazonTask (sem proxy)" default className="method-panel">
     <MethodItem>
@@ -358,7 +358,7 @@ Ao navegar até o site, você recebe uma resposta **405** e uma página HTML com
   </TabItem>
 </Tabs>
 
-## Opção 2
+### Opção 2
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="proxyless" label="AmazonTask (sem proxy)" default className="method-panel">
     <MethodItem>
@@ -442,7 +442,7 @@ Ao navegar até o site, você recebe uma resposta **405** e uma página HTML com
   </TabItem>
 </Tabs>
 
-## Opção 3
+### Opção 3
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="proxyless" label="AmazonTask (sem proxy)" default className="method-panel">
     <MethodItem>
@@ -546,14 +546,14 @@ https://api.capmonster.cloud/getTaskResult
 **Resposta**
 ```json
 {
-    "errorId":0,
-    "status":"ready",
-    "solution": {
-        "cookies": {
-            "aws-waf-token": "10115f5b-ebd8-45c7-851e-cfd4f6a82e3e:EAoAua1QezAhAAAA:dp7sp2rXIRcnJcmpWOC1vIu+yq/A3EbR6b6K7c67P49usNF1f1bt/Af5pNcZ7TKZlW+jIZ7QfNs8zjjqiu8C9XQq50Pmv2DxUlyFtfPZkGwk0d27Ocznk18/IOOa49Rydx+/XkGA7xoGLNaUelzNX34PlyXjoOtL0rzYBxMAQy0D1tn+Q5u97kJBjs5Mytqu9tXPIPCTSn4dfXv5llSkv9pxBEnnhwz6HEdmdJMdfur+YRW1MgCX7i3L2Y0/CNL8kd8CEhTMzwyoXekrzBM="
-        },
-        "userAgent": "userAgentPlaceholder"
-    }
+  "errorId": 0,
+  "status": "ready",
+  "solution": {
+    "cookies": {
+      "aws-waf-token": "10115f5b-ebd8-45c7-851e-cfd4f6a82e3e:EAoAua1QezAhAAAA:dp7sp2rXIRcnJcmpWOC1vIu+yq/A3EbR6b6K7c67P49usNF1f1bt/Af5pNcZ7TKZlW+jIZ7QfNs8zjjqiu8C9XQq50Pmv2DxUlyFtfPZkGwk0d27Ocznk18/IOOa49Rydx+/XkGA7xoGLNaUelzNX34PlyXjoOtL0rzYBxMAQy0D1tn+Q5u97kJBjs5Mytqu9tXPIPCTSn4dfXv5llSkv9pxBEnnhwz6HEdmdJMdfur+YRW1MgCX7i3L2Y0/CNL8kd8CEhTMzwyoXekrzBM="
+    },
+    "userAgent": "userAgentPlaceholder"
+  }
 }
 ```
 </MethodDescription>

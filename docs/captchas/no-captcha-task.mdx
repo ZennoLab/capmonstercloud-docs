@@ -127,23 +127,23 @@ CapMonster Cloud по умолчанию использует встроенны
 		</MethodItem>
 		<MethodDescription>
 			**Запрос**
-			```json
-			{
-			  "clientKey":"API_KEY",
-			  "task": {
-				"type":"RecaptchaV2Task",
-				"websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
-				"websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"
-			  }
-			}
-			```
+```json
+{
+  "clientKey": "API_KEY",
+  "task": {
+    "type": "RecaptchaV2Task",
+    "websiteURL": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
+    "websiteKey": "6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"
+  }
+}
+```
 			**Ответ**
-			```json
-			{
-			  "errorId":0,
-			  "taskId":407533072
-			}
-			```
+```json
+{
+  "errorId":0,
+  "taskId":407533072
+}
+```
 		</MethodDescription>
 	</TabItem>
 
@@ -155,29 +155,29 @@ CapMonster Cloud по умолчанию использует встроенны
 		</MethodItem>
 		<MethodDescription>
 			**Запрос**
-			```json
-			{
-			  "clientKey":"API_KEY",
-			  "task": {
-				"type":"RecaptchaV2Task",
-				"websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
-				"websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
-				"proxyType":"http",
-				"proxyAddress":"8.8.8.8",
-				"proxyPort":8080,
-				"proxyLogin":"proxyLoginHere",
-				"proxyPassword":"proxyPasswordHere",
-				"userAgent":"userAgentPlaceholder"
-			  }
-			}
-			```
+```json
+{
+  "clientKey": "API_KEY",
+  "task": {
+    "type": "RecaptchaV2Task",
+    "websiteURL": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
+    "websiteKey": "6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
+    "proxyType": "http",
+    "proxyAddress": "8.8.8.8",
+    "proxyPort": 8080,
+    "proxyLogin": "proxyLoginHere",
+    "proxyPassword": "proxyPasswordHere",
+    "userAgent": "userAgentPlaceholder"
+  }
+}
+```
 			**Ответ**
-			```json
-			{
-			  "errorId":0,
-			  "taskId":407533072
-			}
-			```
+```json
+{
+  "errorId":0,
+  "taskId":407533072
+}
+```
 		</MethodDescription>
 	</TabItem>  
 </Tabs>
@@ -198,22 +198,22 @@ CapMonster Cloud по умолчанию использует встроенны
 	</MethodItem>
 	<MethodDescription>
 		**Запрос**
-		```json
-		{
-		  "clientKey":"API_KEY",
-		  "taskId": 407533072
-		}
-		```
+```json
+{
+  "clientKey":"API_KEY",
+  "taskId": 407533072
+}
+```
 		**Ответ**
-		```json
-		{
-		  "errorId": 0,
-		  "status":"ready",
-		  "solution": {
-			"gRecaptchaResponse":"3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
-		  }
-		}
-		```
+```json
+{
+  "errorId": 0,
+  "status": "ready",
+  "solution": {
+    "gRecaptchaResponse": "3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
+  }
+}
+```
 
     Для некоторых сайтов ответ может выглядеть следующим образом. При отправке решения необходимо использовать UserAgent, указанный в ответе, даже если он отличается от текущего, используемого вашим браузером или скриптом.
  

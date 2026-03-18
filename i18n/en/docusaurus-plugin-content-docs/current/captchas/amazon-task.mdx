@@ -45,7 +45,7 @@ If you are using a proxy with IP authorization, make sure to whitelist the addre
 :::
 
 ## Request parameters
-## Option 1
+### Option 1
 <TabItem value="proxyless" label="AmazonTask (without proxy)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **AmazonTask**
@@ -112,7 +112,7 @@ If you are using a proxy with IP authorization, make sure to whitelist the addre
   ---
 </TabItem>
 
-## Option 2 
+### Option 2 
 <TabItem value="proxyless" label="AmazonTaskProxyless (without proxy)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **AmazonTask**
@@ -189,7 +189,7 @@ If you are using a proxy with IP authorization, make sure to whitelist the addre
 
 </TabItem>
 
-  ## Option 3
+### Option 3
 
 If the site uses an invisible captcha and only `challenge.js` is loaded, use this option.  
 In this case, you don’t need to pass all parameters from option 2 — they can remain empty. Pass only the `challenge.js` value.
@@ -277,7 +277,7 @@ When navigating to the site, you get a **405** response and an HTML page with ca
 
 
 ## Task creation methods
-## Option 1
+### Option 1
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="proxyless" label="AmazonTask (without proxy)" default className="method-panel">
     <MethodItem>
@@ -357,7 +357,7 @@ When navigating to the site, you get a **405** response and an HTML page with ca
   </TabItem>
 </Tabs>
 
-## Option 2
+### Option 2
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="proxyless" label="AmazonTask (without proxy)" default className="method-panel">
     <MethodItem>
@@ -441,7 +441,7 @@ When navigating to the site, you get a **405** response and an HTML page with ca
   </TabItem>
 </Tabs>
 
-## Option 3
+### Option 3
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="proxyless" label="AmazonTask (without proxy)" default className="method-panel">
     <MethodItem>
@@ -545,18 +545,18 @@ Use the [getTaskResult](../api/methods/get-task-result.mdx) method to get the Am
 		}
 		```
 		**Response**
-		```json
-		{
-			"errorId":0,
-			"status":"ready",
-			"solution": {
-				"cookies": {
-					"aws-waf-token": "10115f5b-ebd8-45c7-851e-cfd4f6a82e3e:EAoAua1QezAhAAAA:dp7sp2rXIRcnJcmpWOC1vIu+yq/A3EbR6b6K7c67P49usNF1f1bt/Af5pNcZ7TKZlW+jIZ7QfNs8zjjqiu8C9XQq50Pmv2DxUlyFtfPZkGwk0d27Ocznk18/IOOa49Rydx+/XkGA7xoGLNaUelzNX34PlyXjoOtL0rzYBxMAQy0D1tn+Q5u97kJBjs5Mytqu9tXPIPCTSn4dfXv5llSkv9pxBEnnhwz6HEdmdJMdfur+YRW1MgCX7i3L2Y0/CNL8kd8CEhTMzwyoXekrzBM="
-				},
-				"userAgent": "userAgentPlaceholder"
-			}
-		}
-		```
+```json
+{
+  "errorId":0,
+  "status":"ready",
+  "solution": {
+    "cookies": {
+      "aws-waf-token": "10115f5b-ebd8-45c7-851e-cfd4f6a82e3e:EAoAua1QezAhAAAA:dp7sp2rXIRcnJcmpWOC1vIu+yq/A3EbR6b6K7c67P49usNF1f1bt/Af5pNcZ7TKZlW+jIZ7QfNs8zjjqiu8C9XQq50Pmv2DxUlyFtfPZkGwk0d27Ocznk18/IOOa49Rydx+/XkGA7xoGLNaUelzNX34PlyXjoOtL0rzYBxMAQy0D1tn+Q5u97kJBjs5Mytqu9tXPIPCTSn4dfXv5llSkv9pxBEnnhwz6HEdmdJMdfur+YRW1MgCX7i3L2Y0/CNL8kd8CEhTMzwyoXekrzBM="
+    },
+    "userAgent": "userAgentPlaceholder"
+  }
+}
+```
 	</MethodDescription>
 </TabItem>
 
