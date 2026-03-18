@@ -110,15 +110,15 @@ loadAndEncodeCaptchaToBase64(captchaUrl);
 	</MethodItem>
 	<MethodDescription>
 		**Request**
-		```json
-		{
-		  "clientKey":"API_KEY",
-		  "task": {
-			"type":"ImageToTextTask",
-			"body":"BASE64_BODY_HERE!"
-		  }
-		}
-		```
+```json
+{
+  "clientKey": "API_KEY",
+  "task": {
+    "type": "ImageToTextTask",
+    "body": "BASE64_BODY_HERE!"
+  }
+}
+```
 		**Response**
 		```json
 		{
@@ -147,15 +147,15 @@ Use the [getTaskResult](../api/methods/get-task-result.mdx) method to get the ca
 		}
 		```
 		**Response**
-		```json
-		{
-		  "errorId":0,
-		  "status":"ready",
-		  "solution": {
-			"text":"answer"
-		  }
-		}
-		```
+```json
+{
+  "errorId": 0,
+  "status": "ready",
+  "solution": {
+    "text": "answer"
+  }
+}
+```
 	</MethodDescription>
 </TabItem>
 

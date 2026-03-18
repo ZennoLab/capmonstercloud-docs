@@ -89,24 +89,23 @@ O método automático de resolução de CAPTCHA baseado em tokens Prosopo Procap
 	</MethodItem>
 	<MethodDescription>
 		**Solicitação**
-		```json
-		{
-			"clientKey": "API_KEY",
-			"task": 
-			{
-				"type": "ProsopoTask",
-				"websiteURL": "https://www.example.com",
-				"websiteKey": "5EZU3LG31uzq1Mwi8inwqxmfvFDpj7VzwDnZwj4Q3syyxBwV"
-			}
-		}
-		```
+```json
+{
+  "clientKey": "API_KEY",
+  "task": {
+    "type": "ProsopoTask",
+    "websiteURL": "https://www.example.com",
+    "websiteKey": "5EZU3LG31uzq1Mwi8inwqxmfvFDpj7VzwDnZwj4Q3syyxBwV"
+  }
+}
+```
 		**Resposta**
-		```json
-		{
-			"errorId":0,
-			"taskId":407533077
-		}
-		```
+```json
+{
+  "errorId":0,
+  "taskId":407533077
+}
+```
 	</MethodDescription>
   </TabItem>
 
@@ -118,29 +117,28 @@ O método automático de resolução de CAPTCHA baseado em tokens Prosopo Procap
 	</MethodItem>
 	<MethodDescription>
 		**Solicitação**
-		```json
-		{
-			"clientKey": "API_KEY",
-			"task": 
-			{
-				"type": "ProsopoTask",
-				"websiteURL": "https://www.example.com",
-				"websiteKey": "5EZU3LG31uzq1Mwi8inwqxmfvFDpj7VzwDnZwj4Q3syyxBwV",
-				"proxyType":"http",
-				"proxyAddress":"8.8.8.8",
-				"proxyPort":8080,
-				"proxyLogin":"proxyLoginHere",
-				"proxyPassword":"proxyPasswordHere"
-			}
-		}
-		```
+```json
+{
+  "clientKey": "API_KEY",
+  "task": {
+    "type": "ProsopoTask",
+    "websiteURL": "https://www.example.com",
+    "websiteKey": "5EZU3LG31uzq1Mwi8inwqxmfvFDpj7VzwDnZwj4Q3syyxBwV",
+    "proxyType": "http",
+    "proxyAddress": "8.8.8.8",
+    "proxyPort": 8080,
+    "proxyLogin": "proxyLoginHere",
+    "proxyPassword": "proxyPasswordHere"
+  }
+}
+```
 		**Resposta**
-		```json
-		{
-			"errorId":0,
-			"taskId":407533077
-		}
-		```
+```json
+{
+  "errorId":0,
+  "taskId":407533077
+}
+```
 	</MethodDescription>
   </TabItem>
 </Tabs>
@@ -157,23 +155,23 @@ Use o método [getTaskResult](../api/methods/get-task-result.mdx) para obter a s
 	</MethodItem>
 	<MethodDescription>
 		**Solicitação**
-		```json
-		{
-			"clientKey":"API_KEY",
-			"taskId": 407533077
-		}
-		```
+```json
+{
+  "clientKey":"API_KEY",
+  "taskId": 407533077
+}
+```
 		**Resposta**
-		```json
-		{
-			"errorId":0,
-			"status":"ready",
-			"solution": 
-			{
-				"token": "0x00016c68747470733a2f2f70726f6e6f6465332e70726f736f706f2e696fc0354550516f4d5a454463354c704e376774784d4d7a5950547a4136..."
-			}
-		}
-		```
+```json
+{
+  "errorId":0,
+  "status":"ready",
+  "solution": 
+  {
+    "token": "0x00016c68747470733a2f2f70726f6e6f6465332e70726f736f706f2e696fc0354550516f4d5a454463354c704e376774784d4d7a5950547a4136..."
+  }
+}
+```
 	</MethodDescription>
 </TabItem>
 

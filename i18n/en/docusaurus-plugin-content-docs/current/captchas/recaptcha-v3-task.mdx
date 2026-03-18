@@ -81,19 +81,19 @@ When creating a task, it is recommended to provide two parameters: `pageAction` 
 	</MethodItem>
 	<MethodDescription>
 		**Request**
-        ```json
-        {
-          "clientKey": "API_KEY",
-          "task": {
-            "type": "RecaptchaV3TaskProxyless",
-            "websiteURL": "https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta",
-            "websiteKey": "6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",
-            "isEnterprise": false,
-            "minScore": 0.7,
-            "pageAction": "myverify"
-          }
-        }
-      ```
+```json
+{
+  "clientKey": "API_KEY",
+  "task": {
+    "type": "RecaptchaV3TaskProxyless",
+    "websiteURL": "https://lessons.zennolab.com/captchas/recaptcha/v3.php?level=beta",
+    "websiteKey": "6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d8juDob",
+    "isEnterprise": false,
+    "minScore": 0.7,
+    "pageAction": "myverify"
+  }
+}
+```
 		**Response**
 		```json
 		{
@@ -121,22 +121,22 @@ Use the [getTaskResult](../api/methods/get-task-result.mdx) to request answer fo
 	</MethodItem>
 	<MethodDescription>
 		**Request**
-		```json
-		{
-		  "clientKey":"API_KEY",
-		  "taskId": 407533072
-		}
-		```
+```json
+{
+  "clientKey":"API_KEY",
+  "taskId": 407533072
+}
+```
 		**Response**
-		```json
-		{
-		  "errorId":0,
-		  "status":"ready",
-		  "solution": {
-			"gRecaptchaResponse":"3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
-		  }
-		}
-		```
+```json
+{
+  "errorId": 0,
+  "status": "ready",
+  "solution": {
+    "gRecaptchaResponse": "3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
+  }
+}
+```
     For some websites, the response may look like the following. When submitting the solution, make sure to use the UserAgent provided in the response, even if it differs from the one currently used by your browser or script.
 
 ```json

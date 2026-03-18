@@ -34,14 +34,14 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 <BlogLink url="https://capmonster.cloud/zh/blog/Cloudflare/what-is-cloudflare-captcha"/>
 <BlogLink url="https://capmonster.cloud/zh/blog/Cloudflare/how-cloudflare-bot-challenge-and-turnstile-protect-web-traffic"/>
 
-## 请求参数
-
 :::warning **注意！**
 
 * 对此任务请使用 **自定义代理**。
 
 * 解决后，你将收到 **特殊 cookies**，需添加到浏览器。
 :::
+
+## 请求参数
 
 <TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless（无需代理）" default className="bordered-panel">
   <ParamItem title="type" required type="string" />
@@ -125,24 +125,24 @@ console.log(htmlBase64);
 	</MethodItem>
 	<MethodDescription>
 		**请求**
-		```json 
-		{
-		  "clientKey":"API_KEY",
-		  "task": {
-			"type":"TurnstileTask",
-			"websiteURL":"https://example.com",
-			"websiteKey":"xxxxxxxxxx",
-			"cloudflareTaskType": "wait_room",
-			"htmlPageBase64": "PCFET0NUWVBFIGh0...vYm9keT48L2h0bWw+",
-			"userAgent": "userAgentPlaceholder",
-			"proxyType":"http",
-			"proxyAddress":"8.8.8.8",
-			"proxyPort":8080,
-			"proxyLogin":"proxyLoginHere",
-			"proxyPassword":"proxyPasswordHere"
-		  }
-		}
-		```
+```json 
+{
+  "clientKey": "API_KEY",
+  "task": {
+    "type": "TurnstileTask",
+    "websiteURL": "https://example.com",
+    "websiteKey": "xxxxxxxxxx",
+    "cloudflareTaskType": "wait_room",
+    "htmlPageBase64": "PCFET0NUWVBFIGh0...vYm9keT48L2h0bWw+",
+    "userAgent": "userAgentPlaceholder",
+    "proxyType": "http",
+    "proxyAddress": "8.8.8.8",
+    "proxyPort": 8080,
+    "proxyLogin": "proxyLoginHere",
+    "proxyPassword": "proxyPasswordHere"
+  }
+}
+```
 		**响应**
 		```json
 		{

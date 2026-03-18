@@ -120,23 +120,23 @@ However, if the token is not accepted by the target site, try again with [your o
 		</MethodItem>
 		<MethodDescription>
 			**Request**
-			```json
-			{
-			  "clientKey":"API_KEY",
-			  "task": {
-				"type":"RecaptchaV2Task",
-				"websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
-				"websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"
-			  }
-			}
-			```
+```json
+{
+  "clientKey": "API_KEY",
+  "task": {
+    "type": "RecaptchaV2Task",
+    "websiteURL": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
+    "websiteKey": "6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"
+  }
+}
+```
 			**Response**
-			```json
-			{
-			  "errorId":0,
-			  "taskId":407533072
-			}
-			```
+```json
+{
+  "errorId":0,
+  "taskId":407533072
+}
+```
 		</MethodDescription>
 	</TabItem>
 
@@ -148,29 +148,29 @@ However, if the token is not accepted by the target site, try again with [your o
 		</MethodItem>
 		<MethodDescription>
 			**Request**
-			```json
-			{
-			  "clientKey":"API_KEY",
-			  "task": {
-				"type":"RecaptchaV2Task",
-				"websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
-				"websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
-				"proxyType":"http",
-				"proxyAddress":"8.8.8.8",
-				"proxyPort":8080,
-				"proxyLogin":"proxyLoginHere",
-				"proxyPassword":"proxyPasswordHere",
-				"userAgent":"userAgentPlaceholder"
-			  }
-			}
-			```
+```json
+{
+  "clientKey": "API_KEY",
+  "task": {
+    "type": "RecaptchaV2Task",
+    "websiteURL": "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
+    "websiteKey": "6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
+    "proxyType": "http",
+    "proxyAddress": "8.8.8.8",
+    "proxyPort": 8080,
+    "proxyLogin": "proxyLoginHere",
+    "proxyPassword": "proxyPasswordHere",
+    "userAgent": "userAgentPlaceholder"
+  }
+}
+```
 			**Response**
-			```json
-			{
-			  "errorId":0,
-			  "taskId":407533072
-			}
-			```
+```json
+{
+  "errorId":0,
+  "taskId":407533072
+}
+```
 		</MethodDescription>
 	</TabItem>  
 </Tabs>
@@ -191,22 +191,22 @@ Use the [getTaskResult](../api/methods/get-task-result.mdx) method to request an
 	</MethodItem>
 	<MethodDescription>
 		**Request**
-		```json
-		{
-		  "clientKey":"API_KEY",
-		  "taskId": 407533072
-		}
-		```
+```json
+{
+  "clientKey":"API_KEY",
+  "taskId": 407533072
+}
+```
 		**Response**
-		```json
-		{
-		  "errorId":0,
-		  "status":"ready",
-		  "solution": {
-			"gRecaptchaResponse":"3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
-		  }
-		}
-		```
+```json
+{
+  "errorId": 0,
+  "status": "ready",
+  "solution": {
+    "gRecaptchaResponse": "3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
+  }
+}
+```
    For some websites, the response may look like the following. When submitting the solution, make sure to use the UserAgent provided in the response, even if it differs from the one currently used by your browser or script.
 
 ```json

@@ -159,7 +159,7 @@ CapMonster Cloud 可以返回解决方案结果为 **token** 或 **cf_clearance 
 * `callback`：验证码成功解决后调用的函数
 
 ---
-## 选项 2. Challenge（cookie）
+### 选项 2. Challenge（cookie）
 
 :::warning **注意！**
 
@@ -336,24 +336,24 @@ console.log(htmlBase64);
 	</MethodItem>
 	<MethodDescription>
 		**请求**
-		```json 
-		{
-		  "clientKey":"API_KEY",
-		  "task": {
-			"type":"TurnstileTask",
-			"websiteURL":"https://example.com",
-			"websiteKey":"xxxxxxxxxx",
-			"cloudflareTaskType": "cf_clearance",
-			"htmlPageBase64": "PCFET0NUWVBFIGh0...vYm9keT48L2h0bWw+",
-			"userAgent": "userAgentPlaceholder",
-			"proxyType":"http",
-			"proxyAddress":"8.8.8.8",
-			"proxyPort":8080,
-			"proxyLogin":"proxyLoginHere",
-			"proxyPassword":"proxyPasswordHere"
-		  }
-		}
-		```
+```json 
+{
+  "clientKey": "API_KEY",
+  "task": {
+    "type": "TurnstileTask",
+    "websiteURL": "https://example.com",
+    "websiteKey": "xxxxxxxxxx",
+    "cloudflareTaskType": "cf_clearance",
+    "htmlPageBase64": "PCFET0NUWVBFIGh0...vYm9keT48L2h0bWw+",
+    "userAgent": "userAgentPlaceholder",
+    "proxyType": "http",
+    "proxyAddress": "8.8.8.8",
+    "proxyPort": 8080,
+    "proxyLogin": "proxyLoginHere",
+    "proxyPassword": "proxyPasswordHere"
+  }
+}
+```
 		**响应**
 		```json
 		{

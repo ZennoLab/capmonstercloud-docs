@@ -77,17 +77,17 @@ You can also solve reCAPTCHA v3 Enterprise using the reCAPTCHA v3 task type by s
 	</MethodItem>
 	<MethodDescription>
 		**Request**
-		```json
-		{
-		  "clientKey":"API_KEY",
-		  "task": {
-			"type":"RecaptchaV3EnterpriseTask",
-			"websiteURL":"https://example.com",
-			"websiteKey":"6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d4TuRTE",
-			"minScore": 0.7
-		  }
-		}
-		```
+```json
+{
+  "clientKey": "API_KEY",
+  "task": {
+    "type": "RecaptchaV3EnterpriseTask",
+    "websiteURL": "https://example.com",
+    "websiteKey": "6Le0xVgUAAAAAIt20XEB4rVhYOODgTl00d4TuRTE",
+    "minScore": 0.7
+  }
+}
+```
 		**Response**
 		```json
 		{
@@ -112,34 +112,34 @@ Use the [getTaskResult](../api/methods/get-task-result.mdx) to request answer fo
 	</MethodItem>
 	<MethodDescription>
 		**Request**
-		```json
-		{
-		  "clientKey":"API_KEY",
-		  "taskId": 407533072
-		}
-		```
+```json
+{
+  "clientKey":"API_KEY",
+  "taskId": 407533072
+}
+```
 		**Response**
-		```json
-		{
-		  "errorId":0,
-		  "status":"ready",
-		  "solution": {
-			"gRecaptchaResponse":"3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
-		  }
-		}
-		```
+```json
+{
+  "errorId": 0,
+  "status": "ready",
+  "solution": {
+    "gRecaptchaResponse": "3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3"
+  }
+}
+```
     For some websites, the response may look approximately like the following. When confirming the solution, you should use the UserAgent provided in the response, even if it differs from the current browser UserAgent:
 
-    ```json
-		{
-		  "errorId":0,
-		  "status":"ready",
-		  "solution": {
-			"gRecaptchaResponse":"3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3",
-			"userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
-		  }
-		}
-		```
+```json
+{
+  "errorId": 0,
+  "status": "ready",
+  "solution": {
+    "gRecaptchaResponse": "3AHJ_VuvYIBNBW5yyv0zRYJ75VkOKvhKj9_xGBJKnQimF72rfoq3Iy-DyGHMwLAo6a3",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+  }
+}
+```
 	</MethodDescription>
 </TabItem>
 

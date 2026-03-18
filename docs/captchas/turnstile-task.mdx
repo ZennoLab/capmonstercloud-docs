@@ -30,11 +30,6 @@ import { ArticleHead } from '../../src/theme/ArticleHead';
 <BlogLink url="https://capmonster.cloud/ru/blog/Cloudflare/what-is-cloudflare-captcha"/>
 <BlogLink url="https://capmonster.cloud/ru/blog/Cloudflare/how-cloudflare-bot-challenge-and-turnstile-protect-web-traffic"/>
 
-
-## Параметры запроса
-
-Вам требуется решить **обычную** Turstile капчу, как [здесь](https://zenno.link/zl-support). Обратите внимание, что капча на страницах Challenge может выглядеть идентично. Посмотрите, [как отличить обычный Turnstile от Challenge](#как-отличить-cloudflare-turnstile-от-cloudflare-challenge). 
-
 :::warning **Внимание!**
 * CapMonster Cloud по умолчанию работает через встроенные прокси — они уже включены в стоимость. Указывать собственные прокси требуется только в тех случаях, когда сайт не принимает токен или доступ к встроенным сервисам ограничен.
 
@@ -42,6 +37,10 @@ import { ArticleHead } from '../../src/theme/ArticleHead';
 
 * После решения вы получите **токен** для подтверждения прохождения проверки.
 :::
+
+## Параметры запроса
+
+Вам требуется решить **обычную** Turstile капчу, как [здесь](https://zenno.link/zl-support). Обратите внимание, что капча на страницах Challenge может выглядеть идентично. Посмотрите, [как отличить обычный Turnstile от Challenge](#как-отличить-cloudflare-turnstile-от-cloudflare-challenge). 
 
 <TabItem value="proxyless" label="TurnstileTask (без прокси)" default className="bordered-panel">
   <ParamItem title="type" required type="string" />

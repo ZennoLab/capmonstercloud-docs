@@ -45,7 +45,7 @@ CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费
 :::
 
 ## 请求参数
-## 选项 1
+### 选项 1
 <TabItem value="proxyless" label="AmazonTask (无代理)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **AmazonTask**
@@ -107,7 +107,7 @@ CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费
 
 </TabItem>
 
-## 选项 2 
+### 选项 2 
 <TabItem value="proxyless" label="AmazonTaskProxyless (无代理)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **AmazonTask**
@@ -184,7 +184,7 @@ CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费
 
 </TabItem>
 
-  ## 选项 3
+### 选项 3
 
 如果网站使用隐形验证码且仅加载 `challenge.js`，请使用此选项。  
 在这种情况下，不需要传递选项 2 的所有参数 — 可保留为空。只需传递 `challenge.js` 的值。
@@ -278,7 +278,7 @@ CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费
 
 
 ## 任务创建方法
-## 选项 1
+### 选项 1
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="proxyless" label="AmazonTask (无代理)" default className="method-panel">
     <MethodItem>
@@ -358,7 +358,7 @@ CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费
   </TabItem>
 </Tabs>
 
-## 选项 2
+### 选项 2
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="proxyless" label="AmazonTask (无代理)" default className="method-panel">
     <MethodItem>
@@ -442,7 +442,7 @@ CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费
   </TabItem>
 </Tabs>
 
-## 选项 3
+### 选项 3
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
   <TabItem value="proxyless" label="AmazonTask (无代理)" default className="method-panel">
     <MethodItem>
@@ -537,25 +537,25 @@ CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费
 	</MethodItem>
 	<MethodDescription>
 		**要求**
-		```json
-		{
-			"clientKey":"API_KEY",
-			"taskId": 407533072
-		}
-		```
+```json
+{
+  "clientKey":"API_KEY",
+  "taskId": 407533072
+}
+```
 		**回应**
-		```json
-		{
-			"errorId":0,
-			"status":"ready",
-			"solution": {
-				"cookies": {
-					"aws-waf-token": "10115f5b-ebd8-45c7-851e-cfd4f6a82e3e:EAoAua1QezAhAAAA:dp7sp2rXIRcnJcmpWOC1vIu+yq/A3EbR6b6K7c67P49usNF1f1bt/Af5pNcZ7TKZlW+jIZ7QfNs8zjjqiu8C9XQq50Pmv2DxUlyFtfPZkGwk0d27Ocznk18/IOOa49Rydx+/XkGA7xoGLNaUelzNX34PlyXjoOtL0rzYBxMAQy0D1tn+Q5u97kJBjs5Mytqu9tXPIPCTSn4dfXv5llSkv9pxBEnnhwz6HEdmdJMdfur+YRW1MgCX7i3L2Y0/CNL8kd8CEhTMzwyoXekrzBM="
-				},
-				"userAgent": "userAgentPlaceholder"
-			}
-		}
-		```
+```json
+{
+  "errorId": 0,
+  "status": "ready",
+  "solution": {
+    "cookies": {
+      "aws-waf-token": "10115f5b-ebd8-45c7-851e-cfd4f6a82e3e:EAoAua1QezAhAAAA:dp7sp2rXIRcnJcmpWOC1vIu+yq/A3EbR6b6K7c67P49usNF1f1bt/Af5pNcZ7TKZlW+jIZ7QfNs8zjjqiu8C9XQq50Pmv2DxUlyFtfPZkGwk0d27Ocznk18/IOOa49Rydx+/XkGA7xoGLNaUelzNX34PlyXjoOtL0rzYBxMAQy0D1tn+Q5u97kJBjs5Mytqu9tXPIPCTSn4dfXv5llSkv9pxBEnnhwz6HEdmdJMdfur+YRW1MgCX7i3L2Y0/CNL8kd8CEhTMzwyoXekrzBM="
+    },
+    "userAgent": "userAgentPlaceholder"
+  }
+}
+```
 	</MethodDescription>
 </TabItem>
 
