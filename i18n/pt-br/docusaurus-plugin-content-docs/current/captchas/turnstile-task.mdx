@@ -25,6 +25,9 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 
 ![](./images/tunrstile-task/turnstile.png)
 
+Você deve resolver um captcha Turnstile **padrão**, como o mostrado [aqui](https://zenno.link/zl-support).
+Observe que os captchas em páginas protegidas pelo Cloudflare podem parecer visualmente idênticos. Consulte [esta seção](#como-diferenciar-o-cloudflare-turnstile-do-cloudflare-challenge) para saber como diferenciar um captcha Turnstile padrão de um Cloudflare Challenge.
+
 Após resolver o CAPTCHA, você receberá um **token** que deve ser inserido em um campo específico da página.
 Todos os subtipos do Turnstile são suportados automaticamente: **manual**, **não interativo** e **invisível**. Portanto, não é necessário especificar um subtipo para um captcha padrão.
 
@@ -40,9 +43,13 @@ Todos os subtipos do Turnstile são suportados automaticamente: **manual**, **n�
 
 ## Parâmetros da solicitação
 
-Você deve resolver um captcha Turnstile **padrão**, como o mostrado [aqui](https://zenno.link/zl-support).
-Observe que os captchas em páginas protegidas pelo Cloudflare podem parecer visualmente idênticos. Consulte [esta seção](#como-diferenciar-o-cloudflare-turnstile-do-cloudflare-challenge) para saber como diferenciar um captcha Turnstile padrão de um Cloudflare Challenge.
-
+<br />
+<span style={{ fontSize: "15px", fontWeight: 700 }}>
+>  IMPORTANTE: alguns valores de parâmetros são dinâmicos — eles mudam a cada renderização da página que contém Cloudflare Turnstile.  
+> Extraia-os imediatamente antes de criar a tarefa para evitar erros durante a resolução.  
+> Veja exemplos de extração automática de parâmetros na seção [Como encontrar todos os parâmetros necessários para a criação da tarefa](#como-encontrar-todos-os-parâmetros-necessários-para-a-criação-da-tarefa).
+</span>
+<br />
 
 <TabItem value="proxyless" label="TurnstileTask (sem proxy)" default className="bordered-panel">
   <ParamItem title="type" required type="string" />

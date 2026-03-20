@@ -33,6 +33,14 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 
 ## Request parameters
 
+<br />
+<span style={{ fontSize: "15px", fontWeight: 700 }}>
+> IMPORTANT: some parameter values are dynamic — they change with each render of the page using Binance.  
+> Extract them immediately before creating the task to avoid errors during solving.  
+> See examples of parameter extraction in the section [How to get websiteKey and validateId](#how-to-get-websitekey-and-validateid).
+</span>
+<br />
+
   <TabItem value="proxy" label="BinanceTask (with proxy)" default className="bordered-panel">
 
     <ParamItem title="type" required type="string" />
@@ -190,7 +198,7 @@ Use the method [getTaskResult](../api/methods/get-task-result.mdx) to obtain the
 	</MethodDescription>
 </TabItem>
 
-## How to obtain `websiteKey` and `validateId`
+## How to get `websiteKey` and `validateId`
 Enable Developer Tools, go to the Network tab, activate the CAPTCHA, and look at the requests. Some of them will contain the required parameter values.
 For example, the parameters:
 
