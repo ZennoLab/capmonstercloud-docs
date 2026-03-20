@@ -34,6 +34,15 @@ The object contains data about the task for solving ReCaptcha2 from Google.
 
 
 ## Request parameters
+
+<br />
+<span style={{ fontSize: "15px", fontWeight: 700 }}>
+>  IMPORTANT: some parameter values are dynamic — they change with each render of the page using reCAPTCHA.  
+> Extract them immediately before creating the task to avoid errors during solving.  
+> See examples of automatic parameter extraction in the section [How to find all required parameters for task creation](#how-to-find-all-required-parameters-for-task-creation).
+</span>
+<br />
+
 <TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (without proxy)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **ComplexImageTask**

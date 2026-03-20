@@ -25,6 +25,8 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 
 ![](./images/tunrstile-task/turnstile.png)
 
+You are required to solve a **regular** Turnstile captcha, like [this one](https://zenno.link/zl-support). Please note that captchas on Cloudflare pages may look identical. See [how to distinguish a regular Turnstile from a Cloudflare Challenge](#how-to-differentiate-cloudflare-turnstile-from-cloudflare-challenge).
+
 After solving the CAPTCHA, you receive a token that must be inserted into a designated field on the page.
 All Turnstile subtypes are automatically supported: **manual**, **non-interactive**, and **invisible**. Therefore, you do not need to specify a subtype for a standard captcha.
 
@@ -41,7 +43,13 @@ All Turnstile subtypes are automatically supported: **manual**, **non-interactiv
 
 ## Request parameters
 
-You are required to solve a **regular** Turnstile captcha, like [this one](https://zenno.link/zl-support). Please note that captchas on Cloudflare pages may look identical. See [how to distinguish a regular Turnstile from a Cloudflare Challenge](#how-to-differentiate-cloudflare-turnstile-from-cloudflare-challenge).
+<br />
+<span style={{ fontSize: "15px", fontWeight: 700 }}>
+>  IMPORTANT: some parameter values are dynamic — they change with each render of the page using Cloudflare Turnstile.  
+> Extract them immediately before creating the task to avoid errors during solving.  
+> See examples of automatic parameter extraction in the section [How to find all required parameters for task creation](#how-to-find-all-required-parameters-for-task-creation).
+</span>
+<br />
 
 <TabItem value="proxyless" label="TurnstileTask (without proxy)" default className="bordered-panel">
   <ParamItem title="type" required type="string" />

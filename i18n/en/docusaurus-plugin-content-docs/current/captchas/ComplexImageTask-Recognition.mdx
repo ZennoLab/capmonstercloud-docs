@@ -73,6 +73,13 @@ Using proxy servers is not required for this task.
 
 ## Request parameters
 
+<br />
+<span style={{ fontSize: "15px", fontWeight: 700 }}>
+>  IMPORTANT: retrieve the base64 images immediately before creating the task to avoid errors during solving (see the section [How to get base64](#how-to-get-base64)).
+</span>
+<br />
+
+
 <TabItem value="proxyless" label="ComplexImageTask (without proxy)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **ComplexImageTask**
@@ -849,7 +856,7 @@ In the request, you need to send **one image** (together with the text) in **bas
 
 ---
 
-## How to find Base64
+## How to get Base64
 
 Images on web pages can be represented either as a URL or directly encoded in Base64 format. To find the required value, right-click on the image, select **Inspect**, and carefully examine the **Elements** section or the network requests grid—there you can find the URL or the encoded content.
 

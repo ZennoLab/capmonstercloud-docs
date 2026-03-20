@@ -31,6 +31,15 @@ O objeto contém dados sobre a tarefa para resolver o ReCaptcha2 do Google.
 
 
 ## Parâmetros da solicitação
+
+<br />
+<span style={{ fontSize: "15px", fontWeight: 700 }}>
+>  IMPORTANTE: alguns valores de parâmetros são dinâmicos, ou seja, mudam a cada renderização da página que contém reCAPTCHA.  
+> Extraia-os imediatamente antes de criar a tarefa para evitar erros durante a resolução.  
+> Veja exemplos de extração automática de parâmetros na seção [Como encontrar todos os parâmetros necessários para criar uma tarefa](#como-encontrar-todos-os-parâmetros-necessários-para-criar-uma-tarefa).
+</span>
+<br />
+
 <TabItem value="proxyless" label="RecaptchaV2EnterpriseTaskProxyless (sem proxy)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **ComplexImageTask**
@@ -175,7 +184,7 @@ https://api.capmonster.cloud/getTaskResult
 | :- | :- | :- |
 |answer|Array|Lista com valores booleanos, "true" significa que você precisa clicar na imagem correspondente a essa posição.|
 
-## Como Encontrar Todos os Parâmetros Necessários para a Criação da Tarefa
+## Como encontrar todos os parâmetros necessários para criar uma tarefa
 
 ### Manualmente
 

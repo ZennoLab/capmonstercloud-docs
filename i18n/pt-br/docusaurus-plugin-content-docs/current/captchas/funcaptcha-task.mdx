@@ -32,6 +32,14 @@ Se o proxy utiliza autenticação por IP, é necessário adicionar o endereço *
 
 ## Parâmetros da solicitação
 
+<br />
+<span style={{ fontSize: "15px", fontWeight: 700 }}>
+>  IMPORTANTE: alguns valores de parâmetros são dinâmicos — eles mudam a cada renderização da página que contém FunCaptcha.  
+> Extraia-os imediatamente antes de criar a tarefa para evitar erros durante a resolução.  
+> Veja exemplos de extração de parâmetros nas seções [Encontrando os parâmetros do FunCaptcha](#encontrando-os-parâmetros-do-funcaptcha) e [Resolução automática do FunCaptcha com data[blob]](#resolução-automática-do-funcaptcha-com-datablob).
+</span>
+<br />
+
 <TabItem value="proxy" label="FunCaptchaTask" className="bordered-panel">
 <ParamItem title="type" required type="string" />
 **FunCaptchaTask**

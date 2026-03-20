@@ -36,6 +36,15 @@ Este tipo de captcha geralmente exige que o usuário resolva um quebra-cabeça m
 
 ## Parâmetros da solicitação
 
+<br />
+<span style={{ fontSize: "15px", fontWeight: 700 }}>
+>  IMPORTANTE: alguns valores de parâmetros são dinâmicos — eles mudam a cada renderização da página que contém DataDome.  
+> Extraia-os imediatamente antes de criar a tarefa para evitar erros durante a resolução.  
+> Veja exemplos de extração de parâmetros nas seções [Como encontrar datadomeCookie](#como-encontrar-datadomecookie) e [Exemplos de solução automática do DataDome](#exemplos-de-solução-automática-do-datadome).
+</span>
+<br />
+
+
 <TabItem value="proxyless" label="CustomTask (without proxy)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **CustomTask**
@@ -257,7 +266,7 @@ ou:
 ![](./images/datadome/datadomeCookie2.png)
 
 
-## Exemplo de solução automática do DataDome
+## Exemplos de solução automática do DataDome
 
 :::warning **Atenção!**
 Os exemplos abaixo são fornecidos apenas para fins informativos e para demonstrar a lógica geral.

@@ -25,6 +25,8 @@ import { ArticleHead } from '../../src/theme/ArticleHead';
 
 ![](./images/tunrstile-task/turnstile.png)
 
+Вам требуется решить **обычную** Turstile капчу, как [здесь](https://zenno.link/zl-support). Обратите внимание, что капча на страницах Challenge может выглядеть идентично. Посмотрите, [как отличить обычный Turnstile от Challenge](#как-отличить-cloudflare-turnstile-от-cloudflare-challenge). 
+
 После решения капчи вы получаете токен, который необходимо вставить в специальное поле на странице. Автоматически поддерживаются все подтипы Turnstile: *manual*, *non-interactive* и *invisible*. Поэтому нет необходимости указывать подтип для обычной капчи.
 
 <BlogLink url="https://capmonster.cloud/ru/blog/Cloudflare/what-is-cloudflare-captcha"/>
@@ -40,7 +42,13 @@ import { ArticleHead } from '../../src/theme/ArticleHead';
 
 ## Параметры запроса
 
-Вам требуется решить **обычную** Turstile капчу, как [здесь](https://zenno.link/zl-support). Обратите внимание, что капча на страницах Challenge может выглядеть идентично. Посмотрите, [как отличить обычный Turnstile от Challenge](#как-отличить-cloudflare-turnstile-от-cloudflare-challenge). 
+<br />
+<span style={{ fontSize: "15px", fontWeight: 700 }}>
+>  ВАЖНО: значения некоторых параметров являются динамическими — они меняются при каждом рендеринге страницы с Cloudflare Turnstile.  
+> Извлекайте их непосредственно перед созданием задачи, чтобы избежать ошибок при решении.
+> Примеры автоматического извлечения параметров см. в разделе [Как найти все нужные параметры для создания задачи](#как-найти-все-нужные-параметры-для-создания-задачи).
+</span>
+<br />
 
 <TabItem value="proxyless" label="TurnstileTask (без прокси)" default className="bordered-panel">
   <ParamItem title="type" required type="string" />
@@ -252,7 +260,7 @@ import { ArticleHead } from '../../src/theme/ArticleHead';
 </details>
 
 ---
-## Как найти все нужные параметры для создания задачи на решение
+## Как найти все нужные параметры для создания задачи
 
 ### Вручную
 

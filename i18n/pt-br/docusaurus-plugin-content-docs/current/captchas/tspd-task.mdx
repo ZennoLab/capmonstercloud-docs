@@ -33,6 +33,14 @@ TSPD é uma proteção WAF (Web Application Firewall) projetada para prevenir at
 
 ## Parâmetros da solicitação
 
+<br />
+<span style={{ fontSize: "15px", fontWeight: 700 }}>
+>  IMPORTANTE: alguns valores de parâmetros são dinâmicos — eles mudam a cada renderização da página que contém TSPD.  
+> Extraia-os imediatamente antes de criar a tarefa para evitar erros durante a resolução.  
+> Veja exemplos de extração automática de parâmetros nas seções [Como obter cookies](#como-obter-cookies), [Como obter o Base64 da página](#como-obter-o-base64-da-página) e [Exemplos de resolução automática do TSPD](#exemplos-de-resolução-automática-do-tspd).
+</span>
+<br />
+
 <TabItem value="proxy" label="CastleTask" className="bordered-panel">
 <ParamItem title="type" required type="string" />
 **CustomTask**

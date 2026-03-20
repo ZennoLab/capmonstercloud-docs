@@ -45,6 +45,15 @@ CapMonster Cloud 默认通过内置代理工作——这些代理已包含在费
 :::
 
 ## 请求参数
+
+<br />
+<span style={{ fontSize: "15px", fontWeight: 700 }}>
+>  重要提示：某些参数的值是动态的，也就是说，在每次渲染包含 Amazon (AWS WAF) 的页面时都会发生变化。  
+> 请在创建任务前立即提取这些参数，以避免在解决过程中出现错误。  
+> 自动提取参数的示例请参见章节 [如何查找任务创建所需的所有参数](#如何查找任务创建所需的所有参数)。
+</span>
+<br />
+
 ### 选项 1
 <TabItem value="proxyless" label="AmazonTask (无代理)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
