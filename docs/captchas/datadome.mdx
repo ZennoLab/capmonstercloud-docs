@@ -37,6 +37,14 @@ import { ArticleHead } from '../../src/theme/ArticleHead';
 
 ## Параметры запроса
 
+<br />
+<span style={{ fontSize: "15px", fontWeight: 700 }}>
+>  ВАЖНО: значения некоторых параметров являются динамическими — они меняются при каждом рендеринге страницы с DataDome.  
+> Извлекайте их непосредственно перед созданием задачи, чтобы избежать ошибок при решении.
+> Примеры извлечения параметров см. в разделах [Как найти datadomeCookie](#как-найти-datadomecookie) и [Примеры автоматического решения DataDome](#примеры-автоматического-решения-datadome).
+</span>
+<br />
+
 <TabItem value="proxyless" label="CustomTask (без прокси)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **CustomTask**
@@ -255,7 +263,7 @@ import { ArticleHead } from '../../src/theme/ArticleHead';
 
 ![](./images/datadome/datadomeCookie2.png)
 
-## Пример автоматического решения DataDome
+## Примеры автоматического решения DataDome
 
 :::warning **Внимание!**
 Приведённые ниже примеры предназначены для ознакомления и демонстрации общей логики.

@@ -37,6 +37,15 @@ import { ArticleHead } from '../../../../../src/theme/ArticleHead';
 
 ## Parâmetros da solicitação
 
+<br />
+<span style={{ fontSize: "15px", fontWeight: 700 }}>
+>  IMPORTANTE: alguns valores de parâmetros são dinâmicos — eles mudam a cada renderização da página que contém Imperva.  
+> Extraia-os imediatamente antes de criar a tarefa para evitar erros durante a resolução.  
+> Veja exemplos de extração automática de parâmetros na seção [Como encontrar todos os parâmetros necessários para criar uma tarefa](#como-encontrar-todos-os-parâmetros-necessários-para-criar-uma-tarefa).
+</span>
+<br />
+
+
 <TabItem value="proxyless" label="CustomTask (without proxy)" default className="bordered-panel">
 
 <ParamItem title="type" required type="string" />
@@ -198,7 +207,7 @@ Use o método [getTaskResult](../api/methods/get-task-result.mdx) para obter a s
 
 Error 16 - este erro está relacionado ao uso de servidores proxy que não correspondem à geolocalização exigida.
 
-## Como Encontrar Todos os Parâmetros Necessários para a Criação da Tarefa
+## Como encontrar todos os parâmetros necessários para criar uma tarefa
 
 ### Automaticamente
 

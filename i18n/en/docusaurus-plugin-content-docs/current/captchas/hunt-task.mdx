@@ -36,6 +36,15 @@ Hunt CAPTCHA is an anti-bot system used on betting platforms to detect automated
 
 ## Request parameters
 
+<br />
+<span style={{ fontSize: "15px", fontWeight: 700 }}>
+>  IMPORTANT: some parameter values are dynamic — they change with each render of the page using Hunt.  
+> Extract them immediately before creating the task to avoid errors during solving.  
+> See examples of automatic parameter extraction in the sections [How to get meta.token](#how-to-get-metatoken) and [Example of solving Hunt CAPTCHA](#example-of-solving-hunt-captcha).
+</span>
+<br />
+
+
 <TabItem value="proxy" label="HuntTask" className="bordered-panel">
 <ParamItem title="type" required type="string" />
 **CustomTask**
@@ -197,7 +206,7 @@ Used to obtain an X-HD token bound to the IP address.
 
 Used after the website returns a captcha error and provides `meta.token`.
 
-### How to obtain `meta.token`
+### How to get `meta.token`
 
 1. Send a request to the website (for example, an SMS request).
 2. Receive X-HD.

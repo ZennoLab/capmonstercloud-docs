@@ -36,6 +36,15 @@ This type of captcha usually requires the user to solve a puzzle by moving a sli
 
 ## Request parameters
 
+<br />
+<span style={{ fontSize: "15px", fontWeight: 700 }}>
+>  IMPORTANT: some parameter values are dynamic — they change with each render of the page using DataDome.  
+> Extract them immediately before creating the task to avoid errors during solving.  
+> See examples of parameter extraction in the sections [How to find datadomeCookie](#how-to-find-datadomecookie) and [Examples of automatic DataDome solving](#examples-of-automatic-datadome-solving).
+</span>
+<br />
+
+
 <TabItem value="proxyless" label="CustomTask (without proxy)" default className="bordered-panel">
     <ParamItem title="type" required type="string" />
     **CustomTask**
@@ -258,7 +267,7 @@ or:
 ![](./images/datadome/datadomeCookie2.png)
 
 
-## Example of automatic DataDome solving
+## Examples of automatic DataDome solving
 
 :::warning **Attention!**
 The examples below are provided for informational purposes and to demonstrate the general logic.
