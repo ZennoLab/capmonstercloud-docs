@@ -6,18 +6,19 @@
 
 .libsBlock {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  width: 100%;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
   grid-column-gap: 30px;
   grid-row-gap: 30px;
 }
 @media (max-width: 968px) {
   .libsBlock {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 600px) {
   .libsBlock {
     grid-template-columns: repeat(1, 1fr);
   }
@@ -33,6 +34,7 @@
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
   background: white;
+  min-width: 0; /* avoid grid overflow with fixed-width children */
 }
 .titleBlock {
   display: flex;
@@ -62,9 +64,15 @@
   text-align: center;
   transition: all 0.3s;
 }
-@media (max-width: 576px) {
+@media (max-width: 600px) {
+  .libBtns {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+  }
   .libBtn {
-    width: 50%;
+    /* prevents overflow when 2 buttons are in one row */
+    width: calc(50% - 6px);
   }
 }
 .libBtn:hover {
