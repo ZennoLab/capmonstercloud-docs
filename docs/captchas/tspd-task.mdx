@@ -145,6 +145,8 @@ User-Agent браузера. <br />
 ## Метод получения результата задачи
 Используйте метод [getTaskResult](../api/methods/get-task-result.mdx), чтобы получить решение TSPD.
 
+> **Важно**: при успешном прохождении в новых версиях TSPD может возвращаться cookie `TSPD_101_DID`, тогда как в более старых версиях он может отсутствовать.
+
 <TabItem value="proxyless" label="CustomTask (без прокси)" default className="method-panel-full">
 	<MethodItem>
 		```http
@@ -199,7 +201,7 @@ sec-ch-ua-mobile: ?0
 sec-ch-ua-platform: "Windows"
 upgrade-insecure-requests: 1
 user-agent: userAgentPlaceholder
-accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
 sec-fetch-site: none
 sec-fetch-mode: navigate
 sec-fetch-user: ?1
@@ -303,7 +305,7 @@ sec-ch-ua-mobile: ?0
 sec-ch-ua-platform: "Windows"
 upgrade-insecure-requests: 1
 user-agent: userAgentPlaceholder
-accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
 sec-fetch-site: none
 sec-fetch-mode: navigate
 sec-fetch-user: ?1
@@ -379,7 +381,7 @@ const headers = {
   "sec-fetch-dest": "document",
   "accept-language": "en-US",
   priority: "u=0,i",
-  referer: "https://example.com/",
+  referer: "https://example.com/"
 };
 
 async function main() {
@@ -433,7 +435,7 @@ main().catch(console.error);
 
 **Важно:** 
 
-Если сервер возвращает cookies в следующем формате (четыре строки):
+Если сервер возвращает cookies в следующем формате (три или четыре строки):
 
 ```
 TS386a400d029=082670...87599c;
@@ -441,17 +443,6 @@ TS386a400d029=082670...40a8ea3;
 TS386a400d078=082670...b4cbe2c;
 TSd2153684027=082670...4415a6
 ```
-
-**Это означает, что запрос был обработан защитным механизмом и выдана страница блокировки (TSPD challenge)**. В данном случае необходимо:
-
-* Передать полученный набор cookies в CapMonster Cloud.
-* Дождаться результата решения.
-* Использовать обновлённые cookies для последующих запросов.
-
----
-
-Если cookies не возвращаются или возвращаются в одном из следующих форматов (обычно три строки):
-
 ```
 TS386a400d029=08777...83ff9,
 TS386a400d029=08777...fb459e,
@@ -466,11 +457,11 @@ TS01fe94e8=01fef...9ed38,
 TSafd868f7027=082670...a7ea7c
 ```
 
-**Это означает, что доступ к ресурсу разрешён**. В данном случае можно:
+и при этом отсутствует cookie `TSPD_101_DID`, **это указывает на то, что запрос был обработан защитным механизмом и выдана страница блокировки (TSPD challenge)**. В данном случае необходимо:
 
-* Продолжать выполнение запросов к сайту.
-* Использовать полученные cookies в рамках текущей сессии.
-
+* Передать полученный набор cookies в CapMonster Cloud.
+* Дождаться результата решения.
+* Использовать обновлённые cookies для последующих запросов [(см. ниже примеры автоматического решения TSPD)](#примеры-автоматического-решения-tspd).
 
 
 ## Как получить Base64 страницы
@@ -499,7 +490,8 @@ const headers = {
   "sec-fetch-user": "?1",
   "sec-fetch-dest": "document",
   "accept-language": "en-US",
-  priority: "u=0,i"
+  priority: "u=0,i",
+  referer: "https://example.com/"
 };
 
 async function main() {
@@ -541,7 +533,7 @@ main().catch(console.error);
 
 1. **Первый запрос.** Скрипт делает HTTP-запрос к странице через прокси с браузерными заголовками.
 
-2. **Получение cookies.** Из ответа извлекаются cookies защиты. Если возвращается cookie `TSPD_101_DID` (означающие, что защита уже пройдена) или формат неправильный — выполнение прекращается.
+2. **Получение cookies.** Из ответа извлекаются нужные cookies защиты. Если возвращается cookie `TSPD_101_DID` (означает, что защита уже пройдена) или формат некорректный — выполнение прекращается.
 
 3. **Создание задачи.** Скрипт отправляет в CapMonster Cloud задачу типа CustomTask (*class: tspd*) с данными:
 
@@ -557,7 +549,7 @@ main().catch(console.error);
 
 4. **Получение решения.** Скрипт ждёт результат через API (*getTaskResult*) и получает корректные cookies.
 
-5. **Финальный запрос.** Запрос повторяется с полученными cookies, после чего возвращается нормальная HTML-страница.
+5. **Финальный запрос.** Запрос повторяется с полученными cookies, после чего возвращается обычная HTML-страница.
 
 <Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
 
@@ -565,15 +557,14 @@ main().catch(console.error);
 <details>
       <summary>Показать код (Node.js)</summary>
 ```js
-import { gotScraping } from "got-scraping";
+import { gotScraping } from "got-scraping"; // Для выполнения HTTP-запросов с TLS-отпечатком
 import fs from "fs";
 
-const API_KEY = "YOUR_API_KEY"; // Замените на ваш API-ключ CapMonster
+const API_KEY = "YOUR_API_KEY"; // Замените на ваш API-ключ CapMonster Cloud
 const CAPMONSTER_URL = "https://api.capmonster.cloud";
 
 // Замените на целевой URL
-const url =
-  "https://example.com";
+const url = "https://example.com";
 
 //  Замените на ваш прокси
 const proxy = {
@@ -600,20 +591,14 @@ function extractValidTspdCookies(setCookies) {
   console.log("\nRaw cookies:");
   console.log(cookies);
 
+  // Извлекаем только TS cookies
+  const tsCookies = cookies.filter((c) => c.startsWith("TS"));
+
   // Проверяем, что TSPD_101_DID отсутствует
   const hasDid = cookies.some((c) => c.startsWith("TSPD_101_DID="));
 
   if (hasDid) {
     console.log("TSPD_101_DID detected. Request was blocked.");
-    return null;
-  }
-
-  // Извлекаем только TS cookies
-  const tsCookies = cookies.filter((c) => c.startsWith("TS"));
-
-  // Должно быть только 4 TS cookies
-  if (tsCookies.length !== 4) {
-    console.log("Invalid TS cookie count:", tsCookies.length);
     return null;
   }
 
@@ -699,14 +684,14 @@ async function main() {
         "user-agent": userAgent,
 
         accept:
-          "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+          "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
 
         "sec-fetch-site": "same-site",
         "sec-fetch-mode": "navigate",
         "sec-fetch-user": "?1",
         "sec-fetch-dest": "document",
 
-        "accept-language": "en-US,en;q=0.9",
+        "accept-language": "en-US",
 
         referer: "https://example.com/", // Замените на актуальный referer
       },
@@ -776,12 +761,12 @@ async function main() {
       "sec-fetch-dest": "document",
 
       "accept-encoding": "gzip, deflate, br, zstd",
-      "accept-language": "en-US,en;q=0.9",
+      "accept-language": "en-US",
 
       cookie: cookieHeader,
 
       priority: "u=0,i",
-
+      "Upgrade-Insecure-Requests": "1",
       referer: "https://example.com/", // Замените на актуальный referer
     };
 
@@ -813,19 +798,20 @@ main();
 <details>
       <summary>Показать код</summary>
 ```python
-import httpx
+import asyncio
+import asyncio
 import base64
-import time
-import json
 import re
+import json
+
+from curl_cffi.requests import AsyncSession # Для выполнения HTTP-запросов с TLS-отпечатком
 
 API_KEY = "YOUR_API_KEY"  # Замените на ваш API-ключ CapMonster Cloud
 CAPMONSTER_URL = "https://api.capmonster.cloud"
 
-# Замените на целевой URL
-url = "https://example.com"
+url = "https://example.com" # Замените на целевой URL
 
-#  Замените на ваш прокси
+# Замените на ваш прокси
 proxy = {
     "host": "proxyAddress",
     "port": 8080,
@@ -840,12 +826,7 @@ proxy_url = f'{proxy["type"]}://{proxy["login"]}:{proxy["password"]}@{proxy["hos
 user_agent = "userAgentPlaceholder"
 
 
-def delay(ms):
-    time.sleep(ms / 1000)
-
-
-def extract_valid_tspd_cookies(set_cookies):
-
+def extract_ts_cookies(set_cookies):
     cookies = [c.split(";")[0].strip() for c in set_cookies]
 
     print("\nRaw cookies:")
@@ -857,194 +838,150 @@ def extract_valid_tspd_cookies(set_cookies):
     if has_did:
         print("TSPD_101_DID detected. Request was blocked.")
         return None
+    
+     # Извлекаем только TS cookies
+    ts = [c for c in cookies if c.startswith("TS")]
 
-    # Извлекаем только TS cookies
-    ts_cookies = [c for c in cookies if c.startswith("TS")]
-
-    # Должно быть только 4 TS cookies
-    if len(ts_cookies) != 4:
-        print("Invalid TS cookie count:", len(ts_cookies))
+    if not ts:
         return None
 
-    valid_format = all(re.match(r"^[^=]+=[^=]+$", c) for c in ts_cookies)
-
-    if not valid_format:
+    if not all(re.match(r"^[^=]+=[^=]+$", c) for c in ts):
         print("Invalid TS cookie format.")
         return None
 
     print("Valid TSPD cookie set detected.")
-
-    return "; ".join(ts_cookies)
+    return "; ".join(ts)
 
 
 def solution_to_cookie_dict(solution):
+    domain = list(solution["domains"].keys())[0]
+    return solution["domains"][domain].get("cookies", {})
 
+
+def solution_to_cookie_header(solution):
     domain = list(solution["domains"].keys())[0]
     cookies = solution["domains"][domain].get("cookies", {})
 
-    return cookies
+    return "; ".join([f"{k}={v}" for k, v in cookies.items()])
 
 
-def create_task(task):
-
-    response = httpx.post(
+async def create_task(session, task):
+    r = await session.post(
         f"{CAPMONSTER_URL}/createTask",
-        json={
-            "clientKey": API_KEY,
-            "task": task
-        }
-    ).json()
+        json={"clientKey": API_KEY, "task": task},
+    )
+    data = r.json()
 
-    if response["errorId"] != 0:
-        raise Exception(response["errorDescription"])
+    if data["errorId"] != 0:
+        raise Exception(data["errorDescription"])
 
-    return response["taskId"]
+    return data["taskId"]
 
 
-def get_task_result(task_id):
-
+async def get_result(session, task_id):
     while True:
+        await asyncio.sleep(3)
 
-        delay(3000)
-
-        response = httpx.post(
+        r = await session.post(
             f"{CAPMONSTER_URL}/getTaskResult",
-            json={
-                "clientKey": API_KEY,
-                "taskId": task_id
-            }
-        ).json()
+            json={"clientKey": API_KEY, "taskId": task_id},
+        )
+        data = r.json()
 
-        if response["errorId"] != 0:
-            raise Exception(response["errorDescription"])
+        if data["errorId"] != 0:
+            raise Exception(data["errorDescription"])
 
-        if response["status"] == "ready":
-            return response["solution"]
+        if data["status"] == "ready":
+            return data["solution"]
 
-        print("Waiting for solution...")
+        print("Waiting...")
 
 
-def main():
+async def main():
+    async with AsyncSession(
+    impersonate="chrome124",
+    proxies={
+        "http": proxy_url,
+        "https": proxy_url,
+    },
+    headers={
+        "user-agent": user_agent,
+        "accept-language": "en-US,en;q=0.9",
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "upgrade-insecure-requests": "1",
+    },
+) as session:
 
-    try:
+        print("Step 1: Initial request")
 
-        print("Sending initial request...")
+        r = await session.get(url)
 
-        headers = {
-            "sec-ch-ua": '"Not:A-Brand";v="99", "Google Chrome";v="145", "Chromium";v="145"',
-            "sec-ch-ua-mobile": "?0",
-            "sec-ch-ua-platform": '"Windows"',
-            "upgrade-insecure-requests": "1",
-            "user-agent": user_agent,
+        html = r.text
+        html_b64 = base64.b64encode(html.encode()).decode()
 
-            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+        set_cookies = r.headers.get_list("set-cookie")
+        tspd = extract_ts_cookies(set_cookies)
 
-            "sec-fetch-site": "same-site",
-            "sec-fetch-mode": "navigate",
-            "sec-fetch-user": "?1",
-            "sec-fetch-dest": "document",
+        if not tspd:
+            print("No TS cookies")
+            return
 
-            "accept-language": "en-US,en;q=0.9",
+        print("\nTS cookies:")
+        print(tspd)
 
-            "referer": "https://example.com/",  # Замените на актуальный referer
+        task = {
+            "type": "CustomTask",
+            "class": "tspd",
+            "websiteUrl": url,
+            "metadata": {
+                "tspdCookie": tspd,
+                "htmlPageBase64": html_b64,
+            },
+            "userAgent": user_agent,
+            "proxyType": proxy["type"],
+            "proxyAddress": proxy["host"],
+            "proxyPort": proxy["port"],
+            "proxyLogin": proxy["login"],
+            "proxyPassword": proxy["password"],
         }
 
-        with httpx.Client(proxy=proxy_url, follow_redirects=True) as client:
+        print("\nStep 2: Create task")
 
-            response = client.get(url, headers=headers)
+        task_id = await create_task(session, task)
+        print("Task ID:", task_id)
 
-            html = response.text
+        solution = await get_result(session, task_id)
 
-            html_base64 = base64.b64encode(html.encode()).decode()
+        print("\nSolution received:")
+        print(json.dumps(solution, indent=2))
 
-            set_cookies = response.headers.get_list("set-cookie")
+        cookies = solution_to_cookie_dict(solution)
 
-            tspd_cookies = extract_valid_tspd_cookies(set_cookies)
+        print("\nApplying cookies to session:")
+        for k, v in cookies.items():
+            print(f"{k}={v}")
+            session.cookies.set(k, v)
 
-            if not tspd_cookies:
+        cookie_header = solution_to_cookie_header(solution)
 
-                print(
-                    "Stopping script. No valid TSPD cookies detected. Continuing normal site interaction."
-                )
+        print("\nFinal Cookie header:")
+        print(cookie_header)
 
-                return
+        print("\nStep 3: Final request")
 
-            task = {
-                "type": "CustomTask",
-                "class": "tspd",
-                "websiteUrl": url,
-                "metadata": {
-                    "tspdCookie": tspd_cookies,
-                    "htmlPageBase64": html_base64
-                },
-                "userAgent": user_agent,
-                "proxyType": proxy["type"],
-                "proxyAddress": proxy["host"],
-                "proxyPort": proxy["port"],
-                "proxyLogin": proxy["login"],
-                "proxyPassword": proxy["password"]
-            }
+        final = await session.get(url)
 
-            print("\nCreating CapMonster Cloud task...")
+        print("\nFinal status:", final.status_code)
+        print("Final page length:", len(final.text))
 
-            task_id = create_task(task)
+        with open("final.html", "w", encoding="utf-8") as f:
+            f.write(final.text)
 
-            print("Task ID:", task_id)
-
-            solution = get_task_result(task_id)
-
-            print("\nSolution received:")
-            print(json.dumps(solution, indent=2))
-
-            cookie_dict = solution_to_cookie_dict(solution)
-
-        print("\nFinal cookies:")
-        print(cookie_dict)
-
-        final_headers = {
-            "sec-ch-ua": '"Not:A-Brand";v="99", "Google Chrome";v="145", "Chromium";v="145"',
-            "sec-ch-ua-mobile": "?0",
-            "sec-ch-ua-platform": '"Windows"',
-            "upgrade-insecure-requests": "1",
-            "user-agent": user_agent,
-
-            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
-
-            "sec-fetch-site": "same-site",
-            "sec-fetch-mode": "navigate",
-            "sec-fetch-user": "?1",
-            "sec-fetch-dest": "document",
-
-            "accept-encoding": "gzip, deflate, br, zstd",
-            "accept-language": "en-US,en;q=0.9",
-
-            "priority": "u=0,i",
-
-            "referer": "https://example.com/",  # Замените на актуальный referer
-        }
-
-        print("\nSending final request...")
-
-        with httpx.Client(
-            proxy=proxy_url,
-            follow_redirects=True,
-            cookies=cookie_dict
-        ) as final_client:
-
-            final_response = final_client.get(url, headers=final_headers)
-
-            print("\nFinal page length:", len(final_response.text))
-
-            with open("final_page.html", "w", encoding="utf-8") as f:
-                f.write(final_response.text)
-
-        print("Page saved to final_page.html")
-
-    except Exception as err:
-        print("Error:", str(err))
+        print("Page saved to final.html")
 
 
-main()
+if __name__ == "__main__":
+    asyncio.run(main())
 ```
 </details>
   </TabItem>
