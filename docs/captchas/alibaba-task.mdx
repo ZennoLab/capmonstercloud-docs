@@ -1,0 +1,255 @@
+---
+sidebar_position: 27
+sidebar_label: Alibaba
+title: "Автоматическое распознавание и обход Alibaba CAPTCHA | API"
+description: "Узнайте, как распознать Alibaba с помощью API сервиса автоматического рапознавания и решения капч CapMonster Cloud!" 
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ParamItem from '@theme/ParamItem';
+import MethodItem from '@theme/MethodItem';
+import ImageWrap from '@theme/ImageWrap';
+import ImagesLayout from '@theme/ImagesLayout';
+import MethodDescription from '@theme/MethodDescription'
+import PriceBlock from '@theme/PriceBlock';
+import PriceBlockWrap from '@theme/PriceBlockWrap';
+import { ArticleHead } from '../../src/theme/ArticleHead';
+
+<ArticleHead slug="captchas/alibaba-task" />
+
+# Alibaba Cloud Captcha
+
+<PriceBlockWrap>
+  <PriceBlock title="Alibaba Captcha" captchaId="alibabacaptcha"/>
+</PriceBlockWrap>
+
+## Примеры заданий
+
+Ниже представлены примеры типов заданий Alibaba Captcha, которые на данный момент поддерживаются сервисом CapMonster Cloud:
+
+<ImagesLayout gap="16px" columns={3}>
+  <ImageWrap title="Puzzle CAPTCHA">![](./images/alibaba-task/puzzle.png)</ImageWrap>
+  <ImageWrap title="Image restoration CAPTCHA">![](./images/alibaba-task/restoration.png)</ImageWrap>
+</ImagesLayout>
+
+:::warning **Внимание!**
+CapMonster Cloud по умолчанию работает через встроенные прокси — они уже включены в стоимость. Указывать собственные прокси требуется только в тех случаях, когда сайт не принимает токен или доступ к встроенным сервисам ограничен.
+
+Если прокси с авторизацией по IP, то необходимо добавить адрес **65.21.190.34** в белый список.
+:::
+
+## Параметры запроса
+
+<TabItem value="proxy" label="CustomTask (при использовании прокси)" className="bordered-panel">
+
+  <ParamItem title="type" required type="string" />
+  **CustomTask**
+
+  ---
+
+  <ParamItem title="class" required type="string" />
+  **alibaba**
+
+   --- 
+
+  <ParamItem title="websiteURL" required type="string" />
+  Полный URL страницы с капчей.
+
+  ---
+
+  <ParamItem title="sceneId (внутри metadata)" required type="string" />
+
+  Идентификатор сценария капчи, передаётся в следующем формате: `"sceneId":"1ww7426c4"` (как найти значение этого параметра, см. в [соответствующем разделе](#sceneid))
+
+  ---
+  <ParamItem title="prefix (внутри metadata)" required type="string" />
+
+  Параметр инициализации капчи, передаётся в URL запроса, используемого для загрузки текста задания на странице.<br />
+  Например, если URL имеет вид: `https://dlw3kug.captcha-open.example.aliyuncs.com/`, то значение параметра `prefix` соответствует поддомену — `dlw3kug`.
+
+
+  ---
+
+  <ParamItem title="userAgent" type="string" />
+  User-Agent браузера. <br />
+  **Передавайте только актуальный UA от ОС Windows. Сейчас таковым является**: `userAgentPlaceholder`
+
+  ---
+
+  <ParamItem title="proxyType" type="string" />
+  **http** - обычный http/https прокси;<br />
+  **https** - попробуйте эту опцию, только если "http" не работает (требуется для некоторых кастомных прокси);<br />
+  **socks4** - socks4 прокси;<br />
+  **socks5** - socks5 прокси.
+
+  ---
+
+  <ParamItem title="proxyAddress" type="string" />
+  <p>
+    IP адрес прокси IPv4/IPv6. Не допускается:
+    - использование прозрачных прокси (там где можно видеть IP клиента);
+    - использование прокси на локальных машинах.
+  </p>
+
+  ---
+
+  <ParamItem title="proxyPort" type="integer" />
+  Порт прокси.
+
+  ---
+
+  <ParamItem title="proxyLogin" type="string" />
+  Логин прокси-сервера.
+
+  ---
+
+  <ParamItem title="proxyPassword" type="string" />
+  Пароль прокси-сервера.
+
+  ---
+
+</TabItem>
+
+## Метод создания задачи
+<Tabs className="full-width-tabs filled-tabs request-tabs" groupId="captcha-type">
+  <TabItem value="proxyless" label="CustomTask (без прокси)" default className="method-panel">
+    <MethodItem>
+    ```http
+    https://api.capmonster.cloud/createTask
+    ```
+    </MethodItem>
+    <MethodDescription>
+      
+      **Запрос**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "CustomTask",
+          "class": "alibaba",
+          "websiteURL": "https://www.example.com",
+          "userAgent": "userAgentPlaceholder"
+          "metadata": {
+			"sceneId":"1ww7426c4",
+			"prefix":"dlw3kug"
+		}
+	}
+      ```
+
+      **Ответ**
+      ```json
+      {
+        "errorId": 0,
+        "taskId": 407533077
+      }
+      ```
+    </MethodDescription>
+  </TabItem>
+
+    <TabItem value="proxy" label="CustomTask (с прокси)" className="method-panel">
+    <MethodItem>
+      ```http
+      https://api.capmonster.cloud/createTask
+      ```
+    </MethodItem>
+    <MethodDescription>
+      
+      **Запрос**
+      ```json
+      {
+        "clientKey": "API_KEY",
+        "task": {
+          "type": "CustomTask",
+          "class": "alibaba",
+          "websiteURL": "https://www.example.com",
+          "userAgent": "userAgentPlaceholder"
+          "metadata": {
+			"sceneId":"1ww7426c4",
+			"prefix":"dlw3kug",
+          "proxyType": "http",
+          "proxyAddress": "8.8.8.8",
+          "proxyPort": 8080,
+          "proxyLogin": "proxyLoginHere",
+          "proxyPassword": "proxyPasswordHere"
+        }
+      }
+      ```
+
+      **Ответ**
+      ```json
+      {
+        "errorId": 0,
+        "taskId": 407533077
+      }
+      ```
+    </MethodDescription>
+  </TabItem>
+</Tabs>
+
+## Метод получения результата задачи
+Используйте метод [getTaskResult](../api/methods/get-task-result.mdx), чтобы получить решение Alibaba капчи.
+
+<TabItem value="proxyless" label="CustomTask (без прокси)" default className="method-panel-full">
+  <MethodItem>
+      ```http
+    https://api.capmonster.cloud/getTaskResult
+    ```
+  </MethodItem>
+  <MethodDescription>
+
+  **Запрос**
+  ```json
+  {
+    "clientKey": "API_KEY",
+    "taskId": 407533077
+  }
+  ```
+
+  **Ответ**
+```json
+{
+  "errorId": 0,
+  "errorCode": null,
+  "errorDescription": null,
+  "status": "ready",
+  "solution": {
+    "data": {
+      "tokens": "{\"sceneId\":\"1ww7426c4\",\"certifyId\":\"kBjCxX2W2c\",\"deviceToken\":\"U0dfV0VCIzM3...wOGJkMjY=\",\"data\":\"JRMnX3B...EUQdCpLkqSj7THYNf3dn\"}"
+    }
+  }
+}
+  ```
+  </MethodDescription>
+</TabItem>
+
+## Как найти все нужные параметры для создания задачи
+
+## `sceneId`
+
+`sceneId` можно получить после одного успешного прохождения капчи:
+
+1. Пройдите капчу вручную на сайте.
+2. Откройте **DevTools** → вкладка **Network**.
+3. Найдите запрос, отправляемый после успешного решения (например: verify, check, validate).
+4. В **Payload** или **Response** найдите параметр `sceneId`.
+
+![](./images/alibaba-task/sceneId.png)
+
+Также данный параметр можно найти с помощью поиска по сетевым запросам:
+
+1. Откройте страницу с капчей, перейдите в **DevTools** → вкладка **Network**.
+3. Выполните поиск (Ctrl + F) по ключу `sceneId`или `CaptchaSceneId`.
+
+![](./images/alibaba-task/sceneId1.png)
+
+
+## `prefix`
+
+`prefix` можно получить из URL запроса, который используется на сайте для передачи текста задания капчи:
+
+1. Откройте страницу с капчей.
+2. Найдите запрос, связанный с загрузкой задания (обычно через **DevTools** → **Network**).
+
+![](./images/alibaba-task/prefix.png)
+
