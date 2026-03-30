@@ -974,10 +974,12 @@ Use the [getTaskResult](../api/methods/get-task-result.mdx) to get the result of
 
 ### Manually
 
-1. Open your website where the captcha appears in the browser.
-2. Right-click on the captcha element and select **Inspect**.
-
-Parameters may load in _load?callback_:
+1. Open the website where the CAPTCHA is displayed in your browser.
+2. Open Developer Tools (DevTools) and go to the **Network** tab.
+3. Refresh the page (F5) to capture all network requests.
+4. In the search field (Filter), type `load` or `captcha` to quickly find the required request.
+5. Find a request like `load?callback=...` — it usually contains CAPTCHA parameters.
+6. Click on this request and open the **Payload** tab to view the required data.
 
 ![paramsv4](images\geetest-task\load-callback.png)
 
@@ -996,83 +998,82 @@ The code snippets provided are basic examples for familiarization with extractin
     <details>
       <summary>Show code (in browser)</summary>
 
-      ```js
-      (function() {
-        function getQueryParams(url) {
-          const params = new URLSearchParams(new URL(url).search);
-          const captchaId = params.get('captcha_id');
-          const challenge = params.get('challenge');
-          const riskType = params.get('risk_type');
-          return { captchaId, challenge, riskType };
+```js
+(function() {
+  function getQueryParams(url) {
+    const params = new URLSearchParams(new URL(url).search);
+    const captchaId = params.get('captcha_id');
+    const riskType = params.get('risk_type');
+    return { captchaId, riskType };
+  }
+
+  const observer = new PerformanceObserver((list) => {
+    const entries = list.getEntriesByType('resource');
+    entries.forEach((entry) => {
+      if (entry.name.includes('https://gcaptcha4.geetest.com/load?')) {
+        const { captchaId, riskType } = getQueryParams(entry.name);
+        if (captchaId) {
+          console.log('GeeTest v4 detected (via PerformanceObserver):');
+          console.log({ captchaId, riskType });
         }
+      }
+    });
+  });
 
-        const observer = new PerformanceObserver((list) => {
-          const entries = list.getEntriesByType('resource');
-          entries.forEach((entry) => {
-            if (entry.name.includes('https://gcaptcha4.geetest.com/load?')) {
-              const { captchaId, challenge, riskType } = getQueryParams(entry.name);
-              if (captchaId && challenge) {
-                console.log('GeeTest v4 detected (via PerformanceObserver):');
-                console.log({ captchaId, challenge, riskType });
-              }
-            }
-          });
-        });
-
-        observer.observe({ type: 'resource', buffered: true });
-      })();
-      ```
+  observer.observe({ type: 'resource', buffered: true });
+})();
+  ```
     </details>
 
     <details>
       <summary>Show code (Node.js)</summary>
 
-      ```js
-      import { chromium } from "playwright";
+```js
+import { chromium } from "playwright";
 
-      async function detectGeeTestV4(pageUrl) {
-        const result = { version: null, data: {} };
+async function detectGeeTestV4(pageUrl) {
+  const result = { version: null, data: {} };
 
-        const browser = await chromium.launch({ headless: false });
-        const context = await browser.newContext();
-        const page = await context.newPage();
+  const browser = await chromium.launch({ headless: false });
+  const context = await browser.newContext();
+  const page = await context.newPage();
 
-        page.on("response", async (response) => {
-          const url = response.url();
-          if (url.includes("https://gcaptcha4.geetest.com/load?")) {
-            const urlParams = new URLSearchParams(url.split("?")[1]);
-            const captchaId = urlParams.get("captcha_id");
-            const challenge = urlParams.get("challenge");
-            const riskType = urlParams.get("risk_type");
+  page.on("response", async (response) => {
+    const url = response.url();
 
-            if (captchaId && challenge && !result.version) {
-              result.version = "v4";
-              result.data = {
-                captchaId: captchaId,
-                challenge: challenge,
-                riskType: riskType,
-              };
-              console.log("GeeTest v4 detected:");
-              console.log(result.data);
-            }
-          }
-        });
+    if (url.includes("https://gcaptcha4.geetest.com/load?")) {
+      const urlParams = new URLSearchParams(url.split("?")[1]);
+      const captchaId = urlParams.get("captcha_id");
+      const riskType = urlParams.get("risk_type");
 
-        await page.goto(pageUrl, { waitUntil: "networkidle" });
-        await page.waitForTimeout(20000);
+      if (captchaId && !result.version) {
+        result.version = "v4";
+        result.data = {
+          captchaId: captchaId,
+          riskType: riskType,
+        };
 
-        if (!result.version) {
-          console.log("error");
-        }
-
-        await browser.close();
-        return result;
+        console.log("GeeTest v4 detected:");
+        console.log(result.data);
       }
+    }
+  });
 
-      detectGeeTestV4("https://example.com").then((result) => {
-        console.log(result);
-      });
-      ```
+  await page.goto(pageUrl, { waitUntil: "networkidle" });
+  await page.waitForTimeout(20000);
+
+  if (!result.version) {
+    console.log("error");
+  }
+
+  await browser.close();
+  return result;
+}
+
+detectGeeTestV4("https://example.com").then((result) => {
+  console.log(result);
+});
+```
     </details>
 
   </TabItem>
@@ -1081,50 +1082,49 @@ The code snippets provided are basic examples for familiarization with extractin
     <details>
       <summary>Show code</summary>
 
-      ```python
-      import asyncio
-      from playwright.async_api import async_playwright
-      from urllib.parse import urlparse, parse_qs
+```python
+import asyncio
+from playwright.async_api import async_playwright
+from urllib.parse import urlparse, parse_qs
 
-      async def detect_geetest_v4(page_url):
-          result = {"version": None, "data": {}}
+async def detect_geetest_v4(page_url):
+    result = {"version": None, "data": {}}
 
-          async with async_playwright() as p:
-              browser = await p.chromium.launch(headless=False)
-              context = await browser.new_context()
-              page = await context.new_page()
+    async with async_playwright() as p:
+        browser = await p.chromium.launch(headless=False)
+        context = await browser.new_context()
+        page = await context.new_page()
 
-              async def on_request(request):
-                  url = request.url
-                  if "https://gcaptcha4.geetest.com/load?" in url:
-                      query = parse_qs(urlparse(url).query)
-                      captcha_id = query.get("captcha_id", [None])[0]
-                      challenge = query.get("challenge", [None])[0]
-                      risk_type = query.get("risk_type", [None])[0]
+        async def on_request(request):
+            url = request.url
+            if "https://gcaptcha4.geetest.com/load?" in url:
+                query = parse_qs(urlparse(url).query)
+                captcha_id = query.get("captcha_id", [None])[0]
+                risk_type = query.get("risk_type", [None])[0]
 
-                      if captcha_id and challenge and not result["version"]:
-                          result["version"] = "v4"
-                          result["data"] = {
-                              "captchaId": captcha_id,
-                              "challenge": challenge,
-                              "riskType": risk_type
-                          }
-                          print("GeeTest v4 detected:")
-                          print(result["data"])
+                if captcha_id and not result["version"]:
+                    result["version"] = "v4"
+                    result["data"] = {
+                        "captchaId": captcha_id,
+                        "riskType": risk_type
+                    }
 
-              context.on("request", on_request)
+                    print("GeeTest v4 detected:")
+                    print(result["data"])
 
-              await page.goto(page_url, wait_until="networkidle")
-              await asyncio.sleep(10)
+        context.on("request", on_request)
 
-              if not result["version"]:
-                  print("error")
+        await page.goto(page_url, wait_until="networkidle")
+        await asyncio.sleep(10)
 
-              await browser.close()
-              return result
+        if not result["version"]:
+            print("error")
 
-      asyncio.run(detect_geetest_v4("https://www.example.com"))
-      ```
+        await browser.close()
+        return result
+
+asyncio.run(detect_geetest_v4("https://www.example.com"))
+```
     </details>
 
   </TabItem>
@@ -1133,69 +1133,60 @@ The code snippets provided are basic examples for familiarization with extractin
     <details>
       <summary>Show code</summary>
 
-      ```csharp
-      using System;
-      using System.Threading.Tasks;
-      using Microsoft.Playwright;
-      using System.Web;
+```csharp
+using System;
+using System.Threading.Tasks;
+using Microsoft.Playwright;
+using System.Web;
 
-      class Program
-      {
-          public static async Task Main(string[] args)
-          {
-              var result = new
-              {
-                  Version = (string)null,
-                  Data = new
-                  {
-                      CaptchaId = (string)null,
-                      Challenge = (string)null,
-                      RiskType = (string)null
-                  }
-              };
+class Program
+{
+    public static async Task Main(string[] args)
+    {
+        using var playwright = await Playwright.CreateAsync();
+        var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+        {
+            Headless = false
+        });
 
-              using var playwright = await Playwright.CreateAsync();
-              var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
-              {
-                  Headless = false
-              });
+        var context = await browser.NewContextAsync();
+        var page = await context.NewPageAsync();
 
-              var context = await browser.NewContextAsync();
-              var page = await context.NewPageAsync();
+        bool detected = false;
 
-              page.Request += (_, request) =>
-              {
-                  var url = request.Url;
+        page.Request += (_, request) =>
+        {
+            var url = request.Url;
 
-                  if (url.Contains("https://gcaptcha4.geetest.com/load?"))
-                  {
-                      var uri = new Uri(url);
-                      var queryParams = HttpUtility.ParseQueryString(uri.Query);
-                      var captchaId = queryParams.Get("captcha_id");
-                      var challenge = queryParams.Get("challenge");
-                      var riskType = queryParams.Get("risk_type");
+            if (url.Contains("https://gcaptcha4.geetest.com/load?"))
+            {
+                var uri = new Uri(url);
+                var queryParams = HttpUtility.ParseQueryString(uri.Query);
+                var captchaId = queryParams.Get("captcha_id");
+                var riskType = queryParams.Get("risk_type");
 
-                      if (!string.IsNullOrEmpty(captchaId) && !string.IsNullOrEmpty(challenge))
-                      {
-                          Console.WriteLine("GeeTest v4 detected:");
-                          Console.WriteLine($"CaptchaId: {captchaId}");
-                          Console.WriteLine($"Challenge: {challenge}");
-                          Console.WriteLine($"RiskType: {riskType}");
-                      }
-                  }
-              };
+                if (!string.IsNullOrEmpty(captchaId) && !detected)
+                {
+                    detected = true;
 
-              await page.GotoAsync("https://www.example.com/", new PageGotoOptions
-              {
-                  WaitUntil = WaitUntilState.NetworkIdle
-              });
+                    Console.WriteLine("GeeTest v4 detected:");
+                    Console.WriteLine($"CaptchaId: {captchaId}");
+                    Console.WriteLine($"RiskType: {riskType}");
+                }
+            }
+        };
 
-              await Task.Delay(10000);
+        await page.GotoAsync("https://www.example.com/", new PageGotoOptions
+        {
+            WaitUntil = WaitUntilState.NetworkIdle
+        });
 
-              await browser.CloseAsync();
-          }
-      }
-      ```
+        await Task.Delay(10000);
+
+        await browser.CloseAsync();
+    }
+}
+```
     </details>
 
   </TabItem>
@@ -1232,7 +1223,6 @@ The code snippets provided are basic examples for familiarization with extractin
         let geetestRequest = new GeeTestRequest({
             websiteURL: "https://example.com/geetest.php", // URL of the page with the captcha
             gt: "81dc9bdb52d04dc20036dbd8313ed055",
-            challenge: "d93591bdf7860e1e4ee2fca799911215",
             version: "4",
             initParameters: { riskType: "slide" }
         });
@@ -1252,7 +1242,6 @@ The code snippets provided are basic examples for familiarization with extractin
         geetestRequest = new GeeTestRequest({
             websiteURL: "https://example.com/geetest.php",
             gt: "81dc9bdb52d04dc20036dbd8313ed055",
-            challenge: "d93591bdf7860e1e4ee2fca799911215",
             version: "4",
             initParameters: { riskType: "slide" },
             proxy,
@@ -1291,7 +1280,6 @@ async function solveGeeTest() {
     let geetestRequest = new GeeTestRequest({
         websiteURL: "https://example.com/geetest.php", // URL of the page with the captcha
         gt: "81dc9bdb52d04dc20036dbd8313ed055",
-        challenge: "d93591bdf7860e1e4ee2fca799911215",
         version: "4",                                 
         initParameters: { riskType: "slide" }
     });
@@ -1311,7 +1299,6 @@ async function solveGeeTest() {
     geetestRequest = new GeeTestRequest({
         websiteURL: "https://example.com/geetest.php",
         gt: "81dc9bdb52d04dc20036dbd8313ed055",
-        challenge: "d93591bdf7860e1e4ee2fca799911215",
         version: "4",
         initParameters: { riskType: "slide" },
         proxy,
